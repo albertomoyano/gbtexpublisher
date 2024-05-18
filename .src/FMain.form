@@ -79,7 +79,7 @@
       { Menu8 Menu
         Text = ("HTML5-JATS (clase article, default)")
       }
-      { menuXHTML Menu
+      { menuHTML5book Menu
         Text = ("HTML5-JATS (clase book, default)")
       }
       { menuGHPages Menu

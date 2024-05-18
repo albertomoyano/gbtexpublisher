@@ -222,7 +222,7 @@ End
 
 Public Sub Borrar_Aux()
 
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "rm *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.css *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
+  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "rm *.css *.lwarpmkconf *.bcf-SAVE-ERROR *.bbl-SAVE-ERROR *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
   Wait 0.2
 
   TerminalView1.SetFocus()
@@ -1019,80 +1019,7 @@ Public Sub menuAbrir_Click()
     Form_Contador.Close ' Cierra la ventana
   End If
 
-  If Not Exist(File.Dir(TextBox1.Text) & "/files") Then
-    Mkdir File.Dir(TextBox1.Text) & "/files"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/correcciones") Then
-    Mkdir File.Dir(TextBox1.Text) & "/correcciones"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/media") Then
-    Mkdir File.Dir(TextBox1.Text) & "/media"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/originales") Then
-    Mkdir File.Dir(TextBox1.Text) & "/originales"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/tapa") Then
-    Mkdir File.Dir(TextBox1.Text) & "/tapa"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/catalogo") Then
-    Mkdir File.Dir(TextBox1.Text) & "/catalogo"
-  End If
-
-  If Not Exist(rutaFILES & "/configEPUB.cfg") Then
-    Copy "./configEPUB.cfg" To rutaFILES & "/configEPUB.cfg"
-  End If
-  If Not Exist(rutaFILES & "/configHTML.cfg") Then
-    Copy "./configHTML.cfg" To rutaFILES & "/configHTML.cfg"
-  End If
-  If Not Exist(rutaFILES & "/configJATS.cfg") Then
-    Copy "./configJATS.cfg" To rutaFILES & "/configJATS.cfg"
-  End If
-  If Not Exist(rutaFILES & "/build.lua") Then
-    Copy "./build.lua" To rutaFILES & "/build.lua"
-  End If
-  If Not Exist(rutaFILES & "/make4ht-indexing.lua") Then
-    Copy "./make4ht-indexing.lua" To rutaFILES & "/make4ht-indexing.lua"
-  End If
-  If Not Exist(rutaFILES & "/blitz-lite.css") Then
-    Copy "./blitz-lite.css" To rutaFILES & "/blitz-lite.css"
-  End If
-  If Not Exist(rutaFILES & "/make4ht-indexing.lua") Then
-    Copy "./make4ht-indexing.lua" To rutaFILES & "/make4ht-indexing.lua"
-  End If
-  If Not Exist(rutaFILES & "/inicio-frontmatter.tex") Then
-    Copy "./inicio-frontmatter.tex" To rutaFILES & "/inicio-frontmatter.tex"
-  End If
-
-  'copiamos los archivos de preámbulo
-  If Not Exist(rutaFILES & "/general-art-pdf.tex") Then
-    Copy "./general-art-pdf.tex" To rutaFILES & "/general-art-pdf.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-book-pdf.tex") Then
-    Copy "./general-book-pdf.tex" To rutaFILES & "/general-book-pdf.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-epub.tex") Then
-    Copy "./general-epub.tex" To rutaFILES & "/general-epub.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-html.tex") Then
-    Copy "./general-html.tex" To rutaFILES & "/general-html.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-jats.tex") Then
-    Copy "./general-jats.tex" To rutaFILES & "/general-jats.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-odt.tex") Then
-    Copy "./general-odt.tex" To rutaFILES & "/general-odt.tex"
-  End If
-  If Not Exist(rutaFILES & "/gbTeXcls.cls") Then
-    Copy "./gbTeXcls.cls" To rutaFILES & "/gbTeXcls.cls"
-  End If
-
-  Dim rutaBase As String = File.Dir(TextBox1.Text)
-  If Not Exist(rutaBase & "/readme.md") Then
-    Copy "./readme.md" To rutaBase & "/readme.md"
-  End If
-  If Not Exist(rutaBase & "/LICENSE") Then
-    Copy "./LICENSE2" To rutaBase & "/LICENSE"
-  End If
+  CopiarArchivos
 
   'comienza metadatos
   Dim comando As String
@@ -1283,13 +1210,7 @@ Public Sub mnuLast_Click()
     Form_Contador.Close ' Cierra la ventana
   End If
 
-  Dim rutaBase As String = File.Dir(TextBox1.Text)
-  If Not Exist(rutaBase & "/readme.md") Then
-    Copy "./readme.md" To rutaBase & "/readme.md"
-  End If
-  If Not Exist(rutaBase & "/LICENSE") Then
-    Copy "./LICENSE2" To rutaBase & "/LICENSE"
-  End If
+  CopiarArchivos
 
   'comienza metadatos
   Dim comando As String
@@ -5587,21 +5508,114 @@ Public Sub menuGHPages_Click()
   End If
 
   'hacemos una copia de los archivos
+  Shell "rm " & estatic & "/media"
+  Wait 0.2
+  Shell "cp -r " & File.Dir(TextBox1.Text) & "/media" & " " & estatic
+  Wait 0.2
   Shell "cp " & File.Dir(TextBox1.Text) &/ "*.html" & " " & estatic
-  Wait 0.1
-  Shell "cp " & File.Dir(TextBox1.Text) &/ "*.jpg" & " " & estatic
-  Wait 0.1
-  Shell "cp " & File.Dir(TextBox1.Text) &/ "*.png" & " " & estatic
-  Wait 0.1
+  Wait 0.2
+  ' Shell "cp " & File.Dir(TextBox1.Text) &/ "*.png" & " " & estatic
+  ' Wait 0.1
   Shell "cp " & File.Dir(TextBox1.Text) &/ "*.css" & " " & estatic
-  Wait 0.1
+  Wait 0.2
   Shell "cp " & File.Dir(TextBox1.Text) &/ "*.js" & " " & estatic
-  Wait 0.1
+  Wait 0.2
+
+  Borrar_Aux
 
 End
 
 Public Sub menuORTO_Click()
 
   Form_ORTO.ShowModal()
+
+End
+
+Public Sub CopiarArchivos()
+
+  If Not Exist(File.Dir(TextBox1.Text) & "/files") Then
+    Mkdir File.Dir(TextBox1.Text) & "/files"
+  End If
+  If Not Exist(File.Dir(TextBox1.Text) & "/correcciones") Then
+    Mkdir File.Dir(TextBox1.Text) & "/correcciones"
+  End If
+  If Not Exist(File.Dir(TextBox1.Text) & "/media") Then
+    Mkdir File.Dir(TextBox1.Text) & "/media"
+  End If
+  If Not Exist(File.Dir(TextBox1.Text) & "/originales") Then
+    Mkdir File.Dir(TextBox1.Text) & "/originales"
+  End If
+  If Not Exist(File.Dir(TextBox1.Text) & "/tapa") Then
+    Mkdir File.Dir(TextBox1.Text) & "/tapa"
+  End If
+  If Not Exist(File.Dir(TextBox1.Text) & "/catalogo") Then
+    Mkdir File.Dir(TextBox1.Text) & "/catalogo"
+  End If
+
+  If Not Exist(rutaFILES & "/imago_custom.css") Then
+    Copy "./imago_custom.css" To rutaFILES & "/imago_custom.css"
+  End If
+  If Not Exist(rutaFILES & "/configEPUB.cfg") Then
+    Copy "./configEPUB.cfg" To rutaFILES & "/configEPUB.cfg"
+  End If
+  If Not Exist(rutaFILES & "/configHTML.cfg") Then
+    Copy "./configHTML.cfg" To rutaFILES & "/configHTML.cfg"
+  End If
+  If Not Exist(rutaFILES & "/configJATS.cfg") Then
+    Copy "./configJATS.cfg" To rutaFILES & "/configJATS.cfg"
+  End If
+  If Not Exist(rutaFILES & "/build.lua") Then
+    Copy "./build.lua" To rutaFILES & "/build.lua"
+  End If
+  If Not Exist(rutaFILES & "/make4ht-indexing.lua") Then
+    Copy "./make4ht-indexing.lua" To rutaFILES & "/make4ht-indexing.lua"
+  End If
+  If Not Exist(rutaFILES & "/blitz-lite.css") Then
+    Copy "./blitz-lite.css" To rutaFILES & "/blitz-lite.css"
+  End If
+  If Not Exist(rutaFILES & "/make4ht-indexing.lua") Then
+    Copy "./make4ht-indexing.lua" To rutaFILES & "/make4ht-indexing.lua"
+  End If
+  If Not Exist(rutaFILES & "/inicio-frontmatter.tex") Then
+    Copy "./inicio-frontmatter.tex" To rutaFILES & "/inicio-frontmatter.tex"
+  End If
+
+  'copiamos los archivos de preámbulo
+  If Not Exist(rutaFILES & "/general-art-pdf.tex") Then
+    Copy "./general-art-pdf.tex" To rutaFILES & "/general-art-pdf.tex"
+  End If
+  If Not Exist(rutaFILES & "/general-book-pdf.tex") Then
+    Copy "./general-book-pdf.tex" To rutaFILES & "/general-book-pdf.tex"
+  End If
+  If Not Exist(rutaFILES & "/general-epub.tex") Then
+    Copy "./general-epub.tex" To rutaFILES & "/general-epub.tex"
+  End If
+  If Not Exist(rutaFILES & "/general-html.tex") Then
+    Copy "./general-html.tex" To rutaFILES & "/general-html.tex"
+  End If
+  If Not Exist(rutaFILES & "/general-jats.tex") Then
+    Copy "./general-jats.tex" To rutaFILES & "/general-jats.tex"
+  End If
+  If Not Exist(rutaFILES & "/general-odt.tex") Then
+    Copy "./general-odt.tex" To rutaFILES & "/general-odt.tex"
+  End If
+  If Not Exist(rutaFILES & "/gbTeXcls.cls") Then
+    Copy "./gbTeXcls.cls" To rutaFILES & "/gbTeXcls.cls"
+  End If
+
+  If Not Exist(File.Dir(TextBox1.Text) & "/readme.md") Then
+    Copy "./readme.md" To File.Dir(TextBox1.Text) & "/readme.md"
+  End If
+  If Not Exist(File.Dir(TextBox1.Text) & "/LICENSE") Then
+    Copy "./LICENSE2" To File.Dir(TextBox1.Text) & "/LICENSE"
+  End If
+
+End
+
+
+Public Sub menuHTML5book_Click()
+
+  Shell "cp " & File.Dir(TextBox1.Text) &/ "files/imago_custom.css" & " " & File.Dir(TextBox1.Text)
+  Wait 0.2
 
 End
