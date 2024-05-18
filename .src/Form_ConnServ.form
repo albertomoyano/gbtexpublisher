@@ -1,0 +1,143 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,639,477)
+  #Scaled = False
+  Text = ("Seleccionar el servidor de base de datos")
+  Icon = Picture["iconos/icono-gbtex.svg"]
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox5 HBox
+    Move(0,0,612,36)
+    { BtnNuevaBBDD Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar una nueva referencia")
+      Picture = Picture["iconos/+pestana.svg"]
+    }
+    { BtnEliminarBBDD Button
+      Move(36,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Borrar entrada")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { btnGuardar Button
+      Move(72,0,36,36)
+      ToolTip = ("Guardar")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarMod Button
+      Move(108,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar cambios")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { txtID TextBox
+      Move(198,0,54,36)
+      Visible = False
+      Background = Color.Background
+      NoTabFocus = True
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Spring2 Spring
+      Move(378,0,72,36)
+    }
+    { btnLegales Button
+      Move(459,0,144,36)
+      Text = ("Legales")
+      Picture = Picture["iconos/clavebib.svg"]
+    }
+  }
+  { tblConnServ TableView
+    Move(45,36,378,216)
+    NoTabFocus = True
+    Expand = True
+    Mode = Select.Single
+    ShowCursor = True
+    Header = GridView.Horizontal
+    ScrollBar = Scroll.Vertical
+    AutoResize = False
+  }
+  { HBox8 HBox
+    Move(9,252,576,36)
+    { TextLabel1 TextLabel
+      Move(9,0,144,36)
+      Text = ("Dirección IP  ")
+      Alignment = Align.Right
+    }
+    { txtIP TextBox
+      Move(207,0,144,36)
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    Move(0,288,459,36)
+    { TextLabel2 TextLabel
+      Move(9,0,144,36)
+      Text = ("Nombre  ")
+      Alignment = Align.Right
+    }
+    { txtNOMBRE TextBox
+      Move(153,0,144,36)
+      Expand = True
+    }
+  }
+  { HBox2 HBox
+    Move(0,324,459,36)
+    { TextLabel3 TextLabel
+      Move(9,0,144,36)
+      Text = ("Usuario  ")
+      Alignment = Align.Right
+    }
+    { txtUSUARIO TextBox
+      Move(153,0,144,36)
+      Expand = True
+    }
+  }
+  { HBox3 HBox
+    Move(0,360,459,36)
+    { TextLabel4 TextLabel
+      Move(9,0,144,36)
+      Text = ("Contraseña  ")
+      Alignment = Align.Right
+    }
+    { txtCLAVE TextBox
+      Move(153,0,144,36)
+      Expand = True
+      Password = True
+    }
+  }
+  { HBox9 HBox
+    Move(0,396,459,36)
+    { lblMensaje Label
+      Move(207,0,72,36)
+      Font = Font["Bold,Italic"]
+      Expand = True
+      AutoResize = True
+      Alignment = Align.Center
+    }
+  }
+  { HBox14 HBox
+    Move(0,432,630,36)
+    { btnCancelar Button
+      Move(0,0,144,36)
+      Text = ("Salir")
+      Picture = Picture["iconos/salir.svg"]
+    }
+    { Spring1 Spring
+      Move(153,0,36,36)
+    }
+    { btnRemoto Button
+      Move(324,0,144,36)
+      Text = ("MariaDB")
+      Picture = Picture["iconos/remoto.svg"]
+    }
+    { btnLocal Button
+      Move(477,0,144,36)
+      Text = ("SQLite")
+      Picture = Picture["iconos/local.svg"]
+    }
+  }
+}

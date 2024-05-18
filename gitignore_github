@@ -1,0 +1,16 @@
+files/
+correcciones/
+tapa/
+originales/
+catalogo/
+pdf/
+epub/
+epub3/
+mobi/
+azw/
+html5/
+xhtml/
+odt-docx/
+jats/
+.gitignore
+.fuse*

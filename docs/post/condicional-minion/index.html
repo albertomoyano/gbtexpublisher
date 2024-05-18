@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es" style="font-size: 120%">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="">
+
+  
+  
+  <meta name="description" content="Trabajar estilos tipográficos en el interior de los libros con condicionales">
+  
+
+  
+  <link rel="icon" href="https://albertomoyano.github.io/blog-gbtexpublisher/">
+
+  
+  
+  <meta name="keywords" content="latex book edition publisher">
+  
+
+  
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css" integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI" crossorigin="anonymous">
+<script type="module">
+    import renderMathInElement from "https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.mjs";
+    renderMathInElement(document.body);
+</script>
+
+  
+
+  
+  
+
+  
+  <meta property="og:title" content="Opciones tipográficas" />
+<meta property="og:description" content="Trabajar estilos tipográficos en el interior de los libros con condicionales" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://albertomoyano.github.io/blog-gbtexpublisher/post/condicional-minion/" /><meta property="og:image" content="https://albertomoyano.github.io/blog-gbtexpublisher/images" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-13T00:00:00+00:00" /><meta property="og:site_name" content="Alberto Moyano" />
+
+
+
+  
+  <link rel="canonical" href="https://albertomoyano.github.io/blog-gbtexpublisher/post/condicional-minion/">
+
+  
+  
+  <meta itemprop="name" content="Opciones tipográficas">
+<meta itemprop="description" content="Trabajar estilos tipográficos en el interior de los libros con condicionales"><meta itemprop="datePublished" content="2022-01-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1084"><meta itemprop="image" content="https://albertomoyano.github.io/blog-gbtexpublisher/images" />
+<meta itemprop="keywords" content="LaTeX,edición,tipografía," />
+
+  
+  <link media="screen" rel="stylesheet" href='https://albertomoyano.github.io/blog-gbtexpublisher/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://albertomoyano.github.io/blog-gbtexpublisher/css/content.css'>
+
+  
+  
+  <title>Opciones tipográficas - Alberto Moyano</title>
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://albertomoyano.github.io/blog-gbtexpublisher/images" /><meta name="twitter:title" content="Opciones tipográficas"/>
+<meta name="twitter:description" content="Trabajar estilos tipográficos en el interior de los libros con condicionales"/>
+
+
+  
+<link rel="stylesheet" href='https://albertomoyano.github.io/blog-gbtexpublisher/css/single.css'>
+<link rel="stylesheet" href='https://albertomoyano.github.io/blog-gbtexpublisher/css/sharingbuttons.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    
+
+
+<header id="header">
+  <h1>
+    <a href="https://albertomoyano.github.io/blog-gbtexpublisher/">Alberto Moyano</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/blog-gbtexpublisher/">Artículos</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/blog-gbtexpublisher/post/">Historial</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/blog-gbtexpublisher/about/">Acerca de...</a>
+    </span>
+    
+  </nav>
+  
+  <div id="searchbox">
+    <form method="get" id="search" target="_blank" action="https://duckduckgo.com/">
+      <input type="hidden" name="sites" value="albertomoyano.github.io">
+      <input type="text" name="q" placeholder="Buscar...">
+    </form>
+  </div>
+  
+</header>
+
+    
+<main id="main" class="post">
+  
+  <h1>Opciones tipográficas</h1>
+  
+  <div>
+    
+    <a class="link" href='https://albertomoyano.github.io/blog-gbtexpublisher/tags/latex'>#LaTeX</a>
+    
+    <a class="link" href='https://albertomoyano.github.io/blog-gbtexpublisher/tags/edici%C3%B3n'>#edición</a>
+    
+    <a class="link" href='https://albertomoyano.github.io/blog-gbtexpublisher/tags/tipograf%C3%ADa'>#tipografía</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Sumario</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#primero-lo-primero">Primero lo primero</a></li>
+    <li><a href="#haciendo-una-pausa">Haciendo una pausa</a></li>
+    <li><a href="#y-los-estilos">¿Y los estilos?</a></li>
+    <li><a href="#trabajando-con-fontspec">Trabajando con <em>fontspec</em></a></li>
+    <li><a href="#veamos-un-ejemplo">Veamos un ejemplo</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <p>Este artículo pretende desarrollar un ejercicio con las <em>features</em> que poseen las tipografías <a href="https://es.wikipedia.org/wiki/OpenType">OpenType</a> y mostrar:</p>
+<ol>
+<li>la capacidad de trabajo con estas <em>features</em> que tiene <a href="https://es.wikipedia.org/wiki/LaTeX">LaTeX</a> utilizando los <em>drivers</em> de <a href="https://es.wikipedia.org/wiki/XeTeX">XeTeX</a> o <a href="https://en.wikipedia.org/wiki/LuaTeX">LuaTeX</a>;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li>que no es complicado de llevar a cabo.</li>
+</ol>
+<h2 id="primero-lo-primero">Primero lo primero</h2>
+<blockquote>
+<p>(&hellip;) La tipografía es un medio eficientemente utilitario y solo accidentalmente estético, ya que el goce visual de las páginas constituye rara vez la aspiración del lector (Stanley Morrison 1942).</p>
+</blockquote>
+<p>Antiguamente, la mayoría de los tipos de letra tenían diferentes diseños para diferentes tamaños de impresión, esa necesidad surgió inicialmente (en la época del plomo) por las limitaciones técnicas que existían para la fabricación de los tipos móviles y continuó con los inconvenientes generados con la ganancia de punto en los primeros tiempos de la impresión moderna.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> Con la llegada de la tipografía digital estas variaciones ópticas se han podido optimizar para su uso en rangos de tamaños de puntos específicos. Varias fuentes incluyen cuatro o cinco variaciones de diseño óptico. Los tamaños previstos exactos varían según la familia (y el diseñador), aunque los rangos de tamaño típicos los podemos encontrar en:</p>
+<ol>
+<li><strong>Caption</strong>: hasta 8 puntos.</li>
+<li><strong>Text</strong>: de 9 a 13 puntos.</li>
+<li><strong>Subhead</strong>: de 14 a 24 puntos.</li>
+<li><strong>Display</strong>: de 25 a 72 puntos.</li>
+</ol>
+<p>En algunas tipografías está presente una quinta variación para valores mayores a 72 puntos (<strong>Poster</strong>).</p>
+<p>Básicamente, las modificaciones en el diseño se encuentran en las <strong>zonas críticas</strong> de algunos caracteres, en la figura a continuación se pueden observar fácilmente las diferencias.</p>
+<p><img src="https://albertomoyano.github.io/blog-gbtexpublisher/images/letraA.png" alt=""></p>
+<p>Este es un ejemplo de Minion Pro (para un mismo cuerpo), vemos la letra <strong>a</strong> en bold, de: <strong>Caption</strong>, <strong>Text</strong>, <strong>Subhead</strong> y <strong>Display</strong>.</p>
+<h2 id="haciendo-una-pausa">Haciendo una pausa</h2>
+<p>Excede el propósito de este artículo hablar de la tecnología OpenType, solo me voy a limitar a decir y mostrar que en este formato de fuente el diseñador de la tipografía puede incluir una gran cantidad de <em>features</em>, con la aplicación <a href="https://www.lcdf.org/type/otfinfo.1.html">otfinfo</a> podemos saber cuales están disponibles, la figura a continuación muestra el listado disponible en la tipografía Minion Pro, otra forma de saber cuáles <em>features</em> están en el diseño de la tipografía, es abrirla con algún editor de fuentes, por ejemplo con <a href="https://fontforge.org/en-US/">fontforge</a>.</p>
+<p><img src="https://albertomoyano.github.io/blog-gbtexpublisher/images/dolphin1.png" alt=""></p>
+<p>Como ejemplo comparativo, a continuación podemos observar que el diseño de <a href="http://linuxlibertine.sourceforge.net/Libertine-EN.html">Linux Libertine</a> es más generoso en cuanto a cantidad de <em>features</em>.</p>
+<p><img src="https://albertomoyano.github.io/blog-gbtexpublisher/images/libertine.png" alt=""></p>
+<p>La mayoría de los programas de <a href="https://es.wikipedia.org/wiki/Autoedici%C3%B3n">DTP</a> traen acceso al uso de algunas de estas <em>features</em>, pero no a todas, ya que su configuración es muy compleja de llevar a una interfaz gráfica (hablo desde la programación), lo que deja como resultado que muchas de las <em>features</em> disponibles en una fuente tipográfica no puedan ser utilizadas en estos programas.</p>
+<h2 id="y-los-estilos">¿Y los estilos?</h2>
+<p>Los estilos tipográficos son básicamente las diferentes características visuales (tamaño, color y posición) aplicados como atributos a las distintas partes del texto (títulos, párrafos, epígrafes, etcétera). Y la herencia de estilos, es básicamente la capacidad de transportar los valores de un estilo a otro nuevo para en él hacer cambios en alguno de sus atributos. La imagen a continuación es una captura parcial de <a href="https://www.scribus.net/">Scribus</a> 1.5.7 y difiere con la de InDesign o Quark Xpress en su diseño y ubicación de los elementos, pero no más que eso.</p>
+<p><img src="https://albertomoyano.github.io/blog-gbtexpublisher/images/scribus.png" alt=""></p>
+<p>Una <strong>incapacidad concreta en todos los programas de DTP</strong>, es no poder hacer un uso intensivo del valor (y sub) del atributo <em>fontfamily</em> que poseen las tipografías, por ejemplo, si quisiéramos trabajar con Minion Pro y utilizar la variante <strong>Text</strong> para el cuerpo del texto principal y la variante <strong>Subhead</strong> para los títulos, necesitamos hacer 2 estilos separados, ya que las tipografías no son vistas por el programa como una sola.</p>
+<h2 id="trabajando-con-fontspec">Trabajando con <em>fontspec</em></h2>
+<p>En función de lo dicho en el párrafo anterior, el objetivo es mostrar que &ndash;en este caso, LaTeX mediante&ndash; Minion Pro puede ser tratada como una sola fuente tipográfica y que la elección de cuál corresponde usar en cada oportunidad, se relacione directamente con el tamaño del cuerpo tipográfico involucrado.</p>
+<blockquote>
+<p>fontspec es un paquete para XeLaTeX y LuaLaTeX. Proporciona una interfaz automática y unificada para fuentes <a href="https://es.wikipedia.org/wiki/Ligadura_(tipograf%C3%ADa)">AAT</a> y OpenType ricas en funciones a través de <a href="https://www.ctan.org/pkg/nfssfont">NFSS</a>.</p>
+</blockquote>
+<p>El siguiente código es el que utilizo generalmente, se observan varias cosas: 1) entre las líneas 4 y 8 determino el rango de valores (en puntos), esta opción hace que el compilador sepa que fuente corresponde y cuando y 2) altero el valor por <em>default</em> de relación para normal/bold, para pasarlo a normal/semibold.</p>
+<pre><code>\setmainfont{Minion Pro}
+[Numbers={OldStyle,Proportional},Ligatures=TeX,
+Scale=1.2,
+SizeFeatures={
+  {Size={-8.4},Font=* Capt},
+  {Size={8.41-13.0},Font=*},
+  {Size={13.01-21},Font=* Subh},
+  {Size={21.01-},Font=* Disp}},
+UprightFont=*-Regular,
+ItalicFont=*-It,
+BoldFont=*-Semibold,
+BoldItalicFont=*-SemiboldIt]
+</code></pre>
+<p>El manual de <em>fontspec</em> tiene más de 120 páginas, lo que es un indicador de que sus capacidades son muchas.</p>
+<p>Para entender mejor el tema, en LaTeX, los estilos tipográficos son una configuración hija dentro de un valor madre (la estructura), por eso primero se diseñan los valores de las partes de la estructura que a su vez contienen a otros valores, por ejemplo los de diseño visual, esto hace posible que la <strong>herencia</strong> &ndash;como se la conoce en los programas de DTP&ndash; también pueda ser <strong>condicional</strong>, es decir, que su resultado se modifique según el contexto.</p>
+<h2 id="veamos-un-ejemplo">Veamos un ejemplo</h2>
+<p>El siguiente código diseña la estructura de los títulos de los capítulos, se puede observar que no hay ninguna indicación de uso de la tipografía Minion Pro, esta es definida en la orden <code>\setmainfont</code> (como tipografía principal por <em>default</em>), por consiguiente es la que el compilador va a usar si no hay una contraorden, <a href="http://albertomoyano.xyz/posts/abrev/">en este artículo explico «en parte»</a> esta lógica de trabajo. A su vez, el valor por <em>default</em> para el cuerpo principal del texto es de 10pt, y están definidos: <code>Large</code> igual a 17pt y <code>LARGE</code> igual a 20pt.</p>
+<pre><code>\titleformat{\chapter}[display]
+{\Large}
+{\vspace{-2.5cm}\centering{\textsc{
+\MakeLowercase\chaptertitlename}}~\thechapter}
+{1.5cm}
+{\filright\LARGE}
+[]
+</code></pre>
+<p>En el diseño estructural de los títulos de sección se puede observar en la línea 2 el cambio de tipografía (<code>\sf\...</code>) que modifica el <em>default</em>, se sigue el mismo patrón de lógica, no se indica una tipografía en particular, en este caso que se cambia un <em>default</em> (tipografía con serif) por otro <em>default</em> (tipografía sin serif).</p>
+<pre><code>\titleformat{\section}[hang]
+{\sf\bfseries\large\raggedright}
+{\thesection}{.5em}{}[]
+\titlespacing{\section}
+{\parindent}{1pc plus .1pc minus -.2pc}{.5pc}
+</code></pre>
+<p>Veamos en la siguiente imagen el resultado del procesamiento.</p>
+<p><img src="https://albertomoyano.github.io/blog-gbtexpublisher/images/ejemplo-minion1.png" alt=""></p>
+<p>Y en esta imagen podemos observar que el PDF contiene empotradas la tipografía en sus variantes Regular (<strong>Text</strong>) y <strong>Subhead</strong>, junto con otras que se utilizan en el pdf.</p>
+<p><img src="https://albertomoyano.github.io/blog-gbtexpublisher/images/ejemplo-minion2.png" alt=""></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Y que hasta el momento no se encuentra disponible en ningún software para edición (léase programa de maquetado) de libros.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Situación que ha mejorado mucho, pero que aún hoy continúa, CTP incluido.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+    
+  </article>
+  
+
+<div id="sharingbuttons">
+    
+    
+    <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2falbertomoyano.github.io%2fblog-gbtexpublisher%2fpost%2fcondicional-minion%2f" target="_blank" rel="noopener" aria-label="">
+      <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
+        </div>
+      </div>
+    </a>
+    
+
+    
+    
+    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Opciones%20tipogr%c3%a1ficas&amp;url=https%3a%2f%2falbertomoyano.github.io%2fblog-gbtexpublisher%2fpost%2fcondicional-minion%2f" target="_blank" rel="noopener" aria-label="">
+      <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
+        </div>
+      </div>
+    </a>
+    
+
+    
+    
+    <a class="resp-sharing-button__link" href="mailto:?subject=Opciones%20tipogr%c3%a1ficas&amp;body=https%3a%2f%2falbertomoyano.github.io%2fblog-gbtexpublisher%2fpost%2fcondicional-minion%2f" target="_self" rel="noopener" aria-label="">
+      <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
+        </div>
+      </div>
+    </a>
+    
+
+    
+    
+    <a class="resp-sharing-button__link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2falbertomoyano.github.io%2fblog-gbtexpublisher%2fpost%2fcondicional-minion%2f" target="_blank" rel="noopener" aria-label="">
+      <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6 0 2.5 1 2.6 2.5 0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
+        </div>
+      </div>
+    </a>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Opciones%20tipogr%c3%a1ficas&amp;url=https%3a%2f%2falbertomoyano.github.io%2fblog-gbtexpublisher%2fpost%2fcondicional-minion%2f" target="_blank" rel="noopener" aria-label="">
+      <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64 0 9.508 0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102 0 0 0 1.75.527l2.96-2.41a.405.405 0 0 1 .494-.013l5.34 3.87a1.1 1.1 0 0 0 1.046.135 1.1 1.1 0 0 0 .682-.803l3.91-18.795A1.102 1.102 0 0 0 22.5.075L.706 8.475z"/></svg>
+        </div>
+      </div>
+    </a>
+    
+</div>
+
+  <div class="paginator">
+    
+    <a class="link" href="https://albertomoyano.github.io/blog-gbtexpublisher/post/vvaa/">← anterior</a>
+    
+    
+    <a class="link" href="https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/">siguiente →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="albertomoyano/blog-gbtexpublisher"
+        data-repo-id="R_kgDOKKd0Qg"
+        data-category-id="DIC_kwDOKKd0Qs4CYzSf"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+  </div>
+  
+
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2013</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Desarrollado con </span>
+    <a class="link" target="_blank" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Esquema </span>
+    <a class="link" target="_blank" href="https://texify2.io">TeXify2</a>
+  </div>
+
+  <div class="footnote">
+    <span>Me pueden encontrar en <a class=link href=https://www.linkedin.com/in/edicion-cientifica/ target=_blank rel=noopener>LinkedIn</a> | Licencia
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+  <link media="screen" rel="stylesheet" href="https://albertomoyano.github.io/blog-gbtexpublisher/css/estilos.css" />
+  
+  <link media="screen" rel="stylesheet" href="https://albertomoyano.github.io/blog-gbtexpublisher/css/font.css" />
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

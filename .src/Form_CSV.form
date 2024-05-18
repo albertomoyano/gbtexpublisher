@@ -1,0 +1,87 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,954,324)
+  #Scaled = False
+  #Translate = False
+  Text = "Incorporar bibliografía"
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  AutoResize = True
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox5 HBox
+    Move(0,72,942,36)
+    NoTabFocus = True
+    { txtOrigenBIB TextBox
+      Move(0,0,216,36)
+      #Translate = False
+      Foreground = Color.Blue
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+    }
+    { btnBuscar Button
+      Move(351,0,144,36)
+      NoTabFocus = True
+      Text = ("Buscar")
+      Picture = Picture["iconos/document.svg"]
+    }
+  }
+  { HBox4 HBox
+    Move(0,108,720,36)
+    NoTabFocus = True
+    { Spring3 Spring
+      Move(0,0,252,36)
+    }
+    { btnConvertirCSV Button
+      Move(351,0,144,36)
+      NoTabFocus = True
+      Text = ("Convertir CSV")
+    }
+  }
+  { HBox1 HBox
+    Move(0,144,942,36)
+    NoTabFocus = True
+    { Label1 Label
+      Move(450,0,72,36)
+      Visible = False
+      Expand = True
+      Alignment = Align.Center
+      Text = ("Se sugiere revisar el archivo .csv de manera externa para confirmar que no tenga errores.")
+    }
+  }
+  { HBox2 HBox
+    Move(9,189,942,36)
+    NoTabFocus = True
+    { txtOrigenCSV TextBox
+      Move(0,0,216,36)
+      #Translate = False
+      Background = Color.Background
+      Foreground = Color.Blue
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+    }
+    { btnImportar Button
+      Move(252,0,144,36)
+      NoTabFocus = True
+      Text = ("Importar")
+      Picture = Picture["iconos/bib.svg"]
+    }
+  }
+  { HBox3 HBox
+    Move(9,225,720,36)
+    NoTabFocus = True
+    { Spring1 Spring
+      Move(0,0,252,36)
+    }
+    { btnSalir Button
+      Move(252,0,144,36)
+      NoTabFocus = True
+      Text = ("Cancelar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+}

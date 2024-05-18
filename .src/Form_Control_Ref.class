@@ -1,0 +1,985 @@
+' Gambas class file
+
+Private Conn As Connection
+Private Contenido1 As Result
+Private Contenido2 As Result
+Private Busqueda1 As Result
+
+Public Sub Form_Open()
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.conectar()
+
+  cbRELATEDTYPE1.Add("")
+  cbRELATEDTYPE1.Add("reprintof")
+  cbRELATEDTYPE1.Add("translationof")
+  cbRELATEDTYPE1.Add("translatedas")
+  cbRELATEDTYPE1.Add("multivolume")
+
+  cbRELATEDTYPE2.Add("")
+  cbRELATEDTYPE2.Add("reprintof")
+  cbRELATEDTYPE2.Add("translationof")
+  cbRELATEDTYPE2.Add("translatedas")
+  cbRELATEDTYPE2.Add("multivolume")
+
+  Mostrar_Lista()
+  Mostrar_Lista2()
+
+End
+
+Public Sub Mostrar_Lista()
+
+  Dim i As Integer
+
+  Table1.Clear()
+
+  ' Contenido1 = Conn.Exec("select * from bibtex ORDER BY id DESC")
+  Contenido1 = Conn.Exec("select * from bibtex ORDER BY id DESC")
+
+  'diseñamos el tableview
+  Table1.Columns.Count = 110
+  Table1.Header = True
+  Table1.Columns[0].Title = "ID"
+  Table1.Columns[0].Width = 0
+  Table1.Columns[1].Title = ""
+  Table1.Columns[1].Width = 0
+  Table1.Columns[2].Title = ""
+  Table1.Columns[2].Width = 0
+  Table1.Columns[3].Title = ""
+  Table1.Columns[3].Width = 0
+  Table1.Columns[4].Title = "Author"
+  Table1.Columns[4].Width = 220
+  Table1.Columns[5].Title = ""
+  Table1.Columns[5].Width = 0
+  Table1.Columns[6].Title = ""
+  Table1.Columns[6].Width = 0
+  Table1.Columns[7].Title = ""
+  Table1.Columns[7].Width = 0
+  Table1.Columns[8].Title = ""
+  Table1.Columns[8].Width = 0
+  Table1.Columns[9].Title = ""
+  Table1.Columns[9].Width = 0
+  Table1.Columns[10].Title = ""
+  Table1.Columns[10].Width = 0
+  Table1.Columns[11].Title = ""
+  Table1.Columns[11].Width = 0
+  Table1.Columns[12].Title = ""
+  Table1.Columns[12].Width = 0
+  Table1.Columns[13].Title = ""
+  Table1.Columns[13].Width = 0
+  Table1.Columns[14].Title = ""
+  Table1.Columns[14].Width = 0
+  Table1.Columns[15].Title = ""
+  Table1.Columns[15].Width = 0
+  Table1.Columns[16].Title = ""
+  Table1.Columns[16].Width = 0
+  Table1.Columns[17].Title = ""
+  Table1.Columns[17].Width = 0
+  Table1.Columns[18].Title = ""
+  Table1.Columns[18].Width = 0
+  Table1.Columns[19].Title = ""
+  Table1.Columns[19].Width = 0
+  Table1.Columns[20].Title = ""
+  Table1.Columns[20].Width = 0
+  Table1.Columns[21].Title = ""
+  Table1.Columns[21].Width = 0
+  Table1.Columns[22].Title = ""
+  Table1.Columns[22].Width = 0
+  Table1.Columns[23].Title = ""
+  Table1.Columns[23].Width = 0
+  Table1.Columns[24].Title = "Título"
+  Table1.Columns[24].Width = 600
+  Table1.Columns[25].Title = ""
+  Table1.Columns[25].Width = 0
+  Table1.Columns[26].Title = ""
+  Table1.Columns[26].Width = 0
+  Table1.Columns[27].Title = ""
+  Table1.Columns[27].Width = 0
+  Table1.Columns[28].Title = ""
+  Table1.Columns[28].Width = 0
+  Table1.Columns[29].Title = "Journal"
+  Table1.Columns[29].Width = 200
+  Table1.Columns[30].Title = ""
+  Table1.Columns[30].Width = 0
+  Table1.Columns[31].Title = ""
+  Table1.Columns[31].Width = 0
+  Table1.Columns[32].Title = ""
+  Table1.Columns[32].Width = 0
+  Table1.Columns[33].Title = ""
+  Table1.Columns[33].Width = 0
+  Table1.Columns[34].Title = ""
+  Table1.Columns[34].Width = 0
+  Table1.Columns[35].Title = ""
+  Table1.Columns[35].Width = 0
+  Table1.Columns[36].Title = ""
+  Table1.Columns[36].Width = 0
+  Table1.Columns[37].Title = ""
+  Table1.Columns[37].Width = 0
+  Table1.Columns[38].Title = ""
+  Table1.Columns[38].Width = 0
+  Table1.Columns[39].Title = ""
+  Table1.Columns[39].Width = 0
+  Table1.Columns[40].Title = ""
+  Table1.Columns[40].Width = 0
+  Table1.Columns[41].Title = ""
+  Table1.Columns[41].Width = 0
+  Table1.Columns[42].Title = ""
+  Table1.Columns[42].Width = 0
+  Table1.Columns[43].Title = "Año"
+  Table1.Columns[43].Width = 70
+  Table1.Columns[44].Title = "Fecha"
+  Table1.Columns[44].Width = 70
+  Table1.Columns[45].Title = ""
+  Table1.Columns[45].Width = 0
+  Table1.Columns[46].Title = ""
+  Table1.Columns[46].Width = 0
+  Table1.Columns[47].Title = ""
+  Table1.Columns[47].Width = 0
+  Table1.Columns[48].Title = ""
+  Table1.Columns[48].Width = 0
+  Table1.Columns[49].Title = ""
+  Table1.Columns[49].Width = 0
+  Table1.Columns[50].Title = ""
+  Table1.Columns[50].Width = 0
+  Table1.Columns[51].Title = ""
+  Table1.Columns[51].Width = 0
+  Table1.Columns[52].Title = ""
+  Table1.Columns[52].Width = 0
+  Table1.Columns[53].Title = "Editorial"
+  Table1.Columns[53].Width = 200
+  Table1.Columns[54].Title = ""
+  Table1.Columns[54].Width = 0
+  Table1.Columns[55].Title = ""
+  Table1.Columns[55].Width = 0
+  Table1.Columns[56].Title = ""
+  Table1.Columns[56].Width = 0
+  Table1.Columns[57].Title = ""
+  Table1.Columns[57].Width = 0
+  Table1.Columns[58].Title = ""
+  Table1.Columns[58].Width = 0
+  Table1.Columns[59].Title = ""
+  Table1.Columns[59].Width = 0
+  Table1.Columns[60].Title = ""
+  Table1.Columns[60].Width = 0
+  Table1.Columns[61].Title = ""
+  Table1.Columns[61].Width = 0
+  Table1.Columns[62].Title = ""
+  Table1.Columns[62].Width = 0
+  Table1.Columns[63].Title = ""
+  Table1.Columns[63].Width = 0
+  Table1.Columns[64].Title = ""
+  Table1.Columns[64].Width = 0
+  Table1.Columns[65].Title = ""
+  Table1.Columns[65].Width = 0
+  Table1.Columns[66].Title = ""
+  Table1.Columns[66].Width = 0
+  Table1.Columns[67].Title = ""
+  Table1.Columns[67].Width = 0
+  Table1.Columns[68].Title = ""
+  Table1.Columns[68].Width = 0
+  Table1.Columns[69].Title = ""
+  Table1.Columns[69].Width = 0
+  Table1.Columns[70].Title = ""
+  Table1.Columns[70].Width = 0
+  Table1.Columns[71].Title = ""
+  Table1.Columns[71].Width = 0
+  Table1.Columns[72].Title = ""
+  Table1.Columns[72].Width = 0
+  Table1.Columns[73].Title = ""
+  Table1.Columns[73].Width = 0
+  Table1.Columns[74].Title = ""
+  Table1.Columns[74].Width = 0
+  Table1.Columns[75].Title = ""
+  Table1.Columns[75].Width = 0
+  Table1.Columns[76].Title = ""
+  Table1.Columns[76].Width = 0
+  Table1.Columns[77].Title = ""
+  Table1.Columns[77].Width = 0
+  Table1.Columns[78].Title = ""
+  Table1.Columns[78].Width = 0
+  Table1.Columns[79].Title = ""
+  Table1.Columns[79].Width = 0
+  Table1.Columns[80].Title = ""
+  Table1.Columns[80].Width = 0
+  Table1.Columns[81].Title = ""
+  Table1.Columns[81].Width = 0
+  Table1.Columns[82].Title = ""
+  Table1.Columns[82].Width = 0
+  Table1.Columns[83].Title = ""
+  Table1.Columns[83].Width = 0
+  Table1.Columns[84].Title = ""
+  Table1.Columns[84].Width = 0
+  Table1.Columns[85].Title = ""
+  Table1.Columns[85].Width = 0
+  Table1.Columns[86].Title = ""
+  Table1.Columns[86].Width = 0
+  Table1.Columns[87].Title = ""
+  Table1.Columns[87].Width = 0
+  Table1.Columns[88].Title = ""
+  Table1.Columns[88].Width = 0
+  Table1.Columns[89].Title = ""
+  Table1.Columns[89].Width = 0
+  Table1.Columns[90].Title = ""
+  Table1.Columns[90].Width = 0
+  Table1.Columns[91].Title = ""
+  Table1.Columns[91].Width = 0
+  Table1.Columns[92].Title = ""
+  Table1.Columns[92].Width = 0
+  Table1.Columns[93].Title = ""
+  Table1.Columns[93].Width = 0
+  Table1.Columns[94].Title = ""
+  Table1.Columns[94].Width = 0
+  Table1.Columns[95].Title = ""
+  Table1.Columns[95].Width = 0
+  Table1.Columns[96].Title = ""
+  Table1.Columns[96].Width = 0
+  Table1.Columns[97].Title = ""
+  Table1.Columns[97].Width = 0
+  Table1.Columns[98].Title = ""
+  Table1.Columns[98].Width = 0
+  Table1.Columns[99].Title = ""
+  Table1.Columns[99].Width = 0
+  Table1.Columns[100].Title = ""
+  Table1.Columns[100].Width = 0
+  Table1.Columns[101].Title = ""
+  Table1.Columns[101].Width = 0
+  Table1.Columns[102].Title = ""
+  Table1.Columns[102].Width = 0
+  Table1.Columns[103].Title = ""
+  Table1.Columns[103].Width = 0
+  Table1.Columns[104].Title = ""
+  Table1.Columns[104].Width = 0
+  Table1.Columns[105].Title = ""
+  Table1.Columns[105].Width = 0
+  Table1.Columns[106].Title = ""
+  Table1.Columns[106].Width = 0
+  Table1.Columns[107].Title = ""
+  Table1.Columns[107].Width = 0
+  Table1.Columns[108].Title = ""
+  Table1.Columns[108].Width = 0
+  Table1.Columns[109].Title = ""
+  Table1.Columns[109].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  Table1.Rows.Count = Contenido1.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido1.Count - 1
+    Table1[i, 0].Text = Contenido1!id
+    Table1[i, 1].Text = Contenido1!tipoEntrada
+    Table1[i, 2].Text = Contenido1!citationKey
+    Table1[i, 3].Text = Contenido1!keywords
+    Table1[i, 4].Text = Contenido1!author
+    Table1[i, 5].Text = Contenido1!bookAuthor
+    Table1[i, 6].Text = Contenido1!editor
+    Table1[i, 7].Text = Contenido1!editorA
+    Table1[i, 8].Text = Contenido1!editorB
+    Table1[i, 9].Text = Contenido1!editorC
+    Table1[i, 10].Text = Contenido1!afterword
+    Table1[i, 11].Text = Contenido1!commentator
+    Table1[i, 12].Text = Contenido1!translator
+    Table1[i, 13].Text = Contenido1!holder
+    Table1[i, 14].Text = Contenido1!shortAuthor
+    Table1[i, 15].Text = Contenido1!editorType
+    Table1[i, 16].Text = Contenido1!editorAtype
+    Table1[i, 17].Text = Contenido1!editorBtype
+    Table1[i, 18].Text = Contenido1!editorCtype
+    Table1[i, 19].Text = Contenido1!foreword
+    Table1[i, 20].Text = Contenido1!introduction
+    Table1[i, 21].Text = Contenido1!annotator
+    Table1[i, 22].Text = Contenido1!gender
+    Table1[i, 23].Text = Contenido1!nameAddOn
+    Table1[i, 24].Text = Contenido1!title
+    Table1[i, 25].Text = Contenido1!shortTitle
+    Table1[i, 26].Text = Contenido1!indexTitle
+    Table1[i, 27].Text = Contenido1!bookTitle
+    Table1[i, 28].Text = Contenido1!mainTitle
+    Table1[i, 29].Text = Contenido1!journalTitle
+    Table1[i, 30].Text = Contenido1!issueTitle
+    Table1[i, 31].Text = Contenido1!eventTitle
+    Table1[i, 32].Text = Contenido1!reprintTitle
+    Table1[i, 33].Text = Contenido1!series
+    Table1[i, 34].Text = Contenido1!bookTitleAddOn
+    Table1[i, 35].Text = Contenido1!mainTitleAddOn
+    Table1[i, 36].Text = Contenido1!journalTitleAddOn
+    Table1[i, 37].Text = Contenido1!issueTitleAddOn
+    Table1[i, 38].Text = Contenido1!eventTitleAddOn
+    Table1[i, 39].Text = Contenido1!chapter
+    Table1[i, 40].Text = Contenido1!volume
+    Table1[i, 41].Text = Contenido1!edition
+    Table1[i, 42].Text = Contenido1!pubState
+    Table1[i, 43].Text = Contenido1!yearY
+    Table1[i, 44].Text = Contenido1!dateD
+    Table1[i, 45].Text = Contenido1!urlDate
+    Table1[i, 46].Text = Contenido1!volumes
+    Table1[i, 47].Text = Contenido1!part
+    Table1[i, 48].Text = Contenido1!issue
+    Table1[i, 49].Text = Contenido1!eventDate
+    Table1[i, 50].Text = Contenido1!origDate
+    Table1[i, 51].Text = Contenido1!version
+    Table1[i, 52].Text = Contenido1!location
+    Table1[i, 53].Text = Contenido1!publisher
+    Table1[i, 54].Text = Contenido1!institution
+    Table1[i, 55].Text = Contenido1!organization
+    Table1[i, 56].Text = Contenido1!page
+    Table1[i, 57].Text = Contenido1!pagination
+    Table1[i, 58].Text = Contenido1!hyphenation
+    Table1[i, 59].Text = Contenido1!langId
+    Table1[i, 60].Text = Contenido1!language
+    Table1[i, 61].Text = Contenido1!origLocation
+    Table1[i, 62].Text = Contenido1!origPublisher
+    Table1[i, 63].Text = Contenido1!pageTotal
+    Table1[i, 64].Text = Contenido1!venue
+    Table1[i, 65].Text = Contenido1!bookPagination
+    Table1[i, 66].Text = Contenido1!langIdOpts
+    Table1[i, 67].Text = Contenido1!origLanguage
+    Table1[i, 68].Text = Contenido1!isan
+    Table1[i, 69].Text = Contenido1!isbn
+    Table1[i, 70].Text = Contenido1!ismn
+    Table1[i, 71].Text = Contenido1!isrn
+    Table1[i, 72].Text = Contenido1!issn
+    Table1[i, 73].Text = Contenido1!iswc
+    Table1[i, 74].Text = Contenido1!url
+    Table1[i, 75].Text = Contenido1!doi
+    Table1[i, 76].Text = Contenido1!eid
+    Table1[i, 77].Text = Contenido1!eprinttype
+    Table1[i, 78].Text = Contenido1!eprint
+    Table1[i, 79].Text = Contenido1!entrysubtype
+    Table1[i, 80].Text = Contenido1!label
+    Table1[i, 81].Text = Contenido1!howpublisher
+    Table1[i, 82].Text = Contenido1!addendum
+    Table1[i, 83].Text = Contenido1!shorthand
+    Table1[i, 84].Text = Contenido1!shorthandintro
+    Table1[i, 85].Text = Contenido1!etiquetas
+    Table1[i, 86].Text = Contenido1!options
+    Table1[i, 87].Text = Contenido1!ids
+    Table1[i, 88].Text = Contenido1!related
+    Table1[i, 89].Text = Contenido1!relatedType
+    Table1[i, 90].Text = Contenido1!relatedString
+    Table1[i, 91].Text = Contenido1!entryset
+    Table1[i, 92].Text = Contenido1!crossref
+    Table1[i, 93].Text = Contenido1!xref
+    Table1[i, 94].Text = Contenido1!xdata
+    Table1[i, 95].Text = Contenido1!presort
+    Table1[i, 96].Text = Contenido1!sortkey
+    Table1[i, 97].Text = Contenido1!sortname
+    Table1[i, 98].Text = Contenido1!sortshorthand
+    Table1[i, 99].Text = Contenido1!sorttitle
+    Table1[i, 100].Text = Contenido1!indexsorttitle
+    Table1[i, 101].Text = Contenido1!sortyear
+    Table1[i, 102].Text = Contenido1!file
+    Table1[i, 103].Text = Contenido1!abstract
+    Table1[i, 104].Text = Contenido1!library
+    Table1[i, 105].Text = Contenido1!note
+    Table1[i, 106].Text = Contenido1!annotation
+    Table1[i, 107].Text = Contenido1!number
+    Table1[i, 108].Text = Contenido1!creationdate
+    Table1[i, 109].Text = Contenido1!type
+
+    Contenido1.MoveNext
+  Next
+
+End
+
+Public Sub Table1_RowClick(Row As Integer)
+
+  txtID1.Text = Table1[Row, 0].Text
+  txtClave1.Text = Table1[Row, 2].Text
+  txtFiltro1.Text = Table1[Row, 3].Text
+  txtRelated1.Text = Table1[Row, 88].Text
+  cbRELATEDTYPE1.Text = Table1[Row, 89].Text
+  txtRelatedString1.Text = Table1[Row, 90].Text
+  txtCrossRef1.Text = Table1[Row, 92].Text
+
+End
+
+Public Sub Table2_RowClick(Row As Integer)
+
+  txtID2.Text = Table2[Row, 0].Text
+  txtClave2.Text = Table2[Row, 2].Text
+  txtFiltro2.Text = Table2[Row, 3].Text
+  txtRelated2.Text = Table2[Row, 88].Text
+  cbRELATEDTYPE2.Text = Table2[Row, 89].Text
+  txtRelatedString2.Text = Table2[Row, 90].Text
+  txtCrossRef2.Text = Table2[Row, 92].Text
+
+End
+
+Public Sub Mostrar_Lista2()
+
+  Dim i As Integer
+
+  Table2.Clear()
+
+  Contenido2 = Conn.Exec("SELECT * FROM bibtex WHERE keywords LIKE '%" & FMain.BaseName & "," & "%'")
+
+  'diseñamos el tableview
+  Table2.Columns.Count = 110
+  Table2.Header = True
+  Table2.Columns[0].Title = "ID"
+  Table2.Columns[0].Width = 0
+  Table2.Columns[1].Title = ""
+  Table2.Columns[1].Width = 0
+  Table2.Columns[2].Title = ""
+  Table2.Columns[2].Width = 0
+  Table2.Columns[3].Title = ""
+  Table2.Columns[3].Width = 0
+  Table2.Columns[4].Title = "Author"
+  Table2.Columns[4].Width = 220
+  Table2.Columns[5].Title = ""
+  Table2.Columns[5].Width = 0
+  Table2.Columns[6].Title = ""
+  Table2.Columns[6].Width = 0
+  Table2.Columns[7].Title = ""
+  Table2.Columns[7].Width = 0
+  Table2.Columns[8].Title = ""
+  Table2.Columns[8].Width = 0
+  Table2.Columns[9].Title = ""
+  Table2.Columns[9].Width = 0
+  Table2.Columns[10].Title = ""
+  Table2.Columns[10].Width = 0
+  Table2.Columns[11].Title = ""
+  Table2.Columns[11].Width = 0
+  Table2.Columns[12].Title = ""
+  Table2.Columns[12].Width = 0
+  Table2.Columns[13].Title = ""
+  Table2.Columns[13].Width = 0
+  Table2.Columns[14].Title = ""
+  Table2.Columns[14].Width = 0
+  Table2.Columns[15].Title = ""
+  Table2.Columns[15].Width = 0
+  Table2.Columns[16].Title = ""
+  Table2.Columns[16].Width = 0
+  Table2.Columns[17].Title = ""
+  Table2.Columns[17].Width = 0
+  Table2.Columns[18].Title = ""
+  Table2.Columns[18].Width = 0
+  Table2.Columns[19].Title = ""
+  Table2.Columns[19].Width = 0
+  Table2.Columns[20].Title = ""
+  Table2.Columns[20].Width = 0
+  Table2.Columns[21].Title = ""
+  Table2.Columns[21].Width = 0
+  Table2.Columns[22].Title = ""
+  Table2.Columns[22].Width = 0
+  Table2.Columns[23].Title = ""
+  Table2.Columns[23].Width = 0
+  Table2.Columns[24].Title = "Título"
+  Table2.Columns[24].Width = 600
+  Table2.Columns[25].Title = ""
+  Table2.Columns[25].Width = 0
+  Table2.Columns[26].Title = ""
+  Table2.Columns[26].Width = 0
+  Table2.Columns[27].Title = ""
+  Table2.Columns[27].Width = 0
+  Table2.Columns[28].Title = ""
+  Table2.Columns[28].Width = 0
+  Table2.Columns[29].Title = "Journal"
+  Table2.Columns[29].Width = 200
+  Table2.Columns[30].Title = ""
+  Table2.Columns[30].Width = 0
+  Table2.Columns[31].Title = ""
+  Table2.Columns[31].Width = 0
+  Table2.Columns[32].Title = ""
+  Table2.Columns[32].Width = 0
+  Table2.Columns[33].Title = ""
+  Table2.Columns[33].Width = 0
+  Table2.Columns[34].Title = ""
+  Table2.Columns[34].Width = 0
+  Table2.Columns[35].Title = ""
+  Table2.Columns[35].Width = 0
+  Table2.Columns[36].Title = ""
+  Table2.Columns[36].Width = 0
+  Table2.Columns[37].Title = ""
+  Table2.Columns[37].Width = 0
+  Table2.Columns[38].Title = ""
+  Table2.Columns[38].Width = 0
+  Table2.Columns[39].Title = ""
+  Table2.Columns[39].Width = 0
+  Table2.Columns[40].Title = ""
+  Table2.Columns[40].Width = 0
+  Table2.Columns[41].Title = ""
+  Table2.Columns[41].Width = 0
+  Table2.Columns[42].Title = ""
+  Table2.Columns[42].Width = 0
+  Table2.Columns[43].Title = "Año"
+  Table2.Columns[43].Width = 70
+  Table2.Columns[44].Title = "Fecha"
+  Table2.Columns[44].Width = 70
+  Table2.Columns[45].Title = ""
+  Table2.Columns[45].Width = 0
+  Table2.Columns[46].Title = ""
+  Table2.Columns[46].Width = 0
+  Table2.Columns[47].Title = ""
+  Table2.Columns[47].Width = 0
+  Table2.Columns[48].Title = ""
+  Table2.Columns[48].Width = 0
+  Table2.Columns[49].Title = ""
+  Table2.Columns[49].Width = 0
+  Table2.Columns[50].Title = ""
+  Table2.Columns[50].Width = 0
+  Table2.Columns[51].Title = ""
+  Table2.Columns[51].Width = 0
+  Table2.Columns[52].Title = ""
+  Table2.Columns[52].Width = 0
+  Table2.Columns[53].Title = "Editorial"
+  Table2.Columns[53].Width = 200
+  Table2.Columns[54].Title = ""
+  Table2.Columns[54].Width = 0
+  Table2.Columns[55].Title = ""
+  Table2.Columns[55].Width = 0
+  Table2.Columns[56].Title = ""
+  Table2.Columns[56].Width = 0
+  Table2.Columns[57].Title = ""
+  Table2.Columns[57].Width = 0
+  Table2.Columns[58].Title = ""
+  Table2.Columns[58].Width = 0
+  Table2.Columns[59].Title = ""
+  Table2.Columns[59].Width = 0
+  Table2.Columns[60].Title = ""
+  Table2.Columns[60].Width = 0
+  Table2.Columns[61].Title = ""
+  Table2.Columns[61].Width = 0
+  Table2.Columns[62].Title = ""
+  Table2.Columns[62].Width = 0
+  Table2.Columns[63].Title = ""
+  Table2.Columns[63].Width = 0
+  Table2.Columns[64].Title = ""
+  Table2.Columns[64].Width = 0
+  Table2.Columns[65].Title = ""
+  Table2.Columns[65].Width = 0
+  Table2.Columns[66].Title = ""
+  Table2.Columns[66].Width = 0
+  Table2.Columns[67].Title = ""
+  Table2.Columns[67].Width = 0
+  Table2.Columns[68].Title = ""
+  Table2.Columns[68].Width = 0
+  Table2.Columns[69].Title = ""
+  Table2.Columns[69].Width = 0
+  Table2.Columns[70].Title = ""
+  Table2.Columns[70].Width = 0
+  Table2.Columns[71].Title = ""
+  Table2.Columns[71].Width = 0
+  Table2.Columns[72].Title = ""
+  Table2.Columns[72].Width = 0
+  Table2.Columns[73].Title = ""
+  Table2.Columns[73].Width = 0
+  Table2.Columns[74].Title = ""
+  Table2.Columns[74].Width = 0
+  Table2.Columns[75].Title = ""
+  Table2.Columns[75].Width = 0
+  Table2.Columns[76].Title = ""
+  Table2.Columns[76].Width = 0
+  Table2.Columns[77].Title = ""
+  Table2.Columns[77].Width = 0
+  Table2.Columns[78].Title = ""
+  Table2.Columns[78].Width = 0
+  Table2.Columns[79].Title = ""
+  Table2.Columns[79].Width = 0
+  Table2.Columns[80].Title = ""
+  Table2.Columns[80].Width = 0
+  Table2.Columns[81].Title = ""
+  Table2.Columns[81].Width = 0
+  Table2.Columns[82].Title = ""
+  Table2.Columns[82].Width = 0
+  Table2.Columns[83].Title = ""
+  Table2.Columns[83].Width = 0
+  Table2.Columns[84].Title = ""
+  Table2.Columns[84].Width = 0
+  Table2.Columns[85].Title = ""
+  Table2.Columns[85].Width = 0
+  Table2.Columns[86].Title = ""
+  Table2.Columns[86].Width = 0
+  Table2.Columns[87].Title = ""
+  Table2.Columns[87].Width = 0
+  Table2.Columns[88].Title = ""
+  Table2.Columns[88].Width = 0
+  Table2.Columns[89].Title = ""
+  Table2.Columns[89].Width = 0
+  Table2.Columns[90].Title = ""
+  Table2.Columns[90].Width = 0
+  Table2.Columns[91].Title = ""
+  Table2.Columns[91].Width = 0
+  Table2.Columns[92].Title = ""
+  Table2.Columns[92].Width = 0
+  Table2.Columns[93].Title = ""
+  Table2.Columns[93].Width = 0
+  Table2.Columns[94].Title = ""
+  Table2.Columns[94].Width = 0
+  Table2.Columns[95].Title = ""
+  Table2.Columns[95].Width = 0
+  Table2.Columns[96].Title = ""
+  Table2.Columns[96].Width = 0
+  Table2.Columns[97].Title = ""
+  Table2.Columns[97].Width = 0
+  Table2.Columns[98].Title = ""
+  Table2.Columns[98].Width = 0
+  Table2.Columns[99].Title = ""
+  Table2.Columns[99].Width = 0
+  Table2.Columns[100].Title = ""
+  Table2.Columns[100].Width = 0
+  Table2.Columns[101].Title = ""
+  Table2.Columns[101].Width = 0
+  Table2.Columns[102].Title = ""
+  Table2.Columns[102].Width = 0
+  Table2.Columns[103].Title = ""
+  Table2.Columns[103].Width = 0
+  Table2.Columns[104].Title = ""
+  Table2.Columns[104].Width = 0
+  Table2.Columns[105].Title = ""
+  Table2.Columns[105].Width = 0
+  Table2.Columns[106].Title = ""
+  Table2.Columns[106].Width = 0
+  Table2.Columns[107].Title = ""
+  Table2.Columns[107].Width = 0
+  Table2.Columns[108].Title = ""
+  Table2.Columns[108].Width = 0
+  Table2.Columns[109].Title = ""
+  Table2.Columns[109].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  Table2.Rows.Count = Contenido2.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido2.Count - 1
+    Table2[i, 0].Text = Contenido2!id
+    Table2[i, 1].Text = Contenido2!tipoEntrada
+    Table2[i, 2].Text = Contenido2!citationKey
+    Table2[i, 3].Text = Contenido2!keywords
+    Table2[i, 4].Text = Contenido2!author
+    Table2[i, 5].Text = Contenido2!bookAuthor
+    Table2[i, 6].Text = Contenido2!editor
+    Table2[i, 7].Text = Contenido2!editorA
+    Table2[i, 8].Text = Contenido2!editorB
+    Table2[i, 9].Text = Contenido2!editorC
+    Table2[i, 10].Text = Contenido2!afterword
+    Table2[i, 11].Text = Contenido2!commentator
+    Table2[i, 12].Text = Contenido2!translator
+    Table2[i, 13].Text = Contenido2!holder
+    Table2[i, 14].Text = Contenido2!shortAuthor
+    Table2[i, 15].Text = Contenido2!editorType
+    Table2[i, 16].Text = Contenido2!editorAtype
+    Table2[i, 17].Text = Contenido2!editorBtype
+    Table2[i, 18].Text = Contenido2!editorCtype
+    Table2[i, 19].Text = Contenido2!foreword
+    Table2[i, 20].Text = Contenido2!introduction
+    Table2[i, 21].Text = Contenido2!annotator
+    Table2[i, 22].Text = Contenido2!gender
+    Table2[i, 23].Text = Contenido2!nameAddOn
+    Table2[i, 24].Text = Contenido2!title
+    Table2[i, 25].Text = Contenido2!shortTitle
+    Table2[i, 26].Text = Contenido2!indexTitle
+    Table2[i, 27].Text = Contenido2!bookTitle
+    Table2[i, 28].Text = Contenido2!mainTitle
+    Table2[i, 29].Text = Contenido2!journalTitle
+    Table2[i, 30].Text = Contenido2!issueTitle
+    Table2[i, 31].Text = Contenido2!eventTitle
+    Table2[i, 32].Text = Contenido2!reprintTitle
+    Table2[i, 33].Text = Contenido2!series
+    Table2[i, 34].Text = Contenido2!bookTitleAddOn
+    Table2[i, 35].Text = Contenido2!mainTitleAddOn
+    Table2[i, 36].Text = Contenido2!journalTitleAddOn
+    Table2[i, 37].Text = Contenido2!issueTitleAddOn
+    Table2[i, 38].Text = Contenido2!eventTitleAddOn
+    Table2[i, 39].Text = Contenido2!chapter
+    Table2[i, 40].Text = Contenido2!volume
+    Table2[i, 41].Text = Contenido2!edition
+    Table2[i, 42].Text = Contenido2!pubState
+    Table2[i, 43].Text = Contenido2!yearY
+    Table2[i, 44].Text = Contenido2!dateD
+    Table2[i, 45].Text = Contenido2!urlDate
+    Table2[i, 46].Text = Contenido2!volumes
+    Table2[i, 47].Text = Contenido2!part
+    Table2[i, 48].Text = Contenido2!issue
+    Table2[i, 49].Text = Contenido2!eventDate
+    Table2[i, 50].Text = Contenido2!origDate
+    Table2[i, 51].Text = Contenido2!version
+    Table2[i, 52].Text = Contenido2!location
+    Table2[i, 53].Text = Contenido2!publisher
+    Table2[i, 54].Text = Contenido2!institution
+    Table2[i, 55].Text = Contenido2!organization
+    Table2[i, 56].Text = Contenido2!page
+    Table2[i, 57].Text = Contenido2!pagination
+    Table2[i, 58].Text = Contenido2!hyphenation
+    Table2[i, 59].Text = Contenido2!langId
+    Table2[i, 60].Text = Contenido2!language
+    Table2[i, 61].Text = Contenido2!origLocation
+    Table2[i, 62].Text = Contenido2!origPublisher
+    Table2[i, 63].Text = Contenido2!pageTotal
+    Table2[i, 64].Text = Contenido2!venue
+    Table2[i, 65].Text = Contenido2!bookPagination
+    Table2[i, 66].Text = Contenido2!langIdOpts
+    Table2[i, 67].Text = Contenido2!origLanguage
+    Table2[i, 68].Text = Contenido2!isan
+    Table2[i, 69].Text = Contenido2!isbn
+    Table2[i, 70].Text = Contenido2!ismn
+    Table2[i, 71].Text = Contenido2!isrn
+    Table2[i, 72].Text = Contenido2!issn
+    Table2[i, 73].Text = Contenido2!iswc
+    Table2[i, 74].Text = Contenido2!url
+    Table2[i, 75].Text = Contenido2!doi
+    Table2[i, 76].Text = Contenido2!eid
+    Table2[i, 77].Text = Contenido2!eprinttype
+    Table2[i, 78].Text = Contenido2!eprint
+    Table2[i, 79].Text = Contenido2!entrysubtype
+    Table2[i, 80].Text = Contenido2!label
+    Table2[i, 81].Text = Contenido2!howpublisher
+    Table2[i, 82].Text = Contenido2!addendum
+    Table2[i, 83].Text = Contenido2!shorthand
+    Table2[i, 84].Text = Contenido2!shorthandintro
+    Table2[i, 85].Text = Contenido2!etiquetas
+    Table2[i, 86].Text = Contenido2!options
+    Table2[i, 87].Text = Contenido2!ids
+    Table2[i, 88].Text = Contenido2!related
+    Table2[i, 89].Text = Contenido2!relatedType
+    Table2[i, 90].Text = Contenido2!relatedString
+    Table2[i, 91].Text = Contenido2!entryset
+    Table2[i, 92].Text = Contenido2!crossref
+    Table2[i, 93].Text = Contenido2!xref
+    Table2[i, 94].Text = Contenido2!xdata
+    Table2[i, 95].Text = Contenido2!presort
+    Table2[i, 96].Text = Contenido2!sortkey
+    Table2[i, 97].Text = Contenido2!sortname
+    Table2[i, 98].Text = Contenido2!sortshorthand
+    Table2[i, 99].Text = Contenido2!sorttitle
+    Table2[i, 100].Text = Contenido2!indexsorttitle
+    Table2[i, 101].Text = Contenido2!sortyear
+    Table2[i, 102].Text = Contenido2!file
+    Table2[i, 103].Text = Contenido2!abstract
+    Table2[i, 104].Text = Contenido2!library
+    Table2[i, 105].Text = Contenido2!note
+    Table2[i, 106].Text = Contenido2!annotation
+    Table2[i, 107].Text = Contenido2!number
+    Table2[i, 108].Text = Contenido2!creationdate
+    Table2[i, 109].Text = Contenido2!type
+
+    Contenido2.MoveNext
+  Next
+
+End
+
+Public Sub BtnBuscar1_Click()' buscar autor
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  If txtBuscar1.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  If radio1a.Value Then
+    Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtBuscar1.Text, "'", "''") & "%';"
+  Else If radio1b.Value Then
+    Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtBuscar1.Text, "'", "''") & "%';"
+  Else
+    ' Aquí puedes manejar una situación donde ningún radio button está seleccionado
+    Return
+  End If
+
+  Busqueda1 = Conn.Exec(Comando)
+
+  ' Limpia el Grid antes de mostrar los resultados de la búsqueda
+  Table1.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda1.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el Grid
+  Table1.Columns.Count = 110
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda1.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    Table1[rowIndex, 0].Text = Busqueda1!id
+    Table1[rowIndex, 1].Text = Busqueda1!tipoEntrada
+    Table1[rowIndex, 2].Text = Busqueda1!citationKey
+    Table1[rowIndex, 3].Text = Busqueda1!keywords
+    Table1[rowIndex, 4].Text = Busqueda1!author
+    Table1[rowIndex, 5].Text = Busqueda1!bookAuthor
+    Table1[rowIndex, 6].Text = Busqueda1!editor
+    Table1[rowIndex, 7].Text = Busqueda1!editorA
+    Table1[rowIndex, 8].Text = Busqueda1!editorB
+    Table1[rowIndex, 9].Text = Busqueda1!editorC
+    Table1[rowIndex, 10].Text = Busqueda1!afterword
+    Table1[rowIndex, 11].Text = Busqueda1!commentator
+    Table1[rowIndex, 12].Text = Busqueda1!translator
+    Table1[rowIndex, 13].Text = Busqueda1!holder
+    Table1[rowIndex, 14].Text = Busqueda1!shortAuthor
+    Table1[rowIndex, 15].Text = Busqueda1!editorType
+    Table1[rowIndex, 16].Text = Busqueda1!editorAtype
+    Table1[rowIndex, 17].Text = Busqueda1!editorBtype
+    Table1[rowIndex, 18].Text = Busqueda1!editorCtype
+    Table1[rowIndex, 19].Text = Busqueda1!foreword
+    Table1[rowIndex, 20].Text = Busqueda1!introduction
+    Table1[rowIndex, 21].Text = Busqueda1!annotator
+    Table1[rowIndex, 22].Text = Busqueda1!gender
+    Table1[rowIndex, 23].Text = Busqueda1!nameAddOn
+    Table1[rowIndex, 24].Text = Busqueda1!title
+    Table1[rowIndex, 25].Text = Busqueda1!shortTitle
+    Table1[rowIndex, 26].Text = Busqueda1!indexTitle
+    Table1[rowIndex, 27].Text = Busqueda1!bookTitle
+    Table1[rowIndex, 28].Text = Busqueda1!mainTitle
+    Table1[rowIndex, 29].Text = Busqueda1!journalTitle
+    Table1[rowIndex, 30].Text = Busqueda1!issueTitle
+    Table1[rowIndex, 31].Text = Busqueda1!eventTitle
+    Table1[rowIndex, 32].Text = Busqueda1!reprintTitle
+    Table1[rowIndex, 33].Text = Busqueda1!series
+    Table1[rowIndex, 34].Text = Busqueda1!bookTitleAddOn
+    Table1[rowIndex, 35].Text = Busqueda1!mainTitleAddOn
+    Table1[rowIndex, 36].Text = Busqueda1!journalTitleAddOn
+    Table1[rowIndex, 37].Text = Busqueda1!issueTitleAddOn
+    Table1[rowIndex, 38].Text = Busqueda1!eventTitleAddOn
+    Table1[rowIndex, 39].Text = Busqueda1!chapter
+    Table1[rowIndex, 40].Text = Busqueda1!volume
+    Table1[rowIndex, 41].Text = Busqueda1!edition
+    Table1[rowIndex, 42].Text = Busqueda1!pubState
+    Table1[rowIndex, 43].Text = Busqueda1!yearY
+    Table1[rowIndex, 44].Text = Busqueda1!dateD
+    Table1[rowIndex, 45].Text = Busqueda1!urlDate
+    Table1[rowIndex, 46].Text = Busqueda1!volumes
+    Table1[rowIndex, 47].Text = Busqueda1!part
+    Table1[rowIndex, 48].Text = Busqueda1!issue
+    Table1[rowIndex, 49].Text = Busqueda1!eventDate
+    Table1[rowIndex, 50].Text = Busqueda1!origDate
+    Table1[rowIndex, 51].Text = Busqueda1!version
+    Table1[rowIndex, 52].Text = Busqueda1!location
+    Table1[rowIndex, 53].Text = Busqueda1!publisher
+    Table1[rowIndex, 54].Text = Busqueda1!institution
+    Table1[rowIndex, 55].Text = Busqueda1!organization
+    Table1[rowIndex, 56].Text = Busqueda1!page
+    Table1[rowIndex, 57].Text = Busqueda1!pagination
+    Table1[rowIndex, 58].Text = Busqueda1!hyphenation
+    Table1[rowIndex, 59].Text = Busqueda1!langId
+    Table1[rowIndex, 60].Text = Busqueda1!language
+    Table1[rowIndex, 61].Text = Busqueda1!origLocation
+    Table1[rowIndex, 62].Text = Busqueda1!origPublisher
+    Table1[rowIndex, 63].Text = Busqueda1!pageTotal
+    Table1[rowIndex, 64].Text = Busqueda1!venue
+    Table1[rowIndex, 65].Text = Busqueda1!bookPagination
+    Table1[rowIndex, 66].Text = Busqueda1!langIdOpts
+    Table1[rowIndex, 67].Text = Busqueda1!origLanguage
+    Table1[rowIndex, 68].Text = Busqueda1!isan
+    Table1[rowIndex, 69].Text = Busqueda1!isbn
+    Table1[rowIndex, 70].Text = Busqueda1!ismn
+    Table1[rowIndex, 71].Text = Busqueda1!isrn
+    Table1[rowIndex, 72].Text = Busqueda1!issn
+    Table1[rowIndex, 73].Text = Busqueda1!iswc
+    Table1[rowIndex, 74].Text = Busqueda1!url
+    Table1[rowIndex, 75].Text = Busqueda1!doi
+    Table1[rowIndex, 76].Text = Busqueda1!eid
+    Table1[rowIndex, 77].Text = Busqueda1!eprinttype
+    Table1[rowIndex, 78].Text = Busqueda1!eprint
+    Table1[rowIndex, 79].Text = Busqueda1!entrysubtype
+    Table1[rowIndex, 80].Text = Busqueda1!label
+    Table1[rowIndex, 81].Text = Busqueda1!howpublisher
+    Table1[rowIndex, 82].Text = Busqueda1!addendum
+    Table1[rowIndex, 83].Text = Busqueda1!shorthand
+    Table1[rowIndex, 84].Text = Busqueda1!shorthandintro
+    Table1[rowIndex, 85].Text = Busqueda1!etiquetas
+    Table1[rowIndex, 86].Text = Busqueda1!options
+    Table1[rowIndex, 87].Text = Busqueda1!ids
+    Table1[rowIndex, 88].Text = Busqueda1!related
+    Table1[rowIndex, 89].Text = Busqueda1!relatedType
+    Table1[rowIndex, 90].Text = Busqueda1!relatedString
+    Table1[rowIndex, 91].Text = Busqueda1!entryset
+    Table1[rowIndex, 92].Text = Busqueda1!crossref
+    Table1[rowIndex, 93].Text = Busqueda1!xref
+    Table1[rowIndex, 94].Text = Busqueda1!xdata
+    Table1[rowIndex, 95].Text = Busqueda1!presort
+    Table1[rowIndex, 96].Text = Busqueda1!sortkey
+    Table1[rowIndex, 97].Text = Busqueda1!sortname
+    Table1[rowIndex, 98].Text = Busqueda1!sortshorthand
+    Table1[rowIndex, 99].Text = Busqueda1!sorttitle
+    Table1[rowIndex, 100].Text = Busqueda1!indexsorttitle
+    Table1[rowIndex, 101].Text = Busqueda1!sortyear
+    Table1[rowIndex, 102].Text = Busqueda1!file
+    Table1[rowIndex, 103].Text = Busqueda1!abstract
+    Table1[rowIndex, 104].Text = Busqueda1!library
+    Table1[rowIndex, 105].Text = Busqueda1!note
+    Table1[rowIndex, 106].Text = Busqueda1!annotation
+    Table1[rowIndex, 107].Text = Busqueda1!number
+    Table1[rowIndex, 108].Text = Busqueda1!creationdate
+    Table1[rowIndex, 109].Text = Busqueda1!type
+
+    ' Incrementa el valor de rowIndex para la siguiente fila
+    rowIndex = rowIndex + 1
+
+    Busqueda1.MoveNext
+  Wend
+
+  ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
+  Table1.ScrollY = 0
+
+End
+
+Public Sub Form_Close()
+
+  Conn.Close
+  Me.Close()
+
+End
+
+Public Sub btnCerrar_Click()
+
+  Conn.Close
+  Me.Close()
+
+End
+
+Public Sub btnGuardar_Click()
+
+  If txtFiltro1.Text = "" Then
+    Message.Error("No ha seleccionado una referencia para relacionar.")
+  Else
+
+    Contenido1 = Conn.Edit("bibtex", "id=" & txtID1.Text)
+    guardarCampos1
+    Contenido1.Update
+    Table1.Clear
+    Mostrar_Lista
+    Wait 0.1
+    If txtFiltro2.Text = "" Then
+      Message.Error("No hay cambios para guardar. No ha seleccionado una referencia del archivo .tex en curso.")
+    Else
+      Contenido2 = Conn.Edit("bibtex", "id=" & txtID2.Text)
+      guardarCampos2
+      Contenido2.Update
+      Table2.Clear
+      Mostrar_Lista2
+      Message.Info("Los cambios se guardaron con éxito.")
+      txtFiltro1.Text = ""
+      txtFiltro2.Text = ""
+      txtRelated2.Text = ""
+      txtRelatedString2.Text = ""
+      txtCrossRef2.Text = ""
+      txtClave1.Text = ""
+      txtClave2.Text = ""
+    End If
+  End If
+
+End
+
+Public Function guardarCampos1()
+
+  Contenido1!id = txtID1.Text
+  Contenido1!keywords = txtFiltro1.Text
+
+End
+
+Public Function guardarCampos2()
+
+  Contenido2!id = txtID2.Text
+  Contenido2!relatedType = cbRELATEDTYPE2.Text
+  Contenido2!keywords = txtFiltro2.Text
+  Contenido2!crossref = txtCrossRef2.Text
+  Contenido2!citationKey = txtClave2.Text
+  Contenido2!related = txtRelated2.Text
+  Contenido2!relatedString = txtRelatedString2.Text
+
+End

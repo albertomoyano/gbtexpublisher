@@ -1,0 +1,49 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,740,320)
+  #Scaled = False
+  Text = ("Recordatorios")
+  Icon = Picture["iconos/1f926-1f3fb.png"]
+  Resizable = False
+  Arrangement = Arrange.Fill
+  Padding = 4
+  { menuTareas Menu
+    Text = ("menuTareas")
+    Visible = False
+    { menuADD Menu
+      Text = ("Agregar tarea")
+      Picture = Picture["iconos/+pestana.svg"]
+    }
+    { menuBORRARtarea Menu
+      Text = ("Borrar tarea")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { mnMarcarCompletado Menu
+      Text = ("Marcar tarea completada")
+      Picture = Picture["iconos/comp.svg"]
+    }
+    { mnMarcarIncompleto Menu
+      Text = ("Marcar tarea como incompleta")
+      Picture = Picture["iconos/incomp.svg"]
+    }
+    { mnuBorrarTODOS Menu
+      Text = ("Borrar tareas completadas")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+  }
+  { Splitter1 Splitter
+    Move(0,0,369,135)
+    Border = False
+    { VLista ListView
+      Move(54,36,144,72)
+      PopupMenu = "menuTareas"
+    }
+    { txtTAREAS TextArea
+      Move(216,36,144,72)
+      ReadOnly = True
+      Wrap = True
+      ScrollBar = Scroll.Vertical
+    }
+  }
+}

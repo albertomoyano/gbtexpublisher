@@ -1,0 +1,109 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,950,207)
+  #Scaled = False
+  #Translate = False
+  Text = "Conversión de archivo a formato LaTeX"
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  AutoResize = True
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox1 HBox
+    Move(0,0,942,36)
+    { Label3 Label
+      Move(0,0,72,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+    }
+    { RadioButton1 RadioButton
+      Move(108,0,198,36)
+      AutoResize = True
+      Text = ("Archivo DOCX (Pandoc) ")
+      Value = True
+    }
+    { RadioButton2 RadioButton
+      Move(315,0,234,36)
+      AutoResize = True
+      Text = ("Archivo DOCX (docx2tex) ")
+    }
+    { RadioButton3 RadioButton
+      Move(558,0,243,36)
+      AutoResize = True
+      Text = ("Archivo RTF (Pandoc) ")
+    }
+  }
+  { HBox2 HBox
+    Move(0,36,800,36)
+    NoTabFocus = True
+    { Label1 Label
+      Move(9,0,72,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Origen ")
+    }
+    { txtORIGEN TextBox
+      Move(126,0,216,36)
+      #Translate = False
+      Foreground = Color.Blue
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+      Placeholder = "Seleccione un archivo word con extensión docx"
+    }
+    { btnBuscar Button
+      Move(351,0,144,36)
+      NoTabFocus = True
+      Text = ("Buscar")
+      Picture = Picture["iconos/document.svg"]
+    }
+  }
+  { HBox3 HBox
+    Move(0,72,800,36)
+    NoTabFocus = True
+    { Label2 Label
+      Move(0,0,72,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Destino ")
+    }
+    { txtDESTINO TextBox
+      Move(126,0,216,36)
+      NoTabFocus = True
+      Expand = True
+      Placeholder = ("caracteres permitidos: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    }
+    { btnCONVERTIR Button
+      Move(351,0,144,36)
+      Enabled = False
+      NoTabFocus = True
+      Text = ("Convertir")
+      Picture = Picture["iconos/conversor.svg"]
+    }
+  }
+  { HBox7 HBox
+    Move(0,108,942,36)
+    { lblMENSAJE Label
+      Move(0,0,144,36)
+      Font = Font["Bold,Italic"]
+      NoTabFocus = True
+      Expand = True
+      Alignment = Align.Center
+    }
+    { btnListo Button
+      Move(351,0,144,36)
+      Visible = False
+      NoTabFocus = True
+      Text = ("Listo")
+      Picture = Picture["iconos/emblem-default.svg"]
+    }
+    { btnSalir Button
+      Move(558,0,144,36)
+      NoTabFocus = True
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+}

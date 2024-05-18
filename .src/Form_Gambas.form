@@ -1,0 +1,46 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,640,320)
+  #Scaled = False
+  Text = ("Acerca de GAMBAS")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox2 HBox
+    Move(9,9,450,72)
+    AutoResize = True
+    Padding = 4
+    { PictureBox1 PictureBox
+      Move(0,0,72,72)
+      Picture = Picture.Load("iconos/logo-gambas.png")
+      Stretch = True
+      Alignment = Align.Center
+      Mode = PictureBox.Fill
+    }
+  }
+  { TextArea1 TextArea
+    Move(18,108,459,63)
+    Background = Color.Background
+    Expand = True
+    Text = ("GAMBAS es un lenguaje de programación libre derivado de BASIC. Se distribuye con licencia GNU GPL. Cabe destacar que presenta ciertas similitudes con Java ya que en la ejecución de cualquier aplicación, se requiere un conjunto de bibliotecas intérprete previamente instaladas (Gambas Runtime) que entiendan el bytecode de las aplicaciones desarrolladas y lo conviertan en código ejecutable por el computador. ")
+    ReadOnly = True
+    Wrap = True
+    ScrollBar = Scroll.Vertical
+  }
+  { HBox1 HBox
+    Move(54,243,567,36)
+    { Spring1 Spring
+      Move(36,0,36,36)
+    }
+    { btnGAMBAS Button
+      Move(135,0,216,36)
+      Text = ("Visitar la web de GAMBAS")
+    }
+    { btnCerrar Button
+      Move(360,0,144,36)
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+}

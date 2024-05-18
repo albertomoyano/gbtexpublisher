@@ -1,0 +1,38 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,640,640)
+  #Scaled = False
+  Expand = True
+  Text = ("Revisión ortotipográfica")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox16 HBox
+    Move(10,30,450,36)
+    { Spring1 Spring
+      Move(180,0,60,40)
+    }
+    { btnCerrarORTO Button
+      Move(270,0,144,36)
+      NoTabFocus = True
+      ToolTip = ("Cerrar la aplicación")
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+  { Spring3 Spring
+    Move(230,130,40,190)
+  }
+  { HBox1 HBox
+    Move(10,360,450,36)
+    { Spring2 Spring
+      Move(180,0,60,40)
+    }
+    { btnCerrarColeccion2 Button
+      Move(270,0,144,36)
+      NoTabFocus = True
+      Text = ("Aplicar")
+    }
+  }
+}

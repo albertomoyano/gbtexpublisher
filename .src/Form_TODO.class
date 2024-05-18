@@ -1,0 +1,206 @@
+' Gambas class file
+
+Private Conn As Connection
+Private Contenido As Result
+Private Item_Seleccionado As String
+
+Public Sub Form_Open()
+
+  ' Me conecto a la base de datos
+  Conn = Mod_Conn.conectar2()
+
+  txtTAREAS.Visible = False
+  Mostrar_Lista_Tareas
+
+End
+
+Public Sub Splitter1_Resize()
+
+  Splitter1.Layout = [1, 1]
+
+End
+
+Public Sub Mostrar_Lista_Tareas() ' Función para popular la lista de eventos
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  Contenido = Conn.Exec("select id, completado, titulo from tareas")
+  If Contenido.Available Then
+    VLista.Clear
+    While (Contenido.Available)
+      If Contenido!completado = False Then
+        VLista.Add(CInt(Contenido!id), Contenido!titulo, Picture["./iconos/incomp.svg"])
+      Else
+        VLista.Add(CInt(Contenido!id), Contenido!titulo, Picture["./iconos/comp.svg"])
+      Endif
+      Contenido.MoveNext
+    Wend
+
+  End If
+
+  If VLista.Count = 0 Then 'Si no hay ningún contenido en la lista limpiar ocultar el panel de contenido y desactivar menú borrar todos
+    txtTAREAS.Text = ""
+    txtTAREAS.Visible = False
+    mnuBorrarTODOS.Enabled = False
+  Else
+    mnuBorrarTODOS.Enabled = True
+  End If
+
+  Chequear_Realizados()
+
+  Conn.Close
+
+End
+
+Public Sub mnuBorrarTODOS_Click()
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  If Message.Question("¿Está seguro de que desea borrar todos los ítems marcados como completados?") = 1 Then
+    ' Conn.Exec("delete from tareas where completado=True")
+    Mod_Conn.conectar2.Exec("delete from tareas where completado=True")
+    'Limpiamos lista y recargamos
+    VLista.Clear
+    Mostrar_Lista_Tareas
+  Else
+    Return
+
+  Endif
+
+  txtTAREAS.Visible = False ' Cerramos el panel lateral por si queda abierto tras borrar ítem realizado
+
+  Conn.Close
+
+End
+
+Public Sub Chequear_Realizados()
+  ' Función para chequear si hay elementos completados de la lista así habilitamos / deshabilitamos el menú de borrado los elementos completados
+
+  ' Me conceto a la base de datos
+  Conn = Mod_Conn.conectar2()
+
+  mnuBorrarTODOS.Enabled = False
+
+  Contenido = Conn.Exec("select completado from tareas where completado=true")
+  If Contenido.Available = ""
+    Return
+  Else
+    mnuBorrarTODOS.Enabled = True
+  Endif
+
+  Conn.Close
+
+End
+
+' esta función no me convence su utilidad
+Public Sub mnMarcarIncompleto_Click()
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  If VLista.Selected = False Then
+    Message.Error("Debe elegir un ítem primero")
+    Return
+  Endif
+
+  Contenido = Conn.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido!completado = False
+  contenido.Update
+
+  'Limpiamos lista y recargamos
+  VLista.Clear
+  Mostrar_Lista_Tareas
+
+  Conn.Close
+
+End
+
+Public Sub mnMarcarCompletado_Click()
+  'Chequeamos primero que se haya seleccionado un elemento de la lista
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  If VLista.Selected = False Then
+    Message.Error("Debe elegir un ítem primero")
+    Return
+  Endif
+
+  Contenido = Conn.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido!completado = True
+  contenido.Update
+
+  'Limpiamos lista y recargamos
+  VLista.Clear
+  Mostrar_Lista_Tareas
+
+  Conn.Close
+
+End
+
+Public Sub menuBORRARtarea_Click()
+
+  'Chequeamos primero que se haya seleccionado un elemento de la lista
+  If VLista.Selected = False Then
+    Message.Error("Debe elegir un ítem primero")
+    Return
+  Endif
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  If Message.Question("¿Está seguro de que desea borrar este ítem?", "Si", "No") = 1 Then
+    ' Contenido = Conn.Exec("delete from tareas where id=" & Item_Seleccionado)
+    Contenido = Conn.Exec("delete from tareas where id=" & Item_Seleccionado)
+  Endif
+
+  If VLista.Count = 0 Then 'Si no hay ningún contenido en la lista limpiar ocultar el panel de contenido
+    txtTAREAS.Text = ""
+    txtTAREAS.Visible = False
+  Endif
+
+  'Limpiamos lista y recargamos
+  VLista.Clear
+  Mostrar_Lista_Tareas
+
+  txtTAREAS.Visible = False 'Cerramos el panel lateral para que no quede abierto tras borrar ítem que pueda conetener
+
+  Conn.Close
+
+End
+
+Public Sub VLista_Select() ' Función que nos muestra el contenido del título elegido en la ListView
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  Contenido = Conn.Exec("select contenido from tareas where id = " & VLista.Item.key)
+  If Contenido!contenido <> "" Then
+    txtTAREAS.Text = Contenido!contenido
+    txtTAREAS.pos = 0
+    txtTAREAS.Visible = True
+  Else
+    txtTAREAS.Visible = False
+  Endif
+
+  Item_Seleccionado = VLista.Item.key
+
+  Print (Item_Seleccionado)
+
+  Conn.Close
+
+End
+
+Public Sub menuADD_Click()
+
+  Form_Tareas.ShowModal()
+
+End
+
+Public Sub Form_Close()
+
+  Conn.Close
+
+End

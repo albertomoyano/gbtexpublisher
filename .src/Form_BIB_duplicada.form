@@ -1,0 +1,251 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,105.5556,82.2222)
+  Text = ("Control de bibliografía duplicada")
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox16 HBox
+    MoveScaled(0,1.6667,105,4)
+    { BtnEliminarBib Button
+      MoveScaled(0,0,4,4)
+      NoTabFocus = True
+      ToolTip = ("Borrar entrada")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { BtnRefrescarBib Button
+      MoveScaled(4,0,4,4)
+      ToolTip = ("Refrescar listado de la base de datos")
+      Picture = Picture["iconos/refrescar.svg"]
+    }
+    { txtID TextBox
+      MoveScaled(8,0,6,4)
+      Visible = False
+      Background = Color.Background
+      NoTabFocus = True
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Spring1 Spring
+      MoveScaled(56,0,17,4)
+    }
+    { btnCerrar Button
+      MoveScaled(84,0,16,4)
+      NoTabFocus = True
+      ToolTip = ("Cerrar la aplicación")
+      Text = ("Salir")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+  { Tabla1 TableView
+    MoveScaled(14,8,40,11)
+    Expand = True
+    ShowCursor = True
+  }
+  { HBox76 HBox
+    MoveScaled(0,20,91,4)
+    { Label48 Label
+      MoveScaled(0,0,16,3.5556)
+      Alignment = Align.Right
+      Text = ("Autor ")
+    }
+    { txtAutor1 TextBox
+      MoveScaled(19,0,17,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox6 HBox
+    MoveScaled(0,24,91,4)
+    { Label5 Label
+      MoveScaled(0,0,16,3.5556)
+      Alignment = Align.Right
+      Text = ("Filtro ")
+    }
+    { txtFiltro1 TextBox
+      MoveScaled(19,0,17,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox78 HBox
+    MoveScaled(0,28,91,4)
+    { lblRELATEDSTRING2 Label
+      MoveScaled(0,0,16,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Title "
+    }
+    { txtTitulo1 TextBox
+      MoveScaled(19,0,24,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox79 HBox
+    MoveScaled(0,32,91,4)
+    { lblRELATEDSTRING1 Label
+      MoveScaled(0,0,16,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Location "
+    }
+    { txtLocation1 TextBox
+      MoveScaled(19,0,21,4)
+      Expand = True
+    }
+    { Label46 Label
+      MoveScaled(39,0,12,3.5556)
+      #Translate = False
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = "Publisher "
+    }
+    { txtPublisher1 TextBox
+      MoveScaled(51,0,21,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox81 HBox
+    MoveScaled(0,36,97,4)
+    { Label4 Label
+      MoveScaled(0,0,16,4)
+      #Translate = False
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = "Clave "
+    }
+    { txtClave1 TextBox
+      MoveScaled(17,0,21,4)
+      NoTabFocus = True
+      Expand = True
+    }
+    { lblRELATEDSTRING3 Label
+      MoveScaled(35,0,12,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Year "
+    }
+    { txtYear1 TextBox
+      MoveScaled(47,0,16,4)
+    }
+    { lblRELATEDSTRING4 Label
+      MoveScaled(63,0,12,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Date "
+    }
+    { txtDate1 TextBox
+      MoveScaled(76,0,16,4)
+    }
+  }
+  { Tabla2 TableView
+    MoveScaled(15,40,40,11)
+    Expand = True
+    ShowCursor = True
+  }
+  { HBox5 HBox
+    MoveScaled(0,51,91,4)
+    { Label6 Label
+      MoveScaled(0,0,16,3.5556)
+      Alignment = Align.Right
+      Text = ("Autor ")
+    }
+    { txtAutor2 TextBox
+      MoveScaled(19,0,17,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox4 HBox
+    MoveScaled(0,55,91,4)
+    { btnGuardar Button
+      MoveScaled(0,0,4,4)
+      ToolTip = ("Guardar")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { Label3 Label
+      MoveScaled(7,0,12,3.5556)
+      Alignment = Align.Right
+      Text = ("Filtro ")
+    }
+    { txtFiltro2 TextBox
+      MoveScaled(19,0,17,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox3 HBox
+    MoveScaled(0,59,91,4)
+    { lblRELATEDSTRING8 Label
+      MoveScaled(0,0,16,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Title "
+    }
+    { txtTitulo2 TextBox
+      MoveScaled(19,0,24,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox2 HBox
+    MoveScaled(0,63,91,4)
+    { lblRELATEDSTRING7 Label
+      MoveScaled(0,0,16,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Location "
+    }
+    { txtLocation2 TextBox
+      MoveScaled(19,0,21,4)
+      Expand = True
+    }
+    { Label2 Label
+      MoveScaled(39,0,12,3.5556)
+      #Translate = False
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = "Publisher "
+    }
+    { txtPublisher2 TextBox
+      MoveScaled(51,0,21,4)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(0,67,97,4)
+    { Label1 Label
+      MoveScaled(0,0,16,4)
+      #Translate = False
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = "Clave "
+    }
+    { txtClave2 TextBox
+      MoveScaled(17,0,21,4)
+      NoTabFocus = True
+      Expand = True
+    }
+    { lblRELATEDSTRING5 Label
+      MoveScaled(35,0,12,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Year "
+    }
+    { txtYear2 TextBox
+      MoveScaled(47,0,16,4)
+    }
+    { lblRELATEDSTRING6 Label
+      MoveScaled(63,0,12,4)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Date "
+    }
+    { txtDate2 TextBox
+      MoveScaled(76,0,16,4)
+    }
+  }
+}
