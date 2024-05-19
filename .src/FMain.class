@@ -154,7 +154,7 @@ Public Sub Form_Open()
   btnGuardarCambios.Visible = False
   Dim editorType As String[] = ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
   Dim pubState As String[] = ["", "inpreparation", "submitted", "forthcoming", "inpress", "prepublished"]
-  Dim thesis As String[] = ["", "@thesis (seleccionar)", "mathesis", "phdthesis", "candthesis", "ingenieriathesis", "magisterthesis", "gradothesis", "licenciaturathesis", "especialthesis", "posgradothesis", " ", "@manual (seleccionar)", " ", "@patent (seleccionar)", " ", "@report (seleccionar)"]
+  Dim thesis As String[] = ["", "@thesis (seleccionar)", "tifthesis", "mathesis", "phdthesis", "candthesis", "ingenieriathesis", "magisterthesis", "gradothesis", "licenciaturathesis", "especialthesis", "posgradothesis", " ", "@manual (seleccionar)", " ", "@patent (seleccionar)", " ", "@report (seleccionar)"]
   Dim relatedType As String[] = ["", "reprintof", "translationof", "translatedas", "multivolume"]
   Dim tipoEntrada As String[] = ["", "article", "incollection", "book", "thesis", "online", "inproceedings", "mvbook", "inbook", "bookinbook", "suppbook", "booklet", "collection", "mvcollection", "suppcollection", "manual", "misc", "patent", "periodical", "suppperiodical", "proceedings", "mvproceedings", "reference", "mvreference", "inreference", "report", "set", "unpublished", "xdata", "movie"]
   Dim hyphenation As String[] = ["", "spanish", "portuguese", "french", "italian", "german", "english", "latin", "greek", "chinese", "norwegian", "swedish", "danish", "dutch", "japanese", "romanian", "armenian", "korean", "russian", "latin", "czech"]
