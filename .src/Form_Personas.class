@@ -1,0 +1,23 @@
+' Gambas class file
+
+Public Sub btnCerrarPERSONAS_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  cmbPERSONAS.Add("")
+  cmbPERSONAS.Add("Autor")
+  cmbPERSONAS.Add("Editor")
+  cmbPERSONAS.Add("Compilador")
+  cmbPERSONAS.Add("Coordinador")
+  cmbPERSONAS.Add("Revisor")
+  cmbPERSONAS.Add("Corrector")
+  cmbPERSONAS.Add("Traductor")
+  cmbPERSONAS.Add("Ilustrador")
+  cmbPERSONAS.Add("Colaborador")
+  cmbPERSONAS.Add("Asistente")
+
+End

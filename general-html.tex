@@ -1,138 +1,60 @@
-\documentclass[oneside,onecolumn,openany,final]{book}
-\usepackage{polyglossia}
-\setmainlanguage{spanish}
-\usepackage[autostyle=true]{csquotes}
+\documentclass{book}
+\usepackage[
+HomeHTMLFilename=index,% Filename of the homepage.
+HTMLFilename={node-},% Filename prefix of other pages.
+mathjax,%Use MathJax to display math.
+xindy,
+latexmk]{lwarp}
+\usepackage{lipsum}
 
-% diseño de listas
-\usepackage{enumitem}
-\setlist{nosep,topsep=-\parskip}
-
-% diseño ISO690
-\usepackage[style=iso-authoryear,
-backend=biber,
-sortcites=true,
-indexing=cite,
-texencoding=utf8,
-bibencoding=utf8]{biblatex}
-
-\defcounter{biburlnumpenalty}{3000}
-\defcounter{biburlucpenalty}{6000}
-\defcounter{biburllcpenalty}{9000}
-
-% Generar los índices, desactivamos las opciones para títulos
-\renewbibmacro*{bibindex}{%
-  \ifbibindex
-    {\indexnames{author}%
-     \indexnames{editor}%
-     \indexnames{translator}%
-     \indexnames{commentator}}
-    {}}
-
-\renewbibmacro*{citeindex}{%
-  \ifciteindex
-    {\indexnames{author}%
-     \indexnames{editor}%
-     \indexnames{translator}%
-     \indexnames{commentator}}
-    {}}
-
-% figuras y epígrafe
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
 \usepackage{graphicx}
-\usepackage{svg}
-\usepackage[labelfont=bf,font=small,labelsep=period,format=plain]{caption}
-
-% Cita con cambio DE márgenes
-\renewenvironment{quote}
-{\normalsize\list{}{\leftmargin=14pt \rightmargin=0pt}%
-\item\relax}
-{\endlist}
-
-% Nuevo tipo de entorno flotante para fotografías
-\usepackage{newfloat}
-\DeclareFloatingEnvironment[
-fileext=lop,
-listname={Índice de imágenes},
-name=Imagen,
-placement=ht,
-%within=section,% activate it if you want
-%chapterlistsgaps=on,% meaningful only if chapters exist
-]{imagen}
-
-% configuración de los valores decimales de los cuadros
-\usepackage{siunitx}
-\sisetup{output-decimal-marker={.},
-group-separator={\,},
-group-minimum-digits=3,
-table-text-alignment=center,
-detect-all}
-
-\usepackage{xcolor}
-
-% generamos los índices en biblatex
-\usepackage[xindy]{imakeidx}
-\makeindex
-\makeindex[name=names,title={Índice de autoras y autores}]
-\makeindex[name=concepto,title={Índice de conceptos}]
-\makeindex[name=onomastico,title={Índice onomástico}]
-
-% generamos los índices personalizados
-\usepackage{esindex}
-\DeclareIndexNameFormat{default}{%
-	\usebibmacro{index:name}{\esindex[names]}
-	{\namepartfamily}
-	{\namepartgiven}
-	{\namepartprefix}
-	{\namepartsuffix}}
-\renewbibmacro*{citeindex}{%
-	\ifciteindex
-	{\indexnames{labelname}}
-	{}}
-
-% generamos los glosarios
-\usepackage[acronym,sanitizesort,toc=true,nonumberlist]{glossaries}
-\preto\chapter{\glsresetall}
+\usepackage[backend=biber,backref=true,indexing=cite,citestyle=authoryear,style=authoryear]{biblatex}
+%\usepackage[xindy,toc,numberedsection=nolabel]{glossaries}
+\usepackage[xindy,acronym,sanitizesort,toc=true,nonumberlist]{glossaries}
 \makenoidxglossaries
-\renewcommand{\glsnamefont}[1]{\sf\textbf{\textup{#1}}}
 
-% Diseño y estilo a glosario y acrónimo
-\newglossarystyle{crossreflist}%
-{% base it on list (adapt as required)
-	\renewcommand*{\glossentry}[2]{%
-		\item[\glsentryitem{##1}%
-		\glstarget{##1}{\glossentryname{##1}}]
-		\glossentrydesc{##1}\glspostdescription\space ##2%
-		% check if the user1 key has been supplied:
-		\ifglshasfield{useri}{##1}%
-		{% do cross-reference
-			\newline
-			\glsletentryfield{\crossrefs}{##1}{useri}%
-			\glsseeformat[\emph{Véase:}]{\crossrefs}{}%
-		}%
-		{}%
-	}%
-}
-\setglossarystyle{crossreflist}
+%hyperref siempre debe quedar último
+\usepackage{hyperref}
+% termina preámbulo predefinido
 
-% estos paquetes deben ir al final
-\usepackage{url}
-\usepackage[unicode,hyperindex=true]{hyperref}
-
-% Diseño de la raya del medio
-\makeatletter
-\def\thinskip{\hskip 0.16667em\relax}
-\def\endash{--}
-\def\emdash{\endash-}
-\def\d@sh#1#2{\unskip#1\thinskip#2\thinskip\ignorespaces}
-\def\dash{\d@sh\nobreak\endash}
-\def\Dash{\d@sh\nobreak\emdash}
-\def\ldash{\d@sh\empty{\hbox{\endash}\nobreak}}
-\def\rdash{\d@sh\nobreak\endash}
-\def\Ldash{\d@sh\empty{\hbox{\emdash}\nobreak}}
-\def\Rdash{\d@sh\nobreak\emdash}
-\def\hyph{-\penalty\z@\hskip\z@skip}
-\def\slash{/\penalty\z@\hskip\z@skip}
-\makeatother
-
-\usepackage{ifthen}
+%comienza preámbulo dinámico desde la base de datos
+\boolfalse{FileSectionNames}% If false, numbers the files.
+\renewcommand{\linkhomename}{Inicio}
+\renewcommand{\linkpreviousname}{Anterior}
+\renewcommand{\linknextname}{Siguiente}
+\renewcommand{\sidetocname}{Sumario}
+\setcounter{tocdepth}{2}% Include subsections in the \TOC.
+\setcounter{secnumdepth}{2}% Number down to subsections.
+\setcounter{FileDepth}{1}% Split \HTML\ files at sections
+\setcounter{FootnoteDepth}{1}
+\booltrue{CombineHigherDepths}% Combine parts/chapters/sections
+\setcounter{SideTOCDepth}{1}% Include subsections in the side\TOC
+\HTMLTitle{Después de parir}% Overrides \title for the web page.
+\HTMLAuthor{Alberto Moyano}% Sets the HTML meta author tag.
+\HTMLLanguage{es-ES}% Sets the HTML meta language.
+\HTMLDescription{Cada página de salida HTML debe tener su propia meta descripción HTML, que usualmente aparece en los resultados de búsqueda en la web.}% Generalmente, está limitada a alrededor de 150 caracteres de longitud y no debe incluir el carácter de comillas dobles ASCII.}% Sets the HTML meta description.
+\HTMLFirstPageTop{\includegraphics[width=5cm]{./media/cover.png}}
+%\HTMLPageTop{Después de parir}
+\HTMLFirstPageBottom{Información de contacto y legales (\url{https://www.edicionesimagomundi.com/})}
+\HTMLPageBottom{\LinkPrevious | \LinkNext}
+\HTMLKeywords{clave1,clave2,clave3}
+\HTMLAddMeta{book-title}{Después de parir}
+\HTMLAddMeta{subtitle}{Que dolor}
+\HTMLAddMeta{trans-title}{After birthing}
+\HTMLAddMeta{edition}{Primera}
+\HTMLAddMeta{publisher-name}{Ediciones Imago Mundi}
+\HTMLAddMeta{publisher-loc}{Buenos Aires}
+\HTMLAddMeta{isbn}{000-000-0000-000-0}
+\HTMLAddMeta{pub-date}{2024/05/17}
+\HTMLAddMeta{volume}{1}
+\HTMLAddMeta{series-title}{Colección Bitácora Argentina}
+\HTMLAddMeta{copyright-statement}{© 2023 Example Publisher}
+\HTMLAddMeta{license-type}{Tipo de licencia: CC BY}
+\HTMLAddMeta{license-text}{Creative Commons Attribution 4.0 International License}
+\HTMLAddMeta{funding-source}{Fuente de financiamiento: National Science Foundation}
+\HTMLAddMeta{abstract}{Cada página de salida HTML debe tener su propia meta descripción HTML, que usualmente aparece en los resultados de búsqueda en la web. Generalmente, está limitada a alrededor de 150 caracteres de longitud y no debe incluir el carácter de comillas dobles ASCII.}
+\CSSFilename{imago_custom.css}
 
 % fin del preambulo

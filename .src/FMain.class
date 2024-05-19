@@ -222,7 +222,7 @@ End
 
 Public Sub Borrar_Aux()
 
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "rm *.css *.lwarpmkconf *.bcf-SAVE-ERROR *.bbl-SAVE-ERROR *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
+  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "rm *.css *.lwarpmkconf *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
   Wait 0.2
 
   TerminalView1.SetFocus()
@@ -258,7 +258,7 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   rutaFija = File.Dir(TextBox1.Text) &/ "files"
   newLog = "gbTeX-" & BaseName & ".log"
 
-  Borrar_Aux()
+  Borrar_Aux
   Wait 0.2
 
   TabPanel1.Index = 0
@@ -302,11 +302,8 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   'generamos una vista con texlogsieve
   TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n" & "clear" & "\n")
 
-  'borramos los archivos auxiliares del directorio
-  Borrar_Aux()
-  Wait 0.2
-
   TerminalView1.SetFocus()
+  Borrar_Aux
 
 End
 
@@ -327,7 +324,7 @@ Public Sub menuODt_DOCX_Click() 'convertimos a odt
   folder = File.Dir(TextBox1.Text) &/ "odt-docx"
   newFile = "odt-" & BaseName & ".tex"
 
-  Borrar_Aux()
+  Borrar_Aux
   Wait 0.2
 
   ' exportamos los archivos
@@ -365,46 +362,11 @@ Public Sub menuODt_DOCX_Click() 'convertimos a odt
   TerminalView1.Input("mv " & "odt-" & BaseName & ".odt" & " " & folder & "/" & BaseName & ".odt" & "\n" & "clear" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  Wait 0.2
+  ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  ' Wait 0.2
 
   TerminalView1.SetFocus()
-
-  Borrar_Aux()
-
-End
-
-Public Sub Menu8_Click()'salida html5
-
-  Dim folder As String
-  Dim newFile As String
-
-  folder = File.Dir(TextBox1.Text) &/ "html5"
-  newFile = "html5-" & BaseName & ".tex"
-
-  Borrar_Aux()
-  Wait 0.2
-
-  ' exportamos los archivos bib y glo
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Wait 0.2
-
-  TerminalView1.Input("cat " & rutaFILES & "/general-html.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -r html5" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("make4ht -l -u -f html5 -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/configHTML.cfg -a Debug " & newFile & "\n" & "rm " & newFile & "\n" & "mkdir html5" & "\n" & "cp *.html" & " " & folder & "\n" & "cp html5-" & BaseName & ".css" & " " & folder &/ "html5-" & BaseName & ".css" & "\n" "clear" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("cp -r ./media " & folder &/ "media" & "\n")' & "clear" & "\n")
-  Wait 0.2
-
-  TerminalView1.SetFocus()
-
-  Borrar_Aux()
+  Borrar_Aux
 
 End
 
@@ -435,7 +397,7 @@ Public Sub menuPDFarticulo_Click()
   newLog = "gbTeX-" & BaseName & ".log"
   metaTemp = "gbTeXmetaTMP-" & BaseName & ".tex"
 
-  Borrar_Aux()
+  Borrar_Aux
   Wait 0.2
 
   ' metadatos para construcción de maketitle
@@ -490,8 +452,8 @@ Public Sub menuPDFarticulo_Click()
   TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n" & "clear" & "\n")
 
   'borramos los archivos auxiliares del directorio
-  Borrar_Aux()
   TerminalView1.SetFocus()
+  Borrar_Aux
 
 End
 
@@ -703,34 +665,6 @@ Public Sub Menu20_Click()'abrir epub
 
 End
 
-Public Sub Menu54_Click()'abrir mobi
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/mobi/mobi-" & BaseName & ".mobi"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
-  Else
-    Message.Error("El archivo <b> mobi-" & BaseName & ".mobi</b> no existe.")
-  Endif
-
-End
-
-Public Sub Menu55_Click()'abrir azw3
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/azw3/azw3-" & BaseName & ".azw3"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
-  Else
-    Message.Error("El archivo <b> azw3-" & BaseName & ".azw3</b> no existe.")
-  Endif
-
-End
-
 Public Sub Menu58_Click()'siunitx
 
   Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/siunitx/siunitx.pdf"
@@ -763,12 +697,6 @@ Public Sub Menu11_Click()'cerrar el programa
 
 End
 
-Public Sub menuCFG_Click()
-
-  Form_CFG.ShowModal()
-
-End
-
 ' Evento Show del formulario
 Public Sub Form_Show()
   ' Configura las coordenadas del formulario para ubicarlo en el margen superior derecho
@@ -778,52 +706,14 @@ Public Sub Form_Show()
 
 End
 
-Public Sub Menu2_Click() 'generamos el epub2
-
-  Dim folder As String
-  Dim newFile As String
-
-  folder = BaseName & "-epub"
-  newFile = "epub-" & BaseName & ".tex"
-
-  Borrar_Aux()
-  Wait 0.2
-
-  ' exportamos los archivos bib, glo y meta
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Mod_Exportar.ExportToMetaEPUB(TextBox1.Text)
-  Wait 0.2
-
-  TerminalView1.Input("cat " & rutaFILES & "/general-epub.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf epub" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES &/ "build.lua -c " & rutaFILES &/ "gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n" & "mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf " & rutaFILES &/ "gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  Wait 0.2
-
-  ' Borrar_Aux()
-
-  TerminalView1.SetFocus()
-
-End
-
-Public Sub menuEPUB3_Click() 'convertimos a epub3
+Public Sub menuEPUB_Click() 'convertimos a epub3
 
   Dim folder As String
   Dim newFile As String
 
   folder = BaseName & "-epub3"
   newFile = "epub3-" & BaseName & ".tex"
-  Borrar_Aux()
+  Borrar_Aux
   Wait 0.2
 
   ' exportamos los archivos bib, glo y meta
@@ -844,53 +734,17 @@ Public Sub menuEPUB3_Click() 'convertimos a epub3
   TerminalView1.Input("tex4ebook -l -f epub3 -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub3-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n" & "mv epub3-" & folder & " epub3" & "\n" & "clear" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  Wait 0.2
-
-  Borrar_Aux()
+  ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  ' Wait 0.2
 
   TerminalView1.SetFocus()
-
-End
-
-Public Sub Menu4_Click()' exportamos a JATS
-
-  Dim folder As String
-  Dim newFile As String
-
-  folder = File.Dir(TextBox1.Text) &/ "jats"
-  newFile = "jats-" & BaseName & ".tex"
-  Borrar_Aux()
-
-  Wait 0.2
-
-  ' exportamos los archivos bib, glo y meta
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  ExportToMetaJATS()
-
-  TerminalView1.Input("cat " & rutaFILES & "/general-jats.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-
-  Wait 0.2
-
-  TerminalView1.Input("rm -r jats" & "\n")
-
-  Wait 0.2
-
-  TerminalView1.Input("make4ht -l -u -f jats -e build.lua -c " & rutaFILES & "/configJATS.cfg -a debug " & newFile & "\n" & "rm " & newFile & "\n" & "mkdir jats" & "\n" & "mv " & "jats-" & BaseName & ".xml" & " " & folder & "/" & "jats-" & BaseName & ".xml" & "\n" & "clear" & "\n")
-  TerminalView1.SetFocus()
-
-End
-
-Public Sub menuBIBingresar_Click()
-
-  Form_CSV.ShowModal()
+  Borrar_Aux
 
 End
 
 Public Sub Menu24_Click()
 
-  Shell "xdg-open https://albertomoyano.github.io/blog-gbtexpublisher/about/"
+  Shell "xdg-open https://albertomoyano.github.io/gbtexpublisher/"
 
 End
 
@@ -905,37 +759,6 @@ Public Sub Menu13_Click()' abrir html
   Else
     Message.Error("El archivo <b>html5-" & BaseName & ".html</b> no existe.")
   Endif
-
-End
-
-Public Sub Menu7_Click()'xhtml
-
-  Dim folder As String
-  Dim newFile As String
-
-  folder = File.Dir(TextBox1.Text) &/ "xhtml"
-  newFile = "xhtml-" & BaseName & ".tex"
-
-  Borrar_Aux()
-  Wait 0.2
-
-  ' exportamos los archivos bib y glo
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Wait 0.2
-
-  TerminalView1.Input("cat " & rutaFILES & "/general-html.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -r xhtml" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("make4ht -l -u -f xhtml -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/configHTML.cfg -a Debug " & newFile & "\n" & "rm " & newFile & "\n" & "mkdir xhtml" & "\n" & "cp *.html" & " " & folder & "\n" & "cp xhtml-" & BaseName & ".css" & " " & folder &/ "xhtml-" & BaseName & ".css" & "\n" "clear" & "\n")
-  Wait 0.2
-
-  TerminalView1.SetFocus()
-
-  Borrar_Aux()
 
 End
 
@@ -1621,7 +1444,7 @@ End
 
 Public Sub menuBORRARaux_Click()
 
-  Borrar_Aux()'borramos los archivos del directorio
+  Borrar_Aux
 
 End
 
@@ -1638,11 +1461,8 @@ Public Sub menuCatalogo_Click()
   TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "catalogo/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
   Wait 0.2
 
-  'borramos los archivos auxiliares del directorio
-  Borrar_Aux()
-  Wait 0.2
-
   TerminalView1.SetFocus()
+  Borrar_Aux
 
 End
 
@@ -2547,7 +2367,8 @@ End
 
 Public Sub btnMostarAuthor_Click()
 
-  Form_Autores.ShowModal()
+  Form_Personas.ShowModal()
+  ' Form_Autores.ShowModal()
 
 End
 
@@ -3095,9 +2916,6 @@ Public Sub BtnNuevoBib_Click()
   ToolPanel1.Index = 0
 
   Dim Idn As Integer
-
-  LimpiarCamposBIB() ' Limpiamos los campos
-
   txtTMPbiblio.Clear
   txtTMPbiblio.SetFocus()
 
@@ -3110,6 +2928,7 @@ Public Sub BtnNuevoBib_Click()
   Else
     Idn = CInt(Contenido["MAX(id)"]) + 1
   Endif
+
   txtID.Text = Idn
   txtCLAVEbib.Text = "@" & Idn & "-" 'colocamos el prefijo de la clave bib
   txtKEYWORDS.Text = "," & BaseName & "," 'colocamos el key con el nombre del archivo
@@ -5501,27 +5320,13 @@ Public Sub menuGHPages_Click()
   Shell "rm -rf " & File.Dir(TextBox1.Text) &/ "docs"
   Wait 0.2
 
-  Dim estatic As String = File.Dir(TextBox1.Text) & "/docs"
-  'carpeta para páginas estáticas
+  'creamos el directorio de las páginas estáticas
   If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
-    Mkdir estatic 'File.Dir(TextBox1.Text) & "/docs"
+    Mkdir File.Dir(TextBox1.Text) & "/docs"
   End If
 
-  'hacemos una copia de los archivos
-  Shell "rm " & estatic & "/media"
-  Wait 0.2
-  Shell "cp -r " & File.Dir(TextBox1.Text) & "/media" & " " & estatic
-  Wait 0.2
-  Shell "cp " & File.Dir(TextBox1.Text) &/ "*.html" & " " & estatic
-  Wait 0.2
-  ' Shell "cp " & File.Dir(TextBox1.Text) &/ "*.png" & " " & estatic
-  ' Wait 0.1
-  Shell "cp " & File.Dir(TextBox1.Text) &/ "*.css" & " " & estatic
-  Wait 0.2
-  Shell "cp " & File.Dir(TextBox1.Text) &/ "*.js" & " " & estatic
-  Wait 0.2
-
-  Borrar_Aux
+  'copiamos los archivos
+  TerminalView1.Input("cp -rv " & File.Dir(TextBox1.Text) & "/html5/*" & " " & File.Dir(TextBox1.Text) & "/docs/" & "\n" & "clear" & "\n")
 
 End
 
@@ -5612,10 +5417,80 @@ Public Sub CopiarArchivos()
 
 End
 
-
 Public Sub menuHTML5book_Click()
+
+  Dim metadatos As String
+
+  metadatos = txtnombreArchivo.Text
+  ' Verificar si el campo de metadatos existe
+  If metadatos = "" Then
+    Message.Error("Debe asegurar la construcción del archivo de metadatos", "Ok")
+    Return
+  End If
+
+  TabPanel1.Index = 0
+
+  TerminalView1.Input("lwarpmk cleanall" & "\n")
+  Wait 0.2
+
+  ' exportamos los archivos bib y glo
+  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
+  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
+  Wait 0.2
 
   Shell "cp " & File.Dir(TextBox1.Text) &/ "files/imago_custom.css" & " " & File.Dir(TextBox1.Text)
   Wait 0.2
+
+  Dim newFile As String
+  newFile = "html5-" & File.Name(TextBox1.Text)
+  TerminalView1.Input("cat " & rutaFILES & "/general-html.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("rm -r html5" & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
+  TerminalView1.Input("lwarpmk html" & "\n")
+  Wait 0.2
+
+  Dim folderHTML5 As String
+  folderHTML5 = File.Dir(TextBox1.Text) &/ "html5"
+
+  If Not Exist(File.Dir(TextBox1.Text) & "/html5") Then
+    Mkdir File.Dir(TextBox1.Text) & "/html5"
+  End If
+
+  'hacemos una copia de los archivos
+  TerminalView1.Input("cp -r " & File.Dir(TextBox1.Text) & "/media" & " " & folderHTML5 & "\n")
+  Wait 0.2
+  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.html" & " " & folderHTML5 & "\n")
+  Wait 0.2
+  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.png" & " " & folderHTML5 & "\n")
+  Wait 0.2
+  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.css" & " " & folderHTML5 & "\n")
+  Wait 0.2
+  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.js" & " " & folderHTML5 & "\n")
+  Wait 0.2
+
+  TerminalView1.SetFocus()
+  Borrar_Aux
+
+End
+
+Public Sub menuLWARP_Click()
+
+  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/lwarp/lwarp.pdf"
+
+End
+
+Public Sub menuAPA_Click()
+
+  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/biblatex-contrib/biblatex-apa/biblatex-apa.pdf"
+
+End
+
+Public Sub menuESTADISTICAS_Click()
+
+  Message.Info("Función en desarrollo.", "Aceptar")
 
 End

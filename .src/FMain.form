@@ -66,16 +66,6 @@
       Text = ("Salida a HTML")
       Picture = Picture["iconos/html5.png"]
       Enabled = False
-      { Menu4 Menu
-        Text = ("HTML5 (clase article, default)")
-        Enabled = False
-        Visible = False
-      }
-      { menuHTML5 Menu
-        Text = ("HTML5 (clase book, default)")
-        Enabled = False
-        Visible = False
-      }
       { Menu8 Menu
         Text = ("HTML5-JATS (clase article, default)")
       }
@@ -84,32 +74,13 @@
       }
       { menuGHPages Menu
         Text = ("Publicar en GitHub Pages")
+        Picture = Picture["iconos/github-mark.svg"]
       }
     }
     { menuEPUB Menu
-      Text = ("Salida a libro ePub-JATS")
+      Text = ("Salida a libro ePub 3")
       Picture = Picture["iconos/epub.svg"]
       Enabled = False
-      { Menu2 Menu
-        Text = ("ePub (default)")
-        Enabled = False
-        Visible = False
-      }
-      { Menu1 Menu
-        Text = ("ePub-JATS")
-        Enabled = False
-        Visible = False
-      }
-      { menuEPUB2 Menu
-        Text = ("ePub 2")
-        Enabled = False
-        Visible = False
-      }
-      { menuEPUB3 Menu
-        Text = ("ePub 3")
-        Enabled = False
-        Visible = False
-      }
     }
     { menuXML Menu
       Text = ("Salida a XML-JATS")
@@ -143,16 +114,13 @@
       Text = ("Exportar referencias bibliográficas")
       Picture = Picture["iconos/exportar.svg"]
     }
-    { menuBIBingresar Menu
-      Text = ("Incorporar bibliografía")
-      Picture = Picture["iconos/bib.svg"]
-    }
     { Menu65 Menu
       Text = ("Control de bibliografía duplicada")
       Picture = Picture["iconos/bibRepetida.svg"]
     }
-    { Menu7 Menu
+    { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
+      Picture = Picture["iconos/chart-3.png"]
     }
     { Menu79 Menu
     }
@@ -168,6 +136,7 @@
     }
     { menuORTO Menu
       Text = ("Revisión ortotipográfica")
+      Picture = Picture["iconos/tools_check.svg"]
       Enabled = False
     }
     { menuGray Menu
@@ -226,6 +195,8 @@
   }
   { AbrirApp Menu
     Text = ("AbrirApp")
+    Enabled = False
+    Toggle = True
     Visible = False
     { Menu17 Menu
       Text = ("Abrir PDF")
@@ -234,16 +205,6 @@
     { Menu20 Menu
       Text = ("Abrir ePub")
       Picture = Picture["iconos/epub.svg"]
-    }
-    { Menu54 Menu
-      Text = ("Abrir MOBI")
-      Enabled = False
-      Visible = False
-    }
-    { Menu55 Menu
-      Text = ("Abrir AZW")
-      Enabled = False
-      Visible = False
     }
     { Menu13 Menu
       Text = ("Abrir HTML5-JATS")
@@ -275,13 +236,16 @@
       { Menu39 Menu
         Text = ("biblatex")
         { Menu45 Menu
-          Text = ("base")
+          Text = ("base (autor-año)")
         }
         { Menu43 Menu
           Text = ("philosophy")
         }
         { Menu44 Menu
           Text = ("ISO690")
+        }
+        { menuAPA Menu
+          Text = ("APA")
         }
       }
       { Menu46 Menu
@@ -337,6 +301,9 @@
       }
       { Menu14 Menu
         Text = ("url")
+      }
+      { menuLWARP Menu
+        Text = ("lwarp")
       }
     }
     { Menu48 Menu
