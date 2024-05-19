@@ -9,15 +9,25 @@ End
 Public Sub Form_Open()
 
   cmbPERSONAS.Add("")
-  cmbPERSONAS.Add("Autor")
-  cmbPERSONAS.Add("Editor")
-  cmbPERSONAS.Add("Compilador")
-  cmbPERSONAS.Add("Coordinador")
-  cmbPERSONAS.Add("Revisor")
-  cmbPERSONAS.Add("Corrector")
-  cmbPERSONAS.Add("Traductor")
-  cmbPERSONAS.Add("Ilustrador")
-  cmbPERSONAS.Add("Colaborador")
-  cmbPERSONAS.Add("Asistente")
+  cmbPERSONAS.Add("Author (autor)")
+  cmbPERSONAS.Add("Editor (editor)")
+  cmbPERSONAS.Add("Contributor (contribuyente)")
+  cmbPERSONAS.Add("Corresponding Author (autor de correspondencia)")
+  cmbPERSONAS.Add("Reviewer (revisor)")
+  cmbPERSONAS.Add("Sponsor (patrocinador)")
+  cmbPERSONAS.Add("Translator (traductor)")
+  cmbPERSONAS.Add("Funder (financiador)")
+  cmbPERSONAS.Add("Group Author (autor grupal)")
+  cmbPERSONAS.Add("Guest Editor (editor invitado)")
+  cmbPERSONAS.Add("Librarian (bibliotecario)")
+  cmbPERSONAS.Add("Data Manager (gestor de datos)")
+  cmbPERSONAS.Add("Organizer (organizador)")
+  cmbPERSONAS.Add("Supervisor (supervisor)")
+
+End
+
+Public Sub btnAutores1_Click()
+
+  Form_Autores.ShowModal()
 
 End

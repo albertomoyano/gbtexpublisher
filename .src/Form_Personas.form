@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,740,420)
+  Move(0,0,960,730)
   #Scaled = False
   Resizable = False
   Arrangement = Arrange.Vertical
@@ -20,18 +20,18 @@
     }
   }
   { ScrollView1 ScrollView
-    Move(0,40,730,320)
+    Move(0,40,870,360)
     Arrangement = Arrange.Vertical
     ScrollBar = Scroll.Vertical
     { HBox2 HBox
-      Move(0,0,600,36)
-      { btnCerrarColeccion3 Button
+      Move(0,0,860,36)
+      { btnAutores1 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox1 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -42,19 +42,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox3 HBox
-      Move(0,34,600,36)
+      Move(0,34,860,36)
       { btnCerrarColeccion1 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox3 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -65,19 +65,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS2 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox4 HBox
-      Move(0,70,600,36)
+      Move(0,70,860,36)
       { btnCerrarColeccion4 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox5 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -88,19 +88,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS3 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox5 HBox
-      Move(0,106,600,36)
+      Move(0,106,860,36)
       { btnCerrarColeccion5 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox7 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -111,19 +111,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS4 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox6 HBox
-      Move(0,142,600,36)
+      Move(0,142,860,36)
       { btnCerrarColeccion6 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox9 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -134,19 +134,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS5 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox7 HBox
-      Move(0,178,600,36)
+      Move(0,178,860,36)
       { btnCerrarColeccion7 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox11 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -157,19 +157,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS6 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox8 HBox
-      Move(0,214,600,36)
+      Move(0,214,860,36)
       { btnCerrarColeccion8 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox13 TextBox
-        Move(36,0,70,36)
+        Move(40,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -180,19 +180,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS7 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox9 HBox
-      Move(0,250,600,36)
+      Move(0,250,860,36)
       { btnCerrarColeccion9 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox15 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -203,19 +203,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS8 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox10 HBox
-      Move(0,286,600,36)
+      Move(0,286,860,36)
       { btnCerrarColeccion10 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox17 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -226,19 +226,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS9 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox11 HBox
-      Move(0,322,600,36)
+      Move(0,322,860,36)
       { btnCerrarColeccion11 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox19 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -249,12 +249,12 @@
         ReadOnly = True
       }
       { cmbPERSONAS10 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox12 HBox
-      Move(0,358,600,36)
+      Move(0,358,860,36)
       { btnCerrarColeccion12 Button
         Move(0,0,36,36)
         NoTabFocus = True
@@ -272,19 +272,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS11 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox13 HBox
-      Move(0,394,600,36)
+      Move(0,394,860,36)
       { btnCerrarColeccion13 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox23 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -295,19 +295,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS12 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox14 HBox
-      Move(0,430,600,36)
+      Move(0,430,860,36)
       { btnCerrarColeccion14 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox25 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -318,19 +318,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS13 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox15 HBox
-      Move(0,466,600,36)
+      Move(0,466,860,36)
       { btnCerrarColeccion15 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox27 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -341,19 +341,19 @@
         ReadOnly = True
       }
       { cmbPERSONAS14 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
     { HBox17 HBox
-      Move(0,502,600,36)
+      Move(0,502,860,36)
       { btnCerrarColeccion16 Button
         Move(0,0,36,36)
         NoTabFocus = True
         Picture = Picture["iconos/schedule.svg"]
       }
       { TextBox29 TextBox
-        Move(36,0,70,36)
+        Move(36,0,50,36)
         Background = Color.Background
         ReadOnly = True
       }
@@ -364,13 +364,13 @@
         ReadOnly = True
       }
       { cmbPERSONAS15 ComboBox
-        Move(430,0,144,36)
+        Move(430,0,404,36)
         ReadOnly = True
       }
     }
   }
   { HBox1 HBox
-    Move(0,370,450,36)
+    Move(10,670,450,36)
     { Spring2 Spring
       Move(180,0,60,40)
     }
