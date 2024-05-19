@@ -5,3 +5,9 @@ Public Sub btnCerrarORTO_Click()
   Me.Close
 
 End
+
+Public Sub btnCerrarColeccion2_Click()
+
+  Message.Info("Función en desarrollo", "Aceptar")
+
+End
