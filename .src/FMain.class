@@ -147,6 +147,13 @@ Public Sub Form_Open()
   cbPDFx.Add("pdf/x-5n")
   cbPDFx.Add("pdf/x-5pg")
 
+  txt89_binding.Add("")
+  txt89_binding.Add("Encolado")
+  txt89_binding.Add("Everflex")
+  txt89_binding.Add("Cosido a hilo")
+  txt89_binding.Add("Anillado")
+  txt89_binding.Add("Abrochado")
+
   ' comienza bibtex
   BtnEliminarBib.visible = False
   BtnRefrescarBib.Visible = False
@@ -915,10 +922,16 @@ Public Sub menuAbrir_Click()
     txt60_artaceptado.Text = Contenido!artaceptado_60
     txtFORMATO.Text = Contenido!formato_61
     txt59_opt_source.Text = Contenido!opt_69
-    txt82_conference.Text = Contenido!conference_82
     txt82_conferenceVisual.Text = Contenido!opt_72
+    txt78_genero.Text = Contenido!genero_78
+    txt82_conference.Text = Contenido!conference_82
     txt84_bookTitle.Text = Contenido!bookTitle_84
     txt85_doiRevista.Text = Contenido!doiRevista_85
+    txt86_annotation.Text = Contenido!notas_86
+    txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
+    txt88_audiencia.Text = Contenido!audience_88
+    txt89_binding.Text = Contenido!binding_89
+
   Else
     BtnNuevoMeta.Visible = True
     btnGuardarMeta.Visible = False
@@ -1106,10 +1119,15 @@ Public Sub mnuLast_Click()
     txt60_artaceptado.Text = Contenido!artaceptado_60
     txtFORMATO.Text = Contenido!formato_61
     txt59_opt_source.Text = Contenido!opt_69
-    txt82_conference.Text = Contenido!conference_82
     txt82_conferenceVisual.Text = Contenido!opt_72
+    txt78_genero.Text = Contenido!genero_78
+    txt82_conference.Text = Contenido!conference_82
     txt84_bookTitle.Text = Contenido!bookTitle_84
     txt85_doiRevista.Text = Contenido!doiRevista_85
+    txt86_annotation.Text = Contenido!notas_86
+    txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
+    txt88_audiencia.Text = Contenido!audience_88
+    txt89_binding.Text = Contenido!binding_89
 
   Else
     BtnNuevoMeta.Visible = True
@@ -2281,10 +2299,15 @@ Public Function guardarCamposMETA() As Boolean
     Contenido!artaceptado_60 = txt60_artaceptado.Text
     Contenido!formato_61 = txtFORMATO.Text
     Contenido!opt_69 = txt59_opt_source.Text
-    Contenido!conference_82 = txt82_conference.Text
     Contenido!opt_72 = txt82_conferenceVisual.Text
+    Contenido!genero_78 = txt78_genero.Text
+    Contenido!conference_82 = txt82_conference.Text
     Contenido!bookTitle_84 = txt84_bookTitle.Text
     Contenido!doiRevista_85 = txt85_doiRevista.Text
+    Contenido!notas_86 = txt86_annotation.Text
+    Contenido!piehtml_87 = txt87_HTMLFirstPageBottom.Text
+    Contenido!audience_88 = txt88_audiencia.Text
+    Contenido!binding_89 = txt89_binding.Text
 
     Return True ' Indicar que el formato es válido
   Else

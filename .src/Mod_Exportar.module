@@ -1099,17 +1099,31 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
     s &= "\\CSSFilename{imago_custom.css}" & "\n"
     s &= "\\HTMLPageBottom{\\LinkPrevious | \\LinkNext}" & "\n"
     s &= "\\HTMLFirstPageTop{\\includegraphics[width=5cm]{./media/cover.png}}" & "\n"
+    s &= "\\HTMLTitle{" & Contenido[aFields[84]] & "}\n"
+    s &= "\\HTMLLanguage{" & Contenido[aFields[39]] & "}\n"
+    s &= "\\HTMLAuthor{" & sb & "}\n"
+    If Not IsNull(Contenido[aFields[87]]) And Len(Contenido[aFields[87]]) > 0 Then
+      s &= "\\HTMLFirstPageBottom{" & Contenido[aFields[87]] & "}\n"'pie de libro web
+    Endif
 
     If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
       s &= "\\HTMLAddMeta{isbn}{" & Contenido[aFields[35]] & "}\n"'isbn
     Endif
 
-    If Not IsNull(Contenido[aFields[6]]) And Len(Contenido[aFields[6]]) > 0 Then
-      s &= "\\HTMLAddMeta{book-title}{" & Contenido[aFields[6]] & "}\n"' title
+    If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
+      s &= "\\HTMLAddMeta{book-title}{" & Contenido[aFields[84]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[9]]) And Len(Contenido[aFields[9]]) > 0 Then
+      s &= "\\HTMLAddMeta{subtitle}{" & Contenido[aFields[9]] & "}\n"'subtitle
     Endif
 
     If Not IsNull(Contenido[aFields[31]]) And Len(Contenido[aFields[31]]) > 0 Then
-      s &= "\\HTMLAddMeta{volume}{" & Contenido[aFields[31]] & "}\n"' volume
+      s &= "\\HTMLAddMeta{volume}{" & Contenido[aFields[31]] & "}\n"'volume
+    Endif
+
+    If Not IsNull(Contenido[aFields[34]]) And Len(Contenido[aFields[34]]) > 0 Then
+      s &= "\\HTMLAddMeta{edition}{" & Contenido[aFields[34]] & "}\n"'edition
     Endif
 
     If Not IsNull(Contenido[aFields[28]]) And Len(Contenido[aFields[28]]) > 0 Then
@@ -1117,184 +1131,69 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
     Endif
 
     If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
-      s &= "\\HTMLAddMeta{license-type}{Tipo de licencia:" & Contenido[aFields[15]] & "}\n"'licencia
+      s &= "\\HTMLAddMeta{license}{" & Contenido[aFields[15]] & "}\n"'licencia"
     Endif
 
-    '
+    If Not IsNull(Contenido[aFields[57]]) And Len(Contenido[aFields[57]]) > 0 Then
+      s &= "\\HTMLAddMeta{keywords}{" & Contenido[aFields[57]] & "}\n"'claves
+    Endif
 
-    ' If Not IsNull(Contenido[aFields[7]]) And Len(Contenido[aFields[7]]) > 0 Then
-    '   s &= "pdfsubject={" & Contenido[aFields[7]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[10]]) And Len(Contenido[aFields[10]]) > 0 Then
-    '   s &= "pdfauthortitle={" & Contenido[aFields[10]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[11]]) And Len(Contenido[aFields[11]]) > 0 Then
-    '   s &= "pdfdate={" & Contenido[aFields[11]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[12]]) And Len(Contenido[aFields[12]]) > 0 Then
-    '   s &= "pdfcreationdate={" & Contenido[aFields[12]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[13]]) And Len(Contenido[aFields[13]]) > 0 Then
-    '   s &= "pdfmoddate={" & Contenido[aFields[13]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
-    '   s &= "pdfmetadate={" & Contenido[aFields[14]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
-    '   s &= "pdfcopyright={" & Contenido[aFields[15]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[16]]) And Len(Contenido[aFields[16]]) > 0 Then
-    '   s &= "pdflicenseurl={" & Contenido[aFields[16]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[17]]) And Len(Contenido[aFields[17]]) > 0 Then
-    '   s &= "pdfcaptionwriter={" & Contenido[aFields[17]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[18]]) And Len(Contenido[aFields[18]]) > 0 Then
-    '   s &= "pdfcontactaddress={" & Contenido[aFields[18]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[19]]) And Len(Contenido[aFields[19]]) > 0 Then
-    '   s &= "pdfcontactcity={" & Contenido[aFields[19]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[20]]) And Len(Contenido[aFields[20]]) > 0 Then
-    '   s &= "pdfcontactpostcode={" & Contenido[aFields[20]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[21]]) And Len(Contenido[aFields[21]]) > 0 Then
-    '   s &= "pdfcontactcountry={" & Contenido[aFields[21]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[22]]) And Len(Contenido[aFields[22]]) > 0 Then
-    '   s &= "pdfcontactregion={" & Contenido[aFields[22]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[23]]) And Len(Contenido[aFields[23]]) > 0 Then
-    '   s &= "pdfcontactphone={" & Contenido[aFields[23]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[24]]) And Len(Contenido[aFields[24]]) > 0 Then
-    '   s &= "pdfcontactemail={" & Contenido[aFields[24]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[25]]) And Len(Contenido[aFields[25]]) > 0 Then
-    '   s &= "pdfcontacturl={" & Contenido[aFields[25]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[26]]) And Len(Contenido[aFields[26]]) > 0 Then
-    '   s &= "pdfdocumentid={" & Contenido[aFields[26]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[27]]) And Len(Contenido[aFields[27]]) > 0 Then
-    '   s &= "pdfpublication={" & Contenido[aFields[27]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[28]]) And Len(Contenido[aFields[28]]) > 0 Then
-    '   s &= "pdfpublisher={" & Contenido[aFields[28]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[29]]) And Len(Contenido[aFields[29]]) > 0 Then
-    '   s &= "pdftype={" & Contenido[aFields[29]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[30]]) And Len(Contenido[aFields[30]]) > 0 Then
-    '   s &= "pdfpubtype={" & Contenido[aFields[30]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[31]]) And Len(Contenido[aFields[31]]) > 0 Then
-    '   s &= "pdfvolumenum={" & Contenido[aFields[31]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[32]]) And Len(Contenido[aFields[32]]) > 0 Then
-    '   s &= "pdfissuenum={" & Contenido[aFields[32]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[50]]) And Len(Contenido[aFields[50]]) > 0 Then
-    '   s &= "pdfpagerange={" & Contenido[aFields[50]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[34]]) And Len(Contenido[aFields[34]]) > 0 Then
-    '   s &= "pdfbookedition={" & Contenido[aFields[34]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
-    '   s &= "pdfisbn={" & Contenido[aFields[35]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[36]]) And Len(Contenido[aFields[36]]) > 0 Then
-    '   s &= "pdfissn={" & Contenido[aFields[36]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[37]]) And Len(Contenido[aFields[37]]) > 0 Then
-    '   s &= "pdfeissn={" & Contenido[aFields[37]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[38]]) And Len(Contenido[aFields[38]]) > 0 Then
-    '   s &= "pdfpubstatus={" & Contenido[aFields[38]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[39]]) And Len(Contenido[aFields[39]]) > 0 Then
-    '   s &= "pdflang={" & Contenido[aFields[39]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[40]]) And Len(Contenido[aFields[40]]) > 0 Then
-    '   s &= "pdfmetalang={" & Contenido[aFields[40]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[41]]) And Len(Contenido[aFields[41]]) > 0 Then
-    '   s &= "pdfbaseurl={" & Contenido[aFields[41]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
-    '   s &= "pdfurl={" & Contenido[aFields[42]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[43]]) And Len(Contenido[aFields[43]]) > 0 Then
-    '   s &= "pdfdoi={" & Contenido[aFields[43]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[44]]) And Len(Contenido[aFields[44]]) > 0 Then
-    '   s &= "pdfrendition={" & Contenido[aFields[44]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[45]]) And Len(Contenido[aFields[45]]) > 0 Then
-    '   s &= "pdfidentifier={" & Contenido[aFields[45]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[46]]) And Len(Contenido[aFields[46]]) > 0 Then
-    '   s &= "pdfx={" & Contenido[aFields[46]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[47]]) And Len(Contenido[aFields[47]]) > 0 Then
-    '   s &= "pdfversionid={" & Contenido[aFields[47]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[57]]) And Len(Contenido[aFields[57]]) > 0 Then
-    '   s &= "pdfkeywords={" & Contenido[aFields[57]] & "},\n"
-    ' Endif
-    ' If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
-    '   s &= "pdfformato={" & Contenido[aFields[61]] & "},\n"
-    ' Endif
-    '
-    ' ' 'el titulo del libro es campo obligatorio
-    ' s &= "pdftitle={" & Contenido[aFields[84]] & "},\n"
-    ' s &= "pdfcreator={gbTeXpublisher}" & ",\n"
-    ' s &= "pdfproducer={Ecosistema de LaTeX}" & ",\n"
-    ' s &= "unicode=true" & ",\n"
-    ' s &= "bookmarks=true" & ",\n"
-    ' s &= "pdfdisplaydoctitle=true" & ",\n"
-    ' s &= "pdfnewwindow=true" & "\n"
-    ' s &= "}" & "\n"
+    If Not IsNull(Contenido[aFields[78]]) And Len(Contenido[aFields[78]]) > 0 Then
+      s &= "\\HTMLAddMeta{series}{" & Contenido[aFields[78]] & "}\n"'colección
+    Endif
 
+    If Not IsNull(Contenido[aFields[40]]) And Len(Contenido[aFields[40]]) > 0 Then
+      s &= "\\HTMLAddMeta{language}{" & Contenido[aFields[40]] & "}\n"'idioma
+    Endif
+
+    If Not IsNull(Contenido[aFields[50]]) And Len(Contenido[aFields[50]]) > 0 Then
+      s &= "\\HTMLAddMeta{page-count}{" & Contenido[aFields[50]] & "}\n"'total de páginas
+    Endif
+
+    If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
+      s &= "\\HTMLAddMeta{dimensions}{" & Contenido[aFields[61]] & "}\n"'formato del libro
+    Endif
+
+    If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
+      s &= "\\HTMLAddMeta{illustrator}{" & Contenido[aFields[55]] & "}\n"'ilustrador
+    Endif
+
+    If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
+      s &= "\\HTMLAddMeta{translator}{" & Contenido[aFields[53]] & "}\n"'traductor
+    Endif
+
+    If Not IsNull(Contenido[aFields[78]]) And Len(Contenido[aFields[78]]) > 0 Then
+      s &= "\\HTMLAddMeta{genre}{" & Contenido[aFields[78]] & "}\n"'género del libro
+    Endif
+
+    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
+      s &= "\\HTMLAddMeta{description}{" & Contenido[aFields[56]] & "}\n"'resumen
+    Endif
+
+    If Not IsNull(Contenido[aFields[30]]) And Len(Contenido[aFields[30]]) > 0 Then
+      s &= "\\HTMLAddMeta{format}{" & Contenido[aFields[30]] & "}\n"'tipo de libro
+    Endif
+
+    If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
+      s &= "\\HTMLAddMeta{editor}{" & Contenido[aFields[52]] & "}\n"'direction
+    Endif
+
+    If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
+      s &= "\\HTMLAddMeta{publication-date}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
+    Endif
+
+    If Not IsNull(Contenido[aFields[86]]) And Len(Contenido[aFields[86]]) > 0 Then
+      s &= "\\HTMLAddMeta{annotation}{" & Contenido[aFields[86]] & "}\n"'notas
+    Endif
+
+    If Not IsNull(Contenido[aFields[88]]) And Len(Contenido[aFields[88]]) > 0 Then
+      s &= "\\HTMLAddMeta{audience}{" & Contenido[aFields[88]] & "}\n"'audiencia
+    Endif
+
+    If Not IsNull(Contenido[aFields[89]]) And Len(Contenido[aFields[89]]) > 0 Then
+      s &= "\\HTMLAddMeta{binding}{" & Contenido[aFields[89]] & "}\n"'audiencia
+    Endif
+    '
     Contenido.MoveNext
   Wend
 
