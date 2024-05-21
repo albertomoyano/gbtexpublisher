@@ -222,7 +222,7 @@ End
 
 Public Sub Borrar_Aux()
 
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "rm *.css *.lwarpmkconf *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
+  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "rm html5-*_html.tex html5-*.bbl-SAVE-ERROR html5-*.bcf-SAVE-ERROR html5-*.tex *.css *.lwarpmkconf *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
   Wait 0.2
 
   TerminalView1.SetFocus()
@@ -248,12 +248,12 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
     Return
   End If
 
-  Dim filePath As String
+  ' Dim filePath As String
   Dim newFile As String
   Dim rutaFija As String
   Dim newLog As String
 
-  filePath = File.Dir(TextBox1.Text) &/ "pdf"
+  ' filePath = File.Dir(TextBox1.Text) &/ "pdf"
   newFile = "pdf-" & BaseName & ".tex"
   rutaFija = File.Dir(TextBox1.Text) &/ "files"
   newLog = "gbTeX-" & BaseName & ".log"
@@ -263,16 +263,19 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
   TabPanel1.Index = 0
 
-  TerminalView1.Input("cat " & rutaFija &/ "general-book-pdf.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf pdf" & "\n")
-  Wait 0.2
-
   ' exportamos los archivos bib, glo y meta
   Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(TextBox1.Text)
   Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
+  Wait 0.2
+
+  TerminalView1.Input("rm -r pdf" & "\n")
+  Wait 0.2
+
+  Mkdir File.Dir(TextBox1.Text) &/ "pdf"
+  Wait 0.1
+
+  TerminalView1.Input("cat " & rutaFija &/ "general-book-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2
 
   TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
@@ -288,19 +291,16 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   TerminalView1.Input("rm -rf " & newFile & "\n")
   Wait 0.2
 
-  If filePath = "" Then
-    Return
-  Else
-    TerminalView1.Input("mkdir pdf" & "\n")
-  Endif
-
-  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
+  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf" & "\n")
+  Wait 0.2
 
   'copiamos /files el archivo .log
   TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n" & "clear" & "\n")
+  Wait 0.2
 
   'generamos una vista con texlogsieve
   TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n" & "clear" & "\n")
+  Wait 0.2
 
   TerminalView1.SetFocus()
   Borrar_Aux
@@ -641,12 +641,12 @@ Public Sub Menu17_Click()'abrir pdf
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
+  filePath = File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
   Else
-    Message.Error("El archivo <b>pdf-" & BaseName & ".pdf</b> no existe.")
+    Message.Error("El archivo <b>" & BaseName & ".pdf</b> no existe.")
   Endif
 
 End
@@ -655,12 +655,12 @@ Public Sub Menu20_Click()'abrir epub
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) &/ "epub/epub-" & BaseName & ".epub"
+  filePath = File.Dir(TextBox1.Text) &/ "epub/" & BaseName & ".epub"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
   Else
-    Message.Error("El archivo <b>epub-" & BaseName & ".epub</b> no existe.")
+    Message.Error("El archivo <b>" & BaseName & ".epub</b> no existe.")
   Endif
 
 End
@@ -748,16 +748,16 @@ Public Sub Menu24_Click()
 
 End
 
-Public Sub Menu13_Click()' abrir html
+Public Sub MenuHTMLview_Click()' abrir html
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) & "/html5/html5-" & BaseName & ".html"
+  filePath = File.Dir(TextBox1.Text) & "/html5/index.html"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
   Else
-    Message.Error("El archivo <b>html5-" & BaseName & ".html</b> no existe.")
+    Message.Error("El archivo <b>index.html</b> no existe.")
   Endif
 
 End
@@ -819,7 +819,6 @@ Public Sub menuAbrir_Click()
   menuCFG.Enabled = True
   menuTOOLS.Visible = True
   menuODt_DOCX.Enabled = True
-  Menu13.Enabled = True
   Menu76.Enabled = True
   MenuApp.Enabled = True
   txtGIT.Enabled = True
@@ -1011,7 +1010,6 @@ Public Sub mnuLast_Click()
   menuCFG.Enabled = True
   menuTOOLS.Visible = True
   menuODt_DOCX.Enabled = True
-  Menu13.Enabled = True
   Menu76.Enabled = True
   MenuApp.Enabled = True
   txtGIT.Enabled = True
@@ -5430,12 +5428,13 @@ Public Sub menuHTML5book_Click()
 
   TabPanel1.Index = 0
 
-  TerminalView1.Input("lwarpmk cleanall" & "\n")
+  Borrar_Aux
   Wait 0.2
 
   ' exportamos los archivos bib y glo
   Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(TextBox1.Text)
+  Mod_Exportar.Exportar2MetadatosHTMLbook(TextBox1.Text)
   Wait 0.2
 
   Shell "cp " & File.Dir(TextBox1.Text) &/ "files/imago_custom.css" & " " & File.Dir(TextBox1.Text)
@@ -5448,18 +5447,16 @@ Public Sub menuHTML5book_Click()
 
   TerminalView1.Input("rm -r html5" & "\n")
   Wait 0.2
+  Mkdir File.Dir(TextBox1.Text) & "/html5"
+  Wait 0.1
 
   TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
+  Wait 0.2
   TerminalView1.Input("lwarpmk html" & "\n")
   Wait 0.2
 
   Dim folderHTML5 As String
   folderHTML5 = File.Dir(TextBox1.Text) &/ "html5"
-
-  If Not Exist(File.Dir(TextBox1.Text) & "/html5") Then
-    Mkdir File.Dir(TextBox1.Text) & "/html5"
-  End If
-
   'hacemos una copia de los archivos
   TerminalView1.Input("cp -r " & File.Dir(TextBox1.Text) & "/media" & " " & folderHTML5 & "\n")
   Wait 0.2

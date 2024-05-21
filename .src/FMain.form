@@ -206,7 +206,7 @@
       Text = ("Abrir ePub")
       Picture = Picture["iconos/epub.svg"]
     }
-    { Menu13 Menu
+    { MenuHTMLview Menu
       Text = ("Abrir HTML5-JATS")
       Picture = Picture["iconos/web.svg"]
     }
