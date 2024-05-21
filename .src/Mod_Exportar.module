@@ -1097,16 +1097,33 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
     s &= "\\booltrue{CombineHigherDepths}" & "\n"
     s &= "\\setcounter{SideTOCDepth}{1}" & "\n"
     s &= "\\CSSFilename{imago_custom.css}" & "\n"
+    s &= "\\HTMLPageBottom{\\LinkPrevious | \\LinkNext}" & "\n"
+    s &= "\\HTMLFirstPageTop{\\includegraphics[width=5cm]{./media/cover.png}}" & "\n"
+
+    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
+      s &= "\\HTMLAddMeta{isbn}{" & Contenido[aFields[35]] & "}\n"'isbn
+    Endif
+
+    If Not IsNull(Contenido[aFields[6]]) And Len(Contenido[aFields[6]]) > 0 Then
+      s &= "\\HTMLAddMeta{book-title}{" & Contenido[aFields[6]] & "}\n"' title
+    Endif
+
+    If Not IsNull(Contenido[aFields[31]]) And Len(Contenido[aFields[31]]) > 0 Then
+      s &= "\\HTMLAddMeta{volume}{" & Contenido[aFields[31]] & "}\n"' volume
+    Endif
+
+    If Not IsNull(Contenido[aFields[28]]) And Len(Contenido[aFields[28]]) > 0 Then
+      s &= "\\HTMLAddMeta{publisher-name}{" & Contenido[aFields[28]] & "}\n"'publisher
+    Endif
+
+    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
+      s &= "\\HTMLAddMeta{license-type}{Tipo de licencia:" & Contenido[aFields[15]] & "}\n"'licencia
+    Endif
 
     '
 
-    '
     ' If Not IsNull(Contenido[aFields[7]]) And Len(Contenido[aFields[7]]) > 0 Then
     '   s &= "pdfsubject={" & Contenido[aFields[7]] & "},\n"
-    ' Endif
-    '
-    ' If Not IsNull(Contenido[aFields[9]]) And Len(Contenido[aFields[9]]) > 0 Then
-    '   s &= "pdfsubtitle={" & Contenido[aFields[9]] & "},\n"
     ' Endif
     '
     ' If Not IsNull(Contenido[aFields[10]]) And Len(Contenido[aFields[10]]) > 0 Then
