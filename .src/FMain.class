@@ -901,7 +901,7 @@ Public Sub menuAbrir_Click()
     txtLang.Text = Contenido!pdflang_39
     txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
     txtBaseURL.Text = Contenido!pdfbaseurl_41
-    txt41_pdfbaseurl.Text = Contenido!pdfurl_42
+    txt42_pdfurl.Text = Contenido!pdfurl_42
     txt43_pdfdoi.Text = Contenido!pdfdoi_43
     cbPDFrendition.Text = Contenido!pdfrendition_44
     txtDocumentId.Text = Contenido!pdfidentifier_45
@@ -921,7 +921,7 @@ Public Sub menuAbrir_Click()
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
     txtFORMATO.Text = Contenido!formato_61
-    txt59_opt_source.Text = Contenido!opt_69
+    txt59_opt_source.Text = Contenido!source_69
     txt82_conferenceVisual.Text = Contenido!opt_72
     txt78_genero.Text = Contenido!genero_78
     txt82_conference.Text = Contenido!conference_82
@@ -1098,7 +1098,7 @@ Public Sub mnuLast_Click()
     txtLang.Text = Contenido!pdflang_39
     txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
     txtBaseURL.Text = Contenido!pdfbaseurl_41
-    txt41_pdfbaseurl.Text = Contenido!pdfurl_42
+    txt42_pdfurl.Text = Contenido!pdfurl_42
     txt43_pdfdoi.Text = Contenido!pdfdoi_43
     cbPDFrendition.Text = Contenido!pdfrendition_44
     txtDocumentId.Text = Contenido!pdfidentifier_45
@@ -1118,7 +1118,7 @@ Public Sub mnuLast_Click()
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
     txtFORMATO.Text = Contenido!formato_61
-    txt59_opt_source.Text = Contenido!opt_69
+    txt59_opt_source.Text = Contenido!source_69
     txt82_conferenceVisual.Text = Contenido!opt_72
     txt78_genero.Text = Contenido!genero_78
     txt82_conference.Text = Contenido!conference_82
@@ -2278,7 +2278,7 @@ Public Function guardarCamposMETA() As Boolean
     Contenido!pdflang_39 = txtLang.Text
     Contenido!pdfmetalang_40 = txt40_pdfmetalang.Text
     Contenido!pdfbaseurl_41 = txtBaseURL.Text
-    Contenido!pdfurl_42 = txt41_pdfbaseurl.Text
+    Contenido!pdfurl_42 = txt42_pdfurl.Text
     Contenido!pdfdoi_43 = txt43_pdfdoi.Text
     Contenido!pdfrendition_44 = cbPDFrendition.Text
     Contenido!pdfidentifier_45 = txtDocumentId.Text
@@ -2298,7 +2298,7 @@ Public Function guardarCamposMETA() As Boolean
     Contenido!artrecibido_59 = txt59_artrecibido.Text
     Contenido!artaceptado_60 = txt60_artaceptado.Text
     Contenido!formato_61 = txtFORMATO.Text
-    Contenido!opt_69 = txt59_opt_source.Text
+    Contenido!source_69 = txt59_opt_source.Text
     Contenido!opt_72 = txt82_conferenceVisual.Text
     Contenido!genero_78 = txt78_genero.Text
     Contenido!conference_82 = txt82_conference.Text

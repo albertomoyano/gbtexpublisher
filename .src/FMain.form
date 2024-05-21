@@ -2395,18 +2395,18 @@
       { rb3 RadioButton
         MoveScaled(55,0,12,4)
         AutoResize = True
-        Text = ("ePub/Mobi  ")
+        Text = ("HTML / ePub  ")
       }
       { rb4 RadioButton
         MoveScaled(68,0,12,4)
         AutoResize = True
-        Text = ("xml-JATS  ")
+        Text = ("XML-JATS  ")
       }
       { rb5 RadioButton
-        MoveScaled(80,0,13,4)
+        MoveScaled(80,0,22,3.6)
         Expand = True
         AutoResize = True
-        Text = ("Libre Office")
+        Text = ("Libre Office / MS Word")
       }
     }
     { HBox3 HBox
@@ -3170,7 +3170,7 @@
           Alignment = Align.Right
           Text = ("URL documento  ")
         }
-        { !txt41_pdfbaseurl TextBox
+        { !txt42_pdfurl TextBox
           MoveScaled(27,0,19,4)
           #Public = True
           Expand = True

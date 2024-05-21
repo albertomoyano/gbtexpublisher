@@ -1101,7 +1101,9 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
     s &= "\\HTMLFirstPageTop{\\includegraphics[width=5cm]{./media/cover.png}}" & "\n"
     s &= "\\HTMLTitle{" & Contenido[aFields[84]] & "}\n"
     s &= "\\HTMLLanguage{" & Contenido[aFields[39]] & "}\n"
+    s &= "\\HTMLAddMeta{DC.language}{" & Contenido[aFields[39]] & "}\n"'idioma
     s &= "\\HTMLAuthor{" & sb & "}\n"
+    s &= "\\HTMLAddMeta{DC.creator}{" & sb & "}\n"'creator/author
     If Not IsNull(Contenido[aFields[87]]) And Len(Contenido[aFields[87]]) > 0 Then
       s &= "\\HTMLFirstPageBottom{" & Contenido[aFields[87]] & "}\n"'pie de libro web
     Endif
@@ -1112,6 +1114,8 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
 
     If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
       s &= "\\HTMLAddMeta{book-title}{" & Contenido[aFields[84]] & "}\n"'title
+      s &= "\\HTMLAddMeta{twitter:title}{" & Contenido[aFields[84]] & "}\n"'title
+      s &= "\\HTMLAddMeta{DC.title}{" & Contenido[aFields[84]] & "}\n"'title
     Endif
 
     If Not IsNull(Contenido[aFields[9]]) And Len(Contenido[aFields[9]]) > 0 Then
@@ -1128,14 +1132,17 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
 
     If Not IsNull(Contenido[aFields[28]]) And Len(Contenido[aFields[28]]) > 0 Then
       s &= "\\HTMLAddMeta{publisher-name}{" & Contenido[aFields[28]] & "}\n"'publisher
+      s &= "\\HTMLAddMeta{DC.publisher}{" & Contenido[aFields[28]] & "}\n"'publisher
     Endif
 
     If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
       s &= "\\HTMLAddMeta{license}{" & Contenido[aFields[15]] & "}\n"'licencia"
+      s &= "\\HTMLAddMeta{DC.rights}{" & Contenido[aFields[15]] & "}\n"'licencia"
     Endif
 
     If Not IsNull(Contenido[aFields[57]]) And Len(Contenido[aFields[57]]) > 0 Then
       s &= "\\HTMLAddMeta{keywords}{" & Contenido[aFields[57]] & "}\n"'claves
+      s &= "\\HTMLAddMeta{DC.subject}{" & Contenido[aFields[57]] & "}\n"'claves
     Endif
 
     If Not IsNull(Contenido[aFields[78]]) And Len(Contenido[aFields[78]]) > 0 Then
@@ -1168,6 +1175,7 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
 
     If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
       s &= "\\HTMLAddMeta{description}{" & Contenido[aFields[56]] & "}\n"'resumen
+      s &= "\\HTMLAddMeta{twitter:description}{" & Contenido[aFields[56]] & "}\n"'resumen
     Endif
 
     If Not IsNull(Contenido[aFields[30]]) And Len(Contenido[aFields[30]]) > 0 Then
@@ -1180,6 +1188,7 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
 
     If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
       s &= "\\HTMLAddMeta{publication-date}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
+      s &= "\\HTMLAddMeta{DC.date}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
     Endif
 
     If Not IsNull(Contenido[aFields[86]]) And Len(Contenido[aFields[86]]) > 0 Then
@@ -1188,12 +1197,25 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
 
     If Not IsNull(Contenido[aFields[88]]) And Len(Contenido[aFields[88]]) > 0 Then
       s &= "\\HTMLAddMeta{audience}{" & Contenido[aFields[88]] & "}\n"'audiencia
+      s &= "\\HTMLAddMeta{DC.audience}{" & Contenido[aFields[88]] & "}\n"'audiencia
     Endif
 
     If Not IsNull(Contenido[aFields[89]]) And Len(Contenido[aFields[89]]) > 0 Then
-      s &= "\\HTMLAddMeta{binding}{" & Contenido[aFields[89]] & "}\n"'audiencia
+      s &= "\\HTMLAddMeta{binding}{" & Contenido[aFields[89]] & "}\n"'encuadernación
     Endif
-    '
+
+    If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.isPartOf}{" & Contenido[aFields[51]] & "}\n"'colección
+    Endif
+
+    If Not IsNull(Contenido[aFields[69]]) And Len(Contenido[aFields[69]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.source}{" & Contenido[aFields[69]] & "}\n"'origen / fuente
+    Endif
+
+    If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.identifier}{" & Contenido[aFields[42]] & "}\n"'url del documento
+    Endif
+
     Contenido.MoveNext
   Wend
 
