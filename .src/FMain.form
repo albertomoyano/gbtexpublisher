@@ -56,10 +56,10 @@
       Picture = Picture["iconos/acroread.svg"]
       Enabled = False
       { menuPDFarticulo Menu
-        Text = ("PDF (clase article) metadatos XMP")
+        Text = ("PDF-XMP (clase article)")
       }
       { menuPDFlibro Menu
-        Text = ("PDF (clase book) metadatos XMP")
+        Text = ("PDF-XMP (clase book)")
       }
     }
     { menuHTML Menu
@@ -67,10 +67,10 @@
       Picture = Picture["iconos/html5.png"]
       Enabled = False
       { Menu8 Menu
-        Text = ("HTML5-JATS (clase article, default)")
+        Text = ("HTML5-JATS (clase article)")
       }
       { menuHTML5book Menu
-        Text = ("HTML5-JATS (clase book, default)")
+        Text = ("HTML5-BITS (clase book)")
       }
       { menuGHPages Menu
         Text = ("Publicar en GitHub Pages")
