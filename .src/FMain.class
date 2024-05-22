@@ -2940,6 +2940,8 @@ Public Sub BtnNuevoBib_Click()
   txtTMPbiblio.Clear
   txtTMPbiblio.SetFocus()
 
+  LimpiarCamposBIB() ' Limpiamos los campos
+
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
   Contenido = Conn.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
 
