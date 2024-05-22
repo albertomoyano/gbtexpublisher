@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,680,490)
+  Move(0,0,810,630)
   #Scaled = False
   Expand = True
   Text = ("Acerca de gbTeXpublisher")
@@ -21,17 +21,17 @@
     }
   }
   { TextArea1 TextArea
-    Move(20,170,495,216)
+    Move(20,80,780,300)
     Background = Color.Background
     Expand = True
-    Text = ("gbTeXpublisher esta programado para ser utilizado con las librerías Qt, si usted utiliza GTK es posible que tenga una interfaz gráfica con errores.\n\ngbTeXpublisher es una aplicación que permite gestionar los procesos de producción editorial basados en el lenguaje LaTeX.\n\nEntre sus principales características observamos:\n\n- Modelo de trabajo basado en un solo origen\n- Manejo de referencias bibliográficas\n- Integración con GitHub y GitLab\n- Capacidad de personalización de las salidas")
+    Text = ("gbTeXpublisher es una aplicación que permite gestionar los procesos de producción editorial basados en el lenguaje LaTeX.\n\nEntre sus principales características observamos:\n\n- Modelo de trabajo basado en un solo origen\n- Manejo de referencias bibliográficas\n- Integración con GitHub y GitLab\n- Capacidad de personalización de las salidas\n\nObservaciones:\nEsta aplicación no tiene soportte para GTK, elegí programar utilizando las librerías Qt por varias razones que considero esenciales para el desarrollo de aplicaciones eficientes y modernas. Qt ofrece una serie de ventajas significativas en términos de funcionalidad y facilidad de uso, lo cual se traduce en una mejor experiencia tanto para el desarrollador como para el usuario final.")
     Alignment = Align.Left
     ReadOnly = True
     Wrap = True
     ScrollBar = Scroll.Vertical
   }
   { HBox1 HBox
-    Move(20,430,567,36)
+    Move(20,500,567,36)
     { Spring1 Spring
       Move(36,0,36,36)
     }

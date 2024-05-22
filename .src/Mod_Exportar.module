@@ -105,7 +105,7 @@ Public Sub EsISBNValido(ISBN As String) As Boolean
 End
 
 'exportamos el archivo metadatos
-Public Sub ExportToMetaDOCX(rutaTexto As String)
+Public Sub Export2MetaDOCX(rutaTexto As String)
 
   Dim s As String
   Dim sb As String
@@ -330,7 +330,7 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
 End
 
 'exportamos el archivo metadatos
-Public Sub ExportToMetaEPUB(rutaTexto As String)
+Public Sub Export2MetaEPUB(rutaTexto As String)
 
   Dim s As String
   Dim sb As String

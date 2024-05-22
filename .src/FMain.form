@@ -121,6 +121,8 @@
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
       Picture = Picture["iconos/chart-3.png"]
+      Enabled = False
+      Visible = False
     }
     { Menu79 Menu
     }
@@ -202,13 +204,13 @@
       Text = ("Abrir PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
-    { Menu20 Menu
-      Text = ("Abrir ePub")
-      Picture = Picture["iconos/epub.svg"]
-    }
     { MenuHTMLview Menu
       Text = ("Abrir HTML")
       Picture = Picture["iconos/web.svg"]
+    }
+    { Menu20 Menu
+      Text = ("Abrir ePub")
+      Picture = Picture["iconos/epub.svg"]
     }
     { Menu22 Menu
     }

@@ -337,8 +337,7 @@ Public Sub menuODt_DOCX_Click() 'convertimos a odt
   ' exportamos los archivos
   Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Mod_Exportar.ExportToMetaDOCX(TextBox1.Text)
-  ' ExportToMetaODT()
+  ' Mod_Exportar.Export2MetaDOCX(TextBox1.Text)
   Wait 0.2
 
   TabPanel1.Index = 0
@@ -352,10 +351,12 @@ Public Sub menuODt_DOCX_Click() 'convertimos a odt
   TerminalView1.Input("mkdir odt-docx" & "\n")
   Wait 0.2
 
+  ' esta instrucción no considera los metadatos
   TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua " & " -a Debug " & newFile & "\n" & "rm -rf " & newFile & "\n")
   Wait 0.2
 
-  ' TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & newFile & "\n" & "rm -rf " & newFile & "\n")
+  ' y esta s con los metadatos
+  ' TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & newFile & "\n")' & "rm -rf " & newFile & "\n")
   ' Wait 0.2
 
   'convertimos el odt a docx
@@ -366,7 +367,7 @@ Public Sub menuODt_DOCX_Click() 'convertimos a odt
   TerminalView1.Input("mv " & "odt-" & BaseName & ".docx" & " " & folder & "/" & BaseName & ".docx" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("mv " & "odt-" & BaseName & ".odt" & " " & folder & "/" & BaseName & ".odt" & "\n" & "clear" & "\n")
+  TerminalView1.Input("mv " & "odt-" & BaseName & ".odt" & " " & folder & "/" & BaseName & ".odt" & "\n")' & "clear" & "\n")
   Wait 0.2
 
   ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
@@ -718,15 +719,15 @@ Public Sub menuEPUB_Click() 'convertimos a epub3
   Dim folder As String
   Dim newFile As String
 
-  folder = BaseName & "-epub3"
-  newFile = "epub3-" & BaseName & ".tex"
+  folder = BaseName & "-epub"
+  newFile = "epub-" & BaseName & ".tex"
   Borrar_Aux
   Wait 0.2
 
   ' exportamos los archivos bib, glo y meta
   Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Mod_Exportar.ExportToMetaEPUB(TextBox1.Text)
+  Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
   Wait 0.2
 
   TerminalView1.Input("cat " & rutaFILES & "/general-epub.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
@@ -735,10 +736,10 @@ Public Sub menuEPUB_Click() 'convertimos a epub3
   TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("rm -rf epub3" & "\n")
+  TerminalView1.Input("rm -rf epub" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("tex4ebook -l -f epub3 -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub3-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n" & "mv epub3-" & folder & " epub3" & "\n" & "clear" & "\n")
+  TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n" & "mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
   Wait 0.2
 
   ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
