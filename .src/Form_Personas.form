@@ -42,7 +42,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -65,7 +65,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS2 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -88,7 +88,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS3 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -111,7 +111,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS4 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -134,7 +134,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS5 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -157,7 +157,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS6 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -180,7 +180,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS7 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -203,7 +203,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS8 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -226,7 +226,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS9 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -249,7 +249,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS10 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -272,7 +272,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS11 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -295,7 +295,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS12 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -318,7 +318,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS13 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -341,7 +341,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS14 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
@@ -364,7 +364,7 @@
         ReadOnly = True
       }
       { cmbPERSONAS15 ComboBox
-        Move(430,0,404,36)
+        Move(430,0,344,36)
         ReadOnly = True
       }
     }
