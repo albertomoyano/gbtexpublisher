@@ -5516,3 +5516,57 @@ Public Sub menuESTADISTICAS_Click()
   Message.Info("Función en desarrollo.", "Aceptar")
 
 End
+
+Public Sub btnCOMPpdf_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    menuPDFlibro_Click
+  Endif
+
+End
+
+Public Sub btnCOMPhtml_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    menuHTML5book_Click
+  Endif
+
+End
+
+Public Sub btnCOMPepub_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    menuEPUB_Click
+  Endif
+
+End
+
+Public Sub btnCOMPxml_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    menuXML_Click
+  Endif
+
+End
+
+Public Sub btnCOMPdocx_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    menuODt_DOCX_Click
+  Endif
+
+End
+
+Public Sub menuXML_Click()
+
+End
