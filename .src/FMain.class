@@ -739,7 +739,10 @@ Public Sub menuEPUB_Click() 'convertimos a epub3
   TerminalView1.Input("rm -rf epub" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n" & "mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
+  TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
   Wait 0.2
 
   ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
@@ -2344,42 +2347,6 @@ Public Sub btnGuardarCambiosMeta_Click()
   Endif
 
 End
-
-Public Sub rb1_GotFocus()'pdf revista
-
-  Mod_Metadatos.PDFrevista()
-
-End 'fin pdf revista
-
-Public Sub rb2_GotFocus()'pdf libro
-
-  Mod_Metadatos.PDFLibro()
-
-End 'fin pdf libro
-
-Public Sub rb3_GotFocus()'ePub
-
-  Mod_Metadatos.ePubCeleste()
-
-End 'fin epub
-
-Public Sub rb4_GotFocus()'jats revista
-
-  Mod_Metadatos.JATSceleste()
-
-End 'fin jats
-
-Public Sub rb5_GotFocus()'libreoffice
-
-  Mod_Metadatos.LibreOfficeCeleste()
-
-End 'fin libreoffice
-
-Public Sub rb7_GotFocus()'todos los valores en true
-
-  Mod_Metadatos.FullTrue()
-
-End 'todos los valores en true
 
 Public Sub btnLimpiarTapa_Click()
 
@@ -5550,11 +5517,11 @@ End
 
 Public Sub btnCOMPxml_Click()
 
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    menuXML_Click
-  Endif
+  ' If TextBox1.Text = "" Then
+  Message.Warning("Función en desarrollo, orientada a revistas.")
+  ' Else
+  '   menuXML_Click
+  ' Endif
 
 End
 

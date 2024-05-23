@@ -2409,6 +2409,7 @@
     }
     { HBox93 HBox
       MoveScaled(0,8,111,3.6)
+      Visible = False
       { PictureBox1 PictureBox
         MoveScaled(-10,0,23,4)
       }
