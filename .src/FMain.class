@@ -714,7 +714,7 @@ Public Sub Form_Show()
 
 End
 
-Public Sub menuEPUB_Click() 'convertimos a epub3
+Public Sub menuEPUB_Click() 'convertimos a epub
 
   Dim folder As String
   Dim newFile As String
@@ -755,7 +755,7 @@ End
 
 Public Sub Menu24_Click()
 
-  Shell "xdg-open https://albertomoyano.github.io/gbtexpublisher/"
+  Shell "xdg-open https://albertomoyano.github.io/blog-gbtexpublisher/about/"
 
 End
 
