@@ -361,11 +361,6 @@
       Text = ("ePub")
       Picture = Picture["iconos/epub.svg"]
     }
-    { btnCOMPxml Button
-      MoveScaled(67.6,0,14.4,3.6)
-      Text = ("XML")
-      Picture = Picture["iconos/xml.svg"]
-    }
     { btnCOMPdocx Button
       MoveScaled(82,0,14.4,3.6)
       Text = ("DOCX")

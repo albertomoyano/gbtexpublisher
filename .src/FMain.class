@@ -5515,16 +5515,6 @@ Public Sub btnCOMPepub_Click()
 
 End
 
-Public Sub btnCOMPxml_Click()
-
-  ' If TextBox1.Text = "" Then
-  Message.Warning("Función en desarrollo, orientada a revistas.")
-  ' Else
-  '   menuXML_Click
-  ' Endif
-
-End
-
 Public Sub btnCOMPdocx_Click()
 
   If TextBox1.Text = "" Then
