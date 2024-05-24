@@ -451,7 +451,7 @@ Public Sub menuPDFarticulo_Click()
     TerminalView1.Input("mkdir pdf" & "\n")
   Endif
 
-  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
+  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf" & "\n")
 
   'copiamos /files el archivo .log
   TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n" & "clear" & "\n")
