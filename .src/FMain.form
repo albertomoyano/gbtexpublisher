@@ -2472,9 +2472,9 @@
       { HBox95 HBox
         MoveScaled(0,4,78,3.6)
         { Label31 Label
-          MoveScaled(3,0,23,4)
+          MoveScaled(3,0,23,3.6)
           Alignment = Align.Right
-          Text = ("Título del artículo  ")
+          Text = ("Título del artículo / capítulo  ")
         }
         { !txt06_pdftitle TextBox
           MoveScaled(27,0,16,4)

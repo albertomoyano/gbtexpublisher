@@ -663,12 +663,12 @@ Public Sub Menu20_Click()'abrir epub
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) &/ "epub/" & BaseName & ".epub"
+  filePath = File.Dir(TextBox1.Text) &/ "epub/epub-" & BaseName & ".epub"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
   Else
-    Message.Error("El archivo <b>" & BaseName & ".epub</b> no existe.")
+    Message.Error("El archivo <b> epub-" & BaseName & ".epub</b> no existe.")
   Endif
 
 End
