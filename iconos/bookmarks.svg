@@ -2,27 +2,27 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="32"
-   height="32"
-   viewBox="0 0 32 32"
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.2 2405546, 2018-03-11"
-   sodipodi:docname="bookmarks.svg">
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="bookmarks.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <title
      id="title7895">Antu icon Theme</title>
   <defs
      id="defs2">
     <linearGradient
-       gradientTransform="matrix(3.7795275,0,0,3.7795275,-0.6249989,-811.2804)"
+       gradientTransform="matrix(2.8358779,0,0,2.6508548,0.55051324,-484.09676)"
        inkscape:collect="always"
        xlink:href="#linearGradient4547"
        id="linearGradient4571"
@@ -93,25 +93,34 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="1.697126"
-     inkscape:cy="-2.4923963"
+     inkscape:zoom="20.634049"
+     inkscape:cx="14.514844"
+     inkscape:cy="12.891314"
      inkscape:document-units="px"
      inkscape:current-layer="g5211"
      showgrid="true"
      units="px"
-     inkscape:window-width="1360"
-     inkscape:window-height="711"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
      inkscape:window-x="0"
-     inkscape:window-y="28"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      objecttolerance="10"
      gridtolerance="10"
-     guidetolerance="10">
+     guidetolerance="10"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        type="xygrid"
        id="grid7897"
-       empspacing="4" />
+       empspacing="4"
+       originx="0"
+       originy="0"
+       spacingy="1"
+       spacingx="1"
+       units="px"
+       visible="true" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -132,7 +141,7 @@
      transform="translate(0,-282.64999)">
     <g
        id="g1781"
-       transform="translate(-4,24.999995)">
+       transform="matrix(0.75032599,0,0,0.701372,-2.9805339,102.74553)">
       <g
          transform="translate(44.753942,5.630845)"
          id="layer1-0-6"
@@ -213,13 +222,13 @@
       <path
          inkscape:connector-curvature="0"
          id="path4545"
-         d="m 25,290.64999 c -0.553999,0 -1,0.44598 -1,1 v 6 2 4 l 4,-3 4,3 v -4 -2 -6 c 0,-0.55402 -0.446,-1 -1,-1 z"
-         style="fill:#3182d9;fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+         d="m 19.777615,288.76637 c -0.415679,0 -0.750325,0.31279 -0.750325,0.70136 v 4.20824 1.40274 2.8055 l 3.001304,-2.10412 3.001303,2.10412 v -2.8055 -1.40274 -4.20824 c 0,-0.38857 -0.334644,-0.70136 -0.750325,-0.70136 z"
+         style="fill:#3182d9;fill-opacity:1;stroke:none;stroke-width:0.725436px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="path4545-5"
-         d="m 25.000001,289.65001 c -0.554,0 -1,0.44599 -1,0.99999 v 6 2.00001 3.99999 l 4,-3 3.999999,3 v -3.99999 -2.00001 -6 c 0,-0.554 -0.445999,-0.99999 -0.999999,-0.99999 z"
-         style="fill:url(#linearGradient4571);fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+         d="m 19.777617,288.06501 c -0.415681,0 -0.750327,0.3128 -0.750327,0.70136 v 4.20824 1.40274 2.80548 l 3.001304,-2.1041 3.001303,2.1041 v -2.80548 -1.40274 -4.20824 c 0,-0.38856 -0.334643,-0.70136 -0.750325,-0.70136 z"
+         style="fill:url(#linearGradient4571);fill-opacity:1;stroke:none;stroke-width:0.725436px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
   </g>
 </svg>

@@ -33,8 +33,12 @@
       Enabled = False
       Visible = False
     }
+    { menuREVnueva Menu
+      Text = ("Abrir revista")
+      Picture = Picture["iconos/document-orange.svg"]
+    }
     { menuAbrir Menu
-      Text = ("Abrir")
+      Text = ("Abrir libro")
       Picture = Picture["iconos/document.svg"]
     }
     { mnu1LastFiles Menu
@@ -362,7 +366,7 @@
       Picture = Picture["iconos/epub.svg"]
     }
     { btnCOMPdocx Button
-      MoveScaled(82,0,14.4,3.6)
+      MoveScaled(66,0,14.4,3.6)
       Text = ("DOCX")
       Picture = Picture["iconos/ms-office.svg"]
     }
@@ -407,7 +411,7 @@
       MoveScaled(75,0,16,4)
       Enabled = False
       Text = ("Ver") & "..."
-      Picture = Picture["iconos/document-orange.svg"]
+      Picture = Picture["iconos/bookmarks.svg"]
       Menu = "AbrirApp"
       MenuOnly = True
     }
