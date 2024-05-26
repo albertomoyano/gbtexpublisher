@@ -2976,8 +2976,8 @@
           Alignment = Align.Right
           Text = ("Tipo de documento  ")
         }
-        { cbType2 ComboBox
-          MoveScaled(25,0,20,4)
+        { cmbType ComboBox
+          MoveScaled(25,0,20,3.6)
           ReadOnly = True
         }
         { lblCBType TextBox

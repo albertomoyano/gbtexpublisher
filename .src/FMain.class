@@ -112,11 +112,11 @@ Public Sub Form_Open()
   txt15_pdfcopyright.Add("Licencia MIT")
   txt15_pdfcopyright.Add("Licencia BSD")
   txt15_pdfcopyright.Add("Otra")
-  cbType.Add("Text")
-  cbType.Add("Software")
-  cbType.Add("Sound")
-  cbType.Add("Dataset")
-  cbType.Add("InteractiveResource")
+  cmbType.Add("Text")
+  cmbType.Add("Software")
+  cmbType.Add("Sound")
+  cmbType.Add("Dataset")
+  cmbType.Add("InteractiveResource")
   cbPDFrendition.Add("default")
   cbPDFrendition.Add("draft")
   cbPDFrendition.Add("low-res")
@@ -892,7 +892,7 @@ Public Sub menuAbrir_Click()
     txtDocumentId.Text = Contenido!pdfdocumentid_26
     txtPublication.Text = Contenido!pdfpublication_27
     txtPublisher.Text = Contenido!pdfpublisher_28
-    cbType.Text = Contenido!pdftype_29
+    cmbType.Text = Contenido!pdftype_29
     cbPubType.Text = Contenido!pdfpubtype_30
     txtVolNum.Text = Contenido!pdfvolumenum_31
     txtIssueNum.Text = Contenido!pdfissuenum_32
@@ -1089,7 +1089,7 @@ Public Sub mnuLast_Click()
     txtDocumentId.Text = Contenido!pdfdocumentid_26
     txtPublication.Text = Contenido!pdfpublication_27
     txtPublisher.Text = Contenido!pdfpublisher_28
-    cbType.Text = Contenido!pdftype_29
+    cmbType.Text = Contenido!pdftype_29
     cbPubType.Text = Contenido!pdfpubtype_30
     txtVolNum.Text = Contenido!pdfvolumenum_31
     txtIssueNum.Text = Contenido!pdfissuenum_32
@@ -2269,7 +2269,7 @@ Public Function guardarCamposMETA() As Boolean
     Contenido!pdfdocumentid_26 = txtDocumentId.Text
     Contenido!pdfpublication_27 = txtPublication.Text
     Contenido!pdfpublisher_28 = txtPublisher.Text
-    Contenido!pdftype_29 = cbType.Text
+    Contenido!pdftype_29 = cmbType.Text
     Contenido!pdfpubtype_30 = cbPubType.Text
     Contenido!pdfvolumenum_31 = txtVolNum.Text
     Contenido!pdfissuenum_32 = txtIssueNum.Text
@@ -2763,7 +2763,7 @@ Public Function LimpiarCamposBIB()
   cbLANGUAGE.Text = ""
   cbRELATEDTYPE.Text = ""
   cbPUBSTATE.Text = ""
-  cbType.Text = ""
+  cmbType.Text = ""
   cbEDITORTYPE.Text = ""
   txtETIQ.Text = ""
   txtKEYWORDS.Text = ""
