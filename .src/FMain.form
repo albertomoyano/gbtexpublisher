@@ -33,12 +33,8 @@
       Enabled = False
       Visible = False
     }
-    { menuREVnueva Menu
-      Text = ("Abrir revista")
-      Picture = Picture["iconos/document-orange.svg"]
-    }
     { menuAbrir Menu
-      Text = ("Abrir libro")
+      Text = ("Abrir revista / libro")
       Picture = Picture["iconos/document.svg"]
     }
     { mnu1LastFiles Menu

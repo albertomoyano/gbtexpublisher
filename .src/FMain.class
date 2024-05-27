@@ -9,6 +9,7 @@ Public rutaFILES As String
 Public rutaMEDIA As String
 Public rutaCONTADOR As String
 Public rutaCATALOGO As String
+Public rutaARTCAP As String
 Private rutaApp As String = User.Home &/ ".gbtexpublisher"
 Private rutaAppR As String = User.Home &/ ".respaldogbTeX"
 Private rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
@@ -38,6 +39,7 @@ Public Sub Form_Open()
   rutaORIGINALES = File.Dir(TextBox1.Text) &/ "originales"
   rutaTAPA = File.Dir(TextBox1.Text) &/ "tapa"
   rutaCATALOGO = File.Dir(TextBox1.Text) &/ "catalogo"
+  rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
   BaseName = File.BaseName(TextBox1.Text)
 
   ' controlamos que la aplicación no esté en ejecución
@@ -5347,6 +5349,9 @@ Public Sub CopiarArchivos()
   If Not Exist(File.Dir(TextBox1.Text) & "/catalogo") Then
     Mkdir File.Dir(TextBox1.Text) & "/catalogo"
   End If
+  If Not Exist(File.Dir(TextBox1.Text) & "/artcap") Then
+    Mkdir File.Dir(TextBox1.Text) & "/artcap"
+  End If
 
   If Not Exist(rutaFILES & "/imago_custom.css") Then
     Copy "./imago_custom.css" To rutaFILES & "/imago_custom.css"
@@ -5522,9 +5527,5 @@ Public Sub btnCOMPdocx_Click()
   Else
     menuODt_DOCX_Click
   Endif
-
-End
-
-Public Sub menuXML_Click()
 
 End
