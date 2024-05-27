@@ -1198,18 +1198,22 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
     Endif
 
     ' <!-- comienza Dublin Core -->
-    s &= "\\HTMLAddMeta{DC.creator}{" & sb & "}\n"'creator/author
+    s &= "\\HTMLAddMeta{DC.Creator.PersonalName}{" & sb & "}\n"'creator/author
 
     If Not IsNull(Contenido[aFields[39]]) And Len(Contenido[aFields[39]]) > 0 Then
       s &= "\\HTMLAddMeta{DC.language}{" & Contenido[aFields[39]] & "}\n"'idioma
     Endif
 
     If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
-      s &= "\\HTMLAddMeta{DC.date}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
+      s &= "\\HTMLAddMeta{DC.Date.created}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
     Endif
 
     If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
-      s &= "\\HTMLAddMeta{DC.title}{" & Contenido[aFields[84]] & "}\n"'title
+      s &= "\\HTMLAddMeta{DC.title\" xml:lang=\"es}{" & Contenido[aFields[84]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[58]]) And Len(Contenido[aFields[58]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.Title.Alternative\" xml:lang=\"en}{" & Contenido[aFields[58]] & "}\n"'title alternative"
     Endif
 
     If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
@@ -1220,8 +1224,16 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
       s &= "\\HTMLAddMeta{DC.source}{" & Contenido[aFields[69]] & "}\n"'origen / fuente
     Endif
 
+    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.source.ISBN}{" & Contenido[aFields[35]] & "}\n"'isbn
+    Endif
+
     If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
-      s &= "\\HTMLAddMeta{DC.identifier}{" & Contenido[aFields[42]] & "}\n"'url del documento
+      s &= "\\HTMLAddMeta{DC.source.URI}{" & Contenido[aFields[42]] & "}\n"'url del documento
+    Endif
+
+    If Not IsNull(Contenido[aFields[3]]) And Len(Contenido[aFields[3]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.source.Volume}{" & Contenido[aFields[31]] & "}\n"'volumen
     Endif
 
     If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
@@ -1238,6 +1250,10 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
 
     If Not IsNull(Contenido[aFields[88]]) And Len(Contenido[aFields[88]]) > 0 Then
       s &= "\\HTMLAddMeta{DC.audience}{" & Contenido[aFields[88]] & "}\n"'audiencia
+    Endif
+
+    If Not IsNull(Contenido[aFields[40]]) And Len(Contenido[aFields[40]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.Language}{" & Contenido[aFields[40]] & "}\n"'audiencia
     Endif
 
     ' s &= "<!-- METS -->" & "\n"
