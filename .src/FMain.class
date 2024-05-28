@@ -2761,12 +2761,17 @@ Public Function LimpiarCamposBIB()
 
   'Limpiamos los campos
   txtID.Text = ""
+  cbType.Text = "" 'tesis
   cbTYPEentrada.Text = ""
   cbLANGUAGE.Text = ""
   cbRELATEDTYPE.Text = ""
   cbPUBSTATE.Text = ""
-  cmbType.Text = ""
   cbEDITORTYPE.Text = ""
+  cbEDITORTYPEa.Text = ""
+  cbEDITORTYPEb.Text = ""
+  cbEDITORTYPEc.Text = ""
+  cbLANGUAGEID.Text = ""
+  cbOPTIONS.Text = ""
   txtETIQ.Text = ""
   txtKEYWORDS.Text = ""
   txtCROSSREF.Text = ""
@@ -2817,9 +2822,6 @@ Public Function LimpiarCamposBIB()
   txtEDITORc.Text = ""
   txtHOLDER.Text = ""
   txtShortAuthor.Text = ""
-  cbEDITORTYPEa.Text = ""
-  cbEDITORTYPEb.Text = ""
-  cbEDITORTYPEc.Text = ""
   txtBookTitleAddOn.Text = ""
   txtMainTitleAddOn.Text = ""
   txtJournalTitleAddOn.Text = ""
@@ -2833,7 +2835,6 @@ Public Function LimpiarCamposBIB()
   txtISSUETITLE.Text = ""
   txtREPRINTTITLE.Text = ""
   txtPAGINATION.Text = ""
-  cbLANGUAGEID.Text = ""
   txtVENUE.Text = ""
   txtBookPagination.Text = ""
   txtLANGIDOPTS.Text = ""
@@ -2863,7 +2864,6 @@ Public Function LimpiarCamposBIB()
   txtADDENDUM.Text = ""
   txtSHORTHAND.Text = ""
   txtSHORTHANDINTRO.Text = ""
-  cbOPTIONS.Text = ""
   txtIDS.Text = ""
   txtENTRYSET.Text = ""
   txtNOTE.Text = ""
@@ -2907,7 +2907,7 @@ Public Sub BtnNuevoBib_Click()
   ToolPanel1.Index = 0
 
   Dim Idn As Integer
-  txtTMPbiblio.Clear
+  ' txtTMPbiblio.Clear
   txtTMPbiblio.SetFocus()
 
   LimpiarCamposBIB() ' Limpiamos los campos
@@ -2995,7 +2995,8 @@ Public Sub btnGuardar_Click()
     Message.Info("Nueva entrada guardada.")
 
     Mostrar_ListaBIB()
-    LimpiarCamposBIB() ' Limpiamos los campos
+    LimpiarCamposBIB() 'limpiamos los campos
+    txtTMPbiblio.Clear 'limpiamos el campo temporal
 
     btnGuardarCambios.Visible = False
     btnGuardar.Visible = False
@@ -3003,7 +3004,6 @@ Public Sub btnGuardar_Click()
     BtnEliminarBib.Visible = False
     btnAgregarCitationKey.Enabled = False
     btnGuardarIGUAL.Visible = False
-
   Endif
 
 End
@@ -4254,36 +4254,49 @@ Public Sub btnAgregarCitationKey_Click()
     textoOrigen = Left(textoOrigen, posicion - 1)
   End If
 
+  ' Convierte el texto a minusculas y elimina espacios al principio y al final
+  textoOrigen = Trim(LCase(textoOrigen))
+
   ' Reemplaza caracteres problemáticos
   textoOrigen = Replace(textoOrigen, "´", "")
   textoOrigen = Replace(textoOrigen, "`", "")
   textoOrigen = Replace(textoOrigen, " ", "")
+  'letra a
   textoOrigen = Replace(textoOrigen, "á", "A")
   textoOrigen = Replace(textoOrigen, "à", "A")
   textoOrigen = Replace(textoOrigen, "ä", "A")
-  textoOrigen = Replace(textoOrigen, "Á", "A")
+  textoOrigen = Replace(textoOrigen, "ã", "A")
+  textoOrigen = Replace(textoOrigen, "ã", "A")
+  textoOrigen = Replace(textoOrigen, "å", "A")
+  textoOrigen = Replace(textoOrigen, "ą", "A")
+  textoOrigen = Replace(textoOrigen, "ă", "A")
+  textoOrigen = Replace(textoOrigen, "ả", "A")
+  textoOrigen = Replace(textoOrigen, "ȧ", "A")
+  textoOrigen = Replace(textoOrigen, "ȃ", "A")
+  textoOrigen = Replace(textoOrigen, "ȁ", "A")
+  textoOrigen = Replace(textoOrigen, "ǎ", "A")
+  textoOrigen = Replace(textoOrigen, "â", "A")
+  'letra e
   textoOrigen = Replace(textoOrigen, "é", "E")
   textoOrigen = Replace(textoOrigen, "è", "E")
   textoOrigen = Replace(textoOrigen, "ë", "E")
-  textoOrigen = Replace(textoOrigen, "É", "E")
+  'letra i
   textoOrigen = Replace(textoOrigen, "í", "I")
   textoOrigen = Replace(textoOrigen, "ì", "I")
   textoOrigen = Replace(textoOrigen, "ï", "I")
-  textoOrigen = Replace(textoOrigen, "Í", "I")
+  'letra o
   textoOrigen = Replace(textoOrigen, "ó", "O")
   textoOrigen = Replace(textoOrigen, "ò", "O")
   textoOrigen = Replace(textoOrigen, "ö", "O")
-  textoOrigen = Replace(textoOrigen, "Ó", "O")
+  'letra u
   textoOrigen = Replace(textoOrigen, "ú", "U")
   textoOrigen = Replace(textoOrigen, "ù", "U")
   textoOrigen = Replace(textoOrigen, "ü", "U")
   textoOrigen = Replace(textoOrigen, "ú", "U")
-  textoOrigen = Replace(textoOrigen, "Ú", "U")
+  'otros caracteres
   textoOrigen = Replace(textoOrigen, "ñ", "N")
-  textoOrigen = Replace(textoOrigen, "Ñ", "N")
   textoOrigen = Replace(textoOrigen, "&", "")
   textoOrigen = Replace(textoOrigen, "ç", "C")
-  textoOrigen = Replace(textoOrigen, "Ç", "C")
   textoOrigen = Replace(textoOrigen, "{", "")
   textoOrigen = Replace(textoOrigen, "}", "")
   textoOrigen = Replace(textoOrigen, "[", "")
@@ -4304,6 +4317,24 @@ Public Sub btnAgregarCitationKey_Click()
   textoOrigen = Replace(textoOrigen, "~", "")
   textoOrigen = Replace(textoOrigen, "*", "")
   textoOrigen = Replace(textoOrigen, "+", "")
+  textoOrigen = Replace(textoOrigen, "ź", "Z")
+  textoOrigen = Replace(textoOrigen, "ż", "Z")
+  textoOrigen = Replace(textoOrigen, "ẑ", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+  textoOrigen = Replace(textoOrigen, "ẋ", "X")
+  textoOrigen = Replace(textoOrigen, "ẍ", "X")
+  textoOrigen = Replace(textoOrigen, "ṽ", "V")
+  textoOrigen = Replace(textoOrigen, "ṕ", "P")
+  textoOrigen = Replace(textoOrigen, "ṗ", "P")
+  textoOrigen = Replace(textoOrigen, "ʠ", "Q")
+  textoOrigen = Replace(textoOrigen, "ḿ", "M")
+  textoOrigen = Replace(textoOrigen, "ṁ", "M")
+  textoOrigen = Replace(textoOrigen, "ṃ", "M")
+  textoOrigen = Replace(textoOrigen, "ĵ", "J")
+  textoOrigen = Replace(textoOrigen, "ǰ", "J")
+  textoOrigen = Replace(textoOrigen, "ḅ", "B")
+  textoOrigen = Replace(textoOrigen, "ḃ", "B")
+  textoOrigen = Replace(textoOrigen, "ḟ", "F")
 
   ' Convierte el texto a mayúsculas y elimina espacios al principio y al final
   textoOrigen = Trim(UCase(textoOrigen))
