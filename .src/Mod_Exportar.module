@@ -995,9 +995,14 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
       s &= "pdfversionid={" & Contenido[aFields[47]] & "},\n"
     Endif
 
+    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
+      s &= "pdfsummary={" & Contenido[aFields[56]] & "},\n"
+    Endif
+
     If Not IsNull(Contenido[aFields[57]]) And Len(Contenido[aFields[57]]) > 0 Then
       s &= "pdfkeywords={" & Contenido[aFields[57]] & "},\n"
     Endif
+
     If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
       s &= "pdfformato={" & Contenido[aFields[61]] & "},\n"
     Endif
