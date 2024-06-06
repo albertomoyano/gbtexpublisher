@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,950,480)
+  Move(0,0,950,740)
   #Scaled = False
   Expand = True
   Resizable = False
@@ -46,8 +46,25 @@
       Picture = Picture["iconos/salir.svg"]
     }
   }
+  { HBox6 Panel
+    Move(0,50,477,108)
+    NoTabFocus = True
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { GridJournal TableView
+      Move(9,9,153,90)
+      Font = Font["-1"]
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Horizontal
+      ScrollBar = Scroll.Vertical
+      AutoResize = False
+      Resizable = False
+    }
+  }
   { HBox3 Panel
-    Move(0,45,711,216)
+    Move(0,160,900,510)
     NoTabFocus = True
     Arrangement = Arrange.Vertical
     { HBox2 HBox
@@ -135,25 +152,8 @@
       }
     }
   }
-  { HBox6 Panel
-    Move(9,279,477,108)
-    NoTabFocus = True
-    Expand = True
-    Arrangement = Arrange.Horizontal
-    { GridJournal TableView
-      Move(9,9,153,90)
-      Font = Font["-1"]
-      Expand = True
-      Mode = Select.Single
-      ShowCursor = True
-      Header = GridView.Horizontal
-      ScrollBar = Scroll.Vertical
-      AutoResize = False
-      Resizable = False
-    }
-  }
   { HBox1 HBox
-    Move(9,396,792,36)
+    Move(10,680,792,36)
     { Spring2 Spring
       Move(126,0,126,36)
     }
