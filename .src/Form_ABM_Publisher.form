@@ -3,6 +3,7 @@
 { Form Form
   Move(0,0,950,400)
   #Scaled = False
+  Text = ("Alta - Baja - Modificación de editoriales")
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
@@ -50,8 +51,25 @@
       Picture = Picture["iconos/salir.svg"]
     }
   }
+  { HBox6 Panel
+    Move(0,50,477,207)
+    NoTabFocus = True
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { GridPublisher TableView
+      Move(135,18,153,90)
+      Font = Font["-1"]
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Horizontal
+      ScrollBar = Scroll.Vertical
+      AutoResize = False
+      Resizable = False
+    }
+  }
   { HBox3 Panel
-    Move(0,45,711,108)
+    Move(0,250,711,108)
     NoTabFocus = True
     Arrangement = Arrange.Vertical
     { HBox2 HBox
@@ -61,15 +79,15 @@
         Alignment = Align.Right
         Text = ("Publisher  ")
       }
+      { btnBuscarPublisher Button
+        Move(130,0,36,36)
+        Picture = Picture["iconos/search.svg"]
+      }
       { txtPublisher TextBox
-        Move(126,0,234,36)
+        Move(240,0,234,36)
         NoTabFocus = True
         Expand = True
         Alignment = Align.Left
-      }
-      { btnBuscarPublisher Button
-        Move(360,0,36,36)
-        Picture = Picture["iconos/search.svg"]
       }
     }
     { HBox7 HBox
@@ -81,13 +99,9 @@
         Text = "Journal "
       }
       { txtJournal TextBox
-        Move(117,0,216,36)
+        Move(240,0,216,36)
         NoTabFocus = True
         Expand = True
-      }
-      { btnBuscarJournal Button
-        Move(360,0,36,36)
-        Picture = Picture["iconos/search.svg"]
       }
     }
     { HBox4 HBox
@@ -103,23 +117,6 @@
         NoTabFocus = True
         Expand = True
       }
-    }
-  }
-  { HBox6 Panel
-    Move(0,153,477,207)
-    NoTabFocus = True
-    Expand = True
-    Arrangement = Arrange.Horizontal
-    { GridPublisher TableView
-      Move(135,18,153,90)
-      Font = Font["-1"]
-      Expand = True
-      Mode = Select.Single
-      ShowCursor = True
-      Header = GridView.Horizontal
-      ScrollBar = Scroll.Vertical
-      AutoResize = False
-      Resizable = False
     }
   }
   { HBox1 HBox

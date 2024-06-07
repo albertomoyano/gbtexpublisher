@@ -4542,18 +4542,6 @@ Public Sub txtSHORTTITLE_Change()
 
 End
 
-Public Sub btnMostarJournal_Click()
-
-  Form_Journal.ShowModal()
-
-End
-
-Public Sub btnMostrarPublisher_Click()
-
-  Form_Publisher.ShowModal()
-
-End
-
 Public Sub BtnBuscarClave_Click()
 
   ' Mostramos el botón de refresh en el form original para recargar las entradas

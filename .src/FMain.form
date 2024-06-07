@@ -45,12 +45,11 @@
     }
     { menuABMautores Menu
       Text = ("ABM autores")
+      Picture = Picture["iconos/document-orange.svg"]
     }
     { menuABMrevistas Menu
       Text = ("ABM revistas")
-    }
-    { Menu2 Menu
-      Text = ("ABM editoriales")
+      Picture = Picture["iconos/document-orange.svg"]
     }
     { Menu3 Menu
     }
@@ -1005,10 +1004,6 @@
             Alignment = Align.Right
             Text = ("JournalTitle ")
           }
-          { btnMostarJournal Button
-            MoveScaled(30,0,3.6,3.6)
-            Picture = Picture["iconos/schedule.svg"]
-          }
           { !txtJOURNALTITLE TextBox
             MoveScaled(40,0,16,3.6)
             #Public = True
@@ -1308,12 +1303,8 @@
         }
         { HBox61 HBox
           MoveScaled(0,4,88,3.6)
-          { btnMostrarPublisher Button
-            MoveScaled(0,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
-          }
           { Label16 Label
-            MoveScaled(10,0,12,3.6)
+            MoveScaled(10,0,16,3.6)
             Alignment = Align.Right
             Text = ("Publisher ")
           }
