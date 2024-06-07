@@ -5716,8 +5716,14 @@ Public Sub BtnBuscarJournal_Click()
 
 End
 
-Public Sub Menu1_Click()
+Public Sub menuABMrevistas_Click()
 
   Form_ABM_revistas.ShowModal
+
+End
+
+Public Sub menuABMautores_Click()
+
+  Form_ABM_autores.ShowModal
 
 End

@@ -43,10 +43,10 @@
     }
     { Menu10 Menu
     }
-    { Menu4 Menu
+    { menuABMautores Menu
       Text = ("ABM autores")
     }
-    { Menu1 Menu
+    { menuABMrevistas Menu
       Text = ("ABM revistas")
     }
     { Menu2 Menu

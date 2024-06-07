@@ -1,31 +1,32 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,102.4,74)
+  Move(0,0,1024,740)
+  #Scaled = False
   Text = ("Alta - Baja - Modificación de revistas")
   Resizable = False
   Arrangement = Arrange.Vertical
   Padding = 4
   { HBox83 HBox
-    MoveScaled(1,2,95,3.6)
+    Move(10,20,950,36)
     { BtnNuevoMeta Button
-      MoveScaled(0,0,4,4)
+      Move(0,0,40,40)
       NoTabFocus = True
       ToolTip = ("Agregar una nueva referencia")
       Picture = Picture["iconos/+pestana.svg"]
     }
     { btnGuardarMeta Button
-      MoveScaled(4,0,4,4)
+      Move(40,0,40,40)
       ToolTip = ("Cerrar la ventana")
       Picture = Picture["iconos/guardar.svg"]
     }
     { btnGuardarCambiosMeta Button
-      MoveScaled(8,0,4,4)
+      Move(80,0,40,40)
       ToolTip = ("Guardar modificaciones")
       Picture = Picture["iconos/guardarComo.svg"]
     }
     { txtID TextBox
-      MoveScaled(12,0,9,3.6)
+      Move(120,0,90,36)
       Visible = False
       Background = Color.Background
       NoTabFocus = True
@@ -33,10 +34,10 @@
       ReadOnly = True
     }
     { Spring6 Spring
-      MoveScaled(49,0,5,4)
+      Move(490,0,50,40)
     }
     { btnCerrar Button
-      MoveScaled(80,0,14.4,3.6)
+      Move(800,0,144,36)
       NoTabFocus = True
       ToolTip = ("Cerrar la aplicación")
       Text = ("Salir")
@@ -44,11 +45,11 @@
     }
   }
   { HBox6 Panel
-    MoveScaled(0,5.6,47.7,10.8)
+    Move(0,56,477,108)
     NoTabFocus = True
     Arrangement = Arrange.Horizontal
     { GridJournal TableView
-      MoveScaled(0.9,0.9,15.3,9)
+      Move(9,9,153,90)
       Font = Font["-1"]
       Expand = True
       Mode = Select.Single
@@ -60,235 +61,249 @@
     }
   }
   { ScrollView9 ScrollView
-    MoveScaled(1,18,91,82)
+    Move(10,180,910,820)
     Expand = True
     Arrangement = Arrange.Vertical
     ScrollBar = Scroll.Vertical
+    { HBox1 HBox
+      Move(0,0,780,36)
+      { Label1 Label
+        Move(30,0,200,36)
+        Alignment = Align.Right
+        Text = ("revista-ID:  ")
+      }
+      { !txt0x_title1 TextBox
+        Move(230,0,160,40)
+        #Public = True
+        Background = Color.Background
+        ReadOnly = True
+      }
+    }
     { HBox187 HBox
-      MoveScaled(1,1,78,3.6)
+      Move(10,50,780,36)
       { Label134 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("lang:  ")
       }
       { ComboBox1 ComboBox
-        MoveScaled(27,0,16,3.6)
+        Move(270,0,160,36)
         ReadOnly = True
       }
     }
     { HBox173 HBox
-      MoveScaled(1,5,78,3.6)
+      Move(10,90,780,36)
       { Label120 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("journal-title:  ")
       }
       { !txt0x_title2 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox174 HBox
-      MoveScaled(1,9,78,3.6)
+      Move(10,130,780,36)
       { Label121 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("abbrev-title:  ")
       }
       { !txt0x_title3 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox175 HBox
-      MoveScaled(1,12,78,3.6)
+      Move(10,160,780,36)
       { Label122 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("pissn:  ")
       }
       { !txt0x_title4 TextBox
-        MoveScaled(27,0,24,4)
+        Move(270,0,240,40)
         #Public = True
       }
     }
     { HBox176 HBox
-      MoveScaled(1,16,78,3.6)
+      Move(10,200,780,36)
       { Label123 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("eissn:  ")
       }
       { !txt0x_title5 TextBox
-        MoveScaled(27,0,24,4)
+        Move(270,0,240,40)
         #Public = True
       }
     }
     { HBox177 HBox
-      MoveScaled(1,19,78,3.6)
+      Move(10,230,780,36)
       { Label124 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("doi_prefix:  ")
       }
       { !txt0x_title6 TextBox
-        MoveScaled(27,0,24,4)
+        Move(270,0,240,40)
         #Public = True
       }
     }
     { HBox178 HBox
-      MoveScaled(1,23,78,3.6)
+      Move(10,270,780,36)
       { Label125 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("redalyc:  ")
       }
       { !txt0x_title7 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox179 HBox
-      MoveScaled(1,27,78,3.6)
+      Move(10,310,780,36)
       { Label126 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("scielo:  ")
       }
       { !txt0x_title8 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox188 HBox
-      MoveScaled(0,30.6,78,3.6)
+      Move(0,350,780,36)
       { Label135 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("publisher-id:  ")
       }
       { !txt0x_title16 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox189 HBox
-      MoveScaled(0,34.2,78,3.6)
+      Move(0,380,780,36)
       { Label136 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("(PubMed) nlm-ta:  ")
       }
       { !txt0x_title17 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox190 HBox
-      MoveScaled(0,37.8,78,3.6)
+      Move(0,420,780,36)
       { Label137 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("(PubMed Central) pmc:  ")
       }
       { !txt0x_title18 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox180 HBox
-      MoveScaled(1,42,78,3.6)
+      Move(10,460,780,36)
       { Label127 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("publisher-name:  ")
       }
       { !txt0x_title9 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox181 HBox
-      MoveScaled(1,48,78,3.6)
+      Move(10,520,780,36)
       { Label128 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("country:  ")
       }
       { !txt0x_title10 TextBox
-        MoveScaled(27,0,24,4)
+        Move(270,0,240,40)
         #Public = True
       }
     }
     { HBox182 HBox
-      MoveScaled(1,51,78,3.6)
+      Move(10,550,780,36)
       { Label129 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("email:  ")
       }
       { !txt0x_title11 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox183 HBox
-      MoveScaled(1,55,78,3.6)
+      Move(10,590,780,36)
       { Label130 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("institution:  ")
       }
       { !txt0x_title12 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox184 HBox
-      MoveScaled(1,59,78,3.6)
+      Move(10,630,780,36)
       { Label131 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("license text:  ")
       }
       { !txt0x_title13 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox185 HBox
-      MoveScaled(1,62,78,3.6)
+      Move(10,660,780,36)
       { Label132 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("licence link:  ")
       }
       { !txt0x_title14 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
     }
     { HBox186 HBox
-      MoveScaled(1,66,78,3.6)
+      Move(10,700,780,36)
       { Label133 Label
-        MoveScaled(3,0,20,3.6)
+        Move(30,0,200,36)
         Alignment = Align.Right
         Text = ("free_to_read:  ")
       }
       { !txt0x_title15 TextBox
-        MoveScaled(27,0,16,4)
+        Move(270,0,160,40)
         #Public = True
         Expand = True
       }
