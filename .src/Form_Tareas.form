@@ -6,7 +6,8 @@
   Arrangement = Arrange.Vertical
   Padding = 4
   { HBox1 HBox
-    MoveScaled(37,2,24,3.6)
+    MoveScaled(28,2,33,4)
+    Padding = 2
     { Label1 Label
       MoveScaled(0,0,16,4)
       Alignment = Align.BottomNormal
@@ -14,14 +15,16 @@
     }
   }
   { HBox2 HBox
-    MoveScaled(37,6,24,3.6)
+    MoveScaled(19,6,42,4)
+    Padding = 2
     { txtAgregarLista TextBox
-      MoveScaled(0,0,21,3.6)
+      MoveScaled(4,0,21,3.6)
       Expand = True
     }
   }
   { HBox3 HBox
-    MoveScaled(37,10,24,3.6)
+    MoveScaled(19,10,42,4)
+    Padding = 2
     { Label2 Label
       MoveScaled(0,0,11,4)
       Alignment = Align.BottomNormal
@@ -32,6 +35,8 @@
     MoveScaled(33,15,28,8)
     Expand = True
     Arrangement = Arrange.Fill
+    Padding = 2
+    Border = Border.Plain
     { txtAgregarDescripcion TextArea
       MoveScaled(0,0,22,7)
       Expand = True
@@ -39,7 +44,8 @@
     }
   }
   { HBox5 HBox
-    MoveScaled(14,24,47,3.6)
+    MoveScaled(0,24,61,4)
+    Padding = 2
     { Spring1 Spring
       MoveScaled(1,0,15,3.6)
     }
@@ -49,7 +55,7 @@
       Picture = Picture["iconos/comp.svg"]
     }
     { btnCancelar Button
-      MoveScaled(31,0,16,3.6)
+      MoveScaled(36,0,16,3.6)
       Text = ("Cancelar")
       Picture = Picture["iconos/salir.svg"]
     }

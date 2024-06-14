@@ -8,14 +8,12 @@
   Margin = True
   Padding = 4
   { HBox1 HBox
-    MoveScaled(0,1,105.6,3.6)
-    { btnDestino Button
-      MoveScaled(0,0,3.6,3.6)
-      Picture = Picture["iconos/document-orange.svg"]
-    }
+    MoveScaled(0,1,105.6,4)
+    Padding = 1
     { TextLabel1 TextLabel
-      MoveScaled(7,0,12,3.6)
-      Text = ("Destino  ")
+      MoveScaled(7,0,12,4)
+      Padding = 2
+      Text = ("Destino")
       Alignment = Align.Right
     }
     { !txtdestino TextBox
@@ -25,21 +23,29 @@
       Expand = True
       ReadOnly = True
     }
+    { btnDestino Button
+      MoveScaled(53,0,4,4)
+      Picture = Picture["iconos/document-orange.svg"]
+    }
   }
   { HBox2 HBox
-    MoveScaled(0,5,105.6,3.6)
+    MoveScaled(0,5,105.6,4)
+    Padding = 1
     { Label1 Label
       MoveScaled(25,0,52,3.6)
+      Font = Font["Bold"]
       Expand = True
       Alignment = Align.Center
       Text = ("Asegurese de escribir correctamente el nombre del filtro de exportación")
     }
   }
   { HBox3 HBox
-    MoveScaled(-5,9,105.6,3.6)
+    MoveScaled(-5,9,105.6,4)
+    Padding = 1
     { TextLabel4 TextLabel
-      MoveScaled(7,0,16,3.6)
-      Text = ("Filtro  ")
+      MoveScaled(7,0,12,3.6)
+      Padding = 2
+      Text = ("Filtro")
       Alignment = Align.Right
     }
     { txtFiltro TextBox
@@ -48,7 +54,8 @@
     }
     { TextLabel2 TextLabel
       MoveScaled(41,0,16,3.6)
-      Text = ("  Exportar como  ")
+      Padding = 2
+      Text = ("  Exportar como")
       Alignment = Align.Right
     }
     { txtNombre TextBox
@@ -57,7 +64,8 @@
     }
   }
   { HBox4 HBox
-    MoveScaled(0,13,105.6,3.6)
+    MoveScaled(0,13,105.6,4)
+    Padding = 1
     { Label2 Label
       MoveScaled(25,0,52,4)
       Font = Font["Bold,Italic"]
@@ -66,7 +74,8 @@
     }
   }
   { HBox14 HBox
-    MoveScaled(0,17,105.6,3.6)
+    MoveScaled(0,17,105.6,4)
+    Padding = 1
     { Spring1 Spring
       MoveScaled(7,0,10,3.6)
     }

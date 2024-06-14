@@ -6,37 +6,36 @@
   Text = ("Apuntes")
   Resizable = False
   Arrangement = Arrange.Vertical
-  Spacing = True
-  Margin = True
   Padding = 4
   { HBox1 HBox
-    Move(9,9,927,36)
+    Move(9,9,927,40)
+    Padding = 1
     { tbNuevo Button
-      Move(0,0,36,36)
+      Move(0,0,40,40)
       NoTabFocus = True
       ToolTip = ("Agregar entrada")
       Picture = Picture["iconos/+pestana.svg"]
     }
     { tbBorrar Button
-      Move(36,0,36,36)
+      Move(36,0,40,40)
       NoTabFocus = True
       ToolTip = ("Eliminar entrada")
       Picture = Picture["iconos/borrar.svg"]
     }
     { btnGuardar Button
-      Move(72,0,36,36)
+      Move(72,0,40,40)
       NoTabFocus = True
       ToolTip = ("Guardar entrada")
       Picture = Picture["iconos/guardar.svg"]
     }
     { btnGuardarMod Button
-      Move(108,0,36,36)
+      Move(108,0,40,40)
       NoTabFocus = True
       ToolTip = ("Guardar cambios")
       Picture = Picture["iconos/guardarComo.svg"]
     }
     { !btnRefresh Button
-      Move(144,0,36,36)
+      Move(144,0,40,40)
       #Public = True
       Visible = False
       NoTabFocus = True
@@ -44,31 +43,31 @@
       Picture = Picture["iconos/refrescar.svg"]
     }
     { BtnExportarDOCX Button
-      Move(180,0,36,36)
+      Move(180,0,40,40)
       NoTabFocus = True
       ToolTip = ("Exportar la nota como archivo de texto plano")
       Picture = Picture["iconos/+nuevo.svg"]
     }
     { BtnExportarPDF Button
-      Move(216,0,36,36)
+      Move(216,0,40,40)
       NoTabFocus = True
       ToolTip = ("Exportar la nota como archivo de texto plano")
       Picture = Picture["iconos/acroread.svg"]
     }
     { txtBuscar TextBox
-      Move(252,0,441,36)
+      Move(252,0,290,40)
     }
     { BtnBuscar Button
-      Move(693,0,36,36)
+      Move(693,0,40,40)
       NoTabFocus = True
       ToolTip = ("Buscar en toda la base de datos")
       Picture = Picture["iconos/search.svg"]
     }
     { Spring1 Spring
-      Move(738,0,36,36)
+      Move(738,0,36,40)
     }
     { btnCerrar ToolButton
-      Move(774,0,144,36)
+      Move(800,0,144,40)
       NoTabFocus = True
       ToolTip = ("Cerrar la ventana")
       Text = ("Cerrar")
@@ -77,9 +76,10 @@
     }
   }
   { HBox8 HBox
-    Move(18,45,765,36)
+    Move(10,80,765,40)
+    Padding = 1
     { !txId TextBox
-      Move(45,0,63,36)
+      Move(45,0,63,40)
       #Public = True
       Visible = False
       NoTabFocus = True
@@ -87,7 +87,7 @@
       ReadOnly = True
     }
     { !txFecha TextBox
-      Move(117,0,126,36)
+      Move(117,0,126,40)
       #Public = True
       Visible = False
       NoTabFocus = True
@@ -95,26 +95,26 @@
       ReadOnly = True
     }
     { Label7 Label
-      Move(387,0,63,36)
+      Move(387,0,63,40)
       NoTabFocus = True
       AutoResize = True
       Alignment = Align.Right
       Text = ("Asunto  ")
     }
     { !txAsunto TextBox
-      Move(450,0,63,36)
+      Move(450,0,63,40)
       #Public = True
       NoTabFocus = True
       Expand = True
     }
   }
   { Splitter6 Splitter
-    Move(0,135,468,423)
+    Move(90,160,468,423)
     Expand = True
     Arrangement = Arrange.Vertical
     Border = False
     { VLista TableView
-      Move(72,117,153,81)
+      Move(70,120,153,81)
       Font = Font["-1"]
       Expand = True
       Mode = Select.Single
@@ -124,7 +124,7 @@
       Resizable = False
     }
     { !txContenido TextArea
-      Move(90,306,180,54)
+      Move(90,310,180,54)
       #Public = True
       Font = Font["Monospace"]
       NoTabFocus = True

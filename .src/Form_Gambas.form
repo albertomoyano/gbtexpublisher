@@ -29,16 +29,17 @@
     ScrollBar = Scroll.Vertical
   }
   { HBox1 HBox
-    Move(54,243,567,36)
+    Move(50,240,567,40)
+    Padding = 1
     { Spring1 Spring
-      Move(36,0,36,36)
+      Move(36,0,36,40)
     }
     { btnGAMBAS Button
-      Move(135,0,216,36)
+      Move(135,0,216,40)
       Text = ("Visitar la web de GAMBAS")
     }
     { btnCerrar Button
-      Move(360,0,144,36)
+      Move(360,0,144,40)
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]
     }
