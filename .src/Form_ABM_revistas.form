@@ -9,7 +9,7 @@
   Padding = 4
   { HBox83 HBox
     Move(10,20,950,40)
-    Padding = 2
+    Padding = 1
     { BtnNuevoMeta Button
       Move(0,0,40,40)
       NoTabFocus = True
@@ -70,7 +70,7 @@
     ScrollBar = Scroll.Vertical
     { HBox1 HBox
       Move(0,0,780,40)
-      Padding = 2
+      Padding = 1
       { Label1 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -85,7 +85,7 @@
     }
     { HBox187 HBox
       Move(10,50,780,40)
-      Padding = 2
+      Padding = 1
       { Label134 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -98,7 +98,7 @@
     }
     { HBox173 HBox
       Move(10,90,780,40)
-      Padding = 2
+      Padding = 1
       { Label120 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -112,7 +112,7 @@
     }
     { HBox174 HBox
       Move(10,130,780,40)
-      Padding = 2
+      Padding = 1
       { Label121 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -126,7 +126,7 @@
     }
     { HBox175 HBox
       Move(10,160,780,40)
-      Padding = 2
+      Padding = 1
       { Label122 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -139,7 +139,7 @@
     }
     { HBox176 HBox
       Move(10,200,780,40)
-      Padding = 2
+      Padding = 1
       { Label123 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -152,7 +152,7 @@
     }
     { HBox177 HBox
       Move(10,230,780,40)
-      Padding = 2
+      Padding = 1
       { Label124 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -165,7 +165,7 @@
     }
     { HBox178 HBox
       Move(10,270,780,40)
-      Padding = 2
+      Padding = 1
       { Label125 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -179,7 +179,7 @@
     }
     { HBox179 HBox
       Move(10,310,780,40)
-      Padding = 2
+      Padding = 1
       { Label126 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -193,7 +193,7 @@
     }
     { HBox188 HBox
       Move(0,350,780,40)
-      Padding = 2
+      Padding = 1
       { Label135 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -207,7 +207,7 @@
     }
     { HBox189 HBox
       Move(0,380,780,40)
-      Padding = 2
+      Padding = 1
       { Label136 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -221,7 +221,7 @@
     }
     { HBox190 HBox
       Move(0,420,780,40)
-      Padding = 2
+      Padding = 1
       { Label137 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -235,7 +235,7 @@
     }
     { HBox180 HBox
       Move(10,460,780,40)
-      Padding = 2
+      Padding = 1
       { Label127 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -249,7 +249,7 @@
     }
     { HBox181 HBox
       Move(10,520,780,40)
-      Padding = 2
+      Padding = 1
       { Label128 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -262,7 +262,7 @@
     }
     { HBox182 HBox
       Move(10,550,780,40)
-      Padding = 2
+      Padding = 1
       { Label129 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -276,7 +276,7 @@
     }
     { HBox183 HBox
       Move(10,590,780,40)
-      Padding = 2
+      Padding = 1
       { Label130 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -290,7 +290,7 @@
     }
     { HBox184 HBox
       Move(10,630,780,40)
-      Padding = 2
+      Padding = 1
       { Label131 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -304,7 +304,7 @@
     }
     { HBox185 HBox
       Move(10,660,780,40)
-      Padding = 2
+      Padding = 1
       { Label132 Label
         Move(30,0,200,36)
         Alignment = Align.Right
@@ -318,7 +318,7 @@
     }
     { HBox186 HBox
       Move(10,700,780,40)
-      Padding = 2
+      Padding = 1
       { Label133 Label
         Move(30,0,200,36)
         Alignment = Align.Right

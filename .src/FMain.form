@@ -903,7 +903,7 @@
           MoveScaled(0,0,100,4)
           Padding = 1
           { BtnBuscarTituloReferencia Button
-            MoveScaled(1,0,3.6,3.6)
+            MoveScaled(1,0,4,4)
             NoTabFocus = True
             ToolTip = ("Búsqueda rápida del título")
             Picture = Picture["iconos/search.svg"]
@@ -914,7 +914,7 @@
             Text = ("Title ")
           }
           { btnBuscarEnGoogle Button
-            MoveScaled(26,0,3.6,3.6)
+            MoveScaled(26,0,4,4)
             ToolTip = ("Buscar en internet")
             Picture = Picture["iconos/web.svg"]
           }
@@ -961,7 +961,7 @@
           MoveScaled(0,12,100,4)
           Padding = 1
           { BtnBuscarBookTitle Button
-            MoveScaled(0,0,3.6,3.6)
+            MoveScaled(0,0,4,4)
             NoTabFocus = True
             ToolTip = ("Búsqueda rápida del título")
             Picture = Picture["iconos/search.svg"]
@@ -1017,7 +1017,7 @@
           MoveScaled(0,20,100,4)
           Padding = 1
           { BtnBuscarJournal Button
-            MoveScaled(0,0,3.6,3.6)
+            MoveScaled(0,0,4,4)
             NoTabFocus = True
             ToolTip = ("Búsqueda rápida del título")
             Picture = Picture["iconos/search.svg"]
