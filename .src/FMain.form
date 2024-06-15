@@ -8,6 +8,16 @@
   Arrangement = Arrange.Vertical
   Margin = True
   Padding = 4
+  { menuCOMPILAR Menu
+    Text = ("menuCompilar")
+    Visible = False
+    { menuCompLibro Menu
+      Text = ("Compilar libro")
+    }
+    { menuComprevista Menu
+      Text = ("Compilar revista")
+    }
+  }
   { menuGIT Menu
     Text = ("menuGit")
     Visible = False
@@ -352,28 +362,23 @@
   { HBox171 HBox
     MoveScaled(1,0,98,4)
     Padding = 1
-    { MenuApp2 MenuButton
-      MoveScaled(0,0,18,4)
-      Text = ("Compilar libro")
-      MenuOnly = True
-    }
     { btnCOMPpdf Button
-      MoveScaled(19.6,0,14.4,4)
+      MoveScaled(23,0,8.8889,4)
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnCOMPhtml Button
-      MoveScaled(35.6,0,14.4,4)
+      MoveScaled(35.5556,0,8.8889,4)
       Text = ("HTML")
       Picture = Picture["iconos/web.svg"]
     }
     { btnCOMPepub Button
-      MoveScaled(51.6,0,14.4,4)
+      MoveScaled(51.5556,0,8.8889,4)
       Text = ("ePub")
       Picture = Picture["iconos/epub.svg"]
     }
     { btnCOMPdocx Button
-      MoveScaled(66,0,14.4,4)
+      MoveScaled(66,0,8.8889,4)
       Text = ("DOCX")
       Picture = Picture["iconos/ms-office.svg"]
     }
@@ -393,17 +398,17 @@
     MoveScaled(1,8,112,4)
     Padding = 1
     { btnTODO Button
-      MoveScaled(0,0,4,4)
+      MoveScaled(0,0,4.4444,4.4444)
       Picture = Picture["iconos/1f926-1f3fb.png"]
     }
     { Button4 Button
-      MoveScaled(5,0,14.4,4)
+      MoveScaled(5,0,17.7778,4)
       Enabled = False
       Text = ("Git local")
       Picture = Picture["iconos/document.svg"]
     }
     { btnMenuGIT MenuButton
-      MoveScaled(20,0,14.4,4)
+      MoveScaled(24,0,17.7778,4)
       Enabled = False
       Text = ("Remoto a")
       Picture = Picture["iconos/document-orange.svg"]
@@ -411,13 +416,13 @@
       MenuOnly = True
     }
     { txtGIT TextBox
-      MoveScaled(35,0,19,4)
+      MoveScaled(44,0,19,4)
       Enabled = False
       Expand = True
       Placeholder = ("coloque aquí su usuario GitLab / GitHub")
     }
     { MenuApp MenuButton
-      MoveScaled(75,0,16,4)
+      MoveScaled(75,0,17.7778,4)
       Enabled = False
       Text = ("Ver") & "..."
       Picture = Picture["iconos/bookmarks.svg"]
@@ -535,7 +540,7 @@
         Picture = Picture["iconos/clave.svg"]
       }
       { lblAlta1 Label
-        MoveScaled(9,0,8.4,4)
+        MoveScaled(9,0,8.4444,4)
         Alignment = Align.Right
         Text = ("Clave ")
       }
@@ -548,7 +553,7 @@
         Placeholder = ("Clave BIB única")
       }
       { btnGuardarIGUAL Button
-        MoveScaled(31,0,14.4,4)
+        MoveScaled(31,0,14.4444,4)
         Visible = False
         ToolTip = ("Forzar guardar")
         Text = ("Forzar")
@@ -584,7 +589,7 @@
       MoveScaled(0,31,103,4)
       Padding = 1
       { Label2 Label
-        MoveScaled(0,0,16.4,4)
+        MoveScaled(0,0,16.4444,4)
         Font = Font["Bold"]
         Foreground = &HFF0000
         Alignment = Align.Right
@@ -638,7 +643,7 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label3 Label
-            MoveScaled(6,0,12,3.6)
+            MoveScaled(6,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Author ")
           }
@@ -648,7 +653,7 @@
             Placeholder = ("Autor principal")
           }
           { lblNAMEADDON2 Label
-            MoveScaled(42,0,12,3.6)
+            MoveScaled(42,0,12,3.5556)
             Alignment = Align.Right
             Text = ("ShortAuthor ")
           }
@@ -662,7 +667,7 @@
           MoveScaled(0,4,97,4)
           Padding = 1
           { lblBOOKAUTHOR2 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("BookAuthor ")
           }
@@ -673,7 +678,7 @@
             Placeholder = ("Autor del libro")
           }
           { lblNAMEADDON Label
-            MoveScaled(43,0,12,3.6)
+            MoveScaled(43,0,12,3.5556)
             Alignment = Align.Right
             Text = ("NameAddOn ")
           }
@@ -692,7 +697,7 @@
             Picture = Picture["iconos/search.svg"]
           }
           { lblEDITOR Label
-            MoveScaled(4,0,12,3.6)
+            MoveScaled(4,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Editor ")
           }
@@ -702,12 +707,12 @@
             PopupMenu = "Menu1"
           }
           { lblEDITORtype Label
-            MoveScaled(44,0,12,3.6)
+            MoveScaled(44,0,12,3.5556)
             Alignment = Align.Right
             Text = ("EditorType ")
           }
           { cbEDITORTYPE ComboBox
-            MoveScaled(63,0,16,3.6)
+            MoveScaled(63,0,16,3.5556)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -716,7 +721,7 @@
           MoveScaled(0,12,97,4)
           Padding = 1
           { lblEDITOR2 Label
-            MoveScaled(-1,0,16,3.6)
+            MoveScaled(-1,0,16,3.5556)
             Alignment = Align.Right
             Text = ("EditorA ")
           }
@@ -726,12 +731,12 @@
             PopupMenu = "Menu1"
           }
           { lblEDITORtype2 Label
-            MoveScaled(42,0,12,3.6)
+            MoveScaled(42,0,12,3.5556)
             Alignment = Align.Right
             Text = ("EditorAType ")
           }
           { cbEDITORTYPEa ComboBox
-            MoveScaled(61,0,16,3.6)
+            MoveScaled(61,0,16,3.5556)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -740,7 +745,7 @@
           MoveScaled(0,16,97,4)
           Padding = 1
           { lblEDITOR3 Label
-            MoveScaled(-1,0,16,3.6)
+            MoveScaled(-1,0,16,3.5556)
             Alignment = Align.Right
             Text = ("EditorB ")
           }
@@ -750,12 +755,12 @@
             PopupMenu = "Menu1"
           }
           { lblEDITORtype3 Label
-            MoveScaled(40,0,12,3.6)
+            MoveScaled(40,0,12,3.5556)
             Alignment = Align.Right
             Text = ("EditorBType ")
           }
           { cbEDITORTYPEb ComboBox
-            MoveScaled(59,0,16,3.6)
+            MoveScaled(59,0,16,3.5556)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -764,7 +769,7 @@
           MoveScaled(0,20,97,4)
           Padding = 1
           { lblEDITOR4 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("EditorC ")
           }
@@ -774,12 +779,12 @@
             PopupMenu = "Menu1"
           }
           { lblEDITORtype4 Label
-            MoveScaled(45,0,12,3.6)
+            MoveScaled(45,0,12,3.5556)
             Alignment = Align.Right
             Text = ("EditorCType ")
           }
           { cbEDITORTYPEc ComboBox
-            MoveScaled(64,0,16,3.6)
+            MoveScaled(64,0,16,3.5556)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -793,7 +798,7 @@
             Text = ("Afterword ")
           }
           { txtAFTERWORD TextBox
-            MoveScaled(21,0,24,3.6)
+            MoveScaled(21,0,24,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("Con Epílogo de")
@@ -804,7 +809,7 @@
             Text = ("Foreword ")
           }
           { txtFOREWORD TextBox
-            MoveScaled(65,0,21,3.6)
+            MoveScaled(65,0,21,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("Con Prólogo de")
@@ -830,7 +835,7 @@
             Text = ("Introduction ")
           }
           { txtINTRODUCTION TextBox
-            MoveScaled(64,0,24,3.6)
+            MoveScaled(64,0,24,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("Con Introducción de")
@@ -909,7 +914,7 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label18 Label
-            MoveScaled(13,0,12,3.6)
+            MoveScaled(13,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Title ")
           }
@@ -919,7 +924,7 @@
             Picture = Picture["iconos/web.svg"]
           }
           { txtTITLE TextBox
-            MoveScaled(33,0,12,3.6)
+            MoveScaled(33,0,12,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Alignment = Align.Left
@@ -930,7 +935,7 @@
           MoveScaled(0,4,100,4)
           Padding = 1
           { Label40 Label
-            MoveScaled(3,0,16,3.6)
+            MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
             Text = ("ShortTitle ")
           }
@@ -946,12 +951,12 @@
           MoveScaled(0,8,100,4)
           Padding = 1
           { Label4 Label
-            MoveScaled(3,0,16,3.6)
+            MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
             Text = ("IndexTitle ")
           }
           { txtINDEXTITLE TextBox
-            MoveScaled(19,0,21,3.6)
+            MoveScaled(19,0,21,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("if different from title")
@@ -967,7 +972,7 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label13 Label
-            MoveScaled(5,0,12,3.6)
+            MoveScaled(5,0,12,3.5556)
             Alignment = Align.Right
             Text = ("BookTitle ")
           }
@@ -978,12 +983,12 @@
             Placeholder = ("Título del libro")
           }
           { lblEVENTTITLEADDON5 Label
-            MoveScaled(58,0,16,3.6)
+            MoveScaled(58,0,16,3.5556)
             Alignment = Align.Right
             Text = ("  BookTitleAddOn ")
           }
           { txtBookTitleAddOn TextBox
-            MoveScaled(79,0,16,3.6)
+            MoveScaled(79,0,16,3.5556)
             PopupMenu = "Menu1"
             Placeholder = ("Sigla")
           }
@@ -992,7 +997,7 @@
           MoveScaled(0,16,100,4)
           Padding = 1
           { Label39 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("MainTitle ")
           }
@@ -1003,7 +1008,7 @@
             Placeholder = ("Título mayor")
           }
           { lblEVENTTITLEADDON3 Label
-            MoveScaled(58,0,16,3.6)
+            MoveScaled(58,0,16,3.5556)
             Alignment = Align.Right
             Text = ("  MainTitleAddOn ")
           }
@@ -1023,23 +1028,23 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label15 Label
-            MoveScaled(15,0,12,3.6)
+            MoveScaled(15,0,12,3.5556)
             Alignment = Align.Right
             Text = ("JournalTitle ")
           }
           { !txtJOURNALTITLE TextBox
-            MoveScaled(40,0,16,3.6)
+            MoveScaled(40,0,16,3.5556)
             #Public = True
             Expand = True
             Placeholder = ("Nombre de la revista")
           }
           { lblEVENTTITLEADDON4 Label
-            MoveScaled(58,0,16,3.6)
+            MoveScaled(58,0,16,3.5556)
             Alignment = Align.Right
             Text = ("  JournalTitleAddOn ")
           }
           { txtJournalTitleAddOn TextBox
-            MoveScaled(79,0,16,3.6)
+            MoveScaled(79,0,16,3.5556)
             PopupMenu = "Menu1"
             Placeholder = ("Sigla")
           }
@@ -1048,12 +1053,12 @@
           MoveScaled(0,24,100,4)
           Padding = 1
           { Label5 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("IssueTitle ")
           }
           { txtISSUETITLE TextBox
-            MoveScaled(19,0,21,3.6)
+            MoveScaled(19,0,21,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("title of journal special issue")
@@ -1073,12 +1078,12 @@
           MoveScaled(0,28,100,4)
           Padding = 1
           { Label43 Label
-            MoveScaled(2,0,16,3.6)
+            MoveScaled(2,0,16,3.5556)
             Alignment = Align.Right
             Text = ("EventTitle ")
           }
           { txtEVENTTITLE TextBox
-            MoveScaled(21,0,24,3.6)
+            MoveScaled(21,0,24,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("title of conference or event")
@@ -1098,12 +1103,12 @@
           MoveScaled(0,32,100,4)
           Padding = 1
           { Label6 Label
-            MoveScaled(3,0,16,3.6)
+            MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
             Text = ("ReprintTitle ")
           }
           { txtREPRINTTITLE TextBox
-            MoveScaled(15,0,21,3.6)
+            MoveScaled(15,0,21,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("title of a reprint of the work")
@@ -1113,12 +1118,12 @@
           MoveScaled(0,36,100,4)
           Padding = 1
           { Label28 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Series ")
           }
           { txtSERIES TextBox
-            MoveScaled(17,0,21,3.6)
+            MoveScaled(17,0,21,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("publication series")
@@ -1137,12 +1142,12 @@
           MoveScaled(0,0,100,4)
           Padding = 1
           { Label23 Label
-            MoveScaled(31,0,16,3.6)
+            MoveScaled(31,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Chapter ")
           }
           { txtChapter TextBox
-            MoveScaled(51,0,21,3.6)
+            MoveScaled(51,0,21,3.5556)
             Expand = True
           }
         }
@@ -1150,7 +1155,7 @@
           MoveScaled(0,4,100,4)
           Padding = 1
           { Label19 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Volume ")
           }
@@ -1159,7 +1164,7 @@
             Expand = True
           }
           { Label24 Label
-            MoveScaled(29,0,12,3.6)
+            MoveScaled(29,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Volume(s) ")
           }
@@ -1182,7 +1187,7 @@
             Expand = True
           }
           { lblPART Label
-            MoveScaled(29,0,12,3.6)
+            MoveScaled(29,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Part ")
           }
@@ -1204,7 +1209,7 @@
             Expand = True
           }
           { lblPART2 Label
-            MoveScaled(41,1,12,3.6)
+            MoveScaled(41,1,12,3.5556)
             Alignment = Align.Right
             Text = ("Issue ")
           }
@@ -1218,12 +1223,12 @@
           MoveScaled(0,16,100,4)
           Padding = 1
           { lblPUBSTATE Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("PubState ")
           }
           { cbPUBSTATE ComboBox
-            MoveScaled(16,0,18,3.6)
+            MoveScaled(16,0,18,3.5556)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -1235,22 +1240,22 @@
           MoveScaled(0,20,100,4)
           Padding = 1
           { Label17 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Year ")
           }
           { txtYEAR TextBox
-            MoveScaled(14,0,24,3.6)
+            MoveScaled(14,0,24,3.5556)
             Expand = True
             Placeholder = ("YYYY (usar en revistas)")
           }
           { Label26 Label
-            MoveScaled(55,0,12,3.6)
+            MoveScaled(55,0,12,3.5556)
             Alignment = Align.Right
             Text = ("EventDate ")
           }
           { txtEVENTDATE TextBox
-            MoveScaled(73,0,21,3.6)
+            MoveScaled(73,0,21,3.5556)
             Expand = True
             Placeholder = ("conference or event date as (yyyy-mm-dd)")
           }
@@ -1259,7 +1264,7 @@
           MoveScaled(0,24,100,4)
           Padding = 1
           { lblDate Label
-            MoveScaled(1,0,16,3.6)
+            MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Date ")
           }
@@ -1269,7 +1274,7 @@
             Placeholder = ("YYYY-MM-DD")
           }
           { lblDate2 Label
-            MoveScaled(44,0,12,3.6)
+            MoveScaled(44,0,12,3.5556)
             Alignment = Align.Right
             Text = ("  OrigDate ")
           }
@@ -1283,17 +1288,17 @@
           MoveScaled(0,28,100,4)
           Padding = 1
           { Label22 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("urlDate ")
           }
           { txtURLDATE TextBox
-            MoveScaled(20,0,21,3.6)
+            MoveScaled(20,0,21,3.5556)
             Expand = True
             Placeholder = ("YYYY-MM-DD")
           }
           { lblPART3 Label
-            MoveScaled(41,0,12,3.6)
+            MoveScaled(41,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Version ")
           }
@@ -1316,7 +1321,7 @@
           MoveScaled(0,0,88,4)
           Padding = 1
           { lblLocation Label
-            MoveScaled(1,0,16,3.6)
+            MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Location ")
           }
@@ -1326,7 +1331,7 @@
             Expand = True
           }
           { lblLocation11 Label
-            MoveScaled(33,0,15,3.6)
+            MoveScaled(33,0,15,3.5556)
             Alignment = Align.Right
             Text = ("OrigLocation ")
           }
@@ -1341,7 +1346,7 @@
           MoveScaled(0,4,88,4)
           Padding = 1
           { Label16 Label
-            MoveScaled(10,0,16,3.6)
+            MoveScaled(10,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Publisher ")
           }
@@ -1366,7 +1371,7 @@
           MoveScaled(0,8,88,4)
           Padding = 1
           { lblIstitution Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Institution ")
           }
@@ -1377,12 +1382,12 @@
             Placeholder = ("Patrocinante")
           }
           { Label25 Label
-            MoveScaled(40,0,15,3.6)
+            MoveScaled(40,0,15,3.5556)
             Alignment = Align.Right
             Text = ("Organization ")
           }
           { txtORGANIZATION TextBox
-            MoveScaled(55,0,24,3.6)
+            MoveScaled(55,0,24,3.5556)
             Expand = True
             PopupMenu = "Menu1"
             Placeholder = ("Organizador")
@@ -1403,7 +1408,7 @@
             Placeholder = ("00-000")
           }
           { lblPAGETOTAL Label
-            MoveScaled(24,0,15,3.6)
+            MoveScaled(24,0,15,3.5556)
             Alignment = Align.Right
             Text = ("PageTotal ")
           }
@@ -1418,7 +1423,7 @@
           MoveScaled(0,16,88,4)
           Padding = 1
           { lblPAGETOTAL2 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Pagination ")
           }
@@ -1429,7 +1434,7 @@
             Placeholder = ("pagination format of (book)title")
           }
           { lblLocation2 Label
-            MoveScaled(29,0,15,3.6)
+            MoveScaled(29,0,15,3.5556)
             Alignment = Align.Right
             Text = ("Venue ")
           }
@@ -1444,7 +1449,7 @@
           MoveScaled(0,20,88,4)
           Padding = 1
           { lblHyphenation Label
-            MoveScaled(3,0,16,3.6)
+            MoveScaled(3,0,16,3.5556)
             #Translate = False
             Font = Font["Bold"]
             Foreground = &HFF0000
@@ -1452,7 +1457,7 @@
             Text = "Hyphenation "
           }
           { cbLANGUAGE ComboBox
-            MoveScaled(22,0,24,3.6)
+            MoveScaled(22,0,24,3.5556)
             NoTabFocus = True
             Expand = True
             ReadOnly = True
@@ -1478,7 +1483,7 @@
             Text = "LangId "
           }
           { cbLANGUAGEID ComboBox
-            MoveScaled(18,0,24,3.6)
+            MoveScaled(18,0,24,3.5556)
             NoTabFocus = True
             Expand = True
             ReadOnly = True
@@ -1499,7 +1504,7 @@
           MoveScaled(0,28,88,4)
           Padding = 1
           { lblLocation6 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Language ")
           }
@@ -1509,7 +1514,7 @@
             Placeholder = ("language of work")
           }
           { lblLocation12 Label
-            MoveScaled(39,0,15,3.6)
+            MoveScaled(39,0,15,3.5556)
             Alignment = Align.Right
             Text = ("  OrigLanguage ")
           }
@@ -1536,7 +1541,7 @@
             Picture = Picture["iconos/comp.svg"]
           }
           { lblISBN Label
-            MoveScaled(5,0,12,3.6)
+            MoveScaled(5,0,12,3.5556)
             Alignment = Align.Right
             Text = ("ISBN ")
           }
@@ -1546,7 +1551,7 @@
             Placeholder = ("International Standard Book Number")
           }
           { Label44 Label
-            MoveScaled(35,0,12,3.6)
+            MoveScaled(35,0,12,3.5556)
             Alignment = Align.Right
             Text = ("ISSN ")
           }
@@ -1560,7 +1565,7 @@
           MoveScaled(0,4,80,4)
           Padding = 1
           { lblISBN3 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("ISMN ")
           }
@@ -1570,7 +1575,7 @@
             Placeholder = ("International Standard Music Number")
           }
           { lblISBN4 Label
-            MoveScaled(28,0,12,3.6)
+            MoveScaled(28,0,12,3.5556)
             Alignment = Align.Right
             Text = ("ISRN ")
           }
@@ -1584,7 +1589,7 @@
           MoveScaled(0,8,80,4)
           Padding = 1
           { lblISBN2 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("ISAN ")
           }
@@ -1594,7 +1599,7 @@
             Placeholder = ("International Standard Audiovisual Number")
           }
           { lblISBN5 Label
-            MoveScaled(28,0,12,3.6)
+            MoveScaled(28,0,12,3.5556)
             Alignment = Align.Right
             Text = ("ISWC ")
           }
@@ -1613,7 +1618,7 @@
             Picture = Picture["iconos/web.svg"]
           }
           { Label21 Label
-            MoveScaled(8,0,12,3.6)
+            MoveScaled(8,0,12,3.5556)
             Alignment = Align.Right
             Text = ("URL ")
           }
@@ -1627,12 +1632,12 @@
           MoveScaled(0,16,80,4)
           Padding = 1
           { lblDOI2 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("DOI ")
           }
           { txtDOI TextBox
-            MoveScaled(17,0,24,3.6)
+            MoveScaled(17,0,24,3.5556)
             Expand = True
             Placeholder = ("Digital Object Identifier")
           }
@@ -1641,7 +1646,7 @@
           MoveScaled(0,20,80,4)
           Padding = 1
           { lblISBN6 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Eid ")
           }
@@ -1651,7 +1656,7 @@
             Placeholder = ("electronic identifier of @article")
           }
           { lblISBN7 Label
-            MoveScaled(27,0,12,3.6)
+            MoveScaled(27,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Eprint ")
           }
@@ -1665,7 +1670,7 @@
           MoveScaled(0,24,80,4)
           Padding = 1
           { lblISBN8 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("EprintType ")
           }
@@ -1688,12 +1693,12 @@
           MoveScaled(0,0,91,4)
           Padding = 1
           { lblLocation3 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Type ")
           }
           { cbType ComboBox
-            MoveScaled(20,0,24,3.6)
+            MoveScaled(20,0,24,3.5556)
             ReadOnly = True
           }
           { txtTYPE TextBox
@@ -1709,7 +1714,7 @@
           MoveScaled(0,4,91,4)
           Padding = 1
           { lblLocation4 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("EntrysubType ")
           }
@@ -1723,7 +1728,7 @@
           MoveScaled(0,8,91,4)
           Padding = 1
           { lblLABEL Label
-            MoveScaled(1,0,16,3.6)
+            MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Label ")
           }
@@ -1737,7 +1742,7 @@
           MoveScaled(0,12,91,4)
           Padding = 1
           { lblLocation5 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Howpublished ")
           }
@@ -1751,7 +1756,7 @@
           MoveScaled(0,16,91,4)
           Padding = 1
           { lblLocation7 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Addendum ")
           }
@@ -1765,7 +1770,7 @@
           MoveScaled(0,20,91,4)
           Padding = 1
           { lblLocation9 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Shorthand ")
           }
@@ -1779,7 +1784,7 @@
           MoveScaled(0,24,91,4)
           Padding = 1
           { lblLocation8 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Shorthandintro ")
           }
@@ -1815,7 +1820,7 @@
           MoveScaled(0,32,91,4)
           Padding = 1
           { Label27 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             #Translate = False
             NoTabFocus = True
             Alignment = Align.Right
@@ -1831,7 +1836,7 @@
           MoveScaled(0,36,91,4)
           Padding = 1
           { Label48 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Related ")
           }
@@ -1846,13 +1851,13 @@
           MoveScaled(0,40,91,4)
           Padding = 1
           { Label49 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             #Translate = False
             Alignment = Align.Right
             Text = "RelatedType "
           }
           { cbRELATEDTYPE ComboBox
-            MoveScaled(18,0,24,3.6)
+            MoveScaled(18,0,24,3.5556)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -1896,7 +1901,7 @@
             Placeholder = ("listado de claves (2 o más) para @set")
           }
           { Label46 Label
-            MoveScaled(39,0,12,3.6)
+            MoveScaled(39,0,12,3.5556)
             #Translate = False
             NoTabFocus = True
             Alignment = Align.Right
@@ -2053,7 +2058,7 @@
           MoveScaled(0,28,94,4)
           Padding = 1
           { lblLocation10 Label
-            MoveScaled(0,0,16,3.6)
+            MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
             Text = ("File ")
           }
@@ -2352,7 +2357,7 @@
           Text = ("") & "..."
         }
         { Label12 Label
-          MoveScaled(7,0,12,3.6)
+          MoveScaled(7,0,12,3.5556)
           Alignment = Align.Right
           Text = ("Description ")
         }
@@ -2366,7 +2371,7 @@
         MoveScaled(1,8,87,4)
         Padding = 1
         { Label7 Label
-          MoveScaled(2,0,16,3.6)
+          MoveScaled(2,0,16,3.5556)
           Alignment = Align.Right
           Text = ("Primera vez ")
         }
@@ -2384,7 +2389,7 @@
           Picture = Picture["iconos/search.svg"]
         }
         { Label8 Label
-          MoveScaled(17,0,12,3.6)
+          MoveScaled(17,0,12,3.5556)
           Alignment = Align.Right
           Text = ("Text ")
         }
@@ -2398,7 +2403,7 @@
         MoveScaled(1,16,87,4)
         Padding = 1
         { Label1 Label
-          MoveScaled(2,0,16,3.6)
+          MoveScaled(2,0,16,3.5556)
           Alignment = Align.Right
           Text = ("Firstplural ")
         }
@@ -2493,7 +2498,7 @@
         Text = ("    Será exportado como:  ")
       }
       { txtEXPORTARmeta TextBox
-        MoveScaled(77,0,26,3.6)
+        MoveScaled(77,0,26,3.5556)
         Background = Color.Background
         NoTabFocus = True
         Expand = True
@@ -2535,7 +2540,7 @@
         Text = ("XML-JATS  ")
       }
       { rb5 RadioButton
-        MoveScaled(80,0,22,3.6)
+        MoveScaled(80,0,22,3.5556)
         Expand = True
         AutoResize = True
         Text = ("Libre Office / MS Word")
@@ -2573,7 +2578,7 @@
           MoveScaled(0,4,78,4)
           Padding = 1
           { Label31 Label
-            MoveScaled(3,0,23,3.6)
+            MoveScaled(3,0,23,3.5556)
             Alignment = Align.Right
             Text = ("Título del artículo / capítulo  ")
           }
@@ -3110,7 +3115,7 @@
             Text = ("Tipo de documento  ")
           }
           { cmbType ComboBox
-            MoveScaled(25,0,20,3.6)
+            MoveScaled(25,0,20,3.5556)
             ReadOnly = True
           }
           { lblCBType TextBox
@@ -3142,7 +3147,7 @@
           }
         }
         { HBox170 HBox
-          MoveScaled(0,135.6,78,4)
+          MoveScaled(0,135.5556,78,4)
           Padding = 1
           { Label118 Label
             MoveScaled(0,0,23,4)
@@ -3150,7 +3155,7 @@
             Text = ("Encuadernación  ")
           }
           { txt89_binding ComboBox
-            MoveScaled(25,0,20,3.6)
+            MoveScaled(25,0,20,3.5556)
             ReadOnly = True
           }
         }
@@ -3991,7 +3996,7 @@
           MoveScaled(0,17,78,4)
           Padding = 1
           { Label119 Label
-            MoveScaled(3,0,23,3.6)
+            MoveScaled(3,0,23,3.5556)
             Alignment = Align.Right
             Text = ("Título del artículo  ")
           }
