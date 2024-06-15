@@ -393,7 +393,7 @@
     MoveScaled(1,8,112,4)
     Padding = 1
     { btnTODO Button
-      MoveScaled(0,0,3.6,4)
+      MoveScaled(0,0,4,4)
       Picture = Picture["iconos/1f926-1f3fb.png"]
     }
     { Button4 Button
@@ -909,7 +909,7 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label18 Label
-            MoveScaled(13,0,12.4,3.6)
+            MoveScaled(13,0,12,3.6)
             Alignment = Align.Right
             Text = ("Title ")
           }
@@ -967,7 +967,7 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label13 Label
-            MoveScaled(5,0,12.4,3.6)
+            MoveScaled(5,0,12,3.6)
             Alignment = Align.Right
             Text = ("BookTitle ")
           }
@@ -1023,7 +1023,7 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label15 Label
-            MoveScaled(15,0,12.4,3.6)
+            MoveScaled(15,0,12,3.6)
             Alignment = Align.Right
             Text = ("JournalTitle ")
           }

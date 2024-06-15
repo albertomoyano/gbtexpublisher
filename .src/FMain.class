@@ -4196,12 +4196,17 @@ Public Sub btnBuscarEnGoogle_Click()
 
   Dim Consulta As String = txtTITLE.Text
 
+  ' Verificar si el cuadro de texto está vacío
+  If Consulta = "" Then
+    Message.Warning("No hay URL para visitar. Por favor, ingrese una consulta.")
+    Return
+  End If
+
   ' Reemplaza los espacios en blanco con el signo de "+" para formatear la consulta de búsqueda
   Consulta = Replace(Consulta, " ", "+")
 
-  If Consulta <> "" Then
-    Shell "xdg-open https://www.google.com/search?q=" & Consulta
-  End If
+  ' Abre el navegador con la consulta de búsqueda en Google
+  Shell "xdg-open https://www.google.com/search?q=" & Consulta
 
 End
 

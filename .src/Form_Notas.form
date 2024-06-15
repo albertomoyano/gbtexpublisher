@@ -58,16 +58,16 @@
       Move(252,0,290,40)
     }
     { BtnBuscar Button
-      Move(693,0,40,40)
+      Move(590,0,40,40)
       NoTabFocus = True
       ToolTip = ("Buscar en toda la base de datos")
       Picture = Picture["iconos/search.svg"]
     }
     { Spring1 Spring
-      Move(738,0,36,40)
+      Move(640,0,36,40)
     }
     { btnCerrar ToolButton
-      Move(800,0,144,40)
+      Move(700,0,160,40)
       NoTabFocus = True
       ToolTip = ("Cerrar la ventana")
       Text = ("Cerrar")
