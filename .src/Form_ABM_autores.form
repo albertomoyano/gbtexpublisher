@@ -8,26 +8,25 @@
   Arrangement = Arrange.Vertical
   Padding = 4
   { HBox83 HBox
-    Move(10,0,960,40)
-    Padding = 1
+    Move(10,0,960,36)
     { BtnNuevoMeta Button
-      Move(0,0,40,40)
+      Move(0,0,36,36)
       NoTabFocus = True
       ToolTip = ("Agregar una nueva referencia")
       Picture = Picture["iconos/+pestana.svg"]
     }
     { BtnRefrescarAutores Button
-      Move(40,0,40,40)
+      Move(40,0,36,36)
       ToolTip = ("Refrescar listado de la base de datos")
       Picture = Picture["iconos/refrescar.svg"]
     }
     { btnGuardarMeta Button
-      Move(120,0,40,40)
+      Move(120,0,36,36)
       ToolTip = ("Cerrar la ventana")
       Picture = Picture["iconos/guardar.svg"]
     }
     { btnGuardarCambiosMeta Button
-      Move(180,0,40,40)
+      Move(180,0,36,36)
       ToolTip = ("Guardar modificaciones")
       Picture = Picture["iconos/guardarComo.svg"]
     }
@@ -35,7 +34,7 @@
       Move(490,0,50,36)
     }
     { btnCLOSEauthor Button
-      Move(760,0,160,40)
+      Move(760,0,160,36)
       NoTabFocus = True
       ToolTip = ("Cerrar la aplicación")
       Text = ("Salir")
@@ -59,14 +58,14 @@
     }
   }
   { ScrollView9 ScrollView
-    Move(0,200,1010,530)
+    Move(0,198,1010,530)
     Expand = True
     Arrangement = Arrange.Vertical
     Border = False
     ScrollBar = Scroll.Vertical
     { HBox1 HBox
-      Move(10,10,780,40)
-      Padding = 1
+      Move(10,10,780,36)
+      Padding = 2
       { Label1 Label
         Move(30,0,200,36)
         Padding = 4
@@ -82,8 +81,8 @@
       }
     }
     { HBox187 HBox
-      Move(10,50,780,40)
-      Padding = 1
+      Move(10,50,780,36)
+      Padding = 2
       { Label134 Label
         Move(30,0,200,36)
         Padding = 4
@@ -102,8 +101,8 @@
       }
     }
     { HBox173 HBox
-      Move(10,90,780,40)
-      Padding = 1
+      Move(10,90,780,36)
+      Padding = 2
       { Label120 Label
         Move(30,0,200,36)
         Padding = 4
@@ -117,8 +116,8 @@
       }
     }
     { HBox174 HBox
-      Move(10,130,780,40)
-      Padding = 1
+      Move(10,130,780,36)
+      Padding = 2
       { Label121 Label
         Move(30,0,200,36)
         Padding = 4
@@ -132,8 +131,8 @@
       }
     }
     { HBox175 HBox
-      Move(10,170,780,40)
-      Padding = 1
+      Move(10,170,780,36)
+      Padding = 2
       { Label122 Label
         Move(30,0,200,36)
         Padding = 4
@@ -152,8 +151,8 @@
       }
     }
     { HBox176 HBox
-      Move(10,210,780,40)
-      Padding = 1
+      Move(10,210,780,36)
+      Padding = 2
       { Label123 Label
         Move(30,0,200,36)
         Padding = 4
@@ -167,8 +166,8 @@
       }
     }
     { HBox177 HBox
-      Move(10,250,1000,40)
-      Padding = 1
+      Move(10,250,1000,36)
+      Padding = 2
       { Label124 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -215,8 +214,8 @@
       }
     }
     { HBox2 HBox
-      Move(10,290,1000,40)
-      Padding = 1
+      Move(10,290,1000,36)
+      Padding = 2
       { Label5 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -263,8 +262,8 @@
       }
     }
     { HBox3 HBox
-      Move(10,320,1000,40)
-      Padding = 1
+      Move(10,320,1000,36)
+      Padding = 2
       { Label9 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -311,8 +310,8 @@
       }
     }
     { HBox4 HBox
-      Move(10,360,1000,40)
-      Padding = 1
+      Move(10,360,1000,36)
+      Padding = 2
       { Label13 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -359,8 +358,8 @@
       }
     }
     { HBox5 HBox
-      Move(10,390,1000,40)
-      Padding = 1
+      Move(10,390,1000,36)
+      Padding = 2
       { Label17 Label
         Move(-30,0,200,36)
         Padding = 4

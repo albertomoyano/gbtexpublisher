@@ -14,8 +14,6 @@ Public Sub Form_Open()
   BtnExportarDOCX.Visible = False
   BtnExportarPDF.Visible = False
 
-  Splitter6.Layout = [3, 7] 'fijamos en ancho del split
-
   ' me conceto a la segunda base de datos
   Conn = Mod_Conn.Conectar2()
 
@@ -62,12 +60,6 @@ Public Sub Mostrar_Lista()
 
   Record = Contenido[0]
   Count = Record
-
-End
-
-Public Sub Splitter6_Resize()
-
-  Splitter6.Layout = [3, 7]
 
 End
 

@@ -12,8 +12,7 @@
   Margin = True
   Padding = 4
   { HBox1 HBox
-    Move(0,0,942,40)
-    Padding = 2
+    Move(0,0,942,36)
     { Label3 Label
       Move(0,0,72,36)
       NoTabFocus = True
@@ -37,9 +36,8 @@
     }
   }
   { HBox2 HBox
-    Move(10,40,800,40)
+    Move(10,40,800,36)
     NoTabFocus = True
-    Padding = 2
     { Label1 Label
       Move(9,0,72,40)
       NoTabFocus = True
@@ -63,9 +61,8 @@
     }
   }
   { HBox3 HBox
-    Move(0,80,800,40)
+    Move(0,80,800,36)
     NoTabFocus = True
-    Padding = 2
     { Label2 Label
       Move(0,0,72,40)
       NoTabFocus = True
@@ -87,8 +84,7 @@
     }
   }
   { HBox7 HBox
-    Move(0,120,942,40)
-    Padding = 2
+    Move(0,120,942,36)
     { lblMENSAJE Label
       Move(0,0,144,40)
       Font = Font["Bold,Italic"]
