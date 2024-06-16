@@ -2356,13 +2356,6 @@ Public Sub btnLimpiarTapa_Click()
 
 End
 
-Public Sub btnMostarAuthor_Click()
-
-  Form_Personas.ShowModal()
-  ' Form_Autores.ShowModal()
-
-End
-
 Public Sub btnMostarJournal2_Click()
 
   Form_Journal.ShowModal()
