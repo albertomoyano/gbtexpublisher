@@ -64,7 +64,7 @@
     Border = False
     ScrollBar = Scroll.Vertical
     { HBox1 HBox
-      Move(10,10,780,36)
+      Move(10,10,780,40)
       Padding = 2
       { Label1 Label
         Move(30,0,200,36)
@@ -81,7 +81,7 @@
       }
     }
     { HBox187 HBox
-      Move(10,50,780,36)
+      Move(10,50,780,40)
       Padding = 2
       { Label134 Label
         Move(30,0,200,36)
@@ -101,7 +101,7 @@
       }
     }
     { HBox173 HBox
-      Move(10,90,780,36)
+      Move(10,90,780,40)
       Padding = 2
       { Label120 Label
         Move(30,0,200,36)
@@ -116,7 +116,7 @@
       }
     }
     { HBox174 HBox
-      Move(10,130,780,36)
+      Move(10,130,780,40)
       Padding = 2
       { Label121 Label
         Move(30,0,200,36)
@@ -131,7 +131,7 @@
       }
     }
     { HBox175 HBox
-      Move(10,170,780,36)
+      Move(10,170,780,40)
       Padding = 2
       { Label122 Label
         Move(30,0,200,36)
@@ -151,7 +151,7 @@
       }
     }
     { HBox176 HBox
-      Move(10,210,780,36)
+      Move(10,210,780,40)
       Padding = 2
       { Label123 Label
         Move(30,0,200,36)
@@ -166,7 +166,7 @@
       }
     }
     { HBox177 HBox
-      Move(10,250,1000,36)
+      Move(10,250,1000,40)
       Padding = 2
       { Label124 Label
         Move(-30,0,200,36)
@@ -214,7 +214,7 @@
       }
     }
     { HBox2 HBox
-      Move(10,290,1000,36)
+      Move(10,290,1000,40)
       Padding = 2
       { Label5 Label
         Move(-30,0,200,36)
@@ -262,7 +262,7 @@
       }
     }
     { HBox3 HBox
-      Move(10,320,1000,36)
+      Move(10,320,1000,40)
       Padding = 2
       { Label9 Label
         Move(-30,0,200,36)
@@ -310,7 +310,7 @@
       }
     }
     { HBox4 HBox
-      Move(10,360,1000,36)
+      Move(10,360,1000,40)
       Padding = 2
       { Label13 Label
         Move(-30,0,200,36)
@@ -358,7 +358,7 @@
       }
     }
     { HBox5 HBox
-      Move(10,390,1000,36)
+      Move(10,390,1000,40)
       Padding = 2
       { Label17 Label
         Move(-30,0,200,36)
