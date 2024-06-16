@@ -6,7 +6,7 @@
   Text = ("Apuntes")
   Resizable = False
   Arrangement = Arrange.Vertical
-  Margin = True
+  Padding = 4
   { HBox1 HBox
     Move(9,9,927,36)
     { tbNuevo Button
