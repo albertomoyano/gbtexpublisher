@@ -430,14 +430,13 @@
   { HBox4 HBox
     MoveScaled(1,13,98,0.8889)
   }
-  { TabPanel1 TabPanel
-    MoveScaled(1,16,112,194)
+  { TabPanel1 TabStrip
+    MoveScaled(2,16,112,194)
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
     Padding = 4
     Count = 4
-    Highlight = True
     Index = 0
     Text = ("Consola")
     Picture = Picture["iconos/terminal.svg"]
@@ -613,17 +612,19 @@
         Placeholder = ("Clave filtro para printbibliography")
       }
     }
-    { TabPanel2 TabPanel
+    { HBox173 HBox
+      MoveScaled(0,35,103,0.8889)
+    }
+    { TabPanel2 TabStrip
       MoveScaled(1,38,104,74)
       Expand = True
       Arrangement = Arrange.Vertical
       Padding = 4
-      Border = False
       Count = 7
       Index = 0
       Text = ("Autoría")
       { ScrollView2 ScrollView
-        MoveScaled(1,1,102,43)
+        MoveScaled(1,2,102,43)
         Expand = True
         Arrangement = Arrange.Vertical
         Border = False
@@ -2173,7 +2174,6 @@
     { HBox8 Panel
       MoveScaled(3,10,52,12)
       NoTabFocus = True
-      Expand = True
       Arrangement = Arrange.Horizontal
       { HBox6 Panel
         MoveScaled(3,0,40,11)
@@ -2312,9 +2312,12 @@
         Expand = True
       }
     }
-    { Panel1 Panel
-      MoveScaled(1,40,96,28)
+    { ScrollView9 ScrollView
+      MoveScaled(1,38,107,42)
+      Expand = True
       Arrangement = Arrange.Vertical
+      Border = False
+      ScrollBar = Scroll.Vertical
       { HBox17 HBox
         MoveScaled(1,0,87,4.4444)
         Padding = 2
@@ -2537,8 +2540,11 @@
         Text = ("Libre Office / MS Word")
       }
     }
-    { TabPanel3 TabPanel
-      MoveScaled(1,13,107,174)
+    { HBox174 HBox
+      MoveScaled(0,13,103,0.8889)
+    }
+    { TabPanel3 TabStrip
+      MoveScaled(1,16,107,174)
       Expand = True
       Arrangement = Arrange.Vertical
       Count = 2
