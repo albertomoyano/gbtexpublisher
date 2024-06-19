@@ -802,6 +802,7 @@ Public Sub menuAbrir_Click()
   Else
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
+    DirViewRuta.Root = File.Dir(TextBox1.Text)
   Endif
 
   If Not MS.Matrix.Exist(Dialog.Path) Then
@@ -1008,6 +1009,7 @@ Public Sub mnuLast_Click()
     iIndex = MS.ShortMatrix.Find(Last.Text)
     TextBox1.Text = MS.Matrix[iIndex]
     fFile = Open TextBox1.Text For Input
+    DirViewRuta.Root = File.Dir(TextBox1.Text)
   Endif
 
   rutaFILES = File.Dir(TextBox1.Text) & "/files"

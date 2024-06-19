@@ -440,12 +440,23 @@
     Index = 0
     Text = ("Consola")
     Picture = Picture["iconos/terminal.svg"]
-    { TerminalView1 TerminalView
-      MoveScaled(1,3,23,8)
-      Font = Font["Terminus"]
+    { Splitter1 Splitter
+      MoveScaled(2,13,93,29)
       Expand = True
-      AutoResize = False
-      Blink = True
+      Border = False
+      { TerminalView1 TerminalView
+        MoveScaled(0,0,27,11)
+        Font = Font["Terminus"]
+        Expand = True
+        AutoResize = False
+        Blink = True
+      }
+      { DirViewRuta DirChooser
+        MoveScaled(30,0,34,15)
+        ShowFile = True
+        ShowBookmark = False
+        ShowToolbar = False
+      }
     }
     Index = 1
     Text = ("Referencias bibliográficas")
