@@ -20,6 +20,7 @@ Public sCurrentFilePath As String
 Public rutaORIGINALES As String
 Public rutaTAPA As String
 Public BaseName As String
+Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
 
 Public Sub Form_Open()
 
@@ -200,6 +201,16 @@ Public Sub Form_Open()
   cbLANGUAGEID.Text = cbLANGUAGEID[0].Text
 
   Mostrar_ListaBIB()
+
+  ' Verifica si el TextBox1 tiene una ruta válida
+  If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
+    ' Hacemos el seguimiento del DirChooser
+    Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
+    Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
+    Watcher.Start
+    ' Inicializa la lista de archivos
+    prevFiles = DirViewRuta.Files
+  End If
 
 End
 
@@ -984,6 +995,17 @@ Public Sub menuAbrir_Click()
 
 End
 
+' Evento que se ejecuta cuando se detecta un cambio en el directorio
+Public Sub Watcher_Change()
+
+  ' Actualiza el DirChooser
+  DirViewRuta.Refresh
+
+  ' Actualiza la lista de archivos anterior
+  prevFiles = DirViewRuta.Files
+
+End
+
 Public Sub UpdateMenu()
 
   Dim MenuItem As Menu
@@ -1014,7 +1036,6 @@ Public Sub mnuLast_Click()
 
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
   BaseName = File.BaseName(TextBox1.Text)
-  ' rutaBIB = BaseName & ".bib"
 
   menuORTO.Enabled = True
   menuRespaldoBDD.Enabled = True

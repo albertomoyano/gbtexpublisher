@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=Form_ConnServ
 Icon=iconos/icono-gbtex.svg
-Version=0.1.116
+Version=0.1.117
 Component=gb.image
 Component=gb.qt5
 Component=gb.form
@@ -16,6 +16,7 @@ Component=gb.util
 Component=gb.settings
 Component=gb.term
 Component=gb.form.terminal
+Component=gb.inotify
 Component=gb.net
 Component=gb.qt5.ext
 Description="gbTeXpublisher es una aplicación que permite gestionar los procesos de producción editorial basados en el lenguaje LaTeX."
