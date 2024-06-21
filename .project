@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=Form_ConnServ
 Icon=iconos/icono-gbtex.svg
-Version=0.1.117
+Version=0.1.119
 Component=gb.image
 Component=gb.qt5
 Component=gb.form

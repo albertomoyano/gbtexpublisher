@@ -866,7 +866,7 @@ Public Sub menuAbrir_Click()
     Form_Contador.Close ' Cierra la ventana
   End If
 
-  CopiarArchivos
+  Mod_Funciones.CopiarArchivos(TextBox1.Text)
 
   'comienza metadatos
   Dim comando As String
@@ -1073,7 +1073,7 @@ Public Sub mnuLast_Click()
     Form_Contador.Close ' Cierra la ventana
   End If
 
-  CopiarArchivos
+  Mod_Funciones.CopiarArchivos(TextBox1.Text)
 
   'comienza metadatos
   Dim comando As String
@@ -5366,90 +5366,6 @@ End
 Public Sub menuORTO_Click()
 
   Form_ORTO.ShowModal()
-
-End
-
-Public Sub CopiarArchivos()
-
-  If Not Exist(File.Dir(TextBox1.Text) & "/files") Then
-    Mkdir File.Dir(TextBox1.Text) & "/files"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/correcciones") Then
-    Mkdir File.Dir(TextBox1.Text) & "/correcciones"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/media") Then
-    Mkdir File.Dir(TextBox1.Text) & "/media"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/originales") Then
-    Mkdir File.Dir(TextBox1.Text) & "/originales"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/tapa") Then
-    Mkdir File.Dir(TextBox1.Text) & "/tapa"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/catalogo") Then
-    Mkdir File.Dir(TextBox1.Text) & "/catalogo"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/artcap") Then
-    Mkdir File.Dir(TextBox1.Text) & "/artcap"
-  End If
-
-  If Not Exist(rutaFILES & "/imago_custom.css") Then
-    Copy "./imago_custom.css" To rutaFILES & "/imago_custom.css"
-  End If
-  If Not Exist(rutaFILES & "/configEPUB.cfg") Then
-    Copy "./configEPUB.cfg" To rutaFILES & "/configEPUB.cfg"
-  End If
-  If Not Exist(rutaFILES & "/configHTML.cfg") Then
-    Copy "./configHTML.cfg" To rutaFILES & "/configHTML.cfg"
-  End If
-  If Not Exist(rutaFILES & "/configJATS.cfg") Then
-    Copy "./configJATS.cfg" To rutaFILES & "/configJATS.cfg"
-  End If
-  If Not Exist(rutaFILES & "/build.lua") Then
-    Copy "./build.lua" To rutaFILES & "/build.lua"
-  End If
-  If Not Exist(rutaFILES & "/make4ht-indexing.lua") Then
-    Copy "./make4ht-indexing.lua" To rutaFILES & "/make4ht-indexing.lua"
-  End If
-  If Not Exist(rutaFILES & "/blitz-lite.css") Then
-    Copy "./blitz-lite.css" To rutaFILES & "/blitz-lite.css"
-  End If
-  If Not Exist(rutaFILES & "/make4ht-indexing.lua") Then
-    Copy "./make4ht-indexing.lua" To rutaFILES & "/make4ht-indexing.lua"
-  End If
-  If Not Exist(rutaFILES & "/inicio-frontmatter.tex") Then
-    Copy "./inicio-frontmatter.tex" To rutaFILES & "/inicio-frontmatter.tex"
-  End If
-
-  'copiamos los archivos de preámbulo
-  If Not Exist(rutaFILES & "/general-art-pdf.tex") Then
-    Copy "./general-art-pdf.tex" To rutaFILES & "/general-art-pdf.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-book-pdf.tex") Then
-    Copy "./general-book-pdf.tex" To rutaFILES & "/general-book-pdf.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-epub.tex") Then
-    Copy "./general-epub.tex" To rutaFILES & "/general-epub.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-html.tex") Then
-    Copy "./general-html.tex" To rutaFILES & "/general-html.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-jats.tex") Then
-    Copy "./general-jats.tex" To rutaFILES & "/general-jats.tex"
-  End If
-  If Not Exist(rutaFILES & "/general-odt.tex") Then
-    Copy "./general-odt.tex" To rutaFILES & "/general-odt.tex"
-  End If
-  If Not Exist(rutaFILES & "/gbTeXcls.cls") Then
-    Copy "./gbTeXcls.cls" To rutaFILES & "/gbTeXcls.cls"
-  End If
-
-  If Not Exist(File.Dir(TextBox1.Text) & "/readme.md") Then
-    Copy "./readme.md" To File.Dir(TextBox1.Text) & "/readme.md"
-  End If
-  If Not Exist(File.Dir(TextBox1.Text) & "/LICENSE") Then
-    Copy "./LICENSE2" To File.Dir(TextBox1.Text) & "/LICENSE"
-  End If
 
 End
 
