@@ -765,17 +765,16 @@ End
 Public Sub Exportar2MetadatosPDF(rutaTexto As String)
 
   Dim s As String
-  Dim sb As String
   Dim f As ResultField
-  Dim fb As ResultField
+  ' Dim fb As ResultField
   Dim aFields As New String[]
-  Dim bFields As New String[]
+  ' Dim bFields As New String[]
   Dim w As Integer
-  Dim wb As Integer
+  ' Dim wb As Integer
   Dim buscar As String
-  Dim buscarAutor As String
+  ' Dim buscarAutor As String
   Dim outputFile As String
-  Dim id As Integer
+  ' Dim id As Integer
 
   ' me conceto a la base de datos
   Conn = Mod_Conn.conectar()
@@ -792,38 +791,12 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
     Endif
   Next
 
-  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
-
-  ' Inicializa la cadena vacía
-  sb = ""
-
-  ' Iterar sobre los IDs y obtener la información correspondiente
-  For Each id In ids
-    ' Establecer el valor de 'id' antes de ejecutar la consulta
-    buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Conn.Exec(buscarAutor)
-
-    bFields.Clear
-    For Each fb In ContenidoAutor.Fields
-      bFields.Add(fb.Name)
-      If Len(fb.Name) > wb Then
-        wb = Len(fb.Name)
-      Endif
-    Next
-
-    ' Agregar la información al resultado
-    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
-  Next
-
-  ' Eliminar la coma adicional al final y cerrar la cadena
-  sb = Left(sb, Len(sb) - 2)
-
   s = "" ' Inicializa la cadena vacía
 
   While Contenido.Available
     s &= "\\hypersetup" & "{" & "\n"
 
-    s &= "pdfauthor={" & sb & "},\n"
+    s &= "pdfauthor={" & Contenido[aFields[5]] & "},\n"
 
     If Not IsNull(Contenido[aFields[2]]) And Len(Contenido[aFields[2]]) > 0 Then
       s &= "\\XMPLangAlt" & Contenido[aFields[2]] & "\n"

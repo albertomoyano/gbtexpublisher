@@ -2635,12 +2635,9 @@
             Alignment = Align.Right
             Text = ("Autor(s)/Editor(s)  ")
           }
-          { !txt05_pdfauthor TextBox
+          { txt05_pdfauthor TextBox
             MoveScaled(30,0,16,4)
-            #Public = True
-            Background = Color.Background
             Expand = True
-            ReadOnly = True
             Placeholder = ("Autor del documento")
           }
           { btnLimpiar Button
