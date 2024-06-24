@@ -2922,25 +2922,28 @@ Public Sub BtnNuevoBib_Click()
   btnAgregarCitationKey.Enabled = True
   ToolPanel1.Index = 0
 
-  Dim Idn As Integer
-  ' txtTMPbiblio.Clear
   txtTMPbiblio.SetFocus()
+  LimpiarCamposBIB()
+  ObtenerNuevoId()
 
-  LimpiarCamposBIB() ' Limpiamos los campos
+End
 
-  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Conn.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
+Public Sub ObtenerNuevoId()
 
-  ' Si no hay ninguna entrada entonces arrancamos desde 0
-  If Contenido["MAX(id)"] = Null Then
+  Dim Idn As Integer
+  Dim MaxId As Variant
+
+  MaxId = Conn.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
+
+  If MaxId["MAX(id)"] = Null Then
     Idn = 0
   Else
-    Idn = CInt(Contenido["MAX(id)"]) + 1
+    Idn = CInt(MaxId["MAX(id)"]) + 1
   Endif
 
   txtID.Text = Idn
-  txtCLAVEbib.Text = "@" & Idn & "-" 'colocamos el prefijo de la clave bib
-  txtKEYWORDS.Text = "," & BaseName & "," 'colocamos el key con el nombre del archivo
+  txtCLAVEbib.Text = "@" & Idn & "-"
+  txtKEYWORDS.Text = "," & BaseName & ","
   Mostrar_ListaBIB()
 
 End

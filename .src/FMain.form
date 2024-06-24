@@ -53,13 +53,16 @@
     }
     { Menu10 Menu
     }
-    { menuABMautores Menu
-      Text = ("ABM autores")
-      Picture = Picture["iconos/document-orange.svg"]
-    }
-    { menuABMrevistas Menu
-      Text = ("ABM revistas")
-      Picture = Picture["iconos/document-orange.svg"]
+    { menuOJS Menu
+      Text = ("OJS")
+      { menuABMautores Menu
+        Text = ("ABM autores")
+        Picture = Picture["iconos/document-orange.svg"]
+      }
+      { menuABMrevistas Menu
+        Text = ("ABM revistas")
+        Picture = Picture["iconos/document-orange.svg"]
+      }
     }
     { Menu3 Menu
     }
