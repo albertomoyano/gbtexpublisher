@@ -2403,14 +2403,13 @@ Public Sub btnMostarConferencia_Click()
 
 End
 
-Public Sub Mostrar_ListaBIB() 'Función que rellena con el title el List View
+Public Sub Mostrar_ListaBIB()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
   Dim Record2BIB As String
   Dim Count2BIB As Integer
   Dim i As Integer
-  ' Dim Comando As String
 
   VListaBIB.Clear()
 
@@ -2900,8 +2899,7 @@ Public Sub BtnEliminarBib_Click()
   Endif
 
   LimpiarCamposBIB() ' Limpiamos los campos
-
-  VListaBIB.Clear
+  VListaBIB.Clear()
   Mostrar_ListaBIB()
 
   BtnEliminarBib.Visible = False
@@ -2922,6 +2920,7 @@ Public Sub BtnNuevoBib_Click()
   btnAgregarCitationKey.Enabled = True
   ToolPanel1.Index = 0
 
+  txtTMPbiblio.Clear 'limpiamos el campo temporal
   txtTMPbiblio.SetFocus()
   LimpiarCamposBIB()
   ObtenerNuevoId()
@@ -2944,7 +2943,6 @@ Public Sub ObtenerNuevoId()
   txtID.Text = Idn
   txtCLAVEbib.Text = "@" & Idn & "-"
   txtKEYWORDS.Text = "," & BaseName & ","
-  Mostrar_ListaBIB()
 
 End
 
@@ -2965,8 +2963,8 @@ Public Sub btnGuardarCambios_Click()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
 
-  Mostrar_ListaBIB()
   LimpiarCamposBIB() ' Limpiamos los campos
+  ' Mostrar_ListaBIB()
 
 End
 
@@ -3013,7 +3011,6 @@ Public Sub btnGuardar_Click()
     Contenido.Update
     Message.Info("Nueva entrada guardada.")
 
-    Mostrar_ListaBIB()
     LimpiarCamposBIB() 'limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
 
@@ -3188,8 +3185,6 @@ End
 
 Public Sub BtnRefrescarBib_Click()'refrescamos la vista
 
-  VListaBIB.Clear
-  Mostrar_ListaBIB()
   BtnNuevoBib.Visible = True
   BtnEliminarBib.Visible = False
   BtnRefrescarBib.Visible = False
@@ -3198,8 +3193,9 @@ Public Sub BtnRefrescarBib_Click()'refrescamos la vista
   btnAgregarCitationKey.Enabled = False
   btnGuardarIGUAL.Visible = False
 
-  'limpiar campos, revisar si tiene sentido hacer esto cuando se refrescan los datos
   LimpiarCamposBIB() ' Limpiamos los campos
+  VListaBIB.Clear
+  Mostrar_ListaBIB()
 
 End
 
