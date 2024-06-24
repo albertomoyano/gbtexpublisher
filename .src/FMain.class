@@ -966,17 +966,9 @@ Public Sub menuAbrir_Click()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  ' Dim Record2BIB As String
-  ' Dim Count2BIB As Integer
-  ' Dim Contenido2 As Result
   Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
-  ' Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
-  ' Record2BIB = Contenido2[0]
-  ' Count2BIB = Record2BIB
-  ' Button1.Text = "(" & Count2BIB & ")"
-  ' txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
   Dim RecordGLO As String
   Dim CountGLO As Integer
@@ -1174,17 +1166,9 @@ Public Sub mnuLast_Click()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  ' Dim Record2BIB As String
-  ' Dim Count2BIB As Integer
-  ' Dim Contenido2 As Result
   Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
-  ' Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
-  ' Record2BIB = Contenido2[0]
-  ' Count2BIB = Record2BIB
-  ' Button1.Text = "(" & Count2BIB & ")"
-  ' txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
   Dim RecordGLO As String
   Dim CountGLO As Integer
@@ -2404,16 +2388,16 @@ End
 
 Public Sub Mostrar_ListaBIB()
 
-  Dim RecordBIB As String
-  Dim CountBIB As Integer
+  ' Dim RecordBIB As String
+  ' Dim CountBIB As Integer
   Dim i As Integer
 
   VListaBIB.Clear()
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
-  RecordBIB = Contenido[0]
-  CountBIB = RecordBIB
-  txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
+  ' Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  ' RecordBIB = Contenido[0]
+  ' CountBIB = RecordBIB
+  ' txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
   Contenido = Conn.Exec("select * from bibtex ORDER BY id DESC")
 
@@ -2952,7 +2936,6 @@ Public Sub btnGuardarCambios_Click()
   Message.Info("Los cambios se guardaron con éxito.")
 
   LimpiarCamposBIB() ' Limpiamos los campos
-  ' Mostrar_ListaBIB()
 
 End
 
@@ -3000,7 +2983,7 @@ Public Sub btnGuardar_Click()
 
     LimpiarCamposBIB() 'limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
-
+    TotalEntradas()'actualizamos el contador de entradas
     btnGuardarCambios.Visible = False
     btnGuardar.Visible = False
     BtnNuevoBib.Visible = True
@@ -5611,5 +5594,17 @@ End
 Public Sub menuABMautores_Click()
 
   Form_ABM_autores.ShowModal
+
+End
+
+Public Sub TotalEntradas()'calculamos las entradas totales
+
+  Dim RecordBIB As String
+  Dim CountBIB As Integer
+
+  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  RecordBIB = Contenido[0]
+  CountBIB = RecordBIB
+  txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
 End
