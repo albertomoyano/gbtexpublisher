@@ -159,7 +159,6 @@ Public Sub Form_Open()
 
   ' comienza bibtex
   BtnEliminarBib.visible = False
-  BtnRefrescarBib.Visible = False
   btnGuardar.Visible = False
   btnGuardarCambios.Visible = False
   Dim editorType As String[] = ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
@@ -967,17 +966,17 @@ Public Sub menuAbrir_Click()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  Dim Record2BIB As String
-  Dim Count2BIB As Integer
-  Dim Contenido2 As Result
+  ' Dim Record2BIB As String
+  ' Dim Count2BIB As Integer
+  ' Dim Contenido2 As Result
   Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
-  Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
-  Record2BIB = Contenido2[0]
-  Count2BIB = Record2BIB
-  Button1.Text = "(" & Count2BIB & ")"
-  txtTOTALbib.Text = "<b>Total " & CountBIB & "</b>"
+  ' Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
+  ' Record2BIB = Contenido2[0]
+  ' Count2BIB = Record2BIB
+  ' Button1.Text = "(" & Count2BIB & ")"
+  ' txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
   Dim RecordGLO As String
   Dim CountGLO As Integer
@@ -1175,17 +1174,17 @@ Public Sub mnuLast_Click()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  Dim Record2BIB As String
-  Dim Count2BIB As Integer
-  Dim Contenido2 As Result
+  ' Dim Record2BIB As String
+  ' Dim Count2BIB As Integer
+  ' Dim Contenido2 As Result
   Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
-  Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
-  Record2BIB = Contenido2[0]
-  Count2BIB = Record2BIB
-  Button1.Text = "(" & Count2BIB & ")"
-  txtTOTALbib.Text = "<b>Total " & CountBIB & "</b>"
+  ' Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
+  ' Record2BIB = Contenido2[0]
+  ' Count2BIB = Record2BIB
+  ' Button1.Text = "(" & Count2BIB & ")"
+  ' txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
   Dim RecordGLO As String
   Dim CountGLO As Integer
@@ -2407,11 +2406,14 @@ Public Sub Mostrar_ListaBIB()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  Dim Record2BIB As String
-  Dim Count2BIB As Integer
   Dim i As Integer
 
   VListaBIB.Clear()
+
+  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  RecordBIB = Contenido[0]
+  CountBIB = RecordBIB
+  txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
   Contenido = Conn.Exec("select * from bibtex ORDER BY id DESC")
 
@@ -2758,18 +2760,6 @@ Public Sub Mostrar_ListaBIB()
     Contenido.MoveNext
   Next
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
-  RecordBIB = Contenido[0]
-  CountBIB = RecordBIB
-
-  Dim Contenido2 As Result
-  Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
-  Record2BIB = Contenido2[0]
-  Count2BIB = Record2BIB
-
-  Button1.Text = "(" & Count2BIB & ")"
-  txtTOTALbib.Text = "<b>Total " & CountBIB & "</b>"
-
 End
 
 Public Function LimpiarCamposBIB()
@@ -2906,7 +2896,6 @@ Public Sub BtnEliminarBib_Click()
   btnGuardarCambios.Visible = False
   btnAgregarCitationKey.Enabled = False
   btnGuardarIGUAL.Visible = False
-  BtnRefrescarBib.Visible = False
 
 End
 
@@ -2914,7 +2903,6 @@ Public Sub BtnNuevoBib_Click()
 
   BtnNuevoBib.Visible = False
   BtnEliminarBib.Visible = False
-  BtnRefrescarBib.Visible = False
   btnGuardar.Visible = True
   btnGuardarCambios.visible = False
   btnAgregarCitationKey.Enabled = True
@@ -2993,7 +2981,6 @@ Public Sub btnGuardar_Click()
     VListaBIB.ScrollY = 0
     ToolPanel1.Index = 1
     btnGuardar.Visible = False
-    BtnRefrescarBib.Visible = True
     btnGuardarIGUAL.Visible = True
     Return ' Salir de la función si el título ya existe
   Endif
@@ -3027,8 +3014,6 @@ End
 Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
 
   txtBOOKTITLE.Text = ""
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -3178,7 +3163,6 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  BtnRefrescarBib.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
   btnGuardarIGUAL.Visible = False
 
 End
@@ -3187,7 +3171,6 @@ Public Sub BtnRefrescarBib_Click()'refrescamos la vista
 
   BtnNuevoBib.Visible = True
   BtnEliminarBib.Visible = False
-  BtnRefrescarBib.Visible = False
   btnGuardar.Visible = False
   btnGuardarCambios.visible = False
   btnAgregarCitationKey.Enabled = False
@@ -3200,9 +3183,6 @@ Public Sub BtnRefrescarBib_Click()'refrescamos la vista
 End
 
 Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
-
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
 
   Dim rowIndex As Integer
 
@@ -3355,8 +3335,6 @@ End
 Public Sub BtnBuscarAuthor_Click()' buscar autor
 
   txtEDITOR.Text = ""
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -3513,8 +3491,6 @@ End
 Public Sub BtnBuscarAuthor2_Click()'buscar editor
 
   txtAUTHOR.Text = ""
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -3832,9 +3808,6 @@ End
 
 Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
 
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
-
   Dim Comando As String
   Dim rowIndex As Integer
 
@@ -3984,14 +3957,15 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
 
-  ' Dim Record2BIB As String
-  ' Dim Count2BIB As Integer
-  ' Dim Contenido2 As Result
-  ' Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
-  ' Record2BIB = Contenido2[0]
-  ' Count2BIB = Record2BIB
-  '
-  ' Button1.Text = "(" & Count2BIB & ")"
+  'obtenemos el número de entradas del archivo en curso
+  Dim Record2BIB As String
+  Dim Count2BIB As Integer
+  Dim Contenido2 As Result
+  Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
+  Record2BIB = Contenido2[0]
+  Count2BIB = Record2BIB
+
+  Button1.Text = "(" & Count2BIB & ")"
 
 End
 
@@ -4564,9 +4538,6 @@ End
 
 Public Sub BtnBuscarClave_Click()
 
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
-
   Dim Comando As String
   Dim rowIndex As Integer
 
@@ -4765,16 +4736,12 @@ Public Sub btnGuardarIGUAL_Click()
       BtnEliminarBib.Visible = False
       btnAgregarCitationKey.Enabled = False
       btnGuardarIGUAL.Visible = False
-      BtnRefrescarBib.Visible = False
     End If
   Endif
 
 End
 
 Public Function mostrarIguales()
-
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -4913,7 +4880,6 @@ Public Function mostrarIguales()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  BtnRefrescarBib.Visible = False ' Mostramos el botón de refresh en el form original para recargar las entradas
   btnGuardarIGUAL.Visible = False
 
 End
@@ -5145,8 +5111,6 @@ End
 Public Sub BtnBuscarBookTitle_Click()
 
   txtTITLE.Text = ""
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  BtnRefrescarBib.Visible = True
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -5296,7 +5260,6 @@ Public Sub BtnBuscarBookTitle_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  BtnRefrescarBib.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
   btnGuardarIGUAL.Visible = False
 
 End
@@ -5635,7 +5598,6 @@ Public Sub BtnBuscarJournal_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  BtnRefrescarBib.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
   btnGuardarIGUAL.Visible = False
 
 End

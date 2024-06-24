@@ -548,12 +548,12 @@
         Picture = Picture["iconos/clave.svg"]
       }
       { lblAlta1 Label
-        MoveScaled(9,0,8.4444,4)
+        MoveScaled(8,0,8.4444,4)
         Alignment = Align.Right
         Text = ("Clave ")
       }
       { txtCLAVEbib TextBox
-        MoveScaled(18,0,13,4)
+        MoveScaled(17,0,9,4)
         NoTabFocus = True
         ToolTip = ("Clave para ser utilizada solo con LaTeX")
         Expand = True
@@ -561,31 +561,30 @@
         Placeholder = ("Clave BIB única")
       }
       { btnGuardarIGUAL Button
-        MoveScaled(31,0,14.4444,4)
+        MoveScaled(27,0,14.4444,4)
         Visible = False
         ToolTip = ("Forzar guardar")
         Text = ("Forzar")
         Picture = Picture["iconos/target_4887265.png"]
       }
       { lblAlta4 Label
-        MoveScaled(47,0,19,4)
+        MoveScaled(42,0,19,4)
         AutoResize = True
         Alignment = Align.Right
         Text = ("    Exportar como  ")
       }
       { txtEXPORTARbib TextBox
-        MoveScaled(66,0,15,4)
+        MoveScaled(61,0,15,4)
         Background = Color.Background
         NoTabFocus = True
         Expand = True
         Alignment = Align.Left
         ReadOnly = True
-        Border = False
       }
       { txtTOTALbib TextLabel
-        MoveScaled(81,0,16,4)
-        Border = Border.Plain
+        MoveScaled(77,0,24.2222,4)
         Alignment = Align.Center
+        Wrap = False
       }
       { Button1 Button
         MoveScaled(99,0,16,4)
