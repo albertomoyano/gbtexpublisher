@@ -200,6 +200,7 @@ Public Sub Form_Open()
   cbLANGUAGEID.Text = cbLANGUAGEID[0].Text
 
   Mostrar_ListaBIB()
+  TotalEntradas()
 
   ' Verifica si el TextBox1 tiene una ruta válida
   If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then

@@ -575,7 +575,6 @@
       }
       { txtEXPORTARbib TextBox
         MoveScaled(61,0,15,4)
-        Background = Color.Background
         NoTabFocus = True
         Expand = True
         Alignment = Align.Left
@@ -583,6 +582,7 @@
       }
       { txtTOTALbib TextLabel
         MoveScaled(77,0,24.2222,4)
+        Border = Border.Etched
         Alignment = Align.Center
         Wrap = False
       }
@@ -2271,26 +2271,25 @@
         Placeholder = ("Clave GLO única")
       }
       { lblAlta3 Label
-        MoveScaled(38,0,21,4)
+        MoveScaled(37,0,21,4)
         AutoResize = True
         Alignment = Align.Right
         Text = ("    Exportar como  ")
       }
       { txtEXPORTARglo TextBox
-        MoveScaled(60,0,16,4)
-        Background = Color.Background
+        MoveScaled(58,0,9,4)
         NoTabFocus = True
         Expand = True
         Alignment = Align.Left
         ReadOnly = True
       }
       { lblTotalesGLO TextLabel
-        MoveScaled(76,0,16,4)
-        Border = Border.Plain
+        MoveScaled(68,0,24.2222,4)
+        Border = Border.Etched
         Alignment = Align.Center
       }
       { btnParcialGLO Button
-        MoveScaled(92,0,16,4)
+        MoveScaled(93,0,16,4)
         Picture = Picture["iconos/face.svg"]
       }
     }
