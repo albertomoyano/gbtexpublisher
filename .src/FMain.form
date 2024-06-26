@@ -522,16 +522,25 @@
         ToolTip = ("Guardar modificaciones")
         Picture = Picture["iconos/guardarComo.svg"]
       }
+      { btnGuardarIGUAL Button
+        MoveScaled(20,0,14.4444,4)
+        ToolTip = ("Forzar guardar")
+        Text = ("Forzar")
+        Picture = Picture["iconos/target_4887265.png"]
+      }
       { txtID2 TextBox
-        MoveScaled(24,0,6,4)
+        MoveScaled(44,0,6,4)
         Visible = False
         Background = Color.Background
         NoTabFocus = True
         Alignment = Align.Right
         ReadOnly = True
       }
-      { Spring4 Spring
-        MoveScaled(38,0,8,4)
+      { txtTOTALbib TextLabel
+        MoveScaled(50,0,24.2222,4)
+        Expand = True
+        Alignment = Align.Center
+        Wrap = False
       }
     }
     { HBox18 HBox
@@ -560,13 +569,6 @@
         Alignment = Align.Left
         Placeholder = ("Clave BIB única")
       }
-      { btnGuardarIGUAL Button
-        MoveScaled(27,0,14.4444,4)
-        Visible = False
-        ToolTip = ("Forzar guardar")
-        Text = ("Forzar")
-        Picture = Picture["iconos/target_4887265.png"]
-      }
       { lblAlta4 Label
         MoveScaled(42,0,19,4)
         AutoResize = True
@@ -579,12 +581,6 @@
         Expand = True
         Alignment = Align.Left
         ReadOnly = True
-      }
-      { txtTOTALbib TextLabel
-        MoveScaled(77,0,24.2222,4)
-        Border = Border.Etched
-        Alignment = Align.Center
-        Wrap = False
       }
       { Button1 Button
         MoveScaled(99,0,16,4)
@@ -660,15 +656,16 @@
             Expand = True
             Placeholder = ("Autor principal")
           }
-          { lblNAMEADDON2 Label
-            MoveScaled(42,0,12,3.5556)
+          { lblNAMEADDON Label
+            MoveScaled(43,0,12,3.5556)
             Alignment = Align.Right
-            Text = ("ShortAuthor ")
+            Text = ("NameAddOn ")
           }
-          { txtShortAuthor TextBox
+          { txtNAMEADDON TextBox
             MoveScaled(55,0,16,4)
+            Expand = True
             PopupMenu = "Menu1"
-            Placeholder = ("Sigla o apodo")
+            Placeholder = ("Sigla, es conveniente hacer un enroque con el campo author")
           }
         }
         { HBox22 HBox
@@ -685,15 +682,15 @@
             PopupMenu = "Menu1"
             Placeholder = ("Autor del libro")
           }
-          { lblNAMEADDON Label
-            MoveScaled(43,0,12,3.5556)
+          { lblNAMEADDON2 Label
+            MoveScaled(39,0,12,3.5556)
             Alignment = Align.Right
-            Text = ("NameAddOn ")
+            Text = ("ShortAuthor ")
           }
-          { txtNAMEADDON TextBox
-            MoveScaled(55,0,16,4)
+          { txtShortAuthor TextBox
+            MoveScaled(52,0,16,4)
             PopupMenu = "Menu1"
-            Placeholder = ("Sigla o apodo")
+            Placeholder = ("Apodo")
           }
         }
         { HBox24 HBox
@@ -2241,8 +2238,10 @@
         Alignment = Align.Right
         ReadOnly = True
       }
-      { Spring2 Spring
-        MoveScaled(65,0,14,4)
+      { lblTotalesGLO TextLabel
+        MoveScaled(30,0,24.2222,4)
+        Expand = True
+        Alignment = Align.Center
       }
     }
     { HBox2 HBox
@@ -2282,11 +2281,6 @@
         Expand = True
         Alignment = Align.Left
         ReadOnly = True
-      }
-      { lblTotalesGLO TextLabel
-        MoveScaled(68,0,24.2222,4)
-        Border = Border.Etched
-        Alignment = Align.Center
       }
       { btnParcialGLO Button
         MoveScaled(93,0,16,4)

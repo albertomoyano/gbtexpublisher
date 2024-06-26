@@ -65,10 +65,10 @@ Public Sub Form_Open()
   ' cargamos los datos del combobox
   cbTYPEentradaGlo.Add("sigla")
   cbTYPEentradaGlo.Add("glosario")
-  BtnEliminarGlo.visible = False
-  BtnRefrescarGlo.Visible = False
-  btnGuardarGlo.Visible = False
-  btnGuardarCambiosGlo.Visible = False
+  BtnEliminarGlo.Enabled = False
+  BtnRefrescarGlo.Enabled = False
+  btnGuardarGlo.Enabled = False
+  btnGuardarCambiosGlo.Enabled = False
   Mostrar_ListaGLO
 
   ' comienza metadatos
@@ -158,9 +158,9 @@ Public Sub Form_Open()
   txt89_binding.Add("Abrochado")
 
   ' comienza bibtex
-  BtnEliminarBib.visible = False
-  btnGuardar.Visible = False
-  btnGuardarCambios.Visible = False
+  BtnEliminarBib.Enabled = False
+  btnGuardar.Enabled = False
+  btnGuardarCambios.Enabled = False
   Dim editorType As String[] = ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
   Dim pubState As String[] = ["", "inpreparation", "submitted", "forthcoming", "inpress", "prepublished"]
   Dim thesis As String[] = ["", "@thesis (seleccionar)", "tifthesis", "mathesis", "phdthesis", "candthesis", "ingenieriathesis", "magisterthesis", "gradothesis", "licenciaturathesis", "especialthesis", "posgradothesis", " ", "@manual (seleccionar)", " ", "@patent (seleccionar)", " ", "@report (seleccionar)"]
@@ -830,6 +830,7 @@ Public Sub menuAbrir_Click()
   BaseName = File.BaseName(TextBox1.Text)
   ' rutaBIB = BaseName & ".bib"
 
+  btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
   menuEPUB.Enabled = True
@@ -842,7 +843,7 @@ Public Sub menuAbrir_Click()
   menuComprimir.Enabled = True
   adminGIT.Enabled = True
   menuCFG.Enabled = True
-  menuTOOLS.Visible = True
+  menuTOOLS.Enabled = True
   menuODt_DOCX.Enabled = True
   Menu76.Enabled = True
   MenuApp.Enabled = True
@@ -874,9 +875,9 @@ Public Sub menuAbrir_Click()
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
   Contenido = Conn.Exec(Comando)
   If Contenido.Count > 0 Then
-    BtnNuevoMeta.Visible = False
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = True
+    BtnNuevoMeta.Enabled = False
+    btnGuardarMeta.Enabled = False
+    btnGuardarCambiosMeta.Enabled = True
     txtId.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
@@ -951,9 +952,9 @@ Public Sub menuAbrir_Click()
     txt89_binding.Text = Contenido!binding_89
 
   Else
-    BtnNuevoMeta.Visible = True
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = False
+    BtnNuevoMeta.Enabled = True
+    btnGuardarMeta.Enabled = False
+    btnGuardarCambiosMeta.Enabled = False
   Endif
   txtContactCountry.MaxLength = 1500
 
@@ -983,7 +984,7 @@ Public Sub menuAbrir_Click()
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
-  lblTotalesGLO.Text = "<b>Total " & CountGLO & "</b>"
+  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
 
 End
 
@@ -1029,6 +1030,7 @@ Public Sub mnuLast_Click()
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
   BaseName = File.BaseName(TextBox1.Text)
 
+  btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuRespaldoBDD.Enabled = True
   menuXML.Enabled = True
@@ -1074,9 +1076,9 @@ Public Sub mnuLast_Click()
   Contenido = Conn.Exec(Comando)
 
   If Contenido.Count > 0 Then
-    BtnNuevoMeta.Visible = False
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = True
+    BtnNuevoMeta.Enabled = False
+    btnGuardarMeta.Enabled = False
+    btnGuardarCambiosMeta.Enabled = True
     txtId.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
@@ -1151,9 +1153,9 @@ Public Sub mnuLast_Click()
     txt89_binding.Text = Contenido!binding_89
 
   Else
-    BtnNuevoMeta.Visible = True
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = False
+    BtnNuevoMeta.Enabled = True
+    btnGuardarMeta.Enabled = False
+    btnGuardarCambiosMeta.Enabled = False
   Endif
 
   txtContactCountry.MaxLength = 1500
@@ -1183,7 +1185,7 @@ Public Sub mnuLast_Click()
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
-  lblTotalesGLO.Text = "<b>Total " & CountGLO & "</b>"
+  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
 
 End
 
@@ -1563,7 +1565,7 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
-  lblTotalesGLO.Text = "<b>Total " & CountGLO & "</b>"
+  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
 
 End
 
@@ -1586,11 +1588,11 @@ End
 Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
 
   Mostrar_ListaGLO
-  BtnNuevoGlo.Visible = True
-  BtnEliminarGlo.Visible = False
-  BtnRefrescarGlo.Visible = False
-  btnGuardarGlo.Visible = False
-  btnGuardarCambiosGlo.visible = False
+  BtnNuevoGlo.Enabled = True
+  BtnEliminarGlo.Enabled = False
+  BtnRefrescarGlo.Enabled = False
+  btnGuardarGlo.Enabled = False
+  btnGuardarCambiosGlo.Enabled = False
   btnAgregarGloKey.Enabled = False
 
   LimpiarCamposGLO
@@ -1775,11 +1777,11 @@ End
 
 Public Sub BtnNuevoGlo_Click()
 
-  BtnNuevoGlo.Visible = False
-  BtnEliminarGlo.Visible = False
-  BtnRefrescarGlo.Visible = False
-  btnGuardarGlo.Visible = True
-  btnGuardarCambiosGlo.visible = False
+  BtnNuevoGlo.Enabled = False
+  BtnEliminarGlo.Enabled = False
+  BtnRefrescarGlo.Enabled = False
+  btnGuardarGlo.Enabled = True
+  btnGuardarCambiosGlo.Enabled = False
   btnAgregarGloKey.Enabled = True
 
   Dim Idn As Integer
@@ -1822,8 +1824,8 @@ Public Sub BtnEliminarGlo_Click()
   ' VListaGLO.Clear
   Mostrar_ListaGLO
 
-  BtnEliminarGlo.Visible = False
-  btnGuardarCambiosGlo.Visible = False
+  BtnEliminarGlo.Enabled = False
+  btnGuardarCambiosGlo.Enabled = False
   btnAgregarGloKey.Enabled = False
 
 End
@@ -1874,20 +1876,20 @@ Public Sub btnGuardarGlo_Click()
   Mostrar_ListaGLO ' Refrescamos la lista de entradas
   LimpiarCamposGLO ' Limpiamos los campos
 
-  btnGuardarCambiosGlo.Visible = False
-  btnGuardarGlo.Visible = False
-  BtnNuevoGlo.Visible = True
-  BtnEliminarGlo.Visible = False
+  btnGuardarCambiosGlo.Enabled = False
+  btnGuardarGlo.Enabled = False
+  BtnNuevoGlo.Enabled = True
+  BtnEliminarGlo.Enabled = False
   btnAgregarGloKey.Enabled = False
 
 End
 
 Public Sub btnGuardarCambiosGlo_Click()
 
-  BtnNuevoGlo.Visible = True
-  btnGuardarGlo.Visible = False
-  btnGuardarCambiosGlo.visible = False
-  BtnEliminarGlo.Visible = False
+  BtnNuevoGlo.Enabled = True
+  btnGuardarGlo.Enabled = False
+  btnGuardarCambiosGlo.Enabled = False
+  BtnEliminarGlo.Enabled = False
   btnAgregarGloKey.Enabled = False
 
   'eliminamos blancos de inicio y final de cadena en los textbox
@@ -1905,10 +1907,10 @@ End
 
 Public Sub VGridGLO_RowClick(Row As Integer)
 
-  btnGuardarCambiosGlo.visible = True
-  BtnEliminarGlo.Visible = True
+  btnGuardarCambiosGlo.Enabled = True
+  BtnEliminarGlo.Enabled = True
   btnAgregarGloKey.Enabled = True
-  btnGuardarGlo.Visible = False
+  btnGuardarGlo.Enabled = False
 
   txtID.Text = VGridGLO[Row, 0].Text
   txtCLAVEglo.Text = VGridGLO[Row, 1].Text
@@ -1926,7 +1928,7 @@ End
 
 Public Sub btnBuscarNombreGLO_Click()
 
-  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -1975,7 +1977,7 @@ End
 
 Public Sub btnBuscarTextoGLO_Click()
 
-  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -2024,7 +2026,7 @@ End
 
 Public Sub btnBuscarClaveGLO_Click()
 
-  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -2194,9 +2196,9 @@ End
 
 Public Sub BtnNuevoMeta_Click()
 
-  BtnNuevoMeta.Visible = True
-  btnGuardarMeta.Visible = False
-  btnGuardarCambiosMeta.Visible = False
+  BtnNuevoMeta.Enabled = True
+  btnGuardarMeta.Enabled = False
+  btnGuardarCambiosMeta.Enabled = False
 
   Dim Idn As Integer
 
@@ -2212,9 +2214,9 @@ Public Sub BtnNuevoMeta_Click()
   txtId.Text = Idn
   txtnombreArchivo.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
 
-  BtnNuevoMeta.Visible = False
-  btnGuardarMeta.Visible = True
-  btnGuardarCambiosMeta.Visible = False
+  BtnNuevoMeta.Enabled = False
+  btnGuardarMeta.Enabled = True
+  btnGuardarCambiosMeta.Enabled = False
 
 End
 
@@ -2228,9 +2230,9 @@ Public Sub btnGuardarMeta_Click()
 
   Contenido.Update
 
-  BtnNuevoMeta.Visible = False
-  btnGuardarMeta.Visible = False
-  btnGuardarCambiosMeta.Visible = True
+  BtnNuevoMeta.Enabled = False
+  btnGuardarMeta.Enabled = False
+  btnGuardarCambiosMeta.Enabled = True
 
   Message.Info("Los cambios se guardaron con éxito.")
 
@@ -2389,16 +2391,9 @@ End
 
 Public Sub Mostrar_ListaBIB()
 
-  ' Dim RecordBIB As String
-  ' Dim CountBIB As Integer
   Dim i As Integer
 
   VListaBIB.Clear()
-
-  ' Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
-  ' RecordBIB = Contenido[0]
-  ' CountBIB = RecordBIB
-  ' txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
 
   Contenido = Conn.Exec("select * from bibtex ORDER BY id DESC")
 
@@ -2877,19 +2872,19 @@ Public Sub BtnEliminarBib_Click()
   VListaBIB.Clear()
   Mostrar_ListaBIB()
 
-  BtnEliminarBib.Visible = False
-  btnGuardarCambios.Visible = False
+  BtnEliminarBib.Enabled = False
+  btnGuardarCambios.Enabled = False
   btnAgregarCitationKey.Enabled = False
-  btnGuardarIGUAL.Visible = False
+  btnGuardarIGUAL.Enabled = False
 
 End
 
 Public Sub BtnNuevoBib_Click()
 
-  BtnNuevoBib.Visible = False
-  BtnEliminarBib.Visible = False
-  btnGuardar.Visible = True
-  btnGuardarCambios.visible = False
+  BtnNuevoBib.Enabled = False
+  BtnEliminarBib.Enabled = False
+  btnGuardar.Enabled = True
+  btnGuardarCambios.Enabled = False
   btnAgregarCitationKey.Enabled = True
   ToolPanel1.Index = 0
 
@@ -2921,11 +2916,11 @@ End
 
 Public Sub btnGuardarCambios_Click()
 
-  BtnNuevoBib.Visible = True
-  btnGuardar.Visible = False
-  btnGuardarCambios.visible = False
-  btnGuardarIGUAL.Visible = False
-  BtnEliminarBib.Visible = False
+  BtnNuevoBib.Enabled = True
+  btnGuardar.Enabled = False
+  btnGuardarCambios.Enabled = False
+  btnGuardarIGUAL.Enabled = False
+  BtnEliminarBib.Enabled = False
   btnAgregarCitationKey.Enabled = False
 
   'eliminamos blancos de inicio y final de cadena en los textbox
@@ -2964,8 +2959,8 @@ Public Sub btnGuardar_Click()
     mostrarIguales()
     VListaBIB.ScrollY = 0
     ToolPanel1.Index = 1
-    btnGuardar.Visible = False
-    btnGuardarIGUAL.Visible = True
+    btnGuardar.Enabled = False
+    btnGuardarIGUAL.Enabled = True
     Return ' Salir de la función si el título ya existe
   Endif
 
@@ -2985,12 +2980,12 @@ Public Sub btnGuardar_Click()
     LimpiarCamposBIB() 'limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
     TotalEntradas()'actualizamos el contador de entradas
-    btnGuardarCambios.Visible = False
-    btnGuardar.Visible = False
-    BtnNuevoBib.Visible = True
-    BtnEliminarBib.Visible = False
+    btnGuardarCambios.Enabled = False
+    btnGuardar.Enabled = False
+    BtnNuevoBib.Enabled = True
+    BtnEliminarBib.Enabled = False
     btnAgregarCitationKey.Enabled = False
-    btnGuardarIGUAL.Visible = False
+    btnGuardarIGUAL.Enabled = False
   Endif
 
 End
@@ -3147,18 +3142,18 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Visible = False
+  btnGuardarIGUAL.Enabled = False
 
 End
 
 Public Sub BtnRefrescarBib_Click()'refrescamos la vista
 
-  BtnNuevoBib.Visible = True
-  BtnEliminarBib.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarCambios.visible = False
+  BtnNuevoBib.Enabled = True
+  BtnEliminarBib.Enabled = False
+  btnGuardar.Enabled = False
+  btnGuardarCambios.Enabled = False
   btnAgregarCitationKey.Enabled = False
-  btnGuardarIGUAL.Visible = False
+  btnGuardarIGUAL.Enabled = False
 
   LimpiarCamposBIB() ' Limpiamos los campos
   VListaBIB.Clear
@@ -4714,12 +4709,12 @@ Public Sub btnGuardarIGUAL_Click()
       Mostrar_ListaBIB ' Refrescamos la lista de entradas
       LimpiarCamposBIB() ' Limpiamos los campos
 
-      btnGuardarCambios.Visible = False
-      btnGuardar.Visible = False
-      BtnNuevoBib.Visible = True
-      BtnEliminarBib.Visible = False
+      btnGuardarCambios.Enabled = False
+      btnGuardar.Enabled = False
+      BtnNuevoBib.Enabled = True
+      BtnEliminarBib.Enabled = False
       btnAgregarCitationKey.Enabled = False
-      btnGuardarIGUAL.Visible = False
+      btnGuardarIGUAL.Enabled = False
     End If
   Endif
 
@@ -4864,16 +4859,16 @@ Public Function mostrarIguales()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Visible = False
+  btnGuardarIGUAL.Enabled = False
 
 End
 
 Public Sub VListaBIB_RowClick(Row As Integer)
 
-  btnGuardarCambios.visible = True
-  BtnEliminarBib.Visible = True
+  btnGuardarCambios.Enabled = True
+  BtnEliminarBib.Enabled = True
   btnAgregarCitationKey.Enabled = True
-  btnGuardar.Visible = False
+  btnGuardar.Enabled = False
 
   txtID.Text = VListaBIB[Row, 0].Text
   cbTYPEentrada.Text = VListaBIB[Row, 1].Text
@@ -5244,7 +5239,7 @@ Public Sub BtnBuscarBookTitle_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Visible = False
+  btnGuardarIGUAL.Enabled = False
 
 End
 
@@ -5582,7 +5577,7 @@ Public Sub BtnBuscarJournal_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Visible = False
+  btnGuardarIGUAL.Enabled = False
 
 End
 
@@ -5606,6 +5601,6 @@ Public Sub TotalEntradas()'calculamos las entradas totales
   Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
-  txtTOTALbib.Text = "<b>Total de entradas " & CountBIB & "</b>"
+  txtTOTALbib.Text = "<b>Total de referencias en la base de datos: " & CountBIB & "</b>"
 
 End

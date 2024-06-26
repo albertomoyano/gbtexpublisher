@@ -1,8 +1,8 @@
 # Gambas Project File 3.0
 Title=gbTeXpublisher
-Startup=Form_ConnServ
+Startup=FMain
 Icon=iconos/icono-gbtex.svg
-Version=0.1.126
+Version=0.1.127
 Component=gb.image
 Component=gb.qt5
 Component=gb.form
