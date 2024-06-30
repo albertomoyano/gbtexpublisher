@@ -1,25 +1,25 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,105.6,82.2)
+  MoveScaled(0,0,105.5556,82.2222)
   Text = ("Control de bibliografía duplicada")
   Arrangement = Arrange.Vertical
   Padding = 4
   { HBox16 HBox
-    MoveScaled(0,1.7,105,3.6)
+    MoveScaled(0,1.6667,105,3.5556)
     { BtnEliminarBib Button
-      MoveScaled(0,0,3.6,3.6)
+      MoveScaled(0,0,3.5556,3.5556)
       NoTabFocus = True
       ToolTip = ("Borrar entrada")
       Picture = Picture["iconos/borrar.svg"]
     }
     { BtnRefrescarBib Button
-      MoveScaled(4,0,3.6,3.6)
+      MoveScaled(4,0,3.5556,3.5556)
       ToolTip = ("Refrescar listado de la base de datos")
       Picture = Picture["iconos/refrescar.svg"]
     }
     { txtID TextBox
-      MoveScaled(8,0,6,3.6)
+      MoveScaled(8,0,6,3.5556)
       Visible = False
       Background = Color.Background
       NoTabFocus = True
@@ -27,10 +27,10 @@
       ReadOnly = True
     }
     { Spring1 Spring
-      MoveScaled(56,0,17,3.6)
+      MoveScaled(56,0,17,3.5556)
     }
     { btnCerrar Button
-      MoveScaled(84,0,14.4,3.6)
+      MoveScaled(84,0,14.4444,3.5556)
       NoTabFocus = True
       ToolTip = ("Cerrar la aplicación")
       Text = ("Salir")
@@ -45,7 +45,7 @@
   { HBox76 HBox
     MoveScaled(0,20,91,4)
     { Label48 Label
-      MoveScaled(0,0,16,3.6)
+      MoveScaled(0,0,16,3.5556)
       Alignment = Align.Right
       Text = ("Autor ")
     }
@@ -58,7 +58,7 @@
   { HBox6 HBox
     MoveScaled(0,24,91,4)
     { Label5 Label
-      MoveScaled(0,0,16,3.6)
+      MoveScaled(0,0,16,3.5556)
       Alignment = Align.Right
       Text = ("Filtro ")
     }
@@ -95,7 +95,7 @@
       Expand = True
     }
     { Label46 Label
-      MoveScaled(39,0,12,3.6)
+      MoveScaled(39,0,12,3.5556)
       #Translate = False
       NoTabFocus = True
       Alignment = Align.Right
@@ -148,7 +148,7 @@
   { HBox5 HBox
     MoveScaled(0,51,91,4)
     { Label6 Label
-      MoveScaled(0,0,16,3.6)
+      MoveScaled(0,0,16,3.5556)
       Alignment = Align.Right
       Text = ("Autor ")
     }
@@ -166,7 +166,7 @@
       Picture = Picture["iconos/guardar.svg"]
     }
     { Label3 Label
-      MoveScaled(7,0,12,3.6)
+      MoveScaled(7,0,12,3.5556)
       Alignment = Align.Right
       Text = ("Filtro ")
     }
@@ -203,7 +203,7 @@
       Expand = True
     }
     { Label2 Label
-      MoveScaled(39,0,12,3.6)
+      MoveScaled(39,0,12,3.5556)
       #Translate = False
       NoTabFocus = True
       Alignment = Align.Right

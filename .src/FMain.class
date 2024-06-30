@@ -304,6 +304,9 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
   Wait 0.2
 
+  TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
+  Wait 0.2
+
   'ejecutamos en conteo del archivo LaTeX
   TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n" & "clear" & "\n")
   Wait 0.2
@@ -406,75 +409,72 @@ End
 'compilo el PDF del artículo
 Public Sub menuPDFarticulo_Click()
 
-  Dim filePath As String
-  Dim newFile As String
-  Dim rutaFija As String
-  Dim newLog As String
-  Dim metaTemp As String
+  ' Dim filePath As String
+  ' Dim newFile As String
+  ' Dim rutaFija As String
+  ' Dim newLog As String
+  ' Dim metaTemp As String
+  '
+  ' filePath = File.Dir(TextBox1.Text) &/ "pdf"
+  ' newFile = "pdf-" & BaseName & ".tex"
+  ' rutaFija = File.Dir(TextBox1.Text) &/ "files"
+  ' newLog = "gbTeX-" & BaseName & ".log"
+  ' metaTemp = "gbTeXmetaTMP-" & BaseName & ".tex"
 
-  filePath = File.Dir(TextBox1.Text) &/ "pdf"
-  newFile = "pdf-" & BaseName & ".tex"
-  rutaFija = File.Dir(TextBox1.Text) &/ "files"
-  newLog = "gbTeX-" & BaseName & ".log"
-  metaTemp = "gbTeXmetaTMP-" & BaseName & ".tex"
-
-  Borrar_Aux
-  Wait 0.2
-
-  ' metadatos para construcción de maketitle
-  ' no mover de esta posición
-  Mod_Exportar.ExportToMetaTMP(TextBox1.Text)
-  Wait 0.2
-
-  TerminalView1.Input("cat " & rutaFILES & "/general-art-pdf.tex" & " " & rutaFILES &/ metaTemp & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  ' borramos el archivo temporal de metadatos del artículo
-  TerminalView1.Input("rm -rf " & rutaFILES &/ metaTemp & "\n")
-
-  ' borramos el pdf antiguo en caso de existir
-  TerminalView1.Input("rm -rf pdf" & "\n")
-  Wait 0.2
-
-  ' exportamos los archivos bib, glo y meta
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
-  Wait 0.2
-
-  TerminalView1.Input("latexmk -f --shell-escape --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-  Wait 0.2
-
-  'ejecutamos en conteo del archivo LaTeX
-  TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n" & "clear" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf " & newFile & "\n")
-  Wait 0.2
-
-  If filePath = "" Then
-    Return
-  Else
-    TerminalView1.Input("mkdir pdf" & "\n")
-  Endif
-
-  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf" & "\n")
-
-  'copiamos /files el archivo .log
-  TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n" & "clear" & "\n")
-
-  'generamos una vista con texlogsieve
-  TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n" & "clear" & "\n")
-
-  'borramos los archivos auxiliares del directorio
-  TerminalView1.SetFocus()
-  Borrar_Aux
+  ' Borrar_Aux
+  ' Wait 0.2
+  '
+  ' ' metadatos para construcción de maketitle
+  ' ' no mover de esta posición
+  ' Mod_Exportar.ExportToMetaTMP(TextBox1.Text)
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("cat " & rutaFILES & "/general-art-pdf.tex" & " " & rutaFILES &/ metaTemp & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' ' borramos el archivo temporal de metadatos del artículo
+  ' TerminalView1.Input("rm -rf " & rutaFILES &/ metaTemp & "\n")
+  '
+  ' ' borramos el pdf antiguo en caso de existir
+  ' TerminalView1.Input("rm -rf pdf" & "\n")
+  ' Wait 0.2
+  '
+  ' ' exportamos los archivos bib, glo y meta
+  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
+  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
+  ' Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("latexmk -f --shell-escape --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' 'ejecutamos en conteo del archivo LaTeX
+  ' TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n" & "clear" & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("rm -rf " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' If filePath = "" Then
+  '   Return
+  ' Else
+  '   TerminalView1.Input("mkdir pdf" & "\n")
+  ' Endif
+  '
+  ' TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf" & "\n")
+  '
+  ' 'copiamos /files el archivo .log
+  ' TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n" & "clear" & "\n")
+  '
+  ' 'generamos una vista con texlogsieve
+  ' TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n" & "clear" & "\n")
+  '
+  ' 'borramos los archivos auxiliares del directorio
+  ' TerminalView1.SetFocus()
+  ' Borrar_Aux
 
 End
 
@@ -1511,8 +1511,8 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
   'diseñamos el tableview
   VGridGLO.Columns.Count = 11
   VGridGLO.Header = True
-  VGridGLO.Columns[0].Title = "id"
-  VGridGLO.Columns[0].Width = 0
+  VGridGLO.Columns[0].Title = "ID"
+  VGridGLO.Columns[0].Width = 60
   VGridGLO.Columns[1].Title = "Clave"
   VGridGLO.Columns[1].Width = 200
   VGridGLO.Columns[2].Title = "Tipo"
@@ -5602,5 +5602,59 @@ Public Sub TotalEntradas()'calculamos las entradas totales
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
   txtTOTALbib.Text = "<b>Total de referencias en la base de datos: " & CountBIB & "</b>"
+
+End
+
+Public Sub btnBuscarFiltroGlosario_Click()
+
+  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "SELECT * FROM glosarios WHERE archivo LIKE '%" & txtARCHIVO.Text & "%'"
+
+  If txtARCHIVO.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = Conn.Exec(Comando)
+
+  ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
+  VGridGLO.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el VGridGLO
+  VGridGLO.Columns.Count = 11
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    VGridGLO[rowIndex, 0].Text = Busqueda!id
+    VGridGLO[rowIndex, 1].Text = Busqueda!key
+    VGridGLO[rowIndex, 2].Text = Busqueda!type
+    VGridGLO[rowIndex, 3].Text = Busqueda!archivo
+    VGridGLO[rowIndex, 4].Text = Busqueda!name
+    VGridGLO[rowIndex, 5].Text = Busqueda!description
+    VGridGLO[rowIndex, 6].Text = Busqueda!first
+    VGridGLO[rowIndex, 7].Text = Busqueda!text
+    VGridGLO[rowIndex, 8].Text = Busqueda!plural
+    VGridGLO[rowIndex, 9].Text = Busqueda!firstplural
+    VGridGLO[rowIndex, 10].Text = Busqueda!sort
+
+    ' Incrementa rowIndex para la siguiente fila
+    rowIndex += 1
+
+    ' Avanza al siguiente resultado
+    Busqueda.MoveNext
+  Wend
 
 End

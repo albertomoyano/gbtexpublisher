@@ -2182,11 +2182,11 @@
       }
     }
     { HBox8 Panel
-      MoveScaled(3,10,52,12)
+      MoveScaled(3,10,52,20)
       NoTabFocus = True
       Arrangement = Arrange.Horizontal
       { HBox6 Panel
-        MoveScaled(3,0,40,11)
+        MoveScaled(3,0,40,19)
         NoTabFocus = True
         Expand = True
         Arrangement = Arrange.Vertical
@@ -2202,7 +2202,7 @@
       }
     }
     { HBox16 HBox
-      MoveScaled(0,22,105,4)
+      MoveScaled(1,31,105,4)
       { BtnNuevoGlo Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
@@ -2245,7 +2245,7 @@
       }
     }
     { HBox2 HBox
-      MoveScaled(0,27,110,4)
+      MoveScaled(1,36,110,4)
       { btnBuscarClaveGLO Button
         MoveScaled(0,0,4,4)
         Picture = Picture["iconos/search.svg"]
@@ -2288,7 +2288,7 @@
       }
     }
     { HBox7 HBox
-      MoveScaled(0,31,103,4)
+      MoveScaled(1,40,103,4)
       { Label11 Label
         MoveScaled(0,0,16,4)
         Font = Font["Bold"]
@@ -2307,19 +2307,23 @@
         Alignment = Align.Right
         Text = "Filtro "
       }
-      { btnAgregarKey Button
+      { btnBuscarFiltroGlosario Button
         MoveScaled(51,0,4,4)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { btnAgregarKey Button
+        MoveScaled(60,0,4,4)
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }
       { txtARCHIVO TextBox
-        MoveScaled(56,0,13,4)
+        MoveScaled(65,0,13,4)
         NoTabFocus = True
         Expand = True
       }
     }
     { ScrollView9 ScrollView
-      MoveScaled(1,38,107,42)
+      MoveScaled(1,45,107,42)
       Expand = True
       Arrangement = Arrange.Vertical
       Border = False
