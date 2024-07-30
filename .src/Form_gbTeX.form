@@ -1,0 +1,45 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,810,630)
+  #Scaled = False
+  Expand = True
+  Text = ("Acerca de gbTeXpublisher")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox2 HBox
+    Move(0,0,450,72)
+    AutoResize = True
+    Padding = 4
+    { PictureBox1 PictureBox
+      Move(0,0,72,72)
+      Picture = Picture.Load("iconos/icono-gbtex.png")
+      Stretch = True
+      Alignment = Align.Center
+      Mode = PictureBox.Fill
+    }
+  }
+  { TextArea1 TextArea
+    Move(20,80,780,300)
+    Background = Color.Background
+    Expand = True
+    Text = ("gbTeXpublisher es una aplicación que permite gestionar los procesos de producción editorial basados en el lenguaje LaTeX.\n\nEntre sus principales características observamos:\n\n- Modelo de trabajo basado en un solo origen\n- Manejo de referencias bibliográficas\n- Integración con GitHub y GitLab\n- Capacidad de personalización de las salidas\n\nObservaciones:\nEsta aplicación no tiene soportte para GTK, elegí programar utilizando las librerías Qt por varias razones que considero esenciales para el desarrollo de aplicaciones eficientes y modernas. Qt ofrece una serie de ventajas significativas en términos de funcionalidad y facilidad de uso, lo cual se traduce en una mejor experiencia tanto para el desarrollador como para el usuario final.")
+    Alignment = Align.Left
+    ReadOnly = True
+    Wrap = True
+    ScrollBar = Scroll.Vertical
+  }
+  { HBox1 HBox
+    Move(20,500,567,40)
+    Padding = 1
+    { Spring1 Spring
+      Move(36,0,36,40)
+    }
+    { btnCerrar Button
+      Move(360,0,160,40)
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+}

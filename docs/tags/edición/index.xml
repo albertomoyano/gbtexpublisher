@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Edición on Alberto Moyano</title>
+    <link>https://albertomoyano.github.io/blog-gbtexpublisher/tags/edici%C3%B3n/</link>
+    <description>Recent content in Edición on Alberto Moyano</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 22 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://albertomoyano.github.io/blog-gbtexpublisher/tags/edici%C3%B3n/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>URL largas en los libros</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-15-urllargas/</link>
+      <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-15-urllargas/</guid>
+      <description>&lt;p&gt;Esta situación la vengo revisando desde hace mucho tiempo, pero aún hoy, no sé que solución es la más satisfactoria.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Trabajo editorial en el aparato crítico</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/ibidem/</link>
+      <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/ibidem/</guid>
+      <description>&lt;p&gt;Este listado de abreviaturas es de uso general, pero las aclaraciones al final se limitan al estándar desarrollado por &lt;a href=&#34;https://www.ctan.org/pkg/biblatex-philosophy&#34;&gt;Iván Valbusa&lt;/a&gt;, él toma como base el &lt;em&gt;default&lt;/em&gt; de BibLaTeX; que si bien tiene muchas similitudes con otros estándares (APA, Chicago, Harvard, etc.), también tiene sutiles diferencias.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Markdown y los académicos</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-09-markdown/</link>
+      <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-09-markdown/</guid>
+      <description>En un curso al que asistí hace ya un tiempo, una compañera preguntó que tan dificil era migrar de word a los lenguajes de marcas ligeros, en ese momento hablábamos de markdown y de asciidoc, al principio la pregunta me pareció absurda, pero rápidamente me ubique en el lugar del otro y entendí lo hondo que ha calado word y el modelo WYSIWYG &amp;ndash;al menos en el ámbito académico&amp;ndash; en los entornos en los que me relaciono.</description>
+    </item>
+    
+    <item>
+      <title>Énfasis o itálicas (I)</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/</link>
+      <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/</guid>
+      <description>&lt;p&gt;Doy comienzo a una serie de artículos en los que voy a comentar características interesantes surgidas al calor de la producción editorial trabajando con LaTeX (ya sean de corrección, edición, maquetado o impresión). Si bien todos los libros en su proceso de producción tienen lugares comunes (léase estandarizados) en lo referente al modelo de edición, siempre hay espacio para situaciones especiales, la idea es compartirlas. Como existe la posibilidad de que algunos libros tengan varias situaciones para comentar y, considerando no hacer estos textos muy extensos (ya que la idea es que se conviertan en &lt;em&gt;tips&lt;/em&gt; de producción), voy a numerar los artículos con mayúsculas en romanos, si más adelante apareciera un artículo donde el número en romano se acompaña de una letra, esto obedece a que ese libro ya fue comentado en otra oportunidad, para esos casos voy a mantener relaciones cruzadas entre los diferentes artículos.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Opciones tipográficas</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/condicional-minion/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/condicional-minion/</guid>
+      <description>&lt;p&gt;Este artículo pretende desarrollar un ejercicio con las &lt;em&gt;features&lt;/em&gt; que poseen las tipografías &lt;a href=&#34;https://es.wikipedia.org/wiki/OpenType&#34;&gt;OpenType&lt;/a&gt; y mostrar:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>La bibliografía en libros de VVAA</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/vvaa/</link>
+      <pubDate>Sat, 08 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/vvaa/</guid>
+      <description>&lt;p&gt;Como consecuencia de una pregunta que se dio en un &lt;a href=&#34;https://www.linkedin.com/groups/12515598/&#34;&gt;seminario que cursé en la UBA&lt;/a&gt; en el segundo cuatrimestre de 2021 y, para ampliar mi mirada sobre el tema, decidí hacer una pequeña investigación que involucró a varios autores, correctores profesionales y editores con bastante experiencia, hago explícito que no lo hice con ninguna pretensión de investigación académica ni nada parecido, de ahí también que haya trabajado con un universo pequeño.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Referencias audiovisuales</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/peliculas/</link>
+      <pubDate>Thu, 30 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/peliculas/</guid>
+      <description>&lt;p&gt;Ya llevo varios libros editados que involucran películas (creo que son más de 12) y en todo este tiempo he estado lidiando con parches y diciéndome que en algún momento voy a tener que parametrizar una salida para las referencias de películas.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PreText y el uso de XML</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/2020-12-30-005/</link>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/2020-12-30-005/</guid>
+      <description>&lt;p&gt;Desde hace más de un año que vengo siguiendo el proyecto &lt;a href=&#34;https://pretextbook.org&#34;&gt;PreText&lt;/a&gt;, he realizado algunos ejercicios llegando hasta la edición «casi» completa de un libro de mediana complejidad y observo que algunas cosas han mejorado mucho. El lenguaje de trabajo es básicamente &lt;a href=&#34;https://es.wikipedia.org/wiki/Extensible_Markup_Language&#34;&gt;XML&lt;/a&gt;, con salida a xHTML, ePub o PDF.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

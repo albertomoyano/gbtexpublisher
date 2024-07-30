@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Libros on Alberto Moyano</title>
+    <link>https://albertomoyano.github.io/blog-gbtexpublisher/categories/libros/</link>
+    <description>Recent content in Libros on Alberto Moyano</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 22 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://albertomoyano.github.io/blog-gbtexpublisher/categories/libros/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>URL largas en los libros</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-15-urllargas/</link>
+      <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-15-urllargas/</guid>
+      <description>&lt;p&gt;Esta situación la vengo revisando desde hace mucho tiempo, pero aún hoy, no sé que solución es la más satisfactoria.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Trabajo editorial en el aparato crítico</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/ibidem/</link>
+      <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/ibidem/</guid>
+      <description>&lt;p&gt;Este listado de abreviaturas es de uso general, pero las aclaraciones al final se limitan al estándar desarrollado por &lt;a href=&#34;https://www.ctan.org/pkg/biblatex-philosophy&#34;&gt;Iván Valbusa&lt;/a&gt;, él toma como base el &lt;em&gt;default&lt;/em&gt; de BibLaTeX; que si bien tiene muchas similitudes con otros estándares (APA, Chicago, Harvard, etc.), también tiene sutiles diferencias.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Énfasis o itálicas (I)</title>
+      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/</link>
+      <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/</guid>
+      <description>&lt;p&gt;Doy comienzo a una serie de artículos en los que voy a comentar características interesantes surgidas al calor de la producción editorial trabajando con LaTeX (ya sean de corrección, edición, maquetado o impresión). Si bien todos los libros en su proceso de producción tienen lugares comunes (léase estandarizados) en lo referente al modelo de edición, siempre hay espacio para situaciones especiales, la idea es compartirlas. Como existe la posibilidad de que algunos libros tengan varias situaciones para comentar y, considerando no hacer estos textos muy extensos (ya que la idea es que se conviertan en &lt;em&gt;tips&lt;/em&gt; de producción), voy a numerar los artículos con mayúsculas en romanos, si más adelante apareciera un artículo donde el número en romano se acompaña de una letra, esto obedece a que ese libro ya fue comentado en otra oportunidad, para esos casos voy a mantener relaciones cruzadas entre los diferentes artículos.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

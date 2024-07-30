@@ -1,0 +1,88 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,106,21)
+  Text = ("Exportar referencias bibliográficas")
+  Arrangement = Arrange.Vertical
+  AutoResize = True
+  Margin = True
+  Padding = 4
+  { HBox1 HBox
+    MoveScaled(0,1,105.5556,4)
+    { TextLabel1 TextLabel
+      MoveScaled(7,0,12,4)
+      Padding = 4
+      Text = ("Destino")
+      Alignment = Align.Right
+    }
+    { !txtdestino TextBox
+      MoveScaled(24,0,16,3.5556)
+      #Public = True
+      Foreground = Color.DarkBlue
+      Expand = True
+      ReadOnly = True
+    }
+    { btnDestino Button
+      MoveScaled(53,0,4,4)
+      Picture = Picture["iconos/document-orange.svg"]
+    }
+  }
+  { HBox2 HBox
+    MoveScaled(0,5,105.5556,4)
+    { Label1 Label
+      MoveScaled(25,0,52,3.5556)
+      Font = Font["Bold"]
+      Expand = True
+      Alignment = Align.Center
+      Text = ("Asegurese de escribir correctamente el nombre del filtro de exportación")
+    }
+  }
+  { HBox3 HBox
+    MoveScaled(-5,9,105.5556,4)
+    { TextLabel4 TextLabel
+      MoveScaled(7,0,12,4)
+      Padding = 4
+      Text = ("Filtro")
+      Alignment = Align.Right
+    }
+    { txtFiltro TextBox
+      MoveScaled(24,0,16,4)
+      Expand = True
+    }
+    { TextLabel2 TextLabel
+      MoveScaled(41,0,16,4)
+      Padding = 4
+      Text = ("  Exportar como")
+      Alignment = Align.Right
+    }
+    { txtNombre TextBox
+      MoveScaled(57,0,22,4)
+      Placeholder = ("Nombre sin la extensión")
+    }
+  }
+  { HBox4 HBox
+    MoveScaled(0,13,105.5556,4)
+    { Label2 Label
+      MoveScaled(25,0,52,4)
+      Font = Font["Bold,Italic"]
+      Expand = True
+      Alignment = Align.Center
+    }
+  }
+  { HBox14 HBox
+    MoveScaled(0,17,105.5556,4)
+    { Spring1 Spring
+      MoveScaled(7,0,10,3.5556)
+    }
+    { btnCancelar Button
+      MoveScaled(28,0,17.7778,4)
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+    { btnExportarBIB Button
+      MoveScaled(49,0,17.7778,4)
+      Text = ("Exportar")
+      Picture = Picture["iconos/exportar.svg"]
+    }
+  }
+}

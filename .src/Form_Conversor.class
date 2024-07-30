@@ -1,0 +1,187 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+  txtDESTINO.SetFocus()
+
+End
+
+Public Sub btnBuscar_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.rtf", ("Archivos rtf"), "*.docx", ("Archivos word"), "*", ("Todos los archivos")]
+  Dialog.AutoExt = True
+  Dialog.Path = User.Home
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    txtORIGEN.Text = Dialog.Path
+    btnCONVERTIR.Enabled = True
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+Public Sub Form_Close()
+
+  Me.Close()
+
+End
+
+Public Sub btnSalir_Click()
+
+  Me.Close()
+
+End
+
+Public Sub btnListo_Click()
+
+  Me.Close()
+
+End
+
+Public Sub btnCONVERTIR_Click()
+
+  Dim escapedPath As String
+  Dim destino As String
+  Dim destinoRTF As String
+  Dim rutaORIGINALES As String
+  Dim rutaMEDIA As String
+
+  txtORIGEN.Text = Dialog.Path
+  rutaORIGINALES = File.Dir(Dialog.Path) &/ "originales"
+  rutaMEDIA = File.Dir(Dialog.Path) &/ "media"
+  destino = File.Dir(Dialog.Path) &/ txtDESTINO.Text & ".tex"
+  destinoRTF = File.Dir(Dialog.Path) &/ txtDESTINO.Text & "@.rtf"
+
+  If Not Exist(rutaORIGINALES) Then
+    Mkdir rutaORIGINALES
+  End If
+
+  If Not Exist(rutaMEDIA) Then
+    Mkdir rutaMEDIA
+  End If
+
+  ' Escapa las rutas de origen y destino
+  escapedPath = EscapePath(Dialog.Path)
+  Dim escapedOriginalesPath As String
+  escapedOriginalesPath = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
+
+  Dim zprocess As Process
+  If RadioButton3.Value = True And RadioButton1.Value = False And RadioButton2.Value = False Then
+    If Trim(txtDESTINO.Text) = "" Then
+      Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+    Else
+      zprocess = Shell "iconv -f ISO-8859-1 -t UTF-8 " & escapedPath & " > " & destinoRTF
+      Wait 0.5
+      zprocess = Shell "pandoc -s " & destinoRTF & " -o " & destino & " --from=rtf --to=latex --reference-links=false --wrap=none --extract-media=" & rutaMEDIA
+      Wait 0.5
+      ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+      zprocess = Shell "rm " & destinoRTF
+      Wait 0.5
+      zprocess = Shell "mv " & escapedPath & " " & escapedOriginalesPath
+      Wait 0.5
+      lblMENSAJE.Text = "Procesando el archivo, sea paciente"
+
+      Do While zprocess.state = Process.Running
+        Wait 0.1
+      Loop
+      If zprocess.State = Process.Stopped Then
+        lblMENSAJE.Text = "El proceso ha terminado, ahora puede cerrar el formulario"
+        btnCONVERTIR.Enabled = False
+        btnListo.Visible = True
+        btnListo.Default = True
+        btnSalir.Visible = False
+      Endif
+    End If
+  End If
+
+  If RadioButton1.Value = True And RadioButton2.Value = False And RadioButton3.Value = False Then
+    If Trim(txtDESTINO.Text) = "" Then
+      Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+    Else
+      Shell "pandoc --reference-links=false --wrap=none --extract-media=" & File.Dir(Dialog.Path) & " -t latex -f docx " & escapedPath & " -o " & destino
+      Wait 0.3
+      ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+      Shell "mv " & escapedPath & " " & escapedOriginalesPath
+      Wait 0.2
+      btnListo.Visible = True
+      btnListo.Default = True
+      btnSalir.Visible = False
+    Endif
+  Endif
+
+  Dim hprocess As Process
+  If RadioButton2.Value = True And RadioButton1.Value = False And RadioButton3.Value = False Then
+    hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text
+    lblMENSAJE.Text = "Procesando el archivo, sea paciente"
+
+    Do While hprocess.state = Process.Running
+      Wait 0.1
+    Loop
+    If hprocess.State = Process.Stopped Then
+      lblMENSAJE.Text = "El proceso ha terminado, ahora puede cerrar el formulario"
+      btnCONVERTIR.Enabled = False
+      btnListo.Visible = True
+      btnListo.Default = True
+      btnSalir.Visible = False
+    Endif
+
+    Shell "mv " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp/word/media" & " " & File.Dir(Dialog.Path)
+    Wait 0.2
+    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".xml"
+    Wait 0.1
+    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".csv"
+    Wait 0.1
+    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".d2t.log"
+    Wait 0.1
+    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".debug"
+    Wait 0.1
+    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp"
+    Wait 0.1
+    Shell "mv " & File.Dir(Dialog.Path) &/ File.Name(Dialog.Path) & " " & rutaORIGINALES
+    Wait 0.2
+  Endif
+
+End
+
+Private Function EscapePath(path As String) As String
+
+  Return "'" & Replace(path, "'", "'\\''") & "'"
+
+End
+
+Public Sub txtDESTINO_KeyRelease()
+  ' Obtener el texto actual del TextBox
+
+  Dim texto As String
+
+  texto = txtDESTINO.Text
+
+  ' Lista de caracteres permitidos
+  Dim caracteresPermitidos As String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+  ' Filtrar el texto para eliminar caracteres no permitidos
+  Dim textoFiltrado As String
+  For i As Integer = 1 To Len(texto)
+    Dim tecla As String
+    tecla = Mid(texto, i, 1)
+    If InStr(caracteresPermitidos, tecla) > 0 Then
+      textoFiltrado = textoFiltrado & tecla
+    End If
+  Next
+
+  ' Limitar la longitud del texto a 11 caracteres
+  If Len(textoFiltrado) > 11 Then
+    ' Mostrar un mensaje de aviso
+    Message.Warning("El nombre de salida del archivo no puede contener más de 11 caracteres.", "Entendido")
+    ' Eliminar los caracteres adicionales
+    txtDESTINO.Text = Left(textoFiltrado, 11)
+  Else
+    ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
+    txtDESTINO.Text = UCase(textoFiltrado)
+  End If
+
+End

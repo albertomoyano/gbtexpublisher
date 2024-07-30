@@ -1,0 +1,63 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,68,29)
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox1 HBox
+    MoveScaled(28,2,33,4)
+    Padding = 2
+    { Label1 Label
+      MoveScaled(0,0,16,4)
+      Alignment = Align.BottomNormal
+      Text = (" Agregar a la lista")
+    }
+  }
+  { HBox2 HBox
+    MoveScaled(19,6,42,4)
+    Padding = 2
+    { txtAgregarLista TextBox
+      MoveScaled(4,0,21,3.6)
+      Expand = True
+    }
+  }
+  { HBox3 HBox
+    MoveScaled(19,10,42,4)
+    Padding = 2
+    { Label2 Label
+      MoveScaled(0,0,11,4)
+      Alignment = Align.BottomNormal
+      Text = (" Descripción")
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(33,15,28,8)
+    Expand = True
+    Arrangement = Arrange.Fill
+    Padding = 2
+    Border = Border.Plain
+    { txtAgregarDescripcion TextArea
+      MoveScaled(0,0,22,7)
+      Expand = True
+      Wrap = True
+    }
+  }
+  { HBox5 HBox
+    MoveScaled(0,24,61,4)
+    Padding = 2
+    { Spring1 Spring
+      MoveScaled(1,0,15,3.6)
+    }
+    { btnAgregar Button
+      MoveScaled(18,0,16,3.6)
+      Text = ("Listo")
+      Picture = Picture["iconos/comp.svg"]
+    }
+    { btnCancelar Button
+      MoveScaled(36,0,16,3.6)
+      Text = ("Cancelar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+}

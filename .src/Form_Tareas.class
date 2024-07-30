@@ -1,0 +1,63 @@
+' Gambas class file
+
+Private Conn As Connection
+Private Contenido As Result
+
+Public Sub btnAgregar_Click()
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  If txtAgregarLista.Text = "" Then
+    Message.Warning("No puede agregar un elemento vacío a la lista")
+    Return
+  Endif
+
+  'Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = Conn.Exec("SELECT MAX(id) FROM tareas LIMIT 1")
+
+  Dim Idn As Integer
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  Contenido = Conn.Create("tareas")
+  Contenido!id = Idn
+  Contenido!titulo = txtAgregarLista.Text
+
+  If txtAgregarDescripcion.Text <> "" Then
+    Contenido!contenido = txtAgregarDescripcion.Text
+  Endif
+
+  Contenido!completado = False
+  Contenido.Update
+  FMain.Mostrar_Lista_Tareas
+
+  Conn.Close
+  Me.Close
+
+End
+
+Public Sub btnCancelar_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_KeyRelease()
+
+  If Key.Code = Key.Esc Then
+    Me.Close
+  Endif
+
+End
+
+Public Sub txtAgregarLista_KeyRelease()
+
+  If Key.Code = 16777220 Or Key.code = 16777221 Then 'No me funciona de otra manera que no sea usando el código
+    btnAgregar_Click
+  Endif
+
+End

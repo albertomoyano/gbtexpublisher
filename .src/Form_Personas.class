@@ -1,0 +1,35 @@
+' Gambas class file
+
+Public Sub btnCerrarPERSONAS_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  cmbPERSONAS.Add("")
+  cmbPERSONAS.Add("Autor")
+  cmbPERSONAS.Add("Editor")
+  cmbPERSONAS.Add("Compilador")
+  cmbPERSONAS.Add("Coordinador")
+  cmbPERSONAS.Add("Contribuyente")
+  cmbPERSONAS.Add("Autor de correspondencia")
+  cmbPERSONAS.Add("Revisor")
+  cmbPERSONAS.Add("Patrocinador")
+  cmbPERSONAS.Add("Traductor")
+  cmbPERSONAS.Add("Financiador")
+  cmbPERSONAS.Add("Autor grupal")
+  cmbPERSONAS.Add("Editor invitado")
+  cmbPERSONAS.Add("Bibliotecario")
+  cmbPERSONAS.Add("Gestor de datos")
+  cmbPERSONAS.Add("Organizador")
+  cmbPERSONAS.Add("Supervisor")
+
+End
+
+Public Sub btnAutores1_Click()
+
+  Form_Autores.ShowModal()
+
+End

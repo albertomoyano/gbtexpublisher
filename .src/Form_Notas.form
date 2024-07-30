@@ -1,0 +1,146 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,950,640)
+  #Scaled = False
+  Text = ("Apuntes")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox1 HBox
+    Move(9,9,927,36)
+    { tbNuevo Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar entrada")
+      Picture = Picture["iconos/+pestana.svg"]
+    }
+    { tbBorrar Button
+      Move(36,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Eliminar entrada")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { btnGuardar Button
+      Move(72,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar entrada")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarMod Button
+      Move(108,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar cambios")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { !btnRefresh Button
+      Move(144,0,36,36)
+      #Public = True
+      Visible = False
+      NoTabFocus = True
+      ToolTip = ("Refrescar datos")
+      Picture = Picture["iconos/refrescar.svg"]
+    }
+    { BtnExportarDOCX Button
+      Move(180,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Exportar la nota como archivo de texto plano")
+      Picture = Picture["iconos/+nuevo.svg"]
+    }
+    { BtnExportarPDF Button
+      Move(216,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Exportar la nota como archivo de texto plano")
+      Picture = Picture["iconos/acroread.svg"]
+    }
+    { txtBuscar TextBox
+      Move(252,0,290,40)
+    }
+    { BtnBuscar Button
+      Move(590,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Buscar en toda la base de datos")
+      Picture = Picture["iconos/search.svg"]
+    }
+    { Spring1 Spring
+      Move(640,0,36,40)
+    }
+    { btnCerrar ToolButton
+      Move(700,0,160,40)
+      NoTabFocus = True
+      ToolTip = ("Cerrar la ventana")
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
+      Border = True
+    }
+  }
+  { HBox2 HBox
+    Move(0,45,765,9)
+  }
+  { HBox8 HBox
+    Move(18,72,765,36)
+    { !txId TextBox
+      Move(45,0,63,40)
+      #Public = True
+      Visible = False
+      NoTabFocus = True
+      Alignment = Align.Center
+      ReadOnly = True
+    }
+    { !txFecha TextBox
+      Move(117,0,126,40)
+      #Public = True
+      Visible = False
+      NoTabFocus = True
+      Alignment = Align.Center
+      ReadOnly = True
+    }
+    { Label7 Label
+      Move(387,0,63,40)
+      NoTabFocus = True
+      AutoResize = True
+      Alignment = Align.Right
+      Text = ("Asunto  ")
+    }
+    { !txAsunto TextBox
+      Move(450,0,63,40)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox3 HBox
+    Move(0,117,765,8)
+  }
+  { HBox4 HBox
+    Move(18,135,765,207)
+    { VLista TableView
+      Move(0,0,153,153)
+      Font = Font["-1"]
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Horizontal
+      ScrollBar = Scroll.Vertical
+      Resizable = False
+    }
+  }
+  { HBox5 HBox
+    Move(0,351,765,8)
+  }
+  { Panel1 Panel
+    Move(360,414,333,180)
+    Expand = True
+    Arrangement = Arrange.Fill
+    Border = Border.Plain
+    { !txContenido TextArea
+      Move(0,0,162,63)
+      #Public = True
+      Font = Font["Monospace"]
+      NoTabFocus = True
+      Expand = True
+      Wrap = True
+      ScrollBar = Scroll.Vertical
+    }
+  }
+}

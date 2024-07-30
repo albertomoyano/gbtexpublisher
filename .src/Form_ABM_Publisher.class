@@ -1,0 +1,263 @@
+' Gambas class file
+
+Private Conn As Connection
+Private Contenido As Result
+Private Busqueda As Result
+Private FilaSeleccionada As Integer
+
+Public Sub btnCerrarColeccion_Click()
+
+  Conn.Close
+  Me.Close()
+
+End
+
+Public Sub Form_Open()
+
+  btnGuardarPublisher.Visible = False
+  btnGuardarCambiosPublisher.Visible = False
+  BtnRefrescarPublisher.Visible = False
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.conectar()
+
+  Mostrar_Lista()
+
+End
+
+Public Sub Mostrar_Lista() 'Función que rellena el GridView
+
+  Dim Record As String
+  Dim Count As Integer
+  Dim i As Integer
+
+  GridPublisher.Clear()
+
+  Contenido = Conn.Exec("select * from publisher ORDER BY id DESC")
+
+  'diseñamos el tableview
+  GridPublisher.Columns.Count = 4
+  GridPublisher.Header = True
+  GridPublisher.Columns[0].Title = "id"
+  GridPublisher.Columns[0].Width = 0
+  GridPublisher.Columns[1].Title = "Publisher"
+  GridPublisher.Columns[1].Width = 250
+  GridPublisher.Columns[2].Title = "Journal"
+  GridPublisher.Columns[2].Width = 250
+  GridPublisher.Columns[3].Title = "Location"
+  GridPublisher.Columns[3].Width = 410
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  GridPublisher.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    GridPublisher[i, 0].Text = Contenido!id
+    GridPublisher[i, 1].Text = Contenido!publisher
+    GridPublisher[i, 2].Text = Contenido!journal
+    GridPublisher[i, 3].Text = Contenido!location
+    Contenido.MoveNext
+  Next
+
+  Contenido = Conn.Exec("SELECT COUNT(*) FROM publisher")
+
+  Record = Contenido[0]
+  Count = Record
+
+End
+
+Public Sub BtnNuevoPublisher_Click()
+
+  ' SELECT MAX(id) FROM clases LIMIT 1 --> Nos devuelve el total de IDs en la tabla
+
+  BtnNuevoPublisher.Visible = False
+  btnGuardarPublisher.Visible = True
+  btnGuardarCambiosPublisher.visible = False
+
+  Dim Idn As Integer
+
+  LimpiarCampos  'Limpiamos todos los campos
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = Conn.Exec("SELECT MAX(id) FROM publisher LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtID.Text = Idn
+  Mostrar_Lista
+  txtPublisher.SetFocus()
+
+End
+
+Public Function LimpiarCampos()
+
+  'Limpiamos los campos
+  txtID.Text = ""
+  txtPublisher.Text = ""
+  txtJournal.Text = ""
+  txtLocation.Text = ""
+
+End
+
+Public Sub btnGuardarPublisher_Click()
+
+  ' no revisamos que existan coincidencias, ya que una editorial
+  ' puede tener diferentes docmicilios
+  Contenido = Conn.Create("publisher")
+
+  guardarCampos
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  Mostrar_Lista ' Refrescamos la lista de entradas
+  LimpiarCampos ' Limpiamos los campos
+
+  btnGuardarCambiosPublisher.Visible = False
+  btnGuardarPublisher.Visible = False
+  BtnNuevoPublisher.Visible = True
+
+End
+
+Public Function eliminarBlancos()
+
+  EliminarEspaciosAlInicioYFinal(txtPublisher)
+  EliminarEspaciosAlInicioYFinal(txtJournal)
+  EliminarEspaciosAlInicioYFinal(txtLocation)
+
+End
+
+Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
+
+  Dim texto As String
+
+  texto = textbox.Text
+  texto = Trim$(texto)
+  textbox.Text = texto
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txtID.Text
+  Contenido!publisher = txtPublisher.Text
+  Contenido!journal = txtJournal.Text
+  Contenido!location = txtLocation.Text
+
+End
+
+Public Sub GridPublisher_RowClick(Row As Integer)
+
+  BtnNuevoPublisher.Visible = False
+  btnGuardarCambiosPublisher.visible = True
+  btnGuardarPublisher.Visible = False
+
+  txtID.Text = GridPublisher[Row, 0].Text
+  txtPublisher.Text = GridPublisher[Row, 1].Text
+  txtJournal.Text = GridPublisher[Row, 2].Text
+  txtLocation.Text = GridPublisher[Row, 3].Text
+
+  FilaSeleccionada = Row
+
+End
+
+Public Sub btnGuardarCambiosPublisher_Click()
+
+  BtnNuevoPublisher.Visible = True
+  btnGuardarPublisher.Visible = False
+  btnGuardarCambiosPublisher.visible = False
+
+  'eliminamos blancos de inicio y final de cadena en los textbox
+  eliminarBlancos
+
+  Contenido = Conn.Edit("publisher", "id=" & txtID.Text)
+  guardarCampos
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  Mostrar_Lista
+  LimpiarCampos 'limpiar campos
+
+End
+
+Public Sub btnSeleccion_Click()
+
+  Dim publisherSeleccionada As String = GridPublisher[FilaSeleccionada, 1].Text
+  Dim journalSeleccionada As String = GridPublisher[FilaSeleccionada, 2].Text
+  Dim locationSeleccionada As String = GridPublisher[FilaSeleccionada, 3].Text
+
+  ' Verificar si hay una fila seleccionada.
+  If FilaSeleccionada >= 0 Then
+    FMain.txtPUBLISHER.Text = publisherSeleccionada
+    FMain.txtJOURNALTITLE.Text = journalSeleccionada
+    FMain.txtLOCATION.Text = locationSeleccionada
+    ' Cierra el formulario actual.
+    Conn.Close
+    Me.Close()
+  Else
+    Message.Warning("Debe seleccionar una editorial o revista.")
+  Endif
+
+End
+
+Public Sub BtnRefrescarPublisher_Click()
+
+  Mostrar_Lista
+  BtnNuevoPublisher.Visible = True
+  BtnRefrescarPublisher.Visible = False
+  btnGuardarPublisher.Visible = False
+  btnGuardarCambiosPublisher.visible = False
+
+  LimpiarCampos
+
+End
+
+Public Sub btnBuscarPublisher_Click()
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "SELECT * FROM publisher WHERE publisher LIKE '%" & txtPublisher.Text & "%'"
+
+  If txtPublisher.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = Conn.Exec(Comando)
+
+  ' Limpia el GridView antes de mostrar los resultados de la búsqueda
+  GridPublisher.Clear()
+
+  ' Configura las columnas
+  GridPublisher.Columns.Count = 4
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Añade una nueva fila al GridView
+    GridPublisher.Rows.Insert(1)
+
+    ' Llena las celdas de la nueva fila con los datos del resultado
+    GridPublisher[rowIndex, 0].Text = Busqueda!id
+    GridPublisher[rowIndex, 1].Text = Busqueda!publisher
+    GridPublisher[rowIndex, 2].Text = Busqueda!journal
+    GridPublisher[rowIndex, 3].Text = Busqueda!location
+    Busqueda.MoveNext
+
+    ' Incrementa el índice de fila
+    rowIndex = rowIndex + 1
+  Wend
+
+  If rowIndex = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+  Else
+    BtnRefrescarPublisher.Visible = True ' Mostramos el botón de refresh en el formulario original para recargar las entradas
+  Endif
+
+End

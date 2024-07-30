@@ -1,0 +1,270 @@
+' Gambas class file
+
+Private Conn As Connection
+Private Contenido As Result
+Private Busqueda As Result
+
+Public Sub Form_Open()
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
+
+  ' me conceto a la segunda base de datos
+  Conn = Mod_Conn.Conectar2()
+
+  Mostrar_Lista()
+
+End
+
+Public Sub Mostrar_Lista()
+
+  Dim Record As String
+  Dim Count As Integer
+  Dim i As Integer
+
+  VLista.Clear()
+
+  Contenido = Conn.Exec("select * from apuntes ORDER BY id DESC")
+
+  'diseñamos el tableview
+  VLista.Columns.Count = 4
+  VLista.Header = True
+  VLista.Columns[0].Title = "id"
+  VLista.Columns[0].Width = 0
+  VLista.Columns[1].Title = "Fecha"
+  VLista.Columns[1].Width = 100
+  VLista.Columns[2].Title = "Asunto"
+  VLista.Columns[2].Width = 800
+  VLista.Columns[3].Title = ""
+  ' VLista.Columns[3].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  VLista.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    VLista[i, 0].Text = Contenido!id
+    VLista[i, 1].Text = Contenido!fecha
+    VLista[i, 2].Text = Contenido!asunto
+    VLista[i, 3].Text = Contenido!contenido
+
+    Contenido.MoveNext
+  Next
+
+  Contenido = Conn.Exec("SELECT COUNT(*) FROM apuntes")
+
+  Record = Contenido[0]
+  Count = Record
+
+End
+
+Public Sub btnCerrar_Click()
+
+  Conn.Close
+  Me.Close()
+
+End
+
+Public Sub btnGuardarMod_Click()
+
+  tbNuevo.Visible = True
+  btnGuardar.Visible = False
+  btnGuardarMod.visible = False
+  tbBorrar.Visible = False
+  BtnExportarDOCX.Visible = False
+
+  Contenido = Conn.Edit("apuntes", "id=" & txId.Text)
+  guardarCampos
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  Mostrar_Lista
+  txtBuscar.Clear
+  LimpiarCampos 'limpiar campos
+
+End
+
+Public Sub tbNuevo_Click()
+
+  Dim Idn As Integer
+  Dim HOY As Date
+
+  HOY = Date
+
+  tbNuevo.Visible = False
+  tbBorrar.Visible = False
+  btnRefresh.Visible = False
+  btnGuardar.Visible = True
+  btnGuardarMod.visible = False
+
+  LimpiarCampos  'Limpiamos todos los campos
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = Conn.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txId.Text = Idn
+  txFecha.Text = (Format(HOY, "dd/mm/yyyy"))
+  txAsunto.SetFocus
+
+  Mostrar_Lista
+
+End
+
+Public Sub btnGuardar_Click()
+
+  Contenido = Conn.Create("apuntes")
+
+  guardarCampos
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  Mostrar_Lista ' Refrescamos la lista de entradas
+  LimpiarCampos ' Limpiamos los campos
+
+  btnGuardarMod.Visible = False
+  btnGuardar.Visible = False
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+
+End
+
+Public Sub tbBorrar_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txId.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = Conn.Exec("delete from apuntes where id=" & txId.Text)
+  Endif
+
+  LimpiarCampos  'Limpiamos los campos
+
+  VLista.Clear
+  Mostrar_Lista
+
+  tbBorrar.Visible = False
+  btnGuardarMod.Visible = False
+  tbNuevo.Visible = True
+  BtnExportarDOCX.Visible = False
+
+End
+
+Public Sub BtnExportarDOCX_Click()
+
+  If txId.Text = "" Then
+    Message.Warning("Debe elegir una entrada.")
+    Return
+  Endif
+
+  If Not Exist("/usr/bin/pandoc") Then
+    Message.Warning("Debe tener instalado el programa <b>pandoc</b> para realizar esta acción.")
+    Return
+  Endif
+
+  Mod_Exportar.ExportarDOCX
+
+End
+
+Public Sub btnRefresh_Click()
+
+  VLista.Clear
+  Mostrar_Lista
+  txtBuscar.Clear
+  btnRefresh.Visible = False
+
+End
+
+Public Sub VLista_RowClick(Row As Integer)
+
+  btnGuardarMod.visible = True
+  tbBorrar.Visible = True
+  BtnExportarDOCX.Visible = True
+
+  txId.Text = VLista[Row, 0].Text
+  txFecha.Text = VLista[Row, 1].Text
+  txAsunto.Text = VLista[Row, 2].Text
+  txContenido.Text = VLista[Row, 3].Text
+
+End
+
+Public Function LimpiarCampos()
+
+  'Limpiamos los campos
+  txId.Text = ""
+  txFecha.Text = ""
+  txAsunto.Text = ""
+  txContenido.Text = ""
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txId.Text
+  Contenido!fecha = txFecha.Text
+  Contenido!asunto = txAsunto.Text
+  Contenido!contenido = txContenido.Text
+
+End
+
+Public Sub BtnBuscar_Click()
+
+  ' Mostramos el botón de refresh en el form original para recargar las entradas
+  btnRefresh.Visible = True
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "SELECT * FROM apuntes WHERE asunto LIKE '%" & txtBuscar.Text & "%' OR contenido LIKE '%" & txtBuscar.Text & "%'"
+
+  If txtBuscar.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = Conn.Exec(Comando)
+
+  ' Limpia el Grid antes de mostrar los resultados de la búsqueda
+  VLista.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el VGridGLO
+  VLista.Columns.Count = 4
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    VLista[rowIndex, 0].Text = Busqueda!id
+    VLista[rowIndex, 1].Text = Busqueda!fecha
+    VLista[rowIndex, 2].Text = Busqueda!asunto
+    VLista[rowIndex, 3].Text = Busqueda!contenido
+
+    ' Incrementa el valor de rowIndex para la siguiente fila
+    rowIndex = rowIndex + 1
+
+    Busqueda.MoveNext
+  Wend
+
+End

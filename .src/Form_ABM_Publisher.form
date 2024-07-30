@@ -1,0 +1,134 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,950,400)
+  #Scaled = False
+  Text = ("Alta - Baja - Modificación de editoriales")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox16 HBox
+    Move(0,9,711,36)
+    { BtnNuevoPublisher Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar una nueva referencia")
+      Picture = Picture["iconos/+pestana.svg"]
+    }
+    { BtnRefrescarPublisher Button
+      Move(36,0,36,36)
+      ToolTip = ("Refrescar listado de la base de datos")
+      Picture = Picture["iconos/refrescar.svg"]
+    }
+    { btnGuardarPublisher Button
+      Move(90,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarCambiosPublisher Button
+      Move(126,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { txtID TextBox
+      Move(162,0,90,36)
+      Visible = False
+      Background = Color.Background
+      NoTabFocus = True
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Spring1 Spring
+      Move(360,0,126,36)
+    }
+    { btnCerrarColeccion Button
+      Move(513,0,144,36)
+      NoTabFocus = True
+      ToolTip = ("Cerrar la aplicación")
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+  { HBox6 Panel
+    Move(0,50,477,207)
+    NoTabFocus = True
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { GridPublisher TableView
+      Move(135,18,153,90)
+      Font = Font["-1"]
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Horizontal
+      ScrollBar = Scroll.Vertical
+      AutoResize = False
+      Resizable = False
+    }
+  }
+  { HBox3 Panel
+    Move(0,250,711,108)
+    NoTabFocus = True
+    Arrangement = Arrange.Vertical
+    { HBox2 HBox
+      Move(0,0,558,36)
+      { lblAlta2 Label
+        Move(0,0,108,36)
+        Alignment = Align.Right
+        Text = ("Publisher  ")
+      }
+      { btnBuscarPublisher Button
+        Move(130,0,36,36)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { txtPublisher TextBox
+        Move(240,0,234,36)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
+      }
+    }
+    { HBox7 HBox
+      Move(0,36,558,36)
+      { lblKEYWORDS1 Label
+        Move(0,0,108,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Journal "
+      }
+      { txtJournal TextBox
+        Move(240,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox4 HBox
+      Move(0,72,558,36)
+      { lblKEYWORDS2 Label
+        Move(0,0,108,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Location "
+      }
+      { txtLocation TextBox
+        Move(117,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+  }
+  { HBox1 HBox
+    Move(0,360,630,36)
+    { Spring2 Spring
+      Move(270,0,126,36)
+    }
+    { btnSeleccion Button
+      Move(414,0,144,36)
+      NoTabFocus = True
+      Text = ("Seleccionar")
+      Picture = Picture["iconos/emblem-default.svg"]
+    }
+  }
+}

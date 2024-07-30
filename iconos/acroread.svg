@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg8" inkscape:version="0.92.2 5c3e80d, 2017-08-06" sodipodi:docname="application-pdf.svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px"
+	 viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<title  id="title7895">Antu icon Theme</title>
+<sodipodi:namedview  id="base" units="px" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:document-units="px" inkscape:current-layer="g2446" inkscape:window-width="1366" inkscape:window-height="697" inkscape:window-x="0" inkscape:window-y="0" objecttolerance="10" gridtolerance="10" guidetolerance="10" pagecolor="#ffffff" showgrid="true" bordercolor="#666666" borderopacity="1.0" inkscape:cx="5.2219006" inkscape:cy="17.169119" inkscape:zoom="11.313708" inkscape:window-maximized="1">
+	<inkscape:grid  id="grid7897" type="xygrid" empspacing="4"></inkscape:grid>
+</sodipodi:namedview>
+<g id="layer1" transform="translate(0,-282.64999)" inkscape:groupmode="layer" inkscape:label="Capa 1">
+	<g id="g2446" transform="translate(8.0000005,-20)">
+		<path id="rect827" inkscape:connector-curvature="0" fill="#B52D2D" d="M-6.153,302.669h20.307c1.023,0,1.847,0.712,1.847,1.598
+			v20.765c0,0.885-0.823,1.598-1.847,1.598H-6.153c-1.023,0-1.847-0.713-1.847-1.598v-20.765
+			C-8,303.382-7.176,302.669-6.153,302.669z"/>
+		
+			<linearGradient id="rect829_1_" gradientUnits="userSpaceOnUse" x1="-524.6514" y1="345.941" x2="-524.6514" y2="340.6578" gradientTransform="matrix(3.7795 0 0 3.7795 1986.9199 -982.4399)">
+			<stop  offset="0" style="stop-color:#F34242"/>
+			<stop  offset="1" style="stop-color:#FF6767"/>
+		</linearGradient>
+		<path id="rect829" inkscape:connector-curvature="0" fill="url(#rect829_1_)" d="M-6.153,303.467h20.307
+			c0.513,0,0.924,0.356,0.924,0.799v20.765c0,0.442-0.411,0.8-0.924,0.8H-6.153c-0.512,0-0.924-0.357-0.924-0.8v-20.765
+			C-7.077,303.824-6.666,303.467-6.153,303.467z"/>
+		<path id="path1376-6" sodipodi:nodetypes="cccccccccccccc" inkscape:connector-curvature="0" fill="#B52D2D" d="M-2.462,326.63
+			h1.847c0.042-2.517-1.665-5.299-3.692-7.188c1.846,0,7.384-2.396,8.307-3.193c-1.027,3.067-2.066,5.768-1.846,10.383h8.308
+			c-3.401-7.117-3.254-13.52,4.616-18.371v-1.597l-3.691,2.396c0-0.798,1.846-3.993,3.691-5.591h-2.771
+			c-2.859,7.765-11.107,12.485-19.384,14.375v2.396C-6.153,320.24-2.554,323.151-2.462,326.63z"/>
+		<path id="path1376" sodipodi:nodetypes="cccccccccccccc" inkscape:connector-curvature="0" fill="#FFFFFF" d="M-2.462,325.831
+			h1.847c0.042-2.517-1.665-5.3-3.692-7.188c1.846,0,7.384-2.396,8.307-3.194c-1.027,3.067-2.066,5.769-1.846,10.384h8.308
+			c-3.401-7.117-3.254-13.519,4.616-18.371v-1.598l-3.691,2.396c0-0.799,0.922-3.195,2.768-4.792h-2.768
+			c-2.861,7.765-10.188,11.687-18.463,13.578v2.396C-6.153,319.441-2.554,322.352-2.462,325.831z"/>
+	</g>
+</g>
+</svg>

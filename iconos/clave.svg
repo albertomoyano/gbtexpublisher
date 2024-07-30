@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg8" sodipodi:docname="preferences-system-power-management.svg" inkscape:version="0.92.2 5c3e80d, 2017-08-06" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px"
+	 viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<title  id="title7895">Antu icon Theme</title>
+<sodipodi:namedview  id="base" units="px" inkscape:window-y="0" inkscape:window-x="0" inkscape:window-height="697" inkscape:window-width="1366" inkscape:current-layer="layer1" inkscape:document-units="px" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:zoom="16" guidetolerance="10" borderopacity="1.0" objecttolerance="10" bordercolor="#666666" showgrid="true" pagecolor="#ffffff" gridtolerance="10" inkscape:cx="20.623313" inkscape:cy="18.134802" inkscape:window-maximized="1">
+	<inkscape:grid  id="grid7897" type="xygrid" empspacing="4"></inkscape:grid>
+</sodipodi:namedview>
+<g id="layer1" transform="translate(0,-282.64999)" inkscape:groupmode="layer" inkscape:label="Capa 1">
+	<g id="g1655" transform="translate(24,-6.000005)">
+		<path id="rect862" inkscape:connector-curvature="0" opacity="0.98" fill-opacity="0.9804" enable-background="new    " d="
+			M-12.001,307.787c1.318,0,2.379,1.063,2.379,2.379l0,0c0,1.318-1.061,2.379-2.379,2.379c-1.316,0-2.377-1.061-2.377-2.379l0,0
+			C-14.38,308.847-13.319,307.787-12.001,307.787z"/>
+		
+			<path id="rect867" inkscape:connector-curvature="0" opacity="0.98" fill="#535E66" fill-opacity="0.9608" enable-background="new    " d="
+			M-12.001,308.58c0.879,0,1.588,0.709,1.588,1.586c0,0.879-0.709,1.586-1.588,1.586c-0.877,0-1.584-0.707-1.584-1.586
+			C-13.585,309.289-12.878,308.58-12.001,308.58z"/>
+		
+			<path id="rect837" inkscape:connector-curvature="0" opacity="0.98" fill="#FF6700" fill-opacity="0.9804" enable-background="new    " d="
+			M-12.001,288.755c4.834,0,8.725,3.891,8.725,8.723c0,4.833-3.891,8.723-8.725,8.723c-4.832,0-8.723-3.891-8.723-8.723
+			C-20.724,292.646-16.833,288.755-12.001,288.755z"/>
+		<path id="rect839" inkscape:connector-curvature="0" opacity="0.98" fill="#FBFFB2" enable-background="new    " d="
+			M-12.001,289.547c4.395,0,7.932,3.537,7.932,7.93s-3.537,7.93-7.932,7.93c-4.393,0-7.93-3.537-7.93-7.93
+			C-19.931,293.084-16.394,289.547-12.001,289.547z"/>
+		<path id="Triangle-1" sodipodi:nodetypes="cccsssscccc" inkscape:connector-curvature="0" fill="#3662D4" d="M-18.345,301.443
+			c-0.68,0-1.044,0.799-0.6,1.313l2.979,3.445v2.379c0,1.318,1.063,2.379,2.379,2.379h3.172c1.317,0,2.379-1.061,2.379-2.379v-2.379
+			l2.979-3.445c0.445-0.514,0.08-1.313-0.6-1.313H-18.345z"/>
+		
+			<linearGradient id="rect869_1_" gradientUnits="userSpaceOnUse" x1="-19.2803" y1="781.6129" x2="-19.2803" y2="776.8551" gradientTransform="matrix(1 0 0 1 7.2803 -472.2402)">
+			<stop  offset="0" style="stop-color:#E4E4E4"/>
+			<stop  offset="1" style="stop-color:#FBFBFB"/>
+		</linearGradient>
+		<path id="rect869" inkscape:connector-curvature="0" opacity="0.98" fill="url(#rect869_1_)" enable-background="new    " d="
+			M-18.345,302.236l3.171,3.172h1.587v0.793h-1.587v0.793h1.587v0.793h-1.587v0.793c0,0.879,0.708,1.586,1.587,1.586h3.172
+			c0.877,0,1.586-0.707,1.586-1.586h-1.584v-0.793h1.586v-0.793h-1.586v-0.793h1.586v-0.793l3.172-3.172H-18.345z"/>
+		<path id="path4614-7-4-8" sodipodi:nodetypes="ccccccc" inkscape:connector-curvature="0" d="M-12.794,299.857l3.172-3.965
+			l-1.586-0.793v-3.172l-3.17,3.965l1.584,0.793V299.857z"/>
+	</g>
+</g>
+</svg>

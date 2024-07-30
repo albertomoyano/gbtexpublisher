@@ -1,0 +1,52 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,748,640)
+  #Scaled = False
+  Text = ("Legales")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { HBox3 HBox
+    Move(0,0,450,72)
+    AutoResize = True
+    Padding = 4
+    { PictureBox1 PictureBox
+      Move(0,0,72,72)
+      Picture = Picture.Load("iconos/candado-abierto.png")
+      Stretch = True
+      Alignment = Align.Center
+      Mode = PictureBox.Fill
+    }
+  }
+  { HBox2 HBox
+    Move(18,117,522,36)
+    { Label1 Label
+      Move(90,0,378,36)
+      Font = Font["Bold"]
+      Expand = True
+      Text = ("Aviso de Ausencia de Garantía y Condiciones de la Licencia GPL-3.0")
+    }
+  }
+  { TextArea1 TextArea
+    Move(27,162,144,144)
+    Background = Color.Background
+    Expand = True
+    Text = ("Este software se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, expresa o implícita, incluyendo, pero no limitado a, las garantías de comerciabilidad, idoneidad para un propósito particular y no infracción. En ningún caso los autores o titulares de los derechos de autor serán responsables por cualquier reclamo, daños u otras responsabilidades, ya sea en una acción de contrato, agravio o de otra manera, derivados de, fuera de o en conexión con el software o el uso u otros negocios en el software.\n\nAdemás, este software se distribuye bajo los términos de la Licencia Pública General de GNU versión 3 (GPL-3.0). El código fuente del mismo está disponible en el siguiente repositorio: https://github.com/albertomoyano/gbtexpublisher. Si desea realizar cambios en el software, le invitamos a consultar y contribuir al código fuente según los términos de la Licencia Pública General de GNU versión 3 (GPL-3.0). Por favor, consulte la licencia para conocer los detalles completos de los derechos y limitaciones legales aplicables a este software.\n")
+    ReadOnly = True
+    Wrap = True
+    ScrollBar = Scroll.Vertical
+  }
+  { HBox1 HBox
+    Move(27,333,306,36)
+    { Spring1 Spring
+      Move(18,0,45,36)
+    }
+    { btnCerrar Button
+      Move(81,0,198,36)
+      NoTabFocus = True
+      Text = ("Acepto los términos")
+      Picture = Picture["iconos/comp.svg"]
+    }
+  }
+}

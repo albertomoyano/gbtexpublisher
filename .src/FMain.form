@@ -1,0 +1,4088 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,114,214)
+  Expand = True
+  Icon = Picture["iconos/icono-gbtex.svg"]
+  Maximized = True
+  Arrangement = Arrange.Vertical
+  Padding = 4
+  { menuTareas Menu
+    Text = ("menuTareas")
+    Visible = False
+    { menuADD Menu
+      Text = ("Agregar tarea")
+      Picture = Picture["iconos/+pestana.svg"]
+    }
+    { menuBORRARtarea Menu
+      Text = ("Borrar tarea")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { mnMarcarCompletado Menu
+      Text = ("Marcar tarea completada")
+      Picture = Picture["iconos/comp.svg"]
+    }
+    { mnMarcarIncompleto Menu
+      Text = ("Marcar tarea como incompleta")
+      Picture = Picture["iconos/incomp.svg"]
+    }
+    { mnuBorrarTODOS Menu
+      Text = ("Borrar tareas completadas")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+  }
+  { menuCOMPILAR Menu
+    Text = ("menuCompilar")
+    Visible = False
+    { menuCompLibro Menu
+      Text = ("Compilar libro")
+    }
+    { menuComprevista Menu
+      Text = ("Compilar revista")
+    }
+  }
+  { menuGIT Menu
+    Text = ("menuGit")
+    Visible = False
+    { Menu75 Menu
+      Text = ("Repositorio en GitLab")
+      Picture = Picture["iconos/gitlab.svg"]
+    }
+    { Menu77 Menu
+      Text = ("Repositorio en GitHub")
+      Picture = Picture["iconos/github.svg"]
+    }
+    { Menu69 Menu
+    }
+    { Menu81 Menu
+      Text = ("Ir a Kanban en GitLab")
+      Picture = Picture["iconos/notas.svg"]
+    }
+  }
+  { Menu6 Menu
+    Text = ("Archivo")
+    { Menu9 Menu
+      Text = ("Abrir old")
+      Enabled = False
+      Visible = False
+    }
+    { menuAbrir Menu
+      Text = ("Abrir revista / libro")
+      Picture = Picture["iconos/document.svg"]
+    }
+    { mnu1LastFiles Menu
+      Text = ("Archivos abiertos recientemente")
+      Picture = Picture["iconos/bookmarks.svg"]
+    }
+    { Menu10 Menu
+    }
+    { menuOJS Menu
+      Text = ("OJS")
+      { menuABMautores Menu
+        Text = ("ABM autores")
+        Picture = Picture["iconos/document-orange.svg"]
+      }
+      { menuABMrevistas Menu
+        Text = ("ABM revistas")
+        Picture = Picture["iconos/document-orange.svg"]
+      }
+    }
+    { Menu3 Menu
+    }
+    { Menu11 Menu
+      Text = ("Cerrar el programa")
+      Picture = Picture["iconos/salir.svg"]
+      Shortcut = "Ctrl+Q"
+    }
+  }
+  { menuLTX Menu
+    Text = ("Compilar")
+    { Menu60 Menu
+      Text = ("Salida a revista")
+      Enabled = False
+      { menuPDFarticulo Menu
+        Text = ("PDF-XMP (clase article)")
+        Picture = Picture["iconos/pdf_revista.png"]
+        Shortcut = "Alt+P"
+      }
+      { Menu8 Menu
+        Text = ("HTML5 (clase article)")
+        Picture = Picture["iconos/html5.png"]
+      }
+      { menuXML Menu
+        Text = ("Salida a XML-JATS")
+        Picture = Picture["iconos/xml.svg"]
+        Enabled = False
+      }
+    }
+    { menuHTML Menu
+      Text = ("Salida a libro")
+      Enabled = False
+      { menuPDFlibro Menu
+        Text = ("PDF-XMP (clase book)")
+        Picture = Picture["iconos/acroread.svg"]
+        Shortcut = "Ctrl+P"
+      }
+      { menuHTML5book Menu
+        Text = ("HTML5 (clase book)")
+        Picture = Picture["iconos/html5.png"]
+      }
+      { menuEPUB Menu
+        Text = ("Salida a libro ePub 3")
+        Picture = Picture["iconos/epub.svg"]
+        Enabled = False
+      }
+      { menuODt_DOCX Menu
+        Text = ("Salida a LibreOffice (odt) y MS Office (docx)")
+        Picture = Picture["iconos/ms-office.svg"]
+        Enabled = False
+      }
+    }
+    { menuGHPages Menu
+      Text = ("Publicar en GitHub Pages")
+      Picture = Picture["iconos/github-mark.svg"]
+      Enabled = False
+    }
+    { Menu72 Menu
+    }
+    { menuCatalogo Menu
+      Text = ("Página del catálogo en PDF")
+      Picture = Picture["iconos/acroread.svg"]
+      Enabled = False
+    }
+  }
+  { menuTOOLS Menu
+    Text = ("Herramientas")
+    { menuCONVERSOR Menu
+      Text = ("Conversión de archivo .docx a .tex")
+      Picture = Picture["iconos/conversor.svg"]
+    }
+    { menuAPUNTES Menu
+      Text = ("Apuntes de producción")
+      Picture = Picture["iconos/notas.svg"]
+    }
+    { Menu78 Menu
+      Text = ("Exportar referencias bibliográficas")
+      Picture = Picture["iconos/exportar.svg"]
+    }
+    { menuESTADISTICAS Menu
+      Text = ("Estadísticas de autores y revisores")
+      Picture = Picture["iconos/chart-3.png"]
+      Enabled = False
+      Visible = False
+    }
+    { Menu79 Menu
+    }
+    { menuControlRef Menu
+      Text = ("Control de referencias relacionadas")
+      Picture = Picture["iconos/bibRepetida.svg"]
+      Enabled = False
+    }
+    { Menu76 Menu
+      Text = ("Script externos")
+      Picture = Picture["iconos/edit-select.svg"]
+      Enabled = False
+    }
+    { menuORTO Menu
+      #Translate = False
+      Text = "Revisión ortotipográfica"
+      Picture = Picture["iconos/tools_check.svg"]
+      Enabled = False
+      Visible = False
+    }
+    { menuGray Menu
+      Text = ("Convertir imágenes a .png en grayscale")
+      Picture = Picture["iconos/js.svg"]
+      Enabled = False
+    }
+    { menuComprimir Menu
+      Text = ("Comprimir proyecto (.tar.gz)")
+      Picture = Picture["iconos/archive-insert.svg"]
+      Enabled = False
+    }
+    { menuLOGFILE Menu
+      Text = ("Analizar el logfile del archivo")
+      Picture = Picture["iconos/logfile.svg"]
+      Enabled = False
+    }
+    { menuDRAW Menu
+      Text = ("Contador / Estadísticas del archivo")
+      Picture = Picture["iconos/draw.svg"]
+      Enabled = False
+    }
+    { menuBORRARaux Menu
+      Text = ("Borrar archivos auxiliares")
+      Picture = Picture["iconos/borrar.svg"]
+      Enabled = False
+    }
+    { menuCFG Menu
+      Text = ("Archivos de configuración")
+      Picture = Picture["iconos/configure.svg"]
+      Enabled = False
+      Visible = False
+    }
+    { menuRespaldoBDD Menu
+      Text = ("Respado de la BDD en GitHub")
+      Picture = Picture["iconos/exportar.svg"]
+      Enabled = False
+    }
+    { adminGIT Menu
+      Text = ("Administrar .gitignore")
+      Picture = Picture["iconos/edit-select.svg"]
+      Enabled = False
+      { limpiarCache Menu
+        Text = ("Limpiar cache para GitHub")
+        Picture = Picture["iconos/refrescar.svg"]
+      }
+      { gitignote_github Menu
+        Text = ("gitignore_PARCIAL")
+        Picture = Picture["iconos/github.svg"]
+      }
+      { gitignote_gitlab Menu
+        Text = ("gitignore_VACIO")
+        Picture = Picture["iconos/gitlab.svg"]
+      }
+    }
+  }
+  { AbrirApp Menu
+    Text = ("AbrirApp")
+    Enabled = False
+    Toggle = True
+    Visible = False
+    { Menu17 Menu
+      Text = ("Abrir PDF")
+      Picture = Picture["iconos/acroread.svg"]
+    }
+    { MenuHTMLview Menu
+      Text = ("Abrir HTML")
+      Picture = Picture["iconos/web.svg"]
+    }
+    { Menu20 Menu
+      Text = ("Abrir ePub")
+      Picture = Picture["iconos/epub.svg"]
+    }
+    { Menu22 Menu
+    }
+    { Menu74 Menu
+      Text = ("Ver página del catálogo")
+      Picture = Picture["iconos/acroread.svg"]
+    }
+  }
+  { Menu57 Menu
+    Text = ("Ayuda")
+    { Menu25 Menu
+      Text = ("Ir al repositorio de la aplicación en GitHub")
+      Picture = Picture["iconos/bookmarks.svg"]
+    }
+    { Menu24 Menu
+      Text = ("Contactar al desarrollador")
+      Picture = Picture["iconos/go-home.svg"]
+    }
+    { Menu27 Menu
+      Text = ("Paquetes de LaTeX más utilizados")
+      Picture = Picture["iconos/TeX.svg"]
+      { Menu33 Menu
+        Text = ("babel")
+      }
+      { Menu39 Menu
+        Text = ("biblatex")
+        { Menu45 Menu
+          Text = ("base (autor-año)")
+        }
+        { Menu43 Menu
+          Text = ("philosophy")
+        }
+        { Menu44 Menu
+          Text = ("ISO690")
+        }
+        { menuAPA Menu
+          Text = ("APA")
+        }
+      }
+      { Menu46 Menu
+        Text = ("booktabs")
+      }
+      { Menu37 Menu
+        Text = ("caption")
+      }
+      { Menu26 Menu
+        Text = ("crop")
+      }
+      { Menu29 Menu
+        Text = ("easyreview")
+      }
+      { Menu36 Menu
+        Text = ("enumitem")
+      }
+      { Menu38 Menu
+        Text = ("footmisc")
+      }
+      { Menu28 Menu
+        Text = ("geometry")
+      }
+      { Menu41 Menu
+        Text = ("glossaries")
+      }
+      { Menu32 Menu
+        Text = ("hyperref")
+      }
+      { Menu42 Menu
+        Text = ("imakeidx")
+      }
+      { Menu31 Menu
+        Text = ("make4ht")
+      }
+      { Menu35 Menu
+        Text = ("microtype")
+      }
+      { Menu34 Menu
+        Text = ("polyglosia")
+      }
+      { Menu58 Menu
+        Text = ("siunitx")
+      }
+      { Menu47 Menu
+        Text = ("svg")
+      }
+      { Menu30 Menu
+        Text = ("tex4ebook")
+      }
+      { Menu40 Menu
+        Text = ("titlesec")
+      }
+      { Menu14 Menu
+        Text = ("url")
+      }
+      { menuLWARP Menu
+        Text = ("lwarp")
+      }
+    }
+    { Menu48 Menu
+      Text = ("Recursos WEB más consultados")
+      Picture = Picture["iconos/web.svg"]
+      { Menu51 Menu
+        Text = ("https://www.fundeu.es/")
+      }
+      { Menu50 Menu
+        Text = ("https://iedra.es/")
+      }
+      { Menu52 Menu
+        Text = ("https://www.reverso.net/")
+      }
+      { Menu53 Menu
+        Text = ("https://tex.stackexchange.com/")
+      }
+    }
+    { Menu64 Menu
+      Text = ("Aviso Legal")
+      Picture = Picture["iconos/clavebib.svg"]
+    }
+    { Menu67 Menu
+    }
+    { Menu68 Menu
+      Text = ("Acerca de gbTeXpublisher")
+      Picture = Picture["iconos/icono-gbtex.png"]
+    }
+    { Menu66 Menu
+      Text = ("Acerca de Gambas")
+      Picture = Picture["iconos/logo-gambas.png"]
+    }
+  }
+  { HBox171 HBox
+    MoveScaled(1,0,98,4)
+    { Label120 Label
+      MoveScaled(0,0,8,4)
+      AutoResize = True
+      Text = ("Libro ")
+    }
+    { btnCOMPpdf Button
+      MoveScaled(12,0,8.8889,4)
+      ToolTip = ("PDF de libro")
+      Text = ("PDF")
+      Picture = Picture["iconos/acroread.svg"]
+    }
+    { btnCOMPhtml Button
+      MoveScaled(21,0,8.8889,4)
+      Text = ("HTML")
+      Picture = Picture["iconos/web.svg"]
+    }
+    { btnCOMPepub Button
+      MoveScaled(30,0,8.8889,4)
+      Text = ("ePub")
+      Picture = Picture["iconos/epub.svg"]
+    }
+    { btnCOMPdocx Button
+      MoveScaled(39,0,8.8889,4)
+      Text = ("DOCX")
+      Picture = Picture["iconos/ms-office.svg"]
+    }
+    { Label121 Label
+      MoveScaled(51,0,8,4)
+      AutoResize = True
+      Text = ("  Revista ")
+    }
+    { btnCOMPpdfRevista Button
+      MoveScaled(61,0,8.8889,4)
+      ToolTip = ("PDF de revista")
+      Text = ("PDF")
+      Picture = Picture["iconos/pdf_revista.png"]
+    }
+    { btnCOMPrevistaHTML Button
+      MoveScaled(69.8889,0,8.8889,4)
+      Text = ("HTML")
+      Picture = Picture["iconos/Chrome.svg"]
+    }
+    { btnCOMPrevistaHTML2 Button
+      MoveScaled(88,0,8.8889,4)
+      Text = ("XML")
+      Picture = Picture["iconos/xml.svg"]
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(1,4,98,4)
+    { !TextBox1 TextBox
+      MoveScaled(12,0,23,4)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+    }
+  }
+  { HBox9 HBox
+    MoveScaled(1,8,112,4)
+    { Button4 Button
+      MoveScaled(5,0,17.7778,4)
+      Enabled = False
+      Text = ("Git local")
+      Picture = Picture["iconos/document.svg"]
+    }
+    { btnMenuGIT MenuButton
+      MoveScaled(24,0,17.7778,4)
+      Enabled = False
+      Text = ("Remoto a")
+      Picture = Picture["iconos/document-orange.svg"]
+      Menu = "menuGIT"
+      MenuOnly = True
+    }
+    { txtGIT TextBox
+      MoveScaled(44,0,19,4)
+      Enabled = False
+      Expand = True
+      Placeholder = ("coloque aquí su usuario GitLab / GitHub")
+    }
+    { MenuApp MenuButton
+      MoveScaled(75,0,17.7778,4)
+      Enabled = False
+      Text = ("Ver") & "..."
+      Picture = Picture["iconos/bookmarks.svg"]
+      Menu = "AbrirApp"
+      MenuOnly = True
+    }
+  }
+  { HBox4 HBox
+    MoveScaled(1,13,98,0.8889)
+  }
+  { TabPanel1 TabStrip
+    MoveScaled(2,16,112,194)
+    Enabled = False
+    Expand = True
+    Arrangement = Arrange.Vertical
+    Padding = 4
+    Count = 4
+    Index = 0
+    Text = ("Consola")
+    Picture = Picture["iconos/terminal.svg"]
+    { Splitter1 Splitter
+      MoveScaled(2,13,93,47)
+      Expand = True
+      Border = False
+      { TerminalView1 TerminalView
+        MoveScaled(1,6,27,11)
+        Expand = True
+        AutoResize = False
+        Blink = True
+      }
+      { Splitter2 Splitter
+        MoveScaled(31,2,57,42)
+        Arrangement = Arrange.Vertical
+        Border = False
+        { DirViewRuta DirChooser
+          MoveScaled(14,1,34,15)
+          ShowFile = True
+          ShowBookmark = False
+          ShowToolbar = False
+        }
+        { Splitter3 Splitter
+          MoveScaled(2,20,41,15)
+          Border = False
+          { VLista ListView
+            MoveScaled(6,4,16,8)
+            PopupMenu = "menuTareas"
+          }
+          { txtTAREAS TextArea
+            MoveScaled(24,4,16,8)
+            ReadOnly = True
+            Wrap = True
+            ScrollBar = Scroll.Vertical
+          }
+        }
+      }
+    }
+    Index = 1
+    Text = ("Referencias bibliográficas")
+    Picture = Picture["iconos/bib.svg"]
+    { ToolPanel1 ToolPanel
+      MoveScaled(1,0,69,23)
+      Arrangement = Arrange.Fill
+      AutoResize = True
+      Count = 2
+      Animated = True
+      Border = True
+      Index = 0
+      Text = ("Caja de texto temporal")
+      Picture = Picture["iconos/+nuevo.svg"]
+      { txtTMPbiblio TextArea
+        MoveScaled(1,1,36,13)
+        Wrap = True
+        ScrollBar = Scroll.Vertical
+      }
+      Index = 1
+      Text = ("Mostrar referencias bibliográficas")
+      Picture = Picture["iconos/bib.svg"]
+      { VListaBIB TableView
+        MoveScaled(1,1,44,12)
+        Font = Font["-1"]
+        Expand = True
+        Mode = Select.Single
+        ShowCursor = True
+        Header = GridView.Horizontal
+        Resizable = False
+      }
+      Index = 0
+    }
+    { HBox14 HBox
+      MoveScaled(0,23,105,4)
+      { BtnNuevoBib Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        ToolTip = ("Agregar una nueva referencia")
+        Picture = Picture["iconos/+pestana.svg"]
+      }
+      { btnGuardar Button
+        MoveScaled(4,0,4,4)
+        ToolTip = ("Guardar")
+        Picture = Picture["iconos/guardar.svg"]
+      }
+      { btnGuardarCambios Button
+        MoveScaled(8,0,4,4)
+        ToolTip = ("Guardar modificaciones")
+        Picture = Picture["iconos/guardarComo.svg"]
+      }
+      { btnGuardarIGUAL Button
+        MoveScaled(12,0,14.4444,4)
+        ToolTip = ("Forzar guardar")
+        Text = ("Forzar")
+        Picture = Picture["iconos/target_4887265.png"]
+      }
+      { BtnRefrescarBib Button
+        MoveScaled(27,0,4,4)
+        ToolTip = ("Refrescar listado de la base de datos")
+        Picture = Picture["iconos/refrescar.svg"]
+      }
+      { BtnEliminarBib Button
+        MoveScaled(31,0,4,4)
+        NoTabFocus = True
+        ToolTip = ("Borrar entrada")
+        Picture = Picture["iconos/borrar.svg"]
+      }
+      { txtID2 TextBox
+        MoveScaled(44,0,6,4)
+        Visible = False
+        Background = Color.Background
+        NoTabFocus = True
+        Alignment = Align.Right
+        ReadOnly = True
+      }
+      { txtTOTALbib TextLabel
+        MoveScaled(50,0,24.2222,4)
+        Expand = True
+        Alignment = Align.Center
+        Wrap = False
+      }
+    }
+    { HBox18 HBox
+      MoveScaled(0,27,111,4)
+      { BtnBuscarClave Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        Picture = Picture["iconos/search.svg"]
+      }
+      { lblAlta1 Label
+        MoveScaled(8,0,12.4444,4)
+        Alignment = Align.Right
+        Text = ("Clave ")
+      }
+      { btnAgregarCitationKey Button
+        MoveScaled(22,0,4,4)
+        Enabled = False
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { txtCLAVEbib TextBox
+        MoveScaled(28,0,9,4)
+        NoTabFocus = True
+        ToolTip = ("Clave para ser utilizada solo con LaTeX")
+        Expand = True
+        Alignment = Align.Left
+        Placeholder = ("Clave BIB única")
+      }
+      { lblAlta4 Label
+        MoveScaled(42,0,19,4)
+        AutoResize = True
+        Alignment = Align.Right
+        Text = ("    Exportar como  ")
+      }
+      { txtEXPORTARbib TextBox
+        MoveScaled(61,0,15,4)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
+        ReadOnly = True
+      }
+      { Button1 Button
+        MoveScaled(99,0,16,4)
+        ToolTip = ("Mostrar las entradas de este archivo")
+        Picture = Picture["iconos/face.svg"]
+      }
+    }
+    { HBox19 HBox
+      MoveScaled(0,31,103,4)
+      { Label2 Label
+        MoveScaled(0,0,16.4444,4)
+        Font = Font["Bold"]
+        Foreground = &HFF0000
+        Alignment = Align.Right
+        Text = ("Tipo ")
+      }
+      { cbTYPEentrada ComboBox
+        MoveScaled(18,0,18,4)
+        NoTabFocus = True
+        ReadOnly = True
+      }
+      { lblKEYWORDS3 Label
+        MoveScaled(44,0,8,4)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Filtro "
+      }
+      { btnAgregarKeyBIB Button
+        MoveScaled(53,0,4,4)
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { !txtKEYWORDS TextBox
+        MoveScaled(57,0,24,4)
+        #Public = True
+        NoTabFocus = True
+        Expand = True
+        Placeholder = ("Clave filtro para printbibliography")
+      }
+    }
+    { HBox173 HBox
+      MoveScaled(0,35,103,0.8889)
+    }
+    { TabPanel2 TabStrip
+      MoveScaled(1,38,104,74)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      Padding = 4
+      Count = 7
+      Index = 0
+      Text = ("Autoría")
+      { ScrollView2 ScrollView
+        MoveScaled(1,2,102,43)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox21 HBox
+          MoveScaled(0,0,97,4.4444)
+          Padding = 2
+          { BtnBuscarAuthor Button
+            MoveScaled(1,0,4,4)
+            NoTabFocus = True
+            Picture = Picture["iconos/search.svg"]
+          }
+          { Label3 Label
+            MoveScaled(6,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Author ")
+          }
+          { txtAUTHOR TextBox
+            MoveScaled(24,0,15,4)
+            Expand = True
+            Placeholder = ("Autor principal")
+          }
+          { lblNAMEADDON Label
+            MoveScaled(43,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("NameAddOn ")
+          }
+          { txtNAMEADDON TextBox
+            MoveScaled(55,0,16,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Sigla, es conveniente hacer un enroque con el campo author")
+          }
+        }
+        { HBox22 HBox
+          MoveScaled(0,4,97,4.4444)
+          Padding = 2
+          { lblBOOKAUTHOR2 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("BookAuthor ")
+          }
+          { txtBOOKAUTHOR TextBox
+            MoveScaled(19,0,15,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Autor del libro")
+          }
+          { lblNAMEADDON2 Label
+            MoveScaled(39,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("ShortAuthor ")
+          }
+          { txtShortAuthor TextBox
+            MoveScaled(52,0,16,4)
+            PopupMenu = "Menu1"
+            Placeholder = ("Apodo")
+          }
+        }
+        { HBox24 HBox
+          MoveScaled(0,8,97,4.4444)
+          Padding = 2
+          { BtnBuscarAuthor2 Button
+            MoveScaled(0,0,4,4)
+            NoTabFocus = True
+            Picture = Picture["iconos/search.svg"]
+          }
+          { lblEDITOR Label
+            MoveScaled(4,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Editor ")
+          }
+          { txtEDITOR TextBox
+            MoveScaled(21,0,17,4)
+            Expand = True
+            PopupMenu = "Menu1"
+          }
+          { lblEDITORtype Label
+            MoveScaled(44,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("EditorType ")
+          }
+          { cbEDITORTYPE ComboBox
+            MoveScaled(63,0,16,3.5556)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+        }
+        { HBox23 HBox
+          MoveScaled(0,12,97,4.4444)
+          Padding = 2
+          { lblEDITOR2 Label
+            MoveScaled(-1,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("EditorA ")
+          }
+          { txtEDITORa TextBox
+            MoveScaled(19,0,17,4)
+            Expand = True
+            PopupMenu = "Menu1"
+          }
+          { lblEDITORtype2 Label
+            MoveScaled(42,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("EditorAType ")
+          }
+          { cbEDITORTYPEa ComboBox
+            MoveScaled(61,0,16,3.5556)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+        }
+        { HBox25 HBox
+          MoveScaled(0,16,97,4.4444)
+          Padding = 2
+          { lblEDITOR3 Label
+            MoveScaled(-1,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("EditorB ")
+          }
+          { txtEDITORb TextBox
+            MoveScaled(19,0,17,4)
+            Expand = True
+            PopupMenu = "Menu1"
+          }
+          { lblEDITORtype3 Label
+            MoveScaled(40,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("EditorBType ")
+          }
+          { cbEDITORTYPEb ComboBox
+            MoveScaled(59,0,16,3.5556)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+        }
+        { HBox26 HBox
+          MoveScaled(0,20,97,4.4444)
+          Padding = 2
+          { lblEDITOR4 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("EditorC ")
+          }
+          { txtEDITORc TextBox
+            MoveScaled(20,0,17,4)
+            Expand = True
+            PopupMenu = "Menu1"
+          }
+          { lblEDITORtype4 Label
+            MoveScaled(45,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("EditorCType ")
+          }
+          { cbEDITORTYPEc ComboBox
+            MoveScaled(64,0,16,3.5556)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+        }
+        { HBox39 HBox
+          MoveScaled(0,24,97,4.4444)
+          Padding = 2
+          { lblAFTERWORD Label
+            MoveScaled(1,0,16,4)
+            Alignment = Align.Right
+            Text = ("Afterword ")
+          }
+          { txtAFTERWORD TextBox
+            MoveScaled(21,0,24,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Con Epílogo de")
+          }
+          { Label30 Label
+            MoveScaled(45,0,12,4)
+            Alignment = Align.Right
+            Text = ("Foreword ")
+          }
+          { txtFOREWORD TextBox
+            MoveScaled(65,0,21,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Con Prólogo de")
+          }
+        }
+        { HBox40 HBox
+          MoveScaled(0,28,97,4.4444)
+          Padding = 2
+          { lblCOMMENTATOR Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Commentator ")
+          }
+          { txtCOMMENTATOR TextBox
+            MoveScaled(22,0,20,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Con comentarios de")
+          }
+          { lblINTRODUCTION Label
+            MoveScaled(42,0,12,4)
+            Alignment = Align.Right
+            Text = ("Introduction ")
+          }
+          { txtINTRODUCTION TextBox
+            MoveScaled(64,0,24,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Con Introducción de")
+          }
+        }
+        { HBox38 HBox
+          MoveScaled(0,32,97,4.4444)
+          Padding = 2
+          { lblTRANSLATOR Label
+            MoveScaled(1,0,16,4)
+            ToolTip = ("Traductor")
+            Alignment = Align.Right
+            Text = ("Translator ")
+          }
+          { txtTRANSLATOR TextBox
+            MoveScaled(18,0,7,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Traducido por")
+          }
+          { lblANNOTATOR Label
+            MoveScaled(26,0,12,4)
+            Alignment = Align.Right
+            Text = ("Annotator ")
+          }
+          { txtANNOTATOR TextBox
+            MoveScaled(48,0,21,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Con anotaciones de")
+          }
+        }
+        { HBox27 HBox
+          MoveScaled(0,36,97,4.4444)
+          Padding = 2
+          { lblANNOTATOR2 Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Holder ")
+          }
+          { txtHOLDER TextBox
+            MoveScaled(22,0,21,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("of patent")
+          }
+          { lblRELATEDSTRING7 Label
+            MoveScaled(46,0,12,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Gender "
+          }
+          { txtGENDER TextBox
+            MoveScaled(58,0,21,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("gender of author or editor")
+          }
+        }
+      }
+      Index = 1
+      Text = ("Títulos")
+      { ScrollView3 ScrollView
+        MoveScaled(1,2,102,55)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox48 HBox
+          MoveScaled(0,0,100,4.4444)
+          Padding = 2
+          { BtnBuscarTituloReferencia Button
+            MoveScaled(1,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Búsqueda rápida del título")
+            Picture = Picture["iconos/search.svg"]
+          }
+          { Label18 Label
+            MoveScaled(13,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Title ")
+          }
+          { btnBuscarEnGoogle Button
+            MoveScaled(26,0,4,4)
+            ToolTip = ("Buscar en internet")
+            Picture = Picture["iconos/web.svg"]
+          }
+          { txtTITLE TextBox
+            MoveScaled(33,0,12,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Alignment = Align.Left
+            Placeholder = ("Título principal")
+          }
+        }
+        { HBox28 HBox
+          MoveScaled(0,4,100,4.4444)
+          Padding = 2
+          { Label40 Label
+            MoveScaled(3,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ShortTitle ")
+          }
+          { txtSHORTTITLE TextBox
+            MoveScaled(28,0,17,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Alignment = Align.Left
+            Placeholder = ("Título recortado para footcite")
+          }
+        }
+        { HBox29 HBox
+          MoveScaled(0,8,100,4.4444)
+          Padding = 2
+          { Label4 Label
+            MoveScaled(3,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("IndexTitle ")
+          }
+          { txtINDEXTITLE TextBox
+            MoveScaled(19,0,21,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("if different from title")
+          }
+        }
+        { HBox30 HBox
+          MoveScaled(0,12,100,4.4444)
+          Padding = 2
+          { BtnBuscarBookTitle Button
+            MoveScaled(0,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Búsqueda rápida del título")
+            Picture = Picture["iconos/search.svg"]
+          }
+          { Label13 Label
+            MoveScaled(5,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("BookTitle ")
+          }
+          { btnBuscarEnGoogle2 Button
+            MoveScaled(19,0,4,4)
+            ToolTip = ("Buscar en internet")
+            Picture = Picture["iconos/web.svg"]
+          }
+          { txtBOOKTITLE TextBox
+            MoveScaled(29,0,17,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Título del libro")
+          }
+          { lblEVENTTITLEADDON5 Label
+            MoveScaled(58,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("  BookTitleAddOn ")
+          }
+          { txtBookTitleAddOn TextBox
+            MoveScaled(79,0,16,3.5556)
+            PopupMenu = "Menu1"
+            Placeholder = ("Sigla")
+          }
+        }
+        { HBox31 HBox
+          MoveScaled(0,16,100,4.4444)
+          Padding = 2
+          { Label39 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("MainTitle ")
+          }
+          { txtMAINTITLE TextBox
+            MoveScaled(20,0,20,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Título mayor")
+          }
+          { lblEVENTTITLEADDON3 Label
+            MoveScaled(58,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("  MainTitleAddOn ")
+          }
+          { txtMainTitleAddOn TextBox
+            MoveScaled(79,0,16,4)
+            PopupMenu = "Menu1"
+            Placeholder = ("Sigla")
+          }
+        }
+        { HBox32 HBox
+          MoveScaled(0,20,100,4.4444)
+          Padding = 2
+          { BtnBuscarJournal Button
+            MoveScaled(0,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Búsqueda rápida del título")
+            Picture = Picture["iconos/search.svg"]
+          }
+          { Label15 Label
+            MoveScaled(15,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("JournalTitle ")
+          }
+          { !txtJOURNALTITLE TextBox
+            MoveScaled(40,0,16,3.5556)
+            #Public = True
+            Expand = True
+            Placeholder = ("Nombre de la revista")
+          }
+          { lblEVENTTITLEADDON4 Label
+            MoveScaled(58,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("  JournalTitleAddOn ")
+          }
+          { txtJournalTitleAddOn TextBox
+            MoveScaled(79,0,16,3.5556)
+            PopupMenu = "Menu1"
+            Placeholder = ("Sigla")
+          }
+        }
+        { HBox33 HBox
+          MoveScaled(0,24,100,4.4444)
+          Padding = 2
+          { Label5 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("IssueTitle ")
+          }
+          { txtISSUETITLE TextBox
+            MoveScaled(19,0,21,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("title of journal special issue")
+          }
+          { lblEVENTTITLEADDON2 Label
+            MoveScaled(58,0,16,4)
+            Alignment = Align.Right
+            Text = ("  IssueTitleAddOn ")
+          }
+          { txtIssueTitleAddOn TextBox
+            MoveScaled(79,0,16,4)
+            PopupMenu = "Menu1"
+            Placeholder = ("Sigla")
+          }
+        }
+        { HBox37 HBox
+          MoveScaled(0,28,100,4.4444)
+          Padding = 2
+          { Label43 Label
+            MoveScaled(2,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("EventTitle ")
+          }
+          { txtEVENTTITLE TextBox
+            MoveScaled(21,0,24,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("title of conference or event")
+          }
+          { lblEVENTTITLEADDON Label
+            MoveScaled(56,0,16,4)
+            Alignment = Align.Right
+            Text = ("  EventTitleAddOn ")
+          }
+          { txtEventTitleAddOn TextBox
+            MoveScaled(79,0,16,4)
+            PopupMenu = "Menu1"
+            Placeholder = ("Sigla")
+          }
+        }
+        { HBox34 HBox
+          MoveScaled(0,32,100,4.4444)
+          Padding = 2
+          { Label6 Label
+            MoveScaled(3,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ReprintTitle ")
+          }
+          { txtREPRINTTITLE TextBox
+            MoveScaled(15,0,21,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("title of a reprint of the work")
+          }
+        }
+        { HBox35 HBox
+          MoveScaled(0,36,100,4.4444)
+          Padding = 2
+          { Label28 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Series ")
+          }
+          { txtSERIES TextBox
+            MoveScaled(17,0,21,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("publication series")
+          }
+        }
+      }
+      Index = 2
+      Text = ("Vol./Núm./Fe.")
+      { ScrollView4 ScrollView
+        MoveScaled(1,1,102,37)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox49 HBox
+          MoveScaled(0,0,100,4.4444)
+          Padding = 2
+          { Label23 Label
+            MoveScaled(31,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Chapter ")
+          }
+          { txtChapter TextBox
+            MoveScaled(51,0,21,3.5556)
+            Expand = True
+          }
+        }
+        { HBox36 HBox
+          MoveScaled(0,4,100,4.4444)
+          Padding = 2
+          { Label19 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Volume ")
+          }
+          { txtVOLUME TextBox
+            MoveScaled(17,0,16,4)
+            Expand = True
+          }
+          { Label24 Label
+            MoveScaled(29,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Volume(s) ")
+          }
+          { txtBOLUMES TextBox
+            MoveScaled(44,0,13,4)
+            Expand = True
+            Placeholder = ("number of volumes for multi-volume work")
+          }
+        }
+        { HBox41 HBox
+          MoveScaled(0,8,100,4.4444)
+          Padding = 2
+          { Label20 Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Number ")
+          }
+          { txtNUMBER TextBox
+            MoveScaled(13,0,16,4)
+            Expand = True
+          }
+          { lblPART Label
+            MoveScaled(29,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Part ")
+          }
+          { txtPART TextBox
+            MoveScaled(50,0,11,4)
+            Expand = True
+          }
+        }
+        { HBox43 HBox
+          MoveScaled(0,12,100,4.4444)
+          Padding = 2
+          { Label14 Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Edition ")
+          }
+          { txtEDITION TextBox
+            MoveScaled(20,0,21,4)
+            Expand = True
+          }
+          { lblPART2 Label
+            MoveScaled(41,1,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Issue ")
+          }
+          { txtISSUE TextBox
+            MoveScaled(57,0,11,4)
+            Expand = True
+            Placeholder = ("non-number issue of journal")
+          }
+        }
+        { HBox44 HBox
+          MoveScaled(0,16,100,4.4444)
+          Padding = 2
+          { lblPUBSTATE Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("PubState ")
+          }
+          { cbPUBSTATE ComboBox
+            MoveScaled(16,0,18,3.5556)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+          { Spring5 Spring
+            MoveScaled(76,0,17,4)
+          }
+        }
+        { HBox46 HBox
+          MoveScaled(0,20,100,4.4444)
+          Padding = 2
+          { Label17 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Year ")
+          }
+          { txtYEAR TextBox
+            MoveScaled(14,0,24,3.5556)
+            Expand = True
+            Placeholder = ("YYYY (usar en revistas)")
+          }
+          { Label26 Label
+            MoveScaled(55,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("EventDate ")
+          }
+          { txtEVENTDATE TextBox
+            MoveScaled(73,0,21,3.5556)
+            Expand = True
+            Placeholder = ("conference or event date as (yyyy-mm-dd)")
+          }
+        }
+        { HBox42 HBox
+          MoveScaled(0,24,100,4.4444)
+          Padding = 2
+          { lblDate Label
+            MoveScaled(1,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Date ")
+          }
+          { txtDATEY TextBox
+            MoveScaled(14,0,21,4)
+            Expand = True
+            Placeholder = ("YYYY-MM-DD")
+          }
+          { lblDate2 Label
+            MoveScaled(44,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("  OrigDate ")
+          }
+          { txtORIGDATE TextBox
+            MoveScaled(57,0,21,4)
+            Expand = True
+            Placeholder = ("YYYY-MM-DD")
+          }
+        }
+        { HBox45 HBox
+          MoveScaled(0,28,100,4.4444)
+          Padding = 2
+          { Label22 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("urlDate ")
+          }
+          { txtURLDATE TextBox
+            MoveScaled(20,0,21,3.5556)
+            Expand = True
+            Placeholder = ("YYYY-MM-DD")
+          }
+          { lblPART3 Label
+            MoveScaled(41,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Version ")
+          }
+          { txtVERSION TextBox
+            MoveScaled(61,0,11,4)
+            Expand = True
+            Placeholder = ("revision number for software or manual")
+          }
+        }
+      }
+      Index = 3
+      Text = ("Org./Pág./Ub./Id.")
+      { ScrollView5 ScrollView
+        MoveScaled(1,1,102,37)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox55 HBox
+          MoveScaled(0,0,88,4.4444)
+          Padding = 2
+          { lblLocation Label
+            MoveScaled(1,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Location ")
+          }
+          { !txtLOCATION TextBox
+            MoveScaled(21,0,12,4)
+            #Public = True
+            Expand = True
+          }
+          { lblLocation11 Label
+            MoveScaled(33,0,15,3.5556)
+            Alignment = Align.Right
+            Text = ("OrigLocation ")
+          }
+          { txtORIGLOCATION TextBox
+            MoveScaled(53,0,12,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Ubicación de la casa editora")
+          }
+        }
+        { HBox61 HBox
+          MoveScaled(0,4,88,4.4444)
+          Padding = 2
+          { Label16 Label
+            MoveScaled(10,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Publisher ")
+          }
+          { !txtPUBLISHER TextBox
+            MoveScaled(28,0,14,4)
+            #Public = True
+            Expand = True
+          }
+          { Label9 Label
+            MoveScaled(46,0,15,4)
+            Alignment = Align.Right
+            Text = ("OrigPublisher ")
+          }
+          { txtORIGPUBLISHER TextBox
+            MoveScaled(62,0,14,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Casa editorial")
+          }
+        }
+        { HBox63 HBox
+          MoveScaled(0,8,88,4.4444)
+          Padding = 2
+          { lblIstitution Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Institution ")
+          }
+          { txtINSTITUTION TextBox
+            MoveScaled(18,0,21,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Patrocinante")
+          }
+          { Label25 Label
+            MoveScaled(40,0,15,3.5556)
+            Alignment = Align.Right
+            Text = ("Organization ")
+          }
+          { txtORGANIZATION TextBox
+            MoveScaled(55,0,24,3.5556)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("Organizador")
+          }
+        }
+        { HBox47 HBox
+          MoveScaled(0,12,88,4.4444)
+          Padding = 2
+          { lblPAGES Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Pages ")
+          }
+          { txtPAGES TextBox
+            MoveScaled(17,0,7,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("00-000")
+          }
+          { lblPAGETOTAL Label
+            MoveScaled(24,0,15,3.5556)
+            Alignment = Align.Right
+            Text = ("PageTotal ")
+          }
+          { txtPAGETOTAL TextBox
+            MoveScaled(42,0,21,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("total number of pages")
+          }
+        }
+        { HBox60 HBox
+          MoveScaled(0,16,88,4.4444)
+          Padding = 2
+          { lblPAGETOTAL2 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Pagination ")
+          }
+          { txtPAGINATION TextBox
+            MoveScaled(17,0,17,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("pagination format of (book)title")
+          }
+          { lblLocation2 Label
+            MoveScaled(29,0,15,3.5556)
+            Alignment = Align.Right
+            Text = ("Venue ")
+          }
+          { txtVENUE TextBox
+            MoveScaled(44,0,12,4)
+            Expand = True
+            PopupMenu = "Menu1"
+            Placeholder = ("of event")
+          }
+        }
+        { HBox50 HBox
+          MoveScaled(0,20,88,4.4444)
+          Padding = 2
+          { lblHyphenation Label
+            MoveScaled(3,0,16,3.5556)
+            #Translate = False
+            Font = Font["Bold"]
+            Foreground = &HFF0000
+            Alignment = Align.Right
+            Text = "Hyphenation "
+          }
+          { cbLANGUAGE ComboBox
+            MoveScaled(22,0,24,3.5556)
+            NoTabFocus = True
+            Expand = True
+            ReadOnly = True
+          }
+          { lblPAGETOTAL3 Label
+            MoveScaled(51,0,15,4)
+            Alignment = Align.Right
+            Text = ("BookPagination ")
+          }
+          { txtBookPagination TextBox
+            MoveScaled(67,0,12,4)
+            Expand = True
+            PopupMenu = "Menu1"
+          }
+        }
+        { HBox84 HBox
+          MoveScaled(0,24,88,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING5 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "LangId "
+          }
+          { cbLANGUAGEID ComboBox
+            MoveScaled(18,0,24,3.5556)
+            NoTabFocus = True
+            Expand = True
+            ReadOnly = True
+          }
+          { lblRELATEDSTRING6 Label
+            MoveScaled(48,0,15,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "LangIdOpts "
+          }
+          { txtLANGIDOPTS TextBox
+            MoveScaled(64,0,21,4)
+            Expand = True
+            Placeholder = ("polyglossia options for langid")
+          }
+        }
+        { HBox68 HBox
+          MoveScaled(0,28,88,4.4444)
+          Padding = 2
+          { lblLocation6 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Language ")
+          }
+          { txtLANGUAGE TextBox
+            MoveScaled(19,0,21,4)
+            Expand = True
+            Placeholder = ("language of work")
+          }
+          { lblLocation12 Label
+            MoveScaled(39,0,15,3.5556)
+            Alignment = Align.Right
+            Text = ("  OrigLanguage ")
+          }
+          { txtORIGLANGUAGE TextBox
+            MoveScaled(55,0,21,4)
+            Expand = True
+            Placeholder = ("orig language of work")
+          }
+        }
+      }
+      Index = 4
+      Text = ("IS**/Digital")
+      { ScrollView6 ScrollView
+        MoveScaled(1,1,102,34)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox51 HBox
+          MoveScaled(0,0,80,4.4444)
+          Padding = 2
+          { btnChequearISBN Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/comp.svg"]
+          }
+          { lblISBN Label
+            MoveScaled(5,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("ISBN ")
+          }
+          { txtISBN TextBox
+            MoveScaled(21,0,11,4)
+            Expand = True
+            Placeholder = ("International Standard Book Number")
+          }
+          { Label44 Label
+            MoveScaled(35,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("ISSN ")
+          }
+          { txtISSN TextBox
+            MoveScaled(52,0,10,4)
+            Expand = True
+            Placeholder = ("International Standard Serial Number")
+          }
+        }
+        { HBox52 HBox
+          MoveScaled(0,4,80,4.4444)
+          Padding = 2
+          { lblISBN3 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ISMN ")
+          }
+          { txtISMN TextBox
+            MoveScaled(17,0,11,4)
+            Expand = True
+            Placeholder = ("International Standard Music Number")
+          }
+          { lblISBN4 Label
+            MoveScaled(28,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("ISRN ")
+          }
+          { txtISRN TextBox
+            MoveScaled(45,0,11,4)
+            Expand = True
+            Placeholder = (" International Standard Technical Report Number")
+          }
+        }
+        { HBox53 HBox
+          MoveScaled(0,8,80,4.4444)
+          Padding = 2
+          { lblISBN2 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ISAN ")
+          }
+          { txtISAN TextBox
+            MoveScaled(17,0,11,4)
+            Expand = True
+            Placeholder = ("International Standard Audiovisual Number")
+          }
+          { lblISBN5 Label
+            MoveScaled(28,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("ISWC ")
+          }
+          { txtISWC TextBox
+            MoveScaled(45,0,10,4)
+            Expand = True
+            Placeholder = ("International Standard Work Code")
+          }
+        }
+        { HBox54 HBox
+          MoveScaled(0,12,80,4.4444)
+          Padding = 2
+          { btnVisitarURL Button
+            MoveScaled(0,0,4,4)
+            ToolTip = ("Buscar en internet")
+            Picture = Picture["iconos/web.svg"]
+          }
+          { Label21 Label
+            MoveScaled(8,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("URL ")
+          }
+          { txtURL TextBox
+            MoveScaled(23,0,12,4)
+            Expand = True
+            Placeholder = ("URL")
+          }
+        }
+        { HBox56 HBox
+          MoveScaled(0,16,80,4.4444)
+          Padding = 2
+          { lblDOI2 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("DOI ")
+          }
+          { txtDOI TextBox
+            MoveScaled(17,0,24,3.5556)
+            Expand = True
+            Placeholder = ("Digital Object Identifier")
+          }
+        }
+        { HBox57 HBox
+          MoveScaled(0,20,80,4.4444)
+          Padding = 2
+          { lblISBN6 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Eid ")
+          }
+          { txtEID TextBox
+            MoveScaled(17,0,10,4)
+            Expand = True
+            Placeholder = ("electronic identifier of @article")
+          }
+          { lblISBN7 Label
+            MoveScaled(27,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("Eprint ")
+          }
+          { txtEPRINT TextBox
+            MoveScaled(44,0,10,4)
+            Expand = True
+            Placeholder = ("archive-specific electronic identifier")
+          }
+        }
+        { HBox58 HBox
+          MoveScaled(0,24,80,4.4444)
+          Padding = 2
+          { lblISBN8 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("EprintType ")
+          }
+          { txtEPRINTYPE TextBox
+            MoveScaled(17,0,10,4)
+            Expand = True
+            Placeholder = ("type of identifier, eprintclass for further details")
+          }
+        }
+      }
+      Index = 5
+      Text = ("Miscelánea 1")
+      { ScrollView7 ScrollView
+        MoveScaled(1,1,102,58)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox64 HBox
+          MoveScaled(0,0,91,4.4444)
+          Padding = 2
+          { lblLocation3 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Type ")
+          }
+          { cbType ComboBox
+            MoveScaled(20,0,24,3.5556)
+            ReadOnly = True
+          }
+          { txtTYPE TextBox
+            MoveScaled(45,0,20,4)
+            Background = Color.Background
+            NoTabFocus = True
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("tipo de entrada para @thesis, @manual, @patent o @report")
+          }
+        }
+        { HBox65 HBox
+          MoveScaled(0,4,91,4.4444)
+          Padding = 2
+          { lblLocation4 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("EntrysubType ")
+          }
+          { txtENTRYSUBTYPE TextBox
+            MoveScaled(15,0,21,4)
+            Expand = True
+            Placeholder = ("for finer-grained specification of type")
+          }
+        }
+        { HBox66 HBox
+          MoveScaled(0,8,91,4.4444)
+          Padding = 2
+          { lblLABEL Label
+            MoveScaled(1,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Label ")
+          }
+          { txtLABEL TextBox
+            MoveScaled(20,0,21,4)
+            Expand = True
+            Placeholder = ("fall-back label")
+          }
+        }
+        { HBox67 HBox
+          MoveScaled(0,12,91,4.4444)
+          Padding = 2
+          { lblLocation5 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Howpublished ")
+          }
+          { txtHOWPUBLISHED TextBox
+            MoveScaled(20,0,21,4)
+            Expand = True
+            Placeholder = ("non-standard publication details")
+          }
+        }
+        { HBox69 HBox
+          MoveScaled(0,16,91,4.4444)
+          Padding = 2
+          { lblLocation7 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Addendum ")
+          }
+          { txtADDENDUM TextBox
+            MoveScaled(25,0,21,4)
+            Expand = True
+            Placeholder = ("miscellaneous data printed at end of entry")
+          }
+        }
+        { HBox71 HBox
+          MoveScaled(0,20,91,4.4444)
+          Padding = 2
+          { lblLocation9 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Shorthand ")
+          }
+          { txtSHORTHAND TextBox
+            MoveScaled(24,0,21,4)
+            Expand = True
+            Placeholder = ("special designator, overrides label in citations")
+          }
+        }
+        { HBox70 HBox
+          MoveScaled(0,24,91,4.4444)
+          Padding = 2
+          { lblLocation8 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Shorthandintro ")
+          }
+          { txtSHORTHANDINTRO TextBox
+            MoveScaled(24,0,21,4)
+            Expand = True
+            Placeholder = ("override default introduction of shorthand")
+          }
+        }
+        { HBox74 HBox
+          MoveScaled(0,28,91,4.4444)
+          Padding = 2
+          { Label10 Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Options ")
+          }
+          { cbOPTIONS TextBox
+            MoveScaled(17,0,24,4)
+            NoTabFocus = True
+            Expand = True
+          }
+          { txtDescripcion4 TextBox
+            MoveScaled(43,0,14,4)
+            Background = Color.Background
+            NoTabFocus = True
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Descripción del tipo de entrada")
+          }
+        }
+        { HBox75 HBox
+          MoveScaled(0,32,91,4.4444)
+          Padding = 2
+          { Label27 Label
+            MoveScaled(0,0,16,3.5556)
+            #Translate = False
+            NoTabFocus = True
+            Alignment = Align.Right
+            Text = "Ids "
+          }
+          { txtIDS TextBox
+            MoveScaled(17,0,21,4)
+            Expand = True
+            Placeholder = ("citation key aliases")
+          }
+        }
+        { HBox76 HBox
+          MoveScaled(0,36,91,4.4444)
+          Padding = 2
+          { Label48 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Related ")
+          }
+          { txtRELATED TextBox
+            MoveScaled(19,0,7,4)
+            NoTabFocus = True
+            Expand = True
+            Placeholder = ("Clave BIB asociada")
+          }
+        }
+        { HBox77 HBox
+          MoveScaled(0,40,91,4.4444)
+          Padding = 2
+          { Label49 Label
+            MoveScaled(0,0,16,3.5556)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "RelatedType "
+          }
+          { cbRELATEDTYPE ComboBox
+            MoveScaled(18,0,24,3.5556)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+          { txtDescripcion5 TextBox
+            MoveScaled(44,0,14,4)
+            Background = Color.Background
+            NoTabFocus = True
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Descripción del tipo de entrada")
+          }
+        }
+        { HBox78 HBox
+          MoveScaled(0,44,91,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING2 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "RelatedString "
+          }
+          { txtRELATEDSTRING TextBox
+            MoveScaled(19,0,24,4)
+            NoTabFocus = True
+            Expand = True
+            Placeholder = ("Redacción manual del tipo de relación")
+          }
+        }
+        { HBox79 HBox
+          MoveScaled(0,48,91,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING1 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "EntrySet "
+          }
+          { txtENTRYSET TextBox
+            MoveScaled(19,0,21,4)
+            Expand = True
+            Placeholder = ("listado de claves (2 o más) para @set")
+          }
+          { Label46 Label
+            MoveScaled(39,0,12,3.5556)
+            #Translate = False
+            NoTabFocus = True
+            Alignment = Align.Right
+            Text = "CrossRef "
+          }
+          { txtCROSSREF TextBox
+            MoveScaled(51,0,21,4)
+            NoTabFocus = True
+            Expand = True
+            Placeholder = ("Clave BIB relacionada")
+          }
+        }
+        { HBox81 HBox
+          MoveScaled(0,52,91,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING3 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Xref "
+          }
+          { txtXREF TextBox
+            MoveScaled(16,0,21,4)
+            Expand = True
+            Placeholder = ("another entry key")
+          }
+          { lblRELATEDSTRING4 Label
+            MoveScaled(33,0,12,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Xdata "
+          }
+          { txtXDATA TextBox
+            MoveScaled(51,0,21,4)
+            Expand = True
+            Placeholder = ("Contenedor de entradas de claves para @xdata")
+          }
+        }
+      }
+      Index = 6
+      Text = ("Miscelánea 2")
+      { ScrollView8 ScrollView
+        MoveScaled(1,1,103,53)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox59 HBox
+          MoveScaled(0,0,94,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING8 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Presort "
+          }
+          { txtPRESORT TextBox
+            MoveScaled(27,0,21,4)
+            Expand = True
+            Placeholder = ("modify sorting")
+          }
+        }
+        { HBox86 HBox
+          MoveScaled(0,4,94,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING9 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Sortkey "
+          }
+          { txtSORTKEY TextBox
+            MoveScaled(23,0,21,4)
+            Expand = True
+            Placeholder = ("sort key, overrides everything except presort")
+          }
+        }
+        { HBox87 HBox
+          MoveScaled(0,8,94,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING10 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Sortname "
+          }
+          { txtSORTNAME TextBox
+            MoveScaled(26,0,21,4)
+            Expand = True
+            Placeholder = ("replaces author or editor when sorting")
+          }
+        }
+        { HBox88 HBox
+          MoveScaled(0,12,94,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING11 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Sortshorthand "
+          }
+          { txtSORTSHORTHAND TextBox
+            MoveScaled(23,0,21,4)
+            Expand = True
+            Placeholder = ("sortkey if entry has shorthand")
+          }
+        }
+        { HBox89 HBox
+          MoveScaled(0,16,94,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING12 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Sorttitle "
+          }
+          { txtSORTTITLE TextBox
+            MoveScaled(26,0,21,4)
+            Expand = True
+            Placeholder = ("replaces title when sorting")
+          }
+        }
+        { HBox90 HBox
+          MoveScaled(0,20,94,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING13 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Indexsorttitle "
+          }
+          { txtINDEXSORTTITLE TextBox
+            MoveScaled(26,0,21,4)
+            Expand = True
+            Placeholder = ("replaces title when sorting index")
+          }
+        }
+        { HBox91 HBox
+          MoveScaled(0,24,94,4.4444)
+          Padding = 2
+          { lblRELATEDSTRING14 Label
+            MoveScaled(0,0,16,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Sortyear "
+          }
+          { txtSORTYEAR TextBox
+            MoveScaled(23,0,21,4)
+            Expand = True
+            Placeholder = ("replaces year (from date) when sorting")
+          }
+        }
+        { HBox72 HBox
+          MoveScaled(0,28,94,4.4444)
+          Padding = 2
+          { lblLocation10 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("File ")
+          }
+          { txtFILE TextBox
+            MoveScaled(27,0,21,4)
+            Expand = True
+            Placeholder = ("ruta fija a un archivo")
+          }
+        }
+        { HBox62 HBox
+          MoveScaled(0,32,91,4.4444)
+          Padding = 2
+          { lblLANGID3 Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Abstract ")
+          }
+          { !txtABSTRACT TextBox
+            MoveScaled(18,0,24,4)
+            #Public = True
+            Expand = True
+          }
+          { ButtonMostrarTexto1 Button
+            MoveScaled(44,0,4,4)
+            Text = ("") & "..."
+          }
+        }
+        { HBox73 HBox
+          MoveScaled(0,36,91,4.4444)
+          Padding = 2
+          { lblNOTE Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Note ")
+          }
+          { txtNOTE TextBox
+            MoveScaled(18,0,21,4)
+            Expand = True
+          }
+          { ButtonMostrarTexto2 Button
+            MoveScaled(47,0,4,4)
+            Text = ("") & "..."
+          }
+        }
+        { HBox80 HBox
+          MoveScaled(0,40,91,4.4444)
+          Padding = 2
+          { lblLANGID Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Library ")
+          }
+          { txtLIBRARY TextBox
+            MoveScaled(18,0,24,4)
+            Expand = True
+          }
+          { ButtonMostrarTexto3 Button
+            MoveScaled(45,0,4,4)
+            Text = ("") & "..."
+          }
+        }
+        { HBox82 HBox
+          MoveScaled(0,44,91,4.4444)
+          Padding = 2
+          { lblANNOTATION Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Annotation ")
+          }
+          { txtANNOTATION TextBox
+            MoveScaled(18,0,21,4)
+            Expand = True
+          }
+          { ButtonMostrarTexto4 Button
+            MoveScaled(48,0,4,4)
+            Text = ("") & "..."
+          }
+        }
+        { HBox92 HBox
+          MoveScaled(0,48,91,4.4444)
+          Padding = 2
+          { BtnBuscarEtiquetas Button
+            MoveScaled(1,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Buscar etiquetas")
+            Picture = Picture["iconos/search.svg"]
+          }
+          { lblKEYWORDS4 Label
+            MoveScaled(5,0,12,4)
+            #Translate = False
+            Alignment = Align.Right
+            Text = "Etiquetas "
+          }
+          { txtETIQ TextBox
+            MoveScaled(22,0,24,4)
+            NoTabFocus = True
+            Expand = True
+            Placeholder = ("Etiquetas adicionales para el motor de búsqueda")
+          }
+        }
+      }
+      Index = 0
+    }
+    Index = 2
+    Text = ("Siglas y glosarios")
+    Picture = Picture["iconos/glo.svg"]
+    { HBox15 Panel
+      MoveScaled(1,0,15,10)
+      NoTabFocus = True
+      Arrangement = Arrange.Horizontal
+      { txtTMPglo TextArea
+        MoveScaled(0,0,12,6)
+        Expand = True
+        Wrap = True
+        ScrollBar = Scroll.Vertical
+      }
+    }
+    { HBox8 Panel
+      MoveScaled(3,10,52,20)
+      NoTabFocus = True
+      Arrangement = Arrange.Horizontal
+      { HBox6 Panel
+        MoveScaled(3,0,40,19)
+        NoTabFocus = True
+        Expand = True
+        Arrangement = Arrange.Vertical
+        { VGridGLO TableView
+          MoveScaled(14,1,17,9)
+          Font = Font["-1"]
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          Resizable = False
+        }
+      }
+    }
+    { HBox16 HBox
+      MoveScaled(1,31,105,4)
+      { BtnNuevoGlo Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        ToolTip = ("Agregar una nueva referencia")
+        Picture = Picture["iconos/+pestana.svg"]
+      }
+      { BtnEliminarGlo Button
+        MoveScaled(4,0,4,4)
+        NoTabFocus = True
+        ToolTip = ("Borrar entrada")
+        Picture = Picture["iconos/borrar.svg"]
+      }
+      { BtnRefrescarGlo Button
+        MoveScaled(8,0,4,4)
+        ToolTip = ("Refrescar listado de la base de datos")
+        Picture = Picture["iconos/refrescar.svg"]
+      }
+      { btnGuardarGlo Button
+        MoveScaled(12,0,4,4)
+        ToolTip = ("Guardar modificaciones")
+        Picture = Picture["iconos/guardar.svg"]
+      }
+      { btnGuardarCambiosGlo Button
+        MoveScaled(16,0,4,4)
+        ToolTip = ("Guardar modificaciones")
+        Picture = Picture["iconos/guardarComo.svg"]
+      }
+      { txtID TextBox
+        MoveScaled(20,0,10,4)
+        Visible = False
+        Background = Color.Background
+        NoTabFocus = True
+        Alignment = Align.Right
+        ReadOnly = True
+      }
+      { lblTotalesGLO TextLabel
+        MoveScaled(30,0,24.2222,4)
+        Expand = True
+        Alignment = Align.Center
+      }
+    }
+    { HBox2 HBox
+      MoveScaled(1,36,110,4)
+      { btnBuscarClaveGLO Button
+        MoveScaled(0,0,4,4)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { btnAgregarGloKey Button
+        MoveScaled(4,0,4,4)
+        Enabled = False
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { lblAlta2 Label
+        MoveScaled(10,0,8,4)
+        Alignment = Align.Right
+        Text = ("Clave  ")
+      }
+      { txtCLAVEglo TextBox
+        MoveScaled(23,0,14,4)
+        NoTabFocus = True
+        ToolTip = ("Clave para ser utilizada solo con LaTeX")
+        Expand = True
+        Alignment = Align.Left
+        Placeholder = ("Clave GLO única")
+      }
+      { lblAlta3 Label
+        MoveScaled(37,0,21,4)
+        AutoResize = True
+        Alignment = Align.Right
+        Text = ("    Exportar como  ")
+      }
+      { txtEXPORTARglo TextBox
+        MoveScaled(58,0,9,4)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
+        ReadOnly = True
+      }
+      { btnParcialGLO Button
+        MoveScaled(93,0,16,4)
+        Picture = Picture["iconos/face.svg"]
+      }
+    }
+    { HBox7 HBox
+      MoveScaled(1,40,103,4)
+      { Label11 Label
+        MoveScaled(0,0,16,4)
+        Font = Font["Bold"]
+        Foreground = &HFF0000
+        Alignment = Align.Right
+        Text = ("Tipo  ")
+      }
+      { cbTYPEentradaGlo ComboBox
+        MoveScaled(17,0,16,4)
+        NoTabFocus = True
+        ReadOnly = True
+      }
+      { lblKEYWORDS1 Label
+        MoveScaled(34,0,16,4)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Filtro "
+      }
+      { btnBuscarFiltroGlosario Button
+        MoveScaled(51,0,4,4)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { btnAgregarKey Button
+        MoveScaled(60,0,4,4)
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { txtARCHIVO TextBox
+        MoveScaled(65,0,13,4)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { ScrollView9 ScrollView
+      MoveScaled(1,45,107,42)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      Border = False
+      ScrollBar = Scroll.Vertical
+      { HBox17 HBox
+        MoveScaled(1,0,87,4.4444)
+        Padding = 2
+        { btnBuscarNombreGLO Button
+          MoveScaled(1,0,4,4)
+          Picture = Picture["iconos/search.svg"]
+        }
+        { lblKEYWORDS2 Label
+          MoveScaled(10,0,12,4)
+          #Translate = False
+          Alignment = Align.Right
+          Text = "Nombre "
+        }
+        { txtNAME TextBox
+          MoveScaled(28,0,24,4)
+          NoTabFocus = True
+          Expand = True
+          Placeholder = ("El nombre de la entrada. Respetar mayúscula/minúscula en la búsqueda.")
+        }
+        { BtnBuscarGoogle Button
+          MoveScaled(62,0,4,4)
+          NoTabFocus = True
+          Picture = Picture["iconos/web.svg"]
+        }
+      }
+      { HBox20 HBox
+        MoveScaled(1,4,87,4.4444)
+        Padding = 2
+        { ButtonMostrarTextoGlo Button
+          MoveScaled(1,0,4,4)
+          Text = ("") & "..."
+        }
+        { Label12 Label
+          MoveScaled(7,0,12,3.5556)
+          Alignment = Align.Right
+          Text = ("Description ")
+        }
+        { txtDESCRIPTION TextBox
+          MoveScaled(19,0,15,4)
+          Expand = True
+          Placeholder = ("La descripción del término.")
+        }
+      }
+      { HBox5 HBox
+        MoveScaled(1,8,87,4.4444)
+        Padding = 2
+        { Label7 Label
+          MoveScaled(2,0,16,3.5556)
+          Alignment = Align.Right
+          Text = ("Primera vez ")
+        }
+        { txtFIRST TextBox
+          MoveScaled(19,0,15,4)
+          Expand = True
+          Placeholder = ("Esta entrada aparecerá en el texto del documento la primera vez que se use.")
+        }
+      }
+      { HBox10 HBox
+        MoveScaled(1,12,87,4.4444)
+        Padding = 2
+        { btnBuscarTextoGLO Button
+          MoveScaled(1,0,4,4)
+          Picture = Picture["iconos/search.svg"]
+        }
+        { Label8 Label
+          MoveScaled(17,0,12,3.5556)
+          Alignment = Align.Right
+          Text = ("Text ")
+        }
+        { txtTEXT TextBox
+          MoveScaled(33,0,15,4)
+          Expand = True
+          Placeholder = ("Esta entrada aparecerá en el texto del documento.")
+        }
+      }
+      { HBox11 HBox
+        MoveScaled(1,16,87,4.4444)
+        Padding = 2
+        { Label1 Label
+          MoveScaled(2,0,16,3.5556)
+          Alignment = Align.Right
+          Text = ("Firstplural ")
+        }
+        { txtFPLURAL TextBox
+          MoveScaled(19,0,15,4)
+          Expand = True
+          Placeholder = ("Esta entrada es igual que plural, pero es solo válida para la primera vez que se llame a \\glspl.")
+        }
+      }
+      { HBox12 HBox
+        MoveScaled(1,20,87,4.4444)
+        Padding = 2
+        { lblLANGID2 Label
+          MoveScaled(0,0,16,4)
+          Alignment = Align.Right
+          Text = ("Plural ")
+        }
+        { !txtPLURAL TextBox
+          MoveScaled(18,0,24,4)
+          #Public = True
+          Expand = True
+          Placeholder = ("Esta entrada aparecerá en el texto cuando se utilice \\glspl.")
+        }
+      }
+      { HBox13 HBox
+        MoveScaled(0,24,87,4.4444)
+        Padding = 2
+        { lblLANGID1 Label
+          MoveScaled(0,0,16,4)
+          Alignment = Align.Right
+          Text = ("Sort ")
+        }
+        { !txtSORT TextBox
+          MoveScaled(18,0,24,4)
+          #Public = True
+          Expand = True
+          Placeholder = ("Este valor indica como makeindex deberı́a ordenar las entradas.")
+        }
+      }
+    }
+    Index = 3
+    Text = ("Metadatos")
+    Picture = Picture["iconos/metadatos.svg"]
+    { HBox83 HBox
+      MoveScaled(1,0,95,4)
+      Padding = 1
+      { BtnNuevoMeta Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        ToolTip = ("Agregar una nueva referencia")
+        Picture = Picture["iconos/+pestana.svg"]
+      }
+      { btnGuardarMeta Button
+        MoveScaled(4,0,4,4)
+        ToolTip = ("Cerrar la ventana")
+        Picture = Picture["iconos/guardar.svg"]
+      }
+      { btnGuardarCambiosMeta Button
+        MoveScaled(8,0,4,4)
+        ToolTip = ("Guardar modificaciones")
+        Picture = Picture["iconos/guardarComo.svg"]
+      }
+      { Spring6 Spring
+        MoveScaled(49,0,5,4)
+      }
+    }
+    { HBox85 HBox
+      MoveScaled(2,5,104,4)
+      Padding = 1
+      { txtId3 TextBox
+        MoveScaled(0,0,6,4)
+        Visible = False
+        NoTabFocus = True
+        ReadOnly = True
+      }
+      { Label29 Label
+        MoveScaled(7,0,23,4)
+        Alignment = Align.Right
+        Text = ("Metadatos para  ")
+      }
+      { txtnombreArchivo TextBox
+        MoveScaled(30,0,23,4)
+        Background = Color.Background
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
+      }
+      { lblAlta5 Label
+        MoveScaled(58,0,19,4)
+        AutoResize = True
+        Alignment = Align.Right
+        Text = ("    Será exportado como:  ")
+      }
+      { txtEXPORTARmeta TextBox
+        MoveScaled(77,0,26,3.5556)
+        Background = Color.Background
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
+        ReadOnly = True
+      }
+    }
+    { HBox93 HBox
+      MoveScaled(-1,9,111,4)
+      Visible = False
+      Padding = 2
+      { PictureBox1 PictureBox
+        MoveScaled(-10,0,23,4)
+      }
+      { rb7 RadioButton
+        MoveScaled(15,0,13,4)
+        AutoResize = True
+        Text = ("Todos  ")
+        Value = True
+      }
+      { rb1 RadioButton
+        MoveScaled(29,0,13,4)
+        AutoResize = True
+        Text = ("PDF (revista)  ")
+      }
+      { rb2 RadioButton
+        MoveScaled(43,0,11,4)
+        AutoResize = True
+        Text = ("PDF (libro)  ")
+      }
+      { rb3 RadioButton
+        MoveScaled(55,0,12,4)
+        AutoResize = True
+        Text = ("HTML / ePub  ")
+      }
+      { rb4 RadioButton
+        MoveScaled(68,0,12,4)
+        AutoResize = True
+        Text = ("XML-JATS  ")
+      }
+      { rb5 RadioButton
+        MoveScaled(80,0,22,3.5556)
+        Expand = True
+        AutoResize = True
+        Text = ("Libre Office / MS Word")
+      }
+    }
+    { HBox174 HBox
+      MoveScaled(0,13,103,0.8889)
+    }
+    { TabPanel3 TabStrip
+      MoveScaled(1,16,107,174)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      Count = 2
+      Index = 0
+      Text = ("Libro")
+      { ScrollView1 ScrollView
+        MoveScaled(2,2,94,323)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Border = False
+        ScrollBar = Scroll.Vertical
+        { HBox94 HBox
+          MoveScaled(0,0,78,4.4444)
+          Padding = 2
+          { Label76 Label
+            MoveScaled(3,0,23,4)
+            Alignment = Align.Right
+            Text = ("Título del libro  ")
+          }
+          { !txt84_bookTitle TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Título del libro")
+          }
+        }
+        { HBox95 HBox
+          MoveScaled(0,4,78,4.4444)
+          Padding = 2
+          { Label31 Label
+            MoveScaled(3,0,23,3.5556)
+            Alignment = Align.Right
+            Text = ("Título del artículo / capítulo  ")
+          }
+          { !txt06_pdftitle TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Título principal del documento")
+          }
+        }
+        { HBox96 HBox
+          MoveScaled(0,8,78,4.4444)
+          Padding = 2
+          { Label58 Label
+            MoveScaled(3,0,23,4)
+            Alignment = Align.Right
+            Text = ("Título en segundo idioma  ")
+          }
+          { !txt58_papertitletwo TextBox
+            MoveScaled(27,0,23,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Título principal en segundo idioma")
+          }
+        }
+        { HBox97 HBox
+          MoveScaled(0,12,78,4.4444)
+          Padding = 2
+          { Label32 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Subtítulo del artículo  ")
+          }
+          { !txt09_pdfsubtitle TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Subtítulo del título principal")
+          }
+        }
+        { HBox98 HBox
+          MoveScaled(0,16,78,4.4444)
+          Padding = 2
+          { Label33 Label
+            MoveScaled(1,0,23,4)
+            Alignment = Align.Right
+            Text = ("Autor(s)/Editor(s)  ")
+          }
+          { txt05_pdfauthor TextBox
+            MoveScaled(30,0,16,4)
+            Expand = True
+            Placeholder = ("Autor del documento")
+          }
+          { btnLimpiar Button
+            MoveScaled(49,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+        }
+        { HBox99 HBox
+          MoveScaled(0,20,78,4.4444)
+          Padding = 2
+          { Label34 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Título académico del autor  ")
+          }
+          { !txt10_pdfauthortitle TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Cargo o título académico del autor principal (solo uno)")
+          }
+        }
+        { HBox100 HBox
+          MoveScaled(0,24,78,4.4444)
+          Padding = 2
+          { Label59 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Fecha artículo recibido  ")
+          }
+          { !txt59_artrecibido TextBox
+            MoveScaled(23,0,20,4)
+            #Public = True
+            Placeholder = ("DD-mes-YYYY")
+          }
+          { txtANIO4 TextBox
+            MoveScaled(43,0,11,4)
+            Alignment = Align.Right
+            Placeholder = ("Año")
+          }
+          { txtMES4 TextBox
+            MoveScaled(54,0,11,4)
+            Alignment = Align.Right
+            Placeholder = ("Mes")
+          }
+          { txtDIA4 TextBox
+            MoveScaled(65,0,11,4)
+            Alignment = Align.Right
+            Placeholder = ("Día")
+          }
+        }
+        { HBox101 HBox
+          MoveScaled(0,28,78,4.4444)
+          Padding = 2
+          { Label60 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Fecha artículo aceptado  ")
+          }
+          { !txt60_artaceptado TextBox
+            MoveScaled(23,0,20,4)
+            #Public = True
+            Placeholder = ("DD-mes-YYYY")
+          }
+          { txtANIO5 TextBox
+            MoveScaled(43,0,11,4)
+            Placeholder = ("Año")
+          }
+          { txtMES5 TextBox
+            MoveScaled(54,0,11,4)
+            Placeholder = ("Mes")
+          }
+          { txtDIA5 TextBox
+            MoveScaled(65,0,11,4)
+            Placeholder = ("Día")
+          }
+        }
+        { HBox102 HBox
+          MoveScaled(0,32,84,4.4444)
+          Padding = 2
+          { Label35 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Date  ")
+          }
+          { !txtDate TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+            Text = ("0000-00")
+            Placeholder = ("YYYY-MM-DD")
+          }
+          { txtANIO6 TextBox
+            MoveScaled(47,0,11,4)
+            Placeholder = ("Año")
+          }
+          { txtMES6 TextBox
+            MoveScaled(58,0,11,4)
+            Placeholder = ("Mes")
+          }
+          { txtDIA6 TextBox
+            MoveScaled(69,0,11,4)
+            Placeholder = ("Día")
+          }
+        }
+        { HBox103 HBox
+          MoveScaled(0,36,84,4.4444)
+          Padding = 2
+          { Label42 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Fecha de creación  ")
+          }
+          { !txtCreationDate TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+          }
+          { txtANIO7 TextBox
+            MoveScaled(47,0,11,4)
+            Placeholder = ("Año")
+          }
+          { txtMES7 TextBox
+            MoveScaled(58,0,11,4)
+            Placeholder = ("Mes")
+          }
+          { txtDIA7 TextBox
+            MoveScaled(69,0,11,4)
+            Placeholder = ("Día")
+          }
+        }
+        { HBox104 HBox
+          MoveScaled(0,40,84,4.4444)
+          Padding = 2
+          { Label36 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Mod. date  ")
+          }
+          { !txtModDate TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+          }
+          { txtANIO8 TextBox
+            MoveScaled(47,0,11,4)
+            Placeholder = ("Año")
+          }
+          { txtMES8 TextBox
+            MoveScaled(58,0,11,4)
+            Placeholder = ("Mes")
+          }
+          { txtDIA8 TextBox
+            MoveScaled(69,0,11,4)
+            Placeholder = ("Día")
+          }
+        }
+        { HBox105 HBox
+          MoveScaled(0,44,84,4.4444)
+          Padding = 2
+          { Label37 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Meta Date  ")
+          }
+          { !txtMetaDate TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+            Placeholder = ("YYYY/MM/DD")
+          }
+        }
+        { HBox106 HBox
+          MoveScaled(0,48,78,4.4444)
+          Padding = 2
+          { Label38 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Tipo de licencia  ")
+          }
+          { txt15_pdfcopyright ComboBox
+            MoveScaled(24,0,37,4)
+            Expand = True
+            ReadOnly = True
+          }
+        }
+        { HBox107 HBox
+          MoveScaled(0,52,78,4.4444)
+          Padding = 2
+          { Label41 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("URL licencia  ")
+          }
+          { !txt16_pdflicenseurl TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+          }
+        }
+        { HBox108 HBox
+          MoveScaled(0,56,78,4.4444)
+          Padding = 2
+          { Label45 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Asunto/Subject  ")
+          }
+          { !txtSubjet TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox109 HBox
+          MoveScaled(0,60,78,4.4444)
+          Padding = 2
+          { Label57 Label
+            MoveScaled(1,0,23,4)
+            Alignment = Align.Right
+            Text = ("Claves/Etiquetas  ")
+          }
+          { !txt57_palabrasclave TextBox
+            MoveScaled(27,0,23,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("ESPAÑOL Palabras clave separadas por coma")
+          }
+        }
+        { HBox110 HBox
+          MoveScaled(0,64,78,4.4444)
+          Padding = 2
+          { Label47 Label
+            MoveScaled(1,0,23,4)
+            Alignment = Align.Right
+            Text = ("Keyword  ")
+          }
+          { !txtKeywords2 TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Palabras clave para el segundo idioma separadas por coma")
+          }
+        }
+        { HBox111 HBox
+          MoveScaled(0,68,78,4.4444)
+          Padding = 2
+          { Label50 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Caption Writer  ")
+          }
+          { !txtCaptionWriter TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Se utiliza para especificar el nombre de quien a modificado el contenido del documento")
+          }
+        }
+        { HBox112 HBox
+          MoveScaled(0,72,78,4.4444)
+          Padding = 2
+          { Label51 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact Address  ")
+          }
+          { !txtContactAddress TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            ToolTip = ("Los 8 puntos que siguen describen cómo ponerse en contacto con la persona o institución responsable del documento")
+            Expand = True
+            Placeholder = ("Ver el ToolTip")
+          }
+        }
+        { HBox113 HBox
+          MoveScaled(0,76,78,4.4444)
+          Padding = 2
+          { Label52 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact City  ")
+          }
+          { !txtContactCity TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox114 HBox
+          MoveScaled(0,80,78,4.4444)
+          Padding = 2
+          { Label53 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact Postcode  ")
+          }
+          { !txtContactPostCode TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox115 HBox
+          MoveScaled(0,84,78,4.4444)
+          Padding = 2
+          { Label54 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact Country  ")
+          }
+          { !txtContactCountry TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox116 HBox
+          MoveScaled(0,88,78,4.4444)
+          Padding = 2
+          { Label55 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact Region  ")
+          }
+          { !txtContactRegion TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox117 HBox
+          MoveScaled(0,92,78,4.4444)
+          Padding = 2
+          { Label56 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact Phone  ")
+          }
+          { !txtContactPhone TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox118 HBox
+          MoveScaled(0,96,78,4.4444)
+          Padding = 2
+          { Label61 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact Email  ")
+          }
+          { !txtContactEmail TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox119 HBox
+          MoveScaled(0,100,78,4.4444)
+          Padding = 2
+          { Label62 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Contact URL  ")
+          }
+          { !txtContactURL TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox120 HBox
+          MoveScaled(0,104,78,4.4444)
+          Padding = 2
+          { btnMostarJournal2 Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label63 Label
+            MoveScaled(5,0,19,4)
+            Alignment = Align.Right
+            Text = ("Publicación  ")
+          }
+          { !txtPublication TextBox
+            MoveScaled(35,0,25,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Especifica el título del diario, revista  o documento principal")
+          }
+          { btnLimpiarJournal Button
+            MoveScaled(63,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+        }
+        { HBox121 HBox
+          MoveScaled(0,108,78,4.4444)
+          Padding = 2
+          { Label66 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("DOI Artículo  ")
+          }
+          { !txt85_doiRevista TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("DOI del artículo")
+          }
+        }
+        { HBox122 HBox
+          MoveScaled(0,112,78,4.4444)
+          Padding = 2
+          { Label64 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("DOI  ")
+          }
+          { !txt43_pdfdoi TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Corresponde al DOI del libro o revista")
+          }
+        }
+        { HBox123 HBox
+          MoveScaled(0,116,78,4.4444)
+          Padding = 2
+          { Label65 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ARK CAICYT  ")
+          }
+          { !txtXX_arkcaicyt TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Código de clasificación")
+          }
+        }
+        { HBox124 HBox
+          MoveScaled(0,120,78,4.4444)
+          Padding = 2
+          { Label67 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Editorial  ")
+          }
+          { !txtPublisher2 TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Nombre de la editorial")
+          }
+        }
+        { HBox125 HBox
+          MoveScaled(0,124,78,4.4444)
+          Padding = 2
+          { Label68 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("URL editorial  ")
+          }
+          { !txtBaseURL TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("URL de la editorial")
+          }
+        }
+        { HBox126 HBox
+          MoveScaled(0,128,78,4.4444)
+          Padding = 2
+          { Label69 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Tipo de documento  ")
+          }
+          { cmbType ComboBox
+            MoveScaled(25,0,20,3.5556)
+            ReadOnly = True
+          }
+          { lblCBType TextBox
+            MoveScaled(47,0,20,4)
+            Background = Color.Background
+            Expand = True
+            Text = ("Refiere a: artículos, libros, disertaciones, periódicos, etc.")
+            ReadOnly = True
+          }
+        }
+        { HBox127 HBox
+          MoveScaled(0,132,78,4.4444)
+          Padding = 2
+          { Label70 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Formato  ")
+          }
+          { cbPubType ComboBox
+            MoveScaled(25,0,20,4)
+            ReadOnly = True
+          }
+          { lblPUBType TextBox
+            MoveScaled(47,0,20,4)
+            Background = Color.Background
+            Expand = True
+            Text = ("Formato de la publicación")
+            ReadOnly = True
+          }
+        }
+        { HBox170 HBox
+          MoveScaled(0,135.5556,78,4.4444)
+          Padding = 2
+          { Label118 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Encuadernación  ")
+          }
+          { txt89_binding ComboBox
+            MoveScaled(25,0,20,3.5556)
+            ReadOnly = True
+          }
+        }
+        { HBox128 HBox
+          MoveScaled(0,141,78,4.4444)
+          Padding = 2
+          { Label71 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Volumen núm.  ")
+          }
+          { !txtVolNum TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+          }
+        }
+        { HBox129 HBox
+          MoveScaled(0,145,78,4.4444)
+          Padding = 2
+          { Label72 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Issue núm.  ")
+          }
+          { !txtIssueNum TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+          }
+        }
+        { HBox130 HBox
+          MoveScaled(0,149,78,4.4444)
+          Padding = 2
+          { Label73 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Rango de páginas  ")
+          }
+          { !txt33_pdfpagerange TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Números de página en los que el documento aparece dentro de la publicación")
+          }
+          { lblPageTotal4 Label
+            MoveScaled(43,0,16,4)
+            Alignment = Align.Right
+            Text = ("Total de páginas  ")
+          }
+          { !txt50_pagetotal TextBox
+            MoveScaled(63,0,12,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Total de páginas del documento")
+          }
+        }
+        { HBox131 HBox
+          MoveScaled(0,153,78,4.4444)
+          Padding = 2
+          { Label74 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Primera página  ")
+          }
+          { !txt62_fpage TextBox
+            MoveScaled(21,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Número de página inicial")
+          }
+          { Label75 Label
+            MoveScaled(38,0,16,4)
+            Alignment = Align.Right
+            Text = ("Última página  ")
+          }
+          { !txt63_lpage TextBox
+            MoveScaled(54,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Número de página final")
+          }
+        }
+        { HBox132 HBox
+          MoveScaled(0,157,78,4.4444)
+          Padding = 2
+          { Label77 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Número de edición  ")
+          }
+          { !txt34_pdfbookedition TextBox
+            MoveScaled(27,0,28,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Edición del libro, especificado como texto, NO en número")
+          }
+        }
+        { hbISBN HBox
+          MoveScaled(0,161,78,4.4444)
+          Padding = 2
+          { Label78 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ISBN  ")
+          }
+          { !txt35_pdfisbn TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { hbISSN HBox
+          MoveScaled(0,165,78,4.4444)
+          Padding = 2
+          { Label79 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ISSN  ")
+          }
+          { !txt36_pdfissn TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Se refiere al ISSN de la versión impresa del documento")
+          }
+        }
+        { hbEISSN HBox
+          MoveScaled(0,169,78,4.4444)
+          Padding = 2
+          { Label80 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("eISSN  ")
+          }
+          { !txt37_pdfeissn TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Se refiere al ISSN de la versión electrónica del documento")
+          }
+        }
+        { HBox133 HBox
+          MoveScaled(0,173,78,4.4444)
+          Padding = 2
+          { Label81 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Estatus del documento  ")
+          }
+          { !txt38_pdfpubstatus TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+          }
+          { cbPubStatus ComboBox
+            MoveScaled(48,0,18,4)
+            Expand = True
+            ReadOnly = True
+          }
+        }
+        { HBox134 HBox
+          MoveScaled(0,177,78,4.4444)
+          Padding = 2
+          { Label82 Label
+            MoveScaled(1,0,23,4)
+            Alignment = Align.Right
+            Text = ("Idioma  ")
+          }
+          { !txtLang TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+            Text = ("es-ES")
+          }
+          { cbLang ComboBox
+            MoveScaled(48,0,19,4)
+            Expand = True
+            ReadOnly = True
+          }
+        }
+        { HBox135 HBox
+          MoveScaled(0,181,78,4.4444)
+          Padding = 2
+          { Label83 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Meta Lang  ")
+          }
+          { txt40_pdfmetalang ComboBox
+            MoveScaled(27,0,20,4)
+            ReadOnly = True
+          }
+        }
+        { HBox136 HBox
+          MoveScaled(0,185,78,4.4444)
+          Padding = 2
+          { Label84 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("URL documento  ")
+          }
+          { !txt42_pdfurl TextBox
+            MoveScaled(27,0,19,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Apunta a la URL completa del documento")
+          }
+        }
+        { HBox137 HBox
+          MoveScaled(0,189,78,4.4444)
+          Padding = 2
+          { Label85 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ID versión  ")
+          }
+          { !txtVersionId TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox138 HBox
+          MoveScaled(0,193,78,4.4444)
+          Padding = 2
+          { Label86 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ID documento  ")
+          }
+          { !txtDocumentId TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox139 HBox
+          MoveScaled(0,197,78,4.4444)
+          Padding = 2
+          { Label87 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ID editorial  ")
+          }
+          { !txt45_pdfidentifier TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Número de identificación de la editorial")
+          }
+        }
+        { HBox140 HBox
+          MoveScaled(0,201,78,4.4444)
+          Padding = 2
+          { Label88 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("PDF Rendition  ")
+          }
+          { cbPDFrendition ComboBox
+            MoveScaled(38,0,20,4)
+            ReadOnly = True
+          }
+        }
+        { HBox141 HBox
+          MoveScaled(0,205,78,4.4444)
+          Padding = 2
+          { Label89 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("PDFx Standard  ")
+          }
+          { cbPDFx ComboBox
+            MoveScaled(38,0,20,4)
+            ReadOnly = True
+          }
+        }
+        { HBox142 HBox
+          MoveScaled(0,209,78,4.4444)
+          Padding = 2
+          { Label90 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("XMPLangAlt  ")
+          }
+          { !txt02_pdfxmp1 TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Título en otro idioma")
+          }
+        }
+        { HBox143 HBox
+          MoveScaled(0,213,78,4.4444)
+          Padding = 2
+          { Label91 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("XMPLangAlt  ")
+          }
+          { !txt03_pdfxmp2 TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Título en otro idioma")
+          }
+        }
+        { HBox144 HBox
+          MoveScaled(0,217,78,4.4444)
+          Padding = 2
+          { Label92 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("XMPLangAlt  ")
+          }
+          { !txt04_pdfxmp3 TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Título en otro idioma")
+          }
+        }
+        { HBox145 HBox
+          MoveScaled(0,221,78,4.4444)
+          Padding = 2
+          { btnVerResumen Button
+            MoveScaled(1,0,4,4)
+            Text = ("") & "..."
+          }
+          { Label93 Label
+            MoveScaled(7,0,19,4)
+            Alignment = Align.Right
+            Text = ("Resumen  ")
+          }
+          { !txt56_resumen TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Resumen en idioma principal")
+          }
+        }
+        { HBox146 HBox
+          MoveScaled(0,225,78,4.4444)
+          Padding = 2
+          { btnVerAbstract Button
+            MoveScaled(1,0,4,4)
+            Text = ("") & "..."
+          }
+          { Label94 Label
+            MoveScaled(6,0,19,4)
+            Alignment = Align.Right
+            Text = ("Abstract  ")
+          }
+          { !txt48_abstract TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Resumen en segundo idioma")
+          }
+        }
+        { HBox147 HBox
+          MoveScaled(0,229,78,4.4444)
+          Padding = 2
+          { Label95 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Origen  ")
+          }
+          { !txt59_opt_source TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Archivo que da origen a la salida")
+          }
+        }
+        { HBox148 HBox
+          MoveScaled(0,233,78,4.4444)
+          Padding = 2
+          { btnAbrirPNG Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/document-orange.svg"]
+          }
+          { Label96 Label
+            MoveScaled(5,0,19,4)
+            Alignment = Align.Right
+            Text = ("Tapa del libro  ")
+          }
+          { !txt49_imagentapa TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+          }
+          { btnLimpiarTapa Button
+            MoveScaled(72,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+        }
+        { HBox149 HBox
+          MoveScaled(0,237,78,4.4444)
+          Padding = 2
+          { Label97 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Atribución de la imagen  ")
+          }
+          { !txt79_attribution TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Atribución de la imagen")
+          }
+        }
+        { HBox150 HBox
+          MoveScaled(0,241,82,4.4444)
+          Padding = 2
+          { btnMostrarColeccion Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label98 Label
+            MoveScaled(4,0,19,4)
+            Alignment = Align.Right
+            Text = ("Colección  ")
+          }
+          { !txtCOLECCION TextBox
+            MoveScaled(24,0,20,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Colección o Serie de la editorial")
+          }
+          { lblFormato Label
+            MoveScaled(44,0,14,4)
+            Alignment = Align.Right
+            Text = ("Formato  ")
+          }
+          { !txtFORMATO TextBox
+            MoveScaled(61,0,16,4)
+            #Public = True
+            Background = Color.Background
+            ReadOnly = True
+          }
+        }
+        { HBox151 HBox
+          MoveScaled(0,245,78,4.4444)
+          Padding = 2
+          { Label99 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Dirección/Editor  ")
+          }
+          { !txtDirection TextBox
+            MoveScaled(24,0,10,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+          }
+          { btnLimpiarRelation Button
+            MoveScaled(59,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+        }
+        { HBox152 HBox
+          MoveScaled(0,249,85,4.4444)
+          Padding = 2
+          { Label100 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Traductor  ")
+          }
+          { !txt53_traductor TextBox
+            MoveScaled(21,0,17,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Nombre y Apellido del traductor")
+          }
+          { lblIdiomaOriginal Label
+            MoveScaled(42,0,14,4)
+            Alignment = Align.Right
+            Text = ("IdiomaOriginal  ")
+          }
+          { txt54_idiomaorig ComboBox
+            MoveScaled(60,0,16,4)
+            ReadOnly = True
+          }
+        }
+        { HBox153 HBox
+          MoveScaled(0,253,78,4.4444)
+          Padding = 2
+          { Label101 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Ilustrador  ")
+          }
+          { !txt55_ilustrador TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Nombre y Apellido del ilustrador")
+          }
+        }
+        { HBox154 HBox
+          MoveScaled(0,257,78,4.4444)
+          Padding = 2
+          { Label102 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Categoría del artículo  ")
+          }
+          { !txtCatArt TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Categoría o disciplina del artículo (por ej.: Medicina)")
+          }
+        }
+        { HBox155 HBox
+          MoveScaled(0,261,78,4.4444)
+          Padding = 2
+          { Label103 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("DOI relacionado  ")
+          }
+          { !txtDOIRel TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("DOI del artículo relacionado")
+          }
+        }
+        { HBox156 HBox
+          MoveScaled(0,265,78,4.4444)
+          Padding = 2
+          { Label104 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Género  ")
+          }
+          { !txt78_genero TextBox
+            MoveScaled(27,0,20,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox157 HBox
+          MoveScaled(0,269,78,4.4444)
+          Padding = 2
+          { Label105 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Tipo de publicación  ")
+          }
+          { cmbTypePub ComboBox
+            MoveScaled(27,0,20,4)
+            ReadOnly = True
+          }
+        }
+        { HBox158 HBox
+          MoveScaled(0,273,78,4.4444)
+          Padding = 2
+          { btnVerNota Button
+            MoveScaled(1,0,4,4)
+            Text = ("") & "..."
+          }
+          { Label106 Label
+            MoveScaled(7,0,19,4)
+            Alignment = Align.Right
+            Text = ("Nota sobre el artículo  ")
+          }
+          { !txt71_note TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Anotaciones sobre el artículo")
+          }
+        }
+        { HBox159 HBox
+          MoveScaled(0,277,78,4.4444)
+          Padding = 2
+          { btnMostarRevision Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label107 Label
+            MoveScaled(6,0,19,4)
+            Alignment = Align.Right
+            Text = ("Revisión por pares  ")
+          }
+          { !txt73_reviewer TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Revisión por pares")
+          }
+          { btnLimpiarRevisor Button
+            MoveScaled(72,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+        }
+        { HBox160 HBox
+          MoveScaled(0,281,78,4.4444)
+          Padding = 2
+          { Label108 Label
+            MoveScaled(2,0,23,4)
+            Alignment = Align.Right
+            Text = ("Copy editor  ")
+          }
+          { !txt74_proofreader TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Editor de copia")
+          }
+        }
+        { HBox161 HBox
+          MoveScaled(0,285,78,4.4444)
+          Padding = 2
+          { Label109 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Financiamiento  ")
+          }
+          { !txt76_fundingGroup TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Grupo de financiamiento")
+          }
+        }
+        { HBox162 HBox
+          MoveScaled(0,289,78,4.4444)
+          Padding = 2
+          { Label110 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Código de clas.  ")
+          }
+          { !txt77_subjGroup TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Código de clasificación")
+          }
+        }
+        { HBox163 HBox
+          MoveScaled(0,293,78,4.4444)
+          Padding = 2
+          { Label111 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Fecha de edición  ")
+          }
+          { txtANIO TextBox
+            MoveScaled(27,0,11,4)
+            Placeholder = ("Año")
+          }
+          { txtMES TextBox
+            MoveScaled(38,0,11,4)
+            Placeholder = ("Mes")
+          }
+          { txtDIA TextBox
+            MoveScaled(49,0,11,4)
+            Placeholder = ("Día")
+          }
+        }
+        { HBox164 HBox
+          MoveScaled(0,297,78,4.4444)
+          Padding = 2
+          { Label112 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Fecha pub. en línea  ")
+          }
+          { txtANIO2 TextBox
+            MoveScaled(27,0,11,4)
+            Placeholder = ("Año")
+          }
+          { txtMES2 TextBox
+            MoveScaled(38,0,11,4)
+            Placeholder = ("Mes")
+          }
+          { txtDIA2 TextBox
+            MoveScaled(49,0,11,4)
+            Placeholder = ("Día")
+          }
+        }
+        { HBox165 HBox
+          MoveScaled(0,301,78,4.4444)
+          Padding = 2
+          { Label113 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Fecha pub. impresa  ")
+          }
+          { txtANIO3 TextBox
+            MoveScaled(28,0,11,4)
+            Placeholder = ("Año")
+          }
+          { txtMES3 TextBox
+            MoveScaled(39,0,11,4)
+            Placeholder = ("Mes")
+          }
+          { txtDIA3 TextBox
+            MoveScaled(50,0,11,4)
+            Placeholder = ("Día")
+          }
+        }
+        { HBox166 HBox
+          MoveScaled(0,305,78,4.4444)
+          Padding = 2
+          { btnMostarConferencia Button
+            MoveScaled(1,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label114 Label
+            MoveScaled(5,0,19,4)
+            Alignment = Align.Right
+            Text = ("Conferencia  ")
+          }
+          { !txt82_conference TextBox
+            MoveScaled(27,0,10,4)
+            #Public = True
+            Background = Color.Background
+            ReadOnly = True
+          }
+          { !txt82_conferenceVisual TextBox
+            MoveScaled(37,0,26,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Título de la conferencia")
+          }
+          { btnLimpiarConferencia Button
+            MoveScaled(72,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+        }
+        { HBox167 HBox
+          MoveScaled(0,309,78,4.4444)
+          Padding = 2
+          { Label115 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Notas  ")
+          }
+          { !txt86_annotation TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Notas y/o comentarios")
+          }
+        }
+        { HBox169 HBox
+          MoveScaled(0,313,78,4.4444)
+          Padding = 2
+          { Label117 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Audiencia  ")
+          }
+          { !txt88_audiencia TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Audiencia")
+          }
+        }
+        { HBox168 HBox
+          MoveScaled(0,317,78,4.4444)
+          Padding = 2
+          { Label116 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("HTMLFirstPageBottom  ")
+          }
+          { !txt87_HTMLFirstPageBottom TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Pie de la web del libro")
+          }
+        }
+      }
+      Index = 1
+      Text = ("Revista")
+      { ToolPanel2 ToolPanel
+        MoveScaled(1,3,97,94)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Count = 2
+        Animated = True
+        Index = 0
+        Text = ("Metadatos de la revista")
+        Index = 1
+        Text = ("Metadatos de los artículos")
+        { HBox3 HBox
+          MoveScaled(0,0,95,4)
+          Padding = 1
+          { BtnNuevoMeta2 Button
+            MoveScaled(0,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Agregar una nueva referencia")
+            Picture = Picture["iconos/+pestana.svg"]
+          }
+          { btnGuardarMeta2 Button
+            MoveScaled(4,0,4,4)
+            ToolTip = ("Cerrar la ventana")
+            Picture = Picture["iconos/guardar.svg"]
+          }
+          { btnGuardarCambiosMeta2 Button
+            MoveScaled(8,0,4,4)
+            ToolTip = ("Guardar modificaciones")
+            Picture = Picture["iconos/guardarComo.svg"]
+          }
+          { Spring1 Spring
+            MoveScaled(49,0,5,4)
+          }
+        }
+        { VListaArticulos TableView
+          MoveScaled(1,5,70,12)
+          Font = Font["-1"]
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          AutoResize = False
+          Resizable = False
+        }
+        { HBox172 HBox
+          MoveScaled(0,17,78,4)
+          Padding = 1
+          { Label119 Label
+            MoveScaled(3,0,23,3.5556)
+            Alignment = Align.Right
+            Text = ("Título del artículo  ")
+          }
+          { !txt0x_title TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Título principal del documento")
+          }
+        }
+        Index = 0
+      }
+      Index = 0
+    }
+    Index = 0
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg8" sodipodi:docname="security-low.svg" inkscape:version="0.91 r13725" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px"
+	 viewBox="4 4 24 24" enable-background="new 4 4 24 24" xml:space="preserve">
+<title  id="title7895">Antu icon Theme</title>
+<sodipodi:namedview  id="base" units="px" inkscape:snap-midpoints="false" inkscape:object-nodes="false" inkscape:object-paths="true" inkscape:bbox-paths="true" inkscape:showpageshadow="false" inkscape:bbox-nodes="true" inkscape:snap-bbox="true" inkscape:window-y="0" inkscape:window-x="0" inkscape:window-height="697" inkscape:window-width="1360" inkscape:current-layer="layer1" inkscape:document-units="px" inkscape:pageshadow="2" inkscape:pageopacity="0.0" guidetolerance="10" gridtolerance="10" inkscape:cy="13.822203" objecttolerance="10" inkscape:cx="18.301294" bordercolor="#666666" borderopacity="1.0" showgrid="true" pagecolor="#ffffff" inkscape:zoom="16" inkscape:snap-smooth-nodes="false" inkscape:snap-intersection-paths="true" inkscape:snap-bbox-midpoints="true" inkscape:snap-bbox-edge-midpoints="true" inkscape:window-maximized="1">
+	<inkscape:grid  id="grid7897" type="xygrid" empspacing="4"></inkscape:grid>
+</sodipodi:namedview>
+<g id="layer1" transform="translate(0,-282.64999)" inkscape:label="Capa 1" inkscape:groupmode="layer">
+	<path id="rect4187-7" inkscape:connector-curvature="0" fill="#B2262C" d="M6,286.829c-1.108,0-2,0.813-2,1.821v9.107
+		c0,0.051,0.011,0.098,0.016,0.147C4.013,298.008,4,298.109,4,298.213v0.911c0,6.307,5.352,11.384,12,11.384s12-5.077,12-11.384
+		v-0.911c0-0.104-0.013-0.205-0.015-0.308c0.003-0.049,0.015-0.097,0.015-0.147v-9.107c0-1.009-0.894-1.821-2-1.821H16H6z"/>
+	
+		<linearGradient id="rect4200-5_1_" gradientUnits="userSpaceOnUse" x1="24.3604" y1="311.7584" x2="24.3603" y2="333.6149" gradientTransform="matrix(1 0 0 -1 -8.3599 621.3547)">
+		<stop  offset="0" style="stop-color:#FC393D"/>
+		<stop  offset="1" style="stop-color:#FD5238"/>
+	</linearGradient>
+	<path id="rect4200-5" inkscape:connector-curvature="0" fill="url(#rect4200-5_1_)" d="M6,287.739c-0.554,0-1,0.406-1,0.911v9.563
+		v0.456v0.456c0,5.802,4.906,10.473,11,10.473s11-4.671,11-10.473v-0.456v-0.456v-9.563c0-0.504-0.445-0.911-1-0.911H16H6z"/>
+	<path id="rect4146" inkscape:connector-curvature="0" fill="#FD7A75" d="M6,287.739c-0.554,0-1,0.406-1,0.911v3.643v6.375h11
+		v-5.464v-3.643v-1.821h-3H6z M16,298.668v10.928c1.522,0,2.973-0.278,4.289-0.784c1.316-0.505,2.502-1.238,3.497-2.143
+		c0.993-0.906,1.798-1.985,2.353-3.185c0.556-1.199,0.861-2.52,0.861-3.906v-0.911H16z"/>
+	<path id="path4291" inkscape:connector-curvature="0" fill="#B2262C" d="M11,292.293c-1.1,0.001-1.991,0.815-1.989,1.817
+		c0,0.489,0.218,0.958,0.603,1.298l3.57,3.255l-3.57,3.254c-0.793,0.693-0.818,1.843-0.057,2.567
+		c0.761,0.722,2.023,0.745,2.816,0.051c0.019-0.017,0.038-0.033,0.056-0.051l3.572-3.256l3.571,3.256
+		c0.762,0.722,2.023,0.745,2.815,0.051c0.793-0.694,0.819-1.844,0.058-2.566c-0.018-0.018-0.037-0.034-0.058-0.052l-3.571-3.254
+		l3.571-3.255c0.79-0.698,0.808-1.847,0.041-2.566c-0.39-0.365-0.929-0.564-1.486-0.549c-0.519,0.014-1.011,0.211-1.37,0.55
+		l-3.571,3.254l-3.572-3.254C12.054,292.491,11.538,292.293,11,292.293z"/>
+	<path id="path4291-5" inkscape:connector-curvature="0" fill="#FFFFFF" d="M11,291.382c-1.1,0.001-1.991,0.815-1.989,1.817
+		c0,0.489,0.218,0.958,0.603,1.298l3.57,3.254l-3.57,3.254c-0.793,0.694-0.818,1.843-0.057,2.567
+		c0.761,0.723,2.023,0.745,2.816,0.052c0.019-0.017,0.038-0.034,0.056-0.052l3.572-3.256l3.571,3.256
+		c0.762,0.723,2.023,0.745,2.815,0.052c0.793-0.695,0.819-1.844,0.058-2.566c-0.018-0.018-0.037-0.035-0.058-0.053l-3.571-3.254
+		l3.571-3.254c0.79-0.699,0.808-1.848,0.041-2.566c-0.39-0.365-0.929-0.564-1.486-0.549c-0.519,0.014-1.011,0.211-1.37,0.55
+		l-3.571,3.254l-3.572-3.254C12.054,291.58,11.538,291.382,11,291.382z"/>
+</g>
+</svg>

@@ -1,0 +1,65 @@
+/* fonts */
+
+@font-face {
+    font-display: swap;
+    font-family: 'Latin Modern Mono';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../font/lmmono-bold.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Latin Modern Mono';
+    font-style: italic;
+    font-weight: bold;
+    src: url('../font/lmmono-bolditalic.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Latin Modern Mono';
+    font-style: italic;
+    font-weight: normal;
+    src: url('../font/lmmono-italic.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Latin Modern Mono';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/lmmono-normal.woff');
+}
+
+    @font-face {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/georgia.woff');
+    }
+
+    @font-face {
+    font-family: 'Georgia';
+    font-style: italic;
+    font-weight: normal;
+    src: url('../font/georgiai.woff');
+    }
+
+
+    @font-face {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../font/georgiab.woff');
+    }
+
+
+    @font-face {
+    font-family: 'Georgia';
+    font-style: italic;
+    font-weight: bold;
+    src: url('../font/georgiaz.woff');
+    }
+
+

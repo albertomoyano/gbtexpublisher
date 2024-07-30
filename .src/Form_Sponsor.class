@@ -1,0 +1,215 @@
+' Gambas class file
+
+Private Conn As Connection
+Private Contenido As Result
+Private Busqueda As Result
+Public FormConferencia As Form_Conferencia
+Private FilaSeleccionada As Integer
+
+Public Sub btnCerrarSponsor_Click()
+
+  Conn.Close
+  Me.Close()
+
+End
+
+Public Sub Form_Open()
+
+  'me conceto a la base de datos
+  Conn = Mod_Conn.conectar()
+
+  btnGuardarSponsor.Visible = False
+  btnGuardarCambiosSponsor.Visible = False
+
+  Mostrar_Lista()
+
+End
+
+Public Sub Mostrar_Lista() 'Función que rellena el GridView
+
+  Dim Record As String
+  Dim Count As Integer
+  Dim i As Integer
+
+  GridSponsor.Clear()
+
+  Contenido = Conn.Exec("select * from patrocinio ORDER BY id DESC")
+
+  ' diseñamos el tableview
+  GridSponsor.Columns.Count = 3
+  GridSponsor.Header = True
+  GridSponsor.Columns[0].Title = "ID"
+  GridSponsor.Columns[0].Width = 60
+  GridSponsor.Columns[1].Title = "Patrocinio"
+  GridSponsor.Columns[1].Width = 840
+  GridSponsor.Columns[2].Title = "Objeto"
+  GridSponsor.Columns[2].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  GridSponsor.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    GridSponsor[i, 0].Text = Contenido!id
+    GridSponsor[i, 1].Text = Contenido!patrocinio
+    GridSponsor[i, 2].Text = Contenido!objeto
+    Contenido.MoveNext
+  Next
+
+  Contenido = Conn.Exec("SELECT COUNT(*) FROM patrocinio")
+
+  Record = Contenido[0]
+  Count = Record
+
+End
+
+Public Sub BtnNuevoSponsor_Click()
+
+  BtnNuevoSponsor.Visible = False
+  btnGuardarSponsor.Visible = True
+  btnGuardarCambiosSponsor.visible = False
+
+  Dim Idn As Integer
+
+  LimpiarCampos  'Limpiamos todos los campos
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = Conn.Exec("SELECT MAX(id) FROM patrocinio LIMIT 1")
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtID.Text = Idn
+  Mostrar_Lista
+  txtPatrocinio.SetFocus()
+
+End
+
+Public Function LimpiarCampos()
+
+  'Limpiamos los campos
+  txtID.Text = ""
+  txtPatrocinio.Text = ""
+  txtObjeto.Text = ""
+
+End
+
+Public Sub btnGuardarSponsor_Click()
+
+  Dim Comando As String
+
+  ' Escapa los caracteres especiales(comilla simple)en el título
+  Dim tituloEscapado As String
+
+  tituloEscapado = Replace(txtPatrocinio.Text, "'", "''")
+
+  eliminarBlancos
+
+  Comando = "SELECT * FROM patrocinio WHERE patrocinio = '" & tituloEscapado & "'"
+  Busqueda = Conn.Exec(Comando)
+
+  ' Verificar si se encontraron resultados en la consulta
+  If Busqueda.Count > 0 Then
+    Message.Warning("La colección que desea agregar ya existe en la base de datos.")
+    Return ' Salir de la función si el título ya existe
+  Endif
+
+  Contenido = Conn.Create("patrocinio")
+
+  guardarCampos
+
+  Contenido.Update
+  Message.Info("Nuevo patrocinio guardado.")
+
+  Mostrar_Lista ' Refrescamos la lista de entradas
+  LimpiarCampos ' Limpiamos los campos
+
+  btnGuardarCambiosSponsor.Visible = False
+  btnGuardarSponsor.Visible = False
+  BtnNuevoSponsor.Visible = True
+
+End
+
+Public Function eliminarBlancos()
+
+  EliminarEspaciosAlInicioYFinal(txtPatrocinio)
+  EliminarEspaciosAlInicioYFinal(txtObjeto)
+
+End
+
+Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
+
+  Dim texto As String
+
+  texto = textbox.Text
+  texto = Trim$(texto)
+  textbox.Text = texto
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txtID.Text
+  Contenido!patrocinio = txtPatrocinio.Text
+  Contenido!objeto = txtObjeto.Text
+
+End
+
+Public Sub GridSponsor_RowClick(Row As Integer)
+
+  BtnNuevoSponsor.Visible = False
+  btnGuardarCambiosSponsor.visible = True
+  btnGuardarSponsor.Visible = False
+
+  txtID.Text = GridSponsor[Row, 0].Text
+  txtPatrocinio.Text = GridSponsor[Row, 1].Text
+  txtObjeto.Text = GridSponsor[Row, 2].Text
+
+  FilaSeleccionada = Row
+
+  ' Ahora habilita el botón después de confirmar que hay una fila seleccionada.
+  btnSeleccion.Enabled = True
+
+End
+
+Public Sub btnGuardarCambiosSponsor_Click()
+
+  BtnNuevoSponsor.Visible = True
+  btnGuardarSponsor.Visible = False
+  btnGuardarCambiosSponsor.visible = False
+
+  'eliminamos blancos de inicio y final de cadena en los textbox
+  eliminarBlancos
+
+  Contenido = Conn.Edit("patrocinio", "id=" & txtID.Text)
+  guardarCampos
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  Mostrar_Lista
+  LimpiarCampos 'limpiar campos
+
+End
+
+Public Sub btnSeleccion_Click()
+
+  ' Verificar si hay una fila seleccionada.
+  If FilaSeleccionada >= 0 Then
+    Dim patrocinioSeleccionada As String = GridSponsor[FilaSeleccionada, 1].Text
+    ' Dim objetoSeleccionada As String = GridSponsor[FilaSeleccionada, 2].Text
+
+    ' Accede al formulario original y establece los valores en los TextBox.
+    If FormConferencia Then
+      FormConferencia.txtPatrocinio07.Text = patrocinioSeleccionada
+      ' FormConferencia.txtObjeto.Text = objetoSeleccionada
+    Endif
+
+    ' Cierra el formulario actual.
+    Me.Close()
+  Else
+    Message.Warning("Debe seleccionar un patrocinador.")
+  Endif
+
+End
