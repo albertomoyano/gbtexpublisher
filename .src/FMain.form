@@ -165,6 +165,10 @@
       Text = ("Exportar referencias bibliográficas")
       Picture = Picture["iconos/exportar.svg"]
     }
+    { menuRespaldoBDD Menu
+      Text = ("Respado de la BDD en GitHub")
+      Picture = Picture["iconos/exportar.svg"]
+    }
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
       Picture = Picture["iconos/chart-3.png"]
@@ -220,11 +224,6 @@
       Picture = Picture["iconos/configure.svg"]
       Enabled = False
       Visible = False
-    }
-    { menuRespaldoBDD Menu
-      Text = ("Respado de la BDD en GitHub")
-      Picture = Picture["iconos/exportar.svg"]
-      Enabled = False
     }
     { adminGIT Menu
       Text = ("Administrar .gitignore")
@@ -466,9 +465,8 @@
     }
     { txtGIT TextBox
       MoveScaled(44,0,19,4)
-      Enabled = False
       Expand = True
-      Placeholder = ("coloque aquí su usuario GitLab / GitHub")
+      Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
     { MenuApp MenuButton
       MoveScaled(75,0,17.7778,4)
