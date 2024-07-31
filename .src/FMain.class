@@ -294,11 +294,8 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
   Wait 0.2
 
-  TerminalView1.Input("rm -rf pdf" & "\n")
-  Wait 0.2
-
-  Mkdir File.Dir(TextBox1.Text) &/ "pdf"
-  Wait 0.1
+  'revisamos la carpeta pdf y borramos el archivo
+  Mod_Funciones.ManagePdfFolder(TextBox1.Text)
 
   TerminalView1.Input("cat " & rutaFija &/ "general-book-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2
@@ -313,7 +310,7 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   Wait 0.2
 
   'ejecutamos en conteo del archivo LaTeX
-  TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n" & "clear" & "\n")
+  TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n")
   Wait 0.2
 
   TerminalView1.Input("rm -rf " & newFile & "\n")
@@ -323,7 +320,7 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   Wait 0.2
 
   'copiamos /files el archivo .log
-  TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n" & "clear" & "\n")
+  TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n")
   Wait 0.2
 
   'eliminamos los archivos auxiliares
@@ -331,7 +328,7 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   Wait 0.2
 
   'generamos una vista con texlogsieve
-  TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n" & "clear" & "\n")
+  TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n")
   Wait 0.2
 
   TerminalView1.SetFocus()
@@ -1450,7 +1447,7 @@ Public Sub limpiarCache_Click()
   TerminalView1.Input("git rm --cached -r html5/" & "\n")
   TerminalView1.Input("git rm --cached -r xhtml/" & "\n")
   TerminalView1.Input("git rm --cached -r odt-docx/" & "\n")
-  TerminalView1.Input("git rm --cached -r jats/" & "\n" & "clear" & "\n")
+  TerminalView1.Input("git rm --cached -r jats/" & "\n")
 
 End
 
@@ -1460,7 +1457,7 @@ Public Sub menuComprimir_Click()
 
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
 
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "tar cvzf " & fecha & "-" & BaseName & ".tar.gz *" "\n" & "clear" & "\n")
+  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "tar cvzf " & fecha & "-" & BaseName & ".tar.gz *" "\n")
 
   TerminalView1.SetFocus()
 

@@ -48,8 +48,8 @@ Public Sub CopiarArchivos(rutaTexto As String)
   If Not Exist(File.Dir(rutaTexto) & "/files/make4ht-indexing.lua") Then
     Copy "./make4ht-indexing.lua" To File.Dir(rutaTexto) & "/files/make4ht-indexing.lua"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/files/inicio-frontmatter.tex") Then
-    Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/files/inicio-frontmatter.tex"
+  If Not Exist(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
+    Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
   End If
 
   'copiamos los archivos de preámbulo
@@ -87,3 +87,19 @@ Public Sub CopiarArchivos(rutaTexto As String)
   End If
 
 End
+
+Public Sub ManagePdfFolder(rutaTexto As String)
+
+  Dim pdfPath As String = File.Dir(rutaTexto) & "/pdf"
+  Dim result As Boolean
+
+  ' Verifica si la carpeta existe
+  If Not Exist(pdfPath) Then
+    ' Si no existe, crea la carpeta
+    Mkdir pdfPath
+  Else
+    ' Si existe, borra los archivos con extensión .pdf
+    Shell "rm -rf " & pdfPath & "/" & File.BaseName(rutaTexto) & ".pdf" Wait
+  End If
+
+End Sub
