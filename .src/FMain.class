@@ -5931,3 +5931,52 @@ Public Sub txtTITLE_DblClick()
   AplicarMayusculasALetras(txtTITLE)
 
 End
+
+Public Sub AplicarMayusculasTotal(textBox As TextBox)
+
+  Dim Cadena As String
+  Dim Resultado As String
+
+  ' Obtener el texto actual del TextBox
+  Cadena = textBox.Text
+
+  ' Variable para determinar si el próximo carácter debe convertirse a mayúscula
+  Dim convertir As Boolean = True
+
+  ' Recorrer cada carácter en la cadena
+  For i As Integer = 1 To String.Len(Cadena)
+    Dim caracter As String = String.Mid(Cadena, i, 1)
+
+    ' Verificar si se debe convertir a mayúscula
+    If convertir Then
+      ' Verificar la excepción para la palabra "and"
+      Dim palabraAnd As String = String.LCase(String.Mid(Cadena, i, 3))
+
+      If palabraAnd = "and" Then
+        Resultado &= "and" ' Agregar "and" sin cambios
+        i = i + 2 ' Saltar las letras de la palabra "and"
+      Else
+        Resultado &= String.UCase(caracter) ' Convertir a mayúscula
+      End If
+
+      convertir = False
+    Else
+      Resultado &= String.UCase(caracter) ' Convertir a mayúscula
+    End If
+
+    ' Si el carácter actual es un espacio, el próximo carácter debe convertirse
+    If caracter = " " Then
+      convertir = True
+    End If
+  Next
+
+  ' Establecer el nuevo texto en el TextBox
+  textBox.Text = Resultado
+
+End
+
+Public Sub txtPUBLISHER_DblClick()
+
+  AplicarMayusculasTotal(txtPUBLISHER)
+
+End
