@@ -5980,3 +5980,36 @@ Public Sub txtPUBLISHER_DblClick()
   AplicarMayusculasTotal(txtPUBLISHER)
 
 End
+
+Public Sub menuCONVERSORpandoc_Click()
+  ' Configura el diálogo para seleccionar un archivo DOCX
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.docx", "Archivos Word", "*", "Todos los archivos"]
+  Dialog.AutoExt = True
+  Dialog.Path = User.Home
+
+  ' Abre el diálogo para seleccionar el archivo
+  If Dialog.OpenFile() Then
+    Return
+  Endif
+
+  ' Obtiene la ruta del directorio del archivo seleccionado
+  Dim directoryPath As String
+  directoryPath = File.Dir(Dialog.Path)
+
+  ' Construye la ruta completa para el archivo de salida
+  Dim outputPath As String
+  outputPath = directoryPath &/ "tmp.tex"
+
+  ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
+  Shell "pandoc --reference-links=false --wrap=none -t latex -f docx " & Quote$(Dialog.Path) & " -o " & Quote$(outputPath) Wait
+
+  ' Verifica si el archivo tmp.tex fue creado exitosamente
+  If Exist(outputPath) Then
+    Message.Info("La conversión a sido exitosa, el archivo: " & outputPath & " ha sido creado.")
+  Else
+    Message.Error("Error: No se pudo convertir el archivo.")
+  Endif
+
+End

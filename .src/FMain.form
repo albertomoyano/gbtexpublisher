@@ -157,6 +157,10 @@
       Text = ("Conversión de archivo .docx a .tex")
       Picture = Picture["iconos/conversor.svg"]
     }
+    { menuCONVERSORpandoc Menu
+      Text = ("Conversión simple y directa de .docx a .tex")
+      Picture = Picture["iconos/conversor.svg"]
+    }
     { menuAPUNTES Menu
       Text = ("Apuntes de producción")
       Picture = Picture["iconos/notas.svg"]
