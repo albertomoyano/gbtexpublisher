@@ -10,14 +10,17 @@
   { menuTEXTBOX Menu
     Text = ("menuContextual")
     Visible = False
-    { Menu1 Menu
+    { menuMIN Menu
       Text = ("Convertir todo a minúsculas")
     }
     { menuMAY Menu
       Text = ("Convertir todo a MAYÚSCULAS")
     }
-    { menuMAYinicial Menu
-      Text = ("Convertir MAYÚSCULA inicial")
+    { menuMAYinicialESPANOL Menu
+      Text = ("Convertir MAYÚSCULA inicial (español)")
+    }
+    { menuMAYinicialINGLES Menu
+      Text = ("Convertir MAYÚSCULA inicial (inglés)")
     }
   }
   { menuTareas Menu
@@ -1426,6 +1429,7 @@
             MoveScaled(21,0,12,4)
             #Public = True
             Expand = True
+            PopupMenu = "menuTEXTBOX"
           }
           { lblLocation11 Label
             MoveScaled(33,0,15,3.5556)
@@ -1451,6 +1455,7 @@
             MoveScaled(28,0,14,4)
             #Public = True
             Expand = True
+            PopupMenu = "menuTEXTBOX"
           }
           { Label9 Label
             MoveScaled(46,0,15,4)
@@ -1475,7 +1480,7 @@
           { txtINSTITUTION TextBox
             MoveScaled(18,0,21,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Patrocinante")
           }
           { Label25 Label

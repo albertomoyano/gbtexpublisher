@@ -6031,9 +6031,3 @@ Public Sub btnBuscarEnGoogle3_Click()
   Shell "xdg-open https://www.google.com/search?q=" & Consulta
 
 End
-
-Public Sub txtPUBLISHER_Menu()
-
-  Me.menuTEXTBOX.popup()
-
-End
