@@ -7,6 +7,19 @@
   Maximized = True
   Arrangement = Arrange.Vertical
   Padding = 4
+  { menuTEXTBOX Menu
+    Text = ("menuContextual")
+    Visible = False
+    { Menu1 Menu
+      Text = ("Convertir todo a minúsculas")
+    }
+    { menuMAY Menu
+      Text = ("Convertir todo a MAYÚSCULAS")
+    }
+    { menuMAYinicial Menu
+      Text = ("Convertir MAYÚSCULA inicial")
+    }
+  }
   { menuTareas Menu
     Text = ("menuTareas")
     Visible = False
@@ -1107,9 +1120,14 @@
             Picture = Picture["iconos/search.svg"]
           }
           { Label15 Label
-            MoveScaled(15,0,12,3.5556)
+            MoveScaled(7,0,12,3.5556)
             Alignment = Align.Right
             Text = ("JournalTitle ")
+          }
+          { btnBuscarEnGoogle3 Button
+            MoveScaled(23,0,4,4)
+            ToolTip = ("Buscar en internet")
+            Picture = Picture["iconos/web.svg"]
           }
           { !txtJOURNALTITLE TextBox
             MoveScaled(40,0,16,3.5556)
