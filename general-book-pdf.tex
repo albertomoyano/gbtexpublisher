@@ -207,38 +207,39 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 {\sf\bfseries\large\raggedright}
 {\thesection}{.5em}{}[]
 \titlespacing{\section}
-{\parindent}{18pt plus .1pt minus -.1pt}{6.75pt}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
 
 %diseño de subseccion
 \titleformat{\subsection}[hang]
 {\sf\large\raggedright}
 {\thesubsection}{.5em}{}[]
 \titlespacing{\subsection}
-{\parindent}{18pt plus .1pt minus -.1pt}{6.75pt}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
 
 %diseño de subsubseccion
 \titleformat{\subsubsection}[hang]
 {\rm\bfseries\normalsize\raggedright}
 {\thesubsubsection}{.5em}{}[]
 \titlespacing{\subsubsection}
-{\parindent}{18pt plus .1pt minus -.1pt}{6.75pt}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
 
 %diseño de parrafo para usar con los autores de compilaciones
 \titleformat{\paragraph}[runin]
-  {\normalfont\sc\MakeLowercase}
+  {\bfseries}
   {}{0em}{}
   [\mbox{ --- }]
 \titlespacing{\paragraph}
   {0pt}% antes de la raya
-  {6.75pt plus .1pt minus -.1pt}% antes del párrafo
+  {6.75pt plus 0.5pt minus 0.5pt}% antes del párrafo
   {0pt}% después de la raya
 
-%diseño de subparrafo TRUCO PARA CENTRAR NUMEROS DE NIGRA
+%diseño de subparrafo
 \titleformat{\subparagraph}[hang]
 {\sf\bfseries\large\centering}
 {\thesubparagraph}{.5em}{}[]
 \titlespacing{\subparagraph}
-{\parindent}{1pc plus .1pc minus -.2pc}{.5pc}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
 
 % DISEÑO DE CABEZALES
 \renewpagestyle{plain}[]{% \footrule
