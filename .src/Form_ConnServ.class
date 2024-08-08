@@ -130,6 +130,10 @@ Public Sub Form_Open()
     Copy "./Controlar_espacio_izquierda.py" To rutaScriptsExternos &/ "Controlar_espacio_izquierda.py"
   End If
 
+  If Not Exist(rutaScriptsExternos &/ "Buscar_palabra.py") Then
+    Copy "./Buscar_palabra.py" To rutaScriptsExternos &/ "Buscar_palabra.py"
+  End If
+
   'me concecto a la base de datos de inicio
   Conn = Mod_Conn.conectar2()
   Mostrar_Lista()
