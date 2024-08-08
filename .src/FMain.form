@@ -497,32 +497,11 @@
       MenuOnly = True
     }
   }
-  { HBox175 HBox
-    MoveScaled(0,12,98,4)
-    { BtnBuscarPROYECTO Button
-      MoveScaled(0,0,4,4)
-      NoTabFocus = True
-      Picture = Picture["iconos/search.svg"]
-    }
-    { Label122 Label
-      MoveScaled(5,0,25,4)
-      AutoResize = True
-      Alignment = Align.Center
-      Text = ("  Buscar en el proyecto  ")
-    }
-    { !txtBUSCARproyecto TextBox
-      MoveScaled(31,0,23,4)
-      #Public = True
-      NoTabFocus = True
-      Expand = True
-      ReadOnly = True
-    }
-  }
   { HBox4 HBox
-    MoveScaled(1,18,98,0.8889)
+    MoveScaled(1,13,98,0.8889)
   }
   { TabPanel1 TabStrip
-    MoveScaled(1,20,112,194)
+    MoveScaled(1,15,112,194)
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
