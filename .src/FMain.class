@@ -29,6 +29,7 @@ Public Sub Form_Open()
 
   pBash = TerminalView1.Exec(["/usr/bin/bash"])
   TerminalView1.SetFocus()
+  TerminalView1.Refresh()
 
   'configuración del ToDo
   Splitter2.Layout = [3, 1]
@@ -331,8 +332,9 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n")
   Wait 0.2
 
-  TerminalView1.SetFocus()
   Borrar_Aux
+  TerminalView1.SetFocus()
+  TerminalView1.Refresh()
 
 End
 
@@ -1371,6 +1373,7 @@ Public Sub Menu75_Click()'gitlab
   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.SetFocus()
+  TerminalView1.Refresh()
 
 End
 
@@ -1397,6 +1400,7 @@ Public Sub Menu77_Click()'github
   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.SetFocus()
+  TerminalView1.Refresh()
 
 End
 
@@ -2876,6 +2880,11 @@ Public Sub BtnEliminarBib_Click()
 End
 
 Public Sub BtnNuevoBib_Click()
+
+  'condicional que revisa que la conexión a la base este abierta
+  If Mod_Conn.Conn.Handle = 1 Then
+    Message.Error("La conexión a la base de datos no está abierta.")
+  End If
 
   BtnNuevoBib.Enabled = False
   BtnEliminarBib.Enabled = False
