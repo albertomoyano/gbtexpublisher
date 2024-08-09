@@ -79,8 +79,17 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 \usepackage[labelfont=bf,font=small,labelsep=period,format=plain]{caption}
 \usepackage{ragged2e}
 \usepackage{xcolor}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{bchart}
+\usepackage[most]{tcolorbox}
 
 % diseño de listas
+% opcion 1
+\usepackage{paralist}
+\setdefaultenum{1)}{a)}{i)}{}
+\pltopsep=0.5mm
+\plitemsep=0mm
+% opcion 2
 \usepackage{enumitem}
 \setlist{nosep,topsep=-\parskip}
 
@@ -239,7 +248,6 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 {\thesubparagraph}{.5em}{}[]
 \titlespacing{\subparagraph}
 {\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
-
 
 % DISEÑO DE CABEZALES
 \renewpagestyle{plain}[]{% \footrule
