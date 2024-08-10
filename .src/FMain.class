@@ -6005,3 +6005,9 @@ Public Sub menuMAYexcepciones_Click()
   AplicarMayusculasTotal(LastTextBox)
 
 End
+
+Public Sub menuMAYinicialINGLES_Click()
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+
+End
