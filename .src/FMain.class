@@ -5864,7 +5864,7 @@ Public Sub AplicarMayusculasALetras(textBox As TextBox)
 
 End
 
-Public Sub AplicarMayusculasTotal(textBox As TextBox)'conversion para LaTeX
+Public Sub AplicarMayusculasTotal(textBox As TextBox)
 
   Dim Resultado As String
 
@@ -5997,5 +5997,56 @@ End
 Public Sub menuMAYinicialINGLES_Click()
 
   If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarTitleCase(LastTextBox)
+
+End
+
+Public Sub AplicarTitleCase(textBox As TextBox)
+
+  Dim Resultado As String
+  Dim palabras As String[]
+
+  ' Dividir el texto en palabras separadas por espacios
+  palabras = Split(sTB_Text, " ")
+
+  ' Lista de palabras que deben ir en minúsculas (excepto si son la primera o última palabra)
+  Dim minusc As New Collection
+
+  minusc.Add("and", "and")
+  minusc.Add("but", "but")
+  minusc.Add("or", "or")
+  minusc.Add("the", "the")
+  minusc.Add("a", "a")
+  minusc.Add("an", "an")
+  minusc.Add("in", "in")
+  minusc.Add("on", "on")
+  minusc.Add("at", "at")
+  minusc.Add("by", "by")
+  minusc.Add("for", "for")
+  minusc.Add("with", "with")
+  minusc.Add("about", "about")
+  minusc.Add("from", "from")
+  minusc.Add("of", "of")
+  minusc.Add("to", "to")
+
+  For i As Integer = 0 To palabras.Max
+    Dim palabra As String = String.LCase(palabras[i])
+
+    ' Convertir la primera palabra y la última palabra a mayúsculas
+    If i = 0 Or i = palabras.Max Or Not minusc.Exist(palabra) Then
+      Resultado &= String.UCase(String.Left(palabras[i], 1)) & String.LCase(String.Mid(palabras[i], 2))
+    Else
+      ' Convertir las palabras en la lista de minúsculas sin cambios
+      Resultado &= palabra
+    End If
+
+    ' Añadir un espacio después de cada palabra, excepto la última
+    If i < palabras.Max Then
+      Resultado &= " "
+    End If
+  Next
+
+  ' Establecer el nuevo texto en el TextBox
+  textBox.Text = Resultado
 
 End

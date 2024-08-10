@@ -23,7 +23,7 @@
       Text = ("Convertir MAYÚSCULA inicial (para español)")
     }
     { menuMAYinicialINGLES Menu
-      Text = ("Convertir MAYÚSCULA inicial (para inglés)")
+      Text = ("Convertir MAYÚSCULA Title Case (para inglés)")
     }
     { Menu2 Menu
     }
