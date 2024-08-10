@@ -16,11 +16,26 @@
     { menuMAY Menu
       Text = ("Convertir todo a MAYÚSCULAS")
     }
+    { menuMAYexcepciones Menu
+      Text = ("Convertir a MAYÚSCULAS con excepciones")
+    }
     { menuMAYinicialESPANOL Menu
       Text = ("Convertir MAYÚSCULA inicial (español)")
     }
     { menuMAYinicialINGLES Menu
       Text = ("Convertir MAYÚSCULA inicial (inglés)")
+    }
+    { Menu2 Menu
+    }
+    { menuBUSCARgoogle Menu
+      Text = ("Buscar en Google")
+      Picture = Picture["iconos/web.svg"]
+    }
+    { menuWordReference Menu
+      Text = ("Buscar definición en WordReference")
+    }
+    { menuFUNDEU Menu
+      Text = ("Buscar definición en Fundeu")
     }
   }
   { menuTareas Menu
@@ -382,12 +397,6 @@
       { Menu51 Menu
         Text = ("https://www.fundeu.es/")
       }
-      { Menu50 Menu
-        Text = ("https://iedra.es/")
-      }
-      { Menu52 Menu
-        Text = ("https://www.reverso.net/")
-      }
       { Menu53 Menu
         Text = ("https://tex.stackexchange.com/")
       }
@@ -736,9 +745,11 @@
             Alignment = Align.Right
             Text = ("Author ")
           }
-          { txtAUTHOR TextBox
+          { txtAUTHOR TextBox AllTextBoxes
+            Name = "txtAUTHOR"
             MoveScaled(24,0,15,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Autor principal")
           }
           { lblNAMEADDON Label
@@ -746,10 +757,11 @@
             Alignment = Align.Right
             Text = ("NameAddOn ")
           }
-          { txtNAMEADDON TextBox
+          { txtNAMEADDON TextBox AllTextBoxes
+            Name = "txtNAMEADDON"
             MoveScaled(55,0,16,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Sigla, es conveniente hacer un enroque con el campo author")
           }
         }
@@ -761,10 +773,11 @@
             Alignment = Align.Right
             Text = ("BookAuthor ")
           }
-          { txtBOOKAUTHOR TextBox
+          { txtBOOKAUTHOR TextBox AllTextBoxes
+            Name = "txtBOOKAUTHOR"
             MoveScaled(19,0,15,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Autor del libro")
           }
           { lblNAMEADDON2 Label
@@ -772,9 +785,10 @@
             Alignment = Align.Right
             Text = ("ShortAuthor ")
           }
-          { txtShortAuthor TextBox
+          { txtShortAuthor TextBox AllTextBoxes
+            Name = "txtShortAuthor"
             MoveScaled(52,0,16,4)
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Apodo")
           }
         }
@@ -791,10 +805,11 @@
             Alignment = Align.Right
             Text = ("Editor ")
           }
-          { txtEDITOR TextBox
+          { txtEDITOR TextBox AllTextBoxes
+            Name = "txtEDITOR"
             MoveScaled(21,0,17,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
           }
           { lblEDITORtype Label
             MoveScaled(44,0,12,3.5556)
@@ -815,10 +830,11 @@
             Alignment = Align.Right
             Text = ("EditorA ")
           }
-          { txtEDITORa TextBox
+          { txtEDITORa TextBox AllTextBoxes
+            Name = "txtEDITORa"
             MoveScaled(19,0,17,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
           }
           { lblEDITORtype2 Label
             MoveScaled(42,0,12,3.5556)
@@ -839,10 +855,11 @@
             Alignment = Align.Right
             Text = ("EditorB ")
           }
-          { txtEDITORb TextBox
+          { txtEDITORb TextBox AllTextBoxes
+            Name = "txtEDITORb"
             MoveScaled(19,0,17,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
           }
           { lblEDITORtype3 Label
             MoveScaled(40,0,12,3.5556)
@@ -863,10 +880,11 @@
             Alignment = Align.Right
             Text = ("EditorC ")
           }
-          { txtEDITORc TextBox
+          { txtEDITORc TextBox AllTextBoxes
+            Name = "txtEDITORc"
             MoveScaled(20,0,17,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
           }
           { lblEDITORtype4 Label
             MoveScaled(45,0,12,3.5556)
@@ -887,10 +905,11 @@
             Alignment = Align.Right
             Text = ("Afterword ")
           }
-          { txtAFTERWORD TextBox
+          { txtAFTERWORD TextBox AllTextBoxes
+            Name = "txtAFTERWORD"
             MoveScaled(21,0,24,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Con Epílogo de")
           }
           { Label30 Label
@@ -898,10 +917,11 @@
             Alignment = Align.Right
             Text = ("Foreword ")
           }
-          { txtFOREWORD TextBox
+          { txtFOREWORD TextBox AllTextBoxes
+            Name = "txtFOREWORD"
             MoveScaled(65,0,21,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Con Prólogo de")
           }
         }
@@ -913,10 +933,11 @@
             Alignment = Align.Right
             Text = ("Commentator ")
           }
-          { txtCOMMENTATOR TextBox
+          { txtCOMMENTATOR TextBox AllTextBoxes
+            Name = "txtCOMMENTATOR"
             MoveScaled(22,0,20,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Con comentarios de")
           }
           { lblINTRODUCTION Label
@@ -924,10 +945,11 @@
             Alignment = Align.Right
             Text = ("Introduction ")
           }
-          { txtINTRODUCTION TextBox
+          { txtINTRODUCTION TextBox AllTextBoxes
+            Name = "txtINTRODUCTION"
             MoveScaled(64,0,24,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Con Introducción de")
           }
         }
@@ -940,10 +962,11 @@
             Alignment = Align.Right
             Text = ("Translator ")
           }
-          { txtTRANSLATOR TextBox
+          { txtTRANSLATOR TextBox AllTextBoxes
+            Name = "txtTRANSLATOR"
             MoveScaled(18,0,7,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Traducido por")
           }
           { lblANNOTATOR Label
@@ -951,10 +974,11 @@
             Alignment = Align.Right
             Text = ("Annotator ")
           }
-          { txtANNOTATOR TextBox
+          { txtANNOTATOR TextBox AllTextBoxes
+            Name = "txtANNOTATOR"
             MoveScaled(48,0,21,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Con anotaciones de")
           }
         }
@@ -966,10 +990,11 @@
             Alignment = Align.Right
             Text = ("Holder ")
           }
-          { txtHOLDER TextBox
+          { txtHOLDER TextBox AllTextBoxes
+            Name = "txtHOLDER"
             MoveScaled(22,0,21,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("of patent")
           }
           { lblRELATEDSTRING7 Label
@@ -978,10 +1003,12 @@
             Alignment = Align.Right
             Text = "Gender "
           }
-          { txtGENDER TextBox
+          { !txtGENDER TextBox AllTextBoxes
+            Name = "txtGENDER"
             MoveScaled(58,0,21,4)
+            #Public = True
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("gender of author or editor")
           }
         }
@@ -1008,15 +1035,11 @@
             Alignment = Align.Right
             Text = ("Title ")
           }
-          { btnBuscarEnGoogle Button
-            MoveScaled(26,0,4,4)
-            ToolTip = ("Buscar en internet")
-            Picture = Picture["iconos/web.svg"]
-          }
-          { txtTITLE TextBox
+          { txtTITLE TextBox AllTextBoxes
+            Name = "txtTITLE"
             MoveScaled(33,0,12,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Alignment = Align.Left
             Placeholder = ("Título principal")
           }
@@ -1029,10 +1052,11 @@
             Alignment = Align.Right
             Text = ("ShortTitle ")
           }
-          { txtSHORTTITLE TextBox
+          { txtSHORTTITLE TextBox AllTextBoxes
+            Name = "txtSHORTTITLE"
             MoveScaled(28,0,17,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Alignment = Align.Left
             Placeholder = ("Título recortado para footcite")
           }
@@ -1045,10 +1069,11 @@
             Alignment = Align.Right
             Text = ("IndexTitle ")
           }
-          { txtINDEXTITLE TextBox
+          { txtINDEXTITLE TextBox AllTextBoxes
+            Name = "txtINDEXTITLE"
             MoveScaled(19,0,21,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("if different from title")
           }
         }
@@ -1066,15 +1091,11 @@
             Alignment = Align.Right
             Text = ("BookTitle ")
           }
-          { btnBuscarEnGoogle2 Button
-            MoveScaled(19,0,4,4)
-            ToolTip = ("Buscar en internet")
-            Picture = Picture["iconos/web.svg"]
-          }
-          { txtBOOKTITLE TextBox
+          { txtBOOKTITLE TextBox AllTextBoxes
+            Name = "txtBOOKTITLE"
             MoveScaled(29,0,17,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Título del libro")
           }
           { lblEVENTTITLEADDON5 Label
@@ -1082,9 +1103,10 @@
             Alignment = Align.Right
             Text = ("  BookTitleAddOn ")
           }
-          { txtBookTitleAddOn TextBox
+          { txtBookTitleAddOn TextBox AllTextBoxes
+            Name = "txtBookTitleAddOn"
             MoveScaled(79,0,16,3.5556)
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Sigla")
           }
         }
@@ -1096,10 +1118,11 @@
             Alignment = Align.Right
             Text = ("MainTitle ")
           }
-          { txtMAINTITLE TextBox
+          { txtMAINTITLE TextBox AllTextBoxes
+            Name = "txtMAINTITLE"
             MoveScaled(20,0,20,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Título mayor")
           }
           { lblEVENTTITLEADDON3 Label
@@ -1107,9 +1130,10 @@
             Alignment = Align.Right
             Text = ("  MainTitleAddOn ")
           }
-          { txtMainTitleAddOn TextBox
+          { txtMainTitleAddOn TextBox AllTextBoxes
+            Name = "txtMainTitleAddOn"
             MoveScaled(79,0,16,4)
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Sigla")
           }
         }
@@ -1127,15 +1151,12 @@
             Alignment = Align.Right
             Text = ("JournalTitle ")
           }
-          { btnBuscarEnGoogle3 Button
-            MoveScaled(23,0,4,4)
-            ToolTip = ("Buscar en internet")
-            Picture = Picture["iconos/web.svg"]
-          }
-          { !txtJOURNALTITLE TextBox
+          { !txtJOURNALTITLE TextBox AllTextBoxes
+            Name = "txtJOURNALTITLE"
             MoveScaled(40,0,16,3.5556)
             #Public = True
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Nombre de la revista")
           }
           { lblEVENTTITLEADDON4 Label
@@ -1143,9 +1164,10 @@
             Alignment = Align.Right
             Text = ("  JournalTitleAddOn ")
           }
-          { txtJournalTitleAddOn TextBox
+          { txtJournalTitleAddOn TextBox AllTextBoxes
+            Name = "txtJournalTitleAddOn"
             MoveScaled(79,0,16,3.5556)
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Sigla")
           }
         }
@@ -1157,10 +1179,11 @@
             Alignment = Align.Right
             Text = ("IssueTitle ")
           }
-          { txtISSUETITLE TextBox
+          { txtISSUETITLE TextBox AllTextBoxes
+            Name = "txtISSUETITLE"
             MoveScaled(19,0,21,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("title of journal special issue")
           }
           { lblEVENTTITLEADDON2 Label
@@ -1168,9 +1191,10 @@
             Alignment = Align.Right
             Text = ("  IssueTitleAddOn ")
           }
-          { txtIssueTitleAddOn TextBox
+          { txtIssueTitleAddOn TextBox AllTextBoxes
+            Name = "txtIssueTitleAddOn"
             MoveScaled(79,0,16,4)
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Sigla")
           }
         }
@@ -1182,10 +1206,11 @@
             Alignment = Align.Right
             Text = ("EventTitle ")
           }
-          { txtEVENTTITLE TextBox
+          { txtEVENTTITLE TextBox AllTextBoxes
+            Name = "txtEVENTTITLE"
             MoveScaled(21,0,24,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("title of conference or event")
           }
           { lblEVENTTITLEADDON Label
@@ -1193,9 +1218,10 @@
             Alignment = Align.Right
             Text = ("  EventTitleAddOn ")
           }
-          { txtEventTitleAddOn TextBox
+          { txtEventTitleAddOn TextBox AllTextBoxes
+            Name = "txtEventTitleAddOn"
             MoveScaled(79,0,16,4)
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Sigla")
           }
         }
@@ -1207,10 +1233,11 @@
             Alignment = Align.Right
             Text = ("ReprintTitle ")
           }
-          { txtREPRINTTITLE TextBox
+          { txtREPRINTTITLE TextBox AllTextBoxes
+            Name = "txtREPRINTTITLE"
             MoveScaled(15,0,21,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("title of a reprint of the work")
           }
         }
@@ -1222,10 +1249,11 @@
             Alignment = Align.Right
             Text = ("Series ")
           }
-          { txtSERIES TextBox
+          { txtSERIES TextBox AllTextBoxes
+            Name = "txtSERIES"
             MoveScaled(17,0,21,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("publication series")
           }
         }
@@ -1246,9 +1274,11 @@
             Alignment = Align.Right
             Text = ("Chapter ")
           }
-          { txtChapter TextBox
+          { txtChapter TextBox AllTextBoxes
+            Name = "txtChapter"
             MoveScaled(51,0,21,3.5556)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
           }
         }
         { HBox36 HBox
@@ -1259,18 +1289,22 @@
             Alignment = Align.Right
             Text = ("Volume ")
           }
-          { txtVOLUME TextBox
+          { txtVOLUME TextBox AllTextBoxes
+            Name = "txtVOLUME"
             MoveScaled(17,0,16,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
           }
           { Label24 Label
             MoveScaled(29,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Volume(s) ")
           }
-          { txtBOLUMES TextBox
+          { txtBOLUMES TextBox AllTextBoxes
+            Name = "txtBOLUMES"
             MoveScaled(44,0,13,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("number of volumes for multi-volume work")
           }
         }
@@ -1282,18 +1316,22 @@
             Alignment = Align.Right
             Text = ("Number ")
           }
-          { txtNUMBER TextBox
+          { txtNUMBER TextBox AllTextBoxes
+            Name = "txtNUMBER"
             MoveScaled(13,0,16,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
           }
           { lblPART Label
             MoveScaled(29,0,12,3.5556)
             Alignment = Align.Right
             Text = ("Part ")
           }
-          { txtPART TextBox
+          { txtPART TextBox AllTextBoxes
+            Name = "txtPART"
             MoveScaled(50,0,11,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
           }
         }
         { HBox43 HBox
@@ -1304,18 +1342,22 @@
             Alignment = Align.Right
             Text = ("Edition ")
           }
-          { txtEDITION TextBox
+          { txtEDITION TextBox AllTextBoxes
+            Name = "txtEDITION"
             MoveScaled(20,0,21,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
           }
           { lblPART2 Label
             MoveScaled(41,1,12,3.5556)
             Alignment = Align.Right
             Text = ("Issue ")
           }
-          { txtISSUE TextBox
+          { txtISSUE TextBox AllTextBoxes
+            Name = "txtISSUE"
             MoveScaled(57,0,11,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("non-number issue of journal")
           }
         }
@@ -1344,9 +1386,11 @@
             Alignment = Align.Right
             Text = ("Year ")
           }
-          { txtYEAR TextBox
+          { txtYEAR TextBox AllTextBoxes
+            Name = "txtYEAR"
             MoveScaled(14,0,24,3.5556)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("YYYY (usar en revistas)")
           }
           { Label26 Label
@@ -1354,9 +1398,11 @@
             Alignment = Align.Right
             Text = ("EventDate ")
           }
-          { txtEVENTDATE TextBox
+          { txtEVENTDATE TextBox AllTextBoxes
+            Name = "txtEVENTDATE"
             MoveScaled(73,0,21,3.5556)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("conference or event date as (yyyy-mm-dd)")
           }
         }
@@ -1368,9 +1414,11 @@
             Alignment = Align.Right
             Text = ("Date ")
           }
-          { txtDATEY TextBox
+          { txtDATEY TextBox AllTextBoxes
+            Name = "txtDATEY"
             MoveScaled(14,0,21,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("YYYY-MM-DD")
           }
           { lblDate2 Label
@@ -1378,9 +1426,11 @@
             Alignment = Align.Right
             Text = ("  OrigDate ")
           }
-          { txtORIGDATE TextBox
+          { txtORIGDATE TextBox AllTextBoxes
+            Name = "txtORIGDATE"
             MoveScaled(57,0,21,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("YYYY-MM-DD")
           }
         }
@@ -1392,9 +1442,11 @@
             Alignment = Align.Right
             Text = ("urlDate ")
           }
-          { txtURLDATE TextBox
+          { txtURLDATE TextBox AllTextBoxes
+            Name = "txtURLDATE"
             MoveScaled(20,0,21,3.5556)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("YYYY-MM-DD")
           }
           { lblPART3 Label
@@ -1402,9 +1454,11 @@
             Alignment = Align.Right
             Text = ("Version ")
           }
-          { txtVERSION TextBox
+          { txtVERSION TextBox AllTextBoxes
+            Name = "txtVERSION"
             MoveScaled(61,0,11,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("revision number for software or manual")
           }
         }
@@ -1425,7 +1479,8 @@
             Alignment = Align.Right
             Text = ("Location ")
           }
-          { !txtLOCATION TextBox
+          { !txtLOCATION TextBox AllTextBoxes
+            Name = "txtLOCATION"
             MoveScaled(21,0,12,4)
             #Public = True
             Expand = True
@@ -1439,7 +1494,7 @@
           { txtORIGLOCATION TextBox
             MoveScaled(53,0,12,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Ubicación de la casa editora")
           }
         }
@@ -1451,7 +1506,8 @@
             Alignment = Align.Right
             Text = ("Publisher ")
           }
-          { !txtPUBLISHER TextBox
+          { !txtPUBLISHER TextBox AllTextBoxes
+            Name = "txtPUBLISHER"
             MoveScaled(28,0,14,4)
             #Public = True
             Expand = True
@@ -1462,10 +1518,11 @@
             Alignment = Align.Right
             Text = ("OrigPublisher ")
           }
-          { txtORIGPUBLISHER TextBox
+          { txtORIGPUBLISHER TextBox AllTextBoxes
+            Name = "txtORIGPUBLISHER"
             MoveScaled(62,0,14,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Casa editorial")
           }
         }
@@ -1477,7 +1534,8 @@
             Alignment = Align.Right
             Text = ("Institution ")
           }
-          { txtINSTITUTION TextBox
+          { txtINSTITUTION TextBox AllTextBoxes
+            Name = "txtINSTITUTION"
             MoveScaled(18,0,21,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
@@ -1488,10 +1546,11 @@
             Alignment = Align.Right
             Text = ("Organization ")
           }
-          { txtORGANIZATION TextBox
+          { txtORGANIZATION TextBox AllTextBoxes
+            Name = "txtORGANIZATION"
             MoveScaled(55,0,24,3.5556)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Organizador")
           }
         }
@@ -1503,10 +1562,11 @@
             Alignment = Align.Right
             Text = ("Pages ")
           }
-          { txtPAGES TextBox
+          { txtPAGES TextBox AllTextBoxes
+            Name = "txtPAGES"
             MoveScaled(17,0,7,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("00-000")
           }
           { lblPAGETOTAL Label
@@ -1514,10 +1574,11 @@
             Alignment = Align.Right
             Text = ("PageTotal ")
           }
-          { txtPAGETOTAL TextBox
+          { txtPAGETOTAL TextBox AllTextBoxes
+            Name = "txtPAGETOTAL"
             MoveScaled(42,0,21,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("total number of pages")
           }
         }
@@ -1529,10 +1590,11 @@
             Alignment = Align.Right
             Text = ("Pagination ")
           }
-          { txtPAGINATION TextBox
+          { txtPAGINATION TextBox AllTextBoxes
+            Name = "txtPAGINATION"
             MoveScaled(17,0,17,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("pagination format of (book)title")
           }
           { lblLocation2 Label
@@ -1540,10 +1602,11 @@
             Alignment = Align.Right
             Text = ("Venue ")
           }
-          { txtVENUE TextBox
+          { txtVENUE TextBox AllTextBoxes
+            Name = "txtVENUE"
             MoveScaled(44,0,12,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("of event")
           }
         }
@@ -1569,10 +1632,11 @@
             Alignment = Align.Right
             Text = ("BookPagination ")
           }
-          { txtBookPagination TextBox
+          { txtBookPagination TextBox AllTextBoxes
+            Name = "txtBookPagination"
             MoveScaled(67,0,12,4)
             Expand = True
-            PopupMenu = "Menu1"
+            PopupMenu = "menuTEXTBOX"
           }
         }
         { HBox84 HBox
@@ -1596,9 +1660,11 @@
             Alignment = Align.Right
             Text = "LangIdOpts "
           }
-          { txtLANGIDOPTS TextBox
+          { txtLANGIDOPTS TextBox AllTextBoxes
+            Name = "txtLANGIDOPTS"
             MoveScaled(64,0,21,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("polyglossia options for langid")
           }
         }
@@ -1610,9 +1676,11 @@
             Alignment = Align.Right
             Text = ("Language ")
           }
-          { txtLANGUAGE TextBox
+          { txtLANGUAGE TextBox AllTextBoxes
+            Name = "txtLANGUAGE"
             MoveScaled(19,0,21,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("language of work")
           }
           { lblLocation12 Label
@@ -1620,9 +1688,11 @@
             Alignment = Align.Right
             Text = ("  OrigLanguage ")
           }
-          { txtORIGLANGUAGE TextBox
+          { txtORIGLANGUAGE TextBox AllTextBoxes
+            Name = "txtORIGLANGUAGE"
             MoveScaled(55,0,21,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("orig language of work")
           }
         }
@@ -1647,9 +1717,11 @@
             Alignment = Align.Right
             Text = ("ISBN ")
           }
-          { txtISBN TextBox
+          { txtISBN TextBox AllTextBoxes
+            Name = "txtISBN"
             MoveScaled(21,0,11,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("International Standard Book Number")
           }
           { Label44 Label
@@ -1657,9 +1729,11 @@
             Alignment = Align.Right
             Text = ("ISSN ")
           }
-          { txtISSN TextBox
+          { txtISSN TextBox AllTextBoxes
+            Name = "txtISSN"
             MoveScaled(52,0,10,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("International Standard Serial Number")
           }
         }
@@ -1671,9 +1745,11 @@
             Alignment = Align.Right
             Text = ("ISMN ")
           }
-          { txtISMN TextBox
+          { txtISMN TextBox AllTextBoxes
+            Name = "txtISMN"
             MoveScaled(17,0,11,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("International Standard Music Number")
           }
           { lblISBN4 Label
@@ -1681,9 +1757,11 @@
             Alignment = Align.Right
             Text = ("ISRN ")
           }
-          { txtISRN TextBox
+          { txtISRN TextBox AllTextBoxes
+            Name = "txtISRN"
             MoveScaled(45,0,11,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = (" International Standard Technical Report Number")
           }
         }
@@ -1695,9 +1773,11 @@
             Alignment = Align.Right
             Text = ("ISAN ")
           }
-          { txtISAN TextBox
+          { txtISAN TextBox AllTextBoxes
+            Name = "txtISAN"
             MoveScaled(17,0,11,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("International Standard Audiovisual Number")
           }
           { lblISBN5 Label
@@ -1705,28 +1785,27 @@
             Alignment = Align.Right
             Text = ("ISWC ")
           }
-          { txtISWC TextBox
+          { txtISWC TextBox AllTextBoxes
+            Name = "txtISWC"
             MoveScaled(45,0,10,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("International Standard Work Code")
           }
         }
         { HBox54 HBox
           MoveScaled(0,12,80,4.4444)
           Padding = 2
-          { btnVisitarURL Button
-            MoveScaled(0,0,4,4)
-            ToolTip = ("Buscar en internet")
-            Picture = Picture["iconos/web.svg"]
-          }
           { Label21 Label
-            MoveScaled(8,0,12,3.5556)
+            MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
             Text = ("URL ")
           }
-          { txtURL TextBox
+          { txtURL TextBox AllTextBoxes
+            Name = "txtURL"
             MoveScaled(23,0,12,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("URL")
           }
         }
@@ -1738,9 +1817,11 @@
             Alignment = Align.Right
             Text = ("DOI ")
           }
-          { txtDOI TextBox
+          { txtDOI TextBox AllTextBoxes
+            Name = "txtDOI"
             MoveScaled(17,0,24,3.5556)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("Digital Object Identifier")
           }
         }
@@ -1752,9 +1833,11 @@
             Alignment = Align.Right
             Text = ("Eid ")
           }
-          { txtEID TextBox
+          { txtEID TextBox AllTextBoxes
+            Name = "txtEID"
             MoveScaled(17,0,10,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("electronic identifier of @article")
           }
           { lblISBN7 Label
@@ -1762,9 +1845,11 @@
             Alignment = Align.Right
             Text = ("Eprint ")
           }
-          { txtEPRINT TextBox
+          { txtEPRINT TextBox AllTextBoxes
+            Name = "txtEPRINT"
             MoveScaled(44,0,10,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("archive-specific electronic identifier")
           }
         }
@@ -1776,9 +1861,11 @@
             Alignment = Align.Right
             Text = ("EprintType ")
           }
-          { txtEPRINTYPE TextBox
+          { txtEPRINTYPE TextBox AllTextBoxes
+            Name = "txtEPRINTYPE"
             MoveScaled(17,0,10,4)
             Expand = True
+            PopupMenu = "menuTEXTBOX"
             Placeholder = ("type of identifier, eprintclass for further details")
           }
         }
@@ -2438,16 +2525,13 @@
           Alignment = Align.Right
           Text = "Nombre "
         }
-        { txtNAME TextBox
+        { txtNAME TextBox AllTextBoxes
+          Name = "txtNAME"
           MoveScaled(28,0,24,4)
           NoTabFocus = True
           Expand = True
+          PopupMenu = "menuTEXTBOX"
           Placeholder = ("El nombre de la entrada. Respetar mayúscula/minúscula en la búsqueda.")
-        }
-        { BtnBuscarGoogle Button
-          MoveScaled(62,0,4,4)
-          NoTabFocus = True
-          Picture = Picture["iconos/web.svg"]
         }
       }
       { HBox20 HBox
@@ -2462,9 +2546,11 @@
           Alignment = Align.Right
           Text = ("Description ")
         }
-        { txtDESCRIPTION TextBox
+        { txtDESCRIPTION TextBox AllTextBoxes
+          Name = "txtDESCRIPTION"
           MoveScaled(19,0,15,4)
           Expand = True
+          PopupMenu = "menuTEXTBOX"
           Placeholder = ("La descripción del término.")
         }
       }
@@ -2476,9 +2562,11 @@
           Alignment = Align.Right
           Text = ("Primera vez ")
         }
-        { txtFIRST TextBox
+        { txtFIRST TextBox AllTextBoxes
+          Name = "txtFIRST"
           MoveScaled(19,0,15,4)
           Expand = True
+          PopupMenu = "menuTEXTBOX"
           Placeholder = ("Esta entrada aparecerá en el texto del documento la primera vez que se use.")
         }
       }
@@ -2494,9 +2582,11 @@
           Alignment = Align.Right
           Text = ("Text ")
         }
-        { txtTEXT TextBox
+        { txtTEXT TextBox AllTextBoxes
+          Name = "txtTEXT"
           MoveScaled(33,0,15,4)
           Expand = True
+          PopupMenu = "menuTEXTBOX"
           Placeholder = ("Esta entrada aparecerá en el texto del documento.")
         }
       }
@@ -2508,9 +2598,11 @@
           Alignment = Align.Right
           Text = ("Firstplural ")
         }
-        { txtFPLURAL TextBox
+        { txtFPLURAL TextBox AllTextBoxes
+          Name = "txtFPLURAL"
           MoveScaled(19,0,15,4)
           Expand = True
+          PopupMenu = "menuTEXTBOX"
           Placeholder = ("Esta entrada es igual que plural, pero es solo válida para la primera vez que se llame a \\glspl.")
         }
       }
@@ -2522,10 +2614,11 @@
           Alignment = Align.Right
           Text = ("Plural ")
         }
-        { !txtPLURAL TextBox
+        { txtPLURAL TextBox AllTextBoxes
+          Name = "txtPLURAL"
           MoveScaled(18,0,24,4)
-          #Public = True
           Expand = True
+          PopupMenu = "menuTEXTBOX"
           Placeholder = ("Esta entrada aparecerá en el texto cuando se utilice \\glspl.")
         }
       }
@@ -2537,10 +2630,11 @@
           Alignment = Align.Right
           Text = ("Sort ")
         }
-        { !txtSORT TextBox
+        { txtSORT TextBox AllTextBoxes
+          Name = "txtSORT"
           MoveScaled(18,0,24,4)
-          #Public = True
           Expand = True
+          PopupMenu = "menuTEXTBOX"
           Placeholder = ("Este valor indica como makeindex deberı́a ordenar las entradas.")
         }
       }

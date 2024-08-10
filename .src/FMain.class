@@ -21,6 +21,8 @@ Public rutaTAPA As String
 Public BaseName As String
 Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
 ' Private Item_Seleccionado As String' para el ToDo
+Public sTB_Text As String
+Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
@@ -642,21 +644,9 @@ Public Sub Menu47_Click()'svg
 
 End
 
-Public Sub Menu50_Click()'iedra
-
-  Shell "xdg-open https://iedra.es/"
-
-End
-
-Public Sub Menu51_Click()'fundeu
+Public Sub Menu51_Click()'fundeu https://www.wordreference.com/definicion/
 
   Shell "xdg-open https://www.fundeu.es/"
-
-End
-
-Public Sub Menu52_Click()'https://www.reverso.net/
-
-  Shell "xdg-open https://www.reverso.net/"
 
 End
 
@@ -4165,24 +4155,6 @@ Public Sub btnChequearISBN_Click()
 
 End
 
-Public Sub btnBuscarEnGoogle_Click()
-
-  Dim Consulta As String = txtTITLE.Text
-
-  ' Verificar si el cuadro de texto está vacío
-  If Consulta = "" Then
-    Message.Warning("No hay URL para visitar. Por favor, ingrese una consulta.")
-    Return
-  End If
-
-  ' Reemplaza los espacios en blanco con el signo de "+" para formatear la consulta de búsqueda
-  Consulta = Replace(Consulta, " ", "+")
-
-  ' Abre el navegador con la consulta de búsqueda en Google
-  Shell "xdg-open https://www.google.com/search?q=" & Consulta
-
-End
-
 Public Sub btnAgregarCitationKey_Click()
 
   Dim textoOrigen As String
@@ -4363,18 +4335,6 @@ Public Sub btnAgregarCitationKey_Click()
   Else
     ' Si el tercer TextBox no está vacío, toma los primeros 4 caracteres
     txtCLAVEbib.Text = txtCLAVEbib.Text & Left(cadenaTercerTextBox, 4)
-  End If
-
-End
-
-Public Sub btnVisitarURL_Click()
-
-  Dim Consulta As String = txtURL.Text
-
-  If Consulta = "" Then
-    Message.Warning("Debe introducir una url válida.")
-  Else
-    Shell "xdg-open " & Consulta
   End If
 
 End
@@ -5874,36 +5834,17 @@ Public Sub menuADD_Click()
 
 End
 
-Public Sub btnBuscarEnGoogle2_Click()
-
-  Dim Consulta As String = txtBOOKTITLE.Text
-
-  ' Verificar si el cuadro de texto está vacío
-  If Consulta = "" Then
-    Message.Warning("No hay URL para visitar. Por favor, ingrese una consulta.")
-    Return
-  End If
-
-  ' Reemplaza los espacios en blanco con el signo de "+" para formatear la consulta de búsqueda
-  Consulta = Replace(Consulta, " ", "+")
-
-  ' Abre el navegador con la consulta de búsqueda en Google
-  Shell "xdg-open https://www.google.com/search?q=" & Consulta
-
-End
-
 Public Sub AplicarMayusculasALetras(textBox As TextBox)
 
-  Dim Cadena As String
   Dim Resultado As String
   Dim convertir As Boolean = True ' Capitalizar la primera letra al inicio
 
   ' Obtener el texto actual del TextBox
-  Cadena = textBox.Text
+  sTB_Text = TextBox.Text
 
   ' Recorrer cada carácter en la cadena
-  For i As Integer = 1 To String.Len(Cadena)
-    Dim caracter As String = String.Mid(Cadena, i, 1)
+  For i As Integer = 1 To String.Len(sTB_Text)
+    Dim caracter As String = String.Mid(sTB_Text, i, 1)
 
     ' Verificar si se debe convertir a mayúscula
     If convertir And (caracter >= "a" And caracter <= "z") Then
@@ -5916,7 +5857,7 @@ Public Sub AplicarMayusculasALetras(textBox As TextBox)
     ' Si el carácter actual es un punto
     If caracter = "." Then
       ' Asegurarse de que haya un espacio después del punto
-      If i < String.Len(Cadena) And String.Mid(Cadena, i + 1, 1) = " " Then
+      If i < String.Len(sTB_Text) And String.Mid(sTB_Text, i + 1, 1) = " " Then
         convertir = True
       End If
     End If
@@ -5924,7 +5865,7 @@ Public Sub AplicarMayusculasALetras(textBox As TextBox)
     ' Si el carácter actual es un espacio, el próximo carácter debe convertirse a mayúscula si se siguió un punto
     If caracter = " " Then
       ' Solo reactivar convertir si el carácter anterior era un punto
-      If i > 1 And String.Mid(Cadena, i - 1, 1) = "." Then
+      If i > 1 And String.Mid(sTB_Text, i - 1, 1) = "." Then
         convertir = True
       End If
     End If
@@ -5935,31 +5876,24 @@ Public Sub AplicarMayusculasALetras(textBox As TextBox)
 
 End
 
-Public Sub txtTITLE_DblClick()
-
-  AplicarMayusculasALetras(txtTITLE)
-
-End
-
 Public Sub AplicarMayusculasTotal(textBox As TextBox)
 
-  Dim Cadena As String
   Dim Resultado As String
 
   ' Obtener el texto actual del TextBox
-  Cadena = textBox.Text
+  sTB_Text = textBox.Text
 
   ' Variable para determinar si el próximo carácter debe convertirse a mayúscula
   Dim convertir As Boolean = True
 
   ' Recorrer cada carácter en la cadena
-  For i As Integer = 1 To String.Len(Cadena)
-    Dim caracter As String = String.Mid(Cadena, i, 1)
+  For i As Integer = 1 To String.Len(sTB_Text)
+    Dim caracter As String = String.Mid(sTB_Text, i, 1)
 
     ' Verificar si se debe convertir a mayúscula
     If convertir Then
       ' Verificar la excepción para la palabra "and"
-      Dim palabraAnd As String = String.LCase(String.Mid(Cadena, i, 3))
+      Dim palabraAnd As String = String.LCase(String.Mid(sTB_Text, i, 3))
 
       If palabraAnd = "and" Then
         Resultado &= "and" ' Agregar "and" sin cambios
@@ -5981,12 +5915,6 @@ Public Sub AplicarMayusculasTotal(textBox As TextBox)
 
   ' Establecer el nuevo texto en el TextBox
   textBox.Text = Resultado
-
-End
-
-Public Sub txtPUBLISHER_DblClick()
-
-  AplicarMayusculasTotal(txtPUBLISHER)
 
 End
 
@@ -6023,20 +5951,54 @@ Public Sub menuCONVERSORpandoc_Click()
 
 End
 
-Public Sub btnBuscarEnGoogle3_Click()
+Public Sub AllTextBoxes_MouseDown()
 
-  Dim Consulta As String = txtJOURNALTITLE.Text
+  LastTextBox = Last
+  sTB_Text = Last.Text
 
-  ' Verificar si el cuadro de texto está vacío
-  If Consulta = "" Then
-    Message.Warning("No hay URL para visitar. Por favor, ingrese una consulta.")
-    Return
-  End If
+End
+
+Public Sub menuBUSCARgoogle_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://www.google.com/search?q=" & sTB_Text)
+
+End
+
+Public Sub menuWordReference_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://www.wordreference.com/definicion/" & sTB_Text)
+
+End
+
+Public Sub menuFUNDEU_Click()
 
   ' Reemplaza los espacios en blanco con el signo de "+" para formatear la consulta de búsqueda
-  Consulta = Replace(Consulta, " ", "+")
+  sTB_Text = Replace(Replace(sTB_Text, " ", "+"), ",+", "+")
 
-  ' Abre el navegador con la consulta de búsqueda en Google
-  Shell "xdg-open https://www.google.com/search?q=" & Consulta
+  If sTB_Text <> "" Then Desktop.Open("https://cse.google.com/cse?cx=005053095451413799011:alg8dd3pluq&q=" & sTB_Text)
+
+End
+
+Public Sub menuMIN_Click()' Convierte el texto del TextBox capturado a minúscula
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+
+End
+
+Public Sub menuMAYinicialESPANOL_Click()
+
+  If sTB_Text <> "" Then AplicarMayusculasALetras(LastTextBox)
+
+End
+
+Public Sub menuMAY_Click()' Convierte el texto del TextBox capturado a mayúsculas
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.UCase(LastTextBox.Text)
+
+End
+
+Public Sub menuMAYexcepciones_Click()
+
+  If sTB_Text <> "" Then AplicarMayusculasTotal(LastTextBox)
 
 End
