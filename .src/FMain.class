@@ -6009,7 +6009,7 @@ Public Sub AplicarTitleCase(textBox As TextBox)
   ' Dividir el texto en palabras separadas por espacios
   palabras = Split(sTB_Text, " ")
 
-  ' Lista de palabras que deben ir en minúsculas (excepto si son la primera o última palabra)
+  ' Lista de palabras que deben ir en minúsculas (excepto si son la primera, última palabra, o después de un punto)
   Dim minusc As New Collection
 
   minusc.Add("and", "and")
@@ -6029,15 +6029,36 @@ Public Sub AplicarTitleCase(textBox As TextBox)
   minusc.Add("of", "of")
   minusc.Add("to", "to")
 
+  Dim convertirProximaPalabra As Boolean = True ' Para manejar después de un punto y la primera palabra
+
   For i As Integer = 0 To palabras.Max
     Dim palabra As String = String.LCase(palabras[i])
 
-    ' Convertir la primera palabra y la última palabra a mayúsculas
-    If i = 0 Or i = palabras.Max Or Not minusc.Exist(palabra) Then
-      Resultado &= String.UCase(String.Left(palabras[i], 1)) & String.LCase(String.Mid(palabras[i], 2))
+    ' Manejo de palabras con guiones
+    Dim subPalabras As String[] = Split(palabra, "-")
+    Dim palabraFinal As String = "" ' Inicializar palabraFinal en cada iteración
+
+    For Each subPalabra As String In subPalabras
+      ' Si es la primera, última palabra, después de un punto, o la subpalabra no está en la lista de minúsculas
+      If convertirProximaPalabra Or i = 0 Or i = palabras.Max Or Not minusc.Exist(subPalabra) Then
+        palabraFinal &= String.UCase(String.Left(subPalabra, 1)) & String.LCase(String.Mid(subPalabra, 2))
+      Else
+        palabraFinal &= subPalabra
+      End If
+
+      ' Añadir guion entre las subpalabras
+      If subPalabra <> subPalabras.Last Then
+        palabraFinal &= "-"
+      End If
+    Next
+
+    Resultado &= palabraFinal
+
+    ' Verificar si la palabra actual termina con un punto
+    If String.Right(palabras[i], 1) = "." Then
+      convertirProximaPalabra = True
     Else
-      ' Convertir las palabras en la lista de minúsculas sin cambios
-      Resultado &= palabra
+      convertirProximaPalabra = False
     End If
 
     ' Añadir un espacio después de cada palabra, excepto la última
