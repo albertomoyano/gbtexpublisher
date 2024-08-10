@@ -644,18 +644,6 @@ Public Sub Menu47_Click()'svg
 
 End
 
-Public Sub Menu51_Click()'fundeu https://www.wordreference.com/definicion/
-
-  Shell "xdg-open https://www.fundeu.es/"
-
-End
-
-Public Sub Menu53_Click()'https://tex.stackexchange.com/
-
-  Shell "xdg-open https://tex.stackexchange.com/"
-
-End
-
 Public Sub Menu17_Click()'abrir pdf
 
   Dim filePath As String

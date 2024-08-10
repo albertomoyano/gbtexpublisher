@@ -391,21 +391,11 @@
         Text = ("lwarp")
       }
     }
-    { Menu48 Menu
-      Text = ("Recursos WEB más consultados")
-      Picture = Picture["iconos/web.svg"]
-      { Menu51 Menu
-        Text = ("https://www.fundeu.es/")
-      }
-      { Menu53 Menu
-        Text = ("https://tex.stackexchange.com/")
-      }
+    { Menu67 Menu
     }
     { Menu64 Menu
       Text = ("Aviso Legal")
       Picture = Picture["iconos/clavebib.svg"]
-    }
-    { Menu67 Menu
     }
     { Menu68 Menu
       Text = ("Acerca de gbTeXpublisher")
