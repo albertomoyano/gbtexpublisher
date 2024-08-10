@@ -5876,7 +5876,7 @@ Public Sub AplicarMayusculasALetras(textBox As TextBox)
 
 End
 
-Public Sub AplicarMayusculasTotal(textBox As TextBox)
+Public Sub AplicarMayusculasTotal(textBox As TextBox)'conversion para LaTeX
 
   Dim Resultado As String
 
@@ -5987,18 +5987,21 @@ End
 
 Public Sub menuMAYinicialESPANOL_Click()
 
-  If sTB_Text <> "" Then AplicarMayusculasALetras(LastTextBox)
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarMayusculasALetras(LastTextBox)
 
 End
 
 Public Sub menuMAY_Click()' Convierte el texto del TextBox capturado a mayúsculas
 
-  If sTB_Text <> "" Then LastTextBox.Text = String.UCase(LastTextBox.Text)
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  LastTextBox.Text = String.UCase(LastTextBox.Text)
 
 End
 
 Public Sub menuMAYexcepciones_Click()
 
-  If sTB_Text <> "" Then AplicarMayusculasTotal(LastTextBox)
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarMayusculasTotal(LastTextBox)
 
 End

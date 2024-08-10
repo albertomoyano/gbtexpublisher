@@ -17,13 +17,13 @@
       Text = ("Convertir todo a MAYÚSCULAS")
     }
     { menuMAYexcepciones Menu
-      Text = ("Convertir a MAYÚSCULAS con excepciones")
+      Text = ("Todo a MAYÚSCULAS (menos «and» para BibLaTeX)")
     }
     { menuMAYinicialESPANOL Menu
-      Text = ("Convertir MAYÚSCULA inicial (español)")
+      Text = ("Convertir MAYÚSCULA inicial (para español)")
     }
     { menuMAYinicialINGLES Menu
-      Text = ("Convertir MAYÚSCULA inicial (inglés)")
+      Text = ("Convertir MAYÚSCULA inicial (para inglés)")
     }
     { Menu2 Menu
     }
