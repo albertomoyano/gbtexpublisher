@@ -118,7 +118,7 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
   contenido = File.Load(sFile)
 
   ' Dividir el contenido en líneas usando gb.NewLine
-  lineas = Split(contenido, gb.NewLine, "", True)
+  lineas = Split(contenido, "\n", "", True)
 
   ' Realizar reemplazos en cada línea
   For iLoop = 0 To lineas.Max
@@ -142,11 +142,11 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\^i", "î")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^o", "ô")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^u", "û")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "a", "ä")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "e", "ë")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "i", "ï")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "o", "ö")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "u", "ü")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "a", "ä")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "e", "ë")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "i", "ï")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "o", "ö")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "u", "ü")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~a", "ã")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~n", "ñ")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~o", "õ")
@@ -169,7 +169,7 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\DH", "Ð")
     lineas[iLoop] = Replace(lineas[iLoop], "\\dh", "ð")
     lineas[iLoop] = Replace(lineas[iLoop], "\\TH", "Þ")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\th", "þ")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\th", "þ")'se conflictua con la expresion \thispage
     lineas[iLoop] = Replace(lineas[iLoop], "\\'A", "Á")
     lineas[iLoop] = Replace(lineas[iLoop], "\\'E", "É")
     lineas[iLoop] = Replace(lineas[iLoop], "\\'I", "Í")
@@ -185,11 +185,11 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\^I", "Î")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^O", "Ô")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^U", "Û")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "A", "Ä")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "E", "Ë")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "I", "Ï")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "O", "Ö")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "U", "Ü")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "A", "Ä")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "E", "Ë")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "I", "Ï")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "O", "Ö")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "U", "Ü")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~A", "Ã")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~N", "Ñ")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~O", "Õ")
@@ -225,11 +225,11 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\^{i}", "î")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^{o}", "ô")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^{u}", "û")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{a}", "ä")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{e}", "ë")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{i}", "ï")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{o}", "ö")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{u}", "ü")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{a}", "ä")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{e}", "ë")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{i}", "ï")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{o}", "ö")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{u}", "ü")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~{a}", "ã")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~{n}", "ñ")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~{o}", "õ")
@@ -252,7 +252,7 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\{DH}", "Ð")
     lineas[iLoop] = Replace(lineas[iLoop], "\\{dh}", "ð")
     lineas[iLoop] = Replace(lineas[iLoop], "\\{TH}", "Þ")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\{th}", "þ")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\{th}", "þ")
     lineas[iLoop] = Replace(lineas[iLoop], "\\'{A}", "Á")
     lineas[iLoop] = Replace(lineas[iLoop], "\\'{E}", "É")
     lineas[iLoop] = Replace(lineas[iLoop], "\\'{I}", "Í")
@@ -268,11 +268,11 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\^{I}", "Î")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^{O}", "Ô")
     lineas[iLoop] = Replace(lineas[iLoop], "\\^{U}", "Û")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{A}", "Ä")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{E}", "Ë")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{I}", "Ï")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{O}", "Ö")
-    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{U}", "Ü")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{A}", "Ä")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{E}", "Ë")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{I}", "Ï")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{O}", "Ö")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{U}", "Ü")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~{A}", "Ã")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~{N}", "Ñ")
     lineas[iLoop] = Replace(lineas[iLoop], "\\~{O}", "Õ")
@@ -308,11 +308,11 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "{\\^{i}}", "î")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\^{o}}", "ô")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\^{u}}", "û")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{a}}", "ä")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{e}}", "ë")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{i}}", "ï")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{o}}", "ö")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{u}}", "ü")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{a}}", "ä")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{e}}", "ë")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{i}}", "ï")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{o}}", "ö")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{u}}", "ü")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\~{a}}", "ã")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\~{n}}", "ñ")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\~{o}}", "õ")
@@ -335,7 +335,7 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "{\\{DH}}", "Ð")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\{dh}}", "ð")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\{TH}}", "Þ")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\{th}}", "þ")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\{th}}", "þ")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\'{A}}", "Á")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\'{E}}", "É")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\'{I}}", "Í")
@@ -351,11 +351,11 @@ Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "{\\^{I}}", "Î")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\^{O}}", "Ô")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\^{U}}", "Û")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{A}}", "Ä")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{E}}", "Ë")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{I}}", "Ï")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{O}}", "Ö")
-    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{U}}", "Ü")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{A}}", "Ä")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{E}}", "Ë")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{I}}", "Ï")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{O}}", "Ö")
+    ' lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{U}}", "Ü")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\~{A}}", "Ã")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\~{N}}", "Ñ")
     lineas[iLoop] = Replace(lineas[iLoop], "{\\~{O}}", "Õ")
@@ -417,7 +417,7 @@ Public Sub menuPuntosSuspensivos(rutaTexto As String)
   contenido = File.Load(sFile)
 
   ' Dividir el contenido en líneas usando gb.NewLine
-  lineas = Split(contenido, gb.NewLine, "", True)
+  lineas = Split(contenido, "\n", "", True)
 
   ' Realizar reemplazos en cada línea
   For iLoop = 0 To lineas.Max
@@ -428,6 +428,7 @@ Public Sub menuPuntosSuspensivos(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "[...]", "(\\dots)")
     lineas[iLoop] = Replace(lineas[iLoop], "...", "\\dots")
     lineas[iLoop] = Replace(lineas[iLoop], "\\ldots{}", "\\dots \\ ")
+    lineas[iLoop] = Replace(lineas[iLoop], "  ", " ")
     lineas[iLoop] = Replace(lineas[iLoop], "\\ldots", "\\dots")
   Next
 
@@ -455,7 +456,7 @@ Public Sub menuFuncionesVacias(rutaTexto As String)
   contenido = File.Load(sFile)
 
   ' Dividir el contenido en líneas usando gb.NewLine
-  lineas = Split(contenido, gb.NewLine, "", True)
+  lineas = Split(contenido, "\n", "", True)
 
   ' Realizar reemplazos en cada línea
   For iLoop = 0 To lineas.Max
@@ -490,6 +491,14 @@ Public Sub menuFuncionesVacias(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\colorbox{}", "")
   Next
 
+  ' Eliminar líneas en blanco después de \begin{quote}
+  For iLoop = lineas.Max - 2 DownTo 0
+    If Trim(lineas[iLoop]) = "\begin{quote}" And Trim(lineas[iLoop + 1]) = "" Then
+      ' Elimina la línea vacía.
+      lineas.Remove(iLoop + 1)
+    End If
+  Next
+
   ' Unir las líneas con gb.NewLine para mantener los saltos de línea
   textoModificado = lineas.Join("\n\n")
 
@@ -513,8 +522,8 @@ Public Sub menuReemplazosOrtograficos(rutaTexto As String)
   ' Leer el contenido del archivo, conservando los saltos de línea
   contenido = File.Load(sFile)
 
-  ' Dividir el contenido en líneas usando gb.NewLine
-  lineas = Split(contenido, gb.NewLine, "", True)
+  ' Dividir el contenido en líneas
+  lineas = Split(contenido, "\n", "", True)
 
   ' Realizar reemplazos en cada línea
   For iLoop = 0 To lineas.Max
@@ -554,7 +563,7 @@ Public Sub menuReemplazosOrtograficos(rutaTexto As String)
     lineas[iLoop] = Replace(lineas[iLoop], "\\uline{.}", ".")
   Next
 
-  ' Unir las líneas con gb.NewLine para mantener los saltos de línea
+  ' Unir las líneas con doble gb.NewLine para conservar los párrafos
   textoModificado = lineas.Join("\n\n")
 
   ' Guardar el contenido modificado en el archivo
