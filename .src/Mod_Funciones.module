@@ -102,3 +102,464 @@ Public Sub ManagePdfFolder(rutaTexto As String)
   End If
 
 End Sub
+
+' Función para reemplazar caracteres escapados
+Public Sub ReemplazarCaracteresEscapados(rutaTexto As String)
+
+  Dim sFile As String
+  Dim contenido As String
+  Dim textoModificado As String
+  Dim iLoop As Integer
+  Dim lineas As String[]
+
+  sFile = File.Dir(rutaTexto) &/ File.BaseName(rutaTexto) & ".tex"
+
+  ' Leer el contenido del archivo, conservando los saltos de línea
+  contenido = File.Load(sFile)
+
+  ' Dividir el contenido en líneas usando gb.NewLine
+  lineas = Split(contenido, gb.NewLine, "", True)
+
+  ' Realizar reemplazos en cada línea
+  For iLoop = 0 To lineas.Max
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{a}", "á")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{e}", "é")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{i}", "í")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{o}", "ó")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{u}", "ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'a", "á")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'e", "é")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'i", "í")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'o", "ó")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'u", "ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`a", "à")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`e", "è")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`i", "ì")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`o", "ò")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`u", "ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^a", "â")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^e", "ê")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^i", "î")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^o", "ô")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^u", "û")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "a", "ä")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "e", "ë")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "i", "ï")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "o", "ö")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "u", "ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~a", "ã")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~n", "ñ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~o", "õ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=a", "ā")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=e", "ē")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=i", "ī")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=o", "ō")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=u", "ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\c{c}", "ç")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\l", "ł")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\o", "ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{s}", "š")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{z}", "ž")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\ae", "æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\AA", "Å")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\oe", "œ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\O", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\AE", "Æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\ss", "ß")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\DH", "Ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\dh", "ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\TH", "Þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\th", "þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'A", "Á")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'E", "É")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'I", "Í")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'O", "Ó")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'U", "Ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`A", "À")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`E", "È")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`I", "Ì")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`O", "Ò")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`U", "Ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^A", "Â")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^E", "Ê")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^I", "Î")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^O", "Ô")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^U", "Û")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "A", "Ä")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "E", "Ë")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "I", "Ï")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "O", "Ö")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "U", "Ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~A", "Ã")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~N", "Ñ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~O", "Õ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=A", "Ā")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=E", "Ē")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=I", "Ī")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=O", "Ō")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\=U", "Ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\c{C}", "Ç")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\L", "Ł")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\O", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{S}", "Š")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{Z}", "Ž")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\AE", "Æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\aa", "Å")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\OE", "Œ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\o", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\SS", "ẞ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\DH", "Ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\TH", "Þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{a}", "á")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{e}", "é")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{i}", "í")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{o}", "ó")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{u}", "ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{a}", "à")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{e}", "è")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{i}", "ì")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{o}", "ò")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{u}", "ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{a}", "â")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{e}", "ê")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{i}", "î")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{o}", "ô")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{u}", "û")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{a}", "ä")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{e}", "ë")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{i}", "ï")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{o}", "ö")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{u}", "ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~{a}", "ã")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~{n}", "ñ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~{o}", "õ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={a}", "ā")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={e}", "ē")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={i}", "ī")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={o}", "ō")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={u}", "ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\c{c}", "ç")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{l}", "ł")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{o}", "ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{s}", "š")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{z}", "ž")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{ae}", "æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{AA}", "Å")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{oe}", "œ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{O}", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{AE}", "Æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{ss}", "ß")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{DH}", "Ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{dh}", "ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{TH}", "Þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{th}", "þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{A}", "Á")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{E}", "É")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{I}", "Í")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{O}", "Ó")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\'{U}", "Ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{A}", "À")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{E}", "È")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{I}", "Ì")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{O}", "Ò")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\`{U}", "Ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{A}", "Â")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{E}", "Ê")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{I}", "Î")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{O}", "Ô")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\^{U}", "Û")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{A}", "Ä")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{E}", "Ë")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{I}", "Ï")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{O}", "Ö")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\" + "{U}", "Ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~{A}", "Ã")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~{N}", "Ñ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\~{O}", "Õ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={A}", "Ā")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={E}", "Ē")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={I}", "Ī")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={O}", "Ō")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\={U}", "Ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\c{C}", "Ç")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{L}", "Ł")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{O}", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{S}", "Š")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\v{Z}", "Ž")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{aa}", "Å")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{OE}", "Œ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{o}", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{AE}", "Æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{SS}", "ẞ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{DH}", "Ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\{TH}", "Þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{a}}", "á")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{e}}", "é")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{i}}", "í")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{o}}", "ó")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{u}}", "ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{a}}", "à")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{e}}", "è")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{i}}", "ì")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{o}}", "ò")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{u}}", "ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{a}}", "â")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{e}}", "ê")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{i}}", "î")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{o}}", "ô")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{u}}", "û")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{a}}", "ä")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{e}}", "ë")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{i}}", "ï")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{o}}", "ö")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{u}}", "ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\~{a}}", "ã")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\~{n}}", "ñ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\~{o}}", "õ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={a}}", "ā")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={e}}", "ē")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={i}}", "ī")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={o}}", "ō")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={u}}", "ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\c{c}}", "ç")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{l}}", "ł")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{o}}", "ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\v{s}}", "š")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\v{z}}", "ž")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{ae}}", "æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{AA}}", "Å")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{oe}}", "œ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{O}}", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{AE}}", "Æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{ss}}", "ß")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{DH}}", "Ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{dh}}", "ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{TH}}", "Þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{th}}", "þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{A}}", "Á")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{E}}", "É")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{I}}", "Í")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{O}}", "Ó")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\'{U}}", "Ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{A}}", "À")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{E}}", "È")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{I}}", "Ì")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{O}}", "Ò")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\`{U}}", "Ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{A}}", "Â")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{E}}", "Ê")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{I}}", "Î")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{O}}", "Ô")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\^{U}}", "Û")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{A}}", "Ä")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{E}}", "Ë")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{I}}", "Ï")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{O}}", "Ö")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\" + "{U}}", "Ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\~{A}}", "Ã")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\~{N}}", "Ñ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\~{O}}", "Õ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={A}}", "Ā")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={E}}", "Ē")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={I}}", "Ī")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={O}}", "Ō")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\={U}}", "Ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\c{C}}", "Ç")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{L}}", "Ł")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{O}}", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\v{S}}", "Š")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\v{Z}}", "Ž")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{AE}}", "Æ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{aa}}", "Å")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{OE}}", "Œ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{o}}", "Ø")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{SS}}", "ẞ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{DH}}", "Ð")
+    lineas[iLoop] = Replace(lineas[iLoop], "{\\{TH}}", "Þ")
+    lineas[iLoop] = Replace(lineas[iLoop], "{ú}", "ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "{ù}", "ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "{û}", "û")
+    lineas[iLoop] = Replace(lineas[iLoop], "{ü}", "ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "{ū}", "ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "{Ú}", "Ú")
+    lineas[iLoop] = Replace(lineas[iLoop], "{Ù}", "Ù")
+    lineas[iLoop] = Replace(lineas[iLoop], "{Û}", "Û")
+    lineas[iLoop] = Replace(lineas[iLoop], "{Ü}", "Ü")
+    lineas[iLoop] = Replace(lineas[iLoop], "{Ū}", "Ū")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textquestiondown", "¿")
+    lineas[iLoop] = Replace(lineas[iLoop], "{¿}", "¿")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textexclamdown", "¡")
+    lineas[iLoop] = Replace(lineas[iLoop], "{¡}", "¡")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textquotesingle", "'")
+  Next
+
+  ' Unir las líneas con gb.NewLine para mantener los saltos de línea
+  textoModificado = lineas.Join("\n\n")
+
+  ' Guardar el contenido modificado en el archivo
+  File.Save(sFile, textoModificado)
+
+  Message.Info("Reemplazo completado con éxito.")
+
+End Sub
+
+Public Sub menuPuntosSuspensivos(rutaTexto As String)
+
+  Dim sFile As String
+  Dim contenido As String
+  Dim textoModificado As String
+  Dim iLoop As Integer
+  Dim lineas As String[]
+
+  sFile = File.Dir(rutaTexto) &/ File.BaseName(rutaTexto) & ".tex"
+
+  ' Leer el contenido del archivo, conservando los saltos de línea
+  contenido = File.Load(sFile)
+
+  ' Dividir el contenido en líneas usando gb.NewLine
+  lineas = Split(contenido, gb.NewLine, "", True)
+
+  ' Realizar reemplazos en cada línea
+  For iLoop = 0 To lineas.Max
+
+    lineas[iLoop] = Replace(lineas[iLoop], "{[}\\ldots{]}", "(\\dots)")
+    lineas[iLoop] = Replace(lineas[iLoop], "{[}...{]}", "(\\dots)")
+    lineas[iLoop] = Replace(lineas[iLoop], "(...)", "(\\dots)")
+    lineas[iLoop] = Replace(lineas[iLoop], "[...]", "(\\dots)")
+    lineas[iLoop] = Replace(lineas[iLoop], "...", "\\dots")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\ldots{}", "\\dots \\ ")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\ldots", "\\dots")
+  Next
+
+  ' Unir las líneas con gb.NewLine para mantener los saltos de línea
+  textoModificado = lineas.Join("\n\n")
+
+  ' Guardar el contenido modificado en el archivo
+  File.Save(sFile, textoModificado)
+
+  Message.Info("Reemplazo completado con éxito.")
+
+End Sub
+
+Public Sub menuFuncionesVacias(rutaTexto As String)
+
+  Dim sFile As String
+  Dim contenido As String
+  Dim textoModificado As String
+  Dim iLoop As Integer
+  Dim lineas As String[]
+
+  sFile = File.Dir(rutaTexto) &/ File.BaseName(rutaTexto) & ".tex"
+
+  ' Leer el contenido del archivo, conservando los saltos de línea
+  contenido = File.Load(sFile)
+
+  ' Dividir el contenido en líneas usando gb.NewLine
+  lineas = Split(contenido, gb.NewLine, "", True)
+
+  ' Realizar reemplazos en cada línea
+  For iLoop = 0 To lineas.Max
+
+    lineas[iLoop] = Replace(lineas[iLoop], "\\footnote{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textbf{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textit{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textsc{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\footnote{~}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textbf{~}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textit{~}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{~}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\chapter{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\section{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\subsection{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\subsubsection{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\paragraph{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\subparagraph{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\quote{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\begin{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\end{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\hl", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textsuperscript{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\enquote{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textup{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textendash{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textemdash{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textnormal{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textcolor{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\foreignlanguage{}", "")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\colorbox{}", "")
+  Next
+
+  ' Unir las líneas con gb.NewLine para mantener los saltos de línea
+  textoModificado = lineas.Join("\n\n")
+
+  ' Guardar el contenido modificado en el archivo
+  File.Save(sFile, textoModificado)
+
+  Message.Info("Reemplazo completado con éxito.")
+
+End Sub
+
+Public Sub menuReemplazosOrtograficos(rutaTexto As String)
+
+  Dim sFile As String
+  Dim contenido As String
+  Dim textoModificado As String
+  Dim iLoop As Integer
+  Dim lineas As String[]
+
+  sFile = File.Dir(rutaTexto) &/ File.BaseName(rutaTexto) & ".tex"
+
+  ' Leer el contenido del archivo, conservando los saltos de línea
+  contenido = File.Load(sFile)
+
+  ' Dividir el contenido en líneas usando gb.NewLine
+  lineas = Split(contenido, gb.NewLine, "", True)
+
+  ' Realizar reemplazos en cada línea
+  For iLoop = 0 To lineas.Max
+
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{Ibídem}", "Ibídem")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{Ibídem,}", "Ibídem,")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{Ibíd}", "Ibíd")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{Ibíd,}", "Ibíd,")
+    lineas[iLoop] = Replace(lineas[iLoop], "{[}", "[")
+    lineas[iLoop] = Replace(lineas[iLoop], "{]}", "]")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{: ", ": \\emph{")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{, ", ", \\emph{")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{; ", "; \\emph{")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{. ", ". \\emph{")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{ ", " \\emph{")
+    lineas[iLoop] = Replace(lineas[iLoop], "---", "--")
+    lineas[iLoop] = Replace(lineas[iLoop], "’", "'")
+    lineas[iLoop] = Replace(lineas[iLoop], "´", "'")
+    lineas[iLoop] = Replace(lineas[iLoop], ",}", "},")
+    lineas[iLoop] = Replace(lineas[iLoop], ";}", "};")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\footnote{ ", " \\footnote{")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{.}", ".")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textbf{.}", ".")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textit{.}", ".")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textsuperscript{.}", ".")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{,}", ",")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textbf{,}", ",")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textit{,}", ",")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textsuperscript{,}", ",")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\emph{;}", ";")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textbf{;}", ";")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textit{;}", ";")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textsuperscript{;}", ";")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\textit{", "\\emph{")
+    lineas[iLoop] = Replace(lineas[iLoop], "iglo X", "iglo~X")
+    lineas[iLoop] = Replace(lineas[iLoop], "éculo X", "éculo~X")
+    lineas[iLoop] = Replace(lineas[iLoop], "\\uline{.}", ".")
+  Next
+
+  ' Unir las líneas con gb.NewLine para mantener los saltos de línea
+  textoModificado = lineas.Join("\n\n")
+
+  ' Guardar el contenido modificado en el archivo
+  File.Save(sFile, textoModificado)
+
+  Message.Info("Reemplazo completado con éxito.")
+
+End Sub

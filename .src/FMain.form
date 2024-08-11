@@ -7,6 +7,21 @@
   Maximized = True
   Arrangement = Arrange.Vertical
   Padding = 4
+  { menuORTOGRAFIA Menu
+    Text = ("menu")
+    { menu7b Menu
+      Text = ("Cambiar texto del modelo escapado «\\'{a}»")
+    }
+    { menuPuntosSuspensivos Menu
+      Text = ("Uniformar escritura de puntos suspensivos")
+    }
+    { menuFuncionesVacias Menu
+      Text = ("Eliminar funciones vacías")
+    }
+    { menuReemplazosOrtograficos Menu
+      Text = ("Reemplazos ortográficos")
+    }
+  }
   { menuTEXTBOX Menu
     Text = ("menuContextual")
     Visible = False
@@ -407,7 +422,7 @@
     }
   }
   { HBox171 HBox
-    MoveScaled(1,0,98,4)
+    MoveScaled(1,0,112,4)
     { Label120 Label
       MoveScaled(0,0,8,4)
       AutoResize = True
@@ -451,9 +466,20 @@
       Picture = Picture["iconos/Chrome.svg"]
     }
     { btnCOMPrevistaHTML2 Button
-      MoveScaled(88,0,8.8889,4)
+      MoveScaled(79,0,8.8889,4)
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
+    }
+    { Separator1 Separator
+      MoveScaled(89,0,1,4)
+    }
+    { btnMenuORTOGRAFIA MenuButton
+      MoveScaled(91,0,17.7778,4)
+      Enabled = False
+      Text = ("Corrección")
+      Picture = Picture["iconos/edit-select.svg"]
+      Menu = "menuORTOGRAFIA"
+      MenuOnly = True
     }
   }
   { HBox1 HBox

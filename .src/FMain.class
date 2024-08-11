@@ -309,8 +309,8 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
   Wait 0.2
 
-  TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-  Wait 0.2
+  ' TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
+  ' Wait 0.2
 
   'ejecutamos en conteo del archivo LaTeX
   TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n")
@@ -838,6 +838,7 @@ Public Sub menuAbrir_Click()
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuControlRef.Enabled = True
+  btnMenuORTOGRAFIA.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -1038,6 +1039,7 @@ Public Sub mnuLast_Click()
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuControlRef.Enabled = True
+  btnMenuORTOGRAFIA.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -6069,5 +6071,29 @@ Public Sub AplicarTitleCase(textBox As TextBox)
 
   ' Establecer el nuevo texto en el TextBox
   textBox.Text = Resultado
+
+End
+
+Public Sub menu7b_Click()'reemplazar caracteres escapados
+
+  Mod_Funciones.ReemplazarCaracteresEscapados(TextBox1.Text)
+
+End
+
+Public Sub menuPuntosSuspensivos_Click()
+
+  Mod_Funciones.menuPuntosSuspensivos(TextBox1.Text)
+
+End
+
+Public Sub menuFuncionesVacias_Click()
+
+  Mod_Funciones.menuFuncionesVacias(TextBox1.Text)
+
+End
+
+Public Sub menuReemplazosOrtograficos_Click()
+
+  Mod_Funciones.menuReemplazosOrtograficos(TextBox1.Text)
 
 End
