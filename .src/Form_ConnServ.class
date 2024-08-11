@@ -102,10 +102,6 @@ Public Sub Form_Open()
     Copy "./Buscar_posibles_parencite.py" To rutaScriptsExternos &/ "Buscar_posibles_parencite.py"
   End If
 
-  If Not Exist(rutaScriptsExternos &/ "Reemplazos_ortotipográficos.py") Then
-    Copy "./Reemplazos_ortotipográficos.py" To rutaScriptsExternos &/ "Reemplazos_ortotipográficos.py"
-  End If
-
   If Not Exist(rutaScriptsExternos &/ "Limpieza_con_ExpReg.py") Then
     Copy "./Limpieza_con_ExpReg.py" To rutaScriptsExternos &/ "Limpieza_con_ExpReg.py"
   End If

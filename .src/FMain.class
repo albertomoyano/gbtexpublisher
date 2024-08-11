@@ -838,7 +838,7 @@ Public Sub menuAbrir_Click()
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuControlRef.Enabled = True
-  btnMenuORTOGRAFIA.Enabled = True
+  menuORTOGRAFIA.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -1039,7 +1039,7 @@ Public Sub mnuLast_Click()
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuControlRef.Enabled = True
-  btnMenuORTOGRAFIA.Enabled = True
+  menuORTOGRAFIA.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
