@@ -9,6 +9,7 @@
   Padding = 4
   { menuORTOGRAFIA Menu
     Text = ("menu")
+    Visible = False
     { menu7b Menu
       Text = ("Cambiar texto del modelo escapado «\\'{a}»")
     }
