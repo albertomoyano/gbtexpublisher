@@ -5954,6 +5954,24 @@ Public Sub menuBUSCARgoogle_Click()
 
 End
 
+Public Sub menuBUSCARduckduckgo_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://html.duckduckgo.com/html?q=" & sTB_Text)'
+
+End
+
+Public Sub menuBUSCARbing_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://www.bing.com/search?q=" & sTB_Text)
+
+End
+
+Public Sub menuBUSCARrae_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://dle.rae.es/" & sTB_Text)
+
+End
+
 Public Sub menuWordReference_Click()
 
   If sTB_Text <> "" Then Desktop.Open("https://www.wordreference.com/definicion/" & sTB_Text)
