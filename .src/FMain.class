@@ -6122,6 +6122,6 @@ Public Sub menuIrURL_Click()
 
   url = sTB_Text
 
-  If sTB_Text <> "" Then Shell "xdg-open " & url
+  If url <> "" Then Shell "xdg-open " & url
 
 End
