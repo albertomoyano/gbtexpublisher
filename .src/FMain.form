@@ -35,7 +35,7 @@
       Text = ("Buscar definición en WordReference")
     }
     { menuFUNDEU Menu
-      Text = ("Buscar definición en Fundeu")
+      Text = ("Buscar definición en FundéuRAE")
     }
     { Menu1 Menu
     }
