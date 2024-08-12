@@ -37,6 +37,11 @@
     { menuFUNDEU Menu
       Text = ("Buscar definición en Fundeu")
     }
+    { Menu1 Menu
+    }
+    { menuIrURL Menu
+      Text = ("Ir a la URL")
+    }
   }
   { menuTareas Menu
     Text = ("menuTareas")

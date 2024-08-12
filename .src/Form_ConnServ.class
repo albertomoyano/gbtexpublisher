@@ -5,7 +5,7 @@ Private Contenido As Result
 Public rutaApp As String
 Public rutaAppR As String
 Public rutaScriptsExternos As String
-Private vChk As String
+' Private vChk As String
 
 Public Sub btnCancelar_Click()
 
@@ -19,7 +19,9 @@ End
 
 Public Sub Form_Open()
 
-  vChk = GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/master/.project")
+  Dim vChk As String
+
+  vChk = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/master/.project")
 
   If Application.Version <> vChk Then
     Message.Info(("Está disponible una nueva versión") & ": " & vChk)
@@ -189,34 +191,74 @@ Public Sub btnLegales_Click()
 
 End
 
-Public Function GitVersion(raw As String) As String 'Función para chequear si hay versiones nuevas
+' Public Function GitVersion(raw As String) As String 'Función para chequear si hay versiones nuevas
+'
+'   Dim s As String
+'   Dim stx As String[]
+'   Dim r As String
+'   Dim v As String
+'
+'   v = ""
+'   If Exist("/tmp/project.txt") Then
+'     Shell "rm /tmp/project.txt" Wait
+'   Endif
+'
+'   Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
+'   If Exist("/tmp/project.txt") Then
+'     s = File.Load("/tmp/project.txt")
+'     stx = Split(s, "\n")
+'     For Each r In stx
+'       If InStr(r, "Version=") Then
+'         If Split(r, "=")[0] = "Version" Then
+'           v = Split(r, "=")[1]
+'           Break
+'         Endif
+'       Endif
+'     Next
+'   Endif
+'   Return v
+'
+' End
 
-  Dim s As String
-  Dim stx As String[]
-  Dim r As String
-  Dim v As String
-
-  v = ""
-  If Exist("/tmp/project.txt") Then
-    Shell "rm /tmp/project.txt" Wait
-  Endif
-
-  Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
-  If Exist("/tmp/project.txt") Then
-    s = File.Load("/tmp/project.txt")
-    stx = Split(s, "\n")
-    For Each r In stx
-      If InStr(r, "Version=") Then
-        If Split(r, "=")[0] = "Version" Then
-          v = Split(r, "=")[1]
-          Break
-        Endif
-      Endif
-    Next
-  Endif
-  Return v
-
-End
+' Public Function GitVersion(raw As String) As String 'Función para chequear si hay versiones nuevas
+'
+'   Dim s As String
+'   Dim stx As String[]
+'   Dim r As String
+'   Dim v As String
+'
+'   v = ""
+'   If Exist("/tmp/project.txt") Then
+'     Shell "rm /tmp/project.txt" Wait
+'   Endif
+'
+'   Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
+'   If Exist("/tmp/project.txt") Then
+'     s = File.Load("/tmp/project.txt")
+'     stx = Split(s, "\n")
+'     For Each r In stx
+'       If InStr(r, "Version=") Then
+'         If Split(r, "=")[0] = "Version" Then
+'           v = Split(r, "=")[1]
+'           Break
+'         Endif
+'       Endif
+'     Next
+'   Endif
+'   Return v
+'
+' End
+'
+' Public Function IsNewVersionAvailable(currentVersion As String, gitVersion As String) As Boolean
+'   ' Convierte las versiones a números para facilitar la comparación
+'
+'   Dim currentVerNum As Integer = Val(currentVersion)
+'   Dim gitVerNum As Integer = Val(gitVersion)
+'
+'   ' Retorna True solo si la versión en GitHub es mayor que la versión actual
+'   Return gitVerNum > currentVerNum
+'
+' End
 
 Public Function LimpiarCampos()
 

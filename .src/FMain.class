@@ -6097,3 +6097,13 @@ Public Sub menuReemplazosOrtograficos_Click()
   Mod_Funciones.menuReemplazosOrtograficos(TextBox1.Text)
 
 End
+
+Public Sub menuIrURL_Click()
+
+  Dim url As String
+
+  url = sTB_Text
+
+  If sTB_Text <> "" Then Shell "xdg-open " & url
+
+End
