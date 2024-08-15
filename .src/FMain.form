@@ -23,10 +23,10 @@
       Text = ("Todo a MAYÚSCULAS (menos «and» para bibLaTeX)")
     }
     { menuMAYinicialESPANOL Menu
-      Text = ("MAYÚSCULA inicial (para español)")
+      Text = ("MAYÚSCULA inicial para español")
     }
     { menuMAYinicialINGLES Menu
-      Text = ("Todo a MAYÚSCULA Title Case (para inglés)")
+      Text = ("Todo a MAYÚSCULAS (Title Case) para inglés")
     }
     { Menu2 Menu
     }
