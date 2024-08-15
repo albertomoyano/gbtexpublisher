@@ -2931,7 +2931,7 @@ Public Sub btnGuardar_Click()
 
   ' Verificar si el campo txtAUTHOR contiene un punto y coma (;)
   If InStr(txtAUTHOR.Text, ";") > 0 Then
-    Message.Error("El campo Author no debe contener el caracter ';' (punto y coma).")
+    Message.Error("El campo de autor no debe contener el carácter <strong>;</strong>. Por favor, revisa tu entrada.")
     Return ' Salir de la función si contiene alguno de estos caracteres
   Endif
 
@@ -4987,84 +4987,84 @@ Public Sub txtPUBLISHER_Change()
 
 End
 
-Public Sub AplicarMayusculasPrimeraLetra(textBox As TextBox)
+' Public Sub AplicarMayusculasPrimeraLetra(textBox As TextBox)
+'
+'   Dim Cadena As String
+'   Dim Resultado As String
+'
+'   ' Obtener el texto actual del TextBox
+'   Cadena = textBox.Text
+'
+'   ' Variable para determinar si el próximo carácter debe convertirse a mayúscula
+'   Dim convertir As Boolean = True
+'
+'   ' Recorrer cada carácter en la cadena
+'   For i As Integer = 1 To String.Len(Cadena)
+'     Dim caracter As String = String.Mid(Cadena, i, 1)
+'
+'     ' Verificar si se debe convertir a mayúscula
+'     If convertir Then
+'       ' Verificar la excepción para la palabra "and"
+'       Dim palabraAnd As String = String.LCase(String.Mid(Cadena, i, 3))
+'
+'       If palabraAnd = "and" Then
+'         Resultado &= String.Mid(Cadena, i, 3)
+'         i = i + 2 ' Saltar las letras de la palabra "and"
+'       Else
+'         Resultado &= String.UCase(caracter)
+'       End If
+'
+'       convertir = False
+'     Else
+'       Resultado &= String.LCase(caracter)
+'     End If
+'
+'     ' Si el carácter actual es un espacio, el próximo carácter debe convertirse
+'     If caracter = " " Then
+'       convertir = True
+'     End If
+'   Next
+'
+'   ' Establecer el nuevo texto en el TextBox
+'   textBox.Text = Resultado
+'
+' End
 
-  Dim Cadena As String
-  Dim Resultado As String
+' Public Sub txtAUTHOR_DblClick()
+'
+'   AplicarMayusculasPrimeraLetra(txtAUTHOR)
+'
+' End
 
-  ' Obtener el texto actual del TextBox
-  Cadena = textBox.Text
+' Public Sub txtBOOKAUTHOR_DblClick()
+'
+'   AplicarMayusculasPrimeraLetra(txtBOOKAUTHOR)
+'
+' End
 
-  ' Variable para determinar si el próximo carácter debe convertirse a mayúscula
-  Dim convertir As Boolean = True
+' Public Sub txtEDITOR_DblClick()
+'
+'   AplicarMayusculasPrimeraLetra(txtEDITOR)
+'
+' End
 
-  ' Recorrer cada carácter en la cadena
-  For i As Integer = 1 To String.Len(Cadena)
-    Dim caracter As String = String.Mid(Cadena, i, 1)
+' Public Sub txtEDITORa_DblClick()
+'
+'   AplicarMayusculasPrimeraLetra(txtEDITORa)
+'
+' End
 
-    ' Verificar si se debe convertir a mayúscula
-    If convertir Then
-      ' Verificar la excepción para la palabra "and"
-      Dim palabraAnd As String = String.LCase(String.Mid(Cadena, i, 3))
+' Public Sub txtEDITORb_DblClick()
+'
+'   AplicarMayusculasPrimeraLetra(txtEDITORb)
+'
+' End
 
-      If palabraAnd = "and" Then
-        Resultado &= String.Mid(Cadena, i, 3)
-        i = i + 2 ' Saltar las letras de la palabra "and"
-      Else
-        Resultado &= String.UCase(caracter)
-      End If
-
-      convertir = False
-    Else
-      Resultado &= String.LCase(caracter)
-    End If
-
-    ' Si el carácter actual es un espacio, el próximo carácter debe convertirse
-    If caracter = " " Then
-      convertir = True
-    End If
-  Next
-
-  ' Establecer el nuevo texto en el TextBox
-  textBox.Text = Resultado
-
-End
-
-Public Sub txtAUTHOR_DblClick()
-
-  AplicarMayusculasPrimeraLetra(txtAUTHOR)
-
-End
-
-Public Sub txtBOOKAUTHOR_DblClick()
-
-  AplicarMayusculasPrimeraLetra(txtBOOKAUTHOR)
-
-End
-
-Public Sub txtEDITOR_DblClick()
-
-  AplicarMayusculasPrimeraLetra(txtEDITOR)
-
-End
-
-Public Sub txtEDITORa_DblClick()
-
-  AplicarMayusculasPrimeraLetra(txtEDITORa)
-
-End
-
-Public Sub txtEDITORb_DblClick()
-
-  AplicarMayusculasPrimeraLetra(txtEDITORb)
-
-End
-
-Public Sub txtEDITORc_DblClick()
-
-  AplicarMayusculasPrimeraLetra(txtEDITORc)
-
-End
+' Public Sub txtEDITORc_DblClick()
+'
+'   AplicarMayusculasPrimeraLetra(txtEDITORc)
+'
+' End
 
 Public Sub BtnBuscarBookTitle_Click()
 
@@ -5908,6 +5908,13 @@ Public Sub AplicarMayusculasTotal(textBox As TextBox)
 
 End
 
+Public Sub menuMAYexcepciones_Click()
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarMayusculasTotal(LastTextBox)
+
+End
+
 Public Sub menuCONVERSORpandoc_Click()
   ' Configura el diálogo para seleccionar un archivo DOCX
 
@@ -6007,17 +6014,33 @@ Public Sub menuMAY_Click()' Convierte el texto del TextBox capturado a mayúscul
 
 End
 
-Public Sub menuMAYexcepciones_Click()
+Public Sub AplicarMayusculasConExcepcion(textBox As TextBox)'usada para normalizar autores
 
-  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
-  AplicarMayusculasTotal(LastTextBox)
+  Dim Resultado As String
+  Dim palabras As String[] = Split(textBox.Text, " ")
+  Dim palabraActual As String
 
-End
+  For i As Integer = 0 To palabras.Max
+    palabraActual = palabras[i]
 
-Public Sub menuMAYinicialINGLES_Click()
+    ' Verificar si la palabra es "y" o "&"
+    If palabraActual = "y" Or palabraActual = "&" Then
+      Resultado &= "and"
+    Else If palabraActual = "and" Then
+      Resultado &= "and"
+    Else
+      ' Convertir la primera letra a mayúscula y el resto a minúscula
+      Resultado &= String.UCase(String.Left(palabraActual, 1)) & String.LCase(Mid(palabraActual, 2))
+    End If
 
-  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
-  AplicarTitleCase(LastTextBox)
+    ' Agregar un espacio entre palabras excepto al final
+    If i < palabras.Max Then
+      Resultado &= " "
+    End If
+  Next
+
+  ' Establecer el nuevo texto en el TextBox
+  textBox.Text = Resultado
 
 End
 
@@ -6092,6 +6115,13 @@ Public Sub AplicarTitleCase(textBox As TextBox)
 
 End
 
+Public Sub menuMAYinicialINGLES_Click()
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarTitleCase(LastTextBox)
+
+End
+
 Public Sub menu7b_Click()'reemplazar caracteres escapados
 
   Mod_Funciones.ReemplazarCaracteresEscapados(TextBox1.Text)
@@ -6123,5 +6153,12 @@ Public Sub menuIrURL_Click()
   url = sTB_Text
 
   If url <> "" Then Shell "xdg-open " & url
+
+End
+
+Public Sub menuMAYand_Click()'aplicar mayuscula para autores
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarMayusculasConExcepcion(LastTextBox)
 
 End

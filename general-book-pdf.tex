@@ -83,24 +83,26 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 \usepackage{bchart}
 \usepackage[most]{tcolorbox}
 
-%% diseño de listas
-%% opcion 1
+%% diseño de listas (opcion 1) con paralist
 \usepackage{paralist}
 \setdefaultenum{1)}{a)}{i)}{}
 \pltopsep=0.5mm
 \plitemsep=0mm
-%% opcion 2
+%% diseño de listas (opcion 2) con enumitem
 \usepackage{enumitem}
 \setlist{nosep,topsep=-\parskip}
 
 %% rediseñamos la raya de las notas a pie
+%% aumentamos la distancia de la raya
 \renewcommand{\footnoterule}{%
 	\kern -3pt%
 	\hrule height 0.5pt width 0.4\columnwidth%
 	\kern 6pt%
 	}
-	
+
 %% rediseño del epígrafe
+%% la columna superior es tratada como párrafo y
+%% la inferior marginada a la derecha
 \newcommand{\epigraph}[2]{%
 	\par\nobreak\noindent\par\nobreak\vspace{.5\baselineskip}
 	\hfill{\small\begin{tabular}{@{}>{\raggedright\arraybackslash}m{.65\textwidth}@{}}

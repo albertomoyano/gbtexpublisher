@@ -13,17 +13,20 @@
     { menuMIN Menu
       Text = ("Convertir todo a minúsculas")
     }
+    { menuMAYand Menu
+      Text = ("Normalizar autores para bibLaTeX")
+    }
     { menuMAY Menu
-      Text = ("Convertir todo a MAYÚSCULAS")
+      Text = ("Todo a MAYÚSCULAS")
     }
     { menuMAYexcepciones Menu
-      Text = ("Todo a MAYÚSCULAS (menos «and» para BibLaTeX)")
+      Text = ("Todo a MAYÚSCULAS (menos «and» para bibLaTeX)")
     }
     { menuMAYinicialESPANOL Menu
-      Text = ("Convertir MAYÚSCULA inicial (para español)")
+      Text = ("MAYÚSCULA inicial (para español)")
     }
     { menuMAYinicialINGLES Menu
-      Text = ("Convertir MAYÚSCULA Title Case (para inglés)")
+      Text = ("Todo a MAYÚSCULA Title Case (para inglés)")
     }
     { Menu2 Menu
     }
