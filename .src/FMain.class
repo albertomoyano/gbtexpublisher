@@ -1053,7 +1053,7 @@ Public Sub mnuLast_Click()
     Form_Contador.Close ' Cierra la ventana
   End If
 
-  Mod_Funciones.CopiarArchivos(TextBox1.Text)
+  ' Mod_Funciones.CopiarArchivos(TextBox1.Text)' esta funcion hay que deshabilitarla si revistas se activa
 
   'comienza metadatos
   Dim comando As String
@@ -6160,5 +6160,192 @@ Public Sub menuMAYand_Click()'aplicar mayuscula para autores
 
   If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
   AplicarMayusculasConExcepcion(LastTextBox)
+
+End
+
+Public Sub menuAbrirRevista_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
+  Dialog.AutoExt = True
+  Dialog.Path = User.Home
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    TextBox1.Text = Dialog.Path
+    sCurrentFilePath = TextBox1.Text
+    DirViewRuta.Root = File.Dir(TextBox1.Text)
+  Endif
+
+  If Not MS.Matrix.Exist(Dialog.Path) Then
+    If MS.Matrix.Count = MS.iLastNumber Then
+      MS.Matrix.Remove(0)
+      MS.ShortMatrix.Remove(0)
+    End If
+    MS.Matrix.Add(Dialog.Path)
+    MS.ShortMatrix.Add(File.Name(Dialog.Path))
+    UpdateMenu()
+  End If
+
+  rutaFILES = File.Dir(TextBox1.Text) & "/files"
+  BaseName = File.BaseName(TextBox1.Text)
+  ' rutaBIB = BaseName & ".bib"
+
+  btnGuardarIGUAL.Enabled = False
+  menuORTO.Enabled = True
+  menuXML.Enabled = True
+  menuEPUB.Enabled = True
+  menuHTML.Enabled = True
+  Menu60.Enabled = True
+  TabPanel1.Enabled = True
+  menuBORRARaux.Enabled = True
+  menuDRAW.Enabled = True
+  menuLOGFILE.Enabled = True
+  menuComprimir.Enabled = True
+  adminGIT.Enabled = True
+  menuCFG.Enabled = True
+  menuTOOLS.Enabled = True
+  menuODt_DOCX.Enabled = True
+  Menu76.Enabled = True
+  MenuApp.Enabled = True
+  Button4.Enabled = True
+  btnMenuGIT.Enabled = True
+  menuGray.Enabled = True
+  menuCatalogo.Enabled = True
+  menuControlRef.Enabled = True
+  menuORTOGRAFIA.Enabled = True
+
+  If Form_Notas.Visible Then
+    Form_Notas.Close ' Cierra la ventana
+  End If
+
+  If Form_Logfile.Visible Then
+    Form_Logfile.Close ' Cierra la ventana
+  End If
+
+  If Form_Contador.Visible Then
+    Form_Contador.Close ' Cierra la ventana
+  End If
+
+  Mod_Funciones.CopiarArchivosRevista(TextBox1.Text)
+
+  'comienza metadatos
+  Dim comando As String
+  ' buscamos la entrada que coincida con el archivo
+  comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
+  Contenido = Conn.Exec(Comando)
+  If Contenido.Count > 0 Then
+    BtnNuevoMeta.Enabled = False
+    btnGuardarMeta.Enabled = False
+    btnGuardarCambiosMeta.Enabled = True
+    txtId.Text = Contenido!id
+    txtnombreArchivo.Text = Contenido!nombreArchivo
+    txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
+    txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
+    txt04_pdfxmp3.Text = Contenido!pdfxmp3_04
+    txt05_pdfauthor.Text = Contenido!pdfauthor_05
+    txt06_pdftitle.Text = Contenido!pdftitle_06
+    txtSubjet.Text = Contenido!pdfsubject_07
+    txtKeywords.Text = Contenido!pdfkeywords_08
+    txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
+    txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
+    txtDate.Text = Contenido!pdfdate_11
+    txtCreationDate.Text = Contenido!pdfcreationdate_12
+    txtModDate.Text = Contenido!pdfmoddate_13
+    txtMetaDate.Text = Contenido!pdfmetadate_14
+    txt15_pdfcopyright.Text = Contenido!pdfcopyright_15
+    txt16_pdflicenseurl.Text = Contenido!pdflicenseurl_16
+    txtCaptionWriter.Text = Contenido!pdfcaptionwriter_17
+    txtContactAddress.Text = Contenido!pdfcontactaddress_18
+    txtContactCity.Text = Contenido!pdfcontactcity_19
+    txtContactPostCode.Text = Contenido!pdfcontactpostcode_20
+    txtContactCountry.Text = Contenido!pdfcontactcountry_21
+    txtContactRegion.Text = Contenido!pdfcontactregion_22
+    txtContactPhone.Text = Contenido!pdfcontactphone_23
+    txtContactEmail.Text = Contenido!pdfcontactemail_24
+    txtContactURL.Text = Contenido!pdfcontacturl_25
+    txtDocumentId.Text = Contenido!pdfdocumentid_26
+    txtPublication.Text = Contenido!pdfpublication_27
+    txtPublisher.Text = Contenido!pdfpublisher_28
+    cmbType.Text = Contenido!pdftype_29
+    cbPubType.Text = Contenido!pdfpubtype_30
+    txtVolNum.Text = Contenido!pdfvolumenum_31
+    txtIssueNum.Text = Contenido!pdfissuenum_32
+    txt33_pdfpagerange.Text = Contenido!pdfpagerange_33
+    txt34_pdfbookedition.Text = Contenido!pdfbookedition_34
+    txt35_pdfisbn.Text = Contenido!pdfisbn_35
+    txt36_pdfissn.Text = Contenido!pdfissn_36
+    txt37_pdfeissn.Text = Contenido!pdfeissn_37
+    txt38_pdfpubstatus.Text = Contenido!pdfpubstatus_38
+    txtLang.Text = Contenido!pdflang_39
+    txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
+    txtBaseURL.Text = Contenido!pdfbaseurl_41
+    txt42_pdfurl.Text = Contenido!pdfurl_42
+    txt43_pdfdoi.Text = Contenido!pdfdoi_43
+    cbPDFrendition.Text = Contenido!pdfrendition_44
+    txtDocumentId.Text = Contenido!pdfidentifier_45
+    cbPDFx.Text = Contenido!pdfx_46
+    txtVersionId.Text = Contenido!pdfversionid_47
+    txt48_abstract.Text = Contenido!abstract_48
+    txt49_imagentapa.Text = Contenido!imagentapa_49
+    txt50_pagetotal.Text = Contenido!pagetotal_50
+    txtCOLECCION.Text = Contenido!relation_51
+    txtDirection.Text = Contenido!direction_52
+    txt53_traductor.Text = Contenido!traductor_53
+    txt54_idiomaorig.Text = Contenido!idiomaorig_54
+    txt55_ilustrador.Text = Contenido!ilustrador_55
+    txt56_resumen.Text = Contenido!resumen_56
+    txt57_palabrasclave.Text = Contenido!palabrasclave_57
+    txt58_papertitletwo.Text = Contenido!papertitletwo_58
+    txt59_artrecibido.Text = Contenido!artrecibido_59
+    txt60_artaceptado.Text = Contenido!artaceptado_60
+    txtFORMATO.Text = Contenido!formato_61
+    txt59_opt_source.Text = Contenido!source_69
+    txt82_conferenceVisual.Text = Contenido!opt_72
+    txt78_genero.Text = Contenido!genero_78
+    txt82_conference.Text = Contenido!conference_82
+    txt84_bookTitle.Text = Contenido!bookTitle_84
+    txt85_doiRevista.Text = Contenido!doiRevista_85
+    txt86_annotation.Text = Contenido!notas_86
+    txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
+    txt88_audiencia.Text = Contenido!audience_88
+    txt89_binding.Text = Contenido!binding_89
+
+  Else
+    BtnNuevoMeta.Enabled = True
+    btnGuardarMeta.Enabled = False
+    btnGuardarCambiosMeta.Enabled = False
+  Endif
+  txtContactCountry.MaxLength = 1500
+
+  txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
+  txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
+  txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
+
+  'posicionamos la consola con el path del archivo de trabajo
+  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
+  TerminalView1.SetFocus()
+
+  Dim RecordBIB As String
+  Dim CountBIB As Integer
+  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  RecordBIB = Contenido[0]
+  CountBIB = RecordBIB
+
+  Dim RecordGLO As String
+  Dim CountGLO As Integer
+  Dim Record2GLO As String
+  Dim Count2GLO As Integer
+  Dim Contenido3 As Result
+
+  Contenido = Conn.Exec("SELECT COUNT(*) FROM glosarios")
+  RecordGLO = Contenido[0]
+  CountGLO = RecordGLO
+  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
+
+  Contenido3 = Conn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  Record2GLO = Contenido3[0]
+  Count2GLO = Record2GLO
+  btnParcialGLO.Text = "(" & Count2GLO & ")"
 
 End

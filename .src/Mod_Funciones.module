@@ -1,6 +1,34 @@
 ' Gambas module file
 
-Public Sub CopiarArchivos(rutaTexto As String)
+Public Sub CopiarArchivosRevista(rutaTexto As String)
+
+  If Not Exist(File.Dir(rutaTexto) & "/media") Then
+    Mkdir File.Dir(rutaTexto) & "/media"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/config") Then
+    Mkdir File.Dir(rutaTexto) & "/config"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/art01") Then
+    Mkdir File.Dir(rutaTexto) & "/art01"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/tapa") Then
+    Mkdir File.Dir(rutaTexto) & "/tapa"
+  End If
+
+  If Not Exist(File.Dir(rutaTexto) & "/readme.md") Then
+    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/LICENSE") Then
+    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
+  End If
+
+  If Not Exist(File.Dir(rutaTexto) & "/config/general-art-pdf.tex") Then
+    Copy "./general-art-pdf.tex" To File.Dir(rutaTexto) & "/config/general-art-pdf.tex"
+  End If
+
+End
+
+Public Sub CopiarArchivos(rutaTexto As String)'libros
 
   If Not Exist(File.Dir(rutaTexto) & "/files") Then
     Mkdir File.Dir(rutaTexto) & "/files"
@@ -53,9 +81,9 @@ Public Sub CopiarArchivos(rutaTexto As String)
   End If
 
   'copiamos los archivos de preámbulo
-  If Not Exist(File.Dir(rutaTexto) & "/files/general-art-pdf.tex") Then
-    Copy "./general-art-pdf.tex" To File.Dir(rutaTexto) & "/files/general-art-pdf.tex"
-  End If
+  ' If Not Exist(File.Dir(rutaTexto) & "/files/general-art-pdf.tex") Then
+  '   Copy "./general-art-pdf.tex" To File.Dir(rutaTexto) & "/files/general-art-pdf.tex"
+  ' End If
   If Not Exist(File.Dir(rutaTexto) & "/files/general-book-pdf.tex") Then
     Copy "./general-book-pdf.tex" To File.Dir(rutaTexto) & "/files/general-book-pdf.tex"
   End If

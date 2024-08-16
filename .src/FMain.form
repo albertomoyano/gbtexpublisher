@@ -118,8 +118,12 @@
       Visible = False
     }
     { menuAbrir Menu
-      Text = ("Abrir revista / libro")
+      Text = ("Abrir libro")
       Picture = Picture["iconos/document.svg"]
+    }
+    { menuAbrirRevista Menu
+      Text = ("Abrir revista")
+      Picture = Picture["iconos/document-orange.svg"]
     }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
