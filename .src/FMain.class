@@ -2878,6 +2878,8 @@ Public Sub BtnNuevoBib_Click()
   LimpiarCamposBIB()
   ObtenerNuevoId()
 
+  TabPanel2.Index = 0
+
 End
 
 Public Sub ObtenerNuevoId()
