@@ -6349,3 +6349,33 @@ Public Sub menuAbrirRevista_Click()
   btnParcialGLO.Text = "(" & Count2GLO & ")"
 
 End
+
+Public Sub btnCOMPpdfRevista_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    ' menuPDFlibro_Click
+  Endif
+
+End
+
+Public Sub btnCOMPrevistaHTML_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    ' menuPDFlibro_Click
+  Endif
+
+End
+
+Public Sub btnCOMPrevistaHTML2_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    ' menuPDFlibro_Click
+  Endif
+
+End
