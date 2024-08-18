@@ -6026,13 +6026,16 @@ Public Sub AplicarMayusculasConExcepcion(textBox As TextBox)'usada para normaliz
     palabraActual = palabras[i]
 
     ' Verificar si la palabra es "y" o "&"
-    If palabraActual = "y" Or palabraActual = "&" Then
+    If palabraActual = "y" Or palabraActual = "&" Or palabraActual = ", y" Then
       Resultado &= "and"
     Else If palabraActual = "and" Then
       Resultado &= "and"
     Else
       ' Convertir la primera letra a mayúscula y el resto a minúscula
       Resultado &= String.UCase(String.Left(palabraActual, 1)) & String.LCase(Mid(palabraActual, 2))
+      ' Reemplazar la secuencia ", y" por " and " (con espacios antes y después)
+      Resultado = Replace(Resultado, ", and ", " and ")
+      Resultado = Replace(Resultado, "; and ", " and ")
     End If
 
     ' Agregar un espacio entre palabras excepto al final
