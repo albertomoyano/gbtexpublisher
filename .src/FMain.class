@@ -4383,118 +4383,118 @@ Public Sub txtPAGES_Change()
 
 End
 
-Public Sub txtTITLE_Change()
+' Public Sub txtTITLE_Change()
+'
+'   Dim curpos As Integer
+'
+'   curpos = txtTITLE.Pos
+'
+'   Dim texto As String
+'
+'   texto = txtTITLE.Text
+'
+'   texto = Replace(texto, "’", "'")
+'   texto = Replace(texto, "´", "'")
+'   texto = Replace(texto, "–", "-")
+'   texto = Replace(texto, " & ", " \\& ")
+'   texto = Replace(texto, " #", " \\#")
+'
+'   txtTITLE.Text = texto
+'
+'   txtTITLE.Pos = curpos
+'
+' End
 
-  Dim curpos As Integer
+' Public Sub txtBOOKTITLE_Change()
+'
+'   Dim curpos As Integer
+'
+'   curpos = txtBOOKTITLE.Pos
+'
+'   Dim texto As String
+'
+'   texto = txtBOOKTITLE.Text
+'
+'   texto = Replace(texto, "  ", " ")
+'   texto = Replace(texto, "’", "'")
+'   texto = Replace(texto, "´", "'")
+'   texto = Replace(texto, "–", "-")
+'   texto = Replace(texto, " & ", " \\& ")
+'   texto = Replace(texto, " #", " \\#")
+'
+'   txtBOOKTITLE.Text = texto
+'
+'   txtBOOKTITLE.Pos = curpos
+'
+' End
 
-  curpos = txtTITLE.Pos
+' Public Sub txtMAINTITLE_Change()
+'
+'   Dim curpos As Integer
+'
+'   curpos = txtMAINTITLE.Pos
+'
+'   Dim texto As String
+'
+'   texto = txtMAINTITLE.Text
+'
+'   texto = Replace(texto, "  ", " ")
+'   texto = Replace(texto, "’", "'")
+'   texto = Replace(texto, "´", "'")
+'   texto = Replace(texto, "–", "-")
+'   texto = Replace(texto, " & ", " \\& ")
+'   texto = Replace(texto, " #", " \\#")
+'
+'   txtMAINTITLE.Text = texto
+'
+'   txtMAINTITLE.Pos = curpos
+'
+' End
 
-  Dim texto As String
+' Public Sub txtJOURNALTITLE_Change()
+'
+'   Dim curpos As Integer
+'
+'   curpos = txtJOURNALTITLE.Pos
+'
+'   Dim texto As String
+'
+'   texto = txtJOURNALTITLE.Text
+'
+'   texto = Replace(texto, "  ", " ")
+'   texto = Replace(texto, "’", "'")
+'   texto = Replace(texto, "´", "'")
+'   texto = Replace(texto, "–", "-")
+'   texto = Replace(texto, " & ", " \\& ")
+'   texto = Replace(texto, " #", " \\#")
+'
+'   txtJOURNALTITLE.Text = texto
+'
+'   txtJOURNALTITLE.Pos = curpos
+'
+' End
 
-  texto = txtTITLE.Text
-
-  texto = Replace(texto, "’", "'")
-  texto = Replace(texto, "´", "'")
-  texto = Replace(texto, "–", "-")
-  texto = Replace(texto, " & ", " \\& ")
-  texto = Replace(texto, " #", " \\#")
-
-  txtTITLE.Text = texto
-
-  txtTITLE.Pos = curpos
-
-End
-
-Public Sub txtBOOKTITLE_Change()
-
-  Dim curpos As Integer
-
-  curpos = txtBOOKTITLE.Pos
-
-  Dim texto As String
-
-  texto = txtBOOKTITLE.Text
-
-  texto = Replace(texto, "  ", " ")
-  texto = Replace(texto, "’", "'")
-  texto = Replace(texto, "´", "'")
-  texto = Replace(texto, "–", "-")
-  texto = Replace(texto, " & ", " \\& ")
-  texto = Replace(texto, " #", " \\#")
-
-  txtBOOKTITLE.Text = texto
-
-  txtBOOKTITLE.Pos = curpos
-
-End
-
-Public Sub txtMAINTITLE_Change()
-
-  Dim curpos As Integer
-
-  curpos = txtMAINTITLE.Pos
-
-  Dim texto As String
-
-  texto = txtMAINTITLE.Text
-
-  texto = Replace(texto, "  ", " ")
-  texto = Replace(texto, "’", "'")
-  texto = Replace(texto, "´", "'")
-  texto = Replace(texto, "–", "-")
-  texto = Replace(texto, " & ", " \\& ")
-  texto = Replace(texto, " #", " \\#")
-
-  txtMAINTITLE.Text = texto
-
-  txtMAINTITLE.Pos = curpos
-
-End
-
-Public Sub txtJOURNALTITLE_Change()
-
-  Dim curpos As Integer
-
-  curpos = txtJOURNALTITLE.Pos
-
-  Dim texto As String
-
-  texto = txtJOURNALTITLE.Text
-
-  texto = Replace(texto, "  ", " ")
-  texto = Replace(texto, "’", "'")
-  texto = Replace(texto, "´", "'")
-  texto = Replace(texto, "–", "-")
-  texto = Replace(texto, " & ", " \\& ")
-  texto = Replace(texto, " #", " \\#")
-
-  txtJOURNALTITLE.Text = texto
-
-  txtJOURNALTITLE.Pos = curpos
-
-End
-
-Public Sub txtSHORTTITLE_Change()
-
-  Dim curpos As Integer
-
-  curpos = txtSHORTTITLE.Pos
-
-  Dim texto As String
-
-  texto = txtSHORTTITLE.Text
-
-  texto = Replace(texto, "’", "'")
-  texto = Replace(texto, "´", "'")
-  texto = Replace(texto, "–", "-")
-  texto = Replace(texto, " & ", " \\& ")
-  texto = Replace(texto, " #", " \\#")
-
-  txtSHORTTITLE.Text = texto
-
-  txtSHORTTITLE.Pos = curpos
-
-End
+' Public Sub txtSHORTTITLE_Change()
+'
+'   Dim curpos As Integer
+'
+'   curpos = txtSHORTTITLE.Pos
+'
+'   Dim texto As String
+'
+'   texto = txtSHORTTITLE.Text
+'
+'   texto = Replace(texto, "’", "'")
+'   texto = Replace(texto, "´", "'")
+'   texto = Replace(texto, "–", "-")
+'   texto = Replace(texto, " & ", " \\& ")
+'   texto = Replace(texto, " #", " \\#")
+'
+'   txtSHORTTITLE.Text = texto
+'
+'   txtSHORTTITLE.Pos = curpos
+'
+' End
 
 Public Sub BtnBuscarClave_Click()
 

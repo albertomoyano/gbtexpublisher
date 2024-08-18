@@ -1349,7 +1349,7 @@
           }
           { txtNUMBER TextBox AllTextBoxes
             Name = "txtNUMBER"
-            MoveScaled(13,0,16,4)
+            MoveScaled(17,0,16,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
           }
@@ -1419,7 +1419,7 @@
           }
           { txtYEAR TextBox AllTextBoxes
             Name = "txtYEAR"
-            MoveScaled(14,0,24,3.5556)
+            MoveScaled(20,0,24,3.5556)
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Placeholder = ("YYYY (usar en revistas)")
@@ -1447,7 +1447,7 @@
           }
           { txtDATEY TextBox AllTextBoxes
             Name = "txtDATEY"
-            MoveScaled(14,0,21,4)
+            MoveScaled(19,0,21,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Placeholder = ("YYYY-MM-DD")
@@ -1593,8 +1593,7 @@
             Alignment = Align.Right
             Text = ("Pages ")
           }
-          { txtPAGES TextBox AllTextBoxes
-            Name = "txtPAGES"
+          { txtPAGES TextBox
             MoveScaled(17,0,7,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
