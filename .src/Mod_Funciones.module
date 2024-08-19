@@ -45,8 +45,8 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not Exist(File.Dir(rutaTexto) & "/tapa") Then
     Mkdir File.Dir(rutaTexto) & "/tapa"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/catalogo") Then
-    Mkdir File.Dir(rutaTexto) & "/catalogo"
+  If Not Exist(File.Dir(rutaTexto) & "/pdf") Then
+    Mkdir File.Dir(rutaTexto) & "/pdf"
   End If
   If Not Exist(File.Dir(rutaTexto) & "/artcap") Then
     Mkdir File.Dir(rutaTexto) & "/artcap"

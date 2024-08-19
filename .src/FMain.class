@@ -1479,7 +1479,7 @@ Public Sub menuCatalogo_Click()
   TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXcatalogo-" & BaseName & ".tex" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "catalogo/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
+  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
   Wait 0.2
 
   TerminalView1.SetFocus()
@@ -6397,10 +6397,10 @@ Public Sub menuDisclaimer_Click()
   Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
   Wait 0.2
 
-  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXcatalogo-" & BaseName & ".tex" & "\n")
+  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXdisclaimer-" & BaseName & ".tex" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "catalogo/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
+  TerminalView1.Input("mv gbTeXdisclaimer-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & "\n")
   Wait 0.2
 
   TerminalView1.SetFocus()
