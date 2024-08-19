@@ -1324,3 +1324,167 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
   Conn.Close
 
 End' exportamos el archivo metadatos para libro en HTML
+
+'exportamos el disclaimer
+Public Sub ExportToDisclaimer(rutaTexto As String)
+
+  Dim s As String
+  Dim sb As String
+  Dim f As ResultField
+  Dim fb As ResultField
+  Dim aFields As New String[]
+  Dim bFields As New String[]
+  Dim w As Integer
+  Dim wb As Integer
+  Dim buscar As String
+  Dim buscarAutor As String
+  Dim outputFile As String
+  Dim id As Integer
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.conectar()
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = Conn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
+
+  ' Inicializa la cadena vacía
+  sb = ""
+
+  ' Iterar sobre los IDs y obtener la información correspondiente
+  For Each id In ids
+    ' Establecer el valor de 'id' antes de ejecutar la consulta
+    buscarAutor = "SELECT * FROM autores WHERE id = " & id
+    ContenidoAutor = Conn.Exec(buscarAutor)
+
+    bFields.Clear
+    For Each fb In ContenidoAutor.Fields
+      bFields.Add(fb.Name)
+      If Len(fb.Name) > wb Then
+        wb = Len(fb.Name)
+      Endif
+    Next
+
+    ' Agregar la información al resultado
+    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  Next
+
+  ' Eliminar la coma adicional al final y cerrar la cadena
+  sb = Left(sb, Len(sb) - 2)
+
+  s = "" ' Inicializa la cadena definitiva
+
+  While Contenido.Available
+    s &= "\\documentclass{article}" & "\n"
+    s &= "\\usepackage[paperwidth=210mm,paperheight=297mm,top=20mm,bottom=20mm,left=20mm,right=20mm,headsep=0pt,headheight=0pt,footskip=0pt,marginparsep=0pt,marginparwidth=0pt,footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}" & "\n"
+    s &= "\\usepackage[spanish,es-ucroman,es-noshorthands]{babel}" & "\n"
+    s &= "\\usepackage[autostyle=true]{csquotes}" & "\n"
+    s &= "\\tracinglostchars=2" & "\n"
+    s &= "\\usepackage{fontspec}" & "\n"
+    s &= "\\usepackage{microtype}" & "\n"
+    s &= "\\newfontfeature{Microtypography}{protrusion=default;expansion=default}" & "\n"
+    s &= "\\directlua{fonts.protrusions.setups.default.factor=.5}" & "\n"
+    s &= "\\renewcommand{\\normalsize}{\\fontsize{10pt}{13.5pt}\\selectfont}" & "\n"
+    s &= "\\topskip=13.5pt" & "\n"
+    s &= "\\setmainfont{Libertinus Serif}[Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.2]" & "\n"
+    s &= "\\setsansfont{IBMPlexSansCondensed}[Scale=MatchLowercase,Ligatures=TeX,Extension=.otf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-SemiBold,BoldItalicFont=*-SemiBoldItalic]" & "\n"
+    s &= "\\setmonofont{IBMPlexMono.otf}[Scale=0.91,Extension=.otf,UprightFont=*-Regular,ItalicFont = IBMPlexMono-Italic.otf,BoldFont = IBMPlexMono-Bold.otf,BoldItalicFont = IBMPlexMono-BoldItalic.otf]" & "\n"
+    s &= "\\usepackage{graphicx}" & "\n"
+    s &= "\\usepackage{ragged2e}" & "\n"
+    s &= "\\usepackage{xcolor}" & "\n"
+    s &= "\\definecolor{color2}{RGB}{144,12,63}" & "\n"
+    s &= "\\pagecolor{color2!1}" & "\n"
+    s &= "\\usepackage[absolute]{textpos}" & "\n"
+    s &= "\\newcommand\\cabecera[1]{\\sf\\normalsize{#1}}" & "\n"
+    s &= "\\newcommand\\titulo[1]{\\sf\\LARGE{\\textbf{#1}}}" & "\n"
+    s &= "\\newcommand\\subtitulo[1]{\\sf\\Large{#1}}" & "\n"
+    s &= "\\newcommand\\autoria[1]{\\color{color2}\\sf\\Large{#1}}" & "\n"
+    s &= "\\newcommand\\legales[1]{\\sf\\normalsize{#1}}" & "\n"
+    s &= "\\newcommand\\texto[1]{\\normalsize{#1}}" & "\n"
+    s &= "\\newcommand\\biografia[1]{\\sf\\small{#1}}" & "\n"
+    s &= "\\usepackage{url}" & "\n"
+    s &= "\\def\\UrlFont{\\tt\\footnotesize}" & "\n"
+
+    s &= "\\begin{document}" & "\n"
+    s &= "\\thispagestyle{empty}" & "\n"
+
+    s &= "\\begin{textblock*}{45mm}(15mm,20mm)" & "\n"
+    s &= "\\includegraphics[width=45mm]{" & Contenido[aFields[49]] & "}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{45mm}(15mm,100mm)" & "\n"
+    s &= "\\begin{minipage}{45mm}" & "\n"
+    s &= "\\noindent\\legales{ISBN: \\textbf{" & Contenido[aFields[35]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Formato: \\textbf{" & Contenido[aFields[61]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Páginas: \\textbf{" & Contenido[aFields[50]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Idioma: \\textbf{" & Contenido[aFields[39]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Fecha: \\textbf{" & Contenido[aFields[11]] & "}}\\\\" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,20mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\noindent \\cabecera{Colección {\\color{color2}\\textbf{" & Contenido[aFields[51]] & "}}}\\\\" & "\n"
+    s &= "\\noindent \\cabecera{Dirigida por \\textbf{" & Contenido[aFields[52]] & "}}\\\\" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,45mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\raggedright \\titulo{" & Contenido[aFields[6]] & "}\\\\" & "\n"
+    s &= "\\raggedright \\subtitulo{" & Contenido[aFields[9]] & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,100mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\noindent \\texto{" & Contenido[aFields[56]] & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,77mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\noindent \\autoria{" & sb & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    ' s &= "\\begin{textblock*}{164mm}(15mm,220mm)" & "\n"
+    ' s &= "\\fboxsep2mm" & "\n"
+    ' s &= "\\colorbox{black!5}{" & "\n"
+    ' s &= "\\begin{minipage}{164mm}" & "\n"
+    ' s &= "\\noindent \\biografia{" & txtCV.Text & "}" & "\n"
+    ' s &= "\\end{minipage}}" & "\n"
+    ' s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{18cm}(15mm,277mm)" & "\n"
+    s &= "\\begin{minipage}{18cm}" & "\n"
+    s &= "\\centering" & "\n"
+    s &= "\\url{" & Contenido[aFields[42]] & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\end{document}" & "\n"
+    s &= "\n"
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXcatalogo-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+  Conn.Close
+
+End

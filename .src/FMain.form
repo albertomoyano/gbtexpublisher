@@ -205,6 +205,11 @@
       Picture = Picture["iconos/acroread.svg"]
       Enabled = False
     }
+    { menuDisclaimer Menu
+      Text = ("Disclaimer")
+      Picture = Picture["iconos/acroread.svg"]
+      Enabled = False
+    }
   }
   { menuTOOLS Menu
     Text = ("Herramientas")
@@ -528,8 +533,15 @@
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
+    { chkActivarTimer CheckBox
+      MoveScaled(66,0,16,4)
+      Enabled = False
+      ToolTip = ("Realiza un empuje a GitHub de manera automática cada 15 minutos")
+      AutoResize = True
+      Text = ("auto push a GitHub  ")
+    }
     { MenuApp MenuButton
-      MoveScaled(75,0,17.7778,4)
+      MoveScaled(92,0,17.7778,4)
       Enabled = False
       Text = ("Ver") & "..."
       Picture = Picture["iconos/bookmarks.svg"]
@@ -546,7 +558,7 @@
     Expand = True
     Arrangement = Arrange.Vertical
     Padding = 4
-    Count = 4
+    Count = 5
     Index = 0
     Text = ("Consola")
     Picture = Picture["iconos/terminal.svg"]
@@ -4274,6 +4286,9 @@
       }
       Index = 0
     }
+    Index = 4
+    Text = ("Disclaimer")
+    Picture = Picture["iconos/metadatos.svg"]
     Index = 0
   }
 }

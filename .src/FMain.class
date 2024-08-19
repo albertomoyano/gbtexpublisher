@@ -839,6 +839,8 @@ Public Sub menuAbrir_Click()
   menuCatalogo.Enabled = True
   menuControlRef.Enabled = True
   menuORTOGRAFIA.Enabled = True
+  menuDisclaimer.Enabled = True
+  chkActivarTimer.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -1040,6 +1042,8 @@ Public Sub mnuLast_Click()
   menuCatalogo.Enabled = True
   menuControlRef.Enabled = True
   menuORTOGRAFIA.Enabled = True
+  menuDisclaimer.Enabled = True
+  chkActivarTimer.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -6036,6 +6040,7 @@ Public Sub AplicarMayusculasConExcepcion(textBox As TextBox)'usada para normaliz
       ' Reemplazar la secuencia ", y" por " and " (con espacios antes y después)
       Resultado = Replace(Resultado, ", and ", " and ")
       Resultado = Replace(Resultado, "; and ", " and ")
+      Resultado = Replace(Resultado, ". and ", " and ")
     End If
 
     ' Agregar un espacio entre palabras excepto al final
@@ -6382,5 +6387,23 @@ Public Sub btnCOMPrevistaHTML2_Click()
     ' Else
     ' menuPDFlibro_Click
   Endif
+
+End
+
+Public Sub menuDisclaimer_Click()
+
+  TabPanel1.Index = 0
+
+  Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
+  Wait 0.2
+
+  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXcatalogo-" & BaseName & ".tex" & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "catalogo/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
+  Wait 0.2
+
+  TerminalView1.SetFocus()
+  Borrar_Aux
 
 End
