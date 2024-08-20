@@ -6548,3 +6548,13 @@ Public Function levantarComenta()
   Endif
 
 End
+
+Public Sub btnFont_Click()
+
+  Dialog.Title = "Seleccione una tipografía"
+  Dialog.Font = txtDisclaimer.Font
+  Dialog.FixedOnly = False
+  If Dialog.SelectFont() Then Return
+  txtDisclaimer.Font = Dialog.Font
+
+End
