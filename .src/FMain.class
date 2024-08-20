@@ -2,6 +2,7 @@
 
 Private Conn As Connection
 Private Contenido As Result
+Private ContenidoComenta As Result
 Private Busqueda As Result
 Public pBash As Process
 Public rutaFILES As String
@@ -856,7 +857,34 @@ Public Sub menuAbrir_Click()
 
   Mod_Funciones.CopiarArchivos(TextBox1.Text)
 
-  'comienza metadatos
+  'levantamos los datos de comentario
+  levantarComenta()
+  ' 'levantamos los datos de comentarios
+  ' Dim comandoComenta As String
+  ' comandoComenta = "select * from comentarios where nombreArchivo = " & "'" & BaseName & ".tex'"
+  ' ContenidoComenta = Conn.Exec(comandoComenta)
+  ' If ContenidoComenta.Count > 0 Then
+  '   BtnNuevoComenta.Enabled = False
+  '   btnGuardarComenta.Enabled = False
+  '   btnGuardarCambiosComenta.Enabled = True
+  '   txtIdComenta.Text = ContenidoComenta!id
+  '   txtnombreArchivoComenta.Text = ContenidoComenta!nombreArchivo
+  '   txtContacto.Text = ContenidoComenta!contacto
+  '   txtCorreo.Text = ContenidoComenta!correo
+  '   txtTelefono.Text = ContenidoComenta!telefono
+  '   txtDisclaimer.Text = ContenidoComenta!disclaimer
+  ' Else
+  '   txtnombreArchivoComenta.Text = ""
+  '   txtContacto.Text = ""
+  '   txtCorreo.Text = ""
+  '   txtTelefono.Text = ""
+  '   txtDisclaimer.Text = ""
+  '   BtnNuevoComenta.Enabled = True
+  '   btnGuardarComenta.Enabled = False
+  '   btnGuardarCambiosComenta.Enabled = False
+  ' Endif
+
+  'levantamos los datos de metadatos
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
@@ -939,6 +967,7 @@ Public Sub menuAbrir_Click()
     txt89_binding.Text = Contenido!binding_89
 
   Else
+    'falta limpiar el contenido de los textbox
     BtnNuevoMeta.Enabled = True
     btnGuardarMeta.Enabled = False
     btnGuardarCambiosMeta.Enabled = False
@@ -1179,6 +1208,9 @@ Public Sub mnuLast_Click()
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
 
+  'levantamos los datos de comentarios
+  levantarComenta()
+
 End
 
 Public Sub d2t_Click()
@@ -1294,12 +1326,26 @@ Public Sub Menu74_Click()'ver pdf página del catálogo
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) & "/catalogo/gbTeXcatalogo-" & BaseName & ".pdf"
+  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
   Else
     Message.Error("El archivo <b>gbTeXcatalogo-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
+
+Public Sub menuComentarios_Click()'ver pdf página de comentarios
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>gbTeXdisclaimer-" & BaseName & ".pdf</b> no existe.")
   Endif
 
 End
@@ -2211,7 +2257,6 @@ Public Sub btnGuardarMeta_Click()
   Contenido = Conn.Create("metadatos")
 
   guardarCamposMETA
-
   Contenido.Update
 
   BtnNuevoMeta.Enabled = False
@@ -6405,5 +6450,101 @@ Public Sub menuDisclaimer_Click()
 
   TerminalView1.SetFocus()
   Borrar_Aux
+
+End
+
+Public Sub BtnNuevoComenta_Click()
+
+  BtnNuevoComenta.Enabled = True
+  btnGuardarComenta.Enabled = False
+  btnGuardarCambiosComenta.Enabled = False
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  ContenidoComenta = Conn.Exec("SELECT MAX(id) FROM comentarios LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If ContenidoComenta["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(ContenidoComenta["MAX(id)"]) + 1
+  Endif
+  txtIdComenta.Text = Idn
+  txtnombreArchivoComenta.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
+  BtnNuevoComenta.Enabled = False
+  btnGuardarComenta.Enabled = True
+  btnGuardarCambiosComenta.Enabled = False
+
+End
+
+Public Sub btnGuardarComenta_Click()
+
+  ContenidoComenta = Conn.Create("comentarios")
+
+  guardarCamposComenta()
+  ContenidoComenta.Update
+
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  BtnNuevoComenta.Enabled = False
+  btnGuardarComenta.Enabled = False
+  btnGuardarCambiosComenta.Enabled = True
+
+End
+
+Public Sub btnGuardarCambiosComenta_Click()
+
+  ContenidoComenta = Conn.Edit("comentarios", "id=" & txtIdComenta.Text)
+
+  If ContenidoComenta.Available Then
+    guardarCamposComenta()
+    ContenidoComenta.Update
+    Message.Info("Los cambios se guardaron con éxito.")
+  Else
+    Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
+  Endif
+
+End
+
+Public Function guardarCamposComenta() As Boolean
+
+  ContenidoComenta!id = txtIdComenta.Text
+  ContenidoComenta!nombreArchivo = txtnombreArchivoComenta.Text
+  ContenidoComenta!contacto = txtContacto.Text
+  ContenidoComenta!correo = txtCorreo.Text
+  ContenidoComenta!telefono = txtTelefono.Text
+  ContenidoComenta!disclaimer = txtDisclaimer.Text
+
+End
+
+Public Function levantarComenta()
+
+  'levantamos los datos de comentarios
+  Dim comandoComenta As String
+
+  comandoComenta = "select * from comentarios where nombreArchivo = " & "'" & BaseName & ".tex'"
+  ContenidoComenta = Conn.Exec(comandoComenta)
+  If ContenidoComenta.Count > 0 Then
+    BtnNuevoComenta.Enabled = False
+    btnGuardarComenta.Enabled = False
+    btnGuardarCambiosComenta.Enabled = True
+    txtIdComenta.Text = ContenidoComenta!id
+    txtnombreArchivoComenta.Text = ContenidoComenta!nombreArchivo
+    txtContacto.Text = ContenidoComenta!contacto
+    txtCorreo.Text = ContenidoComenta!correo
+    txtTelefono.Text = ContenidoComenta!telefono
+    txtDisclaimer.Text = ContenidoComenta!disclaimer
+  Else
+    txtnombreArchivoComenta.Text = ""
+    txtContacto.Text = ""
+    txtCorreo.Text = ""
+    txtTelefono.Text = ""
+    txtDisclaimer.Text = ""
+    BtnNuevoComenta.Enabled = True
+    btnGuardarComenta.Enabled = False
+    btnGuardarCambiosComenta.Enabled = False
+  Endif
 
 End

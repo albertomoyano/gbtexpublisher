@@ -3,6 +3,7 @@
 Public Conn As Connection
 Public Contenido As Result
 Public ContenidoAutor As Result
+Public ContenidoMeta As Result
 
 Public Sub ExportarDOCX() ' Función para exportar el archivo a DOCX
 
@@ -1329,23 +1330,17 @@ End' exportamos el archivo metadatos para libro en HTML
 Public Sub ExportToDisclaimer(rutaTexto As String)
 
   Dim s As String
-  ' Dim sb As String
   Dim f As ResultField
-  Dim fb As ResultField
   Dim aFields As New String[]
-  Dim bFields As New String[]
   Dim w As Integer
-  Dim wb As Integer
   Dim buscar As String
-  Dim buscarAutor As String
   Dim outputFile As String
-  Dim id As Integer
 
   ' me conceto a la base de datos
   Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
-  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   Contenido = Conn.Exec(buscar)
 
   aFields.Clear
@@ -1356,39 +1351,13 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     Endif
   Next
 
-  Dim ids As String[] = Split(Contenido[aFields[0]], " ")
-
-  ' ' Inicializa la cadena vacía
-  ' sb = ""
-
-  ' Iterar sobre los IDs y obtener la información correspondiente
-  For Each id In ids
-    ' Establecer el valor de 'id' antes de ejecutar la consulta
-    buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Conn.Exec(buscarAutor)
-
-    bFields.Clear
-    For Each fb In ContenidoAutor.Fields
-      bFields.Add(fb.Name)
-      If Len(fb.Name) > wb Then
-        wb = Len(fb.Name)
-      Endif
-    Next
-
-    ' ' Agregar la información al resultado
-    ' sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
-  Next
-
-  ' ' Eliminar la coma adicional al final y cerrar la cadena
-  ' sb = Left(sb, Len(sb) - 2)
-
-  s = "" ' Inicializa la cadena definitiva
-
   While Contenido.Available
-    s &= "\\documentclass{article}" & "\n"
+    s &= "\\documentclass[11pt]{article}" & "\n"
     s &= "\\usepackage[paperwidth=210mm,paperheight=297mm,top=20mm,bottom=20mm,left=20mm,marginparsep=6mm,marginparwidth=44mm,textwidth=13cm,headsep=0pt,headheight=0pt,footskip=0pt,footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}" & "\n"
     s &= "\\usepackage[spanish,es-ucroman,es-noshorthands]{babel}" & "\n"
     s &= "\\usepackage[autostyle=true]{csquotes}" & "\n"
+    s &= "\\usepackage{paralist}" & "\n"
+    s &= "\\usepackage{easyReview}" & "\n"
     s &= "\\tracinglostchars=2" & "\n"
     s &= "\\usepackage{fontspec}" & "\n"
     s &= "\\usepackage{microtype}" & "\n"
@@ -1399,16 +1368,10 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\setmainfont{Libertinus Serif}[Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.2]" & "\n"
     s &= "\\setsansfont{IBMPlexSansCondensed}[Scale=MatchLowercase,Ligatures=TeX,Extension=.otf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-SemiBold,BoldItalicFont=*-SemiBoldItalic]" & "\n"
     s &= "\\setmonofont{IBMPlexMono.otf}[Scale=0.91,Extension=.otf,UprightFont=*-Regular,ItalicFont = IBMPlexMono-Italic.otf,BoldFont = IBMPlexMono-Bold.otf,BoldItalicFont = IBMPlexMono-BoldItalic.otf]" & "\n"
-    s &= "\\usepackage{graphicx}" & "\n"
-    s &= "\\usepackage{ragged2e}" & "\n"
-    s &= "\\usepackage{xcolor}" & "\n"
     s &= "\\usepackage[absolute]{textpos}" & "\n"
-    s &= "\\newcommand\\cabecera[1]{\\sf\\normalsize{#1}}" & "\n"
-    s &= "\\newcommand\\titulo[1]{\\sf\\LARGE{\\textbf{#1}}}" & "\n"
-    s &= "\\newcommand\\subtitulo[1]{\\sf\\Large{#1}}" & "\n"
-    s &= "\\newcommand\\legales[1]{\\sf\\small{#1}}" & "\n"
-    s &= "\\newcommand\\texto[1]{\\normalsize{#1}}" & "\n"
-    s &= "\\newcommand\\biografia[1]{\\sf\\small{#1}}" & "\n"
+    s &= "\\newcommand\\titulo[1]{\\sf\\Large{\\textbf{#1}}}" & "\n"
+    s &= "\\newcommand\\subtitulo[1]{\\sf\\large{#1}}" & "\n"
+    s &= "\\newcommand\\texto[1]{\\rm\\normalsize{#1}}" & "\n"
     s &= "\\newcommand\\foot[1]{\\sf\\footnotesize{#1}}" & "\n"
     s &= "\\usepackage{url}" & "\n"
     s &= "\\def\\UrlFont{\\tt\\footnotesize}" & "\n"
@@ -1416,57 +1379,35 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\begin{document}" & "\n"
     s &= "\\thispagestyle{empty}" & "\n"
 
-    'datos de la imagen de tapa
-    s &= "\\begin{textblock*}{44mm}(152mm,20mm)" & "\n"
-    s &= "\\includegraphics[width=44mm]{" & Contenido[aFields[49]] & "}" & "\n"
-    s &= "\\end{textblock*}" & "\n"
-    s &= "\\begin{textblock*}{44mm}(152mm,100mm)" & "\n"
-    s &= "\\begin{minipage}{44mm}" & "\n"
-    s &= "\\noindent\\legales{ISBN: \\textbf{" & Contenido[aFields[35]] & "}}\\\\" & "\n"
-    s &= "\\noindent\\legales{Formato: \\textbf{" & Contenido[aFields[61]] & "}}\\\\" & "\n"
-    s &= "\\noindent\\legales{Páginas: \\textbf{" & Contenido[aFields[50]] & "}}\\\\" & "\n"
-    s &= "\\noindent\\legales{Idioma: \\textbf{" & Contenido[aFields[39]] & "}}\\\\" & "\n"
-    s &= "\\noindent\\legales{Fecha: \\textbf{" & Contenido[aFields[11]] & "}}\\\\" & "\n"
-    s &= "\\end{minipage}" & "\n"
-    s &= "\\end{textblock*}" & "\n"
-
     s &= "\\noindent \\titulo{Comentarios e indicaciones}"
     s &= "\\vspace{5mm}\\\\" & gb.NewLine
-    s &= "\\noindent \\cabecera{Este artículo/libro requiere las siguientes revisiones antes de su publicación final:}\\\\"
+    s &= "\\noindent \\subtitulo{Este libro requiere las siguientes revisiones antes de su publicación final:}\\\\"
     s &= "\\noindent \\medskip"
-    s &= "\\texto{Acá va el texto que se levanta del textarea.text}\\\\" & gb.NewLine
-
-    ' s &= "\\begin{textblock*}{11cm}(75mm,45mm)" & "\n"
-    ' s &= "\\begin{minipage}{11cm}" & "\n"
-    ' s &= "\\raggedright \\titulo{" & Contenido[aFields[6]] & "}\\\\" & "\n"
-    ' s &= "\\raggedright \\subtitulo{" & Contenido[aFields[9]] & "}" & "\n"
-    ' s &= "\\end{minipage}" & "\n"
-    ' s &= "\\end{textblock*}" & "\n"
-
-    ' s &= "\\begin{textblock*}{11cm}(75mm,100mm)" & "\n"
-    ' s &= "\\begin{minipage}{11cm}" & "\n"
-    ' s &= "\\noindent \\texto{" & Contenido[aFields[56]] & "}" & "\n"
-    ' s &= "\\end{minipage}" & "\n"
-    ' s &= "\\end{textblock*}" & "\n"
+    s &= "\\texto{" & Contenido[aFields[5]] & "}\\\\" & gb.NewLine
 
     'datos del contacto
     s &= "\\begin{textblock*}{44mm}(152mm,150mm)" & "\n"
     s &= "\\begin{minipage}{44mm}" & "\n"
-    s &= "\\noindent \\foot{\\textbf{Para consultas}}\\\\" & gb.NewLine
-    s &= "\\noindent \\foot{contacto:}\\\\" & gb.NewLine
-    s &= "\\noindent \\foot{correo:}\\\\" & gb.NewLine
-    s &= "\\noindent \\foot{teléfono:}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{Para consultas}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{contacto}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{\\textbf{" & Contenido[aFields[2]] & "}}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{correo}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{\\textbf{" & Contenido[aFields[3]] & "}}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{teléfono}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{\\textbf{" & Contenido[aFields[4]] & "}}\\\\" & gb.NewLine
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
 
     'pie de página
     s &= "\\vfill" & gb.NewLine
-    s &= "\\noindent\\biografia{\\textbf{Disclaimer:} Esta página no forma parte del contenido oficial del libro y debe ser eliminada antes de la publicación final. La misma se generó para proporcionar comentarios y observaciones sobre el contenido del libro/revista. Los elementos mencionados aquí son para fines internos y no deben considerarse parte del material final del libro. Asegúrese de revisar y actualizar el contenido según las observaciones aquí indicadas antes de la publicación definitiva.}" & gb.NewLine
+    s &= "\\noindent\\foot{\\textbf{Disclaimer:} Esta página no forma parte del contenido oficial del libro y debe ser eliminada antes de la publicación final. La misma se generó para proporcionar comentarios y observaciones sobre el contenido del libro. Los elementos mencionados aquí son para fines internos y no deben considerarse parte del material final del libro. Asegúrese de revisar y actualizar el contenido según las observaciones aquí indicadas antes de la publicación definitiva.}" & gb.NewLine
     s &= "\\end{document}" & gb.NewLine
     s &= "\n"
 
     Contenido.MoveNext
   Wend
+
+  ' Next ' Cerrar el bucle For Each id In ids
 
   ' Establece la ruta y el nombre del archivo de salida
   outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXdisclaimer-" & File.BaseName(rutaTexto) & ".tex"

@@ -345,7 +345,9 @@
     }
     { Menu74 Menu
       Text = ("Ver página del catálogo")
-      Picture = Picture["iconos/acroread.svg"]
+    }
+    { menuComentarios Menu
+      Text = ("Ver página de comentarios")
     }
   }
   { Menu57 Menu
@@ -4292,30 +4294,44 @@
     { HBox175 HBox
       MoveScaled(2,0,95,4)
       Padding = 1
-      { BtnNuevoMeta3 Button
+      { BtnNuevoComenta Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
         ToolTip = ("Agregar una nueva referencia")
         Picture = Picture["iconos/+pestana.svg"]
       }
-      { btnGuardarMeta3 Button
+      { btnGuardarComenta Button
         MoveScaled(4,0,4,4)
         ToolTip = ("Cerrar la ventana")
         Picture = Picture["iconos/guardar.svg"]
       }
-      { btnGuardarCambiosMeta3 Button
+      { btnGuardarCambiosComenta Button
         MoveScaled(8,0,4,4)
         ToolTip = ("Guardar modificaciones")
         Picture = Picture["iconos/guardarComo.svg"]
       }
-      { txtId4 TextBox
+      { txtIdComenta TextBox
         MoveScaled(12,0,6,4)
         Visible = False
+        Enabled = False
         NoTabFocus = True
         ReadOnly = True
       }
       { Spring2 Spring
-        MoveScaled(49,0,5,4)
+        MoveScaled(36,0,5,4)
+      }
+      { lblAlta6 Label
+        MoveScaled(41,0,19,4)
+        AutoResize = True
+        Alignment = Align.Right
+        Text = ("    Comentarios para:  ")
+      }
+      { txtnombreArchivoComenta TextBox
+        MoveScaled(62,0,23,4)
+        Background = Color.Background
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
       }
     }
     { HBox176 HBox
@@ -4326,7 +4342,7 @@
         Alignment = Align.Right
         Text = ("Contacto  ")
       }
-      { txtnombreArchivo2 TextBox
+      { txtContacto TextBox
         MoveScaled(12,0,23,4)
         NoTabFocus = True
         Expand = True
@@ -4340,7 +4356,7 @@
         Alignment = Align.Right
         Text = ("Correo  ")
       }
-      { txtnombreArchivo3 TextBox
+      { txtCorreo TextBox
         MoveScaled(12,0,23,4)
         NoTabFocus = True
         Expand = True
@@ -4354,7 +4370,7 @@
         Alignment = Align.Right
         Text = ("Teléfono  ")
       }
-      { txtnombreArchivo4 TextBox
+      { txtTelefono TextBox
         MoveScaled(12,0,23,4)
         NoTabFocus = True
         Expand = True
@@ -4363,7 +4379,7 @@
     { HBox178 HBox
       MoveScaled(3,18,103,0.8889)
     }
-    { txtAreaDisclaimer TextArea
+    { txtDisclaimer TextArea
       MoveScaled(14,25,16,16)
       Expand = True
       Wrap = True
