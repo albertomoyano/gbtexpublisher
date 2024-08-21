@@ -301,7 +301,7 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   'revisamos la carpeta pdf y borramos el archivo
   Mod_Funciones.ManagePdfFolder(TextBox1.Text)
 
-  TerminalView1.Input("cat " & rutaFija &/ "general-book-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  TerminalView1.Input("cat " & rutaFija &/ "book-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2
 
   TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
@@ -440,7 +440,7 @@ Public Sub menuPDFarticulo_Click()
   ' Mod_Exportar.ExportToMetaTMP(TextBox1.Text)
   ' Wait 0.2
   '
-  ' TerminalView1.Input("cat " & rutaFILES & "/general-art-pdf.tex" & " " & rutaFILES &/ metaTemp & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  ' TerminalView1.Input("cat " & rutaFILES & "/revista-pdf.tex" & " " & rutaFILES &/ metaTemp & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
   ' Wait 0.2
   '
   ' ' borramos el archivo temporal de metadatos del artículo

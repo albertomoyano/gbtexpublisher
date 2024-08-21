@@ -555,7 +555,7 @@
     MoveScaled(1,13,98,0.8889)
   }
   { TabPanel1 TabStrip
-    MoveScaled(1,15,112,194)
+    MoveScaled(1,20,112,194)
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -2857,6 +2857,30 @@
             Expand = True
             Placeholder = ("Título del libro")
           }
+          { PictureBox2 PictureBox
+            MoveScaled(43,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox3 PictureBox
+            MoveScaled(47,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox4 PictureBox
+            MoveScaled(51,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox5 PictureBox
+            MoveScaled(55,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
         }
         { HBox95 HBox
           MoveScaled(0,4,78,4.4444)
@@ -4391,5 +4415,8 @@
       ScrollBar = Scroll.Vertical
     }
     Index = 0
+  }
+  { Timer1 #Timer
+    #MoveScaled(100,13)
   }
 }
