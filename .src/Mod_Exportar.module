@@ -1331,9 +1331,13 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
 
   Dim s As String
   Dim f As ResultField
+  Dim fb As ResultField
   Dim aFields As New String[]
+  Dim bFields As New String[]
   Dim w As Integer
+  Dim wb As Integer
   Dim buscar As String
+  Dim buscarMeta As String
   Dim outputFile As String
 
   ' me conceto a la base de datos
@@ -1342,12 +1346,22 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
   ' Exportamos los registros seleccionados
   buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   Contenido = Conn.Exec(buscar)
+  buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoMeta = Conn.Exec(buscarMeta)
 
   aFields.Clear
   For Each f In Contenido.Fields
     aFields.Add(f.Name)
     If Len(f.Name) > w Then
       w = Len(f.Name)
+    Endif
+  Next
+
+  bFields.Clear
+  For Each fb In ContenidoMeta.Fields
+    bFields.Add(fb.Name)
+    If Len(fb.Name) > wb Then
+      wb = Len(fb.Name)
     Endif
   Next
 
@@ -1358,6 +1372,7 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\usepackage[autostyle=true]{csquotes}" & "\n"
     s &= "\\usepackage{paralist}" & "\n"
     s &= "\\usepackage{easyReview}" & "\n"
+    s &= "\\usepackage{graphicx}" & "\n"
     s &= "\\tracinglostchars=2" & "\n"
     s &= "\\usepackage{fontspec}" & "\n"
     s &= "\\usepackage{microtype}" & "\n"
@@ -1384,6 +1399,20 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\noindent \\subtitulo{Este libro requiere las siguientes revisiones antes de su publicación final:}\\\\"
     s &= "\\noindent \\medskip"
     s &= "\\texto{" & Contenido[aFields[5]] & "}\\\\" & gb.NewLine
+
+    s &= "\\begin{textblock*}{44mm}(152mm,20mm)" & "\n"
+    s &= "\\includegraphics[width=44mm]{" & ContenidoMeta[bFields[49]] & "}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{44mm}(152mm,90mm)" & "\n"
+    s &= "\\begin{minipage}{44mm}" & "\n"
+    s &= "\\noindent\\foot{ISBN: \\textbf{" & ContenidoMeta[bFields[35]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Formato: \\textbf{" & ContenidoMeta[bFields[61]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Páginas: \\textbf{" & ContenidoMeta[bFields[50]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Idioma: \\textbf{" & ContenidoMeta[bFields[39]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Fecha: \\textbf{" & ContenidoMeta[bFields[11]] & "}}\\\\" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
 
     'datos del contacto
     s &= "\\begin{textblock*}{44mm}(152mm,150mm)" & "\n"

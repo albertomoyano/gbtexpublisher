@@ -206,7 +206,7 @@
       Enabled = False
     }
     { menuDisclaimer Menu
-      Text = ("Disclaimer")
+      Text = ("Página de comentarios")
       Picture = Picture["iconos/acroread.svg"]
       Enabled = False
     }
