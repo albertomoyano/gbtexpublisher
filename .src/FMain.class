@@ -859,36 +859,12 @@ Public Sub menuAbrir_Click()
 
   'levantamos los datos de comentario
   levantarComenta()
-  ' 'levantamos los datos de comentarios
-  ' Dim comandoComenta As String
-  ' comandoComenta = "select * from comentarios where nombreArchivo = " & "'" & BaseName & ".tex'"
-  ' ContenidoComenta = Conn.Exec(comandoComenta)
-  ' If ContenidoComenta.Count > 0 Then
-  '   BtnNuevoComenta.Enabled = False
-  '   btnGuardarComenta.Enabled = False
-  '   btnGuardarCambiosComenta.Enabled = True
-  '   txtIdComenta.Text = ContenidoComenta!id
-  '   txtnombreArchivoComenta.Text = ContenidoComenta!nombreArchivo
-  '   txtContacto.Text = ContenidoComenta!contacto
-  '   txtCorreo.Text = ContenidoComenta!correo
-  '   txtTelefono.Text = ContenidoComenta!telefono
-  '   txtDisclaimer.Text = ContenidoComenta!disclaimer
-  ' Else
-  '   txtnombreArchivoComenta.Text = ""
-  '   txtContacto.Text = ""
-  '   txtCorreo.Text = ""
-  '   txtTelefono.Text = ""
-  '   txtDisclaimer.Text = ""
-  '   BtnNuevoComenta.Enabled = True
-  '   btnGuardarComenta.Enabled = False
-  '   btnGuardarCambiosComenta.Enabled = False
-  ' Endif
 
   'levantamos los datos de metadatos
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = Conn.Exec(Comando)
+  Contenido = Conn.Exec(comando)
   If Contenido.Count > 0 Then
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
@@ -1219,108 +1195,108 @@ Public Sub d2t_Click()
 
 End
 
-'exportamos el archivo metadatos
-Public Sub ExportToMetaJATS()
-
-  Dim s As String
-  Dim f As ResultField
-  Dim aFields As New String[]
-  Dim w As Integer
-  Dim buscar As String
-  Dim outputFile As String
-
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
-
-  buscar = "select * from metadatos where nombreArchivo like '%" & BaseName & "%'"
-
-  ' Exportar el registro seleccionado
-  Contenido = Conn.Exec(buscar)
-
-  aFields.Clear
-  For Each f In Contenido.Fields
-    aFields.Add(f.Name)
-    If Len(f.Name) > w Then
-      w = Len(f.Name)
-    Endif
-  Next
-
-  s = "" ' Inicializa la cadena vacía
-
-  While Contenido.Available
-    s &= "\n"
-    s &= "% contenido agregado de manera dinámica, no edite este archivo" & "\n"
-    ' s &= "\n"
-    ' s &= "\\Configure{CoverMimeType}{image/jpeg}" & "\n"
-    ' s &= "\\CoverMetadata{./media/" & Contenido[aFields[49]] & "}\n" 'tapa
-    s &= "\n"
-    s &= "\\begin{document}" & "\n"
-    s &= "\\def\\Author{" & Contenido[aFields[5]] & "}\n" '
-    s &= "\\def\\Title{" & Contenido[aFields[6]] & ": " & Contenido[aFields[9]] & "}\n"
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:subject>" & Contenido[aFields[57]] & "</dc:subject>}}\n" 'palabras clave
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:date>" & Contenido[aFields[11]] & "</dc:date>}}\n" 'fecha original opf:event=\"original-publication\"
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:created>" & Contenido[aFields[12]] & "</dc:created>}}\n" 'fecha de creación
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:modified>" & Contenido[aFields[13]] & "</dc:modified>}}\n"
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:rights>" & Contenido[aFields[15]] & "</dc:rights>}}\n" 'licencia
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:identifier id=\"uuid\" opf:scheme=\"UUID\">" & Contenido[aFields[26]] & "</dc:identifier>}}\n" 'identificador
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:publisher>" & Contenido[aFields[28]] & "</dc:publisher>}}\n" 'editorial
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:identifier id=\"bookid\">" & Contenido[aFields[35]] & "</dc:identifier>}}\n" 'isbn
-    s &= "\\Configure{DocumentLanguage}{" & Contenido[aFields[39]] & "}\n"
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:identifier id=\"bookid\" opf:scheme=\"URI\">" & Contenido[aFields[42]] & "</dc:identifier>}}\n" 'identificador uuid 42
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:description>" & Contenido[aFields[56]] & "</dc:description>}}\n" 'abstract
-
-    If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
-      s &= "\\Configure{OpfMetadata}" & "\n"
-      s &= "{\\HCode{<dc:relation>" & Contenido[aFields[51]] & "</dc:relation>}}\n" 'relation
-    Endif
-
-    If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
-      s &= "\\Configure{OpfMetadata}" & "\n"
-      s &= "{\\HCode{<dc:contributor opf:role=\"edt\">" & Contenido[aFields[52]] & "</dc:contributor>}}\n" 'editor
-    Endif
-
-    If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
-      s &= "\\Configure{OpfMetadata}" & "\n"
-      s &= "{\\HCode{<dc:contributor opf:role=\"trl\">" & Contenido[aFields[53]] & "</dc:contributor>}}\n" 'traductor
-    Endif
-
-    If Not IsNull(Contenido[aFields[54]]) And Len(Contenido[aFields[54]]) > 0 Then
-      s &= "\\Configure{OpfMetadata}" & "\n"
-      s &= "{\\HCode{<dc:language opf:file-as=\"Original Language\">" & Contenido[aFields[54]] & "</dc:language>}}\n"
-    Endif
-
-    If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
-      s &= "\\Configure{OpfMetadata}" & "\n"
-      s &= "{\\HCode{<dc:contributor opf:role=\"ill\">" & Contenido[aFields[55]] & "</dc:contributor>}}\n" 'ilustrador
-    Endif
-
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:format>EPUB</dc:format>}}\n" 'formato
-    s &= "\\EndPreamble" & "\n"
-    s &= "\n"
-
-    Contenido.MoveNext
-  Wend
-
-  ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(TextBox1.Text) &/ "files" &/ "gbTeXmeta-" & BaseName & ".tex"
-
-  ' Guarda el contenido acumulado en un solo archivo
-  File.Save(outputFile, s)
-
-  Conn.Close
-
-End
+' 'exportamos el archivo metadatos
+' Public Sub ExportToMetaJATS()
+'
+'   Dim s As String
+'   Dim f As ResultField
+'   Dim aFields As New String[]
+'   Dim w As Integer
+'   Dim buscar As String
+'   Dim outputFile As String
+'
+'   ' me conceto a la base de datos
+'   Conn = Mod_Conn.conectar()
+'
+'   buscar = "select * from metadatos where nombreArchivo like '%" & BaseName & "%'"
+'
+'   ' Exportar el registro seleccionado
+'   Contenido = Conn.Exec(buscar)
+'
+'   aFields.Clear
+'   For Each f In Contenido.Fields
+'     aFields.Add(f.Name)
+'     If Len(f.Name) > w Then
+'       w = Len(f.Name)
+'     Endif
+'   Next
+'
+'   s = "" ' Inicializa la cadena vacía
+'
+'   While Contenido.Available
+'     s &= "\n"
+'     s &= "% contenido agregado de manera dinámica, no edite este archivo" & "\n"
+'     ' s &= "\n"
+'     ' s &= "\\Configure{CoverMimeType}{image/jpeg}" & "\n"
+'     ' s &= "\\CoverMetadata{./media/" & Contenido[aFields[49]] & "}\n" 'tapa
+'     s &= "\n"
+'     s &= "\\begin{document}" & "\n"
+'     s &= "\\def\\Author{" & Contenido[aFields[5]] & "}\n" '
+'     s &= "\\def\\Title{" & Contenido[aFields[6]] & ": " & Contenido[aFields[9]] & "}\n"
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:subject>" & Contenido[aFields[57]] & "</dc:subject>}}\n" 'palabras clave
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:date>" & Contenido[aFields[11]] & "</dc:date>}}\n" 'fecha original opf:event=\"original-publication\"
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:created>" & Contenido[aFields[12]] & "</dc:created>}}\n" 'fecha de creación
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:modified>" & Contenido[aFields[13]] & "</dc:modified>}}\n"
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:rights>" & Contenido[aFields[15]] & "</dc:rights>}}\n" 'licencia
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:identifier id=\"uuid\" opf:scheme=\"UUID\">" & Contenido[aFields[26]] & "</dc:identifier>}}\n" 'identificador
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:publisher>" & Contenido[aFields[28]] & "</dc:publisher>}}\n" 'editorial
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:identifier id=\"bookid\">" & Contenido[aFields[35]] & "</dc:identifier>}}\n" 'isbn
+'     s &= "\\Configure{DocumentLanguage}{" & Contenido[aFields[39]] & "}\n"
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:identifier id=\"bookid\" opf:scheme=\"URI\">" & Contenido[aFields[42]] & "</dc:identifier>}}\n" 'identificador uuid 42
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:description>" & Contenido[aFields[56]] & "</dc:description>}}\n" 'abstract
+'
+'     If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
+'       s &= "\\Configure{OpfMetadata}" & "\n"
+'       s &= "{\\HCode{<dc:relation>" & Contenido[aFields[51]] & "</dc:relation>}}\n" 'relation
+'     Endif
+'
+'     If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
+'       s &= "\\Configure{OpfMetadata}" & "\n"
+'       s &= "{\\HCode{<dc:contributor opf:role=\"edt\">" & Contenido[aFields[52]] & "</dc:contributor>}}\n" 'editor
+'     Endif
+'
+'     If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
+'       s &= "\\Configure{OpfMetadata}" & "\n"
+'       s &= "{\\HCode{<dc:contributor opf:role=\"trl\">" & Contenido[aFields[53]] & "</dc:contributor>}}\n" 'traductor
+'     Endif
+'
+'     If Not IsNull(Contenido[aFields[54]]) And Len(Contenido[aFields[54]]) > 0 Then
+'       s &= "\\Configure{OpfMetadata}" & "\n"
+'       s &= "{\\HCode{<dc:language opf:file-as=\"Original Language\">" & Contenido[aFields[54]] & "</dc:language>}}\n"
+'     Endif
+'
+'     If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
+'       s &= "\\Configure{OpfMetadata}" & "\n"
+'       s &= "{\\HCode{<dc:contributor opf:role=\"ill\">" & Contenido[aFields[55]] & "</dc:contributor>}}\n" 'ilustrador
+'     Endif
+'
+'     s &= "\\Configure{OpfMetadata}" & "\n"
+'     s &= "{\\HCode{<dc:format>EPUB</dc:format>}}\n" 'formato
+'     s &= "\\EndPreamble" & "\n"
+'     s &= "\n"
+'
+'     Contenido.MoveNext
+'   Wend
+'
+'   ' Establece la ruta y el nombre del archivo de salida
+'   outputFile = File.Dir(TextBox1.Text) &/ "files" &/ "gbTeXmeta-" & BaseName & ".tex"
+'
+'   ' Guarda el contenido acumulado en un solo archivo
+'   File.Save(outputFile, s)
+'
+'   Conn.Close
+'
+' End
 
 Public Sub Menu74_Click()'ver pdf página del catálogo
 
@@ -2106,13 +2082,6 @@ Public Sub btnBuscarClaveGLO_Click()
     VGridGLO[rowIndex, 10].Text = Busqueda!sort
     Busqueda.MoveNext
   Wend
-
-End
-
-' comienzan metadatos
-Public Sub btnLimpiar_Click()
-
-  txt05_pdfauthor.Clear
 
 End
 
@@ -6472,7 +6441,8 @@ Public Sub menuDisclaimer_Click()
     TerminalView1.SetFocus()
     Borrar_Aux
   Else
-    Message.Info("No se encontró registro de comentarios en la base de datos para el archivo especificado.")
+    Message.Info("No se encontró registro de comentarios en la base de datos para el archivo especificado. Será dirigido a la pestaña de comentarios para dar el alta el registro.")
+    TabPanel1.Index = 4
   Endif
 
 End
