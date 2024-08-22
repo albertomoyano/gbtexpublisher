@@ -558,7 +558,12 @@ Public Sub ExportToCatalogo(rutaTexto As String)
     s &= "\\thispagestyle{empty}" & "\n"
 
     s &= "\\begin{textblock*}{45mm}(15mm,20mm)" & "\n"
-    s &= "\\includegraphics[width=45mm]{" & Contenido[aFields[49]] & "}" & "\n"
+    If Not IsNull(Contenido[aFields[49]]) And Len(Contenido[aFields[49]]) > 0 Then
+      s &= "\\includegraphics[width=45mm]{" & Contenido[aFields[49]] & "}" & "\n"
+    Else
+      ' Si no hay registro, usa una imagen predefinida
+      s &= "\\includegraphics[width=45mm]{" & User.Home & "/.gbtexpublisher/falta-tapa.png}" & "\n"
+    Endif
     s &= "\\end{textblock*}" & "\n"
 
     s &= "\\begin{textblock*}{45mm}(15mm,100mm)" & "\n"
@@ -1401,7 +1406,12 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\texto{" & Contenido[aFields[5]] & "}\\\\" & gb.NewLine
 
     s &= "\\begin{textblock*}{44mm}(152mm,20mm)" & "\n"
-    s &= "\\includegraphics[width=44mm]{" & ContenidoMeta[bFields[49]] & "}" & "\n"
+    If Not IsNull(ContenidoMeta[bFields[49]]) And Len(ContenidoMeta[bFields[49]]) > 0 Then
+      s &= "\\includegraphics[width=44mm]{" & ContenidoMeta[bFields[49]] & "}" & "\n"
+    Else
+      ' Si no hay registro, usa una imagen predefinida
+      s &= "\\includegraphics[width=44mm]{" & User.Home & "/.gbtexpublisher/falta-tapa.png}" & "\n"
+    Endif
     s &= "\\end{textblock*}" & "\n"
 
     s &= "\\begin{textblock*}{44mm}(152mm,90mm)" & "\n"

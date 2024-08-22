@@ -47,6 +47,10 @@ Public Sub Form_Open()
     Copy "./db_tex.sqlite" To rutaApp &/ "db_tex.sqlite"
   End If
 
+  If Not Exist(rutaApp &/ "falta-tapa.png") Then
+    Copy "./falta-tapa.png" To rutaApp &/ "falta-tapa.png"
+  End If
+
   If Not Exist(rutaAppR &/ ".gitignore") Then
     Copy "./gitignore_BD" To rutaAppR &/ ".gitignore"
   End If
