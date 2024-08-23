@@ -2787,51 +2787,11 @@
         ReadOnly = True
       }
     }
-    { HBox93 HBox
-      MoveScaled(-1,9,111,4)
-      Visible = False
-      Padding = 2
-      { PictureBox1 PictureBox
-        MoveScaled(-10,0,23,4)
-      }
-      { rb7 RadioButton
-        MoveScaled(15,0,13,4)
-        AutoResize = True
-        Text = ("Todos  ")
-        Value = True
-      }
-      { rb1 RadioButton
-        MoveScaled(29,0,13,4)
-        AutoResize = True
-        Text = ("PDF (revista)  ")
-      }
-      { rb2 RadioButton
-        MoveScaled(43,0,11,4)
-        AutoResize = True
-        Text = ("PDF (libro)  ")
-      }
-      { rb3 RadioButton
-        MoveScaled(55,0,12,4)
-        AutoResize = True
-        Text = ("HTML / ePub  ")
-      }
-      { rb4 RadioButton
-        MoveScaled(68,0,12,4)
-        AutoResize = True
-        Text = ("XML-JATS  ")
-      }
-      { rb5 RadioButton
-        MoveScaled(80,0,22,3.5556)
-        Expand = True
-        AutoResize = True
-        Text = ("Libre Office / MS Word")
-      }
-    }
     { HBox174 HBox
-      MoveScaled(0,13,103,0.8889)
+      MoveScaled(2,9,103,0.8889)
     }
     { TabPanel3 TabStrip
-      MoveScaled(1,16,107,195)
+      MoveScaled(1,11,107,195)
       Expand = True
       Arrangement = Arrange.Vertical
       Count = 2
@@ -2886,11 +2846,10 @@
             { Label35 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Date  ")
+              Text = ("Fecha  ")
             }
-            { !txtDate TextBox
+            { txtDate TextBox
               MoveScaled(27,0,20,4)
-              #Public = True
               Text = ("0000-00")
               Placeholder = ("YYYY-MM-DD")
             }
@@ -2907,6 +2866,7 @@
               MoveScaled(27,0,16,4)
               #Public = True
               Expand = True
+              Placeholder = ("Tema principal del libro")
             }
           }
           { HBox109 HBox
@@ -2915,7 +2875,7 @@
             { Label57 Label
               MoveScaled(1,0,23,4)
               Alignment = Align.Right
-              Text = ("Claves/Etiquetas  ")
+              Text = ("Palabras claves  ")
             }
             { !txt57_palabrasclave TextBox
               MoveScaled(27,0,23,4)
