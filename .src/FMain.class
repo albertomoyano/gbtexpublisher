@@ -841,7 +841,6 @@ Public Sub menuAbrir_Click()
   menuControlRef.Enabled = True
   menuORTOGRAFIA.Enabled = True
   menuDisclaimer.Enabled = True
-  chkActivarTimer.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -1048,7 +1047,6 @@ Public Sub mnuLast_Click()
   menuControlRef.Enabled = True
   menuORTOGRAFIA.Enabled = True
   menuDisclaimer.Enabled = True
-  chkActivarTimer.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -6552,20 +6550,3 @@ Public Sub btnFont_Click()
   txtDisclaimer.Font = Dialog.Font
 
 End
-
-' Verificar si el CheckBox de GitHub esta habilitado
-Public Sub chkActivarTimer_Click()
-
-  ' Verifica si el CheckBox está activado (True)
-  If chkActivarTimer.Value Then
-    ' Verifica si el TextBox tiene contenido
-    If txtGIT.Text <> "" Then
-      ' Aquí pones el código que quieres ejecutar si el TextBox no está vacío
-    Else
-      ' Si el TextBox está vacío, podrías desactivar el CheckBox o mostrar un mensaje
-      Message.Warning("Debe colocar su usuario de GitHub. No se puede activar la automatización.")
-      chkActivarTimer.Value = False
-    Endif
-  Endif
-
-End Sub

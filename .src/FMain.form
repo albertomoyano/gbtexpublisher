@@ -535,13 +535,6 @@
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
-    { chkActivarTimer CheckBox
-      MoveScaled(66,0,16,4)
-      Enabled = False
-      ToolTip = ("Realiza un empuje a GitHub de manera automática cada 15 minutos")
-      AutoResize = True
-      Text = ("auto push a GitHub  ")
-    }
     { MenuApp MenuButton
       MoveScaled(92,0,17.7778,4)
       Enabled = False
@@ -4378,8 +4371,5 @@
       ScrollBar = Scroll.Vertical
     }
     Index = 0
-  }
-  { Timer1 #Timer
-    #MoveScaled(100,13)
   }
 }
