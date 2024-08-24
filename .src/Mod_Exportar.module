@@ -1400,10 +1400,15 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\begin{document}" & "\n"
     s &= "\\thispagestyle{empty}" & "\n"
 
-    s &= "\\noindent \\titulo{Comentarios e indicaciones}"
-    s &= "\\vspace{5mm}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Título: \\emph{" & ContenidoMeta[bFields[84]] & "}}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Autor(es): " & ContenidoMeta[bFields[5]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Asunto: " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Palabras clave: " & ContenidoMeta[bFields[57]] & "}\\\\" & gb.NewLine
+    s &= "\\\\" & gb.NewLine
+    s &= "\\noindent \\titulo{Comentarios e indicaciones}\\\\"
+    s &= "\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{Este libro requiere las siguientes revisiones antes de su publicación final:}\\\\"
-    s &= "\\noindent \\medskip"
+    s &= "\\\\" & gb.NewLine
     s &= "\\texto{" & Contenido[aFields[5]] & "}\\\\" & gb.NewLine
 
     s &= "\\begin{textblock*}{44mm}(152mm,20mm)" & "\n"
