@@ -268,16 +268,15 @@ End
 
 Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
+  Dim newFile As String
+  Dim rutaFija As String
+  Dim newLog As String
+
   ' Llamamos a la función del módulo para verificar los metadatos
   If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
     ' Si la función retorna False, cancelamos la operación
     Return
   End If
-
-  ' Dim filePath As String
-  Dim newFile As String
-  Dim rutaFija As String
-  Dim newLog As String
 
   ' filePath = File.Dir(TextBox1.Text) &/ "pdf"
   newFile = "pdf-" & BaseName & ".tex"
