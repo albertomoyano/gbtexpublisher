@@ -129,6 +129,8 @@ Public Sub ManagePdfFolder(rutaTexto As String)
   Else
     ' Si existe, borra los archivos con extensión .pdf
     Shell "rm -rf " & pdfPath & "/" & File.BaseName(rutaTexto) & ".pdf" Wait
+    Shell "rm -rf " & pdfPath & "/gbTeXdisclaimer-" & File.BaseName(rutaTexto) & ".pdf" Wait
+    Shell "rm -rf " & pdfPath & "/_" & File.BaseName(rutaTexto) & ".pdf" Wait
   End If
 
 End Sub
