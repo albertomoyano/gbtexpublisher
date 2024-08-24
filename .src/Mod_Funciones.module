@@ -631,3 +631,24 @@ Public Sub GitVersion(raw As String) As String 'Función para chequear si hay ve
   Return v
 
 End
+
+'funcion para asegurar metadatos basicos a los archivos
+Public Function registrosObligatorios(rutaTexto As String) As Boolean
+
+  ' Verificar si el campo de metadatos existe
+  If FMain.txtnombreArchivo.Text = "" Or FMain.txtnombreArchivo.Text <> File.Name(rutaTexto) Then
+    Message.Error("Debe asegurar la construcción del archivo de metadatos para <strong>" & File.Name(rutaTexto) & "</strong>", "Ok")
+    FMain.TabPanel1.Index = 3
+    Return False
+  End If
+
+  ' Verificamos si los otros campos están vacíos
+  If FMain.txt84_bookTitle.Text = "" Or FMain.txt05_pdfauthor.Text = "" Or FMain.txtDate.Text = "" Or FMain.txtSubjet.Text = "" Or FMain.txt57_palabrasclave.Text = "" Then
+    Message.Error("Uno o más registros de los metadatos obligatorios están vacíos, la operación será cancelada.")
+    FMain.TabPanel1.Index = 3
+    Return False
+  End If
+  ' Si todo está bien, retornamos True
+  Return True
+
+End Function

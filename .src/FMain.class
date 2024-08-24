@@ -268,12 +268,9 @@ End
 
 Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
-  Dim metadatos As String
-
-  metadatos = txtnombreArchivo.Text
-  ' Verificar si el campo de metadatos existe
-  If metadatos = "" Then
-    Message.Error("Debe asegurar la construcción del archivo de metadatos", "Ok")
+  ' Llamamos a la función del módulo para verificar los metadatos
+  If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
+    ' Si la función retorna False, cancelamos la operación
     Return
   End If
 
@@ -343,65 +340,62 @@ End
 
 Public Sub menuODt_DOCX_Click() 'convertimos a odt
 
-  Dim metadatos As String
-
-  metadatos = txtnombreArchivo.Text
-  ' Verificar si el campo de metadatos existe
-  If metadatos = "" Then
-    Message.Error("Debe asegurar la construcción del archivo de metadatos", "Ok")
+  ' Llamamos a la función del módulo para verificar los metadatos
+  If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
+    ' Si la función retorna False, cancelamos la operación
     Return
   End If
-
-  Dim folder As String
-  Dim newFile As String
-
-  folder = File.Dir(TextBox1.Text) &/ "odt-docx"
-  newFile = "odt-" & BaseName & ".tex"
-
-  Borrar_Aux
-  Wait 0.2
-
-  ' exportamos los archivos
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  ' Mod_Exportar.Export2MetaDOCX(TextBox1.Text)
-  Wait 0.2
-
-  TabPanel1.Index = 0
-
-  TerminalView1.Input("cat " & rutaFILES & "/general-odt.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf odt-docx" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("mkdir odt-docx" & "\n")
-  Wait 0.2
-
-  ' esta instrucción no considera los metadatos
-  TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua " & " -a Debug " & newFile & "\n" & "rm -rf " & newFile & "\n")
-  Wait 0.2
-
-  ' y esta s con los metadatos
-  ' TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & newFile & "\n")' & "rm -rf " & newFile & "\n")
+  '
+  ' Dim folder As String
+  ' Dim newFile As String
+  '
+  ' folder = File.Dir(TextBox1.Text) &/ "odt-docx"
+  ' newFile = "odt-" & BaseName & ".tex"
+  '
+  ' Borrar_Aux
   ' Wait 0.2
-
-  'convertimos el odt a docx
-  TerminalView1.Input("libreoffice --headless --convert-to docx" & " " & "*.odt" & "\n")
-  Wait 0.2
-
-  ' movemos los archivos al directorio odt-docx
-  TerminalView1.Input("mv " & "odt-" & BaseName & ".docx" & " " & folder & "/" & BaseName & ".docx" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("mv " & "odt-" & BaseName & ".odt" & " " & folder & "/" & BaseName & ".odt" & "\n")' & "clear" & "\n")
-  Wait 0.2
-
-  ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  '
+  ' ' exportamos los archivos
+  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
+  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
+  ' ' Mod_Exportar.Export2MetaDOCX(TextBox1.Text)
   ' Wait 0.2
-
-  TerminalView1.SetFocus()
-  Borrar_Aux
+  '
+  ' TabPanel1.Index = 0
+  '
+  ' TerminalView1.Input("cat " & rutaFILES & "/general-odt.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("rm -rf odt-docx" & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("mkdir odt-docx" & "\n")
+  ' Wait 0.2
+  '
+  ' ' esta instrucción no considera los metadatos
+  ' TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua " & " -a Debug " & newFile & "\n" & "rm -rf " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' ' y esta s con los metadatos
+  ' ' TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & newFile & "\n")' & "rm -rf " & newFile & "\n")
+  ' ' Wait 0.2
+  '
+  ' 'convertimos el odt a docx
+  ' TerminalView1.Input("libreoffice --headless --convert-to docx" & " " & "*.odt" & "\n")
+  ' Wait 0.2
+  '
+  ' ' movemos los archivos al directorio odt-docx
+  ' TerminalView1.Input("mv " & "odt-" & BaseName & ".docx" & " " & folder & "/" & BaseName & ".docx" & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("mv " & "odt-" & BaseName & ".odt" & " " & folder & "/" & BaseName & ".odt" & "\n")' & "clear" & "\n")
+  ' Wait 0.2
+  '
+  ' ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  ' ' Wait 0.2
+  '
+  ' TerminalView1.SetFocus()
+  ' Borrar_Aux
 
 End
 
@@ -716,40 +710,46 @@ End
 
 Public Sub menuEPUB_Click() 'convertimos a epub
 
-  Dim folder As String
-  Dim newFile As String
+  ' Llamamos a la función del módulo para verificar los metadatos
+  If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
+    ' Si la función retorna False, cancelamos la operación
+    Return
+  End If
 
-  folder = BaseName & "-epub"
-  newFile = "epub-" & BaseName & ".tex"
-  Borrar_Aux
-  Wait 0.2
-
-  ' exportamos los archivos bib, glo y meta
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
-  Wait 0.2
-
-  TerminalView1.Input("cat " & rutaFILES & "/general-epub.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf epub" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
-  Wait 0.2
-
-  ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  ' Dim folder As String
+  ' Dim newFile As String
+  '
+  ' folder = BaseName & "-epub"
+  ' newFile = "epub-" & BaseName & ".tex"
+  ' Borrar_Aux
   ' Wait 0.2
-
-  TerminalView1.SetFocus()
-  Borrar_Aux
+  '
+  ' ' exportamos los archivos bib, glo y meta
+  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
+  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
+  ' Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("cat " & rutaFILES & "/general-epub.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("rm -rf epub" & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
+  ' Wait 0.2
+  '
+  ' ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  ' ' Wait 0.2
+  '
+  ' TerminalView1.SetFocus()
+  ' Borrar_Aux
 
 End
 
@@ -5310,60 +5310,57 @@ End
 
 Public Sub menuHTML5book_Click()
 
-  Dim metadatos As String
-
-  metadatos = txtnombreArchivo.Text
-  ' Verificar si el campo de metadatos existe
-  If metadatos = "" Then
-    Message.Error("Debe asegurar la construcción del archivo de metadatos", "Ok")
+  ' Llamamos a la función del módulo para verificar los metadatos
+  If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
+    ' Si la función retorna False, cancelamos la operación
     Return
   End If
-
-  TabPanel1.Index = 0
-
-  Borrar_Aux
-  Wait 0.2
-
-  ' exportamos los archivos bib y glo
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Mod_Exportar.Exportar2MetadatosHTMLbook(TextBox1.Text)
-  Wait 0.2
-
-  Shell "cp " & File.Dir(TextBox1.Text) &/ "files/imago_custom.css" & " " & File.Dir(TextBox1.Text)
-  Wait 0.2
-
-  Dim newFile As String
-  newFile = "html5-" & File.Name(TextBox1.Text)
-  TerminalView1.Input("cat " & rutaFILES & "/general-html.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf html5" & "\n")
-  Wait 0.2
-  Mkdir File.Dir(TextBox1.Text) & "/html5"
-  Wait 0.1
-
-  TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
-  Wait 0.2
-  TerminalView1.Input("lwarpmk html" & "\n")
-  Wait 0.2
-
-  Dim folderHTML5 As String
-  folderHTML5 = File.Dir(TextBox1.Text) &/ "html5"
-  'hacemos una copia de los archivos
-  TerminalView1.Input("cp -r " & File.Dir(TextBox1.Text) & "/media" & " " & folderHTML5 & "\n")
-  Wait 0.2
-  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.html" & " " & folderHTML5 & "\n")
-  Wait 0.2
-  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.png" & " " & folderHTML5 & "\n")
-  Wait 0.2
-  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.css" & " " & folderHTML5 & "\n")
-  Wait 0.2
-  TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.js" & " " & folderHTML5 & "\n")
-  Wait 0.2
-
-  TerminalView1.SetFocus()
-  Borrar_Aux
+  '
+  ' TabPanel1.Index = 0
+  '
+  ' Borrar_Aux
+  ' Wait 0.2
+  '
+  ' ' exportamos los archivos bib y glo
+  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
+  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
+  ' Mod_Exportar.Exportar2MetadatosHTMLbook(TextBox1.Text)
+  ' Wait 0.2
+  '
+  ' Shell "cp " & File.Dir(TextBox1.Text) &/ "files/imago_custom.css" & " " & File.Dir(TextBox1.Text)
+  ' Wait 0.2
+  '
+  ' Dim newFile As String
+  ' newFile = "html5-" & File.Name(TextBox1.Text)
+  ' TerminalView1.Input("cat " & rutaFILES & "/general-html.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.Input("rm -rf html5" & "\n")
+  ' Wait 0.2
+  ' Mkdir File.Dir(TextBox1.Text) & "/html5"
+  ' Wait 0.1
+  '
+  ' TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
+  ' Wait 0.2
+  ' TerminalView1.Input("lwarpmk html" & "\n")
+  ' Wait 0.2
+  '
+  ' Dim folderHTML5 As String
+  ' folderHTML5 = File.Dir(TextBox1.Text) &/ "html5"
+  ' 'hacemos una copia de los archivos
+  ' TerminalView1.Input("cp -r " & File.Dir(TextBox1.Text) & "/media" & " " & folderHTML5 & "\n")
+  ' Wait 0.2
+  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.html" & " " & folderHTML5 & "\n")
+  ' Wait 0.2
+  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.png" & " " & folderHTML5 & "\n")
+  ' Wait 0.2
+  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.css" & " " & folderHTML5 & "\n")
+  ' Wait 0.2
+  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.js" & " " & folderHTML5 & "\n")
+  ' Wait 0.2
+  '
+  ' TerminalView1.SetFocus()
+  ' Borrar_Aux
 
 End
 

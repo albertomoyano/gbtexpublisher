@@ -4,6 +4,7 @@ Public Conn As Connection
 Public Contenido As Result
 Public ContenidoAutor As Result
 Public ContenidoMeta As Result
+Public ResultadoMeta As Result
 
 Public Sub ExportarDOCX() ' Función para exportar el archivo a DOCX
 
