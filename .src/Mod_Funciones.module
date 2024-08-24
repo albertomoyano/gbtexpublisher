@@ -635,16 +635,25 @@ End
 'funcion para asegurar metadatos basicos a los archivos
 Public Function registrosObligatorios(rutaTexto As String) As Boolean
 
+  Dim campo0, campo1, campo2, campo3, campo4, campo5 As String
+
+  campo0 = FMain.txtnombreArchivo.Text
+  campo1 = FMain.txt84_bookTitle.Text
+  campo2 = FMain.txt05_pdfauthor.Text
+  campo3 = FMain.txtDate.Text
+  campo4 = FMain.txtSubjet.Text
+  campo5 = FMain.txt57_palabrasclave.Text
+
   ' Verificar si el campo de metadatos existe
-  If FMain.txtnombreArchivo.Text = "" Or FMain.txtnombreArchivo.Text <> File.Name(rutaTexto) Then
-    Message.Error("Debe asegurar la construcción del archivo de metadatos para <strong>" & File.Name(rutaTexto) & "</strong>", "Ok")
+  If campo0 = "" Or campo0 <> File.Name(rutaTexto) Then
+    Message.Error("Debe asegurar la construcción del archivo de metadatos para <strong>" & File.Name(rutaTexto) & "</strong>", "Aceptar")
     FMain.TabPanel1.Index = 3
     Return False
   End If
 
   ' Verificamos si los otros campos están vacíos
-  If FMain.txt84_bookTitle.Text = "" Or FMain.txt05_pdfauthor.Text = "" Or FMain.txtDate.Text = "" Or FMain.txtSubjet.Text = "" Or FMain.txt57_palabrasclave.Text = "" Then
-    Message.Error("Uno o más registros de los metadatos obligatorios están vacíos, la operación será cancelada.")
+  If campo1 = "" Or campo2 = "" Or campo3 = "" Or campo4 = "" Or campo5 = "" Then
+    Message.Error("Uno o más registros de los metadatos obligatorios están vacíos, la operación será cancelada.", "Aceptar")
     FMain.TabPanel1.Index = 3
     Return False
   End If
