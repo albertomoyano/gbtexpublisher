@@ -312,7 +312,6 @@
       Enabled = False
       { limpiarCache Menu
         Text = ("Limpiar cache para GitHub")
-        Picture = Picture["iconos/refrescar.svg"]
       }
       { gitignote_github Menu
         Text = ("gitignore_PARCIAL")
@@ -653,7 +652,7 @@
       { BtnRefrescarBib Button
         MoveScaled(27,0,4,4)
         ToolTip = ("Refrescar listado de la base de datos")
-        Picture = Picture["iconos/refrescar.svg"]
+        Picture = Picture["iconos/refrescar.png"]
       }
       { BtnEliminarBib Button
         MoveScaled(31,0,4,4)
@@ -665,7 +664,7 @@
         MoveScaled(35,0,4,4)
         NoTabFocus = True
         ToolTip = ("Duplicar entrada")
-        Picture = Picture["iconos/duplicar.svg"]
+        Picture = Picture["iconos/duplicar2.png"]
       }
       { txtID2 TextBox
         MoveScaled(45,0,6,4)
@@ -2488,7 +2487,7 @@
       { BtnRefrescarGlo Button
         MoveScaled(8,0,4,4)
         ToolTip = ("Refrescar listado de la base de datos")
-        Picture = Picture["iconos/refrescar.svg"]
+        Picture = Picture["iconos/refrescar.png"]
       }
       { btnGuardarGlo Button
         MoveScaled(12,0,4,4)
