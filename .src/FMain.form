@@ -661,8 +661,14 @@
         ToolTip = ("Borrar entrada")
         Picture = Picture["iconos/borrar.svg"]
       }
+      { btnDuplicarBib Button
+        MoveScaled(35,0,4,4)
+        NoTabFocus = True
+        ToolTip = ("Duplicar entrada")
+        Picture = Picture["iconos/duplicar.svg"]
+      }
       { txtID2 TextBox
-        MoveScaled(44,0,6,4)
+        MoveScaled(45,0,6,4)
         Visible = False
         Background = Color.Background
         NoTabFocus = True
@@ -670,7 +676,7 @@
         ReadOnly = True
       }
       { txtTOTALbib TextLabel
-        MoveScaled(50,0,24.2222,4)
+        MoveScaled(52,0,24.2222,4)
         Expand = True
         Alignment = Align.Center
         Wrap = False

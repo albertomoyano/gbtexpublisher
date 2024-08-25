@@ -94,7 +94,9 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not Exist(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
     Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
   End If
-
+  If Not Exist(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
+    Copy "./agradecimientos.tex" To File.Dir(rutaTexto) & "/artcap/agradecimientos.tex"
+  End If
   ' If Not Exist(File.Dir(rutaTexto) & "/files/general-epub.tex") Then
   '   Copy "./general-epub.tex" To File.Dir(rutaTexto) & "/files/general-epub.tex"
   ' End If
