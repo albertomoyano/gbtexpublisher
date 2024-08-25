@@ -1400,23 +1400,6 @@
             Placeholder = ("non-number issue of journal")
           }
         }
-        { HBox44 HBox
-          MoveScaled(0,16,100,4.4444)
-          Padding = 2
-          { lblPUBSTATE Label
-            MoveScaled(0,0,16,3.5556)
-            Alignment = Align.Right
-            Text = ("PubState ")
-          }
-          { cbPUBSTATE ComboBox
-            MoveScaled(16,0,18,3.5556)
-            NoTabFocus = True
-            ReadOnly = True
-          }
-          { Spring5 Spring
-            MoveScaled(76,0,17,4)
-          }
-        }
         { HBox46 HBox
           MoveScaled(0,20,100,4.4444)
           Padding = 2
@@ -1505,7 +1488,7 @@
       Index = 3
       Text = ("Org./Pág./Ub./Id.")
       { ScrollView5 ScrollView
-        MoveScaled(1,1,102,37)
+        MoveScaled(1,1,102,54)
         Expand = True
         Arrangement = Arrange.Vertical
         Border = False
@@ -1593,8 +1576,25 @@
             Placeholder = ("Organizador")
           }
         }
+        { HBox44 HBox
+          MoveScaled(0,13,100,4.4444)
+          Padding = 2
+          { lblPUBSTATE Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("PubState ")
+          }
+          { cbPUBSTATE ComboBox
+            MoveScaled(16,0,18,3.5556)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+          { Spring5 Spring
+            MoveScaled(76,0,17,4)
+          }
+        }
         { HBox47 HBox
-          MoveScaled(0,12,88,4.4444)
+          MoveScaled(0,18,88,4.4444)
           Padding = 2
           { lblPAGES Label
             MoveScaled(0,0,16,4)
@@ -1621,7 +1621,7 @@
           }
         }
         { HBox60 HBox
-          MoveScaled(0,16,88,4.4444)
+          MoveScaled(0,22,88,4.4444)
           Padding = 2
           { lblPAGETOTAL2 Label
             MoveScaled(0,0,16,3.5556)
@@ -1649,7 +1649,7 @@
           }
         }
         { HBox50 HBox
-          MoveScaled(0,20,88,4.4444)
+          MoveScaled(0,26,88,4.4444)
           Padding = 2
           { lblHyphenation Label
             MoveScaled(3,0,16,3.5556)
@@ -1678,7 +1678,7 @@
           }
         }
         { HBox84 HBox
-          MoveScaled(0,24,88,4.4444)
+          MoveScaled(0,30,88,4.4444)
           Padding = 2
           { lblRELATEDSTRING5 Label
             MoveScaled(0,0,16,4)
@@ -1707,7 +1707,7 @@
           }
         }
         { HBox68 HBox
-          MoveScaled(0,28,88,4.4444)
+          MoveScaled(0,34,88,4.4444)
           Padding = 2
           { lblLocation6 Label
             MoveScaled(0,0,16,3.5556)
