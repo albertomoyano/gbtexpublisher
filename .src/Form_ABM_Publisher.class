@@ -7,7 +7,7 @@ Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
 
-  Conn.Close
+  Mod_Conn.desconectar
   Me.Close()
 
 End
@@ -19,7 +19,7 @@ Public Sub Form_Open()
   BtnRefrescarPublisher.Visible = False
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  Mod_Conn.conectar
 
   Mostrar_Lista()
 
@@ -196,7 +196,7 @@ Public Sub btnSeleccion_Click()
     FMain.txtJOURNALTITLE.Text = journalSeleccionada
     FMain.txtLOCATION.Text = locationSeleccionada
     ' Cierra el formulario actual.
-    Conn.Close
+    Mod_Conn.desconectar
     Me.Close()
   Else
     Message.Warning("Debe seleccionar una editorial o revista.")

@@ -5,9 +5,6 @@ Private Contenido As Result
 
 Public Sub btnAgregar_Click()
 
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.Conectar2()
-
   If txtAgregarLista.Text = "" Then
     Message.Warning("No puede agregar un elemento vacío a la lista")
     Return
@@ -42,6 +39,7 @@ End
 
 Public Sub btnCancelar_Click()
 
+  Conn.Close
   Me.Close
 
 End
@@ -59,5 +57,19 @@ Public Sub txtAgregarLista_KeyRelease()
   If Key.Code = 16777220 Or Key.code = 16777221 Then 'No me funciona de otra manera que no sea usando el código
     btnAgregar_Click
   Endif
+
+End
+
+Public Sub Form_Close()
+
+  Conn.Close
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  ' me conceto a la base de datos al abrir el formulario
+  Conn = Mod_Conn.conectar()
 
 End

@@ -8,7 +8,7 @@ Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarSponsor_Click()
 
-  Conn.Close
+  Mod_Conn.desconectar
   Me.Close()
 
 End
@@ -16,7 +16,7 @@ End
 Public Sub Form_Open()
 
   'me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  Mod_Conn.conectar
 
   btnGuardarSponsor.Visible = False
   btnGuardarCambiosSponsor.Visible = False

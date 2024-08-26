@@ -7,7 +7,7 @@ Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
 
-  Conn.Close
+  Mod_Conn.desconectar
   Me.Close()
 
 End
@@ -15,7 +15,7 @@ End
 Public Sub Form_Open()
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  Mod_Conn.conectar
 
   btnGuardarColeccion.Visible = False
   btnGuardarCambiosColeccion.Visible = False
@@ -211,7 +211,7 @@ Public Sub btnSeleccion_Click()
     FMain.txtDirection.Text = direccionSeleccionada
     FMain.txtFORMATO.Text = formatoSeleccionada
     ' Cierra la base y el formulario actual.
-    Conn.Close
+    Mod_Conn.desconectar
     Me.Close()
   Else
     Message.Warning("Debe seleccionar una colección.")

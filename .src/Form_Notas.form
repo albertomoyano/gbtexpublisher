@@ -39,7 +39,7 @@
       Visible = False
       NoTabFocus = True
       ToolTip = ("Refrescar datos")
-      Picture = Picture["iconos/refrescar.svg"]
+      Picture = Picture["iconos/refrescar.png"]
     }
     { BtnExportarDOCX Button
       Move(180,0,36,36)

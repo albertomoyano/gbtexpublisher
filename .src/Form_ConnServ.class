@@ -1,6 +1,6 @@
 ' Gambas class file
 
-Private Conn As Connection
+Private conector As Connection
 Private Contenido As Result
 Public rutaApp As String
 Public rutaAppR As String
@@ -12,138 +12,159 @@ Public Sub btnCancelar_Click()
   Shell "rm " & User.Home &/ "wget-log wget-log.*"
   Wait 0.1
 
-  Conn.Close
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  ' Conn.Close
   Me.Close
 
 End
 
 Public Sub Form_Open()
 
-  Dim vChk As String
+  ' Crear una nueva conexión
+  conector = New Connection
 
-  vChk = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/master/.project")
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Name = "conn_serv.sqlite"
 
-  If Application.Version <> vChk Then
-    Message.Info(("Está disponible una nueva versión") & ": " & vChk)
+  ' Intentar abrir la conexión
+  Try conector.Open()
+
+  If Error Then
+    conector = Null
+    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  Else
+
+    Dim vChk As String
+
+    vChk = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/master/.project")
+
+    If Application.Version <> vChk Then
+      Message.Info(("Está disponible una nueva versión") & ": " & vChk)
+    Endif
+
+    rutaApp = User.Home &/ ".gbtexpublisher"
+    rutaScriptsExternos = rutaApp &/ "ScriptsExternos"
+    rutaAppR = User.Home &/ ".respaldogbTeX"
+
+    If Not Exist(rutaApp) Then
+      Mkdir rutaApp
+    End If
+
+    If Not Exist(rutaScriptsExternos) Then
+      Mkdir rutaScriptsExternos
+    End If
+
+    If Not Exist(rutaAppR) Then
+      Mkdir rutaAppR
+    End If
+
+    If Not Exist(rutaApp &/ "db_tex.sqlite") Then
+      Copy "./db_tex.sqlite" To rutaApp &/ "db_tex.sqlite"
+    End If
+
+    If Not Exist(rutaApp &/ "falta-tapa.png") Then
+      Copy "./falta-tapa.png" To rutaApp &/ "falta-tapa.png"
+    End If
+
+    If Not Exist(rutaAppR &/ ".gitignore") Then
+      Copy "./gitignore_BD" To rutaAppR &/ ".gitignore"
+    End If
+
+    If Not Exist(rutaApp &/ "conn_serv.sqlite") Then
+      Copy "./conn_serv.sqlite" To rutaApp &/ "conn_serv.sqlite"
+    End If
+
+    If Not Exist(rutaApp & "/gitignore_github") Then
+      Copy "./gitignore_github" To rutaApp & "/gitignore_github"
+    End If
+
+    If Not Exist(rutaApp & "/gitignore_gitlab") Then
+      Copy "./gitignore_gitlab" To rutaApp & "/gitignore_gitlab"
+    End If
+
+    'scripts externos
+    If Not Exist(rutaScriptsExternos &/ "Contador_global.py") Then
+      Copy "./Contador_global.py" To rutaScriptsExternos &/ "Contador_global.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Control_de_llaves.py") Then
+      Copy "./Control_de_llaves.py" To rutaScriptsExternos &/ "Control_de_llaves.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Control_de_signo_de_admiracion.py") Then
+      Copy "./Control_de_signo_de_admiracion.py" To rutaScriptsExternos &/ "Control_de_signo_de_admiracion.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Control-de_numeros.py") Then
+      Copy "./Control-de_numeros.py" To rutaScriptsExternos &/ "Control-de_numeros.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Control_de_corchetes.py") Then
+      Copy "./Control_de_corchetes.py" To rutaScriptsExternos &/ "Control_de_corchetes.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Control_de_parentesis.py") Then
+      Copy "./Control_de_parentesis.py" To rutaScriptsExternos &/ "Control_de_parentesis.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Control_de_entorno.py") Then
+      Copy "./Control_de_entorno.py" To rutaScriptsExternos &/ "Control_de_entorno.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Control_de_signo_de_pregunta.py") Then
+      Copy "./Control_de_signo_de_pregunta.py" To rutaScriptsExternos &/ "Control_de_signo_de_pregunta.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Reemplazar_endash.py") Then
+      Copy "./Reemplazar_endash.py" To rutaScriptsExternos &/ "Reemplazar_endash.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Buscar_posibles_parencite.py") Then
+      Copy "./Buscar_posibles_parencite.py" To rutaScriptsExternos &/ "Buscar_posibles_parencite.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Limpieza_con_ExpReg.py") Then
+      Copy "./Limpieza_con_ExpReg.py" To rutaScriptsExternos &/ "Limpieza_con_ExpReg.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Reemplazar_comillas.py") Then
+      Copy "./Reemplazar_comillas.py" To rutaScriptsExternos &/ "Reemplazar_comillas.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Controlar_espacio_izquierda.py") Then
+      Copy "./Controlar_espacio_izquierda.py" To rutaScriptsExternos &/ "Controlar_espacio_izquierda.py"
+    End If
+
+    If Not Exist(rutaScriptsExternos &/ "Buscar_palabra.py") Then
+      Copy "./Buscar_palabra.py" To rutaScriptsExternos &/ "Buscar_palabra.py"
+    End If
+
+    Mostrar_Lista()
+
+    tblConnServ.Columns.Count = 3
+    tblConnServ.Header = True
+    tblConnServ.Columns[0].Title = "id"
+    tblConnServ.Columns[0].Width = 0
+    tblConnServ.Columns[1].Title = "IP"
+    tblConnServ.Columns[1].Width = 295
+    tblConnServ.Columns[2].Title = "Nombre"
+    tblConnServ.Columns[2].Width = 295
+
+    BtnEliminarBBDD.Visible = False
+    btnGuardar.Visible = False
+    btnGuardarMod.Visible = False
+    txtIP.Visible = False
+    txtNOMBRE.Visible = False
+    txtUSUARIO.Visible = False
+    txtCLAVE.Visible = False
   Endif
-
-  rutaApp = User.Home &/ ".gbtexpublisher"
-  rutaScriptsExternos = rutaApp &/ "ScriptsExternos"
-  rutaAppR = User.Home &/ ".respaldogbTeX"
-
-  If Not Exist(rutaApp) Then
-    Mkdir rutaApp
-  End If
-
-  If Not Exist(rutaScriptsExternos) Then
-    Mkdir rutaScriptsExternos
-  End If
-
-  If Not Exist(rutaAppR) Then
-    Mkdir rutaAppR
-  End If
-
-  If Not Exist(rutaApp &/ "db_tex.sqlite") Then
-    Copy "./db_tex.sqlite" To rutaApp &/ "db_tex.sqlite"
-  End If
-
-  If Not Exist(rutaApp &/ "falta-tapa.png") Then
-    Copy "./falta-tapa.png" To rutaApp &/ "falta-tapa.png"
-  End If
-
-  If Not Exist(rutaAppR &/ ".gitignore") Then
-    Copy "./gitignore_BD" To rutaAppR &/ ".gitignore"
-  End If
-
-  If Not Exist(rutaApp &/ "conn_serv.sqlite") Then
-    Copy "./conn_serv.sqlite" To rutaApp &/ "conn_serv.sqlite"
-  End If
-
-  If Not Exist(rutaApp & "/gitignore_github") Then
-    Copy "./gitignore_github" To rutaApp & "/gitignore_github"
-  End If
-
-  If Not Exist(rutaApp & "/gitignore_gitlab") Then
-    Copy "./gitignore_gitlab" To rutaApp & "/gitignore_gitlab"
-  End If
-
-  'scripts externos
-  If Not Exist(rutaScriptsExternos &/ "Contador_global.py") Then
-    Copy "./Contador_global.py" To rutaScriptsExternos &/ "Contador_global.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Control_de_llaves.py") Then
-    Copy "./Control_de_llaves.py" To rutaScriptsExternos &/ "Control_de_llaves.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Control_de_signo_de_admiracion.py") Then
-    Copy "./Control_de_signo_de_admiracion.py" To rutaScriptsExternos &/ "Control_de_signo_de_admiracion.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Control-de_numeros.py") Then
-    Copy "./Control-de_numeros.py" To rutaScriptsExternos &/ "Control-de_numeros.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Control_de_corchetes.py") Then
-    Copy "./Control_de_corchetes.py" To rutaScriptsExternos &/ "Control_de_corchetes.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Control_de_parentesis.py") Then
-    Copy "./Control_de_parentesis.py" To rutaScriptsExternos &/ "Control_de_parentesis.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Control_de_entorno.py") Then
-    Copy "./Control_de_entorno.py" To rutaScriptsExternos &/ "Control_de_entorno.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Control_de_signo_de_pregunta.py") Then
-    Copy "./Control_de_signo_de_pregunta.py" To rutaScriptsExternos &/ "Control_de_signo_de_pregunta.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Reemplazar_endash.py") Then
-    Copy "./Reemplazar_endash.py" To rutaScriptsExternos &/ "Reemplazar_endash.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Buscar_posibles_parencite.py") Then
-    Copy "./Buscar_posibles_parencite.py" To rutaScriptsExternos &/ "Buscar_posibles_parencite.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Limpieza_con_ExpReg.py") Then
-    Copy "./Limpieza_con_ExpReg.py" To rutaScriptsExternos &/ "Limpieza_con_ExpReg.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Reemplazar_comillas.py") Then
-    Copy "./Reemplazar_comillas.py" To rutaScriptsExternos &/ "Reemplazar_comillas.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Controlar_espacio_izquierda.py") Then
-    Copy "./Controlar_espacio_izquierda.py" To rutaScriptsExternos &/ "Controlar_espacio_izquierda.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Buscar_palabra.py") Then
-    Copy "./Buscar_palabra.py" To rutaScriptsExternos &/ "Buscar_palabra.py"
-  End If
-
-  'me concecto a la base de datos de inicio
-  Conn = Mod_Conn.conectar2()
-  Mostrar_Lista()
-
-  tblConnServ.Columns.Count = 3
-  tblConnServ.Header = True
-  tblConnServ.Columns[0].Title = "id"
-  tblConnServ.Columns[0].Width = 0
-  tblConnServ.Columns[1].Title = "IP"
-  tblConnServ.Columns[1].Width = 295
-  tblConnServ.Columns[2].Title = "Nombre"
-  tblConnServ.Columns[2].Width = 295
-
-  BtnEliminarBBDD.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarMod.Visible = False
-  txtIP.Visible = False
-  txtNOMBRE.Visible = False
-  txtUSUARIO.Visible = False
-  txtCLAVE.Visible = False
 
 End
 
@@ -164,7 +185,7 @@ Public Sub BtnNuevaBBDD_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   'Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Conn.Exec("SELECT MAX(id) FROM servidores LIMIT 1")
+  Contenido = conector.Exec("SELECT MAX(id) FROM servidores LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -185,7 +206,7 @@ Public Sub btnLocal_Click()
   Me.Close
   FMain.Show()
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  Mod_Conn.conectar
 
 End
 
@@ -281,7 +302,7 @@ Public Sub Mostrar_Lista() 'Función que rellena con el title el List View
 
   tblConnServ.Clear()
 
-  Contenido = Conn.Exec("select * from servidores")
+  Contenido = conector.Exec("select * from servidores")
 
   'diseñamos el tableview
   tblConnServ.Columns.Count = 3
@@ -312,14 +333,19 @@ Public Sub Form_Close()
   Shell "rm " & User.Home &/ "wget-log wget-log.*"
   Wait 0.1
 
-  Conn.Close
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
   Me.Close
 
 End
 
 Public Sub btnGuardar_Click()
 
-  Contenido = Conn.Create("servidores")
+  Contenido = conector.Create("servidores")
 
   guardarCampos
 
@@ -371,7 +397,7 @@ Public Sub BtnEliminarBBDD_Click()
   Endif
 
   If Message.Question("¿Desea borrar el servidor de la base de datos?", "Si", "No") = 1 Then
-    Contenido = Conn.Exec("delete from servidores where id=" & txtID.Text)
+    Contenido = conector.Exec("delete from servidores where id=" & txtID.Text)
   Endif
 
   LimpiarCampos  'Limpiamos los campos
@@ -391,7 +417,7 @@ End
 
 Public Sub btnGuardarMod_Click()
 
-  Contenido = Conn.Edit("servidores", "id=" & txtID.Text)
+  Contenido = conector.Edit("servidores", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")

@@ -25,28 +25,3 @@ Public Sub desconectar(ByRef conector As Connection)
   conector = Null
 
 End
-
-' conexion a la segunda base de datos
-Public Function conectar2() As Connection
-
-  Dim conector2 As New Connection
-
-  conector2.Type = "sqlite"
-  conector2.Host = User.Home &/ ".gbtexpublisher"
-  conector2.Name = "conn_serv.sqlite"
-  Try conector2.Open()
-  Return conector2
-
-  If Error Then
-    conector2 = Null
-    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
-  Endif
-
-End
-
-Public Sub desconectar2(ByRef conector2 As Connection)
-
-  conector2.Close()
-  conector2 = Null
-
-End

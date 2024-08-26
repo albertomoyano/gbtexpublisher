@@ -7,7 +7,7 @@ Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
 
-  Conn.Close
+  Mod_Conn.desconectar
   Me.Close()
 
 End
@@ -19,7 +19,7 @@ Public Sub Form_Open()
   BtnRefrescarAutores.Visible = False
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  Mod_Conn.conectar
 
   Mostrar_Lista()
 
@@ -332,7 +332,7 @@ Public Sub btnSeleccion_Click()  ' Verificar si hay una fila seleccionada.
     ' Accede al formulario original y establece los valores en los TextBox.
     FMain.txt05_pdfauthor.Text = FMain.txt05_pdfauthor.Text & " " & IdSeleccionado
     ' Cierra la base y el formulario actual.
-    Conn.Close
+    Mod_Conn.desconectar
     Me.Close()
   Else
     Message.Warning("Debe seleccionar un autor.")

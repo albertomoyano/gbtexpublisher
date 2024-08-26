@@ -1,23 +1,37 @@
 ' Gambas class file
 
-Private Conn As Connection
+Private conector As Connection
 Private Contenido As Result
 Private Busqueda As Result
 
 Public Sub Form_Open()
 
-  tbNuevo.Visible = True
-  tbBorrar.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
+  ' Crear una nueva conexión
+  conector = New Connection
 
-  ' me conceto a la segunda base de datos
-  Conn = Mod_Conn.Conectar2()
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Name = "conn_serv.sqlite"
 
-  Mostrar_Lista()
+  ' Intentar abrir la conexión
+  Try conector.Open()
+
+  If Error Then
+    conector = Null
+    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  Else
+
+    tbNuevo.Visible = True
+    tbBorrar.Visible = False
+    btnGuardar.Visible = False
+    btnGuardarMod.Visible = False
+    btnRefresh.Visible = False
+    BtnExportarDOCX.Visible = False
+    BtnExportarPDF.Visible = False
+
+    Mostrar_Lista()
+  Endif
 
 End
 
@@ -29,7 +43,7 @@ Public Sub Mostrar_Lista()
 
   VLista.Clear()
 
-  Contenido = Conn.Exec("select * from apuntes ORDER BY id DESC")
+  Contenido = conector.Exec("select * from apuntes ORDER BY id DESC")
 
   'diseñamos el tableview
   VLista.Columns.Count = 4
@@ -56,7 +70,7 @@ Public Sub Mostrar_Lista()
     Contenido.MoveNext
   Next
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM apuntes")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM apuntes")
 
   Record = Contenido[0]
   Count = Record
@@ -65,7 +79,12 @@ End
 
 Public Sub btnCerrar_Click()
 
-  Conn.Close
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
   Me.Close()
 
 End
@@ -78,7 +97,7 @@ Public Sub btnGuardarMod_Click()
   tbBorrar.Visible = False
   BtnExportarDOCX.Visible = False
 
-  Contenido = Conn.Edit("apuntes", "id=" & txId.Text)
+  Contenido = conector.Edit("apuntes", "id=" & txId.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -105,7 +124,7 @@ Public Sub tbNuevo_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Conn.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
+  Contenido = conector.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -124,7 +143,7 @@ End
 
 Public Sub btnGuardar_Click()
 
-  Contenido = Conn.Create("apuntes")
+  Contenido = conector.Create("apuntes")
 
   guardarCampos
 
@@ -150,7 +169,7 @@ Public Sub tbBorrar_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = Conn.Exec("delete from apuntes where id=" & txId.Text)
+    Contenido = conector.Exec("delete from apuntes where id=" & txId.Text)
   Endif
 
   LimpiarCampos  'Limpiamos los campos
@@ -237,7 +256,7 @@ Public Sub BtnBuscar_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VLista.Clear()
@@ -266,5 +285,17 @@ Public Sub BtnBuscar_Click()
 
     Busqueda.MoveNext
   Wend
+
+End
+
+Public Sub Form_Close()
+
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  Me.Close
 
 End

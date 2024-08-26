@@ -1,6 +1,6 @@
 ' Gambas class file
 
-Private Conn As Connection
+Private conector As Connection
 Private Contenido As Result
 Private ContenidoComenta As Result
 Private Busqueda As Result
@@ -27,201 +27,214 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
-  'me conecto a las 2 bases de datos, es temporal hasta resolver la conexión con mysql
-  Mod_Conn.conectar()
-  Mod_Conn.Conectar2()
+  ' Crear una nueva conexión
+  conector = New Connection
 
-  pBash = TerminalView1.Exec(["/usr/bin/bash"])
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Name = "db_tex.sqlite"
 
-  'configuración del ToDo
-  Splitter2.Layout = [3, 1]
-  txtTAREAS.Visible = False
-  Mostrar_Lista_Tareas
+  ' Intentar abrir la conexión
+  Try conector.Open()
 
-  MS.Init()
-  MS.GetLastListFromSettings()
-  UpdateMenu()
+  If Error Then
+    conector = Null
+    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>db_tex.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  Else
 
-  rutaFILES = File.Dir(TextBox1.Text) &/ "files"
-  rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
-  rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
-  rutaORIGINALES = File.Dir(TextBox1.Text) &/ "originales"
-  rutaTAPA = File.Dir(TextBox1.Text) &/ "tapa"
-  rutaCATALOGO = File.Dir(TextBox1.Text) &/ "catalogo"
-  rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
-  BaseName = File.BaseName(TextBox1.Text)
+    pBash = TerminalView1.Exec(["/usr/bin/bash"])
+    TerminalView1.SetFocus()
+    TerminalView1.Refresh()
 
-  ' controlamos que la aplicación no esté en ejecución
-  Dim s As String
-  Exec ["pgrep", "-fla", Application.Name] Wait To s
-  If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
-    Message.Warning(Application.name & (" ya se está ejecutando"))
-    Quit
+    'configuración del ToDo
+    Splitter2.Layout = [3, 1]
+    txtTAREAS.Visible = False
+    Mostrar_Lista_Tareas
+
+    MS.Init()
+    MS.GetLastListFromSettings()
+    UpdateMenu()
+
+    rutaFILES = File.Dir(TextBox1.Text) &/ "files"
+    rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
+    rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
+    rutaORIGINALES = File.Dir(TextBox1.Text) &/ "originales"
+    rutaTAPA = File.Dir(TextBox1.Text) &/ "tapa"
+    rutaCATALOGO = File.Dir(TextBox1.Text) &/ "catalogo"
+    rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
+    BaseName = File.BaseName(TextBox1.Text)
+
+    ' controlamos que la aplicación no esté en ejecución
+    Dim s As String
+    Exec ["pgrep", "-fla", Application.Name] Wait To s
+    If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
+      Message.Warning(Application.name & (" ya se está ejecutando"))
+      Quit
+    Endif
+
+    Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+
+    Dim mtmp As Menu
+    Dim file As String
+
+    For Each file In Dir(rutaScriptsExternos, "*.py").Sort()
+      mtmp = New Menu(Menu76) As "obs"
+      mtmp.caption = File
+    Next
+
+    ' comienza glosario
+    ' cargamos los datos del combobox
+    cbTYPEentradaGlo.Add("sigla")
+    cbTYPEentradaGlo.Add("glosario")
+    BtnEliminarGlo.Enabled = False
+    BtnRefrescarGlo.Enabled = False
+    btnGuardarGlo.Enabled = False
+    btnGuardarCambiosGlo.Enabled = False
+    Mostrar_ListaGLO
+
+    ' comienza metadatos
+    cmbTypePub.Add("research-article")
+    cmbTypePub.Add("review-article")
+    cmbTypePub.Add("editorial")
+    cmbTypePub.Add("case-report")
+    cmbTypePub.Add("letter")
+    cmbTypePub.Add("commentary")
+    cmbTypePub.Add("correction")
+    txt40_pdfmetalang.Add("es")
+    txt40_pdfmetalang.Add("pt")
+    txt40_pdfmetalang.Add("en")
+    txt40_pdfmetalang.Add("fr")
+    txt40_pdfmetalang.Add("de")
+    txt40_pdfmetalang.Add("it")
+    txt54_idiomaorig.Add("")
+    txt54_idiomaorig.Add("es")
+    txt54_idiomaorig.Add("pt")
+    txt54_idiomaorig.Add("en")
+    txt54_idiomaorig.Add("fr")
+    txt54_idiomaorig.Add("de")
+    txt54_idiomaorig.Add("it")
+    cbLang.Add("Español de España: es-ES")
+    cbLang.Add("Portugués de Brasil: pt-BR")
+    cbLang.Add("Inglés de Estados Unidos: en-US")
+    cbLang.Add("Francés de Francia: fr-FR")
+    cbLang.Add("Alemán de Alemania: de-DE")
+    cbLang.Add("Italiano: it-IT")
+    cbLang.Add("Japonés: ja-JP")
+    cbLang.Add("Chino simplificado: zh-Hans")
+    txt15_pdfcopyright.Add("Copyright")
+    If txt16_pdflicenseurl.Text = "" Then
+      txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Copyright"
+    Endif
+    txt15_pdfcopyright.Add("CC0 1.0 Universal")
+    txt15_pdfcopyright.Add("CC BY 4.0 Attribution 4.0 International")
+    txt15_pdfcopyright.Add("CC BY-SA 4.0 Attribution-ShareAlike 4.0 International")
+    txt15_pdfcopyright.Add("CC BY-ND 4.0 Attribution-NoDerivatives 4.0 International")
+    txt15_pdfcopyright.Add("CC BY-NC 4.0 Attribution-NonCommercial 4.0 International")
+    txt15_pdfcopyright.Add("CC BY-NC-SA 4.0 Attribution-NonCommercial-ShareAlike 4.0 International")
+    txt15_pdfcopyright.Add("CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International")
+    txt15_pdfcopyright.Add("GNU General Public License")
+    txt15_pdfcopyright.Add("Licencia MIT")
+    txt15_pdfcopyright.Add("Licencia BSD")
+    txt15_pdfcopyright.Add("Otra")
+    cmbType.Add("Text")
+    cmbType.Add("Software")
+    cmbType.Add("Sound")
+    cmbType.Add("Dataset")
+    cmbType.Add("InteractiveResource")
+    cbPDFrendition.Add("default")
+    cbPDFrendition.Add("draft")
+    cbPDFrendition.Add("low-res")
+    cbPDFrendition.Add("proof")
+    cbPDFrendition.Add("screen")
+    cbPDFrendition.Add("thumbnail")
+    cbPubType.Add("book")
+    cbPubType.Add("journal")
+    cbPubType.Add("magazine")
+    cbPubType.Add("manual")
+    cbPubType.Add("report")
+    cbPubType.Add("whitepaper")
+    cbPubStatus.Add("Author's Original: AO")
+    cbPubStatus.Add("Submitted Manuscript Under Review: SMUR")
+    cbPubStatus.Add("Accepted Manuscript: AM")
+    cbPubStatus.Add("Proof: P")
+    cbPubStatus.Add("Version Of Record: VoR")
+    cbPubStatus.Add("Corrected Version Of Record: CVoR")
+    cbPubStatus.Add("Enhanced Version Of Record: EVoR")
+    cbPDFx.Add("pdf/A")
+    cbPDFx.Add("pdf/x-1a:2001")
+    cbPDFx.Add("pdf/x-1a:2003")
+    cbPDFx.Add("pdf/x-3:2002")
+    cbPDFx.Add("pdf/x-3:2003")
+    cbPDFx.Add("pdf/x-4")
+    cbPDFx.Add("pdf/x-4p")
+    cbPDFx.Add("pdf/x-5g")
+    cbPDFx.Add("pdf/x-5n")
+    cbPDFx.Add("pdf/x-5pg")
+
+    txt89_binding.Add("")
+    txt89_binding.Add("Encolado")
+    txt89_binding.Add("Everflex")
+    txt89_binding.Add("Cosido a hilo")
+    txt89_binding.Add("Anillado")
+    txt89_binding.Add("Abrochado")
+
+    ' comienza bibtex
+    BtnEliminarBib.Enabled = False
+    btnDuplicarBib.Enabled = False
+    btnGuardar.Enabled = False
+    btnGuardarCambios.Enabled = False
+    Dim editorType As String[] = ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
+    Dim pubState As String[] = ["", "mimeograph", "photocopy", "digitalprinting", "inpreparation", "submitted", "forthcoming", "inpress", "prepublished"]
+    Dim thesis As String[] = ["", "@thesis (seleccionar)", "tifthesis", "mathesis", "phdthesis", "candthesis", "ingenieriathesis", "magisterthesis", "gradothesis", "licenciaturathesis", "especialthesis", "posgradothesis", " ", "@manual (seleccionar)", " ", "@patent (seleccionar)", " ", "@report (seleccionar)"]
+    Dim relatedType As String[] = ["", "reprintof", "translationof", "translatedas", "multivolume"]
+    Dim tipoEntrada As String[] = ["", "article", "incollection", "book", "thesis", "online", "inproceedings", "mvbook", "inbook", "bookinbook", "suppbook", "booklet", "collection", "mvcollection", "suppcollection", "manual", "misc", "patent", "periodical", "suppperiodical", "proceedings", "mvproceedings", "reference", "mvreference", "inreference", "report", "set", "unpublished", "xdata", "movie"]
+    Dim hyphenation As String[] = ["", "spanish", "portuguese", "french", "italian", "german", "english", "latin", "greek", "chinese", "norwegian", "swedish", "danish", "dutch", "japanese", "romanian", "armenian", "korean", "russian", "latin", "czech"]
+
+    'PREPARAMOS LOS COMBOBOX
+    cbEDITORTYPE.List = editorType
+    cbEDITORTYPE.Text = cbEDITORTYPE[0].Text
+
+    cbEDITORTYPEa.List = editorType
+    cbEDITORTYPEa.Text = cbEDITORTYPEa[0].Text
+
+    cbEDITORTYPEb.List = editorType
+    cbEDITORTYPEb.Text = cbEDITORTYPEb[0].Text
+
+    cbEDITORTYPEc.List = editorType
+    cbEDITORTYPEc.Text = cbEDITORTYPEc[0].Text
+
+    cbPUBSTATE.List = pubState
+    cbPUBSTATE.Text = cbPUBSTATE[0].Text
+
+    cbType.List = thesis
+    cbType.Text = cbType[0].Text
+
+    cbRELATEDTYPE.List = relatedType
+    cbRELATEDTYPE.Text = cbRELATEDTYPE[0].Text
+
+    cbTYPEentrada.List = tipoEntrada
+    cbTYPEentrada.Text = cbTYPEentrada[0].Text
+
+    cbLANGUAGE.List = hyphenation
+    cbLANGUAGE.Text = cbLANGUAGE[0].Text
+
+    cbLANGUAGEID.List = hyphenation
+    cbLANGUAGEID.Text = cbLANGUAGEID[0].Text
+
+    Mostrar_ListaBIB()
+    TotalEntradas()
+
+    ' Verifica si el TextBox1 tiene una ruta válida
+    If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
+      ' Hacemos el seguimiento del DirChooser
+      Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
+      Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
+      Watcher.Start
+      ' Inicializa la lista de archivos
+      prevFiles = DirViewRuta.Files
+    End If
   Endif
-
-  Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
-
-  Dim mtmp As Menu
-  Dim file As String
-
-  For Each file In Dir(rutaScriptsExternos, "*.py").Sort()
-    mtmp = New Menu(Menu76) As "obs"
-    mtmp.caption = File
-  Next
-
-  ' comienza glosario
-  ' cargamos los datos del combobox
-  cbTYPEentradaGlo.Add("sigla")
-  cbTYPEentradaGlo.Add("glosario")
-  BtnEliminarGlo.Enabled = False
-  BtnRefrescarGlo.Enabled = False
-  btnGuardarGlo.Enabled = False
-  btnGuardarCambiosGlo.Enabled = False
-  Mostrar_ListaGLO
-
-  ' comienza metadatos
-  cmbTypePub.Add("research-article")
-  cmbTypePub.Add("review-article")
-  cmbTypePub.Add("editorial")
-  cmbTypePub.Add("case-report")
-  cmbTypePub.Add("letter")
-  cmbTypePub.Add("commentary")
-  cmbTypePub.Add("correction")
-  txt40_pdfmetalang.Add("es")
-  txt40_pdfmetalang.Add("pt")
-  txt40_pdfmetalang.Add("en")
-  txt40_pdfmetalang.Add("fr")
-  txt40_pdfmetalang.Add("de")
-  txt40_pdfmetalang.Add("it")
-  txt54_idiomaorig.Add("")
-  txt54_idiomaorig.Add("es")
-  txt54_idiomaorig.Add("pt")
-  txt54_idiomaorig.Add("en")
-  txt54_idiomaorig.Add("fr")
-  txt54_idiomaorig.Add("de")
-  txt54_idiomaorig.Add("it")
-  cbLang.Add("Español de España: es-ES")
-  cbLang.Add("Portugués de Brasil: pt-BR")
-  cbLang.Add("Inglés de Estados Unidos: en-US")
-  cbLang.Add("Francés de Francia: fr-FR")
-  cbLang.Add("Alemán de Alemania: de-DE")
-  cbLang.Add("Italiano: it-IT")
-  cbLang.Add("Japonés: ja-JP")
-  cbLang.Add("Chino simplificado: zh-Hans")
-  txt15_pdfcopyright.Add("Copyright")
-  If txt16_pdflicenseurl.Text = "" Then
-    txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Copyright"
-  Endif
-  txt15_pdfcopyright.Add("CC0 1.0 Universal")
-  txt15_pdfcopyright.Add("CC BY 4.0 Attribution 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-SA 4.0 Attribution-ShareAlike 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-ND 4.0 Attribution-NoDerivatives 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-NC 4.0 Attribution-NonCommercial 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-NC-SA 4.0 Attribution-NonCommercial-ShareAlike 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International")
-  txt15_pdfcopyright.Add("GNU General Public License")
-  txt15_pdfcopyright.Add("Licencia MIT")
-  txt15_pdfcopyright.Add("Licencia BSD")
-  txt15_pdfcopyright.Add("Otra")
-  cmbType.Add("Text")
-  cmbType.Add("Software")
-  cmbType.Add("Sound")
-  cmbType.Add("Dataset")
-  cmbType.Add("InteractiveResource")
-  cbPDFrendition.Add("default")
-  cbPDFrendition.Add("draft")
-  cbPDFrendition.Add("low-res")
-  cbPDFrendition.Add("proof")
-  cbPDFrendition.Add("screen")
-  cbPDFrendition.Add("thumbnail")
-  cbPubType.Add("book")
-  cbPubType.Add("journal")
-  cbPubType.Add("magazine")
-  cbPubType.Add("manual")
-  cbPubType.Add("report")
-  cbPubType.Add("whitepaper")
-  cbPubStatus.Add("Author's Original: AO")
-  cbPubStatus.Add("Submitted Manuscript Under Review: SMUR")
-  cbPubStatus.Add("Accepted Manuscript: AM")
-  cbPubStatus.Add("Proof: P")
-  cbPubStatus.Add("Version Of Record: VoR")
-  cbPubStatus.Add("Corrected Version Of Record: CVoR")
-  cbPubStatus.Add("Enhanced Version Of Record: EVoR")
-  cbPDFx.Add("pdf/A")
-  cbPDFx.Add("pdf/x-1a:2001")
-  cbPDFx.Add("pdf/x-1a:2003")
-  cbPDFx.Add("pdf/x-3:2002")
-  cbPDFx.Add("pdf/x-3:2003")
-  cbPDFx.Add("pdf/x-4")
-  cbPDFx.Add("pdf/x-4p")
-  cbPDFx.Add("pdf/x-5g")
-  cbPDFx.Add("pdf/x-5n")
-  cbPDFx.Add("pdf/x-5pg")
-
-  txt89_binding.Add("")
-  txt89_binding.Add("Encolado")
-  txt89_binding.Add("Everflex")
-  txt89_binding.Add("Cosido a hilo")
-  txt89_binding.Add("Anillado")
-  txt89_binding.Add("Abrochado")
-
-  ' comienza bibtex
-  BtnEliminarBib.Enabled = False
-  btnDuplicarBib.Enabled = False
-  btnGuardar.Enabled = False
-  btnGuardarCambios.Enabled = False
-  Dim editorType As String[] = ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
-  Dim pubState As String[] = ["", "mimeograph", "photocopy", "digitalprinting", "inpreparation", "submitted", "forthcoming", "inpress", "prepublished"]
-  Dim thesis As String[] = ["", "@thesis (seleccionar)", "tifthesis", "mathesis", "phdthesis", "candthesis", "ingenieriathesis", "magisterthesis", "gradothesis", "licenciaturathesis", "especialthesis", "posgradothesis", " ", "@manual (seleccionar)", " ", "@patent (seleccionar)", " ", "@report (seleccionar)"]
-  Dim relatedType As String[] = ["", "reprintof", "translationof", "translatedas", "multivolume"]
-  Dim tipoEntrada As String[] = ["", "article", "incollection", "book", "thesis", "online", "inproceedings", "mvbook", "inbook", "bookinbook", "suppbook", "booklet", "collection", "mvcollection", "suppcollection", "manual", "misc", "patent", "periodical", "suppperiodical", "proceedings", "mvproceedings", "reference", "mvreference", "inreference", "report", "set", "unpublished", "xdata", "movie"]
-  Dim hyphenation As String[] = ["", "spanish", "portuguese", "french", "italian", "german", "english", "latin", "greek", "chinese", "norwegian", "swedish", "danish", "dutch", "japanese", "romanian", "armenian", "korean", "russian", "latin", "czech"]
-
-  'PREPARAMOS LOS COMBOBOX
-  cbEDITORTYPE.List = editorType
-  cbEDITORTYPE.Text = cbEDITORTYPE[0].Text
-
-  cbEDITORTYPEa.List = editorType
-  cbEDITORTYPEa.Text = cbEDITORTYPEa[0].Text
-
-  cbEDITORTYPEb.List = editorType
-  cbEDITORTYPEb.Text = cbEDITORTYPEb[0].Text
-
-  cbEDITORTYPEc.List = editorType
-  cbEDITORTYPEc.Text = cbEDITORTYPEc[0].Text
-
-  cbPUBSTATE.List = pubState
-  cbPUBSTATE.Text = cbPUBSTATE[0].Text
-
-  cbType.List = thesis
-  cbType.Text = cbType[0].Text
-
-  cbRELATEDTYPE.List = relatedType
-  cbRELATEDTYPE.Text = cbRELATEDTYPE[0].Text
-
-  cbTYPEentrada.List = tipoEntrada
-  cbTYPEentrada.Text = cbTYPEentrada[0].Text
-
-  cbLANGUAGE.List = hyphenation
-  cbLANGUAGE.Text = cbLANGUAGE[0].Text
-
-  cbLANGUAGEID.List = hyphenation
-  cbLANGUAGEID.Text = cbLANGUAGEID[0].Text
-
-  Mostrar_ListaBIB()
-  TotalEntradas()
-
-  ' Verifica si el TextBox1 tiene una ruta válida
-  If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
-    ' Hacemos el seguimiento del DirChooser
-    Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
-    Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
-    Watcher.Start
-    ' Inicializa la lista de archivos
-    prevFiles = DirViewRuta.Files
-  End If
 
 End
 
@@ -232,19 +245,27 @@ Public Sub Form_Close()
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
 
   If Message.Question("¿Desea cerrar la aplicación?\n\nAl cerrar, esta acción realizará una copia de respaldo de la base de datos con el nombre <b>" & fecha & "-" & "db_tex.sqlite</b> y de <b>" & fecha & "-" & "conn_serv.sqlite</b>.", "Aceptar", "Cancelar") = 1 Then
-    Conn.Close
 
-    'hacemos una copia de respaldo de la base de datos
+    ' Realizar la copia de respaldo de la base de datos
     Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
     Wait 0.1
     Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
     Wait 0.1
 
-    'guardamos el último archivo abierto
+    ' Guardar el último archivo abierto
     MS.SetLastListToSettings()
     Try pBash.Close
     Try fFile.Close
+
+    ' Desconectar la base de datos
+    If conector Then
+      conector.Close()
+      conector = Null
+    Endif
+
+    ' Cerrar la aplicación
     Quit
+
   Else
     Stop Event
   Endif
@@ -681,19 +702,27 @@ Public Sub Menu11_Click()'cerrar el programa
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
 
   If Message.Question("¿Desea cerrar la aplicación?\n\nAl cerrar, esta acción realizará una copia de respaldo de la base de datos con el nombre <b>" & fecha & "-" & "db_tex.sqlite</b> y de <b>" & fecha & "-" & "conn_serv.sqlite</b>.", "Aceptar", "Cancelar") = 1 Then
-    Conn.Close ' Cierra la conexión a la base de datos
 
-    'hacemos una copia de respaldo de la base de datos
+    ' Realizar la copia de respaldo de la base de datos
     Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-    Wait 0.2
+    Wait 0.1
     Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
-    Wait 0.2
+    Wait 0.1
 
-    'guardamos el último archivo abierto
+    ' Guardar el último archivo abierto
     MS.SetLastListToSettings()
     Try pBash.Close
     Try fFile.Close
+
+    ' Desconectar la base de datos
+    If conector Then
+      conector.Close()
+      conector = Null
+    Endif
+
+    ' Cerrar la aplicación
     Quit
+
   Else
     Stop Event
   Endif
@@ -864,7 +893,7 @@ Public Sub menuAbrir_Click()
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = Conn.Exec(comando)
+  Contenido = conector.Exec(comando)
   If Contenido.Count > 0 Then
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
@@ -960,7 +989,7 @@ Public Sub menuAbrir_Click()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
 
@@ -970,12 +999,12 @@ Public Sub menuAbrir_Click()
   Dim Count2GLO As Integer
   Dim Contenido3 As Result
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM glosarios")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
   RecordGLO = Contenido[0]
   CountGLO = RecordGLO
   lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
 
-  Contenido3 = Conn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
@@ -1067,7 +1096,7 @@ Public Sub mnuLast_Click()
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = Conn.Exec(Comando)
+  Contenido = conector.Exec(Comando)
 
   If Contenido.Count > 0 Then
     BtnNuevoMeta.Enabled = False
@@ -1163,7 +1192,7 @@ Public Sub mnuLast_Click()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
 
@@ -1173,12 +1202,12 @@ Public Sub mnuLast_Click()
   Dim Count2GLO As Integer
   Dim Contenido3 As Result
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM glosarios")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
   RecordGLO = Contenido[0]
   CountGLO = RecordGLO
   lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
 
-  Contenido3 = Conn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
@@ -1203,9 +1232,6 @@ End
 '   Dim w As Integer
 '   Dim buscar As String
 '   Dim outputFile As String
-'
-'   ' me conceto a la base de datos
-'   Conn = Mod_Conn.conectar()
 '
 '   buscar = "select * from metadatos where nombreArchivo like '%" & BaseName & "%'"
 '
@@ -1292,8 +1318,6 @@ End
 '
 '   ' Guarda el contenido acumulado en un solo archivo
 '   File.Save(outputFile, s)
-'
-'   Conn.Close
 '
 ' End
 
@@ -1512,12 +1536,9 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
 
   Dim i As Integer
 
-  ' me conecto a la base de datos
-  Conn = Mod_Conn.conectar()
-
   VGridGLO.Clear()
 
-  Contenido = Conn.Exec("select * from glosarios ORDER BY id DESC")
+  Contenido = conector.Exec("select * from glosarios ORDER BY id DESC")
 
   'diseñamos el tableview
   VGridGLO.Columns.Count = 11
@@ -1569,10 +1590,10 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
   Dim Record2GLO As String
   Dim Count2GLO As Integer
   Dim Contenido3 As Result
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM glosarios")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
   RecordGLO = Contenido[0]
   CountGLO = RecordGLO
-  Contenido3 = Conn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
@@ -1803,7 +1824,7 @@ Public Sub BtnNuevoGlo_Click()
   txtTMPglo.SetFocus()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Conn.Exec("SELECT MAX(id) FROM glosarios LIMIT 1")
+  Contenido = conector.Exec("SELECT MAX(id) FROM glosarios LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -1827,7 +1848,7 @@ Public Sub BtnEliminarGlo_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = Conn.Exec("delete from glosarios where id=" & txtID.Text)
+    Contenido = conector.Exec("delete from glosarios where id=" & txtID.Text)
   Endif
 
   LimpiarCamposGLO  'Limpiamos los campos
@@ -1869,7 +1890,7 @@ Public Sub btnGuardarGlo_Click()
   eliminarBlancosGLO
 
   Comando = "SELECT * FROM glosarios WHERE text = '" & tituloEscapado & "'"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -1877,7 +1898,7 @@ Public Sub btnGuardarGlo_Click()
     Return ' Salir de la función si el título ya existe
   Endif
 
-  Contenido = Conn.Create("glosarios")
+  Contenido = conector.Create("glosarios")
 
   guardarCamposGLO
 
@@ -1906,7 +1927,7 @@ Public Sub btnGuardarCambiosGlo_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosGLO
 
-  Contenido = Conn.Edit("glosarios", "id=" & txtId.Text)
+  Contenido = conector.Edit("glosarios", "id=" & txtId.Text)
   guardarCamposGLO
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -1951,7 +1972,7 @@ Public Sub btnBuscarNombreGLO_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -2000,7 +2021,7 @@ Public Sub btnBuscarTextoGLO_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -2049,7 +2070,7 @@ Public Sub btnBuscarClaveGLO_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -2201,7 +2222,7 @@ Public Sub BtnNuevoMeta_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Conn.Exec("SELECT MAX(id) FROM metadatos LIMIT 1")
+  Contenido = conector.Exec("SELECT MAX(id) FROM metadatos LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -2222,7 +2243,7 @@ Public Sub btnGuardarMeta_Click()
 
   eliminarBlancosMETA
 
-  Contenido = Conn.Create("metadatos")
+  Contenido = conector.Create("metadatos")
 
   guardarCamposMETA
   Contenido.Update
@@ -2344,7 +2365,7 @@ Public Sub btnGuardarCambiosMeta_Click()
 
   eliminarBlancosMETA
 
-  Contenido = Conn.Edit("metadatos", "id=" & txtId.Text)
+  Contenido = conector.Edit("metadatos", "id=" & txtId.Text)
 
   ' Llamar a guardarCamposMETA y verificar si el formato de la fecha es válido
   If guardarCamposMETA() Then
@@ -2392,7 +2413,7 @@ Public Sub Mostrar_ListaBIB()
 
   VListaBIB.Clear()
 
-  Contenido = Conn.Exec("select * from bibtex ORDER BY id DESC")
+  Contenido = conector.Exec("select * from bibtex ORDER BY id DESC")
 
   'diseñamos el tableview
   VListaBIB.Columns.Count = 110
@@ -2862,7 +2883,7 @@ Public Sub BtnEliminarBib_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = Conn.Exec("delete from bibtex where id=" & txtID.Text)
+    Contenido = conector.Exec("delete from bibtex where id=" & txtID.Text)
   Endif
 
   LimpiarCamposBIB() ' Limpiamos los campos
@@ -2878,11 +2899,6 @@ Public Sub BtnEliminarBib_Click()
 End
 
 Public Sub BtnNuevoBib_Click()
-
-  'condicional que revisa que la conexión a la base este abierta
-  If Mod_Conn.Conn.Handle = 1 Then
-    Message.Error("La conexión a la base de datos no está abierta.")
-  End If
 
   btnDuplicarBib.Enabled = False
   BtnNuevoBib.Enabled = False
@@ -2906,7 +2922,7 @@ Public Sub ObtenerNuevoId()
   Dim Idn As Integer
   Dim MaxId As Variant
 
-  MaxId = Conn.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
+  MaxId = conector.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
 
   If MaxId["MAX(id)"] = Null Then
     Idn = 0
@@ -2933,7 +2949,7 @@ Public Sub btnGuardarCambios_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosBIB()
 
-  Contenido = Conn.Edit("bibtex", "id=" & txtId.Text)
+  Contenido = conector.Edit("bibtex", "id=" & txtId.Text)
   guardarCampos()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -2957,7 +2973,7 @@ Public Sub btnGuardar_Click()
     Return ' Salir de la función si contiene alguno de estos caracteres
   Endif
 
-  Busqueda = Conn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+  Busqueda = conector.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -2977,7 +2993,7 @@ Public Sub btnGuardar_Click()
     Message.Error("No ha seleccionado el tipo de tesis.")
   Else
 
-    Contenido = Conn.Create("bibtex")
+    Contenido = conector.Create("bibtex")
 
     guardarCampos()
 
@@ -3010,10 +3026,8 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     Return
   Endif
 
-  Mod_Conn.conectar()
-
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLE.Text, "'", "''") & "%';"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3149,8 +3163,6 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     Busqueda.MoveNext
   Wend
 
-  Mod_Conn.desconectar()
-
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
@@ -3183,7 +3195,7 @@ Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
     Return
   Endif
 
-  Busqueda = Conn.Exec("SELECT * FROM  bibtex WHERE etiquetas=&1 COLLATE NOCASE", txtETIQ.Text)
+  Busqueda = conector.Exec("SELECT * FROM  bibtex WHERE etiquetas=&1 COLLATE NOCASE", txtETIQ.Text)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3336,10 +3348,8 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
     Return
   Endif
 
-  Mod_Conn.conectar()
   Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHOR.Text, "'", "''") & "%';"
-  ' Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & txtAUTHOR.Text & "%';"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3474,7 +3484,6 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
 
     Busqueda.MoveNext
   Wend
-  Mod_Conn.desconectar()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
@@ -3494,9 +3503,8 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
     Return
   Endif
 
-  Mod_Conn.conectar()
   Comando = "SELECT * FROM bibtex WHERE editor LIKE '%" & Replace(txtEDITOR.Text, "'", "''") & "%';"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3631,7 +3639,6 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
 
     Busqueda.MoveNext
   Wend
-  Mod_Conn.desconectar()
 
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
@@ -3814,7 +3821,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
 
   Comando = "SELECT * FROM bibtex WHERE keywords LIKE '%" & BaseName & "," & "%' ORDER BY id DESC"
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3957,7 +3964,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
   Dim Record2BIB As String
   Dim Count2BIB As Integer
   Dim Contenido2 As Result
-  Contenido2 = Conn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
+  Contenido2 = conector.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
   Record2BIB = Contenido2[0]
   Count2BIB = Record2BIB
 
@@ -4196,7 +4203,7 @@ Public Sub btnAgregarCitationKey_Click()
   eliminarBlancosBIB()
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & tituloEscapado & "%'"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Obtén el texto del TextBox de origen
   If Trim(txtAUTHOR.Text) = "" Then
@@ -4538,7 +4545,7 @@ Public Sub BtnBuscarClave_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -4695,7 +4702,7 @@ Public Sub btnGuardarIGUAL_Click()
     Return ' Salir de la función si contiene alguno de estos caracteres
   Endif
 
-  Busqueda = Conn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+  Busqueda = conector.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
 
   If Busqueda.Count > 0 Then
     idExistente = False
@@ -4710,7 +4717,7 @@ Public Sub btnGuardarIGUAL_Click()
     Else
 
       ' Contenido = Conn.Create("bibtex")
-      Contenido = Conn.Create("bibtex")
+      Contenido = conector.Create("bibtex")
 
       guardarCampos()
 
@@ -4738,7 +4745,7 @@ Public Function mostrarIguales()
   Dim rowIndex As Integer
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTITLE.Text & "%';"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -5112,10 +5119,8 @@ Public Sub BtnBuscarBookTitle_Click()
     Return
   Endif
 
-  Mod_Conn.conectar()
-
   Comando = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & Replace(txtBOOKTITLE.Text, "'", "''") & "%';"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -5251,8 +5256,6 @@ Public Sub BtnBuscarBookTitle_Click()
     Busqueda.MoveNext
   Wend
 
-  Mod_Conn.desconectar()
-
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
@@ -5280,7 +5283,6 @@ Public Sub menuRespaldoBDD_Click()
   'hacemos una copia de respaldo de la base de datos
   Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Wait 0.2
-  Conn.Close ' Cierra la conexión a la base de datos
 
   TerminalView1.Input("clear" & "\n")
   TerminalView1.Input("cd " & User.Home & "/.respaldogbTeX/" & "\n")
@@ -5291,9 +5293,6 @@ Public Sub menuRespaldoBDD_Click()
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n")
   TerminalView1.SetFocus()
-
-  ' nos conectamos nuevamente a la base de datos
-  Conn = Mod_Conn.conectar()
 
 End
 
@@ -5452,10 +5451,8 @@ Public Sub BtnBuscarJournal_Click()
     Return
   Endif
 
-  Mod_Conn.conectar()
-
   Comando = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & Replace(txtJOURNALTITLE.Text, "'", "''") & "%';"
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -5591,8 +5588,6 @@ Public Sub BtnBuscarJournal_Click()
     Busqueda.MoveNext
   Wend
 
-  Mod_Conn.desconectar()
-
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
@@ -5617,7 +5612,7 @@ Public Sub TotalEntradas()'calculamos las entradas totales
   Dim RecordBIB As String
   Dim CountBIB As Integer
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
   txtTOTALbib.Text = "<b>Total de referencias en la base de datos: " & CountBIB & "</b>"
@@ -5638,7 +5633,7 @@ Public Sub btnBuscarFiltroGlosario_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -5686,10 +5681,7 @@ End
 
 Public Sub Mostrar_Lista_Tareas() ' Función para popular la lista de eventos
 
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.Conectar2()
-
-  Contenido = Conn.Exec("select id, completado, titulo from tareas")
+  Contenido = conector.Exec("select id, completado, titulo from tareas")
   If Contenido.Available Then
     VLista.Clear
     While (Contenido.Available)
@@ -5713,18 +5705,13 @@ Public Sub Mostrar_Lista_Tareas() ' Función para popular la lista de eventos
 
   Chequear_Realizados()
 
-  Conn.Close
-
 End
 
 Public Sub mnuBorrarTODOS_Click()
 
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.Conectar2()
-
   If Message.Question("¿Está seguro de que desea borrar todos los ítems marcados como completados?") = 1 Then
     ' Conn.Exec("delete from tareas where completado=True")
-    Mod_Conn.conectar2.Exec("delete from tareas where completado=True")
+    conector.Exec("delete from tareas where completado=True")
     'Limpiamos lista y recargamos
     VLista.Clear
     Mostrar_Lista_Tareas
@@ -5735,41 +5722,31 @@ Public Sub mnuBorrarTODOS_Click()
 
   txtTAREAS.Visible = False ' Cerramos el panel lateral por si queda abierto tras borrar ítem realizado
 
-  Conn.Close
-
 End
 
 Public Sub Chequear_Realizados()
   ' Función para chequear si hay elementos completados de la lista así habilitamos / deshabilitamos el menú de borrado los elementos completados
 
-  ' Me conceto a la base de datos
-  Conn = Mod_Conn.conectar2()
-
   mnuBorrarTODOS.Enabled = False
 
-  Contenido = Conn.Exec("select completado from tareas where completado=true")
+  Contenido = conector.Exec("select completado from tareas where completado=true")
   If Contenido.Available = ""
     Return
   Else
     mnuBorrarTODOS.Enabled = True
   Endif
 
-  Conn.Close
-
 End
 
 ' esta función no me convence su utilidad
 Public Sub mnMarcarIncompleto_Click()
-
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.Conectar2()
 
   If VLista.Selected = False Then
     Message.Error("Debe elegir un ítem primero")
     Return
   Endif
 
-  Contenido = Conn.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido = conector.Edit("tareas", "id=" & Item_Seleccionado)
   Contenido!completado = False
   contenido.Update
 
@@ -5777,30 +5754,23 @@ Public Sub mnMarcarIncompleto_Click()
   VLista.Clear
   Mostrar_Lista_Tareas
 
-  Conn.Close
-
 End
 
 Public Sub mnMarcarCompletado_Click()
   'Chequeamos primero que se haya seleccionado un elemento de la lista
-
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.Conectar2()
 
   If VLista.Selected = False Then
     Message.Error("Debe elegir un ítem primero")
     Return
   Endif
 
-  Contenido = Conn.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido = conector.Edit("tareas", "id=" & Item_Seleccionado)
   Contenido!completado = True
   contenido.Update
 
   'Limpiamos lista y recargamos
   VLista.Clear
   Mostrar_Lista_Tareas
-
-  Conn.Close
 
 End
 
@@ -5812,12 +5782,8 @@ Public Sub menuBORRARtarea_Click()
     Return
   Endif
 
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.Conectar2()
-
   If Message.Question("¿Está seguro de que desea borrar este ítem?", "Si", "No") = 1 Then
-    ' Contenido = Conn.Exec("delete from tareas where id=" & Item_Seleccionado)
-    Contenido = Conn.Exec("delete from tareas where id=" & Item_Seleccionado)
+    Contenido = conector.Exec("delete from tareas where id=" & Item_Seleccionado)
   Endif
 
   If VLista.Count = 0 Then 'Si no hay ningún contenido en la lista limpiar ocultar el panel de contenido
@@ -5831,16 +5797,11 @@ Public Sub menuBORRARtarea_Click()
 
   txtTAREAS.Visible = False 'Cerramos el panel lateral para que no quede abierto tras borrar ítem que pueda conetener
 
-  Conn.Close
-
 End
 
 Public Sub VLista_Select() ' Función que nos muestra el contenido del título elegido en la ListView
 
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.Conectar2()
-
-  Contenido = Conn.Exec("select contenido from tareas where id = " & VLista.Item.key)
+  Contenido = conector.Exec("select contenido from tareas where id = " & VLista.Item.key)
   If Contenido!contenido <> "" Then
     txtTAREAS.Text = Contenido!contenido
     txtTAREAS.pos = 0
@@ -5852,8 +5813,6 @@ Public Sub VLista_Select() ' Función que nos muestra el contenido del título e
   Item_Seleccionado = VLista.Item.key
 
   Print (Item_Seleccionado)
-
-  Conn.Close
 
 End
 
@@ -6276,7 +6235,7 @@ Public Sub menuAbrirRevista_Click()
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = Conn.Exec(Comando)
+  Contenido = conector.Exec(Comando)
   If Contenido.Count > 0 Then
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
@@ -6371,7 +6330,7 @@ Public Sub menuAbrirRevista_Click()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM bibtex")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
 
@@ -6381,12 +6340,12 @@ Public Sub menuAbrirRevista_Click()
   Dim Count2GLO As Integer
   Dim Contenido3 As Result
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM glosarios")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
   RecordGLO = Contenido[0]
   CountGLO = RecordGLO
   lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
 
-  Contenido3 = Conn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
@@ -6430,7 +6389,7 @@ Public Sub menuDisclaimer_Click()
   'condicional para revisar que exista la entrada de comentarios en la base de datos
   ' Exportamos los registros seleccionados
   buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(TextBox1.Text) & "%'"
-  Resultado = Conn.Exec(buscar)
+  Resultado = conector.Exec(buscar)
 
   If Resultado.Available Then
     TabPanel1.Index = 0
@@ -6475,7 +6434,7 @@ Public Sub BtnNuevoComenta_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  ContenidoComenta = Conn.Exec("SELECT MAX(id) FROM comentarios LIMIT 1")
+  ContenidoComenta = conector.Exec("SELECT MAX(id) FROM comentarios LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If ContenidoComenta["MAX(id)"] = Null Then
@@ -6494,7 +6453,7 @@ End
 
 Public Sub btnGuardarComenta_Click()
 
-  ContenidoComenta = Conn.Create("comentarios")
+  ContenidoComenta = conector.Create("comentarios")
 
   guardarCamposComenta()
   ContenidoComenta.Update
@@ -6509,7 +6468,7 @@ End
 
 Public Sub btnGuardarCambiosComenta_Click()
 
-  ContenidoComenta = Conn.Edit("comentarios", "id=" & txtIdComenta.Text)
+  ContenidoComenta = conector.Edit("comentarios", "id=" & txtIdComenta.Text)
 
   If ContenidoComenta.Available Then
     guardarCamposComenta()
@@ -6538,7 +6497,7 @@ Public Function levantarComenta()
   Dim comandoComenta As String
 
   comandoComenta = "select * from comentarios where nombreArchivo = " & "'" & BaseName & ".tex'"
-  ContenidoComenta = Conn.Exec(comandoComenta)
+  ContenidoComenta = conector.Exec(comandoComenta)
   If ContenidoComenta.Count > 0 Then
     BtnNuevoComenta.Enabled = False
     btnGuardarComenta.Enabled = False

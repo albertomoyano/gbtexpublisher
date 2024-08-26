@@ -122,7 +122,7 @@ Public Sub Export2MetaDOCX(rutaTexto As String)
   Dim outputFile As String
   Dim id As Integer
 
-  ' 'me conceto a la base de datos
+  ' me conceto a la base de datos
   Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
@@ -238,7 +238,7 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
   Dim outputFile As String
   Dim id As Integer
 
-  ' 'me conceto a la base de datos
+  ' me conceto a la base de datos
   Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
@@ -347,7 +347,7 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   Dim outputFile As String
   Dim id As Integer
 
-  ' 'me conceto a la base de datos
+  ' me conceto a la base de datos
   Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados

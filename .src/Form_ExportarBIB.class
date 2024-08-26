@@ -3,13 +3,6 @@
 Private Conn As Connection
 Private Contenido As Result
 
-Public Sub btnCancelar_Click()
-
-  Conn.Close
-  Me.Close
-
-End
-
 Public Sub btnExportarBIB_Click()
   'exportamos el archivo bib
 
@@ -29,6 +22,9 @@ Public Sub btnExportarBIB_Click()
     ' Mostrar mensaje de alerta
     Message.Warning("Por favor, complete todos los campos.")
   Else
+
+    ' me conceto a la base de datos
+    Conn = Mod_Conn.conectar()
 
     'me aseguro de que la búsqueda se encuentre entre comas
     buscar = "select * from bibtex where keywords like ',%" & txtFiltro.Text & ",%'"
@@ -76,7 +72,7 @@ Public Sub btnExportarBIB_Click()
     outputFile = txtdestino.Text &/ txtNombre.Text & ".bib"
     File.Save(outputFile, s)
 
-    Conn.Close
+    Mod_Conn.desconectar
     ' Mostrar mensaje de exportación terminada en el label
     Label2.Text = "Exportación terminada, puede cerrar el formulario o realizar una nueva exportación"
     txtdestino.Text = ""
@@ -137,6 +133,13 @@ End
 Public Sub Form_Open()
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  Conn.Close
+
+End
+
+Public Sub btnCancelar_Click()
+
+  Conn.Close
+  Me.Close
 
 End

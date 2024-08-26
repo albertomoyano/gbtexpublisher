@@ -8,7 +8,7 @@ Private Busqueda1 As Result
 Public Sub Form_Open()
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  Mod_Conn.conectar
 
   cbRELATEDTYPE1.Add("")
   cbRELATEDTYPE1.Add("reprintof")
@@ -920,14 +920,14 @@ End
 
 Public Sub Form_Close()
 
-  Conn.Close
+  Mod_Conn.desconectar
   Me.Close()
 
 End
 
 Public Sub btnCerrar_Click()
 
-  Conn.Close
+  Mod_Conn.desconectar
   Me.Close()
 
 End
