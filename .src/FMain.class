@@ -27,7 +27,8 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
-  Mod_Conn.conectar()'me conecto a las 2 bases de datos, es temporal hasta resolver la conexión con mysql
+  'me conecto a las 2 bases de datos, es temporal hasta resolver la conexión con mysql
+  Mod_Conn.conectar()
   Mod_Conn.Conectar2()
 
   pBash = TerminalView1.Exec(["/usr/bin/bash"])
@@ -3009,6 +3010,8 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     Return
   Endif
 
+  Mod_Conn.conectar()
+
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLE.Text, "'", "''") & "%';"
   Busqueda = Conn.Exec(Comando)
 
@@ -3145,6 +3148,8 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
 
     Busqueda.MoveNext
   Wend
+
+  Mod_Conn.desconectar()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
@@ -3331,6 +3336,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
     Return
   Endif
 
+  Mod_Conn.conectar()
   Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHOR.Text, "'", "''") & "%';"
   ' Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & txtAUTHOR.Text & "%';"
   Busqueda = Conn.Exec(Comando)
@@ -3468,6 +3474,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
 
     Busqueda.MoveNext
   Wend
+  Mod_Conn.desconectar()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
@@ -3487,6 +3494,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
     Return
   Endif
 
+  Mod_Conn.conectar()
   Comando = "SELECT * FROM bibtex WHERE editor LIKE '%" & Replace(txtEDITOR.Text, "'", "''") & "%';"
   Busqueda = Conn.Exec(Comando)
 
@@ -3623,6 +3631,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
 
     Busqueda.MoveNext
   Wend
+  Mod_Conn.desconectar()
 
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
@@ -5103,6 +5112,8 @@ Public Sub BtnBuscarBookTitle_Click()
     Return
   Endif
 
+  Mod_Conn.conectar()
+
   Comando = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & Replace(txtBOOKTITLE.Text, "'", "''") & "%';"
   Busqueda = Conn.Exec(Comando)
 
@@ -5239,6 +5250,8 @@ Public Sub BtnBuscarBookTitle_Click()
 
     Busqueda.MoveNext
   Wend
+
+  Mod_Conn.desconectar()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
@@ -5439,6 +5452,8 @@ Public Sub BtnBuscarJournal_Click()
     Return
   Endif
 
+  Mod_Conn.conectar()
+
   Comando = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & Replace(txtJOURNALTITLE.Text, "'", "''") & "%';"
   Busqueda = Conn.Exec(Comando)
 
@@ -5575,6 +5590,8 @@ Public Sub BtnBuscarJournal_Click()
 
     Busqueda.MoveNext
   Wend
+
+  Mod_Conn.desconectar()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
