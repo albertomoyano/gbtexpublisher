@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=FMain
 Icon=iconos/icono-gbtex.svg
-Version=0.1.217
+Version=0.1.218
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form
@@ -33,7 +33,7 @@ VendorPrefix=AM
 Address=alberto.alejandro.moyano@gmail.com
 Url=https://github.com/albertomoyano
 License=General Public License V3
-PackageName=gbtexpublisher-0.1.217
+PackageName=gbtexpublisher-0.1.218
 CreateEachDirectory=1
 Packager=1
 Systems=autotools

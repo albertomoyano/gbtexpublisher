@@ -295,13 +295,12 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
   Dim rutaFija As String
   Dim newLog As String
 
-  ' Llamamos a la función del módulo para verificar los metadatos
+  ' Llamamos a la función del módulo para verificar los metadatos obligatorios
   If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
     ' Si la función retorna False, cancelamos la operación
     Return
   End If
 
-  ' filePath = File.Dir(TextBox1.Text) &/ "pdf"
   newFile = "pdf-" & BaseName & ".tex"
   rutaFija = File.Dir(TextBox1.Text) &/ "files"
   newLog = "gbTeX-" & BaseName & ".log"
@@ -311,7 +310,7 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
   TabPanel1.Index = 0
 
-  ' exportamos los archivos bib, glo y meta
+  ' obtenemos la exportación de los archivos bib, glo y metadatos
   Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(TextBox1.Text)
   Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
@@ -328,9 +327,6 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
   TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
   Wait 0.2
-
-  ' TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-  ' Wait 0.2
 
   'ejecutamos en conteo del archivo LaTeX
   TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n")
@@ -356,8 +352,8 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
   Borrar_Aux
 
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
+  ' TerminalView1.SetFocus()
+  ' TerminalView1.Refresh()
 
 End
 

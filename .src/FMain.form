@@ -573,7 +573,9 @@
         MoveScaled(1,6,27,11)
         Expand = True
         AutoResize = False
-        Blink = True
+        ShowScrollBar = True
+        ReadOnly = True
+        WindowCommands = True
       }
       { Splitter2 Splitter
         MoveScaled(31,2,57,42)
