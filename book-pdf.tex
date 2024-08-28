@@ -68,6 +68,11 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 	maxcycles=4
 }
 
+% control sobre parrafos de una linea
+\usepackage{needspace}
+\let\oldpar\par
+\renewcommand{\par}{\Needspace{2\baselineskip}\oldpar}
+
 % paquetes varios
 \usepackage{froufrou}
 \usepackage{nccfoots}

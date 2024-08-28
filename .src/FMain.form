@@ -110,7 +110,7 @@
       Picture = Picture["iconos/notas.svg"]
     }
   }
-  { Menu6 Menu
+  { menuArchivo Menu
     Text = ("Archivo")
     { Menu9 Menu
       Text = ("Abrir old")
@@ -169,6 +169,10 @@
         Picture = Picture["iconos/xml.svg"]
         Enabled = False
       }
+      { menuTodasRevista Menu
+        Text = ("Generar todas las salidas")
+        Enabled = False
+      }
     }
     { menuHTML Menu
       Text = ("Salida a libro")
@@ -190,6 +194,10 @@
       { menuODt_DOCX Menu
         Text = ("Salida a LibreOffice (odt) y MS Office (docx)")
         Picture = Picture["iconos/ms-office.svg"]
+        Enabled = False
+      }
+      { menuTodasLibro Menu
+        Text = ("Generar todas las salidas")
         Enabled = False
       }
     }

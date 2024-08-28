@@ -62,7 +62,7 @@
     }
   }
   { ScrollView9 ScrollView
-    Move(9,180,910,820)
+    Move(18,180,910,820)
     Expand = True
     Arrangement = Arrange.Vertical
     Border = False
