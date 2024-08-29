@@ -563,22 +563,33 @@
     Padding = 4
     Count = 5
     Index = 0
-    Text = ("Consola")
+    Text = ("Editor y Terminal")
     Picture = Picture["iconos/terminal.svg"]
     { Splitter1 Splitter
-      MoveScaled(2,13,93,47)
+      MoveScaled(2,13,109,47)
       Expand = True
       Border = False
-      { TerminalView1 TerminalView
-        MoveScaled(1,6,27,11)
+      { Splitter4 Splitter
+        MoveScaled(5,4,45,42)
         Expand = True
-        AutoResize = False
-        ShowScrollBar = True
-        ReadOnly = True
-        WindowCommands = True
+        Arrangement = Arrange.Vertical
+        Centered = True
+        Border = False
+        { TerminalMicro TerminalView
+          MoveScaled(9,11,27,6)
+          Expand = True
+        }
+        { TerminalView1 TerminalView
+          MoveScaled(9,19,27,6)
+          Expand = True
+          AutoResize = False
+          ShowScrollBar = True
+          ReadOnly = True
+          WindowCommands = True
+        }
       }
       { Splitter2 Splitter
-        MoveScaled(31,2,57,42)
+        MoveScaled(51,2,57,42)
         Arrangement = Arrange.Vertical
         Border = False
         { DirViewRuta DirChooser

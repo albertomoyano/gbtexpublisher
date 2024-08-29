@@ -49,6 +49,7 @@ Public Sub Form_Open()
 
     'configuración del ToDo
     Splitter2.Layout = [3, 1]
+    Splitter4.Layout = [3, 1]
     txtTAREAS.Visible = False
     Mostrar_Lista_Tareas
 
@@ -76,11 +77,11 @@ Public Sub Form_Open()
     Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
     Dim mtmp As Menu
-    Dim file As String
+    Dim fileA As String
 
-    For Each file In Dir(rutaScriptsExternos, "*.py").Sort()
+    For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()
       mtmp = New Menu(Menu76) As "obs"
-      mtmp.caption = File
+      mtmp.caption = fileA
     Next
 
     ' comienza glosario
@@ -286,6 +287,14 @@ Public Sub obs_click()
 
   TerminalView1.Input("clear" & "\n")
   TerminalView1.Input("python3 " & rutaScriptsExternos &/ Last.caption & " " & File.Name(TextBox1.Text) & "\n")
+
+End
+
+'ejecutamos el evento click del observador
+Public Sub obs2_click()
+
+  ' Print Last.caption
+  ' TextEditFiles.Text = File.Load(rutaFILES & Last.caption)
 
 End
 
@@ -830,6 +839,13 @@ Public Sub menuAbrir_Click()
     DirViewRuta.Root = File.Dir(TextBox1.Text)
   Endif
 
+  rutaFILES = File.Dir(TextBox1.Text) & "/files"
+  BaseName = File.BaseName(TextBox1.Text)
+  ' rutaBIB = BaseName & ".bib"
+  'posicionamos la consola con el path del archivo de trabajo
+  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
+  TerminalView1.SetFocus()
+
   If Not MS.Matrix.Exist(Dialog.Path) Then
     If MS.Matrix.Count = MS.iLastNumber Then
       MS.Matrix.Remove(0)
@@ -839,10 +855,6 @@ Public Sub menuAbrir_Click()
     MS.ShortMatrix.Add(File.Name(Dialog.Path))
     UpdateMenu()
   End If
-
-  rutaFILES = File.Dir(TextBox1.Text) & "/files"
-  BaseName = File.BaseName(TextBox1.Text)
-  ' rutaBIB = BaseName & ".bib"
 
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
@@ -980,10 +992,6 @@ Public Sub menuAbrir_Click()
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
 
-  'posicionamos la consola con el path del archivo de trabajo
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
-  TerminalView1.SetFocus()
-
   Dim RecordBIB As String
   Dim CountBIB As Integer
   Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
@@ -1005,6 +1013,8 @@ Public Sub menuAbrir_Click()
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
+
+  TerminalMicro.Shell("micro " & "\n")
 
 End
 
@@ -1036,6 +1046,7 @@ Public Sub UpdateMenu()
 
 End
 
+' me que muestra los ultimos archivos abiertos
 Public Sub mnuLast_Click()
 
   Dim iIndex As Integer
@@ -1211,6 +1222,7 @@ Public Sub mnuLast_Click()
 
   'levantamos los datos de comentarios
   levantarComenta()
+  TerminalMicro.Shell("micro " & "\n")
 
 End
 
@@ -5678,6 +5690,12 @@ End
 Public Sub Splitter2_Resize()
 
   Splitter2.Layout = [3, 1]
+
+End
+
+Public Sub Splitter4_Resize()
+
+  Splitter4.Layout = [3, 1]
 
 End
 
