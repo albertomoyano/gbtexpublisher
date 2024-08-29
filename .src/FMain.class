@@ -1014,7 +1014,7 @@ Public Sub menuAbrir_Click()
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
 
-  TerminalMicro.Shell("micro " & "\n")
+  TerminalMicro.Shell("nano" & "\n")
 
 End
 
@@ -1222,7 +1222,7 @@ Public Sub mnuLast_Click()
 
   'levantamos los datos de comentarios
   levantarComenta()
-  TerminalMicro.Shell("micro " & "\n")
+  TerminalMicro.Shell("nano" & "\n")
 
 End
 
