@@ -2813,8 +2813,10 @@
       { HBox180 HBox
         MoveScaled(0,0,103,0.8889)
       }
-      { TabStripMetaLibro TabStrip
-        MoveScaled(1,2,105,340)
+      { !TabStripMetaLibro TabStrip
+        MoveScaled(2,3,105,340)
+        #Public = True
+        Expand = True
         Arrangement = Arrange.Vertical
         Count = 2
         Index = 0
@@ -2824,6 +2826,7 @@
           Expand = True
           Arrangement = Arrange.Vertical
           Border = False
+          ScrollBar = Scroll.Vertical
           { HBox94 HBox
             MoveScaled(0,0,78,4.4444)
             Padding = 2
@@ -2906,6 +2909,7 @@
           MoveScaled(2,3,94,323)
           Expand = True
           Arrangement = Arrange.Vertical
+          Border = False
           ScrollBar = Scroll.Vertical
           { HBox95 HBox
             MoveScaled(0,1,78,4.4444)
