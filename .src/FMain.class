@@ -3009,8 +3009,6 @@ End
 
 Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
 
-  txtBOOKTITLE.Text = ""
-
   Dim Comando As String
   Dim rowIndex As Integer
 
@@ -3331,8 +3329,6 @@ End
 
 Public Sub BtnBuscarAuthor_Click()' buscar autor
 
-  txtEDITOR.Text = ""
-
   Dim Comando As String
   Dim rowIndex As Integer
 
@@ -3485,8 +3481,6 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
 End
 
 Public Sub BtnBuscarAuthor2_Click()'buscar editor
-
-  txtAUTHOR.Text = ""
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -5101,8 +5095,6 @@ End
 ' End
 
 Public Sub BtnBuscarBookTitle_Click()
-
-  txtTITLE.Text = ""
 
   Dim Comando As String
   Dim rowIndex As Integer
