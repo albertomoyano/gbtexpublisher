@@ -4,7 +4,6 @@
   MoveScaled(0,0,114,390)
   Expand = True
   Icon = Picture["iconos/icono-gbtex.svg"]
-  Border = False
   Maximized = True
   Arrangement = Arrange.Vertical
   Padding = 4
