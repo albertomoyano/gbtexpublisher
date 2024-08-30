@@ -5,7 +5,6 @@ Private Contenido As Result
 Private ContenidoComenta As Result
 Private Busqueda As Result
 Private pBash As Process
-Private mBash As Process
 Public rutaFILES As String
 Public rutaMEDIA As String
 Public rutaCONTADOR As String
@@ -50,7 +49,6 @@ Public Sub Form_Open()
 
     'configuración del ToDo
     Splitter2.Layout = [3, 1]
-    Splitter4.Layout = [3, 1]
     txtTAREAS.Visible = False
     Mostrar_Lista_Tareas
 
@@ -265,11 +263,6 @@ Public Sub Form_Close()
       conector = Null
     Endif
 
-    ' Verificar si el proceso está en ejecución y cerrarlo
-    If mBash <> Null Then
-      mBash.Close
-    Endif
-
     ' Cerrar la aplicación
     Quit
 
@@ -367,8 +360,8 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
   Borrar_Aux
 
-  ' TerminalView1.SetFocus()
-  ' TerminalView1.Refresh()
+  TerminalView1.SetFocus()
+  TerminalView1.Refresh()
 
 End
 
@@ -732,11 +725,6 @@ Public Sub Menu11_Click()'cerrar el programa
       conector = Null
     Endif
 
-    ' Verificar si el proceso está en ejecución y cerrarlo
-    If mBash <> Null Then
-      mBash.Close
-    Endif
-
     ' Cerrar la aplicación
     Quit
 
@@ -1025,8 +1013,6 @@ Public Sub menuAbrir_Click()
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
 
-  mBash = TerminalMicro.Shell("nano" & "\n")
-
 End
 
 ' Evento que se ejecuta cuando se detecta un cambio en el directorio
@@ -1233,7 +1219,6 @@ Public Sub mnuLast_Click()
 
   'levantamos los datos de comentarios
   levantarComenta()
-  mBash = TerminalMicro.Shell("nano" & "\n")
 
 End
 
@@ -5704,12 +5689,6 @@ Public Sub Splitter2_Resize()
 
 End
 
-Public Sub Splitter4_Resize()
-
-  Splitter4.Layout = [3, 1]
-
-End
-
 Public Sub Mostrar_Lista_Tareas() ' Función para popular la lista de eventos
 
   Contenido = conector.Exec("select id, completado, titulo from tareas")
@@ -6573,5 +6552,24 @@ Public Sub menuComprimir_Click()
   comando = "tar cvzf " & fecha & "-" & BaseName & ".tar.gz *" & "\n"
 
   TerminalView1.Input(comando)
+
+End
+
+Public Sub btnAbrirFiles_Click()
+
+  ' Configurar el diálogo
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(TextBox1.Text) & "/files/"
+
+  ' Abrir el diálogo para seleccionar un archivo
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    ' Obtener la ruta completa del archivo seleccionado
+    Dim selectedFile As String
+    selectedFile = Dialog.Path
+  Endif
 
 End

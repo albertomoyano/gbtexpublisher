@@ -1,9 +1,10 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,114,242)
+  MoveScaled(0,0,114,390)
   Expand = True
   Icon = Picture["iconos/icono-gbtex.svg"]
+  Border = False
   Maximized = True
   Arrangement = Arrange.Vertical
   Padding = 4
@@ -555,7 +556,7 @@
     MoveScaled(1,13,98,0.8889)
   }
   { !TabPanel1 TabStrip
-    MoveScaled(1,20,112,217)
+    MoveScaled(1,20,112,365)
     #Public = True
     Enabled = False
     Expand = True
@@ -563,30 +564,21 @@
     Padding = 4
     Count = 5
     Index = 0
-    Text = ("Editor y Terminal")
+    Text = ("Terminal    ")
     Picture = Picture["iconos/terminal.svg"]
     { Splitter1 Splitter
-      MoveScaled(2,13,109,47)
+      MoveScaled(2,13,109,65)
       Expand = True
       Border = False
-      { Splitter4 Splitter
-        MoveScaled(5,4,45,42)
+      { TerminalView1 TerminalView
+        MoveScaled(5,8,27,6)
         Expand = True
-        Arrangement = Arrange.Vertical
-        Centered = True
-        Border = False
-        { TerminalMicro TerminalView
-          MoveScaled(9,11,27,6)
-          Expand = True
-        }
-        { TerminalView1 TerminalView
-          MoveScaled(9,19,27,6)
-          Expand = True
-          AutoResize = False
-          ShowScrollBar = True
-          ReadOnly = True
-          WindowCommands = True
-        }
+        AutoResize = False
+        Blink = True
+        CursorStyle = TerminalView.Underline
+        ShowScrollBar = True
+        ShowLink = True
+        WindowCommands = True
       }
       { Splitter2 Splitter
         MoveScaled(51,2,57,42)
@@ -615,7 +607,7 @@
       }
     }
     Index = 1
-    Text = ("Referencias bibliográficas")
+    Text = ("Referencias bibliográficas    ")
     Picture = Picture["iconos/bib.svg"]
     { ToolPanel1 ToolPanel
       MoveScaled(1,0,69,23)
@@ -2224,7 +2216,7 @@
       Index = 6
       Text = ("Miscelánea 2")
       { ScrollView8 ScrollView
-        MoveScaled(1,1,103,53)
+        MoveScaled(1,1,103,54)
         Expand = True
         Arrangement = Arrange.Vertical
         Border = False
@@ -2458,7 +2450,7 @@
       Index = 0
     }
     Index = 2
-    Text = ("Siglas y glosarios")
+    Text = ("Siglas y glosarios    ")
     Picture = Picture["iconos/glo.svg"]
     { HBox15 Panel
       MoveScaled(1,0,15,10)
@@ -2746,7 +2738,7 @@
       }
     }
     Index = 3
-    Text = ("Metadatos")
+    Text = ("Metadatos    ")
     Picture = Picture["iconos/metadatos.svg"]
     { HBox83 HBox
       MoveScaled(1,0,95,4)
@@ -2812,7 +2804,7 @@
       MoveScaled(2,9,103,0.8889)
     }
     { !TabPanel3 TabStrip
-      MoveScaled(1,11,107,195)
+      MoveScaled(1,11,107,348)
       #Public = True
       Expand = True
       Arrangement = Arrange.Vertical
@@ -2823,13 +2815,13 @@
         MoveScaled(0,0,103,0.8889)
       }
       { TabStripMetaLibro TabStrip
-        MoveScaled(1,2,105,193)
+        MoveScaled(1,2,105,340)
         Arrangement = Arrange.Vertical
         Count = 2
         Index = 0
         Text = ("Generales y obligatorios para todas las salidas")
         { ScrollView10 ScrollView
-          MoveScaled(2,3,103,24)
+          MoveScaled(2,3,97,24)
           Expand = True
           Arrangement = Arrange.Vertical
           Border = False
@@ -2912,10 +2904,9 @@
         Index = 1
         Text = ("Particulares")
         { ScrollView1 ScrollView
-          MoveScaled(2,2,94,323)
+          MoveScaled(2,3,94,323)
           Expand = True
           Arrangement = Arrange.Vertical
-          Border = False
           ScrollBar = Scroll.Vertical
           { HBox95 HBox
             MoveScaled(0,1,78,4.4444)
@@ -4300,7 +4291,7 @@
       Index = 0
     }
     Index = 4
-    Text = ("Comentarios")
+    Text = ("Comentarios    ")
     Picture = Picture["iconos/metadatos.svg"]
     { HBox175 HBox
       MoveScaled(2,0,95,4)
