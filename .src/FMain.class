@@ -4,7 +4,8 @@ Private conector As Connection
 Private Contenido As Result
 Private ContenidoComenta As Result
 Private Busqueda As Result
-Public pBash As Process
+Private pBash As Process
+Private mBash As Process
 Public rutaFILES As String
 Public rutaMEDIA As String
 Public rutaCONTADOR As String
@@ -262,6 +263,11 @@ Public Sub Form_Close()
     If conector Then
       conector.Close()
       conector = Null
+    Endif
+
+    ' Verificar si el proceso está en ejecución y cerrarlo
+    If mBash <> Null Then
+      mBash.Close
     Endif
 
     ' Cerrar la aplicación
@@ -726,6 +732,11 @@ Public Sub Menu11_Click()'cerrar el programa
       conector = Null
     Endif
 
+    ' Verificar si el proceso está en ejecución y cerrarlo
+    If mBash <> Null Then
+      mBash.Close
+    Endif
+
     ' Cerrar la aplicación
     Quit
 
@@ -1014,7 +1025,7 @@ Public Sub menuAbrir_Click()
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
 
-  TerminalMicro.Shell("nano" & "\n")
+  mBash = TerminalMicro.Shell("nano" & "\n")
 
 End
 
@@ -1222,7 +1233,7 @@ Public Sub mnuLast_Click()
 
   'levantamos los datos de comentarios
   levantarComenta()
-  TerminalMicro.Shell("nano" & "\n")
+  mBash = TerminalMicro.Shell("nano" & "\n")
 
 End
 
