@@ -770,3 +770,18 @@ Public Function validarArchivos()
   End If
 
 End
+
+Public Sub RevisarArchivo()'nos reaseguramos de que el archivo de la base de datos no se haya perdido
+
+  Dim rutaApp As String
+  Dim archivo As String
+
+  ' Establecer la ruta y el nombre del archivo
+  rutaApp = User.Home &/ ".gbtexpublisher"
+  archivo = rutaApp &/ "db_tex.sqlite"
+
+  If Not Exist(rutaApp &/ "db_tex.sqlite") Then
+    Message.Error("El archivo <stron>db_tex.sqlite</strong> no se encontró en el directorio: " & rutaApp)
+  End If
+
+End

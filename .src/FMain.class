@@ -892,6 +892,9 @@ Public Sub menuAbrir_Click()
   'levantamos los datos de comentario
   levantarComenta()
 
+  'nos reaseguramos de que la base de datos exista
+  Mod_Funciones.RevisarArchivo()
+
   'levantamos los datos de metadatos
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo

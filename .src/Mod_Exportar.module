@@ -586,7 +586,7 @@ Public Sub ExportToCatalogo(rutaTexto As String)
 
     s &= "\\begin{textblock*}{11cm}(75mm,45mm)" & "\n"
     s &= "\\begin{minipage}{11cm}" & "\n"
-    s &= "\\raggedright \\titulo{" & Contenido[aFields[6]] & "}\\\\" & "\n"
+    s &= "\\raggedright \\titulo{" & Contenido[aFields[84]] & "}\\\\" & "\n"
     s &= "\\raggedright \\subtitulo{" & Contenido[aFields[9]] & "}" & "\n"
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"

@@ -2940,43 +2940,13 @@
           Arrangement = Arrange.Vertical
           Border = False
           ScrollBar = Scroll.Vertical
-          { HBox95 HBox
-            MoveScaled(0,1,78,4.4444)
-            Padding = 2
-            { Label31 Label
-              MoveScaled(3,0,23,3.5556)
-              Alignment = Align.Right
-              Text = ("Título del artículo / capítulo  ")
-            }
-            { !txt06_pdftitle TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Título principal del documento")
-            }
-          }
-          { HBox96 HBox
-            MoveScaled(0,6,78,4.4444)
-            Padding = 2
-            { Label58 Label
-              MoveScaled(3,0,23,4)
-              Alignment = Align.Right
-              Text = ("Título en segundo idioma  ")
-            }
-            { !txt58_papertitletwo TextBox
-              MoveScaled(27,0,23,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Título principal en segundo idioma")
-            }
-          }
           { HBox97 HBox
-            MoveScaled(0,11,78,4.4444)
+            MoveScaled(2,1,78,4.4444)
             Padding = 2
             { Label32 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Subtítulo del artículo  ")
+              Text = ("Subtítulo  ")
             }
             { !txt09_pdfsubtitle TextBox
               MoveScaled(27,0,16,4)
@@ -2984,9 +2954,33 @@
               Expand = True
               Placeholder = ("Subtítulo del título principal")
             }
+            { PictureBox1 PictureBox
+              MoveScaled(43,0,4,4)
+              Picture = Picture.Load("iconos/acroread.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox6 PictureBox
+              MoveScaled(47,0,4,4)
+              Picture = Picture.Load("iconos/web.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox7 PictureBox
+              MoveScaled(51,0,4,4)
+              Picture = Picture.Load("iconos/epub.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox8 PictureBox
+              MoveScaled(55,0,4,4)
+              Picture = Picture.Load("iconos/ms-office.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
           }
           { HBox99 HBox
-            MoveScaled(0,16,78,4.4444)
+            MoveScaled(2,6,78,4.4444)
             Padding = 2
             { Label34 Label
               MoveScaled(0,0,23,4)
@@ -3007,21 +3001,69 @@
             }
             { PictureBox3 PictureBox
               MoveScaled(47,0,4,4)
-              Picture = Picture.Load("iconos/web.svg")
               Alignment = Align.Center
               Border = Border.Etched
             }
             { PictureBox4 PictureBox
               MoveScaled(51,0,4,4)
-              Picture = Picture.Load("iconos/epub.svg")
               Alignment = Align.Center
               Border = Border.Etched
             }
             { PictureBox5 PictureBox
               MoveScaled(55,0,4,4)
-              Picture = Picture.Load("iconos/ms-office.svg")
               Alignment = Align.Center
               Border = Border.Etched
+            }
+          }
+          { HBox95 HBox
+            MoveScaled(2,11,78,4.4444)
+            Padding = 2
+            { Label31 Label
+              MoveScaled(3,0,23,3.5556)
+              Alignment = Align.Right
+              Text = ("Título del artículo / capítulo  ")
+            }
+            { !txt06_pdftitle TextBox
+              MoveScaled(27,0,16,4)
+              #Public = True
+              Expand = True
+              Placeholder = ("Título principal del documento")
+            }
+            { PictureBox9 PictureBox
+              MoveScaled(43,0,4,4)
+              Picture = Picture.Load("iconos/acroread.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox10 PictureBox
+              MoveScaled(47,0,4,4)
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox11 PictureBox
+              MoveScaled(51,0,4,4)
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox12 PictureBox
+              MoveScaled(55,0,4,4)
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+          }
+          { HBox96 HBox
+            MoveScaled(1,16,78,4.4444)
+            Padding = 2
+            { Label58 Label
+              MoveScaled(3,0,23,4)
+              Alignment = Align.Right
+              Text = ("Título en segundo idioma  ")
+            }
+            { !txt58_papertitletwo TextBox
+              MoveScaled(27,0,23,4)
+              #Public = True
+              Expand = True
+              Placeholder = ("Título principal en segundo idioma")
             }
           }
           { HBox100 HBox
