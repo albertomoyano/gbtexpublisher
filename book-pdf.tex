@@ -68,11 +68,6 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 	maxcycles=4
 }
 
-% control sobre parrafos de una linea
-\usepackage{needspace}
-\let\oldpar\par
-\renewcommand{\par}{\Needspace{2\baselineskip}\oldpar}
-
 % paquetes varios
 \usepackage{froufrou}
 \usepackage{nccfoots}
@@ -87,18 +82,17 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{bchart}
 \usepackage[most]{tcolorbox}
-
-%% diseño de listas (opcion 1) con paralist
+% control sobre parrafos de una linea a final de página
+\usepackage{needspace}% usar donde se desea el corte \Needspace*{4\baselineskip}
+% diseño de listas (opcion 1) con paralist
 \usepackage{paralist}
 \setdefaultenum{1)}{a)}{i)}{}
 \pltopsep=0.5mm
 \plitemsep=0mm
-%% diseño de listas (opcion 2) con enumitem
+% diseño de listas (opcion 2) con enumitem
 \usepackage{enumitem}
 \setlist{nosep,topsep=-\parskip}
-
-%% rediseñamos la raya de las notas a pie
-%% aumentamos la distancia de la raya
+% rediseñamos la raya de las notas a pie aumentamos la distancia de la raya
 \renewcommand{\footnoterule}{%
 	\kern -3pt%
 	\hrule height 0.5pt width 0.4\columnwidth%
@@ -549,7 +543,7 @@ uniquelist=minyear]{biblatex}
 % generamos los índices
 \usepackage[xindy]{imakeidx}
 \makeindex
-\makeindex[name=names,title={Índice de autoras y autores}]
+\makeindex[name=names,title={Índice de autoras y autores del aparato bibliográfico}]
 \makeindex[name=concepto,title={Índice de conceptos}]
 \makeindex[name=onomastico,title={Índice onomástico}]
 
