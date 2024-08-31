@@ -565,6 +565,25 @@
     Index = 0
     Text = ("Terminal    ")
     Picture = Picture["iconos/terminal.svg"]
+    { HBox93 HBox
+      MoveScaled(0,1,97,4)
+      { BtnBuscarEnArchivos Button
+        MoveScaled(1,0,4,4)
+        NoTabFocus = True
+        Picture = Picture["iconos/search.svg"]
+      }
+      { TextBox2 TextBox
+        MoveScaled(11,0,23,4)
+      }
+      { Label125 Label
+        MoveScaled(47,0,42,4)
+        Expand = True
+        Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
+      }
+    }
+    { HBox181 HBox
+      MoveScaled(0,6,103,0.8889)
+    }
     { Splitter1 Splitter
       MoveScaled(2,13,109,65)
       Expand = True

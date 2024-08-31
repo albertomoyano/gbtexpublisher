@@ -27,6 +27,8 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
+  Mod_Funciones.validarArchivos()
+
   ' Crear una nueva conexión
   conector = New Connection
 
@@ -286,14 +288,6 @@ Public Sub obs_click()
 
   TerminalView1.Input("clear" & "\n")
   TerminalView1.Input("python3 " & rutaScriptsExternos &/ Last.caption & " " & File.Name(TextBox1.Text) & "\n")
-
-End
-
-'ejecutamos el evento click del observador
-Public Sub obs2_click()
-
-  ' Print Last.caption
-  ' TextEditFiles.Text = File.Load(rutaFILES & Last.caption)
 
 End
 
@@ -6547,21 +6541,14 @@ Public Sub menuComprimir_Click()
 
 End
 
-Public Sub btnAbrirFiles_Click()
+Public Sub BtnBuscarEnArchivos_Click()
 
-  ' Configurar el diálogo
-  Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
-  Dialog.AutoExt = True
-  Dialog.Path = File.Dir(TextBox1.Text) & "/files/"
+  Dim palabraAbuscar As String
 
-  ' Abrir el diálogo para seleccionar un archivo
-  If Dialog.OpenFile() Then
-    Return
-  Else
-    ' Obtener la ruta completa del archivo seleccionado
-    Dim selectedFile As String
-    selectedFile = Dialog.Path
-  Endif
+  palabraAbuscar = TextBox2.Text
+
+  TerminalView1.Clear
+  TerminalView1.Input("python3 " & rutaScriptsExternos & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
+  TerminalView1.SetFocus
 
 End
