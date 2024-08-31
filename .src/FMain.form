@@ -254,10 +254,11 @@
       Picture = Picture["iconos/bibRepetida.svg"]
       Enabled = False
     }
-    { Menu76 Menu
+    { menuScriptsExternos Menu
       Text = ("Script externos")
       Picture = Picture["iconos/edit-select.svg"]
       Enabled = False
+      Visible = False
     }
     { menuORTOGRAFIA Menu
       Text = ("Correcciones sobre el texto")
@@ -555,7 +556,7 @@
     MoveScaled(1,13,98,0.8889)
   }
   { !TabPanel1 TabStrip
-    MoveScaled(1,20,112,365)
+    MoveScaled(1,15,112,365)
     #Public = True
     Enabled = False
     Expand = True
@@ -566,17 +567,26 @@
     Text = ("Terminal    ")
     Picture = Picture["iconos/terminal.svg"]
     { HBox93 HBox
-      MoveScaled(0,1,97,4)
+      MoveScaled(1,1,108,4)
+      { MenuButton1 MenuButton
+        MoveScaled(1,0,23,4)
+        Text = ("Guiones externos")
+        Picture = Picture["iconos/conversor.svg"]
+        MenuOnly = True
+      }
+      { Separator1 Separator
+        MoveScaled(25,0,1.3333,4)
+      }
+      { TextBox2 TextBox
+        MoveScaled(27,0,23,4)
+      }
       { BtnBuscarEnArchivos Button
-        MoveScaled(1,0,4,4)
+        MoveScaled(51,0,4,4)
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
-      { TextBox2 TextBox
-        MoveScaled(11,0,23,4)
-      }
       { Label125 Label
-        MoveScaled(47,0,42,4)
+        MoveScaled(56,0,42,4)
         Expand = True
         Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
       }

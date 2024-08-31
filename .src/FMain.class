@@ -80,8 +80,8 @@ Public Sub Form_Open()
     Dim mtmp As Menu
     Dim fileA As String
 
-    For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()
-      mtmp = New Menu(Menu76) As "obs"
+    For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
+      mtmp = New Menu(menuScriptsExternos) As "obs"
       mtmp.caption = fileA
     Next
 
@@ -849,6 +849,7 @@ Public Sub menuAbrir_Click()
     UpdateMenu()
   End If
 
+  MenuButton1.Menu = "menuScriptsExternos"
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
@@ -864,7 +865,7 @@ Public Sub menuAbrir_Click()
   menuCFG.Enabled = True
   menuTOOLS.Enabled = True
   menuODt_DOCX.Enabled = True
-  Menu76.Enabled = True
+  menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
@@ -1052,6 +1053,7 @@ Public Sub mnuLast_Click()
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
   BaseName = File.BaseName(TextBox1.Text)
 
+  MenuButton1.Menu = "menuScriptsExternos"
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
@@ -1067,7 +1069,7 @@ Public Sub mnuLast_Click()
   menuCFG.Enabled = True
   menuTOOLS.Visible = True
   menuODt_DOCX.Enabled = True
-  Menu76.Enabled = True
+  menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
@@ -6204,7 +6206,7 @@ Public Sub menuAbrirRevista_Click()
   menuCFG.Enabled = True
   menuTOOLS.Enabled = True
   menuODt_DOCX.Enabled = True
-  Menu76.Enabled = True
+  menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
@@ -6548,7 +6550,7 @@ Public Sub BtnBuscarEnArchivos_Click()
   palabraAbuscar = TextBox2.Text
 
   TerminalView1.Clear
-  TerminalView1.Input("python3 " & rutaScriptsExternos & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
+  TerminalView1.Input("python3 " & rutaApp & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
   TerminalView1.SetFocus
 
 End
