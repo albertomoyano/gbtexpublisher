@@ -35,7 +35,7 @@ Public Sub Form_Open()
     cbRELATEDTYPE2.Add("translatedas")
     cbRELATEDTYPE2.Add("multivolume")
 
-    ' Mostrar_Lista()
+    Mostrar_Lista()
     Mostrar_Lista2()
   Endif
 

@@ -140,7 +140,7 @@
       MoveScaled(0,39,103,31)
       Arrangement = Arrange.Vertical
       Padding = 4
-      Text = ("Total de referencias en la base de datos")
+      Text = ("Todas las referencias disponibles en la base de datos")
       Alignment = Align.BottomLeft
       { HBox16 HBox
         MoveScaled(1,3,98,4.4444)
