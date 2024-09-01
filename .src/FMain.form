@@ -7,6 +7,25 @@
   Maximized = True
   Arrangement = Arrange.Vertical
   Padding = 4
+  { menuProcesarArchivos Menu
+    Text = ("Procesar archivos")
+    Visible = False
+    { menuGray Menu
+      Text = ("Convertir imágenes a .png en grayscale")
+      Picture = Picture["iconos/js.svg"]
+      Enabled = False
+    }
+    { menuComprimir Menu
+      Text = ("Comprimir proyecto (.tar.gz)")
+      Picture = Picture["iconos/archive-insert.svg"]
+      Enabled = False
+    }
+    { menuBORRARaux Menu
+      Text = ("Borrar archivos auxiliares")
+      Picture = Picture["iconos/borrar.svg"]
+      Enabled = False
+    }
+  }
   { menuTEXTBOX Menu
     Text = ("menuContextual")
     Visible = False
@@ -249,11 +268,6 @@
     }
     { Menu79 Menu
     }
-    { menuControlRef Menu
-      Text = ("Control de referencias relacionadas")
-      Picture = Picture["iconos/bibRepetida.svg"]
-      Enabled = False
-    }
     { menuScriptsExternos Menu
       Text = ("Script externos")
       Picture = Picture["iconos/edit-select.svg"]
@@ -284,16 +298,6 @@
       Enabled = False
       Visible = False
     }
-    { menuGray Menu
-      Text = ("Convertir imágenes a .png en grayscale")
-      Picture = Picture["iconos/js.svg"]
-      Enabled = False
-    }
-    { menuComprimir Menu
-      Text = ("Comprimir proyecto (.tar.gz)")
-      Picture = Picture["iconos/archive-insert.svg"]
-      Enabled = False
-    }
     { menuLOGFILE Menu
       Text = ("Analizar el logfile del archivo")
       Picture = Picture["iconos/logfile.svg"]
@@ -302,11 +306,6 @@
     { menuDRAW Menu
       Text = ("Contador / Estadísticas del archivo")
       Picture = Picture["iconos/draw.svg"]
-      Enabled = False
-    }
-    { menuBORRARaux Menu
-      Text = ("Borrar archivos auxiliares")
-      Picture = Picture["iconos/borrar.svg"]
       Enabled = False
     }
     { menuCFG Menu
@@ -490,8 +489,11 @@
       Text = ("DOCX")
       Picture = Picture["iconos/ms-office.svg"]
     }
+    { Separator2 Separator
+      MoveScaled(49,0,1.3333,4)
+    }
     { Label121 Label
-      MoveScaled(51,0,8,4)
+      MoveScaled(52,0,8,4)
       AutoResize = True
       Text = ("  Revista ")
     }
@@ -609,17 +611,32 @@
         WindowCommands = True
       }
       { Splitter2 Splitter
-        MoveScaled(51,2,57,42)
+        MoveScaled(51,2,57,61)
         Arrangement = Arrange.Vertical
         Border = False
-        { DirViewRuta DirChooser
-          MoveScaled(14,1,34,15)
-          ShowFile = True
-          ShowBookmark = False
-          ShowToolbar = False
+        { Panel1 Panel
+          MoveScaled(1,6,55,29)
+          Expand = True
+          Arrangement = Arrange.Vertical
+          { HBox182 HBox
+            MoveScaled(2,1,34,4)
+            { MenuButton2 MenuButton
+              MoveScaled(1,0,23,4)
+              Text = ("Procesar archivos")
+              Picture = Picture["iconos/conversor.svg"]
+              MenuOnly = True
+            }
+          }
+          { DirViewRuta DirChooser
+            MoveScaled(1,13,34,15)
+            Expand = True
+            ShowFile = True
+            ShowBookmark = False
+            ShowToolbar = False
+          }
         }
         { Splitter3 Splitter
-          MoveScaled(2,20,41,15)
+          MoveScaled(1,44,41,15)
           Border = False
           { VLista ListView
             MoveScaled(6,4,16,8)
@@ -707,8 +724,13 @@
         ToolTip = ("Duplicar entrada")
         Picture = Picture["iconos/duplicar2.png"]
       }
+      { btnRefRelacionada Button
+        MoveScaled(41,0,16,4)
+        Text = ("Relación")
+        Picture = Picture["iconos/bibRepetida.svg"]
+      }
       { txtID2 TextBox
-        MoveScaled(45,0,6,4)
+        MoveScaled(69,0,6,4)
         Visible = False
         Background = Color.Background
         NoTabFocus = True
@@ -716,7 +738,7 @@
         ReadOnly = True
       }
       { txtTOTALbib TextLabel
-        MoveScaled(52,0,24.2222,4)
+        MoveScaled(70,0,24.2222,4)
         Expand = True
         Alignment = Align.Center
         Wrap = False
@@ -2933,15 +2955,30 @@
           }
         }
         Index = 1
-        Text = ("Particulares")
+        Text = ("Particulares a cada tipo de salida")
         { ScrollView1 ScrollView
           MoveScaled(2,3,94,323)
           Expand = True
           Arrangement = Arrange.Vertical
           Border = False
           ScrollBar = Scroll.Vertical
-          { HBox97 HBox
+          { HBox111 HBox
             MoveScaled(2,1,78,4.4444)
+            Padding = 2
+            { Label50 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("Caption Writer  ")
+            }
+            { !txtCaptionWriter TextBox
+              MoveScaled(27,0,16,4)
+              #Public = True
+              Expand = True
+              Placeholder = ("Se utiliza para especificar el nombre de quien a modificado el contenido del documento")
+            }
+          }
+          { HBox97 HBox
+            MoveScaled(2,6,78,4.4444)
             Padding = 2
             { Label32 Label
               MoveScaled(0,0,23,4)
@@ -2980,7 +3017,7 @@
             }
           }
           { HBox99 HBox
-            MoveScaled(2,6,78,4.4444)
+            MoveScaled(2,11,78,4.4444)
             Padding = 2
             { Label34 Label
               MoveScaled(0,0,23,4)
@@ -3015,8 +3052,86 @@
               Border = Border.Etched
             }
           }
+          { HBox106 HBox
+            MoveScaled(2,16,88,4)
+            Padding = 2
+            { Label38 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("Tipo de licencia  ")
+            }
+            { txt15_pdfcopyright ComboBox
+              MoveScaled(24,0,37,4)
+              Expand = True
+              ReadOnly = True
+            }
+            { PictureBox17 PictureBox
+              MoveScaled(61,0,4,4)
+              Picture = Picture.Load("iconos/acroread.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox18 PictureBox
+              MoveScaled(65,0,4,4)
+              Picture = Picture.Load("iconos/web.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox19 PictureBox
+              MoveScaled(69,0,4,4)
+              Picture = Picture.Load("iconos/epub.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox20 PictureBox
+              MoveScaled(73,0,4,4)
+              Picture = Picture.Load("iconos/ms-office.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+          }
+          { HBox107 HBox
+            MoveScaled(2,21,78,4.4444)
+            Padding = 2
+            { Label41 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("URL licencia  ")
+            }
+            { !txt16_pdflicenseurl TextBox
+              MoveScaled(27,0,16,4)
+              #Public = True
+              Background = Color.Background
+              Expand = True
+              ReadOnly = True
+            }
+            { PictureBox13 PictureBox
+              MoveScaled(43,0,4,4)
+              Picture = Picture.Load("iconos/acroread.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox14 PictureBox
+              MoveScaled(47,0,4,4)
+              Picture = Picture.Load("iconos/web.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox15 PictureBox
+              MoveScaled(51,0,4,4)
+              Picture = Picture.Load("iconos/epub.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+            { PictureBox16 PictureBox
+              MoveScaled(55,0,4,4)
+              Picture = Picture.Load("iconos/ms-office.svg")
+              Alignment = Align.Center
+              Border = Border.Etched
+            }
+          }
           { HBox95 HBox
-            MoveScaled(2,11,78,4.4444)
+            MoveScaled(1,29,78,4.4444)
             Padding = 2
             { Label31 Label
               MoveScaled(3,0,23,3.5556)
@@ -3052,7 +3167,7 @@
             }
           }
           { HBox96 HBox
-            MoveScaled(1,16,78,4.4444)
+            MoveScaled(0,34,78,4.4444)
             Padding = 2
             { Label58 Label
               MoveScaled(3,0,23,4)
@@ -3067,7 +3182,7 @@
             }
           }
           { HBox100 HBox
-            MoveScaled(0,21,78,4.4444)
+            MoveScaled(0,39,78,4.4444)
             Padding = 2
             { Label59 Label
               MoveScaled(0,0,23,4)
@@ -3096,7 +3211,7 @@
             }
           }
           { HBox101 HBox
-            MoveScaled(0,26,78,4.4444)
+            MoveScaled(0,44,78,4.4444)
             Padding = 2
             { Label60 Label
               MoveScaled(0,0,23,4)
@@ -3122,7 +3237,7 @@
             }
           }
           { HBox103 HBox
-            MoveScaled(0,31,84,4.4444)
+            MoveScaled(0,49,84,4.4444)
             Padding = 2
             { Label42 Label
               MoveScaled(0,0,23,4)
@@ -3147,7 +3262,7 @@
             }
           }
           { HBox104 HBox
-            MoveScaled(0,36,84,4.4444)
+            MoveScaled(0,54,84,4.4444)
             Padding = 2
             { Label36 Label
               MoveScaled(0,0,23,4)
@@ -3172,7 +3287,7 @@
             }
           }
           { HBox105 HBox
-            MoveScaled(0,44,84,4.4444)
+            MoveScaled(0,59,84,4.4444)
             Padding = 2
             { Label37 Label
               MoveScaled(0,0,23,4)
@@ -3183,36 +3298,6 @@
               MoveScaled(27,0,20,4)
               #Public = True
               Placeholder = ("YYYY/MM/DD")
-            }
-          }
-          { HBox106 HBox
-            MoveScaled(0,48,78,4.4444)
-            Padding = 2
-            { Label38 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Tipo de licencia  ")
-            }
-            { txt15_pdfcopyright ComboBox
-              MoveScaled(24,0,37,4)
-              Expand = True
-              ReadOnly = True
-            }
-          }
-          { HBox107 HBox
-            MoveScaled(0,52,78,4.4444)
-            Padding = 2
-            { Label41 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("URL licencia  ")
-            }
-            { !txt16_pdflicenseurl TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Background = Color.Background
-              Expand = True
-              ReadOnly = True
             }
           }
           { HBox110 HBox
@@ -3228,21 +3313,6 @@
               #Public = True
               Expand = True
               Placeholder = ("Palabras clave para el segundo idioma separadas por coma")
-            }
-          }
-          { HBox111 HBox
-            MoveScaled(0,68,78,4.4444)
-            Padding = 2
-            { Label50 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Caption Writer  ")
-            }
-            { !txtCaptionWriter TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Se utiliza para especificar el nombre de quien a modificado el contenido del documento")
             }
           }
           { HBox112 HBox

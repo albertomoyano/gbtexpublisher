@@ -850,6 +850,7 @@ Public Sub menuAbrir_Click()
   End If
 
   MenuButton1.Menu = "menuScriptsExternos"
+  MenuButton2.Menu = "menuProcesarArchivos"
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
@@ -871,7 +872,6 @@ Public Sub menuAbrir_Click()
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
-  menuControlRef.Enabled = True
   menuORTOGRAFIA.Enabled = True
   menuDisclaimer.Enabled = True
 
@@ -1057,6 +1057,7 @@ Public Sub mnuLast_Click()
   BaseName = File.BaseName(TextBox1.Text)
 
   MenuButton1.Menu = "menuScriptsExternos"
+  MenuButton2.Menu = "menuProcesarArchivos"
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
@@ -1078,7 +1079,6 @@ Public Sub mnuLast_Click()
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
-  menuControlRef.Enabled = True
   menuORTOGRAFIA.Enabled = True
   menuDisclaimer.Enabled = True
 
@@ -1356,12 +1356,6 @@ End
 Public Sub Menu78_Click()'exportar referencias bibligráficas
 
   Form_ExportarBIB.ShowModal()
-
-End
-
-Public Sub menuControlRef_Click()
-
-  Form_Control_Ref.Show()
 
 End
 
@@ -6215,7 +6209,6 @@ Public Sub menuAbrirRevista_Click()
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
-  menuControlRef.Enabled = True
   menuORTOGRAFIA.Enabled = True
 
   If Form_Notas.Visible Then
@@ -6555,5 +6548,11 @@ Public Sub BtnBuscarEnArchivos_Click()
   TerminalView1.Clear
   TerminalView1.Input("python3 " & rutaApp & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
   TerminalView1.SetFocus
+
+End
+
+Public Sub btnRefRelacionada_Click()
+
+  Form_Control_Ref.Show()
 
 End

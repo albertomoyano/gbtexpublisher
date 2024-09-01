@@ -1,29 +1,43 @@
 ' Gambas class file
 
-Private Conn As Connection
+Private conector As Connection
 Private Contenido1 As Result
 Private Contenido2 As Result
 Private Busqueda1 As Result
 
 Public Sub Form_Open()
 
-  ' me conceto a la base de datos
-  Mod_Conn.conectar
+  ' Crear una nueva conexión
+  conector = New Connection
 
-  cbRELATEDTYPE1.Add("")
-  cbRELATEDTYPE1.Add("reprintof")
-  cbRELATEDTYPE1.Add("translationof")
-  cbRELATEDTYPE1.Add("translatedas")
-  cbRELATEDTYPE1.Add("multivolume")
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Name = "db_tex.sqlite"
 
-  cbRELATEDTYPE2.Add("")
-  cbRELATEDTYPE2.Add("reprintof")
-  cbRELATEDTYPE2.Add("translationof")
-  cbRELATEDTYPE2.Add("translatedas")
-  cbRELATEDTYPE2.Add("multivolume")
+  ' Intentar abrir la conexión
+  Try conector.Open()
 
-  Mostrar_Lista()
-  Mostrar_Lista2()
+  If Error Then
+    conector = Null
+    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>db_tex.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  Else
+
+    cbRELATEDTYPE1.Add("")
+    cbRELATEDTYPE1.Add("reprintof")
+    cbRELATEDTYPE1.Add("translationof")
+    cbRELATEDTYPE1.Add("translatedas")
+    cbRELATEDTYPE1.Add("multivolume")
+
+    cbRELATEDTYPE2.Add("")
+    cbRELATEDTYPE2.Add("reprintof")
+    cbRELATEDTYPE2.Add("translationof")
+    cbRELATEDTYPE2.Add("translatedas")
+    cbRELATEDTYPE2.Add("multivolume")
+
+    ' Mostrar_Lista()
+    Mostrar_Lista2()
+  Endif
 
 End
 
@@ -33,8 +47,7 @@ Public Sub Mostrar_Lista()
 
   Table1.Clear()
 
-  ' Contenido1 = Conn.Exec("select * from bibtex ORDER BY id DESC")
-  Contenido1 = Conn.Exec("select * from bibtex ORDER BY id DESC")
+  Contenido1 = conector.Exec("select * from bibtex ORDER BY id DESC")
 
   'diseñamos el tableview
   Table1.Columns.Count = 110
@@ -411,7 +424,7 @@ Public Sub Mostrar_Lista2()
 
   Table2.Clear()
 
-  Contenido2 = Conn.Exec("SELECT * FROM bibtex WHERE keywords LIKE '%" & FMain.BaseName & "," & "%'")
+  Contenido2 = conector.Exec("SELECT * FROM bibtex WHERE keywords LIKE '%" & FMain.BaseName & "," & "%'")
 
   'diseñamos el tableview
   Table2.Columns.Count = 110
@@ -777,7 +790,7 @@ Public Sub BtnBuscar1_Click()' buscar autor
     Return
   End If
 
-  Busqueda1 = Conn.Exec(Comando)
+  Busqueda1 = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   Table1.Clear()
@@ -920,14 +933,24 @@ End
 
 Public Sub Form_Close()
 
-  Mod_Conn.desconectar
+  ' Desconectar la base de datos
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
   Me.Close()
 
 End
 
 Public Sub btnCerrar_Click()
 
-  Mod_Conn.desconectar
+  ' Desconectar la base de datos
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
   Me.Close()
 
 End
@@ -938,7 +961,7 @@ Public Sub btnGuardar_Click()
     Message.Error("No ha seleccionado una referencia para relacionar.")
   Else
 
-    Contenido1 = Conn.Edit("bibtex", "id=" & txtID1.Text)
+    Contenido1 = conector.Edit("bibtex", "id=" & txtID1.Text)
     guardarCampos1
     Contenido1.Update
     Table1.Clear
@@ -947,7 +970,7 @@ Public Sub btnGuardar_Click()
     If txtFiltro2.Text = "" Then
       Message.Error("No hay cambios para guardar. No ha seleccionado una referencia del archivo .tex en curso.")
     Else
-      Contenido2 = Conn.Edit("bibtex", "id=" & txtID2.Text)
+      Contenido2 = conector.Edit("bibtex", "id=" & txtID2.Text)
       guardarCampos2
       Contenido2.Update
       Table2.Clear
