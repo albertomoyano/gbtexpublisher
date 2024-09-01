@@ -146,7 +146,7 @@
     }
     { menuMono Menu
       Text = ("Monografía académica")
-      Picture = Picture["iconos/document-mono.svg"]
+      Picture = Picture["iconos/document-mono.png"]
     }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
@@ -166,7 +166,7 @@
       }
       { menuDatosAcademicos Menu
         Text = ("Datos académicos")
-        Picture = Picture["iconos/document-mono.svg"]
+        Picture = Picture["iconos/document-mono.png"]
       }
     }
     { Menu3 Menu
