@@ -144,6 +144,10 @@
       Text = ("Abrir revista")
       Picture = Picture["iconos/document-orange.svg"]
     }
+    { menuMono Menu
+      Text = ("Monografía académica")
+      Picture = Picture["iconos/document-mono.svg"]
+    }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
       Picture = Picture["iconos/bookmarks.svg"]
@@ -151,7 +155,7 @@
     { Menu10 Menu
     }
     { menuOJS Menu
-      Text = ("OJS")
+      Text = ("Academia y OJS")
       { menuABMautores Menu
         Text = ("ABM autores")
         Picture = Picture["iconos/document-orange.svg"]
@@ -159,6 +163,10 @@
       { menuABMrevistas Menu
         Text = ("ABM revistas")
         Picture = Picture["iconos/document-orange.svg"]
+      }
+      { menuDatosAcademicos Menu
+        Text = ("Datos académicos")
+        Picture = Picture["iconos/document-mono.svg"]
       }
     }
     { Menu3 Menu
