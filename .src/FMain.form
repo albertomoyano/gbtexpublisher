@@ -228,6 +228,11 @@
         Enabled = False
       }
     }
+    { menuMonografia Menu
+      Text = ("Salida a monografía")
+      Picture = Picture["iconos/acroread.svg"]
+      Enabled = False
+    }
     { menuGHPages Menu
       Text = ("Publicar en GitHub Pages")
       Picture = Picture["iconos/github-mark.svg"]
@@ -520,6 +525,20 @@
       MoveScaled(79,0,8.8889,4)
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
+    }
+    { Separator3 Separator
+      MoveScaled(89,0,1.3333,4)
+    }
+    { Label126 Label
+      MoveScaled(90.3333,0,8,4)
+      AutoResize = True
+      Text = ("  Monografía ")
+    }
+    { btnMONO Button
+      MoveScaled(102,0,8.8889,4)
+      ToolTip = ("PDF de libro")
+      Text = ("PDF")
+      Picture = Picture["iconos/acroread.svg"]
     }
   }
   { HBox1 HBox
