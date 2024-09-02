@@ -688,6 +688,11 @@ Public Function validarArchivos()
     Mkdir rutaAppR
   End If
 
+  ' aseguramos que exista el archivo de cabecera para monografias
+  If Not Exist(rutaApp &/ "monografia-pdf.tex") Then
+    Copy "./monografia-pdf.tex" To rutaApp &/ "monografia-pdf.tex"
+  End If
+
   If Not Exist(rutaApp &/ "db_tex.sqlite") Then
     Copy "./db_tex.sqlite" To rutaApp &/ "db_tex.sqlite"
   End If
@@ -785,3 +790,47 @@ Public Sub RevisarArchivo()'nos reaseguramos de que el archivo de la base de dat
   End If
 
 End
+
+Public Sub ManagePdfFolderMonografia(rutaTexto As String)
+
+  Dim pdfPath As String = File.Dir(rutaTexto) & "/pdf/"
+
+  ' Verifica si la carpeta existe
+  If Not Exist(pdfPath) Then
+    ' Si no existe, crea la carpeta
+    Mkdir pdfPath
+  Else
+    ' Si existe, borra los archivos con extensión .pdf
+    Shell "rm -rf " & pdfPath & File.BaseName(rutaTexto) & ".pdf" Wait
+  End If
+
+End Sub
+
+Public Function registrosObligatoriosMonografia(rutaTexto As String) As Boolean
+
+  ' Dim campo0, campo1, campo2, campo3, campo4, campo5 As String
+  '
+  ' campo0 = FMain.txtnombreArchivo.Text
+  ' campo1 = FMain.txt84_bookTitle.Text
+  ' campo2 = FMain.txt05_pdfauthor.Text
+  ' campo3 = FMain.txtDate.Text
+  ' campo4 = FMain.txtSubjet.Text
+  ' campo5 = FMain.txt57_palabrasclave.Text
+  '
+  ' ' Verificar si el campo de metadatos existe
+  ' If campo0 = "" Then
+  '   Message.Error("Debe asegurar la construcción del archivo de metadatos para <strong>" & File.Name(rutaTexto) & "</strong>", "Aceptar")
+  '   FMain.TabPanel1.Index = 3
+  '   Return False
+  ' End If
+  '
+  ' ' Verificamos si los otros campos están vacíos
+  ' If campo1 = "" Or campo2 = "" Or campo3 = "" Or campo4 = "" Or campo5 = "" Then
+  '   Message.Error("Uno o más registros de los metadatos obligatorios están vacíos, la operación será cancelada.", "Aceptar")
+  '   FMain.TabPanel1.Index = 3
+  '   Return False
+  ' End If
+  ' ' Si todo está bien, retornamos True
+  ' Return True
+
+End Function

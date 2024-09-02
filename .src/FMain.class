@@ -27,8 +27,6 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
-  Mod_Funciones.validarArchivos()
-
   ' Crear una nueva conexión
   conector = New Connection
 
@@ -48,6 +46,9 @@ Public Sub Form_Open()
     pBash = TerminalView1.Exec(["/usr/bin/bash"])
     TerminalView1.SetFocus()
     TerminalView1.Refresh()
+
+    ' validamos la creacion de carpetas y archivos
+    Mod_Funciones.validarArchivos()
 
     'configuración del ToDo
     Splitter2.Layout = [3, 1]
@@ -851,6 +852,7 @@ Public Sub menuAbrir_Click()
 
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
+  menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
@@ -1058,6 +1060,7 @@ Public Sub mnuLast_Click()
 
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
+  menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
@@ -6188,6 +6191,7 @@ Public Sub menuAbrirRevista_Click()
   BaseName = File.BaseName(TextBox1.Text)
   ' rutaBIB = BaseName & ".bib"
 
+  menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
   menuXML.Enabled = True
@@ -6585,7 +6589,9 @@ Public Sub menuMono_Click()
   BaseName = File.BaseName(TextBox1.Text)
   ' rutaBIB = BaseName & ".bib"
 
+  menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
+  menuMonografia.Enabled = True
   menuORTO.Enabled = True
   menuXML.Enabled = True
   menuEPUB.Enabled = True
@@ -6748,11 +6754,55 @@ Public Sub btnMONO_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    menuMonografia_Click
+    menuMonografia_Click()
   Endif
 
 End
 
 Public Sub menuMonografia_Click()
+
+  ' ' Llamamos a la función del módulo para verificar los metadatos obligatorios
+  ' If Not Mod_Funciones.registrosObligatoriosMonografia(TextBox1.Text) Then
+  '   ' Si la función retorna False, cancelamos la operación
+  '   Return
+  ' End If
+
+  Dim newFile As String
+
+  newFile = "monografia-" & BaseName & ".tex"
+  Borrar_Aux
+  Wait 0.2
+
+  TabPanel1.Index = 0
+
+  ' ' obtenemos la exportación de los archivos bib, glo y metadatos
+  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
+  ' Wait 0.2
+
+  'revisamos la carpeta pdf y borramos el archivo
+  Mod_Funciones.ManagePdfFolderMonografia(TextBox1.Text)
+
+  TerminalView1.Input("cat " & rutaApp & "/monografia-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("rm -rf " & newFile & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) & "/monografia-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/" & BaseName & ".pdf" & "\n")
+  Wait 0.2
+
+  Borrar_Aux
+
+  TerminalView1.SetFocus()
+  TerminalView1.Refresh()
+
+End
+
+Public Sub menuDatosAcademicos_Click()
+
+  Form_Monografia.ShowModal()
 
 End

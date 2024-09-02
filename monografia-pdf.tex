@@ -1,0 +1,117 @@
+\documentclass[12]{article}
+% diseñamos la página
+\usepackage[paperwidth=210mm,paperheight=297mm,top=20mm,bottom=20mm,left=20mm,marginparsep=6mm,marginparwidth=44mm,textwidth=13cm,headsep=0pt,headheight=0pt,footskip=0pt,footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}
+% Idiomas y babel
+\usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
+
+\usepackage[style=apa]{biblatex}
+
+\usepackage{fontspec}
+\usepackage{microtype}
+\newfontfeature{Microtypography}{protrusion=default;expansion=default}
+\directlua{fonts.protrusions.setups.default.factor=.5}
+\renewcommand{\normalsize}{\fontsize{10pt}{13.5pt}\selectfont}
+\topskip=13.5pt
+
+% tipografía Libertinus
+\setmainfont{Libertinus Serif}
+[Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.18]
+\usepackage{unicode-math}
+\setmathfont{Libertinus Math}
+
+% configuración y tipografía por default en TeXlive para idioma chino
+\usepackage{luatexja-fontspec}
+\setmainjfont{FandolSong}
+
+\setsansfont[Scale=MatchLowercase,
+Ligatures=TeX,
+Extension=.otf,
+UprightFont=*-Regular,
+ItalicFont=*-Italic,
+BoldFont=*-SemiBold,
+BoldItalicFont=*-SemiBoldItalic]{IBMPlexSansCondensed}
+
+\setmonofont[Scale=0.91,
+Extension=.otf,
+UprightFont=*-Regular,
+ItalicFont = IBMPlexMono-Italic.otf,
+BoldFont = IBMPlexMono-Bold.otf,
+BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
+
+% paquetes varios
+\usepackage{froufrou}
+\usepackage{nccfoots}
+\usepackage{booktabs}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage[final]{pdfpages}
+\usepackage[labelfont=bf,font=small,labelsep=period,format=plain]{caption}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{bchart}
+\usepackage[most]{tcolorbox}
+\usepackage{marginnote}
+\usepackage{ifthen}
+
+\usepackage[sf,bf,compact,topmarks,calcwidth,pagestyles,clearempty,newlinetospace]{titlesec}
+
+%diseño de seccion
+\titleformat{\section}[hang]
+{\sf\bfseries\large\raggedright}
+{\thesection}{.5em}{}[]
+\titlespacing{\section}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+%diseño de subseccion
+\titleformat{\subsection}[hang]
+{\sf\large\raggedright}
+{\thesubsection}{.5em}{}[]
+\titlespacing{\subsection}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+%diseño de subsubseccion
+\titleformat{\subsubsection}[hang]
+{\rm\bfseries\normalsize\raggedright}
+{\thesubsubsection}{.5em}{}[]
+\titlespacing{\subsubsection}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+%diseño de parrafo
+\titleformat{\paragraph}[runin]
+  {\bfseries}
+  {}{0em}{}
+  [\mbox{ --- }]
+\titlespacing{\paragraph}
+  {0pt}% antes de la raya
+  {6.75pt plus 0.5pt minus 0.5pt}% antes del párrafo
+  {0pt}% después de la raya
+
+%diseño de subparrafo
+\titleformat{\subparagraph}[hang]
+{\sf\bfseries\large\centering}
+{\thesubparagraph}{.5em}{}[]
+\titlespacing{\subparagraph}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+% % DISEÑO DE CABEZALES
+% \renewpagestyle{plain}[]{% \footrule
+% \setfoot{}{}{}}
+% \newpagestyle{myps}[]{%
+% \setfoot[][][]{}{}{}
+% \sethead[\sf \textbf{\usepage}][][\sf \TheAuthor]
+% {\sf \chaptertitle}{}{\sf \textbf{\usepage}}
+% }
+% \pagestyle{myps}
+
+% funciones directas
+\raggedbottom
+\clubpenalty=10000
+\widowpenalty=10000
+\definecolor{color1}{RGB}{0,0,0}
+\definecolor{color2}{RGB}{144,12,63}
+
+
+\usepackage[allcolors=blue,colorlinks,unicode]{hyperref}
+%% fin del preambulo
