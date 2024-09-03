@@ -70,24 +70,6 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not Exist(File.Dir(rutaTexto) & "/files/imago_custom.css") Then
     Copy "./imago_custom.css" To File.Dir(rutaTexto) & "/files/imago_custom.css"
   End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/configEPUB.cfg") Then
-  '   Copy "./configEPUB.cfg" To File.Dir(rutaTexto) & "/files/configEPUB.cfg"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/configHTML.cfg") Then
-  '   Copy "./configHTML.cfg" To File.Dir(rutaTexto) & "/files/configHTML.cfg"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/configJATS.cfg") Then
-  '   Copy "./configJATS.cfg" To File.Dir(rutaTexto) & "/files/configJATS.cfg"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/build.lua") Then
-  '   Copy "./build.lua" To File.Dir(rutaTexto) & "/files/build.lua"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/make4ht-indexing.lua") Then
-  '   Copy "./make4ht-indexing.lua" To File.Dir(rutaTexto) & "/files/make4ht-indexing.lua"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/make4ht-indexing.lua") Then
-  '   Copy "./make4ht-indexing.lua" To File.Dir(rutaTexto) & "/files/make4ht-indexing.lua"
-  ' End If
   If Not Exist(File.Dir(rutaTexto) & "/files/blitz-lite.css") Then
     Copy "./blitz-lite.css" To File.Dir(rutaTexto) & "/files/blitz-lite.css"
   End If
@@ -97,16 +79,12 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not Exist(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
     Copy "./agradecimientos.tex" To File.Dir(rutaTexto) & "/artcap/agradecimientos.tex"
   End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/general-epub.tex") Then
-  '   Copy "./general-epub.tex" To File.Dir(rutaTexto) & "/files/general-epub.tex"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/general-html.tex") Then
-  '   Copy "./general-html.tex" To File.Dir(rutaTexto) & "/files/general-html.tex"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/general-odt.tex") Then
-  '   Copy "./general-odt.tex" To File.Dir(rutaTexto) & "/files/general-odt.tex"
-  ' End If
-
+  If Not Exist(File.Dir(rutaTexto) & "/artcap/colofon.tex") Then
+    Copy "./colofon.tex" To File.Dir(rutaTexto) & "/artcap/colofon.tex"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
+    Copy "./indiceautores.tex" To File.Dir(rutaTexto) & "/artcap/indiceautores.tex"
+  End If
   If Not Exist(File.Dir(rutaTexto) & "/readme.md") Then
     Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
   End If
