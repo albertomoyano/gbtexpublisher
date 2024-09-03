@@ -68,13 +68,13 @@ Public Sub Form_Open()
     rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
     BaseName = File.BaseName(TextBox1.Text)
 
-    ' controlamos que la aplicación no esté en ejecución
-    Dim s As String
-    Exec ["pgrep", "-fla", Application.Name] Wait To s
-    If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
-      Message.Warning(Application.name & (" ya se está ejecutando"))
-      Quit
-    Endif
+    ' ' controlamos que la aplicación no esté en ejecución
+    ' Dim s As String
+    ' Exec ["pgrep", "-fla", Application.Name] Wait To s
+    ' If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
+    '   Message.Warning(Application.name & (" ya se está ejecutando"))
+    '   Quit
+    ' Endif
 
     Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
@@ -6573,6 +6573,9 @@ Public Sub menuMono_Click()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
+    If Not Exist(File.Dir(TextBox1.Text) & "/media") Then
+      Mkdir File.Dir(TextBox1.Text) & "/media"
+    End If
   Endif
 
   If Not MS.Matrix.Exist(Dialog.Path) Then
