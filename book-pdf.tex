@@ -189,22 +189,31 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 \usepackage[sf,bf,compact,topmarks,calcwidth,pagestyles,clearempty,newlinetospace]{titlesec}
 %diseño de parte
 \makeatletter
-\def\@part[#1]#2{\ifnum \c@secnumdepth >-2\relax
+\def\@part[#1]#2{%
+	\ifnum \c@secnumdepth >-2\relax
 	\refstepcounter{part}%
-
-	\addcontentsline{toc}{part}{Parte \thepart
-		\hspace{1em}#1}\else
-
-	\addcontentsline{toc}{part}{#1}\fi
+	\addcontentsline{toc}{part}{Parte \thepart\hspace{1em}#1}%
+	\else
+	\addcontentsline{toc}{part}{#1}%
+	\fi
 	\markboth{}{}%
 	{\centering
 		\interlinepenalty \@M
 		\ifnum \c@secnumdepth >-2\relax
 		\sf\LARGE\selectfont \partname~\thepart
-		\par
-		\vskip 20\p@\fi
+		\par\vskip 20\p@%
+		\fi
+		\sf\Large\selectfont
+		#2\par}%
+	\@endpart}
+
+\def\@spart#1{%
+	\markboth{}{}%
+	{\centering
+		\interlinepenalty \@M
 		\sf\LARGE\selectfont
-		#2\par}\@endpart}
+		#1\par}%
+	\@endpart}
 \makeatother
 
 %diseño de capitulo

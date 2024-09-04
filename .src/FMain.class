@@ -21,11 +21,21 @@ Public rutaORIGINALES As String
 Public rutaTAPA As String
 Public BaseName As String
 Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
-' Private Item_Seleccionado As String' para el ToDo
 Public sTB_Text As String
 Public LastTextBox As TextBox
 
 Public Sub Form_Open()
+
+  ' controlamos que la aplicación no esté en ejecución
+  Dim s As String
+
+  Exec ["pgrep", "-fla", Application.Name] Wait To s
+  If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
+    Message.Warning(Application.name & (" ya se está ejecutando"))
+    Quit
+  Endif
+
+  Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
   ' Crear una nueva conexión
   conector = New Connection
@@ -59,6 +69,7 @@ Public Sub Form_Open()
     MS.GetLastListFromSettings()
     UpdateMenu()
 
+    'declaramos las ritas a utilizar
     rutaFILES = File.Dir(TextBox1.Text) &/ "files"
     rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
     rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
@@ -68,16 +79,6 @@ Public Sub Form_Open()
     rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
     BaseName = File.BaseName(TextBox1.Text)
 
-    ' ' controlamos que la aplicación no esté en ejecución
-    ' Dim s As String
-    ' Exec ["pgrep", "-fla", Application.Name] Wait To s
-    ' If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
-    '   Message.Warning(Application.name & (" ya se está ejecutando"))
-    '   Quit
-    ' Endif
-
-    Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
-
     Dim mtmp As Menu
     Dim fileA As String
 
@@ -86,10 +87,62 @@ Public Sub Form_Open()
       mtmp.caption = fileA
     Next
 
-    ' comienza glosario
-    ' cargamos los datos del combobox
-    cbTYPEentradaGlo.Add("sigla")
-    cbTYPEentradaGlo.Add("glosario")
+    ' comienza la carga de los combobox de FMain
+    Dim itemsGlo As String[] = Mod_ComboBox.cbTYPEentradaGlo()
+    For Each item As String In itemsGlo
+      cbTYPEentradaGlo.Add(item)
+    Next
+
+    Dim itemsTipo As String[] = Mod_ComboBox.cbTYPEentrada()
+    For Each item As String In itemsTipo
+      cbTYPEentrada.Add(item)
+    Next
+
+    Dim itemsLanguage As String[] = Mod_ComboBox.cbLANGUAGE()
+
+    ' Llenar el primer ComboBox
+    For Each item As String In itemsLanguage
+      cbLANGUAGE.Add(item)
+    Next
+
+    For Each item As String In itemsLanguage
+      cbLANGUAGEID.Add(item)
+    Next
+
+    Dim itemsRelated As String[] = Mod_ComboBox.cbRELATEDTYPE()
+    For Each item As String In itemsRelated
+      cbRELATEDTYPE.Add(item)
+    Next
+
+    Dim itemsPubState As String[] = Mod_ComboBox.cbPUBSTATE()
+    For Each item As String In itemsPubState
+      cbPUBSTATE.Add(item)
+    Next
+
+    Dim itemsType As String[] = Mod_ComboBox.cbType()
+    For Each item As String In itemsType
+      cbType.Add(item)
+    Next
+
+    Dim itemsEditor As String[] = Mod_ComboBox.cbEDITORTYPE()
+
+    ' Llenar el primer ComboBox
+    For Each item As String In itemsEditor
+      cbEDITORTYPE.Add(item)
+    Next
+
+    For Each item As String In itemsEditor
+      cbEDITORTYPEa.Add(item)
+    Next
+
+    For Each item As String In itemsEditor
+      cbEDITORTYPEb.Add(item)
+    Next
+
+    For Each item As String In itemsEditor
+      cbEDITORTYPEc.Add(item)
+    Next
+
     BtnEliminarGlo.Enabled = False
     BtnRefrescarGlo.Enabled = False
     btnGuardarGlo.Enabled = False
@@ -187,43 +240,6 @@ Public Sub Form_Open()
     btnDuplicarBib.Enabled = False
     btnGuardar.Enabled = False
     btnGuardarCambios.Enabled = False
-    Dim editorType As String[] = ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
-    Dim pubState As String[] = ["", "mimeograph", "photocopy", "digitalprinting", "inpreparation", "submitted", "forthcoming", "inpress", "prepublished"]
-    Dim thesis As String[] = ["", "@thesis (seleccionar)", "tifthesis", "mathesis", "phdthesis", "candthesis", "ingenieriathesis", "magisterthesis", "gradothesis", "licenciaturathesis", "especialthesis", "posgradothesis", " ", "@manual (seleccionar)", " ", "@patent (seleccionar)", " ", "@report (seleccionar)"]
-    Dim relatedType As String[] = ["", "reprintof", "translationof", "translatedas", "multivolume"]
-    Dim tipoEntrada As String[] = ["", "article", "incollection", "book", "thesis", "online", "inproceedings", "mvbook", "inbook", "bookinbook", "suppbook", "booklet", "collection", "mvcollection", "suppcollection", "manual", "misc", "patent", "periodical", "suppperiodical", "proceedings", "mvproceedings", "reference", "mvreference", "inreference", "report", "set", "unpublished", "xdata", "movie"]
-    Dim hyphenation As String[] = ["", "spanish", "portuguese", "french", "italian", "german", "english", "latin", "greek", "chinese", "norwegian", "swedish", "danish", "dutch", "japanese", "romanian", "armenian", "korean", "russian", "latin", "czech"]
-
-    'PREPARAMOS LOS COMBOBOX
-    cbEDITORTYPE.List = editorType
-    cbEDITORTYPE.Text = cbEDITORTYPE[0].Text
-
-    cbEDITORTYPEa.List = editorType
-    cbEDITORTYPEa.Text = cbEDITORTYPEa[0].Text
-
-    cbEDITORTYPEb.List = editorType
-    cbEDITORTYPEb.Text = cbEDITORTYPEb[0].Text
-
-    cbEDITORTYPEc.List = editorType
-    cbEDITORTYPEc.Text = cbEDITORTYPEc[0].Text
-
-    cbPUBSTATE.List = pubState
-    cbPUBSTATE.Text = cbPUBSTATE[0].Text
-
-    cbType.List = thesis
-    cbType.Text = cbType[0].Text
-
-    cbRELATEDTYPE.List = relatedType
-    cbRELATEDTYPE.Text = cbRELATEDTYPE[0].Text
-
-    cbTYPEentrada.List = tipoEntrada
-    cbTYPEentrada.Text = cbTYPEentrada[0].Text
-
-    cbLANGUAGE.List = hyphenation
-    cbLANGUAGE.Text = cbLANGUAGE[0].Text
-
-    cbLANGUAGEID.List = hyphenation
-    cbLANGUAGEID.Text = cbLANGUAGEID[0].Text
 
     Mostrar_ListaBIB()
     TotalEntradas()
