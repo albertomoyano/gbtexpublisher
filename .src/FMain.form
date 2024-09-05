@@ -155,7 +155,7 @@
     { Menu10 Menu
     }
     { menuOJS Menu
-      Text = ("Academia y OJS")
+      Text = ("Open Journal System")
       { menuABMautores Menu
         Text = ("ABM autores")
         Picture = Picture["iconos/document-orange.svg"]
@@ -163,10 +163,6 @@
       { menuABMrevistas Menu
         Text = ("ABM revistas")
         Picture = Picture["iconos/document-orange.svg"]
-      }
-      { menuDatosAcademicos Menu
-        Text = ("Datos académicos")
-        Picture = Picture["iconos/document-mono.png"]
       }
     }
     { Menu3 Menu
@@ -475,9 +471,9 @@
     }
   }
   { HBox171 HBox
-    MoveScaled(1,0,112,4)
+    MoveScaled(-3,0,122,4)
     { Label120 Label
-      MoveScaled(0,0,8,4)
+      MoveScaled(3,0,8,4)
       AutoResize = True
       Text = ("Libro ")
     }
@@ -506,39 +502,49 @@
       MoveScaled(49,0,1.3333,4)
     }
     { Label121 Label
-      MoveScaled(52,0,8,4)
+      MoveScaled(51,0,8,4)
       AutoResize = True
       Text = ("  Revista ")
     }
     { btnCOMPpdfRevista Button
-      MoveScaled(61,0,8.8889,4)
+      MoveScaled(59,0,8.8889,4)
       ToolTip = ("PDF de revista")
       Text = ("PDF")
       Picture = Picture["iconos/pdf_revista.png"]
     }
     { btnCOMPrevistaHTML Button
-      MoveScaled(69.8889,0,8.8889,4)
+      MoveScaled(68,0,8.8889,4)
       Text = ("HTML")
       Picture = Picture["iconos/Chrome.svg"]
     }
     { btnCOMPrevistaHTML2 Button
-      MoveScaled(79,0,8.8889,4)
+      MoveScaled(77,0,8.8889,4)
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
     }
     { Separator3 Separator
-      MoveScaled(89,0,1.3333,4)
+      MoveScaled(86,0,1.3333,4)
     }
     { Label126 Label
-      MoveScaled(90.3333,0,8,4)
+      MoveScaled(87,0,8,4)
       AutoResize = True
       Text = ("  Monografía ")
     }
+    { BtnMonografia Button
+      MoveScaled(96,0,4,4)
+      NoTabFocus = True
+      Picture = Picture["iconos/document-mono.png"]
+    }
     { btnMONO Button
-      MoveScaled(102,0,8.8889,4)
+      MoveScaled(100,0,8.8889,4)
       ToolTip = ("PDF de libro")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
+    }
+    { btnMonoDocx Button
+      MoveScaled(109,0,8.8889,4)
+      Text = ("DOCX")
+      Picture = Picture["iconos/ms-office.svg"]
     }
   }
   { HBox1 HBox
@@ -552,7 +558,7 @@
     }
   }
   { HBox9 HBox
-    MoveScaled(1,8,112,4)
+    MoveScaled(1,8,87,4)
     { Button4 Button
       MoveScaled(5,0,17.7778,4)
       Enabled = False
@@ -573,7 +579,7 @@
       Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
     { MenuApp MenuButton
-      MoveScaled(92,0,17.7778,4)
+      MoveScaled(65,0,17.7778,4)
       Enabled = False
       Text = ("Ver") & "..."
       Picture = Picture["iconos/bookmarks.svg"]

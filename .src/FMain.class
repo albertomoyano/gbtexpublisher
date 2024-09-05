@@ -55,7 +55,6 @@ Public Sub Form_Open()
 
     pBash = TerminalView1.Exec(["/usr/bin/bash"])
     TerminalView1.SetFocus()
-    TerminalView1.Refresh()
 
     ' validamos la creacion de carpetas y archivos
     Mod_Funciones.validarArchivos()
@@ -866,6 +865,7 @@ Public Sub menuAbrir_Click()
     UpdateMenu()
   End If
 
+  btnMONO.Enabled = False
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
   menuMonografia.Enabled = True
@@ -6207,6 +6207,7 @@ Public Sub menuAbrirRevista_Click()
   BaseName = File.BaseName(TextBox1.Text)
   ' rutaBIB = BaseName & ".bib"
 
+  btnMONO.Enabled = False
   menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
@@ -6820,8 +6821,22 @@ Public Sub menuMonografia_Click()
 
 End
 
-Public Sub menuDatosAcademicos_Click()
+Public Sub BtnMonografia_Click()
 
-  Form_Monografia.ShowModal()
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Form_Monografia.ShowModal()
+  Endif
+
+End
+
+Public Sub btnMonoDocx_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    'van funciones
+  Endif
 
 End
