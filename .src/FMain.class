@@ -307,7 +307,7 @@ Public Sub obs_click()
 
 End
 
-Public Sub menuPDFlibro_Click() 'generamos el PDF libro
+Public Sub salidaPDFlibro() 'generamos el PDF libro
 
   Dim newFile As String
   Dim rutaFija As String
@@ -375,7 +375,7 @@ Public Sub menuPDFlibro_Click() 'generamos el PDF libro
 
 End
 
-Public Sub menuODt_DOCX_Click() 'convertimos a odt
+Public Sub salidaODT() 'convertimos a odt
 
   ' Llamamos a la función del módulo para verificar los metadatos
   If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
@@ -753,7 +753,7 @@ Public Sub Form_Show()
 
 End
 
-Public Sub menuEPUB_Click() 'convertimos a epub
+Public Sub salidaEPUB() 'convertimos a epub
 
   ' Llamamos a la función del módulo para verificar los metadatos
   If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
@@ -843,7 +843,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
-    Mod_Funciones.habilitamosLibro()
+    habilitamosLibro()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
@@ -869,13 +869,8 @@ Public Sub menuAbrir_Click()'abrir un libro
 
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
-  menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
-  menuXML.Enabled = True
-  menuEPUB.Enabled = True
-  menuHTML.Enabled = True
-  Menu60.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -884,7 +879,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   adminGIT.Enabled = True
   menuCFG.Enabled = True
   menuTOOLS.Enabled = True
-  menuODt_DOCX.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
   Button4.Enabled = True
@@ -1078,13 +1072,8 @@ Public Sub mnuLast_Click()
 
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
-  menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
-  menuXML.Enabled = True
-  menuEPUB.Enabled = True
-  menuHTML.Enabled = True
-  Menu60.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -1093,7 +1082,6 @@ Public Sub mnuLast_Click()
   adminGIT.Enabled = True
   menuCFG.Enabled = True
   menuTOOLS.Visible = True
-  menuODt_DOCX.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
   Button4.Enabled = True
@@ -5346,7 +5334,7 @@ Public Sub menuORTO_Click()
 
 End
 
-Public Sub menuHTML5book_Click()
+Public Sub salidaHTML5()
 
   ' Llamamos a la función del módulo para verificar los metadatos
   If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
@@ -5425,7 +5413,7 @@ Public Sub btnCOMPpdf_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    menuPDFlibro_Click
+    salidaPDFlibro
   Endif
 
 End
@@ -5435,7 +5423,7 @@ Public Sub btnCOMPhtml_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    menuHTML5book_Click
+    salidaHTML5
   Endif
 
 End
@@ -5445,7 +5433,7 @@ Public Sub btnCOMPepub_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    menuEPUB_Click
+    salidaEPUB
   Endif
 
 End
@@ -5455,7 +5443,7 @@ Public Sub btnCOMPdocx_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    menuODt_DOCX_Click
+    salidaODT
   Endif
 
 End
@@ -6181,7 +6169,7 @@ Public Sub menuAbrirRevista_Click()
   If Dialog.OpenFile() Then
     Return
   Else
-    Mod_Funciones.habilitamosRevista()
+    habilitamosRevista()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
@@ -6202,14 +6190,9 @@ Public Sub menuAbrirRevista_Click()
   BaseName = File.BaseName(TextBox1.Text)
   ' rutaBIB = BaseName & ".bib"
 
-  btnMONO.Enabled = False
-  menuMonografia.Enabled = True
+  btnMONOpdf.Enabled = False
   btnGuardarIGUAL.Enabled = False
   menuORTO.Enabled = True
-  menuXML.Enabled = True
-  menuEPUB.Enabled = True
-  menuHTML.Enabled = True
-  Menu60.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -6218,7 +6201,6 @@ Public Sub menuAbrirRevista_Click()
   adminGIT.Enabled = True
   menuCFG.Enabled = True
   menuTOOLS.Enabled = True
-  menuODt_DOCX.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
   Button4.Enabled = True
@@ -6367,7 +6349,6 @@ Public Sub btnCOMPpdfRevista_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
     ' Else
-    ' menuPDFlibro_Click
   Endif
 
 End
@@ -6377,7 +6358,6 @@ Public Sub btnCOMPrevistaHTML_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
     ' Else
-    ' menuPDFlibro_Click
   Endif
 
 End
@@ -6387,7 +6367,6 @@ Public Sub btnRevistaCompliarXML_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
     ' Else
-    ' menuPDFlibro_Click
   Endif
 
 End
@@ -6582,7 +6561,7 @@ Public Sub menuMono_Click()
   If Dialog.OpenFile() Then
     Return
   Else
-    Mod_Funciones.habilitamosMonografia()
+    habilitamosMonografia()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
@@ -6606,14 +6585,8 @@ Public Sub menuMono_Click()
   BaseName = File.BaseName(TextBox1.Text)
   ' rutaBIB = BaseName & ".bib"
 
-  menuMonografia.Enabled = True
   btnGuardarIGUAL.Enabled = False
-  menuMonografia.Enabled = True
   menuORTO.Enabled = True
-  menuXML.Enabled = True
-  menuEPUB.Enabled = True
-  menuHTML.Enabled = True
-  Menu60.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -6622,7 +6595,6 @@ Public Sub menuMono_Click()
   adminGIT.Enabled = True
   menuCFG.Enabled = True
   menuTOOLS.Enabled = True
-  menuODt_DOCX.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
   Button4.Enabled = True
@@ -6766,17 +6738,17 @@ Public Sub menuMono_Click()
 
 End
 
-Public Sub btnMONO_Click()
+Public Sub btnMONOpdf_Click()
 
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    menuMonografia_Click()
+    menuMonografia()
   Endif
 
 End
 
-Public Sub menuMonografia_Click()
+Public Sub menuMonografia()
 
   ' ' Llamamos a la función del módulo para verificar los metadatos obligatorios
   ' If Not Mod_Funciones.registrosObligatoriosMonografia(TextBox1.Text) Then
@@ -6818,7 +6790,7 @@ Public Sub menuMonografia_Click()
 
 End
 
-Public Sub BtnMonografia_Click()
+Public Sub BtnOpenMonografia_Click()
 
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
@@ -6943,16 +6915,64 @@ Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
     ' Condicional para elegir la función según el tipo de documento
     Select Case tipoDocumento
       Case "tipoLibro"
-        Mod_Funciones.habilitamosLibro
+        habilitamosLibro
       Case "tipoRevista"
-        Mod_Funciones.habilitamosRevista
+        habilitamosRevista
       Case "tipoMonografia"
-        Mod_Funciones.habilitamosMonografia
+        habilitamosMonografia
       Case Else
         Message.Error("Tipo de documento desconocido.")
     End Select
   Else
     Message.Error("El archivo no existe en la base de datos.")
   End If
+
+End
+
+Public Sub habilitamosLibro()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  btnCOMPpdf.Enabled = True
+  btnCOMPhtml.Enabled = True
+  btnCOMPepub.Enabled = True
+  btnCOMPdocx.Enabled = True
+  btnCOMPpdfRevista.Enabled = False
+  btnCOMPrevistaHTML.Enabled = False
+  btnRevistaCompliarXML.Enabled = False
+  BtnOpenMonografia.Enabled = False
+  btnMONOpdf.Enabled = False
+  btnMonoDocx.Enabled = False
+
+End
+
+Public Sub habilitamosRevista()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  btnCOMPpdf.Enabled = False
+  btnCOMPhtml.Enabled = False
+  btnCOMPepub.Enabled = False
+  btnCOMPdocx.Enabled = False
+  btnCOMPpdfRevista.Enabled = True
+  btnCOMPrevistaHTML.Enabled = True
+  btnRevistaCompliarXML.Enabled = True
+  BtnOpenMonografia.Enabled = False
+  btnMONOpdf.Enabled = False
+  btnMonoDocx.Enabled = False
+
+End
+
+Public Sub habilitamosMonografia()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  btnCOMPpdf.Enabled = False
+  btnCOMPhtml.Enabled = False
+  btnCOMPepub.Enabled = False
+  btnCOMPdocx.Enabled = False
+  btnCOMPpdfRevista.Enabled = False
+  btnCOMPrevistaHTML.Enabled = False
+  btnRevistaCompliarXML.Enabled = False
+  BtnOpenMonografia.Enabled = True
+  btnMONOpdf.Enabled = True
+  btnMonoDocx.Enabled = True
 
 End

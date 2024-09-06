@@ -162,59 +162,11 @@
   }
   { menuLTX Menu
     Text = ("Compilar")
-    { Menu60 Menu
-      Text = ("Salida a revista")
-      Enabled = False
-      { menuPDFarticulo Menu
-        Text = ("PDF-XMP (clase article)")
-        Picture = Picture["iconos/pdf_revista.png"]
-        Shortcut = "Alt+P"
-      }
-      { Menu8 Menu
-        Text = ("HTML5 (clase article)")
-        Picture = Picture["iconos/html5.png"]
-      }
-      { menuXML Menu
-        Text = ("Salida a XML-JATS")
-        Picture = Picture["iconos/xml.svg"]
-        Enabled = False
-      }
-      { menuTodasRevista Menu
-        Text = ("Generar todas las salidas")
-        Enabled = False
-      }
-    }
-    { menuHTML Menu
-      Text = ("Salida a libro")
-      Enabled = False
-      { menuPDFlibro Menu
-        Text = ("PDF-XMP (clase book)")
-        Picture = Picture["iconos/acroread.svg"]
-        Shortcut = "Ctrl+P"
-      }
-      { menuHTML5book Menu
-        Text = ("HTML5 (clase book)")
-        Picture = Picture["iconos/html5.png"]
-      }
-      { menuEPUB Menu
-        Text = ("Salida a libro ePub 3")
-        Picture = Picture["iconos/epub.svg"]
-        Enabled = False
-      }
-      { menuODt_DOCX Menu
-        Text = ("Salida a LibreOffice (odt) y MS Office (docx)")
-        Picture = Picture["iconos/ms-office.svg"]
-        Enabled = False
-      }
-      { menuTodasLibro Menu
-        Text = ("Generar todas las salidas")
-        Enabled = False
-      }
-    }
-    { menuMonografia Menu
+    { menuMonografia2 Menu
       Text = ("Salida a monografía")
       Picture = Picture["iconos/acroread.svg"]
       Enabled = False
+      Visible = False
     }
     { menuGHPages Menu
       Text = ("Publicar en GitHub Pages")
@@ -517,12 +469,12 @@
       AutoResize = True
       Text = ("  Monografía ")
     }
-    { BtnMonografia Button
+    { BtnOpenMonografia Button
       MoveScaled(96,0,4,4)
       NoTabFocus = True
       Picture = Picture["iconos/document-mono.png"]
     }
-    { btnMONO Button
+    { btnMONOpdf Button
       MoveScaled(100,0,8.8889,4)
       ToolTip = ("PDF de libro")
       Text = ("PDF")
