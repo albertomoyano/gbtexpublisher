@@ -783,3 +783,60 @@ Public Sub ManagePdfFolderMonografia(rutaTexto As String)
   End If
 
 End Sub
+
+Public Sub habilitamosLibro()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  FMain.Menu60.Visible = False' menu revista
+  FMain.menuHTML.Visible = True 'menu libro
+  FMain.menuMonografia.Visible = False' menu monografia
+  FMain.btnCOMPpdf.Enabled = True
+  FMain.btnCOMPhtml.Enabled = True
+  FMain.btnCOMPepub.Enabled = True
+  FMain.btnCOMPdocx.Enabled = True
+  FMain.btnCOMPpdfRevista.Enabled = False
+  FMain.btnCOMPrevistaHTML.Enabled = False
+  FMain.btnRevistaCompliarXML.Enabled = False
+  FMain.BtnMonografia.Enabled = False
+  FMain.btnMONO.Enabled = False
+  FMain.btnMonoDocx.Enabled = False
+
+End
+
+Public Sub habilitamosRevista()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  FMain.Menu60.Visible = True' menu revista
+  FMain.menuHTML.Visible = False' menu libro
+  FMain.menuMonografia.Visible = False' menu monografia
+  FMain.btnCOMPpdf.Enabled = False
+  FMain.btnCOMPhtml.Enabled = False
+  FMain.btnCOMPepub.Enabled = False
+  FMain.btnCOMPdocx.Enabled = False
+  FMain.btnCOMPpdfRevista.Enabled = True
+  FMain.btnCOMPrevistaHTML.Enabled = True
+  FMain.btnRevistaCompliarXML.Enabled = True
+  FMain.BtnMonografia.Enabled = False
+  FMain.btnMONO.Enabled = False
+  FMain.btnMonoDocx.Enabled = False
+
+End
+
+Public Sub habilitamosMonografia()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  FMain.Menu60.Visible = False' menu revista
+  FMain.menuHTML.Visible = False' menu libro
+  FMain.menuMonografia.Visible = True' menu monografia
+  FMain.btnCOMPpdf.Enabled = False
+  FMain.btnCOMPhtml.Enabled = False
+  FMain.btnCOMPepub.Enabled = False
+  FMain.btnCOMPdocx.Enabled = False
+  FMain.btnCOMPpdfRevista.Enabled = False
+  FMain.btnCOMPrevistaHTML.Enabled = False
+  FMain.btnRevistaCompliarXML.Enabled = False
+  FMain.BtnMonografia.Enabled = True
+  FMain.btnMONO.Enabled = True
+  FMain.btnMonoDocx.Enabled = True
+
+End

@@ -51,7 +51,6 @@ Public Sub Form_Open()
       txtDOCENTE.Text = Contenido!docente
       txtMATERIA.Text = Contenido!materia
       txtTITULO.Text = Contenido!titulo
-      txtTipoDocumento.Text = Contenido!tipoDocumento
     Endif
 
   Endif
@@ -116,7 +115,6 @@ Public Function guardarCampos()
   Contenido!docente = txtDOCENTE.Text
   Contenido!materia = txtMATERIA.Text
   Contenido!titulo = txtTITULO.Text
-  Contenido!tipoDocumento = txtTipoDocumento.Text
 
 End
 

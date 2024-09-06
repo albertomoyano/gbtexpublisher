@@ -154,19 +154,6 @@
     }
     { Menu10 Menu
     }
-    { menuOJS Menu
-      Text = ("Open Journal System")
-      { menuABMautores Menu
-        Text = ("ABM autores")
-        Picture = Picture["iconos/document-orange.svg"]
-      }
-      { menuABMrevistas Menu
-        Text = ("ABM revistas")
-        Picture = Picture["iconos/document-orange.svg"]
-      }
-    }
-    { Menu3 Menu
-    }
     { Menu11 Menu
       Text = ("Cerrar el programa")
       Picture = Picture["iconos/salir.svg"]
@@ -517,7 +504,7 @@
       Text = ("HTML")
       Picture = Picture["iconos/Chrome.svg"]
     }
-    { btnCOMPrevistaHTML2 Button
+    { btnRevistaCompliarXML Button
       MoveScaled(77,0,8.8889,4)
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
@@ -550,7 +537,7 @@
   { HBox1 HBox
     MoveScaled(1,4,98,4)
     { !TextBox1 TextBox
-      MoveScaled(12,0,23,4)
+      MoveScaled(36,0,23,4)
       #Public = True
       NoTabFocus = True
       Expand = True
@@ -4406,8 +4393,26 @@
       }
       Index = 1
       Text = ("Revista")
+      { HBox183 HBox
+        MoveScaled(1,1,95,4)
+        Padding = 1
+        { btnABMautores Button
+          MoveScaled(0,0,16,4)
+          NoTabFocus = True
+          Text = ("ABM autores")
+          Picture = Picture["iconos/document-orange.svg"]
+        }
+        { btnABMrevistas Button
+          MoveScaled(18,0,16,4)
+          Text = ("ABM revistas")
+          Picture = Picture["iconos/document-orange.svg"]
+        }
+        { Spring3 Spring
+          MoveScaled(49,0,5,4)
+        }
+      }
       { ToolPanel2 ToolPanel
-        MoveScaled(1,3,97,94)
+        MoveScaled(1,9,97,88)
         Expand = True
         Arrangement = Arrange.Vertical
         Count = 2

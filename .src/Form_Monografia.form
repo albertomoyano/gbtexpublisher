@@ -51,11 +51,6 @@
       Expand = True
       ReadOnly = True
     }
-    { txtTipoDocumento TextBox
-      Move(621,0,153,36)
-      Visible = False
-      ReadOnly = True
-    }
   }
   { HBox1 HBox
     Move(0,76,780,40)

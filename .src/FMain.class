@@ -680,7 +680,7 @@ Public Sub Menu17_Click()'abrir pdf
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf"
+  filePath = File.Dir(TextBox1.Text) & "/pdf/" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
@@ -834,7 +834,7 @@ Public Sub menuGray_Click()
 
 End
 
-Public Sub menuAbrir_Click()
+Public Sub menuAbrir_Click()'abrir un libro
 
   Dialog.Title = "Seleccionar archivo"
   Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
@@ -843,9 +843,11 @@ Public Sub menuAbrir_Click()
   If Dialog.OpenFile() Then
     Return
   Else
+    Mod_Funciones.habilitamosLibro()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
+    guardarTipoDocumentoLibro()
   Endif
 
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
@@ -865,7 +867,6 @@ Public Sub menuAbrir_Click()
     UpdateMenu()
   End If
 
-  btnMONO.Enabled = False
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
   menuMonografia.Enabled = True
@@ -1069,6 +1070,7 @@ Public Sub mnuLast_Click()
     TextBox1.Text = MS.Matrix[iIndex]
     fFile = Open TextBox1.Text For Input
     DirViewRuta.Root = File.Dir(TextBox1.Text)
+    ' Consultar el tipo de documento asociado al archivo
   Endif
 
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
@@ -1112,8 +1114,6 @@ Public Sub mnuLast_Click()
   If Form_Contador.Visible Then
     Form_Contador.Close ' Cierra la ventana
   End If
-
-  ' Mod_Funciones.CopiarArchivos(TextBox1.Text)' esta funcion hay que deshabilitarla si revistas se activa
 
   'comienza metadatos
   Dim comando As String
@@ -1234,6 +1234,11 @@ Public Sub mnuLast_Click()
   Record2GLO = Contenido3[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
+
+  Dim nombreDelArchivo As String = File.Name(TextBox1.Text)
+
+  ' Verificar el tipo de documento por el nombre del archivo
+  seleccionarFuncionPorTipo(nombreDelArchivo)
 
   'levantamos los datos de comentarios
   levantarComenta()
@@ -5609,18 +5614,6 @@ Public Sub BtnBuscarJournal_Click()
 
 End
 
-Public Sub menuABMrevistas_Click()
-
-  Form_ABM_revistas.ShowModal
-
-End
-
-Public Sub menuABMautores_Click()
-
-  Form_ABM_autores.ShowModal
-
-End
-
 Public Sub TotalEntradas()'calculamos las entradas totales
 
   Dim RecordBIB As String
@@ -6188,9 +6181,11 @@ Public Sub menuAbrirRevista_Click()
   If Dialog.OpenFile() Then
     Return
   Else
+    Mod_Funciones.habilitamosRevista()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
+    guardarTipoDocumentoRevista()
   Endif
 
   If Not MS.Matrix.Exist(Dialog.Path) Then
@@ -6387,7 +6382,7 @@ Public Sub btnCOMPrevistaHTML_Click()
 
 End
 
-Public Sub btnCOMPrevistaHTML2_Click()
+Public Sub btnRevistaCompliarXML_Click()
 
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
@@ -6587,12 +6582,14 @@ Public Sub menuMono_Click()
   If Dialog.OpenFile() Then
     Return
   Else
+    Mod_Funciones.habilitamosMonografia()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     If Not Exist(File.Dir(TextBox1.Text) & "/media") Then
       Mkdir File.Dir(TextBox1.Text) & "/media"
     End If
+    guardarTipoDocumentoMonografia()
   Endif
 
   If Not MS.Matrix.Exist(Dialog.Path) Then
@@ -6838,5 +6835,124 @@ Public Sub btnMonoDocx_Click()
   Else
     'van funciones
   Endif
+
+End
+
+Public Sub btnABMautores_Click()
+
+  Form_ABM_autores.ShowModal
+
+End
+
+Public Sub btnABMrevistas_Click()
+
+  Form_ABM_revistas.ShowModal
+
+End
+
+Public Sub guardarTipoDocumentoLibro()
+
+  Dim tdL As String = "tipoLibro"
+  Dim nombreArchivo As String = File.Name(TextBox1.Text)
+  Dim consulta As Result
+  Dim existe As Boolean = False
+
+  ' Verificar si el archivo ya existe en la tabla
+  consulta = conector.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Comprobar si la consulta devolvió algún resultado
+  If consulta.Available Then
+    existe = True
+  End If
+
+  ' Solo si no existe, insertamos el nuevo registro
+  If Not existe Then
+    Contenido = conector.Create("tipoDocumento")
+    Contenido!nombreArchivo = nombreArchivo
+    Contenido!tipoDocumento = tdL
+    Contenido.Update
+  End If
+
+End
+
+Public Sub guardarTipoDocumentoRevista()
+
+  Dim tdR As String = "tipoRevista"
+  Dim nombreArchivo As String = File.Name(TextBox1.Text)
+  Dim consulta As Result
+  Dim existe As Boolean = False
+
+  ' Verificar si el archivo ya existe en la tabla
+  consulta = conector.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Comprobar si la consulta devolvió algún resultado
+  If consulta.Available Then
+    existe = True
+  End If
+
+  ' Solo si no existe, insertamos el nuevo registro
+  If Not existe Then
+    Contenido = conector.Create("tipoDocumento")
+    Contenido!nombreArchivo = nombreArchivo
+    Contenido!tipoDocumento = tdR
+    Contenido.Update
+  End If
+
+End
+
+Public Sub guardarTipoDocumentoMonografia()
+
+  Dim tdM As String = "tipoMonografia"
+  Dim nombreArchivo As String = File.Name(TextBox1.Text)
+  Dim consulta As Result
+  Dim existe As Boolean = False
+
+  ' Verificar si el archivo ya existe en la tabla
+  consulta = conector.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Comprobar si la consulta devolvió algún resultado
+  If consulta.Available Then
+    existe = True
+  End If
+
+  ' Solo si no existe, insertamos el nuevo registro
+  If Not existe Then
+    Contenido = conector.Create("tipoDocumento")
+    Contenido!nombreArchivo = nombreArchivo
+    Contenido!tipoDocumento = tdM
+    Contenido.Update
+  End If
+
+End
+
+Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
+
+  Dim consulta As Result
+  Dim tipoDocumento As String
+
+  ' Realizar la consulta
+  Print "Buscando archivo: "; nombreArchivo
+  consulta = conector.Exec("SELECT tipoDocumento FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Verificar si la consulta devolvió resultados
+  If consulta.Fields Then
+    ' Obtener el valor de tipoDocumento
+    tipoDocumento = consulta["tipoDocumento"]
+    Print "Tipo de documento encontrado: "; tipoDocumento
+
+    ' Condicional para elegir la función según el tipo de documento
+    Select Case tipoDocumento
+      Case "tipoLibro"
+        Mod_Funciones.habilitamosLibro
+      Case "tipoRevista"
+        Mod_Funciones.habilitamosRevista
+      Case "tipoMonografia"
+        Mod_Funciones.habilitamosMonografia
+      Case Else
+        Message.Error("Tipo de documento desconocido.")
+    End Select
+  Else
+    Message.Error("El archivo no existe en la base de datos.")
+  End If
 
 End
