@@ -533,8 +533,7 @@
     Padding = 4
     Count = 5
     Index = 0
-    Text = ("Terminal    ")
-    Picture = Picture["iconos/terminal.svg"]
+    Text = ("Terminal y ChatGPT    ")
     { HBox93 HBox
       MoveScaled(1,1,108,4)
       { MenuButton1 MenuButton
