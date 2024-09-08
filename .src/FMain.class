@@ -290,15 +290,6 @@ Public Sub Form_Close()
 
 End
 
-Public Sub Borrar_Aux()
-
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "rm *.bcf-SAVE-ERROR html5-*_html.tex *.bbl-SAVE-ERROR html5-*.tex *.css *.lwarpmkconf *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
-  Wait 0.2
-
-  TerminalView1.SetFocus()
-
-End
-
 'ejecutamos el evento click del observador
 Public Sub obs_click()
 
@@ -323,7 +314,7 @@ Public Sub salidaPDFlibro() 'generamos el PDF libro
   rutaFija = File.Dir(TextBox1.Text) &/ "files"
   newLog = "gbTeX-" & BaseName & ".log"
 
-  Borrar_Aux
+  Mod_Funciones.Borrar_Aux
   Wait 0.2
 
   TabPanel1.Index = 0
@@ -368,71 +359,10 @@ Public Sub salidaPDFlibro() 'generamos el PDF libro
   TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n")
   Wait 0.2
 
-  Borrar_Aux
+  Mod_Funciones.Borrar_Aux
 
   TerminalView1.SetFocus()
   TerminalView1.Refresh()
-
-End
-
-Public Sub salidaODT() 'convertimos a odt
-
-  ' Llamamos a la función del módulo para verificar los metadatos
-  If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
-    ' Si la función retorna False, cancelamos la operación
-    Return
-  End If
-  '
-  ' Dim folder As String
-  ' Dim newFile As String
-  '
-  ' folder = File.Dir(TextBox1.Text) &/ "odt-docx"
-  ' newFile = "odt-" & BaseName & ".tex"
-  '
-  ' Borrar_Aux
-  ' Wait 0.2
-  '
-  ' ' exportamos los archivos
-  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  ' ' Mod_Exportar.Export2MetaDOCX(TextBox1.Text)
-  ' Wait 0.2
-  '
-  ' TabPanel1.Index = 0
-  '
-  ' TerminalView1.Input("cat " & rutaFILES & "/general-odt.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("rm -rf odt-docx" & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("mkdir odt-docx" & "\n")
-  ' Wait 0.2
-  '
-  ' ' esta instrucción no considera los metadatos
-  ' TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua " & " -a Debug " & newFile & "\n" & "rm -rf " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' ' y esta s con los metadatos
-  ' ' TerminalView1.Input("make4ht -l -f odt -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & newFile & "\n")' & "rm -rf " & newFile & "\n")
-  ' ' Wait 0.2
-  '
-  ' 'convertimos el odt a docx
-  ' TerminalView1.Input("libreoffice --headless --convert-to docx" & " " & "*.odt" & "\n")
-  ' Wait 0.2
-  '
-  ' ' movemos los archivos al directorio odt-docx
-  ' TerminalView1.Input("mv " & "odt-" & BaseName & ".docx" & " " & folder & "/" & BaseName & ".docx" & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("mv " & "odt-" & BaseName & ".odt" & " " & folder & "/" & BaseName & ".odt" & "\n")' & "clear" & "\n")
-  ' Wait 0.2
-  '
-  ' ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  ' ' Wait 0.2
-  '
-  ' TerminalView1.SetFocus()
-  ' Borrar_Aux
 
 End
 
@@ -463,7 +393,7 @@ Public Sub menuPDFarticulo_Click()
   ' newLog = "gbTeX-" & BaseName & ".log"
   ' metaTemp = "gbTeXmetaTMP-" & BaseName & ".tex"
 
-  ' Borrar_Aux
+  ' Mod_Funciones.Borrar_Aux
   ' Wait 0.2
   '
   ' ' metadatos para construcción de maketitle
@@ -516,7 +446,7 @@ Public Sub menuPDFarticulo_Click()
   '
   ' 'borramos los archivos auxiliares del directorio
   ' TerminalView1.SetFocus()
-  ' Borrar_Aux
+  ' Mod_Funciones.Borrar_Aux
 
 End
 
@@ -766,7 +696,7 @@ Public Sub salidaEPUB() 'convertimos a epub
   '
   ' folder = BaseName & "-epub"
   ' newFile = "epub-" & BaseName & ".tex"
-  ' Borrar_Aux
+  ' Mod_Funciones.Borrar_Aux
   ' Wait 0.2
   '
   ' ' exportamos los archivos bib, glo y meta
@@ -794,13 +724,13 @@ Public Sub salidaEPUB() 'convertimos a epub
   ' ' Wait 0.2
   '
   ' TerminalView1.SetFocus()
-  ' Borrar_Aux
+  ' Mod_Funciones.Borrar_Aux
 
 End
 
 Public Sub Menu24_Click()
 
-  Shell "xdg-open https://albertomoyano.github.io/blog-gbtexpublisher/about/"
+  Shell "xdg-open https://www.linkedin.com/in/edicion-cientifica/"
 
 End
 
@@ -1508,7 +1438,7 @@ End
 
 Public Sub menuBORRARaux_Click()
 
-  Borrar_Aux
+  Mod_Funciones.Borrar_Aux
 
 End
 
@@ -1526,7 +1456,7 @@ Public Sub menuCatalogo_Click()
   Wait 0.2
 
   TerminalView1.SetFocus()
-  Borrar_Aux
+  Mod_Funciones.Borrar_Aux
 
 End
 
@@ -1599,7 +1529,7 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
 
 End
 
-Public Function LimpiarCamposGLO()
+Public Sub LimpiarCamposGLO()
 
   'Limpiamos los campos
   txtID.Text = ""
@@ -1689,7 +1619,7 @@ Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
 
 End
 
-Public Function eliminarBlancosGLO()
+Public Sub eliminarBlancosGLO()
 
   EliminarEspaciosAlInicioYFinal(txtARCHIVO)
   EliminarEspaciosAlInicioYFinal(txtNAME)
@@ -1860,7 +1790,7 @@ Public Sub BtnEliminarGlo_Click()
 
 End
 
-Public Function guardarCamposGLO()
+Public Sub guardarCamposGLO()
 
   Contenido!id = txtID.Text
   Contenido!key = txtCLAVEglo.Text
@@ -2351,7 +2281,7 @@ Public Function guardarCamposMETA() As Boolean
 
 End
 
-Public Function eliminarBlancosMETA()
+Public Sub eliminarBlancosMETA()
 
   EliminarEspaciosAlInicioYFinal(txt05_pdfauthor)
   EliminarEspaciosAlInicioYFinal(txt06_pdftitle)
@@ -2758,7 +2688,7 @@ Public Sub Mostrar_ListaBIB()
 
 End
 
-Public Function LimpiarCamposBIB()
+Public Sub LimpiarCamposBIB()
 
   'Limpiamos los campos
   txtID.Text = ""
@@ -3687,7 +3617,7 @@ Public Sub txtKEYWORDS_KeyRelease()'caracteres permitidos en los keywords
 
 End
 
-Public Function guardarCampos()
+Public Sub guardarCampos()
 
   Contenido!id = txtID.Text
   Contenido!tipoEntrada = cbTYPEentrada.Text
@@ -4067,7 +3997,7 @@ Public Sub txtEDITOR_Change()
 
 End
 
-Public Function eliminarBlancosBIB()
+Public Sub eliminarBlancosBIB()
 
   EliminarEspaciosAlInicioYFinal(txtETIQ)
   EliminarEspaciosAlInicioYFinal(txtKEYWORDS)
@@ -4731,7 +4661,7 @@ Public Sub btnGuardarIGUAL_Click()
 
 End
 
-Public Function mostrarIguales()
+Public Sub mostrarIguales()
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -5344,7 +5274,7 @@ Public Sub salidaHTML5()
   '
   ' TabPanel1.Index = 0
   '
-  ' Borrar_Aux
+  ' Mod_Funciones.Borrar_Aux
   ' Wait 0.2
   '
   ' ' exportamos los archivos bib y glo
@@ -5386,7 +5316,7 @@ Public Sub salidaHTML5()
   ' Wait 0.2
   '
   ' TerminalView1.SetFocus()
-  ' Borrar_Aux
+  ' Mod_Funciones.Borrar_Aux
 
 End
 
@@ -5434,16 +5364,6 @@ Public Sub btnCOMPepub_Click()
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
     salidaEPUB
-  Endif
-
-End
-
-Public Sub btnCOMPdocx_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    salidaODT
   Endif
 
 End
@@ -6406,7 +6326,7 @@ Public Sub menuDisclaimer_Click()
     End If
 
     TerminalView1.SetFocus()
-    Borrar_Aux
+    Mod_Funciones.Borrar_Aux
   Else
     Message.Info("No se encontró registro de comentarios en la base de datos para el archivo especificado. Será dirigido a la pestaña de comentarios para dar el alta el registro.")
     TabPanel1.Index = 4
@@ -6469,7 +6389,7 @@ Public Sub btnGuardarCambiosComenta_Click()
 
 End
 
-Public Function guardarCamposComenta() As Boolean
+Public Sub guardarCamposComenta()' As Boolean
 
   ContenidoComenta!id = txtIdComenta.Text
   ContenidoComenta!nombreArchivo = txtnombreArchivoComenta.Text
@@ -6480,7 +6400,7 @@ Public Function guardarCamposComenta() As Boolean
 
 End
 
-Public Function levantarComenta()
+Public Sub levantarComenta()
 
   'levantamos los datos de comentarios
   Dim comandoComenta As String
@@ -6743,50 +6663,8 @@ Public Sub btnMONOpdf_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    menuMonografia()
+    Mod_Exportar.salidaPDFmonografia()
   Endif
-
-End
-
-Public Sub menuMonografia()
-
-  ' ' Llamamos a la función del módulo para verificar los metadatos obligatorios
-  ' If Not Mod_Funciones.registrosObligatoriosMonografia(TextBox1.Text) Then
-  '   ' Si la función retorna False, cancelamos la operación
-  '   Return
-  ' End If
-
-  Dim newFile As String
-
-  newFile = "monografia-" & BaseName & ".tex"
-  Borrar_Aux
-  Wait 0.2
-
-  TabPanel1.Index = 0
-
-  ' ' obtenemos la exportación de los archivos bib, glo y metadatos
-  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  ' Wait 0.2
-
-  'revisamos la carpeta pdf y borramos el archivo
-  Mod_Funciones.ManagePdfFolderMonografia(TextBox1.Text)
-
-  TerminalView1.Input("cat " & rutaApp & "/monografia-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) & "/monografia-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/" & BaseName & ".pdf" & "\n")
-  Wait 0.2
-
-  Borrar_Aux
-
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
 
 End
 
@@ -6800,12 +6678,12 @@ Public Sub BtnOpenMonografia_Click()
 
 End
 
-Public Sub btnMonoDocx_Click()
+Public Sub btnMonoDocx_Click()'salida a odt y docx de monografia
 
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    'van funciones
+    Mod_Exportar.salidaODTmonografia()
   Endif
 
 End

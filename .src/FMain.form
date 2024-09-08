@@ -131,11 +131,6 @@
   }
   { menuArchivo Menu
     Text = ("Archivo")
-    { Menu9 Menu
-      Text = ("Abrir old")
-      Enabled = False
-      Visible = False
-    }
     { menuAbrir Menu
       Text = ("Abrir libro")
       Picture = Picture["iconos/document.svg"]
@@ -697,7 +692,7 @@
         Picture = Picture["iconos/duplicar2.png"]
       }
       { btnRefRelacionada Button
-        MoveScaled(41,0,16,4)
+        MoveScaled(42,0,16,4)
         Text = ("Relación")
         Picture = Picture["iconos/bibRepetida.svg"]
       }
@@ -710,7 +705,7 @@
         ReadOnly = True
       }
       { txtTOTALbib TextLabel
-        MoveScaled(70,0,24.2222,4)
+        MoveScaled(74,0,24.2222,4)
         Expand = True
         Alignment = Align.Center
         Wrap = False

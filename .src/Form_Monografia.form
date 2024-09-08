@@ -36,7 +36,7 @@
     }
   }
   { HBox2 HBox
-    Move(0,36,780,40)
+    Move(0,36,1017,40)
     AutoResize = True
     Padding = 2
     { Label2 Label
@@ -46,9 +46,20 @@
       Text = ("Archivo asociado  ")
     }
     { txtnombreArchivo TextBox
-      Move(176,0,207,36)
+      Move(189,0,207,36)
       Background = Color.Background
       Expand = True
+      ReadOnly = True
+    }
+    { Label3 Label
+      Move(432,0,270,36)
+      Padding = 4
+      AutoResize = True
+      Alignment = Align.Right
+      Text = ("  Estilo p/referencias  ")
+    }
+    { cmbEstiloReferencias ComboBox
+      Move(792,0,216,36)
       ReadOnly = True
     }
   }
@@ -116,7 +127,7 @@
       Expand = True
     }
     { txtID TextBox
-      Move(440,0,160,36)
+      Move(459,0,160,36)
       Visible = False
       Background = Color.Background
       NoTabFocus = True
