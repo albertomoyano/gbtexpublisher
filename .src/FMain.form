@@ -591,7 +591,6 @@
         Picture = Picture["iconos/ChatGPT_logo.svg"]
         { WebViewGPT WebView
           MoveScaled(2,2,27,16)
-          Url = "https://chatgpt.com/"
         }
         Index = 0
       }

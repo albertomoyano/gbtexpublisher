@@ -63,6 +63,7 @@ Public Sub Form_Open()
 
     pBash = TerminalView1.Exec(["/usr/bin/bash"])
     TerminalView1.SetFocus()
+    WebViewGPT.Url = "https://chatgpt.com/"
 
     ' validamos la creacion de carpetas y archivos
     Mod_Funciones.validarArchivos()
