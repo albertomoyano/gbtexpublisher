@@ -26,14 +26,14 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
-  ' controlamos que la aplicación no esté en ejecución
-  Dim s As String
-
-  Exec ["pgrep", "-fla", Application.Name] Wait To s
-  If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
-    Message.Warning(Application.name & (" ya se está ejecutando"))
-    Quit
-  Endif
+  ' ' controlamos que la aplicación no esté en ejecución
+  ' Dim s As String
+  '
+  ' Exec ["pgrep", "-fla", Application.Name] Wait To s
+  ' If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
+  '   Message.Warning(Application.name & (" ya se está ejecutando"))
+  '   Quit
+  ' Endif
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
@@ -264,22 +264,22 @@ Public Sub Form_Close()
 
   If Message.Question("¿Desea cerrar la aplicación?\n\nAl cerrar, esta acción realizará una copia de respaldo de la base de datos con el nombre <b>" & fecha & "-" & "db_tex.sqlite</b> y de <b>" & fecha & "-" & "conn_serv.sqlite</b>.", "Aceptar", "Cancelar") = 1 Then
 
-    ' Realizar la copia de respaldo de la base de datos
-    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-    Wait 0.1
-    Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
-    Wait 0.1
-
-    ' Guardar el último archivo abierto
-    MS.SetLastListToSettings()
-    Try pBash.Close
-    Try fFile.Close
-
     ' Desconectar la base de datos
     If conector Then
       conector.Close()
       conector = Null
     Endif
+
+    ' Realizar la copia de respaldo de la base de datos
+    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+    Wait 0.2
+    Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
+    Wait 0.2
+
+    ' Guardar el último archivo abierto
+    MS.SetLastListToSettings()
+    Try pBash.Close
+    Try fFile.Close
 
     ' Cerrar la aplicación
     Quit
@@ -648,22 +648,22 @@ Public Sub Menu11_Click()'cerrar el programa
 
   If Message.Question("¿Desea cerrar la aplicación?\n\nAl cerrar, esta acción realizará una copia de respaldo de la base de datos con el nombre <b>" & fecha & "-" & "db_tex.sqlite</b> y de <b>" & fecha & "-" & "conn_serv.sqlite</b>.", "Aceptar", "Cancelar") = 1 Then
 
-    ' Realizar la copia de respaldo de la base de datos
-    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-    Wait 0.1
-    Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
-    Wait 0.1
-
-    ' Guardar el último archivo abierto
-    MS.SetLastListToSettings()
-    Try pBash.Close
-    Try fFile.Close
-
     ' Desconectar la base de datos
     If conector Then
       conector.Close()
       conector = Null
     Endif
+
+    ' Realizar la copia de respaldo de la base de datos
+    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+    Wait 0.2
+    Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
+    Wait 0.2
+
+    ' Guardar el último archivo abierto
+    MS.SetLastListToSettings()
+    Try pBash.Close
+    Try fFile.Close
 
     ' Cerrar la aplicación
     Quit

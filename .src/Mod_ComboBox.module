@@ -43,3 +43,9 @@ Public Function cbEDITORTYPE() As String[]
   Return ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
 
 End Function
+
+Public Function cmbEstiloReferencias() As String[]
+
+  Return ["", "APA (7th edition)", "AMS Review", "IEEE (con URL)", "Vancouver"]
+
+End Function

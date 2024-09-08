@@ -567,15 +567,34 @@
       MoveScaled(2,13,109,65)
       Expand = True
       Border = False
-      { TerminalView1 TerminalView
-        MoveScaled(5,8,27,6)
+      { TabStrip1 TabStrip
+        MoveScaled(4,9,45,24)
         Expand = True
-        AutoResize = False
-        Blink = True
-        CursorStyle = TerminalView.Underline
-        ShowScrollBar = True
-        ShowLink = True
-        WindowCommands = True
+        Arrangement = Arrange.Fill
+        Padding = 4
+        Count = 2
+        Index = 0
+        Text = ("  Terminal  ")
+        Picture = Picture["iconos/terminal.svg"]
+        { !TerminalView1 TerminalView
+          MoveScaled(2,2,27,6)
+          #Public = True
+          Expand = True
+          AutoResize = False
+          Blink = True
+          CursorStyle = TerminalView.Underline
+          ShowScrollBar = True
+          ShowLink = True
+          WindowCommands = True
+        }
+        Index = 1
+        Text = ("  ChatGPT  ")
+        Picture = Picture["iconos/ChatGPT_logo.svg"]
+        { WebViewGPT WebView
+          MoveScaled(2,2,27,16)
+          Url = "https://chatgpt.com/"
+        }
+        Index = 0
       }
       { Splitter2 Splitter
         MoveScaled(51,2,57,61)
