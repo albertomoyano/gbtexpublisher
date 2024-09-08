@@ -567,7 +567,7 @@
       MoveScaled(2,13,109,65)
       Expand = True
       Border = False
-      { TabStrip1 TabStrip
+      { TabGPT TabStrip
         MoveScaled(4,9,45,24)
         Expand = True
         Arrangement = Arrange.Fill

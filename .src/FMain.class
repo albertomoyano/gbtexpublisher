@@ -35,6 +35,14 @@ Public Sub Form_Open()
   '   Quit
   ' Endif
 
+  Dim fecha As String
+
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+
+  ' Realizar la copia de respaldo de la base de datos
+  Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+  Wait 0.2
+
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
   ' Crear una nueva conexión
@@ -258,35 +266,19 @@ End
 
 Public Sub Form_Close()
 
-  Dim fecha As String
-
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-
-  If Message.Question("¿Desea cerrar la aplicación?\n\nAl cerrar, esta acción realizará una copia de respaldo de la base de datos con el nombre <b>" & fecha & "-" & "db_tex.sqlite</b> y de <b>" & fecha & "-" & "conn_serv.sqlite</b>.", "Aceptar", "Cancelar") = 1 Then
-
-    ' Desconectar la base de datos
-    If conector Then
-      conector.Close()
-      conector = Null
-    Endif
-
-    ' Realizar la copia de respaldo de la base de datos
-    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-    Wait 0.2
-    Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
-    Wait 0.2
-
-    ' Guardar el último archivo abierto
-    MS.SetLastListToSettings()
-    Try pBash.Close
-    Try fFile.Close
-
-    ' Cerrar la aplicación
-    Quit
-
-  Else
-    Stop Event
+  ' Desconectar la base de datos
+  If conector Then
+    conector.Close()
+    conector = Null
   Endif
+
+  ' Guardar el último archivo abierto
+  MS.SetLastListToSettings()
+  Try pBash.Close
+  Try fFile.Close
+
+  ' Cerrar la aplicación
+  Quit
 
 End
 
@@ -642,35 +634,19 @@ End
 
 Public Sub Menu11_Click()'cerrar el programa
 
-  Dim fecha As String
-
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-
-  If Message.Question("¿Desea cerrar la aplicación?\n\nAl cerrar, esta acción realizará una copia de respaldo de la base de datos con el nombre <b>" & fecha & "-" & "db_tex.sqlite</b> y de <b>" & fecha & "-" & "conn_serv.sqlite</b>.", "Aceptar", "Cancelar") = 1 Then
-
-    ' Desconectar la base de datos
-    If conector Then
-      conector.Close()
-      conector = Null
-    Endif
-
-    ' Realizar la copia de respaldo de la base de datos
-    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-    Wait 0.2
-    Shell "cp " & rutaApp &/ "conn_serv.sqlite" & " " & rutaAppR &/ fecha & "-" & "conn_serv.sqlite"
-    Wait 0.2
-
-    ' Guardar el último archivo abierto
-    MS.SetLastListToSettings()
-    Try pBash.Close
-    Try fFile.Close
-
-    ' Cerrar la aplicación
-    Quit
-
-  Else
-    Stop Event
+  ' Desconectar la base de datos
+  If conector Then
+    conector.Close()
+    conector = Null
   Endif
+
+  ' Guardar el último archivo abierto
+  MS.SetLastListToSettings()
+  Try pBash.Close
+  Try fFile.Close
+
+  ' Cerrar la aplicación
+  Quit
 
 End
 
@@ -6460,6 +6436,7 @@ Public Sub BtnBuscarEnArchivos_Click()
 
   palabraAbuscar = TextBox2.Text
 
+  TabGPT.Index = 0
   TerminalView1.Clear
   TerminalView1.Input("python3 " & rutaApp & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
   TerminalView1.SetFocus
