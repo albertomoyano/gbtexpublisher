@@ -6787,6 +6787,10 @@ Public Sub habilitamosLibro()
   BtnOpenMonografia.Enabled = False
   btnMONOpdf.Enabled = False
   btnMonoDocx.Enabled = False
+  HBox83.Visible = True
+  HBox85.Visible = True
+  TabStripMetaLibro.Visible = True
+  TabPanel3.Visible = False
 
 End
 
@@ -6804,6 +6808,10 @@ Public Sub habilitamosRevista()
   BtnOpenMonografia.Enabled = False
   btnMONOpdf.Enabled = False
   btnMonoDocx.Enabled = False
+  HBox83.Visible = True
+  HBox85.Visible = True
+  TabStripMetaLibro.Visible = False
+  TabPanel3.Visible = True
 
 End
 
@@ -6821,6 +6829,10 @@ Public Sub habilitamosMonografia()
   BtnOpenMonografia.Enabled = True
   btnMONOpdf.Enabled = True
   btnMonoDocx.Enabled = True
+  HBox83.Visible = False
+  HBox85.Visible = False
+  TabStripMetaLibro.Visible = False
+  TabPanel3.Visible = False
 
 End
 
