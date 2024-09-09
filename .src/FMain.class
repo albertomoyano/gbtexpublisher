@@ -5187,15 +5187,17 @@ Public Sub menuRespaldoBDD_Click()
   Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Wait 0.2
 
+  TabPanel1.Index = 0
   TerminalView1.Input("clear" & "\n")
   TerminalView1.Input("cd " & User.Home & "/.respaldogbTeX/" & "\n")
+  TerminalView1.Input("git remote remove origin" & "\n")
   TerminalView1.Input("git remote add origin " & IdGitHub & "\n") '
-  TerminalView1.Input("git branch -M main" & "\n")
   TerminalView1.Input("git add ." & "\n")
   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n")
   TerminalView1.SetFocus()
+  TerminalView1.Refresh()
 
   ' abrimos nuevamente la conexión a la base de datos
   conector = New Connection

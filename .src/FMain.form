@@ -563,7 +563,7 @@
       MoveScaled(0,6,103,0.8889)
     }
     { Splitter1 Splitter
-      MoveScaled(2,13,109,65)
+      MoveScaled(1,8,109,65)
       Expand = True
       Border = False
       { TabGPT TabStrip
@@ -620,7 +620,7 @@
           }
         }
         { Splitter3 Splitter
-          MoveScaled(1,44,41,15)
+          MoveScaled(1,36,41,15)
           Border = False
           { VLista ListView
             MoveScaled(6,4,16,8)
