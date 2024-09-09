@@ -788,6 +788,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
+  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -991,6 +992,7 @@ Public Sub mnuLast_Click()
   menuTOOLS.Visible = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
+  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -5219,24 +5221,6 @@ Public Sub txtABSTRACT_DblClick()
 
 End
 
-Public Sub menuGHPages_Click()
-
-  Message.Info("Esta función genera una copia de las páginas estáticas en una carpeta docs, el proceso de <em>deploy</em> en GitHub Pages se debe hacer desde GitHub.", "Aceptar")
-
-  'forzamos el borrado de las páginas estáticas
-  Shell "rm -rf " & File.Dir(TextBox1.Text) &/ "docs"
-  Wait 0.2
-
-  'creamos el directorio de las páginas estáticas
-  If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
-    Mkdir File.Dir(TextBox1.Text) & "/docs"
-  End If
-
-  'copiamos los archivos
-  TerminalView1.Input("cp -rv " & File.Dir(TextBox1.Text) & "/html5/*" & " " & File.Dir(TextBox1.Text) & "/docs/" & "\n" & "clear" & "\n")
-
-End
-
 Public Sub menuORTO_Click()
 
   Form_ORTO.ShowModal()
@@ -6102,6 +6086,7 @@ Public Sub menuAbrirRevista_Click()
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
+  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -6497,6 +6482,7 @@ Public Sub menuMono_Click()
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
+  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -6794,6 +6780,7 @@ Public Sub habilitamosLibro()
   btnCOMPhtml.Enabled = True
   btnCOMPepub.Enabled = True
   btnCOMPdocx.Enabled = True
+  btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False
   btnRevistaCompliarXML.Enabled = False
@@ -6810,6 +6797,7 @@ Public Sub habilitamosRevista()
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPdocx.Enabled = False
+  btnGitHubPages.Enabled = True
   btnCOMPpdfRevista.Enabled = True
   btnCOMPrevistaHTML.Enabled = True
   btnRevistaCompliarXML.Enabled = True
@@ -6826,11 +6814,30 @@ Public Sub habilitamosMonografia()
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPdocx.Enabled = False
+  btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False
   btnRevistaCompliarXML.Enabled = False
   BtnOpenMonografia.Enabled = True
   btnMONOpdf.Enabled = True
   btnMonoDocx.Enabled = True
+
+End
+
+Public Sub btnGitHubPages_Click()
+
+  Message.Info("Esta función genera una copia de las páginas estáticas en una carpeta docs, el proceso de <em>deploy</em> en GitHub Pages se debe hacer desde GitHub.", "Aceptar")
+
+  'forzamos el borrado de las páginas estáticas
+  Shell "rm -rf " & File.Dir(TextBox1.Text) &/ "docs"
+  Wait 0.2
+
+  'creamos el directorio de las páginas estáticas
+  If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
+    Mkdir File.Dir(TextBox1.Text) & "/docs"
+  End If
+
+  'copiamos los archivos
+  TerminalView1.Input("cp -rv " & File.Dir(TextBox1.Text) & "/html5/*" & " " & File.Dir(TextBox1.Text) & "/docs/" & "\n" & "clear" & "\n")
 
 End

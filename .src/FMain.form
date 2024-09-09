@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,114,390)
+  MoveScaled(0,0,130,390)
   Expand = True
   Icon = Picture["iconos/icono-gbtex.svg"]
   Maximized = True
@@ -157,19 +157,7 @@
   }
   { menuLTX Menu
     Text = ("Compilar")
-    { menuMonografia2 Menu
-      Text = ("Salida a monografía")
-      Picture = Picture["iconos/acroread.svg"]
-      Enabled = False
-      Visible = False
-    }
-    { menuGHPages Menu
-      Text = ("Publicar en GitHub Pages")
-      Picture = Picture["iconos/github-mark.svg"]
-      Enabled = False
-    }
-    { Menu72 Menu
-    }
+    Visible = False
     { menuCatalogo Menu
       Text = ("Página del catálogo en PDF")
       Picture = Picture["iconos/acroread.svg"]
@@ -405,7 +393,7 @@
     }
   }
   { HBox171 HBox
-    MoveScaled(-3,0,122,4)
+    MoveScaled(-3,0,131,4)
     { Label120 Label
       MoveScaled(3,0,8,4)
       AutoResize = True
@@ -451,32 +439,37 @@
       Text = ("HTML")
       Picture = Picture["iconos/Chrome.svg"]
     }
+    { btnGitHubPages Button
+      MoveScaled(76.8889,0,8.8889,4)
+      Text = ("Pages")
+      Picture = Picture["iconos/github-mark.svg"]
+    }
     { btnRevistaCompliarXML Button
-      MoveScaled(77,0,8.8889,4)
+      MoveScaled(88,0,8.8889,4)
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
     }
     { Separator3 Separator
-      MoveScaled(86,0,1.3333,4)
+      MoveScaled(97,0,1.3333,4)
     }
     { Label126 Label
-      MoveScaled(87,0,8,4)
+      MoveScaled(98,0,8,4)
       AutoResize = True
       Text = ("  Monografía ")
     }
     { BtnOpenMonografia Button
-      MoveScaled(96,0,4,4)
+      MoveScaled(107,0,4,4)
       NoTabFocus = True
       Picture = Picture["iconos/document-mono.png"]
     }
     { btnMONOpdf Button
-      MoveScaled(100,0,8.8889,4)
+      MoveScaled(111,0,8.8889,4)
       ToolTip = ("PDF de libro")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnMonoDocx Button
-      MoveScaled(109,0,8.8889,4)
+      MoveScaled(120,0,8.8889,4)
       Text = ("DOCX")
       Picture = Picture["iconos/ms-office.svg"]
     }
@@ -489,6 +482,14 @@
       NoTabFocus = True
       Expand = True
       ReadOnly = True
+    }
+    { MenuAppCompilar MenuButton
+      MoveScaled(76,0,17.7778,4)
+      Enabled = False
+      Text = ("Compilar") & "..."
+      Picture = Picture["iconos/acroread.svg"]
+      Menu = "menuLTX"
+      MenuOnly = True
     }
   }
   { HBox9 HBox
