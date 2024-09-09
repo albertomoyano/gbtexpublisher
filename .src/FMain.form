@@ -714,16 +714,24 @@
         Text = ("Relación")
         Picture = Picture["iconos/bibRepetida.svg"]
       }
-      { txtID2 TextBox
-        MoveScaled(69,0,6,4)
-        Visible = False
+      { Separator8 Separator
+        MoveScaled(59,0,2.3333,4)
+      }
+      { Label129 Label
+        MoveScaled(61.3333,0,5,4)
+        AutoResize = True
+        Text = ("ID  ")
+      }
+      { !txtIDbibtex TextBox
+        MoveScaled(69,0,10,4)
+        #Public = True
         Background = Color.Background
         NoTabFocus = True
         Alignment = Align.Right
         ReadOnly = True
       }
       { txtTOTALbib TextLabel
-        MoveScaled(74,0,24.2222,4)
+        MoveScaled(80,0,24.2222,4)
         Expand = True
         Alignment = Align.Center
         Wrap = False
@@ -2547,16 +2555,22 @@
         ToolTip = ("Guardar modificaciones")
         Picture = Picture["iconos/guardarComo.svg"]
       }
-      { txtID TextBox
-        MoveScaled(20,0,10,4)
-        Visible = False
+      { Separator7 Separator
+        MoveScaled(20,0,2.3333,4)
+      }
+      { Label128 Label
+        MoveScaled(25,0,5,4)
+        AutoResize = True
+        Text = ("ID  ")
+      }
+      { txtIDglosario TextBox
+        MoveScaled(30,0,10,4)
         Background = Color.Background
         NoTabFocus = True
-        Alignment = Align.Right
         ReadOnly = True
       }
       { lblTotalesGLO TextLabel
-        MoveScaled(30,0,24.2222,4)
+        MoveScaled(47,0,24.2222,4)
         Expand = True
         Alignment = Align.Center
       }
@@ -2794,6 +2808,21 @@
         ToolTip = ("Guardar modificaciones")
         Picture = Picture["iconos/guardarComo.svg"]
       }
+      { Separator6 Separator
+        MoveScaled(12,0,2.3333,4)
+      }
+      { Label127 Label
+        MoveScaled(16,0,5,4)
+        AutoResize = True
+        Text = ("ID  ")
+      }
+      { !txtIDmetadatos TextBox
+        MoveScaled(24,0,9,4)
+        #Public = True
+        Background = Color.Background
+        NoTabFocus = True
+        ReadOnly = True
+      }
       { Spring6 Spring
         MoveScaled(49,0,5,4)
       }
@@ -2801,19 +2830,13 @@
     { HBox85 HBox
       MoveScaled(2,5,104,4)
       Padding = 1
-      { txtId3 TextBox
-        MoveScaled(0,0,9,4)
-        Visible = False
-        NoTabFocus = True
-        ReadOnly = True
-      }
       { Label29 Label
-        MoveScaled(7,0,23,4)
+        MoveScaled(1,0,23,4)
         Alignment = Align.Right
-        Text = ("Metadatos para  ")
+        Text = ("    Metadatos para  ")
       }
       { !txtnombreArchivo TextBox
-        MoveScaled(30,0,23,4)
+        MoveScaled(25,0,23,4)
         #Public = True
         Background = Color.Background
         NoTabFocus = True
@@ -2821,17 +2844,17 @@
         ReadOnly = True
       }
       { lblAlta5 Label
-        MoveScaled(58,0,19,4)
+        MoveScaled(50,0,19,4)
         AutoResize = True
         Alignment = Align.Right
         Text = ("    Será exportado como:  ")
       }
-      { txtEXPORTARmeta TextBox
-        MoveScaled(77,0,26,3.5556)
+      { !txtEXPORTARmeta TextBox
+        MoveScaled(86,0,26,3.5556)
+        #Public = True
         Background = Color.Background
         NoTabFocus = True
         Expand = True
-        Alignment = Align.Left
         ReadOnly = True
       }
     }
@@ -3029,8 +3052,9 @@
             Alignment = Align.Right
             Text = ("Tipo de licencia  ")
           }
-          { txt15_pdfcopyright ComboBox
+          { !txt15_pdfcopyright ComboBox
             MoveScaled(24,0,37,4)
+            #Public = True
             Expand = True
             ReadOnly = True
           }
@@ -3504,8 +3528,9 @@
             Alignment = Align.Right
             Text = ("Tipo de documento  ")
           }
-          { cmbType ComboBox
+          { !cmbType ComboBox
             MoveScaled(25,0,20,3.5556)
+            #Public = True
             ReadOnly = True
           }
           { lblCBType TextBox
@@ -3524,8 +3549,9 @@
             Alignment = Align.Right
             Text = ("Formato  ")
           }
-          { cbPubType ComboBox
+          { !cbPubType ComboBox
             MoveScaled(25,0,20,4)
+            #Public = True
             ReadOnly = True
           }
           { lblPUBType TextBox
@@ -3544,8 +3570,9 @@
             Alignment = Align.Right
             Text = ("Encuadernación  ")
           }
-          { txt89_binding ComboBox
+          { !txt89_binding ComboBox
             MoveScaled(25,0,20,3.5556)
+            #Public = True
             ReadOnly = True
           }
         }
@@ -3735,8 +3762,9 @@
             Alignment = Align.Right
             Text = ("Meta Lang  ")
           }
-          { txt40_pdfmetalang ComboBox
+          { !txt40_pdfmetalang ComboBox
             MoveScaled(27,0,20,4)
+            #Public = True
             ReadOnly = True
           }
         }
@@ -3806,8 +3834,9 @@
             Alignment = Align.Right
             Text = ("PDF Rendition  ")
           }
-          { cbPDFrendition ComboBox
+          { !cbPDFrendition ComboBox
             MoveScaled(38,0,20,4)
+            #Public = True
             ReadOnly = True
           }
         }
@@ -3819,8 +3848,9 @@
             Alignment = Align.Right
             Text = ("PDFx Standard  ")
           }
-          { cbPDFx ComboBox
+          { !cbPDFx ComboBox
             MoveScaled(38,0,20,4)
+            #Public = True
             ReadOnly = True
           }
         }
@@ -4032,8 +4062,9 @@
             Alignment = Align.Right
             Text = ("IdiomaOriginal  ")
           }
-          { txt54_idiomaorig ComboBox
+          { !txt54_idiomaorig ComboBox
             MoveScaled(60,0,16,4)
+            #Public = True
             ReadOnly = True
           }
         }
@@ -4104,8 +4135,9 @@
             Alignment = Align.Right
             Text = ("Tipo de publicación  ")
           }
-          { cmbTypePub ComboBox
+          { !cmbTypePub ComboBox
             MoveScaled(27,0,20,4)
+            #Public = True
             ReadOnly = True
           }
         }
@@ -4206,16 +4238,19 @@
             Alignment = Align.Right
             Text = ("Fecha de edición  ")
           }
-          { txtANIO TextBox
+          { !txtANIO TextBox
             MoveScaled(27,0,11,4)
+            #Public = True
             Placeholder = ("Año")
           }
-          { txtMES TextBox
+          { !txtMES TextBox
             MoveScaled(38,0,11,4)
+            #Public = True
             Placeholder = ("Mes")
           }
-          { txtDIA TextBox
+          { !txtDIA TextBox
             MoveScaled(49,0,11,4)
+            #Public = True
             Placeholder = ("Día")
           }
         }
@@ -4227,16 +4262,19 @@
             Alignment = Align.Right
             Text = ("Fecha pub. en línea  ")
           }
-          { txtANIO2 TextBox
+          { !txtANIO2 TextBox
             MoveScaled(27,0,11,4)
+            #Public = True
             Placeholder = ("Año")
           }
-          { txtMES2 TextBox
+          { !txtMES2 TextBox
             MoveScaled(38,0,11,4)
+            #Public = True
             Placeholder = ("Mes")
           }
-          { txtDIA2 TextBox
+          { !txtDIA2 TextBox
             MoveScaled(49,0,11,4)
+            #Public = True
             Placeholder = ("Día")
           }
         }
@@ -4248,16 +4286,19 @@
             Alignment = Align.Right
             Text = ("Fecha pub. impresa  ")
           }
-          { txtANIO3 TextBox
+          { !txtANIO3 TextBox
             MoveScaled(28,0,11,4)
+            #Public = True
             Placeholder = ("Año")
           }
-          { txtMES3 TextBox
+          { !txtMES3 TextBox
             MoveScaled(39,0,11,4)
+            #Public = True
             Placeholder = ("Mes")
           }
-          { txtDIA3 TextBox
+          { !txtDIA3 TextBox
             MoveScaled(50,0,11,4)
+            #Public = True
             Placeholder = ("Día")
           }
         }

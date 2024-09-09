@@ -797,7 +797,7 @@ End
 
 Public Sub limpiamosMetadatosLibrosRevistas()
 
-  FMain.txtId3.Text = ""
+  FMain.txtIdmetadatos.Text = ""
   FMain.txtnombreArchivo.Text = ""
   FMain.txt02_pdfxmp1.Text = ""
   FMain.txt03_pdfxmp2.Text = ""

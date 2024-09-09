@@ -828,7 +828,8 @@ Public Sub menuAbrir_Click()'abrir un libro
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
     btnGuardarCambiosMeta.Enabled = True
-    txtId3.Text = Contenido!id
+
+    txtIDmetadatos.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
     txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
@@ -907,7 +908,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     btnGuardarMeta.Enabled = False
     btnGuardarCambiosMeta.Enabled = False
   Endif
-  txtContactCountry.MaxLength = 1500
+  ' txtContactCountry.MaxLength = 1500
 
   txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
@@ -1025,7 +1026,7 @@ Public Sub mnuLast_Click()
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
     btnGuardarCambiosMeta.Enabled = True
-    txtId.Text = Contenido!id
+    txtIDmetadatos.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
     txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
@@ -1454,7 +1455,7 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
   VGridGLO.Columns.Count = 11
   VGridGLO.Header = True
   VGridGLO.Columns[0].Title = "ID"
-  VGridGLO.Columns[0].Width = 60
+  VGridGLO.Columns[0].Width = 0
   VGridGLO.Columns[1].Title = "Clave"
   VGridGLO.Columns[1].Width = 200
   VGridGLO.Columns[2].Title = "Tipo"
@@ -1514,7 +1515,7 @@ End
 Public Sub LimpiarCamposGLO()
 
   'Limpiamos los campos
-  txtID.Text = ""
+  txtIDglosario.Text = ""
   txtCLAVEglo.Text = ""
   txtARCHIVO.Text = ""
   txtNAME.Text = ""
@@ -1742,7 +1743,7 @@ Public Sub BtnNuevoGlo_Click()
   Else
     Idn = CInt(Contenido["MAX(id)"]) + 1
   Endif
-  txtID.Text = Idn
+  txtIDglosario.Text = Idn
   txtCLAVEglo.Text = "@glo" & Idn & "-" 'colocamos el prefijo de la clave bib
   txtARCHIVO.Text = "," & BaseName & "," 'colocamos el key con el nombre del archivo
   Mostrar_ListaGLO
@@ -1752,13 +1753,13 @@ End
 Public Sub BtnEliminarGlo_Click()
 
   'Chequeamos primero que se haya elegido una entrada
-  If txtID.Text = "" Then
+  If txtIDglosario.Text = "" Then
     Message.Info("Debe primero seleccionarse la entrada a borrar.")
     Return
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from glosarios where id=" & txtID.Text)
+    Contenido = conector.Exec("delete from glosarios where id=" & txtIDglosario.Text)
   Endif
 
   LimpiarCamposGLO  'Limpiamos los campos
@@ -1774,7 +1775,7 @@ End
 
 Public Sub guardarCamposGLO()
 
-  Contenido!id = txtID.Text
+  Contenido!id = txtIDglosario.Text
   Contenido!key = txtCLAVEglo.Text
   Contenido!type = cbTYPEentradaGlo.Text
   Contenido!archivo = txtARCHIVO.Text
@@ -1837,7 +1838,7 @@ Public Sub btnGuardarCambiosGlo_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosGLO
 
-  Contenido = conector.Edit("glosarios", "id=" & txtId.Text)
+  Contenido = conector.Edit("glosarios", "id=" & txtIDglosario.Text)
   guardarCamposGLO
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -1854,7 +1855,7 @@ Public Sub VGridGLO_RowClick(Row As Integer)
   btnAgregarGloKey.Enabled = True
   btnGuardarGlo.Enabled = False
 
-  txtID.Text = VGridGLO[Row, 0].Text
+  txtIDglosario.Text = VGridGLO[Row, 0].Text
   txtCLAVEglo.Text = VGridGLO[Row, 1].Text
   cbTYPEentradaGlo.Text = VGridGLO[Row, 2].Text
   txtARCHIVO.Text = VGridGLO[Row, 3].Text
@@ -2140,7 +2141,7 @@ Public Sub BtnNuevoMeta_Click()
   Else
     Idn = CInt(Contenido["MAX(id)"]) + 1
   Endif
-  txtId.Text = Idn
+  txtIDmetadatos.Text = Idn
   txtnombreArchivo.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
 
   BtnNuevoMeta.Enabled = False
@@ -2155,7 +2156,23 @@ Public Sub btnGuardarMeta_Click()
 
   Contenido = conector.Create("metadatos")
 
-  guardarCamposMETA
+  ' Obtener el valor de txtDate
+  Dim valorFecha As String
+
+  valorFecha = txtDate.Text
+
+  ' Verificar el formato usando una expresión regular
+  If valorFecha Like "[0-9][0-9][0-9][0-9]-[0-9][0-9]" Then
+    ' El formato es correcto, continuar con la asignación de los campos
+    guardarCamposMETA
+  Else
+    ' El formato es incorrecto, mostrar mensaje de advertencia
+    Message.Warning("El formato de la fecha no es válido. Debe ser en el formato 'YYYY-MM'.")
+    txtDate.txt = ""
+    txtDate.SetFocus
+    Return
+  Endif
+
   Contenido.Update
 
   BtnNuevoMeta.Enabled = False
@@ -2166,100 +2183,80 @@ Public Sub btnGuardarMeta_Click()
 
 End
 
-Public Function guardarCamposMETA() As Boolean
+Public Sub guardarCamposMETA()
 
-  ' Obtener el valor de txtDate
-  Dim valorFecha As String
-
-  valorFecha = txtDate.Text
-
-  ' Verificar el formato usando una expresión regular
-  If valorFecha Like "[0-9][0-9][0-9][0-9]-[0-9][0-9]" Then
-    ' El formato es correcto
-    Contenido!pdfdate_11 = txtDate.Text
-    ' Puedes continuar con el resto del código para guardar
-    Contenido!id = txtId.Text
-
-    Contenido!nombreArchivo = txtnombreArchivo.Text
-    Contenido!pdfxmp1_02 = txt02_pdfxmp1.Text
-    Contenido!pdfxmp2_03 = txt03_pdfxmp2.Text
-    Contenido!pdfxmp3_04 = txt04_pdfxmp3.Text
-    Contenido!pdfauthor_05 = txt05_pdfauthor.Text
-    Contenido!pdftitle_06 = txt06_pdftitle.Text
-    Contenido!pdfsubject_07 = txtSubjet.Text
-    Contenido!pdfkeywords_08 = txtKeywords.Text
-    Contenido!pdfsubtitle_09 = txt09_pdfsubtitle.Text
-    Contenido!pdfauthortitle_10 = txt10_pdfauthortitle.Text
-    Contenido!pdfdate_11 = txtDate.Text
-    Contenido!pdfcreationdate_12 = txtCreationDate.Text
-    Contenido!pdfmoddate_13 = txtModDate.Text
-    Contenido!pdfmetadate_14 = txtMetaDate.Text
-    Contenido!pdfcopyright_15 = txt15_pdfcopyright.Text
-    Contenido!pdflicenseurl_16 = txt16_pdflicenseurl.Text
-    Contenido!pdfcaptionwriter_17 = txtCaptionWriter.Text
-    Contenido!pdfcontactaddress_18 = txtContactAddress.Text
-    Contenido!pdfcontactcity_19 = txtContactCity.Text
-    Contenido!pdfcontactpostcode_20 = txtContactPostCode.Text
-    Contenido!pdfcontactcountry_21 = txtContactCountry.Text
-    Contenido!pdfcontactregion_22 = txtContactRegion.Text
-    Contenido!pdfcontactphone_23 = txtContactPhone.Text
-    Contenido!pdfcontactemail_24 = txtContactEmail.Text
-    Contenido!pdfcontacturl_25 = txtContactURL.Text
-    Contenido!pdfdocumentid_26 = txtDocumentId.Text
-    Contenido!pdfpublication_27 = txtPublication.Text
-    Contenido!pdfpublisher_28 = txtPublisher.Text
-    Contenido!pdftype_29 = cmbType.Text
-    Contenido!pdfpubtype_30 = cbPubType.Text
-    Contenido!pdfvolumenum_31 = txtVolNum.Text
-    Contenido!pdfissuenum_32 = txtIssueNum.Text
-    Contenido!pdfpagerange_33 = txt33_pdfpagerange.Text
-    Contenido!pdfbookedition_34 = txt34_pdfbookedition.Text
-    Contenido!pdfisbn_35 = txt35_pdfisbn.Text
-    Contenido!pdfissn_36 = txt36_pdfissn.Text
-    Contenido!pdfeissn_37 = txt37_pdfeissn.Text
-    Contenido!pdfpubstatus_38 = txt38_pdfpubstatus.Text
-    Contenido!pdflang_39 = txtLang.Text
-    Contenido!pdfmetalang_40 = txt40_pdfmetalang.Text
-    Contenido!pdfbaseurl_41 = txtBaseURL.Text
-    Contenido!pdfurl_42 = txt42_pdfurl.Text
-    Contenido!pdfdoi_43 = txt43_pdfdoi.Text
-    Contenido!pdfrendition_44 = cbPDFrendition.Text
-    Contenido!pdfidentifier_45 = txtDocumentId.Text
-    Contenido!pdfx_46 = cbPDFx.Text
-    Contenido!pdfversionid_47 = txtVersionId.Text
-    Contenido!abstract_48 = txt48_abstract.Text
-    Contenido!imagentapa_49 = txt49_imagentapa.Text
-    Contenido!pagetotal_50 = txt50_pagetotal.Text
-    Contenido!relation_51 = txtCOLECCION.Text
-    Contenido!direction_52 = txtDirection.Text
-    Contenido!traductor_53 = txt53_traductor.Text
-    Contenido!idiomaorig_54 = txt54_idiomaorig.Text
-    Contenido!ilustrador_55 = txt55_ilustrador.Text
-    Contenido!resumen_56 = txt56_resumen.Text
-    Contenido!palabrasclave_57 = txt57_palabrasclave.Text
-    Contenido!papertitletwo_58 = txt58_papertitletwo.Text
-    Contenido!artrecibido_59 = txt59_artrecibido.Text
-    Contenido!artaceptado_60 = txt60_artaceptado.Text
-    Contenido!formato_61 = txtFORMATO.Text
-    Contenido!source_69 = txt59_opt_source.Text
-    Contenido!opt_72 = txt82_conferenceVisual.Text
-    Contenido!genero_78 = txt78_genero.Text
-    Contenido!conference_82 = txt82_conference.Text
-    Contenido!bookTitle_84 = txt84_bookTitle.Text
-    Contenido!doiRevista_85 = txt85_doiRevista.Text
-    Contenido!notas_86 = txt86_annotation.Text
-    Contenido!piehtml_87 = txt87_HTMLFirstPageBottom.Text
-    Contenido!audience_88 = txt88_audiencia.Text
-    Contenido!binding_89 = txt89_binding.Text
-
-    Return True ' Indicar que el formato es válido
-  Else
-    ' El formato no es correcto, mostrar un mensaje de advertencia
-    Message.Warning("El formato de Date no es válido. Debe ser en el formato '0000-00'.")
-    txtDate.SetFocus
-    ' Salir de la función o hacer cualquier otra acción que necesites
-    Return False
-  Endif
+  ' Contenido!id = txtIdmetadatos.Text 'no es necesario guardar este campo
+  Contenido!nombreArchivo = txtnombreArchivo.Text
+  Contenido!pdfxmp1_02 = txt02_pdfxmp1.Text
+  Contenido!pdfxmp2_03 = txt03_pdfxmp2.Text
+  Contenido!pdfxmp3_04 = txt04_pdfxmp3.Text
+  Contenido!pdfauthor_05 = txt05_pdfauthor.Text
+  Contenido!pdftitle_06 = txt06_pdftitle.Text
+  Contenido!pdfsubject_07 = txtSubjet.Text
+  Contenido!pdfkeywords_08 = txtKeywords.Text
+  Contenido!pdfsubtitle_09 = txt09_pdfsubtitle.Text
+  Contenido!pdfauthortitle_10 = txt10_pdfauthortitle.Text
+  Contenido!pdfdate_11 = txtDate.Text
+  Contenido!pdfcreationdate_12 = txtCreationDate.Text
+  Contenido!pdfmoddate_13 = txtModDate.Text
+  Contenido!pdfmetadate_14 = txtMetaDate.Text
+  Contenido!pdfcopyright_15 = txt15_pdfcopyright.Text
+  Contenido!pdflicenseurl_16 = txt16_pdflicenseurl.Text
+  Contenido!pdfcaptionwriter_17 = txtCaptionWriter.Text
+  Contenido!pdfcontactaddress_18 = txtContactAddress.Text
+  Contenido!pdfcontactcity_19 = txtContactCity.Text
+  Contenido!pdfcontactpostcode_20 = txtContactPostCode.Text
+  Contenido!pdfcontactcountry_21 = txtContactCountry.Text
+  Contenido!pdfcontactregion_22 = txtContactRegion.Text
+  Contenido!pdfcontactphone_23 = txtContactPhone.Text
+  Contenido!pdfcontactemail_24 = txtContactEmail.Text
+  Contenido!pdfcontacturl_25 = txtContactURL.Text
+  Contenido!pdfdocumentid_26 = txtDocumentId.Text
+  Contenido!pdfpublication_27 = txtPublication.Text
+  Contenido!pdfpublisher_28 = txtPublisher.Text
+  Contenido!pdftype_29 = cmbType.Text
+  Contenido!pdfpubtype_30 = cbPubType.Text
+  Contenido!pdfvolumenum_31 = txtVolNum.Text
+  Contenido!pdfissuenum_32 = txtIssueNum.Text
+  Contenido!pdfpagerange_33 = txt33_pdfpagerange.Text
+  Contenido!pdfbookedition_34 = txt34_pdfbookedition.Text
+  Contenido!pdfisbn_35 = txt35_pdfisbn.Text
+  Contenido!pdfissn_36 = txt36_pdfissn.Text
+  Contenido!pdfeissn_37 = txt37_pdfeissn.Text
+  Contenido!pdfpubstatus_38 = txt38_pdfpubstatus.Text
+  Contenido!pdflang_39 = txtLang.Text
+  Contenido!pdfmetalang_40 = txt40_pdfmetalang.Text
+  Contenido!pdfbaseurl_41 = txtBaseURL.Text
+  Contenido!pdfurl_42 = txt42_pdfurl.Text
+  Contenido!pdfdoi_43 = txt43_pdfdoi.Text
+  Contenido!pdfrendition_44 = cbPDFrendition.Text
+  Contenido!pdfidentifier_45 = txtDocumentId.Text
+  Contenido!pdfx_46 = cbPDFx.Text
+  Contenido!pdfversionid_47 = txtVersionId.Text
+  Contenido!abstract_48 = txt48_abstract.Text
+  Contenido!imagentapa_49 = txt49_imagentapa.Text
+  Contenido!pagetotal_50 = txt50_pagetotal.Text
+  Contenido!relation_51 = txtCOLECCION.Text
+  Contenido!direction_52 = txtDirection.Text
+  Contenido!traductor_53 = txt53_traductor.Text
+  Contenido!idiomaorig_54 = txt54_idiomaorig.Text
+  Contenido!ilustrador_55 = txt55_ilustrador.Text
+  Contenido!resumen_56 = txt56_resumen.Text
+  Contenido!palabrasclave_57 = txt57_palabrasclave.Text
+  Contenido!papertitletwo_58 = txt58_papertitletwo.Text
+  Contenido!artrecibido_59 = txt59_artrecibido.Text
+  Contenido!artaceptado_60 = txt60_artaceptado.Text
+  Contenido!formato_61 = txtFORMATO.Text
+  Contenido!source_69 = txt59_opt_source.Text
+  Contenido!opt_72 = txt82_conferenceVisual.Text
+  Contenido!genero_78 = txt78_genero.Text
+  Contenido!conference_82 = txt82_conference.Text
+  Contenido!bookTitle_84 = txt84_bookTitle.Text
+  Contenido!doiRevista_85 = txt85_doiRevista.Text
+  Contenido!notas_86 = txt86_annotation.Text
+  Contenido!piehtml_87 = txt87_HTMLFirstPageBottom.Text
+  Contenido!audience_88 = txt88_audiencia.Text
+  Contenido!binding_89 = txt89_binding.Text
 
 End
 
@@ -2271,19 +2268,21 @@ Public Sub eliminarBlancosMETA()
 End
 
 Public Sub btnGuardarCambiosMeta_Click()
-  ' Eliminamos blancos de inicio y final de cadena en los textbox
 
+  ' Eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosMETA
 
-  Contenido = conector.Edit("metadatos", "id=" & txtId.Text)
+  ' Cargar el registro a modificar
+  Contenido = conector.Edit("metadatos", "id=" & txtIDmetadatos.Text)
 
-  ' Llamar a guardarCamposMETA y verificar si el formato de la fecha es válido
-  If guardarCamposMETA() Then
-    Contenido.Update
-    Message.Info("Los cambios se guardaron con éxito.")
-  Else
-    Message.Warning("No se pudieron guardar los cambios debido a un formato de fecha no válido.")
-  Endif
+  ' Guardar los campos modificados
+  guardarCamposMETA()
+
+  ' Actualizar el contenido en la base de datos
+  Contenido.Update
+
+  ' Informar al usuario que los cambios se guardaron con éxito
+  Message.Info("Los cambios se guardaron con éxito.")
 
 End
 
@@ -2329,7 +2328,7 @@ Public Sub Mostrar_ListaBIB()
   VListaBIB.Columns.Count = 110
   VListaBIB.Header = True
   VListaBIB.Columns[0].Title = "ID"
-  VListaBIB.Columns[0].Width = 60
+  VListaBIB.Columns[0].Width = 0
   VListaBIB.Columns[1].Title = ""
   VListaBIB.Columns[1].Width = 0
   VListaBIB.Columns[2].Title = ""
@@ -2673,7 +2672,7 @@ End
 Public Sub LimpiarCamposBIB()
 
   'Limpiamos los campos
-  txtID.Text = ""
+  txtIDbibtex.Text = ""
   cbType.Text = "" 'tesis
   cbTYPEentrada.Text = ""
   cbLANGUAGE.Text = ""
@@ -2787,13 +2786,13 @@ End
 Public Sub BtnEliminarBib_Click()
 
   'Chequeamos primero que se haya elegido una entrada
-  If txtID.Text = "" Then
+  If txtIDglosario.Text = "" Then
     Message.Info("Debe primero seleccionarse la entrada a borrar.")
     Return
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from bibtex where id=" & txtID.Text)
+    Contenido = conector.Exec("delete from bibtex where id=" & txtIDglosario.Text)
   Endif
 
   LimpiarCamposBIB() ' Limpiamos los campos
@@ -2840,7 +2839,7 @@ Public Sub ObtenerNuevoId()
     Idn = CInt(MaxId["MAX(id)"]) + 1
   Endif
 
-  txtID.Text = Idn
+  txtIDbibtex.Text = Idn
   txtCLAVEbib.Text = "@" & Idn & "-"
   txtKEYWORDS.Text = "," & BaseName & ","
 
@@ -2859,7 +2858,7 @@ Public Sub btnGuardarCambios_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosBIB()
 
-  Contenido = conector.Edit("bibtex", "id=" & txtId.Text)
+  Contenido = conector.Edit("bibtex", "id=" & txtIDbibtex.Text)
   guardarCampos()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -3601,7 +3600,7 @@ End
 
 Public Sub guardarCampos()
 
-  Contenido!id = txtID.Text
+  Contenido!id = txtIDbibtex.Text
   Contenido!tipoEntrada = cbTYPEentrada.Text
   Contenido!hyphenation = cbLANGUAGE.Text
   Contenido!relatedType = cbRELATEDTYPE.Text
@@ -4097,7 +4096,7 @@ Public Sub btnAgregarCitationKey_Click()
   Dim Comando As String
   Dim Header As String
 
-  Header = "@" & txtID.Text & "-" 'prefijo de la clave bib
+  Header = "@" & txtIDglosario.Text & "-" 'prefijo de la clave bib
 
   ' Escapa los caracteres especiales (comilla simple) en el título
   Dim tituloEscapado As String
@@ -4794,7 +4793,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   btnAgregarCitationKey.Enabled = True
   btnGuardar.Enabled = False
 
-  txtID.Text = VListaBIB[Row, 0].Text
+  txtIDglosario.Text = VListaBIB[Row, 0].Text
   cbTYPEentrada.Text = VListaBIB[Row, 1].Text
   txtCLAVEbib.Text = VListaBIB[Row, 2].Text
   txtKEYWORDS.Text = VListaBIB[Row, 3].Text
@@ -6110,6 +6109,9 @@ Public Sub menuAbrirRevista_Click()
 
   Mod_Funciones.CopiarArchivosRevista(TextBox1.Text)
 
+  ' limpiamos las entradas de los metadatos
+  Mod_Funciones.limpiamosMetadatosLibrosRevistas()
+
   'comienza metadatos
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
@@ -6119,7 +6121,7 @@ Public Sub menuAbrirRevista_Click()
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
     btnGuardarCambiosMeta.Enabled = True
-    txtId.Text = Contenido!id
+    txtIDglosario.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
     txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
@@ -6505,6 +6507,8 @@ Public Sub menuMono_Click()
   End If
 
   ' Mod_Funciones.CopiarArchivosRevista(TextBox1.Text)
+  ' limpiamos las entradas de los metadatos
+  Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
   'comienza metadatos
   Dim comando As String
@@ -6515,7 +6519,7 @@ Public Sub menuMono_Click()
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
     btnGuardarCambiosMeta.Enabled = True
-    txtId.Text = Contenido!id
+    txtIDglosario.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
     txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
