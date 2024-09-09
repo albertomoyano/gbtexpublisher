@@ -617,7 +617,7 @@ End
 'funcion para asegurar metadatos basicos a los archivos
 Public Function registrosObligatorios(rutaTexto As String) As Boolean
 
-  Dim campo0, campo1, campo2, campo3, campo4, campo5 As String
+  Dim campo0, campo1, campo2, campo3, campo4, campo5, campo6, campo7 As String
 
   campo0 = FMain.txtnombreArchivo.Text
   campo1 = FMain.txt84_bookTitle.Text
@@ -625,6 +625,8 @@ Public Function registrosObligatorios(rutaTexto As String) As Boolean
   campo3 = FMain.txtDate.Text
   campo4 = FMain.txtSubjet.Text
   campo5 = FMain.txt57_palabrasclave.Text
+  campo6 = FMain.txt10_pdfauthortitle.Text
+  campo7 = FMain.txtCaptionWriter.Text
 
   ' Verificar si el campo de metadatos existe
   If campo0 = "" Then
@@ -634,7 +636,7 @@ Public Function registrosObligatorios(rutaTexto As String) As Boolean
   End If
 
   ' Verificamos si los otros campos están vacíos
-  If campo1 = "" Or campo2 = "" Or campo3 = "" Or campo4 = "" Or campo5 = "" Then
+  If campo1 = "" Or campo2 = "" Or campo3 = "" Or campo4 = "" Or campo5 = "" Or campo6 = "" Or campo7 = "" Then
     Message.Error("Uno o más registros de los metadatos obligatorios están vacíos, la operación será cancelada.", "Aceptar")
     FMain.TabPanel1.Index = 3
     Return False
@@ -790,5 +792,82 @@ Public Sub Borrar_Aux()
   Wait 0.2
 
   FMain.TerminalView1.SetFocus()
+
+End
+
+Public Sub limpiamosMetadatosLibrosRevistas()
+
+  FMain.txtId3.Text = ""
+  FMain.txtnombreArchivo.Text = ""
+  FMain.txt02_pdfxmp1.Text = ""
+  FMain.txt03_pdfxmp2.Text = ""
+  FMain.txt04_pdfxmp3.Text = ""
+  FMain.txt05_pdfauthor.Text = ""
+  FMain.txt06_pdftitle.Text = ""
+  FMain.txtSubjet.Text = ""
+  FMain.txtKeywords.Text = ""
+  FMain.txt09_pdfsubtitle.Text = ""
+  FMain.txt10_pdfauthortitle.Text = ""
+  FMain.txtDate.Text = ""
+  FMain.txtCreationDate.Text = ""
+  FMain.txtModDate.Text = ""
+  FMain.txtMetaDate.Text = ""
+  FMain.txt15_pdfcopyright.Text = ""
+  FMain.txt16_pdflicenseurl.Text = ""
+  FMain.txtCaptionWriter.Text = ""
+  FMain.txtContactAddress.Text = ""
+  FMain.txtContactCity.Text = ""
+  FMain.txtContactPostCode.Text = ""
+  FMain.txtContactCountry.Text = ""
+  FMain.txtContactRegion.Text = ""
+  FMain.txtContactPhone.Text = ""
+  FMain.txtContactEmail.Text = ""
+  FMain.txtContactURL.Text = ""
+  FMain.txtDocumentId.Text = ""
+  FMain.txtPublication.Text = ""
+  FMain.txtPublisher.Text = ""
+  FMain.cmbType.Text = ""
+  FMain.cbPubType.Text = ""
+  FMain.txtVolNum.Text = ""
+  FMain.txtIssueNum.Text = ""
+  FMain.txt33_pdfpagerange.Text = ""
+  FMain.txt34_pdfbookedition.Text = ""
+  FMain.txt35_pdfisbn.Text = ""
+  FMain.txt36_pdfissn.Text = ""
+  FMain.txt37_pdfeissn.Text = ""
+  FMain.txt38_pdfpubstatus.Text = ""
+  FMain.txtLang.Text = ""
+  FMain.txt40_pdfmetalang.Text = ""
+  FMain.txtBaseURL.Text = ""
+  FMain.txt42_pdfurl.Text = ""
+  FMain.txt43_pdfdoi.Text = ""
+  FMain.cbPDFrendition.Text = ""
+  FMain.txtDocumentId.Text = ""
+  FMain.cbPDFx.Text = ""
+  FMain.txtVersionId.Text = ""
+  FMain.txt48_abstract.Text = ""
+  FMain.txt49_imagentapa.Text = ""
+  FMain.txt50_pagetotal.Text = ""
+  FMain.txtCOLECCION.Text = ""
+  FMain.txtDirection.Text = ""
+  FMain.txt53_traductor.Text = ""
+  FMain.txt54_idiomaorig.Text = ""
+  FMain.txt55_ilustrador.Text = ""
+  FMain.txt56_resumen.Text = ""
+  FMain.txt57_palabrasclave.Text = ""
+  FMain.txt58_papertitletwo.Text = ""
+  FMain.txt59_artrecibido.Text = ""
+  FMain.txt60_artaceptado.Text = ""
+  FMain.txtFORMATO.Text = ""
+  FMain.txt59_opt_source.Text = ""
+  FMain.txt82_conferenceVisual.Text = ""
+  FMain.txt78_genero.Text = ""
+  FMain.txt82_conference.Text = ""
+  FMain.txt84_bookTitle.Text = ""
+  FMain.txt85_doiRevista.Text = ""
+  FMain.txt86_annotation.Text = ""
+  FMain.txt87_HTMLFirstPageBottom.Text = ""
+  FMain.txt88_audiencia.Text = ""
+  FMain.txt89_binding.Text = ""
 
 End

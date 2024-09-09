@@ -421,7 +421,7 @@
       Picture = Picture["iconos/ms-office.svg"]
     }
     { Separator2 Separator
-      MoveScaled(49,0,1.3333,4)
+      MoveScaled(49,0,2.3333,4)
     }
     { Label121 Label
       MoveScaled(51,0,8,4)
@@ -450,7 +450,7 @@
       Picture = Picture["iconos/xml.svg"]
     }
     { Separator3 Separator
-      MoveScaled(97,0,1.3333,4)
+      MoveScaled(97,0,2.3333,4)
     }
     { Label126 Label
       MoveScaled(98,0,8,4)
@@ -2839,7 +2839,7 @@
       MoveScaled(2,9,103,0.8889)
     }
     { !TabStripMetaLibro TabStrip
-      MoveScaled(-34,11,69,340)
+      MoveScaled(1,11,89,340)
       #Public = True
       Expand = True
       Arrangement = Arrange.Vertical
@@ -2847,7 +2847,7 @@
       Index = 0
       Text = ("Generales y obligatorios para todas las salidas")
       { ScrollView10 ScrollView
-        MoveScaled(3,7,97,24)
+        MoveScaled(3,7,97,37)
         Expand = True
         Arrangement = Arrange.Vertical
         Border = False
@@ -2882,8 +2882,23 @@
             Placeholder = ("Autor del documento")
           }
         }
+        { HBox99 HBox
+          MoveScaled(0,8,78,4.4444)
+          Padding = 2
+          { Label34 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Título académico del autor  ")
+          }
+          { !txt10_pdfauthortitle TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Cargo o título académico del autor principal (solo uno)")
+          }
+        }
         { HBox102 HBox
-          MoveScaled(0,8.8889,84,4.4444)
+          MoveScaled(0,12,84,4.4444)
           Padding = 2
           { Label35 Label
             MoveScaled(0,0,23,4)
@@ -2891,14 +2906,23 @@
             Text = ("Fecha  ")
           }
           { !txtDate TextBox
-            MoveScaled(27,0,20,4)
+            MoveScaled(27,0,23,4)
             #Public = True
             Text = ("0000-00")
             Placeholder = ("YYYY-MM-DD")
           }
+          { Separator5 Separator
+            MoveScaled(50,0,2.3333,4)
+          }
+          { TextLabel2 TextLabel
+            MoveScaled(57,0,15,4)
+            Expand = True
+            Text = ("Refiere a la fecha de creación del archivo .tex")
+            Alignment = Align.Normal
+          }
         }
         { HBox108 HBox
-          MoveScaled(0,13.3333,78,4.4444)
+          MoveScaled(0,16,78,4.4444)
           Padding = 2
           { Label45 Label
             MoveScaled(0,0,23,4)
@@ -2913,7 +2937,7 @@
           }
         }
         { HBox109 HBox
-          MoveScaled(0,17.3333,78,4.4444)
+          MoveScaled(0,20,78,4.4444)
           Padding = 2
           { Label57 Label
             MoveScaled(1,0,23,4)
@@ -2927,6 +2951,28 @@
             Placeholder = ("ESPAÑOL Palabras clave separadas por coma")
           }
         }
+        { HBox111 HBox
+          MoveScaled(0,25,78,4.4444)
+          Padding = 2
+          { Label50 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Caption Writer  ")
+          }
+          { !txtCaptionWriter TextBox
+            MoveScaled(27,0,23,4)
+            #Public = True
+          }
+          { Separator4 Separator
+            MoveScaled(52,0,2.3333,4)
+          }
+          { TextLabel1 TextLabel
+            MoveScaled(59,0,15,4)
+            Expand = True
+            Text = ("Persona que hace el mantenimiento del archivo")
+            Alignment = Align.Normal
+          }
+        }
       }
       Index = 1
       Text = ("Particulares a cada tipo de salida")
@@ -2936,21 +2982,6 @@
         Arrangement = Arrange.Vertical
         Border = False
         ScrollBar = Scroll.Vertical
-        { HBox111 HBox
-          MoveScaled(2,1,78,4.4444)
-          Padding = 2
-          { Label50 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("Caption Writer  ")
-          }
-          { !txtCaptionWriter TextBox
-            MoveScaled(27,0,16,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("Se utiliza para especificar el nombre de quien a modificado el contenido del documento")
-          }
-        }
         { HBox97 HBox
           MoveScaled(2,6,78,4.4444)
           Padding = 2
@@ -2986,42 +3017,6 @@
           { PictureBox8 PictureBox
             MoveScaled(55,0,4,4)
             Picture = Picture.Load("iconos/ms-office.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-        }
-        { HBox99 HBox
-          MoveScaled(2,11,78,4.4444)
-          Padding = 2
-          { Label34 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("Título académico del autor  ")
-          }
-          { !txt10_pdfauthortitle TextBox
-            MoveScaled(27,0,16,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("Cargo o título académico del autor principal (solo uno)")
-          }
-          { PictureBox2 PictureBox
-            MoveScaled(43,0,4,4)
-            Picture = Picture.Load("iconos/acroread.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox3 PictureBox
-            MoveScaled(47,0,4,4)
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox4 PictureBox
-            MoveScaled(51,0,4,4)
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox5 PictureBox
-            MoveScaled(55,0,4,4)
             Alignment = Align.Center
             Border = Border.Etched
           }
@@ -4346,7 +4341,7 @@
       Index = 0
     }
     { !TabPanel3 TabStrip
-      MoveScaled(39,11,107,348)
+      MoveScaled(92,10,107,348)
       #Public = True
       Expand = True
       Arrangement = Arrange.Vertical

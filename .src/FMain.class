@@ -810,11 +810,14 @@ Public Sub menuAbrir_Click()'abrir un libro
 
   Mod_Funciones.CopiarArchivos(TextBox1.Text)
 
-  'levantamos los datos de comentario
+  ' levantamos los datos de comentario
   levantarComenta()
 
-  'nos reaseguramos de que la base de datos exista
+  ' nos reaseguramos de que la base de datos exista
   Mod_Funciones.RevisarArchivo()
+
+  ' limpiamos las entradas de los metadatos
+  Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
   'levantamos los datos de metadatos
   Dim comando As String
@@ -825,7 +828,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
     btnGuardarCambiosMeta.Enabled = True
-    txtId.Text = Contenido!id
+    txtId3.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
     txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
