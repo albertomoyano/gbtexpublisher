@@ -771,6 +771,7 @@
       }
       { txtEXPORTARbib TextBox
         MoveScaled(61,0,15,4)
+        Background = Color.Background
         NoTabFocus = True
         Expand = True
         Alignment = Align.Left
@@ -3005,39 +3006,225 @@
         Arrangement = Arrange.Vertical
         Border = False
         ScrollBar = Scroll.Vertical
-        { HBox97 HBox
-          MoveScaled(2,6,78,4.4444)
+        { HBox148 HBox
+          MoveScaled(1,1,85,4.4444)
           Padding = 2
-          { Label32 Label
+          { btnAbrirPNG Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/document-orange.svg"]
+          }
+          { Label96 Label
+            MoveScaled(5,0,19,4)
+            Alignment = Align.Right
+            Text = ("Tapa del libro  ")
+          }
+          { !txt49_imagentapa TextBox
+            MoveScaled(27,0,29,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+          }
+          { btnLimpiarTapa Button
+            MoveScaled(57,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+          { PictureBox2 PictureBox
+            MoveScaled(61,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox3 PictureBox
+            MoveScaled(65,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox4 PictureBox
+            MoveScaled(69,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox5 PictureBox
+            MoveScaled(73,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+        }
+        { HBox149 HBox
+          MoveScaled(1,6,78,4.4444)
+          Padding = 2
+          { Label97 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
-            Text = ("Subtítulo  ")
+            Text = ("Atribución de la imagen  ")
           }
-          { !txt09_pdfsubtitle TextBox
+          { !txt79_attribution TextBox
             MoveScaled(27,0,16,4)
             #Public = True
             Expand = True
-            Placeholder = ("Subtítulo del título principal")
+            Placeholder = ("Atribución de la imagen")
           }
-          { PictureBox1 PictureBox
+          { PictureBox29 PictureBox
             MoveScaled(43,0,4,4)
             Picture = Picture.Load("iconos/acroread.svg")
             Alignment = Align.Center
             Border = Border.Etched
           }
-          { PictureBox6 PictureBox
+          { PictureBox30 PictureBox
             MoveScaled(47,0,4,4)
             Picture = Picture.Load("iconos/web.svg")
             Alignment = Align.Center
             Border = Border.Etched
           }
-          { PictureBox7 PictureBox
+          { PictureBox31 PictureBox
             MoveScaled(51,0,4,4)
             Picture = Picture.Load("iconos/epub.svg")
             Alignment = Align.Center
             Border = Border.Etched
           }
-          { PictureBox8 PictureBox
+          { PictureBox32 PictureBox
+            MoveScaled(55,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+        }
+        { HBox150 HBox
+          MoveScaled(1,11,85,4.4444)
+          Padding = 2
+          { btnMostrarColeccion Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label98 Label
+            MoveScaled(4,0,19,4)
+            Alignment = Align.Right
+            Text = ("Colección  ")
+          }
+          { !txtCOLECCION TextBox
+            MoveScaled(24,0,15,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Colección o Serie de la editorial")
+          }
+          { lblFormato Label
+            MoveScaled(39,0,14,4)
+            Alignment = Align.Right
+            Text = ("Formato  ")
+          }
+          { !txtFORMATO TextBox
+            MoveScaled(54,0,16,4)
+            #Public = True
+            Background = Color.Background
+            ReadOnly = True
+          }
+          { PictureBox25 PictureBox
+            MoveScaled(71,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox26 PictureBox
+            MoveScaled(75,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox27 PictureBox
+            MoveScaled(79,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox28 PictureBox
+            MoveScaled(83,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+        }
+        { HBox151 HBox
+          MoveScaled(1,16,78,4.4444)
+          Padding = 2
+          { Label99 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Dirección/Editor  ")
+          }
+          { !txtDirection TextBox
+            MoveScaled(24,0,22,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+          }
+          { btnLimpiarRelation Button
+            MoveScaled(47,0,4,4)
+            Picture = Picture["iconos/borrar.svg"]
+          }
+          { PictureBox21 PictureBox
+            MoveScaled(51,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox22 PictureBox
+            MoveScaled(55,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox23 PictureBox
+            MoveScaled(59,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox24 PictureBox
+            MoveScaled(63,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+        }
+        { hbISBN HBox
+          MoveScaled(0,21,78,4.4444)
+          Padding = 2
+          { Label78 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ISBN  ")
+          }
+          { !txt35_pdfisbn TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+          { PictureBox33 PictureBox
+            MoveScaled(43,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox34 PictureBox
+            MoveScaled(47,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox35 PictureBox
+            MoveScaled(51,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox36 PictureBox
             MoveScaled(55,0,4,4)
             Picture = Picture.Load("iconos/ms-office.svg")
             Alignment = Align.Center
@@ -3045,7 +3232,7 @@
           }
         }
         { HBox106 HBox
-          MoveScaled(2,16,88,4)
+          MoveScaled(0,26,88,4.4444)
           Padding = 2
           { Label38 Label
             MoveScaled(0,0,23,4)
@@ -3084,7 +3271,7 @@
           }
         }
         { HBox107 HBox
-          MoveScaled(2,21,78,4.4444)
+          MoveScaled(0,31,78,4.4444)
           Padding = 2
           { Label41 Label
             MoveScaled(0,0,23,4)
@@ -3123,8 +3310,47 @@
             Border = Border.Etched
           }
         }
+        { HBox97 HBox
+          MoveScaled(1,41,78,4.4444)
+          Padding = 2
+          { Label32 Label
+            MoveScaled(1,0,23,4)
+            Alignment = Align.Right
+            Text = ("Subtítulo  ")
+          }
+          { !txt09_pdfsubtitle TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Subtítulo del título principal")
+          }
+          { PictureBox1 PictureBox
+            MoveScaled(43,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox6 PictureBox
+            MoveScaled(47,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox7 PictureBox
+            MoveScaled(51,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+          { PictureBox8 PictureBox
+            MoveScaled(55,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
+            Border = Border.Etched
+          }
+        }
         { HBox95 HBox
-          MoveScaled(1,29,78,4.4444)
+          MoveScaled(1,46,78,4.4444)
           Padding = 2
           { Label31 Label
             MoveScaled(3,0,23,3.5556)
@@ -3160,7 +3386,7 @@
           }
         }
         { HBox96 HBox
-          MoveScaled(0,34,78,4.4444)
+          MoveScaled(0,51,78,4.4444)
           Padding = 2
           { Label58 Label
             MoveScaled(3,0,23,4)
@@ -3175,7 +3401,7 @@
           }
         }
         { HBox100 HBox
-          MoveScaled(0,39,78,4.4444)
+          MoveScaled(0,56,78,4.4444)
           Padding = 2
           { Label59 Label
             MoveScaled(0,0,23,4)
@@ -3204,7 +3430,7 @@
           }
         }
         { HBox101 HBox
-          MoveScaled(0,44,78,4.4444)
+          MoveScaled(0,61,78,4.4444)
           Padding = 2
           { Label60 Label
             MoveScaled(0,0,23,4)
@@ -3230,7 +3456,7 @@
           }
         }
         { HBox103 HBox
-          MoveScaled(0,49,84,4.4444)
+          MoveScaled(0,66,84,4.4444)
           Padding = 2
           { Label42 Label
             MoveScaled(0,0,23,4)
@@ -3255,7 +3481,7 @@
           }
         }
         { HBox104 HBox
-          MoveScaled(0,54,84,4.4444)
+          MoveScaled(0,71,84,4.4444)
           Padding = 2
           { Label36 Label
             MoveScaled(0,0,23,4)
@@ -3280,7 +3506,7 @@
           }
         }
         { HBox105 HBox
-          MoveScaled(0,59,84,4.4444)
+          MoveScaled(0,76,84,4.4444)
           Padding = 2
           { Label37 Label
             MoveScaled(0,0,23,4)
@@ -3294,7 +3520,7 @@
           }
         }
         { HBox110 HBox
-          MoveScaled(0,64,78,4.4444)
+          MoveScaled(0,81,78,4.4444)
           Padding = 2
           { Label47 Label
             MoveScaled(1,0,23,4)
@@ -3309,7 +3535,7 @@
           }
         }
         { HBox112 HBox
-          MoveScaled(0,72,78,4.4444)
+          MoveScaled(0,86,78,4.4444)
           Padding = 2
           { Label51 Label
             MoveScaled(0,0,23,4)
@@ -3325,7 +3551,7 @@
           }
         }
         { HBox113 HBox
-          MoveScaled(0,76,78,4.4444)
+          MoveScaled(0,90,78,4.4444)
           Padding = 2
           { Label52 Label
             MoveScaled(0,0,23,4)
@@ -3339,7 +3565,7 @@
           }
         }
         { HBox114 HBox
-          MoveScaled(0,80,78,4.4444)
+          MoveScaled(0,94,78,4.4444)
           Padding = 2
           { Label53 Label
             MoveScaled(0,0,23,4)
@@ -3353,7 +3579,7 @@
           }
         }
         { HBox115 HBox
-          MoveScaled(0,84,78,4.4444)
+          MoveScaled(0,98,78,4.4444)
           Padding = 2
           { Label54 Label
             MoveScaled(0,0,23,4)
@@ -3367,7 +3593,7 @@
           }
         }
         { HBox116 HBox
-          MoveScaled(0,88,78,4.4444)
+          MoveScaled(0,102,78,4.4444)
           Padding = 2
           { Label55 Label
             MoveScaled(0,0,23,4)
@@ -3381,7 +3607,7 @@
           }
         }
         { HBox117 HBox
-          MoveScaled(0,92,78,4.4444)
+          MoveScaled(0,106,78,4.4444)
           Padding = 2
           { Label56 Label
             MoveScaled(0,0,23,4)
@@ -3395,7 +3621,7 @@
           }
         }
         { HBox118 HBox
-          MoveScaled(0,96,78,4.4444)
+          MoveScaled(0,110,78,4.4444)
           Padding = 2
           { Label61 Label
             MoveScaled(0,0,23,4)
@@ -3409,7 +3635,7 @@
           }
         }
         { HBox119 HBox
-          MoveScaled(0,100,78,4.4444)
+          MoveScaled(0,114,78,4.4444)
           Padding = 2
           { Label62 Label
             MoveScaled(0,0,23,4)
@@ -3423,7 +3649,7 @@
           }
         }
         { HBox120 HBox
-          MoveScaled(0,104,78,4.4444)
+          MoveScaled(0,118,78,4.4444)
           Padding = 2
           { btnMostarJournal2 Button
             MoveScaled(0,0,4,4)
@@ -3446,7 +3672,7 @@
           }
         }
         { HBox121 HBox
-          MoveScaled(0,108,78,4.4444)
+          MoveScaled(0,122,78,4.4444)
           Padding = 2
           { Label66 Label
             MoveScaled(0,0,23,4)
@@ -3461,7 +3687,7 @@
           }
         }
         { HBox122 HBox
-          MoveScaled(0,112,78,4.4444)
+          MoveScaled(0,126,78,4.4444)
           Padding = 2
           { Label64 Label
             MoveScaled(0,0,23,4)
@@ -3476,7 +3702,7 @@
           }
         }
         { HBox123 HBox
-          MoveScaled(0,116,78,4.4444)
+          MoveScaled(0,130,78,4.4444)
           Padding = 2
           { Label65 Label
             MoveScaled(0,0,23,4)
@@ -3491,7 +3717,7 @@
           }
         }
         { HBox124 HBox
-          MoveScaled(0,120,78,4.4444)
+          MoveScaled(0,134,78,4.4444)
           Padding = 2
           { Label67 Label
             MoveScaled(0,0,23,4)
@@ -3506,7 +3732,7 @@
           }
         }
         { HBox125 HBox
-          MoveScaled(0,124,78,4.4444)
+          MoveScaled(0,138,78,4.4444)
           Padding = 2
           { Label68 Label
             MoveScaled(0,0,23,4)
@@ -3521,7 +3747,7 @@
           }
         }
         { HBox126 HBox
-          MoveScaled(0,128,78,4.4444)
+          MoveScaled(0,142,78,4.4444)
           Padding = 2
           { Label69 Label
             MoveScaled(0,0,23,4)
@@ -3542,7 +3768,7 @@
           }
         }
         { HBox127 HBox
-          MoveScaled(0,132,78,4.4444)
+          MoveScaled(0,146,78,4.4444)
           Padding = 2
           { Label70 Label
             MoveScaled(0,0,23,4)
@@ -3563,7 +3789,7 @@
           }
         }
         { HBox170 HBox
-          MoveScaled(0,135.5556,78,4.4444)
+          MoveScaled(0,150,78,4.4444)
           Padding = 2
           { Label118 Label
             MoveScaled(0,0,23,4)
@@ -3577,7 +3803,7 @@
           }
         }
         { HBox128 HBox
-          MoveScaled(0,141,78,4.4444)
+          MoveScaled(0,155,78,4.4444)
           Padding = 2
           { Label71 Label
             MoveScaled(0,0,23,4)
@@ -3590,7 +3816,7 @@
           }
         }
         { HBox129 HBox
-          MoveScaled(0,145,78,4.4444)
+          MoveScaled(0,159,78,4.4444)
           Padding = 2
           { Label72 Label
             MoveScaled(0,0,23,4)
@@ -3603,7 +3829,7 @@
           }
         }
         { HBox130 HBox
-          MoveScaled(0,149,78,4.4444)
+          MoveScaled(0,163,78,4.4444)
           Padding = 2
           { Label73 Label
             MoveScaled(0,0,23,4)
@@ -3629,7 +3855,7 @@
           }
         }
         { HBox131 HBox
-          MoveScaled(0,153,78,4.4444)
+          MoveScaled(0,167,78,4.4444)
           Padding = 2
           { Label74 Label
             MoveScaled(0,0,23,4)
@@ -3655,7 +3881,7 @@
           }
         }
         { HBox132 HBox
-          MoveScaled(0,157,78,4.4444)
+          MoveScaled(0,171,78,4.4444)
           Padding = 2
           { Label77 Label
             MoveScaled(0,0,23,4)
@@ -3669,22 +3895,8 @@
             Placeholder = ("Edición del libro, especificado como texto, NO en número")
           }
         }
-        { hbISBN HBox
-          MoveScaled(0,161,78,4.4444)
-          Padding = 2
-          { Label78 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("ISBN  ")
-          }
-          { !txt35_pdfisbn TextBox
-            MoveScaled(27,0,16,4)
-            #Public = True
-            Expand = True
-          }
-        }
         { hbISSN HBox
-          MoveScaled(0,165,78,4.4444)
+          MoveScaled(0,179,78,4.4444)
           Padding = 2
           { Label79 Label
             MoveScaled(0,0,23,4)
@@ -3701,7 +3913,7 @@
           }
         }
         { hbEISSN HBox
-          MoveScaled(0,169,78,4.4444)
+          MoveScaled(0,183,78,4.4444)
           Padding = 2
           { Label80 Label
             MoveScaled(0,0,23,4)
@@ -3718,7 +3930,7 @@
           }
         }
         { HBox133 HBox
-          MoveScaled(0,173,78,4.4444)
+          MoveScaled(0,187,78,4.4444)
           Padding = 2
           { Label81 Label
             MoveScaled(0,0,23,4)
@@ -3736,7 +3948,7 @@
           }
         }
         { HBox134 HBox
-          MoveScaled(0,177,78,4.4444)
+          MoveScaled(0,191,78,4.4444)
           Padding = 2
           { Label82 Label
             MoveScaled(1,0,23,4)
@@ -3755,7 +3967,7 @@
           }
         }
         { HBox135 HBox
-          MoveScaled(0,181,78,4.4444)
+          MoveScaled(0,195,78,4.4444)
           Padding = 2
           { Label83 Label
             MoveScaled(0,0,23,4)
@@ -3769,7 +3981,7 @@
           }
         }
         { HBox136 HBox
-          MoveScaled(0,185,78,4.4444)
+          MoveScaled(0,199,78,4.4444)
           Padding = 2
           { Label84 Label
             MoveScaled(0,0,23,4)
@@ -3784,7 +3996,7 @@
           }
         }
         { HBox137 HBox
-          MoveScaled(0,189,78,4.4444)
+          MoveScaled(0,204,78,4.4444)
           Padding = 2
           { Label85 Label
             MoveScaled(0,0,23,4)
@@ -3798,7 +4010,7 @@
           }
         }
         { HBox138 HBox
-          MoveScaled(0,193,78,4.4444)
+          MoveScaled(0,208,78,4.4444)
           Padding = 2
           { Label86 Label
             MoveScaled(0,0,23,4)
@@ -3812,7 +4024,7 @@
           }
         }
         { HBox139 HBox
-          MoveScaled(0,197,78,4.4444)
+          MoveScaled(0,212,78,4.4444)
           Padding = 2
           { Label87 Label
             MoveScaled(0,0,23,4)
@@ -3827,7 +4039,7 @@
           }
         }
         { HBox140 HBox
-          MoveScaled(0,201,78,4.4444)
+          MoveScaled(0,216,78,4.4444)
           Padding = 2
           { Label88 Label
             MoveScaled(0,0,23,4)
@@ -3841,7 +4053,7 @@
           }
         }
         { HBox141 HBox
-          MoveScaled(0,205,78,4.4444)
+          MoveScaled(0,220,78,4.4444)
           Padding = 2
           { Label89 Label
             MoveScaled(0,0,23,4)
@@ -3855,7 +4067,7 @@
           }
         }
         { HBox142 HBox
-          MoveScaled(0,209,78,4.4444)
+          MoveScaled(0,224,78,4.4444)
           Padding = 2
           { Label90 Label
             MoveScaled(0,0,23,4)
@@ -3870,7 +4082,7 @@
           }
         }
         { HBox143 HBox
-          MoveScaled(0,213,78,4.4444)
+          MoveScaled(0,228,78,4.4444)
           Padding = 2
           { Label91 Label
             MoveScaled(0,0,23,4)
@@ -3885,7 +4097,7 @@
           }
         }
         { HBox144 HBox
-          MoveScaled(0,217,78,4.4444)
+          MoveScaled(0,232,78,4.4444)
           Padding = 2
           { Label92 Label
             MoveScaled(0,0,23,4)
@@ -3900,7 +4112,7 @@
           }
         }
         { HBox145 HBox
-          MoveScaled(0,221,78,4.4444)
+          MoveScaled(0,236,78,4.4444)
           Padding = 2
           { btnVerResumen Button
             MoveScaled(1,0,4,4)
@@ -3919,7 +4131,7 @@
           }
         }
         { HBox146 HBox
-          MoveScaled(0,225,78,4.4444)
+          MoveScaled(0,240,78,4.4444)
           Padding = 2
           { btnVerAbstract Button
             MoveScaled(1,0,4,4)
@@ -3938,7 +4150,7 @@
           }
         }
         { HBox147 HBox
-          MoveScaled(0,229,78,4.4444)
+          MoveScaled(0,244,78,4.4444)
           Padding = 2
           { Label95 Label
             MoveScaled(0,0,23,4)
@@ -3950,97 +4162,6 @@
             #Public = True
             Expand = True
             Placeholder = ("Archivo que da origen a la salida")
-          }
-        }
-        { HBox148 HBox
-          MoveScaled(0,233,78,4.4444)
-          Padding = 2
-          { btnAbrirPNG Button
-            MoveScaled(0,0,4,4)
-            Picture = Picture["iconos/document-orange.svg"]
-          }
-          { Label96 Label
-            MoveScaled(5,0,19,4)
-            Alignment = Align.Right
-            Text = ("Tapa del libro  ")
-          }
-          { !txt49_imagentapa TextBox
-            MoveScaled(27,0,16,4)
-            #Public = True
-            Background = Color.Background
-            Expand = True
-            ReadOnly = True
-          }
-          { btnLimpiarTapa Button
-            MoveScaled(72,0,4,4)
-            Picture = Picture["iconos/borrar.svg"]
-          }
-        }
-        { HBox149 HBox
-          MoveScaled(0,237,78,4.4444)
-          Padding = 2
-          { Label97 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("Atribución de la imagen  ")
-          }
-          { !txt79_attribution TextBox
-            MoveScaled(27,0,16,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("Atribución de la imagen")
-          }
-        }
-        { HBox150 HBox
-          MoveScaled(0,241,82,4.4444)
-          Padding = 2
-          { btnMostrarColeccion Button
-            MoveScaled(0,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
-          }
-          { Label98 Label
-            MoveScaled(4,0,19,4)
-            Alignment = Align.Right
-            Text = ("Colección  ")
-          }
-          { !txtCOLECCION TextBox
-            MoveScaled(24,0,20,4)
-            #Public = True
-            Background = Color.Background
-            Expand = True
-            ReadOnly = True
-            Placeholder = ("Colección o Serie de la editorial")
-          }
-          { lblFormato Label
-            MoveScaled(44,0,14,4)
-            Alignment = Align.Right
-            Text = ("Formato  ")
-          }
-          { !txtFORMATO TextBox
-            MoveScaled(61,0,16,4)
-            #Public = True
-            Background = Color.Background
-            ReadOnly = True
-          }
-        }
-        { HBox151 HBox
-          MoveScaled(0,245,78,4.4444)
-          Padding = 2
-          { Label99 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("Dirección/Editor  ")
-          }
-          { !txtDirection TextBox
-            MoveScaled(24,0,10,4)
-            #Public = True
-            Background = Color.Background
-            Expand = True
-            ReadOnly = True
-          }
-          { btnLimpiarRelation Button
-            MoveScaled(59,0,4,4)
-            Picture = Picture["iconos/borrar.svg"]
           }
         }
         { HBox152 HBox

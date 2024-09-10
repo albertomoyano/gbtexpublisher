@@ -1,6 +1,6 @@
 ' Gambas class file
 
-Private conector As Connection
+Public conector As Connection
 Private Contenido As Result
 Private ContenidoComenta As Result
 Private Busqueda As Result
@@ -250,7 +250,7 @@ Public Sub Form_Open()
     btnGuardarCambios.Enabled = False
 
     Mostrar_ListaBIB()
-    TotalEntradas()
+    TotalEntradasBIByGLO()' mostramos total de entradas bib y glo
 
     ' Verifica si el TextBox1 tiene una ruta válida
     If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
@@ -368,78 +368,6 @@ End
 Public Sub menuCONVERSOR_Click()
 
   Form_Conversor.ShowModal()
-
-End
-
-'compilo el PDF del artículo
-Public Sub menuPDFarticulo_Click()
-
-  ' Dim filePath As String
-  ' Dim newFile As String
-  ' Dim rutaFija As String
-  ' Dim newLog As String
-  ' Dim metaTemp As String
-  '
-  ' filePath = File.Dir(TextBox1.Text) &/ "pdf"
-  ' newFile = "pdf-" & BaseName & ".tex"
-  ' rutaFija = File.Dir(TextBox1.Text) &/ "files"
-  ' newLog = "gbTeX-" & BaseName & ".log"
-  ' metaTemp = "gbTeXmetaTMP-" & BaseName & ".tex"
-
-  ' Mod_Funciones.Borrar_Aux
-  ' Wait 0.2
-  '
-  ' ' metadatos para construcción de maketitle
-  ' ' no mover de esta posición
-  ' Mod_Exportar.ExportToMetaTMP(TextBox1.Text)
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("cat " & rutaFILES & "/revista-pdf.tex" & " " & rutaFILES &/ metaTemp & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' ' borramos el archivo temporal de metadatos del artículo
-  ' TerminalView1.Input("rm -rf " & rutaFILES &/ metaTemp & "\n")
-  '
-  ' ' borramos el pdf antiguo en caso de existir
-  ' TerminalView1.Input("rm -rf pdf" & "\n")
-  ' Wait 0.2
-  '
-  ' ' exportamos los archivos bib, glo y meta
-  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  ' Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("latexmk -f --shell-escape --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' 'ejecutamos en conteo del archivo LaTeX
-  ' TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n" & "clear" & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("rm -rf " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' If filePath = "" Then
-  '   Return
-  ' Else
-  '   TerminalView1.Input("mkdir pdf" & "\n")
-  ' Endif
-  '
-  ' TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf" & "\n")
-  '
-  ' 'copiamos /files el archivo .log
-  ' TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n" & "clear" & "\n")
-  '
-  ' 'generamos una vista con texlogsieve
-  ' TerminalView1.Input("texlogsieve " & rutaFILES & "/gbTeX-" & BaseName & ".log > " & rutaFILES & "/gbTeXv-" & BaseName & ".log" & "\n" & "clear" & "\n")
-  '
-  ' 'borramos los archivos auxiliares del directorio
-  ' TerminalView1.SetFocus()
-  ' Mod_Funciones.Borrar_Aux
 
 End
 
@@ -819,6 +747,9 @@ Public Sub menuAbrir_Click()'abrir un libro
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
+  ' mostramos las entradas particulares del archivo en los botones de filtro
+  contarEntradasBIByGLO()
+
   'levantamos los datos de metadatos
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
@@ -913,28 +844,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-
-  Dim RecordBIB As String
-  Dim CountBIB As Integer
-  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
-  RecordBIB = Contenido[0]
-  CountBIB = RecordBIB
-
-  Dim RecordGLO As String
-  Dim CountGLO As Integer
-  Dim Record2GLO As String
-  Dim Count2GLO As Integer
-  Dim Contenido3 As Result
-
-  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
-  RecordGLO = Contenido[0]
-  CountGLO = RecordGLO
-  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
-
-  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
-  Record2GLO = Contenido3[0]
-  Count2GLO = Record2GLO
-  btnParcialGLO.Text = "(" & Count2GLO & ")"
 
 End
 
@@ -1110,31 +1019,12 @@ Public Sub mnuLast_Click()
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
 
+  ' mostramos las entradas particulares del archivo en los botones de filtro
+  contarEntradasBIByGLO()
+
   'posicionamos la consola con el path del archivo de trabajo
   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
   TerminalView1.SetFocus()
-
-  Dim RecordBIB As String
-  Dim CountBIB As Integer
-  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
-  RecordBIB = Contenido[0]
-  CountBIB = RecordBIB
-
-  Dim RecordGLO As String
-  Dim CountGLO As Integer
-  Dim Record2GLO As String
-  Dim Count2GLO As Integer
-  Dim Contenido3 As Result
-
-  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
-  RecordGLO = Contenido[0]
-  CountGLO = RecordGLO
-  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
-
-  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
-  Record2GLO = Contenido3[0]
-  Count2GLO = Record2GLO
-  btnParcialGLO.Text = "(" & Count2GLO & ")"
 
   Dim nombreDelArchivo As String = File.Name(TextBox1.Text)
 
@@ -1151,104 +1041,6 @@ Public Sub d2t_Click()
   Form_Conversor.ShowModal()
 
 End
-
-' 'exportamos el archivo metadatos
-' Public Sub ExportToMetaJATS()
-'
-'   Dim s As String
-'   Dim f As ResultField
-'   Dim aFields As New String[]
-'   Dim w As Integer
-'   Dim buscar As String
-'   Dim outputFile As String
-'
-'   buscar = "select * from metadatos where nombreArchivo like '%" & BaseName & "%'"
-'
-'   ' Exportar el registro seleccionado
-'   Contenido = Conn.Exec(buscar)
-'
-'   aFields.Clear
-'   For Each f In Contenido.Fields
-'     aFields.Add(f.Name)
-'     If Len(f.Name) > w Then
-'       w = Len(f.Name)
-'     Endif
-'   Next
-'
-'   s = "" ' Inicializa la cadena vacía
-'
-'   While Contenido.Available
-'     s &= "\n"
-'     s &= "% contenido agregado de manera dinámica, no edite este archivo" & "\n"
-'     ' s &= "\n"
-'     ' s &= "\\Configure{CoverMimeType}{image/jpeg}" & "\n"
-'     ' s &= "\\CoverMetadata{./media/" & Contenido[aFields[49]] & "}\n" 'tapa
-'     s &= "\n"
-'     s &= "\\begin{document}" & "\n"
-'     s &= "\\def\\Author{" & Contenido[aFields[5]] & "}\n" '
-'     s &= "\\def\\Title{" & Contenido[aFields[6]] & ": " & Contenido[aFields[9]] & "}\n"
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:subject>" & Contenido[aFields[57]] & "</dc:subject>}}\n" 'palabras clave
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:date>" & Contenido[aFields[11]] & "</dc:date>}}\n" 'fecha original opf:event=\"original-publication\"
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:created>" & Contenido[aFields[12]] & "</dc:created>}}\n" 'fecha de creación
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:modified>" & Contenido[aFields[13]] & "</dc:modified>}}\n"
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:rights>" & Contenido[aFields[15]] & "</dc:rights>}}\n" 'licencia
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:identifier id=\"uuid\" opf:scheme=\"UUID\">" & Contenido[aFields[26]] & "</dc:identifier>}}\n" 'identificador
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:publisher>" & Contenido[aFields[28]] & "</dc:publisher>}}\n" 'editorial
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:identifier id=\"bookid\">" & Contenido[aFields[35]] & "</dc:identifier>}}\n" 'isbn
-'     s &= "\\Configure{DocumentLanguage}{" & Contenido[aFields[39]] & "}\n"
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:identifier id=\"bookid\" opf:scheme=\"URI\">" & Contenido[aFields[42]] & "</dc:identifier>}}\n" 'identificador uuid 42
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:description>" & Contenido[aFields[56]] & "</dc:description>}}\n" 'abstract
-'
-'     If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
-'       s &= "\\Configure{OpfMetadata}" & "\n"
-'       s &= "{\\HCode{<dc:relation>" & Contenido[aFields[51]] & "</dc:relation>}}\n" 'relation
-'     Endif
-'
-'     If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
-'       s &= "\\Configure{OpfMetadata}" & "\n"
-'       s &= "{\\HCode{<dc:contributor opf:role=\"edt\">" & Contenido[aFields[52]] & "</dc:contributor>}}\n" 'editor
-'     Endif
-'
-'     If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
-'       s &= "\\Configure{OpfMetadata}" & "\n"
-'       s &= "{\\HCode{<dc:contributor opf:role=\"trl\">" & Contenido[aFields[53]] & "</dc:contributor>}}\n" 'traductor
-'     Endif
-'
-'     If Not IsNull(Contenido[aFields[54]]) And Len(Contenido[aFields[54]]) > 0 Then
-'       s &= "\\Configure{OpfMetadata}" & "\n"
-'       s &= "{\\HCode{<dc:language opf:file-as=\"Original Language\">" & Contenido[aFields[54]] & "</dc:language>}}\n"
-'     Endif
-'
-'     If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
-'       s &= "\\Configure{OpfMetadata}" & "\n"
-'       s &= "{\\HCode{<dc:contributor opf:role=\"ill\">" & Contenido[aFields[55]] & "</dc:contributor>}}\n" 'ilustrador
-'     Endif
-'
-'     s &= "\\Configure{OpfMetadata}" & "\n"
-'     s &= "{\\HCode{<dc:format>EPUB</dc:format>}}\n" 'formato
-'     s &= "\\EndPreamble" & "\n"
-'     s &= "\n"
-'
-'     Contenido.MoveNext
-'   Wend
-'
-'   ' Establece la ruta y el nombre del archivo de salida
-'   outputFile = File.Dir(TextBox1.Text) &/ "files" &/ "gbTeXmeta-" & BaseName & ".tex"
-'
-'   ' Guarda el contenido acumulado en un solo archivo
-'   File.Save(outputFile, s)
-'
-' End
 
 Public Sub Menu74_Click()'ver pdf página del catálogo
 
@@ -1495,20 +1287,6 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
     VGridGLO[i, 10].Text = Contenido!sort
     Contenido.MoveNext
   Next
-
-  Dim RecordGLO As String
-  Dim CountGLO As Integer
-  Dim Record2GLO As String
-  Dim Count2GLO As Integer
-  Dim Contenido3 As Result
-  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
-  RecordGLO = Contenido[0]
-  CountGLO = RecordGLO
-  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
-  Record2GLO = Contenido3[0]
-  Count2GLO = Record2GLO
-  btnParcialGLO.Text = "(" & Count2GLO & ")"
-  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
 
 End
 
@@ -2911,7 +2689,7 @@ Public Sub btnGuardar_Click()
 
     LimpiarCamposBIB() 'limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
-    TotalEntradas()'actualizamos el contador de entradas
+    Mod_Funciones.TotalEntradasBIByGLO()'actualizamos el contador de entradas
     btnGuardarCambios.Enabled = False
     btnGuardar.Enabled = False
     BtnNuevoBib.Enabled = True
@@ -3863,16 +3641,6 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
 
-  'obtenemos el número de entradas del archivo en curso
-  Dim Record2BIB As String
-  Dim Count2BIB As Integer
-  Dim Contenido2 As Result
-  Contenido2 = conector.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
-  Record2BIB = Contenido2[0]
-  Count2BIB = Record2BIB
-
-  Button1.Text = "(" & Count2BIB & ")"
-
 End
 
 Public Sub btnAgregarKeyBIB_Click()
@@ -4096,7 +3864,7 @@ Public Sub btnAgregarCitationKey_Click()
   Dim Comando As String
   Dim Header As String
 
-  Header = "@" & txtIDglosario.Text & "-" 'prefijo de la clave bib
+  Header = "@" & txtIDbibtex.Text & "-" 'prefijo de la clave bib
 
   ' Escapa los caracteres especiales (comilla simple) en el título
   Dim tituloEscapado As String
@@ -4322,119 +4090,6 @@ Public Sub txtPAGES_Change()
   txtPAGES.pos = curpos
 
 End
-
-' Public Sub txtTITLE_Change()
-'
-'   Dim curpos As Integer
-'
-'   curpos = txtTITLE.Pos
-'
-'   Dim texto As String
-'
-'   texto = txtTITLE.Text
-'
-'   texto = Replace(texto, "’", "'")
-'   texto = Replace(texto, "´", "'")
-'   texto = Replace(texto, "–", "-")
-'   texto = Replace(texto, " & ", " \\& ")
-'   texto = Replace(texto, " #", " \\#")
-'
-'   txtTITLE.Text = texto
-'
-'   txtTITLE.Pos = curpos
-'
-' End
-
-' Public Sub txtBOOKTITLE_Change()
-'
-'   Dim curpos As Integer
-'
-'   curpos = txtBOOKTITLE.Pos
-'
-'   Dim texto As String
-'
-'   texto = txtBOOKTITLE.Text
-'
-'   texto = Replace(texto, "  ", " ")
-'   texto = Replace(texto, "’", "'")
-'   texto = Replace(texto, "´", "'")
-'   texto = Replace(texto, "–", "-")
-'   texto = Replace(texto, " & ", " \\& ")
-'   texto = Replace(texto, " #", " \\#")
-'
-'   txtBOOKTITLE.Text = texto
-'
-'   txtBOOKTITLE.Pos = curpos
-'
-' End
-
-' Public Sub txtMAINTITLE_Change()
-'
-'   Dim curpos As Integer
-'
-'   curpos = txtMAINTITLE.Pos
-'
-'   Dim texto As String
-'
-'   texto = txtMAINTITLE.Text
-'
-'   texto = Replace(texto, "  ", " ")
-'   texto = Replace(texto, "’", "'")
-'   texto = Replace(texto, "´", "'")
-'   texto = Replace(texto, "–", "-")
-'   texto = Replace(texto, " & ", " \\& ")
-'   texto = Replace(texto, " #", " \\#")
-'
-'   txtMAINTITLE.Text = texto
-'
-'   txtMAINTITLE.Pos = curpos
-'
-' End
-
-' Public Sub txtJOURNALTITLE_Change()
-'
-'   Dim curpos As Integer
-'
-'   curpos = txtJOURNALTITLE.Pos
-'
-'   Dim texto As String
-'
-'   texto = txtJOURNALTITLE.Text
-'
-'   texto = Replace(texto, "  ", " ")
-'   texto = Replace(texto, "’", "'")
-'   texto = Replace(texto, "´", "'")
-'   texto = Replace(texto, "–", "-")
-'   texto = Replace(texto, " & ", " \\& ")
-'   texto = Replace(texto, " #", " \\#")
-'
-'   txtJOURNALTITLE.Text = texto
-'
-'   txtJOURNALTITLE.Pos = curpos
-'
-' End
-
-' Public Sub txtSHORTTITLE_Change()
-'
-'   Dim curpos As Integer
-'
-'   curpos = txtSHORTTITLE.Pos
-'
-'   Dim texto As String
-'
-'   texto = txtSHORTTITLE.Text
-'
-'   texto = Replace(texto, "’", "'")
-'   texto = Replace(texto, "´", "'")
-'   texto = Replace(texto, "–", "-")
-'   texto = Replace(texto, " & ", " \\& ")
-'   texto = Replace(texto, " #", " \\#")
-'
-'   txtSHORTTITLE.Text = texto
-'
-'   txtSHORTTITLE.Pos = curpos
-'
-' End
 
 Public Sub BtnBuscarClave_Click()
 
@@ -4931,85 +4586,6 @@ Public Sub txtPUBLISHER_Change()
 
 End
 
-' Public Sub AplicarMayusculasPrimeraLetra(textBox As TextBox)
-'
-'   Dim Cadena As String
-'   Dim Resultado As String
-'
-'   ' Obtener el texto actual del TextBox
-'   Cadena = textBox.Text
-'
-'   ' Variable para determinar si el próximo carácter debe convertirse a mayúscula
-'   Dim convertir As Boolean = True
-'
-'   ' Recorrer cada carácter en la cadena
-'   For i As Integer = 1 To String.Len(Cadena)
-'     Dim caracter As String = String.Mid(Cadena, i, 1)
-'
-'     ' Verificar si se debe convertir a mayúscula
-'     If convertir Then
-'       ' Verificar la excepción para la palabra "and"
-'       Dim palabraAnd As String = String.LCase(String.Mid(Cadena, i, 3))
-'
-'       If palabraAnd = "and" Then
-'         Resultado &= String.Mid(Cadena, i, 3)
-'         i = i + 2 ' Saltar las letras de la palabra "and"
-'       Else
-'         Resultado &= String.UCase(caracter)
-'       End If
-'
-'       convertir = False
-'     Else
-'       Resultado &= String.LCase(caracter)
-'     End If
-'
-'     ' Si el carácter actual es un espacio, el próximo carácter debe convertirse
-'     If caracter = " " Then
-'       convertir = True
-'     End If
-'   Next
-'
-'   ' Establecer el nuevo texto en el TextBox
-'   textBox.Text = Resultado
-'
-' End
-
-' Public Sub txtAUTHOR_DblClick()
-'
-'   AplicarMayusculasPrimeraLetra(txtAUTHOR)
-'
-' End
-
-' Public Sub txtBOOKAUTHOR_DblClick()
-'
-'   AplicarMayusculasPrimeraLetra(txtBOOKAUTHOR)
-'
-' End
-
-' Public Sub txtEDITOR_DblClick()
-'
-'   AplicarMayusculasPrimeraLetra(txtEDITOR)
-'
-' End
-
-' Public Sub txtEDITORa_DblClick()
-'
-'   AplicarMayusculasPrimeraLetra(txtEDITORa)
-'
-' End
-
-' Public Sub txtEDITORb_DblClick()
-'
-'   AplicarMayusculasPrimeraLetra(txtEDITORb)
-'
-' End
-
-' Public Sub txtEDITORc_DblClick()
-'
-'   AplicarMayusculasPrimeraLetra(txtEDITORc)
-'
-' End
-
 Public Sub BtnBuscarBookTitle_Click()
 
   Dim Comando As String
@@ -5220,12 +4796,6 @@ Public Sub txtABSTRACT_DblClick()
 
   Form_TXTextendido.OriginalTextBox = txtABSTRACT
   Form_TXTextendido.ShowModal
-
-End
-
-Public Sub menuORTO_Click()
-
-  Form_ORTO.ShowModal()
 
 End
 
@@ -5484,18 +5054,6 @@ Public Sub BtnBuscarJournal_Click()
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
   btnGuardarIGUAL.Enabled = False
-
-End
-
-Public Sub TotalEntradas()'calculamos las entradas totales
-
-  Dim RecordBIB As String
-  Dim CountBIB As Integer
-
-  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
-  RecordBIB = Contenido[0]
-  CountBIB = RecordBIB
-  txtTOTALbib.Text = "<b>Total de referencias en la base de datos: " & CountBIB & "</b>"
 
 End
 
@@ -6112,6 +5670,9 @@ Public Sub menuAbrirRevista_Click()
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
+  ' mostramos las entradas particulares del archivo en los botones de filtro
+  contarEntradasBIByGLO()
+
   'comienza metadatos
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
@@ -6208,28 +5769,6 @@ Public Sub menuAbrirRevista_Click()
   'posicionamos la consola con el path del archivo de trabajo
   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
   TerminalView1.SetFocus()
-
-  Dim RecordBIB As String
-  Dim CountBIB As Integer
-  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
-  RecordBIB = Contenido[0]
-  CountBIB = RecordBIB
-
-  Dim RecordGLO As String
-  Dim CountGLO As Integer
-  Dim Record2GLO As String
-  Dim Count2GLO As Integer
-  Dim Contenido3 As Result
-
-  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
-  RecordGLO = Contenido[0]
-  CountGLO = RecordGLO
-  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
-
-  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
-  Record2GLO = Contenido3[0]
-  Count2GLO = Record2GLO
-  btnParcialGLO.Text = "(" & Count2GLO & ")"
 
 End
 
@@ -6607,28 +6146,6 @@ Public Sub menuMono_Click()
   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
   TerminalView1.SetFocus()
 
-  Dim RecordBIB As String
-  Dim CountBIB As Integer
-  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
-  RecordBIB = Contenido[0]
-  CountBIB = RecordBIB
-
-  Dim RecordGLO As String
-  Dim CountGLO As Integer
-  Dim Record2GLO As String
-  Dim Count2GLO As Integer
-  Dim Contenido3 As Result
-
-  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
-  RecordGLO = Contenido[0]
-  CountGLO = RecordGLO
-  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
-
-  Contenido3 = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
-  Record2GLO = Contenido3[0]
-  Count2GLO = Record2GLO
-  btnParcialGLO.Text = "(" & Count2GLO & ")"
-
 End
 
 Public Sub btnMONOpdf_Click()
@@ -6858,5 +6375,46 @@ Public Sub btnGitHubPages_Click()
 
   'copiamos los archivos
   TerminalView1.Input("cp -rv " & File.Dir(TextBox1.Text) & "/html5/*" & " " & File.Dir(TextBox1.Text) & "/docs/" & "\n" & "clear" & "\n")
+
+End
+
+Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales
+
+  Dim RecordBIB As String
+  Dim CountBIB As Integer
+  Dim RecordGLO As String
+  Dim CountGLO As Integer
+
+  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
+  RecordBIB = Contenido[0]
+  CountBIB = RecordBIB
+  txtTOTALbib.Text = "<b>Total de referencias en la base de datos: " & CountBIB & "</b>"
+
+  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
+  RecordGLO = Contenido[0]
+  CountGLO = RecordGLO
+  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
+
+End
+
+Public Sub contarEntradasBIByGLO()' mostramos las cantidades en el boton
+
+  Dim Record2BIB As String
+  Dim Count2BIB As Integer
+  Dim ContenidoBIB As Result
+
+  ContenidoBIB = conector.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
+  Record2BIB = ContenidoBIB[0]
+  Count2BIB = Record2BIB
+  Button1.Text = "(" & Count2BIB & ")"
+
+  Dim Record2GLO As String
+  Dim Count2GLO As Integer
+  Dim ContenidoGLO As Result
+
+  ContenidoGLO = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  Record2GLO = ContenidoGLO[0]
+  Count2GLO = Record2GLO
+  btnParcialGLO.Text = "(" & Count2GLO & ")"
 
 End

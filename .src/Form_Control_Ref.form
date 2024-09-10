@@ -16,12 +16,12 @@
       ReadOnly = True
     }
     { txtID2 TextBox
-      MoveScaled(6,0,8,4)
+      MoveScaled(13,0,8,4)
       Visible = False
       ReadOnly = True
     }
     { Spring1 Spring
-      MoveScaled(21,0,15,4)
+      MoveScaled(30,0,15,4)
     }
     { btnGuardar Button
       MoveScaled(65,0,4,4)
