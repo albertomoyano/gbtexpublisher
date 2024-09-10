@@ -4793,7 +4793,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   btnAgregarCitationKey.Enabled = True
   btnGuardar.Enabled = False
 
-  txtIDglosario.Text = VListaBIB[Row, 0].Text
+  txtIDbibtex.Text = VListaBIB[Row, 0].Text
   cbTYPEentrada.Text = VListaBIB[Row, 1].Text
   txtCLAVEbib.Text = VListaBIB[Row, 2].Text
   txtKEYWORDS.Text = VListaBIB[Row, 3].Text
