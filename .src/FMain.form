@@ -3013,11 +3013,11 @@
       MoveScaled(2,9,103,0.8889)
     }
     { !TabStripMetaLibro TabStrip
-      MoveScaled(1,12,89,340)
+      MoveScaled(2,12,89,340)
       #Public = True
       Expand = True
       Arrangement = Arrange.Vertical
-      Count = 3
+      Count = 2
       Index = 0
       Text = ("Generales y obligatorios para todas las salidas")
       { ScrollView10 ScrollView
@@ -3089,7 +3089,7 @@
             MoveScaled(50,0,2.3333,4)
           }
           { TextLabel2 TextLabel
-            MoveScaled(57,0,15,4)
+            MoveScaled(53,0,23,4)
             Expand = True
             Text = ("Refiere a la fecha de creación del archivo .tex")
             Alignment = Align.Normal
@@ -4650,12 +4650,10 @@
           }
         }
       }
-      Index = 2
-      Text = ("ABM autores")
       Index = 0
     }
     { !TabPanel3 TabStrip
-      MoveScaled(92,11,107,348)
+      MoveScaled(93,11,107,348)
       #Public = True
       Expand = True
       Arrangement = Arrange.Vertical
