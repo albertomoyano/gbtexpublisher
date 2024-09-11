@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,105.5556,82.2222)
+  MoveScaled(0,0,113.7778,88.8889)
   Text = ("Control de referencias relacionadas")
   Arrangement = Arrange.Vertical
   Padding = 4
@@ -45,7 +45,6 @@
       MoveScaled(1,5,101,33)
       Arrangement = Arrange.Vertical
       Padding = 4
-      Text = ("Referencias del archivo .tex en curso")
       Alignment = Align.BottomLeft
       { Table2 TableView
         MoveScaled(4,5,45,7)
@@ -53,6 +52,7 @@
         Expand = True
         Mode = Select.Single
         ShowCursor = True
+        Header = GridView.Horizontal
       }
       { HBox3 HBox
         MoveScaled(2,14,97,4.4444)
@@ -145,121 +145,48 @@
       { HBox16 HBox
         MoveScaled(1,3,98,4.4444)
         Padding = 2
-        { radio1a RadioButton
-          MoveScaled(2,0,16,4)
-          AutoResize = True
-          Text = ("Por autor  ")
-          Value = True
+        { Label8 Label
+          MoveScaled(0,0,16,3.5556)
+          Alignment = Align.Right
+          Text = ("Autor ")
         }
-        { radio1b RadioButton
-          MoveScaled(20,0,24,4)
-          AutoResize = True
-          Text = ("Por título  ")
-        }
-        { txtBuscar1 TextBox
+        { txtBuscarAutor TextBox
           MoveScaled(59,0,13,4)
           NoTabFocus = True
           Expand = True
         }
-        { BtnBuscar1 Button
+        { BtnBuscarAutor Button
           MoveScaled(79,0,4,4)
           NoTabFocus = True
           Picture = Picture["iconos/search.svg"]
         }
       }
-      { HBox81 HBox
-        MoveScaled(2,7,97,4.4444)
+      { HBox5 HBox
+        MoveScaled(0,7.4444,98,4.4444)
         Padding = 2
-        { Label5 Label
+        { Label9 Label
           MoveScaled(0,0,16,3.5556)
           Alignment = Align.Right
-          Text = ("Filtro ")
+          Text = ("Título ")
         }
-        { txtFiltro1 TextBox
-          MoveScaled(19,0,17,4)
+        { txtBuscarTitulo TextBox
+          MoveScaled(59,0,13,4)
           NoTabFocus = True
           Expand = True
         }
-        { Label4 Label
-          MoveScaled(51,0,12,4)
-          #Translate = False
+        { BtnBuscarTitulo Button
+          MoveScaled(79,0,4,4)
           NoTabFocus = True
-          Alignment = Align.Right
-          Text = "Clave "
-        }
-        { txtClave1 TextBox
-          MoveScaled(65,0,30,4)
-          Background = Color.Background
-          NoTabFocus = True
-          ReadOnly = True
+          Picture = Picture["iconos/search.svg"]
         }
       }
-      { HBox76 HBox
-        MoveScaled(2,11,97,4.4444)
-        Padding = 2
-        { Label49 Label
-          MoveScaled(1,0,16,3.5556)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "RelatedType "
-        }
-        { cbRELATEDTYPE1 ComboBox
-          MoveScaled(19,0,24,3.5556)
-          NoTabFocus = True
-          ReadOnly = True
-        }
-        { Label48 Label
-          MoveScaled(47,0,12,3.5556)
-          Expand = True
-          Alignment = Align.Right
-          Text = ("Related ")
-        }
-        { txtRelated1 TextBox
-          MoveScaled(65,0,30,4)
-          Background = Color.Background
-          NoTabFocus = True
-          ReadOnly = True
-          Placeholder = ("Clave BIB asociada")
-        }
-      }
-      { HBox77 HBox
-        MoveScaled(2,15,97,4.4444)
-        Padding = 2
-        { lblRELATEDSTRING2 Label
-          MoveScaled(0,0,16,4)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "RelatedString "
-        }
-        { txtRelatedString1 TextBox
-          MoveScaled(17,0,24,4)
-          Background = Color.Background
-          NoTabFocus = True
-          Expand = True
-          ReadOnly = True
-          Placeholder = ("Redacción manual del tipo de relación")
-        }
-        { Label46 Label
-          MoveScaled(41,0,12,3.5556)
-          #Translate = False
-          NoTabFocus = True
-          Alignment = Align.Right
-          Text = "CrossRef "
-        }
-        { txtCrossRef1 TextBox
-          MoveScaled(60,0,30,4)
-          Background = Color.Background
-          NoTabFocus = True
-          ReadOnly = True
-          Placeholder = ("Clave BIB relacionada")
-        }
-      }
-      { Table1 TableView
-        MoveScaled(2,20,47,7)
+      { VListaBIB TableView
+        MoveScaled(2,24,47,7)
         Font = Font["-1"]
         Expand = True
         Mode = Select.Single
         ShowCursor = True
+        Header = GridView.Horizontal
       }
     }
   }

@@ -245,7 +245,6 @@ Public Sub Form_Open()
 
     ' comienza bibtex
     BtnEliminarBib.Enabled = False
-    btnDuplicarBib.Enabled = False
     btnGuardar.Enabled = False
     btnGuardarCambios.Enabled = False
 
@@ -2577,7 +2576,6 @@ Public Sub BtnEliminarBib_Click()
   VListaBIB.Clear()
   Mostrar_ListaBIB()
 
-  btnDuplicarBib.Enabled = False
   BtnEliminarBib.Enabled = False
   btnGuardarCambios.Enabled = False
   btnAgregarCitationKey.Enabled = False
@@ -2587,7 +2585,6 @@ End
 
 Public Sub BtnNuevoBib_Click()
 
-  btnDuplicarBib.Enabled = False
   BtnNuevoBib.Enabled = False
   BtnEliminarBib.Enabled = False
   btnGuardar.Enabled = True
@@ -2625,7 +2622,6 @@ End
 
 Public Sub btnGuardarCambios_Click()
 
-  btnDuplicarBib.Enabled = False
   BtnNuevoBib.Enabled = True
   btnGuardar.Enabled = False
   btnGuardarCambios.Enabled = False
@@ -2696,7 +2692,6 @@ Public Sub btnGuardar_Click()
     BtnEliminarBib.Enabled = False
     btnAgregarCitationKey.Enabled = False
     btnGuardarIGUAL.Enabled = False
-    btnDuplicarBib.Enabled = False
   Endif
 
 End
@@ -2857,7 +2852,6 @@ End
 
 Public Sub BtnRefrescarBib_Click()'refrescamos la vista
 
-  btnDuplicarBib.Enabled = False
   BtnNuevoBib.Enabled = True
   BtnEliminarBib.Enabled = False
   btnGuardar.Enabled = False
@@ -4289,7 +4283,6 @@ Public Sub btnGuardarIGUAL_Click()
       btnGuardar.Enabled = False
       BtnNuevoBib.Enabled = True
       BtnEliminarBib.Enabled = False
-      btnDuplicarBib.Enabled = False
       btnAgregarCitationKey.Enabled = False
       btnGuardarIGUAL.Enabled = False
     End If
@@ -4442,7 +4435,6 @@ End
 
 Public Sub VListaBIB_RowClick(Row As Integer)
 
-  btnDuplicarBib.Enabled = True
   btnGuardarCambios.Enabled = True
   BtnEliminarBib.Enabled = True
   btnAgregarCitationKey.Enabled = True
@@ -5972,12 +5964,6 @@ Public Sub BtnBuscarEnArchivos_Click()
   TerminalView1.Clear
   TerminalView1.Input("python3 " & rutaApp & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
   TerminalView1.SetFocus
-
-End
-
-Public Sub btnRefRelacionada_Click()
-
-  Form_Control_Ref.Show()
 
 End
 
