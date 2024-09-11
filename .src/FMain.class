@@ -1013,7 +1013,7 @@ Public Sub mnuLast_Click()
     btnGuardarCambiosMeta.Enabled = False
   Endif
 
-  txtContactCountry.MaxLength = 1500
+  ' txtContactCountry.MaxLength = 1500
   txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"

@@ -5,7 +5,7 @@ Public pSettings As Settings
 Public Matrix As New String[]
 Public ShortMatrix As New String[]
 Public sSlotName As String
-Public Const iLastNumber As Integer = 9
+Public Const iLastNumber As Integer = 20
 
 Public Sub Init()
 
