@@ -1654,7 +1654,6 @@
           { txtPAGES TextBox
             MoveScaled(17,0,7,4)
             Expand = True
-            PopupMenu = "menuTEXTBOX"
             Placeholder = ("00-000")
           }
           { lblPAGETOTAL Label
@@ -1662,11 +1661,9 @@
             Alignment = Align.Right
             Text = ("PageTotal ")
           }
-          { txtPAGETOTAL TextBox AllTextBoxes
-            Name = "txtPAGETOTAL"
+          { txtPAGETOTAL TextBox
             MoveScaled(42,0,21,4)
             Expand = True
-            PopupMenu = "menuTEXTBOX"
             Placeholder = ("total number of pages")
           }
         }
@@ -1678,11 +1675,9 @@
             Alignment = Align.Right
             Text = ("Pagination ")
           }
-          { txtPAGINATION TextBox AllTextBoxes
-            Name = "txtPAGINATION"
+          { txtPAGINATION TextBox
             MoveScaled(17,0,17,4)
             Expand = True
-            PopupMenu = "menuTEXTBOX"
             Placeholder = ("pagination format of (book)title")
           }
           { lblLocation2 Label
@@ -1720,8 +1715,7 @@
             Alignment = Align.Right
             Text = ("BookPagination ")
           }
-          { txtBookPagination TextBox AllTextBoxes
-            Name = "txtBookPagination"
+          { txtBookPagination TextBox
             MoveScaled(67,0,12,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
@@ -2559,8 +2553,13 @@
             Alignment = Align.Right
             Text = ("Filtro ")
           }
+          { btnAgregarKeyBIBtwo Button
+            MoveScaled(18,0,4,4)
+            ToolTip = ("Agregar clave")
+            Picture = Picture["iconos/clave.svg"]
+          }
           { txtFILTROrelacion TextBox
-            MoveScaled(19,0,17,4)
+            MoveScaled(32,0,17,4)
             NoTabFocus = True
             Expand = True
           }

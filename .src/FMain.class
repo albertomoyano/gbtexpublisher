@@ -4151,6 +4151,8 @@ Public Sub txtPAGES_Change()
   texto = Replace(texto, " -", "-")
   texto = Replace(texto, "- ", "-")
   texto = Replace(texto, " a ", "-")
+  texto = Replace(texto, ".", "")
+  texto = Replace(texto, " al ", "-")
 
   txtPAGES.Text = texto
 
@@ -7145,5 +7147,33 @@ Public Sub BtnBuscarTituloReferenciaRelacion_Click()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   tbRefDup.ScrollY = 0
+
+End
+
+Public Sub btnAgregarKeyBIBtwo_Click()
+
+  Dim TextoExistente As String
+  Dim TextoAAgregar As String
+
+  ' Obtener el texto actual del cuadro de texto
+  TextoExistente = txtFILTROrelacion.Text
+
+  ' Verificar si el primer carácter es una coma
+  If Left$(TextoExistente, 1) <> "," Then
+    ' Agregar una coma al principio del texto
+    TextoExistente = "," & TextoExistente
+  Endif
+
+  ' Texto que deseas agregar
+  TextoAAgregar = BaseName & ","
+
+  ' Comprobar si el cuadro de texto ya tiene texto
+  If Len(Trim(TextoExistente)) > 0 Then
+    ' Si ya hay texto, agrega el texto nuevo
+    txtFILTROrelacion.Text = TextoExistente & TextoAAgregar
+  Else
+    ' Si no hay texto, simplemente establece el texto a agregar
+    txtFILTROrelacion.Text = TextoAAgregar
+  Endif
 
 End
