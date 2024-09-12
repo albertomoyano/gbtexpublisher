@@ -249,7 +249,7 @@ Public Sub Form_Open()
     btnGuardarCambios.Enabled = False
 
     Mostrar_ListaBIB()
-    TotalEntradasBIByGLO()' mostramos total de entradas bib y glo
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
 
     ' Verifica si el TextBox1 tiene una ruta válida
     If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
@@ -746,8 +746,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
-  ' mostramos las entradas particulares del archivo en los botones de filtro
-  contarEntradasBIByGLO()
+  contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
   'levantamos los datos de metadatos
   Dim comando As String
@@ -1018,8 +1017,7 @@ Public Sub mnuLast_Click()
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
 
-  ' mostramos las entradas particulares del archivo en los botones de filtro
-  contarEntradasBIByGLO()
+  contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
   'posicionamos la consola con el path del archivo de trabajo
   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
@@ -2685,7 +2683,7 @@ Public Sub btnGuardar_Click()
 
     LimpiarCamposBIB() 'limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
-    Mod_Funciones.TotalEntradasBIByGLO()'actualizamos el contador de entradas
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
     btnGuardarCambios.Enabled = False
     btnGuardar.Enabled = False
     BtnNuevoBib.Enabled = True
@@ -5662,8 +5660,7 @@ Public Sub menuAbrirRevista_Click()
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
-  ' mostramos las entradas particulares del archivo en los botones de filtro
-  contarEntradasBIByGLO()
+  contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
   'comienza metadatos
   Dim comando As String
