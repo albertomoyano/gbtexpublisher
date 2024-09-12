@@ -766,7 +766,7 @@
         ReadOnly = True
       }
       { Button1 Button
-        MoveScaled(99,0,16,4)
+        MoveScaled(84,0,16,4)
         ToolTip = ("Mostrar las entradas de este archivo")
         Picture = Picture["iconos/face.svg"]
       }
@@ -2490,7 +2490,7 @@
         ScrollBar = Scroll.Vertical
         { HBox188 HBox
           MoveScaled(0,0,89,4)
-          { btnGuardar2 Button
+          { btnGuardarRelacion Button
             MoveScaled(1,0,4,4)
             ToolTip = ("Guardar")
             Picture = Picture["iconos/guardarComo.svg"]
@@ -2501,6 +2501,7 @@
         }
         { tbRefDup TableView
           MoveScaled(3,7,47,9)
+          Visible = False
           Font = Font["-1"]
           Expand = True
           Mode = Select.Single
@@ -2511,7 +2512,7 @@
         { HBox180 HBox
           MoveScaled(0,16,97,4.4444)
           Padding = 2
-          { BtnBuscarAuthorDup Button
+          { BtnBuscarAuthorRelacion Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
             Picture = Picture["iconos/search.svg"]
@@ -2521,7 +2522,7 @@
             Alignment = Align.Right
             Text = ("Author ")
           }
-          { txtAUTHORdup TextBox
+          { txtAUTHORrelacion TextBox
             MoveScaled(24,0,15,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
@@ -2531,7 +2532,7 @@
         { HBox184 HBox
           MoveScaled(0,21,100,4.4444)
           Padding = 2
-          { BtnBuscarTituloReferenciaDup Button
+          { BtnBuscarTituloReferenciaRelacion Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
             ToolTip = ("Búsqueda rápida del título")
@@ -2542,7 +2543,7 @@
             Alignment = Align.Right
             Text = ("Title ")
           }
-          { txtTITLEdup TextBox
+          { txtTITLErelacion TextBox
             MoveScaled(33,0,12,3.5556)
             Expand = True
             PopupMenu = "menuTEXTBOX"
@@ -2558,7 +2559,7 @@
             Alignment = Align.Right
             Text = ("Filtro ")
           }
-          { txtFiltro1 TextBox
+          { txtFILTROrelacion TextBox
             MoveScaled(19,0,17,4)
             NoTabFocus = True
             Expand = True

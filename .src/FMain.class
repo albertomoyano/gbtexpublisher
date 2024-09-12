@@ -249,6 +249,7 @@ Public Sub Form_Open()
     btnGuardarCambios.Enabled = False
 
     Mostrar_ListaBIB()
+    Mostrar_ListaBIBrelacion
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
 
     ' Verifica si el TextBox1 tiene una ruta válida
@@ -3900,66 +3901,6 @@ Public Sub btnAgregarCitationKey_Click()
   textoOrigen = Replace(textoOrigen, "´", "")
   textoOrigen = Replace(textoOrigen, "`", "")
   textoOrigen = Replace(textoOrigen, " ", "")
-  'letra a
-  textoOrigen = Replace(textoOrigen, "á", "A")
-  textoOrigen = Replace(textoOrigen, "à", "A")
-  textoOrigen = Replace(textoOrigen, "ä", "A")
-  textoOrigen = Replace(textoOrigen, "ã", "A")
-  textoOrigen = Replace(textoOrigen, "å", "A")
-  textoOrigen = Replace(textoOrigen, "ą", "A")
-  textoOrigen = Replace(textoOrigen, "ă", "A")
-  textoOrigen = Replace(textoOrigen, "ả", "A")
-  textoOrigen = Replace(textoOrigen, "ȧ", "A")
-  textoOrigen = Replace(textoOrigen, "ȃ", "A")
-  textoOrigen = Replace(textoOrigen, "ȁ", "A")
-  textoOrigen = Replace(textoOrigen, "ǎ", "A")
-  textoOrigen = Replace(textoOrigen, "â", "A")
-  textoOrigen = Replace(textoOrigen, "Á", "A")
-  textoOrigen = Replace(textoOrigen, "À", "A")
-  textoOrigen = Replace(textoOrigen, "Ä", "A")
-  textoOrigen = Replace(textoOrigen, "Ã", "A")
-  textoOrigen = Replace(textoOrigen, "Å", "A")
-  textoOrigen = Replace(textoOrigen, "Ą", "A")
-  textoOrigen = Replace(textoOrigen, "Ă", "A")
-  textoOrigen = Replace(textoOrigen, "Ả", "A")
-  textoOrigen = Replace(textoOrigen, "Ȧ", "A")
-  textoOrigen = Replace(textoOrigen, "Ȃ", "A")
-  textoOrigen = Replace(textoOrigen, "Ȁ", "A")
-  textoOrigen = Replace(textoOrigen, "Ǎ", "A")
-  textoOrigen = Replace(textoOrigen, "Â", "A")
-  'letra e
-  textoOrigen = Replace(textoOrigen, "é", "E")
-  textoOrigen = Replace(textoOrigen, "è", "E")
-  textoOrigen = Replace(textoOrigen, "ë", "E")
-  textoOrigen = Replace(textoOrigen, "É", "E")
-  textoOrigen = Replace(textoOrigen, "È", "E")
-  textoOrigen = Replace(textoOrigen, "Ë", "E")
-  'letra i
-  textoOrigen = Replace(textoOrigen, "í", "I")
-  textoOrigen = Replace(textoOrigen, "ì", "I")
-  textoOrigen = Replace(textoOrigen, "ï", "I")
-  textoOrigen = Replace(textoOrigen, "Í", "I")
-  textoOrigen = Replace(textoOrigen, "Ì", "I")
-  textoOrigen = Replace(textoOrigen, "Ï", "I")
-  'letra o
-  textoOrigen = Replace(textoOrigen, "ó", "O")
-  textoOrigen = Replace(textoOrigen, "ò", "O")
-  textoOrigen = Replace(textoOrigen, "ö", "O")
-  textoOrigen = Replace(textoOrigen, "Ó", "O")
-  textoOrigen = Replace(textoOrigen, "Ò", "O")
-  textoOrigen = Replace(textoOrigen, "Ö", "O")
-  'letra u
-  textoOrigen = Replace(textoOrigen, "ú", "U")
-  textoOrigen = Replace(textoOrigen, "ù", "U")
-  textoOrigen = Replace(textoOrigen, "ü", "U")
-  textoOrigen = Replace(textoOrigen, "Ú", "U")
-  textoOrigen = Replace(textoOrigen, "Ù", "U")
-  textoOrigen = Replace(textoOrigen, "Ü", "U")
-  'otros caracteres
-  textoOrigen = Replace(textoOrigen, "ñ", "N")
-  textoOrigen = Replace(textoOrigen, "Ñ", "N")
-  textoOrigen = Replace(textoOrigen, "&", "")
-  textoOrigen = Replace(textoOrigen, "ç", "C")
   textoOrigen = Replace(textoOrigen, "{", "")
   textoOrigen = Replace(textoOrigen, "}", "")
   textoOrigen = Replace(textoOrigen, "[", "")
@@ -3980,8 +3921,143 @@ Public Sub btnAgregarCitationKey_Click()
   textoOrigen = Replace(textoOrigen, "~", "")
   textoOrigen = Replace(textoOrigen, "*", "")
   textoOrigen = Replace(textoOrigen, "+", "")
+
+  textoOrigen = Replace(textoOrigen, "á", "A")
+  textoOrigen = Replace(textoOrigen, "à", "A")
+  textoOrigen = Replace(textoOrigen, "â", "A")
+  textoOrigen = Replace(textoOrigen, "ä", "A")
+  textoOrigen = Replace(textoOrigen, "ã", "A")
+  textoOrigen = Replace(textoOrigen, "å", "A")
+  textoOrigen = Replace(textoOrigen, "æ", "AE")
+  textoOrigen = Replace(textoOrigen, "ā", "A")
+  textoOrigen = Replace(textoOrigen, "ă", "A")
+  textoOrigen = Replace(textoOrigen, "ą", "A")
+  textoOrigen = Replace(textoOrigen, "ç", "C")
+  textoOrigen = Replace(textoOrigen, "ć", "C")
+  textoOrigen = Replace(textoOrigen, "č", "C")
+  textoOrigen = Replace(textoOrigen, "ď", "D")
+  textoOrigen = Replace(textoOrigen, "đ", "D")
+  textoOrigen = Replace(textoOrigen, "é", "E")
+  textoOrigen = Replace(textoOrigen, "è", "E")
+  textoOrigen = Replace(textoOrigen, "ê", "E")
+  textoOrigen = Replace(textoOrigen, "ë", "E")
+  textoOrigen = Replace(textoOrigen, "ē", "E")
+  textoOrigen = Replace(textoOrigen, "ė", "E")
+  textoOrigen = Replace(textoOrigen, "ę", "E")
+  textoOrigen = Replace(textoOrigen, "ě", "E")
+  textoOrigen = Replace(textoOrigen, "í", "I")
+  textoOrigen = Replace(textoOrigen, "ì", "I")
+  textoOrigen = Replace(textoOrigen, "î", "I")
+  textoOrigen = Replace(textoOrigen, "ï", "I")
+  textoOrigen = Replace(textoOrigen, "ī", "I")
+  textoOrigen = Replace(textoOrigen, "į", "I")
+  textoOrigen = Replace(textoOrigen, "ı", "I")
+  textoOrigen = Replace(textoOrigen, "ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "ľ", "L")
+  textoOrigen = Replace(textoOrigen, "ł", "L")
+  textoOrigen = Replace(textoOrigen, "ñ", "N")
+  textoOrigen = Replace(textoOrigen, "ń", "N")
+  textoOrigen = Replace(textoOrigen, "ň", "N")
+  textoOrigen = Replace(textoOrigen, "ó", "O")
+  textoOrigen = Replace(textoOrigen, "ò", "O")
+  textoOrigen = Replace(textoOrigen, "ô", "O")
+  textoOrigen = Replace(textoOrigen, "ö", "O")
+  textoOrigen = Replace(textoOrigen, "õ", "O")
+  textoOrigen = Replace(textoOrigen, "ő", "O")
+  textoOrigen = Replace(textoOrigen, "ø", "O")
+  textoOrigen = Replace(textoOrigen, "œ", "OE")
+  textoOrigen = Replace(textoOrigen, "ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "ř", "R")
+  textoOrigen = Replace(textoOrigen, "ś", "S")
+  textoOrigen = Replace(textoOrigen, "š", "S")
+  textoOrigen = Replace(textoOrigen, "ş", "S")
+  textoOrigen = Replace(textoOrigen, "ș", "S")
+  textoOrigen = Replace(textoOrigen, "ť", "T")
+  textoOrigen = Replace(textoOrigen, "ţ", "T")
+  textoOrigen = Replace(textoOrigen, "ț", "T")
+  textoOrigen = Replace(textoOrigen, "ú", "U")
+  textoOrigen = Replace(textoOrigen, "ù", "U")
+  textoOrigen = Replace(textoOrigen, "û", "U")
+  textoOrigen = Replace(textoOrigen, "ü", "U")
+  textoOrigen = Replace(textoOrigen, "ū", "U")
+  textoOrigen = Replace(textoOrigen, "ů", "U")
+  textoOrigen = Replace(textoOrigen, "ű", "U")
+  textoOrigen = Replace(textoOrigen, "ų", "U")
+  textoOrigen = Replace(textoOrigen, "ý", "Y")
+  textoOrigen = Replace(textoOrigen, "ÿ", "Y")
   textoOrigen = Replace(textoOrigen, "ź", "Z")
   textoOrigen = Replace(textoOrigen, "ż", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+
+  ' Mayúsculas
+  textoOrigen = Replace(textoOrigen, "Á", "A")
+  textoOrigen = Replace(textoOrigen, "À", "A")
+  textoOrigen = Replace(textoOrigen, "Â", "A")
+  textoOrigen = Replace(textoOrigen, "Ä", "A")
+  textoOrigen = Replace(textoOrigen, "Ã", "A")
+  textoOrigen = Replace(textoOrigen, "Å", "A")
+  textoOrigen = Replace(textoOrigen, "Æ", "AE")
+  textoOrigen = Replace(textoOrigen, "Ā", "A")
+  textoOrigen = Replace(textoOrigen, "Ă", "A")
+  textoOrigen = Replace(textoOrigen, "Ą", "A")
+  textoOrigen = Replace(textoOrigen, "Ç", "C")
+  textoOrigen = Replace(textoOrigen, "Ć", "C")
+  textoOrigen = Replace(textoOrigen, "Č", "C")
+  textoOrigen = Replace(textoOrigen, "Ď", "D")
+  textoOrigen = Replace(textoOrigen, "Đ", "D")
+  textoOrigen = Replace(textoOrigen, "É", "E")
+  textoOrigen = Replace(textoOrigen, "È", "E")
+  textoOrigen = Replace(textoOrigen, "Ê", "E")
+  textoOrigen = Replace(textoOrigen, "Ë", "E")
+  textoOrigen = Replace(textoOrigen, "Ē", "E")
+  textoOrigen = Replace(textoOrigen, "Ė", "E")
+  textoOrigen = Replace(textoOrigen, "Ę", "E")
+  textoOrigen = Replace(textoOrigen, "Ě", "E")
+  textoOrigen = Replace(textoOrigen, "Í", "I")
+  textoOrigen = Replace(textoOrigen, "Ì", "I")
+  textoOrigen = Replace(textoOrigen, "Î", "I")
+  textoOrigen = Replace(textoOrigen, "Ï", "I")
+  textoOrigen = Replace(textoOrigen, "Ī", "I")
+  textoOrigen = Replace(textoOrigen, "Į", "I")
+  textoOrigen = Replace(textoOrigen, "İ", "I")
+  textoOrigen = Replace(textoOrigen, "Ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "Ľ", "L")
+  textoOrigen = Replace(textoOrigen, "Ł", "L")
+  textoOrigen = Replace(textoOrigen, "Ñ", "N")
+  textoOrigen = Replace(textoOrigen, "Ń", "N")
+  textoOrigen = Replace(textoOrigen, "Ň", "N")
+  textoOrigen = Replace(textoOrigen, "Ó", "O")
+  textoOrigen = Replace(textoOrigen, "Ò", "O")
+  textoOrigen = Replace(textoOrigen, "Ô", "O")
+  textoOrigen = Replace(textoOrigen, "Ö", "O")
+  textoOrigen = Replace(textoOrigen, "Õ", "O")
+  textoOrigen = Replace(textoOrigen, "Ő", "O")
+  textoOrigen = Replace(textoOrigen, "Ø", "O")
+  textoOrigen = Replace(textoOrigen, "Œ", "OE")
+  textoOrigen = Replace(textoOrigen, "Ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "Ř", "R")
+  textoOrigen = Replace(textoOrigen, "Ś", "S")
+  textoOrigen = Replace(textoOrigen, "Š", "S")
+  textoOrigen = Replace(textoOrigen, "Ş", "S")
+  textoOrigen = Replace(textoOrigen, "Ș", "S")
+  textoOrigen = Replace(textoOrigen, "Ť", "T")
+  textoOrigen = Replace(textoOrigen, "Ţ", "T")
+  textoOrigen = Replace(textoOrigen, "Ț", "T")
+  textoOrigen = Replace(textoOrigen, "Ú", "U")
+  textoOrigen = Replace(textoOrigen, "Ù", "U")
+  textoOrigen = Replace(textoOrigen, "Û", "U")
+  textoOrigen = Replace(textoOrigen, "Ü", "U")
+  textoOrigen = Replace(textoOrigen, "Ū", "U")
+  textoOrigen = Replace(textoOrigen, "Ů", "U")
+  textoOrigen = Replace(textoOrigen, "Ű", "U")
+  textoOrigen = Replace(textoOrigen, "Ų", "U")
+  textoOrigen = Replace(textoOrigen, "Ý", "Y")
+  textoOrigen = Replace(textoOrigen, "Ÿ", "Y")
+  textoOrigen = Replace(textoOrigen, "Ź", "Z")
+  textoOrigen = Replace(textoOrigen, "Ż", "Z")
+  textoOrigen = Replace(textoOrigen, "Ž", "Z")
+
+  ' Adicionales
   textoOrigen = Replace(textoOrigen, "ẑ", "Z")
   textoOrigen = Replace(textoOrigen, "ž", "Z")
   textoOrigen = Replace(textoOrigen, "ẋ", "X")
@@ -6399,5 +6475,675 @@ Public Sub contarEntradasBIByGLO()' mostramos las cantidades en el boton
   Record2GLO = ContenidoGLO[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
+
+End
+
+Public Sub BtnBuscarAuthorRelacion_Click()
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  If txtAUTHORrelacion.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHORrelacion.Text, "'", "''") & "%';"
+  Busqueda = conector.Exec(Comando)
+
+  tbRefDup.Visible = True
+
+  ' Limpia el Grid antes de mostrar los resultados de la búsqueda
+  tbRefDup.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el Grid
+  tbRefDup.Columns.Count = 110
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    tbRefDup[rowIndex, 0].Text = Busqueda!id
+    tbRefDup[rowIndex, 1].Text = Busqueda!tipoEntrada
+    tbRefDup[rowIndex, 2].Text = Busqueda!citationKey
+    tbRefDup[rowIndex, 3].Text = Busqueda!keywords
+    tbRefDup[rowIndex, 4].Text = Busqueda!author
+    tbRefDup[rowIndex, 5].Text = Busqueda!bookAuthor
+    tbRefDup[rowIndex, 6].Text = Busqueda!editor
+    tbRefDup[rowIndex, 7].Text = Busqueda!editorA
+    tbRefDup[rowIndex, 8].Text = Busqueda!editorB
+    tbRefDup[rowIndex, 9].Text = Busqueda!editorC
+    tbRefDup[rowIndex, 10].Text = Busqueda!afterword
+    tbRefDup[rowIndex, 11].Text = Busqueda!commentator
+    tbRefDup[rowIndex, 12].Text = Busqueda!translator
+    tbRefDup[rowIndex, 13].Text = Busqueda!holder
+    tbRefDup[rowIndex, 14].Text = Busqueda!shortAuthor
+    tbRefDup[rowIndex, 15].Text = Busqueda!editorType
+    tbRefDup[rowIndex, 16].Text = Busqueda!editorAtype
+    tbRefDup[rowIndex, 17].Text = Busqueda!editorBtype
+    tbRefDup[rowIndex, 18].Text = Busqueda!editorCtype
+    tbRefDup[rowIndex, 19].Text = Busqueda!foreword
+    tbRefDup[rowIndex, 20].Text = Busqueda!introduction
+    tbRefDup[rowIndex, 21].Text = Busqueda!annotator
+    tbRefDup[rowIndex, 22].Text = Busqueda!gender
+    tbRefDup[rowIndex, 23].Text = Busqueda!nameAddOn
+    tbRefDup[rowIndex, 24].Text = Busqueda!title
+    tbRefDup[rowIndex, 25].Text = Busqueda!shortTitle
+    tbRefDup[rowIndex, 26].Text = Busqueda!indexTitle
+    tbRefDup[rowIndex, 27].Text = Busqueda!bookTitle
+    tbRefDup[rowIndex, 28].Text = Busqueda!mainTitle
+    tbRefDup[rowIndex, 29].Text = Busqueda!journalTitle
+    tbRefDup[rowIndex, 30].Text = Busqueda!issueTitle
+    tbRefDup[rowIndex, 31].Text = Busqueda!eventTitle
+    tbRefDup[rowIndex, 32].Text = Busqueda!reprintTitle
+    tbRefDup[rowIndex, 33].Text = Busqueda!series
+    tbRefDup[rowIndex, 34].Text = Busqueda!bookTitleAddOn
+    tbRefDup[rowIndex, 35].Text = Busqueda!mainTitleAddOn
+    tbRefDup[rowIndex, 36].Text = Busqueda!journalTitleAddOn
+    tbRefDup[rowIndex, 37].Text = Busqueda!issueTitleAddOn
+    tbRefDup[rowIndex, 38].Text = Busqueda!eventTitleAddOn
+    tbRefDup[rowIndex, 39].Text = Busqueda!chapter
+    tbRefDup[rowIndex, 40].Text = Busqueda!volume
+    tbRefDup[rowIndex, 41].Text = Busqueda!edition
+    tbRefDup[rowIndex, 42].Text = Busqueda!pubState
+    tbRefDup[rowIndex, 43].Text = Busqueda!yearY
+    tbRefDup[rowIndex, 44].Text = Busqueda!dateD
+    tbRefDup[rowIndex, 45].Text = Busqueda!urlDate
+    tbRefDup[rowIndex, 46].Text = Busqueda!volumes
+    tbRefDup[rowIndex, 47].Text = Busqueda!part
+    tbRefDup[rowIndex, 48].Text = Busqueda!issue
+    tbRefDup[rowIndex, 49].Text = Busqueda!eventDate
+    tbRefDup[rowIndex, 50].Text = Busqueda!origDate
+    tbRefDup[rowIndex, 51].Text = Busqueda!version
+    tbRefDup[rowIndex, 52].Text = Busqueda!location
+    tbRefDup[rowIndex, 53].Text = Busqueda!publisher
+    tbRefDup[rowIndex, 54].Text = Busqueda!institution
+    tbRefDup[rowIndex, 55].Text = Busqueda!organization
+    tbRefDup[rowIndex, 56].Text = Busqueda!page
+    tbRefDup[rowIndex, 57].Text = Busqueda!pagination
+    tbRefDup[rowIndex, 58].Text = Busqueda!hyphenation
+    tbRefDup[rowIndex, 59].Text = Busqueda!langId
+    tbRefDup[rowIndex, 60].Text = Busqueda!language
+    tbRefDup[rowIndex, 61].Text = Busqueda!origLocation
+    tbRefDup[rowIndex, 62].Text = Busqueda!origPublisher
+    tbRefDup[rowIndex, 63].Text = Busqueda!pageTotal
+    tbRefDup[rowIndex, 64].Text = Busqueda!venue
+    tbRefDup[rowIndex, 65].Text = Busqueda!bookPagination
+    tbRefDup[rowIndex, 66].Text = Busqueda!langIdOpts
+    tbRefDup[rowIndex, 67].Text = Busqueda!origLanguage
+    tbRefDup[rowIndex, 68].Text = Busqueda!isan
+    tbRefDup[rowIndex, 69].Text = Busqueda!isbn
+    tbRefDup[rowIndex, 70].Text = Busqueda!ismn
+    tbRefDup[rowIndex, 71].Text = Busqueda!isrn
+    tbRefDup[rowIndex, 72].Text = Busqueda!issn
+    tbRefDup[rowIndex, 73].Text = Busqueda!iswc
+    tbRefDup[rowIndex, 74].Text = Busqueda!url
+    tbRefDup[rowIndex, 75].Text = Busqueda!doi
+    tbRefDup[rowIndex, 76].Text = Busqueda!eid
+    tbRefDup[rowIndex, 77].Text = Busqueda!eprinttype
+    tbRefDup[rowIndex, 78].Text = Busqueda!eprint
+    tbRefDup[rowIndex, 79].Text = Busqueda!entrysubtype
+    tbRefDup[rowIndex, 80].Text = Busqueda!label
+    tbRefDup[rowIndex, 81].Text = Busqueda!howpublisher
+    tbRefDup[rowIndex, 82].Text = Busqueda!addendum
+    tbRefDup[rowIndex, 83].Text = Busqueda!shorthand
+    tbRefDup[rowIndex, 84].Text = Busqueda!shorthandintro
+    tbRefDup[rowIndex, 85].Text = Busqueda!etiquetas
+    tbRefDup[rowIndex, 86].Text = Busqueda!options
+    tbRefDup[rowIndex, 87].Text = Busqueda!ids
+    tbRefDup[rowIndex, 88].Text = Busqueda!related
+    tbRefDup[rowIndex, 89].Text = Busqueda!relatedType
+    tbRefDup[rowIndex, 90].Text = Busqueda!relatedString
+    tbRefDup[rowIndex, 91].Text = Busqueda!entryset
+    tbRefDup[rowIndex, 92].Text = Busqueda!crossref
+    tbRefDup[rowIndex, 93].Text = Busqueda!xref
+    tbRefDup[rowIndex, 94].Text = Busqueda!xdata
+    tbRefDup[rowIndex, 95].Text = Busqueda!presort
+    tbRefDup[rowIndex, 96].Text = Busqueda!sortkey
+    tbRefDup[rowIndex, 97].Text = Busqueda!sortname
+    tbRefDup[rowIndex, 98].Text = Busqueda!sortshorthand
+    tbRefDup[rowIndex, 99].Text = Busqueda!sorttitle
+    tbRefDup[rowIndex, 100].Text = Busqueda!indexsorttitle
+    tbRefDup[rowIndex, 101].Text = Busqueda!sortyear
+    tbRefDup[rowIndex, 102].Text = Busqueda!file
+    tbRefDup[rowIndex, 103].Text = Busqueda!abstract
+    tbRefDup[rowIndex, 104].Text = Busqueda!library
+    tbRefDup[rowIndex, 105].Text = Busqueda!note
+    tbRefDup[rowIndex, 106].Text = Busqueda!annotation
+    tbRefDup[rowIndex, 107].Text = Busqueda!number
+    tbRefDup[rowIndex, 108].Text = Busqueda!creationdate
+    tbRefDup[rowIndex, 109].Text = Busqueda!type
+
+    ' Incrementa el valor de rowIndex para la siguiente fila
+    rowIndex = rowIndex + 1
+
+    Busqueda.MoveNext
+  Wend
+
+  ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
+  tbRefDup.ScrollY = 0
+
+End
+
+Public Sub Mostrar_ListaBIBrelacion()
+
+  Dim i As Integer
+
+  tbRefDup.Clear()
+
+  Contenido = conector.Exec("select * from bibtex ORDER BY id DESC")
+
+  'diseñamos el tableview
+  tbRefDup.Columns.Count = 110
+  tbRefDup.Header = True
+  tbRefDup.Columns[0].Title = "ID"
+  tbRefDup.Columns[0].Width = 0
+  tbRefDup.Columns[1].Title = ""
+  tbRefDup.Columns[1].Width = 0
+  tbRefDup.Columns[2].Title = ""
+  tbRefDup.Columns[2].Width = 0
+  tbRefDup.Columns[3].Title = ""
+  tbRefDup.Columns[3].Width = 0
+  tbRefDup.Columns[4].Title = "Author"
+  tbRefDup.Columns[4].Width = 250
+  tbRefDup.Columns[5].Title = ""
+  tbRefDup.Columns[5].Width = 0
+  tbRefDup.Columns[6].Title = "Editor"
+  tbRefDup.Columns[6].Width = 250
+  tbRefDup.Columns[7].Title = ""
+  tbRefDup.Columns[7].Width = 0
+  tbRefDup.Columns[8].Title = ""
+  tbRefDup.Columns[8].Width = 0
+  tbRefDup.Columns[9].Title = ""
+  tbRefDup.Columns[9].Width = 0
+  tbRefDup.Columns[10].Title = ""
+  tbRefDup.Columns[10].Width = 0
+  tbRefDup.Columns[11].Title = ""
+  tbRefDup.Columns[11].Width = 0
+  tbRefDup.Columns[12].Title = ""
+  tbRefDup.Columns[12].Width = 0
+  tbRefDup.Columns[13].Title = ""
+  tbRefDup.Columns[13].Width = 0
+  tbRefDup.Columns[14].Title = ""
+  tbRefDup.Columns[14].Width = 0
+  tbRefDup.Columns[15].Title = ""
+  tbRefDup.Columns[15].Width = 0
+  tbRefDup.Columns[16].Title = ""
+  tbRefDup.Columns[16].Width = 0
+  tbRefDup.Columns[17].Title = ""
+  tbRefDup.Columns[17].Width = 0
+  tbRefDup.Columns[18].Title = ""
+  tbRefDup.Columns[18].Width = 0
+  tbRefDup.Columns[19].Title = ""
+  tbRefDup.Columns[19].Width = 0
+  tbRefDup.Columns[20].Title = ""
+  tbRefDup.Columns[20].Width = 0
+  tbRefDup.Columns[21].Title = ""
+  tbRefDup.Columns[21].Width = 0
+  tbRefDup.Columns[22].Title = ""
+  tbRefDup.Columns[22].Width = 0
+  tbRefDup.Columns[23].Title = ""
+  tbRefDup.Columns[23].Width = 0
+  tbRefDup.Columns[24].Title = "Título"
+  tbRefDup.Columns[24].Width = 600
+  tbRefDup.Columns[25].Title = ""
+  tbRefDup.Columns[25].Width = 0
+  tbRefDup.Columns[26].Title = ""
+  tbRefDup.Columns[26].Width = 0
+  tbRefDup.Columns[27].Title = ""
+  tbRefDup.Columns[27].Width = 0
+  tbRefDup.Columns[28].Title = ""
+  tbRefDup.Columns[28].Width = 0
+  tbRefDup.Columns[29].Title = "Journal"
+  tbRefDup.Columns[29].Width = 200
+  tbRefDup.Columns[30].Title = ""
+  tbRefDup.Columns[30].Width = 0
+  tbRefDup.Columns[31].Title = ""
+  tbRefDup.Columns[31].Width = 0
+  tbRefDup.Columns[32].Title = ""
+  tbRefDup.Columns[32].Width = 0
+  tbRefDup.Columns[33].Title = ""
+  tbRefDup.Columns[33].Width = 0
+  tbRefDup.Columns[34].Title = ""
+  tbRefDup.Columns[34].Width = 0
+  tbRefDup.Columns[35].Title = ""
+  tbRefDup.Columns[35].Width = 0
+  tbRefDup.Columns[36].Title = ""
+  tbRefDup.Columns[36].Width = 0
+  tbRefDup.Columns[37].Title = ""
+  tbRefDup.Columns[37].Width = 0
+  tbRefDup.Columns[38].Title = ""
+  tbRefDup.Columns[38].Width = 0
+  tbRefDup.Columns[39].Title = ""
+  tbRefDup.Columns[39].Width = 0
+  tbRefDup.Columns[40].Title = ""
+  tbRefDup.Columns[40].Width = 0
+  tbRefDup.Columns[41].Title = ""
+  tbRefDup.Columns[41].Width = 0
+  tbRefDup.Columns[42].Title = ""
+  tbRefDup.Columns[42].Width = 0
+  tbRefDup.Columns[43].Title = "Year"
+  tbRefDup.Columns[43].Width = 70
+  tbRefDup.Columns[44].Title = "Date"
+  tbRefDup.Columns[44].Width = 70
+  tbRefDup.Columns[45].Title = ""
+  tbRefDup.Columns[45].Width = 0
+  tbRefDup.Columns[46].Title = ""
+  tbRefDup.Columns[46].Width = 0
+  tbRefDup.Columns[47].Title = ""
+  tbRefDup.Columns[47].Width = 0
+  tbRefDup.Columns[48].Title = ""
+  tbRefDup.Columns[48].Width = 0
+  tbRefDup.Columns[49].Title = ""
+  tbRefDup.Columns[49].Width = 0
+  tbRefDup.Columns[50].Title = ""
+  tbRefDup.Columns[50].Width = 0
+  tbRefDup.Columns[51].Title = ""
+  tbRefDup.Columns[51].Width = 0
+  tbRefDup.Columns[52].Title = ""
+  tbRefDup.Columns[52].Width = 0
+  tbRefDup.Columns[53].Title = "Editorial"
+  tbRefDup.Columns[53].Width = 200
+  tbRefDup.Columns[54].Title = ""
+  tbRefDup.Columns[54].Width = 0
+  tbRefDup.Columns[55].Title = ""
+  tbRefDup.Columns[55].Width = 0
+  tbRefDup.Columns[56].Title = ""
+  tbRefDup.Columns[56].Width = 0
+  tbRefDup.Columns[57].Title = ""
+  tbRefDup.Columns[57].Width = 0
+  tbRefDup.Columns[58].Title = ""
+  tbRefDup.Columns[58].Width = 0
+  tbRefDup.Columns[59].Title = ""
+  tbRefDup.Columns[59].Width = 0
+  tbRefDup.Columns[60].Title = ""
+  tbRefDup.Columns[60].Width = 0
+  tbRefDup.Columns[61].Title = ""
+  tbRefDup.Columns[61].Width = 0
+  tbRefDup.Columns[62].Title = ""
+  tbRefDup.Columns[62].Width = 0
+  tbRefDup.Columns[63].Title = ""
+  tbRefDup.Columns[63].Width = 0
+  tbRefDup.Columns[64].Title = ""
+  tbRefDup.Columns[64].Width = 0
+  tbRefDup.Columns[65].Title = ""
+  tbRefDup.Columns[65].Width = 0
+  tbRefDup.Columns[66].Title = ""
+  tbRefDup.Columns[66].Width = 0
+  tbRefDup.Columns[67].Title = ""
+  tbRefDup.Columns[67].Width = 0
+  tbRefDup.Columns[68].Title = ""
+  tbRefDup.Columns[68].Width = 0
+  tbRefDup.Columns[69].Title = ""
+  tbRefDup.Columns[69].Width = 0
+  tbRefDup.Columns[70].Title = ""
+  tbRefDup.Columns[70].Width = 0
+  tbRefDup.Columns[71].Title = ""
+  tbRefDup.Columns[71].Width = 0
+  tbRefDup.Columns[72].Title = ""
+  tbRefDup.Columns[72].Width = 0
+  tbRefDup.Columns[73].Title = ""
+  tbRefDup.Columns[73].Width = 0
+  tbRefDup.Columns[74].Title = ""
+  tbRefDup.Columns[74].Width = 0
+  tbRefDup.Columns[75].Title = ""
+  tbRefDup.Columns[75].Width = 0
+  tbRefDup.Columns[76].Title = ""
+  tbRefDup.Columns[76].Width = 0
+  tbRefDup.Columns[77].Title = ""
+  tbRefDup.Columns[77].Width = 0
+  tbRefDup.Columns[78].Title = ""
+  tbRefDup.Columns[78].Width = 0
+  tbRefDup.Columns[79].Title = ""
+  tbRefDup.Columns[79].Width = 0
+  tbRefDup.Columns[80].Title = ""
+  tbRefDup.Columns[80].Width = 0
+  tbRefDup.Columns[81].Title = ""
+  tbRefDup.Columns[81].Width = 0
+  tbRefDup.Columns[82].Title = ""
+  tbRefDup.Columns[82].Width = 0
+  tbRefDup.Columns[83].Title = ""
+  tbRefDup.Columns[83].Width = 0
+  tbRefDup.Columns[84].Title = ""
+  tbRefDup.Columns[84].Width = 0
+  tbRefDup.Columns[85].Title = ""
+  tbRefDup.Columns[85].Width = 0
+  tbRefDup.Columns[86].Title = ""
+  tbRefDup.Columns[86].Width = 0
+  tbRefDup.Columns[87].Title = ""
+  tbRefDup.Columns[87].Width = 0
+  tbRefDup.Columns[88].Title = ""
+  tbRefDup.Columns[88].Width = 0
+  tbRefDup.Columns[89].Title = ""
+  tbRefDup.Columns[89].Width = 0
+  tbRefDup.Columns[90].Title = ""
+  tbRefDup.Columns[90].Width = 0
+  tbRefDup.Columns[91].Title = ""
+  tbRefDup.Columns[91].Width = 0
+  tbRefDup.Columns[92].Title = ""
+  tbRefDup.Columns[92].Width = 0
+  tbRefDup.Columns[93].Title = ""
+  tbRefDup.Columns[93].Width = 0
+  tbRefDup.Columns[94].Title = ""
+  tbRefDup.Columns[94].Width = 0
+  tbRefDup.Columns[95].Title = ""
+  tbRefDup.Columns[95].Width = 0
+  tbRefDup.Columns[96].Title = ""
+  tbRefDup.Columns[96].Width = 0
+  tbRefDup.Columns[97].Title = ""
+  tbRefDup.Columns[97].Width = 0
+  tbRefDup.Columns[98].Title = ""
+  tbRefDup.Columns[98].Width = 0
+  tbRefDup.Columns[99].Title = ""
+  tbRefDup.Columns[99].Width = 0
+  tbRefDup.Columns[100].Title = ""
+  tbRefDup.Columns[100].Width = 0
+  tbRefDup.Columns[101].Title = ""
+  tbRefDup.Columns[101].Width = 0
+  tbRefDup.Columns[102].Title = ""
+  tbRefDup.Columns[102].Width = 0
+  tbRefDup.Columns[103].Title = ""
+  tbRefDup.Columns[103].Width = 0
+  tbRefDup.Columns[104].Title = ""
+  tbRefDup.Columns[104].Width = 0
+  tbRefDup.Columns[105].Title = ""
+  tbRefDup.Columns[105].Width = 0
+  tbRefDup.Columns[106].Title = ""
+  tbRefDup.Columns[106].Width = 0
+  tbRefDup.Columns[107].Title = ""
+  tbRefDup.Columns[107].Width = 0
+  tbRefDup.Columns[108].Title = ""
+  tbRefDup.Columns[108].Width = 0
+  tbRefDup.Columns[109].Title = ""
+  tbRefDup.Columns[109].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tbRefDup.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tbRefDup[i, 0].Text = Contenido!id
+    tbRefDup[i, 1].Text = Contenido!tipoEntrada
+    tbRefDup[i, 2].Text = Contenido!citationKey
+    tbRefDup[i, 3].Text = Contenido!keywords
+    tbRefDup[i, 4].Text = Contenido!author
+    tbRefDup[i, 5].Text = Contenido!bookAuthor
+    tbRefDup[i, 6].Text = Contenido!editor
+    tbRefDup[i, 7].Text = Contenido!editorA
+    tbRefDup[i, 8].Text = Contenido!editorB
+    tbRefDup[i, 9].Text = Contenido!editorC
+    tbRefDup[i, 10].Text = Contenido!afterword
+    tbRefDup[i, 11].Text = Contenido!commentator
+    tbRefDup[i, 12].Text = Contenido!translator
+    tbRefDup[i, 13].Text = Contenido!holder
+    tbRefDup[i, 14].Text = Contenido!shortAuthor
+    tbRefDup[i, 15].Text = Contenido!editorType
+    tbRefDup[i, 16].Text = Contenido!editorAtype
+    tbRefDup[i, 17].Text = Contenido!editorBtype
+    tbRefDup[i, 18].Text = Contenido!editorCtype
+    tbRefDup[i, 19].Text = Contenido!foreword
+    tbRefDup[i, 20].Text = Contenido!introduction
+    tbRefDup[i, 21].Text = Contenido!annotator
+    tbRefDup[i, 22].Text = Contenido!gender
+    tbRefDup[i, 23].Text = Contenido!nameAddOn
+    tbRefDup[i, 24].Text = Contenido!title
+    tbRefDup[i, 25].Text = Contenido!shortTitle
+    tbRefDup[i, 26].Text = Contenido!indexTitle
+    tbRefDup[i, 27].Text = Contenido!bookTitle
+    tbRefDup[i, 28].Text = Contenido!mainTitle
+    tbRefDup[i, 29].Text = Contenido!journalTitle
+    tbRefDup[i, 30].Text = Contenido!issueTitle
+    tbRefDup[i, 31].Text = Contenido!eventTitle
+    tbRefDup[i, 32].Text = Contenido!reprintTitle
+    tbRefDup[i, 33].Text = Contenido!series
+    tbRefDup[i, 34].Text = Contenido!bookTitleAddOn
+    tbRefDup[i, 35].Text = Contenido!mainTitleAddOn
+    tbRefDup[i, 36].Text = Contenido!journalTitleAddOn
+    tbRefDup[i, 37].Text = Contenido!issueTitleAddOn
+    tbRefDup[i, 38].Text = Contenido!eventTitleAddOn
+    tbRefDup[i, 39].Text = Contenido!chapter
+    tbRefDup[i, 40].Text = Contenido!volume
+    tbRefDup[i, 41].Text = Contenido!edition
+    tbRefDup[i, 42].Text = Contenido!pubState
+    tbRefDup[i, 43].Text = Contenido!yearY
+    tbRefDup[i, 44].Text = Contenido!dateD
+    tbRefDup[i, 45].Text = Contenido!urlDate
+    tbRefDup[i, 46].Text = Contenido!volumes
+    tbRefDup[i, 47].Text = Contenido!part
+    tbRefDup[i, 48].Text = Contenido!issue
+    tbRefDup[i, 49].Text = Contenido!eventDate
+    tbRefDup[i, 50].Text = Contenido!origDate
+    tbRefDup[i, 51].Text = Contenido!version
+    tbRefDup[i, 52].Text = Contenido!location
+    tbRefDup[i, 53].Text = Contenido!publisher
+    tbRefDup[i, 54].Text = Contenido!institution
+    tbRefDup[i, 55].Text = Contenido!organization
+    tbRefDup[i, 56].Text = Contenido!page
+    tbRefDup[i, 57].Text = Contenido!pagination
+    tbRefDup[i, 58].Text = Contenido!hyphenation
+    tbRefDup[i, 59].Text = Contenido!langId
+    tbRefDup[i, 60].Text = Contenido!language
+    tbRefDup[i, 61].Text = Contenido!origLocation
+    tbRefDup[i, 62].Text = Contenido!origPublisher
+    tbRefDup[i, 63].Text = Contenido!pageTotal
+    tbRefDup[i, 64].Text = Contenido!venue
+    tbRefDup[i, 65].Text = Contenido!bookPagination
+    tbRefDup[i, 66].Text = Contenido!langIdOpts
+    tbRefDup[i, 67].Text = Contenido!origLanguage
+    tbRefDup[i, 68].Text = Contenido!isan
+    tbRefDup[i, 69].Text = Contenido!isbn
+    tbRefDup[i, 70].Text = Contenido!ismn
+    tbRefDup[i, 71].Text = Contenido!isrn
+    tbRefDup[i, 72].Text = Contenido!issn
+    tbRefDup[i, 73].Text = Contenido!iswc
+    tbRefDup[i, 74].Text = Contenido!url
+    tbRefDup[i, 75].Text = Contenido!doi
+    tbRefDup[i, 76].Text = Contenido!eid
+    tbRefDup[i, 77].Text = Contenido!eprinttype
+    tbRefDup[i, 78].Text = Contenido!eprint
+    tbRefDup[i, 79].Text = Contenido!entrysubtype
+    tbRefDup[i, 80].Text = Contenido!label
+    tbRefDup[i, 81].Text = Contenido!howpublisher
+    tbRefDup[i, 82].Text = Contenido!addendum
+    tbRefDup[i, 83].Text = Contenido!shorthand
+    tbRefDup[i, 84].Text = Contenido!shorthandintro
+    tbRefDup[i, 85].Text = Contenido!etiquetas
+    tbRefDup[i, 86].Text = Contenido!options
+    tbRefDup[i, 87].Text = Contenido!ids
+    tbRefDup[i, 88].Text = Contenido!related
+    tbRefDup[i, 89].Text = Contenido!relatedType
+    tbRefDup[i, 90].Text = Contenido!relatedString
+    tbRefDup[i, 91].Text = Contenido!entryset
+    tbRefDup[i, 92].Text = Contenido!crossref
+    tbRefDup[i, 93].Text = Contenido!xref
+    tbRefDup[i, 94].Text = Contenido!xdata
+    tbRefDup[i, 95].Text = Contenido!presort
+    tbRefDup[i, 96].Text = Contenido!sortkey
+    tbRefDup[i, 97].Text = Contenido!sortname
+    tbRefDup[i, 98].Text = Contenido!sortshorthand
+    tbRefDup[i, 99].Text = Contenido!sorttitle
+    tbRefDup[i, 100].Text = Contenido!indexsorttitle
+    tbRefDup[i, 101].Text = Contenido!sortyear
+    tbRefDup[i, 102].Text = Contenido!file
+    tbRefDup[i, 103].Text = Contenido!abstract
+    tbRefDup[i, 104].Text = Contenido!library
+    tbRefDup[i, 105].Text = Contenido!note
+    tbRefDup[i, 106].Text = Contenido!annotation
+    tbRefDup[i, 107].Text = Contenido!number
+    tbRefDup[i, 108].Text = Contenido!creationdate
+    tbRefDup[i, 109].Text = Contenido!type
+
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub btnGuardarRelacion_Click()
+
+  txtAUTHORrelacion.Clear
+  txtTITLErelacion.Clear
+  txtFILTROrelacion.Clear
+  tbRefDup.Visible = False
+
+End
+
+Public Sub BtnBuscarTituloReferenciaRelacion_Click()
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  If txtTITLErelacion.Text = "" Then
+    Message.Warning("Debe introducir un título a buscar.")
+    Return
+  Endif
+
+  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLErelacion.Text, "'", "''") & "%';"
+  Busqueda = conector.Exec(Comando)
+
+  tbRefDup.Visible = True
+
+  ' Limpia el Grid antes de mostrar los resultados de la búsqueda
+  tbRefDup.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el Grid
+  tbRefDup.Columns.Count = 110
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    tbRefDup[rowIndex, 0].Text = Busqueda!id
+    tbRefDup[rowIndex, 1].Text = Busqueda!tipoEntrada
+    tbRefDup[rowIndex, 2].Text = Busqueda!citationKey
+    tbRefDup[rowIndex, 3].Text = Busqueda!keywords
+    tbRefDup[rowIndex, 4].Text = Busqueda!author
+    tbRefDup[rowIndex, 5].Text = Busqueda!bookAuthor
+    tbRefDup[rowIndex, 6].Text = Busqueda!editor
+    tbRefDup[rowIndex, 7].Text = Busqueda!editorA
+    tbRefDup[rowIndex, 8].Text = Busqueda!editorB
+    tbRefDup[rowIndex, 9].Text = Busqueda!editorC
+    tbRefDup[rowIndex, 10].Text = Busqueda!afterword
+    tbRefDup[rowIndex, 11].Text = Busqueda!commentator
+    tbRefDup[rowIndex, 12].Text = Busqueda!translator
+    tbRefDup[rowIndex, 13].Text = Busqueda!holder
+    tbRefDup[rowIndex, 14].Text = Busqueda!shortAuthor
+    tbRefDup[rowIndex, 15].Text = Busqueda!editorType
+    tbRefDup[rowIndex, 16].Text = Busqueda!editorAtype
+    tbRefDup[rowIndex, 17].Text = Busqueda!editorBtype
+    tbRefDup[rowIndex, 18].Text = Busqueda!editorCtype
+    tbRefDup[rowIndex, 19].Text = Busqueda!foreword
+    tbRefDup[rowIndex, 20].Text = Busqueda!introduction
+    tbRefDup[rowIndex, 21].Text = Busqueda!annotator
+    tbRefDup[rowIndex, 22].Text = Busqueda!gender
+    tbRefDup[rowIndex, 23].Text = Busqueda!nameAddOn
+    tbRefDup[rowIndex, 24].Text = Busqueda!title
+    tbRefDup[rowIndex, 25].Text = Busqueda!shortTitle
+    tbRefDup[rowIndex, 26].Text = Busqueda!indexTitle
+    tbRefDup[rowIndex, 27].Text = Busqueda!bookTitle
+    tbRefDup[rowIndex, 28].Text = Busqueda!mainTitle
+    tbRefDup[rowIndex, 29].Text = Busqueda!journalTitle
+    tbRefDup[rowIndex, 30].Text = Busqueda!issueTitle
+    tbRefDup[rowIndex, 31].Text = Busqueda!eventTitle
+    tbRefDup[rowIndex, 32].Text = Busqueda!reprintTitle
+    tbRefDup[rowIndex, 33].Text = Busqueda!series
+    tbRefDup[rowIndex, 34].Text = Busqueda!bookTitleAddOn
+    tbRefDup[rowIndex, 35].Text = Busqueda!mainTitleAddOn
+    tbRefDup[rowIndex, 36].Text = Busqueda!journalTitleAddOn
+    tbRefDup[rowIndex, 37].Text = Busqueda!issueTitleAddOn
+    tbRefDup[rowIndex, 38].Text = Busqueda!eventTitleAddOn
+    tbRefDup[rowIndex, 39].Text = Busqueda!chapter
+    tbRefDup[rowIndex, 40].Text = Busqueda!volume
+    tbRefDup[rowIndex, 41].Text = Busqueda!edition
+    tbRefDup[rowIndex, 42].Text = Busqueda!pubState
+    tbRefDup[rowIndex, 43].Text = Busqueda!yearY
+    tbRefDup[rowIndex, 44].Text = Busqueda!dateD
+    tbRefDup[rowIndex, 45].Text = Busqueda!urlDate
+    tbRefDup[rowIndex, 46].Text = Busqueda!volumes
+    tbRefDup[rowIndex, 47].Text = Busqueda!part
+    tbRefDup[rowIndex, 48].Text = Busqueda!issue
+    tbRefDup[rowIndex, 49].Text = Busqueda!eventDate
+    tbRefDup[rowIndex, 50].Text = Busqueda!origDate
+    tbRefDup[rowIndex, 51].Text = Busqueda!version
+    tbRefDup[rowIndex, 52].Text = Busqueda!location
+    tbRefDup[rowIndex, 53].Text = Busqueda!publisher
+    tbRefDup[rowIndex, 54].Text = Busqueda!institution
+    tbRefDup[rowIndex, 55].Text = Busqueda!organization
+    tbRefDup[rowIndex, 56].Text = Busqueda!page
+    tbRefDup[rowIndex, 57].Text = Busqueda!pagination
+    tbRefDup[rowIndex, 58].Text = Busqueda!hyphenation
+    tbRefDup[rowIndex, 59].Text = Busqueda!langId
+    tbRefDup[rowIndex, 60].Text = Busqueda!language
+    tbRefDup[rowIndex, 61].Text = Busqueda!origLocation
+    tbRefDup[rowIndex, 62].Text = Busqueda!origPublisher
+    tbRefDup[rowIndex, 63].Text = Busqueda!pageTotal
+    tbRefDup[rowIndex, 64].Text = Busqueda!venue
+    tbRefDup[rowIndex, 65].Text = Busqueda!bookPagination
+    tbRefDup[rowIndex, 66].Text = Busqueda!langIdOpts
+    tbRefDup[rowIndex, 67].Text = Busqueda!origLanguage
+    tbRefDup[rowIndex, 68].Text = Busqueda!isan
+    tbRefDup[rowIndex, 69].Text = Busqueda!isbn
+    tbRefDup[rowIndex, 70].Text = Busqueda!ismn
+    tbRefDup[rowIndex, 71].Text = Busqueda!isrn
+    tbRefDup[rowIndex, 72].Text = Busqueda!issn
+    tbRefDup[rowIndex, 73].Text = Busqueda!iswc
+    tbRefDup[rowIndex, 74].Text = Busqueda!url
+    tbRefDup[rowIndex, 75].Text = Busqueda!doi
+    tbRefDup[rowIndex, 76].Text = Busqueda!eid
+    tbRefDup[rowIndex, 77].Text = Busqueda!eprinttype
+    tbRefDup[rowIndex, 78].Text = Busqueda!eprint
+    tbRefDup[rowIndex, 79].Text = Busqueda!entrysubtype
+    tbRefDup[rowIndex, 80].Text = Busqueda!label
+    tbRefDup[rowIndex, 81].Text = Busqueda!howpublisher
+    tbRefDup[rowIndex, 82].Text = Busqueda!addendum
+    tbRefDup[rowIndex, 83].Text = Busqueda!shorthand
+    tbRefDup[rowIndex, 84].Text = Busqueda!shorthandintro
+    tbRefDup[rowIndex, 85].Text = Busqueda!etiquetas
+    tbRefDup[rowIndex, 86].Text = Busqueda!options
+    tbRefDup[rowIndex, 87].Text = Busqueda!ids
+    tbRefDup[rowIndex, 88].Text = Busqueda!related
+    tbRefDup[rowIndex, 89].Text = Busqueda!relatedType
+    tbRefDup[rowIndex, 90].Text = Busqueda!relatedString
+    tbRefDup[rowIndex, 91].Text = Busqueda!entryset
+    tbRefDup[rowIndex, 92].Text = Busqueda!crossref
+    tbRefDup[rowIndex, 93].Text = Busqueda!xref
+    tbRefDup[rowIndex, 94].Text = Busqueda!xdata
+    tbRefDup[rowIndex, 95].Text = Busqueda!presort
+    tbRefDup[rowIndex, 96].Text = Busqueda!sortkey
+    tbRefDup[rowIndex, 97].Text = Busqueda!sortname
+    tbRefDup[rowIndex, 98].Text = Busqueda!sortshorthand
+    tbRefDup[rowIndex, 99].Text = Busqueda!sorttitle
+    tbRefDup[rowIndex, 100].Text = Busqueda!indexsorttitle
+    tbRefDup[rowIndex, 101].Text = Busqueda!sortyear
+    tbRefDup[rowIndex, 102].Text = Busqueda!file
+    tbRefDup[rowIndex, 103].Text = Busqueda!abstract
+    tbRefDup[rowIndex, 104].Text = Busqueda!library
+    tbRefDup[rowIndex, 105].Text = Busqueda!note
+    tbRefDup[rowIndex, 106].Text = Busqueda!annotation
+    tbRefDup[rowIndex, 107].Text = Busqueda!number
+    tbRefDup[rowIndex, 108].Text = Busqueda!creationdate
+    tbRefDup[rowIndex, 109].Text = Busqueda!type
+
+    ' Incrementa el valor de rowIndex para la siguiente fila
+    rowIndex = rowIndex + 1
+
+    Busqueda.MoveNext
+  Wend
+
+  ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
+  tbRefDup.ScrollY = 0
 
 End

@@ -40,7 +40,7 @@ End Function
 
 Public Function cbEDITORTYPE() As String[]
 
-  Return ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator"]
+  Return ["", "editor", "compiler", "direction", "founder", "continuator", "redactor", "reviser", "collaborator", "cordinator", "organizator"]
 
 End Function
 
