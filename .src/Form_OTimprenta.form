@@ -1,0 +1,19 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,1024,748)
+  #Scaled = False
+  Resizable = False
+  Arrangement = Arrange.Fill
+  Padding = 4
+  { TabStrip1 TabStrip
+    Move(90,126,765,540)
+    Count = 2
+    Index = 0
+    Text = ("Orden de taller para  <nombre del archivo>")
+    Picture = Picture["iconos/imprenta.png"]
+    Index = 1
+    Text = ("Historial de todos los envíos")
+    Index = 0
+  }
+}

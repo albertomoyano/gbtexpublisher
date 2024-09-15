@@ -198,11 +198,15 @@
     }
     { Menu79 Menu
     }
+    { menuOT Menu
+      Text = ("OT para imprenta")
+      Picture = Picture["iconos/imprenta.png"]
+      Enabled = False
+    }
     { menuScriptsExternos Menu
       Text = ("Script externos")
       Picture = Picture["iconos/edit-select.svg"]
       Enabled = False
-      Visible = False
     }
     { menuORTOGRAFIA Menu
       Text = ("Correcciones sobre el texto")
@@ -221,13 +225,6 @@
         Text = ("Corrección ortotipográfica")
       }
     }
-    { menuORTO Menu
-      #Translate = False
-      Text = "Revisión ortotipográfica"
-      Picture = Picture["iconos/tools_check.svg"]
-      Enabled = False
-      Visible = False
-    }
     { menuLOGFILE Menu
       Text = ("Analizar el logfile del archivo")
       Picture = Picture["iconos/logfile.svg"]
@@ -242,7 +239,6 @@
       Text = ("Archivos de configuración")
       Picture = Picture["iconos/configure.svg"]
       Enabled = False
-      Visible = False
     }
     { adminGIT Menu
       Text = ("Administrar .gitignore")

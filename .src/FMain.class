@@ -704,8 +704,8 @@ Public Sub menuAbrir_Click()'abrir un libro
 
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
+  menuOT.Enabled = True
   btnGuardarIGUAL.Enabled = False
-  menuORTO.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -892,8 +892,8 @@ Public Sub mnuLast_Click()
 
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
+  menuOT.Enabled = True
   btnGuardarIGUAL.Enabled = False
-  menuORTO.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -5703,7 +5703,6 @@ Public Sub menuAbrirRevista_Click()
 
   btnMONOpdf.Enabled = False
   btnGuardarIGUAL.Enabled = False
-  menuORTO.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -6076,7 +6075,6 @@ Public Sub menuMono_Click()
   ' rutaBIB = BaseName & ".bib"
 
   btnGuardarIGUAL.Enabled = False
-  menuORTO.Enabled = True
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -7175,5 +7173,11 @@ Public Sub btnAgregarKeyBIBtwo_Click()
     ' Si no hay texto, simplemente establece el texto a agregar
     txtFILTROrelacion.Text = TextoAAgregar
   Endif
+
+End
+
+Public Sub menuOT_Click()
+
+  Form_OTimprenta.ShowModal()
 
 End
