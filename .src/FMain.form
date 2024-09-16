@@ -198,6 +198,11 @@
     }
     { Menu79 Menu
     }
+    { menuPDFweb Menu
+      Text = ("Generar PDF para la web")
+      Picture = Picture["iconos/acroread.svg"]
+      Enabled = False
+    }
     { menuOT Menu
       Text = ("OT para imprenta")
       Picture = Picture["iconos/imprenta.png"]

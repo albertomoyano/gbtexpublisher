@@ -1,0 +1,117 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+  ' Asigna el evento Change de cada TextBox al procedimiento VerificarCampos
+  txtTapa_Change()
+  txtInterior_Change()
+  txtContratapa_Change()
+
+  ' Llamar a la verificación al inicio por si ya hay algún texto en los TextBox
+  VerificarCampos
+
+End
+
+' Evento que se dispara cuando cambia el contenido de txtTapa
+Public Sub txtTapa_Change()
+
+  VerificarCampos()
+
+End
+
+' Evento que se dispara cuando cambia el contenido de txtInterior
+Public Sub txtInterior_Change()
+
+  VerificarCampos()
+
+End
+
+' Evento que se dispara cuando cambia el contenido de txtContratapa
+Public Sub txtContratapa_Change()
+
+  VerificarCampos()
+
+End
+
+Public Sub btnBuscarTapa_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.pdf", ("Archivos pdf")]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(FMain.TextBox1.Text) & "/pdf/"
+  ' Abre el diálogo para seleccionar archivo
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    ' Asigna la ruta del archivo seleccionado al TextBox
+    txtTapa.Text = Dialog.Path
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+Public Sub btnBuscarInterior_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.pdf", ("Archivos pdf")]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(FMain.TextBox1.Text) & "/pdf/"
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    txtInterior.Text = Dialog.Path
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+Public Sub btnBuscarcontratapa_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.pdf", ("Archivos pdf")]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(FMain.TextBox1.Text) & "/pdf/"
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    txtContratapa.Text = Dialog.Path
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+' Función que verifica si todos los TextBox tienen texto
+Public Sub VerificarCampos()
+
+  If txtTapa.Text <> "" And txtInterior.Text <> "" And txtContratapa.Text <> "" Then
+    btnEnsamblar.Enabled = True
+  Else
+    btnEnsamblar.Enabled = False
+  Endif
+
+End
+
+Public Sub btnSalir_Click()
+
+  Me.Close
+
+End
+
+Public Sub btnEnsamblar_Click()
+
+  Dim rutaTapa As String = File.RealPath(txtTapa.Text)
+  Dim rutaInterior As String = File.RealPath(txtInterior.Text)
+  Dim rutaContratapa As String = File.RealPath(txtContratapa.Text)
+  Dim completo As String = File.Dir(FMain.TextBox1.Text) & "/pdf/" & "web-" & File.Name(txtInterior.Text)
+
+  ' Si el archivo existe, ejecutar la función
+  FMain.TerminalView1.Input("pdfunite " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " " & completo & "\n")
+  Wait 0.1
+
+End

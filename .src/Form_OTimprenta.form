@@ -4,16 +4,141 @@
   Move(0,0,1024,748)
   #Scaled = False
   Resizable = False
-  Arrangement = Arrange.Fill
+  Arrangement = Arrange.Vertical
   Padding = 4
-  { TabStrip1 TabStrip
-    Move(90,126,765,540)
+  { HBox6 HBox
+    Move(0,0,927,40)
+    Padding = 2
+    { Spring2 Spring
+      Move(387,0,162,36)
+    }
+    { btnSalirOT ToolButton
+      Move(720,0,160,36)
+      NoTabFocus = True
+      ToolTip = ("Cerrar la ventana")
+      Text = ("Salir")
+      Picture = Picture["iconos/salir.svg"]
+      Border = True
+    }
+  }
+  { TabStripOT TabStrip
+    Move(9,54,1008,684)
     Count = 2
     Index = 0
-    Text = ("Orden de taller para  <nombre del archivo>")
+    Text = ("")
     Picture = Picture["iconos/imprenta.png"]
     Index = 1
     Text = ("Historial de todos los envíos")
+    { HBox1 HBox
+      Move(9,0,927,36)
+      { tbNuevo Button
+        Move(0,0,36,36)
+        NoTabFocus = True
+        ToolTip = ("Agregar entrada")
+        Picture = Picture["iconos/+pestana.svg"]
+      }
+      { tbBorrar Button
+        Move(36,0,36,36)
+        NoTabFocus = True
+        ToolTip = ("Eliminar entrada")
+        Picture = Picture["iconos/borrar.svg"]
+      }
+      { btnGuardar Button
+        Move(72,0,36,36)
+        NoTabFocus = True
+        ToolTip = ("Guardar entrada")
+        Picture = Picture["iconos/guardar.svg"]
+      }
+      { btnGuardarMod Button
+        Move(108,0,36,36)
+        NoTabFocus = True
+        ToolTip = ("Guardar cambios")
+        Picture = Picture["iconos/guardarComo.svg"]
+      }
+      { !btnRefresh Button
+        Move(144,0,36,36)
+        #Public = True
+        Visible = False
+        NoTabFocus = True
+        ToolTip = ("Refrescar datos")
+        Picture = Picture["iconos/refrescar.png"]
+      }
+      { BtnExportarDOCX Button
+        Move(180,0,36,36)
+        NoTabFocus = True
+        ToolTip = ("Exportar la nota como archivo de texto plano")
+        Picture = Picture["iconos/+nuevo.svg"]
+      }
+      { BtnExportarPDF Button
+        Move(216,0,36,36)
+        NoTabFocus = True
+        ToolTip = ("Exportar la nota como archivo de texto plano")
+        Picture = Picture["iconos/acroread.svg"]
+      }
+      { txtBuscar TextBox
+        Move(252,0,290,40)
+      }
+      { BtnBuscar Button
+        Move(590,0,36,36)
+        NoTabFocus = True
+        ToolTip = ("Buscar en toda la base de datos")
+        Picture = Picture["iconos/search.svg"]
+      }
+      { Spring1 Spring
+        Move(640,0,36,40)
+      }
+    }
+    { HBox2 HBox
+      Move(0,36,765,9)
+    }
+    { HBox8 HBox
+      Move(-9,405,765,36)
+      { !txId TextBox
+        Move(45,0,63,40)
+        #Public = True
+        Visible = False
+        NoTabFocus = True
+        Alignment = Align.Center
+        ReadOnly = True
+      }
+      { !txFecha TextBox
+        Move(117,0,126,40)
+        #Public = True
+        Visible = False
+        NoTabFocus = True
+        Alignment = Align.Center
+        ReadOnly = True
+      }
+      { Label7 Label
+        Move(387,0,63,40)
+        NoTabFocus = True
+        AutoResize = True
+        Alignment = Align.Right
+        Text = ("Asunto  ")
+      }
+      { !txAsunto TextBox
+        Move(450,0,63,40)
+        #Public = True
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox4 HBox
+      Move(18,63,765,171)
+      { VLista TableView
+        Move(0,0,153,153)
+        Font = Font["-1"]
+        Expand = True
+        Mode = Select.Single
+        ShowCursor = True
+        Header = GridView.Horizontal
+        ScrollBar = Scroll.Vertical
+        Resizable = False
+      }
+    }
+    { HBox5 HBox
+      Move(0,342,765,8)
+    }
     Index = 0
   }
 }

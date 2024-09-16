@@ -705,6 +705,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
   menuOT.Enabled = True
+  menuPDFweb.Enabled = True
   btnGuardarIGUAL.Enabled = False
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
@@ -893,6 +894,7 @@ Public Sub mnuLast_Click()
   MenuButton1.Menu = "menuScriptsExternos"
   MenuButton2.Menu = "menuProcesarArchivos"
   menuOT.Enabled = True
+  menuPDFweb.Enabled = True
   btnGuardarIGUAL.Enabled = False
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
@@ -7179,5 +7181,11 @@ End
 Public Sub menuOT_Click()
 
   Form_OTimprenta.ShowModal()
+
+End
+
+Public Sub menuPDFweb_Click()
+
+  Form_CombinarPDF.ShowModal()
 
 End

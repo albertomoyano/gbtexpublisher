@@ -1,0 +1,107 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,950,207)
+  #Scaled = False
+  #Translate = False
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  AutoResize = True
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox1 HBox
+    Move(0,0,942,38)
+    Padding = 1
+    { Label3 Label
+      Move(0,0,178,40)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Archivo de tapa  ")
+    }
+    { txtTapa TextBox
+      Move(279,0,216,40)
+      #Translate = False
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+    }
+    { btnBuscarTapa Button
+      Move(585,0,160,40)
+      NoTabFocus = True
+      Text = ("Buscar")
+      Picture = Picture["iconos/document-orange.svg"]
+    }
+  }
+  { HBox2 HBox
+    Move(10,40,800,38)
+    NoTabFocus = True
+    Padding = 1
+    { Label1 Label
+      Move(9,0,178,40)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Archivo de interior  ")
+    }
+    { txtInterior TextBox
+      Move(279,0,216,40)
+      #Translate = False
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+    }
+    { btnBuscarInterior Button
+      Move(594,0,160,40)
+      NoTabFocus = True
+      Text = ("Buscar")
+      Picture = Picture["iconos/document-orange.svg"]
+    }
+  }
+  { HBox3 HBox
+    Move(0,80,800,38)
+    NoTabFocus = True
+    Padding = 1
+    { Label2 Label
+      Move(0,0,178,40)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Archivo de contratapa  ")
+    }
+    { txtContratapa TextBox
+      Move(288,0,216,40)
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+    }
+    { btnBuscarcontratapa Button
+      Move(603,0,160,40)
+      NoTabFocus = True
+      Text = ("Buscar")
+      Picture = Picture["iconos/document-orange.svg"]
+    }
+  }
+  { HBox7 HBox
+    Move(0,120,942,38)
+    Padding = 1
+    { lblMENSAJE Label
+      Move(0,0,144,40)
+      Font = Font["Bold,Italic"]
+      NoTabFocus = True
+      Expand = True
+      Alignment = Align.Center
+    }
+    { btnEnsamblar Button
+      Move(351,0,160,40)
+      Enabled = False
+      NoTabFocus = True
+      Text = ("Ensamblar")
+      Picture = Picture["iconos/emblem-default.svg"]
+    }
+    { btnSalir Button
+      Move(558,0,160,40)
+      NoTabFocus = True
+      Text = ("Salir")
+      Picture = Picture["iconos/salir.svg"]
+    }
+  }
+}
