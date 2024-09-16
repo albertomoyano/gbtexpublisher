@@ -12,13 +12,12 @@
     { Spring2 Spring
       Move(387,0,162,36)
     }
-    { btnSalirOT ToolButton
+    { btnSalirOT Button
       Move(720,0,160,36)
       NoTabFocus = True
       ToolTip = ("Cerrar la ventana")
       Text = ("Salir")
       Picture = Picture["iconos/salir.svg"]
-      Border = True
     }
   }
   { TabStripOT TabStrip

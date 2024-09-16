@@ -2,14 +2,20 @@
 
 Public Sub Form_Open()
 
-  txtDESTINO.SetFocus()
+  Dim fecha As String
+
+  fecha = Format(Date(), "yyyymmdd") ' Obtener la fecha actual
+
+  Dim comando As String
+
+  txtFecha.Text = fecha & "_"
 
 End
 
 Public Sub btnBuscar_Click()
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.rtf", ("Archivos rtf"), "*.docx", ("Archivos word"), "*", ("Todos los archivos")]
+  Dialog.Filter = ["*.docx", ("Archivos word"), "*.rtf", ("Archivos rtf"), "*", ("Todos los archivos")]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
@@ -53,7 +59,7 @@ Public Sub btnCONVERTIR_Click()
   txtORIGEN.Text = Dialog.Path
   rutaORIGINALES = File.Dir(Dialog.Path) &/ "originales"
   rutaMEDIA = File.Dir(Dialog.Path) &/ "media"
-  destino = File.Dir(Dialog.Path) &/ txtDESTINO.Text & ".tex"
+  destino = File.Dir(Dialog.Path) &/ txtFecha & txtDESTINO.Text & ".tex"
   destinoRTF = File.Dir(Dialog.Path) &/ txtDESTINO.Text & "@.rtf"
 
   If Not Exist(rutaORIGINALES) Then
@@ -161,7 +167,7 @@ Public Sub txtDESTINO_KeyRelease()
   texto = txtDESTINO.Text
 
   ' Lista de caracteres permitidos
-  Dim caracteresPermitidos As String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  Dim caracteresPermitidos As String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
   ' Filtrar el texto para eliminar caracteres no permitidos
   Dim textoFiltrado As String
@@ -174,11 +180,11 @@ Public Sub txtDESTINO_KeyRelease()
   Next
 
   ' Limitar la longitud del texto a 11 caracteres
-  If Len(textoFiltrado) > 11 Then
+  If Len(textoFiltrado) > 20 Then
     ' Mostrar un mensaje de aviso
-    Message.Warning("El nombre de salida del archivo no puede contener más de 11 caracteres.", "Entendido")
+    Message.Warning("El nombre de salida del archivo no puede contener más de 20 caracteres.", "Entendido")
     ' Eliminar los caracteres adicionales
-    txtDESTINO.Text = Left(textoFiltrado, 11)
+    txtDESTINO.Text = Left(textoFiltrado, 20)
   Else
     ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
     txtDESTINO.Text = UCase(textoFiltrado)
