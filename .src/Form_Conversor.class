@@ -87,13 +87,11 @@ Public Sub btnCONVERTIR_Click()
       Wait 0.5
       zprocess = Shell "mv " & escapedPath & " " & escapedOriginalesPath
       Wait 0.5
-      lblMENSAJE.Text = "Procesando el archivo, sea paciente"
 
       Do While zprocess.state = Process.Running
         Wait 0.1
       Loop
       If zprocess.State = Process.Stopped Then
-        lblMENSAJE.Text = "El proceso ha terminado, ahora puede cerrar el formulario"
         btnCONVERTIR.Enabled = False
         btnListo.Visible = True
         btnListo.Default = True
@@ -120,13 +118,11 @@ Public Sub btnCONVERTIR_Click()
   Dim hprocess As Process
   If RadioButton2.Value = True And RadioButton1.Value = False And RadioButton3.Value = False Then
     hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text
-    lblMENSAJE.Text = "Procesando el archivo, sea paciente"
 
     Do While hprocess.state = Process.Running
       Wait 0.1
     Loop
     If hprocess.State = Process.Stopped Then
-      lblMENSAJE.Text = "El proceso ha terminado, ahora puede cerrar el formulario"
       btnCONVERTIR.Enabled = False
       btnListo.Visible = True
       btnListo.Default = True

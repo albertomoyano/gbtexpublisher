@@ -32,7 +32,7 @@ Public Sub Form_Open()
 
     If File.RealPath(filePath) <> "" Then
       ' Si el archivo existe, continuar con la apertura del formulario
-      TabStripOT[0].Text = "Orden de taller para el archivo " & NombreArchivo
+      Form_OTimprenta.Title = "Orden de taller para el archivo " & NombreArchivo
       'aquí van las funciones del formulario
       '1) validar que sea un tipoDocumento Libro
       '2) llenar los textbox básicos
