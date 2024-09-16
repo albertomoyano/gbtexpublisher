@@ -5,7 +5,9 @@ Public Sub Form_Open()
   Dim texto As String
   Dim linea As String
   Dim archivo As String
+  Dim NombreArchivo As String
 
+  NombreArchivo = FMain.BaseName & ".tex"
   archivo = FMain.rutaFILES & "/gbTeXv-" & FMain.BaseName & ".log"
   texto = File.Load(archivo)
 
@@ -18,7 +20,7 @@ Public Sub Form_Open()
     TextArea1.Text &= linea & gb.NewLine
   Next
 
-  Form_Contador.Title = "Estadística del archivo"
+  Form_Logfile.Title = "Estadística para el archivo " & NombreArchivo
 
 End
 

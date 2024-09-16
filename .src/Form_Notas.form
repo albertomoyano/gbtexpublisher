@@ -3,7 +3,6 @@
 { Form Form
   Move(0,0,950,640)
   #Scaled = False
-  Text = ("Apuntes")
   Resizable = False
   Arrangement = Arrange.Vertical
   Padding = 4

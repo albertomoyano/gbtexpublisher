@@ -91,6 +91,9 @@
   }
   { HBox7 HBox
     Move(0,120,942,36)
+    { Spring1 Spring
+      Move(135,0,117,36)
+    }
     { btnListo Button
       Move(351,0,160,40)
       Visible = False

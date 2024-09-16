@@ -5,7 +5,9 @@ Public Sub Form_Open()
   Dim texto As String
   Dim linea As String
   Dim archivo As String
+  Dim NombreArchivo As String
 
+  NombreArchivo = FMain.BaseName & ".tex"
   archivo = FMain.rutaFILES &/ "gbTeX-" & FMain.BaseName & ".txt"
   TextArea1.Text = ""
 
@@ -21,7 +23,7 @@ Public Sub Form_Open()
     Message.Error("El archivo <b>gbTeX-" & FMain.BaseName & ".txt</b> no existe.")
   Endif
 
-  Form_Contador.Title = "Estadística del archivo"
+  Form_Contador.Title = "Estadística para el archivo " & NombreArchivo
 
 End
 

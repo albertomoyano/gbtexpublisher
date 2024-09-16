@@ -2082,12 +2082,6 @@ Public Sub btnMostrarColeccion_Click()
 
 End
 
-Public Sub btnMostarRevision_Click()
-
-  Form_Revisores.ShowModal()
-
-End
-
 Public Sub btnMostarConferencia_Click()
 
   Form_Conferencia.ShowModal()

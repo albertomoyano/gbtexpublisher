@@ -259,16 +259,6 @@ Public Sub btnLimpiar_Click()
 
 End
 
-Public Sub btnMostarSponsor_Click()
-
-  Dim FormSponsor As Form_Sponsor
-
-  FormSponsor = New Form_Sponsor
-  FormSponsor.FormConferencia = Me
-  FormSponsor.ShowModal
-
-End
-
 Public Sub Form_Close()
 
   Mod_Conn.desconectar

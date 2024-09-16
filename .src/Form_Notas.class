@@ -21,7 +21,7 @@ Public Sub Form_Open()
     conector = Null
     Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
   Else
-
+    Form_Notas.Title = "Formulario para notas generales"
     tbNuevo.Visible = True
     tbBorrar.Visible = False
     btnGuardar.Visible = False
