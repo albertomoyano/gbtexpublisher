@@ -26,14 +26,14 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
-  ' ' controlamos que la aplicación no esté en ejecución
-  ' Dim s As String
-  '
-  ' Exec ["pgrep", "-fla", Application.Name] Wait To s
-  ' If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
-  '   Message.Warning(Application.name & (" ya se está ejecutando"))
-  '   Quit
-  ' Endif
+  ' controlamos que la aplicación no esté en ejecución
+  Dim s As String
+
+  Exec ["pgrep", "-fla", Application.Name] Wait To s
+  If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
+    Message.Warning(Application.name & (" ya se está ejecutando"))
+    Quit
+  Endif
 
   Dim fecha As String
 
