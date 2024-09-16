@@ -91,13 +91,6 @@
   }
   { HBox7 HBox
     Move(0,120,942,36)
-    { lblMENSAJE Label
-      Move(0,0,144,40)
-      Font = Font["Bold,Italic"]
-      NoTabFocus = True
-      Expand = True
-      Alignment = Align.Center
-    }
     { btnListo Button
       Move(351,0,160,40)
       Visible = False
