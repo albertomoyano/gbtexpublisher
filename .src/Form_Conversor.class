@@ -6,9 +6,7 @@ Public Sub Form_Open()
 
   fecha = Format(Date(), "yyyymmdd") ' Obtener la fecha actual
 
-  Dim comando As String
-
-  txtFecha.Text = fecha & "_"
+  txtFecha.Text = fecha
 
 End
 
@@ -59,7 +57,7 @@ Public Sub btnCONVERTIR_Click()
   txtORIGEN.Text = Dialog.Path
   rutaORIGINALES = File.Dir(Dialog.Path) &/ "originales"
   rutaMEDIA = File.Dir(Dialog.Path) &/ "media"
-  destino = File.Dir(Dialog.Path) &/ txtFecha & txtDESTINO.Text & ".tex"
+  destino = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
   destinoRTF = File.Dir(Dialog.Path) &/ txtDESTINO.Text & "@.rtf"
 
   If Not Exist(rutaORIGINALES) Then

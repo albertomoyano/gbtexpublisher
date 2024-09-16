@@ -70,8 +70,9 @@
       Text = ("Archivo de  destino  ")
     }
     { txtFecha TextBox
-      Move(234,0,108,36)
+      Move(234,0,144,36)
       Background = Color.Background
+      Alignment = Align.Right
       ReadOnly = True
     }
     { txtDESTINO TextBox
