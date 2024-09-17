@@ -6,6 +6,7 @@ Private Busqueda As Result
 
 Public Sub Form_Open()
 
+  Splitter1.Layout = [1, 5]
   ' Crear una nueva conexión
   conector = New Connection
 
@@ -60,6 +61,10 @@ End
 
 Public Sub Button1_Click()
 
-  Mod_Exportar.Export2OrdenTaller()
+End
+
+Public Sub Splitter1_Resize()
+
+  Splitter1.Layout = [1, 5]
 
 End

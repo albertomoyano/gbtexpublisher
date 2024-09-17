@@ -7175,3 +7175,9 @@ Public Sub menuPDFweb_Click()
   Form_CombinarPDF.ShowModal()
 
 End
+
+Public Sub menuOT_Click()
+
+  Form_OTimprenta.ShowModal()
+
+End

@@ -10,7 +10,12 @@
     Move(0,0,927,40)
     Padding = 2
     { Spring2 Spring
-      Move(387,0,162,36)
+      Move(27,0,162,36)
+    }
+    { Button2 Button
+      Move(549,0,160,36)
+      Text = ("Generar")
+      Picture = Picture["iconos/acroread.svg"]
     }
     { btnSalirOT Button
       Move(720,0,160,36)
@@ -20,7 +25,196 @@
       Picture = Picture["iconos/salir.svg"]
     }
   }
-  { Button1 Button
-    Move(621,540,144,36)
+  { Splitter1 Splitter
+    Move(9,54,1008,612)
+    Expand = True
+    Border = False
+    { PictureBox1 PictureBox
+      Move(18,81,171,189)
+      NoTabFocus = True
+      Picture = Picture.Load("iconos/document.png")
+      Alignment = Align.Top
+    }
+    { ScrollView2 ScrollView
+      Move(243,45,738,549)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      Border = False
+      ScrollBar = Scroll.Vertical
+      { HBox13 HBox
+        Move(0,0,414,40)
+        Padding = 2
+        { Label12 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Copias ")
+        }
+        { txtCopiasOT TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox21 HBox
+        Move(9,45,414,40)
+        Padding = 2
+        { Label3 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Autor ")
+        }
+        { txtAutorOT TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox2 HBox
+        Move(0,90,414,40)
+        Padding = 2
+        { Label1 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Título ")
+        }
+        { txtTituloOT TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox3 HBox
+        Move(0,126,414,40)
+        Padding = 2
+        { Label2 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Páginas ")
+        }
+        { txtPaginasOT TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox4 HBox
+        Move(0,162,414,40)
+        Padding = 2
+        { Label4 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Formato ")
+        }
+        { txtAutorOT4 TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox5 HBox
+        Move(0,207,414,40)
+        Padding = 2
+        { Label5 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Tintas interior ")
+        }
+        { txtAutorOT5 TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox7 HBox
+        Move(0,243,414,40)
+        Padding = 2
+        { Label6 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Papel interior ")
+        }
+        { txtAutorOT6 TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox8 HBox
+        Move(0,288,414,40)
+        Padding = 2
+        { Label7 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Encuadernación ")
+        }
+        { txtAutorOT7 TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox9 HBox
+        Move(0,324,414,40)
+        Padding = 2
+        { Label8 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Tintas tapa ")
+        }
+        { txtAutorOT8 TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox10 HBox
+        Move(0,369,414,40)
+        Padding = 2
+        { Label9 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Papel tapa ")
+        }
+        { txtAutorOT9 TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox11 HBox
+        Move(0,405,414,40)
+        Padding = 2
+        { Label10 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Revestimiento ")
+        }
+        { txtAutorOT10 TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox12 HBox
+        Move(0,441,414,99)
+        Expand = True
+        Padding = 1
+        { Label11 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Notas ")
+        }
+        { Panel1 Panel
+          Move(162,9,162,90)
+          Expand = True
+          Arrangement = Arrange.Fill
+          Border = Border.Etched
+          { TextArea1 TextArea
+            Move(9,9,117,63)
+            Expand = True
+          }
+        }
+      }
+    }
+  }
+  { HBox1 HBox
+    Move(18,684,927,40)
+    Padding = 2
+    { Spring1 Spring
+      Move(387,0,162,36)
+    }
+    { Button1 Button
+      Move(603,0,320,36)
+      Text = ("Despachar por correo")
+    }
   }
 }
