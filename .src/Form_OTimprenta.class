@@ -57,3 +57,9 @@ Public Sub btnSalirOT_Click()
   Me.Close()
 
 End
+
+Public Sub Button1_Click()
+
+  Mod_Exportar.Export2OrdenTaller()
+
+End

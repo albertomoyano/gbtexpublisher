@@ -110,8 +110,13 @@ Public Sub btnEnsamblar_Click()
   Dim rutaContratapa As String = File.RealPath(txtContratapa.Text)
   Dim completo As String = File.Dir(FMain.TextBox1.Text) & "/pdf/" & "web-" & File.Name(txtInterior.Text)
 
-  ' Si el archivo existe, ejecutar la función
-  FMain.TerminalView1.Input("pdfunite " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " " & completo & "\n")
-  Wait 0.1
+  ' Verifica si el archivo ya existe y lo elimina
+  If File.RealPath(completo) Then
+    FMain.TerminalView1.Input("rm -rf " & completo & "\n" & "pdfunite " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " " & completo & "\n")
+    Wait 0.1
+  Else
+    FMain.TerminalView1.Input("pdfunite " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " " & completo & "\n")
+    Wait 0.1
+  Endif
 
 End

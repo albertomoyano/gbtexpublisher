@@ -20,4 +20,7 @@
       Picture = Picture["iconos/salir.svg"]
     }
   }
+  { Button1 Button
+    Move(621,540,144,36)
+  }
 }

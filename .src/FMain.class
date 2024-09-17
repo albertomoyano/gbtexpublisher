@@ -715,7 +715,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
   adminGIT.Enabled = True
-  menuCFG.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
@@ -904,7 +903,6 @@ Public Sub mnuLast_Click()
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
   adminGIT.Enabled = True
-  menuCFG.Enabled = True
   menuTOOLS.Visible = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
@@ -1948,7 +1946,7 @@ Public Sub btnGuardarMeta_Click()
   Else
     ' El formato es incorrecto, mostrar mensaje de advertencia
     Message.Warning("El formato de la fecha no es válido. Debe ser en el formato 'YYYY-MM'.")
-    txtDate.txt = ""
+    txtDate.text = ""
     txtDate.SetFocus
     Return
   Endif
@@ -5707,7 +5705,6 @@ Public Sub menuAbrirRevista_Click()
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
   adminGIT.Enabled = True
-  menuCFG.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
@@ -6079,7 +6076,6 @@ Public Sub menuMono_Click()
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
   adminGIT.Enabled = True
-  menuCFG.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   MenuApp.Enabled = True
@@ -7171,12 +7167,6 @@ Public Sub btnAgregarKeyBIBtwo_Click()
     ' Si no hay texto, simplemente establece el texto a agregar
     txtFILTROrelacion.Text = TextoAAgregar
   Endif
-
-End
-
-Public Sub menuOT_Click()
-
-  Form_OTimprenta.ShowModal()
 
 End
 

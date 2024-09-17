@@ -240,11 +240,6 @@
       Picture = Picture["iconos/draw.svg"]
       Enabled = False
     }
-    { menuCFG Menu
-      Text = ("Archivos de configuración")
-      Picture = Picture["iconos/configure.svg"]
-      Enabled = False
-    }
     { adminGIT Menu
       Text = ("Administrar .gitignore")
       Picture = Picture["iconos/edit-select.svg"]
@@ -2760,6 +2755,7 @@
       }
       { txtEXPORTARglo TextBox
         MoveScaled(58,0,9,4)
+        Background = Color.Background
         NoTabFocus = True
         Expand = True
         Alignment = Align.Left
