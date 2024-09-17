@@ -33,7 +33,7 @@ Public Sub Form_Open()
 
     If File.RealPath(filePath) <> "" Then
       ' Si el archivo existe, continuar con la apertura del formulario
-      Form_OTimprenta.Title = "Orden de taller para el archivo " & NombreArchivo
+      Form_OTimprenta.Title = "Orden de impresión para el archivo " & NombreArchivo
       'aquí van las funciones del formulario
       '1) validar que sea un tipoDocumento Libro
       '2) llenar los textbox básicos
@@ -59,12 +59,18 @@ Public Sub btnSalirOT_Click()
 
 End
 
-Public Sub Button1_Click()
+Public Sub btnDespacharCorreo_Click()
 
 End
 
 Public Sub Splitter1_Resize()
 
   Splitter1.Layout = [1, 5]
+
+End
+
+Public Sub btnGenerarPDF_Click()
+
+  Mod_Exportar.Export2OrdenTaller()
 
 End

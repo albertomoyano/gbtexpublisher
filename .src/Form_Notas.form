@@ -131,9 +131,9 @@
     Move(360,414,333,180)
     Expand = True
     Arrangement = Arrange.Fill
-    Border = Border.Plain
+    Border = Border.Etched
     { !txContenido TextArea
-      Move(0,0,162,63)
+      Move(9,27,162,63)
       #Public = True
       Font = Font["Monospace"]
       NoTabFocus = True

@@ -12,7 +12,7 @@
     { Spring2 Spring
       Move(27,0,162,36)
     }
-    { Button2 Button
+    { btnGenerarPDF Button
       Move(549,0,160,36)
       Text = ("Generar")
       Picture = Picture["iconos/acroread.svg"]
@@ -36,13 +36,26 @@
       Alignment = Align.Top
     }
     { ScrollView2 ScrollView
-      Move(243,45,738,549)
+      Move(243,9,738,594)
       Expand = True
       Arrangement = Arrange.Vertical
       Border = False
       ScrollBar = Scroll.Vertical
-      { HBox13 HBox
+      { HBox14 HBox
         Move(0,0,414,40)
+        Padding = 2
+        { Label13 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Proveedor ")
+        }
+        { txtProveedorOT TextBox
+          Move(216,0,135,36)
+          Expand = True
+        }
+      }
+      { HBox13 HBox
+        Move(0,36,414,40)
         Padding = 2
         { Label12 Label
           Move(0,0,144,32)
@@ -55,7 +68,7 @@
         }
       }
       { HBox21 HBox
-        Move(9,45,414,40)
+        Move(9,81,414,40)
         Padding = 2
         { Label3 Label
           Move(0,0,144,32)
@@ -64,11 +77,13 @@
         }
         { txtAutorOT TextBox
           Move(216,0,135,36)
+          Background = Color.Background
           Expand = True
+          ReadOnly = True
         }
       }
       { HBox2 HBox
-        Move(0,90,414,40)
+        Move(0,126,414,40)
         Padding = 2
         { Label1 Label
           Move(0,0,144,32)
@@ -77,11 +92,13 @@
         }
         { txtTituloOT TextBox
           Move(216,0,135,36)
+          Background = Color.Background
           Expand = True
+          ReadOnly = True
         }
       }
       { HBox3 HBox
-        Move(0,126,414,40)
+        Move(0,162,414,40)
         Padding = 2
         { Label2 Label
           Move(0,0,144,32)
@@ -90,11 +107,13 @@
         }
         { txtPaginasOT TextBox
           Move(216,0,135,36)
+          Background = Color.Background
           Expand = True
+          ReadOnly = True
         }
       }
       { HBox4 HBox
-        Move(0,162,414,40)
+        Move(0,198,414,40)
         Padding = 2
         { Label4 Label
           Move(0,0,144,32)
@@ -103,11 +122,13 @@
         }
         { txtAutorOT4 TextBox
           Move(216,0,135,36)
+          Background = Color.Background
           Expand = True
+          ReadOnly = True
         }
       }
       { HBox5 HBox
-        Move(0,207,414,40)
+        Move(0,243,414,40)
         Padding = 2
         { Label5 Label
           Move(0,0,144,32)
@@ -120,7 +141,7 @@
         }
       }
       { HBox7 HBox
-        Move(0,243,414,40)
+        Move(0,279,414,40)
         Padding = 2
         { Label6 Label
           Move(0,0,144,32)
@@ -133,7 +154,7 @@
         }
       }
       { HBox8 HBox
-        Move(0,288,414,40)
+        Move(0,324,414,40)
         Padding = 2
         { Label7 Label
           Move(0,0,144,32)
@@ -146,7 +167,7 @@
         }
       }
       { HBox9 HBox
-        Move(0,324,414,40)
+        Move(0,360,414,40)
         Padding = 2
         { Label8 Label
           Move(0,0,144,32)
@@ -159,7 +180,7 @@
         }
       }
       { HBox10 HBox
-        Move(0,369,414,40)
+        Move(0,405,414,40)
         Padding = 2
         { Label9 Label
           Move(0,0,144,32)
@@ -172,7 +193,7 @@
         }
       }
       { HBox11 HBox
-        Move(0,405,414,40)
+        Move(0,441,414,40)
         Padding = 2
         { Label10 Label
           Move(0,0,144,32)
@@ -185,7 +206,7 @@
         }
       }
       { HBox12 HBox
-        Move(0,441,414,99)
+        Move(9,486,414,99)
         Expand = True
         Padding = 1
         { Label11 Label
@@ -212,7 +233,7 @@
     { Spring1 Spring
       Move(387,0,162,36)
     }
-    { Button1 Button
+    { btnDespacharCorreo Button
       Move(603,0,320,36)
       Text = ("Despachar por correo")
     }
