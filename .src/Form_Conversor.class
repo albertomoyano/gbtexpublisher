@@ -80,7 +80,7 @@ Public Sub btnCONVERTIR_Click()
     Else
       zprocess = Shell "iconv -f ISO-8859-1 -t UTF-8 " & escapedPath & " > " & destinoRTF
       Wait 0.5
-      zprocess = Shell "pandoc -s " & destinoRTF & " -o " & destino & " --from=rtf --to=latex --reference-links=false --wrap=none --extract-media=" & rutaMEDIA
+      zprocess = Shell "pandoc --normalize -s " & destinoRTF & " -o " & destino & " --from=rtf --to=latex --reference-links=false --wrap=none --extract-media=" & rutaMEDIA
       Wait 0.5
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
       zprocess = Shell "rm " & destinoRTF
@@ -104,7 +104,7 @@ Public Sub btnCONVERTIR_Click()
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
-      Shell "pandoc --reference-links=false --wrap=none --extract-media=" & File.Dir(Dialog.Path) & " -t latex -f docx " & escapedPath & " -o " & destino
+      Shell "pandoc --normalize --reference-links=false --wrap=none --extract-media=" & File.Dir(Dialog.Path) & " -t latex -f docx " & escapedPath & " -o " & destino
       Wait 0.3
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
       Shell "mv " & escapedPath & " " & escapedOriginalesPath

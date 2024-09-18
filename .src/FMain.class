@@ -5437,7 +5437,7 @@ Public Sub menuCONVERSORpandoc_Click()
   outputPath = directoryPath &/ "tmp.tex"
 
   ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
-  Shell "pandoc --reference-links=false --wrap=none -t latex -f docx " & Quote$(Dialog.Path) & " -o " & Quote$(outputPath) Wait
+  Shell "pandoc --normalize --reference-links=false --wrap=none -t latex -f docx " & Quote$(Dialog.Path) & " -o " & Quote$(outputPath) Wait
 
   ' Verifica si el archivo tmp.tex fue creado exitosamente
   If Exist(outputPath) Then
