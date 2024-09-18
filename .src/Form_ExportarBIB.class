@@ -69,7 +69,6 @@ Public Sub btnExportarBIB_Click()
     outputFile = txtdestino.Text &/ txtNombre.Text & ".bib"
     File.Save(outputFile, s)
 
-    Mod_Conn.desconectar
     ' Mostrar mensaje de exportación terminada en el label
     Label2.Text = "Exportación terminada, puede cerrar el formulario o realizar una nueva exportación"
     txtdestino.Text = ""

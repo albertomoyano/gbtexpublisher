@@ -1,38 +1,40 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,106,25)
+  Move(0,0,1024,208)
+  #Scaled = False
+  Expand = True
   Text = ("Exportar referencias bibliográficas")
+  Resizable = False
   Arrangement = Arrange.Vertical
-  AutoResize = True
   Margin = True
   Padding = 4
   { HBox1 HBox
-    MoveScaled(0,1,105.5556,4.4444)
+    Move(0,9,950,40)
     Padding = 2
     { TextLabel1 TextLabel
-      MoveScaled(7,0,12,4)
+      Move(63,0,108,36)
       Padding = 4
-      Text = ("Destino")
+      Text = ("Destino  ")
       Alignment = Align.Right
     }
     { !txtdestino TextBox
-      MoveScaled(24,0,16,3.5556)
+      Move(216,0,144,32)
       #Public = True
       Foreground = Color.DarkBlue
       Expand = True
       ReadOnly = True
     }
     { btnDestino Button
-      MoveScaled(53,0,4,4)
+      Move(477,0,36,36)
       Picture = Picture["iconos/document-orange.svg"]
     }
   }
   { HBox2 HBox
-    MoveScaled(0,5,105.5556,4.4444)
+    Move(0,45,950,40)
     Padding = 2
     { Label1 Label
-      MoveScaled(25,0,52,3.5556)
+      Move(225,0,468,32)
       Font = Font["Bold"]
       Expand = True
       Alignment = Align.Center
@@ -40,52 +42,52 @@
     }
   }
   { HBox3 HBox
-    MoveScaled(-5,9,105.5556,4.4444)
+    Move(-45,81,950,40)
     Padding = 2
     { TextLabel4 TextLabel
-      MoveScaled(7,0,12,4)
+      Move(63,0,108,36)
       Padding = 4
-      Text = ("Filtro")
+      Text = ("Filtro  ")
       Alignment = Align.Right
     }
     { txtFiltro TextBox
-      MoveScaled(24,0,16,4)
+      Move(216,0,144,36)
       Expand = True
     }
     { TextLabel2 TextLabel
-      MoveScaled(41,0,16,4)
+      Move(369,0,144,36)
       Padding = 4
-      Text = ("  Exportar como")
+      Text = ("  Exportar como  ")
       Alignment = Align.Right
     }
     { txtNombre TextBox
-      MoveScaled(57,0,22,4)
+      Move(513,0,198,36)
       Placeholder = ("Nombre sin la extensión")
     }
   }
   { HBox4 HBox
-    MoveScaled(0,13,105.5556,4.4444)
+    Move(0,117,950,40)
     Padding = 2
     { Label2 Label
-      MoveScaled(25,0,52,4)
+      Move(225,0,468,36)
       Font = Font["Bold,Italic"]
       Expand = True
       Alignment = Align.Center
     }
   }
   { HBox14 HBox
-    MoveScaled(0,17,105.5556,4.4444)
+    Move(0,153,950,40)
     Padding = 2
     { Spring1 Spring
-      MoveScaled(7,0,10,3.5556)
+      Move(63,0,90,32)
     }
     { btnExportarBIB Button
-      MoveScaled(49,0,17.7778,4)
+      Move(441,0,160,36)
       Text = ("Exportar")
       Picture = Picture["iconos/exportar.svg"]
     }
     { btnCancelar Button
-      MoveScaled(68,0,17.7778,4)
+      Move(612,0,160,36)
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]
     }
