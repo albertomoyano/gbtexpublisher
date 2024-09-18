@@ -3,6 +3,10 @@
 Private conector As Connection
 Private Contenido As Result
 Private Busqueda As Result
+Private filePathPDF As String
+Private filePathTEX As String
+Private NombreArchivoPDF As String = File.BaseName(FMain.TextBox1.Text) & ".pdf"
+Private NombreArchivoTEX As String = File.BaseName(FMain.TextBox1.Text) & ".tex"
 
 Public Sub Form_Open()
 
@@ -13,7 +17,7 @@ Public Sub Form_Open()
   ' Configurar los parámetros de conexión
   conector.Type = "sqlite"
   conector.Host = User.Home &/ ".gbtexpublisher"
-  conector.Name = "conn_serv.sqlite"
+  conector.Name = "db_tex.sqlite"
 
   ' Intentar abrir la conexión
   Try conector.Open()
@@ -23,23 +27,22 @@ Public Sub Form_Open()
     Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
   Else
 
-    Dim filePath As String
-    Dim NombreArchivo As String
+    Dim Himagen As String
+    Himagen = User.Home & "/.gbtexpublisher/falta-tapa.png"
 
-    ' Construir el nombre del archivo PDF
-    NombreArchivo = File.BaseName(FMain.TextBox1.Text) & ".pdf"
+    filePathPDF = File.Dir(FMain.TextBox1.Text) & "/pdf/" & NombreArchivoPDF
+    filePathTEX = File.Dir(FMain.TextBox1.Text) & NombreArchivoTEX
 
-    filePath = File.Dir(FMain.TextBox1.Text) & "/pdf/" & NombreArchivo
-
-    If File.RealPath(filePath) <> "" Then
+    If File.RealPath(filePathPDF) <> "" Then
       ' Si el archivo existe, continuar con la apertura del formulario
-      Form_OTimprenta.Title = "Orden de impresión para el archivo " & NombreArchivo
+      verTipoDocumento
+      picTapaOT.Picture = Picture[Himagen]
+
       'aquí van las funciones del formulario
-      '1) validar que sea un tipoDocumento Libro
       '2) llenar los textbox básicos
       '
     Else
-      Message.Error("El archivo <b>" & NombreArchivo & "</b> no existe.")
+      Message.Error("El archivo <b>" & NombreArchivoPDF & "</b> no existe.")
       Me.Close
     Endif
 
@@ -66,5 +69,34 @@ End
 Public Sub Splitter1_Resize()
 
   Splitter1.Layout = [1, 5]
+
+End
+
+Public Sub verTipoDocumento()
+
+  Dim comando As String
+  Dim tipoDocumento As String
+
+  ' Realizar la consulta
+  comando = "SELECT * FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivoTEX & "'"
+  Contenido = conector.Exec(comando)
+
+  ' Verificar si la consulta devolvió resultados
+  If Contenido.Available Then
+    ' Obtener el valor de tipoDocumento
+    tipoDocumento = Contenido!tipoDocumento
+
+    ' Condicional para elegir la función según el tipo de documento
+    Select Case tipoDocumento
+      Case "tipoLibro"
+        Form_OTimprenta.Title = "Orden de taller para impresión"
+        txtLabel.Text = "Orden de impresión para el archivo <strong> " & NombreArchivoPDF & "</strong>"
+      Case Else
+        Message.Error("No es posble generar una orden de taller para el archivo <strong>" & NombreArchivoPDF & "</strong>, ya que el mismo no es un libro.")
+        Me.Close()
+    End Select
+  Else
+    Message.Error("El archivo no existe en la base de datos.")
+  End If
 
 End
