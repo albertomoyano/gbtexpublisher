@@ -9,8 +9,19 @@
   { HBox6 HBox
     Move(0,0,927,40)
     Padding = 2
+    { txtIDot TextBox
+      Move(9,0,90,36)
+      Visible = False
+      Background = Color.Background
+      ReadOnly = True
+    }
+    { btnGuardarCambiosOT Button
+      Move(171,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
     { Spring2 Spring
-      Move(27,0,162,36)
+      Move(351,0,162,36)
     }
     { btnGenerarPDF Button
       Move(549,0,160,36)
@@ -29,7 +40,7 @@
     Move(9,54,1008,612)
     Expand = True
     Border = False
-    { PictureBox1 PictureBox
+    { picTapaOT PictureBox
       Move(18,81,171,189)
       NoTabFocus = True
       Picture = Picture.Load("iconos/document.png")
@@ -135,7 +146,7 @@
           Alignment = Align.Right
           Text = ("Tintas interior ")
         }
-        { txtAutorOT5 TextBox
+        { txtTintasInteriorOT TextBox
           Move(216,0,135,36)
           Expand = True
         }
@@ -148,7 +159,7 @@
           Alignment = Align.Right
           Text = ("Papel interior ")
         }
-        { txtAutorOT6 TextBox
+        { txtPapelInteriorOT TextBox
           Move(216,0,135,36)
           Expand = True
         }
@@ -161,7 +172,7 @@
           Alignment = Align.Right
           Text = ("Encuadernación ")
         }
-        { txtAutorOT7 TextBox
+        { txtEncuadernacionOT TextBox
           Move(216,0,135,36)
           Expand = True
         }
@@ -174,7 +185,7 @@
           Alignment = Align.Right
           Text = ("Tintas tapa ")
         }
-        { txtAutorOT8 TextBox
+        { txtTintasTapaOT TextBox
           Move(216,0,135,36)
           Expand = True
         }
@@ -187,7 +198,7 @@
           Alignment = Align.Right
           Text = ("Papel tapa ")
         }
-        { txtAutorOT9 TextBox
+        { txtPapelTapaOT TextBox
           Move(216,0,135,36)
           Expand = True
         }
@@ -200,7 +211,7 @@
           Alignment = Align.Right
           Text = ("Revestimiento ")
         }
-        { txtAutorOT10 TextBox
+        { txtRevestimientoOT TextBox
           Move(216,0,135,36)
           Expand = True
         }
@@ -219,7 +230,7 @@
           Expand = True
           Arrangement = Arrange.Fill
           Border = Border.Etched
-          { TextArea1 TextArea
+          { txtNotasOT TextArea
             Move(9,9,117,63)
             Expand = True
           }

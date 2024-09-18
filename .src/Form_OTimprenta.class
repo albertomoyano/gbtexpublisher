@@ -68,9 +68,3 @@ Public Sub Splitter1_Resize()
   Splitter1.Layout = [1, 5]
 
 End
-
-Public Sub btnGenerarPDF_Click()
-
-  Mod_Exportar.Export2OrdenTaller()
-
-End
