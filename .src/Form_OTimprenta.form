@@ -228,8 +228,8 @@
         Padding = 1
         { Label11 Label
           Move(0,0,144,32)
-          Alignment = Align.Right
-          Text = ("Notas ")
+          Alignment = Align.TopRight
+          Text = ("Observaciones ")
         }
         { Panel1 Panel
           Move(162,9,162,90)
