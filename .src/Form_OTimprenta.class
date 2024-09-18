@@ -2,7 +2,6 @@
 
 Private conector As Connection
 Private Contenido As Result
-Private Busqueda As Result
 Private filePathPDF As String
 Private filePathTEX As String
 Private NombreArchivoPDF As String = File.BaseName(FMain.TextBox1.Text) & ".pdf"

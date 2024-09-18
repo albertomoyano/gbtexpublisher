@@ -1,14 +1,15 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,106,21)
+  MoveScaled(0,0,106,25)
   Text = ("Exportar referencias bibliográficas")
   Arrangement = Arrange.Vertical
   AutoResize = True
   Margin = True
   Padding = 4
   { HBox1 HBox
-    MoveScaled(0,1,105.5556,4)
+    MoveScaled(0,1,105.5556,4.4444)
+    Padding = 2
     { TextLabel1 TextLabel
       MoveScaled(7,0,12,4)
       Padding = 4
@@ -28,7 +29,8 @@
     }
   }
   { HBox2 HBox
-    MoveScaled(0,5,105.5556,4)
+    MoveScaled(0,5,105.5556,4.4444)
+    Padding = 2
     { Label1 Label
       MoveScaled(25,0,52,3.5556)
       Font = Font["Bold"]
@@ -38,7 +40,8 @@
     }
   }
   { HBox3 HBox
-    MoveScaled(-5,9,105.5556,4)
+    MoveScaled(-5,9,105.5556,4.4444)
+    Padding = 2
     { TextLabel4 TextLabel
       MoveScaled(7,0,12,4)
       Padding = 4
@@ -61,7 +64,8 @@
     }
   }
   { HBox4 HBox
-    MoveScaled(0,13,105.5556,4)
+    MoveScaled(0,13,105.5556,4.4444)
+    Padding = 2
     { Label2 Label
       MoveScaled(25,0,52,4)
       Font = Font["Bold,Italic"]
@@ -70,19 +74,20 @@
     }
   }
   { HBox14 HBox
-    MoveScaled(0,17,105.5556,4)
+    MoveScaled(0,17,105.5556,4.4444)
+    Padding = 2
     { Spring1 Spring
       MoveScaled(7,0,10,3.5556)
-    }
-    { btnCancelar Button
-      MoveScaled(28,0,17.7778,4)
-      Text = ("Cerrar")
-      Picture = Picture["iconos/salir.svg"]
     }
     { btnExportarBIB Button
       MoveScaled(49,0,17.7778,4)
       Text = ("Exportar")
       Picture = Picture["iconos/exportar.svg"]
+    }
+    { btnCancelar Button
+      MoveScaled(68,0,17.7778,4)
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
     }
   }
 }

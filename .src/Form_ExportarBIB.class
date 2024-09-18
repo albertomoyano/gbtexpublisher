@@ -1,6 +1,6 @@
 ' Gambas class file
 
-Private Conn As Connection
+Private conector As Connection
 Private Contenido As Result
 
 Public Sub btnExportarBIB_Click()
@@ -23,14 +23,11 @@ Public Sub btnExportarBIB_Click()
     Message.Warning("Por favor, complete todos los campos.")
   Else
 
-    ' me conceto a la base de datos
-    Conn = Mod_Conn.conectar()
-
     'me aseguro de que la búsqueda se encuentre entre comas
     buscar = "select * from bibtex where keywords like ',%" & txtFiltro.Text & ",%'"
 
     ' Exportar el registro seleccionado
-    Contenido = Conn.Exec(buscar)
+    Contenido = conector.Exec(buscar)
 
     aFields.Clear
     For Each f In Contenido.Fields
@@ -118,11 +115,11 @@ Public Sub txtFiltro_KeyRelease()
   Next
 
   ' Limitar la longitud del texto a 11 caracteres
-  If Len(textoFiltrado) > 11 Then
+  If Len(textoFiltrado) > 20 Then
     ' Mostrar un mensaje de aviso
     Message.Warning("El nombre del filtro no puede contener más de 11 caracteres.", "Entendido")
     ' Eliminar los caracteres adicionales
-    txtFiltro.Text = Left(textoFiltrado, 11)
+    txtFiltro.Text = Left(textoFiltrado, 20)
   Else
     ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
     txtFiltro.Text = UCase(textoFiltrado)
@@ -132,14 +129,43 @@ End
 
 Public Sub Form_Open()
 
-  ' me conceto a la base de datos
-  Conn.Close
+  conector = New Connection
+
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Name = "db_tex.sqlite"
+
+  ' Intentar abrir la conexión
+  Try conector.Open()
+
+  If Error Then
+    conector = Null
+    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  Endif
 
 End
 
 Public Sub btnCancelar_Click()
 
-  Conn.Close
-  Me.Close
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  Me.Close()
+
+End
+
+Public Sub Form_Close()
+
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  Me.Close()
 
 End
