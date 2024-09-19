@@ -26,17 +26,14 @@ Public Sub Form_Open()
     Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
   Else
 
-    Dim Himagen As String
-    Himagen = User.Home & "/.gbtexpublisher/falta-tapa.png"
-
     filePathPDF = File.Dir(FMain.TextBox1.Text) & "/pdf/" & NombreArchivoPDF
     filePathTEX = File.Dir(FMain.TextBox1.Text) & NombreArchivoTEX
 
     If File.RealPath(filePathPDF) <> "" Then
       ' Si el archivo existe, continuar con la apertura del formulario
       verTipoDocumento
-      picTapaOT.Picture = Picture[Himagen]
-
+      levantarOT()
+      levantarOTmetadatos()
       'aquí van las funciones del formulario
       '2) llenar los textbox básicos
       '
@@ -97,5 +94,141 @@ Public Sub verTipoDocumento()
   Else
     Message.Error("El archivo no existe en la base de datos.")
   End If
+
+End
+
+Public Sub guardarCamposOT()' As Boolean
+
+  Contenido!id = txtIDot.Text
+  Contenido!nombreArchivo = txtOrigenOT.Text
+  Contenido!proveedor = txtProveedorOT.Text
+  Contenido!copias = txtCopiasOT.Text
+  Contenido!tintasInterior = txtTintasInteriorOT.Text
+  Contenido!papelInterior = txtPapelInteriorOT.Text
+  Contenido!encuadernacion = txtEncuadernacionOT.Text
+  Contenido!tintasTapa = txtTintasTapaOT.Text
+  Contenido!papelTapa = txtPapelTapaOT.Text
+  Contenido!revestimiento = txtRevestimientoOT.Text
+  Contenido!notas = txtNotasOT.Text
+
+End
+
+Public Sub btnNuevaOT_Click()
+
+  btnNuevaOT.Enabled = True
+  btnGuardarOT.Enabled = False
+  btnGuardarCambiosOT.Enabled = False
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = conector.Exec("SELECT MAX(id) FROM ot LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtIDot.Text = Idn
+  txtOrigenOT.Text = NombreArchivoTEX 'colocamos el nombre del archivo
+
+  btnNuevaOT.Enabled = False
+  btnGuardarOT.Enabled = True
+  btnGuardarCambiosOT.Enabled = False
+
+End
+
+Public Sub btnGuardarOT_Click()
+
+  Contenido = conector.Create("ot")
+
+  guardarCamposOT()
+  Contenido.Update
+
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  BtnNuevaOT.Enabled = False
+  btnGuardarOT.Enabled = False
+  btnGuardarCambiosOT.Enabled = True
+
+End
+
+Public Sub btnGuardarCambiosOT_Click()
+
+  Contenido = conector.Edit("ot", "id=" & txtIDot.Text)
+
+  If Contenido.Available Then
+    guardarCamposOT()
+    Contenido.Update
+    Message.Info("Los cambios se guardaron con éxito.")
+  Else
+    Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
+  Endif
+
+End
+
+Public Sub levantarOT()
+
+  'levantamos los datos de comentarios
+  Dim comandoOT As String
+
+  comandoOT = "select * from ot where nombreArchivo = '" & nombreArchivoTEX & "'"
+  Contenido = conector.Exec(comandoOT)
+  If Contenido.Count > 0 Then
+    btnNuevaOT.Enabled = False
+    btnGuardarOT.Enabled = False
+    btnGuardarCambiosOT.Enabled = True
+    txtIDot.Text = Contenido!id
+    txtOrigenOT.Text = Contenido!nombreArchivo
+    txtProveedorOT.Text = Contenido!proveedor
+    txtCopiasOT.Text = Contenido!copias
+    txtTintasInteriorOT.Text = Contenido!tintasInterior
+    txtPapelInteriorOT.Text = Contenido!papelInterior
+    txtEncuadernacionOT.Text = Contenido!encuadernacion
+    txtTintasTapaOT.Text = Contenido!tintasTapa
+    txtPapelTapaOT.Text = Contenido!papelTapa
+    txtRevestimientoOT.Text = Contenido!revestimiento
+    txtNotasOT.Text = Contenido!notas
+  Else
+    txtIDot.Text = ""
+    txtOrigenOT.Text = ""
+    txtProveedorOT.Text = ""
+    txtCopiasOT.Text = ""
+    txtTintasInteriorOT.Text = ""
+    txtPapelInteriorOT.Text = ""
+    txtEncuadernacionOT.Text = ""
+    txtTintasTapaOT.Text = ""
+    txtPapelTapaOT.Text = ""
+    txtRevestimientoOT.Text = ""
+    txtNotasOT.Text = ""
+    btnNuevaOT.Enabled = True
+    btnGuardarOT.Enabled = False
+    btnGuardarCambiosOT.Enabled = False
+  Endif
+
+End
+
+Public Sub levantarOTmetadatos()
+
+  'levantamos los datos de comentarios
+  Dim comandoOTmetadatos As String
+  Dim Himagen As String
+
+  comandoOTmetadatos = "select * from metadatos where nombreArchivo = '" & nombreArchivoTEX & "'"
+  Contenido = conector.Exec(comandoOTmetadatos)
+  If Contenido.Count > 0 Then
+    txtAutorOT.Text = Contenido!pdfauthor_05
+    txtTituloOT.Text = Contenido!bookTitle_84
+    txtPaginasOT.Text = Contenido!pagetotal_50
+    txtFormatoOT.Text = Contenido!formato_61
+    Himagen = Contenido!imagentapa_49
+    picTapaOT.Picture = Picture[Himagen]
+  Else
+    txtAutorOT.Text = ""
+    txtTituloOT.Text = ""
+    txtPaginasOT.Text = ""
+    txtFormatoOT.Text = ""
+  Endif
 
 End

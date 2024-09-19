@@ -7,7 +7,7 @@
   Arrangement = Arrange.Vertical
   Padding = 4
   { HBox6 HBox
-    Move(0,0,927,40)
+    Move(9,0,927,40)
     Padding = 2
     { txtIDot TextBox
       Move(9,0,90,36)
@@ -15,16 +15,27 @@
       Background = Color.Background
       ReadOnly = True
     }
-    { btnGuardarCambiosOT Button
+    { btnNuevaOT Button
       Move(108,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar una nueva referencia")
+      Picture = Picture["iconos/+pestana.svg"]
+    }
+    { btnGuardarOT Button
+      Move(144,0,36,36)
+      ToolTip = ("Cerrar la ventana")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarCambiosOT Button
+      Move(180,0,36,36)
       ToolTip = ("Guardar modificaciones")
       Picture = Picture["iconos/guardarComo.svg"]
     }
     { Separator1 Separator
-      Move(189,0,18,36)
+      Move(333,-9,18,36)
     }
     { txtLabel TextLabel
-      Move(306,0,234,36)
+      Move(369,0,171,36)
       Expand = True
       Alignment = Align.Normal
     }
@@ -42,7 +53,7 @@
     }
   }
   { Splitter1 Splitter
-    Move(9,54,1008,612)
+    Move(9,45,1008,648)
     Expand = True
     Border = False
     { picTapaOT PictureBox
@@ -53,13 +64,28 @@
       Mode = PictureBox.Contain
     }
     { ScrollView2 ScrollView
-      Move(243,9,738,594)
+      Move(243,0,738,639)
       Expand = True
       Arrangement = Arrange.Vertical
       Border = False
       ScrollBar = Scroll.Vertical
+      { HBox15 HBox
+        Move(18,18,414,40)
+        Padding = 2
+        { Label14 Label
+          Move(0,0,144,32)
+          Alignment = Align.Right
+          Text = ("Origen ")
+        }
+        { txtOrigenOT TextBox
+          Move(216,0,135,36)
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+        }
+      }
       { HBox14 HBox
-        Move(0,0,414,40)
+        Move(18,63,414,40)
         Padding = 2
         { Label13 Label
           Move(0,0,144,32)
@@ -72,7 +98,7 @@
         }
       }
       { HBox13 HBox
-        Move(0,36,414,40)
+        Move(18,99,414,40)
         Padding = 2
         { Label12 Label
           Move(0,0,144,32)
@@ -85,7 +111,7 @@
         }
       }
       { HBox21 HBox
-        Move(9,81,414,40)
+        Move(18,144,414,40)
         Padding = 2
         { Label3 Label
           Move(0,0,144,32)
@@ -100,7 +126,7 @@
         }
       }
       { HBox2 HBox
-        Move(0,126,414,40)
+        Move(18,189,414,40)
         Padding = 2
         { Label1 Label
           Move(0,0,144,32)
@@ -115,7 +141,7 @@
         }
       }
       { HBox3 HBox
-        Move(0,162,414,40)
+        Move(18,225,414,40)
         Padding = 2
         { Label2 Label
           Move(0,0,144,32)
@@ -130,14 +156,14 @@
         }
       }
       { HBox4 HBox
-        Move(0,198,414,40)
+        Move(18,261,414,40)
         Padding = 2
         { Label4 Label
           Move(0,0,144,32)
           Alignment = Align.Right
           Text = ("Formato ")
         }
-        { txtAutorOT4 TextBox
+        { txtFormatoOT TextBox
           Move(216,0,135,36)
           Background = Color.Background
           Expand = True
@@ -145,7 +171,7 @@
         }
       }
       { HBox5 HBox
-        Move(0,243,414,40)
+        Move(18,306,414,40)
         Padding = 2
         { Label5 Label
           Move(0,0,144,32)
@@ -158,7 +184,7 @@
         }
       }
       { HBox7 HBox
-        Move(0,279,414,40)
+        Move(18,342,414,40)
         Padding = 2
         { Label6 Label
           Move(0,0,144,32)
@@ -171,7 +197,7 @@
         }
       }
       { HBox8 HBox
-        Move(0,324,414,40)
+        Move(18,387,414,40)
         Padding = 2
         { Label7 Label
           Move(0,0,144,32)
@@ -184,7 +210,7 @@
         }
       }
       { HBox9 HBox
-        Move(0,360,414,40)
+        Move(18,423,414,40)
         Padding = 2
         { Label8 Label
           Move(0,0,144,32)
@@ -197,7 +223,7 @@
         }
       }
       { HBox10 HBox
-        Move(0,405,414,40)
+        Move(18,468,414,40)
         Padding = 2
         { Label9 Label
           Move(0,0,144,32)
@@ -210,7 +236,7 @@
         }
       }
       { HBox11 HBox
-        Move(0,441,414,40)
+        Move(18,504,414,40)
         Padding = 2
         { Label10 Label
           Move(0,0,144,32)
@@ -223,7 +249,7 @@
         }
       }
       { HBox12 HBox
-        Move(9,486,414,99)
+        Move(18,540,414,81)
         Expand = True
         Padding = 1
         { Label11 Label
@@ -232,12 +258,12 @@
           Text = ("Observaciones ")
         }
         { Panel1 Panel
-          Move(162,9,162,90)
+          Move(162,9,162,63)
           Expand = True
           Arrangement = Arrange.Fill
           Border = Border.Etched
           { txtNotasOT TextArea
-            Move(9,9,117,63)
+            Move(9,9,117,45)
             Expand = True
           }
         }
@@ -245,7 +271,7 @@
     }
   }
   { HBox1 HBox
-    Move(18,684,927,40)
+    Move(18,702,927,40)
     Padding = 2
     { Spring1 Spring
       Move(387,0,162,36)
