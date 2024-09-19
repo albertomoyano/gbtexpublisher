@@ -24,6 +24,10 @@
       Picture = Picture["iconos/borrar.svg"]
       Enabled = False
     }
+    { menuDespacharCorreo Menu
+      Text = ("Despachar correo")
+      Enabled = False
+    }
   }
   { menuTEXTBOX Menu
     Text = ("menuContextual")
@@ -281,6 +285,9 @@
     }
     { menuComentarios Menu
       Text = ("Ver página de comentarios")
+    }
+    { menuVerOt Menu
+      Text = ("Ver Orden de Taller")
     }
   }
   { Menu57 Menu

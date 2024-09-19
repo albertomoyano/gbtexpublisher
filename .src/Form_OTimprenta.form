@@ -92,7 +92,8 @@
           Alignment = Align.Right
           Text = ("Proveedor ")
         }
-        { txtProveedorOT TextBox
+        { txtProveedorOT TextBox grupoOT
+          Name = "txtProveedorOT"
           Move(216,0,135,36)
           Expand = True
         }
@@ -105,7 +106,8 @@
           Alignment = Align.Right
           Text = ("Copias ")
         }
-        { txtCopiasOT TextBox
+        { txtCopiasOT TextBox grupoOT
+          Name = "txtCopiasOT"
           Move(216,0,135,36)
           Expand = True
         }
@@ -178,7 +180,8 @@
           Alignment = Align.Right
           Text = ("Tintas interior ")
         }
-        { txtTintasInteriorOT TextBox
+        { txtTintasInteriorOT TextBox grupoOT
+          Name = "txtTintasInteriorOT"
           Move(216,0,135,36)
           Expand = True
         }
@@ -191,7 +194,8 @@
           Alignment = Align.Right
           Text = ("Papel interior ")
         }
-        { txtPapelInteriorOT TextBox
+        { txtPapelInteriorOT TextBox grupoOT
+          Name = "txtPapelInteriorOT"
           Move(216,0,135,36)
           Expand = True
         }
@@ -204,7 +208,8 @@
           Alignment = Align.Right
           Text = ("Encuadernación ")
         }
-        { txtEncuadernacionOT TextBox
+        { txtEncuadernacionOT TextBox grupoOT
+          Name = "txtEncuadernacionOT"
           Move(216,0,135,36)
           Expand = True
         }
@@ -217,7 +222,8 @@
           Alignment = Align.Right
           Text = ("Tintas tapa ")
         }
-        { txtTintasTapaOT TextBox
+        { txtTintasTapaOT TextBox grupoOT
+          Name = "txtTintasTapaOT"
           Move(216,0,135,36)
           Expand = True
         }
@@ -230,7 +236,8 @@
           Alignment = Align.Right
           Text = ("Papel tapa ")
         }
-        { txtPapelTapaOT TextBox
+        { txtPapelTapaOT TextBox grupoOT
+          Name = "txtPapelTapaOT"
           Move(216,0,135,36)
           Expand = True
         }
@@ -243,7 +250,8 @@
           Alignment = Align.Right
           Text = ("Revestimiento ")
         }
-        { txtRevestimientoOT TextBox
+        { txtRevestimientoOT TextBox grupoOT
+          Name = "txtRevestimientoOT"
           Move(216,0,135,36)
           Expand = True
         }
