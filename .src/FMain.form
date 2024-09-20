@@ -24,10 +24,6 @@
       Picture = Picture["iconos/borrar.svg"]
       Enabled = False
     }
-    { menuDespacharCorreo Menu
-      Text = ("Despachar correo")
-      Enabled = False
-    }
   }
   { menuTEXTBOX Menu
     Text = ("menuContextual")

@@ -60,10 +60,6 @@ Public Sub btnSalirOT_Click()
 
 End
 
-Public Sub btnDespacharCorreo_Click()
-
-End
-
 Public Sub Splitter1_Resize()
 
   Splitter1.Layout = [1, 5]

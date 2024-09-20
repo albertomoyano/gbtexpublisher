@@ -39,11 +39,6 @@
       Expand = True
       Alignment = Align.Normal
     }
-    { btnGenerarPDF Button
-      Move(549,0,160,36)
-      Text = ("Generar")
-      Picture = Picture["iconos/acroread.svg"]
-    }
     { btnSalirOT Button
       Move(720,0,160,36)
       NoTabFocus = True
@@ -284,9 +279,10 @@
     { Spring1 Spring
       Move(387,0,162,36)
     }
-    { btnDespacharCorreo Button
-      Move(603,0,320,36)
-      Text = ("Despachar por correo")
+    { btnGenerarPDF Button
+      Move(747,0,160,36)
+      Text = ("Generar")
+      Picture = Picture["iconos/acroread.svg"]
     }
   }
 }

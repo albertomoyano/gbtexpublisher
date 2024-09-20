@@ -42,6 +42,7 @@ Public Sub Form_Open()
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
 
   ' Realizar la copia de respaldo de la base de datos
+  ' cada vez que inicia la aplicación
   Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Wait 0.2
 
@@ -6429,19 +6430,21 @@ End
 
 Public Sub btnGitHubPages_Click()
 
-  Message.Info("Esta función genera una copia de las páginas estáticas en una carpeta docs, el proceso de <em>deploy</em> en GitHub Pages se debe hacer desde GitHub.", "Aceptar")
+  Message.Info("Esta función se está reescribiendo, por el momento a sido suspendida.", "Aceptar")
 
-  'forzamos el borrado de las páginas estáticas
-  Shell "rm -rf " & File.Dir(TextBox1.Text) &/ "docs"
-  Wait 0.2
-
-  'creamos el directorio de las páginas estáticas
-  If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
-    Mkdir File.Dir(TextBox1.Text) & "/docs"
-  End If
-
-  'copiamos los archivos
-  TerminalView1.Input("cp -rv " & File.Dir(TextBox1.Text) & "/html5/*" & " " & File.Dir(TextBox1.Text) & "/docs/" & "\n" & "clear" & "\n")
+  ' Message.Info("Esta función genera una copia de las páginas estáticas en una carpeta docs, el proceso de <em>deploy</em> en GitHub Pages se debe hacer desde GitHub.", "Aceptar")
+  '
+  ' 'forzamos el borrado de las páginas estáticas
+  ' Shell "rm -rf " & File.Dir(TextBox1.Text) &/ "docs"
+  ' Wait 0.2
+  '
+  ' 'creamos el directorio de las páginas estáticas
+  ' If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
+  '   Mkdir File.Dir(TextBox1.Text) & "/docs"
+  ' End If
+  '
+  ' 'copiamos los archivos
+  ' TerminalView1.Input("cp -rv " & File.Dir(TextBox1.Text) & "/html5/*" & " " & File.Dir(TextBox1.Text) & "/docs/" & "\n" & "clear" & "\n")
 
 End
 
