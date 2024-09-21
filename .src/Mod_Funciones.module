@@ -655,10 +655,6 @@ Public Function validarArchivos()
     Copy "./gitignore_BD" To rutaAppR &/ ".gitignore"
   End If
 
-  If Not Exist(rutaApp &/ "conn_serv.sqlite") Then
-    Copy "./conn_serv.sqlite" To rutaApp &/ "conn_serv.sqlite"
-  End If
-
   If Not Exist(rutaApp & "/gitignore_github") Then
     Copy "./gitignore_github" To rutaApp & "/gitignore_github"
   End If

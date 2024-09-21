@@ -239,6 +239,7 @@ Public Sub btnGenerarPDF_Click()
     Return  ' Cancela la operación si alguno de los TextBox está vacío
   Endif
 
+  FMain.TabPanel1.Index = 0
   Export2OrdenTaller()
 
   FMain.TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & filePathFiles & "gbTeXOT-" & NombreArchivoTEX & "\n")

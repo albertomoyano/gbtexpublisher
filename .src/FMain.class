@@ -26,8 +26,19 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
-  Dim s As String
+  ' validamos la creacion de carpetas y archivos
+  Mod_Funciones.validarArchivos()
 
+  Dim fecha As String
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+  ' Realizar la copia de respaldo de la base de datos
+  ' cada vez que inicia la aplicación
+  Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+  Wait 0.2
+
+  Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+
+  Dim s As String
   ' Usamos pgrep pero lo limitamos más a los procesos que contienen solo el nombre de la aplicación
   Exec ["pgrep", "-x", "-fla", Application.Name] Wait To s
 
@@ -36,17 +47,6 @@ Public Sub Form_Open()
     Message.Warning(Application.Name & " ya se está ejecutando")
     Quit
   Endif
-
-  Dim fecha As String
-
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-
-  ' Realizar la copia de respaldo de la base de datos
-  ' cada vez que inicia la aplicación
-  Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-  Wait 0.2
-
-  Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
   ' Crear una nueva conexión
   conector = New Connection
@@ -67,9 +67,6 @@ Public Sub Form_Open()
     pBash = TerminalView1.Exec(["/usr/bin/bash"])
     TerminalView1.SetFocus()
     WebViewGPT.Url = "https://chatgpt.com/"
-
-    ' validamos la creacion de carpetas y archivos
-    Mod_Funciones.validarArchivos()
 
     'configuración del ToDo
     Splitter2.Layout = [3, 1]

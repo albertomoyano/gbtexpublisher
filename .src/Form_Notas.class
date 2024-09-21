@@ -12,7 +12,7 @@ Public Sub Form_Open()
   ' Configurar los parámetros de conexión
   conector.Type = "sqlite"
   conector.Host = User.Home &/ ".gbtexpublisher"
-  conector.Name = "conn_serv.sqlite"
+  conector.Name = "db_tex.sqlite"
 
   ' Intentar abrir la conexión
   Try conector.Open()
