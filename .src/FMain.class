@@ -77,6 +77,16 @@ Public Sub Form_Open()
     MS.GetLastListFromSettings()
     UpdateMenu()
 
+    ' Verifica si el TextBox1 tiene una ruta válida
+    If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
+      ' Hacemos el seguimiento del DirChooser
+      Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
+      Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
+      Watcher.Start
+      ' Inicializa la lista de archivos
+      prevFiles = DirViewRuta.Files
+    End If
+
     'declaramos las ritas a utilizar
     rutaFILES = File.Dir(TextBox1.Text) &/ "files"
     rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
@@ -252,15 +262,6 @@ Public Sub Form_Open()
     Mostrar_ListaBIBrelacion
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
 
-    ' Verifica si el TextBox1 tiene una ruta válida
-    If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
-      ' Hacemos el seguimiento del DirChooser
-      Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
-      Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
-      Watcher.Start
-      ' Inicializa la lista de archivos
-      prevFiles = DirViewRuta.Files
-    End If
   Endif
 
 End
