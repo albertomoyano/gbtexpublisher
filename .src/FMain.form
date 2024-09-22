@@ -772,8 +772,13 @@
     }
     { HBox19 HBox
       MoveScaled(0,31,103,4)
+      { btnBuscarFiltro Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        Picture = Picture["iconos/search.svg"]
+      }
       { Label2 Label
-        MoveScaled(0,0,16.4444,4)
+        MoveScaled(6,0,12.4444,4)
         Font = Font["Bold"]
         Foreground = &HFF0000
         Alignment = Align.Right
