@@ -1661,7 +1661,7 @@ Public Sub btnBuscarNombreGLO_Click()
   Dim Comando As String
   Dim rowIndex As Integer
 
-  Comando = "SELECT * FROM glosarios WHERE name = '" & txtNAME.Text & "'"
+  Comando = "SELECT * FROM glosarios WHERE name = '" & txtNAME.Text & "%' ORDER BY id DESC;"
 
   If txtNAME.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
@@ -1710,7 +1710,7 @@ Public Sub btnBuscarTextoGLO_Click()
   Dim Comando As String
   Dim rowIndex As Integer
 
-  Comando = "select * from glosarios where name " & " like " & "'%" & txtTEXT.Text & "%'"
+  Comando = "select * from glosarios where name " & " like " & "'%" & txtTEXT.Text & "%' ORDER BY id DESC;"
 
   If txtTEXT.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
@@ -1759,7 +1759,7 @@ Public Sub btnBuscarClaveGLO_Click()
   Dim Comando As String
   Dim rowIndex As Integer
 
-  Comando = "SELECT * FROM glosarios WHERE key LIKE '%" & txtCLAVEglo.Text & "%'"
+  Comando = "SELECT * FROM glosarios WHERE key LIKE '%" & txtCLAVEglo.Text & "%' ORDER BY id DESC;"
 
   If txtCLAVEglo.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
@@ -2565,13 +2565,13 @@ End
 Public Sub BtnEliminarBib_Click()
 
   'Chequeamos primero que se haya elegido una entrada
-  If txtIDglosario.Text = "" Then
+  If txtIDbibtex.Text = "" Then
     Message.Info("Debe primero seleccionarse la entrada a borrar.")
     Return
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from bibtex where id=" & txtIDglosario.Text)
+    Contenido = conector.Exec("delete from bibtex where id=" & txtIDbibtex.Text)
   Endif
 
   LimpiarCamposBIB() ' Limpiamos los campos
@@ -2704,7 +2704,7 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLE.Text, "'", "''") & "%';"
+  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLE.Text, "'", "''") & "%' ORDER BY id DESC;"
   Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
@@ -3023,7 +3023,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHOR.Text, "'", "''") & "%';"
+  Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHOR.Text, "'", "''") & "%' ORDER BY id DESC;"
   Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
@@ -3176,7 +3176,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE editor LIKE '%" & Replace(txtEDITOR.Text, "'", "''") & "%';"
+  Comando = "SELECT * FROM bibtex WHERE editor LIKE '%" & Replace(txtEDITOR.Text, "'", "''") & "%' ORDER BY id DESC;"
   Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
@@ -4165,7 +4165,8 @@ Public Sub BtnBuscarClave_Click()
   Dim Comando As String
   Dim rowIndex As Integer
 
-  Comando = "SELECT * FROM bibtex WHERE citationKey LIKE '%" & txtCLAVEbib.Text & "%';"
+  Comando = "SELECT * FROM bibtex WHERE citationKey LIKE '%" & txtCLAVEbib.Text & "%' ORDER BY id DESC;"
+  ' Comando = "SELECT * FROM bibtex WHERE citationKey LIKE '%" & txtCLAVEbib.Text & "%';"
 
   If txtCLAVEbib.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
@@ -4663,7 +4664,7 @@ Public Sub BtnBuscarBookTitle_Click()
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & Replace(txtBOOKTITLE.Text, "'", "''") & "%';"
+  Comando = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & Replace(txtBOOKTITLE.Text, "'", "''") & "%' ORDER BY id DESC;"
   Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
@@ -4980,7 +4981,7 @@ Public Sub BtnBuscarJournal_Click()
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & Replace(txtJOURNALTITLE.Text, "'", "''") & "%';"
+  Comando = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & Replace(txtJOURNALTITLE.Text, "'", "''") & "%' ORDER BY id DESC;"
   Busqueda = conector.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
@@ -5131,7 +5132,7 @@ Public Sub btnBuscarFiltroGlosario_Click()
   Dim Comando As String
   Dim rowIndex As Integer
 
-  Comando = "SELECT * FROM glosarios WHERE archivo LIKE '%" & txtARCHIVO.Text & "%'"
+  Comando = "SELECT * FROM glosarios WHERE archivo LIKE '%" & txtARCHIVO.Text & "%' ORDER BY id DESC;"
 
   If txtARCHIVO.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
@@ -6487,7 +6488,7 @@ Public Sub BtnBuscarAuthorRelacion_Click()
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHORrelacion.Text, "'", "''") & "%';"
+  Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHORrelacion.Text, "'", "''") & "%' ORDER BY id DESC;"
   Busqueda = conector.Exec(Comando)
 
   tbRefDup.Visible = True
@@ -7003,7 +7004,7 @@ Public Sub BtnBuscarTituloReferenciaRelacion_Click()
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLErelacion.Text, "'", "''") & "%';"
+  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLErelacion.Text, "'", "''") & "%' ORDER BY id DESC;"
   Busqueda = conector.Exec(Comando)
 
   tbRefDup.Visible = True
@@ -7192,7 +7193,7 @@ Public Sub btnBuscarFiltro_Click()
   Dim Comando As String
   Dim rowIndex As Integer
 
-  Comando = "SELECT * FROM bibtex WHERE keywords LIKE '%" & txtKEYWORDS.Text & "%';"
+  Comando = "SELECT * FROM bibtex WHERE keywords LIKE '%" & txtKEYWORDS.Text & "%' ORDER BY id DESC;"
 
   If txtKEYWORDS.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
