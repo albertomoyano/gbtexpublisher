@@ -2677,14 +2677,11 @@ Public Sub btnGuardar_Click()
   Else If cbTYPEentrada.Text = "thesis" And cbType.Text = "" Then
     Message.Error("No ha seleccionado el tipo de tesis.")
   Else
-
     Contenido = conector.Create("bibtex")
-
     guardarCampos()
-
     Contenido.Update
     Message.Info("Nueva entrada guardada.")
-
+    LimpiarCamposBIB() ' Limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     btnGuardarCambios.Enabled = False
@@ -2694,8 +2691,6 @@ Public Sub btnGuardar_Click()
     btnAgregarCitationKey.Enabled = False
     btnGuardarIGUAL.Enabled = False
   Endif
-
-  LimpiarCamposBIB() 'limpiamos los campos
 
 End
 
