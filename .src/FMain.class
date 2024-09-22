@@ -59,210 +59,203 @@ Public Sub Form_Open()
   ' Intentar abrir la conexión
   Try conector.Open()
 
-  If Error Then
-    conector = Null
-    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>db_tex.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
-  Else
+  pBash = TerminalView1.Exec(["/usr/bin/bash"])
+  TerminalView1.SetFocus()
+  WebViewGPT.Url = "https://chatgpt.com/"
 
-    pBash = TerminalView1.Exec(["/usr/bin/bash"])
-    TerminalView1.SetFocus()
-    WebViewGPT.Url = "https://chatgpt.com/"
+  'configuración del ToDo
+  Splitter2.Layout = [3, 1]
+  txtTAREAS.Visible = False
+  Mostrar_Lista_Tareas
 
-    'configuración del ToDo
-    Splitter2.Layout = [3, 1]
-    txtTAREAS.Visible = False
-    Mostrar_Lista_Tareas
+  MS.Init()
+  MS.GetLastListFromSettings()
+  UpdateMenu()
 
-    MS.Init()
-    MS.GetLastListFromSettings()
-    UpdateMenu()
+  ' Verifica si el TextBox1 tiene una ruta válida
+  If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
+    ' Hacemos el seguimiento del DirChooser
+    Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
+    Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
+    Watcher.Start
+    ' Inicializa la lista de archivos
+    prevFiles = DirViewRuta.Files
+  End If
 
-    ' Verifica si el TextBox1 tiene una ruta válida
-    If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
-      ' Hacemos el seguimiento del DirChooser
-      Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
-      Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
-      Watcher.Start
-      ' Inicializa la lista de archivos
-      prevFiles = DirViewRuta.Files
-    End If
+  'declaramos las ritas a utilizar
+  rutaFILES = File.Dir(TextBox1.Text) &/ "files"
+  rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
+  rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
+  rutaORIGINALES = File.Dir(TextBox1.Text) &/ "originales"
+  rutaTAPA = File.Dir(TextBox1.Text) &/ "tapa"
+  rutaCATALOGO = File.Dir(TextBox1.Text) &/ "catalogo"
+  rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
+  BaseName = File.BaseName(TextBox1.Text)
 
-    'declaramos las ritas a utilizar
-    rutaFILES = File.Dir(TextBox1.Text) &/ "files"
-    rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
-    rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
-    rutaORIGINALES = File.Dir(TextBox1.Text) &/ "originales"
-    rutaTAPA = File.Dir(TextBox1.Text) &/ "tapa"
-    rutaCATALOGO = File.Dir(TextBox1.Text) &/ "catalogo"
-    rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
-    BaseName = File.BaseName(TextBox1.Text)
+  Dim mtmp As Menu
+  Dim fileA As String
 
-    Dim mtmp As Menu
-    Dim fileA As String
+  For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
+    mtmp = New Menu(menuScriptsExternos) As "obs"
+    mtmp.caption = fileA
+  Next
 
-    For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
-      mtmp = New Menu(menuScriptsExternos) As "obs"
-      mtmp.caption = fileA
-    Next
+  ' comienza la carga de los combobox de FMain
+  Dim itemsGlo As String[] = Mod_ComboBox.cbTYPEentradaGlo()
+  For Each item As String In itemsGlo
+    cbTYPEentradaGlo.Add(item)
+  Next
 
-    ' comienza la carga de los combobox de FMain
-    Dim itemsGlo As String[] = Mod_ComboBox.cbTYPEentradaGlo()
-    For Each item As String In itemsGlo
-      cbTYPEentradaGlo.Add(item)
-    Next
+  Dim itemsTipo As String[] = Mod_ComboBox.cbTYPEentrada()
+  For Each item As String In itemsTipo
+    cbTYPEentrada.Add(item)
+  Next
 
-    Dim itemsTipo As String[] = Mod_ComboBox.cbTYPEentrada()
-    For Each item As String In itemsTipo
-      cbTYPEentrada.Add(item)
-    Next
+  Dim itemsLanguage As String[] = Mod_ComboBox.cbLANGUAGE()
 
-    Dim itemsLanguage As String[] = Mod_ComboBox.cbLANGUAGE()
+  ' Llenar el primer ComboBox
+  For Each item As String In itemsLanguage
+    cbLANGUAGE.Add(item)
+  Next
 
-    ' Llenar el primer ComboBox
-    For Each item As String In itemsLanguage
-      cbLANGUAGE.Add(item)
-    Next
+  For Each item As String In itemsLanguage
+    cbLANGUAGEID.Add(item)
+  Next
 
-    For Each item As String In itemsLanguage
-      cbLANGUAGEID.Add(item)
-    Next
+  Dim itemsRelated As String[] = Mod_ComboBox.cbRELATEDTYPE()
+  For Each item As String In itemsRelated
+    cbRELATEDTYPE.Add(item)
+  Next
 
-    Dim itemsRelated As String[] = Mod_ComboBox.cbRELATEDTYPE()
-    For Each item As String In itemsRelated
-      cbRELATEDTYPE.Add(item)
-    Next
+  Dim itemsPubState As String[] = Mod_ComboBox.cbPUBSTATE()
+  For Each item As String In itemsPubState
+    cbPUBSTATE.Add(item)
+  Next
 
-    Dim itemsPubState As String[] = Mod_ComboBox.cbPUBSTATE()
-    For Each item As String In itemsPubState
-      cbPUBSTATE.Add(item)
-    Next
+  Dim itemsType As String[] = Mod_ComboBox.cbType()
+  For Each item As String In itemsType
+    cbType.Add(item)
+  Next
 
-    Dim itemsType As String[] = Mod_ComboBox.cbType()
-    For Each item As String In itemsType
-      cbType.Add(item)
-    Next
+  Dim itemsEditor As String[] = Mod_ComboBox.cbEDITORTYPE()
 
-    Dim itemsEditor As String[] = Mod_ComboBox.cbEDITORTYPE()
+  ' Llenar el primer ComboBox
+  For Each item As String In itemsEditor
+    cbEDITORTYPE.Add(item)
+  Next
 
-    ' Llenar el primer ComboBox
-    For Each item As String In itemsEditor
-      cbEDITORTYPE.Add(item)
-    Next
+  For Each item As String In itemsEditor
+    cbEDITORTYPEa.Add(item)
+  Next
 
-    For Each item As String In itemsEditor
-      cbEDITORTYPEa.Add(item)
-    Next
+  For Each item As String In itemsEditor
+    cbEDITORTYPEb.Add(item)
+  Next
 
-    For Each item As String In itemsEditor
-      cbEDITORTYPEb.Add(item)
-    Next
+  For Each item As String In itemsEditor
+    cbEDITORTYPEc.Add(item)
+  Next
 
-    For Each item As String In itemsEditor
-      cbEDITORTYPEc.Add(item)
-    Next
+  BtnEliminarGlo.Enabled = False
+  BtnRefrescarGlo.Enabled = False
+  btnGuardarGlo.Enabled = False
+  btnGuardarCambiosGlo.Enabled = False
 
-    BtnEliminarGlo.Enabled = False
-    BtnRefrescarGlo.Enabled = False
-    btnGuardarGlo.Enabled = False
-    btnGuardarCambiosGlo.Enabled = False
-    Mostrar_ListaGLO
-    LimpiarCamposBIB() ' Limpiamos los campos
-    Mostrar_ListaBIB()
-    Mostrar_ListaBIBrelacion
-    TotalEntradasBIByGLO()'actualizamos el contador de entradas
-
-    ' comienza metadatos
-    cmbTypePub.Add("research-article")
-    cmbTypePub.Add("review-article")
-    cmbTypePub.Add("editorial")
-    cmbTypePub.Add("case-report")
-    cmbTypePub.Add("letter")
-    cmbTypePub.Add("commentary")
-    cmbTypePub.Add("correction")
-    txt40_pdfmetalang.Add("es")
-    txt40_pdfmetalang.Add("pt")
-    txt40_pdfmetalang.Add("en")
-    txt40_pdfmetalang.Add("fr")
-    txt40_pdfmetalang.Add("de")
-    txt40_pdfmetalang.Add("it")
-    txt54_idiomaorig.Add("")
-    txt54_idiomaorig.Add("es")
-    txt54_idiomaorig.Add("pt")
-    txt54_idiomaorig.Add("en")
-    txt54_idiomaorig.Add("fr")
-    txt54_idiomaorig.Add("de")
-    txt54_idiomaorig.Add("it")
-    cbLang.Add("Español de España: es-ES")
-    cbLang.Add("Portugués de Brasil: pt-BR")
-    cbLang.Add("Inglés de Estados Unidos: en-US")
-    cbLang.Add("Francés de Francia: fr-FR")
-    cbLang.Add("Alemán de Alemania: de-DE")
-    cbLang.Add("Italiano: it-IT")
-    cbLang.Add("Japonés: ja-JP")
-    cbLang.Add("Chino simplificado: zh-Hans")
-    txt15_pdfcopyright.Add("Copyright")
-    If txt16_pdflicenseurl.Text = "" Then
-      txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Copyright"
-    Endif
-    txt15_pdfcopyright.Add("CC0 1.0 Universal")
-    txt15_pdfcopyright.Add("CC BY 4.0 Attribution 4.0 International")
-    txt15_pdfcopyright.Add("CC BY-SA 4.0 Attribution-ShareAlike 4.0 International")
-    txt15_pdfcopyright.Add("CC BY-ND 4.0 Attribution-NoDerivatives 4.0 International")
-    txt15_pdfcopyright.Add("CC BY-NC 4.0 Attribution-NonCommercial 4.0 International")
-    txt15_pdfcopyright.Add("CC BY-NC-SA 4.0 Attribution-NonCommercial-ShareAlike 4.0 International")
-    txt15_pdfcopyright.Add("CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International")
-    txt15_pdfcopyright.Add("GNU General Public License")
-    txt15_pdfcopyright.Add("Licencia MIT")
-    txt15_pdfcopyright.Add("Licencia BSD")
-    txt15_pdfcopyright.Add("Otra")
-    cmbType.Add("Text")
-    cmbType.Add("Software")
-    cmbType.Add("Sound")
-    cmbType.Add("Dataset")
-    cmbType.Add("InteractiveResource")
-    cbPDFrendition.Add("default")
-    cbPDFrendition.Add("draft")
-    cbPDFrendition.Add("low-res")
-    cbPDFrendition.Add("proof")
-    cbPDFrendition.Add("screen")
-    cbPDFrendition.Add("thumbnail")
-    cbPubType.Add("book")
-    cbPubType.Add("journal")
-    cbPubType.Add("magazine")
-    cbPubType.Add("manual")
-    cbPubType.Add("report")
-    cbPubType.Add("whitepaper")
-    cbPubStatus.Add("Author's Original: AO")
-    cbPubStatus.Add("Submitted Manuscript Under Review: SMUR")
-    cbPubStatus.Add("Accepted Manuscript: AM")
-    cbPubStatus.Add("Proof: P")
-    cbPubStatus.Add("Version Of Record: VoR")
-    cbPubStatus.Add("Corrected Version Of Record: CVoR")
-    cbPubStatus.Add("Enhanced Version Of Record: EVoR")
-    cbPDFx.Add("pdf/A")
-    cbPDFx.Add("pdf/x-1a:2001")
-    cbPDFx.Add("pdf/x-1a:2003")
-    cbPDFx.Add("pdf/x-3:2002")
-    cbPDFx.Add("pdf/x-3:2003")
-    cbPDFx.Add("pdf/x-4")
-    cbPDFx.Add("pdf/x-4p")
-    cbPDFx.Add("pdf/x-5g")
-    cbPDFx.Add("pdf/x-5n")
-    cbPDFx.Add("pdf/x-5pg")
-
-    txt89_binding.Add("")
-    txt89_binding.Add("Encolado")
-    txt89_binding.Add("Everflex")
-    txt89_binding.Add("Cosido a hilo")
-    txt89_binding.Add("Anillado")
-    txt89_binding.Add("Abrochado")
-
-    ' comienza bibtex
-    BtnEliminarBib.Enabled = False
-    btnGuardar.Enabled = False
-    btnGuardarCambios.Enabled = False
-
+  ' comienza metadatos
+  cmbTypePub.Add("research-article")
+  cmbTypePub.Add("review-article")
+  cmbTypePub.Add("editorial")
+  cmbTypePub.Add("case-report")
+  cmbTypePub.Add("letter")
+  cmbTypePub.Add("commentary")
+  cmbTypePub.Add("correction")
+  txt40_pdfmetalang.Add("es")
+  txt40_pdfmetalang.Add("pt")
+  txt40_pdfmetalang.Add("en")
+  txt40_pdfmetalang.Add("fr")
+  txt40_pdfmetalang.Add("de")
+  txt40_pdfmetalang.Add("it")
+  txt54_idiomaorig.Add("")
+  txt54_idiomaorig.Add("es")
+  txt54_idiomaorig.Add("pt")
+  txt54_idiomaorig.Add("en")
+  txt54_idiomaorig.Add("fr")
+  txt54_idiomaorig.Add("de")
+  txt54_idiomaorig.Add("it")
+  cbLang.Add("Español de España: es-ES")
+  cbLang.Add("Portugués de Brasil: pt-BR")
+  cbLang.Add("Inglés de Estados Unidos: en-US")
+  cbLang.Add("Francés de Francia: fr-FR")
+  cbLang.Add("Alemán de Alemania: de-DE")
+  cbLang.Add("Italiano: it-IT")
+  cbLang.Add("Japonés: ja-JP")
+  cbLang.Add("Chino simplificado: zh-Hans")
+  txt15_pdfcopyright.Add("Copyright")
+  If txt16_pdflicenseurl.Text = "" Then
+    txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Copyright"
   Endif
+  txt15_pdfcopyright.Add("CC0 1.0 Universal")
+  txt15_pdfcopyright.Add("CC BY 4.0 Attribution 4.0 International")
+  txt15_pdfcopyright.Add("CC BY-SA 4.0 Attribution-ShareAlike 4.0 International")
+  txt15_pdfcopyright.Add("CC BY-ND 4.0 Attribution-NoDerivatives 4.0 International")
+  txt15_pdfcopyright.Add("CC BY-NC 4.0 Attribution-NonCommercial 4.0 International")
+  txt15_pdfcopyright.Add("CC BY-NC-SA 4.0 Attribution-NonCommercial-ShareAlike 4.0 International")
+  txt15_pdfcopyright.Add("CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International")
+  txt15_pdfcopyright.Add("GNU General Public License")
+  txt15_pdfcopyright.Add("Licencia MIT")
+  txt15_pdfcopyright.Add("Licencia BSD")
+  txt15_pdfcopyright.Add("Otra")
+  cmbType.Add("Text")
+  cmbType.Add("Software")
+  cmbType.Add("Sound")
+  cmbType.Add("Dataset")
+  cmbType.Add("InteractiveResource")
+  cbPDFrendition.Add("default")
+  cbPDFrendition.Add("draft")
+  cbPDFrendition.Add("low-res")
+  cbPDFrendition.Add("proof")
+  cbPDFrendition.Add("screen")
+  cbPDFrendition.Add("thumbnail")
+  cbPubType.Add("book")
+  cbPubType.Add("journal")
+  cbPubType.Add("magazine")
+  cbPubType.Add("manual")
+  cbPubType.Add("report")
+  cbPubType.Add("whitepaper")
+  cbPubStatus.Add("Author's Original: AO")
+  cbPubStatus.Add("Submitted Manuscript Under Review: SMUR")
+  cbPubStatus.Add("Accepted Manuscript: AM")
+  cbPubStatus.Add("Proof: P")
+  cbPubStatus.Add("Version Of Record: VoR")
+  cbPubStatus.Add("Corrected Version Of Record: CVoR")
+  cbPubStatus.Add("Enhanced Version Of Record: EVoR")
+  cbPDFx.Add("pdf/A")
+  cbPDFx.Add("pdf/x-1a:2001")
+  cbPDFx.Add("pdf/x-1a:2003")
+  cbPDFx.Add("pdf/x-3:2002")
+  cbPDFx.Add("pdf/x-3:2003")
+  cbPDFx.Add("pdf/x-4")
+  cbPDFx.Add("pdf/x-4p")
+  cbPDFx.Add("pdf/x-5g")
+  cbPDFx.Add("pdf/x-5n")
+  cbPDFx.Add("pdf/x-5pg")
+
+  txt89_binding.Add("")
+  txt89_binding.Add("Encolado")
+  txt89_binding.Add("Everflex")
+  txt89_binding.Add("Cosido a hilo")
+  txt89_binding.Add("Anillado")
+  txt89_binding.Add("Abrochado")
+
+  ' comienza bibtex
+  BtnEliminarBib.Enabled = False
+  btnGuardar.Enabled = False
+  btnGuardarCambios.Enabled = False
+
+  Mostrar_ListaGLO
+  Mostrar_ListaBIB()
+  Mostrar_ListaBIBrelacion
+  TotalEntradasBIByGLO()'actualizamos el contador de entradas
 
 End
 
@@ -684,6 +677,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     guardarTipoDocumentoLibro()
+    LimpiarCamposBIB() ' Limpiamos los campos de las entradas bib
   Endif
 
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
@@ -1030,8 +1024,8 @@ Public Sub mnuLast_Click()
   ' Verificar el tipo de documento por el nombre del archivo
   seleccionarFuncionPorTipo(nombreDelArchivo)
 
-  'levantamos los datos de comentarios
-  levantarComenta()
+  levantarComenta()'levantamos los datos de comentarios
+  LimpiarCamposBIB()' Limpiamos los campos de las entradas bib
 
 End
 
@@ -2691,7 +2685,6 @@ Public Sub btnGuardar_Click()
     Contenido.Update
     Message.Info("Nueva entrada guardada.")
 
-    LimpiarCamposBIB() 'limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     btnGuardarCambios.Enabled = False
@@ -2701,6 +2694,8 @@ Public Sub btnGuardar_Click()
     btnAgregarCitationKey.Enabled = False
     btnGuardarIGUAL.Enabled = False
   Endif
+
+  LimpiarCamposBIB() 'limpiamos los campos
 
 End
 
