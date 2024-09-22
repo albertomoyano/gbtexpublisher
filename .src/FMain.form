@@ -612,6 +612,7 @@
           }
           { DirViewRuta DirChooser
             MoveScaled(1,13,34,15)
+            #Translate = False
             Expand = True
             ShowFile = True
             ShowBookmark = False
