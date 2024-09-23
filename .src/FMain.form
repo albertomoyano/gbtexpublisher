@@ -2575,7 +2575,7 @@
             Alignment = Align.Right
             Text = "Clave "
           }
-          { txtClave1 TextBox
+          { txtClaveRelacion TextBox
             MoveScaled(65,0,30,4)
             Background = Color.Background
             NoTabFocus = True
@@ -2591,7 +2591,7 @@
             Alignment = Align.Right
             Text = "RelatedType "
           }
-          { cbRELATEDTYPE1 ComboBox
+          { cbRelatedTypeRelacion ComboBox
             MoveScaled(19,0,24,3.5556)
             NoTabFocus = True
             ReadOnly = True
@@ -2602,7 +2602,7 @@
             Alignment = Align.Right
             Text = ("Related ")
           }
-          { txtRelated1 TextBox
+          { txtRelatedRelacion TextBox
             MoveScaled(65,0,30,4)
             Background = Color.Background
             NoTabFocus = True
@@ -2634,7 +2634,7 @@
             Alignment = Align.Right
             Text = "CrossRef "
           }
-          { txtCrossRef1 TextBox
+          { txtCrossRefRelacion TextBox
             MoveScaled(60,0,30,4)
             Background = Color.Background
             NoTabFocus = True
@@ -3025,7 +3025,7 @@
       Arrangement = Arrange.Vertical
       Count = 2
       Index = 0
-      Text = ("Generales y obligatorios para todas las salidas")
+      Text = ("Generales y obligatorios para todas las salidas de tipo libro")
       { ScrollView10 ScrollView
         MoveScaled(3,7,97,37)
         Expand = True
@@ -3155,7 +3155,7 @@
         }
       }
       Index = 1
-      Text = ("Particulares a cada tipo de salida")
+      Text = ("Particulares a cada tipo de salida  de tipo libro")
       { ScrollView1 ScrollView
         MoveScaled(2,3,94,323)
         Expand = True
@@ -4833,11 +4833,17 @@
     { HBox178 HBox
       MoveScaled(3,18,103,0.8889)
     }
-    { txtDisclaimer TextArea
-      MoveScaled(14,25,16,16)
+    { Panel2 Panel
+      MoveScaled(4,22,32,24)
       Expand = True
-      Wrap = True
-      ScrollBar = Scroll.Vertical
+      Arrangement = Arrange.Fill
+      Border = Border.Etched
+      { txtDisclaimer TextArea
+        MoveScaled(3,3,16,16)
+        Expand = True
+        Wrap = True
+        ScrollBar = Scroll.Vertical
+      }
     }
     Index = 0
   }

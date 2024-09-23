@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=FMain
 Icon=iconos/icono-gbtex.svg
-Version=0.1.300
+Version=0.1.301
 Component=gb.image
 Component=gb.qt5
 Component=gb.form
