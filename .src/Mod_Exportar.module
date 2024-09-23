@@ -1380,6 +1380,8 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\usepackage[spanish,es-ucroman,es-noshorthands]{babel}" & "\n"
     s &= "\\usepackage[autostyle=true]{csquotes}" & "\n"
     s &= "\\usepackage{paralist}" & "\n"
+    s &= "\\usepackage{enumitem}" & "\n"
+    s &= "\\setlist{nosep,topsep=4pt}" & "\n"
     s &= "\\usepackage{easyReview}" & "\n"
     s &= "\\usepackage{graphicx}" & "\n"
     s &= "\\tracinglostchars=2" & "\n"
