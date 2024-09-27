@@ -526,12 +526,14 @@
     }
   }
   { !TabPanel1 TabStrip
-    MoveScaled(1,15,112,365)
+    MoveScaled(1,14,128,365)
     #Public = True
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
     Spacing = True
+    Margin = True
+    Padding = 4
     Count = 5
     Index = 0
     Text = ("     Terminal y ChatGPT     ")
@@ -637,14 +639,13 @@
     Index = 1
     Text = ("     Referencias bibliográficas     ")
     { ToolPanel1 ToolPanel
-      MoveScaled(1,0,69,23)
+      MoveScaled(3,0,69,23)
       Arrangement = Arrange.Fill
       AutoResize = True
       Count = 2
-      Animated = True
       Border = True
       Index = 0
-      Text = ("Caja de texto temporal")
+      Text = ("   Caja de texto temporal")
       Picture = Picture["iconos/+nuevo.svg"]
       { txtTMPbiblio TextArea
         MoveScaled(1,1,36,13)
@@ -652,7 +653,7 @@
         ScrollBar = Scroll.Vertical
       }
       Index = 1
-      Text = ("Mostrar referencias bibliográficas")
+      Text = ("   Mostrar referencias bibliográficas")
       Picture = Picture["iconos/bib.svg"]
       { VListaBIB TableView
         MoveScaled(1,1,44,12)
@@ -808,22 +809,26 @@
       }
     }
     { TabPanel2 TabStrip
-      MoveScaled(1,38,104,74)
+      MoveScaled(1,37,125,74)
       Expand = True
       Arrangement = Arrange.Vertical
+      Margin = True
       Padding = 4
       Count = 9
       Index = 0
       Text = ("Autoría")
       { ScrollView2 ScrollView
-        MoveScaled(1,2,102,43)
+        MoveScaled(1,2,108,43)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox21 HBox
-          MoveScaled(0,0,97,4.4444)
-          Padding = 2
+          MoveScaled(1,0,97,4)
           { BtnBuscarAuthor Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
@@ -855,8 +860,7 @@
           }
         }
         { HBox22 HBox
-          MoveScaled(0,4,97,4.4444)
-          Padding = 2
+          MoveScaled(0,4,97,4)
           { lblBOOKAUTHOR2 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -882,8 +886,7 @@
           }
         }
         { HBox24 HBox
-          MoveScaled(0,8,97,4.4444)
-          Padding = 2
+          MoveScaled(0,8,97,4)
           { BtnBuscarAuthor2 Button
             MoveScaled(0,0,4,4)
             NoTabFocus = True
@@ -912,8 +915,7 @@
           }
         }
         { HBox23 HBox
-          MoveScaled(0,12,97,4.4444)
-          Padding = 2
+          MoveScaled(0,12,97,4)
           { lblEDITOR2 Label
             MoveScaled(-1,0,16,3.5556)
             Alignment = Align.Right
@@ -937,8 +939,7 @@
           }
         }
         { HBox25 HBox
-          MoveScaled(0,16,97,4.4444)
-          Padding = 2
+          MoveScaled(0,16,97,4)
           { lblEDITOR3 Label
             MoveScaled(-1,0,16,3.5556)
             Alignment = Align.Right
@@ -962,8 +963,7 @@
           }
         }
         { HBox26 HBox
-          MoveScaled(0,20,97,4.4444)
-          Padding = 2
+          MoveScaled(0,20,97,4)
           { lblEDITOR4 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -987,8 +987,7 @@
           }
         }
         { HBox39 HBox
-          MoveScaled(0,24,97,4.4444)
-          Padding = 2
+          MoveScaled(0,24,97,4)
           { lblAFTERWORD Label
             MoveScaled(1,0,16,4)
             Alignment = Align.Right
@@ -1015,8 +1014,7 @@
           }
         }
         { HBox40 HBox
-          MoveScaled(0,28,97,4.4444)
-          Padding = 2
+          MoveScaled(0,28,97,4)
           { lblCOMMENTATOR Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1043,8 +1041,7 @@
           }
         }
         { HBox38 HBox
-          MoveScaled(0,32,97,4.4444)
-          Padding = 2
+          MoveScaled(0,32,97,4)
           { lblTRANSLATOR Label
             MoveScaled(1,0,16,4)
             ToolTip = ("Traductor")
@@ -1072,8 +1069,7 @@
           }
         }
         { HBox27 HBox
-          MoveScaled(0,36,97,4.4444)
-          Padding = 2
+          MoveScaled(0,36,97,4)
           { lblANNOTATOR2 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1108,11 +1104,14 @@
         MoveScaled(1,2,102,55)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox48 HBox
-          MoveScaled(0,0,100,4.4444)
-          Padding = 2
+          MoveScaled(0,0,100,4)
           { BtnBuscarTituloReferencia Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
@@ -1134,8 +1133,7 @@
           }
         }
         { HBox28 HBox
-          MoveScaled(0,4,100,4.4444)
-          Padding = 2
+          MoveScaled(0,4,100,4)
           { Label40 Label
             MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
@@ -1151,8 +1149,7 @@
           }
         }
         { HBox29 HBox
-          MoveScaled(0,8,100,4.4444)
-          Padding = 2
+          MoveScaled(0,8,100,4)
           { Label4 Label
             MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
@@ -1167,8 +1164,7 @@
           }
         }
         { HBox30 HBox
-          MoveScaled(0,12,100,4.4444)
-          Padding = 2
+          MoveScaled(0,12,100,4)
           { BtnBuscarBookTitle Button
             MoveScaled(0,0,4,4)
             NoTabFocus = True
@@ -1200,8 +1196,7 @@
           }
         }
         { HBox31 HBox
-          MoveScaled(0,16,100,4.4444)
-          Padding = 2
+          MoveScaled(0,16,100,4)
           { Label39 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1227,8 +1222,7 @@
           }
         }
         { HBox32 HBox
-          MoveScaled(0,20,100,4.4444)
-          Padding = 2
+          MoveScaled(0,20,100,4)
           { BtnBuscarJournal Button
             MoveScaled(0,0,4,4)
             NoTabFocus = True
@@ -1261,8 +1255,7 @@
           }
         }
         { HBox33 HBox
-          MoveScaled(0,24,100,4.4444)
-          Padding = 2
+          MoveScaled(0,24,100,4)
           { Label5 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1288,8 +1281,7 @@
           }
         }
         { HBox37 HBox
-          MoveScaled(0,28,100,4.4444)
-          Padding = 2
+          MoveScaled(0,28,100,4)
           { Label43 Label
             MoveScaled(2,0,16,3.5556)
             Alignment = Align.Right
@@ -1315,8 +1307,7 @@
           }
         }
         { HBox34 HBox
-          MoveScaled(0,32,100,4.4444)
-          Padding = 2
+          MoveScaled(0,32,100,4)
           { Label6 Label
             MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
@@ -1331,8 +1322,7 @@
           }
         }
         { HBox35 HBox
-          MoveScaled(0,36,100,4.4444)
-          Padding = 2
+          MoveScaled(0,36,100,4)
           { Label28 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1353,11 +1343,14 @@
         MoveScaled(1,1,102,37)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox49 HBox
-          MoveScaled(0,0,100,4.4444)
-          Padding = 2
+          MoveScaled(0,0,100,4)
           { Label23 Label
             MoveScaled(31,0,16,3.5556)
             Alignment = Align.Right
@@ -1371,8 +1364,7 @@
           }
         }
         { HBox36 HBox
-          MoveScaled(0,4,100,4.4444)
-          Padding = 2
+          MoveScaled(0,4,100,4)
           { Label19 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1398,8 +1390,7 @@
           }
         }
         { HBox41 HBox
-          MoveScaled(0,8,100,4.4444)
-          Padding = 2
+          MoveScaled(0,8,100,4)
           { Label20 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1424,8 +1415,7 @@
           }
         }
         { HBox43 HBox
-          MoveScaled(0,12,100,4.4444)
-          Padding = 2
+          MoveScaled(0,12,100,4)
           { Label14 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1451,8 +1441,7 @@
           }
         }
         { HBox46 HBox
-          MoveScaled(0,20,100,4.4444)
-          Padding = 2
+          MoveScaled(0,20,100,4)
           { Label17 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1479,8 +1468,7 @@
           }
         }
         { HBox42 HBox
-          MoveScaled(0,24,100,4.4444)
-          Padding = 2
+          MoveScaled(0,24,100,4)
           { lblDate Label
             MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
@@ -1507,8 +1495,7 @@
           }
         }
         { HBox45 HBox
-          MoveScaled(0,28,100,4.4444)
-          Padding = 2
+          MoveScaled(0,28,100,4)
           { Label22 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1541,11 +1528,14 @@
         MoveScaled(1,1,102,54)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox55 HBox
-          MoveScaled(0,0,88,4.4444)
-          Padding = 2
+          MoveScaled(0,0,88,4)
           { lblLocation Label
             MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
@@ -1571,8 +1561,7 @@
           }
         }
         { HBox61 HBox
-          MoveScaled(0,4,88,4.4444)
-          Padding = 2
+          MoveScaled(0,4,88,4)
           { Label16 Label
             MoveScaled(10,0,16,3.5556)
             Alignment = Align.Right
@@ -1599,8 +1588,7 @@
           }
         }
         { HBox63 HBox
-          MoveScaled(0,8,88,4.4444)
-          Padding = 2
+          MoveScaled(0,8,88,4)
           { lblIstitution Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1627,8 +1615,7 @@
           }
         }
         { HBox44 HBox
-          MoveScaled(0,13,100,4.4444)
-          Padding = 2
+          MoveScaled(0,13,100,4)
           { lblPUBSTATE Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1644,8 +1631,7 @@
           }
         }
         { HBox47 HBox
-          MoveScaled(0,18,88,4.4444)
-          Padding = 2
+          MoveScaled(0,18,88,4)
           { lblPAGES Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1668,8 +1654,7 @@
           }
         }
         { HBox60 HBox
-          MoveScaled(0,22,88,4.4444)
-          Padding = 2
+          MoveScaled(0,22,88,4)
           { lblPAGETOTAL2 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1694,8 +1679,7 @@
           }
         }
         { HBox50 HBox
-          MoveScaled(0,26,88,4.4444)
-          Padding = 2
+          MoveScaled(0,26,88,4)
           { lblHyphenation Label
             MoveScaled(3,0,16,3.5556)
             #Translate = False
@@ -1722,8 +1706,7 @@
           }
         }
         { HBox84 HBox
-          MoveScaled(0,30,88,4.4444)
-          Padding = 2
+          MoveScaled(0,30,88,4)
           { lblRELATEDSTRING5 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -1751,8 +1734,7 @@
           }
         }
         { HBox68 HBox
-          MoveScaled(0,34,88,4.4444)
-          Padding = 2
+          MoveScaled(0,34,88,4)
           { lblLocation6 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1785,11 +1767,14 @@
         MoveScaled(1,1,102,34)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox51 HBox
-          MoveScaled(0,0,80,4.4444)
-          Padding = 2
+          MoveScaled(0,0,80,4)
           { btnChequearISBN Button
             MoveScaled(0,0,4,4)
             Picture = Picture["iconos/comp.svg"]
@@ -1820,8 +1805,7 @@
           }
         }
         { HBox52 HBox
-          MoveScaled(0,4,80,4.4444)
-          Padding = 2
+          MoveScaled(0,4,80,4)
           { lblISBN3 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1848,8 +1832,7 @@
           }
         }
         { HBox53 HBox
-          MoveScaled(0,8,80,4.4444)
-          Padding = 2
+          MoveScaled(0,8,80,4)
           { lblISBN2 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1876,8 +1859,7 @@
           }
         }
         { HBox54 HBox
-          MoveScaled(0,12,80,4.4444)
-          Padding = 2
+          MoveScaled(0,12,80,4)
           { Label21 Label
             MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
@@ -1892,8 +1874,7 @@
           }
         }
         { HBox56 HBox
-          MoveScaled(0,16,80,4.4444)
-          Padding = 2
+          MoveScaled(0,16,80,4)
           { lblDOI2 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1908,8 +1889,7 @@
           }
         }
         { HBox57 HBox
-          MoveScaled(0,20,80,4.4444)
-          Padding = 2
+          MoveScaled(0,20,80,4)
           { lblISBN6 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1936,8 +1916,7 @@
           }
         }
         { HBox58 HBox
-          MoveScaled(0,24,80,4.4444)
-          Padding = 2
+          MoveScaled(0,24,80,4)
           { lblISBN8 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1958,11 +1937,14 @@
         MoveScaled(1,1,102,58)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox64 HBox
-          MoveScaled(0,0,91,4.4444)
-          Padding = 2
+          MoveScaled(0,0,91,4)
           { lblLocation3 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1982,8 +1964,7 @@
           }
         }
         { HBox65 HBox
-          MoveScaled(0,4,91,4.4444)
-          Padding = 2
+          MoveScaled(0,4,91,4)
           { lblLocation4 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1998,8 +1979,7 @@
           }
         }
         { HBox66 HBox
-          MoveScaled(0,8,91,4.4444)
-          Padding = 2
+          MoveScaled(0,8,91,4)
           { lblLABEL Label
             MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
@@ -2014,8 +1994,7 @@
           }
         }
         { HBox67 HBox
-          MoveScaled(0,12,91,4.4444)
-          Padding = 2
+          MoveScaled(0,12,91,4)
           { lblLocation5 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -2030,8 +2009,7 @@
           }
         }
         { HBox69 HBox
-          MoveScaled(0,16,91,4.4444)
-          Padding = 2
+          MoveScaled(0,16,91,4)
           { lblLocation7 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -2046,8 +2024,7 @@
           }
         }
         { HBox71 HBox
-          MoveScaled(0,20,91,4.4444)
-          Padding = 2
+          MoveScaled(0,20,91,4)
           { lblLocation9 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -2061,8 +2038,7 @@
           }
         }
         { HBox70 HBox
-          MoveScaled(0,24,91,4.4444)
-          Padding = 2
+          MoveScaled(0,24,91,4)
           { lblLocation8 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -2077,8 +2053,7 @@
           }
         }
         { HBox74 HBox
-          MoveScaled(0,28,91,4.4444)
-          Padding = 2
+          MoveScaled(0,28,91,4)
           { Label10 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -2101,8 +2076,7 @@
           }
         }
         { HBox75 HBox
-          MoveScaled(0,32,91,4.4444)
-          Padding = 2
+          MoveScaled(0,32,91,4)
           { Label27 Label
             MoveScaled(0,0,16,3.5556)
             #Translate = False
@@ -2119,8 +2093,7 @@
           }
         }
         { HBox76 HBox
-          MoveScaled(0,36,91,4.4444)
-          Padding = 2
+          MoveScaled(0,36,91,4)
           { Label48 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -2136,8 +2109,7 @@
           }
         }
         { HBox77 HBox
-          MoveScaled(0,40,91,4.4444)
-          Padding = 2
+          MoveScaled(0,40,91,4)
           { Label49 Label
             MoveScaled(0,0,16,3.5556)
             #Translate = False
@@ -2159,8 +2131,7 @@
           }
         }
         { HBox78 HBox
-          MoveScaled(0,44,91,4.4444)
-          Padding = 2
+          MoveScaled(0,44,91,4)
           { lblRELATEDSTRING2 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2177,8 +2148,7 @@
           }
         }
         { HBox79 HBox
-          MoveScaled(0,48,91,4.4444)
-          Padding = 2
+          MoveScaled(0,48,91,4)
           { lblRELATEDSTRING1 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2209,8 +2179,7 @@
           }
         }
         { HBox81 HBox
-          MoveScaled(0,52,91,4.4444)
-          Padding = 2
+          MoveScaled(0,52,91,4)
           { lblRELATEDSTRING3 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2242,14 +2211,17 @@
       Index = 6
       Text = ("Miscelánea 2")
       { ScrollView8 ScrollView
-        MoveScaled(1,1,103,54)
+        MoveScaled(1,0,103,54)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox59 HBox
-          MoveScaled(0,0,94,4.4444)
-          Padding = 2
+          MoveScaled(0,0,94,4)
           { lblRELATEDSTRING8 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2265,8 +2237,7 @@
           }
         }
         { HBox86 HBox
-          MoveScaled(0,4,94,4.4444)
-          Padding = 2
+          MoveScaled(0,4,94,4)
           { lblRELATEDSTRING9 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2282,8 +2253,7 @@
           }
         }
         { HBox87 HBox
-          MoveScaled(0,8,94,4.4444)
-          Padding = 2
+          MoveScaled(0,8,94,4)
           { lblRELATEDSTRING10 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2299,8 +2269,7 @@
           }
         }
         { HBox88 HBox
-          MoveScaled(0,12,94,4.4444)
-          Padding = 2
+          MoveScaled(0,12,94,4)
           { lblRELATEDSTRING11 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2314,8 +2283,7 @@
           }
         }
         { HBox89 HBox
-          MoveScaled(0,16,94,4.4444)
-          Padding = 2
+          MoveScaled(0,16,94,4)
           { lblRELATEDSTRING12 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2331,8 +2299,7 @@
           }
         }
         { HBox90 HBox
-          MoveScaled(0,20,94,4.4444)
-          Padding = 2
+          MoveScaled(0,20,94,4)
           { lblRELATEDSTRING13 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2348,8 +2315,7 @@
           }
         }
         { HBox91 HBox
-          MoveScaled(0,24,94,4.4444)
-          Padding = 2
+          MoveScaled(0,24,94,4)
           { lblRELATEDSTRING14 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2364,8 +2330,7 @@
           }
         }
         { HBox72 HBox
-          MoveScaled(0,28,94,4.4444)
-          Padding = 2
+          MoveScaled(0,28,94,4)
           { lblLocation10 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -2380,8 +2345,7 @@
           }
         }
         { HBox62 HBox
-          MoveScaled(0,32,91,4.4444)
-          Padding = 2
+          MoveScaled(0,32,91,4)
           { lblLANGID3 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -2398,8 +2362,7 @@
           }
         }
         { HBox73 HBox
-          MoveScaled(0,36,91,4.4444)
-          Padding = 2
+          MoveScaled(0,36,91,4)
           { lblNOTE Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -2415,8 +2378,7 @@
           }
         }
         { HBox80 HBox
-          MoveScaled(0,40,91,4.4444)
-          Padding = 2
+          MoveScaled(0,40,91,4)
           { lblLANGID Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -2432,8 +2394,7 @@
           }
         }
         { HBox82 HBox
-          MoveScaled(0,44,91,4.4444)
-          Padding = 2
+          MoveScaled(0,44,91,4)
           { lblANNOTATION Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -2449,8 +2410,7 @@
           }
         }
         { HBox92 HBox
-          MoveScaled(0,48,91,4.4444)
-          Padding = 2
+          MoveScaled(0,48,91,4)
           { BtnBuscarEtiquetas Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
@@ -2475,13 +2435,16 @@
       }
       Index = 7
       Text = ("Construir relaciones")
-      Picture = Picture["iconos/bibRepetida.png"]
       { ScrollView11 ScrollView
         MoveScaled(1,3,102,43)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
+        Shadow = True
         { HBox188 HBox
           MoveScaled(0,0,89,4)
           { btnGuardarRelacion Button
@@ -2504,8 +2467,7 @@
           AutoResize = False
         }
         { HBox180 HBox
-          MoveScaled(0,16,97,4.4444)
-          Padding = 2
+          MoveScaled(0,16,97,4)
           { BtnBuscarAuthorRelacion Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
@@ -2524,8 +2486,7 @@
           }
         }
         { HBox184 HBox
-          MoveScaled(0,21,100,4.4444)
-          Padding = 2
+          MoveScaled(0,21,100,4)
           { BtnBuscarTituloReferenciaRelacion Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
@@ -2546,8 +2507,7 @@
           }
         }
         { HBox185 HBox
-          MoveScaled(0,25.4444,97,4.4444)
-          Padding = 2
+          MoveScaled(0,25.4444,97,4)
           { Label132 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -2578,8 +2538,7 @@
           }
         }
         { HBox186 HBox
-          MoveScaled(0,29.4444,97,4.4444)
-          Padding = 2
+          MoveScaled(0,29.4444,97,4)
           { Label134 Label
             MoveScaled(1,0,16,3.5556)
             #Translate = False
@@ -2606,8 +2565,7 @@
           }
         }
         { HBox187 HBox
-          MoveScaled(0,33.4444,97,4.4444)
-          Padding = 2
+          MoveScaled(0,33.4444,97,4)
           { lblRELATEDSTRING15 Label
             MoveScaled(0,0,16,4)
             #Translate = False
@@ -2640,7 +2598,6 @@
       }
       Index = 8
       Text = ("Duplicar entrada")
-      Picture = Picture["iconos/duplicar2.png"]
       Index = 0
     }
     Index = 2

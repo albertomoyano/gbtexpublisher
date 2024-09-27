@@ -7353,3 +7353,11 @@ Public Sub menuRespaldoSQL_Click()
   Form_RespaldoSql.ShowModal()
 
 End
+
+Public Sub TabPanel1_Click()
+
+End
+
+Public Sub TabPanel2_Click()
+
+End
