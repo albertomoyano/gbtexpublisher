@@ -5,7 +5,8 @@
   Expand = True
   Maximized = True
   Arrangement = Arrange.Vertical
-  Padding = 4
+  Spacing = True
+  Margin = True
   { menuProcesarArchivos Menu
     Text = ("Procesar archivos")
     Visible = False
@@ -188,6 +189,10 @@
     }
     { menuRespaldoBDD Menu
       Text = ("Respado de la BDD en GitHub")
+      Picture = Picture["iconos/exportar.svg"]
+    }
+    { menuRespaldoSQL Menu
+      Text = ("Ubicación del respaldo de la BBDD")
       Picture = Picture["iconos/exportar.svg"]
     }
     { menuESTADISTICAS Menu
@@ -520,19 +525,16 @@
       MenuOnly = True
     }
   }
-  { HBox4 HBox
-    MoveScaled(1,13,98,0.8889)
-  }
   { !TabPanel1 TabStrip
     MoveScaled(1,15,112,365)
     #Public = True
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
-    Padding = 4
+    Spacing = True
     Count = 5
     Index = 0
-    Text = ("Terminal y ChatGPT    ")
+    Text = ("     Terminal y ChatGPT     ")
     { HBox93 HBox
       MoveScaled(1,1,108,4)
       { MenuButton1 MenuButton
@@ -557,9 +559,6 @@
         Expand = True
         Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
       }
-    }
-    { HBox181 HBox
-      MoveScaled(0,6,103,0.8889)
     }
     { Splitter1 Splitter
       MoveScaled(1,8,109,65)
@@ -636,8 +635,7 @@
       }
     }
     Index = 1
-    Text = ("Referencias bibliográficas    ")
-    Picture = Picture["iconos/bib.svg"]
+    Text = ("     Referencias bibliográficas     ")
     { ToolPanel1 ToolPanel
       MoveScaled(1,0,69,23)
       Arrangement = Arrange.Fill
@@ -808,9 +806,6 @@
         Expand = True
         Placeholder = ("Clave filtro para printbibliography")
       }
-    }
-    { HBox173 HBox
-      MoveScaled(0,35,103,0.8889)
     }
     { TabPanel2 TabStrip
       MoveScaled(1,38,104,74)
@@ -2649,8 +2644,7 @@
       Index = 0
     }
     Index = 2
-    Text = ("Siglas y glosarios    ")
-    Picture = Picture["iconos/glo.svg"]
+    Text = ("     Siglas y glosarios     ")
     { HBox15 Panel
       MoveScaled(1,0,15,10)
       NoTabFocus = True
@@ -2944,8 +2938,7 @@
       }
     }
     Index = 3
-    Text = ("Metadatos    ")
-    Picture = Picture["iconos/metadatos.svg"]
+    Text = ("     Metadatos     ")
     { HBox83 HBox
       MoveScaled(1,0,95,4)
       Padding = 1
@@ -3014,9 +3007,6 @@
         Expand = True
         ReadOnly = True
       }
-    }
-    { HBox174 HBox
-      MoveScaled(2,9,103,0.8889)
     }
     { !TabStripMetaLibro TabStrip
       MoveScaled(2,12,89,340)
@@ -4738,8 +4728,7 @@
       Index = 0
     }
     Index = 4
-    Text = ("Comentarios    ")
-    Picture = Picture["iconos/metadatos.svg"]
+    Text = ("     Comentarios     ")
     { HBox175 HBox
       MoveScaled(2,0,95,4)
       Padding = 1
@@ -4829,9 +4818,6 @@
         NoTabFocus = True
         Expand = True
       }
-    }
-    { HBox178 HBox
-      MoveScaled(3,18,103,0.8889)
     }
     { Panel2 Panel
       MoveScaled(4,22,32,24)

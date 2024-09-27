@@ -382,7 +382,7 @@ Public Sub Export2OrdenTaller()
 
     'pie de página
     s &= "\\vfill" & gb.NewLine
-    s &= "\\noindent\\foot{\\textbf{Disclaimer:} Esta página no forma parte del contenido oficial del libro. La misma se generó para proporcionar al taller de imprenta instrucciones y comentarios. Asegúrese de revisar las observaciones aquí indicadas antes de la realizar la impresión.}" & gb.NewLine & gb.NewLine
+    s &= "\\noindent\\foot{\\textbf{Disclaimer:} Esta página no forma parte del contenido oficial del libro. La misma se generó para proporcionar al taller de imprenta instrucciones y comentarios. Asegúrese de revisar las observaciones aquí indicadas antes de realizar la impresión.}" & gb.NewLine & gb.NewLine
     s &= "\\noindent\\foot{\\textbf{Fecha de emisión de esta OT:} \\today}" & gb.NewLine & gb.NewLine
     s &= "\\end{document}" & gb.NewLine
     s &= "\n"

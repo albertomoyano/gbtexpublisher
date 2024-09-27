@@ -1,0 +1,34 @@
+' Gambas class file
+
+Public Sub btnSalir_Click()
+
+  Me.Close
+
+End
+
+Public Sub btnSeleccionarDir_Click()
+
+  Dialog.Title = "Seleccionar una ruta de destino"
+  Dialog.Path = User.Home
+  If Dialog.SelectDirectory() Then
+    Return
+  Else
+    txtDestino.Text = Dialog.Path
+  Endif
+
+End
+
+Public Sub btnListo_Click()
+
+  ' ' Guardar la ruta en los ajustes
+  ' Settings["RutaDestino"] = txtDestino.Text
+  ' Settings.Save()
+
+End
+
+Public Sub Form_Open()
+
+  ' ' Cargar la ruta guardada al abrir el formulario
+  ' txtDestino.Text = Settings["RutaDestino"]
+
+End

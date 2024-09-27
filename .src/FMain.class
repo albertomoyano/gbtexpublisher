@@ -26,6 +26,9 @@ Public LastTextBox As TextBox
 
 Public Sub Form_Open()
 
+  ' Cargar la ruta guardada al abrir el formulario
+  Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
+
   ' validamos la creacion de carpetas y archivos
   Mod_Funciones.validarArchivos()
 
@@ -34,6 +37,8 @@ Public Sub Form_Open()
   ' Realizar la copia de respaldo de la base de datos
   ' cada vez que inicia la aplicación
   Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+  Wait 0.2
+  Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & User.Home & "/Disco2/.respaldogbTeX/" & fecha & "-" & "db_tex.sqlite"
   Wait 0.2
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
@@ -7340,5 +7345,11 @@ Public Sub btnBuscarFiltro_Click()
 
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
+
+End
+
+Public Sub menuRespaldoSQL_Click()
+
+  Form_RespaldoSql.ShowModal()
 
 End
