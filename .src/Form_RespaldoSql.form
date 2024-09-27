@@ -55,6 +55,10 @@
       NoTabFocus = True
       Text = ("Confirmar")
     }
+    { Separator1 Separator
+      Move(531,0,9,36)
+      Foreground = Color.Transparent
+    }
     { btnSalir Button
       Move(558,0,160,36)
       Font = Font["Bold"]

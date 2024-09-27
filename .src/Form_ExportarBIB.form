@@ -68,7 +68,6 @@
     Move(0,117,950,36)
     { Label2 Label
       Move(225,0,468,36)
-      Font = Font["Bold,Italic"]
       Expand = True
       Alignment = Align.Center
     }
@@ -83,8 +82,12 @@
       Background = &H8BE06F
       Text = ("Exportar")
     }
+    { Separator1 Separator
+      Move(639,0,9,36)
+      Foreground = Color.Transparent
+    }
     { btnCancelar Button
-      Move(612,0,160,36)
+      Move(693,0,160,36)
       Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White
