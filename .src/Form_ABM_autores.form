@@ -34,10 +34,11 @@
     }
     { btnCLOSEauthor Button
       Move(760,0,160,36)
+      Font = Font["Bold"]
+      Background = &HE00000
+      Foreground = Color.White
       NoTabFocus = True
-      ToolTip = ("Cerrar la aplicación")
-      Text = ("Salir")
-      Picture = Picture["iconos/salir.svg"]
+      Text = ("Cerrar")
     }
   }
   { HBox6 Panel

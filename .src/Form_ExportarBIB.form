@@ -88,8 +88,10 @@
     }
     { btnCancelar Button
       Move(612,0,160,36)
+      Font = Font["Bold"]
+      Background = &HE00000
+      Foreground = Color.White
       Text = ("Cerrar")
-      Picture = Picture["iconos/salir.svg"]
     }
   }
 }

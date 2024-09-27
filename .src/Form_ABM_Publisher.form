@@ -20,7 +20,6 @@
     { BtnRefrescarPublisher Button
       Move(36,0,36,36)
       ToolTip = ("Refrescar listado de la base de datos")
-      Picture = Picture["iconos/refrescar.svg"]
     }
     { btnGuardarPublisher Button
       Move(90,0,36,36)
@@ -45,10 +44,11 @@
     }
     { btnCerrarColeccion Button
       Move(513,0,144,36)
+      Font = Font["Bold"]
+      Background = &HE00000
+      Foreground = Color.White
       NoTabFocus = True
-      ToolTip = ("Cerrar la aplicación")
       Text = ("Cerrar")
-      Picture = Picture["iconos/salir.svg"]
     }
   }
   { HBox6 Panel

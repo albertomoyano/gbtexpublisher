@@ -18,7 +18,7 @@
     MoveScaled(19,6,42,4)
     Padding = 2
     { txtAgregarLista TextBox
-      MoveScaled(4,0,21,3.6)
+      MoveScaled(4,0,21,3.5556)
       Expand = True
     }
   }
@@ -47,17 +47,19 @@
     MoveScaled(0,24,61,4)
     Padding = 2
     { Spring1 Spring
-      MoveScaled(1,0,15,3.6)
+      MoveScaled(1,0,15,3.5556)
     }
     { btnAgregar Button
-      MoveScaled(18,0,16,3.6)
+      MoveScaled(18,0,16,3.5556)
       Text = ("Listo")
       Picture = Picture["iconos/comp.svg"]
     }
     { btnCancelar Button
-      MoveScaled(36,0,16,3.6)
-      Text = ("Cancelar")
-      Picture = Picture["iconos/salir.svg"]
+      MoveScaled(36,0,16,3.5556)
+      Font = Font["Bold"]
+      Background = &HE00000
+      Foreground = Color.White
+      Text = ("Cerrar")
     }
   }
 }

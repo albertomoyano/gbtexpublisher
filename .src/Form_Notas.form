@@ -66,10 +66,12 @@
     }
     { btnCerrar ToolButton
       Move(700,0,160,40)
+      Font = Font["Bold"]
+      Background = &HE00000
+      Foreground = Color.White
       NoTabFocus = True
       ToolTip = ("Cerrar la ventana")
       Text = ("Cerrar")
-      Picture = Picture["iconos/salir.svg"]
       Border = True
     }
   }

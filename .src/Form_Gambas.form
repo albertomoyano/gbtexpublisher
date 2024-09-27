@@ -40,8 +40,10 @@
     }
     { btnCerrar Button
       Move(360,0,144,40)
+      Font = Font["Bold"]
+      Background = &HE00000
+      Foreground = Color.White
       Text = ("Cerrar")
-      Picture = Picture["iconos/salir.svg"]
     }
   }
 }
