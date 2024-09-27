@@ -47,15 +47,15 @@
     MoveScaled(0,24,61,4)
     Padding = 2
     { Spring1 Spring
-      MoveScaled(1,0,15,3.5556)
+      MoveScaled(1,0,15,4)
     }
     { btnAgregar Button
-      MoveScaled(18,0,16,3.5556)
+      MoveScaled(18,0,16,4)
+      Background = &H8BE06F
       Text = ("Listo")
-      Picture = Picture["iconos/comp.svg"]
     }
     { btnCancelar Button
-      MoveScaled(36,0,16,3.5556)
+      MoveScaled(36,0,16,4)
       Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White

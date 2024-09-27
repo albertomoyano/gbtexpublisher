@@ -7,34 +7,34 @@
   Text = ("Exportar referencias bibliográficas")
   Resizable = False
   Arrangement = Arrange.Vertical
+  AutoResize = True
+  Spacing = True
   Margin = True
   Padding = 4
   { HBox1 HBox
-    Move(0,9,950,40)
-    Padding = 2
+    Move(0,9,950,36)
     { TextLabel1 TextLabel
-      Move(63,0,108,36)
+      Move(63,0,162,36)
       Padding = 4
-      Text = ("Destino  ")
+      Text = ("Seleccionar destino  ")
       Alignment = Align.Right
     }
+    { btnDestino Button
+      Move(225,0,36,36)
+      Picture = Picture["iconos/search.svg"]
+    }
     { !txtdestino TextBox
-      Move(216,0,144,32)
+      Move(279,0,144,36)
       #Public = True
       Foreground = Color.DarkBlue
       Expand = True
       ReadOnly = True
     }
-    { btnDestino Button
-      Move(477,0,36,36)
-      Picture = Picture["iconos/document-orange.svg"]
-    }
   }
   { HBox2 HBox
-    Move(0,45,950,40)
-    Padding = 2
+    Move(0,45,950,36)
     { Label1 Label
-      Move(225,0,468,32)
+      Move(225,0,468,36)
       Font = Font["Bold"]
       Expand = True
       Alignment = Align.Center
@@ -42,16 +42,15 @@
     }
   }
   { HBox3 HBox
-    Move(-45,81,950,40)
-    Padding = 2
+    Move(-45,81,950,36)
     { TextLabel4 TextLabel
-      Move(63,0,108,36)
+      Move(63,0,162,36)
       Padding = 4
       Text = ("Filtro  ")
       Alignment = Align.Right
     }
     { txtFiltro TextBox
-      Move(216,0,144,36)
+      Move(252,0,144,36)
       Expand = True
     }
     { TextLabel2 TextLabel
@@ -66,8 +65,7 @@
     }
   }
   { HBox4 HBox
-    Move(0,117,950,40)
-    Padding = 2
+    Move(0,117,950,36)
     { Label2 Label
       Move(225,0,468,36)
       Font = Font["Bold,Italic"]
@@ -76,10 +74,9 @@
     }
   }
   { HBox14 HBox
-    Move(0,153,950,40)
-    Padding = 2
+    Move(0,153,950,36)
     { Spring1 Spring
-      Move(63,0,90,32)
+      Move(63,0,90,36)
     }
     { btnExportarBIB Button
       Move(441,0,160,36)

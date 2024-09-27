@@ -14,6 +14,7 @@
     NoTabFocus = True
     { lbl Label
       Move(207,0,333,36)
+      Font = Font["Bold"]
       Expand = True
       Alignment = Align.Center
       Text = ("Se creará un directorio oculto (.respaldogbTeX) en el destino seleccionado")
@@ -23,26 +24,23 @@
     Move(9,63,800,36)
     NoTabFocus = True
     { Label1 Label
-      Move(9,0,153,40)
+      Move(9,0,162,36)
       NoTabFocus = True
-      AutoResize = True
       Alignment = Align.Right
-      Text = ("     Destino  ")
+      Text = ("Seleccionar destino  ")
+    }
+    { btnSeleccionarDir Button
+      Move(297,0,36,36)
+      NoTabFocus = True
+      Picture = Picture["iconos/search.svg"]
     }
     { txtDestino TextBox
-      Move(369,0,216,40)
+      Move(369,0,216,36)
       #Translate = False
-      Foreground = Color.Blue
+      Background = Color.Background
       NoTabFocus = True
       Expand = True
       ReadOnly = True
-      Placeholder = "Seleccione un destino"
-    }
-    { btnSeleccionarDir Button
-      Move(594,0,160,40)
-      NoTabFocus = True
-      Text = ("Seleccionar")
-      Picture = Picture["iconos/document-orange.svg"]
     }
   }
   { HBox7 HBox
@@ -51,13 +49,14 @@
       Move(135,0,117,36)
     }
     { btnListo Button
-      Move(351,0,160,40)
+      Move(351,0,160,36)
+      Visible = False
+      Background = &H8BE06F
       NoTabFocus = True
-      Text = ("Listo")
-      Picture = Picture["iconos/emblem-default.svg"]
+      Text = ("Confirmar")
     }
     { btnSalir Button
-      Move(558,0,160,40)
+      Move(558,0,160,36)
       Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White

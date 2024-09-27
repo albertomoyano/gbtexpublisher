@@ -11,93 +11,88 @@
   Margin = True
   Padding = 4
   { HBox1 HBox
-    Move(0,0,942,38)
-    Padding = 1
+    Move(0,0,942,36)
     { Label3 Label
-      Move(0,0,178,40)
+      Move(0,0,178,36)
       NoTabFocus = True
       Alignment = Align.Right
       Text = ("Archivo de tapa  ")
     }
+    { btnBuscarTapa Button
+      Move(243,0,36,36)
+      NoTabFocus = True
+      Picture = Picture["iconos/search.svg"]
+    }
     { txtTapa TextBox
-      Move(279,0,216,40)
+      Move(279,0,216,36)
       #Translate = False
       NoTabFocus = True
       Expand = True
       ReadOnly = True
     }
-    { btnBuscarTapa Button
-      Move(585,0,160,40)
-      NoTabFocus = True
-      Text = ("Buscar")
-      Picture = Picture["iconos/search.svg"]
-    }
   }
   { HBox2 HBox
-    Move(10,40,800,38)
+    Move(10,40,800,36)
     NoTabFocus = True
     Padding = 1
     { Label1 Label
-      Move(9,0,178,40)
+      Move(9,0,178,36)
       NoTabFocus = True
       Alignment = Align.Right
       Text = ("Archivo de interior  ")
     }
+    { btnBuscarInterior Button
+      Move(234,0,36,36)
+      NoTabFocus = True
+      Picture = Picture["iconos/search.svg"]
+    }
     { txtInterior TextBox
-      Move(279,0,216,40)
+      Move(279,0,216,36)
       #Translate = False
       NoTabFocus = True
       Expand = True
       ReadOnly = True
     }
-    { btnBuscarInterior Button
-      Move(594,0,160,40)
-      NoTabFocus = True
-      Text = ("Buscar")
-      Picture = Picture["iconos/search.svg"]
-    }
   }
   { HBox3 HBox
-    Move(0,80,800,38)
+    Move(0,80,800,36)
     NoTabFocus = True
     Padding = 1
     { Label2 Label
-      Move(0,0,178,40)
+      Move(0,0,178,36)
       NoTabFocus = True
       Alignment = Align.Right
       Text = ("Archivo de contratapa  ")
     }
+    { btnBuscarcontratapa Button
+      Move(243,0,36,36)
+      NoTabFocus = True
+      Picture = Picture["iconos/search.svg"]
+    }
     { txtContratapa TextBox
-      Move(288,0,216,40)
+      Move(288,0,216,36)
       NoTabFocus = True
       Expand = True
       ReadOnly = True
     }
-    { btnBuscarcontratapa Button
-      Move(603,0,160,40)
-      NoTabFocus = True
-      Text = ("Buscar")
-      Picture = Picture["iconos/search.svg"]
-    }
   }
   { HBox7 HBox
-    Move(0,120,942,38)
-    Padding = 1
+    Move(0,120,942,36)
     { lblMENSAJE Label
-      Move(0,0,144,40)
+      Move(0,0,144,36)
       Font = Font["Bold,Italic"]
       NoTabFocus = True
       Expand = True
       Alignment = Align.Center
     }
     { btnEnsamblar Button
-      Move(351,0,160,40)
+      Move(351,0,160,36)
       Background = &H8BE06F
       NoTabFocus = True
-      Text = ("Ensamblar")
+      Text = ("Compaginar")
     }
     { btnSalir Button
-      Move(558,0,160,40)
+      Move(558,0,160,36)
       Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White

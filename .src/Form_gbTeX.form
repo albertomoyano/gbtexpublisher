@@ -31,13 +31,13 @@
     ScrollBar = Scroll.Vertical
   }
   { HBox1 HBox
-    Move(20,500,567,40)
+    Move(20,500,567,36)
     Padding = 1
     { Spring1 Spring
-      Move(36,0,36,40)
+      Move(36,0,36,36)
     }
     { btnCerrar Button
-      Move(360,0,160,40)
+      Move(360,0,160,36)
       Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White

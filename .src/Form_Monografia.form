@@ -1,10 +1,14 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,1024,320)
+  Move(0,0,1026,414)
   #Scaled = False
+  Expand = True
   Resizable = False
   Arrangement = Arrange.Vertical
+  AutoResize = True
+  Spacing = True
+  Margin = True
   Padding = 4
   { HBox83 HBox
     Move(10,0,960,36)

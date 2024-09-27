@@ -3,9 +3,13 @@
 { Form Form
   Move(0,0,1024,740)
   #Scaled = False
+  Expand = True
   Text = ("Alta - Baja - Modificación de autores")
   Resizable = False
   Arrangement = Arrange.Vertical
+  AutoResize = True
+  Spacing = True
+  Margin = True
   Padding = 4
   { HBox83 HBox
     Move(10,0,960,36)
@@ -58,14 +62,14 @@
     }
   }
   { ScrollView9 ScrollView
-    Move(0,198,1010,530)
+    Move(0,207,1010,530)
     Expand = True
     Arrangement = Arrange.Vertical
+    Spacing = True
     Border = False
     ScrollBar = Scroll.Vertical
     { HBox1 HBox
-      Move(10,10,780,40)
-      Padding = 2
+      Move(10,10,780,36)
       { Label1 Label
         Move(30,0,200,36)
         Padding = 4
@@ -81,8 +85,7 @@
       }
     }
     { HBox187 HBox
-      Move(10,50,780,40)
-      Padding = 2
+      Move(10,50,780,36)
       { Label134 Label
         Move(30,0,200,36)
         Padding = 4
@@ -101,8 +104,7 @@
       }
     }
     { HBox173 HBox
-      Move(10,90,780,40)
-      Padding = 2
+      Move(10,90,780,36)
       { Label120 Label
         Move(30,0,200,36)
         Padding = 4
@@ -116,8 +118,7 @@
       }
     }
     { HBox174 HBox
-      Move(10,130,780,40)
-      Padding = 2
+      Move(10,130,780,36)
       { Label121 Label
         Move(30,0,200,36)
         Padding = 4
@@ -131,8 +132,7 @@
       }
     }
     { HBox7 HBox
-      Move(9,171,780,40)
-      Padding = 2
+      Move(9,171,780,36)
       { Label21 Label
         Move(30,0,200,36)
         Padding = 4
@@ -146,8 +146,7 @@
       }
     }
     { HBox175 HBox
-      Move(9,207,780,40)
-      Padding = 2
+      Move(9,207,780,36)
       { Label122 Label
         Move(30,0,200,36)
         Padding = 4
@@ -166,8 +165,7 @@
       }
     }
     { HBox176 HBox
-      Move(9,252,780,40)
-      Padding = 2
+      Move(9,252,780,36)
       { Label123 Label
         Move(30,0,200,36)
         Padding = 4
@@ -181,8 +179,7 @@
       }
     }
     { HBox177 HBox
-      Move(9,297,1000,40)
-      Padding = 2
+      Move(9,297,1000,36)
       { Label124 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -229,8 +226,7 @@
       }
     }
     { HBox2 HBox
-      Move(9,342,1000,40)
-      Padding = 2
+      Move(9,342,1000,36)
       { Label5 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -277,8 +273,7 @@
       }
     }
     { HBox3 HBox
-      Move(9,387,1000,40)
-      Padding = 2
+      Move(9,387,1000,36)
       { Label9 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -325,8 +320,7 @@
       }
     }
     { HBox4 HBox
-      Move(9,432,1000,40)
-      Padding = 2
+      Move(9,432,1000,36)
       { Label13 Label
         Move(-30,0,200,36)
         Padding = 4
@@ -373,8 +367,7 @@
       }
     }
     { HBox5 HBox
-      Move(9,477,1000,40)
-      Padding = 2
+      Move(9,477,1000,36)
       { Label17 Label
         Move(-30,0,200,36)
         Padding = 4

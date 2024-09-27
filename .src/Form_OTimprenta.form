@@ -7,7 +7,7 @@
   Arrangement = Arrange.Vertical
   Padding = 4
   { HBox6 HBox
-    Move(9,0,927,40)
+    Move(9,0,927,36)
     Padding = 2
     { txtIDot TextBox
       Move(9,0,90,36)
@@ -66,7 +66,7 @@
       Border = False
       ScrollBar = Scroll.Vertical
       { HBox15 HBox
-        Move(18,18,414,40)
+        Move(18,18,414,36)
         Padding = 2
         { Label14 Label
           Move(0,0,144,32)
@@ -81,7 +81,7 @@
         }
       }
       { HBox14 HBox
-        Move(18,63,414,40)
+        Move(18,63,414,36)
         Padding = 2
         { Label13 Label
           Move(0,0,144,32)
@@ -95,7 +95,7 @@
         }
       }
       { HBox13 HBox
-        Move(18,99,414,40)
+        Move(18,99,414,36)
         Padding = 2
         { Label12 Label
           Move(0,0,144,32)
@@ -109,7 +109,7 @@
         }
       }
       { HBox21 HBox
-        Move(18,144,414,40)
+        Move(18,144,414,36)
         Padding = 2
         { Label3 Label
           Move(0,0,144,32)
@@ -124,7 +124,7 @@
         }
       }
       { HBox2 HBox
-        Move(18,189,414,40)
+        Move(18,189,414,36)
         Padding = 2
         { Label1 Label
           Move(0,0,144,32)
@@ -139,7 +139,7 @@
         }
       }
       { HBox3 HBox
-        Move(18,225,414,40)
+        Move(18,225,414,36)
         Padding = 2
         { Label2 Label
           Move(0,0,144,32)
@@ -154,7 +154,7 @@
         }
       }
       { HBox4 HBox
-        Move(18,261,414,40)
+        Move(18,261,414,36)
         Padding = 2
         { Label4 Label
           Move(0,0,144,32)
@@ -169,7 +169,7 @@
         }
       }
       { HBox5 HBox
-        Move(18,306,414,40)
+        Move(18,306,414,36)
         Padding = 2
         { Label5 Label
           Move(0,0,144,32)
@@ -183,7 +183,7 @@
         }
       }
       { HBox7 HBox
-        Move(18,342,414,40)
+        Move(18,342,414,36)
         Padding = 2
         { Label6 Label
           Move(0,0,144,32)
@@ -197,7 +197,7 @@
         }
       }
       { HBox8 HBox
-        Move(18,387,414,40)
+        Move(18,387,414,36)
         Padding = 2
         { Label7 Label
           Move(0,0,144,32)
@@ -211,7 +211,7 @@
         }
       }
       { HBox9 HBox
-        Move(18,423,414,40)
+        Move(18,423,414,36)
         Padding = 2
         { Label8 Label
           Move(0,0,144,32)
@@ -225,7 +225,7 @@
         }
       }
       { HBox10 HBox
-        Move(18,468,414,40)
+        Move(18,468,414,36)
         Padding = 2
         { Label9 Label
           Move(0,0,144,32)
@@ -239,7 +239,7 @@
         }
       }
       { HBox11 HBox
-        Move(18,504,414,40)
+        Move(18,504,414,36)
         Padding = 2
         { Label10 Label
           Move(0,0,144,32)
@@ -275,7 +275,7 @@
     }
   }
   { HBox1 HBox
-    Move(18,702,927,40)
+    Move(18,702,927,36)
     Padding = 2
     { Spring1 Spring
       Move(387,0,162,36)
