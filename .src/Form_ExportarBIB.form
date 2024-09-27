@@ -83,8 +83,8 @@
     }
     { btnExportarBIB Button
       Move(441,0,160,36)
+      Background = &H8BE06F
       Text = ("Exportar")
-      Picture = Picture["iconos/exportar.svg"]
     }
     { btnCancelar Button
       Move(612,0,160,36)

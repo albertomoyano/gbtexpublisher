@@ -282,8 +282,8 @@
     }
     { btnGenerarPDF Button
       Move(747,0,160,36)
-      Text = ("Generar")
-      Picture = Picture["iconos/acroread.svg"]
+      Background = &H8BE06F
+      Text = ("Generar PDF")
     }
   }
 }

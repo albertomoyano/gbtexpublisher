@@ -44,9 +44,9 @@
     }
     { btnCerrar Button
       Move(81,0,198,36)
+      Background = &H8BE06F
       NoTabFocus = True
       Text = ("Acepto los términos")
-      Picture = Picture["iconos/comp.svg"]
     }
   }
 }

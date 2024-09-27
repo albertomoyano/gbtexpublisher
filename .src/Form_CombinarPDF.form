@@ -30,7 +30,7 @@
       Move(585,0,160,40)
       NoTabFocus = True
       Text = ("Buscar")
-      Picture = Picture["iconos/document-orange.svg"]
+      Picture = Picture["iconos/search.svg"]
     }
   }
   { HBox2 HBox
@@ -54,7 +54,7 @@
       Move(594,0,160,40)
       NoTabFocus = True
       Text = ("Buscar")
-      Picture = Picture["iconos/document-orange.svg"]
+      Picture = Picture["iconos/search.svg"]
     }
   }
   { HBox3 HBox
@@ -77,7 +77,7 @@
       Move(603,0,160,40)
       NoTabFocus = True
       Text = ("Buscar")
-      Picture = Picture["iconos/document-orange.svg"]
+      Picture = Picture["iconos/search.svg"]
     }
   }
   { HBox7 HBox
@@ -92,10 +92,9 @@
     }
     { btnEnsamblar Button
       Move(351,0,160,40)
-      Enabled = False
+      Background = &H8BE06F
       NoTabFocus = True
       Text = ("Ensamblar")
-      Picture = Picture["iconos/emblem-default.svg"]
     }
     { btnSalir Button
       Move(558,0,160,40)

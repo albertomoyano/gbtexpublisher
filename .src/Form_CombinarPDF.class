@@ -90,9 +90,9 @@ End
 Public Sub VerificarCampos()
 
   If txtTapa.Text <> "" And txtInterior.Text <> "" And txtContratapa.Text <> "" Then
-    btnEnsamblar.Enabled = True
+    btnEnsamblar.Visible = True
   Else
-    btnEnsamblar.Enabled = False
+    btnEnsamblar.Visible = False
   Endif
 
 End
