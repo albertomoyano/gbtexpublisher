@@ -6,6 +6,7 @@
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
+  Margin = True
   Padding = 4
   { HBox1 HBox
     Move(9,9,927,36)
@@ -79,7 +80,7 @@
   { HBox8 HBox
     Move(18,72,765,36)
     { !txId TextBox
-      Move(45,0,63,40)
+      Move(45,0,63,36)
       #Public = True
       Visible = False
       NoTabFocus = True
@@ -87,7 +88,7 @@
       ReadOnly = True
     }
     { !txFecha TextBox
-      Move(117,0,126,40)
+      Move(117,0,126,36)
       #Public = True
       Visible = False
       NoTabFocus = True
@@ -95,14 +96,14 @@
       ReadOnly = True
     }
     { Label7 Label
-      Move(387,0,63,40)
+      Move(387,0,63,36)
       NoTabFocus = True
       AutoResize = True
       Alignment = Align.Right
       Text = ("Asunto  ")
     }
     { !txAsunto TextBox
-      Move(450,0,63,40)
+      Move(450,0,63,36)
       #Public = True
       NoTabFocus = True
       Expand = True
@@ -112,7 +113,6 @@
     Move(18,135,765,207)
     { VLista TableView
       Move(0,0,153,153)
-      Font = Font["-1"]
       Expand = True
       Mode = Select.Single
       ShowCursor = True
