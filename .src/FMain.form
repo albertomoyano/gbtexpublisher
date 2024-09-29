@@ -486,6 +486,10 @@
       Expand = True
       ReadOnly = True
     }
+    { Separator12 Separator
+      MoveScaled(62,0,0.8889,4)
+      Foreground = Color.Transparent
+    }
     { MenuAppCompilar MenuButton
       MoveScaled(76,0,17.7778,4)
       Enabled = False
@@ -498,10 +502,14 @@
   { HBox9 HBox
     MoveScaled(1,8,87,4)
     { Button4 Button
-      MoveScaled(5,0,17.7778,4)
+      MoveScaled(0,0,17.7778,4)
       Enabled = False
       Text = ("Git local")
       Picture = Picture["iconos/document.svg"]
+    }
+    { Separator9 Separator
+      MoveScaled(20,0,0.8889,4)
+      Foreground = Color.Transparent
     }
     { btnMenuGIT MenuButton
       MoveScaled(24,0,17.7778,4)
@@ -511,13 +519,21 @@
       Menu = "menuGIT"
       MenuOnly = True
     }
+    { Separator11 Separator
+      MoveScaled(43,0,0.8889,4)
+      Foreground = Color.Transparent
+    }
     { txtGIT TextBox
-      MoveScaled(44,0,19,4)
+      MoveScaled(46,0,19,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
+    { Separator10 Separator
+      MoveScaled(66,0,0.8889,4)
+      Foreground = Color.Transparent
+    }
     { MenuApp MenuButton
-      MoveScaled(65,0,17.7778,4)
+      MoveScaled(68,0,17.7778,4)
       Enabled = False
       Text = ("Ver") & "..."
       Picture = Picture["iconos/bookmarks.svg"]
