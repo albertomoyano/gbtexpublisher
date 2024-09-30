@@ -51,22 +51,18 @@
     }
     { menuBUSCARgoogle Menu
       Text = ("Buscar con Google")
-      Picture = Picture["iconos/google_icon-icons.com_62798.png"]
     }
     { menuBUSCARduckduckgo Menu
       Text = ("Buscar con DuckDuckGo")
-      Picture = Picture["iconos/DuckDuckGo_icon-icons.com_67089.png"]
     }
     { menuBUSCARbing Menu
       Text = ("Buscar con Bing")
-      Picture = Picture["iconos/bing_icon-icons.com_62761.png"]
     }
     { menuWordReference Menu
       Text = ("Buscar definición en WordReference")
     }
     { menuBUSCARrae Menu
       Text = ("Buscar en la RAE")
-      Picture = Picture["iconos/logoRAE.png"]
     }
     { menuFUNDEU Menu
       Text = ("Buscar definición en FundéuRAE")
@@ -197,7 +193,6 @@
     }
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
-      Picture = Picture["iconos/chart-3.png"]
       Enabled = False
       Visible = False
     }
@@ -242,7 +237,6 @@
     }
     { menuDRAW Menu
       Text = ("Contador / Estadísticas del archivo")
-      Picture = Picture["iconos/draw.svg"]
       Enabled = False
     }
     { adminGIT Menu
@@ -303,7 +297,6 @@
     }
     { Menu27 Menu
       Text = ("Paquetes de LaTeX más utilizados")
-      Picture = Picture["iconos/TeX.svg"]
       { Menu33 Menu
         Text = ("babel")
       }
@@ -388,7 +381,6 @@
     }
     { Menu68 Menu
       Text = ("Acerca de gbTeXpublisher")
-      Picture = Picture["iconos/icono-gbtex.png"]
     }
     { Menu66 Menu
       Text = ("Acerca de Gambas")
@@ -435,12 +427,12 @@
       MoveScaled(59,0,8.8889,4)
       ToolTip = ("PDF de revista")
       Text = ("PDF")
-      Picture = Picture["iconos/pdf_revista.png"]
+      Picture = Picture["iconos/acroread.svg"]
     }
     { btnCOMPrevistaHTML Button
       MoveScaled(68,0,8.8889,4)
       Text = ("HTML")
-      Picture = Picture["iconos/Chrome.svg"]
+      Picture = Picture["iconos/web.svg"]
     }
     { btnGitHubPages Button
       MoveScaled(76.8889,0,8.8889,4)
@@ -662,7 +654,6 @@
       Border = True
       Index = 0
       Text = ("   Caja de texto temporal")
-      Picture = Picture["iconos/+nuevo.svg"]
       { txtTMPbiblio TextArea
         MoveScaled(1,1,36,13)
         Wrap = True
@@ -670,7 +661,6 @@
       }
       Index = 1
       Text = ("   Mostrar referencias bibliográficas")
-      Picture = Picture["iconos/bib.svg"]
       { VListaBIB TableView
         MoveScaled(1,1,44,12)
         Font = Font["-1"]
@@ -688,7 +678,7 @@
         MoveScaled(0,0,4,4)
         NoTabFocus = True
         ToolTip = ("Agregar una nueva referencia")
-        Picture = Picture["iconos/+pestana.svg"]
+        Picture = Picture["iconos/+nuevo.svg"]
       }
       { btnGuardar Button
         MoveScaled(4,0,4,4)
@@ -704,12 +694,12 @@
         MoveScaled(12,0,14.4444,4)
         ToolTip = ("Forzar guardar")
         Text = ("Forzar")
-        Picture = Picture["iconos/target_4887265.png"]
+        Picture = Picture["iconos/forzar.svg"]
       }
       { BtnRefrescarBib Button
         MoveScaled(27,0,4,4)
         ToolTip = ("Refrescar listado de la base de datos")
-        Picture = Picture["iconos/refrescar.png"]
+        Picture = Picture["iconos/refrescar.svg"]
       }
       { BtnEliminarBib Button
         MoveScaled(31,0,4,4)
@@ -2655,7 +2645,7 @@
         MoveScaled(0,0,4,4)
         NoTabFocus = True
         ToolTip = ("Agregar una nueva referencia")
-        Picture = Picture["iconos/+pestana.svg"]
+        Picture = Picture["iconos/+nuevo.svg"]
       }
       { BtnEliminarGlo Button
         MoveScaled(4,0,4,4)
@@ -2666,7 +2656,7 @@
       { BtnRefrescarGlo Button
         MoveScaled(8,0,4,4)
         ToolTip = ("Refrescar listado de la base de datos")
-        Picture = Picture["iconos/refrescar.png"]
+        Picture = Picture["iconos/refrescar.svg"]
       }
       { btnGuardarGlo Button
         MoveScaled(12,0,4,4)
@@ -2919,7 +2909,7 @@
         MoveScaled(0,0,4,4)
         NoTabFocus = True
         ToolTip = ("Agregar una nueva referencia")
-        Picture = Picture["iconos/+pestana.svg"]
+        Picture = Picture["iconos/+nuevo.svg"]
       }
       { btnGuardarMeta Button
         MoveScaled(4,0,4,4)
@@ -4709,7 +4699,7 @@
         MoveScaled(0,0,4,4)
         NoTabFocus = True
         ToolTip = ("Agregar una nueva referencia")
-        Picture = Picture["iconos/+pestana.svg"]
+        Picture = Picture["iconos/+nuevo.svg"]
       }
       { btnGuardarComenta Button
         MoveScaled(4,0,4,4)
@@ -4724,7 +4714,7 @@
       { btnFont Button
         MoveScaled(12,0,4,4)
         ToolTip = ("Guardar modificaciones")
-        Picture = Picture["iconos/application-x-font-ttf.svg"]
+        Picture = Picture["iconos/fonts.svg"]
       }
       { txtIdComenta TextBox
         MoveScaled(24,0,6,4)
