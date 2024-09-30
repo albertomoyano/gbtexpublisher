@@ -14,7 +14,7 @@
       Move(0,0,36,36)
       NoTabFocus = True
       ToolTip = ("Agregar entrada")
-      Picture = Picture["iconos/+pestana.svg"]
+      Picture = Picture["iconos/+nuevo.svg"]
     }
     { tbBorrar Button
       Move(36,0,36,36)
@@ -40,13 +40,13 @@
       Visible = False
       NoTabFocus = True
       ToolTip = ("Refrescar datos")
-      Picture = Picture["iconos/refrescar.png"]
+      Picture = Picture["iconos/refrescar.svg"]
     }
     { BtnExportarDOCX Button
       Move(180,0,36,36)
       NoTabFocus = True
       ToolTip = ("Exportar la nota como archivo de texto plano")
-      Picture = Picture["iconos/+nuevo.svg"]
+      Picture = Picture["iconos/ms-office.svg"]
     }
     { BtnExportarPDF Button
       Move(216,0,36,36)

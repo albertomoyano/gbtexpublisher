@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.1"
-   width="32"
-   height="32"
+   width="28"
+   height="28"
    color-interpolation="linearRGB"
    id="svg66"
    sodipodi:docname="clave.svg"
@@ -34,7 +34,7 @@
      inkscape:current-layer="svg66" />
   <g
      id="g64"
-     transform="matrix(0.49153975,0,0,0.49153975,-1.6399151,0.34993334)">
+     transform="matrix(0.42759905,0,0,0.42759905,-0.43082666,0.424421)">
     <radialGradient
        id="gradient0"
        gradientUnits="userSpaceOnUse"
