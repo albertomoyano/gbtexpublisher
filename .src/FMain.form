@@ -136,7 +136,6 @@
     }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
-      Picture = Picture["iconos/bookmarks.svg"]
     }
     { Menu10 Menu
     }
@@ -284,7 +283,6 @@
     Text = ("Ayuda")
     { Menu25 Menu
       Text = ("Ir al repositorio de la aplicación en GitHub")
-      Picture = Picture["iconos/bookmarks.svg"]
     }
     { Menu24 Menu
       Text = ("Contactar al desarrollador")
@@ -384,7 +382,7 @@
   }
   { HBox171 HBox
     MoveScaled(-3,0,134,4)
-    { Button2 Button
+    { btnAbrirLibro Button
       MoveScaled(2,0,14,4)
       Text = ("Libro")
       Picture = Picture["iconos/abrirBuscar.svg"]
@@ -413,7 +411,7 @@
     { Separator2 Separator
       MoveScaled(50,0,2.3333,4)
     }
-    { Button3 Button
+    { btnAbrirRevista Button
       MoveScaled(52,0,14,4)
       Text = ("Revista")
       Picture = Picture["iconos/abrirBuscar.svg"]
@@ -442,7 +440,7 @@
     { Separator3 Separator
       MoveScaled(99,0,2.3333,4)
     }
-    { BtnOpenMonografia Button
+    { btnAbrirMonografia Button
       MoveScaled(101,0,14,4)
       NoTabFocus = True
       Text = ("Monografía")

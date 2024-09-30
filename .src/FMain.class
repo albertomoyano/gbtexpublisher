@@ -6220,16 +6220,6 @@ Public Sub btnMONOpdf_Click()
 
 End
 
-Public Sub BtnOpenMonografia_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    Form_Monografia.ShowModal()
-  Endif
-
-End
-
 Public Sub btnMonoDocx_Click()'salida a odt y docx de monografia
 
   If TextBox1.Text = "" Then
@@ -6370,7 +6360,6 @@ Public Sub habilitamosLibro()
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False
   btnRevistaCompliarXML.Enabled = False
-  BtnOpenMonografia.Enabled = False
   btnMONOpdf.Enabled = False
   btnMonoDocx.Enabled = False
   HBox83.Visible = True
@@ -6391,7 +6380,6 @@ Public Sub habilitamosRevista()
   btnCOMPpdfRevista.Enabled = True
   btnCOMPrevistaHTML.Enabled = True
   btnRevistaCompliarXML.Enabled = True
-  BtnOpenMonografia.Enabled = False
   btnMONOpdf.Enabled = False
   btnMonoDocx.Enabled = False
   HBox83.Visible = True
@@ -6412,7 +6400,6 @@ Public Sub habilitamosMonografia()
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False
   btnRevistaCompliarXML.Enabled = False
-  BtnOpenMonografia.Enabled = True
   btnMONOpdf.Enabled = True
   btnMonoDocx.Enabled = True
   HBox83.Visible = False
@@ -7359,5 +7346,23 @@ Public Sub TabPanel1_Click()
 End
 
 Public Sub TabPanel2_Click()
+
+End
+
+Public Sub btnAbrirLibro_Click()
+
+  menuAbrir_Click()
+
+End
+
+Public Sub btnAbrirRevista_Click()
+
+  menuAbrirRevista_Click()
+
+End
+
+Public Sub btnAbrirMonografia_Click()
+
+  menuMono_Click()
 
 End
