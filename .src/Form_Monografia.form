@@ -16,7 +16,7 @@
       Move(0,0,36,36)
       NoTabFocus = True
       ToolTip = ("Agregar una nueva referencia")
-      Picture = Picture["iconos/+pestana.svg"]
+      Picture = Picture["iconos/+nuevo.svg"]
     }
     { btnGuardarMonografia Button
       Move(120,0,36,36)

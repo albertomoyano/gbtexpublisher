@@ -17,11 +17,12 @@
       Move(0,0,36,36)
       NoTabFocus = True
       ToolTip = ("Agregar una nueva referencia")
-      Picture = Picture["iconos/+pestana.svg"]
+      Picture = Picture["iconos/+nuevo.svg"]
     }
     { BtnRefrescarAutores Button
       Move(40,0,36,36)
       ToolTip = ("Refrescar listado de la base de datos")
+      Picture = Picture["iconos/refrescar.svg"]
     }
     { btnGuardarMeta Button
       Move(120,0,36,36)
