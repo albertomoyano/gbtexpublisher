@@ -792,6 +792,7 @@
       }
       { btnAgregarKeyBIB Button
         MoveScaled(53,0,4,4)
+        Enabled = False
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }

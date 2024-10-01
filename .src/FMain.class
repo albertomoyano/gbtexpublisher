@@ -2597,6 +2597,7 @@ Public Sub BtnNuevoBib_Click()
   btnGuardar.Enabled = True
   btnGuardarCambios.Enabled = False
   btnAgregarCitationKey.Enabled = True
+  btnAgregarKeyBIB.Enabled = True
   ToolPanel1.Index = 0
 
   txtTMPbiblio.Clear 'limpiamos el campo temporal
@@ -2635,6 +2636,7 @@ Public Sub btnGuardarCambios_Click()
   btnGuardarIGUAL.Enabled = False
   BtnEliminarBib.Enabled = False
   btnAgregarCitationKey.Enabled = False
+  btnAgregarKeyBIB.Enabled = False
 
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosBIB()
@@ -2695,6 +2697,7 @@ Public Sub btnGuardar_Click()
     BtnEliminarBib.Enabled = False
     btnAgregarCitationKey.Enabled = False
     btnGuardarIGUAL.Enabled = False
+    btnAgregarKeyBIB.Enabled = False
   Endif
 
 End
@@ -2861,6 +2864,7 @@ Public Sub BtnRefrescarBib_Click()'refrescamos la vista
   btnGuardarCambios.Enabled = False
   btnAgregarCitationKey.Enabled = False
   btnGuardarIGUAL.Enabled = False
+  btnAgregarKeyBIB.Enabled = False
 
   LimpiarCamposBIB() ' Limpiamos los campos
   VListaBIB.Clear
@@ -4520,6 +4524,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   BtnEliminarBib.Enabled = True
   btnAgregarCitationKey.Enabled = True
   btnGuardar.Enabled = False
+  btnAgregarKeyBIB.Enabled = True
 
   txtIDbibtex.Text = VListaBIB[Row, 0].Text
   cbTYPEentrada.Text = VListaBIB[Row, 1].Text
