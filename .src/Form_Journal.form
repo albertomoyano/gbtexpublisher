@@ -40,7 +40,6 @@
     }
     { btnCerrarColeccion Button
       Move(513,0,144,36)
-      Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White
       NoTabFocus = True

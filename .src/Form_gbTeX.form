@@ -14,7 +14,6 @@
     Padding = 4
     { PictureBox1 PictureBox
       Move(0,0,72,72)
-      Picture = Picture.Load("iconos/icono-gbtex.png")
       Stretch = True
       Alignment = Align.Center
       Mode = PictureBox.Fill
@@ -38,7 +37,6 @@
     }
     { btnCerrar Button
       Move(360,0,160,36)
-      Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White
       Text = ("Cerrar")

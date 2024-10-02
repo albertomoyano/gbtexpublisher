@@ -33,7 +33,6 @@
     }
     { btnCLOSEmonografia Button
       Move(760,0,160,36)
-      Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White
       NoTabFocus = True

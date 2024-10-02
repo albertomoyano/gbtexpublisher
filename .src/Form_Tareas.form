@@ -56,7 +56,6 @@
     }
     { btnCancelar Button
       MoveScaled(36,0,16,4)
-      Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White
       Text = ("Cerrar")

@@ -100,7 +100,6 @@
     }
     { btnSalir Button
       Move(594,0,160,36)
-      Font = Font["Bold"]
       Background = &HE00000
       Foreground = Color.White
       NoTabFocus = True
