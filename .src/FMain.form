@@ -77,6 +77,7 @@
     Visible = False
     { menuADD Menu
       Text = ("Agregar tarea")
+      Picture = Picture["iconos/+nuevo.svg"]
     }
     { menuBORRARtarea Menu
       Text = ("Borrar tarea")
@@ -283,6 +284,7 @@
     Text = ("Ayuda")
     { Menu25 Menu
       Text = ("Ir al repositorio de la aplicación en GitHub")
+      Picture = Picture["iconos/github.svg"]
     }
     { Menu24 Menu
       Text = ("Contactar al desarrollador")
