@@ -8,10 +8,6 @@ Adhiere al modelo de producción de fuente única [(_single source_)](https://en
 
 Para una explicación con mayores detalles sobre el uso de esta aplicación, sus módulos y el proceso de edición ramificada, visite el [blog de la aplicación](https://albertomoyano.github.io/gbtexpublisher/).
 
-# Instalación y manual de uso
-
-Esta información la puede obtener en la wiki del [gbTeXpublisher](https://github.com/albertomoyano/gbtexpublisher/wiki)
-
 # Licencia
 
 El código fuente de gbTeXpublisher está disponible gratuitamente bajo una licencia GPL 3.0. La licencia completa está disponible en línea en https://www.gnu.org/licenses/gpl-3.0.en.html
