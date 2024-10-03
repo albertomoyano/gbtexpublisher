@@ -21,7 +21,7 @@
     }
     { btnDestino Button
       Move(225,0,36,36)
-      Picture = Picture["iconos/search.svg"]
+      Picture = Picture["iconos/document.svg"]
     }
     { !txtdestino TextBox
       Move(279,0,144,36)
@@ -35,7 +35,6 @@
     Move(0,45,950,36)
     { Label1 Label
       Move(225,0,468,36)
-      Font = Font["Bold"]
       Expand = True
       Alignment = Align.Center
       Text = ("Asegurese de escribir correctamente el nombre del filtro de exportación")
