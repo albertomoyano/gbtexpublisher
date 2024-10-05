@@ -7,6 +7,8 @@
   Text = ("Acerca de gbTeXpublisher")
   Resizable = False
   Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
   Padding = 4
   { HBox2 HBox
     Move(0,0,450,72)
@@ -14,6 +16,7 @@
     Padding = 4
     { PictureBox1 PictureBox
       Move(0,0,72,72)
+      Picture = Picture.Load("iconos/info.svg")
       Stretch = True
       Alignment = Align.Center
       Mode = PictureBox.Fill

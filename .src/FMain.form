@@ -3,6 +3,7 @@
 { Form Form
   MoveScaled(0,0,130,390)
   Expand = True
+  Icon = Picture["iconos/icono-gbtex.svg"]
   Maximized = True
   Arrangement = Arrange.Vertical
   Spacing = True
@@ -200,7 +201,6 @@
     }
     { menuOT Menu
       Text = ("OT para imprenta")
-      Picture = Picture["iconos/imprenta.png"]
       Enabled = False
     }
     { menuScriptsExternos Menu
