@@ -54,8 +54,12 @@
       Background = &H8BE06F
       Text = ("Listo")
     }
+    { Separator1 Separator
+      MoveScaled(37,0,1,4)
+      Foreground = Color.Transparent
+    }
     { btnCancelar Button
-      MoveScaled(36,0,16,4)
+      MoveScaled(42,0,16,4)
       Background = &HE00000
       Foreground = Color.White
       Text = ("Cerrar")

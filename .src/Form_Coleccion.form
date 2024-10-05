@@ -114,10 +114,10 @@
     }
     { btnSeleccion Button
       Move(270,0,144,36)
-      Enabled = False
+      Visible = False
+      Background = &H8BE06F
       NoTabFocus = True
-      Text = ("Seleccionar")
-      Picture = Picture["iconos/emblem-default.svg"]
+      Text = ("Aplicar")
     }
   }
 }

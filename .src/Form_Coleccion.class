@@ -195,7 +195,7 @@ Public Sub GridColeccion_RowClick(Row As Integer)
   FilaSeleccionada = Row
 
   ' Ahora habilita el botón después de confirmar que hay una fila seleccionada.
-  btnSeleccion.Enabled = True
+  btnSeleccion.Visible = True
 
 End
 
