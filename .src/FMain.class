@@ -2659,6 +2659,21 @@ Public Sub btnGuardar_Click()
 
   eliminarBlancosBIB()
 
+  ' Variables para almacenar los datos de los TextBox
+  Dim booktitulo As String
+  Dim titulo As String
+  Dim maintitulo As String
+
+  ' Verificar y formatear los textos de los TextBox
+  titulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtTITLE.Text)
+  booktitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtBOOKTITLE.Text)
+  maintitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtMAINTITLE.Text)
+
+  ' Actualizar los TextBox por si quieres reflejar los cambios visualmente
+  txtBOOKTITLE.Text = booktitulo
+  txtTITLE.Text = titulo
+  txtMAINTITLE.Text = maintitulo
+
   ' Verificar si el campo txtAUTHOR contiene un punto y coma (;)
   If InStr(txtAUTHOR.Text, ";") > 0 Then
     Message.Error("El campo de autor no debe contener el carácter <strong>;</strong>. Por favor, revisa tu entrada.")
