@@ -276,6 +276,9 @@
     { menuComentarios Menu
       Text = ("Ver página de comentarios")
     }
+    { Menu3 Menu
+      Text = ("Ver archivo PDF para web")
+    }
     { menuVerOt Menu
       Text = ("Ver Orden de Taller")
     }

@@ -21,10 +21,10 @@
     { btnBuscarTapa Button
       Move(243,0,36,36)
       NoTabFocus = True
-      Picture = Picture["iconos/search.svg"]
+      Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { txtTapa TextBox
-      Move(279,0,216,36)
+      Move(288,0,216,36)
       #Translate = False
       Background = Color.Background
       NoTabFocus = True
@@ -45,7 +45,7 @@
     { btnBuscarInterior Button
       Move(234,0,36,36)
       NoTabFocus = True
-      Picture = Picture["iconos/search.svg"]
+      Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { txtInterior TextBox
       Move(279,0,216,36)
@@ -69,7 +69,7 @@
     { btnBuscarcontratapa Button
       Move(243,0,36,36)
       NoTabFocus = True
-      Picture = Picture["iconos/search.svg"]
+      Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { txtContratapa TextBox
       Move(288,0,216,36)
@@ -81,12 +81,8 @@
   }
   { HBox7 HBox
     Move(0,120,942,36)
-    { lblMENSAJE Label
-      Move(0,0,144,36)
-      Font = Font["Bold"]
-      NoTabFocus = True
-      Expand = True
-      Alignment = Align.Center
+    { Spring1 Spring
+      Move(81,0,162,36)
     }
     { btnEnsamblar Button
       Move(351,0,160,36)

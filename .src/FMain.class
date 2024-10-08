@@ -1082,6 +1082,20 @@ Public Sub menuVerOt_Click()'ver pdf página de comentarios
 
 End
 
+Public Sub menu3_Click()'ver pdf página para web
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/pdf/web-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>web-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
+
 Public Sub Menu78_Click()'exportar referencias bibligráficas
 
   Form_ExportarBIB.ShowModal()

@@ -105,18 +105,42 @@ End
 
 Public Sub btnEnsamblar_Click()
 
+  FMain.TabPanel1.Index = 0
+
+  Mod_Exportar.Exportar2MetadatosPDF(FMain.TextBox1.Text)
+  Wait 0.2
+
   Dim rutaTapa As String = File.RealPath(txtTapa.Text)
   Dim rutaInterior As String = File.RealPath(txtInterior.Text)
   Dim rutaContratapa As String = File.RealPath(txtContratapa.Text)
-  Dim completo As String = File.Dir(FMain.TextBox1.Text) & "/pdf/" & "web-" & File.Name(txtInterior.Text)
+  Dim inputMetadatos As String = File.Dir(FMain.TextBox1.Text) & "/files/" & "gbTeXmeta-" & File.Name(FMain.TextBox1.Text)
+  Dim outputFile As String = File.Dir(FMain.TextBox1.Text) & "/files/" & "web-" & File.Name(FMain.TextBox1.Text)
+  Dim s As String
 
-  ' Verifica si el archivo ya existe y lo elimina
-  If File.RealPath(completo) Then
-    FMain.TerminalView1.Input("rm -rf " & completo & "\n" & "pdfunite " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " " & completo & "\n")
-    Wait 0.1
-  Else
-    FMain.TerminalView1.Input("pdfunite " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " " & completo & "\n")
-    Wait 0.1
-  Endif
+  s &= "\\documentclass{article}" & "\n"
+  s &= "\\usepackage{hyperref}" & "\n"
+  s &= "\\usepackage{hyperxmp}" & "\n"
+  s &= "\\input{" & inputMetadatos & "}" & "\n"
+  s &= "\\usepackage{pdfpages}" & "\n"
+  s &= "\n"
+  s &= "\\begin{document}" & "\n"
+  s &= "\n"
+  s &= "\\includepdf[pages=-, fitpaper=True]{" & rutaTapa & "}" & "\n"
+  s &= "\\includepdf[pages=-, fitpaper=True]{" & rutaInterior & "}" & "\n"
+  s &= "\\includepdf[pages=-, fitpaper=True]{" & rutaContratapa & "}" & "\n"
+  s &= "\n"
+  s &= "\\end{document}" & "\n"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+  FMain.TerminalView1.Input("lualatex -interaction=nonstopmode " & outputFile & "\n")
+  FMain.TerminalView1.Input("lualatex -interaction=nonstopmode " & outputFile & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n" & "clear" & "\n")
+  Wait 0.2
+
+  Mod_Funciones.Borrar_Aux
 
 End
