@@ -96,6 +96,10 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
     Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
   End If
 
+  If Not Exist(File.Dir(rutaTexto) & "/media/desconocido.png") Then
+    Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
+  End If
+
 End
 
 Public Sub ManagePdfFolder(rutaTexto As String)
@@ -840,22 +844,16 @@ End
 
 Public Sub VerificarPorcentajeEnTexto(TextoOriginal As String) As String
 
-  Dim i As Integer
-  Dim nuevoTexto As String = ""
+  Dim nuevoTexto As String
 
-  ' Recorremos el texto carácter por carácter
-  For i = 1 To Len(TextoOriginal)
-    ' Si el carácter actual es % y no está precedido por una barra invertida \
-    If Mid(TextoOriginal, i, 1) = "%" Then
-      If i = 1 Or Mid(TextoOriginal, i - 1, 1) <> "\\" Then
-        nuevoTexto &= "\\" ' Adicionar la barra invertida antes del %"
-      End If
-    End If
-    ' Agregar el carácter actual al nuevo texto
-    nuevoTexto &= Mid(TextoOriginal, i, 1)
-  Next
+  nuevoTexto = TextoOriginal
 
-  ' Devolver el nuevo texto modificado
+  ' hacemos reemplazos de seguridad
+  nuevoTexto = Replace(nuevoTexto, "%", "\\%")
+  nuevoTexto = Replace(nuevoTexto, "´", "'")
+  nuevoTexto = Replace(nuevoTexto, "’", "'")
+
+  ' Devolvemos el texto modificado
   Return nuevoTexto
 
 End
