@@ -3115,6 +3115,7 @@
           Padding = 2
           { btnAbrirPNG Button
             MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/abrirBuscar.svg"]
           }
           { Label96 Label
             MoveScaled(5,0,19,4)
