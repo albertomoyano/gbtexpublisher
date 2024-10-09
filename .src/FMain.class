@@ -5542,7 +5542,12 @@ End
 
 Public Sub menuMIN_Click()' Convierte el texto del TextBox capturado a minúscula
 
-  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  If sTB_Text <> "" Then
+    ' Eliminar espacios al inicio
+    LastTextBox.Text = Trim(LastTextBox.Text)
+
+    LastTextBox.Text = String.LCase(LastTextBox.Text)
+  End If
 
 End
 
@@ -5555,8 +5560,12 @@ End
 
 Public Sub menuMAY_Click()' Convierte el texto del TextBox capturado a mayúsculas
 
-  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
-  LastTextBox.Text = String.UCase(LastTextBox.Text)
+  If sTB_Text <> "" Then
+    ' Eliminar espacios al inicio
+    LastTextBox.Text = Trim(LastTextBox.Text)
+    ' Convertir todo a mayúsculas
+    LastTextBox.Text = String.UCase(LastTextBox.Text)
+  End If
 
 End
 
