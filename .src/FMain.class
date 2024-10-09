@@ -2612,6 +2612,7 @@ Public Sub BtnNuevoBib_Click()
   btnGuardarCambios.Enabled = False
   btnAgregarCitationKey.Enabled = True
   btnAgregarKeyBIB.Enabled = True
+  txtTMPbiblio.Enabled = True
   ToolPanel1.Index = 0
 
   txtTMPbiblio.Clear 'limpiamos el campo temporal
@@ -2651,6 +2652,7 @@ Public Sub btnGuardarCambios_Click()
   BtnEliminarBib.Enabled = False
   btnAgregarCitationKey.Enabled = False
   btnAgregarKeyBIB.Enabled = False
+  txtTMPbiblio.Enabled = False
 
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosBIB()
@@ -2727,6 +2729,7 @@ Public Sub btnGuardar_Click()
     btnAgregarCitationKey.Enabled = False
     btnGuardarIGUAL.Enabled = False
     btnAgregarKeyBIB.Enabled = False
+    txtTMPbiblio.Enabled = False
   Endif
 
 End

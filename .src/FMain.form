@@ -605,12 +605,16 @@
           Expand = True
           Arrangement = Arrange.Vertical
           { HBox182 HBox
-            MoveScaled(2,1,34,4)
+            MoveScaled(2,1,51,4)
             { MenuButton2 MenuButton
               MoveScaled(1,0,23,4)
+              Expand = True
               Text = ("Procesar archivos")
               Picture = Picture["iconos/conversor.svg"]
               MenuOnly = True
+            }
+            { Spring5 Spring
+              MoveScaled(36,0,12,4)
             }
           }
           { DirViewRuta DirChooser
@@ -650,6 +654,7 @@
       Text = ("   Caja de texto temporal")
       { txtTMPbiblio TextArea
         MoveScaled(1,1,36,13)
+        Enabled = False
         Wrap = True
         ScrollBar = Scroll.Vertical
       }
@@ -1625,10 +1630,16 @@
           { cbPUBSTATE ComboBox
             MoveScaled(16,0,18,3.5556)
             NoTabFocus = True
+            Expand = True
             ReadOnly = True
           }
-          { Spring5 Spring
-            MoveScaled(76,0,17,4)
+          { Label120 Label
+            MoveScaled(57,0,15,3.5556)
+            Alignment = Align.Right
+            Text = (" ")
+          }
+          { Spring7 Spring
+            MoveScaled(80,0,17,4)
           }
         }
         { HBox47 HBox
@@ -1682,7 +1693,7 @@
         { HBox50 HBox
           MoveScaled(0,26,88,4)
           { lblHyphenation Label
-            MoveScaled(3,0,16,3.5556)
+            MoveScaled(1,0,16,3.5556)
             #Translate = False
             Font = Font["Bold"]
             Foreground = &HFF0000
@@ -1690,18 +1701,18 @@
             Text = "Hyphenation "
           }
           { cbLANGUAGE ComboBox
-            MoveScaled(22,0,24,3.5556)
+            MoveScaled(18,0,18,4)
             NoTabFocus = True
             Expand = True
             ReadOnly = True
           }
           { lblPAGETOTAL3 Label
-            MoveScaled(51,0,15,4)
+            MoveScaled(58,0,15,4)
             Alignment = Align.Right
             Text = ("BookPagination ")
           }
           { txtBookPagination TextBox
-            MoveScaled(67,0,12,4)
+            MoveScaled(74,0,12,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
           }
@@ -1715,20 +1726,20 @@
             Text = "LangId "
           }
           { cbLANGUAGEID ComboBox
-            MoveScaled(18,0,24,3.5556)
+            MoveScaled(18,0,18,4)
             NoTabFocus = True
             Expand = True
             ReadOnly = True
           }
           { lblRELATEDSTRING6 Label
-            MoveScaled(48,0,15,4)
+            MoveScaled(56,0,15,4)
             #Translate = False
             Alignment = Align.Right
             Text = "LangIdOpts "
           }
           { txtLANGIDOPTS TextBox AllTextBoxes
             Name = "txtLANGIDOPTS"
-            MoveScaled(64,0,21,4)
+            MoveScaled(72,0,14,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Placeholder = ("polyglossia options for langid")
@@ -1953,6 +1964,7 @@
           }
           { cbType ComboBox
             MoveScaled(20,0,24,3.5556)
+            Expand = True
             ReadOnly = True
           }
           { txtTYPE TextBox
