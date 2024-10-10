@@ -4115,17 +4115,19 @@ Public Sub btnAgregarCitationKey_Click()
   textoOrigen = Replace(textoOrigen, "ḃ", "B")
   textoOrigen = Replace(textoOrigen, "ḟ", "F")
 
-  ' Convierte el texto a mayúsculas
-  textoOrigen = UCase(textoOrigen)
-
   ' Elimina espacios al principio y al final
   textoOrigen = Trim(textoOrigen)
+
+  ' Convierte el texto a mayúsculas
+  textoOrigen = UCase(textoOrigen)
 
   ' Agregar el texto al final del TextBox de destino sin borrar su contenido actual
   txtCLAVEbib.Text = Header & textoOrigen
 
   ' Obtén el texto del tercer TextBox
   cadenaTercerTextBox = txtYEAR.Text
+  cadenaTercerTextBox = Replace(cadenaTercerTextBox, "/", "")
+  cadenaTercerTextBox = UCase(cadenaTercerTextBox)
 
   ' Verifica si el tercer TextBox está vacío
   If Trim(cadenaTercerTextBox) = "" Then
