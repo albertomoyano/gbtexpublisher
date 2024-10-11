@@ -4133,6 +4133,8 @@ Public Sub btnAgregarCitationKey_Click()
   If Trim(cadenaTercerTextBox) = "" Then
     ' Si el tercer TextBox está vacío, obtén el texto del cuarto TextBox
     cadenaCuartoTextBox = txtDATEY.Text
+    cadenaCuartoTextBox = Replace(cadenaCuartoTextBox, "/", "")
+    cadenaCuartoTextBox = UCase(cadenaCuartoTextBox)
 
     ' Verifica si el cuarto TextBox también está vacío
     If Trim(cadenaCuartoTextBox) = "" Then
@@ -4144,7 +4146,7 @@ Public Sub btnAgregarCitationKey_Click()
     End If
   Else
     ' Si el tercer TextBox no está vacío, toma los primeros 4 caracteres
-    txtCLAVEbib.Text = txtCLAVEbib.Text & Left(cadenaTercerTextBox, 4)
+    txtCLAVEbib.Text = txtCLAVEbib.Text & cadenaTercerTextBox '& Left(cadenaTercerTextBox, 4)
   End If
 
 End
