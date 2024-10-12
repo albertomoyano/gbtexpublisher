@@ -5,9 +5,9 @@ Public Contenido As Result
 Public ContenidoAutor As Result
 Public ContenidoMeta As Result
 Public ResultadoMeta As Result
-Private Name As String = File.Name(FMain.TextBox1.Text)
-Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
-Private rutaApp As String = User.Home &/ ".gbtexpublisher"
+' Private Name As String = File.Name(FMain.TextBox1.Text)
+' Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
+' Private rutaApp As String = User.Home &/ ".gbtexpublisher"
 
 Public Sub ExportarDOCX() ' Función para exportar el archivo a DOCX las notas
 
