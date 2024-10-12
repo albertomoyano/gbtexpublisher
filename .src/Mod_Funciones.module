@@ -1,39 +1,5 @@
 ' Gambas module file
 
-Public Sub CopiarArchivosRevista(rutaTexto As String)
-
-  If Not Exist(File.Dir(rutaTexto) & "/media") Then
-    Mkdir File.Dir(rutaTexto) & "/media"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/config") Then
-    Mkdir File.Dir(rutaTexto) & "/config"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/art01") Then
-    Mkdir File.Dir(rutaTexto) & "/art01"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/tapa") Then
-    Mkdir File.Dir(rutaTexto) & "/tapa"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/readme.md") Then
-    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/LICENSE") Then
-    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
-  End If
-  'copiamos los archivos de preámbulo de revista
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/revista-pdf.tex") Then
-  '   Copy "./revista-pdf.tex" To File.Dir(rutaTexto) & "/files/revista-pdf.tex"
-  ' End If
-  'copiamos los archivos de preámbulo de revista
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/revista-xml.tex") Then
-  '   Copy "./revista-xml.tex" To File.Dir(rutaTexto) & "/files/revista-xml.tex"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/gbTeXcls.cls") Then
-  '   Copy "./gbTeXcls.cls" To File.Dir(rutaTexto) & "/files/gbTeXcls.cls"
-  ' End If
-
-End
-
 Public Sub CopiarArchivos(rutaTexto As String)'libros
 
   If Not Exist(File.Dir(rutaTexto) & "/files") Then
@@ -99,6 +65,40 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not Exist(File.Dir(rutaTexto) & "/media/desconocido.png") Then
     Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
   End If
+
+End
+
+Public Sub CopiarArchivosRevista(rutaTexto As String)
+
+  If Not Exist(File.Dir(rutaTexto) & "/media") Then
+    Mkdir File.Dir(rutaTexto) & "/media"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/config") Then
+    Mkdir File.Dir(rutaTexto) & "/config"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/art01") Then
+    Mkdir File.Dir(rutaTexto) & "/art01"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/tapa") Then
+    Mkdir File.Dir(rutaTexto) & "/tapa"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/readme.md") Then
+    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/LICENSE") Then
+    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
+  End If
+  'copiamos los archivos de preámbulo de revista
+  ' If Not Exist(File.Dir(rutaTexto) & "/files/revista-pdf.tex") Then
+  '   Copy "./revista-pdf.tex" To File.Dir(rutaTexto) & "/files/revista-pdf.tex"
+  ' End If
+  'copiamos los archivos de preámbulo de revista
+  ' If Not Exist(File.Dir(rutaTexto) & "/files/revista-xml.tex") Then
+  '   Copy "./revista-xml.tex" To File.Dir(rutaTexto) & "/files/revista-xml.tex"
+  ' End If
+  ' If Not Exist(File.Dir(rutaTexto) & "/files/gbTeXcls.cls") Then
+  '   Copy "./gbTeXcls.cls" To File.Dir(rutaTexto) & "/files/gbTeXcls.cls"
+  ' End If
 
 End
 
@@ -642,11 +642,6 @@ Public Function validarArchivos()
     Mkdir rutaAppR
   End If
 
-  ' aseguramos que exista el archivo de cabecera para monografias
-  If Not Exist(rutaApp &/ "monografia-pdf.tex") Then
-    Copy "./monografia-pdf.tex" To rutaApp &/ "monografia-pdf.tex"
-  End If
-
   If Not Exist(rutaApp &/ "db_tex.sqlite") Then
     Copy "./db_tex.sqlite" To rutaApp &/ "db_tex.sqlite"
   End If
@@ -740,21 +735,6 @@ Public Sub RevisarArchivo()'nos reaseguramos de que el archivo de la base de dat
   End If
 
 End
-
-Public Sub ManagePdfFolderMonografia(rutaTexto As String)
-
-  Dim pdfPath As String = File.Dir(rutaTexto) & "/pdf/"
-
-  ' Verifica si la carpeta existe
-  If Not Exist(pdfPath) Then
-    ' Si no existe, crea la carpeta
-    Mkdir pdfPath
-  Else
-    ' Si existe, borra los archivos con extensión .pdf
-    Shell "rm -rf " & pdfPath & File.BaseName(rutaTexto) & ".pdf" Wait
-  End If
-
-End Sub
 
 Public Sub Borrar_Aux()
 

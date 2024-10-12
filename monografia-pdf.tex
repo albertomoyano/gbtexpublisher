@@ -18,8 +18,21 @@ footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}
 % Configuración de idiomas y opciones de Babel: permite utilizar múltiples idiomas en el documento.
 \usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
 
-% Estilo bibliográfico IEEE
+% Estilo bibliográfico APA
 \usepackage[style=ieee]{biblatex}
+
+%% Estilo bibliográfico IEEE
+%\usepackage[style=ieee]{biblatex}
+%
+%% Estilo bibliográfico Vancouver
+%\usepackage[style=ieee]{biblatex}
+%
+%% Estilo bibliográfico Oxford (nota a pie)
+%\usepackage[style=ieee]{biblatex}
+%
+%% Estilo bibliográfico Verona (autor/año)
+%\usepackage[style=ieee]{biblatex}
+
 \defcounter{biburlnumpenalty}{3000}
 \defcounter{biburlucpenalty}{6000}
 \defcounter{biburllcpenalty}{9000}
@@ -126,14 +139,14 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
     \sethead[][][]{
                   \begin{minipage}[b]{.2\textwidth}
                   \raggedright
-                  \includegraphics[height=20mm]{./media/logo-unlp-ingenieria.jpg}
+                  \includegraphics[height=20mm]{\logo}
                   \end{minipage}
                   }{}{
                      \begin{minipage}[b]{.8\textwidth+\marginparsep+\marginparwidth}
                      \raggedleft
-                     \textsc{alejandro arias}\\
-                     \textsc{cálculo de tensores}\\
-                    \textsc{02/09/2024}
+                     \textsc{\MakeLowercase\autor}\\
+                     \textsc{\MakeLowercase\materia}\\
+                    \textsc{\fecha}
                     \end{minipage}
                     }
     \setfoot[pág.~\textbf{\usepage} de \pageref{LastPage}]
@@ -225,4 +238,4 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 % Hipervínculos y referencias: permite enlaces y referencias dentro del documento.
 \usepackage[allcolors=blue,colorlinks,unicode]{hyperref}
 
-%% Fin del preámbulo
+
