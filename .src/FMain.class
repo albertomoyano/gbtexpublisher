@@ -5544,12 +5544,19 @@ Public Sub menuFUNDEU_Click()
 
 End
 
+Public Sub menuGlifos_Click()' Corregir glifos
+
+  If sTB_Text <> "" Then
+    LastTextBox.Text = Replace(LastTextBox.Text, "’", "'")
+    LastTextBox.Text = Replace(LastTextBox.Text, "´", "'")
+  End If
+
+End
+
 Public Sub menuMIN_Click()' Convierte el texto del TextBox capturado a minúscula
 
   If sTB_Text <> "" Then
-    ' Eliminar espacios al inicio
     LastTextBox.Text = Trim(LastTextBox.Text)
-
     LastTextBox.Text = String.LCase(LastTextBox.Text)
   End If
 
@@ -5557,17 +5564,17 @@ End
 
 Public Sub menuMAYinicialESPANOL_Click()
 
-  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
-  AplicarMayusculasALetras(LastTextBox)
+  If sTB_Text <> "" Then
+    LastTextBox.Text = String.LCase(LastTextBox.Text)
+    AplicarMayusculasALetras(LastTextBox)
+  End If
 
 End
 
 Public Sub menuMAY_Click()' Convierte el texto del TextBox capturado a mayúsculas
 
   If sTB_Text <> "" Then
-    ' Eliminar espacios al inicio
     LastTextBox.Text = Trim(LastTextBox.Text)
-    ' Convertir todo a mayúsculas
     LastTextBox.Text = String.UCase(LastTextBox.Text)
   End If
 

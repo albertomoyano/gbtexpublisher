@@ -29,6 +29,9 @@
   { menuTEXTBOX Menu
     Text = ("menuContextual")
     Visible = False
+    { menuGlifos Menu
+      Text = ("Normalizar glifos")
+    }
     { menuMIN Menu
       Text = ("Convertir todo a minúsculas")
     }
