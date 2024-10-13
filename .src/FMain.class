@@ -23,8 +23,19 @@ Public BaseName As String
 Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
 Public sTB_Text As String
 Public LastTextBox As TextBox
+Public horas As Integer
+Public minutos As Integer
+Public segundos As Integer
 
 Public Sub Form_Open()
+
+  ' Inicializamos los contadores de minutos y segundos
+  horas = 0
+  minutos = 0
+  segundos = 0
+  ' Configuramos el Timer para que se ejecute cada segundo (1000 milisegundos)
+  Timer1.Delay = 1000
+  Timer1.Stop  ' No iniciamos el Timer de inmediato
 
   ' Cargar la ruta guardada al abrir el formulario
   Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
@@ -723,6 +734,8 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuCatalogo.Enabled = True
   menuORTOGRAFIA.Enabled = True
   menuDisclaimer.Enabled = True
+  TabPanel1[3].Visible = True
+  TabPanel1[4].Visible = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -884,7 +897,6 @@ Public Sub mnuLast_Click()
     TextBox1.Text = MS.Matrix[iIndex]
     fFile = Open TextBox1.Text For Input
     DirViewRuta.Root = File.Dir(TextBox1.Text)
-    ' Consultar el tipo de documento asociado al archivo
   Endif
 
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
@@ -5780,6 +5792,8 @@ Public Sub menuAbrirRevista_Click()
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuORTOGRAFIA.Enabled = True
+  TabPanel1[3].Visible = True
+  TabPanel1[4].Visible = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -6334,6 +6348,12 @@ Public Sub habilitamosLibro()
   HBox85.Visible = True
   TabStripMetaLibro.Visible = True
   TabPanel3.Visible = False
+  TabPanel1[3].Visible = True
+  TabPanel1[4].Visible = True
+  menuPDFweb.Visible = True
+  menuOT.Visible = True
+  ' Inicia el Timer al hacer clic en el botón
+  reinicamosTiempo
 
 End
 
@@ -6354,6 +6374,12 @@ Public Sub habilitamosRevista()
   HBox85.Visible = True
   TabStripMetaLibro.Visible = False
   TabPanel3.Visible = True
+  TabPanel1[3].Visible = True
+  TabPanel1[4].Visible = True
+  menuPDFweb.Visible = True
+  menuOT.Visible = True
+  ' Inicia el Timer al hacer clic en el botón
+  reinicamosTiempo
 
 End
 
@@ -6370,10 +6396,12 @@ Public Sub habilitamosMonografia()
   btnRevistaCompliarXML.Enabled = False
   btnMONOpdf.Enabled = True
   btnMonoDocx.Enabled = True
-  HBox83.Visible = False
-  HBox85.Visible = False
-  TabStripMetaLibro.Visible = False
-  TabPanel3.Visible = False
+  TabPanel1[3].Visible = False
+  TabPanel1[4].Visible = False
+  menuPDFweb.Visible = False
+  menuOT.Visible = False
+  ' Inicia el Timer al hacer clic en el botón
+  reinicamosTiempo
 
 End
 
@@ -7332,5 +7360,53 @@ End
 Public Sub btnAbrirMonografia_Click()
 
   menuMono_Click()
+
+End
+
+' Evento que se ejecuta cada segundo
+Public Sub Timer1_Timer()
+
+  ' Incrementamos los segundos
+  segundos += 1
+
+  ' Si los segundos llegan a 60, incrementamos los minutos y reiniciamos los segundos
+  If segundos = 60 Then
+    segundos = 0
+    minutos += 1
+  Endif
+
+  ' Si los minutos llegan a 60, incrementamos las horas y reiniciamos los minutos
+  If minutos = 60 Then
+    minutos = 0
+    horas += 1
+  Endif
+
+  ' Actualizamos el display del tiempo
+  ActualizarDisplay
+
+End
+' Función para actualizar el display del botón
+
+Public Sub ActualizarDisplay()
+
+  ' Formateamos horas, minutos y segundos en "hh:mm:ss"
+  ' txtTiempo.Caption = horas & ":" & minutos & ":" & segundos
+  txtTiempo.Caption = Right$("0" & horas, 2) & ":" & Right$("0" & minutos, 2) & ":" & Right$("0" & segundos, 2)
+
+End
+
+Public Sub reinicamosTiempo()
+
+  ' Reiniciamos el conteo de horas, minutos y segundos
+  horas = 0
+  minutos = 0
+  segundos = 0
+
+  ' Detenemos el Timer si está corriendo, luego lo reiniciamos
+  Timer1.Stop
+  Timer1.Start
+
+  ' Actualizamos el display para reflejar el reinicio
+  ActualizarDisplay
 
 End
