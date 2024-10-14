@@ -6,6 +6,7 @@
   Text = ("OT para imprenta")
   Resizable = False
   Arrangement = Arrange.Vertical
+  Spacing = True
   Margin = True
   Padding = 4
   { HBox6 HBox
@@ -60,14 +61,16 @@
       Mode = PictureBox.Contain
     }
     { ScrollView2 ScrollView
-      Move(243,0,738,639)
+      Move(225,18,738,639)
       Expand = True
       Arrangement = Arrange.Vertical
+      Spacing = True
+      Margin = True
+      Padding = 4
       Border = False
       ScrollBar = Scroll.Vertical
       { HBox15 HBox
         Move(18,18,414,36)
-        Padding = 2
         { Label14 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -82,7 +85,6 @@
       }
       { HBox14 HBox
         Move(18,63,414,36)
-        Padding = 2
         { Label13 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -96,7 +98,6 @@
       }
       { HBox13 HBox
         Move(18,99,414,36)
-        Padding = 2
         { Label12 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -110,7 +111,6 @@
       }
       { HBox21 HBox
         Move(18,144,414,36)
-        Padding = 2
         { Label3 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -125,7 +125,6 @@
       }
       { HBox2 HBox
         Move(18,189,414,36)
-        Padding = 2
         { Label1 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -140,7 +139,6 @@
       }
       { HBox3 HBox
         Move(18,225,414,36)
-        Padding = 2
         { Label2 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -155,7 +153,6 @@
       }
       { HBox4 HBox
         Move(18,261,414,36)
-        Padding = 2
         { Label4 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -170,7 +167,6 @@
       }
       { HBox5 HBox
         Move(18,306,414,36)
-        Padding = 2
         { Label5 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -184,7 +180,6 @@
       }
       { HBox7 HBox
         Move(18,342,414,36)
-        Padding = 2
         { Label6 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -198,7 +193,6 @@
       }
       { HBox8 HBox
         Move(18,387,414,36)
-        Padding = 2
         { Label7 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -212,7 +206,6 @@
       }
       { HBox9 HBox
         Move(18,423,414,36)
-        Padding = 2
         { Label8 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -226,7 +219,6 @@
       }
       { HBox10 HBox
         Move(18,468,414,36)
-        Padding = 2
         { Label9 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -240,7 +232,6 @@
       }
       { HBox11 HBox
         Move(18,504,414,36)
-        Padding = 2
         { Label10 Label
           Move(0,0,144,32)
           Alignment = Align.Right
@@ -255,7 +246,6 @@
       { HBox12 HBox
         Move(18,540,414,81)
         Expand = True
-        Padding = 1
         { Label11 Label
           Move(0,0,144,32)
           Alignment = Align.TopRight
@@ -265,7 +255,7 @@
           Move(162,9,162,63)
           Expand = True
           Arrangement = Arrange.Fill
-          Border = Border.Etched
+          Border = Border.Sunken
           { txtNotasOT TextArea
             Move(9,9,117,45)
             Expand = True
