@@ -31,7 +31,7 @@
       Move(640,0,36,40)
     }
     { btnCerrar ToolButton
-      Move(700,0,160,40)
+      Move(700,0,160,36)
       Background = &HE00000
       Foreground = Color.White
       NoTabFocus = True
@@ -69,14 +69,43 @@
   }
   { HBox2 HBox
     Move(0,486,927,36)
-    { txtBuscar2 TextBox
-      Move(252,0,290,40)
+    { txtTiempo Label
+      Move(0,0,99,36)
+      AutoResize = True
+      Text = ("Presupuesto  ")
     }
-  }
-  { HBox3 HBox
-    Move(0,522,927,36)
-    { txtBuscar3 TextBox
-      Move(252,0,290,40)
+    { txtBuscar2 ValueBox
+      Move(99,0,171,36)
+    }
+    { txtTiempo2 Label
+      Move(270,0,99,36)
+      AutoResize = True
+      Text = ("  Páginas  ")
+    }
+    { txtBuscar4 ValueBox
+      Move(369,0,72,36)
+      Background = Color.Background
+      ReadOnly = True
+    }
+    { txtTiempo3 Label
+      Move(441,0,99,36)
+      AutoResize = True
+      Text = ("  Coeficiente  ")
+    }
+    { txtBuscar5 ValueBox
+      Move(540,0,72,36)
+      Font = Font["Bold"]
+      Background = Color.Background
+      ReadOnly = True
+    }
+    { Spring2 Spring
+      Move(675,0,54,36)
+    }
+    { Button1 Button
+      Move(756,0,160,36)
+      Background = &H8BE06F
+      Text = ("Refrescar")
+      Picture = Picture["iconos/renta.svg"]
     }
   }
 }
