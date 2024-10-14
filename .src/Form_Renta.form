@@ -4,6 +4,79 @@
   Move(0,0,960,640)
   #Scaled = False
   Text = ("Rentabilizar tiempo de trabajo")
+  Icon = Picture["iconos/renta.svg"]
   Resizable = False
   Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox1 HBox
+    Move(0,0,927,36)
+    { btnGuardarMod Button
+      Move(108,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar cambios")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { txtBuscar TextBox
+      Move(252,0,290,40)
+    }
+    { BtnBuscar Button
+      Move(590,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Buscar en toda la base de datos")
+      Picture = Picture["iconos/search.svg"]
+    }
+    { Spring1 Spring
+      Move(640,0,36,40)
+    }
+    { btnCerrar ToolButton
+      Move(700,0,160,40)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la ventana")
+      Text = ("Cerrar")
+      Border = True
+    }
+  }
+  { HBox4 HBox
+    Move(0,36,927,450)
+    Expand = True
+    { Splitter1 Splitter
+      Move(9,9,612,423)
+      Expand = True
+      Border = False
+      { gridRentaArchivo TableView
+        Move(0,0,153,153)
+        Expand = True
+        Mode = Select.Single
+        ShowCursor = True
+        Header = GridView.Horizontal
+        ScrollBar = Scroll.Vertical
+        Resizable = False
+      }
+      { gridRenta TableView
+        Move(207,0,153,153)
+        Expand = True
+        Mode = Select.Single
+        ShowCursor = True
+        Header = GridView.Horizontal
+        ScrollBar = Scroll.Vertical
+        Resizable = False
+      }
+    }
+  }
+  { HBox2 HBox
+    Move(0,486,927,36)
+    { txtBuscar2 TextBox
+      Move(252,0,290,40)
+    }
+  }
+  { HBox3 HBox
+    Move(0,522,927,36)
+    { txtBuscar3 TextBox
+      Move(252,0,290,40)
+    }
+  }
 }

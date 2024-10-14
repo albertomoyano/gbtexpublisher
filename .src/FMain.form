@@ -192,6 +192,7 @@
     }
     { rentaTrabajo Menu
       Text = ("Rentabilizar tiempo de trabajo")
+      Picture = Picture["iconos/renta.svg"]
     }
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")

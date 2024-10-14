@@ -4,6 +4,7 @@
   Move(0,0,960,640)
   #Scaled = False
   Text = ("Apuntes de producción")
+  Icon = Picture["iconos/notas.svg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True

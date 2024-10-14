@@ -1,1 +1,59 @@
 ' Gambas class file
+
+Private conector As Connection
+Private Contenido As Result
+Private Busqueda As Result
+
+Public Sub Form_Open()
+
+  Splitter1.Layout = [2, 5]
+  ' Crear una nueva conexión
+  conector = New Connection
+
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Name = "db_tex.sqlite"
+
+  ' Intentar abrir la conexión
+  Try conector.Open()
+
+  If Error Then
+    conector = Null
+    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  Else
+
+    ' Mostrar_Lista()
+  Endif
+
+End
+
+Public Sub btnCerrar_Click()
+
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  Me.Close()
+
+End
+
+Public Sub Form_Close()
+
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  Me.Close()
+
+End
+
+Public Sub Splitter1_Resize()
+
+  Splitter1.Layout = [2, 5]
+
+End
