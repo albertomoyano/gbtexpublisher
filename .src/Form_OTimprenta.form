@@ -103,7 +103,7 @@
           Alignment = Align.Right
           Text = ("Copias ")
         }
-        { txtCopiasOT TextBox grupoOT
+        { txtCopiasOT ValueBox grupoOT
           Name = "txtCopiasOT"
           Move(216,0,135,36)
           Expand = True

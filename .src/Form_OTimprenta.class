@@ -239,6 +239,12 @@ Public Sub btnGenerarPDF_Click()
     Return  ' Cancela la operación si alguno de los TextBox está vacío
   Endif
 
+  ' Verifica si todos los TextBox (txtOT1, txtOT2, txtOT3) están llenos
+  If txtAutorOT.Text = "" Or txtPaginasOT.Text = "" Or txtFormatoOT.Text = "" Then
+    Message.Error("Uno o más campos de los metadatos están vacíos. Deben completarse para continuar.")
+    Return  ' Cancela la operación si alguno de los TextBox está vacío
+  Endif
+
   FMain.TabPanel1.Index = 0
   Export2OrdenTaller()
 
