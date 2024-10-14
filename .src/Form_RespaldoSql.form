@@ -3,6 +3,7 @@
 { Form Form
   Move(0,0,950,153)
   #Scaled = False
+  Text = ("Ubicación del respaldo de la BBDD")
   Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True

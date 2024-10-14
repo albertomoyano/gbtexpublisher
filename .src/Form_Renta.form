@@ -1,0 +1,9 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,640)
+  #Scaled = False
+  Text = ("Rentabilizar tiempo de trabajo")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+}

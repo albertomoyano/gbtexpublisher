@@ -190,6 +190,9 @@
       Text = ("Ubicación del respaldo de la BBDD")
       Picture = Picture["iconos/exportar.svg"]
     }
+    { rentaTrabajo Menu
+      Text = ("Rentabilizar tiempo de trabajo")
+    }
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
       Enabled = False

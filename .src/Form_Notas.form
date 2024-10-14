@@ -1,8 +1,9 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,950,640)
+  Move(0,0,960,640)
   #Scaled = False
+  Text = ("Apuntes de producción")
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True

@@ -7410,3 +7410,9 @@ Public Sub reinicamosTiempo()
   ActualizarDisplay
 
 End
+
+Public Sub rentaTrabajo_Click()
+
+  Form_Renta.ShowModal()
+
+End
