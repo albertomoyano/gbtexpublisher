@@ -4,6 +4,7 @@
   Move(0,0,950,207)
   #Scaled = False
   #Translate = False
+  Text = "Generar PDF para la web"
   Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True
@@ -35,7 +36,6 @@
   { HBox2 HBox
     Move(10,40,800,36)
     NoTabFocus = True
-    Padding = 1
     { Label1 Label
       Move(9,0,178,36)
       NoTabFocus = True
@@ -59,7 +59,6 @@
   { HBox3 HBox
     Move(0,80,800,36)
     NoTabFocus = True
-    Padding = 1
     { Label2 Label
       Move(0,0,178,36)
       NoTabFocus = True

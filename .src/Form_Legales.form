@@ -3,7 +3,7 @@
 { Form Form
   Move(0,0,748,640)
   #Scaled = False
-  Text = ("Legales")
+  Text = ("Aviso Legal")
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True

@@ -4,6 +4,8 @@
   MoveScaled(0,0,68,29)
   Resizable = False
   Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
   Padding = 4
   { HBox1 HBox
     MoveScaled(28,2,33,4)
@@ -35,8 +37,7 @@
     MoveScaled(33,15,28,8)
     Expand = True
     Arrangement = Arrange.Fill
-    Padding = 2
-    Border = Border.Plain
+    Border = Border.Sunken
     { txtAgregarDescripcion TextArea
       MoveScaled(0,0,22,7)
       Expand = True
@@ -45,7 +46,6 @@
   }
   { HBox5 HBox
     MoveScaled(0,24,61,4)
-    Padding = 2
     { Spring1 Spring
       MoveScaled(1,0,15,4)
     }

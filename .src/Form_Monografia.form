@@ -40,9 +40,8 @@
     }
   }
   { HBox2 HBox
-    Move(0,36,1017,40)
+    Move(0,36,1017,36)
     AutoResize = True
-    Padding = 2
     { Label2 Label
       Move(30,0,146,36)
       Padding = 4
@@ -68,9 +67,8 @@
     }
   }
   { HBox1 HBox
-    Move(0,76,780,40)
+    Move(0,76,780,36)
     AutoResize = True
-    Padding = 2
     { Label1 Label
       Move(30,0,146,36)
       Padding = 4
@@ -84,9 +82,8 @@
     }
   }
   { HBox175 HBox
-    Move(0,121,780,40)
+    Move(0,121,780,36)
     AutoResize = True
-    Padding = 2
     { Label122 Label
       Move(30,0,146,36)
       Padding = 4
@@ -100,9 +97,8 @@
     }
   }
   { HBox7 HBox
-    Move(0,166,780,40)
+    Move(0,166,780,36)
     AutoResize = True
-    Padding = 2
     { Label21 Label
       Move(30,0,146,36)
       Padding = 4
@@ -116,9 +112,8 @@
     }
   }
   { HBox187 HBox
-    Move(0,202,780,40)
+    Move(0,202,780,36)
     AutoResize = True
-    Padding = 2
     { Label134 Label
       Move(30,0,146,36)
       Padding = 4
@@ -140,9 +135,8 @@
     }
   }
   { HBox173 HBox
-    Move(0,238,780,40)
+    Move(0,238,780,36)
     AutoResize = True
-    Padding = 2
     { Label120 Label
       Move(30,0,146,36)
       Padding = 4
@@ -156,9 +150,8 @@
     }
   }
   { HBox174 HBox
-    Move(0,274,780,40)
+    Move(0,274,780,36)
     AutoResize = True
-    Padding = 2
     { Label121 Label
       Move(30,0,146,36)
       Padding = 4

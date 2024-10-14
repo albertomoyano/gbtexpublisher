@@ -3,12 +3,13 @@
 { Form Form
   Move(0,0,1024,748)
   #Scaled = False
+  Text = ("OT para imprenta")
   Resizable = False
   Arrangement = Arrange.Vertical
+  Margin = True
   Padding = 4
   { HBox6 HBox
     Move(9,0,927,36)
-    Padding = 2
     { txtIDot TextBox
       Move(9,0,90,36)
       Visible = False
@@ -277,7 +278,6 @@
   }
   { HBox1 HBox
     Move(18,702,927,36)
-    Padding = 2
     { Spring1 Spring
       Move(387,0,162,36)
     }

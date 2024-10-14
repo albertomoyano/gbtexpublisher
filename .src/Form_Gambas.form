@@ -6,11 +6,12 @@
   Text = ("Acerca de GAMBAS")
   Resizable = False
   Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
   Padding = 4
   { HBox2 HBox
     Move(9,9,450,72)
     AutoResize = True
-    Padding = 4
     { PictureBox1 PictureBox
       Move(0,0,72,72)
       Picture = Picture.Load("iconos/logo-gambas.png")
@@ -30,7 +31,6 @@
   }
   { HBox1 HBox
     Move(50,240,567,36)
-    Padding = 1
     { Spring1 Spring
       Move(36,0,36,36)
     }
