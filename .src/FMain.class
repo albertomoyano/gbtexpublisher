@@ -3545,7 +3545,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE keywords LIKE '%" & BaseName & "," & "%' ORDER BY id DESC"
+  Comando = "SELECT * FROM bibtex WHERE keywords LIKE '%" & BaseName & "," & "%' ORDER BY author ASC"
 
   Busqueda = conector.Exec(Comando)
 
