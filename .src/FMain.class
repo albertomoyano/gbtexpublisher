@@ -7416,3 +7416,9 @@ Public Sub rentaTrabajo_Click()
   Form_Renta.ShowModal()
 
 End
+
+Public Sub btnHelpPy_Click()
+
+  Form_Ayuda.ShowModal()
+
+End

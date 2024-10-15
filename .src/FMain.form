@@ -568,25 +568,29 @@
     Text = ("     Terminal y ChatGPT     ")
     { HBox93 HBox
       MoveScaled(1,1,108,4)
+      { btnHelpPy Button
+        MoveScaled(0,0,4,4)
+        Picture = Picture["iconos/info.svg"]
+      }
       { MenuButton1 MenuButton
-        MoveScaled(1,0,23,4)
+        MoveScaled(5,0,23,4)
         Text = ("Guiones externos")
         Picture = Picture["iconos/conversor.svg"]
         MenuOnly = True
       }
       { Separator1 Separator
-        MoveScaled(25,0,1.3333,4)
+        MoveScaled(29,0,1.3333,4)
       }
       { TextBox2 TextBox
-        MoveScaled(27,0,23,4)
+        MoveScaled(31,0,23,4)
       }
       { BtnBuscarEnArchivos Button
-        MoveScaled(51,0,4,4)
+        MoveScaled(55,0,4,4)
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
       { Label125 Label
-        MoveScaled(56,0,42,4)
+        MoveScaled(61,0,42,4)
         Expand = True
         Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
       }
