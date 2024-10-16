@@ -8,6 +8,46 @@
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
+  { menuHELP Menu
+    Text = ("menuHelp")
+    Visible = False
+    { menuError01 Menu
+      Text = ("menuError01")
+    }
+    { menuError02 Menu
+      Text = ("menuError02")
+    }
+    { Menu4 Menu
+      Text = ("menuError03")
+    }
+    { Menu5 Menu
+      Text = ("menuError04")
+    }
+    { Menu6 Menu
+      Text = ("menuError05")
+    }
+    { Menu7 Menu
+      Text = ("menuError06")
+    }
+    { Menu8 Menu
+      Text = ("menuError07")
+    }
+    { Menu9 Menu
+      Text = ("menuError07")
+    }
+    { Menu12 Menu
+      Text = ("menuError08")
+    }
+    { Menu13 Menu
+      Text = ("menuError09")
+    }
+    { Menu15 Menu
+      Text = ("menuError10")
+    }
+    { Menu16 Menu
+      Text = ("menuError11")
+    }
+  }
   { menuProcesarArchivos Menu
     Text = ("Procesar archivos")
     Visible = False
@@ -555,7 +595,7 @@
     }
   }
   { !TabPanel1 TabStrip
-    MoveScaled(1,13,128,365)
+    MoveScaled(1,12,128,365)
     #Public = True
     Enabled = False
     Expand = True
@@ -568,24 +608,26 @@
     Text = ("     Terminal y ChatGPT     ")
     { HBox93 HBox
       MoveScaled(1,1,108,4)
-      { btnHelpPy Button
-        MoveScaled(0,0,4,4)
+      { btnHelpPy MenuButton
+        MoveScaled(0,0,7,4)
         Picture = Picture["iconos/info.svg"]
+        Menu = "menuHELP"
+        MenuOnly = True
       }
       { MenuButton1 MenuButton
-        MoveScaled(5,0,23,4)
+        MoveScaled(8,0,23,4)
         Text = ("Guiones externos")
         Picture = Picture["iconos/conversor.svg"]
         MenuOnly = True
       }
       { Separator1 Separator
-        MoveScaled(29,0,1.3333,4)
+        MoveScaled(31,0,1.3333,4)
       }
       { TextBox2 TextBox
-        MoveScaled(31,0,23,4)
+        MoveScaled(33,0,23,4)
       }
       { BtnBuscarEnArchivos Button
-        MoveScaled(55,0,4,4)
+        MoveScaled(57,0,4,4)
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
@@ -595,8 +637,14 @@
         Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
       }
     }
+    { MessageView1 MessageView
+      MoveScaled(1,6,84,6)
+      Tag = "Closed"
+      Border = True
+      Animated = True
+    }
     { Splitter1 Splitter
-      MoveScaled(1,8,109,65)
+      MoveScaled(1,17,109,65)
       Expand = True
       Border = False
       { TabGPT TabStrip

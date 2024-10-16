@@ -1,1 +1,17 @@
 ' Gambas class file
+
+Public Sub btnCerrar_Click()
+
+  Me.Close
+
+End
+
+Public Sub ToolButtonHelp1_Click()
+
+  If MessageView1.Tag = "Closed" Then
+    MessageView1.Open("1/. Pick a pattern from the dropdown box or create a new one.(e.g. <b>*.txt</b> or multiple seperated by a comma <b>*.png,*.jpg,*.jpeg</b>)<br>2/. Pick the text from the dropdown box, or add new text for your search.<br> 3/. Select a folder to search.<br>4/. Check 'Case sensitive' and 'Recursive' options as required.<br>5/. If there are files to search then click 'Search'.", Picture["icon:/48/help"])
+  Else
+    MessageView1.Close
+  End If
+
+End

@@ -5,7 +5,37 @@
   #Scaled = False
   Text = ("Ayuda sobre guiones externos")
   Resizable = False
+  Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
   Padding = 4
+  { HBox1 HBox
+    Move(0,0,927,36)
+    { Label1 Label
+      Move(333,0,126,36)
+      AutoResize = True
+      Text = ("Los guiones externos son scripts en python que lo asisten en la edición del texto")
+    }
+    { Spring1 Spring
+      Move(640,0,36,40)
+    }
+    { btnCerrar ToolButton
+      Move(700,0,160,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la ventana")
+      Text = ("Cerrar")
+      Border = True
+    }
+  }
+  { Button1 Button
+    Move(27,72,144,36)
+  }
+  { MessageView1 MessageView
+    Move(63,153,756,54)
+    Tag = "Closed"
+    Border = True
+    Animated = True
+  }
 }
