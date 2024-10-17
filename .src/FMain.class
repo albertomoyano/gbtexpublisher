@@ -7419,8 +7419,10 @@ End
 
 Public Sub menuError01_Click()
 
+  MessageView1.Close
+
   If MessageView1.Tag = "Closed" Then
-    MessageView1.Open("1/. Pick a pattern from the dropdown box or create a new one.(e.g. <b>*.txt</b> or multiple seperated by a comma <b>*.png,*.jpg,*.jpeg</b>)<br>2/. Pick the text from the dropdown box, or add new text for your search.<br> 3/. Select a folder to search.<br>4/. Check 'Case sensitive' and 'Recursive' options as required.<br>5/. If there are files to search then click 'Search'.", Picture["icon:/48/help"])
+    MessageView1.Open("<b>01_Error?.py</b><br>Explicación de este script en python.")
   Else
     MessageView1.Close
   End If
@@ -7429,8 +7431,10 @@ End
 
 Public Sub menuError02_Click()
 
+  MessageView1.Close
+
   If MessageView1.Tag = "Closed" Then
-    MessageView1.Open("A/. Pattern from the dropdown box or create a new one.(e.g. <b>*.txt</b> or multiple seperated by a comma <b>*.png,*.jpg,*.jpeg</b>)<br>2/. Pick the text from the dropdown box, or add new text for your search.<br> 3/. Select a folder to search.<br>4/. Check 'Case sensitive' and 'Recursive' options as required.<br>5/. If there are files to search then click 'Search'.", Picture["icon:/48/help"])
+    MessageView1.Open("<b>02_Error.py</b><br>Pick the text From the dropdown box, Or add New Text For your search. <br>Select a folder To search.<br>Check 'Case sensitive' and 'Recursive' options as required.<br>If there are files to search then click 'Search'.")', Picture["icon:/48/help"]
   Else
     MessageView1.Close
   End If
