@@ -7422,7 +7422,7 @@ Public Sub menuError01_Click()
   MessageView1.Close
 
   If MessageView1.Tag = "Closed" Then
-    MessageView1.Open("<b>01_Error?.py</b><br>Explicación de este script en python.")
+    MessageView1.Open("<b>01_Error?.py</b><br>Expresión regular para buscar '?' seguido de un espacio y una letra en minúscula.", Picture["icon:/48/help"])
   Else
     MessageView1.Close
   End If
@@ -7434,7 +7434,7 @@ Public Sub menuError02_Click()
   MessageView1.Close
 
   If MessageView1.Tag = "Closed" Then
-    MessageView1.Open("<b>02_Error.py</b><br>Pick the text From the dropdown box, Or add New Text For your search. <br>Select a folder To search.<br>Check 'Case sensitive' and 'Recursive' options as required.<br>If there are files to search then click 'Search'.")', Picture["icon:/48/help"]
+    MessageView1.Open("<b>02_Contador_global.py</b><br>Pick .", Picture["icon:/48/help"])'
   Else
     MessageView1.Close
   End If

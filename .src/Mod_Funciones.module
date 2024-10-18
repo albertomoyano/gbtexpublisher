@@ -629,8 +629,11 @@ Public Function validarArchivos()
   End If
 
   'scripts externos
-  If Not Exist(rutaScriptsExternos &/ "Contador_global.py") Then
-    Copy "./Contador_global.py" To rutaScriptsExternos &/ "Contador_global.py"
+  If Not Exist(rutaScriptsExternos &/ "01_Error?.py") Then
+    Copy "./01_Error?.py" To rutaScriptsExternos &/ "01_Error?_global.py"
+  End If
+  If Not Exist(rutaScriptsExternos &/ "02_Contador_global.py") Then
+    Copy "./02_Contador_global.py" To rutaScriptsExternos &/ "02_Contador_global.py"
   End If
 
   If Not Exist(rutaScriptsExternos &/ "Control_de_llaves.py") Then
