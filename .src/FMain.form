@@ -53,6 +53,12 @@
     { Menu18 Menu
       Text = ("13_ControlarEspacioIzquierda")
     }
+    { Menu21 Menu
+      Text = ("14_BuscarParencite")
+    }
+    { Menu23 Menu
+      Text = ("15_PalabrasRepetidas")
+    }
   }
   { menuProcesarArchivos Menu
     Text = ("Procesar archivos")

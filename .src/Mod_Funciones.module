@@ -653,6 +653,15 @@ Public Function validarArchivos()
   If Not Exist(rutaScriptsExternos &/ "13_ControlarEspacioIzquierda.py") Then
     Copy "./13_ControlarEspacioIzquierda.py" To rutaScriptsExternos &/ "13_ControlarEspacioIzquierda.py"
   End If
+  If Not Exist(rutaScriptsExternos &/ "14_BuscarParencite.py") Then
+    Copy "./14_BuscarParencite.py" To rutaScriptsExternos &/ "14_BuscarParencite.py"
+  End If
+  If Not Exist(rutaScriptsExternos &/ "15_PalabrasRepetidas.py") Then
+    Copy "./15_PalabrasRepetidas.py" To rutaScriptsExternos &/ "15_PalabrasRepetidas.py"
+  End If
+  If Not Exist(rutaScriptsExternos &/ "16_ControlarEntornos.py") Then
+    Copy "./16_ControlarEntornos.py" To rutaScriptsExternos &/ "16_ControlarEntornos.py"
+  End If
 
   If Not Exist(rutaScriptsExternos &/ "Control_de_llaves.py") Then
     Copy "./Control_de_llaves.py" To rutaScriptsExternos &/ "Control_de_llaves.py"
@@ -670,20 +679,12 @@ Public Function validarArchivos()
     Copy "./Control_de_parentesis.py" To rutaScriptsExternos &/ "Control_de_parentesis.py"
   End If
 
-  If Not Exist(rutaScriptsExternos &/ "Control_de_entorno.py") Then
-    Copy "./Control_de_entorno.py" To rutaScriptsExternos &/ "Control_de_entorno.py"
-  End If
-
   If Not Exist(rutaScriptsExternos &/ "Control_de_signo_de_pregunta.py") Then
     Copy "./Control_de_signo_de_pregunta.py" To rutaScriptsExternos &/ "Control_de_signo_de_pregunta.py"
   End If
 
   If Not Exist(rutaScriptsExternos &/ "Reemplazar_endash.py") Then
     Copy "./Reemplazar_endash.py" To rutaScriptsExternos &/ "Reemplazar_endash.py"
-  End If
-
-  If Not Exist(rutaScriptsExternos &/ "Buscar_posibles_parencite.py") Then
-    Copy "./Buscar_posibles_parencite.py" To rutaScriptsExternos &/ "Buscar_posibles_parencite.py"
   End If
 
   If Not Exist(rutaApp &/ "Buscar_palabra_Gambas.py") Then
