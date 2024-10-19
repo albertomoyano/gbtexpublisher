@@ -12,10 +12,10 @@
     Text = ("menuHelp")
     Visible = False
     { menuError01 Menu
-      Text = ("menuError01")
+      Text = ("01_Error?")
     }
     { menuError02 Menu
-      Text = ("menuError02")
+      Text = ("02_ContadorGlobal")
     }
     { Menu4 Menu
       Text = ("menuError03")
@@ -46,6 +46,12 @@
     }
     { Menu16 Menu
       Text = ("11_ReemplazarComillas")
+    }
+    { Menu19 Menu
+      Text = ("12_ControlarNumeros")
+    }
+    { Menu18 Menu
+      Text = ("13_ControlarEspacioIzquierda")
     }
   }
   { menuProcesarArchivos Menu
