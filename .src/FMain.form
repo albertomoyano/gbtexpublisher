@@ -42,10 +42,10 @@
       Text = ("menuError09")
     }
     { Menu15 Menu
-      Text = ("menuError10")
+      Text = ("10_LimpiezaConExpReg")
     }
     { Menu16 Menu
-      Text = ("menuError11")
+      Text = ("11_ReemplazarComillas")
     }
   }
   { menuProcesarArchivos Menu
