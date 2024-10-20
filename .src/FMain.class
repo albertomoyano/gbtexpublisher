@@ -7416,27 +7416,3 @@ Public Sub rentaTrabajo_Click()
   Form_Renta.ShowModal()
 
 End
-
-Public Sub menuError01_Click()
-
-  MessageView1.Close
-
-  If MessageView1.Tag = "Closed" Then
-    MessageView1.Open("<b>01_Error?.py</b><br>Expresión regular para buscar '?' seguido de un espacio y una letra en minúscula.", Picture["icon:/48/help"])
-  Else
-    MessageView1.Close
-  End If
-
-End
-
-Public Sub menuError02_Click()
-
-  MessageView1.Close
-
-  If MessageView1.Tag = "Closed" Then
-    MessageView1.Open("<b>02_Contador_global.py</b><br>Pick .", Picture["icon:/48/help"])'
-  Else
-    MessageView1.Close
-  End If
-
-End

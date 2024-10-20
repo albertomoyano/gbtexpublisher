@@ -8,58 +8,6 @@
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
-  { menuHELP Menu
-    Text = ("menuHelp")
-    Visible = False
-    { menuError01 Menu
-      Text = ("01_Error?")
-    }
-    { menuError02 Menu
-      Text = ("02_ContadorGlobal")
-    }
-    { Menu4 Menu
-      Text = ("menuError03")
-    }
-    { Menu5 Menu
-      Text = ("menuError04")
-    }
-    { Menu6 Menu
-      Text = ("menuError05")
-    }
-    { Menu7 Menu
-      Text = ("menuError06")
-    }
-    { Menu8 Menu
-      Text = ("menuError07")
-    }
-    { Menu9 Menu
-      Text = ("menuError07")
-    }
-    { Menu12 Menu
-      Text = ("menuError08")
-    }
-    { Menu13 Menu
-      Text = ("menuError09")
-    }
-    { Menu15 Menu
-      Text = ("10_LimpiezaConExpReg")
-    }
-    { Menu16 Menu
-      Text = ("11_ReemplazarComillas")
-    }
-    { Menu19 Menu
-      Text = ("12_ControlarNumeros")
-    }
-    { Menu18 Menu
-      Text = ("13_ControlarEspacioIzquierda")
-    }
-    { Menu21 Menu
-      Text = ("14_BuscarParencite")
-    }
-    { Menu23 Menu
-      Text = ("15_PalabrasRepetidas")
-    }
-  }
   { menuProcesarArchivos Menu
     Text = ("Procesar archivos")
     Visible = False
@@ -620,12 +568,6 @@
     Text = ("     Terminal y ChatGPT     ")
     { HBox93 HBox
       MoveScaled(1,1,108,4)
-      { btnHelpPy MenuButton
-        MoveScaled(0,0,7,4)
-        Picture = Picture["iconos/info.svg"]
-        Menu = "menuHELP"
-        MenuOnly = True
-      }
       { MenuButton1 MenuButton
         MoveScaled(8,0,23,4)
         Text = ("Guiones externos")
@@ -649,14 +591,8 @@
         Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
       }
     }
-    { MessageView1 MessageView
-      MoveScaled(1,6,84,6)
-      Tag = "Closed"
-      Border = True
-      Animated = True
-    }
     { Splitter1 Splitter
-      MoveScaled(1,17,109,65)
+      MoveScaled(1,6,109,65)
       Expand = True
       Border = False
       { TabGPT TabStrip
