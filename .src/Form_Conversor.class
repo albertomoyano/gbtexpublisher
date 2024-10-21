@@ -48,8 +48,7 @@ End
 
 Public Sub btnCONVERTIR_Click()
 
-  Dim escapedPath As String
-  Dim destino As String
+  Dim destino As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
   Dim destinoRTF As String
   Dim rutaORIGINALES As String
   Dim rutaMEDIA As String
@@ -57,7 +56,6 @@ Public Sub btnCONVERTIR_Click()
   txtORIGEN.Text = Dialog.Path
   rutaORIGINALES = File.Dir(Dialog.Path) &/ "originales"
   rutaMEDIA = File.Dir(Dialog.Path) &/ "media"
-  destino = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
   destinoRTF = File.Dir(Dialog.Path) &/ txtDESTINO.Text & "@.rtf"
 
   If Not Exist(rutaORIGINALES) Then
@@ -69,9 +67,8 @@ Public Sub btnCONVERTIR_Click()
   End If
 
   ' Escapa las rutas de origen y destino
-  escapedPath = EscapePath(Dialog.Path)
-  Dim escapedOriginalesPath As String
-  escapedOriginalesPath = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
+  Dim escapedPath As String = EscapePath(Dialog.Path)
+  Dim escapedOriginalesPath As String = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
 
   Dim zprocess As Process
   If RadioButton3.Value = True And RadioButton1.Value = False And RadioButton2.Value = False Then
@@ -95,7 +92,6 @@ Public Sub btnCONVERTIR_Click()
         btnCONVERTIR.Enabled = False
         btnListo.Visible = True
         btnListo.Default = True
-        btnSalir.Visible = False
       Endif
     End If
   End If
@@ -111,39 +107,41 @@ Public Sub btnCONVERTIR_Click()
       Wait 0.2
       btnListo.Visible = True
       btnListo.Default = True
-      btnSalir.Visible = False
     Endif
   Endif
 
   Dim hprocess As Process
   If RadioButton2.Value = True And RadioButton1.Value = False And RadioButton3.Value = False Then
-    hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text
-
-    Do While hprocess.state = Process.Running
+    If Trim(txtDESTINO.Text) = "" Then
+      Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+    Else
+      hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text
+      Do While hprocess.state = Process.Running
+        Wait 0.1
+      Loop
+      If hprocess.State = Process.Stopped Then
+        btnCONVERTIR.Enabled = False
+        btnListo.Visible = True
+      Endif
+      Shell "mv " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp/word/media" & " " & File.Dir(Dialog.Path)
+      Wait 0.2
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".xml"
       Wait 0.1
-    Loop
-    If hprocess.State = Process.Stopped Then
-      btnCONVERTIR.Enabled = False
-      btnListo.Visible = True
-      btnListo.Default = True
-      btnSalir.Visible = False
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".csv"
+      Wait 0.1
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".d2t.log"
+      Wait 0.1
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".debug"
+      Wait 0.1
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp"
+      Wait 0.1
+      Shell "mv " & File.Dir(Dialog.Path) &/ File.Name(Dialog.Path) & " " & rutaORIGINALES
+      Wait 0.2
     Endif
-
-    Shell "mv " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp/word/media" & " " & File.Dir(Dialog.Path)
-    Wait 0.2
-    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".xml"
-    Wait 0.1
-    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".csv"
-    Wait 0.1
-    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".d2t.log"
-    Wait 0.1
-    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".debug"
-    Wait 0.1
-    Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp"
-    Wait 0.1
-    Shell "mv " & File.Dir(Dialog.Path) &/ File.Name(Dialog.Path) & " " & rutaORIGINALES
-    Wait 0.2
   Endif
+
+  Shell "mv " & "TRIPIANA.tex" & " " & destino
+  Wait 0.2
 
 End
 

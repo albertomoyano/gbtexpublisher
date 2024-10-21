@@ -215,23 +215,6 @@
       Picture = Picture["iconos/edit-select.svg"]
       Enabled = False
     }
-    { menuORTOGRAFIA Menu
-      Text = ("Correcciones sobre el texto")
-      Picture = Picture["iconos/edit-select.svg"]
-      Enabled = False
-      { menu7b Menu
-        Text = ("Cambiar texto del modelo escapado «\\'{a}»")
-      }
-      { menuPuntosSuspensivos Menu
-        Text = ("Uniformar escritura de puntos suspensivos")
-      }
-      { menuFuncionesVacias Menu
-        Text = ("Eliminar funciones vacías")
-      }
-      { menuReemplazosOrtograficos Menu
-        Text = ("Corrección ortotipográfica")
-      }
-    }
     { menuLOGFILE Menu
       Text = ("Analizar el logfile del archivo")
       Picture = Picture["iconos/logfile.svg"]

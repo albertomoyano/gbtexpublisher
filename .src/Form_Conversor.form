@@ -106,7 +106,7 @@
       Foreground = Color.Transparent
     }
     { btnSalir Button
-      Move(639,0,160,40)
+      Move(639,0,160,36)
       Background = &HE00000
       Foreground = Color.White
       NoTabFocus = True

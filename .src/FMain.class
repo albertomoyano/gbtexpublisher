@@ -732,7 +732,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
-  menuORTOGRAFIA.Enabled = True
   menuDisclaimer.Enabled = True
   TabPanel1[3].Visible = True
   TabPanel1[4].Visible = True
@@ -921,7 +920,6 @@ Public Sub mnuLast_Click()
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
-  menuORTOGRAFIA.Enabled = True
   menuDisclaimer.Enabled = True
 
   If Form_Notas.Visible Then
@@ -5704,30 +5702,6 @@ Public Sub menuMAYinicialINGLES_Click()
 
 End
 
-Public Sub menu7b_Click()'reemplazar caracteres escapados
-
-  Mod_Funciones.ReemplazarCaracteresEscapados(TextBox1.Text)
-
-End
-
-Public Sub menuPuntosSuspensivos_Click()
-
-  Mod_Funciones.menuPuntosSuspensivos(TextBox1.Text)
-
-End
-
-Public Sub menuFuncionesVacias_Click()
-
-  Mod_Funciones.menuFuncionesVacias(TextBox1.Text)
-
-End
-
-Public Sub menuReemplazosOrtograficos_Click()
-
-  Mod_Funciones.menuReemplazosOrtograficos(TextBox1.Text)
-
-End
-
 Public Sub menuIrURL_Click()
 
   Dim url As String
@@ -5791,7 +5765,6 @@ Public Sub menuAbrirRevista_Click()
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
-  menuORTOGRAFIA.Enabled = True
   TabPanel1[3].Visible = True
   TabPanel1[4].Visible = True
 
@@ -6163,7 +6136,6 @@ Public Sub menuMono_Click()'monografia academica
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
-  menuORTOGRAFIA.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
