@@ -763,7 +763,7 @@ Public Sub Exportar2BibTeX(rutaTexto As String)
 
   ' Establece la ruta y el nombre del archivo de salida
   ' Guarda el contenido acumulado en un solo archivo
-  s &= "\n\n@Comment{gbTeXpublisher: databaseType:biblatex; fecha de creación: " & fecha & ";}"
+  s &= "\n\n@Comment{generado con gbTeXpublisher; databaseType:biblatex; fecha de creación: " & fecha & ";}"
   outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXbib-" & File.BaseName(rutaTexto) & ".bib"
   File.Save(outputFile, s)
 
