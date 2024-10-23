@@ -29,7 +29,7 @@ Public segundos As Integer
 
 Public Sub Form_Open()
 
-  ' controlamos que existan los directorios principales
+  ' controlamos que existan los directorios principales o los creamos
   If Not Exist(rutaApp) Then
     Mkdir rutaApp
   End If
@@ -60,7 +60,7 @@ Public Sub Form_Open()
   If File.RealPath(rutaApp &/ "db_tex.sqlite") Then
     Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Else
-    Message.Error("Error: No existe la base de datos db_tex.sqlite.")
+    Message.Error("El archivo <stron>db_tex.sqlite</strong> no se encontró en el directorio " & rutaApp)
     Quit
   Endif
   Wait 0.2
@@ -768,9 +768,6 @@ Public Sub menuAbrir_Click()'abrir un libro
 
   ' levantamos los datos de comentario
   levantarComenta()
-
-  ' nos reaseguramos de que la base de datos exista
-  Mod_Funciones.RevisarArchivo()
 
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
