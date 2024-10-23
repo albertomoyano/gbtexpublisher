@@ -6,6 +6,7 @@ Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExte
 
 Public Sub CopiarArchivos(rutaTexto As String)'libros
 
+  ' usar Exist cuando refiere a directorios y File.RealPath cuando refiere a archivos
   If Not Exist(File.Dir(rutaTexto) & "/files") Then
     Mkdir File.Dir(rutaTexto) & "/files"
   End If
@@ -29,44 +30,44 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   End If
 
   'copiamos los archivos de preámbulo de libro
-  If Not Exist(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
     Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/files/book-xml.tex") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-xml.tex") Then
     Copy "./book-xml.tex" To File.Dir(rutaTexto) & "/files/book-xml.tex"
   End If
 
   'copiamos los archivos de configuracion general
-  If Not Exist(File.Dir(rutaTexto) & "/files/imago_custom.css") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/imago_custom.css") Then
     Copy "./imago_custom.css" To File.Dir(rutaTexto) & "/files/imago_custom.css"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/files/blitz-lite.css") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/blitz-lite.css") Then
     Copy "./blitz-lite.css" To File.Dir(rutaTexto) & "/files/blitz-lite.css"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
     Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
     Copy "./agradecimientos.tex" To File.Dir(rutaTexto) & "/artcap/agradecimientos.tex"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/artcap/colofon.tex") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/colofon.tex") Then
     Copy "./colofon.tex" To File.Dir(rutaTexto) & "/artcap/colofon.tex"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
     Copy "./indiceautores.tex" To File.Dir(rutaTexto) & "/artcap/indiceautores.tex"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/readme.md") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/readme.md") Then
     Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/LICENSE") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
     Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
   End If
 
-  If Not Exist(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
     Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
   End If
 
-  If Not Exist(File.Dir(rutaTexto) & "/media/desconocido.png") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
     Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
   End If
 
@@ -97,12 +98,12 @@ Public Sub GitVersion(raw As String) As String 'Función para chequear si hay ve
   Dim v As String
 
   v = ""
-  If Exist("/tmp/project.txt") Then
+  If File.RealPath("/tmp/project.txt") Then
     Shell "rm /tmp/project.txt" Wait
   Endif
 
   Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
-  If Exist("/tmp/project.txt") Then
+  If File.RealPath("/tmp/project.txt") Then
     s = File.Load("/tmp/project.txt")
     stx = Split(s, "\n")
     For Each r In stx
@@ -152,76 +153,80 @@ End Function
 
 Public Function validarArchivos()
 
-  If Not Exist(rutaApp &/ "db_tex.sqlite") Then
+  If Not File.RealPath(rutaApp &/ "db_tex.sqlite") Then
     Copy "./db_tex.sqlite" To rutaApp &/ "db_tex.sqlite"
   End If
 
-  If Not Exist(rutaApp &/ "falta-tapa.png") Then
+  If Not File.RealPath(rutaApp &/ "falta-tapa.png") Then
     Copy "./falta-tapa.png" To rutaApp &/ "falta-tapa.png"
   End If
 
-  If Not Exist(rutaAppR &/ ".gitignore") Then
+  If Not File.RealPath(rutaAppR &/ ".gitignore") Then
     Copy "./gitignore_BD" To rutaAppR &/ ".gitignore"
   End If
 
-  If Not Exist(rutaApp & "/gitignore_github") Then
+  If Not File.RealPath(rutaApp & "/gitignore_github") Then
     Copy "./gitignore_github" To rutaApp & "/gitignore_github"
   End If
 
-  If Not Exist(rutaApp & "/gitignore_gitlab") Then
+  If Not File.RealPath(rutaApp & "/gitignore_gitlab") Then
     Copy "./gitignore_gitlab" To rutaApp & "/gitignore_gitlab"
   End If
 
+  If Not File.RealPath(rutaApp & "/Buscar_palabra_Gambas.py") Then
+    Copy "./Buscar_palabra_Gambas.py" To rutaApp & "/Buscar_palabra_Gambas.py"
+  End If
+
   'scripts externos
-  If Not Exist(rutaScriptsExternos &/ "01_Error?.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "01_Error?.py") Then
     Copy "./01_Error?.py" To rutaScriptsExternos &/ "01_Error?_global.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "02_ContadorGlobal.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "02_ContadorGlobal.py") Then
     Copy "./02_ContadorGlobal.py" To rutaScriptsExternos &/ "02_ContadorGlobal.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "03_ControlarLlaves.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "03_ControlarLlaves.py") Then
     Copy "./03_ControlarLlaves.py" To rutaScriptsExternos &/ "03_ControlarLlaves.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "04_ControlarCorchetes.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "04_ControlarCorchetes.py") Then
     Copy "./04_ControlarCorchetes.py" To rutaScriptsExternos &/ "04_ControlarCorchetes.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "05_ControlarParentesis.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "05_ControlarParentesis.py") Then
     Copy "./05_ControlarParentesis.py" To rutaScriptsExternos &/ "05_ControlarParentesis.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "06_ControlarPregunta.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "06_ControlarPregunta.py") Then
     Copy "./06_ControlarPregunta.py" To rutaScriptsExternos &/ "06_ControlarPregunta.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "07_ControlarAdmiracion.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "07_ControlarAdmiracion.py") Then
     Copy "./07_ControlarAdmiracion.py" To rutaScriptsExternos &/ "07_ControlarAdmiracion.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "08_LigarSiglo.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "08_LigarSiglo.py") Then
     Copy "./08_LigarSiglo.py" To rutaScriptsExternos &/ "08_LigarSiglo.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "09_BuscarLigaduras.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "09_BuscarLigaduras.py") Then
     Copy "./09_BuscarLigaduras.py" To rutaScriptsExternos &/ "09_BuscarLigaduras.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "10_LimpiezaConExpReg.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "10_LimpiezaConExpReg.py") Then
     Copy "./10_LimpiezaConExpReg.py" To rutaScriptsExternos &/ "10_LimpiezaConExpReg.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "11_ReemplazarComillas.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "11_ReemplazarComillas.py") Then
     Copy "./11_ReemplazarComillas.py" To rutaScriptsExternos &/ "11_ReemplazarComillas.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "12_ControlarNumeros.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "12_ControlarNumeros.py") Then
     Copy "./12_ControlarNumeros.py" To rutaScriptsExternos &/ "12_ControlarNumeros.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "13_ControlarEspacioIzquierda.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "13_ControlarEspacioIzquierda.py") Then
     Copy "./13_ControlarEspacioIzquierda.py" To rutaScriptsExternos &/ "13_ControlarEspacioIzquierda.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "14_BuscarParencite.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "14_BuscarParencite.py") Then
     Copy "./14_BuscarParencite.py" To rutaScriptsExternos &/ "14_BuscarParencite.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "15_PalabrasRepetidas.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "15_PalabrasRepetidas.py") Then
     Copy "./15_PalabrasRepetidas.py" To rutaScriptsExternos &/ "15_PalabrasRepetidas.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "16_ControlarEntornos.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "16_ControlarEntornos.py") Then
     Copy "./16_ControlarEntornos.py" To rutaScriptsExternos &/ "16_ControlarEntornos.py"
   End If
-  If Not Exist(rutaScriptsExternos &/ "17_UniformarEndash.py") Then
+  If Not File.RealPath(rutaScriptsExternos &/ "17_UniformarEndash.py") Then
     Copy "./17_UniformarEndash.py" To rutaScriptsExternos &/ "17_UniformarEndash.py"
   End If
 
