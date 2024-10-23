@@ -2133,7 +2133,7 @@ Public Sub Mostrar_ListaBIB()
   Contenido = conector.Exec("select * from bibtex ORDER BY id DESC")
 
   'diseñamos el tableview
-  VListaBIB.Columns.Count = 111
+  VListaBIB.Columns.Count = 112
   VListaBIB.Header = True
   VListaBIB.Columns[0].Title = "ID"
   VListaBIB.Columns[0].Width = 0
@@ -2357,6 +2357,8 @@ Public Sub Mostrar_ListaBIB()
   VListaBIB.Columns[109].Width = 0
   VListaBIB.Columns[110].Title = ""
   VListaBIB.Columns[110].Width = 0
+  VListaBIB.Columns[111].Title = ""
+  VListaBIB.Columns[111].Width = 0
 
   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
   VListaBIB.Rows.Count = Contenido.Count
@@ -2474,6 +2476,7 @@ Public Sub Mostrar_ListaBIB()
     VListaBIB[i, 108].Text = Contenido!creationdate
     VListaBIB[i, 109].Text = Contenido!type
     VListaBIB[i, 110].Text = Contenido!titleaddon
+    VListaBIB[i, 111].Text = Contenido!subtitle
 
     Contenido.MoveNext
   Next
@@ -2592,6 +2595,7 @@ Public Sub LimpiarCamposBIB()
   txtNOTE.Text = ""
   txtLANGUAGE.Text = ""
   txtTitleAddOn.Text = ""
+  txtSubTitle.Text = ""
 
 End
 
@@ -2771,7 +2775,7 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -2888,7 +2892,8 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -2940,7 +2945,7 @@ Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -3057,7 +3062,8 @@ Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3093,7 +3099,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -3210,7 +3216,8 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3247,7 +3254,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -3364,7 +3371,8 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3538,7 +3546,8 @@ Public Sub guardarCampos()
   Contenido!note = txtNOTE.Text
   Contenido!language = txtLANGUAGE.Text
   Contenido!issue = txtISSUE.Text
-  Contenido!txtTitleAddOn = txtTitleAddOn.Text
+  Contenido!titleaddon = txtTitleAddOn.Text
+  Contenido!subtitle = txtSubTitle.Text
 
 End
 
@@ -3566,7 +3575,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -3683,7 +3692,8 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -4251,7 +4261,7 @@ Public Sub BtnBuscarClave_Click()
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -4368,7 +4378,8 @@ Public Sub BtnBuscarClave_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -4445,7 +4456,7 @@ Public Sub mostrarIguales()
   VListaBIB.Clear()
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -4562,7 +4573,8 @@ Public Sub mostrarIguales()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -4693,9 +4705,10 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   txtNOTE.Text = VListaBIB[Row, 105].Text
   txtANNOTATION.Text = VListaBIB[Row, 106].Text
   txtNUMBER.Text = VListaBIB[Row, 107].Text
-
+  ' = VListaBIB[Row, 108].Text
   cbType.Text = VListaBIB[Row, 109].Text
   txtTitleAddOn.Text = VListaBIB[Row, 110].Text
+  txtSubTitle.Text = VListaBIB[Row, 111].Text
 
 End
 
@@ -4747,7 +4760,7 @@ Public Sub BtnBuscarBookTitle_Click()
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -4864,7 +4877,8 @@ Public Sub BtnBuscarBookTitle_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -5065,7 +5079,7 @@ Public Sub BtnBuscarJournal_Click()
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -5182,7 +5196,8 @@ Public Sub BtnBuscarJournal_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -7190,7 +7205,7 @@ Public Sub btnBuscarFiltro_Click()
   Endif
 
   ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 112
 
   ' Inicializa rowIndex a 0
   rowIndex = 0
@@ -7307,7 +7322,8 @@ Public Sub btnBuscarFiltro_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
+    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
+    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
