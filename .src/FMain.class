@@ -10,9 +10,9 @@ Public rutaMEDIA As String
 Public rutaCONTADOR As String
 Public rutaCATALOGO As String
 Public rutaARTCAP As String
-Private rutaApp As String = User.Home &/ ".gbtexpublisher"
-Private rutaAppR As String = User.Home &/ ".respaldogbTeX"
-Private rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+Public rutaApp As String = User.Home &/ ".gbtexpublisher"
+Public rutaAppR As String = User.Home &/ ".respaldogbTeX"
+Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
 Public fFile As File
@@ -29,6 +29,19 @@ Public segundos As Integer
 
 Public Sub Form_Open()
 
+  ' controlamos que existan los directorios principales
+  If Not Exist(rutaApp) Then
+    Mkdir rutaApp
+  End If
+
+  If Not Exist(rutaScriptsExternos) Then
+    Mkdir rutaScriptsExternos
+  End If
+
+  If Not Exist(rutaAppR) Then
+    Mkdir rutaAppR
+  End If
+
   ' Inicializamos los contadores de minutos y segundos
   horas = 0
   minutos = 0
@@ -37,8 +50,8 @@ Public Sub Form_Open()
   Timer1.Delay = 1000
   Timer1.Stop  ' No iniciamos el Timer de inmediato
 
-  ' Cargar la ruta guardada al abrir el formulario
-  Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
+  ' ' Cargar la ruta guardada al abrir el formulario RESOLVER
+  ' Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
 
   Dim fecha As String
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual

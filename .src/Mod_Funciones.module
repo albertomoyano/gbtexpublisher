@@ -1,5 +1,9 @@
 ' Gambas module file
 
+Public rutaApp As String = User.Home &/ ".gbtexpublisher"
+Public rutaAppR As String = User.Home &/ ".respaldogbTeX"
+Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+
 Public Sub CopiarArchivos(rutaTexto As String)'libros
 
   If Not Exist(File.Dir(rutaTexto) & "/files") Then
@@ -147,26 +151,6 @@ Public Function registrosObligatorios(rutaTexto As String) As Boolean
 End Function
 
 Public Function validarArchivos()
-
-  Dim rutaApp As String
-  Dim rutaScriptsExternos As String
-  Dim rutaAppR As String
-
-  rutaApp = User.Home &/ ".gbtexpublisher"
-  rutaScriptsExternos = rutaApp &/ "ScriptsExternos"
-  rutaAppR = User.Home &/ ".respaldogbTeX"
-
-  If Not Exist(rutaApp) Then
-    Mkdir rutaApp
-  End If
-
-  If Not Exist(rutaScriptsExternos) Then
-    Mkdir rutaScriptsExternos
-  End If
-
-  If Not Exist(rutaAppR) Then
-    Mkdir rutaAppR
-  End If
 
   If Not Exist(rutaApp &/ "db_tex.sqlite") Then
     Copy "./db_tex.sqlite" To rutaApp &/ "db_tex.sqlite"
