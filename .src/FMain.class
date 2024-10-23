@@ -29,9 +29,6 @@ Public segundos As Integer
 
 Public Sub Form_Open()
 
-  ' validamos la creacion de carpetas y archivos
-  Mod_Funciones.validarArchivos()
-
   ' Inicializamos los contadores de minutos y segundos
   horas = 0
   minutos = 0
@@ -47,10 +44,13 @@ Public Sub Form_Open()
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
   ' Realizar la copia de respaldo de la base de datos
   ' cada vez que inicia la aplicación
-  Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+  If File.RealPath(rutaApp &/ "db_tex.sqlite") Then
+    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+  Else
+    Message.Error("Error: No existe la base de datos db_tex.sqlite.")
+    Quit
+  Endif
   Wait 0.2
-  ' Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & User.Home & "/Disco2/.respaldogbTeX/" & fecha & "-" & "db_tex.sqlite"
-  ' Wait 0.2
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
@@ -63,6 +63,9 @@ Public Sub Form_Open()
     Message.Warning(Application.Name & " ya se está ejecutando")
     Quit
   Endif
+
+  ' validamos la creacion de carpetas y archivos
+  Mod_Funciones.validarArchivos()
 
   ' Crear una nueva conexión
   conector = New Connection
