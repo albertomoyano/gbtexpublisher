@@ -29,6 +29,9 @@ Public segundos As Integer
 
 Public Sub Form_Open()
 
+  ' validamos la creacion de carpetas y archivos
+  Mod_Funciones.validarArchivos()
+
   ' Inicializamos los contadores de minutos y segundos
   horas = 0
   minutos = 0
@@ -40,17 +43,14 @@ Public Sub Form_Open()
   ' Cargar la ruta guardada al abrir el formulario
   Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
 
-  ' validamos la creacion de carpetas y archivos
-  Mod_Funciones.validarArchivos()
-
   Dim fecha As String
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
   ' Realizar la copia de respaldo de la base de datos
   ' cada vez que inicia la aplicación
   Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Wait 0.2
-  Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & User.Home & "/Disco2/.respaldogbTeX/" & fecha & "-" & "db_tex.sqlite"
-  Wait 0.2
+  ' Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & User.Home & "/Disco2/.respaldogbTeX/" & fecha & "-" & "db_tex.sqlite"
+  ' Wait 0.2
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
@@ -2473,7 +2473,7 @@ Public Sub Mostrar_ListaBIB()
     VListaBIB[i, 107].Text = Contenido!number
     VListaBIB[i, 108].Text = Contenido!creationdate
     VListaBIB[i, 109].Text = Contenido!type
-    VListaBIB[i, 110].Text = Contenido!txtTitleAddOn
+    VListaBIB[i, 110].Text = Contenido!titleaddon
 
     Contenido.MoveNext
   Next
