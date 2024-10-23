@@ -2133,7 +2133,7 @@ Public Sub Mostrar_ListaBIB()
   Contenido = conector.Exec("select * from bibtex ORDER BY id DESC")
 
   'diseñamos el tableview
-  VListaBIB.Columns.Count = 110
+  VListaBIB.Columns.Count = 111
   VListaBIB.Header = True
   VListaBIB.Columns[0].Title = "ID"
   VListaBIB.Columns[0].Width = 0
@@ -2355,6 +2355,8 @@ Public Sub Mostrar_ListaBIB()
   VListaBIB.Columns[108].Width = 0
   VListaBIB.Columns[109].Title = ""
   VListaBIB.Columns[109].Width = 0
+  VListaBIB.Columns[110].Title = ""
+  VListaBIB.Columns[110].Width = 0
 
   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
   VListaBIB.Rows.Count = Contenido.Count
@@ -2471,6 +2473,7 @@ Public Sub Mostrar_ListaBIB()
     VListaBIB[i, 107].Text = Contenido!number
     VListaBIB[i, 108].Text = Contenido!creationdate
     VListaBIB[i, 109].Text = Contenido!type
+    VListaBIB[i, 110].Text = Contenido!txtTitleAddOn
 
     Contenido.MoveNext
   Next
@@ -2588,6 +2591,7 @@ Public Sub LimpiarCamposBIB()
   txtENTRYSET.Text = ""
   txtNOTE.Text = ""
   txtLANGUAGE.Text = ""
+  txtTitleAddOn.Text = ""
 
 End
 
@@ -2884,6 +2888,7 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3052,6 +3057,7 @@ Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3204,6 +3210,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3357,6 +3364,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3530,6 +3538,7 @@ Public Sub guardarCampos()
   Contenido!note = txtNOTE.Text
   Contenido!language = txtLANGUAGE.Text
   Contenido!issue = txtISSUE.Text
+  Contenido!txtTitleAddOn = txtTitleAddOn.Text
 
 End
 
@@ -3674,6 +3683,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -3883,6 +3893,7 @@ Public Sub eliminarBlancosBIB()
   EliminarEspaciosAlInicioYFinal(txtIDS)
   EliminarEspaciosAlInicioYFinal(txtENTRYSET)
   EliminarEspaciosAlInicioYFinal(txtLANGUAGE)
+  EliminarEspaciosAlInicioYFinal(txtTitleAddOn)
 
 End
 
@@ -4357,6 +4368,7 @@ Public Sub BtnBuscarClave_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -4550,6 +4562,7 @@ Public Sub mostrarIguales()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -4682,6 +4695,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   txtNUMBER.Text = VListaBIB[Row, 107].Text
 
   cbType.Text = VListaBIB[Row, 109].Text
+  txtTitleAddOn.Text = VListaBIB[Row, 110].Text
 
 End
 
@@ -4850,6 +4864,7 @@ Public Sub BtnBuscarBookTitle_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -5167,6 +5182,7 @@ Public Sub BtnBuscarJournal_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
@@ -7291,6 +7307,7 @@ Public Sub btnBuscarFiltro_Click()
     VListaBIB[rowIndex, 107].Text = Busqueda!number
     VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
     VListaBIB[rowIndex, 109].Text = Busqueda!type
+    VListaBIB[rowIndex, 110].Text = Busqueda!txtTitleAddOn
 
     ' Incrementa el valor de rowIndex para la siguiente fila
     rowIndex = rowIndex + 1
