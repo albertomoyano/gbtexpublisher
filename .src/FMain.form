@@ -1145,7 +1145,7 @@
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Alignment = Align.Left
-            Placeholder = ("Título principal")
+            Placeholder = ("Título")
           }
           { lblEVENTTITLEADDON6 Label
             MoveScaled(45,0,16,3.5556)
@@ -1159,8 +1159,35 @@
             PopupMenu = "menuTEXTBOX"
           }
         }
-        { HBox30 HBox
+        { HBox35 HBox
           MoveScaled(0,4,100,4)
+          { Label121 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("SubTitle ")
+          }
+          { txtSubTitle TextBox AllTextBoxes
+            Name = "txtSubTitle"
+            MoveScaled(20,0,20,4)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+            Placeholder = ("Subtítulo del libro")
+          }
+          { Label28 Label
+            MoveScaled(60,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("  Series ")
+          }
+          { txtSERIES TextBox AllTextBoxes
+            Name = "txtSERIES"
+            MoveScaled(77,0,21,3.5556)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+            Placeholder = ("publication series (vale para colecciones)")
+          }
+        }
+        { HBox30 HBox
+          MoveScaled(0,8,100,4)
           { BtnBuscarBookTitle Button
             MoveScaled(0,0,4,4)
             NoTabFocus = True
@@ -1177,7 +1204,7 @@
             MoveScaled(29,0,17,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
-            Placeholder = ("Título del libro")
+            Placeholder = ("Título general del libro")
           }
           { lblEVENTTITLEADDON5 Label
             MoveScaled(58,0,16,3.5556)
@@ -1192,7 +1219,7 @@
           }
         }
         { HBox31 HBox
-          MoveScaled(0,8,100,4)
+          MoveScaled(0,12,100,4)
           { Label39 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1203,7 +1230,7 @@
             MoveScaled(20,0,20,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
-            Placeholder = ("Título mayor")
+            Placeholder = ("Título mayor del libro")
           }
           { lblEVENTTITLEADDON3 Label
             MoveScaled(58,0,16,3.5556)
@@ -1218,7 +1245,7 @@
           }
         }
         { HBox32 HBox
-          MoveScaled(0,12,100,4)
+          MoveScaled(0,16,100,4)
           { BtnBuscarJournal Button
             MoveScaled(0,0,4,4)
             NoTabFocus = True
@@ -1251,7 +1278,7 @@
           }
         }
         { HBox33 HBox
-          MoveScaled(0,16,100,4)
+          MoveScaled(0,20,100,4)
           { Label5 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1277,7 +1304,7 @@
           }
         }
         { HBox37 HBox
-          MoveScaled(0,20,100,4)
+          MoveScaled(0,24,100,4)
           { Label43 Label
             MoveScaled(2,0,16,3.5556)
             Alignment = Align.Right
@@ -1303,7 +1330,7 @@
           }
         }
         { HBox29 HBox
-          MoveScaled(0,24,73,4)
+          MoveScaled(0,28,73,4)
           { Label4 Label
             MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
@@ -1318,7 +1345,7 @@
           }
         }
         { HBox28 HBox
-          MoveScaled(0,28,73,4)
+          MoveScaled(0,32,73,4)
           { Label40 Label
             MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
@@ -1334,7 +1361,7 @@
           }
         }
         { HBox34 HBox
-          MoveScaled(0,32,73,4)
+          MoveScaled(0,36,73,4)
           { Label6 Label
             MoveScaled(3,0,16,3.5556)
             Alignment = Align.Right
@@ -1346,21 +1373,6 @@
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Placeholder = ("title of a reprint of the work")
-          }
-        }
-        { HBox35 HBox
-          MoveScaled(0,36,73,4)
-          { Label28 Label
-            MoveScaled(0,0,16,3.5556)
-            Alignment = Align.Right
-            Text = ("Series ")
-          }
-          { txtSERIES TextBox AllTextBoxes
-            Name = "txtSERIES"
-            MoveScaled(17,0,21,3.5556)
-            Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Placeholder = ("publication series")
           }
         }
       }
