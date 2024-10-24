@@ -42,6 +42,43 @@ Public Sub Form_Open()
     Mkdir rutaAppR
   End If
 
+  ' ' validamos la creacion de carpetas y archivos
+  If Not File.RealPath(rutaAppR &/ ".gitignore") Then
+    Copy "./gitignore_BD" To rutaAppR &/ ".gitignore"
+  End If
+
+  Dim archivos As String[] = [
+    "db_tex.sqlite",
+    "falta-tapa.png",
+    "gitignore_github",
+    "gitignore_gitlab",
+    "Buscar_palabra_Gambas.py"
+  ]
+
+  For Each archivo As String In archivos
+    If Not File.RealPath(rutaApp &/ archivo) Then
+      Copy "./" & archivo To rutaApp &/ archivo
+    Endif
+  Next
+
+  ' aseguramos los scripts externos
+  Dim archivosP As String[] = [
+    "01_Error?.py", "02_ContadorGlobal.py", "03_ControlarLlaves.py", "04_ControlarCorchetes.py",
+    "05_ControlarParentesis.py", "06_ControlarPregunta.py", "07_ControlarAdmiracion.py",
+    "08_LigarSiglo.py", "09_BuscarLigaduras.py", "10_LimpiezaConExpReg.py", "11_ReemplazarComillas.py",
+    "12_ControlarNumeros.py", "13_ControlarEspacioIzquierda.py", "14_BuscarParencite.py",
+    "15_PalabrasRepetidas.py", "16_ControlarEntornos.py", "17_UniformarEndash.py"
+  ]
+
+  For Each archivopy As String In archivosP
+    If Not File.RealPath(rutaScriptsExternos &/ archivopy) Then
+      Copy "./" & archivopy To rutaScriptsExternos &/ archivopy
+    Endif
+  Next
+
+  ' ' Cargar la ruta guardada al abrir el formulario RESOLVER
+  ' Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
+
   ' Inicializamos los contadores de minutos y segundos
   horas = 0
   minutos = 0
@@ -49,21 +86,6 @@ Public Sub Form_Open()
   ' Configuramos el Timer para que se ejecute cada segundo (1000 milisegundos)
   Timer1.Delay = 1000
   Timer1.Stop  ' No iniciamos el Timer de inmediato
-
-  ' ' Cargar la ruta guardada al abrir el formulario RESOLVER
-  ' Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
-
-  Dim fecha As String
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-  ' Realizar la copia de respaldo de la base de datos
-  ' cada vez que inicia la aplicación
-  If File.RealPath(rutaApp &/ "db_tex.sqlite") Then
-    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-  Else
-    Message.Error("El archivo <stron>db_tex.sqlite</strong> no se encontró en el directorio " & rutaApp)
-    Quit
-  Endif
-  Wait 0.2
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
 
@@ -76,9 +98,6 @@ Public Sub Form_Open()
     Message.Warning(Application.Name & " ya se está ejecutando")
     Quit
   Endif
-
-  ' validamos la creacion de carpetas y archivos
-  Mod_Funciones.validarArchivos()
 
   ' Crear una nueva conexión
   conector = New Connection
@@ -114,7 +133,7 @@ Public Sub Form_Open()
     prevFiles = DirViewRuta.Files
   End If
 
-  'declaramos las ritas a utilizar
+  'declaramos las rutas a utilizar
   rutaFILES = File.Dir(TextBox1.Text) &/ "files"
   rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
   rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
@@ -293,10 +312,15 @@ End
 
 Public Sub Form_Close()
 
+  Dim fecha As String
+
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+
   ' Desconectar la base de datos
   If conector Then
     conector.Close()
     conector = Null
+    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Endif
 
   ' Guardar el último archivo abierto
@@ -589,10 +613,15 @@ End
 
 Public Sub Menu11_Click()'cerrar el programa
 
+  Dim fecha As String
+
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+
   ' Desconectar la base de datos
   If conector Then
     conector.Close()
     conector = Null
+    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Endif
 
   ' Guardar el último archivo abierto
