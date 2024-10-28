@@ -15,12 +15,13 @@ footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}
 % Idiomas y babel
 \usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
 \usepackage[autostyle=true]{csquotes}
+\frenchspacing
 \renewcommand{\spanishcontentsname}{Sumario}
 \renewcommand{\spanishindexname}{Índice alfabético}
 
 \tracinglostchars=2
 \usepackage{fontspec}
-\usepackage{microtype}
+\usepackage[final]{microtype}
 \newfontfeature{Microtypography}{protrusion=default;expansion=default}
 \directlua{fonts.protrusions.setups.default.factor=.5}
 \renewcommand{\normalsize}{\fontsize{10pt}{13.5pt}\selectfont}
