@@ -1573,8 +1573,31 @@
         Border = False
         ScrollBar = Scroll.Vertical
         Shadow = True
+        { HBox47 HBox
+          MoveScaled(0,1,88,4)
+          { lblPAGES Label
+            MoveScaled(0,0,16,4)
+            Alignment = Align.Right
+            Text = ("Pages ")
+          }
+          { txtPAGES TextBox
+            MoveScaled(17,0,7,4)
+            Expand = True
+            Placeholder = ("00-000")
+          }
+          { lblPAGETOTAL Label
+            MoveScaled(24,0,15,3.5556)
+            Alignment = Align.Right
+            Text = ("PageTotal ")
+          }
+          { txtPAGETOTAL TextBox
+            MoveScaled(42,0,21,4)
+            Expand = True
+            Placeholder = ("total number of pages")
+          }
+        }
         { HBox55 HBox
-          MoveScaled(0,0,88,4)
+          MoveScaled(0,5,88,4)
           { lblLocation Label
             MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
@@ -1600,7 +1623,7 @@
           }
         }
         { HBox61 HBox
-          MoveScaled(0,4,88,4)
+          MoveScaled(0,9,88,4)
           { Label16 Label
             MoveScaled(10,0,16,3.5556)
             Alignment = Align.Right
@@ -1627,7 +1650,7 @@
           }
         }
         { HBox50 HBox
-          MoveScaled(0,8,88,4)
+          MoveScaled(0,13,88,4)
           { lblHyphenation Label
             MoveScaled(1,0,16,3.5556)
             #Translate = False
@@ -1656,7 +1679,7 @@
           }
         }
         { HBox44 HBox
-          MoveScaled(0,12,88,4)
+          MoveScaled(0,17,88,4)
           { lblPUBSTATE Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1678,7 +1701,7 @@
           }
         }
         { HBox84 HBox
-          MoveScaled(2,16,88,4)
+          MoveScaled(2,21,88,4)
           { lblPAGETOTAL3 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1701,7 +1724,7 @@
           }
         }
         { HBox68 HBox
-          MoveScaled(2,20,88,4)
+          MoveScaled(2,25,88,4)
           { lblLocation6 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1728,7 +1751,7 @@
           }
         }
         { HBox63 HBox
-          MoveScaled(2,24,88,4)
+          MoveScaled(2,29,88,4)
           { lblIstitution Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1754,31 +1777,8 @@
             Placeholder = ("Organizador")
           }
         }
-        { HBox47 HBox
-          MoveScaled(2,28,88,4)
-          { lblPAGES Label
-            MoveScaled(0,0,16,4)
-            Alignment = Align.Right
-            Text = ("Pages ")
-          }
-          { txtPAGES TextBox
-            MoveScaled(17,0,7,4)
-            Expand = True
-            Placeholder = ("00-000")
-          }
-          { lblPAGETOTAL Label
-            MoveScaled(24,0,15,3.5556)
-            Alignment = Align.Right
-            Text = ("PageTotal ")
-          }
-          { txtPAGETOTAL TextBox
-            MoveScaled(42,0,21,4)
-            Expand = True
-            Placeholder = ("total number of pages")
-          }
-        }
         { HBox60 HBox
-          MoveScaled(2,32,88,4)
+          MoveScaled(2,33,88,4)
           { lblLocation2 Label
             MoveScaled(1,0,16,4)
             Alignment = Align.Right
@@ -2811,11 +2811,11 @@
       MoveScaled(1,45,107,42)
       Expand = True
       Arrangement = Arrange.Vertical
+      Spacing = True
       Border = False
       ScrollBar = Scroll.Vertical
       { HBox17 HBox
-        MoveScaled(1,0,87,4.4444)
-        Padding = 2
+        MoveScaled(1,0,87,4)
         { btnBuscarNombreGLO Button
           MoveScaled(1,0,4,4)
           Picture = Picture["iconos/search.svg"]
@@ -2836,8 +2836,7 @@
         }
       }
       { HBox20 HBox
-        MoveScaled(1,4,87,4.4444)
-        Padding = 2
+        MoveScaled(1,4,87,4)
         { ButtonMostrarTextoGlo Button
           MoveScaled(1,0,4,4)
           Text = ("") & "..."
@@ -2856,8 +2855,7 @@
         }
       }
       { HBox5 HBox
-        MoveScaled(1,8,87,4.4444)
-        Padding = 2
+        MoveScaled(1,8,87,4)
         { Label7 Label
           MoveScaled(2,0,16,3.5556)
           Alignment = Align.Right
@@ -2872,8 +2870,7 @@
         }
       }
       { HBox10 HBox
-        MoveScaled(1,12,87,4.4444)
-        Padding = 2
+        MoveScaled(1,12,87,4)
         { btnBuscarTextoGLO Button
           MoveScaled(1,0,4,4)
           Picture = Picture["iconos/search.svg"]
@@ -2892,8 +2889,7 @@
         }
       }
       { HBox11 HBox
-        MoveScaled(1,16,87,4.4444)
-        Padding = 2
+        MoveScaled(1,16,87,4)
         { Label1 Label
           MoveScaled(2,0,16,3.5556)
           Alignment = Align.Right
@@ -2908,8 +2904,7 @@
         }
       }
       { HBox12 HBox
-        MoveScaled(1,20,87,4.4444)
-        Padding = 2
+        MoveScaled(1,20,87,4)
         { lblLANGID2 Label
           MoveScaled(0,0,16,4)
           Alignment = Align.Right
@@ -2924,8 +2919,7 @@
         }
       }
       { HBox13 HBox
-        MoveScaled(0,24,87,4.4444)
-        Padding = 2
+        MoveScaled(0,24,87,4)
         { lblLANGID1 Label
           MoveScaled(0,0,16,4)
           Alignment = Align.Right
@@ -3016,18 +3010,19 @@
       #Public = True
       Expand = True
       Arrangement = Arrange.Vertical
+      Padding = 4
       Count = 2
       Index = 0
       Text = ("Generales y obligatorios para todas las salidas de tipo libro")
       { ScrollView10 ScrollView
-        MoveScaled(3,7,97,37)
+        MoveScaled(2,6,97,37)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
         Border = False
         ScrollBar = Scroll.Vertical
         { HBox94 HBox
-          MoveScaled(0,0,78,4.4444)
-          Padding = 2
+          MoveScaled(0,0,78,4)
           { Label76 Label
             MoveScaled(3,0,23,4)
             Alignment = Align.Right
@@ -3041,8 +3036,7 @@
           }
         }
         { HBox98 HBox
-          MoveScaled(0,4,78,4.4444)
-          Padding = 2
+          MoveScaled(0,4,78,4)
           { Label33 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3056,8 +3050,7 @@
           }
         }
         { HBox99 HBox
-          MoveScaled(0,8,78,4.4444)
-          Padding = 2
+          MoveScaled(0,8,78,4)
           { Label34 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3071,8 +3064,7 @@
           }
         }
         { HBox102 HBox
-          MoveScaled(0,12,84,4.4444)
-          Padding = 2
+          MoveScaled(0,12,84,4)
           { Label35 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3095,8 +3087,7 @@
           }
         }
         { HBox108 HBox
-          MoveScaled(0,16,78,4.4444)
-          Padding = 2
+          MoveScaled(0,16,78,4)
           { Label45 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3110,8 +3101,7 @@
           }
         }
         { HBox109 HBox
-          MoveScaled(0,20,78,4.4444)
-          Padding = 2
+          MoveScaled(0,20,78,4)
           { Label57 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3125,8 +3115,7 @@
           }
         }
         { HBox111 HBox
-          MoveScaled(0,25,78,4.4444)
-          Padding = 2
+          MoveScaled(0,25,78,4)
           { Label50 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3153,11 +3142,44 @@
         MoveScaled(2,3,94,323)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
         Border = False
         ScrollBar = Scroll.Vertical
+        { hbISBN HBox
+          MoveScaled(3,1,78,4)
+          { Label78 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("ISBN  ")
+          }
+          { !txt35_pdfisbn TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+          { PictureBox33 PictureBox
+            MoveScaled(43,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+          }
+          { PictureBox34 PictureBox
+            MoveScaled(47,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+          }
+          { PictureBox35 PictureBox
+            MoveScaled(51,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+          }
+          { PictureBox36 PictureBox
+            MoveScaled(55,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
+          }
+        }
         { HBox148 HBox
-          MoveScaled(1,1,85,4.4444)
-          Padding = 2
+          MoveScaled(3,6,85,4)
           { btnAbrirPNG Button
             MoveScaled(0,0,4,4)
             Picture = Picture["iconos/abrirBuscar.svg"]
@@ -3182,30 +3204,25 @@
             MoveScaled(61,0,4,4)
             Picture = Picture.Load("iconos/acroread.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox3 PictureBox
             MoveScaled(65,0,4,4)
             Picture = Picture.Load("iconos/web.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox4 PictureBox
             MoveScaled(69,0,4,4)
             Picture = Picture.Load("iconos/epub.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox5 PictureBox
             MoveScaled(73,0,4,4)
             Picture = Picture.Load("iconos/ms-office.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
         }
         { HBox149 HBox
-          MoveScaled(1,6,78,4.4444)
-          Padding = 2
+          MoveScaled(4,11,78,4)
           { Label97 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3217,34 +3234,9 @@
             Expand = True
             Placeholder = ("Atribución de la imagen")
           }
-          { PictureBox29 PictureBox
-            MoveScaled(43,0,4,4)
-            Picture = Picture.Load("iconos/acroread.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox30 PictureBox
-            MoveScaled(47,0,4,4)
-            Picture = Picture.Load("iconos/web.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox31 PictureBox
-            MoveScaled(51,0,4,4)
-            Picture = Picture.Load("iconos/epub.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox32 PictureBox
-            MoveScaled(55,0,4,4)
-            Picture = Picture.Load("iconos/ms-office.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
         }
         { HBox150 HBox
-          MoveScaled(1,11,85,4.4444)
-          Padding = 2
+          MoveScaled(2,16,85,4)
           { btnMostrarColeccion Button
             MoveScaled(0,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
@@ -3277,30 +3269,25 @@
             MoveScaled(71,0,4,4)
             Picture = Picture.Load("iconos/acroread.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox26 PictureBox
             MoveScaled(75,0,4,4)
             Picture = Picture.Load("iconos/web.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox27 PictureBox
             MoveScaled(79,0,4,4)
             Picture = Picture.Load("iconos/epub.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox28 PictureBox
             MoveScaled(83,0,4,4)
             Picture = Picture.Load("iconos/ms-office.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
         }
         { HBox151 HBox
-          MoveScaled(1,16,78,4.4444)
-          Padding = 2
+          MoveScaled(1,28,78,4)
           { Label99 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3321,107 +3308,25 @@
             MoveScaled(51,0,4,4)
             Picture = Picture.Load("iconos/acroread.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox22 PictureBox
             MoveScaled(55,0,4,4)
             Picture = Picture.Load("iconos/web.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox23 PictureBox
             MoveScaled(59,0,4,4)
             Picture = Picture.Load("iconos/epub.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox24 PictureBox
             MoveScaled(63,0,4,4)
             Picture = Picture.Load("iconos/ms-office.svg")
             Alignment = Align.Center
-            Border = Border.Etched
-          }
-        }
-        { hbISBN HBox
-          MoveScaled(0,21,78,4.4444)
-          Padding = 2
-          { Label78 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("ISBN  ")
-          }
-          { !txt35_pdfisbn TextBox
-            MoveScaled(27,0,16,4)
-            #Public = True
-            Expand = True
-          }
-          { PictureBox33 PictureBox
-            MoveScaled(43,0,4,4)
-            Picture = Picture.Load("iconos/acroread.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox34 PictureBox
-            MoveScaled(47,0,4,4)
-            Picture = Picture.Load("iconos/web.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox35 PictureBox
-            MoveScaled(51,0,4,4)
-            Picture = Picture.Load("iconos/epub.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox36 PictureBox
-            MoveScaled(55,0,4,4)
-            Picture = Picture.Load("iconos/ms-office.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-        }
-        { HBox106 HBox
-          MoveScaled(0,26,88,4.4444)
-          Padding = 2
-          { Label38 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("Tipo de licencia  ")
-          }
-          { !txt15_pdfcopyright ComboBox
-            MoveScaled(24,0,37,4)
-            #Public = True
-            Expand = True
-            ReadOnly = True
-          }
-          { PictureBox17 PictureBox
-            MoveScaled(61,0,4,4)
-            Picture = Picture.Load("iconos/acroread.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox18 PictureBox
-            MoveScaled(65,0,4,4)
-            Picture = Picture.Load("iconos/web.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox19 PictureBox
-            MoveScaled(69,0,4,4)
-            Picture = Picture.Load("iconos/epub.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
-          }
-          { PictureBox20 PictureBox
-            MoveScaled(73,0,4,4)
-            Picture = Picture.Load("iconos/ms-office.svg")
-            Alignment = Align.Center
-            Border = Border.Etched
           }
         }
         { HBox107 HBox
-          MoveScaled(0,31,78,4.4444)
-          Padding = 2
+          MoveScaled(1,33,78,4)
           { Label41 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3438,30 +3343,59 @@
             MoveScaled(43,0,4,4)
             Picture = Picture.Load("iconos/acroread.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox14 PictureBox
             MoveScaled(47,0,4,4)
             Picture = Picture.Load("iconos/web.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox15 PictureBox
             MoveScaled(51,0,4,4)
             Picture = Picture.Load("iconos/epub.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox16 PictureBox
             MoveScaled(55,0,4,4)
             Picture = Picture.Load("iconos/ms-office.svg")
             Alignment = Align.Center
-            Border = Border.Etched
+          }
+        }
+        { HBox106 HBox
+          MoveScaled(1,37,88,4)
+          { Label38 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Tipo de licencia  ")
+          }
+          { !txt15_pdfcopyright ComboBox
+            MoveScaled(24,0,37,4)
+            #Public = True
+            Expand = True
+            ReadOnly = True
+          }
+          { PictureBox17 PictureBox
+            MoveScaled(61,0,4,4)
+            Picture = Picture.Load("iconos/acroread.svg")
+            Alignment = Align.Center
+          }
+          { PictureBox18 PictureBox
+            MoveScaled(65,0,4,4)
+            Picture = Picture.Load("iconos/web.svg")
+            Alignment = Align.Center
+          }
+          { PictureBox19 PictureBox
+            MoveScaled(69,0,4,4)
+            Picture = Picture.Load("iconos/epub.svg")
+            Alignment = Align.Center
+          }
+          { PictureBox20 PictureBox
+            MoveScaled(73,0,4,4)
+            Picture = Picture.Load("iconos/ms-office.svg")
+            Alignment = Align.Center
           }
         }
         { HBox97 HBox
-          MoveScaled(1,41,78,4.4444)
-          Padding = 2
+          MoveScaled(1,41,78,4)
           { Label32 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3477,30 +3411,25 @@
             MoveScaled(43,0,4,4)
             Picture = Picture.Load("iconos/acroread.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox6 PictureBox
             MoveScaled(47,0,4,4)
             Picture = Picture.Load("iconos/web.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox7 PictureBox
             MoveScaled(51,0,4,4)
             Picture = Picture.Load("iconos/epub.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
           { PictureBox8 PictureBox
             MoveScaled(55,0,4,4)
             Picture = Picture.Load("iconos/ms-office.svg")
             Alignment = Align.Center
-            Border = Border.Etched
           }
         }
         { HBox95 HBox
-          MoveScaled(1,46,78,4.4444)
-          Padding = 2
+          MoveScaled(1,46,78,4)
           { Label31 Label
             MoveScaled(3,0,23,3.5556)
             Alignment = Align.Right
@@ -3535,8 +3464,7 @@
           }
         }
         { HBox96 HBox
-          MoveScaled(0,51,78,4.4444)
-          Padding = 2
+          MoveScaled(0,51,78,4)
           { Label58 Label
             MoveScaled(3,0,23,4)
             Alignment = Align.Right
@@ -3550,8 +3478,7 @@
           }
         }
         { HBox100 HBox
-          MoveScaled(0,56,78,4.4444)
-          Padding = 2
+          MoveScaled(0,56,78,4)
           { Label59 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3579,8 +3506,7 @@
           }
         }
         { HBox101 HBox
-          MoveScaled(0,61,78,4.4444)
-          Padding = 2
+          MoveScaled(0,61,78,4)
           { Label60 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3605,8 +3531,7 @@
           }
         }
         { HBox103 HBox
-          MoveScaled(0,66,84,4.4444)
-          Padding = 2
+          MoveScaled(0,66,84,4)
           { Label42 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3630,8 +3555,7 @@
           }
         }
         { HBox104 HBox
-          MoveScaled(0,71,84,4.4444)
-          Padding = 2
+          MoveScaled(0,71,84,4)
           { Label36 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3655,8 +3579,7 @@
           }
         }
         { HBox105 HBox
-          MoveScaled(0,76,84,4.4444)
-          Padding = 2
+          MoveScaled(0,76,84,4)
           { Label37 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3669,8 +3592,7 @@
           }
         }
         { HBox110 HBox
-          MoveScaled(0,81,78,4.4444)
-          Padding = 2
+          MoveScaled(0,81,78,4)
           { Label47 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3684,8 +3606,7 @@
           }
         }
         { HBox112 HBox
-          MoveScaled(0,86,78,4.4444)
-          Padding = 2
+          MoveScaled(0,86,78,4)
           { Label51 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3700,8 +3621,7 @@
           }
         }
         { HBox113 HBox
-          MoveScaled(0,90,78,4.4444)
-          Padding = 2
+          MoveScaled(0,90,78,4)
           { Label52 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3714,8 +3634,7 @@
           }
         }
         { HBox114 HBox
-          MoveScaled(0,94,78,4.4444)
-          Padding = 2
+          MoveScaled(0,94,78,4)
           { Label53 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3728,8 +3647,7 @@
           }
         }
         { HBox115 HBox
-          MoveScaled(0,98,78,4.4444)
-          Padding = 2
+          MoveScaled(0,98,78,4)
           { Label54 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3742,8 +3660,7 @@
           }
         }
         { HBox116 HBox
-          MoveScaled(0,102,78,4.4444)
-          Padding = 2
+          MoveScaled(0,102,78,4)
           { Label55 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3756,8 +3673,7 @@
           }
         }
         { HBox117 HBox
-          MoveScaled(0,106,78,4.4444)
-          Padding = 2
+          MoveScaled(0,106,78,4)
           { Label56 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3770,8 +3686,7 @@
           }
         }
         { HBox118 HBox
-          MoveScaled(0,110,78,4.4444)
-          Padding = 2
+          MoveScaled(0,110,78,4)
           { Label61 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3784,8 +3699,7 @@
           }
         }
         { HBox119 HBox
-          MoveScaled(0,114,78,4.4444)
-          Padding = 2
+          MoveScaled(0,114,78,4)
           { Label62 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3798,8 +3712,7 @@
           }
         }
         { HBox120 HBox
-          MoveScaled(0,118,78,4.4444)
-          Padding = 2
+          MoveScaled(0,118,78,4)
           { btnMostarJournal2 Button
             MoveScaled(0,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
@@ -3821,8 +3734,7 @@
           }
         }
         { HBox121 HBox
-          MoveScaled(0,122,78,4.4444)
-          Padding = 2
+          MoveScaled(0,122,78,4)
           { Label66 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3836,8 +3748,7 @@
           }
         }
         { HBox122 HBox
-          MoveScaled(0,126,78,4.4444)
-          Padding = 2
+          MoveScaled(0,126,78,4)
           { Label64 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3851,8 +3762,7 @@
           }
         }
         { HBox123 HBox
-          MoveScaled(0,130,78,4.4444)
-          Padding = 2
+          MoveScaled(0,130,78,4)
           { Label65 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3866,8 +3776,7 @@
           }
         }
         { HBox124 HBox
-          MoveScaled(0,134,78,4.4444)
-          Padding = 2
+          MoveScaled(0,134,78,4)
           { Label67 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3881,8 +3790,7 @@
           }
         }
         { HBox125 HBox
-          MoveScaled(0,138,78,4.4444)
-          Padding = 2
+          MoveScaled(0,138,78,4)
           { Label68 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3896,8 +3804,7 @@
           }
         }
         { HBox126 HBox
-          MoveScaled(0,142,78,4.4444)
-          Padding = 2
+          MoveScaled(0,142,78,4)
           { Label69 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3917,8 +3824,7 @@
           }
         }
         { HBox127 HBox
-          MoveScaled(0,146,78,4.4444)
-          Padding = 2
+          MoveScaled(0,146,78,4)
           { Label70 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3938,8 +3844,7 @@
           }
         }
         { HBox170 HBox
-          MoveScaled(0,150,78,4.4444)
-          Padding = 2
+          MoveScaled(0,150,78,4)
           { Label118 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3952,8 +3857,7 @@
           }
         }
         { HBox128 HBox
-          MoveScaled(0,155,78,4.4444)
-          Padding = 2
+          MoveScaled(0,155,78,4)
           { Label71 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3965,8 +3869,7 @@
           }
         }
         { HBox129 HBox
-          MoveScaled(0,159,78,4.4444)
-          Padding = 2
+          MoveScaled(0,159,78,4)
           { Label72 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3978,8 +3881,7 @@
           }
         }
         { HBox130 HBox
-          MoveScaled(0,163,78,4.4444)
-          Padding = 2
+          MoveScaled(0,163,78,4)
           { Label73 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4004,8 +3906,7 @@
           }
         }
         { HBox131 HBox
-          MoveScaled(0,167,78,4.4444)
-          Padding = 2
+          MoveScaled(0,167,78,4)
           { Label74 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4030,8 +3931,7 @@
           }
         }
         { HBox132 HBox
-          MoveScaled(0,171,78,4.4444)
-          Padding = 2
+          MoveScaled(0,171,78,4)
           { Label77 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4045,8 +3945,7 @@
           }
         }
         { hbISSN HBox
-          MoveScaled(0,179,78,4.4444)
-          Padding = 2
+          MoveScaled(0,179,78,4)
           { Label79 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4062,8 +3961,7 @@
           }
         }
         { hbEISSN HBox
-          MoveScaled(0,183,78,4.4444)
-          Padding = 2
+          MoveScaled(0,183,78,4)
           { Label80 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4079,8 +3977,7 @@
           }
         }
         { HBox133 HBox
-          MoveScaled(0,187,78,4.4444)
-          Padding = 2
+          MoveScaled(0,187,78,4)
           { Label81 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4097,8 +3994,7 @@
           }
         }
         { HBox134 HBox
-          MoveScaled(0,191,78,4.4444)
-          Padding = 2
+          MoveScaled(0,191,78,4)
           { Label82 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -4116,8 +4012,7 @@
           }
         }
         { HBox135 HBox
-          MoveScaled(0,195,78,4.4444)
-          Padding = 2
+          MoveScaled(0,195,78,4)
           { Label83 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4130,8 +4025,7 @@
           }
         }
         { HBox136 HBox
-          MoveScaled(0,199,78,4.4444)
-          Padding = 2
+          MoveScaled(0,199,78,4)
           { Label84 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4145,8 +4039,7 @@
           }
         }
         { HBox137 HBox
-          MoveScaled(0,204,78,4.4444)
-          Padding = 2
+          MoveScaled(0,204,78,4)
           { Label85 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4159,8 +4052,7 @@
           }
         }
         { HBox138 HBox
-          MoveScaled(0,208,78,4.4444)
-          Padding = 2
+          MoveScaled(0,208,78,4)
           { Label86 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4173,8 +4065,7 @@
           }
         }
         { HBox139 HBox
-          MoveScaled(0,212,78,4.4444)
-          Padding = 2
+          MoveScaled(0,212,78,4)
           { Label87 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4188,8 +4079,7 @@
           }
         }
         { HBox140 HBox
-          MoveScaled(0,216,78,4.4444)
-          Padding = 2
+          MoveScaled(0,216,78,4)
           { Label88 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4202,8 +4092,7 @@
           }
         }
         { HBox141 HBox
-          MoveScaled(0,220,78,4.4444)
-          Padding = 2
+          MoveScaled(0,220,78,4)
           { Label89 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4216,8 +4105,7 @@
           }
         }
         { HBox142 HBox
-          MoveScaled(0,224,78,4.4444)
-          Padding = 2
+          MoveScaled(0,224,78,4)
           { Label90 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4231,8 +4119,7 @@
           }
         }
         { HBox143 HBox
-          MoveScaled(0,228,78,4.4444)
-          Padding = 2
+          MoveScaled(0,228,78,4)
           { Label91 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4246,8 +4133,7 @@
           }
         }
         { HBox144 HBox
-          MoveScaled(0,232,78,4.4444)
-          Padding = 2
+          MoveScaled(0,232,78,4)
           { Label92 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4261,8 +4147,7 @@
           }
         }
         { HBox145 HBox
-          MoveScaled(0,236,78,4.4444)
-          Padding = 2
+          MoveScaled(0,236,78,4)
           { btnVerResumen Button
             MoveScaled(1,0,4,4)
             Text = ("") & "..."
@@ -4280,8 +4165,7 @@
           }
         }
         { HBox146 HBox
-          MoveScaled(0,240,78,4.4444)
-          Padding = 2
+          MoveScaled(0,240,78,4)
           { btnVerAbstract Button
             MoveScaled(1,0,4,4)
             Text = ("") & "..."
@@ -4299,8 +4183,7 @@
           }
         }
         { HBox147 HBox
-          MoveScaled(0,244,78,4.4444)
-          Padding = 2
+          MoveScaled(0,244,78,4)
           { Label95 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4314,8 +4197,7 @@
           }
         }
         { HBox152 HBox
-          MoveScaled(0,249,85,4.4444)
-          Padding = 2
+          MoveScaled(0,249,85,4)
           { Label100 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4339,8 +4221,7 @@
           }
         }
         { HBox153 HBox
-          MoveScaled(0,253,78,4.4444)
-          Padding = 2
+          MoveScaled(0,253,78,4)
           { Label101 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4354,8 +4235,7 @@
           }
         }
         { HBox154 HBox
-          MoveScaled(0,257,78,4.4444)
-          Padding = 2
+          MoveScaled(0,257,78,4)
           { Label102 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4369,8 +4249,7 @@
           }
         }
         { HBox155 HBox
-          MoveScaled(0,261,78,4.4444)
-          Padding = 2
+          MoveScaled(0,261,78,4)
           { Label103 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4384,8 +4263,7 @@
           }
         }
         { HBox156 HBox
-          MoveScaled(0,265,78,4.4444)
-          Padding = 2
+          MoveScaled(0,265,78,4)
           { Label104 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4398,8 +4276,7 @@
           }
         }
         { HBox157 HBox
-          MoveScaled(0,269,78,4.4444)
-          Padding = 2
+          MoveScaled(0,269,78,4)
           { Label105 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4412,8 +4289,7 @@
           }
         }
         { HBox158 HBox
-          MoveScaled(0,273,78,4.4444)
-          Padding = 2
+          MoveScaled(0,273,78,4)
           { btnVerNota Button
             MoveScaled(1,0,4,4)
             Text = ("") & "..."
@@ -4431,8 +4307,7 @@
           }
         }
         { HBox159 HBox
-          MoveScaled(0,277,78,4.4444)
-          Padding = 2
+          MoveScaled(0,277,78,4)
           { btnMostarRevision Button
             MoveScaled(0,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
@@ -4456,8 +4331,7 @@
           }
         }
         { HBox160 HBox
-          MoveScaled(0,281,78,4.4444)
-          Padding = 2
+          MoveScaled(0,281,78,4)
           { Label108 Label
             MoveScaled(2,0,23,4)
             Alignment = Align.Right
@@ -4471,8 +4345,7 @@
           }
         }
         { HBox161 HBox
-          MoveScaled(0,285,78,4.4444)
-          Padding = 2
+          MoveScaled(0,285,78,4)
           { Label109 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4486,8 +4359,7 @@
           }
         }
         { HBox162 HBox
-          MoveScaled(0,289,78,4.4444)
-          Padding = 2
+          MoveScaled(0,289,78,4)
           { Label110 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4501,8 +4373,7 @@
           }
         }
         { HBox163 HBox
-          MoveScaled(0,293,78,4.4444)
-          Padding = 2
+          MoveScaled(0,293,78,4)
           { Label111 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4525,8 +4396,7 @@
           }
         }
         { HBox164 HBox
-          MoveScaled(0,297,78,4.4444)
-          Padding = 2
+          MoveScaled(0,297,78,4)
           { Label112 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4549,8 +4419,7 @@
           }
         }
         { HBox165 HBox
-          MoveScaled(0,301,78,4.4444)
-          Padding = 2
+          MoveScaled(0,301,78,4)
           { Label113 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4573,8 +4442,7 @@
           }
         }
         { HBox166 HBox
-          MoveScaled(0,305,78,4.4444)
-          Padding = 2
+          MoveScaled(0,305,78,4)
           { btnMostarConferencia Button
             MoveScaled(1,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
@@ -4604,8 +4472,7 @@
           }
         }
         { HBox167 HBox
-          MoveScaled(0,309,78,4.4444)
-          Padding = 2
+          MoveScaled(0,309,78,4)
           { Label115 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4619,8 +4486,7 @@
           }
         }
         { HBox169 HBox
-          MoveScaled(0,313,78,4.4444)
-          Padding = 2
+          MoveScaled(0,313,78,4)
           { Label117 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4634,8 +4500,7 @@
           }
         }
         { HBox168 HBox
-          MoveScaled(0,317,78,4.4444)
-          Padding = 2
+          MoveScaled(0,317,78,4)
           { Label116 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
