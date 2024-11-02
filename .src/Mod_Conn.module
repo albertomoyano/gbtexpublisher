@@ -7,7 +7,7 @@ Public Function conectar() As Connection
   Dim conector As New Connection
 
   conector.Type = "sqlite"
-  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
   conector.Name = "db_tex.sqlite"
   Try conector.Open()
   Return conector

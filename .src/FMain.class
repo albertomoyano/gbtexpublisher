@@ -48,7 +48,6 @@ Public Sub Form_Open()
   End If
 
   Dim archivos As String[] = [
-    "db_tex.sqlite",
     "falta-tapa.png",
     "gitignore_github",
     "gitignore_gitlab",
@@ -104,7 +103,7 @@ Public Sub Form_Open()
 
   ' Configurar los parámetros de conexión
   conector.Type = "sqlite"
-  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
   conector.Name = "db_tex.sqlite"
 
   ' Intentar abrir la conexión
@@ -320,7 +319,7 @@ Public Sub Form_Close()
   If conector Then
     conector.Close()
     conector = Null
-    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+    ' Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Endif
 
   ' Guardar el último archivo abierto
@@ -621,7 +620,7 @@ Public Sub Menu11_Click()'cerrar el programa
   If conector Then
     conector.Close()
     conector = Null
-    Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+    ' Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
   Endif
 
   ' Guardar el último archivo abierto
@@ -4935,57 +4934,57 @@ Public Sub BtnBuscarBookTitle_Click()
 
 End
 
-Public Sub menuRespaldoBDD_Click()
-
-  Dim fecha As String
-  Dim usuario As String = Trim(txtGIT.Text)
-  Dim IdGitHub As String = "git@github.com:" & usuario & "/respaldogbTeX.git"
-
-  TabPanel1.Index = 0
-
-  ' Obtener la fecha actual
-  fecha = Format(Date(), "dd-mm-yyyy")
-
-  ' Verificar si el nombre de usuario está vacío
-  If usuario = "" Then
-    Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
-    Return
-  End If
-
-  ' Desconectar la base de datos
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
-
-  'hacemos una copia de respaldo de la base de datos
-  Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
-  Wait 0.2
-
-  TabPanel1.Index = 0
-  TerminalView1.Input("clear" & "\n")
-  TerminalView1.Input("cd " & User.Home & "/.respaldogbTeX/" & "\n")
-  TerminalView1.Input("git remote remove origin" & "\n")
-  TerminalView1.Input("git remote add origin " & IdGitHub & "\n") '
-  TerminalView1.Input("git add ." & "\n")
-  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
-  TerminalView1.Input("git push --set-upstream origin main" & "\n")
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n")
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
-
-  ' abrimos nuevamente la conexión a la base de datos
-  conector = New Connection
-  conector.Type = "sqlite"
-  conector.Host = rutaApp
-  conector.Name = "db_tex.sqlite"
-
-  Try conector.Open()
-  If Error Then
-    Message.Error("No se pudo volver a conectar a la base de datos.")
-  Endif
-
-End
+' Public Sub menuRespaldoBDD_Click()
+'
+'   Dim fecha As String
+'   Dim usuario As String = Trim(txtGIT.Text)
+'   Dim IdGitHub As String = "git@github.com:" & usuario & "/respaldogbTeX.git"
+'
+'   TabPanel1.Index = 0
+'
+'   ' Obtener la fecha actual
+'   fecha = Format(Date(), "dd-mm-yyyy")
+'
+'   ' Verificar si el nombre de usuario está vacío
+'   If usuario = "" Then
+'     Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
+'     Return
+'   End If
+'
+'   ' Desconectar la base de datos
+'   If conector Then
+'     conector.Close()
+'     conector = Null
+'   Endif
+'
+'   'hacemos una copia de respaldo de la base de datos
+'   Shell "cp " & rutaApp &/ "db_tex.sqlite" & " " & rutaAppR &/ fecha & "-" & "db_tex.sqlite"
+'   Wait 0.2
+'
+'   TabPanel1.Index = 0
+'   TerminalView1.Input("clear" & "\n")
+'   TerminalView1.Input("cd " & User.Home & "/.respaldogbTeX/" & "\n")
+'   TerminalView1.Input("git remote remove origin" & "\n")
+'   TerminalView1.Input("git remote add origin " & IdGitHub & "\n") '
+'   TerminalView1.Input("git add ." & "\n")
+'   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
+'   TerminalView1.Input("git push --set-upstream origin main" & "\n")
+'   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n")
+'   TerminalView1.SetFocus()
+'   TerminalView1.Refresh()
+'
+'   ' abrimos nuevamente la conexión a la base de datos
+'   conector = New Connection
+'   conector.Type = "sqlite"
+'   conector.Host = rutaApp
+'   conector.Name = "db_tex.sqlite"
+'
+'   Try conector.Open()
+'   If Error Then
+'     Message.Error("No se pudo volver a conectar a la base de datos.")
+'   Endif
+'
+' End
 
 Public Sub txtABSTRACT_DblClick()
 

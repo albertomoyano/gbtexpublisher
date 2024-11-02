@@ -23,7 +23,7 @@ Public Sub Form_Open()
 
   ' Configurar los parámetros de conexión
   conector.Type = "sqlite"
-  conector.Host = User.Home &/ ".gbtexpublisher"
+  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
   conector.Name = "db_tex.sqlite"
 
   ' Intentar abrir la conexión
