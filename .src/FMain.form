@@ -186,10 +186,6 @@
       Text = ("Respado de la BDD en GitHub")
       Picture = Picture["iconos/exportar.svg"]
     }
-    { menuRespaldoSQL Menu
-      Text = ("Ubicación del respaldo de la BBDD")
-      Picture = Picture["iconos/exportar.svg"]
-    }
     { rentaTrabajo Menu
       Text = ("Rentabilizar tiempo de trabajo")
       Picture = Picture["iconos/renta.svg"]
