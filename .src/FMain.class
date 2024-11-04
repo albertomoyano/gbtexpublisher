@@ -6383,6 +6383,7 @@ Public Sub habilitamosLibro()
   btnCOMPhtml.Enabled = True
   btnCOMPepub.Enabled = True
   btnCOMPdocx.Enabled = True
+  btnLibroCompliarXML.Enabled = True
   btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False
@@ -6409,6 +6410,7 @@ Public Sub habilitamosRevista()
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPdocx.Enabled = False
+  btnLibroCompliarXML.Enabled = False
   btnGitHubPages.Enabled = True
   btnCOMPpdfRevista.Enabled = True
   btnCOMPrevistaHTML.Enabled = True
@@ -6435,6 +6437,7 @@ Public Sub habilitamosMonografia()
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPdocx.Enabled = False
+  btnLibroCompliarXML.Enabled = False
   btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False

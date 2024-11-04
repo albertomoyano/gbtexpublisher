@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,130,390)
+  MoveScaled(0,0,165,390)
   Expand = True
   Icon = Picture["iconos/icono-gbtex.svg"]
   Maximized = True
@@ -372,9 +372,9 @@
     }
   }
   { HBox171 HBox
-    MoveScaled(-3,0,134,4)
+    MoveScaled(1,0,163,4)
     { btnAbrirLibro Button
-      MoveScaled(2,0,14,4)
+      MoveScaled(0,0,14,4)
       Text = ("Libro")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
@@ -399,52 +399,57 @@
       Text = ("DOCX")
       Picture = Picture["iconos/ms-office.svg"]
     }
+    { btnLibroCompliarXML Button
+      MoveScaled(49.8889,0,8.8889,4)
+      Text = ("XML")
+      Picture = Picture["iconos/xml.svg"]
+    }
     { Separator2 Separator
-      MoveScaled(50,0,2.3333,4)
+      MoveScaled(59,0,2.3333,4)
     }
     { btnAbrirRevista Button
-      MoveScaled(52,0,14,4)
+      MoveScaled(61,0,14,4)
       Text = ("Revista")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista Button
-      MoveScaled(63,0,8.8889,4)
+      MoveScaled(75,0,8.8889,4)
       ToolTip = ("PDF de revista")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnCOMPrevistaHTML Button
-      MoveScaled(72,0,8.8889,4)
+      MoveScaled(84,0,8.8889,4)
       Text = ("HTML")
       Picture = Picture["iconos/web.svg"]
     }
     { btnGitHubPages Button
-      MoveScaled(81,0,8.8889,4)
+      MoveScaled(93,0,8.8889,4)
       Text = ("Pages")
       Picture = Picture["iconos/github-mark.svg"]
     }
     { btnRevistaCompliarXML Button
-      MoveScaled(90,0,8.8889,4)
+      MoveScaled(102,0,8.8889,4)
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
     }
     { Separator3 Separator
-      MoveScaled(99,0,2.3333,4)
+      MoveScaled(111,0,2.3333,4)
     }
     { btnAbrirMonografia Button
-      MoveScaled(101,0,14,4)
+      MoveScaled(113,0,14,4)
       NoTabFocus = True
       Text = ("Monografía")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnMONOpdf Button
-      MoveScaled(115,0,8.8889,4)
+      MoveScaled(127,0,8.8889,4)
       ToolTip = ("PDF de libro")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnMonoDocx Button
-      MoveScaled(124,0,8.8889,4)
+      MoveScaled(136,0,8.8889,4)
       Text = ("DOCX")
       Picture = Picture["iconos/ms-office.svg"]
     }
