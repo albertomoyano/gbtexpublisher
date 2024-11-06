@@ -3338,7 +3338,7 @@
           { Label72 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
-            Text = ("Número de serie (issue)  ")
+            Text = ("Núm. de serie (o colección)  ")
           }
           { !txtIssueNum TextBox
             MoveScaled(27,0,20,4)
