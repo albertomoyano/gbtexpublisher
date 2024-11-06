@@ -3142,7 +3142,7 @@
       Index = 1
       Text = ("Particulares a cada tipo de salida  de tipo libro")
       { ScrollView1 ScrollView
-        MoveScaled(2,11,81,156)
+        MoveScaled(1,1,81,156)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -3257,26 +3257,8 @@
             Placeholder = ("Total de páginas del documento")
           }
         }
-        { HBox145 HBox
-          MoveScaled(1,29,78,4)
-          { btnVerResumen Button
-            MoveScaled(1,0,4,4)
-            Text = ("") & "..."
-          }
-          { Label93 Label
-            MoveScaled(7,0,19,4)
-            Alignment = Align.Right
-            Text = ("Resumen  ")
-          }
-          { !txt56_resumen TextBox
-            MoveScaled(27,0,16,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("Resumen en idioma principal")
-          }
-        }
         { HBox126 HBox
-          MoveScaled(1,33,78,4)
+          MoveScaled(1,29,78,4)
           { Label69 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3298,7 +3280,7 @@
           }
         }
         { HBox133 HBox
-          MoveScaled(1,37,78,4)
+          MoveScaled(1,33,78,4)
           { Label81 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3318,7 +3300,7 @@
           }
         }
         { HBox127 HBox
-          MoveScaled(1,44,78,4)
+          MoveScaled(1,37,78,4)
           { Label70 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3340,7 +3322,7 @@
           }
         }
         { HBox128 HBox
-          MoveScaled(1,48,78,4)
+          MoveScaled(1,41,78,4)
           { Label71 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3352,7 +3334,7 @@
           }
         }
         { HBox129 HBox
-          MoveScaled(1,52,78,4)
+          MoveScaled(1,45,78,4)
           { Label72 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3364,7 +3346,7 @@
           }
         }
         { HBox132 HBox
-          MoveScaled(1,56,78,4)
+          MoveScaled(1,49,78,4)
           { Label77 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3377,7 +3359,7 @@
           }
         }
         { HBox134 HBox
-          MoveScaled(1,60,78,4)
+          MoveScaled(1,53,78,4)
           { Label82 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3398,7 +3380,7 @@
           }
         }
         { HBox135 HBox
-          MoveScaled(1,64,78,4)
+          MoveScaled(1,57,78,4)
           { Label83 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3411,7 +3393,7 @@
           }
         }
         { HBox140 HBox
-          MoveScaled(1,68,78,4)
+          MoveScaled(1,61,78,4)
           { Label88 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3433,7 +3415,7 @@
           }
         }
         { HBox141 HBox
-          MoveScaled(1,72,78,4)
+          MoveScaled(1,65,78,4)
           { Label89 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3455,7 +3437,7 @@
           }
         }
         { HBox142 HBox
-          MoveScaled(1,76,78,4)
+          MoveScaled(1,69,78,4)
           { Label90 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3469,7 +3451,7 @@
           }
         }
         { HBox143 HBox
-          MoveScaled(1,80,78,4)
+          MoveScaled(1,73,78,4)
           { Label91 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3483,7 +3465,7 @@
           }
         }
         { HBox144 HBox
-          MoveScaled(1,84,78,4)
+          MoveScaled(1,77,78,4)
           { Label92 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3497,7 +3479,7 @@
           }
         }
         { HBox174 HBox
-          MoveScaled(0,90,78,4)
+          MoveScaled(1,81,78,4)
           { Label126 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3510,7 +3492,7 @@
           }
         }
         { HBox112 HBox
-          MoveScaled(0,94,78,4)
+          MoveScaled(1,85,78,4)
           { Label51 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3525,7 +3507,7 @@
           }
         }
         { HBox113 HBox
-          MoveScaled(0,98,78,4)
+          MoveScaled(1,89,78,4)
           { Label52 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3538,7 +3520,7 @@
           }
         }
         { HBox114 HBox
-          MoveScaled(0,102,78,4)
+          MoveScaled(1,93,78,4)
           { Label53 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3551,7 +3533,7 @@
           }
         }
         { HBox116 HBox
-          MoveScaled(0,106,78,4)
+          MoveScaled(1,97,78,4)
           { Label55 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3564,7 +3546,7 @@
           }
         }
         { HBox115 HBox
-          MoveScaled(0,110,78,4)
+          MoveScaled(1,101,78,4)
           { Label54 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3577,7 +3559,7 @@
           }
         }
         { HBox117 HBox
-          MoveScaled(0,114,78,4)
+          MoveScaled(1,105,78,4)
           { Label56 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3590,7 +3572,7 @@
           }
         }
         { HBox118 HBox
-          MoveScaled(0,118,78,4)
+          MoveScaled(1,109,78,4)
           { Label61 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3603,7 +3585,7 @@
           }
         }
         { HBox119 HBox
-          MoveScaled(0,122,78,4)
+          MoveScaled(1,113,78,4)
           { Label62 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4259,6 +4241,24 @@
           Expand = True
           ReadOnly = True
           Placeholder = ("Se refiere al ISSN de la versión electrónica del documento")
+        }
+      }
+      { HBox145 HBox
+        MoveScaled(0,141,78,4)
+        { btnVerResumen Button
+          MoveScaled(1,0,4,4)
+          Text = ("") & "..."
+        }
+        { Label93 Label
+          MoveScaled(7,0,19,4)
+          Alignment = Align.Right
+          Text = ("Resumen  ")
+        }
+        { !txt56_resumen TextBox
+          MoveScaled(27,0,16,4)
+          #Public = True
+          Expand = True
+          Placeholder = ("Resumen en idioma principal")
         }
       }
       { HBox137 HBox
