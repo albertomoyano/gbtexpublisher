@@ -27,6 +27,10 @@ footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}
 \renewcommand{\normalsize}{\fontsize{10pt}{13.5pt}\selectfont}
 \topskip=13.5pt
 
+%% tipografía De Gruyter
+% \setmainfont{De Gruyter Serif}
+% [Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.15]
+
 % tipografía Libertinus
 \setmainfont{Libertinus Serif}
 [Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.18]
@@ -539,6 +543,8 @@ uniquelist=minyear]{biblatex}
 	patrequk         = {solicitud de patente británica},
 	patrequs         = {solicitud de patente estadounidense},
 	bycompiler       = {comp\adddotspace por},
+	issue            = {n.\sptext{o}},
+	number           = {n.\sptext{o}},
 }
 
 % corrección para año original
@@ -554,7 +560,7 @@ uniquelist=minyear]{biblatex}
 % generamos los índices
 \usepackage[xindy]{imakeidx}
 \makeindex
-\makeindex[name=names,title={Índice de autoras y autores del aparato bibliográfico}]
+\makeindex[name=names]
 \makeindex[name=concepto,title={Índice de conceptos}]
 \makeindex[name=onomastico,title={Índice onomástico}]
 
