@@ -1,12 +1,11 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,950,740)
+  Move(0,0,954,621)
   #Scaled = False
   Expand = True
   Resizable = False
   Arrangement = Arrange.Vertical
-  AutoResize = True
   Spacing = True
   Margin = True
   Padding = 4
@@ -48,7 +47,7 @@
     }
   }
   { HBox6 Panel
-    Move(0,50,477,108)
+    Move(9,81,225,108)
     NoTabFocus = True
     Expand = True
     Arrangement = Arrange.Horizontal
@@ -65,9 +64,12 @@
     }
   }
   { HBox3 Panel
-    Move(0,160,900,510)
+    Move(9,324,639,279)
     NoTabFocus = True
+    Expand = True
     Arrangement = Arrange.Vertical
+    Margin = True
+    Padding = 4
     { HBox2 HBox
       Move(0,0,558,36)
       { lblAlta2 Label
@@ -152,18 +154,18 @@
         Expand = True
       }
     }
-  }
-  { HBox1 HBox
-    Move(10,680,792,36)
-    { Spring2 Spring
-      Move(126,0,126,36)
-    }
-    { btnSeleccion Button
-      Move(270,0,144,36)
-      Visible = False
-      Background = &H8BE06F
-      NoTabFocus = True
-      Text = ("Seleccionar")
+    { HBox1 HBox
+      Move(0,216,522,36)
+      { Spring2 Spring
+        Move(126,0,126,36)
+      }
+      { btnSeleccion Button
+        Move(270,0,144,36)
+        Visible = False
+        Background = &H8BE06F
+        NoTabFocus = True
+        Text = ("Seleccionar")
+      }
     }
   }
 }

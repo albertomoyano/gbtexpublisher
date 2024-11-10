@@ -551,7 +551,7 @@
     Index = 0
     Text = ("     Terminal y ChatGPT     ")
     { HBox93 HBox
-      MoveScaled(1,1,108,4)
+      MoveScaled(1,1,123,4)
       { MenuButton1 MenuButton
         MoveScaled(8,0,23,4)
         Text = ("Guiones externos")
@@ -559,18 +559,24 @@
         MenuOnly = True
       }
       { Separator1 Separator
-        MoveScaled(31,0,1.3333,4)
+        MoveScaled(32,0,2.3333,4)
+      }
+      { btnLimpiar Button
+        MoveScaled(38,0,4,4)
+        NoTabFocus = True
+        ToolTip = ("Borrar entrada")
+        Picture = Picture["iconos/borrar.svg"]
       }
       { TextBox2 TextBox
-        MoveScaled(33,0,23,4)
+        MoveScaled(43,0,23,4)
       }
       { BtnBuscarEnArchivos Button
-        MoveScaled(57,0,4,4)
+        MoveScaled(67,0,4,4)
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
       { Label125 Label
-        MoveScaled(61,0,42,4)
+        MoveScaled(78,0,42,4)
         Expand = True
         Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
       }
@@ -1624,27 +1630,35 @@
           }
         }
         { HBox61 HBox
-          MoveScaled(0,9,88,4)
+          MoveScaled(0,9,101,4)
+          { Button3 Button
+            MoveScaled(1,0,4,4)
+            Picture = Picture["iconos/abrirBuscar.svg"]
+          }
+          { Button2 Button
+            MoveScaled(5,0,4,4)
+            Picture = Picture["iconos/face.svg"]
+          }
           { Label16 Label
-            MoveScaled(10,0,16,3.5556)
+            MoveScaled(12,0,8,4)
             Alignment = Align.Right
             Text = ("Publisher ")
           }
           { !txtPUBLISHER TextBox AllTextBoxes
             Name = "txtPUBLISHER"
-            MoveScaled(28,0,14,4)
+            MoveScaled(35,0,14,4)
             #Public = True
             Expand = True
             PopupMenu = "menuTEXTBOX"
           }
           { Label9 Label
-            MoveScaled(46,0,15,4)
+            MoveScaled(55,0,15,4)
             Alignment = Align.Right
             Text = ("OrigPublisher ")
           }
           { txtORIGPUBLISHER TextBox AllTextBoxes
             Name = "txtORIGPUBLISHER"
-            MoveScaled(62,0,14,4)
+            MoveScaled(82,0,14,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Placeholder = ("Casa editorial")

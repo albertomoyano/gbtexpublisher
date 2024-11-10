@@ -309,6 +309,9 @@ Public Sub Form_Open()
   btnGuardar.Enabled = False
   btnGuardarCambios.Enabled = False
 
+  ' asignamos tipografia monoespaciada al textarea de biblio
+  txtTMPbiblio.Font = Font["Monospace"]
+
   Mostrar_ListaGLO
   Mostrar_ListaBIB()
   Mostrar_ListaBIBrelacion
@@ -7458,5 +7461,12 @@ End
 Public Sub rentaTrabajo_Click()
 
   Form_Renta.ShowModal()
+
+End
+
+Public Sub btnLimpiar_Click()
+
+  TextBox2.Clear
+  TerminalView1.Input("clear" & "\n")
 
 End

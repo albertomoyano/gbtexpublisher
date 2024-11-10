@@ -7,10 +7,11 @@ textheight=540pt,
 centering,
 includehead,
 includefoot,
-headsep=13.5pt,
+headsep=14pt,
 top=35pt,
 footskip=0mm,
-footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}
+footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
+\usepackage{etoolbox}
 
 % Idiomas y babel
 \usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
@@ -24,8 +25,8 @@ footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}
 \usepackage[final]{microtype}
 \newfontfeature{Microtypography}{protrusion=default;expansion=default}
 \directlua{fonts.protrusions.setups.default.factor=.5}
-\renewcommand{\normalsize}{\fontsize{10pt}{13.5pt}\selectfont}
-\topskip=13.5pt
+\renewcommand{\normalsize}{\fontsize{10pt}{14pt}\selectfont}
+\topskip=14pt
 
 %% tipografía De Gruyter
 % \setmainfont{De Gruyter Serif}
@@ -130,6 +131,12 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 
 % diseño del pie de página
 \usepackage[bottom,stable,hang]{footmisc}
+\setlength{\footnotesep}{10pt}% cambia el valor deseado en puntos (pt)
+
+\makeatletter
+\patchcmd\@footnotetext{\@MM}{100}{}{\fail}
+\makeatother
+
 \makeatletter
 \patchcmd{\@footnotetext}{\footnotesize}{\small}{}{}% tamaño del cuerpo del texto del footnote
 \makeatother
@@ -544,8 +551,10 @@ uniquelist=minyear]{biblatex}
 	patrequk         = {solicitud de patente británica},
 	patrequs         = {solicitud de patente estadounidense},
 	bycompiler       = {comp\adddotspace por},
-	issue            = {n.\sptext{o}},
-	number           = {n.\sptext{o}},
+	issue            = {n\sptext{o}},
+	number           = {n\sptext{o}},
+	volume           = {vol\adddot},
+	volumes          = {vols\adddot},
 }
 
 % corrección para año original
