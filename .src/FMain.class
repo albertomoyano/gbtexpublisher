@@ -7470,3 +7470,13 @@ Public Sub btnLimpiar_Click()
   TerminalView1.Input("clear" & "\n")
 
 End
+
+Public Sub btnAbrirPublisher_Click()
+
+  Form_ABM_Publisher.ShowModal()
+
+End
+
+Public Sub Button2_Click()
+
+End

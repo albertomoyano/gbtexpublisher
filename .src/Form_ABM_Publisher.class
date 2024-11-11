@@ -1,27 +1,45 @@
 ' Gambas class file
 
-Private Conn As Connection
+Private conector As Connection
 Private Contenido As Result
 Private Busqueda As Result
 Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
 
-  Mod_Conn.desconectar
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
   Me.Close()
 
 End
 
 Public Sub Form_Open()
 
-  btnGuardarPublisher.Visible = False
-  btnGuardarCambiosPublisher.Visible = False
-  BtnRefrescarPublisher.Visible = False
+  ' Crear una nueva conexión
+  conector = New Connection
 
-  ' me conceto a la base de datos
-  Mod_Conn.conectar
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
+  conector.Name = "db_tex.sqlite"
 
-  Mostrar_Lista()
+  ' Intentar abrir la conexión
+  Try conector.Open()
+
+  If Error Then
+    conector = Null
+    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  Else
+    btnGuardarPublisher.Visible = False
+    btnGuardarCambiosPublisher.Visible = False
+    BtnRefrescarPublisher.Visible = False
+
+    Mostrar_Lista()
+  Endif
 
 End
 
@@ -33,7 +51,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridPublisher.Clear()
 
-  Contenido = Conn.Exec("select * from publisher ORDER BY id DESC")
+  Contenido = conector.Exec("select * from publisher ORDER BY id DESC")
 
   'diseñamos el tableview
   GridPublisher.Columns.Count = 4
@@ -59,7 +77,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM publisher")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM publisher")
 
   Record = Contenido[0]
   Count = Record
@@ -79,7 +97,7 @@ Public Sub BtnNuevoPublisher_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Conn.Exec("SELECT MAX(id) FROM publisher LIMIT 1")
+  Contenido = conector.Exec("SELECT MAX(id) FROM publisher LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -107,7 +125,7 @@ Public Sub btnGuardarPublisher_Click()
 
   ' no revisamos que existan coincidencias, ya que una editorial
   ' puede tener diferentes docmicilios
-  Contenido = Conn.Create("publisher")
+  Contenido = conector.Create("publisher")
 
   guardarCampos
 
@@ -155,6 +173,7 @@ Public Sub GridPublisher_RowClick(Row As Integer)
   BtnNuevoPublisher.Visible = False
   btnGuardarCambiosPublisher.visible = True
   btnGuardarPublisher.Visible = False
+  btnSeleccion.Visible = True
 
   txtID.Text = GridPublisher[Row, 0].Text
   txtPublisher.Text = GridPublisher[Row, 1].Text
@@ -174,7 +193,7 @@ Public Sub btnGuardarCambiosPublisher_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = Conn.Edit("publisher", "id=" & txtID.Text)
+  Contenido = conector.Edit("publisher", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -187,19 +206,23 @@ End
 Public Sub btnSeleccion_Click()
 
   Dim publisherSeleccionada As String = GridPublisher[FilaSeleccionada, 1].Text
-  Dim journalSeleccionada As String = GridPublisher[FilaSeleccionada, 2].Text
-  Dim locationSeleccionada As String = GridPublisher[FilaSeleccionada, 3].Text
+  ' Dim journalSeleccionada As String = GridPublisher[FilaSeleccionada, 2].Text
+  ' Dim locationSeleccionada As String = GridPublisher[FilaSeleccionada, 3].Text
 
   ' Verificar si hay una fila seleccionada.
   If FilaSeleccionada >= 0 Then
     FMain.txtPUBLISHER.Text = publisherSeleccionada
-    FMain.txtJOURNALTITLE.Text = journalSeleccionada
-    FMain.txtLOCATION.Text = locationSeleccionada
+    ' FMain.txtJOURNALTITLE.Text = journalSeleccionada
+    ' FMain.txtLOCATION.Text = locationSeleccionada
     ' Cierra el formulario actual.
-    Mod_Conn.desconectar
+    ' Cerrar la conexión si está abierta
+    If conector Then
+      conector.Close()
+      conector = Null
+    Endif
     Me.Close()
   Else
-    Message.Warning("Debe seleccionar una editorial o revista.")
+    Message.Warning("Debe seleccionar una editorial.")
   Endif
 
 End
@@ -228,7 +251,7 @@ Public Sub btnBuscarPublisher_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el GridView antes de mostrar los resultados de la búsqueda
   GridPublisher.Clear()
@@ -259,5 +282,17 @@ Public Sub btnBuscarPublisher_Click()
   Else
     BtnRefrescarPublisher.Visible = True ' Mostramos el botón de refresh en el formulario original para recargar las entradas
   Endif
+
+End
+
+Public Sub Form_Close()
+
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  Me.Close()
 
 End

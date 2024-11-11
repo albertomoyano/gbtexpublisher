@@ -1631,22 +1631,18 @@
         }
         { HBox61 HBox
           MoveScaled(0,9,101,4)
-          { Button3 Button
+          { btnAbrirPublisher Button
             MoveScaled(1,0,4,4)
             Picture = Picture["iconos/abrirBuscar.svg"]
           }
-          { Button2 Button
-            MoveScaled(5,0,4,4)
-            Picture = Picture["iconos/face.svg"]
-          }
           { Label16 Label
-            MoveScaled(12,0,8,4)
+            MoveScaled(6,0,12,4)
             Alignment = Align.Right
             Text = ("Publisher ")
           }
           { !txtPUBLISHER TextBox AllTextBoxes
             Name = "txtPUBLISHER"
-            MoveScaled(35,0,14,4)
+            MoveScaled(19,0,14,4)
             #Public = True
             Expand = True
             PopupMenu = "menuTEXTBOX"

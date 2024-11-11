@@ -129,7 +129,7 @@
       Visible = False
       Background = &H8BE06F
       NoTabFocus = True
-      Text = ("Seleccionar")
+      Text = ("Aplicar selección")
     }
   }
 }
