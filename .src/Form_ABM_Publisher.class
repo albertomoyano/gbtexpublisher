@@ -51,7 +51,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridPublisher.Clear()
 
-  Contenido = conector.Exec("select * from publisher ORDER BY id DESC")
+  Contenido = conector.Exec("SELECT * FROM publisher ORDER BY publisher ASC, location ASC")
 
   'diseñamos el tableview
   GridPublisher.Columns.Count = 4
@@ -59,11 +59,11 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
   GridPublisher.Columns[0].Title = "id"
   GridPublisher.Columns[0].Width = 0
   GridPublisher.Columns[1].Title = "Publisher"
-  GridPublisher.Columns[1].Width = 250
+  GridPublisher.Columns[1].Width = 350
   GridPublisher.Columns[2].Title = "Journal"
-  GridPublisher.Columns[2].Width = 250
+  GridPublisher.Columns[2].Width = 350
   GridPublisher.Columns[3].Title = "Location"
-  GridPublisher.Columns[3].Width = 410
+  GridPublisher.Columns[3].Width = 200
 
   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
   GridPublisher.Rows.Count = Contenido.Count

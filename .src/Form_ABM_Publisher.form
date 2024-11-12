@@ -74,14 +74,14 @@
     Arrangement = Arrange.Vertical
     { HBox2 HBox
       Move(0,0,558,36)
+      { btnBuscarPublisher Button
+        Move(0,0,36,36)
+        Picture = Picture["iconos/search.svg"]
+      }
       { lblAlta2 Label
-        Move(0,0,108,36)
+        Move(54,0,108,36)
         Alignment = Align.Right
         Text = ("Publisher  ")
-      }
-      { btnBuscarPublisher Button
-        Move(130,0,36,36)
-        Picture = Picture["iconos/search.svg"]
       }
       { txtPublisher TextBox
         Move(240,0,234,36)
@@ -93,10 +93,10 @@
     { HBox7 HBox
       Move(0,36,558,36)
       { lblKEYWORDS1 Label
-        Move(0,0,108,36)
+        Move(0,0,144,36)
         #Translate = False
         Alignment = Align.Right
-        Text = "Journal "
+        Text = "Journal  "
       }
       { txtJournal TextBox
         Move(240,0,216,36)
@@ -107,13 +107,13 @@
     { HBox4 HBox
       Move(0,72,558,36)
       { lblKEYWORDS2 Label
-        Move(0,0,108,36)
+        Move(0,0,144,36)
         #Translate = False
         Alignment = Align.Right
-        Text = "Location "
+        Text = "Location  "
       }
       { txtLocation TextBox
-        Move(117,0,216,36)
+        Move(243,0,216,36)
         NoTabFocus = True
         Expand = True
       }
