@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,950,400)
+  Move(0,0,954,468)
   #Scaled = False
   Text = ("Alta - Baja - Modificación de editoriales")
   Resizable = False
@@ -52,7 +52,7 @@
     }
   }
   { HBox6 Panel
-    Move(0,50,477,207)
+    Move(0,50,477,252)
     NoTabFocus = True
     Expand = True
     Arrangement = Arrange.Horizontal
@@ -68,59 +68,54 @@
       Resizable = False
     }
   }
-  { HBox3 Panel
-    Move(0,250,711,108)
-    NoTabFocus = True
-    Arrangement = Arrange.Vertical
-    { HBox2 HBox
-      Move(0,0,558,36)
-      { btnBuscarPublisher Button
-        Move(0,0,36,36)
-        Picture = Picture["iconos/search.svg"]
-      }
-      { lblAlta2 Label
-        Move(54,0,108,36)
-        Alignment = Align.Right
-        Text = ("Publisher  ")
-      }
-      { txtPublisher TextBox
-        Move(240,0,234,36)
-        NoTabFocus = True
-        Expand = True
-        Alignment = Align.Left
-      }
+  { HBox2 HBox
+    Move(0,306,558,36)
+    { btnBuscarPublisher Button
+      Move(0,0,36,36)
+      Picture = Picture["iconos/search.svg"]
     }
-    { HBox7 HBox
-      Move(0,36,558,36)
-      { lblKEYWORDS1 Label
-        Move(0,0,144,36)
-        #Translate = False
-        Alignment = Align.Right
-        Text = "Journal  "
-      }
-      { txtJournal TextBox
-        Move(240,0,216,36)
-        NoTabFocus = True
-        Expand = True
-      }
+    { lblAlta2 Label
+      Move(54,0,108,36)
+      Alignment = Align.Right
+      Text = ("Publisher  ")
     }
-    { HBox4 HBox
-      Move(0,72,558,36)
-      { lblKEYWORDS2 Label
-        Move(0,0,144,36)
-        #Translate = False
-        Alignment = Align.Right
-        Text = "Location  "
-      }
-      { txtLocation TextBox
-        Move(243,0,216,36)
-        NoTabFocus = True
-        Expand = True
-      }
+    { txtPublisher TextBox
+      Move(240,0,234,36)
+      NoTabFocus = True
+      Expand = True
+      Alignment = Align.Left
+    }
+  }
+  { HBox7 HBox
+    Move(0,342,558,36)
+    { lblKEYWORDS1 Label
+      Move(0,0,144,36)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Journal  "
+    }
+    { txtJournal TextBox
+      Move(240,0,216,36)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox4 HBox
+    Move(0,378,558,36)
+    { lblKEYWORDS2 Label
+      Move(0,0,144,36)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Location  "
+    }
+    { txtLocation TextBox
+      Move(243,0,216,36)
+      NoTabFocus = True
+      Expand = True
     }
   }
   { HBox1 HBox
-    Move(0,360,630,36)
+    Move(0,414,630,36)
     { Spring2 Spring
       Move(270,0,126,36)
     }
