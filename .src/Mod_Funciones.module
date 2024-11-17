@@ -82,10 +82,8 @@ Public Sub ManagePdfFolder(rutaTexto As String)
     ' Si no existe, crea la carpeta
     Mkdir pdfPath
   Else
-    ' Si existe, borra los archivos con extensión .pdf
-    Shell "rm -rf " & pdfPath & "/" & File.BaseName(rutaTexto) & ".pdf" Wait
-    Shell "rm -rf " & pdfPath & "/gbTeXdisclaimer-" & File.BaseName(rutaTexto) & ".pdf" Wait
-    Shell "rm -rf " & pdfPath & "/_" & File.BaseName(rutaTexto) & ".pdf" Wait
+    ' borramos todos los archivos pdf del proyecto
+    Shell "rm -rf " & pdfPath & "/*.pdf" Wait
   End If
 
 End Sub

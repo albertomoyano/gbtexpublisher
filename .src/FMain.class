@@ -396,7 +396,7 @@ Public Sub salidaPDFlibro() 'generamos el PDF libro
   TerminalView1.Input("rm -rf " & newFile & "\n")
   Wait 0.2
 
-  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/" & BaseName & ".pdf" & "\n")
+  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
   Wait 0.2
 
   'copiamos /files el archivo .log
@@ -590,12 +590,12 @@ Public Sub Menu17_Click()'abrir pdf
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) & "/pdf/" & BaseName & ".pdf"
+  filePath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
   Else
-    Message.Error("El archivo <b>" & BaseName & ".pdf</b> no existe.")
+    Message.Error("El archivo <b>pdf-" & BaseName & ".pdf</b> no existe.")
   Endif
 
 End
@@ -733,6 +733,22 @@ Public Sub menuGray_Click()
 
 End
 
+Public Sub Menu4_Click()
+
+  Dim sFilePath As String = File.Dir(TextBox1.Text) &/ "separatas.sh"
+
+  ' Comprobamos si el archivo existe
+  If File.RealPath(sFilePath) Then
+    ' Si existe, ejecutamos el script
+    TerminalView1.Input("sh " & sFilePath & "\n")
+    Wait 0.2
+  Else
+    ' Si no existe, mostramos un mensaje
+    Message.Info("El archivo <b>separatas.sh</b> no existe. Por favor, analice la configuración de su proyecto.")
+  Endif
+
+End
+
 Public Sub menuAbrir_Click()'abrir un libro
 
   Dialog.Title = "Seleccionar archivo"
@@ -787,6 +803,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
+  Menu4.Enabled = True
   TabPanel1[3].Visible = True
   TabPanel1[4].Visible = True
 
@@ -803,6 +820,9 @@ Public Sub menuAbrir_Click()'abrir un libro
   End If
 
   Mod_Funciones.CopiarArchivos(TextBox1.Text)
+
+  ' exportamos el archivo para separata
+  Mod_Exportar.ExportToSeparata(TextBox1.Text)
 
   ' levantamos los datos de comentario
   levantarComenta()
@@ -972,6 +992,7 @@ Public Sub mnuLast_Click()
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
+  Menu4.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -5841,6 +5862,7 @@ Public Sub menuAbrirRevista_Click()
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
+  Menu4.Enabled = True
   TabPanel1[3].Visible = True
   TabPanel1[4].Visible = True
 
@@ -6212,6 +6234,7 @@ Public Sub menuMono_Click()'monografia academica
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
+  Menu4.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana

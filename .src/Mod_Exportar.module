@@ -1468,3 +1468,35 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
   Conn.Close
 
 End
+
+'exportamos el archivo de separata
+Public Sub ExportToSeparata(rutaTexto As String)
+
+  Dim s As String
+  Dim outputFile As String
+
+  s &= "% acá comienza el script" & gb.NewLine
+  s &= "\\newcounter{PrimPag}" & gb.NewLine
+  s &= "\\setcounter{PrimPag}{1}" & gb.NewLine
+  s &= "\\newwrite\\script" & gb.NewLine
+  s &= "\\immediate\\openout\\script=separatas.sh% Ruta y nombre del script" & gb.NewLine
+  s &= "\\immediate\\write\\script{\\string#!/bin/bash}% escribe el shebang" & gb.NewLine
+  s &= "\\newcommand{\\separata}[1]{%" & gb.NewLine
+  s &= "\\immediate\\write\\script{pdfjam\\space ./pdf/\\jobname.pdf\\space \\thePrimPag-\\theCurrentPage\\space -o\\space ./pdf/#1-\\jobname.pdf}%" & gb.NewLine
+  s &= "\\setcounter{PrimPag}{\\theCurrentPage+1}" & gb.NewLine
+  s &= "}%" & gb.NewLine
+  s &= "% acá termina el script" & gb.NewLine
+  s &= "\n"
+  s &= "\n"
+  s &= "%% esto se agrega al final del archivo antes de \\end{document}" & gb.NewLine
+  s &= "%\\immediate\\write\\script{exit}%" & gb.NewLine
+  s &= "%\\immediate\\closeout\\script%" & gb.NewLine
+  s &= "\n"
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXseparata-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End

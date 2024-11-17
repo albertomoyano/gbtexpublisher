@@ -11,8 +11,14 @@
   { menuProcesarArchivos Menu
     Text = ("Procesar archivos")
     Visible = False
+    { Menu4 Menu
+      Text = ("Ejecutar separatas")
+      Picture = Picture["iconos/terminal.svg"]
+      Enabled = False
+    }
     { menuGray Menu
       Text = ("Convertir imágenes a .png en grayscale")
+      Picture = Picture["iconos/terminal.svg"]
       Enabled = False
     }
     { menuComprimir Menu
@@ -539,7 +545,7 @@
     }
   }
   { !TabPanel1 TabStrip
-    MoveScaled(1,12,162,365)
+    MoveScaled(1,13,162,365)
     #Public = True
     Enabled = False
     Expand = True
@@ -626,7 +632,7 @@
             { MenuButton2 MenuButton
               MoveScaled(1,0,23,4)
               Expand = True
-              Text = ("Procesar archivos")
+              Text = ("Procesar archivos por lotes")
               Picture = Picture["iconos/conversor.svg"]
               MenuOnly = True
             }
