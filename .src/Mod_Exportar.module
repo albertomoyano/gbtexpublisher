@@ -1475,23 +1475,18 @@ Public Sub ExportToSeparata(rutaTexto As String)
   Dim s As String
   Dim outputFile As String
 
-  s &= "% acá comienza el script" & gb.NewLine
+  ' %acá comienza el script
   s &= "\\newcounter{PrimPag}" & gb.NewLine
   s &= "\\setcounter{PrimPag}{1}" & gb.NewLine
-  s &= "\\newwrite\\script" & gb.NewLine
-  s &= "\\immediate\\openout\\script=separatas.sh% Ruta y nombre del script" & gb.NewLine
-  s &= "\\immediate\\write\\script{\\string#!/bin/bash}% escribe el shebang" & gb.NewLine
-  s &= "\\newcommand{\\separata}[1]{%" & gb.NewLine
-  s &= "\\immediate\\write\\script{pdfjam\\space ./pdf/\\jobname.pdf\\space \\thePrimPag-\\theCurrentPage\\space -o\\space ./pdf/#1-\\jobname.pdf}%" & gb.NewLine
   s &= "\\setcounter{PrimPag}{\\theCurrentPage+1}" & gb.NewLine
-  s &= "}%" & gb.NewLine
-  s &= "% acá termina el script" & gb.NewLine
+  s &= "\\newwrite\\script" & gb.NewLine
+  s &= "\\immediate\\openout\\script=separatas.sh" & gb.NewLine
+  s &= "\\immediate\\write\\script{\\string#!/bin/bash}" & gb.NewLine
+  s &= "\\newcommand{\\separata}[1]{"
+  s &= "\\immediate\\write\\script{pdftk ./pdf/\\jobname.pdf cat \\thePrimPag-\\theCurrentPage\\space output ./pdf/#1-\\jobname.pdf}"
+  s &= "}"
   s &= "\n"
-  s &= "\n"
-  s &= "%% esto se agrega al final del archivo antes de \\end{document}" & gb.NewLine
-  s &= "%\\immediate\\write\\script{exit}%" & gb.NewLine
-  s &= "%\\immediate\\closeout\\script%" & gb.NewLine
-  s &= "\n"
+  ' %acá termina el script
 
   ' Establece la ruta y el nombre del archivo de salida
   outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXseparata-" & File.BaseName(rutaTexto) & ".tex"

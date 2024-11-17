@@ -740,7 +740,7 @@ Public Sub Menu4_Click()
   ' Comprobamos si el archivo existe
   If File.RealPath(sFilePath) Then
     ' Si existe, ejecutamos el script
-    TerminalView1.Input("sh " & sFilePath & "\n")
+    TerminalView1.Input("sh " & sFilePath & "\n" & "clear" & "\n")
     Wait 0.2
   Else
     ' Si no existe, mostramos un mensaje
