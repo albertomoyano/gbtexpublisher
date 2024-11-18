@@ -5,7 +5,7 @@ Private Contenido As Result
 Private filePathPDF As String
 Private filePathTEX As String
 Private filePathFiles As String
-Private NombreArchivoPDF As String = File.BaseName(FMain.TextBox1.Text) & ".pdf"
+Private NombreArchivoPDF As String = "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf"
 Private NombreArchivoTEX As String = File.BaseName(FMain.TextBox1.Text) & ".tex"
 
 Public Sub Form_Open()
@@ -251,7 +251,7 @@ Public Sub btnGenerarPDF_Click()
   FMain.TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & filePathFiles & "gbTeXOT-" & NombreArchivoTEX & "\n")
   Wait 0.1
 
-  FMain.TerminalView1.Input("mv gbTeXOT-" & NombreArchivoPDF & " " & File.Dir(FMain.TextBox1.Text) & "/pdf/gbTeXOT-" & NombreArchivoPDF & "\n")
+  FMain.TerminalView1.Input("mv gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) & "/pdf/gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.1
 
   Mod_Funciones.Borrar_Aux()
