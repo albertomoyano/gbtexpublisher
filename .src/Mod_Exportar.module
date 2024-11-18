@@ -1543,15 +1543,20 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
 
     s &= "InfoBegin" & gb.NewLine
     s &= "InfoKey:Creator" & gb.NewLine
-    s &= "InfoValue:gbTeXpublisher" & gb.NewLine
+    s &= "InfoValue:gbTeXpublisher y el ecosistema de LaTeX" & gb.NewLine
 
     s &= "InfoBegin" & gb.NewLine
     s &= "InfoKey:Producer" & gb.NewLine
-    s &= "InfoValue:Ecosistema de LaTeX" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[17]] & gb.NewLine
 
+    ' refiere a la fecha de creación de este pdf compaginado
     s &= "InfoBegin" & gb.NewLine
     s &= "InfoKey:CreationDate" & gb.NewLine
     s &= "InfoValue:D:" & FechaPDF & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Trapped" & gb.NewLine
+    s &= "InfoValue:Unknown" & gb.NewLine
 
     ContenidoMeta.MoveNext
   Wend

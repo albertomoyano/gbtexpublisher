@@ -3092,8 +3092,7 @@
           { !txtDate TextBox
             MoveScaled(27,0,23,4)
             #Public = True
-            Text = ("0000-00")
-            Placeholder = ("YYYY-MM-DD")
+            Placeholder = ("YYYYMMDDHHmmSS")
           }
           { Separator5 Separator
             MoveScaled(50,0,2.3333,4)
@@ -3134,22 +3133,23 @@
           }
         }
         { HBox111 HBox
-          MoveScaled(0,25,78,4)
+          MoveScaled(0,25,83,4)
           { Label50 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
             Text = ("Caption Writer  ")
           }
           { !txtCaptionWriter TextBox
-            MoveScaled(27,0,23,4)
+            MoveScaled(23,0,14,4)
             #Public = True
+            Expand = True
           }
           { Separator4 Separator
-            MoveScaled(52,0,2.3333,4)
+            MoveScaled(37,0,2.3333,4)
           }
           { TextLabel1 TextLabel
-            MoveScaled(59,0,15,4)
-            Expand = True
+            MoveScaled(39,0,39,4)
+            AutoResize = True
             Text = ("Persona que hace el mantenimiento del archivo")
             Alignment = Align.Normal
           }
