@@ -1495,3 +1495,75 @@ Public Sub ExportToSeparata(rutaTexto As String)
   File.Save(outputFile, s)
 
 End
+
+'exportamos el disclaimer
+Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
+
+  Dim s As String
+  Dim fb As ResultField
+  Dim bFields As New String[]
+  Dim wb As Integer
+  Dim buscarMeta As String
+  Dim outputFile As String
+  Dim fechaPDF As String
+
+  fechaPDF = (Format(Now, "yyyymmddhhnnss"))
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.conectar()
+
+  ' Exportamos los registros seleccionados
+  buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoMeta = Conn.Exec(buscarMeta)
+
+  bFields.Clear
+  For Each fb In ContenidoMeta.Fields
+    bFields.Add(fb.Name)
+    If Len(fb.Name) > wb Then
+      wb = Len(fb.Name)
+    Endif
+  Next
+
+  While ContenidoMeta.Available
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Title" & gb.NewLine
+    s &= "InfoValue: " & ContenidoMeta[bFields[84]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Author" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[5]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Subject" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[7]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Keywords" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[57]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Creator" & gb.NewLine
+    s &= "InfoValue:gbTeXpublisher" & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Producer" & gb.NewLine
+    s &= "InfoValue:Ecosistema de LaTeX" & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:CreationDate" & gb.NewLine
+    s &= "InfoValue:D:" & FechaPDF & gb.NewLine
+
+    ContenidoMeta.MoveNext
+  Wend
+
+  ' Next ' Cerrar el bucle For Each id In ids
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXpdfTKmeta-" & File.BaseName(rutaTexto) & ".txt"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+  Conn.Close
+
+End

@@ -1,5 +1,9 @@
 ' Gambas class file
 
+Private conector As Connection
+Private Contenido As Result
+Private Busqueda As Result
+
 Public Sub Form_Open()
 
   ' Asigna el evento Change de cada TextBox al procedimiento VerificarCampos
@@ -9,6 +13,9 @@ Public Sub Form_Open()
 
   ' Llamar a la verificación al inicio por si ya hay algún texto en los TextBox
   VerificarCampos
+
+  ' exportamos los metadatos
+  Mod_Exportar.ExportToMetadatosPDFTK(FMain.TextBox1.Text)
 
 End
 
@@ -99,7 +106,7 @@ End
 
 Public Sub btnSalir_Click()
 
-  Me.Close
+  Me.Close()
 
 End
 
@@ -107,40 +114,18 @@ Public Sub btnEnsamblar_Click()
 
   FMain.TabPanel1.Index = 0
 
-  Mod_Exportar.Exportar2MetadatosPDF(FMain.TextBox1.Text)
-  Wait 0.2
-
   Dim rutaTapa As String = File.RealPath(txtTapa.Text)
   Dim rutaInterior As String = File.RealPath(txtInterior.Text)
   Dim rutaContratapa As String = File.RealPath(txtContratapa.Text)
-  Dim inputMetadatos As String = File.Dir(FMain.TextBox1.Text) & "/files/" & "gbTeXmeta-" & File.Name(FMain.TextBox1.Text)
-  Dim outputFile As String = File.Dir(FMain.TextBox1.Text) & "/files/" & "web-" & File.Name(FMain.TextBox1.Text)
-  Dim s As String
+  Dim metadatos As String = File.Dir(FMain.TextBox1.Text) & "/files/" & "gbTeXpdfTKmeta-" & File.BaseName(FMain.TextBox1.Text) & ".txt"
 
-  s &= "\\documentclass{article}" & "\n"
-  s &= "\\usepackage{hyperref}" & "\n"
-  s &= "\\usepackage{hyperxmp}" & "\n"
-  s &= "\\input{" & inputMetadatos & "}" & "\n"
-  s &= "\\usepackage{pdfpages}" & "\n"
-  s &= "\n"
-  s &= "\\begin{document}" & "\n"
-  s &= "\n"
-  s &= "\\includepdf[pages=-, fitpaper=True]{" & rutaTapa & "}" & "\n"
-  s &= "\\includepdf[pages=-, fitpaper=True]{" & rutaInterior & "}" & "\n"
-  s &= "\\includepdf[pages=-, fitpaper=True]{" & rutaContratapa & "}" & "\n"
-  s &= "\n"
-  s &= "\\end{document}" & "\n"
-
-  ' Guarda el contenido acumulado en un solo archivo
-  File.Save(outputFile, s)
-
-  FMain.TerminalView1.Input("lualatex -interaction=nonstopmode " & outputFile & "\n")
-  FMain.TerminalView1.Input("lualatex -interaction=nonstopmode " & outputFile & "\n")
+  ' generamos el pdf para web con pdftk
+  FMain.TerminalView1.Input("pdftk " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " cat output " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf" & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n" & "clear" & "\n")
+  FMain.TerminalView1.Input("pdftk " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf update_info " & metadatos & " output " & File.Dir(FMain.TextBox1.Text) & "/pdf/web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
 
-  Mod_Funciones.Borrar_Aux
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf" & "\n" & "clear" & "\n")
 
 End
