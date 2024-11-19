@@ -1,9 +1,5 @@
 ' Gambas class file
 
-Private conector As Connection
-Private Contenido As Result
-Private Busqueda As Result
-
 Public Sub Form_Open()
 
   ' Asigna el evento Change de cada TextBox al procedimiento VerificarCampos
@@ -14,7 +10,7 @@ Public Sub Form_Open()
   ' Llamar a la verificación al inicio por si ya hay algún texto en los TextBox
   VerificarCampos
 
-  ' exportamos los metadatos
+  ' exportamos los metadatos para pdftk
   Mod_Exportar.ExportToMetadatosPDFTK(FMain.TextBox1.Text)
 
 End
