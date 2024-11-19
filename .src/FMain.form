@@ -553,7 +553,7 @@
     Spacing = True
     Margin = True
     Padding = 4
-    Count = 5
+    Count = 6
     Index = 0
     Text = ("     Terminal y ChatGPT     ")
     { HBox93 HBox
@@ -4620,6 +4620,8 @@
         ScrollBar = Scroll.Vertical
       }
     }
+    Index = 5
+    Text = ("GitHub Pages")
     Index = 0
   }
   { Timer1 #Timer
