@@ -7503,3 +7503,13 @@ End
 Public Sub Button2_Click()
 
 End
+
+Public Sub btnGenerarInex_Click()
+
+  If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
+    Mkdir File.Dir(TextBox1.Text) & "/docs"
+  End If
+
+  Mod_Exportar.ExportToIndexHTML(TextBox1.Text)
+
+End

@@ -3032,7 +3032,7 @@
       Index = 0
       Text = ("Generales y obligatorios para todas las salidas de tipo libro")
       { ScrollView10 ScrollView
-        MoveScaled(2,6,97,37)
+        MoveScaled(2,6,97,90)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -3152,6 +3152,18 @@
             AutoResize = True
             Text = ("Persona que hace el mantenimiento del archivo")
             Alignment = Align.Normal
+          }
+        }
+        { HBox181 HBox
+          MoveScaled(0,29,83,2)
+        }
+        { HBox178 HBox
+          MoveScaled(0,32,83,4)
+          { Label137 Label
+            MoveScaled(0,0,69,4)
+            Expand = True
+            Alignment = Align.Center
+            Text = ("Metadatos específicos para GitHub Pages")
           }
         }
       }
@@ -4622,6 +4634,18 @@
     }
     Index = 5
     Text = ("GitHub Pages")
+    { HBox190 HBox
+      MoveScaled(0,7,110,4)
+      { Spring9 Spring
+        MoveScaled(4,0,18,4)
+      }
+      { btnGenerarInex Button
+        MoveScaled(28,0,17.7778,4)
+        Background = &H8BE06F
+        NoTabFocus = True
+        Text = ("Generar index.html")
+      }
+    }
     Index = 0
   }
   { Timer1 #Timer

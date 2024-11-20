@@ -1572,3 +1572,82 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
   Conn.Close
 
 End
+
+'exportamos el disclaimer
+Public Sub ExportToIndexHTML(rutaTexto As String)
+
+  Dim s As String
+  Dim fb As ResultField
+  Dim bFields As New String[]
+  Dim wb As Integer
+  Dim buscarMeta As String
+  Dim outputFile As String
+  Dim fechaPDF As String
+
+  fechaPDF = (Format(Now, "yyyymmddhhnnss"))
+
+  ' me conceto a la base de datos
+  Conn = Mod_Conn.conectar()
+
+  ' Exportamos los registros seleccionados
+  buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoMeta = Conn.Exec(buscarMeta)
+
+  bFields.Clear
+  For Each fb In ContenidoMeta.Fields
+    bFields.Add(fb.Name)
+    If Len(fb.Name) > wb Then
+      wb = Len(fb.Name)
+    Endif
+  Next
+
+  While ContenidoMeta.Available
+    s &= "<!DOCTYPE html>" & gb.NewLine
+    s &= "<html lang=\"es\">" & gb.NewLine
+    s &= "<head>" & gb.NewLine
+    s &= "\t <meta charset=\"utf-8\">" & gb.NewLine
+    s &= "\t <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" & gb.NewLine
+    s &= "\t <meta name=\"description\" content=\" entrada de la base de datos \">" & gb.NewLine
+    s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
+    s &= "\t <meta name=\"keywords\" content=\" entrada de la base de datos \">" & gb.NewLine
+    s &= "\t <meta name=\"robots\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <title>Ediciones Imago Mundi | entrada de la base de datos </title>" & gb.NewLine
+    '
+    s &= "<!-- Favicon -->" & gb.NewLine
+    s &= "\t <link rel=\"icon\" href=\"favicon-im.png\">" & gb.NewLine
+    '
+    s &= "<!-- Estilos -->" & gb.NewLine
+    s &= "\t <link rel=\"stylesheet\" href=\"styles.css\">" & gb.NewLine
+    s &= "</head>" & gb.NewLine
+    '
+    '
+
+    s &= "<body>" & gb.NewLine
+    s &= "\t <header><h1>Ediciones Imago Mundi</h1></header>" & gb.NewLine
+    '
+    s &= "\t <aside>" & gb.NewLine
+    s &= "\t </aside>" & gb.NewLine
+    '
+    s &= "\t <section>" & gb.NewLine
+    s &= "\t </section>" & gb.NewLine
+    '
+    s &= "\t <footer>" & gb.NewLine
+    s &= "\t </footer>" & gb.NewLine
+    '
+    s &= "</body>" & gb.NewLine
+    s &= "</html>" & gb.NewLine
+
+    ContenidoMeta.MoveNext
+  Wend
+
+  ' Next ' Cerrar el bucle For Each id In ids
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "docs" &/ "index.html"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+  Conn.Close
+
+End
