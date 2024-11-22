@@ -927,9 +927,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
 
-  Dim fecha As String
-  Dim HOY As Date
-
 End
 
 ' Evento que se ejecuta cuando se detecta un cambio en el directorio
