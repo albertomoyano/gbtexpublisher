@@ -1609,13 +1609,19 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" & gb.NewLine
     s &= "\t <meta name=\"description\" content=\" entrada de la base de datos \">" & gb.NewLine
     s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
-    s &= "\t <meta name=\"keywords\" content=\" entrada de la base de datos \">" & gb.NewLine
+    s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"robots\" content=\"index, follow\">" & gb.NewLine
-    s &= "\t <title>Ediciones Imago Mundi | entrada de la base de datos </title>" & gb.NewLine
-    '
+    s &= "\t <title>Ediciones Imago Mundi | " & ContenidoMeta[bFields[84]] & "</title>" & gb.NewLine
+    s &= "<!-- -->" & gb.NewLine
+    s &= "<!-- Google Scholar, CrosRef y PubMed -->" & gb.NewLine
+    s &= "\t <meta name=\"citation_title\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_language\" content=\"es\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_publication_date\" content=\"" & ContenidoMeta[bFields[11]] & "\"/>" & gb.NewLine'el 11 es la fecha de creación, cambiarlo
+    s &= "\t <meta name=\"citation_author\" content=\"Karolin Bove\"/>" & gb.NewLine
+    s &= "<!-- -->" & gb.NewLine
     s &= "<!-- Favicon -->" & gb.NewLine
     s &= "\t <link rel=\"icon\" href=\"favicon-im.png\">" & gb.NewLine
-    '
+    s &= "<!-- -->" & gb.NewLine
     s &= "<!-- Estilos -->" & gb.NewLine
     s &= "\t <link rel=\"stylesheet\" href=\"styles.css\">" & gb.NewLine
     s &= "</head>" & gb.NewLine

@@ -3087,11 +3087,13 @@
           { Label35 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
-            Text = ("Fecha  ")
+            Text = ("Fecha de creación  ")
           }
           { !txtDate TextBox
             MoveScaled(27,0,23,4)
             #Public = True
+            Background = Color.Background
+            ReadOnly = True
             Placeholder = ("YYYYMMDDHHmmSS")
           }
           { Separator5 Separator
@@ -3157,13 +3159,16 @@
         { HBox181 HBox
           MoveScaled(0,29,83,2)
         }
-        { HBox178 HBox
-          MoveScaled(0,32,83,4)
-          { Label137 Label
-            MoveScaled(0,0,69,4)
-            Expand = True
-            Alignment = Align.Center
-            Text = ("Metadatos específicos para GitHub Pages")
+        { HBox190 HBox
+          MoveScaled(0,31,79,4)
+          { Spring9 Spring
+            MoveScaled(36,0,18,4)
+          }
+          { btnGenerarInex Button
+            MoveScaled(57,0,17.7778,4)
+            Background = &H8BE06F
+            NoTabFocus = True
+            Text = ("Generar index.html")
           }
         }
       }
@@ -4634,18 +4639,6 @@
     }
     Index = 5
     Text = ("GitHub Pages")
-    { HBox190 HBox
-      MoveScaled(0,7,110,4)
-      { Spring9 Spring
-        MoveScaled(4,0,18,4)
-      }
-      { btnGenerarInex Button
-        MoveScaled(28,0,17.7778,4)
-        Background = &H8BE06F
-        NoTabFocus = True
-        Text = ("Generar index.html")
-      }
-    }
     Index = 0
   }
   { Timer1 #Timer

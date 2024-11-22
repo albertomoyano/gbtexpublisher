@@ -927,6 +927,9 @@ Public Sub menuAbrir_Click()'abrir un libro
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
 
+  Dim fecha As String
+  Dim HOY As Date
+
 End
 
 ' Evento que se ejecuta cuando se detecta un cambio en el directorio
@@ -2012,6 +2015,15 @@ End
 
 Public Sub BtnNuevoMeta_Click()
 
+  Dim fecha As String
+  Dim HOY As Date
+
+  If txtDate.Text = "" Then
+    HOY = Now
+    fecha = Format(HOY, "yyyymmddhhnnss")
+    txtDate.Text = fecha
+  Endif
+
   BtnNuevoMeta.Enabled = True
   btnGuardarMeta.Enabled = False
   btnGuardarCambiosMeta.Enabled = False
@@ -2038,26 +2050,23 @@ End
 
 Public Sub btnGuardarMeta_Click()
 
+  'Date = Date ( Año , Mes , Día [ , Horas , Minutos , Segundos ] )
   eliminarBlancosMETA
 
   Contenido = conector.Create("metadatos")
 
-  ' Obtener el valor de txtDate
-  Dim valorFecha As String
-
-  valorFecha = txtDate.Text
-
-  ' Verificar el formato usando una expresión regular
-  If valorFecha Like "[0-9][0-9][0-9][0-9]-[0-9][0-9]" Then
-    ' El formato es correcto, continuar con la asignación de los campos
-    guardarCamposMETA
-  Else
-    ' El formato es incorrecto, mostrar mensaje de advertencia
-    Message.Warning("El formato de la fecha no es válido. Debe ser en el formato 'YYYY-MM'.")
-    txtDate.text = ""
-    txtDate.SetFocus
-    Return
-  Endif
+  '
+  ' ' Verificar el formato usando una expresión regular
+  ' If valorFecha Like "[0-9][0-9][0-9][0-9]-[0-9][0-9]" Then
+  '   ' El formato es correcto, continuar con la asignación de los campos
+  guardarCamposMETA
+  ' Else
+  '   ' El formato es incorrecto, mostrar mensaje de advertencia
+  '   Message.Warning("El formato de la fecha no es válido. Debe ser en el formato 'YYYYMMDDHHmmSS'.")
+  '   txtDate.text = ""
+  '   txtDate.SetFocus
+  '   Return
+  ' Endif
 
   Contenido.Update
 
