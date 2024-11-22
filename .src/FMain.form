@@ -3156,21 +3156,6 @@
             Alignment = Align.Normal
           }
         }
-        { HBox181 HBox
-          MoveScaled(0,29,83,2)
-        }
-        { HBox190 HBox
-          MoveScaled(0,31,79,4)
-          { Spring9 Spring
-            MoveScaled(36,0,18,4)
-          }
-          { btnGenerarInex Button
-            MoveScaled(57,0,17.7778,4)
-            Background = &H8BE06F
-            NoTabFocus = True
-            Text = ("Generar index.html")
-          }
-        }
       }
       Index = 1
       Text = ("Particulares a cada tipo de salida  de tipo libro")
@@ -4639,6 +4624,18 @@
     }
     Index = 5
     Text = ("GitHub Pages")
+    { HBox190 HBox
+      MoveScaled(0,0,79,4)
+      { Spring9 Spring
+        MoveScaled(36,0,18,4)
+      }
+      { btnGenerarInex Button
+        MoveScaled(57,0,17.7778,4)
+        Background = &H8BE06F
+        NoTabFocus = True
+        Text = ("Generar index.html")
+      }
+    }
     Index = 0
   }
   { Timer1 #Timer

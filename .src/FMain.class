@@ -2050,23 +2050,11 @@ End
 
 Public Sub btnGuardarMeta_Click()
 
-  'Date = Date ( Año , Mes , Día [ , Horas , Minutos , Segundos ] )
   eliminarBlancosMETA
 
   Contenido = conector.Create("metadatos")
 
-  '
-  ' ' Verificar el formato usando una expresión regular
-  ' If valorFecha Like "[0-9][0-9][0-9][0-9]-[0-9][0-9]" Then
-  '   ' El formato es correcto, continuar con la asignación de los campos
   guardarCamposMETA
-  ' Else
-  '   ' El formato es incorrecto, mostrar mensaje de advertencia
-  '   Message.Warning("El formato de la fecha no es válido. Debe ser en el formato 'YYYYMMDDHHmmSS'.")
-  '   txtDate.text = ""
-  '   txtDate.SetFocus
-  '   Return
-  ' Endif
 
   Contenido.Update
 
