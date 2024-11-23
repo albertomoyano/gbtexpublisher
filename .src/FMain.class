@@ -7569,6 +7569,9 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!nombreArchivo = txtnombreArchivoGHP.Text
   ContenidoGHP!txtCreateDateHTML = txtCreateDateHTML.Text
   ContenidoGHP!txtModDateHTML = txtModDateHTML.Text
+  ContenidoGHP!cvautoresHTML = txtCVautoresHTML.Text
+  ContenidoGHP!hrefepubHTML = txtHREFepubHTML.Text
+  ContenidoGHP!hrefelineaHTML = txtHREFenlineaHTML.Text
 
   BtnNuevoGHP.Enabled = False
   btnGuardarGHP.Enabled = False
@@ -7613,13 +7616,26 @@ Public Sub levantarGitHubPages()
     txtnombreArchivoGHP.Text = ContenidoGHP!nombreArchivo
     txtCreateDateHTML.Text = ContenidoGHP!txtCreateDateHTML
     txtModDateHTML.Text = ContenidoGHP!txtModDateHTML
+    txtCVautoresHTML.Text = ContenidoGHP!cvautoresHTML
+    txtHREFepubHTML.Text = ContenidoGHP!hrefepubHTML
+    txtHREFenlineaHTML.Text = ContenidoGHP!hrefelineaHTML
   Else
     txtnombreArchivoGHP.Text = ""
     txtCreateDateHTML.Text = ""
     txtModDateHTML.Text = ""
+    txtCVautoresHTML.Text = ""
+    txtHREFepubHTML.Text = ""
+    txtHREFenlineaHTML.Text = ""
     BtnNuevoGHP.Enabled = True
     btnGuardarGHP.Enabled = False
     btnGuardarCambiosGHP.Enabled = False
   Endif
+
+End
+
+Public Sub btnMostrarTexto_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtCVautoresHTML
+  Form_TXTextendido.ShowModal
 
 End

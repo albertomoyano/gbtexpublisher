@@ -4716,6 +4716,70 @@
         Alignment = Align.Normal
       }
     }
+    { HBox192 HBox
+      MoveScaled(0,13,106,4)
+      { Label142 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+      }
+      { CheckBox2 CheckBox
+        MoveScaled(28,0,30,4)
+        Text = ("Este libro tiene versión en ePub   ")
+      }
+      { !txtHREFepubHTML TextBox
+        MoveScaled(58,0,23,4)
+        #Public = True
+        Expand = True
+      }
+    }
+    { HBox193 HBox
+      MoveScaled(0,17,106,4)
+      { Label143 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+      }
+      { CheckBox1 CheckBox
+        MoveScaled(26,0,30,4)
+        Text = ("Este libro tiene versión en línea  ")
+      }
+      { !txtHREFenlineaHTML TextBox
+        MoveScaled(58,0,23,4)
+        #Public = True
+        Expand = True
+      }
+    }
+    { HBox190 HBox
+      MoveScaled(0,21,106,4)
+      { Label140 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+        Text = ("Descripción  ")
+      }
+      { !txtDescripcionHTML TextBox
+        MoveScaled(27,0,23,4)
+        #Public = True
+        Background = Color.Background
+        Expand = True
+        ReadOnly = True
+      }
+    }
+    { HBox191 HBox
+      MoveScaled(0,25,106,4)
+      { Label141 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+        Text = ("CV autores  ")
+      }
+      { !txtCVautoresHTML TextBox
+        MoveScaled(27,0,23,4)
+        #Public = True
+        Expand = True
+      }
+      { btnMostrarTexto Button
+        MoveScaled(52,0,4,4)
+        Text = ("") & "..."
+      }
+    }
     Index = 0
   }
   { Timer1 #Timer
