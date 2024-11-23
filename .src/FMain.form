@@ -2959,17 +2959,16 @@
       { BtnNuevoMeta Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
-        ToolTip = ("Agregar una nueva referencia")
         Picture = Picture["iconos/+nuevo.svg"]
       }
       { btnGuardarMeta Button
         MoveScaled(4,0,4,4)
-        ToolTip = ("Cerrar la ventana")
+        Enabled = False
         Picture = Picture["iconos/guardar.svg"]
       }
       { btnGuardarCambiosMeta Button
         MoveScaled(8,0,4,4)
-        ToolTip = ("Guardar modificaciones")
+        Enabled = False
         Picture = Picture["iconos/guardarComo.svg"]
       }
       { Separator6 Separator
@@ -3093,7 +3092,6 @@
             MoveScaled(27,0,23,4)
             #Public = True
             Background = Color.Background
-            ReadOnly = True
             Placeholder = ("YYYYMMDDHHmmSS")
           }
           { Separator5 Separator
@@ -4522,21 +4520,19 @@
     Text = ("     Comentarios     ")
     { HBox175 HBox
       MoveScaled(2,0,95,4)
-      Padding = 1
       { BtnNuevoComenta Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
-        ToolTip = ("Agregar una nueva referencia")
         Picture = Picture["iconos/+nuevo.svg"]
       }
       { btnGuardarComenta Button
         MoveScaled(4,0,4,4)
-        ToolTip = ("Cerrar la ventana")
+        Enabled = False
         Picture = Picture["iconos/guardar.svg"]
       }
       { btnGuardarCambiosComenta Button
         MoveScaled(8,0,4,4)
-        ToolTip = ("Guardar modificaciones")
+        Enabled = False
         Picture = Picture["iconos/guardarComo.svg"]
       }
       { btnFont Button
@@ -4569,8 +4565,7 @@
       }
     }
     { HBox176 HBox
-      MoveScaled(3,5,104,4.4444)
-      Padding = 2
+      MoveScaled(3,5,104,4)
       { Label122 Label
         MoveScaled(1,0,11,4)
         Alignment = Align.Right
@@ -4583,8 +4578,7 @@
       }
     }
     { HBox177 HBox
-      MoveScaled(3,9,104,4.4444)
-      Padding = 2
+      MoveScaled(3,9,104,4)
       { Label123 Label
         MoveScaled(1,0,11,4)
         Alignment = Align.Right
@@ -4597,8 +4591,7 @@
       }
     }
     { HBox179 HBox
-      MoveScaled(3,13,104,4.4444)
-      Padding = 2
+      MoveScaled(3,13,104,4)
       { Label124 Label
         MoveScaled(1,0,11,4)
         Alignment = Align.Right
@@ -4624,16 +4617,103 @@
     }
     Index = 5
     Text = ("GitHub Pages")
-    { HBox190 HBox
-      MoveScaled(0,0,79,4)
-      { Spring9 Spring
-        MoveScaled(36,0,18,4)
+    { HBox181 HBox
+      MoveScaled(1,1,118,4)
+      { BtnNuevoGHP Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        Picture = Picture["iconos/+nuevo.svg"]
       }
-      { btnGenerarInex Button
-        MoveScaled(57,0,17.7778,4)
+      { btnGuardarGHP Button
+        MoveScaled(4,0,4,4)
+        Enabled = False
+        Picture = Picture["iconos/guardar.svg"]
+      }
+      { btnGuardarCambiosGHP Button
+        MoveScaled(8,0,4,4)
+        Enabled = False
+        Picture = Picture["iconos/guardarComo.svg"]
+      }
+      { Spring9 Spring
+        MoveScaled(16,0,5,4)
+      }
+      { Label138 Label
+        MoveScaled(21,0,22.4444,4)
+        Alignment = Align.Right
+        Text = ("    GitHub Pages para  ")
+      }
+      { !txtnombreArchivoGHP TextBox
+        MoveScaled(45,0,23,4)
+        #Public = True
+        Background = Color.Background
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
+      }
+      { txtIdGitHubPages TextBox
+        MoveScaled(68,0,6,4)
+        Visible = False
+        Enabled = False
+        NoTabFocus = True
+        ReadOnly = True
+      }
+      { Separator21 Separator
+        MoveScaled(97,0,0.8889,4)
+        Foreground = Color.Transparent
+      }
+      { btnGenerarIndex Button
+        MoveScaled(99,0,17.1111,4)
         Background = &H8BE06F
         NoTabFocus = True
         Text = ("Generar index.html")
+      }
+    }
+    { HBox189 HBox
+      MoveScaled(1,5,106,4)
+      { Label139 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+        Text = ("Fecha de creación  ")
+      }
+      { !txtCreateDateHTML TextBox
+        MoveScaled(27,0,23,4)
+        #Public = True
+        Background = Color.Background
+        ReadOnly = True
+        Placeholder = ("YYYYMMDDHHmmSS")
+      }
+      { Separator22 Separator
+        MoveScaled(50,0,2.3333,4)
+      }
+      { TextLabel9 TextLabel
+        MoveScaled(53,0,47,4)
+        Expand = True
+        Text = ("Refiere a la fecha de creación del html general")
+        Alignment = Align.Normal
+      }
+    }
+    { HBox178 HBox
+      MoveScaled(1,9,106,4)
+      { Label137 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+        Text = ("Fecha de modificación  ")
+      }
+      { !txtModDateHTML TextBox
+        MoveScaled(27,0,23,4)
+        #Public = True
+        Background = Color.Background
+        ReadOnly = True
+        Placeholder = ("YYYYMMDDHHmmSS")
+      }
+      { Separator20 Separator
+        MoveScaled(50,0,2.3333,4)
+      }
+      { TextLabel8 TextLabel
+        MoveScaled(53,0,47,4)
+        Expand = True
+        Text = ("Refiere a la fecha de modificación del html general")
+        Alignment = Align.Normal
       }
     }
     Index = 0

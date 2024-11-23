@@ -3,6 +3,7 @@
 Public conector As Connection
 Private Contenido As Result
 Private ContenidoComenta As Result
+Private ContenidoGHP As Result
 Private Busqueda As Result
 Private pBash As Process
 Public rutaFILES As String
@@ -827,6 +828,9 @@ Public Sub menuAbrir_Click()'abrir un libro
   ' levantamos los datos de comentario
   levantarComenta()
 
+  ' levantamos los datos de githubpages
+  levantarGitHubPages()
+
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
@@ -1112,6 +1116,7 @@ Public Sub mnuLast_Click()
   seleccionarFuncionPorTipo(nombreDelArchivo)
 
   levantarComenta()'levantamos los datos de comentarios
+  levantarGitHubPages()  ' levantamos los datos de githubpages
   LimpiarCamposBIB()' Limpiamos los campos de las entradas bib
 
 End
@@ -2020,10 +2025,6 @@ Public Sub BtnNuevoMeta_Click()
     fecha = Format(HOY, "yyyymmddhhnnss")
     txtDate.Text = fecha
   Endif
-
-  BtnNuevoMeta.Enabled = True
-  btnGuardarMeta.Enabled = False
-  btnGuardarCambiosMeta.Enabled = False
 
   Dim Idn As Integer
 
@@ -6050,10 +6051,6 @@ End
 
 Public Sub BtnNuevoComenta_Click()
 
-  BtnNuevoComenta.Enabled = True
-  btnGuardarComenta.Enabled = False
-  btnGuardarCambiosComenta.Enabled = False
-
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
@@ -7498,12 +7495,131 @@ Public Sub Button2_Click()
 
 End
 
-Public Sub btnGenerarInex_Click()
+Public Sub btnGenerarIndex_Click()
 
   If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
     Mkdir File.Dir(TextBox1.Text) & "/docs"
   End If
 
   Mod_Exportar.ExportToIndexHTML(TextBox1.Text)
+
+End
+
+Public Sub BtnNuevoGHP_Click()
+
+  Dim fecha As String
+  Dim HOY As Date
+
+  If txtModDateHTML.Text = "" Then
+    HOY = Now
+    fecha = Format(HOY, "yyyy-mm-dd")
+    txtCreateDateHTML.Text = fecha
+  Endif
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  ContenidoGHP = conector.Exec("SELECT MAX(id) FROM githubpages LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If ContenidoGHP["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(ContenidoGHP["MAX(id)"]) + 1
+  Endif
+  txtIdGitHubPages.Text = Idn
+  txtnombreArchivoGHP.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
+
+  BtnNuevoGHP.Enabled = False
+  btnGuardarGHP.Enabled = True
+  btnGuardarCambiosGHP.Enabled = False
+
+End
+
+Public Sub btnGuardarGHP_Click()
+
+  ' actualizamos la fecha de última modificación
+  Dim fecha As String
+  Dim HOY As Date
+
+  HOY = Now
+  fecha = Format(HOY, "yyyy-mm-dd")
+  txtModDateHTML.Text = fecha
+
+  ContenidoGHP = conector.Create("githubpages")
+
+  guardarCamposGHP()
+  ContenidoGHP.Update
+
+  Message.Info("Los cambios se guardaron con éxito.")
+
+End
+
+Public Sub guardarCamposGHP()' As Boolean
+
+  ' actualizamos la fecha de última modificación
+  Dim fecha As String
+  Dim HOY As Date
+
+  HOY = Now
+  fecha = Format(HOY, "yyyy-mm-dd")
+  txtModDateHTML.Text = fecha
+
+  ContenidoGHP!id = txtIdGitHubPages.Text
+  ContenidoGHP!nombreArchivo = txtnombreArchivoGHP.Text
+  ContenidoGHP!txtCreateDateHTML = txtCreateDateHTML.Text
+  ContenidoGHP!txtModDateHTML = txtModDateHTML.Text
+
+  BtnNuevoGHP.Enabled = False
+  btnGuardarGHP.Enabled = False
+  btnGuardarCambiosGHP.Enabled = True
+
+End
+
+Public Sub btnGuardarCambiosGHP_Click()
+
+  ' actualizamos la fecha de última modificación
+  Dim fecha As String
+  Dim HOY As Date
+
+  HOY = Now
+  fecha = Format(HOY, "yyyy-mm-dd")
+  txtModDateHTML.Text = fecha
+
+  ContenidoGHP = conector.Edit("githubpages", "id=" & txtIdGitHubPages.Text)
+
+  If ContenidoGHP.Available Then
+    guardarCamposGHP()
+    ContenidoGHP.Update
+    Message.Info("Los cambios se guardaron con éxito.")
+  Else
+    Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
+  Endif
+
+End
+
+Public Sub levantarGitHubPages()
+
+  'levantamos los datos de githubpages
+  Dim comandoGHP As String
+
+  comandoGHP = "select * from githubpages where nombreArchivo = " & "'" & BaseName & ".tex'"
+  ContenidoGHP = conector.Exec(comandoGHP)
+  If ContenidoGHP.Count > 0 Then
+    BtnNuevoGHP.Enabled = False
+    btnGuardarGHP.Enabled = False
+    btnGuardarCambiosGHP.Enabled = True
+    txtIdGitHubPages.Text = ContenidoGHP!id
+    txtnombreArchivoGHP.Text = ContenidoGHP!nombreArchivo
+    txtCreateDateHTML.Text = ContenidoGHP!txtCreateDateHTML
+    txtModDateHTML.Text = ContenidoGHP!txtModDateHTML
+  Else
+    txtnombreArchivoGHP.Text = ""
+    txtCreateDateHTML.Text = ""
+    txtModDateHTML.Text = ""
+    BtnNuevoGHP.Enabled = True
+    btnGuardarGHP.Enabled = False
+    btnGuardarCambiosGHP.Enabled = False
+  Endif
 
 End
