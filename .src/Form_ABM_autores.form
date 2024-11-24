@@ -66,6 +66,8 @@
     Expand = True
     Arrangement = Arrange.Vertical
     Spacing = True
+    Margin = True
+    Padding = 4
     Border = False
     ScrollBar = Scroll.Vertical
     { HBox1 HBox
