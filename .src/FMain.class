@@ -7572,6 +7572,9 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!cvautoresHTML = txtCVautoresHTML.Text
   ContenidoGHP!hrefepubHTML = txtHREFepubHTML.Text
   ContenidoGHP!hrefelineaHTML = txtHREFenlineaHTML.Text
+  ContenidoGHP!hrefpdfHTML = txtHREFpdfHTML.Text
+  ContenidoGHP!ImagenHTML = txtImagenHTML.Text
+  ContenidoGHP!PubDateHTML = txtPubDateHTML.Text
 
   BtnNuevoGHP.Enabled = False
   btnGuardarGHP.Enabled = False
@@ -7619,6 +7622,9 @@ Public Sub levantarGitHubPages()
     txtCVautoresHTML.Text = ContenidoGHP!cvautoresHTML
     txtHREFepubHTML.Text = ContenidoGHP!hrefepubHTML
     txtHREFenlineaHTML.Text = ContenidoGHP!hrefelineaHTML
+    txtHREFpdfHTML.Text = ContenidoGHP!hrefpdfHTML
+    txtImagenHTML.Text = ContenidoGHP!ImagenHTML
+    txtPubDateHTML.Text = ContenidoGHP!PubDateHTML
   Else
     txtnombreArchivoGHP.Text = ""
     txtCreateDateHTML.Text = ""
@@ -7626,6 +7632,9 @@ Public Sub levantarGitHubPages()
     txtCVautoresHTML.Text = ""
     txtHREFepubHTML.Text = ""
     txtHREFenlineaHTML.Text = ""
+    txtHREFpdfHTML.Text = ""
+    txtImagenHTML.Text = ""
+    txtPubDateHTML.Text = ""
     BtnNuevoGHP.Enabled = True
     btnGuardarGHP.Enabled = False
     btnGuardarCambiosGHP.Enabled = False

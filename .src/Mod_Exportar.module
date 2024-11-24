@@ -1655,6 +1655,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t </aside>" & gb.NewLine
     '
     s &= "\t <section>" & gb.NewLine
+    s &= "\t\t <p>" & ContenidoMeta[bFields[48]] & "</p>" & gb.NewLine
     s &= "\t\t <p>" & ContenidoGHP[gFields[4]] & "</p>" & gb.NewLine
     s &= "\t </section>" & gb.NewLine
     '
