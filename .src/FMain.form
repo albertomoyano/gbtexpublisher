@@ -4777,8 +4777,27 @@
         Expand = True
       }
     }
+    { HBox197 HBox
+      MoveScaled(0,29,106,4)
+      { Label147 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+        Text = ("Imagen de cabecera  ")
+      }
+      { btnBuscarCabecera Button
+        MoveScaled(26,0,4,4)
+        Picture = Picture["iconos/abrirBuscar.svg"]
+      }
+      { !txtCabeceraHTML TextBox
+        MoveScaled(35,0,23,4)
+        #Public = True
+        Background = Color.Background
+        Expand = True
+        ReadOnly = True
+      }
+    }
     { HBox190 HBox
-      MoveScaled(1,29,106,4)
+      MoveScaled(1,33,106,4)
       { Label140 Label
         MoveScaled(0,0,23,4)
         Alignment = Align.Right
@@ -4797,7 +4816,7 @@
       }
     }
     { HBox191 HBox
-      MoveScaled(1,33,106,4)
+      MoveScaled(1,37,106,4)
       { Label141 Label
         MoveScaled(0,0,23,4)
         Alignment = Align.Right
@@ -4814,7 +4833,7 @@
       }
     }
     { HBox196 HBox
-      MoveScaled(0,37,106,4)
+      MoveScaled(0,41,106,4)
       { Label146 Label
         MoveScaled(0,0,23,4)
         Alignment = Align.Right

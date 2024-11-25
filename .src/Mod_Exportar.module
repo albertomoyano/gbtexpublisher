@@ -1655,7 +1655,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     '
 
     s &= "<body>" & gb.NewLine
-    s &= "\t <header><h1>Ediciones Imago Mundi</h1></header>" & gb.NewLine
+    s &= "\t <header>" & ContenidoGHP[gFields[10]] & "</header>" & gb.NewLine
     '
     s &= "\t <aside>" & gb.NewLine
     s &= "\t\t <img src=\"" & ContenidoGHP[gFields[8]] & "\" alt=\"Imagen de tapa\">" & gb.NewLine

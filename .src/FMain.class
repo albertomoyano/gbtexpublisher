@@ -7575,7 +7575,8 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!hrefpdfHTML = txtHREFpdfHTML.Text
   ContenidoGHP!ImagenHTML = txtImagenHTML.Text
   ContenidoGHP!PubDateHTML = txtPubDateHTML.Text
-  ContenidoGHP!PieHTML = txtPieHTML.Text
+  ContenidoGHP!txtPieHTML = txtPieHTML.Text
+  ContenidoGHP!txtCabeceraHTML = txtCabeceraHTML.Text
 
   BtnNuevoGHP.Enabled = False
   btnGuardarGHP.Enabled = False
@@ -7626,7 +7627,8 @@ Public Sub levantarGitHubPages()
     txtHREFpdfHTML.Text = ContenidoGHP!hrefpdfHTML
     txtImagenHTML.Text = ContenidoGHP!ImagenHTML
     txtPubDateHTML.Text = ContenidoGHP!PubDateHTML
-    txtPieHTML.Text = ContenidoGHP!PieHTML
+    txtPieHTML.Text = ContenidoGHP!txtPieHTML
+    txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
   Else
     txtnombreArchivoGHP.Text = ""
     txtCreateDateHTML.Text = ""
@@ -7638,6 +7640,7 @@ Public Sub levantarGitHubPages()
     txtImagenHTML.Text = ""
     txtPubDateHTML.Text = ""
     txtPieHTML.Text = ""
+    txtCabeceraHTML.Text = ""
     BtnNuevoGHP.Enabled = True
     btnGuardarGHP.Enabled = False
     btnGuardarCambiosGHP.Enabled = False
@@ -7687,5 +7690,23 @@ Public Sub btnMostrarTexto2_Click()
 
   Form_TXTextendido.OriginalTextBox = txtPieHTML
   Form_TXTextendido.ShowModal
+
+End
+
+Public Sub btnBuscarCabecera_Click()
+
+  ' Configurar el título y los filtros del cuadro de diálogo
+  Dialog.Title = "Seleccionar archivo para el header de la página html"
+  Dialog.Filter = ["*.png", "Archivos PNG"]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(TextBox1.Text) & "/docs/"
+
+  ' Abrir el cuadro de diálogo de selección de archivo
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    ' Actualizar el TextBox con el archivo seleccionado
+    txtCabeceraHTML.Text = File.Name(Dialog.Path)
+  Endif
 
 End
