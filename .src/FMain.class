@@ -7500,39 +7500,20 @@ Public Sub btnGenerarIndex_Click()
   If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
     Mkdir File.Dir(TextBox1.Text) & "/docs"
   End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/logo-imago.png") Then
+    Copy "./logo-imago.png" To File.Dir(TextBox1.Text) & "/docs/logo-imago.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/descarga.png") Then
+    Copy "./descarga.png" To File.Dir(TextBox1.Text) & "/docs/descarga.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/orcid.png") Then
+    Copy "./orcid.png" To File.Dir(TextBox1.Text) & "/docs/orcid.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/imago1.css") Then
+    Copy "./imago1.css" To File.Dir(TextBox1.Text) & "/docs/imago1.css"
+  End If
 
   Mod_Exportar.ExportToIndexHTML(TextBox1.Text)
-
-End
-
-Public Sub BtnNuevoGHP_Click()
-
-  Dim fecha As String
-  Dim HOY As Date
-
-  If txtModDateHTML.Text = "" Then
-    HOY = Now
-    fecha = Format(HOY, "yyyy-mm-dd")
-    txtCreateDateHTML.Text = fecha
-  Endif
-
-  Dim Idn As Integer
-
-  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  ContenidoGHP = conector.Exec("SELECT MAX(id) FROM githubpages LIMIT 1")
-
-  ' Si no hay ninguna entrada entonces arrancamos desde 0
-  If ContenidoGHP["MAX(id)"] = Null Then
-    Idn = 0
-  Else
-    Idn = CInt(ContenidoGHP["MAX(id)"]) + 1
-  Endif
-  txtIdGitHubPages.Text = Idn
-  txtnombreArchivoGHP.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
-
-  BtnNuevoGHP.Enabled = False
-  btnGuardarGHP.Enabled = True
-  btnGuardarCambiosGHP.Enabled = False
 
 End
 
@@ -7660,9 +7641,7 @@ Public Sub btnBuscarImagen_Click()
   If Dialog.OpenFile() Then
     Return
   Else
-    If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
-      Mkdir File.Dir(TextBox1.Text) & "/docs"
-    End If
+
     ' Si se seleccionó un archivo, actualizar el TextBox y la ruta
     txtImagenHTML.Text = Dialog.Path
 
@@ -7708,5 +7687,52 @@ Public Sub btnBuscarCabecera_Click()
     ' Actualizar el TextBox con el archivo seleccionado
     txtCabeceraHTML.Text = File.Name(Dialog.Path)
   Endif
+
+End
+
+Public Sub BtnNuevoGHP_Click()
+
+  Dim fecha As String
+  Dim HOY As Date
+
+  If txtModDateHTML.Text = "" Then
+    HOY = Now
+    fecha = Format(HOY, "yyyy-mm-dd")
+    txtCreateDateHTML.Text = fecha
+  Endif
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  ContenidoGHP = conector.Exec("SELECT MAX(id) FROM githubpages LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If ContenidoGHP["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(ContenidoGHP["MAX(id)"]) + 1
+  Endif
+  txtIdGitHubPages.Text = Idn
+  txtnombreArchivoGHP.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
+
+  BtnNuevoGHP.Enabled = False
+  btnGuardarGHP.Enabled = True
+  btnGuardarCambiosGHP.Enabled = False
+
+  If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
+    Mkdir File.Dir(TextBox1.Text) & "/docs"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/logo-imago.png") Then
+    Copy "./logo-imago.png" To File.Dir(TextBox1.Text) & "/docs/logo-imago.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/descarga.png") Then
+    Copy "./descarga.png" To File.Dir(TextBox1.Text) & "/docs/descarga.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/orcid.png") Then
+    Copy "./orcid.png" To File.Dir(TextBox1.Text) & "/docs/orcid.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/imago1.css") Then
+    Copy "./imago1.css" To File.Dir(TextBox1.Text) & "/docs/imago1.css"
+  End If
 
 End
