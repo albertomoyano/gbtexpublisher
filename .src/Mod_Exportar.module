@@ -1658,6 +1658,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <header><h1>Ediciones Imago Mundi</h1></header>" & gb.NewLine
     '
     s &= "\t <aside>" & gb.NewLine
+    s &= "\t\t <img src=\"" & ContenidoGHP[gFields[8]] & "\" alt=\"Imagen de tapa\">" & gb.NewLine
     s &= "\t\t <h2>Licencia</h2>" & gb.NewLine
     s &= "\t\t <h2>Identificadores</h2>" & gb.NewLine
     s &= "\t\t <h2>Fecha de publicación</h2>" & gb.NewLine
@@ -1670,7 +1671,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t </section>" & gb.NewLine
     '
     s &= "\t <footer id=\"ancho-del-pie\">" & gb.NewLine
-    s &= "\t\t<p id=\"texto-blanco\">marco del footer</p>" & gb.NewLine
+    s &= "\t\t<p id=\"texto-blanco\">" & ContenidoGHP[gFields[10]] & "</p>" & gb.NewLine
     s &= "\t </footer>" & gb.NewLine
     '
     s &= "</body>" & gb.NewLine

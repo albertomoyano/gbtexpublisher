@@ -4813,6 +4813,23 @@
         Text = ("") & "..."
       }
     }
+    { HBox196 HBox
+      MoveScaled(0,37,106,4)
+      { Label146 Label
+        MoveScaled(0,0,23,4)
+        Alignment = Align.Right
+        Text = ("Pie de página  ")
+      }
+      { !txtPieHTML TextBox
+        MoveScaled(27,0,23,4)
+        #Public = True
+        Expand = True
+      }
+      { btnMostrarTexto2 Button
+        MoveScaled(52,0,4,4)
+        Text = ("") & "..."
+      }
+    }
     Index = 0
   }
   { Timer1 #Timer
