@@ -1644,6 +1644,12 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "<!-- -->" & gb.NewLine
     s &= "<!-- Estilos -->" & gb.NewLine
     s &= "\t <link rel=\"stylesheet\" href=\"styles.css\">" & gb.NewLine
+    s &= "\t <style>" & gb.NewLine
+    s &= "\t\t aside {background-color: #e6e6e6;}" & gb.NewLine
+    s &= "\t\t footer {background-color: #4d4d4d; border-top: 12px; margin: 12px auto;}" & gb.NewLine
+    s &= "\t\t #ancho-del-pie {width: 960px;}" & gb.NewLine
+    s &= "\t\t #texto-blanco {color: white; padding: 12px;}" & gb.NewLine
+    s &= "\t </style>" & gb.NewLine
     s &= "</head>" & gb.NewLine
     '
     '
@@ -1652,6 +1658,10 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <header><h1>Ediciones Imago Mundi</h1></header>" & gb.NewLine
     '
     s &= "\t <aside>" & gb.NewLine
+    s &= "\t\t <h2>Licencia</h2>" & gb.NewLine
+    s &= "\t\t <h2>Identificadores</h2>" & gb.NewLine
+    s &= "\t\t <h2>Fecha de publicación</h2>" & gb.NewLine
+    s &= "\t\t <p>" & ContenidoGHP[gFields[9]] & "</p>" & gb.NewLine
     s &= "\t </aside>" & gb.NewLine
     '
     s &= "\t <section>" & gb.NewLine
@@ -1659,7 +1669,8 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t\t <p>" & ContenidoGHP[gFields[4]] & "</p>" & gb.NewLine
     s &= "\t </section>" & gb.NewLine
     '
-    s &= "\t <footer>" & gb.NewLine
+    s &= "\t <footer id=\"ancho-del-pie\">" & gb.NewLine
+    s &= "\t\t<p id=\"texto-blanco\">marco del footer</p>" & gb.NewLine
     s &= "\t </footer>" & gb.NewLine
     '
     s &= "</body>" & gb.NewLine

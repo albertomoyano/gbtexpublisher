@@ -7648,3 +7648,34 @@ Public Sub btnMostrarTexto_Click()
   Form_TXTextendido.ShowModal
 
 End
+
+Public Sub btnBuscarImagen_Click()
+
+  ' Configurar el título y los filtros del cuadro de diálogo
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.png", "Archivos PNG", "*.jpg", "Archivos JPG"] ' Añadimos soporte para JPG
+  Dialog.AutoExt = True
+  Dialog.Path = File.RealPath(TextBox1.Text)
+
+  ' Abrir el cuadro de diálogo de selección de archivo
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
+      Mkdir File.Dir(TextBox1.Text) & "/docs"
+    End If
+    ' Si se seleccionó un archivo, actualizar el TextBox y la ruta
+    txtImagenHTML.Text = Dialog.Path
+
+    ' Construir la ruta de destino
+    Dim archivoDestino As String
+    archivoDestino = File.Dir(TextBox1.Text) & "/docs/260x-tapa-" & File.BaseName(TextBox1.Text) & ".png"
+
+    ' Ejecutar el comando convert para redimensionar la imagen
+    TerminalView1.Input("convert " & File.RealPath(txtImagenHTML.Text) & " -resize 260x " & archivoDestino & "\n")
+
+    ' Actualizar el TextBox con el nuevo nombre de archivo resultante
+    txtImagenHTML.Text = File.Name(archivoDestino)
+  Endif
+
+End

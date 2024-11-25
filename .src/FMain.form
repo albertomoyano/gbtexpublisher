@@ -4740,13 +4740,10 @@
     }
     { HBox194 HBox
       MoveScaled(1,17,106,4)
-      { Label144 Label
+      { Label142 Label
         MoveScaled(0,0,23,4)
         Alignment = Align.Right
-      }
-      { CheckBox3 CheckBox
-        MoveScaled(28,0,30,4)
-        Text = ("Este libro tiene versión en PDF   ")
+        Text = ("URL para descarga PDF  ")
       }
       { !txtHREFpdfHTML TextBox
         MoveScaled(58,0,23,4)
@@ -4756,13 +4753,10 @@
     }
     { HBox192 HBox
       MoveScaled(1,21,106,4)
-      { Label142 Label
+      { Label143 Label
         MoveScaled(0,0,23,4)
         Alignment = Align.Right
-      }
-      { CheckBox2 CheckBox
-        MoveScaled(28,0,30,4)
-        Text = ("Este libro tiene versión en ePub   ")
+        Text = ("URL para descarga ePub  ")
       }
       { !txtHREFepubHTML TextBox
         MoveScaled(58,0,23,4)
@@ -4772,13 +4766,10 @@
     }
     { HBox193 HBox
       MoveScaled(1,25,106,4)
-      { Label143 Label
+      { Label144 Label
         MoveScaled(0,0,23,4)
         Alignment = Align.Right
-      }
-      { CheckBox1 CheckBox
-        MoveScaled(26,0,30,4)
-        Text = ("Este libro tiene versión en línea  ")
+        Text = ("URL para lectura en línea  ")
       }
       { !txtHREFenlineaHTML TextBox
         MoveScaled(58,0,23,4)
@@ -4793,7 +4784,7 @@
         Alignment = Align.Right
         Text = ("Imagen de tapa  ")
       }
-      { btnMostrarTexto2 Button
+      { btnBuscarImagen Button
         MoveScaled(26,0,4,4)
         Picture = Picture["iconos/search.svg"]
       }
