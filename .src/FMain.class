@@ -68,13 +68,13 @@ Public Sub Form_Open()
     Endif
   Next
 
-  ' aseguramos los scripts externos
+  ' aseguramos la copia de los scripts externos
   Dim archivosP As String[] = [
     "01_Error?.py", "02_ContadorGlobal.py", "03_ControlarLlaves.py", "04_ControlarCorchetes.py",
     "05_ControlarParentesis.py", "06_ControlarPregunta.py", "07_ControlarAdmiracion.py",
     "08_LigarSiglo.py", "09_BuscarLigaduras.py", "10_LimpiezaConExpReg.py", "11_ReemplazarComillas.py",
     "12_ControlarNumeros.py", "13_ControlarEspacioIzquierda.py", "14_BuscarParencite.py",
-    "15_PalabrasRepetidas.py", "16_ControlarEntornos.py", "17_UniformarEndash.py"
+    "15_PalabrasRepetidas.py", "16_ControlarEntornos.py", "17_UniformarEndash.py", "18_ControlarComa.py"
   ]
 
   For Each archivopy As String In archivosP

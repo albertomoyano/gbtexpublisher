@@ -1620,37 +1620,44 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   While ContenidoMeta.Available
     s &= "<!DOCTYPE html>" & gb.NewLine
     s &= "<html lang=\"es\">" & gb.NewLine
+    '
     s &= "<head>" & gb.NewLine
     s &= "\t <meta charset=\"utf-8\">" & gb.NewLine
+    s &= "\t <meta name=\"generator\" content=\"gbTeXpublisher y el ecosistema de LaTeX\">" & gb.NewLine
     s &= "\t <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" & gb.NewLine
     s &= "\t <meta name=\"description\" content=\" entrada de la base de datos \">" & gb.NewLine
     s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
     s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"robots\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <title>Ediciones Imago Mundi | " & ContenidoMeta[bFields[84]] & "</title>" & gb.NewLine
-    s &= "<!-- -->" & gb.NewLine
+    '
+    s &= "\t <!-- Google Fonts -->" & gb.NewLine
+    s &= "\t <link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap\" rel=\"stylesheet\">" & gb.NewLine
+    '
     s &= "<!-- Google Scholar, CrosRef y PubMed -->" & gb.NewLine
-    s &= "\t <meta name=\"citation_title\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_language\" content=\"es\"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_publication_date\" content=\"" & ContenidoMeta[bFields[11]] & "\"/>" & gb.NewLine'el 11 es la fecha de creación, cambiarlo
-    s &= "<!-- DC  -->" & gb.NewLine
-    s &= "\t <meta name=\"DC.date.created\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[2]] & "\"/>" & gb.NewLine
-    s &= "\t <meta name=\"DC.date.datesubmitted\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[3]] & "\"/>" & gb.NewLine
-
     s &= "\t <meta name=\"citation_author\" content=\"Karolin Bove\"/>" & gb.NewLine
-    s &= "<!-- -->" & gb.NewLine
+    s &= "\t <meta name=\"citation_title\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_isbn\" content=\" -- \"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_language\" content=\"es\"/>" & gb.NewLine
+    '
+    s &= "<!-- Dublin Core (DC)  -->" & gb.NewLine
+    a &= "<link rel=\"schema.dc\" href=\"http://purl.org/dc/elements/1.1/\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.format\" content=\"text/html\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.title\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.title.alternative\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.date.created\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[2]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.date.datesubmitted\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[3]] & "\"/>" & gb.NewLine
+    '
+    s &= "\t <meta name=\"dc.source\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.source.URI\" content=\"https://www.edicionesimagomundi.com/\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.type\" content=\"text.book\">" & gb.NewLine
+    '
     s &= "<!-- Favicon -->" & gb.NewLine
     s &= "\t <link rel=\"icon\" href=\"favicon-im.png\">" & gb.NewLine
-    s &= "<!-- -->" & gb.NewLine
+    '
     s &= "<!-- Estilos -->" & gb.NewLine
-    s &= "\t <link rel=\"stylesheet\" href=\"styles.css\">" & gb.NewLine
-    s &= "\t <style>" & gb.NewLine
-    s &= "\t\t aside {background-color: #e6e6e6;}" & gb.NewLine
-    s &= "\t\t footer {background-color: #4d4d4d; border-top: 12px; margin: 12px auto;}" & gb.NewLine
-    s &= "\t\t #ancho-del-pie {width: 960px;}" & gb.NewLine
-    s &= "\t\t #texto-blanco {color: white; padding: 12px;}" & gb.NewLine
-    s &= "\t </style>" & gb.NewLine
-    s &= "</head>" & gb.NewLine
+    s &= "\t <link rel=\"stylesheet\" href=\"imago1.css\">" & gb.NewLine
+    s &= "</head>" & gb.NewLine 'termina al head
     '
     '
 
