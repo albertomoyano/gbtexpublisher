@@ -4869,7 +4869,7 @@
         }
       }
       { HBox201 HBox
-        MoveScaled(1,36,86,4)
+        MoveScaled(1,40,106,4)
         { Label150 Label
           MoveScaled(0,0,23,4)
           Alignment = Align.Right
@@ -4885,12 +4885,19 @@
           NoTabFocus = True
           Picture = Picture["iconos/borrar.svg"]
         }
+        { Separator24 Separator
+          MoveScaled(58,0,2.3333,4)
+        }
+        { cmbRolAutores ComboBox
+          MoveScaled(62,0,23,4)
+          ReadOnly = True
+        }
         { Spring10 Spring
-          MoveScaled(52,0,5,4)
+          MoveScaled(96,0,5,4)
         }
       }
       { HBox200 HBox
-        MoveScaled(1,40,86,16)
+        MoveScaled(1,44,86,16)
         { tblAutores TableView
           MoveScaled(1,1,19,10)
           Expand = True
@@ -4901,7 +4908,7 @@
         }
       }
       { HBox198 HBox
-        MoveScaled(1,56,86,4)
+        MoveScaled(1,60,86,4)
         { Label149 Label
           MoveScaled(0,0,23,4)
           Alignment = Align.Right
@@ -4922,7 +4929,7 @@
         }
       }
       { HBox199 HBox
-        MoveScaled(1,60,86,16)
+        MoveScaled(1,64,86,16)
         { tblArticulos TableView
           MoveScaled(1,1,19,10)
           Expand = True

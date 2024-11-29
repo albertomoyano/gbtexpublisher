@@ -1687,6 +1687,8 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t\t <a href=\"" & ContenidoGHP[gFields[5]] & "\" target=\"_blank\">Descargar ePub</a>" & gb.NewLine
     s &= "\t\t <a href=\"" & ContenidoGHP[gFields[6]] & "\" target=\"_blank\">Leer en línea</a>" & gb.NewLine
     s &= "\t\t </div>" & gb.NewLine
+    s &= "<h3>" & ContenidoGHP[gFields[12]] & "</h3>" & gb.NewLine
+    ' s &= "<h3>" & AUTORES & "</h3>" & gb.NewLine
     s &= "<h2>" & ContenidoMeta[bFields[84]] & "</h2>" & gb.NewLine
     s &= "<h3>" & ContenidoMeta[bFields[9]] & "</h3>" & gb.NewLine
 

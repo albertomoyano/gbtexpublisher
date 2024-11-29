@@ -305,6 +305,21 @@ Public Sub Form_Open()
   txt89_binding.Add("Anillado")
   txt89_binding.Add("Abrochado")
 
+  ' combobox de githubpages
+  cmbRolAutores.Add("")
+  cmbRolAutores.Add("Autor")
+  cmbRolAutores.Add("Autora")
+  cmbRolAutores.Add("Autores")
+  cmbRolAutores.Add("Editor")
+  cmbRolAutores.Add("Editora")
+  cmbRolAutores.Add("Editores")
+  cmbRolAutores.Add("Compilador")
+  cmbRolAutores.Add("Compiladora")
+  cmbRolAutores.Add("Compiladores")
+  cmbRolAutores.Add("Coordinador")
+  cmbRolAutores.Add("Coordinadora")
+  cmbRolAutores.Add("Coordinadores")
+
   ' comienza bibtex
   BtnEliminarBib.Enabled = False
   btnGuardar.Enabled = False
@@ -7562,6 +7577,7 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!PubDateHTML = txtPubDateHTML.Text
   ContenidoGHP!txtPieHTML = txtPieHTML.Text
   ContenidoGHP!txtCabeceraHTML = txtCabeceraHTML.Text
+  ContenidoGHP!rolHTML = cmbRolAutores.Text
 
   BtnNuevoGHP.Enabled = False
   btnGuardarGHP.Enabled = False
@@ -7614,6 +7630,7 @@ Public Sub levantarGitHubPages()
     txtPubDateHTML.Text = ContenidoGHP!PubDateHTML
     txtPieHTML.Text = ContenidoGHP!txtPieHTML
     txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
+    cmbRolAutores.Text = ContenidoGHP!rolHTML
   Else
     txtnombreArchivoGHP.Text = ""
     txtCreateDateHTML.Text = ""
@@ -7626,6 +7643,7 @@ Public Sub levantarGitHubPages()
     txtPubDateHTML.Text = ""
     txtPieHTML.Text = ""
     txtCabeceraHTML.Text = ""
+    cmbRolAutores.Text = ""
     BtnNuevoGHP.Enabled = True
     btnGuardarGHP.Enabled = False
     btnGuardarCambiosGHP.Enabled = False
