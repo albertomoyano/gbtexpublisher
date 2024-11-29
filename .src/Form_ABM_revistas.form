@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,1024,740)
+  Move(0,0,960,740)
   #Scaled = False
   Text = ("Alta - Baja - Modificación de revistas")
   Resizable = False

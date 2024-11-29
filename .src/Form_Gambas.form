@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,640,320)
+  Move(0,0,960,320)
   #Scaled = False
   Text = ("Acerca de GAMBAS")
   Resizable = False

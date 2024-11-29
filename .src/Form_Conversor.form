@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,950,207)
+  Move(0,0,960,207)
   #Scaled = False
   #Translate = False
   Text = "Conversión de archivo a formato LaTeX"
@@ -90,7 +90,7 @@
     }
   }
   { HBox7 HBox
-    Move(0,120,942,36)
+    Move(0,120,952,36)
     { Spring1 Spring
       Move(135,0,117,36)
     }

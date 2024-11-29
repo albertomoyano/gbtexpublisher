@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,950,400)
+  Move(0,0,960,400)
   #Scaled = False
   Expand = True
   Resizable = False

@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,1024,208)
+  Move(0,0,960,208)
   #Scaled = False
   Expand = True
   Text = ("Exportar referencias bibliográficas")

@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,1024,748)
+  Move(0,0,960,748)
   #Scaled = False
   Text = ("OT para imprenta")
   Resizable = False

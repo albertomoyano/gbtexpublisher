@@ -1,25 +1,38 @@
 ' Gambas class file
 
-Private Conn As Connection
+Private conector As Connection
 Private Contenido As Result
 Private Busqueda As Result
 Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
 
-  Mod_Conn.desconectar
-  Me.Close()
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
+  Endif
+
+  Me.Close
 
 End
 
 Public Sub Form_Open()
 
+  ' Crear una nueva conexión
+  conector = New Connection
+
+  ' Configurar los parámetros de conexión
+  conector.Type = "sqlite"
+  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
+  conector.Name = "db_tex.sqlite"
+
+  ' Intentar abrir la conexión
+  Try conector.Open()
+
   btnGuardarAutores.Visible = False
   btnGuardarCambiosAutores.Visible = False
   BtnRefrescarAutores.Visible = False
-
-  ' me conceto a la base de datos
-  Mod_Conn.conectar
 
   Mostrar_Lista()
 
@@ -33,7 +46,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridAutores.Clear()
 
-  Contenido = Conn.Exec("select * from autores ORDER BY id DESC")
+  Contenido = conector.Exec("select * from autores ORDER BY id DESC")
 
   'diseñamos el tableview
   GridAutores.Columns.Count = 14
@@ -88,7 +101,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM autores")
+  Contenido = conector.Exec("SELECT COUNT(*) FROM autores")
 
   Record = Contenido[0]
   Count = Record
@@ -106,7 +119,7 @@ Public Sub BtnNuevoAutores_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Conn.Exec("SELECT MAX(id) FROM autores LIMIT 1")
+  Contenido = conector.Exec("SELECT MAX(id) FROM autores LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -144,7 +157,7 @@ Public Sub btnGuardarAutores_Click()
 
   ' no revisamos que existan coincidencias, ya que una editorial
   ' puede tener diferentes docmicilios
-  Contenido = Conn.Create("autores")
+  Contenido = conector.Create("autores")
 
   guardarCampos
 
@@ -244,7 +257,7 @@ Public Sub btnGuardarCambiosAutores_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = Conn.Edit("autores", "id=" & txtID.Text)
+  Contenido = conector.Edit("autores", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -278,7 +291,7 @@ Public Sub btnBuscarApellido_Click()
     Return
   Endif
 
-  Busqueda = Conn.Exec(Comando)
+  Busqueda = conector.Exec(Comando)
 
   ' Limpia el GridView antes de mostrar los resultados de la búsqueda
   GridAutores.Clear()
@@ -326,16 +339,28 @@ End
 
 Public Sub btnSeleccion_Click()  ' Verificar si hay una fila seleccionada.
 
-  Dim IdSeleccionado As String = GridAutores[FilaSeleccionada, 0].Text
+  ' Dim IdSeleccionado As String = GridAutores[FilaSeleccionada, 0].Text
+  '
+  ' If FilaSeleccionada >= 0 Then
+  '   ' Accede al formulario original y establece los valores en los TextBox.
+  '   FMain.txt05_pdfauthor.Text = FMain.txt05_pdfauthor.Text & " " & IdSeleccionado
+  '   ' Cierra la base y el formulario actual.
+  '   conector.Close()
+  '   Me.Close()
+  ' Else
+  '   Message.Warning("Debe seleccionar un autor.")
+  ' Endif
 
-  If FilaSeleccionada >= 0 Then
-    ' Accede al formulario original y establece los valores en los TextBox.
-    FMain.txt05_pdfauthor.Text = FMain.txt05_pdfauthor.Text & " " & IdSeleccionado
-    ' Cierra la base y el formulario actual.
-    Mod_Conn.desconectar
-    Me.Close()
-  Else
-    Message.Warning("Debe seleccionar un autor.")
+End
+
+Public Sub Form_Close()
+
+  ' Cerrar la conexión si está abierta
+  If conector Then
+    conector.Close()
+    conector = Null
   Endif
+
+  Me.Close
 
 End

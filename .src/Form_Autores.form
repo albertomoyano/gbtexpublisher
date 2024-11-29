@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,950,640)
+  Move(0,0,960,640)
   #Scaled = False
   Resizable = False
   Arrangement = Arrange.Vertical
@@ -9,7 +9,7 @@
   Margin = True
   Padding = 4
   { HBox16 HBox
-    Move(0,9,711,36)
+    Move(0,9,952,36)
     { BtnNuevoAutores Button
       Move(0,0,36,36)
       NoTabFocus = True
@@ -52,212 +52,203 @@
     }
   }
   { TabStrip1 TabStrip
-    Move(18,54,942,254)
-    Arrangement = Arrange.Fill
-    AutoResize = True
+    Move(9,54,954,279)
+    Expand = True
+    Arrangement = Arrange.Vertical
+    Spacing = True
+    Margin = True
+    Padding = 4
     Count = 2
     Index = 0
     Text = ("Autor")
-    { HBox3 Panel
-      Move(9,0,711,180)
-      NoTabFocus = True
-      Arrangement = Arrange.Vertical
-      { HBox2 HBox
-        Move(0,0,549,36)
-        AutoResize = True
-        { lblAlta2 Label
-          Move(72,0,126,36)
-          Alignment = Align.Right
-          Text = ("Apellido  ")
-        }
-        { txtApellido TextBox
-          Move(225,0,135,36)
-          NoTabFocus = True
-          Expand = True
-          Alignment = Align.Left
-        }
-        { btnBuscarApellido Button
-          Move(360,0,36,36)
-          Picture = Picture["iconos/search.svg"]
-        }
+    Picture = Picture["iconos/candado-abierto.svg"]
+    { HBox2 HBox
+      Move(9,9,549,36)
+      AutoResize = True
+      { lblAlta2 Label
+        Move(72,0,126,36)
+        Alignment = Align.Right
+        Text = ("Apellido  ")
       }
-      { HBox15 HBox
-        Move(0,36,693,36)
-        { lblKEYWORDS1 Label
-          Move(0,0,126,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Nombre "
-        }
-        { txtNombre TextBox
-          Move(225,0,144,36)
-          NoTabFocus = True
-          Expand = True
-        }
+      { txtApellido TextBox
+        Move(225,0,135,36)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
       }
-      { HBox4 HBox
-        Move(0,72,702,36)
-        { lblKEYWORDS2 Label
-          Move(333,0,126,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Email "
-        }
-        { txtEmail TextBox
-          Move(459,0,216,36)
-          NoTabFocus = True
-          Expand = True
-        }
+      { btnBuscarApellido Button
+        Move(360,0,36,36)
+        Picture = Picture["iconos/search.svg"]
       }
-      { HBox7 HBox
-        Move(0,108,702,36)
-        { lblKEYWORDS5 Label
-          Move(333,0,126,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Blog / Website "
-        }
-        { txtBlog TextBox
-          Move(459,0,216,36)
-          NoTabFocus = True
-          Expand = True
-        }
+    }
+    { HBox15 HBox
+      Move(9,45,693,36)
+      { lblKEYWORDS1 Label
+        Move(0,0,126,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Nombre "
       }
-      { HBox5 HBox
-        Move(0,144,558,36)
-        { lblKEYWORDS3 Label
-          Move(0,0,126,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "ORCID "
-        }
-        { txtORCID TextBox
-          Move(198,0,216,36)
-          NoTabFocus = True
-          Expand = True
-        }
-        { btnBuscarORCID Button
-          Move(432,0,36,36)
-          Picture = Picture["iconos/web.svg"]
-        }
+      { txtNombre TextBox
+        Move(225,0,144,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox4 HBox
+      Move(9,81,702,36)
+      { lblKEYWORDS2 Label
+        Move(333,0,126,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Email "
+      }
+      { txtEmail TextBox
+        Move(459,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox7 HBox
+      Move(9,117,702,36)
+      { lblKEYWORDS5 Label
+        Move(333,0,126,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Blog / Website "
+      }
+      { txtBlog TextBox
+        Move(459,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox5 HBox
+      Move(9,153,952,36)
+      { lblKEYWORDS3 Label
+        Move(0,0,126,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "ORCID "
+      }
+      { txtORCID TextBox
+        Move(198,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+      { btnBuscarORCID Button
+        Move(432,0,36,36)
+        Picture = Picture["iconos/web.svg"]
       }
     }
     Index = 1
     Text = ("Filiación")
-    { HBox8 Panel
-      Move(0,0,711,216)
-      NoTabFocus = True
-      Arrangement = Arrange.Vertical
-      { HBox9 HBox
-        Move(0,0,558,36)
-        { lblAlta1 Label
-          Move(0,0,144,36)
-          Alignment = Align.Right
-          Text = ("Institución  ")
-        }
-        { txtInstitucion TextBox
-          Move(162,0,234,36)
-          NoTabFocus = True
-          Expand = True
-          Alignment = Align.Left
-        }
+    { HBox9 HBox
+      Move(9,9,936,36)
+      { lblAlta1 Label
+        Move(0,0,144,36)
+        Alignment = Align.Right
+        Text = ("Institución  ")
       }
-      { HBox10 HBox
-        Move(0,36,558,36)
-        { lblKEYWORDS4 Label
-          Move(0,0,144,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Departamento "
-        }
-        { txtDepartamento TextBox
-          Move(162,0,216,36)
-          NoTabFocus = True
-          Expand = True
-        }
+      { txtInstitucion TextBox
+        Move(162,0,234,36)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
       }
-      { HBox11 HBox
-        Move(0,72,558,36)
-        { lblKEYWORDS6 Label
-          Move(0,0,144,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Dirección "
-        }
-        { txtDireccion TextBox
-          Move(162,0,216,36)
-          NoTabFocus = True
-          Expand = True
-        }
+      { lblKEYWORDS4 Label
+        Move(396,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Departamento "
       }
-      { HBox12 HBox
-        Move(0,108,693,36)
-        { lblKEYWORDS7 Label
-          Move(0,0,144,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Provincia "
-        }
-        { txtProvincia TextBox
-          Move(162,0,126,36)
-          NoTabFocus = True
-          Expand = True
-        }
-        { lblKEYWORDS8 Label
-          Move(243,0,108,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "País "
-        }
-        { txtPais TextBox
-          Move(360,0,126,36)
-          NoTabFocus = True
-          Expand = True
-        }
-        { lblKEYWORDS9 Label
-          Move(495,0,108,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "C. Postal "
-        }
-        { txtPostal TextBox
-          Move(612,0,117,36)
-          NoTabFocus = True
-        }
+      { txtDepartamento TextBox
+        Move(558,0,216,36)
+        NoTabFocus = True
+        Expand = True
       }
-      { HBox13 HBox
-        Move(0,144,558,36)
-        { lblKEYWORDS10 Label
-          Move(9,0,144,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Email "
-        }
-        { txtEmailInstitucion TextBox
-          Move(162,0,117,36)
-          NoTabFocus = True
-          Expand = True
-        }
+    }
+    { HBox11 HBox
+      Move(9,81,558,36)
+      { lblKEYWORDS6 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Dirección "
       }
-      { HBox14 HBox
-        Move(0,180,558,36)
-        { lblKEYWORDS11 Label
-          Move(0,0,144,36)
-          #Translate = False
-          Alignment = Align.Right
-          Text = "Website "
-        }
-        { txtWebsite TextBox
-          Move(162,0,153,36)
-          NoTabFocus = True
-          Expand = True
-        }
+      { txtDireccion TextBox
+        Move(162,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox12 HBox
+      Move(9,117,952,36)
+      { lblKEYWORDS7 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Provincia "
+      }
+      { txtProvincia TextBox
+        Move(162,0,126,36)
+        NoTabFocus = True
+        Expand = True
+      }
+      { lblKEYWORDS8 Label
+        Move(243,0,108,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "País "
+      }
+      { txtPais TextBox
+        Move(360,0,126,36)
+        NoTabFocus = True
+        Expand = True
+      }
+      { lblKEYWORDS9 Label
+        Move(495,0,108,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "C. Postal "
+      }
+      { txtPostal TextBox
+        Move(612,0,117,36)
+        NoTabFocus = True
+      }
+    }
+    { HBox13 HBox
+      Move(9,153,558,36)
+      { lblKEYWORDS10 Label
+        Move(9,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Email "
+      }
+      { txtEmailInstitucion TextBox
+        Move(162,0,117,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox14 HBox
+      Move(9,189,558,36)
+      { lblKEYWORDS11 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Website "
+      }
+      { txtWebsite TextBox
+        Move(162,0,153,36)
+        NoTabFocus = True
+        Expand = True
       }
     }
     Index = 0
   }
   { HBox6 Panel
-    Move(9,360,477,153)
+    Move(216,405,477,153)
     NoTabFocus = True
     Expand = True
     Arrangement = Arrange.Horizontal
@@ -274,7 +265,7 @@
     }
   }
   { HBox1 HBox
-    Move(9,522,630,36)
+    Move(9,585,952,36)
     { Spring2 Spring
       Move(27,0,126,36)
     }

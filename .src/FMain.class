@@ -7743,6 +7743,12 @@ End
 
 Public Sub btnAgregarAutor_Click()
 
-  Form_ABM_autores.ShowModal()
+  Form_Autores.ShowModal()
+
+End
+
+Public Sub BtnNuevoGHP2_Click()
+
+  Form_Separatas.ShowModal()
 
 End

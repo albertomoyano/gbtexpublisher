@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,748,640)
+  Move(0,0,960,640)
   #Scaled = False
   Text = ("Aviso Legal")
   Resizable = False
