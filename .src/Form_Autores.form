@@ -42,14 +42,6 @@
     { Spring1 Spring
       Move(360,0,126,36)
     }
-    { btnCerrarColeccion Button
-      Move(513,0,144,36)
-      Background = &HE00000
-      Foreground = Color.White
-      NoTabFocus = True
-      ToolTip = ("Cerrar la aplicación")
-      Text = ("Cerrar")
-    }
   }
   { TabStrip1 TabStrip
     Move(9,54,954,279)
@@ -65,8 +57,12 @@
     { HBox2 HBox
       Move(9,9,549,36)
       AutoResize = True
+      { btnBuscarApellido Button
+        Move(9,0,36,36)
+        Picture = Picture["iconos/search.svg"]
+      }
       { lblAlta2 Label
-        Move(72,0,126,36)
+        Move(72,0,108,36)
         Alignment = Align.Right
         Text = ("Apellido  ")
       }
@@ -76,15 +72,11 @@
         Expand = True
         Alignment = Align.Left
       }
-      { btnBuscarApellido Button
-        Move(360,0,36,36)
-        Picture = Picture["iconos/search.svg"]
-      }
     }
     { HBox15 HBox
       Move(9,45,693,36)
       { lblKEYWORDS1 Label
-        Move(0,0,126,36)
+        Move(0,0,144,36)
         #Translate = False
         Alignment = Align.Right
         Text = "Nombre "
@@ -98,7 +90,7 @@
     { HBox4 HBox
       Move(9,81,702,36)
       { lblKEYWORDS2 Label
-        Move(333,0,126,36)
+        Move(333,0,144,36)
         #Translate = False
         Alignment = Align.Right
         Text = "Email "
@@ -112,7 +104,7 @@
     { HBox7 HBox
       Move(9,117,702,36)
       { lblKEYWORDS5 Label
-        Move(333,0,126,36)
+        Move(333,0,144,36)
         #Translate = False
         Alignment = Align.Right
         Text = "Blog / Website "
@@ -126,7 +118,7 @@
     { HBox5 HBox
       Move(9,153,952,36)
       { lblKEYWORDS3 Label
-        Move(0,0,126,36)
+        Move(0,0,144,36)
         #Translate = False
         Alignment = Align.Right
         Text = "ORCID "
@@ -135,10 +127,6 @@
         Move(198,0,216,36)
         NoTabFocus = True
         Expand = True
-      }
-      { btnBuscarORCID Button
-        Move(432,0,36,36)
-        Picture = Picture["iconos/web.svg"]
       }
     }
     Index = 1
@@ -272,9 +260,21 @@
     { btnSeleccion Button
       Move(459,0,180,36)
       Enabled = False
+      Background = &H8BE06F
       NoTabFocus = True
       Text = ("Seleccionar autor")
-      Picture = Picture["iconos/emblem-default.svg"]
+    }
+    { Separator1 Separator
+      Move(684,0,9,36)
+      Foreground = Color.Transparent
+    }
+    { btnCerrarColeccion Button
+      Move(756,0,144,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la aplicación")
+      Text = ("Cerrar")
     }
   }
 }
