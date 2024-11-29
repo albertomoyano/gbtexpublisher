@@ -1641,7 +1641,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"citation_language\" content=\"es\"/>" & gb.NewLine
     '
     s &= "<!-- Dublin Core (DC)  -->" & gb.NewLine
-    a &= "<link rel=\"schema.dc\" href=\"http://purl.org/dc/elements/1.1/\">" & gb.NewLine
+    s &= "<link rel=\"schema.dc\" href=\"http://purl.org/dc/elements/1.1/\">" & gb.NewLine
     s &= "\t <meta name=\"dc.format\" content=\"text/html\">" & gb.NewLine
     s &= "\t <meta name=\"dc.title\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.title.alternative\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
@@ -1659,27 +1659,80 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <link rel=\"stylesheet\" href=\"imago1.css\">" & gb.NewLine
     s &= "</head>" & gb.NewLine 'termina al head
     '
-    '
-
     s &= "<body>" & gb.NewLine
-    s &= "\t <header>" & ContenidoGHP[gFields[10]] & "</header>" & gb.NewLine
+    s &= "\t <header><img src=\"" & ContenidoGHP[gFields[11]] & "\" alt=\"Logo de Imago Mundi\"></header>" & gb.NewLine
     '
+    '
+    s &= "<!-- Contenedor principal -->" & gb.NewLine
+    s &= "<div class=\"container\">" & gb.NewLine
+    s &= "\t <div class=\"main-content\">" & gb.NewLine
+    '
+    s &= "<!-- Aside -->" & gb.NewLine
     s &= "\t <aside>" & gb.NewLine
     s &= "\t\t <img src=\"" & ContenidoGHP[gFields[8]] & "\" alt=\"Imagen de tapa\">" & gb.NewLine
-    s &= "\t\t <h2>Licencia</h2>" & gb.NewLine
-    s &= "\t\t <h2>Identificadores</h2>" & gb.NewLine
-    s &= "\t\t <h2>Fecha de publicación</h2>" & gb.NewLine
+    s &= "\t\t <h3>Licencia</h3>" & gb.NewLine
+    s &= "\t\t <a href=\"" & ContenidoMeta[bFields[16]] & "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"url-link\">" & ContenidoMeta[bFields[15]] & "</a>" & gb.NewLine
+
+    s &= "\t\t <h3>Identificadores</h3>" & gb.NewLine
+    s &= "\t\t <p>DOI: " & ContenidoMeta[bFields[43]] & "</p>" & gb.NewLine
+    s &= "\t\t <p>ISBN: " & ContenidoMeta[bFields[35]] & "</p>" & gb.NewLine
+    s &= "\t\t <p>eISBN: " & ContenidoMeta[bFields[90]] & "</p>" & gb.NewLine
+    s &= "\t\t <h3>Fecha de publicación</h3>" & gb.NewLine
     s &= "\t\t <p>" & ContenidoGHP[gFields[9]] & "</p>" & gb.NewLine
     s &= "\t </aside>" & gb.NewLine
     '
     s &= "\t <section>" & gb.NewLine
-    s &= "\t\t <p>" & ContenidoMeta[bFields[48]] & "</p>" & gb.NewLine
-    s &= "\t\t <p>" & ContenidoGHP[gFields[4]] & "</p>" & gb.NewLine
-    s &= "\t </section>" & gb.NewLine
+    s &= "\t\t <div class=\"button-container\">" & gb.NewLine
+    s &= "\t\t <a href=\"" & ContenidoGHP[gFields[7]] & "\" target=\"_blank\">Descargar PDF</a>" & gb.NewLine
+    s &= "\t\t <a href=\"" & ContenidoGHP[gFields[5]] & "\" target=\"_blank\">Descargar ePub</a>" & gb.NewLine
+    s &= "\t\t <a href=\"" & ContenidoGHP[gFields[6]] & "\" target=\"_blank\">Leer en línea</a>" & gb.NewLine
+    s &= "\t\t </div>" & gb.NewLine
+    s &= "<h2>" & ContenidoMeta[bFields[84]] & "</h2>" & gb.NewLine
+    s &= "<h3>" & ContenidoMeta[bFields[9]] & "</h3>" & gb.NewLine
+
+    s &= "\t\t <p class=\"resumen\">" & ContenidoMeta[bFields[48]] & "</p>" & gb.NewLine
+    s &= "\t\t <p class=\"autor\">" & ContenidoGHP[gFields[4]] & "</p>" & gb.NewLine
+
+    s &= "<!-- Tabla al final de la sección -->" & gb.NewLine
+    s &= "<table class=\"info-table\">" & gb.NewLine
+    s &= "<thead>" & gb.NewLine
+    s &= "<tr>" & gb.NewLine
+    s &= "<th>Sumario</th>" & gb.NewLine
+    s &= "<th>Páginas</th>" & gb.NewLine
+    s &= "<th>PDF</th>" & gb.NewLine
+    s &= "</tr>" & gb.NewLine
+    s &= "</thead>" & gb.NewLine
+    s &= "<tbody>" & gb.NewLine
+    '   < tr >
+    '   < td > Historia social contempor ánea</td>
+    ' < td > 1 - 128 < / td >
+    '   < td > < a href = "https://www.edicionesimagomundi.com/" target = "_blank" > < img src = "descarga.png" alt = "icono descargar" > < / a >
+    '   < / td >
+    '   < / tr >
     '
-    s &= "\t <footer id=\"ancho-del-pie\">" & gb.NewLine
-    s &= "\t\t<p id=\"texto-blanco\">" & ContenidoGHP[gFields[10]] & "</p>" & gb.NewLine
-    s &= "\t </footer>" & gb.NewLine
+    '   < tr >
+    '   < td > Hegemon ía de Estados Unidos</td>
+    ' < td > 129 - 315 < / td >
+    '   < td > < a href = "https://www.edicionesimagomundi.com/" target = "_blank" > < img src = "descarga.png" alt = "icono descargar" > < / a >
+    '   < / td >
+    '   < / tr >
+    '
+    '   < tr >
+    '   < td > Crisis econ ómicas globales</td>
+    ' < td > 180 < / td >
+    '   < td > < a href = "https://www.edicionesimagomundi.com/" target = "_blank" > < img src = "descarga.png" alt = "icono descargar" > < / a >
+    '   < / td >
+    '   < / tr >
+    s &= "</tbody>" & gb.NewLine
+    s &= "</table>" & gb.NewLine
+
+    s &= "\t </section>" & gb.NewLine
+    s &= "\t </div>" & gb.NewLine
+    s &= "</div>" & gb.NewLine
+
+    s &= "<footer id=\"ancho-del-pie\">" & gb.NewLine
+    s &= "\t <p>" & ContenidoGHP[gFields[10]] & "</p>" & gb.NewLine
+    s &= "</footer>" & gb.NewLine
     '
     s &= "</body>" & gb.NewLine
     s &= "</html>" & gb.NewLine

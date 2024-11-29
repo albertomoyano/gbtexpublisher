@@ -918,6 +918,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
     txt88_audiencia.Text = Contenido!audience_88
     txt89_binding.Text = Contenido!binding_89
+    txt90_eisbn.Text = Contenido!eISBN_90
 
   Else
     'falta limpiar el contenido de los textbox
@@ -1092,6 +1093,7 @@ Public Sub mnuLast_Click()
     txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
     txt88_audiencia.Text = Contenido!audience_88
     txt89_binding.Text = Contenido!binding_89
+    txt90_eisbn.Text = Contenido!eISBN_90
 
   Else
     BtnNuevoMeta.Enabled = True
@@ -2138,6 +2140,7 @@ Public Sub guardarCamposMETA()
   Contenido!piehtml_87 = txt87_HTMLFirstPageBottom.Text
   Contenido!audience_88 = txt88_audiencia.Text
   Contenido!binding_89 = txt89_binding.Text
+  Contenido!eISBN_90 = txt90_eisbn.Text
 
 End
 
@@ -5961,6 +5964,7 @@ Public Sub menuAbrirRevista_Click()
     txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
     txt88_audiencia.Text = Contenido!audience_88
     txt89_binding.Text = Contenido!binding_89
+    txt90_eisbn.Text = Contenido!eISBN_90
 
   Else
     BtnNuevoMeta.Enabled = True
@@ -7734,5 +7738,11 @@ Public Sub BtnNuevoGHP_Click()
   If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/imago1.css") Then
     Copy "./imago1.css" To File.Dir(TextBox1.Text) & "/docs/imago1.css"
   End If
+
+End
+
+Public Sub btnAgregarAutor_Click()
+
+  Form_ABM_autores.ShowModal()
 
 End

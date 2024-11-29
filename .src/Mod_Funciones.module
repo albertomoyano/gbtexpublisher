@@ -232,6 +232,7 @@ Public Sub limpiamosMetadatosLibrosRevistas()
   FMain.txt87_HTMLFirstPageBottom.Text = ""
   FMain.txt88_audiencia.Text = ""
   FMain.txt89_binding.Text = ""
+  FMain.txt90_eisbn.Text = ""
 
 End
 

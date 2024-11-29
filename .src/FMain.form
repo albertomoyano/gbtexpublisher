@@ -3158,7 +3158,7 @@
       Index = 1
       Text = ("Particulares a cada tipo de salida  de tipo libro")
       { ScrollView1 ScrollView
-        MoveScaled(1,1,81,156)
+        MoveScaled(1,1,84,156)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -3216,8 +3216,21 @@
             Expand = True
           }
         }
-        { HBox122 HBox
+        { hbISBN2 HBox
           MoveScaled(1,13,78,4)
+          { Label148 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("eISBN  ")
+          }
+          { !txt90_eisbn TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox122 HBox
+          MoveScaled(1,17,78,4)
           { Label64 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3231,7 +3244,7 @@
           }
         }
         { HBox106 HBox
-          MoveScaled(1,17,78,4)
+          MoveScaled(1,21,78,4)
           { Label38 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3245,7 +3258,7 @@
           }
         }
         { HBox107 HBox
-          MoveScaled(1,21,78,4)
+          MoveScaled(1,25,78,4)
           { Label41 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3260,7 +3273,7 @@
           }
         }
         { HBox130 HBox
-          MoveScaled(1,25,78,4)
+          MoveScaled(1,29,78,4)
           { lblPageTotal4 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3274,7 +3287,7 @@
           }
         }
         { HBox146 HBox
-          MoveScaled(1,29,78,4)
+          MoveScaled(1,33,78,4)
           { Label94 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3292,7 +3305,7 @@
           }
         }
         { HBox126 HBox
-          MoveScaled(1,33,78,4)
+          MoveScaled(1,37,78,4)
           { Label69 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3314,7 +3327,7 @@
           }
         }
         { HBox133 HBox
-          MoveScaled(1,37,78,4)
+          MoveScaled(1,41,78,4)
           { Label81 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3334,7 +3347,7 @@
           }
         }
         { HBox127 HBox
-          MoveScaled(1,41,78,4)
+          MoveScaled(1,45,78,4)
           { Label70 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3356,7 +3369,7 @@
           }
         }
         { HBox128 HBox
-          MoveScaled(1,45,78,4)
+          MoveScaled(1,49,78,4)
           { Label71 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3368,7 +3381,7 @@
           }
         }
         { HBox129 HBox
-          MoveScaled(1,49,78,4)
+          MoveScaled(1,53,78,4)
           { Label72 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3380,7 +3393,7 @@
           }
         }
         { HBox132 HBox
-          MoveScaled(1,53,78,4)
+          MoveScaled(1,57,78,4)
           { Label77 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3393,7 +3406,7 @@
           }
         }
         { HBox134 HBox
-          MoveScaled(1,57,78,4)
+          MoveScaled(1,61,78,4)
           { Label82 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3414,7 +3427,7 @@
           }
         }
         { HBox135 HBox
-          MoveScaled(1,61,78,4)
+          MoveScaled(1,65,78,4)
           { Label83 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3427,7 +3440,7 @@
           }
         }
         { HBox140 HBox
-          MoveScaled(1,65,78,4)
+          MoveScaled(1,69,78,4)
           { Label88 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3449,7 +3462,7 @@
           }
         }
         { HBox141 HBox
-          MoveScaled(1,69,78,4)
+          MoveScaled(1,73,78,4)
           { Label89 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3471,7 +3484,7 @@
           }
         }
         { HBox142 HBox
-          MoveScaled(1,73,78,4)
+          MoveScaled(1,77,78,4)
           { Label90 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3485,7 +3498,7 @@
           }
         }
         { HBox143 HBox
-          MoveScaled(1,77,78,4)
+          MoveScaled(1,81,78,4)
           { Label91 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3499,7 +3512,7 @@
           }
         }
         { HBox144 HBox
-          MoveScaled(1,81,78,4)
+          MoveScaled(1,85,78,4)
           { Label92 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3513,7 +3526,7 @@
           }
         }
         { HBox174 HBox
-          MoveScaled(1,85,78,4)
+          MoveScaled(1,89,78,4)
           { Label126 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3526,7 +3539,7 @@
           }
         }
         { HBox112 HBox
-          MoveScaled(1,89,78,4)
+          MoveScaled(1,93,78,4)
           { Label51 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3541,7 +3554,7 @@
           }
         }
         { HBox113 HBox
-          MoveScaled(1,93,78,4)
+          MoveScaled(1,97,78,4)
           { Label52 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3554,7 +3567,7 @@
           }
         }
         { HBox114 HBox
-          MoveScaled(1,97,78,4)
+          MoveScaled(1,101,78,4)
           { Label53 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3567,7 +3580,7 @@
           }
         }
         { HBox116 HBox
-          MoveScaled(1,101,78,4)
+          MoveScaled(1,105,78,4)
           { Label55 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3580,7 +3593,7 @@
           }
         }
         { HBox115 HBox
-          MoveScaled(1,105,78,4)
+          MoveScaled(1,109,78,4)
           { Label54 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3593,7 +3606,7 @@
           }
         }
         { HBox117 HBox
-          MoveScaled(1,109,78,4)
+          MoveScaled(1,113,78,4)
           { Label56 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3606,7 +3619,7 @@
           }
         }
         { HBox118 HBox
-          MoveScaled(1,113,78,4)
+          MoveScaled(1,117,78,4)
           { Label61 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3619,7 +3632,7 @@
           }
         }
         { HBox119 HBox
-          MoveScaled(1,117,78,4)
+          MoveScaled(1,121,78,4)
           { Label62 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4634,16 +4647,26 @@
         Enabled = False
         Picture = Picture["iconos/guardarComo.svg"]
       }
+      { Separator21 Separator
+        MoveScaled(13,0,0.8889,4)
+        Foreground = Color.Transparent
+      }
+      { btnGenerarIndex Button
+        MoveScaled(15,0,17.1111,4)
+        Background = &H8BE06F
+        NoTabFocus = True
+        Text = ("Generar index.html")
+      }
       { Spring9 Spring
-        MoveScaled(16,0,5,4)
+        MoveScaled(34,0,5,4)
       }
       { Label138 Label
-        MoveScaled(21,0,22.4444,4)
+        MoveScaled(52,0,22.4444,4)
         Alignment = Align.Right
         Text = ("    GitHub Pages para  ")
       }
       { !txtnombreArchivoGHP TextBox
-        MoveScaled(45,0,23,4)
+        MoveScaled(75,0,23,4)
         #Public = True
         Background = Color.Background
         NoTabFocus = True
@@ -4651,202 +4674,263 @@
         ReadOnly = True
       }
       { txtIdGitHubPages TextBox
-        MoveScaled(68,0,6,4)
+        MoveScaled(98,0,6,4)
         Visible = False
         Enabled = False
         NoTabFocus = True
         ReadOnly = True
       }
-      { Separator21 Separator
-        MoveScaled(97,0,0.8889,4)
-        Foreground = Color.Transparent
-      }
-      { btnGenerarIndex Button
-        MoveScaled(99,0,17.1111,4)
-        Background = &H8BE06F
-        NoTabFocus = True
-        Text = ("Generar index.html")
-      }
     }
-    { HBox189 HBox
-      MoveScaled(1,5,106,4)
-      { Label139 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("Fecha de creación  ")
+    { ScrollView12 ScrollView
+      MoveScaled(1,6,118,117)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      Spacing = True
+      Margin = True
+      Padding = 4
+      Border = False
+      ScrollBar = Scroll.Vertical
+      { HBox189 HBox
+        MoveScaled(1,0,106,4)
+        { Label139 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Fecha de creación  ")
+        }
+        { !txtCreateDateHTML TextBox
+          MoveScaled(27,0,23,4)
+          #Public = True
+          Background = Color.Background
+          ReadOnly = True
+          Placeholder = ("YYYYMMDDHHmmSS")
+        }
+        { Separator22 Separator
+          MoveScaled(50,0,2.3333,4)
+        }
+        { TextLabel9 TextLabel
+          MoveScaled(53,0,47,4)
+          Expand = True
+          Text = ("Refiere a la fecha de creación del html general")
+          Alignment = Align.Normal
+        }
       }
-      { !txtCreateDateHTML TextBox
-        MoveScaled(27,0,23,4)
-        #Public = True
-        Background = Color.Background
-        ReadOnly = True
-        Placeholder = ("YYYYMMDDHHmmSS")
+      { HBox178 HBox
+        MoveScaled(1,4,106,4)
+        { Label137 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Fecha de modificación  ")
+        }
+        { !txtModDateHTML TextBox
+          MoveScaled(27,0,23,4)
+          #Public = True
+          Background = Color.Background
+          ReadOnly = True
+          Placeholder = ("YYYYMMDDHHmmSS")
+        }
+        { Separator20 Separator
+          MoveScaled(50,0,2.3333,4)
+        }
+        { TextLabel8 TextLabel
+          MoveScaled(53,0,47,4)
+          Expand = True
+          Text = ("Refiere a la fecha de modificación del html general")
+          Alignment = Align.Normal
+        }
       }
-      { Separator22 Separator
-        MoveScaled(50,0,2.3333,4)
+      { HBox195 HBox
+        MoveScaled(1,8,106,4)
+        { Label145 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Fecha de publicación  ")
+        }
+        { !txtPubDateHTML TextBox
+          MoveScaled(27,0,23,4)
+          #Public = True
+          Placeholder = ("DD-MM-YYYY")
+        }
+        { Separator23 Separator
+          MoveScaled(50,0,2.3333,4)
+        }
+        { TextLabel10 TextLabel
+          MoveScaled(53,0,47,4)
+          Expand = True
+          Text = ("Refiere a la fecha de publicación del libro")
+          Alignment = Align.Normal
+        }
       }
-      { TextLabel9 TextLabel
-        MoveScaled(53,0,47,4)
-        Expand = True
-        Text = ("Refiere a la fecha de creación del html general")
-        Alignment = Align.Normal
+      { HBox194 HBox
+        MoveScaled(1,12,106,4)
+        { Label142 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("URL para descarga PDF  ")
+        }
+        { !txtHREFpdfHTML TextBox
+          MoveScaled(58,0,23,4)
+          #Public = True
+          Expand = True
+        }
       }
-    }
-    { HBox178 HBox
-      MoveScaled(1,9,106,4)
-      { Label137 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("Fecha de modificación  ")
+      { HBox192 HBox
+        MoveScaled(1,16,106,4)
+        { Label143 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("URL para descarga ePub  ")
+        }
+        { !txtHREFepubHTML TextBox
+          MoveScaled(58,0,23,4)
+          #Public = True
+          Expand = True
+        }
       }
-      { !txtModDateHTML TextBox
-        MoveScaled(27,0,23,4)
-        #Public = True
-        Background = Color.Background
-        ReadOnly = True
-        Placeholder = ("YYYYMMDDHHmmSS")
+      { HBox193 HBox
+        MoveScaled(1,20,106,4)
+        { Label144 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("URL para lectura en línea  ")
+        }
+        { !txtHREFenlineaHTML TextBox
+          MoveScaled(58,0,23,4)
+          #Public = True
+          Expand = True
+        }
       }
-      { Separator20 Separator
-        MoveScaled(50,0,2.3333,4)
+      { HBox197 HBox
+        MoveScaled(1,24,106,4)
+        { Label147 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Imagen de cabecera  ")
+        }
+        { btnBuscarCabecera Button
+          MoveScaled(26,0,4,4)
+          Picture = Picture["iconos/abrirBuscar.svg"]
+        }
+        { !txtCabeceraHTML TextBox
+          MoveScaled(31,0,17,4)
+          #Public = True
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+        }
+        { Label140 Label
+          MoveScaled(48,0,23,4)
+          Alignment = Align.Right
+          Text = ("Imagen de tapa  ")
+        }
+        { btnBuscarImagen Button
+          MoveScaled(73,0,4,4)
+          Picture = Picture["iconos/search.svg"]
+        }
+        { !txtImagenHTML TextBox
+          MoveScaled(78,0,17,4)
+          #Public = True
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+        }
       }
-      { TextLabel8 TextLabel
-        MoveScaled(53,0,47,4)
-        Expand = True
-        Text = ("Refiere a la fecha de modificación del html general")
-        Alignment = Align.Normal
+      { HBox191 HBox
+        MoveScaled(1,28,106,4)
+        { Label141 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("CV autores  ")
+        }
+        { !txtCVautoresHTML TextBox
+          MoveScaled(27,0,23,4)
+          #Public = True
+          Expand = True
+        }
+        { btnMostrarTexto Button
+          MoveScaled(52,0,4,4)
+          Text = ("") & "..."
+        }
       }
-    }
-    { HBox195 HBox
-      MoveScaled(1,13,106,4)
-      { Label145 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("Fecha de publicación  ")
+      { HBox196 HBox
+        MoveScaled(1,32,106,4)
+        { Label146 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Pie de página  ")
+        }
+        { !txtPieHTML TextBox
+          MoveScaled(27,0,23,4)
+          #Public = True
+          Expand = True
+        }
+        { btnMostrarTexto2 Button
+          MoveScaled(52,0,4,4)
+          Text = ("") & "..."
+        }
       }
-      { !txtPubDateHTML TextBox
-        MoveScaled(27,0,23,4)
-        #Public = True
-        Placeholder = ("DD-MM-YYYY")
+      { HBox201 HBox
+        MoveScaled(1,36,86,4)
+        { Label150 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Autores  ")
+        }
+        { btnAgregarAutor Button
+          MoveScaled(38,0,4,4)
+          NoTabFocus = True
+          Picture = Picture["iconos/+nuevo.svg"]
+        }
+        { btnBorrarArticulo2 Button
+          MoveScaled(46,0,4,4)
+          NoTabFocus = True
+          Picture = Picture["iconos/borrar.svg"]
+        }
+        { Spring10 Spring
+          MoveScaled(52,0,5,4)
+        }
       }
-      { Separator23 Separator
-        MoveScaled(50,0,2.3333,4)
+      { HBox200 HBox
+        MoveScaled(1,40,86,16)
+        { tblAutores TableView
+          MoveScaled(1,1,19,10)
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          ScrollBar = Scroll.Horizontal
+        }
       }
-      { TextLabel10 TextLabel
-        MoveScaled(53,0,47,4)
-        Expand = True
-        Text = ("Refiere a la fecha de publicación del libro")
-        Alignment = Align.Normal
+      { HBox198 HBox
+        MoveScaled(1,56,86,4)
+        { Label149 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Artículos  ")
+        }
+        { BtnNuevoGHP2 Button
+          MoveScaled(38,0,4,4)
+          NoTabFocus = True
+          Picture = Picture["iconos/+nuevo.svg"]
+        }
+        { btnBorrarArticulo Button
+          MoveScaled(46,0,4,4)
+          NoTabFocus = True
+          Picture = Picture["iconos/borrar.svg"]
+        }
+        { Spring8 Spring
+          MoveScaled(52,0,5,4)
+        }
       }
-    }
-    { HBox194 HBox
-      MoveScaled(1,17,106,4)
-      { Label142 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("URL para descarga PDF  ")
-      }
-      { !txtHREFpdfHTML TextBox
-        MoveScaled(58,0,23,4)
-        #Public = True
-        Expand = True
-      }
-    }
-    { HBox192 HBox
-      MoveScaled(1,21,106,4)
-      { Label143 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("URL para descarga ePub  ")
-      }
-      { !txtHREFepubHTML TextBox
-        MoveScaled(58,0,23,4)
-        #Public = True
-        Expand = True
-      }
-    }
-    { HBox193 HBox
-      MoveScaled(1,25,106,4)
-      { Label144 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("URL para lectura en línea  ")
-      }
-      { !txtHREFenlineaHTML TextBox
-        MoveScaled(58,0,23,4)
-        #Public = True
-        Expand = True
-      }
-    }
-    { HBox197 HBox
-      MoveScaled(0,29,106,4)
-      { Label147 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("Imagen de cabecera  ")
-      }
-      { btnBuscarCabecera Button
-        MoveScaled(26,0,4,4)
-        Picture = Picture["iconos/abrirBuscar.svg"]
-      }
-      { !txtCabeceraHTML TextBox
-        MoveScaled(35,0,23,4)
-        #Public = True
-        Background = Color.Background
-        Expand = True
-        ReadOnly = True
-      }
-    }
-    { HBox190 HBox
-      MoveScaled(1,33,106,4)
-      { Label140 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("Imagen de tapa  ")
-      }
-      { btnBuscarImagen Button
-        MoveScaled(26,0,4,4)
-        Picture = Picture["iconos/search.svg"]
-      }
-      { !txtImagenHTML TextBox
-        MoveScaled(35,0,23,4)
-        #Public = True
-        Background = Color.Background
-        Expand = True
-        ReadOnly = True
-      }
-    }
-    { HBox191 HBox
-      MoveScaled(1,37,106,4)
-      { Label141 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("CV autores  ")
-      }
-      { !txtCVautoresHTML TextBox
-        MoveScaled(27,0,23,4)
-        #Public = True
-        Expand = True
-      }
-      { btnMostrarTexto Button
-        MoveScaled(52,0,4,4)
-        Text = ("") & "..."
-      }
-    }
-    { HBox196 HBox
-      MoveScaled(0,41,106,4)
-      { Label146 Label
-        MoveScaled(0,0,23,4)
-        Alignment = Align.Right
-        Text = ("Pie de página  ")
-      }
-      { !txtPieHTML TextBox
-        MoveScaled(27,0,23,4)
-        #Public = True
-        Expand = True
-      }
-      { btnMostrarTexto2 Button
-        MoveScaled(52,0,4,4)
-        Text = ("") & "..."
+      { HBox199 HBox
+        MoveScaled(1,60,86,16)
+        { tblArticulos TableView
+          MoveScaled(1,1,19,10)
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          ScrollBar = Scroll.Horizontal
+        }
       }
     }
     Index = 0
