@@ -850,10 +850,10 @@ Public Sub menuAbrir_Click()'abrir un libro
   ' levantamos los datos de githubpages
   levantarGitHubPages()
 
+  contarEntradasBIByGLO()' mostramos las cantidades en el boton
+
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
-
-  contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
   'levantamos los datos de metadatos
   Dim comando As String
@@ -1029,6 +1029,9 @@ Public Sub mnuLast_Click()
   If Form_Contador.Visible Then
     Form_Contador.Close ' Cierra la ventana
   End If
+
+  ' limpiamos las entradas de los metadatos
+  Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
   'comienza metadatos
   Dim comando As String
@@ -2087,7 +2090,7 @@ End
 
 Public Sub guardarCamposMETA()
 
-  ' Contenido!id = txtIdmetadatos.Text 'no es necesario guardar este campo
+  Contenido!id = txtIdmetadatos.Text
   Contenido!nombreArchivo = txtnombreArchivo.Text
   Contenido!pdfxmp1_02 = txt02_pdfxmp1.Text
   Contenido!pdfxmp2_03 = txt03_pdfxmp2.Text
