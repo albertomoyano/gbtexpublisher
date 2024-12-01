@@ -4691,7 +4691,7 @@
       }
     }
     { ScrollView12 ScrollView
-      MoveScaled(1,6,118,117)
+      MoveScaled(1,6,118,96)
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
@@ -4916,36 +4916,86 @@
           ScrollBar = Scroll.Horizontal
         }
       }
-      { HBox198 HBox
-        MoveScaled(1,60,86,4)
-        { Label149 Label
-          MoveScaled(0,0,23,4)
-          Alignment = Align.Right
-          Text = ("Artículos  ")
-        }
-        { BtnNuevoGHP2 Button
-          MoveScaled(38,0,4,4)
-          NoTabFocus = True
-          Picture = Picture["iconos/+nuevo.svg"]
-        }
-        { btnBorrarArticulo Button
-          MoveScaled(46,0,4,4)
-          NoTabFocus = True
-          Picture = Picture["iconos/borrar.svg"]
-        }
-        { Spring8 Spring
-          MoveScaled(52,0,5,4)
-        }
-      }
-      { HBox199 HBox
-        MoveScaled(1,64,86,16)
-        { tblArticulos TableView
-          MoveScaled(1,1,19,10)
-          Expand = True
-          Mode = Select.Single
-          ShowCursor = True
-          Header = GridView.Horizontal
-          ScrollBar = Scroll.Horizontal
+      { Frame1 Frame
+        MoveScaled(1,63,90,27)
+        Expand = True
+        Arrangement = Arrange.Fill
+        Text = ("Capítulos del libro")
+        { HBox199 VBox
+          MoveScaled(1,3,86,24)
+          Spacing = True
+          Margin = True
+          Padding = 4
+          { HBox198 HBox
+            MoveScaled(1,0,73,4)
+            { btnNuevoCapitulo Button
+              MoveScaled(3,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/+nuevo.svg"]
+            }
+            { btnGuardarCapitulo Button
+              MoveScaled(7,0,4,4)
+              Enabled = False
+              Picture = Picture["iconos/guardar.svg"]
+            }
+            { btnGuardarCambiosCapitulo Button
+              MoveScaled(11,0,4,4)
+              Enabled = False
+              Picture = Picture["iconos/guardarComo.svg"]
+            }
+            { btnBorrarCapitulo Button
+              MoveScaled(15,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/borrar.svg"]
+            }
+            { Spring8 Spring
+              MoveScaled(52,0,5,4)
+            }
+          }
+          { HBox190 HBox
+            MoveScaled(1,4,54,4)
+            { Label151 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("Capítulo  ")
+            }
+            { !txtCapitulo TextBox
+              MoveScaled(27,0,23,4)
+              #Public = True
+              Expand = True
+            }
+          }
+          { HBox202 HBox
+            MoveScaled(1,8,82,4)
+            { Label152 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("Rango de páginas  ")
+            }
+            { !txtRangoPaginas TextBox
+              MoveScaled(27,0,16,4)
+              #Public = True
+            }
+            { Label153 Label
+              MoveScaled(44,0,23,4)
+              AutoResize = True
+              Alignment = Align.Right
+              Text = ("    URL de descarga  ")
+            }
+            { !txtURLdescarga TextBox
+              MoveScaled(69,0,16,4)
+              #Public = True
+              Expand = True
+            }
+          }
+          { tblArticulos TableView
+            MoveScaled(1,12,19,10)
+            Expand = True
+            Mode = Select.Single
+            ShowCursor = True
+            Header = GridView.Horizontal
+            ScrollBar = Scroll.Horizontal
+          }
         }
       }
     }
