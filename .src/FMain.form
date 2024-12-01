@@ -134,6 +134,23 @@
       Picture = Picture["iconos/notas.svg"]
     }
   }
+  { menuAdmin Menu
+    Text = ("Administración")
+    { Menu5 Menu
+      Text = ("Contratos de edición")
+    }
+    { rentaTrabajo Menu
+      Text = ("Rentabilizar tiempo de trabajo")
+      Picture = Picture["iconos/renta.svg"]
+    }
+    { Menu10 Menu
+    }
+    { Menu11 Menu
+      Text = ("Cerrar el programa")
+      Picture = Picture["iconos/salir.svg"]
+      Shortcut = "Ctrl+Q"
+    }
+  }
   { menuArchivo Menu
     Text = ("Archivo")
     { menuAbrir Menu
@@ -147,13 +164,6 @@
     }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
-    }
-    { Menu10 Menu
-    }
-    { Menu11 Menu
-      Text = ("Cerrar el programa")
-      Picture = Picture["iconos/salir.svg"]
-      Shortcut = "Ctrl+Q"
     }
   }
   { menuLTX Menu
@@ -191,10 +201,6 @@
     { menuRespaldoBDD Menu
       Text = ("Respado de la BDD en GitHub")
       Picture = Picture["iconos/exportar.svg"]
-    }
-    { rentaTrabajo Menu
-      Text = ("Rentabilizar tiempo de trabajo")
-      Picture = Picture["iconos/renta.svg"]
     }
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
