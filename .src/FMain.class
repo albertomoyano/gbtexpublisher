@@ -2944,7 +2944,7 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -3114,7 +3114,7 @@ Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -3268,7 +3268,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -3423,7 +3423,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -3744,7 +3744,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -4430,7 +4430,7 @@ Public Sub BtnBuscarClave_Click()
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -4625,7 +4625,7 @@ Public Sub mostrarIguales()
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -4929,7 +4929,7 @@ Public Sub BtnBuscarBookTitle_Click()
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -5242,7 +5242,7 @@ Public Sub BtnBuscarJournal_Click()
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
@@ -6659,7 +6659,7 @@ Public Sub BtnBuscarAuthorRelacion_Click()
     tbRefDup[rowIndex, 53].Text = Busqueda!publisher
     tbRefDup[rowIndex, 54].Text = Busqueda!institution
     tbRefDup[rowIndex, 55].Text = Busqueda!organization
-    tbRefDup[rowIndex, 56].Text = Busqueda!page
+    tbRefDup[rowIndex, 56].Text = Busqueda!pages
     tbRefDup[rowIndex, 57].Text = Busqueda!pagination
     tbRefDup[rowIndex, 58].Text = Busqueda!hyphenation
     tbRefDup[rowIndex, 59].Text = Busqueda!langId
@@ -7175,7 +7175,7 @@ Public Sub BtnBuscarTituloReferenciaRelacion_Click()
     tbRefDup[rowIndex, 53].Text = Busqueda!publisher
     tbRefDup[rowIndex, 54].Text = Busqueda!institution
     tbRefDup[rowIndex, 55].Text = Busqueda!organization
-    tbRefDup[rowIndex, 56].Text = Busqueda!page
+    tbRefDup[rowIndex, 56].Text = Busqueda!pages
     tbRefDup[rowIndex, 57].Text = Busqueda!pagination
     tbRefDup[rowIndex, 58].Text = Busqueda!hyphenation
     tbRefDup[rowIndex, 59].Text = Busqueda!langId
@@ -7370,7 +7370,7 @@ Public Sub btnBuscarFiltro_Click()
     VListaBIB[rowIndex, 53].Text = Busqueda!publisher
     VListaBIB[rowIndex, 54].Text = Busqueda!institution
     VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!page
+    VListaBIB[rowIndex, 56].Text = Busqueda!pages
     VListaBIB[rowIndex, 57].Text = Busqueda!pagination
     VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
     VListaBIB[rowIndex, 59].Text = Busqueda!langId
