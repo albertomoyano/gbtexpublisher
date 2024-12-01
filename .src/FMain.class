@@ -1193,6 +1193,20 @@ Public Sub menuVerOt_Click()'ver pdf página de comentarios
 
 End
 
+Public Sub menuHTMLghp_Click()'ver pagina index.html
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/docs/index.html"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>index.html</b> no existe.")
+  Endif
+
+End
+
 Public Sub menu3_Click()'ver pdf página para web
 
   Dim filePath As String

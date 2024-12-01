@@ -272,7 +272,10 @@
       Text = ("Ver archivo PDF para web")
     }
     { menuVerOt Menu
-      Text = ("Ver Orden de Taller")
+      Text = ("Ver orden para impresión")
+    }
+    { menuHTMLghp Menu
+      Text = ("Ver página HTML para GitHub Pages")
     }
   }
   { Menu57 Menu
