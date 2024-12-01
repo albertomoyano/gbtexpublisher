@@ -2527,7 +2527,7 @@ Public Sub Mostrar_ListaBIB()
     VListaBIB[i, 53].Text = Contenido!publisher
     VListaBIB[i, 54].Text = Contenido!institution
     VListaBIB[i, 55].Text = Contenido!organization
-    VListaBIB[i, 56].Text = Contenido!page
+    VListaBIB[i, 56].Text = Contenido!pages
     VListaBIB[i, 57].Text = Contenido!pagination
     VListaBIB[i, 58].Text = Contenido!hyphenation
     VListaBIB[i, 59].Text = Contenido!langId
@@ -3571,7 +3571,7 @@ Public Sub guardarCampos()
   Contenido!bookTitle = txtBOOKTITLE.Text
   Contenido!volume = txtVOLUME.Text
   Contenido!number = txtNUMBER.Text
-  Contenido!page = txtPAGES.Text
+  Contenido!pages = txtPAGES.Text
   Contenido!journalTitle = txtJOURNALTITLE.Text
   Contenido!urlDate = txtURLDATE.Text
   Contenido!doi = txtDOI.Text
@@ -7018,7 +7018,7 @@ Public Sub Mostrar_ListaBIBrelacion()
     tbRefDup[i, 53].Text = Contenido!publisher
     tbRefDup[i, 54].Text = Contenido!institution
     tbRefDup[i, 55].Text = Contenido!organization
-    tbRefDup[i, 56].Text = Contenido!page
+    tbRefDup[i, 56].Text = Contenido!pages
     tbRefDup[i, 57].Text = Contenido!pagination
     tbRefDup[i, 58].Text = Contenido!hyphenation
     tbRefDup[i, 59].Text = Contenido!langId
