@@ -30,6 +30,18 @@ Public segundos As Integer
 
 Public Sub Form_Open()
 
+  ' por el momento esta funcion se deshabilita
+  Dim name As String
+  ' Usamos pgrep para buscar procesos por el nombre exacto de la aplicación
+  Exec ["pgrep", "-fl", Application.Name] Wait To name
+  ' ' Mostramos el resultado para depurar (puedes eliminar esta línea después)
+  ' Print "Procesos encontrados: "; s
+  ' Comprobamos que el resultado contenga más de un proceso
+  If Split(Trim$(name), gb.NewLine, "", True).Count > 1 Then
+    Message.Warning(Application.Name & " ya se está ejecutando.")
+    Quit
+  Endif
+
   Dim BD As String = User.Home & "/Dropbox/gbBaseDatos"
 
   ' ' validamos la existencia de la bse de datos
@@ -95,16 +107,6 @@ Public Sub Form_Open()
   Timer1.Stop  ' No iniciamos el Timer de inmediato
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
-
-  Dim s As String
-  ' Usamos pgrep pero lo limitamos más a los procesos que contienen solo el nombre de la aplicación
-  Exec ["pgrep", "-x", "-fla", Application.Name] Wait To s
-
-  ' Comprobamos que el resultado no contenga más de un proceso
-  If Split(Trim$(s), gb.NewLine, "", True).Count > 1 Then
-    Message.Warning(Application.Name & " ya se está ejecutando")
-    Quit
-  Endif
 
   ' Crear una nueva conexión
   conector = New Connection
@@ -341,9 +343,8 @@ End
 
 Public Sub Form_Close()
 
-  Dim fecha As String
-
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+  ' Dim fecha As String
+  ' fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
 
   ' Desconectar la base de datos
   If conector Then
@@ -354,9 +355,12 @@ Public Sub Form_Close()
 
   ' Guardar el último archivo abierto
   MS.SetLastListToSettings()
-  Try pBash.Close
+  Try pBash.Kill
+  Wait 0.1
   Try fFile.Close
-
+  Wait 1
+  Try WebViewGPT.Stop
+  Wait 0.1
   ' Cerrar la aplicación
   Quit
 
@@ -642,9 +646,8 @@ End
 
 Public Sub Menu11_Click()'cerrar el programa
 
-  Dim fecha As String
-
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+  ' Dim fecha As String
+  ' fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
 
   ' Desconectar la base de datos
   If conector Then
@@ -655,9 +658,12 @@ Public Sub Menu11_Click()'cerrar el programa
 
   ' Guardar el último archivo abierto
   MS.SetLastListToSettings()
-  Try pBash.Close
+  Try pBash.Kill
+  Wait 0.1
   Try fFile.Close
-
+  Wait 1
+  Try WebViewGPT.Stop
+  Wait 0.1
   ' Cerrar la aplicación
   Quit
 
