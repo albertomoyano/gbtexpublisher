@@ -3286,8 +3286,39 @@
             Placeholder = ("Total de páginas del documento")
           }
         }
-        { HBox146 HBox
+        { HBox150 HBox
           MoveScaled(1,33,78,4)
+          { btnMostrarColeccion Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label98 Label
+            MoveScaled(4,0,19,4)
+            Alignment = Align.Right
+            Text = ("Colección  ")
+          }
+          { !txtCOLECCION TextBox
+            MoveScaled(24,0,15,4)
+            #Public = True
+            Background = Color.Background
+            Expand = True
+            ReadOnly = True
+            Placeholder = ("Colección o Serie de la editorial")
+          }
+          { lblFormato Label
+            MoveScaled(39,0,14,4)
+            Alignment = Align.Right
+            Text = ("Formato  ")
+          }
+          { !txtFORMATO TextBox
+            MoveScaled(54,0,16,4)
+            #Public = True
+            Background = Color.Background
+            ReadOnly = True
+          }
+        }
+        { HBox146 HBox
+          MoveScaled(1,37,78,4)
           { Label94 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3305,7 +3336,7 @@
           }
         }
         { HBox126 HBox
-          MoveScaled(1,37,78,4)
+          MoveScaled(1,41,78,4)
           { Label69 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3327,7 +3358,7 @@
           }
         }
         { HBox133 HBox
-          MoveScaled(1,41,78,4)
+          MoveScaled(1,45,78,4)
           { Label81 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3347,7 +3378,7 @@
           }
         }
         { HBox127 HBox
-          MoveScaled(1,45,78,4)
+          MoveScaled(1,49,78,4)
           { Label70 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3369,7 +3400,7 @@
           }
         }
         { HBox128 HBox
-          MoveScaled(1,49,78,4)
+          MoveScaled(1,53,78,4)
           { Label71 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3381,7 +3412,7 @@
           }
         }
         { HBox129 HBox
-          MoveScaled(1,53,78,4)
+          MoveScaled(1,57,78,4)
           { Label72 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3393,7 +3424,7 @@
           }
         }
         { HBox132 HBox
-          MoveScaled(1,57,78,4)
+          MoveScaled(1,61,78,4)
           { Label77 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3406,7 +3437,7 @@
           }
         }
         { HBox134 HBox
-          MoveScaled(1,61,78,4)
+          MoveScaled(1,65,78,4)
           { Label82 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
@@ -3427,7 +3458,7 @@
           }
         }
         { HBox135 HBox
-          MoveScaled(1,65,78,4)
+          MoveScaled(1,69,78,4)
           { Label83 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3440,7 +3471,7 @@
           }
         }
         { HBox140 HBox
-          MoveScaled(1,69,78,4)
+          MoveScaled(1,73,78,4)
           { Label88 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3462,7 +3493,7 @@
           }
         }
         { HBox141 HBox
-          MoveScaled(1,73,78,4)
+          MoveScaled(1,77,78,4)
           { Label89 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3484,7 +3515,7 @@
           }
         }
         { HBox142 HBox
-          MoveScaled(1,77,78,4)
+          MoveScaled(1,81,78,4)
           { Label90 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3498,7 +3529,7 @@
           }
         }
         { HBox143 HBox
-          MoveScaled(1,81,78,4)
+          MoveScaled(1,85,78,4)
           { Label91 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3512,7 +3543,7 @@
           }
         }
         { HBox144 HBox
-          MoveScaled(1,85,78,4)
+          MoveScaled(1,89,78,4)
           { Label92 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3526,7 +3557,7 @@
           }
         }
         { HBox174 HBox
-          MoveScaled(1,89,78,4)
+          MoveScaled(1,93,78,4)
           { Label126 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3539,7 +3570,7 @@
           }
         }
         { HBox112 HBox
-          MoveScaled(1,93,78,4)
+          MoveScaled(1,97,78,4)
           { Label51 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3554,7 +3585,7 @@
           }
         }
         { HBox113 HBox
-          MoveScaled(1,97,78,4)
+          MoveScaled(1,101,78,4)
           { Label52 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3567,7 +3598,7 @@
           }
         }
         { HBox114 HBox
-          MoveScaled(1,101,78,4)
+          MoveScaled(1,105,78,4)
           { Label53 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3580,7 +3611,7 @@
           }
         }
         { HBox116 HBox
-          MoveScaled(1,105,78,4)
+          MoveScaled(1,109,78,4)
           { Label55 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3593,7 +3624,7 @@
           }
         }
         { HBox115 HBox
-          MoveScaled(1,109,78,4)
+          MoveScaled(1,113,78,4)
           { Label54 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3606,7 +3637,7 @@
           }
         }
         { HBox117 HBox
-          MoveScaled(1,113,78,4)
+          MoveScaled(1,117,78,4)
           { Label56 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3619,7 +3650,7 @@
           }
         }
         { HBox118 HBox
-          MoveScaled(1,117,78,4)
+          MoveScaled(1,121,78,4)
           { Label61 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3632,7 +3663,7 @@
           }
         }
         { HBox119 HBox
-          MoveScaled(1,121,78,4)
+          MoveScaled(1,125,78,4)
           { Label62 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -4342,37 +4373,6 @@
           #Public = True
           Expand = True
           Placeholder = ("Números de página en los que el documento aparece dentro de la publicación")
-        }
-      }
-      { HBox150 HBox
-        MoveScaled(0,161,85,4)
-        { btnMostrarColeccion Button
-          MoveScaled(0,0,4,4)
-          Picture = Picture["iconos/schedule.svg"]
-        }
-        { Label98 Label
-          MoveScaled(4,0,19,4)
-          Alignment = Align.Right
-          Text = ("Colección  ")
-        }
-        { !txtCOLECCION TextBox
-          MoveScaled(24,0,15,4)
-          #Public = True
-          Background = Color.Background
-          Expand = True
-          ReadOnly = True
-          Placeholder = ("Colección o Serie de la editorial")
-        }
-        { lblFormato Label
-          MoveScaled(39,0,14,4)
-          Alignment = Align.Right
-          Text = ("Formato  ")
-        }
-        { !txtFORMATO TextBox
-          MoveScaled(54,0,16,4)
-          #Public = True
-          Background = Color.Background
-          ReadOnly = True
         }
       }
       { HBox136 HBox
