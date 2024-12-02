@@ -4890,15 +4890,15 @@
           Picture = Picture["iconos/+nuevo.svg"]
         }
         { btnBorrarArticulo2 Button
-          MoveScaled(46,0,4,4)
+          MoveScaled(42,0,4,4)
           NoTabFocus = True
           Picture = Picture["iconos/borrar.svg"]
         }
         { Separator24 Separator
-          MoveScaled(58,0,2.3333,4)
+          MoveScaled(47,0,2.3333,4)
         }
         { cmbRolAutores ComboBox
-          MoveScaled(62,0,23,4)
+          MoveScaled(50,0,23,4)
           ReadOnly = True
         }
         { Spring10 Spring
@@ -4913,7 +4913,7 @@
           Mode = Select.Single
           ShowCursor = True
           Header = GridView.Horizontal
-          ScrollBar = Scroll.Horizontal
+          Resizable = False
         }
       }
       { Frame1 Frame
@@ -4945,11 +4945,22 @@
             }
             { btnBorrarCapitulo Button
               MoveScaled(15,0,4,4)
+              Enabled = False
               NoTabFocus = True
               Picture = Picture["iconos/borrar.svg"]
             }
             { Spring8 Spring
-              MoveScaled(52,0,5,4)
+              MoveScaled(22,0,5,4)
+            }
+            { txtIdCapituloNuevo2 TextLabel
+              MoveScaled(29,0,18,4)
+              Visible = False
+              Alignment = Align.Normal
+            }
+            { txtIdCapituloNuevo TextLabel
+              MoveScaled(55,0,18,4)
+              Visible = False
+              Alignment = Align.Normal
             }
           }
           { HBox190 HBox
@@ -4962,6 +4973,7 @@
             { !txtCapitulo TextBox
               MoveScaled(27,0,23,4)
               #Public = True
+              Enabled = False
               Expand = True
             }
           }
@@ -4975,6 +4987,7 @@
             { !txtRangoPaginas TextBox
               MoveScaled(27,0,16,4)
               #Public = True
+              Enabled = False
             }
             { Label153 Label
               MoveScaled(44,0,23,4)
@@ -4985,6 +4998,7 @@
             { !txtURLdescarga TextBox
               MoveScaled(69,0,16,4)
               #Public = True
+              Enabled = False
               Expand = True
             }
           }
@@ -4994,7 +5008,7 @@
             Mode = Select.Single
             ShowCursor = True
             Header = GridView.Horizontal
-            ScrollBar = Scroll.Horizontal
+            ScrollBar = Scroll.Vertical
           }
         }
       }

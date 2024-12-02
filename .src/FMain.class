@@ -334,10 +334,11 @@ Public Sub Form_Open()
   ' asignamos tipografia monoespaciada al textarea de biblio
   txtTMPbiblio.Font = Font["Monospace"]
 
-  Mostrar_ListaGLO
+  Mostrar_ListaGLO()
   Mostrar_ListaBIB()
-  Mostrar_ListaBIBrelacion
+  Mostrar_ListaBIBrelacion()
   TotalEntradasBIByGLO()'actualizamos el contador de entradas
+  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
 
 End
 
@@ -7627,6 +7628,7 @@ Public Sub btnGuardarCambiosGHP_Click()
   If ContenidoGHP.Available Then
     guardarCamposGHP()
     ContenidoGHP.Update
+    MostrarListaCapNuevo ' Refrescamos la lista de entradas de los capítulos
     Message.Info("Los cambios se guardaron con éxito.")
   Else
     Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
@@ -7789,5 +7791,176 @@ End
 Public Sub btnAgregarAutor_Click()
 
   Form_Autores.ShowModal()
+
+End
+
+Public Sub btnNuevoCapitulo_Click()
+
+  LimpiarCamposCapituloNuevo  'Limpiamos todos los campos
+
+  Dim Idc As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = conector.Exec("SELECT MAX(id) FROM separatas LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idc = 0
+  Else
+    Idc = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  ' txtIdCapituloNuevo.Text = Idc
+  MostrarListaCapNuevo
+
+  btnNuevoCapitulo.Enabled = False
+  btnGuardarCapitulo.Enabled = True
+  btnGuardarCambiosCapitulo.Enabled = False
+  btnBorrarCapitulo.Enabled = False
+  txtCapitulo.Enabled = True
+  txtRangoPaginas.Enabled = True
+  txtURLdescarga.Enabled = True
+
+End
+
+Public Sub MostrarListaCapNuevo() 'Función que rellena el GridView
+
+  Dim i As Integer
+
+  tblArticulos.Clear()
+
+  Contenido = conector.Exec("select * from separatas")
+
+  'diseñamos el tableview
+  tblArticulos.Columns.Count = 5
+  tblArticulos.Header = True
+  tblArticulos.Columns[0].Title = "Id"
+  tblArticulos.Columns[0].Width = 0
+  tblArticulos.Columns[1].Title = "Nombre de archivo"
+  tblArticulos.Columns[1].Width = 0
+  tblArticulos.Columns[2].Title = "Número y título del capítulo"
+  tblArticulos.Columns[2].Width = 1000
+  tblArticulos.Columns[3].Title = "Paginas"
+  tblArticulos.Columns[3].Width = 100
+  tblArticulos.Columns[4].Title = "url de descarga"
+  tblArticulos.Columns[4].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tblArticulos.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tblArticulos[i, 0].Text = Contenido!id
+    tblArticulos[i, 1].Text = Contenido!nombreArchivo
+    tblArticulos[i, 2].Text = Contenido!titulo_02
+    tblArticulos[i, 3].Text = Contenido!paginas_03
+    tblArticulos[i, 4].Text = Contenido!pdf_04
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub btnGuardarCapitulo_Click()
+
+  Contenido = conector.Create("separatas")
+
+  guardarCamposCapituloNuevo
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  MostrarListaCapNuevo ' Refrescamos la lista de entradas
+  LimpiarCamposCapituloNuevo ' Limpiamos los campos
+
+  btnNuevoCapitulo.Enabled = True
+  btnGuardarCapitulo.Enabled = False
+  btnGuardarCambiosCapitulo.Enabled = False
+  btnBorrarCapitulo.Enabled = False
+  txtCapitulo.Enabled = False
+  txtRangoPaginas.Enabled = False
+  txtURLdescarga.Enabled = False
+
+End
+
+Public Sub guardarCamposCapituloNuevo()
+
+  Contenido!id = txtIdCapituloNuevo.Text
+  Contenido!nombreArchivo = txtnombreArchivo.Text
+  Contenido!titulo_02 = txtCapitulo.Text
+  Contenido!paginas_03 = txtRangoPaginas.Text
+  Contenido!pdf_04 = txtURLdescarga.Text
+
+End
+
+Public Sub LimpiarCamposCapituloNuevo()
+
+  txtIdCapituloNuevo.Text = ""
+  txtnombreArchivo.Text = ""
+  txtCapitulo.Text = ""
+  txtRangoPaginas.Text = ""
+  txtURLdescarga.Text = ""
+
+End
+
+Public Sub btnBorrarCapitulo_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIdCapituloNuevo.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = conector.Exec("delete from separatas where id=" & txtIdCapituloNuevo.Text)
+  Endif
+
+  LimpiarCamposCapituloNuevo  'Limpiamos los campos
+  MostrarListaCapNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoCapitulo.Enabled = True
+  btnGuardarCapitulo.Enabled = False
+  btnGuardarCambiosCapitulo.Enabled = False
+  btnBorrarCapitulo.Enabled = False
+  txtCapitulo.Enabled = False
+  txtRangoPaginas.Enabled = False
+  txtURLdescarga.Enabled = False
+
+End
+
+Public Sub tblArticulos_RowClick(Row As Integer)
+
+  txtIdCapituloNuevo.Text = tblArticulos[Row, 0].Text
+  txtnombreArchivo.Text = tblArticulos[Row, 1].Text
+  txtCapitulo.Text = tblArticulos[Row, 2].Text
+  txtRangoPaginas.Text = tblArticulos[Row, 3].Text
+  txtURLdescarga.Text = tblArticulos[Row, 4].Text
+
+  btnNuevoCapitulo.Enabled = False
+  btnGuardarCapitulo.Enabled = False
+  btnGuardarCambiosCapitulo.Enabled = True
+  btnBorrarCapitulo.Enabled = True
+  txtCapitulo.Enabled = True
+  txtRangoPaginas.Enabled = True
+  txtURLdescarga.Enabled = True
+
+End
+
+Public Sub btnGuardarCambiosCapitulo_Click()
+
+  Contenido = conector.Edit("separatas", "id=" & txtIdCapituloNuevo.Text)
+  guardarCamposCapituloNuevo()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  LimpiarCamposCapituloNuevo  'Limpiamos los campos
+  MostrarListaCapNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoCapitulo.Enabled = True
+  btnGuardarCapitulo.Enabled = False
+  btnGuardarCambiosCapitulo.Enabled = False
+  btnBorrarCapitulo.Enabled = False
+  txtCapitulo.Enabled = False
+  txtRangoPaginas.Enabled = False
+  txtURLdescarga.Enabled = False
 
 End
