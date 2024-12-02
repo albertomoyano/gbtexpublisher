@@ -5,6 +5,7 @@ Public Contenido As Result
 Public ContenidoAutor As Result
 Public ContenidoMeta As Result
 Public ContenidoGHP As Result
+Public ContenidoSeparatas As Result
 Public ResultadoMeta As Result
 ' Private Name As String = File.Name(FMain.TextBox1.Text)
 ' Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
@@ -1580,12 +1581,16 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Dim s As String
   Dim fb As ResultField
   Dim fg As ResultField
+  Dim fx As ResultField
   Dim bFields As New String[]
   Dim gFields As New String[]
+  Dim xFields As New String[]
   Dim wb As Integer
   Dim wg As Integer
+  Dim wx As Integer
   Dim buscarMeta As String
   Dim buscarGHP As String
+  Dim buscarSeparatas As String
   Dim outputFile As String
   Dim fechaPDF As String
 
@@ -1600,6 +1605,9 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   ' Exportamos los registros seleccionados
   buscarGHP = "select * from githubpages where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   ContenidoGHP = Conn.Exec(buscarGHP)
+  ' Exportamos los registros seleccionados
+  buscarSeparatas = "select * from separatas where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoSeparatas = Conn.Exec(buscarSeparatas)
 
   bFields.Clear
   For Each fb In ContenidoMeta.Fields
@@ -1614,6 +1622,14 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     gFields.Add(fg.Name)
     If Len(fg.Name) > wg Then
       wg = Len(fg.Name)
+    Endif
+  Next
+
+  xFields.Clear
+  For Each fx In ContenidoSeparatas.Fields
+    xFields.Add(fx.Name)
+    If Len(fx.Name) > wb Then
+      wx = Len(fx.Name)
     Endif
   Next
 
@@ -1674,9 +1690,18 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t\t <a href=\"" & ContenidoMeta[bFields[16]] & "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"url-link\">" & ContenidoMeta[bFields[15]] & "</a>" & gb.NewLine
 
     s &= "\t\t <h3>Identificadores</h3>" & gb.NewLine
-    s &= "\t\t <p>DOI: " & ContenidoMeta[bFields[43]] & "</p>" & gb.NewLine
-    s &= "\t\t <p>ISBN: " & ContenidoMeta[bFields[35]] & "</p>" & gb.NewLine
-    s &= "\t\t <p>eISBN: " & ContenidoMeta[bFields[90]] & "</p>" & gb.NewLine
+    If Not IsNull(ContenidoMeta[bFields[43]]) And Len(ContenidoMeta[bFields[43]]) > 0 Then
+      s &= "\t\t <p>DOI: " & ContenidoMeta[bFields[43]] & "</p>" & gb.NewLine
+    End If
+    If Not IsNull(ContenidoMeta[bFields[35]]) And Len(ContenidoMeta[bFields[35]]) > 0 Then
+      s &= "\t\t <p>ISBN: " & ContenidoMeta[bFields[35]] & "</p>" & gb.NewLine
+    Else
+      Message.Warning("El campo ISBN está vacío o no definido, revise los metadatos.", "Aceptar")
+    End If
+    If Not IsNull(ContenidoMeta[bFields[90]]) And Len(ContenidoMeta[bFields[90]]) > 0 Then
+      s &= "\t\t <p>eISBN: " & ContenidoMeta[bFields[90]] & "</p>" & gb.NewLine
+    End If
+
     s &= "\t\t <h3>Fecha de publicación</h3>" & gb.NewLine
     s &= "\t\t <p>" & ContenidoGHP[gFields[9]] & "</p>" & gb.NewLine
     s &= "\t </aside>" & gb.NewLine
@@ -1705,26 +1730,16 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "</tr>" & gb.NewLine
     s &= "</thead>" & gb.NewLine
     s &= "<tbody>" & gb.NewLine
-    '   < tr >
-    '   < td > Historia social contempor ánea</td>
-    ' < td > 1 - 128 < / td >
-    '   < td > < a href = "https://www.edicionesimagomundi.com/" target = "_blank" > < img src = "descarga.png" alt = "icono descargar" > < / a >
-    '   < / td >
-    '   < / tr >
     '
-    '   < tr >
-    '   < td > Hegemon ía de Estados Unidos</td>
-    ' < td > 129 - 315 < / td >
-    '   < td > < a href = "https://www.edicionesimagomundi.com/" target = "_blank" > < img src = "descarga.png" alt = "icono descargar" > < / a >
-    '   < / td >
-    '   < / tr >
-    '
-    '   < tr >
-    '   < td > Crisis econ ómicas globales</td>
-    ' < td > 180 < / td >
-    '   < td > < a href = "https://www.edicionesimagomundi.com/" target = "_blank" > < img src = "descarga.png" alt = "icono descargar" > < / a >
-    '   < / td >
-    '   < / tr >
+    ' Construcción dinámica de la salida de separatas
+    While ContenidoSeparatas.Available
+      ' Usamos solo las columnas necesarias (índices 2, 3 y 4)
+      s &= "<tr><td>" & ContenidoSeparatas[xFields[2]] & "</td>"
+      s &= "<td>" & ContenidoSeparatas[xFields[3]] & "</td>"
+      s &= "<td><a href=\"" & ContenidoSeparatas[xFields[4]] & "\" target=\"_blank\"><img src=\"descarga.png\" alt=\"icono descargar\"></a></td></tr>" & gb.NewLine
+      ContenidoSeparatas.MoveNext ' Avanzar al siguiente registro
+    Wend
+
     s &= "</tbody>" & gb.NewLine
     s &= "</table>" & gb.NewLine
 
