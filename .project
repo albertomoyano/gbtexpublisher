@@ -22,6 +22,7 @@ Component=gb.qt5.webview
 Component=gb.xml
 Component=gb.xml.html
 Component=gb.xml.xslt
+StartupEnvironment=GB_GUI=gb.qt5
 Description="gbTeXpublisher es una aplicación que permite gestionar los procesos de producción editorial basados en el lenguaje LaTeX."
 Authors="Alberto Moyano"
 TabSize=2
