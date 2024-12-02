@@ -856,6 +856,7 @@ Public Sub menuAbrir_Click()'abrir un libro
 
   ' levantamos los datos de githubpages
   levantarGitHubPages()
+  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
 
   contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
@@ -1148,6 +1149,7 @@ Public Sub mnuLast_Click()
 
   levantarComenta()'levantamos los datos de comentarios
   levantarGitHubPages()  ' levantamos los datos de githubpages
+  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
   LimpiarCamposBIB()' Limpiamos los campos de las entradas bib
 
 End
@@ -7810,7 +7812,9 @@ Public Sub btnNuevoCapitulo_Click()
     Idc = CInt(Contenido["MAX(id)"]) + 1
   Endif
 
-  ' txtIdCapituloNuevo.Text = Idc
+  txtIdCapituloNuevo.Text = Idc
+  txtnombreArchivoCapNuevo.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
   MostrarListaCapNuevo
 
   btnNuevoCapitulo.Enabled = False
@@ -7825,11 +7829,11 @@ End
 
 Public Sub MostrarListaCapNuevo() 'Función que rellena el GridView
 
-  Dim i As Integer
-
   tblArticulos.Clear()
 
-  Contenido = conector.Exec("select * from separatas")
+  Dim i As Integer
+
+  Contenido = conector.Exec("SELECT * FROM separatas WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
 
   'diseñamos el tableview
   tblArticulos.Columns.Count = 5
@@ -7885,7 +7889,7 @@ End
 Public Sub guardarCamposCapituloNuevo()
 
   Contenido!id = txtIdCapituloNuevo.Text
-  Contenido!nombreArchivo = txtnombreArchivo.Text
+  Contenido!nombreArchivo = txtnombreArchivoCapNuevo.Text
   Contenido!titulo_02 = txtCapitulo.Text
   Contenido!paginas_03 = txtRangoPaginas.Text
   Contenido!pdf_04 = txtURLdescarga.Text
@@ -7895,7 +7899,7 @@ End
 Public Sub LimpiarCamposCapituloNuevo()
 
   txtIdCapituloNuevo.Text = ""
-  txtnombreArchivo.Text = ""
+  txtnombreArchivoCapNuevo.Text = ""
   txtCapitulo.Text = ""
   txtRangoPaginas.Text = ""
   txtURLdescarga.Text = ""
@@ -7930,7 +7934,7 @@ End
 Public Sub tblArticulos_RowClick(Row As Integer)
 
   txtIdCapituloNuevo.Text = tblArticulos[Row, 0].Text
-  txtnombreArchivo.Text = tblArticulos[Row, 1].Text
+  txtnombreArchivoCapNuevo.Text = tblArticulos[Row, 1].Text
   txtCapitulo.Text = tblArticulos[Row, 2].Text
   txtRangoPaginas.Text = tblArticulos[Row, 3].Text
   txtURLdescarga.Text = tblArticulos[Row, 4].Text

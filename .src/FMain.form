@@ -4949,18 +4949,19 @@
               NoTabFocus = True
               Picture = Picture["iconos/borrar.svg"]
             }
-            { Spring8 Spring
-              MoveScaled(22,0,5,4)
-            }
-            { txtIdCapituloNuevo2 TextLabel
-              MoveScaled(29,0,18,4)
+            { txtnombreArchivoCapNuevo TextLabel
+              MoveScaled(24,0,23,4)
               Visible = False
+              Enabled = False
               Alignment = Align.Normal
             }
             { txtIdCapituloNuevo TextLabel
-              MoveScaled(55,0,18,4)
+              MoveScaled(49,0,18,4)
               Visible = False
               Alignment = Align.Normal
+            }
+            { Spring8 Spring
+              MoveScaled(67,0,5,4)
             }
           }
           { HBox190 HBox
