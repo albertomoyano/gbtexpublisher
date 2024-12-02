@@ -4877,47 +4877,91 @@
           Text = ("") & "..."
         }
       }
-      { HBox201 HBox
-        MoveScaled(1,40,106,4)
-        { Label150 Label
-          MoveScaled(0,0,23,4)
-          Alignment = Align.Right
-          Text = ("Autores  ")
-        }
-        { btnAgregarAutor Button
-          MoveScaled(38,0,4,4)
-          NoTabFocus = True
-          Picture = Picture["iconos/+nuevo.svg"]
-        }
-        { btnBorrarArticulo2 Button
-          MoveScaled(42,0,4,4)
-          NoTabFocus = True
-          Picture = Picture["iconos/borrar.svg"]
-        }
-        { Separator24 Separator
-          MoveScaled(47,0,2.3333,4)
-        }
-        { cmbRolAutores ComboBox
-          MoveScaled(50,0,23,4)
-          ReadOnly = True
-        }
-        { Spring10 Spring
-          MoveScaled(96,0,5,4)
-        }
-      }
-      { HBox200 HBox
-        MoveScaled(1,44,86,16)
-        { tblAutores TableView
-          MoveScaled(1,1,19,10)
-          Expand = True
-          Mode = Select.Single
-          ShowCursor = True
-          Header = GridView.Horizontal
-          Resizable = False
+      { Frame2 Frame
+        MoveScaled(1,37,114,18)
+        Expand = True
+        Arrangement = Arrange.Fill
+        Text = ("Autor(es) del libro")
+        { HBox200 VBox
+          MoveScaled(1,2,111,16)
+          Spacing = True
+          Margin = True
+          Padding = 4
+          { HBox201 HBox
+            MoveScaled(0,0,110,4)
+            { Label150 Label
+              MoveScaled(0,0,22.5556,4)
+              Alignment = Align.Right
+              Text = ("Rol  ")
+            }
+            { cmbRolAutores ComboBox
+              MoveScaled(23,0,20,4)
+              ReadOnly = True
+            }
+            { btnAgregarAutor Button
+              MoveScaled(44,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/+nuevo.svg"]
+            }
+            { btnGuardarCapitulo2 Button
+              MoveScaled(48,0,4,4)
+              Enabled = False
+              Picture = Picture["iconos/guardar.svg"]
+            }
+            { btnGuardarCambiosCapitulo2 Button
+              MoveScaled(52,0,4,4)
+              Enabled = False
+              Picture = Picture["iconos/guardarComo.svg"]
+            }
+            { btnBorrarArticulo2 Button
+              MoveScaled(57,0,4,4)
+              Enabled = False
+              NoTabFocus = True
+              Picture = Picture["iconos/borrar.svg"]
+            }
+            { Spring10 Spring
+              MoveScaled(102,0,5,4)
+            }
+          }
+          { HBox203 HBox
+            MoveScaled(0,4,110,4)
+            { Label149 Label
+              MoveScaled(0,0,22.5556,4)
+              Alignment = Align.Right
+              Text = ("Autor  ")
+            }
+            { !txtCapitulo2 TextBox
+              MoveScaled(27,0,22.5556,4)
+              #Public = True
+              Enabled = False
+              Expand = True
+            }
+            { Label154 Label
+              MoveScaled(49.5556,0,23,4)
+              AutoResize = True
+              Alignment = Align.Right
+              Text = ("    ORCID  ")
+            }
+            { !txtCapitulo3 TextBox
+              MoveScaled(76.5556,0,22.5556,4)
+              #Public = True
+              Enabled = False
+              Expand = True
+            }
+          }
+          { tblAutores TableView
+            MoveScaled(1,8,27,8)
+            Expand = True
+            Mode = Select.Single
+            ShowCursor = True
+            Header = GridView.Horizontal
+            ScrollBar = Scroll.Vertical
+            Resizable = False
+          }
         }
       }
       { Frame1 Frame
-        MoveScaled(1,63,90,27)
+        MoveScaled(1,55,90,27)
         Expand = True
         Arrangement = Arrange.Fill
         Text = ("Capítulos del libro")
@@ -4927,7 +4971,7 @@
           Margin = True
           Padding = 4
           { HBox198 HBox
-            MoveScaled(1,0,73,4)
+            MoveScaled(1,0,80,4)
             { btnNuevoCapitulo Button
               MoveScaled(3,0,4,4)
               NoTabFocus = True
@@ -4967,7 +5011,7 @@
           { HBox190 HBox
             MoveScaled(1,4,54,4)
             { Label151 Label
-              MoveScaled(0,0,23,4)
+              MoveScaled(0,0,22.5556,4)
               Alignment = Align.Right
               Text = ("Capítulo  ")
             }
@@ -4981,7 +5025,7 @@
           { HBox202 HBox
             MoveScaled(1,8,82,4)
             { Label152 Label
-              MoveScaled(0,0,23,4)
+              MoveScaled(0,0,22.5556,4)
               Alignment = Align.Right
               Text = ("Rango de páginas  ")
             }
@@ -5004,7 +5048,7 @@
             }
           }
           { tblArticulos TableView
-            MoveScaled(1,12,19,10)
+            MoveScaled(1,13,19,10)
             Expand = True
             Mode = Select.Single
             ShowCursor = True
