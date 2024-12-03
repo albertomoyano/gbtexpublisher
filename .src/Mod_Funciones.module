@@ -38,11 +38,11 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   End If
 
   'copiamos los archivos de configuracion general
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/imago_custom.css") Then
-    Copy "./imago_custom.css" To File.Dir(rutaTexto) & "/files/imago_custom.css"
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
+    Copy "./imagoCustom.css" To File.Dir(rutaTexto) & "/files/imagoCustom.css"
   End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/blitz-lite.css") Then
-    Copy "./blitz-lite.css" To File.Dir(rutaTexto) & "/files/blitz-lite.css"
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoEpub.css") Then
+    Copy "./imagoEpub.css" To File.Dir(rutaTexto) & "/files/imagoEpub.css"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
     Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
@@ -66,7 +66,6 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
     Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
   End If
-
   If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
     Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
   End If

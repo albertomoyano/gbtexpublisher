@@ -1741,12 +1741,6 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
       Endif
       ContenidoAutores.MoveNext ' Avanzar al siguiente registro
     Wend
-    ' ' Construcción dinámica de la salida de la separata de capítulos
-    ' While ContenidoAutores.Available
-    '   ' Usamos solo las columnas necesarias (índices 2, 3 y 4)
-    '   s &= "<span><strong>" & ContenidoAutores[aFields[2]] & "<a href=\"" & ContenidoAutores[aFields[3]] & "\" target=\"_blank\"><img src=\"orcid.png\" alt=\"icono orcid\"></a></strong></span>" 'sin newline para que los autores vayan de corrido
-    '   ContenidoAutores.MoveNext ' Avanzar al siguiente registro
-    ' Wend
     '
     s &= "<h2>" & ContenidoMeta[bFields[84]] & "</h2>" & gb.NewLine
     s &= "<h3>" & ContenidoMeta[bFields[9]] & "</h3>" & gb.NewLine
