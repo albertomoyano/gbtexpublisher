@@ -86,6 +86,9 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/docs/imago1.css") Then
     Copy "./imago1.css" To File.Dir(rutaTexto) & "/docs/imago1.css"
   End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/favicon.jpg") Then
+    Copy "./favicon.jpg" To File.Dir(rutaTexto) & "/docs/favicon.jpg"
+  End If
 
 End
 
