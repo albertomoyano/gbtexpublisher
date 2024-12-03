@@ -1657,12 +1657,18 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta charset=\"utf-8\">" & gb.NewLine
     s &= "\t <meta name=\"generator\" content=\"gbTeXpublisher y el ecosistema de LaTeX\">" & gb.NewLine
     s &= "\t <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" & gb.NewLine
-    s &= "\t <meta name=\"description\" content=\" entrada de la base de datos \">" & gb.NewLine
+    s &= "\t <meta name=\"description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
     s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"robots\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"googlebot\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"bingbot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"exabot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"sogou\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"baiduspider\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"applebot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"pinterest\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"twitterbot\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <title>Ediciones Imago Mundi | " & ContenidoMeta[bFields[84]] & "</title>" & gb.NewLine
     '
     s &= "\t <!-- Google Fonts -->" & gb.NewLine

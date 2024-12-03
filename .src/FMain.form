@@ -4665,7 +4665,7 @@
         Background = &H8BE06F
         NoTabFocus = True
         AutoResize = True
-        Text = ("Generar el archivo index.html")
+        Text = ("   Generar el archivo index.html   ")
       }
       { Spring9 Spring
         MoveScaled(46,0,5,4)
