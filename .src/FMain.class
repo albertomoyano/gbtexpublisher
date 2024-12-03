@@ -857,6 +857,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   ' levantamos los datos de githubpages
   levantarGitHubPages()
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+  MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
 
   contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
@@ -1149,6 +1150,7 @@ Public Sub mnuLast_Click()
 
   levantarComenta()'levantamos los datos de comentarios
   levantarGitHubPages()  ' levantamos los datos de githubpages
+  MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
   LimpiarCamposBIB()' Limpiamos los campos de las entradas bib
 
@@ -7630,7 +7632,7 @@ Public Sub btnGuardarCambiosGHP_Click()
   If ContenidoGHP.Available Then
     guardarCamposGHP()
     ContenidoGHP.Update
-    MostrarListaCapNuevo ' Refrescamos la lista de entradas de los capítulos
+    MostrarListaCapNuevo() ' Refrescamos la lista de entradas de los capítulos
     Message.Info("Los cambios se guardaron con éxito.")
   Else
     Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
@@ -7790,12 +7792,6 @@ Public Sub BtnNuevoGHP_Click()
 
 End
 
-Public Sub btnAgregarAutor_Click()
-
-  Form_Autores.ShowModal()
-
-End
-
 Public Sub btnNuevoCapitulo_Click()
 
   LimpiarCamposCapituloNuevo  'Limpiamos todos los campos
@@ -7815,7 +7811,7 @@ Public Sub btnNuevoCapitulo_Click()
   txtIdCapituloNuevo.Text = Idc
   txtnombreArchivoCapNuevo.Text = BaseName & ".tex" 'colocamos el nombre del archivo
 
-  MostrarListaCapNuevo
+  MostrarListaCapNuevo()
 
   btnNuevoCapitulo.Enabled = False
   btnGuardarCapitulo.Enabled = True
@@ -7931,6 +7927,172 @@ Public Sub btnBorrarCapitulo_Click()
 
 End
 
+Public Sub btnGuardarCambiosCapitulo_Click()
+
+  Contenido = conector.Edit("separatas", "id=" & txtIdCapituloNuevo.Text)
+  guardarCamposCapituloNuevo()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  LimpiarCamposCapituloNuevo  'Limpiamos los campos
+  MostrarListaCapNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoCapitulo.Enabled = True
+  btnGuardarCapitulo.Enabled = False
+  btnGuardarCambiosCapitulo.Enabled = False
+  btnBorrarCapitulo.Enabled = False
+  txtCapitulo.Enabled = False
+  txtRangoPaginas.Enabled = False
+  txtURLdescarga.Enabled = False
+
+End
+
+Public Sub btnNuevoAutor_Click()
+
+  LimpiarCamposAutorNuevo  'Limpiamos todos los campos
+
+  Dim Ida As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = conector.Exec("SELECT MAX(id) FROM autoresGHP LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Ida = 0
+  Else
+    Ida = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txtIdAutorNuevo.Text = Ida
+  txtnombreAutorGHP.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
+  MostrarListaAutoresNuevo()
+
+  btnNuevoAutor.Enabled = False
+  btnGuardarAutor.Enabled = True
+  btnGuardarCambiosAutor.Enabled = False
+  btnBorrarAutor.Enabled = False
+  txtAutor.Enabled = True
+  txtORCID.Enabled = True
+
+End
+
+Public Sub btnGuardarAutor_Click()
+
+  Contenido = conector.Create("autoresGHP")
+
+  guardarCamposAutoresNuevo
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  LimpiarCamposAutorNuevo ' Limpiamos los campos
+  MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoAutor.Enabled = True
+  btnGuardarAutor.Enabled = False
+  btnGuardarCambiosAutor.Enabled = False
+  btnBorrarAutor.Enabled = False
+  txtAutor.Enabled = False
+  txtORCID.Enabled = False
+
+End
+
+Public Sub btnGuardarCambiosAutor_Click()
+
+  Contenido = conector.Edit("autoresGHP", "id=" & txtIdAutorNuevo.Text)
+  guardarCamposAutoresNuevo()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  LimpiarCamposAutorNuevo  'Limpiamos los campos
+  MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoAutor.Enabled = True
+  btnGuardarAutor.Enabled = False
+  btnGuardarCambiosAutor.Enabled = False
+  btnBorrarAutor.Enabled = False
+  txtAutor.Enabled = False
+  txtORCID.Enabled = False
+
+End
+
+Public Sub btnBorrarAutor_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIdAutorNuevo.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = conector.Exec("delete from autoresGHP where id=" & txtIdAutorNuevo.Text)
+  Endif
+
+  LimpiarCamposAutorNuevo  'Limpiamos los campos
+  MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoAutor.Enabled = True
+  btnGuardarAutor.Enabled = False
+  btnGuardarCambiosAutor.Enabled = False
+  btnBorrarAutor.Enabled = False
+  txtAutor.Enabled = False
+  txtORCID.Enabled = False
+
+End
+
+Public Sub LimpiarCamposAutorNuevo()
+
+  txtIdCapituloNuevo.Text = ""
+  txtnombreArchivoCapNuevo.Text = ""
+  txtAutor.Text = ""
+  txtORCID.Text = ""
+
+End
+
+Public Sub MostrarListaAutoresNuevo() 'Función que rellena el GridView
+
+  tblAutores.Clear()
+
+  Dim i As Integer
+
+  Contenido = conector.Exec("SELECT * FROM autoresGHP WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
+
+  'diseñamos el tableview
+  tblAutores.Columns.Count = 4
+  tblAutores.Header = True
+  tblAutores.Columns[0].Title = "Id"
+  tblAutores.Columns[0].Width = 0
+  tblAutores.Columns[1].Title = "Nombre de archivo"
+  tblAutores.Columns[1].Width = 0
+  tblAutores.Columns[2].Title = "Autor/a/es (nombre completo)"
+  tblAutores.Columns[2].Width = 1000
+  tblAutores.Columns[3].Title = "orcid"
+  tblAutores.Columns[3].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tblAutores.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tblAutores[i, 0].Text = Contenido!id
+    tblAutores[i, 1].Text = Contenido!nombreArchivo
+    tblAutores[i, 2].Text = Contenido!autorNombreCompleto
+    tblAutores[i, 3].Text = Contenido!orcid
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub guardarCamposAutoresNuevo()
+
+  Contenido!id = txtIdAutorNuevo.Text
+  Contenido!nombreArchivo = txtnombreAutorGHP.Text
+  Contenido!autorNombreCompleto = txtAutor.Text
+  Contenido!orcid = txtORCID.Text
+
+End
+
 Public Sub tblArticulos_RowClick(Row As Integer)
 
   txtIdCapituloNuevo.Text = tblArticulos[Row, 0].Text
@@ -7949,22 +8111,18 @@ Public Sub tblArticulos_RowClick(Row As Integer)
 
 End
 
-Public Sub btnGuardarCambiosCapitulo_Click()
+Public Sub tblAutores_RowClick(Row As Integer)
 
-  Contenido = conector.Edit("separatas", "id=" & txtIdCapituloNuevo.Text)
-  guardarCamposCapituloNuevo()
-  Contenido.Update
-  Message.Info("Los cambios se guardaron con éxito.")
+  txtIdAutorNuevo.Text = tblAutores[Row, 0].Text
+  txtnombreAutorGHP.Text = tblAutores[Row, 1].Text
+  txtAutor.Text = tblAutores[Row, 2].Text
+  txtORCID.Text = tblAutores[Row, 3].Text
 
-  LimpiarCamposCapituloNuevo  'Limpiamos los campos
-  MostrarListaCapNuevo ' Refrescamos la lista de entradas
-
-  btnNuevoCapitulo.Enabled = True
-  btnGuardarCapitulo.Enabled = False
-  btnGuardarCambiosCapitulo.Enabled = False
-  btnBorrarCapitulo.Enabled = False
-  txtCapitulo.Enabled = False
-  txtRangoPaginas.Enabled = False
-  txtURLdescarga.Enabled = False
+  btnNuevoAutor.Enabled = False
+  btnGuardarAutor.Enabled = False
+  btnGuardarCambiosAutor.Enabled = True
+  btnBorrarAutor.Enabled = True
+  txtAutor.Enabled = True
+  txtORCID.Enabled = True
 
 End

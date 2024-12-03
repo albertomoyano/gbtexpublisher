@@ -4898,26 +4898,37 @@
               MoveScaled(23,0,20,4)
               ReadOnly = True
             }
-            { btnAgregarAutor Button
+            { btnNuevoAutor Button
               MoveScaled(44,0,4,4)
               NoTabFocus = True
               Picture = Picture["iconos/+nuevo.svg"]
             }
-            { btnGuardarCapitulo2 Button
+            { btnGuardarAutor Button
               MoveScaled(48,0,4,4)
               Enabled = False
               Picture = Picture["iconos/guardar.svg"]
             }
-            { btnGuardarCambiosCapitulo2 Button
+            { btnGuardarCambiosAutor Button
               MoveScaled(52,0,4,4)
               Enabled = False
               Picture = Picture["iconos/guardarComo.svg"]
             }
-            { btnBorrarArticulo2 Button
+            { btnBorrarAutor Button
               MoveScaled(57,0,4,4)
               Enabled = False
               NoTabFocus = True
               Picture = Picture["iconos/borrar.svg"]
+            }
+            { txtnombreAutorGHP TextLabel
+              MoveScaled(61,0,23,4)
+              Visible = False
+              Enabled = False
+              Alignment = Align.Normal
+            }
+            { txtIdAutorNuevo TextLabel
+              MoveScaled(84,0,18,4)
+              Visible = False
+              Alignment = Align.Normal
             }
             { Spring10 Spring
               MoveScaled(102,0,5,4)
@@ -4930,7 +4941,7 @@
               Alignment = Align.Right
               Text = ("Autor  ")
             }
-            { !txtCapitulo2 TextBox
+            { !txtAutor TextBox
               MoveScaled(27,0,22.5556,4)
               #Public = True
               Enabled = False
@@ -4942,7 +4953,7 @@
               Alignment = Align.Right
               Text = ("    ORCID  ")
             }
-            { !txtCapitulo3 TextBox
+            { !txtORCID TextBox
               MoveScaled(76.5556,0,22.5556,4)
               #Public = True
               Enabled = False
