@@ -28,6 +28,9 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not Exist(File.Dir(rutaTexto) & "/artcap") Then
     Mkdir File.Dir(rutaTexto) & "/artcap"
   End If
+  If Not Exist(File.Dir(rutaTexto) & "/docs") Then
+    Mkdir File.Dir(rutaTexto) & "/docs"
+  End If
 
   'copiamos los archivos de preámbulo de libro
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
@@ -68,6 +71,20 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
     Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
+  End If
+
+  ' copiamos archivos para página html
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/logo-imago.png") Then
+    Copy "./logo-imago.png" To File.Dir(rutaTexto) & "/docs/logo-imago.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/descarga.png") Then
+    Copy "./descarga.png" To File.Dir(rutaTexto) & "/docs/descarga.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/orcid.png") Then
+    Copy "./orcid.png" To File.Dir(rutaTexto) & "/docs/orcid.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/imago1.css") Then
+    Copy "./imago1.css" To File.Dir(rutaTexto) & "/docs/imago1.css"
   End If
 
 End
