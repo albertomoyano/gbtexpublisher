@@ -2430,7 +2430,7 @@
           }
           { ButtonMostrarTexto1 Button
             MoveScaled(44,0,4,4)
-            Text = ("") & "..."
+            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox73 HBox
@@ -2446,7 +2446,7 @@
           }
           { ButtonMostrarTexto2 Button
             MoveScaled(47,0,4,4)
-            Text = ("") & "..."
+            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox80 HBox
@@ -2462,7 +2462,7 @@
           }
           { ButtonMostrarTexto3 Button
             MoveScaled(45,0,4,4)
-            Text = ("") & "..."
+            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox82 HBox
@@ -2478,7 +2478,7 @@
           }
           { ButtonMostrarTexto4 Button
             MoveScaled(48,0,4,4)
-            Text = ("") & "..."
+            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox92 HBox
@@ -4831,28 +4831,30 @@
             Alignment = Align.Right
             Text = ("CV autores  ")
           }
+          { btnMostrarTexto Button
+            MoveScaled(26,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
           { !txtCVautoresHTML TextBox
-            MoveScaled(27,0,17,4)
+            MoveScaled(31,0,17,4)
             #Public = True
             Expand = True
-          }
-          { btnMostrarTexto Button
-            MoveScaled(45,0,4,4)
-            Text = ("") & "..."
+            Alignment = Align.Left
           }
           { Label146 Label
             MoveScaled(49,0,23,4)
             Alignment = Align.Right
             Text = ("Pie de página  ")
           }
+          { btnMostrarTexto2 Button
+            MoveScaled(73,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
           { !txtPieHTML TextBox
-            MoveScaled(72,0,13,4)
+            MoveScaled(78,0,13,4)
             #Public = True
             Expand = True
-          }
-          { btnMostrarTexto2 Button
-            MoveScaled(86,0,4,4)
-            Text = ("") & "..."
+            Alignment = Align.Left
           }
         }
         { Frame2 Frame
@@ -4930,8 +4932,13 @@
                 Alignment = Align.Right
                 Text = ("    ORCID  ")
               }
+              { btnBuscarORCID Button
+                MoveScaled(80,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/gitRemoto.svg"]
+              }
               { !txtORCID TextBox
-                MoveScaled(76.5556,0,22.5556,4)
+                MoveScaled(85,0,22.5556,4)
                 #Public = True
                 Enabled = False
                 Expand = True
@@ -5081,7 +5088,9 @@
           { !txtHREFpdfHTML9 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox209 HBox
@@ -5094,7 +5103,9 @@
           { !txtHREFpdfHTML10 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox216 HBox
@@ -5133,7 +5144,9 @@
           { !txtHREFpdfHTML13 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox219 HBox
@@ -5146,7 +5159,9 @@
           { !txtHREFpdfHTML14 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox220 HBox
@@ -5159,7 +5174,9 @@
           { !txtHREFpdfHTML15 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox221 HBox
@@ -5185,7 +5202,9 @@
           { !txtHREFpdfHTML17 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox223 HBox
@@ -5198,7 +5217,9 @@
           { !txtHREFpdfHTML18 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox224 HBox

@@ -8122,3 +8122,13 @@ Public Sub tblAutores_RowClick(Row As Integer)
   txtORCID.Enabled = True
 
 End
+
+Public Sub btnBuscarORCID_Click()
+
+  Dim url As String
+
+  url = txtORCID.Text
+
+  If url <> "" Then Shell "xdg-open " & url
+
+End
