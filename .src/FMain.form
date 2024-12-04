@@ -5069,8 +5069,13 @@
         ScrollBar = Scroll.Vertical
         { HBox178 HBox
           MoveScaled(0,0,106,4)
+          { btnRefrescarMetadatos Button
+            MoveScaled(1,0,4,4)
+            ToolTip = ("Refrescar listado de la base de datos")
+            Picture = Picture["iconos/refrescar.svg"]
+          }
           { Label221 Label
-            MoveScaled(0,0,23,4)
+            MoveScaled(4,0,19,4)
             Alignment = Align.Right
           }
           { Label155 Label
