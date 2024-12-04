@@ -1657,9 +1657,6 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta charset=\"utf-8\">" & gb.NewLine
     s &= "\t <meta name=\"generator\" content=\"gbTeXpublisher y el ecosistema de LaTeX\">" & gb.NewLine
     s &= "\t <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" & gb.NewLine
-    s &= "\t <meta name=\"description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
-    s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
-    s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"robots\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"googlebot\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"bingbot\" content=\"index, follow\">" & gb.NewLine
@@ -1669,6 +1666,11 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"applebot\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"pinterest\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"twitterbot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"github:creator\" content=\"albertomoyano\">" & gb.NewLine
+    s &= "\t <meta name=\"github:language\" content=\"LaTeX\">" & gb.NewLine
+    s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
+    s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
     s &= "\t <title>Ediciones Imago Mundi | " & ContenidoMeta[bFields[84]] & "</title>" & gb.NewLine
     '
     s &= "\t <!-- Google Fonts -->" & gb.NewLine
@@ -1732,8 +1734,12 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <section>" & gb.NewLine
     s &= "\t\t <div class=\"button-container\">" & gb.NewLine
     s &= "\t\t <a href=\"" & ContenidoGHP[gFields[7]] & "\" target=\"_blank\">Descargar PDF</a>" & gb.NewLine
-    s &= "\t\t <a href=\"" & ContenidoGHP[gFields[5]] & "\" target=\"_blank\">Descargar ePub</a>" & gb.NewLine
-    s &= "\t\t <a href=\"" & ContenidoGHP[gFields[6]] & "\" target=\"_blank\">Leer en línea</a>" & gb.NewLine
+    If Not IsNull(ContenidoGHP[gFields[5]]) And Len(ContenidoGHP[gFields[5]]) > 0 Then
+      s &= "\t\t <a href=\"" & ContenidoGHP[gFields[5]] & "\" target=\"_blank\">Descargar ePub</a>" & gb.NewLine
+    End If
+    If Not IsNull(ContenidoGHP[gFields[6]]) And Len(ContenidoGHP[gFields[6]]) > 0 Then
+      s &= "\t\t <a href=\"" & ContenidoGHP[gFields[6]] & "\" target=\"_blank\">Leer en línea</a>" & gb.NewLine
+    End If
     s &= "\t\t </div>" & gb.NewLine
     s &= "<h3 style=\"font-weight: normal\">" & ContenidoGHP[gFields[12]] & "</h3>" & gb.NewLine
     ' Construcción dinámica de la salida de la separata de capítulos

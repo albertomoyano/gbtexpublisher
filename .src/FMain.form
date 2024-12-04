@@ -5082,16 +5082,99 @@
         { HBox205 HBox
           MoveScaled(0,16,106,4)
           { Label157 Label
-            MoveScaled(0,0,23,4)
+            MoveScaled(0,0,38,4)
             AutoResize = True
             Text = ("Metadatos Open Graph para Redes Sociales")
           }
         }
         { HBox206 HBox
           MoveScaled(0,20,106,4)
+          { Label161 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:title  ")
+          }
+          { !txtHREFpdfHTML3 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox211 HBox
+          MoveScaled(0,24,106,4)
+          { Label162 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:type  ")
+          }
+          { !txtHREFpdfHTML4 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox212 HBox
+          MoveScaled(0,28,106,4)
+          { Label163 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:url  ")
+          }
+          { !txtHREFpdfHTML5 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox213 HBox
+          MoveScaled(0,32,106,4)
+          { Label164 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:image  ")
+          }
+          { !txtHREFpdfHTML6 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox214 HBox
+          MoveScaled(0,36,106,4)
+          { Label165 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:description  ")
+          }
+          { !txtHREFpdfHTML7 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox215 HBox
+          MoveScaled(0,40,106,4)
+          { Label166 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML8 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox210 HBox
+          MoveScaled(0,44,106,4)
+          { Label159 Label
+            MoveScaled(0,0,33,4)
+            AutoResize = True
+            Text = ("Metadatos Específicos de OMP")
+          }
         }
         { HBox207 HBox
-          MoveScaled(0,24,106,4)
+          MoveScaled(0,52,106,4)
           { Label158 Label
             MoveScaled(0,0,23,4)
             AutoResize = True
@@ -5099,18 +5182,20 @@
           }
         }
         { HBox208 HBox
-          MoveScaled(0,28,106,4)
-        }
-        { HBox210 HBox
-          MoveScaled(0,32,106,4)
-          { Label159 Label
+          MoveScaled(0,56,106,4)
+          { Label160 Label
             MoveScaled(0,0,23,4)
-            AutoResize = True
-            Text = ("Metadatos Específicos de OMP")
+            Alignment = Align.Right
+            Text = ("URL para descarga PDF  ")
+          }
+          { !txtHREFpdfHTML2 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
           }
         }
         { HBox209 HBox
-          MoveScaled(0,36,106,4)
+          MoveScaled(0,69,106,4)
         }
       }
       Index = 0
