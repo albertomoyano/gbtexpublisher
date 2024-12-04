@@ -5193,7 +5193,7 @@
             Alignment = Align.Right
             Text = ("keywords  ")
           }
-          { !txtHREFpdfHTML18 TextBox
+          { !txtKEYhtml TextBox
             MoveScaled(58,0,23,4)
             #Public = True
             Background = Color.Background
@@ -5208,14 +5208,18 @@
             Alignment = Align.Right
             Text = ("news_keywords  ")
           }
-          { btnMostarNewsKeywords Button
+          { btnCopiarKeywords Button
             MoveScaled(23,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
+            Picture = Picture["iconos/exportar.svg"]
           }
-          { !txtHREFpdfHTML19 TextBox
+          { !txtKEYnewKEYhtml TextBox
             MoveScaled(58,0,23,4)
             #Public = True
             Expand = True
+          }
+          { btnMostarNewsKeywords Button
+            MoveScaled(82,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox196 HBox

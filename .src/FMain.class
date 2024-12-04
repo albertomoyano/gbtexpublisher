@@ -932,6 +932,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     txt55_ilustrador.Text = Contenido!ilustrador_55
     txt56_resumen.Text = Contenido!resumen_56
     txt57_palabrasclave.Text = Contenido!palabrasclave_57
+    txtKEYhtml.Text = txt57_palabrasclave.Text' textbox de GHP
     txt58_papertitletwo.Text = Contenido!papertitletwo_58
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
@@ -1110,6 +1111,7 @@ Public Sub mnuLast_Click()
     txt55_ilustrador.Text = Contenido!ilustrador_55
     txt56_resumen.Text = Contenido!resumen_56
     txt57_palabrasclave.Text = Contenido!palabrasclave_57
+    txtKEYhtml.Text = txt57_palabrasclave.Text' textbox de GHP
     txt58_papertitletwo.Text = Contenido!papertitletwo_58
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
@@ -5997,6 +5999,7 @@ Public Sub menuAbrirRevista_Click()
     txt55_ilustrador.Text = Contenido!ilustrador_55
     txt56_resumen.Text = Contenido!resumen_56
     txt57_palabrasclave.Text = Contenido!palabrasclave_57
+    txtKEYhtml.Text = txt57_palabrasclave.Text' textbox de GHP
     txt58_papertitletwo.Text = Contenido!papertitletwo_58
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
@@ -7606,6 +7609,7 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!txtPieHTML = txtPieHTML.Text
   ContenidoGHP!txtCabeceraHTML = txtCabeceraHTML.Text
   ContenidoGHP!rolHTML = cmbRolAutores.Text
+  ContenidoGHP!txtKEYnewKEYhtml = txtKEYnewKEYhtml.Text
 
   BtnNuevoGHP.Enabled = False
   btnGuardarGHP.Enabled = False
@@ -7628,7 +7632,7 @@ Public Sub btnGuardarCambiosGHP_Click()
   If ContenidoGHP.Available Then
     guardarCamposGHP()
     ContenidoGHP.Update
-    MostrarListaCapNuevo() ' Refrescamos la lista de entradas de los capítulos
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de los capítulos
     Message.Info("Los cambios se guardaron con éxito.")
   Else
     Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
@@ -7660,6 +7664,7 @@ Public Sub levantarGitHubPages()
     txtPieHTML.Text = ContenidoGHP!txtPieHTML
     txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
     cmbRolAutores.Text = ContenidoGHP!rolHTML
+    txtKEYnewKEYhtml.Text = ContenidoGHP!txtKEYnewKEYhtml
   Else
     txtnombreArchivoGHP.Text = ""
     txtCreateDateHTML.Text = ""
@@ -7673,6 +7678,7 @@ Public Sub levantarGitHubPages()
     txtPieHTML.Text = ""
     txtCabeceraHTML.Text = ""
     cmbRolAutores.Text = ""
+    txtKEYnewKEYhtml.Text = ""
     BtnNuevoGHP.Enabled = True
     btnGuardarGHP.Enabled = False
     btnGuardarCambiosGHP.Enabled = False
@@ -8130,5 +8136,19 @@ Public Sub btnBuscarORCID_Click()
   url = txtORCID.Text
 
   If url <> "" Then Shell "xdg-open " & url
+
+End
+
+Public Sub btnCopiarKeywords_Click()
+
+  ' Copia el texto de TextBox1 a TextBox2
+  txtKEYnewKEYhtml.Text = txtKEYhtml.Text
+
+End
+
+Public Sub btnMostarNewsKeywords_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtKEYnewKEYhtml
+  Form_TXTextendido.ShowModal
 
 End
