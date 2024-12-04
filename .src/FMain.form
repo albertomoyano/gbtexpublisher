@@ -155,12 +155,15 @@
     Text = ("Archivo")
     { menuAbrir Menu
       Text = ("Abrir libro")
+      Picture = Picture["iconos/document.svg"]
     }
     { menuAbrirRevista Menu
       Text = ("Abrir revista")
+      Picture = Picture["iconos/document.svg"]
     }
     { menuMono Menu
       Text = ("Monografía académica")
+      Picture = Picture["iconos/document.svg"]
     }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
@@ -5108,34 +5111,8 @@
             ReadOnly = True
           }
         }
-        { HBox216 HBox
-          MoveScaled(0,12,106,4)
-          { Label169 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("rating  ")
-          }
-          { !txtHREFpdfHTML11 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox217 HBox
-          MoveScaled(0,16,106,4)
-          { Label170 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("revisit-after  ")
-          }
-          { !txtHREFpdfHTML12 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
         { HBox218 HBox
-          MoveScaled(0,20,106,4)
+          MoveScaled(0,12,106,4)
           { Label171 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5150,7 +5127,7 @@
           }
         }
         { HBox219 HBox
-          MoveScaled(0,24,106,4)
+          MoveScaled(0,16,106,4)
           { Label172 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5165,7 +5142,7 @@
           }
         }
         { HBox220 HBox
-          MoveScaled(0,28,106,4)
+          MoveScaled(0,20,106,4)
           { Label173 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5180,7 +5157,7 @@
           }
         }
         { HBox221 HBox
-          MoveScaled(0,32,106,4)
+          MoveScaled(0,24,106,4)
           { Label174 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5189,11 +5166,13 @@
           { !txtHREFpdfHTML16 TextBox
             MoveScaled(58,0,23,4)
             #Public = True
+            Background = Color.Background
             Expand = True
+            ReadOnly = True
           }
         }
         { HBox222 HBox
-          MoveScaled(0,36,106,4)
+          MoveScaled(0,28,106,4)
           { Label175 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5208,7 +5187,7 @@
           }
         }
         { HBox223 HBox
-          MoveScaled(0,40,106,4)
+          MoveScaled(0,32,106,4)
           { Label176 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5223,11 +5202,15 @@
           }
         }
         { HBox224 HBox
-          MoveScaled(0,44,106,4)
+          MoveScaled(0,36,106,4)
           { Label177 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
             Text = ("news_keywords  ")
+          }
+          { btnMostarNewsKeywords Button
+            MoveScaled(23,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
           }
           { !txtHREFpdfHTML19 TextBox
             MoveScaled(58,0,23,4)
@@ -5236,7 +5219,7 @@
           }
         }
         { HBox196 HBox
-          MoveScaled(0,48,106,4)
+          MoveScaled(0,40,106,4)
           { Label222 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5250,7 +5233,7 @@
           }
         }
         { HBox226 HBox
-          MoveScaled(0,52,106,4)
+          MoveScaled(0,44,106,4)
           { Label179 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5263,7 +5246,7 @@
           }
         }
         { HBox227 HBox
-          MoveScaled(0,56,106,4)
+          MoveScaled(0,48,106,4)
           { Label180 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5276,7 +5259,7 @@
           }
         }
         { HBox228 HBox
-          MoveScaled(0,60,106,4)
+          MoveScaled(0,52,106,4)
           { Label181 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5289,7 +5272,7 @@
           }
         }
         { HBox229 HBox
-          MoveScaled(0,64,106,4)
+          MoveScaled(0,56,106,4)
           { Label182 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5302,7 +5285,7 @@
           }
         }
         { HBox230 HBox
-          MoveScaled(0,68,106,4)
+          MoveScaled(0,60,106,4)
           { Label183 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5315,7 +5298,7 @@
           }
         }
         { HBox231 HBox
-          MoveScaled(0,72,106,4)
+          MoveScaled(0,64,106,4)
           { Label184 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5328,7 +5311,7 @@
           }
         }
         { HBox232 HBox
-          MoveScaled(0,76,106,4)
+          MoveScaled(0,68,106,4)
           { Label185 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5341,7 +5324,7 @@
           }
         }
         { HBox233 HBox
-          MoveScaled(0,80,106,4)
+          MoveScaled(0,72,106,4)
           { Label186 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5354,7 +5337,7 @@
           }
         }
         { HBox234 HBox
-          MoveScaled(0,84,106,4)
+          MoveScaled(0,76,106,4)
           { Label187 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5367,7 +5350,7 @@
           }
         }
         { HBox225 HBox
-          MoveScaled(0,88,106,4)
+          MoveScaled(0,80,106,4)
           { Label223 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5381,7 +5364,7 @@
           }
         }
         { HBox204 HBox
-          MoveScaled(0,92,106,4)
+          MoveScaled(0,84,106,4)
           { Label188 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5394,7 +5377,7 @@
           }
         }
         { HBox235 HBox
-          MoveScaled(0,96,106,4)
+          MoveScaled(0,88,106,4)
           { Label189 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5407,7 +5390,7 @@
           }
         }
         { HBox236 HBox
-          MoveScaled(0,100,106,4)
+          MoveScaled(0,92,106,4)
           { Label190 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5420,7 +5403,7 @@
           }
         }
         { HBox237 HBox
-          MoveScaled(0,104,106,4)
+          MoveScaled(0,96,106,4)
           { Label191 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5433,7 +5416,7 @@
           }
         }
         { HBox238 HBox
-          MoveScaled(0,108,106,4)
+          MoveScaled(0,100,106,4)
           { Label192 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5446,7 +5429,7 @@
           }
         }
         { HBox239 HBox
-          MoveScaled(0,112,106,4)
+          MoveScaled(0,104,106,4)
           { Label193 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5459,7 +5442,7 @@
           }
         }
         { HBox240 HBox
-          MoveScaled(0,116,106,4)
+          MoveScaled(0,108,106,4)
           { Label194 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5472,7 +5455,7 @@
           }
         }
         { HBox241 HBox
-          MoveScaled(0,120,106,4)
+          MoveScaled(0,112,106,4)
           { Label195 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5485,7 +5468,7 @@
           }
         }
         { HBox242 HBox
-          MoveScaled(0,124,106,4)
+          MoveScaled(0,116,106,4)
           { Label196 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5498,7 +5481,7 @@
           }
         }
         { HBox205 HBox
-          MoveScaled(0,128,106,4)
+          MoveScaled(0,120,106,4)
           { Label224 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5512,7 +5495,7 @@
           }
         }
         { HBox206 HBox
-          MoveScaled(0,132,106,4)
+          MoveScaled(0,124,106,4)
           { Label161 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5525,7 +5508,7 @@
           }
         }
         { HBox211 HBox
-          MoveScaled(0,136,106,4)
+          MoveScaled(0,128,106,4)
           { Label162 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5538,7 +5521,7 @@
           }
         }
         { HBox212 HBox
-          MoveScaled(0,140,106,4)
+          MoveScaled(0,132,106,4)
           { Label163 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5551,7 +5534,7 @@
           }
         }
         { HBox213 HBox
-          MoveScaled(0,144,106,4)
+          MoveScaled(0,136,106,4)
           { Label164 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5564,7 +5547,7 @@
           }
         }
         { HBox214 HBox
-          MoveScaled(0,148,106,4)
+          MoveScaled(0,140,106,4)
           { Label165 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5577,7 +5560,7 @@
           }
         }
         { HBox215 HBox
-          MoveScaled(0,152,106,4)
+          MoveScaled(0,144,106,4)
           { Label166 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5590,7 +5573,7 @@
           }
         }
         { HBox210 HBox
-          MoveScaled(0,156,106,4)
+          MoveScaled(0,148,106,4)
           { Label225 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5604,7 +5587,7 @@
           }
         }
         { HBox243 HBox
-          MoveScaled(0,160,106,4)
+          MoveScaled(0,152,106,4)
           { Label197 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5617,7 +5600,7 @@
           }
         }
         { HBox244 HBox
-          MoveScaled(0,164,106,4)
+          MoveScaled(0,156,106,4)
           { Label198 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5630,7 +5613,7 @@
           }
         }
         { HBox245 HBox
-          MoveScaled(0,168,106,4)
+          MoveScaled(0,160,106,4)
           { Label199 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5643,7 +5626,7 @@
           }
         }
         { HBox246 HBox
-          MoveScaled(0,172,106,4)
+          MoveScaled(0,164,106,4)
           { Label200 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5656,7 +5639,7 @@
           }
         }
         { HBox247 HBox
-          MoveScaled(0,176,106,4)
+          MoveScaled(0,168,106,4)
           { Label201 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5669,7 +5652,7 @@
           }
         }
         { HBox248 HBox
-          MoveScaled(0,180,106,4)
+          MoveScaled(0,172,106,4)
           { Label202 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5682,7 +5665,7 @@
           }
         }
         { HBox249 HBox
-          MoveScaled(0,184,106,4)
+          MoveScaled(0,176,106,4)
           { Label203 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5695,7 +5678,7 @@
           }
         }
         { HBox250 HBox
-          MoveScaled(0,188,106,4)
+          MoveScaled(0,180,106,4)
           { Label204 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5708,7 +5691,7 @@
           }
         }
         { HBox251 HBox
-          MoveScaled(0,192,106,4)
+          MoveScaled(0,184,106,4)
           { Label205 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5721,7 +5704,7 @@
           }
         }
         { HBox252 HBox
-          MoveScaled(0,196,106,4)
+          MoveScaled(0,188,106,4)
           { Label206 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5734,7 +5717,7 @@
           }
         }
         { HBox253 HBox
-          MoveScaled(0,200,106,4)
+          MoveScaled(0,192,106,4)
           { Label207 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5747,7 +5730,7 @@
           }
         }
         { HBox254 HBox
-          MoveScaled(0,204,106,4)
+          MoveScaled(0,196,106,4)
           { Label208 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5760,7 +5743,7 @@
           }
         }
         { HBox255 HBox
-          MoveScaled(0,208,106,4)
+          MoveScaled(0,200,106,4)
           { Label209 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5773,7 +5756,7 @@
           }
         }
         { HBox256 HBox
-          MoveScaled(0,212,106,4)
+          MoveScaled(0,204,106,4)
           { Label210 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5786,7 +5769,7 @@
           }
         }
         { HBox257 HBox
-          MoveScaled(0,216,106,4)
+          MoveScaled(0,208,106,4)
           { Label211 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5799,7 +5782,7 @@
           }
         }
         { HBox258 HBox
-          MoveScaled(0,220,106,4)
+          MoveScaled(0,212,106,4)
           { Label212 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5812,7 +5795,7 @@
           }
         }
         { HBox259 HBox
-          MoveScaled(0,224,106,4)
+          MoveScaled(0,216,106,4)
           { Label213 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5825,7 +5808,7 @@
           }
         }
         { HBox260 HBox
-          MoveScaled(0,228,106,4)
+          MoveScaled(0,220,106,4)
           { Label214 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5838,7 +5821,7 @@
           }
         }
         { HBox261 HBox
-          MoveScaled(0,232,106,4)
+          MoveScaled(0,224,106,4)
           { Label215 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5851,7 +5834,7 @@
           }
         }
         { HBox262 HBox
-          MoveScaled(0,236,106,4)
+          MoveScaled(0,228,106,4)
           { Label216 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5864,7 +5847,7 @@
           }
         }
         { HBox207 HBox
-          MoveScaled(0,240,106,4)
+          MoveScaled(0,232,106,4)
           { Label226 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5878,7 +5861,7 @@
           }
         }
         { HBox208 HBox
-          MoveScaled(0,244,106,4)
+          MoveScaled(0,236,106,4)
           { Label160 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5891,7 +5874,7 @@
           }
         }
         { HBox263 HBox
-          MoveScaled(0,248,106,4)
+          MoveScaled(0,240,106,4)
           { Label217 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5904,7 +5887,7 @@
           }
         }
         { HBox264 HBox
-          MoveScaled(0,252,106,4)
+          MoveScaled(0,244,106,4)
           { Label218 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5917,7 +5900,7 @@
           }
         }
         { HBox265 HBox
-          MoveScaled(0,256,106,4)
+          MoveScaled(0,248,106,4)
           { Label219 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5930,7 +5913,7 @@
           }
         }
         { HBox266 HBox
-          MoveScaled(0,260,106,4)
+          MoveScaled(0,252,106,4)
           { Label220 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right

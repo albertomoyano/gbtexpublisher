@@ -1666,6 +1666,8 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"applebot\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"pinterest\" content=\"index, follow\">" & gb.NewLine
     s &= "\t <meta name=\"twitterbot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"rating\" content=\"general\">" & gb.NewLine
+    s &= "\t <meta name=\"revisit-after\" content=\"7 days\">" & gb.NewLine
     s &= "\t <meta name=\"github:creator\" content=\"albertomoyano\">" & gb.NewLine
     s &= "\t <meta name=\"github:language\" content=\"LaTeX\">" & gb.NewLine
     s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
