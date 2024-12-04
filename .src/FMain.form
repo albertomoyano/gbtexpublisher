@@ -4692,7 +4692,7 @@
       }
     }
     { TabStrip1 TabStrip
-      MoveScaled(1,6,123,97)
+      MoveScaled(1,6,123,282)
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
@@ -5049,7 +5049,7 @@
       Index = 1
       Text = ("     Metadatos específicos para la salida GitHub Pages     ")
       { ScrollView13 ScrollView
-        MoveScaled(1,2,121,89)
+        MoveScaled(1,2,121,279)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -5059,36 +5059,439 @@
         ScrollBar = Scroll.Vertical
         { HBox178 HBox
           MoveScaled(0,0,106,4)
-          { Label155 Label
+          { Label221 Label
             MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+          }
+          { Label155 Label
+            MoveScaled(26,0,23,4)
+            Font = Font["Bold"]
+            Expand = True
             AutoResize = True
             Text = ("Metadatos Generales  ")
           }
         }
         { HBox195 HBox
           MoveScaled(0,4,106,4)
+          { Label167 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("publisher  ")
+          }
+          { !txtHREFpdfHTML9 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox209 HBox
+          MoveScaled(0,8,106,4)
+          { Label168 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("copyright  ")
+          }
+          { !txtHREFpdfHTML10 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox216 HBox
+          MoveScaled(0,12,106,4)
+          { Label169 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("rating  ")
+          }
+          { !txtHREFpdfHTML11 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox217 HBox
+          MoveScaled(0,16,106,4)
+          { Label170 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("revisit-after  ")
+          }
+          { !txtHREFpdfHTML12 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox218 HBox
+          MoveScaled(0,20,106,4)
+          { Label171 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("description  ")
+          }
+          { !txtHREFpdfHTML13 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox219 HBox
+          MoveScaled(0,24,106,4)
+          { Label172 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("author  ")
+          }
+          { !txtHREFpdfHTML14 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox220 HBox
+          MoveScaled(0,28,106,4)
+          { Label173 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("creator  ")
+          }
+          { !txtHREFpdfHTML15 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox221 HBox
+          MoveScaled(0,32,106,4)
+          { Label174 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("editor  ")
+          }
+          { !txtHREFpdfHTML16 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox222 HBox
+          MoveScaled(0,36,106,4)
+          { Label175 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("subject  ")
+          }
+          { !txtHREFpdfHTML17 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox223 HBox
+          MoveScaled(0,40,106,4)
+          { Label176 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("keywords  ")
+          }
+          { !txtHREFpdfHTML18 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox224 HBox
+          MoveScaled(0,44,106,4)
+          { Label177 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("news_keywords  ")
+          }
+          { !txtHREFpdfHTML19 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
         }
         { HBox196 HBox
-          MoveScaled(0,8,106,4)
-          { Label156 Label
+          MoveScaled(0,48,106,4)
+          { Label222 Label
             MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+          }
+          { Label156 Label
+            MoveScaled(36,0,30,4)
+            Font = Font["Bold"]
+            Expand = True
+            AutoResize = True
+            Text = ("Metadatos de Citas Académicas  ")
+          }
+        }
+        { HBox226 HBox
+          MoveScaled(0,52,106,4)
+          { Label179 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_author  ")
+          }
+          { !txtHREFpdfHTML20 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox227 HBox
+          MoveScaled(0,56,106,4)
+          { Label180 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_publication_date  ")
+          }
+          { !txtHREFpdfHTML21 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox228 HBox
+          MoveScaled(0,60,106,4)
+          { Label181 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_publisher  ")
+          }
+          { !txtHREFpdfHTML22 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox229 HBox
+          MoveScaled(0,64,106,4)
+          { Label182 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_volume  ")
+          }
+          { !txtHREFpdfHTML23 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox230 HBox
+          MoveScaled(0,68,106,4)
+          { Label183 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_issue  ")
+          }
+          { !txtHREFpdfHTML24 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox231 HBox
+          MoveScaled(0,72,106,4)
+          { Label184 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_firstpage  ")
+          }
+          { !txtHREFpdfHTML25 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox232 HBox
+          MoveScaled(0,76,106,4)
+          { Label185 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_lastpage  ")
+          }
+          { !txtHREFpdfHTML26 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox233 HBox
+          MoveScaled(0,80,106,4)
+          { Label186 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_doi  ")
+          }
+          { !txtHREFpdfHTML27 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox234 HBox
+          MoveScaled(0,84,106,4)
+          { Label187 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("citation_pdf_url  ")
+          }
+          { !txtHREFpdfHTML28 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox225 HBox
+          MoveScaled(0,88,106,4)
+          { Label223 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+          }
+          { Label178 Label
+            MoveScaled(38,0,23,4)
+            Font = Font["Bold"]
+            Expand = True
             AutoResize = True
             Text = ("Metadatos de Dublin Core  ")
           }
         }
         { HBox204 HBox
-          MoveScaled(0,12,106,4)
+          MoveScaled(0,92,106,4)
+          { Label188 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.creator  ")
+          }
+          { !txtHREFpdfHTML29 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox235 HBox
+          MoveScaled(0,96,106,4)
+          { Label189 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.subject  ")
+          }
+          { !txtHREFpdfHTML30 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox236 HBox
+          MoveScaled(0,100,106,4)
+          { Label190 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.description  ")
+          }
+          { !txtHREFpdfHTML31 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox237 HBox
+          MoveScaled(0,104,106,4)
+          { Label191 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.publisher  ")
+          }
+          { !txtHREFpdfHTML32 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox238 HBox
+          MoveScaled(0,108,106,4)
+          { Label192 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.contributor  ")
+          }
+          { !txtHREFpdfHTML33 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox239 HBox
+          MoveScaled(0,112,106,4)
+          { Label193 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.rights  ")
+          }
+          { !txtHREFpdfHTML34 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox240 HBox
+          MoveScaled(0,116,106,4)
+          { Label194 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.language  ")
+          }
+          { !txtHREFpdfHTML35 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox241 HBox
+          MoveScaled(0,120,106,4)
+          { Label195 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.coverage  ")
+          }
+          { !txtHREFpdfHTML36 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox242 HBox
+          MoveScaled(0,124,106,4)
+          { Label196 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("dc.relation  ")
+          }
+          { !txtHREFpdfHTML37 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
         }
         { HBox205 HBox
-          MoveScaled(0,16,106,4)
+          MoveScaled(0,128,106,4)
+          { Label224 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+          }
           { Label157 Label
-            MoveScaled(0,0,38,4)
+            MoveScaled(37,0,38,4)
+            Font = Font["Bold"]
+            Expand = True
             AutoResize = True
             Text = ("Metadatos Open Graph para Redes Sociales")
           }
         }
         { HBox206 HBox
-          MoveScaled(0,20,106,4)
+          MoveScaled(0,132,106,4)
           { Label161 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5101,7 +5504,7 @@
           }
         }
         { HBox211 HBox
-          MoveScaled(0,24,106,4)
+          MoveScaled(0,136,106,4)
           { Label162 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5114,7 +5517,7 @@
           }
         }
         { HBox212 HBox
-          MoveScaled(0,28,106,4)
+          MoveScaled(0,140,106,4)
           { Label163 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5127,7 +5530,7 @@
           }
         }
         { HBox213 HBox
-          MoveScaled(0,32,106,4)
+          MoveScaled(0,144,106,4)
           { Label164 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5140,7 +5543,7 @@
           }
         }
         { HBox214 HBox
-          MoveScaled(0,36,106,4)
+          MoveScaled(0,148,106,4)
           { Label165 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5153,7 +5556,7 @@
           }
         }
         { HBox215 HBox
-          MoveScaled(0,40,106,4)
+          MoveScaled(0,152,106,4)
           { Label166 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5166,23 +5569,295 @@
           }
         }
         { HBox210 HBox
-          MoveScaled(0,44,106,4)
+          MoveScaled(0,156,106,4)
+          { Label225 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+          }
           { Label159 Label
-            MoveScaled(0,0,33,4)
+            MoveScaled(34,0,33,4)
+            Font = Font["Bold"]
+            Expand = True
             AutoResize = True
             Text = ("Metadatos Específicos de OMP")
           }
         }
-        { HBox207 HBox
-          MoveScaled(0,52,106,4)
-          { Label158 Label
+        { HBox243 HBox
+          MoveScaled(0,160,106,4)
+          { Label197 Label
             MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML38 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox244 HBox
+          MoveScaled(0,164,106,4)
+          { Label198 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML39 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox245 HBox
+          MoveScaled(0,168,106,4)
+          { Label199 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML40 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox246 HBox
+          MoveScaled(0,172,106,4)
+          { Label200 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML41 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox247 HBox
+          MoveScaled(0,176,106,4)
+          { Label201 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML42 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox248 HBox
+          MoveScaled(0,180,106,4)
+          { Label202 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML43 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox249 HBox
+          MoveScaled(0,184,106,4)
+          { Label203 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML44 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox250 HBox
+          MoveScaled(0,188,106,4)
+          { Label204 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML45 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox251 HBox
+          MoveScaled(0,192,106,4)
+          { Label205 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML46 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox252 HBox
+          MoveScaled(0,196,106,4)
+          { Label206 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML47 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox253 HBox
+          MoveScaled(0,200,106,4)
+          { Label207 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML48 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox254 HBox
+          MoveScaled(0,204,106,4)
+          { Label208 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML49 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox255 HBox
+          MoveScaled(0,208,106,4)
+          { Label209 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML50 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox256 HBox
+          MoveScaled(0,212,106,4)
+          { Label210 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML51 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox257 HBox
+          MoveScaled(0,216,106,4)
+          { Label211 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML52 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox258 HBox
+          MoveScaled(0,220,106,4)
+          { Label212 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML53 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox259 HBox
+          MoveScaled(0,224,106,4)
+          { Label213 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML54 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox260 HBox
+          MoveScaled(0,228,106,4)
+          { Label214 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML55 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox261 HBox
+          MoveScaled(0,232,106,4)
+          { Label215 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML56 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox262 HBox
+          MoveScaled(0,236,106,4)
+          { Label216 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("og:site_name  ")
+          }
+          { !txtHREFpdfHTML57 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox207 HBox
+          MoveScaled(0,240,106,4)
+          { Label226 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+          }
+          { Label158 Label
+            MoveScaled(27,0,23,4)
+            Font = Font["Bold"]
+            Expand = True
             AutoResize = True
             Text = ("Metadatos Twitter Card")
           }
         }
         { HBox208 HBox
-          MoveScaled(0,56,106,4)
+          MoveScaled(0,244,106,4)
           { Label160 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -5194,8 +5869,57 @@
             Expand = True
           }
         }
-        { HBox209 HBox
-          MoveScaled(0,69,106,4)
+        { HBox263 HBox
+          MoveScaled(0,248,106,4)
+          { Label217 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("URL para descarga PDF  ")
+          }
+          { !txtHREFpdfHTML58 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox264 HBox
+          MoveScaled(0,252,106,4)
+          { Label218 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("URL para descarga PDF  ")
+          }
+          { !txtHREFpdfHTML59 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox265 HBox
+          MoveScaled(0,256,106,4)
+          { Label219 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("URL para descarga PDF  ")
+          }
+          { !txtHREFpdfHTML60 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
+        }
+        { HBox266 HBox
+          MoveScaled(0,260,106,4)
+          { Label220 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("URL para descarga PDF  ")
+          }
+          { !txtHREFpdfHTML61 TextBox
+            MoveScaled(58,0,23,4)
+            #Public = True
+            Expand = True
+          }
         }
       }
       Index = 0
