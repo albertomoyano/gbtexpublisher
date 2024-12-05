@@ -169,20 +169,6 @@
       Text = ("Archivos abiertos recientemente")
     }
   }
-  { menuLTX Menu
-    Text = ("Compilar")
-    Visible = False
-    { menuCatalogo Menu
-      Text = ("Página del catálogo en PDF")
-      Picture = Picture["iconos/acroread.svg"]
-      Enabled = False
-    }
-    { menuDisclaimer Menu
-      Text = ("Página de comentarios")
-      Picture = Picture["iconos/acroread.svg"]
-      Enabled = False
-    }
-  }
   { menuTOOLS Menu
     Text = ("Herramientas")
     { menuSelecionarBBDD Menu
@@ -215,14 +201,29 @@
     }
     { Menu79 Menu
     }
-    { menuPDFweb Menu
-      Text = ("Generar PDF para la web")
-      Picture = Picture["iconos/acroread.svg"]
+    { menuLTX Menu
+      Text = ("Compilar PDF complementarios")
       Enabled = False
-    }
-    { menuOT Menu
-      Text = ("OT para imprenta")
-      Enabled = False
+      { menuPDFweb Menu
+        Text = ("Generar PDF para la web")
+        Picture = Picture["iconos/acroread.svg"]
+        Enabled = False
+      }
+      { menuOT Menu
+        Text = ("Orden de trabajo para el taller de imprenta")
+        Picture = Picture["iconos/acroread.svg"]
+        Enabled = False
+      }
+      { menuDisclaimer Menu
+        Text = ("Generar PDF de comentarios para corrección")
+        Picture = Picture["iconos/acroread.svg"]
+        Enabled = False
+      }
+      { menuCatalogo Menu
+        Text = ("Generar PDF del catálogo/gacetilla de prensa")
+        Picture = Picture["iconos/acroread.svg"]
+        Enabled = False
+      }
     }
     { menuScriptsExternos Menu
       Text = ("Script externos")
@@ -476,7 +477,7 @@
     }
   }
   { HBox1 HBox
-    MoveScaled(1,4,98,4)
+    MoveScaled(1,4,107,4)
     { HBox4 HBox
       MoveScaled(1,0,17.7778,4)
       { PictureBox37 PictureBox
@@ -485,7 +486,7 @@
         Alignment = Align.Center
       }
       { txtTiempo TextLabel
-        MoveScaled(6,0,11,4)
+        MoveScaled(4,0,11,4)
         Font = Font["Bold"]
         Background = Color.Background
         Expand = True
@@ -493,14 +494,27 @@
         Wrap = False
       }
     }
+    { !TextBox1 TextBox
+      MoveScaled(20,0,11,4)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+      ReadOnly = True
+    }
     { Separator13 Separator
       MoveScaled(45,0,0.8889,4)
       Foreground = Color.Transparent
     }
-    { !TextBox1 TextBox
-      MoveScaled(50,0,11,4)
-      #Public = True
-      NoTabFocus = True
+    { btnSelecionarBBDD Button
+      MoveScaled(39,0,21,4)
+      ToolTip = ("Seleccionar la base de datos")
+      AutoResize = True
+      Text = ("Base de datos")
+      Picture = Picture["iconos/basededatos.svg"]
+    }
+    { TextBoxRuta TextBox
+      MoveScaled(72,0,16,4)
+      Background = Color.Background
       Expand = True
       ReadOnly = True
     }
@@ -508,55 +522,43 @@
       MoveScaled(81,0,0.8889,4)
       Foreground = Color.Transparent
     }
-    { MenuAppCompilar MenuButton
-      MoveScaled(74,0,17.7778,4)
-      Enabled = False
-      Text = ("Compilar") & "..."
-      Picture = Picture["iconos/acroread.svg"]
-      Menu = "menuLTX"
-      MenuOnly = True
-    }
   }
   { HBox9 HBox
-    MoveScaled(1,8,87,4)
-    { Button4 Button
-      MoveScaled(0,0,17.7778,4)
+    MoveScaled(1,8,100,4)
+    { MenuApp MenuButton
+      MoveScaled(1,0,17.7778,4)
       Enabled = False
-      Text = ("Git local")
+      Text = ("Ver salidas")
       Picture = Picture["iconos/document.svg"]
-    }
-    { Separator9 Separator
-      MoveScaled(20,0,0.8889,4)
-      Foreground = Color.Transparent
-    }
-    { btnMenuGIT MenuButton
-      MoveScaled(24,0,17.7778,4)
-      Enabled = False
-      Text = ("Remoto a")
-      Picture = Picture["iconos/gitRemoto.svg"]
-      Menu = "menuGIT"
+      Menu = "AbrirApp"
       MenuOnly = True
     }
     { Separator11 Separator
       MoveScaled(43,0,0.8889,4)
       Foreground = Color.Transparent
     }
-    { txtGIT TextBox
-      MoveScaled(46,0,19,4)
-      Expand = True
-      Placeholder = ("coloque aquí su usuario GitHub / GitLab")
+    { Button4 Button
+      MoveScaled(39,0,17.7778,4)
+      Enabled = False
+      Text = ("Git local")
+      Picture = Picture["iconos/document.svg"]
     }
     { Separator10 Separator
       MoveScaled(66,0,0.8889,4)
       Foreground = Color.Transparent
     }
-    { MenuApp MenuButton
-      MoveScaled(68,0,17.7778,4)
+    { btnMenuGIT MenuButton
+      MoveScaled(58,0,17.7778,4)
       Enabled = False
-      Text = ("Ver") & "..."
-      Picture = Picture["iconos/document.svg"]
-      Menu = "AbrirApp"
+      Text = ("Remoto a")
+      Picture = Picture["iconos/gitRemoto.svg"]
+      Menu = "menuGIT"
       MenuOnly = True
+    }
+    { txtGIT TextBox
+      MoveScaled(76,0,19,4)
+      Expand = True
+      Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
   }
   { !TabPanel1 TabStrip
@@ -600,15 +602,6 @@
         MoveScaled(73,0,26,4)
         AutoResize = True
         Text = ("  Buscar palabras en todo el proyecto")
-      }
-      { Separator20 Separator
-        MoveScaled(120,0,2.3333,4)
-      }
-      { TextBoxRuta TextBox
-        MoveScaled(123,0,31,4)
-        Background = Color.Background
-        Expand = True
-        ReadOnly = True
       }
     }
     { Splitter1 Splitter

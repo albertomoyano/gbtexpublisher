@@ -823,8 +823,8 @@ Public Sub menuAbrir_Click()'abrir un libro
   adminGIT.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
+  menuLTX.Enabled = True
   MenuApp.Enabled = True
-  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -1020,8 +1020,8 @@ Public Sub mnuLast_Click()
   adminGIT.Enabled = True
   menuTOOLS.Visible = True
   menuScriptsExternos.Enabled = True
+  menuLTX.Enabled = True
   MenuApp.Enabled = True
-  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -5905,8 +5905,8 @@ Public Sub menuAbrirRevista_Click()
   adminGIT.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
+  menuLTX.Enabled = True
   MenuApp.Enabled = True
-  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -6276,8 +6276,8 @@ Public Sub menuMono_Click()'monografia academica
   adminGIT.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
+  menuLTX.Enabled = True
   MenuApp.Enabled = True
-  MenuAppCompilar.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   menuGray.Enabled = True
@@ -8156,18 +8156,18 @@ Public Sub btnMostarNewsKeywords_Click()
 
 End
 
-' Public Sub menuSelecionarBBDD_Click()
-'
-'   Dim sArchivo As String
-'
-'   ' Abrir un cuadro de diálogo para seleccionar un archivo
-'   Dialog.Title = "Seleccionar base de datos SQLite"
-'   Dialog.Filter = ["*.db", "Bases de datos SQLite (*.db)"]
-'   Dialog.Path = User.Home
-'   If Dialog.OpenFile() Then Return
-'
-'   ' Mostrar la ruta seleccionada en el TextBox
-'   sArchivo = Dialog.Path
-'   TextBoxRuta.Text = sArchivo
-'
-' End
+Public Sub btnSelecionarBBDD_Click()
+
+  Dim sArchivo As String
+
+  ' Abrir un cuadro de diálogo para seleccionar un archivo
+  Dialog.Title = "Seleccionar base de datos SQLite"
+  Dialog.Filter = ["*.sqlite", "Bases de datos SQLite (*.sqlite)"]
+  Dialog.Path = User.Home
+  If Dialog.OpenFile() Then Return
+
+  ' Mostrar la ruta seleccionada en el TextBox
+  sArchivo = Dialog.Path
+  TextBoxRuta.Text = sArchivo
+
+End
