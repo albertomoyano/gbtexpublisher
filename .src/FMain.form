@@ -185,6 +185,9 @@
   }
   { menuTOOLS Menu
     Text = ("Herramientas")
+    { menuSelecionarBBDD Menu
+      Text = ("Seleccionar una base de datos")
+    }
     { menuCONVERSOR Menu
       Text = ("Conversión de archivo .docx a .tex")
       Picture = Picture["iconos/conversor.svg"]
@@ -569,7 +572,7 @@
     Index = 0
     Text = ("     Terminal y ChatGPT     ")
     { HBox93 HBox
-      MoveScaled(1,1,123,4)
+      MoveScaled(1,1,158,4)
       { MenuButton1 MenuButton
         MoveScaled(8,0,23,4)
         Text = ("Guiones externos")
@@ -594,9 +597,18 @@
         Picture = Picture["iconos/search.svg"]
       }
       { Label125 Label
-        MoveScaled(78,0,42,4)
+        MoveScaled(73,0,26,4)
+        AutoResize = True
+        Text = ("  Buscar palabras en todo el proyecto")
+      }
+      { Separator20 Separator
+        MoveScaled(120,0,2.3333,4)
+      }
+      { TextBoxRuta TextBox
+        MoveScaled(123,0,31,4)
+        Background = Color.Background
         Expand = True
-        Text = ("  Buscar palabras en todo el proyecto, la búsqueda es sensible a mayúscula/minúscula")
+        ReadOnly = True
       }
     }
     { Splitter1 Splitter
@@ -5123,7 +5135,7 @@
             Alignment = Align.Right
             Text = ("description  ")
           }
-          { !txtHREFpdfHTML13 TextBox
+          { !txtDescriptionHTML TextBox
             MoveScaled(58,0,23,4)
             #Public = True
             Background = Color.Background
@@ -5183,7 +5195,7 @@
             Alignment = Align.Right
             Text = ("subject  ")
           }
-          { !txtHREFpdfHTML17 TextBox
+          { !txtSubjetHTML TextBox
             MoveScaled(58,0,23,4)
             #Public = True
             Background = Color.Background

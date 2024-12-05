@@ -6,10 +6,12 @@ Public Function conectar() As Connection
 
   Dim conector As New Connection
 
-  conector.Type = "sqlite"
+  conector.Type = "sqlite3"
   conector.Host = User.Home & "/Dropbox/gbBaseDatos"
   conector.Name = "db_tex.sqlite"
-  Try conector.Open()
+  conector.Open()
+  ' Configurar journal_mode a WAL
+  conector.Exec("PRAGMA journal_mode = WAL;")
   Return conector
 
   If Error Then

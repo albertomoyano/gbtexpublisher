@@ -923,6 +923,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     cbPDFx.Text = Contenido!pdfx_46
     txtVersionId.Text = Contenido!pdfversionid_47
     txt48_abstract.Text = Contenido!abstract_48
+    txtDescriptionHTML.Text = txt48_abstract.Text' textbox de GHP
     txt49_imagentapa.Text = Contenido!imagentapa_49
     txt50_pagetotal.Text = Contenido!pagetotal_50
     txtCOLECCION.Text = Contenido!relation_51
@@ -1102,6 +1103,7 @@ Public Sub mnuLast_Click()
     cbPDFx.Text = Contenido!pdfx_46
     txtVersionId.Text = Contenido!pdfversionid_47
     txt48_abstract.Text = Contenido!abstract_48
+    txtDescriptionHTML.Text = txt48_abstract.Text' textbox de GHP
     txt49_imagentapa.Text = Contenido!imagentapa_49
     txt50_pagetotal.Text = Contenido!pagetotal_50
     txtCOLECCION.Text = Contenido!relation_51
@@ -5990,6 +5992,7 @@ Public Sub menuAbrirRevista_Click()
     cbPDFx.Text = Contenido!pdfx_46
     txtVersionId.Text = Contenido!pdfversionid_47
     txt48_abstract.Text = Contenido!abstract_48
+    txtDescriptionHTML.Text = txt48_abstract.Text' textbox de GHP
     txt49_imagentapa.Text = Contenido!imagentapa_49
     txt50_pagetotal.Text = Contenido!pagetotal_50
     txtCOLECCION.Text = Contenido!relation_51
@@ -8152,3 +8155,19 @@ Public Sub btnMostarNewsKeywords_Click()
   Form_TXTextendido.ShowModal
 
 End
+
+' Public Sub menuSelecionarBBDD_Click()
+'
+'   Dim sArchivo As String
+'
+'   ' Abrir un cuadro de diálogo para seleccionar un archivo
+'   Dialog.Title = "Seleccionar base de datos SQLite"
+'   Dialog.Filter = ["*.db", "Bases de datos SQLite (*.db)"]
+'   Dialog.Path = User.Home
+'   If Dialog.OpenFile() Then Return
+'
+'   ' Mostrar la ruta seleccionada en el TextBox
+'   sArchivo = Dialog.Path
+'   TextBoxRuta.Text = sArchivo
+'
+' End
