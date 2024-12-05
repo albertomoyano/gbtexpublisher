@@ -778,6 +778,12 @@ End
 
 Public Sub menuAbrir_Click()'abrir un libro
 
+  ' Verifica si el TextBox está vacío o es Null
+  If IsNull(TextBoxRuta.Text) Or TextBoxRuta.Text = "" Then
+    Message.Warning("Debe seleccionar una base de datos para trabajar.")
+    Return ' Detiene la ejecución
+  End If
+
   Dialog.Title = "Seleccionar archivo"
   Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
   Dialog.AutoExt = True
@@ -994,6 +1000,12 @@ End
 
 ' me que muestra los ultimos archivos abiertos
 Public Sub mnuLast_Click()
+
+  ' Verifica si el TextBox está vacío o es Null
+  If IsNull(TextBoxRuta.Text) Or TextBoxRuta.Text = "" Then
+    Message.Warning("Debe seleccionar una base de datos para trabajar.")
+    Return ' Detiene la ejecución
+  End If
 
   Dim iIndex As Integer
 

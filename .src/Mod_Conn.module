@@ -10,8 +10,6 @@ Public Function conectar() As Connection
   conector.Host = User.Home & "/Dropbox/gbBaseDatos"
   conector.Name = "db_tex.sqlite"
   conector.Open()
-  ' Configurar journal_mode a WAL
-  conector.Exec("PRAGMA journal_mode = WAL;")
   Return conector
 
   If Error Then

@@ -513,7 +513,7 @@
       Picture = Picture["iconos/basededatos.svg"]
     }
     { TextBoxRuta TextBox
-      MoveScaled(72,0,16,4)
+      MoveScaled(67,0,16,4)
       Background = Color.Background
       Expand = True
       ReadOnly = True
