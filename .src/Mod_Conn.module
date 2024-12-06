@@ -11,6 +11,8 @@ Public Function conectar() As Connection
   conector.Name = "db_tex.sqlite"
   conector.Open()
   Return conector
+  ' Configurar el modo de journal a DELETE para evitar los archivos .wal y .shm
+  conector.Exec("PRAGMA journal_mode=DELETE;")
 
   If Error Then
     conector = Null

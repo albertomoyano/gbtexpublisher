@@ -171,9 +171,6 @@
   }
   { menuTOOLS Menu
     Text = ("Herramientas")
-    { menuSelecionarBBDD Menu
-      Text = ("Seleccionar una base de datos")
-    }
     { menuCONVERSOR Menu
       Text = ("Conversión de archivo .docx a .tex")
       Picture = Picture["iconos/conversor.svg"]
@@ -193,6 +190,8 @@
     { menuRespaldoBDD Menu
       Text = ("Respado de la BDD en GitHub")
       Picture = Picture["iconos/exportar.svg"]
+      Enabled = False
+      Visible = False
     }
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
