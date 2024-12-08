@@ -39,7 +39,6 @@
     { !btnRefresh Button
       Move(144,0,36,36)
       #Public = True
-      Visible = False
       NoTabFocus = True
       ToolTip = ("Refrescar datos")
       Picture = Picture["iconos/refrescar.svg"]

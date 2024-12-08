@@ -7,6 +7,6 @@ RememberPassword=False
 IgnoreCharset=False
 DisplayMetadata=False
 RememberTemplate=False
-Database="db_tex.sqlite"
+Database="gbtexpublisher.sqlite"
 Requests=[""]
 

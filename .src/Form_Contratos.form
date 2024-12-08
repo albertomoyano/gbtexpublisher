@@ -1,0 +1,239 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,640)
+  #Scaled = False
+  Text = ("Contratos de edición")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox1 HBox
+    Move(9,9,927,36)
+    { tbNuevo Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar entrada")
+      Picture = Picture["iconos/+nuevo.svg"]
+    }
+    { tbBorrar Button
+      Move(36,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Eliminar entrada")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { btnGuardar Button
+      Move(72,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar entrada")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarMod Button
+      Move(108,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar cambios")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { !btnRefresh Button
+      Move(144,0,36,36)
+      #Public = True
+      Visible = False
+      NoTabFocus = True
+      ToolTip = ("Refrescar datos")
+      Picture = Picture["iconos/refrescar.svg"]
+    }
+    { BtnExportarDOCX Button
+      Move(180,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Exportar la nota como archivo de texto plano")
+      Picture = Picture["iconos/ms-office.svg"]
+    }
+    { BtnExportarPDF Button
+      Move(216,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Exportar la nota como archivo de texto plano")
+      Picture = Picture["iconos/acroread.svg"]
+    }
+    { txtBuscarContrato TextBox
+      Move(252,0,290,40)
+    }
+    { BtnBuscar Button
+      Move(590,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Buscar en toda la base de datos")
+      Picture = Picture["iconos/search.svg"]
+    }
+    { Spring1 Spring
+      Move(640,0,36,40)
+    }
+    { btnCerrar ToolButton
+      Move(702,0,160,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la ventana")
+      Text = ("Cerrar")
+      Border = True
+    }
+  }
+  { tblContratos TableView
+    Move(9,54,153,153)
+    Expand = True
+    Mode = Select.Single
+    ShowCursor = True
+    Header = GridView.Horizontal
+    ScrollBar = Scroll.Vertical
+    Resizable = False
+  }
+  { HBox8 HBox
+    Move(9,216,765,36)
+    { Label7 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Título  ")
+    }
+    { !txAsunto TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox11 HBox
+    Move(9,252,765,36)
+    { Label10 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Tipo de obra  ")
+    }
+    { !txAsunto10 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox2 HBox
+    Move(9,288,765,36)
+    { Label1 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Nombre y apellido  ")
+    }
+    { !txAsunto2 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox3 HBox
+    Move(9,324,765,36)
+    { Label2 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("DNI  ")
+    }
+    { !txAsunto3 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox4 HBox
+    Move(9,360,765,36)
+    { Label3 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Domicilio  ")
+    }
+    { !txAsunto4 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox5 HBox
+    Move(9,396,765,36)
+    { Label4 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Licencia  ")
+    }
+    { !txAsunto5 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox6 HBox
+    Move(9,432,765,36)
+    { Label5 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Fecha de salida  ")
+    }
+    { !txAsunto6 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox7 HBox
+    Move(9,468,765,36)
+    { Label6 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Cantidad  ")
+    }
+    { !txAsunto7 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox9 HBox
+    Move(9,504,765,36)
+    { Label8 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Importe  ")
+    }
+    { !txAsunto8 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox10 HBox
+    Move(9,540,765,36)
+    { Label9 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Detalles técnicos  ")
+    }
+    { !txAsunto9 TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+}

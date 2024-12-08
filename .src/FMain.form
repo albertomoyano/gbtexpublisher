@@ -138,6 +138,7 @@
     Text = ("Administración")
     { Menu5 Menu
       Text = ("Contratos de edición")
+      Picture = Picture["iconos/acroread.svg"]
     }
     { rentaTrabajo Menu
       Text = ("Rentabilizar tiempo de trabajo")

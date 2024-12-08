@@ -8047,3 +8047,9 @@ Public Sub btnMostarNewsKeywords_Click()
   Form_TXTextendido.ShowModal
 
 End
+
+Public Sub Menu5_Click()
+
+  Form_Contratos.ShowModal()
+
+End

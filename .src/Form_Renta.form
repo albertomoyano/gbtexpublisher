@@ -11,7 +11,7 @@
   Margin = True
   Padding = 4
   { HBox1 HBox
-    Move(0,0,927,36)
+    Move(9,9,927,36)
     { btnGuardarMod Button
       Move(108,0,36,36)
       NoTabFocus = True
@@ -40,35 +40,38 @@
       Border = True
     }
   }
-  { HBox4 HBox
-    Move(0,36,927,450)
+  { gridRentaArchivo TableView
+    Move(18,54,153,153)
     Expand = True
-    { Splitter1 Splitter
-      Move(9,9,612,423)
-      Expand = True
-      Border = False
-      { gridRentaArchivo TableView
-        Move(0,0,153,153)
-        Expand = True
-        Mode = Select.Single
-        ShowCursor = True
-        Header = GridView.Horizontal
-        ScrollBar = Scroll.Vertical
-        Resizable = False
-      }
-      { gridRenta TableView
-        Move(207,0,153,153)
-        Expand = True
-        Mode = Select.Single
-        ShowCursor = True
-        Header = GridView.Horizontal
-        ScrollBar = Scroll.Vertical
-        Resizable = False
-      }
-    }
+    Mode = Select.Single
+    ShowCursor = True
+    Header = GridView.Horizontal
+    ScrollBar = Scroll.Vertical
+    Resizable = False
+  }
+  { HBox3 HBox
+    Move(0,207,927,36)
+  }
+  { HBox4 HBox
+    Move(0,243,927,36)
+  }
+  { HBox5 HBox
+    Move(0,279,927,36)
+  }
+  { HBox6 HBox
+    Move(0,315,927,36)
+  }
+  { HBox7 HBox
+    Move(0,351,927,36)
+  }
+  { HBox8 HBox
+    Move(0,387,927,36)
+  }
+  { HBox9 HBox
+    Move(0,423,927,36)
   }
   { HBox2 HBox
-    Move(0,486,927,36)
+    Move(9,567,927,36)
     { txtTiempo Label
       Move(0,0,99,36)
       AutoResize = True

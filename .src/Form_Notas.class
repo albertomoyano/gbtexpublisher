@@ -5,6 +5,14 @@ Private Busqueda As Result
 
 Public Sub Form_Open()
 
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
+
   Mostrar_Lista()
 
 End
@@ -59,12 +67,6 @@ End
 
 Public Sub btnGuardarMod_Click()
 
-  tbNuevo.Visible = True
-  btnGuardar.Visible = False
-  btnGuardarMod.visible = False
-  tbBorrar.Visible = False
-  BtnExportarDOCX.Visible = False
-
   Contenido = FMain.meConn.Edit("apuntes", "id=" & txId.Text)
   guardarCampos
   Contenido.Update
@@ -73,6 +75,14 @@ Public Sub btnGuardarMod_Click()
   Mostrar_Lista
   txtBuscar.Clear
   LimpiarCampos 'limpiar campos
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
 
 End
 
@@ -85,9 +95,11 @@ Public Sub tbNuevo_Click()
 
   tbNuevo.Visible = False
   tbBorrar.Visible = False
-  btnRefresh.Visible = False
   btnGuardar.Visible = True
-  btnGuardarMod.visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
 
   LimpiarCampos  'Limpiamos todos los campos
 
@@ -121,10 +133,13 @@ Public Sub btnGuardar_Click()
   Mostrar_Lista ' Refrescamos la lista de entradas
   LimpiarCampos ' Limpiamos los campos
 
-  btnGuardarMod.Visible = False
-  btnGuardar.Visible = False
   tbNuevo.Visible = True
   tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
 
 End
 
@@ -145,10 +160,13 @@ Public Sub tbBorrar_Click()
   VLista.Clear
   Mostrar_Lista
 
-  tbBorrar.Visible = False
-  btnGuardarMod.Visible = False
   tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
   BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
 
 End
 
@@ -173,15 +191,26 @@ Public Sub btnRefresh_Click()
   VLista.Clear
   Mostrar_Lista
   txtBuscar.Clear
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
   btnRefresh.Visible = False
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
 
 End
 
 Public Sub VLista_RowClick(Row As Integer)
 
-  btnGuardarMod.visible = True
+  tbNuevo.Visible = False
   tbBorrar.Visible = True
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = True
+  btnRefresh.Visible = False
   BtnExportarDOCX.Visible = True
+  BtnExportarPDF.Visible = True
 
   txId.Text = VLista[Row, 0].Text
   txFecha.Text = VLista[Row, 1].Text
@@ -210,9 +239,6 @@ Public Function guardarCampos()
 End
 
 Public Sub BtnBuscar_Click()
-
-  ' Mostramos el botón de refresh en el form original para recargar las entradas
-  btnRefresh.Visible = True
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -253,6 +279,14 @@ Public Sub BtnBuscar_Click()
 
     Busqueda.MoveNext
   Wend
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = True
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
 
 End
 
