@@ -1,6 +1,6 @@
 ' Gambas class file
 
-Private meConn As New Connection
+Public meConn As New Connection
 Public Contenido As Result
 Private ContenidoComenta As Result
 Private ContenidoGHP As Result

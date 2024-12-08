@@ -1,6 +1,5 @@
 ' Gambas module file
 
-Public Conn As Connection
 Public Contenido As Result
 Public ContenidoAutor As Result
 Public ContenidoMeta As Result
@@ -8,9 +7,6 @@ Public ContenidoGHP As Result
 Public ContenidoSeparatas As Result
 Public ContenidoAutores As Result
 Public ResultadoMeta As Result
-' Private Name As String = File.Name(FMain.TextBox1.Text)
-' Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
-' Private rutaApp As String = User.Home &/ ".gbtexpublisher"
 
 Public Sub ExportarDOCX() ' Función para exportar el archivo a DOCX las notas
 
@@ -128,12 +124,9 @@ Public Sub Export2MetaDOCX(rutaTexto As String)
   Dim outputFile As String
   Dim id As Integer
 
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
-
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -152,7 +145,7 @@ Public Sub Export2MetaDOCX(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Conn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -224,8 +217,6 @@ Public Sub Export2MetaDOCX(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el archivo metadatos para articulo para hacer el maketitle
@@ -244,12 +235,9 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
   Dim outputFile As String
   Dim id As Integer
 
-  ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
-
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -268,7 +256,7 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Conn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -333,8 +321,6 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el archivo metadatos
@@ -354,11 +340,11 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   Dim id As Integer
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -377,7 +363,7 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Conn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -467,8 +453,6 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el catalogo
@@ -488,11 +472,11 @@ Public Sub ExportToCatalogo(rutaTexto As String)
   Dim id As Integer
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -511,7 +495,7 @@ Public Sub ExportToCatalogo(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Conn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -636,8 +620,6 @@ Public Sub ExportToCatalogo(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el archivo glosario
@@ -655,10 +637,10 @@ Public Sub Exportar2Glosario(rutaTexto As String)
   Dim HOY As Date
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   buscar = "select * from glosarios where archivo like ',%" & File.BaseName(rutaTexto) & ",%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -706,8 +688,6 @@ Public Sub Exportar2Glosario(rutaTexto As String)
 
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el archivo bibtex
@@ -725,11 +705,11 @@ Public Sub Exportar2BibTeX(rutaTexto As String)
   Dim HOY As Date
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   'me aseguro de que la búsqueda se encuentre entre comas
   buscar = "select * from bibtex where keywords like ',%" & File.BaseName(rutaTexto) & ",%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -770,8 +750,6 @@ Public Sub Exportar2BibTeX(rutaTexto As String)
   outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXbib-" & File.BaseName(rutaTexto) & ".bib"
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el archivo metadatos para PDF libro
@@ -790,11 +768,11 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
   ' Dim id As Integer
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -1012,8 +990,6 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 ' exportamos el archivo metadatos para libro en HTML
@@ -1033,11 +1009,11 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
   Dim id As Integer
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -1056,7 +1032,7 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Conn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -1334,8 +1310,6 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End' exportamos el archivo metadatos para libro en HTML
 
 'exportamos el disclaimer
@@ -1353,13 +1327,13 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
   Dim outputFile As String
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Conn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoMeta = Conn.Exec(buscarMeta)
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -1468,8 +1442,6 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el archivo de separata
@@ -1513,11 +1485,11 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
   fechaPDF = (Format(Now, "yyyymmddhhnnss"))
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoMeta = Conn.Exec(buscarMeta)
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
 
   bFields.Clear
   For Each fb In ContenidoMeta.Fields
@@ -1572,8 +1544,6 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
 
-  Conn.Close
-
 End
 
 'exportamos el disclaimer
@@ -1602,20 +1572,20 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   fechaPDF = (Format(Now, "yyyymmddhhnnss"))
 
   ' me conceto a la base de datos
-  Conn = Mod_Conn.conectar()
+  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoMeta = Conn.Exec(buscarMeta)
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
   ' Exportamos los registros seleccionados
   buscarGHP = "select * from githubpages where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoGHP = Conn.Exec(buscarGHP)
+  ContenidoGHP = FMain.meConn.Exec(buscarGHP)
   ' Exportamos los registros seleccionados
   buscarSeparatas = "select * from separatas where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoSeparatas = Conn.Exec(buscarSeparatas)
+  ContenidoSeparatas = FMain.meConn.Exec(buscarSeparatas)
   ' Exportamos los registros seleccionados
   buscarAutores = "select * from autoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoAutores = Conn.Exec(buscarAutores)
+  ContenidoAutores = FMain.meConn.Exec(buscarAutores)
 
   bFields.Clear
   For Each fb In ContenidoMeta.Fields
@@ -1805,7 +1775,5 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
-
-  Conn.Close
 
 End
