@@ -1,27 +1,9 @@
 ' Gambas class file
 
-Private meConn As New Connection
 Private Contenido As Result
 Private Busqueda As Result
 
 Public Sub Form_Open()
-
-  ' Usa la ruta seleccionada en el formulario de inicio
-  meConn.Type = "sqlite3"
-  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Open()
-  ' Configurar el modo de journal a DELETE
-  meConn.Exec("PRAGMA journal_mode=DELETE;")
-
-  Form_Notas.Title = "Formulario para notas generales"
-  tbNuevo.Visible = True
-  tbBorrar.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
 
   Mostrar_Lista()
 
@@ -35,7 +17,7 @@ Public Sub Mostrar_Lista()
 
   VLista.Clear()
 
-  Contenido = meConn.Exec("select * from apuntes ORDER BY id DESC")
+  Contenido = FMain.meConn.Exec("select * from apuntes ORDER BY id DESC")
 
   'diseñamos el tableview
   VLista.Columns.Count = 4
@@ -62,7 +44,7 @@ Public Sub Mostrar_Lista()
     Contenido.MoveNext
   Next
 
-  Contenido = meConn.Exec("SELECT COUNT(*) FROM apuntes")
+  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM apuntes")
 
   Record = Contenido[0]
   Count = Record
@@ -71,10 +53,6 @@ End
 
 Public Sub btnCerrar_Click()
 
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
   Me.Close
 
 End
@@ -87,7 +65,7 @@ Public Sub btnGuardarMod_Click()
   tbBorrar.Visible = False
   BtnExportarDOCX.Visible = False
 
-  Contenido = meConn.Edit("apuntes", "id=" & txId.Text)
+  Contenido = FMain.meConn.Edit("apuntes", "id=" & txId.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -114,7 +92,7 @@ Public Sub tbNuevo_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = meConn.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -133,7 +111,7 @@ End
 
 Public Sub btnGuardar_Click()
 
-  Contenido = meConn.Create("apuntes")
+  Contenido = FMain.meConn.Create("apuntes")
 
   guardarCampos
 
@@ -159,7 +137,7 @@ Public Sub tbBorrar_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = meConn.Exec("delete from apuntes where id=" & txId.Text)
+    Contenido = FMain.meConn.Exec("delete from apuntes where id=" & txId.Text)
   Endif
 
   LimpiarCampos  'Limpiamos los campos
@@ -246,7 +224,7 @@ Public Sub BtnBuscar_Click()
     Return
   Endif
 
-  Busqueda = meConn.Exec(Comando)
+  Busqueda = FMain.meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VLista.Clear()
@@ -280,11 +258,6 @@ End
 
 Public Sub Form_Close()
 
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
-  Me.Close
   Me.Close
 
 End
