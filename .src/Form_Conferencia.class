@@ -67,7 +67,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = Conn.Exec("SELECT COUNT(*) FROM conferencias")
+  Contenido = meConn.Exec("SELECT COUNT(*) FROM conferencias")
 
   Record = Contenido[0]
   Count = Record
