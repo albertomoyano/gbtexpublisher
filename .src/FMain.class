@@ -37,18 +37,6 @@ Public Sub Form_Open()
   ' Configurar el modo de journal a DELETE
   meConn.Exec("PRAGMA journal_mode=DELETE;")
 
-  ' ' por el momento esta funcion se deshabilita
-  ' Dim name As String
-  ' ' Usamos pgrep para buscar procesos por el nombre exacto de la aplicación
-  ' Exec ["pgrep", "-fl", Application.Name] Wait To name
-  ' ' ' Mostramos el resultado para depurar (puedes eliminar esta línea después)
-  ' ' Print "Procesos encontrados: "; s
-  ' ' Comprobamos que el resultado contenga más de un proceso
-  ' If Split(Trim$(name), gb.NewLine, "", True).Count > 1 Then
-  '   Message.Warning(Application.Name & " ya se está ejecutando.")
-  '   Quit
-  ' Endif
-
   ' controlamos que existan los directorios principales o los creamos
   If Not Exist(rutaApp) Then
     Mkdir rutaApp

@@ -1536,8 +1536,6 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
     ContenidoMeta.MoveNext
   Wend
 
-  ' Next ' Cerrar el bucle For Each id In ids
-
   ' Establece la ruta y el nombre del archivo de salida
   outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXpdfTKmeta-" & File.BaseName(rutaTexto) & ".txt"
 
