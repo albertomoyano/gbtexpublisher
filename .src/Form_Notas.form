@@ -69,7 +69,7 @@
       Move(640,0,36,40)
     }
     { btnCerrar ToolButton
-      Move(700,0,160,40)
+      Move(702,0,160,36)
       Background = &HE00000
       Foreground = Color.White
       NoTabFocus = True

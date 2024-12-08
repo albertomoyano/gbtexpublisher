@@ -1,37 +1,29 @@
 ' Gambas class file
 
-Private conector As Connection
+Private meConn As New Connection
 Private Contenido As Result
 Private Busqueda As Result
 
 Public Sub Form_Open()
 
-  ' Crear una nueva conexión
-  conector = New Connection
+  ' Usa la ruta seleccionada en el formulario de inicio
+  meConn.Type = "sqlite3"
+  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Open()
+  ' Configurar el modo de journal a DELETE
+  meConn.Exec("PRAGMA journal_mode=DELETE;")
 
-  ' Configurar los parámetros de conexión
-  conector.Type = "sqlite"
-  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
-  conector.Name = "db_tex.sqlite"
+  Form_Notas.Title = "Formulario para notas generales"
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+  BtnExportarDOCX.Visible = False
+  BtnExportarPDF.Visible = False
 
-  ' Intentar abrir la conexión
-  Try conector.Open()
-
-  If Error Then
-    conector = Null
-    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
-  Else
-    Form_Notas.Title = "Formulario para notas generales"
-    tbNuevo.Visible = True
-    tbBorrar.Visible = False
-    btnGuardar.Visible = False
-    btnGuardarMod.Visible = False
-    btnRefresh.Visible = False
-    BtnExportarDOCX.Visible = False
-    BtnExportarPDF.Visible = False
-
-    Mostrar_Lista()
-  Endif
+  Mostrar_Lista()
 
 End
 
@@ -43,7 +35,7 @@ Public Sub Mostrar_Lista()
 
   VLista.Clear()
 
-  Contenido = conector.Exec("select * from apuntes ORDER BY id DESC")
+  Contenido = meConn.Exec("select * from apuntes ORDER BY id DESC")
 
   'diseñamos el tableview
   VLista.Columns.Count = 4
@@ -70,7 +62,7 @@ Public Sub Mostrar_Lista()
     Contenido.MoveNext
   Next
 
-  Contenido = conector.Exec("SELECT COUNT(*) FROM apuntes")
+  Contenido = meConn.Exec("SELECT COUNT(*) FROM apuntes")
 
   Record = Contenido[0]
   Count = Record
@@ -79,13 +71,11 @@ End
 
 Public Sub btnCerrar_Click()
 
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
+  If meConn Then
+    meConn.Close()
+    meConn = Null
   Endif
-
-  Me.Close()
+  Me.Close
 
 End
 
@@ -97,7 +87,7 @@ Public Sub btnGuardarMod_Click()
   tbBorrar.Visible = False
   BtnExportarDOCX.Visible = False
 
-  Contenido = conector.Edit("apuntes", "id=" & txId.Text)
+  Contenido = meConn.Edit("apuntes", "id=" & txId.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -124,7 +114,7 @@ Public Sub tbNuevo_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
+  Contenido = meConn.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -143,7 +133,7 @@ End
 
 Public Sub btnGuardar_Click()
 
-  Contenido = conector.Create("apuntes")
+  Contenido = meConn.Create("apuntes")
 
   guardarCampos
 
@@ -169,7 +159,7 @@ Public Sub tbBorrar_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from apuntes where id=" & txId.Text)
+    Contenido = meConn.Exec("delete from apuntes where id=" & txId.Text)
   Endif
 
   LimpiarCampos  'Limpiamos los campos
@@ -256,7 +246,7 @@ Public Sub BtnBuscar_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VLista.Clear()
@@ -290,12 +280,11 @@ End
 
 Public Sub Form_Close()
 
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
+  If meConn Then
+    meConn.Close()
+    meConn = Null
   Endif
-
+  Me.Close
   Me.Close
 
 End

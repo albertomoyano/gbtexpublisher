@@ -22,16 +22,16 @@ Public Sub Form_Open()
   conector = New Connection
 
   ' Configurar los parámetros de conexión
-  conector.Type = "sqlite"
-  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
-  conector.Name = "db_tex.sqlite"
+  conector.Type = "sqlite3"
+  conector.Host = File.Dir(FMain.TextBoxRuta.Text)
+  conector.Name = "gbtexpublisher.sqlite"
 
   ' Intentar abrir la conexión
   Try conector.Open()
 
   If Error Then
     conector = Null
-    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>db_tex.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>gbtexpublisher.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
   Else
 
     btnGuardarColeccion.Visible = False

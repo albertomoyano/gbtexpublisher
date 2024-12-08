@@ -1,6 +1,6 @@
 # Gambas Project File 3.0
 Title=gbTeXpublisher
-Startup=FMain
+Startup=Form_ConectarBBDD
 Icon=iconos/icono-gbtex.svg
 Version=0.1.407
 Component=gb.image
@@ -35,7 +35,7 @@ VendorPrefix=AM
 Address=alberto.alejandro.moyano@gmail.com
 Url=https://github.com/albertomoyano
 License=General Public License V3
-PackageName=gbtexpublisher-0.1.406
+PackageName=gbtexpublisher-0.1.407
 CreateEachDirectory=1
 Packager=1
 Systems=ubuntu

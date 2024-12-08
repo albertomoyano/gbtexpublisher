@@ -1,7 +1,19 @@
 ' Gambas class file
 
-Private conector As Connection
+Private meConn As New Connection
 Private Contenido As Result
+
+Public Sub Form_Open()
+
+  ' Usa la ruta seleccionada en el formulario de inicio
+  meConn.Type = "sqlite3"
+  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Open()
+  ' Configurar el modo de journal a DELETE
+  meConn.Exec("PRAGMA journal_mode=DELETE;")
+
+End
 
 Public Sub btnExportarBIB_Click()
   'exportamos el archivo bib
@@ -27,7 +39,7 @@ Public Sub btnExportarBIB_Click()
     buscar = "select * from bibtex where keywords like ',%" & txtFiltro.Text & ",%'"
 
     ' Exportar el registro seleccionado
-    Contenido = conector.Exec(buscar)
+    Contenido = meConn.Exec(buscar)
 
     aFields.Clear
     For Each f In Contenido.Fields
@@ -126,45 +138,22 @@ Public Sub txtFiltro_KeyRelease()
 
 End
 
-Public Sub Form_Open()
-
-  conector = New Connection
-
-  ' Configurar los parámetros de conexión
-  conector.Type = "sqlite"
-  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
-  conector.Name = "db_tex.sqlite"
-
-  ' Intentar abrir la conexión
-  Try conector.Open()
-
-  If Error Then
-    conector = Null
-    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
-  Endif
-
-End
-
 Public Sub btnCancelar_Click()
 
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
+  If meConn Then
+    meConn.Close()
+    meConn = Null
   Endif
-
-  Me.Close()
+  Me.Close
 
 End
 
 Public Sub Form_Close()
 
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
+  If meConn Then
+    meConn.Close()
+    meConn = Null
   Endif
-
-  Me.Close()
+  Me.Close
 
 End

@@ -187,12 +187,6 @@
       Text = ("Exportar referencias bibliográficas")
       Picture = Picture["iconos/exportar.svg"]
     }
-    { menuRespaldoBDD Menu
-      Text = ("Respado de la BDD en GitHub")
-      Picture = Picture["iconos/exportar.svg"]
-      Enabled = False
-      Visible = False
-    }
     { menuESTADISTICAS Menu
       Text = ("Estadísticas de autores y revisores")
       Enabled = False
@@ -493,37 +487,20 @@
         Wrap = False
       }
     }
+    { Separator9 Separator
+      MoveScaled(20,0,0.8889,4)
+      Foreground = Color.Transparent
+    }
     { !TextBox1 TextBox
-      MoveScaled(20,0,11,4)
+      MoveScaled(22,0,11,4)
       #Public = True
       NoTabFocus = True
       Expand = True
       ReadOnly = True
     }
-    { Separator13 Separator
-      MoveScaled(45,0,0.8889,4)
-      Foreground = Color.Transparent
-    }
-    { btnSelecionarBBDD Button
-      MoveScaled(39,0,21,4)
-      ToolTip = ("Seleccionar la base de datos")
-      AutoResize = True
-      Text = ("Base de datos")
-      Picture = Picture["iconos/basededatos.svg"]
-    }
-    { TextBoxRuta TextBox
-      MoveScaled(67,0,16,4)
-      Background = Color.Background
-      Expand = True
-      ReadOnly = True
-    }
-    { Separator12 Separator
-      MoveScaled(81,0,0.8889,4)
-      Foreground = Color.Transparent
-    }
   }
   { HBox9 HBox
-    MoveScaled(1,8,100,4)
+    MoveScaled(1,8,114,4)
     { MenuApp MenuButton
       MoveScaled(1,0,17.7778,4)
       Enabled = False
@@ -532,30 +509,34 @@
       Menu = "AbrirApp"
       MenuOnly = True
     }
-    { Separator11 Separator
-      MoveScaled(43,0,0.8889,4)
+    { Separator12 Separator
+      MoveScaled(20,0,0.8889,4)
       Foreground = Color.Transparent
     }
     { Button4 Button
-      MoveScaled(39,0,17.7778,4)
+      MoveScaled(22,0,17.7778,4)
       Enabled = False
       Text = ("Git local")
       Picture = Picture["iconos/document.svg"]
     }
-    { Separator10 Separator
-      MoveScaled(66,0,0.8889,4)
+    { Separator11 Separator
+      MoveScaled(41,0,0.8889,4)
       Foreground = Color.Transparent
     }
     { btnMenuGIT MenuButton
-      MoveScaled(58,0,17.7778,4)
+      MoveScaled(44,0,17.7778,4)
       Enabled = False
       Text = ("Remoto a")
       Picture = Picture["iconos/gitRemoto.svg"]
       Menu = "menuGIT"
       MenuOnly = True
     }
+    { Separator10 Separator
+      MoveScaled(64,0,0.8889,4)
+      Foreground = Color.Transparent
+    }
     { txtGIT TextBox
-      MoveScaled(76,0,19,4)
+      MoveScaled(98,0,8,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
@@ -5944,6 +5925,6 @@
     Index = 0
   }
   { Timer1 #Timer
-    #MoveScaled(109,6)
+    #MoveScaled(117,9)
   }
 }

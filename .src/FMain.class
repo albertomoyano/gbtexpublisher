@@ -1,7 +1,7 @@
 ' Gambas class file
 
-Public conector As Connection
-Private Contenido As Result
+Private meConn As New Connection
+Public Contenido As Result
 Private ContenidoComenta As Result
 Private ContenidoGHP As Result
 Private Busqueda As Result
@@ -12,7 +12,6 @@ Public rutaCONTADOR As String
 Public rutaCATALOGO As String
 Public rutaARTCAP As String
 Public rutaApp As String = User.Home &/ ".gbtexpublisher"
-Public respaldoBBDD As String = User.Home &/ ".respaldogbTeX"
 Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
@@ -30,6 +29,14 @@ Public segundos As Integer
 
 Public Sub Form_Open()
 
+  ' Usa la ruta seleccionada en el formulario de inicio
+  meConn.Type = "sqlite3"
+  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Open()
+  ' Configurar el modo de journal a DELETE
+  meConn.Exec("PRAGMA journal_mode=DELETE;")
+
   ' ' por el momento esta funcion se deshabilita
   ' Dim name As String
   ' ' Usamos pgrep para buscar procesos por el nombre exacto de la aplicación
@@ -42,13 +49,6 @@ Public Sub Form_Open()
   '   Quit
   ' Endif
 
-  ' Dim BD As String = User.Home & "/Dropbox/gbBaseDatos"
-
-  ' ' ' validamos la existencia de la bse de datos
-  ' If Not File.RealPath(BD & "/db_tex.sqlite") Then
-  '   Copy "./db_tex.sqlite" To BD & "/db_tex.sqlite"
-  ' End If
-
   ' controlamos que existan los directorios principales o los creamos
   If Not Exist(rutaApp) Then
     Mkdir rutaApp
@@ -56,15 +56,6 @@ Public Sub Form_Open()
 
   If Not Exist(rutaScriptsExternos) Then
     Mkdir rutaScriptsExternos
-  End If
-
-  If Not Exist(respaldoBBDD) Then
-    Mkdir respaldoBBDD
-  End If
-
-  ' ' validamos la creacion de carpetas y archivos
-  If Not File.RealPath(respaldoBBDD &/ ".gitignore") Then
-    Copy "./gitignore_BD" To respaldoBBDD &/ ".gitignore"
   End If
 
   Dim archivos As String[] = [
@@ -95,9 +86,6 @@ Public Sub Form_Open()
     Endif
   Next
 
-  ' ' Cargar la ruta guardada al abrir el formulario RESOLVER
-  ' Form_RespaldoSql.txtDestino.Text = Settings["RutaDestino"]
-
   ' Inicializamos los contadores de minutos y segundos
   horas = 0
   minutos = 0
@@ -107,17 +95,6 @@ Public Sub Form_Open()
   Timer1.Stop  ' No iniciamos el Timer de inmediato
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
-
-  ' Crear una nueva conexión
-  conector = New Connection
-
-  ' Configurar los parámetros de conexión
-  conector.Type = "sqlite"
-  conector.Host = User.Home & "/Dropbox/gbBaseDatos"
-  conector.Name = "db_tex.sqlite"
-
-  ' Intentar abrir la conexión
-  Try conector.Open()
 
   pBash = TerminalView1.Exec(["/usr/bin/bash"])
   TerminalView1.SetFocus()
@@ -344,15 +321,10 @@ End
 
 Public Sub Form_Close()
 
-  ' Dim fecha As String
-  ' fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-
-  ' Desconectar la base de datos
-  If conector Then
-    conector.Close()
-    conector = Null
+  If meConn Then
+    meConn.Close()
+    meConn = Null
   Endif
-
   ' Guardar el último archivo abierto
   MS.SetLastListToSettings()
   Try pBash.Kill
@@ -361,7 +333,6 @@ Public Sub Form_Close()
   Wait 1
   Try WebViewGPT.Stop
   Wait 0.1
-  ' Cerrar la aplicación
   Quit
 
 End
@@ -646,10 +617,9 @@ End
 
 Public Sub Menu11_Click()'cerrar el programa
 
-  ' Desconectar la base de datos
-  If conector Then
-    conector.Close()
-    conector = Null
+  If meConn Then
+    meConn.Close()
+    meConn = Null
   Endif
 
   ' Guardar el último archivo abierto
@@ -661,6 +631,7 @@ Public Sub Menu11_Click()'cerrar el programa
   Try WebViewGPT.Stop
   Wait 0.1
   ' Cerrar la aplicación
+  Form_ConectarBBDD.Close
   Quit
 
 End
@@ -773,12 +744,6 @@ End
 
 Public Sub menuAbrir_Click()'abrir un libro
 
-  ' Verifica si el TextBox está vacío o es Null
-  If IsNull(TextBoxRuta.Text) Or TextBoxRuta.Text = "" Then
-    Message.Warning("Debe seleccionar una base de datos para trabajar.")
-    Return ' Detiene la ejecución
-  End If
-
   Dialog.Title = "Seleccionar archivo"
   Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
   Dialog.AutoExt = True
@@ -869,7 +834,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = conector.Exec(comando)
+  Contenido = meConn.Exec(comando)
   If Contenido.Count > 0 Then
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
@@ -996,12 +961,6 @@ End
 ' me que muestra los ultimos archivos abiertos
 Public Sub mnuLast_Click()
 
-  ' Verifica si el TextBox está vacío o es Null
-  If IsNull(TextBoxRuta.Text) Or TextBoxRuta.Text = "" Then
-    Message.Warning("Debe seleccionar una base de datos para trabajar.")
-    Return ' Detiene la ejecución
-  End If
-
   Dim iIndex As Integer
 
   If MS.ShortMatrix.Find(Last.Text) <> -1 Then
@@ -1055,7 +1014,7 @@ Public Sub mnuLast_Click()
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = conector.Exec(comando)
+  Contenido = meConn.Exec(comando)
 
   If Contenido.Count > 0 Then
     BtnNuevoMeta.Enabled = False
@@ -1411,10 +1370,14 @@ End
 Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
 
   Dim i As Integer
+  Dim Comando As String
 
   VGridGLO.Clear()
 
-  Contenido = conector.Exec("select * from glosarios ORDER BY id DESC")
+  ' Contenido = meConn.Exec("select * from glosarios ORDER BY id DESC")
+
+  Comando = "select * from glosarios ORDER BY id DESC"
+  Contenido = meConn.Exec(Comando)
 
   'diseñamos el tableview
   VGridGLO.Columns.Count = 11
@@ -1481,7 +1444,7 @@ End
 
 Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
 
-  Mostrar_ListaGLO
+  ' Mostrar_ListaGLO
   BtnNuevoGlo.Enabled = True
   BtnEliminarGlo.Enabled = False
   BtnRefrescarGlo.Enabled = False
@@ -1686,7 +1649,7 @@ Public Sub BtnNuevoGlo_Click()
   txtTMPglo.SetFocus()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM glosarios LIMIT 1")
+  Contenido = meConn.Exec("SELECT MAX(id) FROM glosarios LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -1697,7 +1660,7 @@ Public Sub BtnNuevoGlo_Click()
   txtIDglosario.Text = Idn
   txtCLAVEglo.Text = "@glo" & Idn & "-" 'colocamos el prefijo de la clave bib
   txtARCHIVO.Text = "," & BaseName & "," 'colocamos el key con el nombre del archivo
-  Mostrar_ListaGLO
+  ' Mostrar_ListaGLO
 
 End
 
@@ -1710,13 +1673,13 @@ Public Sub BtnEliminarGlo_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from glosarios where id=" & txtIDglosario.Text)
+    Contenido = meConn.Exec("delete from glosarios where id=" & txtIDglosario.Text)
   Endif
 
   LimpiarCamposGLO  'Limpiamos los campos
 
   ' VListaGLO.Clear
-  Mostrar_ListaGLO
+  ' Mostrar_ListaGLO
 
   BtnEliminarGlo.Enabled = False
   btnGuardarCambiosGlo.Enabled = False
@@ -1752,7 +1715,7 @@ Public Sub btnGuardarGlo_Click()
   eliminarBlancosGLO
 
   Comando = "SELECT * FROM glosarios WHERE text = '" & tituloEscapado & "'"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -1760,14 +1723,14 @@ Public Sub btnGuardarGlo_Click()
     Return ' Salir de la función si el título ya existe
   Endif
 
-  Contenido = conector.Create("glosarios")
+  Contenido = meConn.Create("glosarios")
 
   guardarCamposGLO
 
   Contenido.Update
   Message.Info("Nueva entrada guardada.")
 
-  Mostrar_ListaGLO ' Refrescamos la lista de entradas
+  ' Mostrar_ListaGLO ' Refrescamos la lista de entradas
   LimpiarCamposGLO ' Limpiamos los campos
 
   btnGuardarCambiosGlo.Enabled = False
@@ -1789,12 +1752,12 @@ Public Sub btnGuardarCambiosGlo_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosGLO
 
-  Contenido = conector.Edit("glosarios", "id=" & txtIDglosario.Text)
+  Contenido = meConn.Edit("glosarios", "id=" & txtIDglosario.Text)
   guardarCamposGLO
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
 
-  Mostrar_ListaGLO
+  ' Mostrar_ListaGLO
   LimpiarCamposGLO 'limpiar campos
 
 End
@@ -1834,7 +1797,7 @@ Public Sub btnBuscarNombreGLO_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -1883,7 +1846,7 @@ Public Sub btnBuscarTextoGLO_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -1932,7 +1895,7 @@ Public Sub btnBuscarClaveGLO_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -2089,7 +2052,7 @@ Public Sub BtnNuevoMeta_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM metadatos LIMIT 1")
+  Contenido = meConn.Exec("SELECT MAX(id) FROM metadatos LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -2110,7 +2073,7 @@ Public Sub btnGuardarMeta_Click()
 
   eliminarBlancosMETA
 
-  Contenido = conector.Create("metadatos")
+  Contenido = meConn.Create("metadatos")
 
   guardarCamposMETA
 
@@ -2215,7 +2178,7 @@ Public Sub btnGuardarCambiosMeta_Click()
   eliminarBlancosMETA
 
   ' Cargar el registro a modificar
-  Contenido = conector.Edit("metadatos", "id=" & txtIDmetadatos.Text)
+  Contenido = meConn.Edit("metadatos", "id=" & txtIDmetadatos.Text)
 
   ' Guardar los campos modificados
   guardarCamposMETA()
@@ -2258,7 +2221,7 @@ Public Sub Mostrar_ListaBIB()
 
   VListaBIB.Clear()
 
-  Contenido = conector.Exec("select * from bibtex ORDER BY id DESC")
+  Contenido = meConn.Exec("select * from bibtex ORDER BY id DESC")
 
   'diseñamos el tableview
   VListaBIB.Columns.Count = 112
@@ -2736,7 +2699,7 @@ Public Sub BtnEliminarBib_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from bibtex where id=" & txtIDbibtex.Text)
+    Contenido = meConn.Exec("delete from bibtex where id=" & txtIDbibtex.Text)
   Endif
 
   LimpiarCamposBIB() ' Limpiamos los campos
@@ -2775,7 +2738,7 @@ Public Sub ObtenerNuevoId()
   Dim Idn As Integer
   Dim MaxId As Variant
 
-  MaxId = conector.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
+  MaxId = meConn.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
 
   If MaxId["MAX(id)"] = Null Then
     Idn = 0
@@ -2803,7 +2766,7 @@ Public Sub btnGuardarCambios_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosBIB()
 
-  Contenido = conector.Edit("bibtex", "id=" & txtIDbibtex.Text)
+  Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
   guardarCampos()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -2842,7 +2805,7 @@ Public Sub btnGuardar_Click()
     Return ' Salir de la función si contiene alguno de estos caracteres
   Endif
 
-  Busqueda = conector.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+  Busqueda = meConn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -2861,7 +2824,7 @@ Public Sub btnGuardar_Click()
   Else If cbTYPEentrada.Text = "thesis" And cbType.Text = "" Then
     Message.Error("No ha seleccionado el tipo de tesis.")
   Else
-    Contenido = conector.Create("bibtex")
+    Contenido = meConn.Create("bibtex")
     guardarCampos()
     Contenido.Update
     Message.Info("Nueva entrada guardada.")
@@ -2891,7 +2854,7 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
   Endif
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLE.Text, "'", "''") & "%' ORDER BY id DESC;"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3061,7 +3024,7 @@ Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
     Return
   Endif
 
-  Busqueda = conector.Exec("SELECT * FROM  bibtex WHERE etiquetas=&1 COLLATE NOCASE", txtETIQ.Text)
+  Busqueda = meConn.Exec("SELECT * FROM  bibtex WHERE etiquetas=&1 COLLATE NOCASE", txtETIQ.Text)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3215,7 +3178,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
   Endif
 
   Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHOR.Text, "'", "''") & "%' ORDER BY id DESC;"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3370,7 +3333,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
   Endif
 
   Comando = "SELECT * FROM bibtex WHERE editor LIKE '%" & Replace(txtEDITOR.Text, "'", "''") & "%' ORDER BY id DESC;"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -3691,7 +3654,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
 
   Comando = "SELECT * FROM bibtex WHERE keywords LIKE '%" & BaseName & "," & "%' ORDER BY author ASC"
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -4066,7 +4029,7 @@ Public Sub btnAgregarCitationKey_Click()
   eliminarBlancosBIB()
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & tituloEscapado & "%'"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Obtén el texto del TextBox de origen
   If Trim(txtAUTHOR.Text) = "" Then
@@ -4377,7 +4340,7 @@ Public Sub BtnBuscarClave_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -4536,7 +4499,7 @@ Public Sub btnGuardarIGUAL_Click()
     Return ' Salir de la función si contiene alguno de estos caracteres
   Endif
 
-  Busqueda = conector.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+  Busqueda = meConn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
 
   If Busqueda.Count > 0 Then
     idExistente = False
@@ -4551,7 +4514,7 @@ Public Sub btnGuardarIGUAL_Click()
     Else
 
       ' Contenido = Conn.Create("bibtex")
-      Contenido = conector.Create("bibtex")
+      Contenido = meConn.Create("bibtex")
 
       guardarCampos()
 
@@ -4578,7 +4541,7 @@ Public Sub mostrarIguales()
   Dim rowIndex As Integer
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTITLE.Text & "%';"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -4876,7 +4839,7 @@ Public Sub BtnBuscarBookTitle_Click()
   Endif
 
   Comando = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & Replace(txtBOOKTITLE.Text, "'", "''") & "%' ORDER BY id DESC;"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -5021,52 +4984,6 @@ Public Sub BtnBuscarBookTitle_Click()
 
 End
 
-Public Sub menuRespaldoBDD_Click()
-
-  ' Dim usuario As String = Trim(txtGIT.Text)
-  ' Dim IdGitHub As String = "git@github.com:" & usuario & "/db_tex.git"
-  '
-  ' TabPanel1.Index = 0
-  '
-  ' ' Verificar si el nombre de usuario está vacío
-  ' If usuario = "" Then
-  '   Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
-  '   Return
-  ' End If
-  '
-  ' ' Desconectar la base de datos
-  ' If conector Then
-  '   conector.Close()
-  '   conector = Null
-  ' Endif
-  '
-  ' Dim fecha As String = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-  '
-  ' TabPanel1.Index = 0
-  ' TerminalView1.Input("clear" & "\n")
-  ' TerminalView1.Input("cd " & User.Home & "/Dropbox/gbBaseDatos" & "\n")
-  ' TerminalView1.Input("git remote remove origin" & "\n")
-  ' TerminalView1.Input("git remote add origin " & IdGitHub & "\n") '
-  ' TerminalView1.Input("git add ." & "\n")
-  ' TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
-  ' TerminalView1.Input("git push --set-upstream origin main" & "\n")
-  ' TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n")
-  ' TerminalView1.SetFocus()
-  ' TerminalView1.Refresh()
-  '
-  ' ' abrimos nuevamente la conexión a la base de datos
-  ' conector = New Connection
-  ' conector.Type = "sqlite"
-  ' conector.Host = User.Home & "/Dropbox/gbBaseDatos"
-  ' conector.Name = "db_tex.sqlite"
-  '
-  ' Try conector.Open()
-  ' If Error Then
-  '   Message.Error("No se pudo volver a conectar a la base de datos.")
-  ' Endif
-
-End
-
 Public Sub txtABSTRACT_DblClick()
 
   Form_TXTextendido.OriginalTextBox = txtABSTRACT
@@ -5189,7 +5106,7 @@ Public Sub BtnBuscarJournal_Click()
   Endif
 
   Comando = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & Replace(txtJOURNALTITLE.Text, "'", "''") & "%' ORDER BY id DESC;"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -5348,7 +5265,7 @@ Public Sub btnBuscarFiltroGlosario_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
   VGridGLO.Clear()
@@ -5396,7 +5313,7 @@ End
 
 Public Sub Mostrar_Lista_Tareas() ' Función para popular la lista de eventos
 
-  Contenido = conector.Exec("select id, completado, titulo from tareas")
+  Contenido = meConn.Exec("select id, completado, titulo from tareas")
   If Contenido.Available Then
     VLista.Clear
     While (Contenido.Available)
@@ -5426,7 +5343,7 @@ Public Sub mnuBorrarTODOS_Click()
 
   If Message.Question("¿Está seguro de que desea borrar todos los ítems marcados como completados?") = 1 Then
     ' Conn.Exec("delete from tareas where completado=True")
-    conector.Exec("delete from tareas where completado=True")
+    meConn.Exec("delete from tareas where completado=True")
     'Limpiamos lista y recargamos
     VLista.Clear
     Mostrar_Lista_Tareas
@@ -5444,7 +5361,7 @@ Public Sub Chequear_Realizados()
 
   mnuBorrarTODOS.Enabled = False
 
-  Contenido = conector.Exec("select completado from tareas where completado=true")
+  Contenido = meConn.Exec("select completado from tareas where completado=true")
   If Contenido.Available = ""
     Return
   Else
@@ -5461,7 +5378,7 @@ Public Sub mnMarcarIncompleto_Click()
     Return
   Endif
 
-  Contenido = conector.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido = meConn.Edit("tareas", "id=" & Item_Seleccionado)
   Contenido!completado = False
   contenido.Update
 
@@ -5479,7 +5396,7 @@ Public Sub mnMarcarCompletado_Click()
     Return
   Endif
 
-  Contenido = conector.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido = meConn.Edit("tareas", "id=" & Item_Seleccionado)
   Contenido!completado = True
   contenido.Update
 
@@ -5498,7 +5415,7 @@ Public Sub menuBORRARtarea_Click()
   Endif
 
   If Message.Question("¿Está seguro de que desea borrar este ítem?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from tareas where id=" & Item_Seleccionado)
+    Contenido = meConn.Exec("delete from tareas where id=" & Item_Seleccionado)
   Endif
 
   If VLista.Count = 0 Then 'Si no hay ningún contenido en la lista limpiar ocultar el panel de contenido
@@ -5516,7 +5433,7 @@ End
 
 Public Sub VLista_Select() ' Función que nos muestra el contenido del título elegido en la ListView
 
-  Contenido = conector.Exec("select contenido from tareas where id = " & VLista.Item.key)
+  Contenido = meConn.Exec("select contenido from tareas where id = " & VLista.Item.key)
   If Contenido!contenido <> "" Then
     txtTAREAS.Text = Contenido!contenido
     txtTAREAS.pos = 0
@@ -5945,7 +5862,7 @@ Public Sub menuAbrirRevista_Click()
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = conector.Exec(Comando)
+  Contenido = meConn.Exec(Comando)
   If Contenido.Count > 0 Then
     BtnNuevoMeta.Enabled = False
     btnGuardarMeta.Enabled = False
@@ -6077,7 +5994,7 @@ Public Sub menuDisclaimer_Click()
   'condicional para revisar que exista la entrada de comentarios en la base de datos
   ' Exportamos los registros seleccionados
   buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(TextBox1.Text) & "%'"
-  Resultado = conector.Exec(buscar)
+  Resultado = meConn.Exec(buscar)
 
   If Resultado.Available Then
     TabPanel1.Index = 0
@@ -6118,7 +6035,7 @@ Public Sub BtnNuevoComenta_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  ContenidoComenta = conector.Exec("SELECT MAX(id) FROM comentarios LIMIT 1")
+  ContenidoComenta = meConn.Exec("SELECT MAX(id) FROM comentarios LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If ContenidoComenta["MAX(id)"] = Null Then
@@ -6137,7 +6054,7 @@ End
 
 Public Sub btnGuardarComenta_Click()
 
-  ContenidoComenta = conector.Create("comentarios")
+  ContenidoComenta = meConn.Create("comentarios")
 
   guardarCamposComenta()
   ContenidoComenta.Update
@@ -6152,7 +6069,7 @@ End
 
 Public Sub btnGuardarCambiosComenta_Click()
 
-  ContenidoComenta = conector.Edit("comentarios", "id=" & txtIdComenta.Text)
+  ContenidoComenta = meConn.Edit("comentarios", "id=" & txtIdComenta.Text)
 
   If ContenidoComenta.Available Then
     guardarCamposComenta()
@@ -6181,7 +6098,7 @@ Public Sub levantarComenta()
   Dim comandoComenta As String
 
   comandoComenta = "select * from comentarios where nombreArchivo = " & "'" & BaseName & ".tex'"
-  ContenidoComenta = conector.Exec(comandoComenta)
+  ContenidoComenta = meConn.Exec(comandoComenta)
   If ContenidoComenta.Count > 0 Then
     BtnNuevoComenta.Enabled = False
     btnGuardarComenta.Enabled = False
@@ -6358,7 +6275,7 @@ Public Sub guardarTipoDocumentoLibro()
   Dim existe As Boolean = False
 
   ' Verificar si el archivo ya existe en la tabla
-  consulta = conector.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+  consulta = meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
 
   ' Comprobar si la consulta devolvió algún resultado
   If consulta.Available Then
@@ -6367,7 +6284,7 @@ Public Sub guardarTipoDocumentoLibro()
 
   ' Solo si no existe, insertamos el nuevo registro
   If Not existe Then
-    Contenido = conector.Create("tipoDocumento")
+    Contenido = meConn.Create("tipoDocumento")
     Contenido!nombreArchivo = nombreArchivo
     Contenido!tipoDocumento = tdL
     Contenido.Update
@@ -6383,7 +6300,7 @@ Public Sub guardarTipoDocumentoRevista()
   Dim existe As Boolean = False
 
   ' Verificar si el archivo ya existe en la tabla
-  consulta = conector.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+  consulta = meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
 
   ' Comprobar si la consulta devolvió algún resultado
   If consulta.Available Then
@@ -6392,7 +6309,7 @@ Public Sub guardarTipoDocumentoRevista()
 
   ' Solo si no existe, insertamos el nuevo registro
   If Not existe Then
-    Contenido = conector.Create("tipoDocumento")
+    Contenido = meConn.Create("tipoDocumento")
     Contenido!nombreArchivo = nombreArchivo
     Contenido!tipoDocumento = tdR
     Contenido.Update
@@ -6408,7 +6325,7 @@ Public Sub guardarTipoDocumentoMonografia()
   Dim existe As Boolean = False
 
   ' Verificar si el archivo ya existe en la tabla
-  consulta = conector.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+  consulta = meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
 
   ' Comprobar si la consulta devolvió algún resultado
   If consulta.Available Then
@@ -6417,7 +6334,7 @@ Public Sub guardarTipoDocumentoMonografia()
 
   ' Solo si no existe, insertamos el nuevo registro
   If Not existe Then
-    Contenido = conector.Create("tipoDocumento")
+    Contenido = meConn.Create("tipoDocumento")
     Contenido!nombreArchivo = nombreArchivo
     Contenido!tipoDocumento = tdM
     Contenido.Update
@@ -6432,7 +6349,7 @@ Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
 
   ' Realizar la consulta
   Print "Buscando archivo: "; nombreArchivo
-  consulta = conector.Exec("SELECT tipoDocumento FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+  consulta = meConn.Exec("SELECT tipoDocumento FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
 
   ' Verificar si la consulta devolvió resultados
   If consulta.Fields Then
@@ -6534,26 +6451,6 @@ Public Sub habilitamosMonografia()
 
 End
 
-Public Sub btnGitHubPages_Click()
-
-  Message.Info("Esta función se está reescribiendo, por el momento a sido suspendida.", "Aceptar")
-
-  ' Message.Info("Esta función genera una copia de las páginas estáticas en una carpeta docs, el proceso de <em>deploy</em> en GitHub Pages se debe hacer desde GitHub.", "Aceptar")
-  '
-  ' 'forzamos el borrado de las páginas estáticas
-  ' Shell "rm -rf " & File.Dir(TextBox1.Text) &/ "docs"
-  ' Wait 0.2
-  '
-  ' 'creamos el directorio de las páginas estáticas
-  ' If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
-  '   Mkdir File.Dir(TextBox1.Text) & "/docs"
-  ' End If
-  '
-  ' 'copiamos los archivos
-  ' TerminalView1.Input("cp -rv " & File.Dir(TextBox1.Text) & "/html5/*" & " " & File.Dir(TextBox1.Text) & "/docs/" & "\n" & "clear" & "\n")
-
-End
-
 Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales
 
   Dim RecordBIB As String
@@ -6561,12 +6458,12 @@ Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales
   Dim RecordGLO As String
   Dim CountGLO As Integer
 
-  Contenido = conector.Exec("SELECT COUNT(*) FROM bibtex")
+  Contenido = meConn.Exec("SELECT COUNT(*) FROM bibtex")
   RecordBIB = Contenido[0]
   CountBIB = RecordBIB
   txtTOTALbib.Text = "<b>Total de referencias en la base de datos: " & CountBIB & "</b>"
 
-  Contenido = conector.Exec("SELECT COUNT(*) FROM glosarios")
+  Contenido = meConn.Exec("SELECT COUNT(*) FROM glosarios")
   RecordGLO = Contenido[0]
   CountGLO = RecordGLO
   lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
@@ -6579,7 +6476,7 @@ Public Sub contarEntradasBIByGLO()' mostramos las cantidades en el boton
   Dim Count2BIB As Integer
   Dim ContenidoBIB As Result
 
-  ContenidoBIB = conector.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
+  ContenidoBIB = meConn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
   Record2BIB = ContenidoBIB[0]
   Count2BIB = Record2BIB
   Button1.Text = "(" & Count2BIB & ")"
@@ -6588,7 +6485,7 @@ Public Sub contarEntradasBIByGLO()' mostramos las cantidades en el boton
   Dim Count2GLO As Integer
   Dim ContenidoGLO As Result
 
-  ContenidoGLO = conector.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  ContenidoGLO = meConn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
   Record2GLO = ContenidoGLO[0]
   Count2GLO = Record2GLO
   btnParcialGLO.Text = "(" & Count2GLO & ")"
@@ -6606,7 +6503,7 @@ Public Sub BtnBuscarAuthorRelacion_Click()
   Endif
 
   Comando = "SELECT * FROM bibtex WHERE author LIKE '%" & Replace(txtAUTHORrelacion.Text, "'", "''") & "%' ORDER BY id DESC;"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   tbRefDup.Visible = True
 
@@ -6755,7 +6652,7 @@ Public Sub Mostrar_ListaBIBrelacion()
 
   tbRefDup.Clear()
 
-  Contenido = conector.Exec("select * from bibtex ORDER BY id DESC")
+  Contenido = meConn.Exec("select * from bibtex ORDER BY id DESC")
 
   'diseñamos el tableview
   tbRefDup.Columns.Count = 110
@@ -7122,7 +7019,7 @@ Public Sub BtnBuscarTituloReferenciaRelacion_Click()
   Endif
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & Replace(txtTITLErelacion.Text, "'", "''") & "%' ORDER BY id DESC;"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   tbRefDup.Visible = True
 
@@ -7317,7 +7214,7 @@ Public Sub btnBuscarFiltro_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = meConn.Exec(Comando)
 
   ' Limpia el Grid antes de mostrar los resultados de la búsqueda
   VListaBIB.Clear()
@@ -7587,7 +7484,7 @@ Public Sub btnGuardarGHP_Click()
   fecha = Format(HOY, "yyyy-mm-dd")
   txtModDateHTML.Text = fecha
 
-  ContenidoGHP = conector.Create("githubpages")
+  ContenidoGHP = meConn.Create("githubpages")
 
   guardarCamposGHP()
   ContenidoGHP.Update
@@ -7637,7 +7534,7 @@ Public Sub btnGuardarCambiosGHP_Click()
   fecha = Format(HOY, "yyyy-mm-dd")
   txtModDateHTML.Text = fecha
 
-  ContenidoGHP = conector.Edit("githubpages", "id=" & txtIdGitHubPages.Text)
+  ContenidoGHP = meConn.Edit("githubpages", "id=" & txtIdGitHubPages.Text)
 
   If ContenidoGHP.Available Then
     guardarCamposGHP()
@@ -7656,7 +7553,7 @@ Public Sub levantarGitHubPages()
   Dim comandoGHP As String
 
   comandoGHP = "select * from githubpages where nombreArchivo = " & "'" & BaseName & ".tex'"
-  ContenidoGHP = conector.Exec(comandoGHP)
+  ContenidoGHP = meConn.Exec(comandoGHP)
   If ContenidoGHP.Count > 0 Then
     BtnNuevoGHP.Enabled = False
     btnGuardarGHP.Enabled = False
@@ -7771,7 +7668,7 @@ Public Sub BtnNuevoGHP_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  ContenidoGHP = conector.Exec("SELECT MAX(id) FROM githubpages LIMIT 1")
+  ContenidoGHP = meConn.Exec("SELECT MAX(id) FROM githubpages LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If ContenidoGHP["MAX(id)"] = Null Then
@@ -7811,7 +7708,7 @@ Public Sub btnNuevoCapitulo_Click()
   Dim Idc As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM separatas LIMIT 1")
+  Contenido = meConn.Exec("SELECT MAX(id) FROM separatas LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -7841,7 +7738,7 @@ Public Sub MostrarListaCapNuevo() 'Función que rellena el GridView
 
   Dim i As Integer
 
-  Contenido = conector.Exec("SELECT * FROM separatas WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
+  Contenido = meConn.Exec("SELECT * FROM separatas WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
 
   'diseñamos el tableview
   tblArticulos.Columns.Count = 5
@@ -7874,7 +7771,7 @@ End
 
 Public Sub btnGuardarCapitulo_Click()
 
-  Contenido = conector.Create("separatas")
+  Contenido = meConn.Create("separatas")
 
   guardarCamposCapituloNuevo
 
@@ -7923,7 +7820,7 @@ Public Sub btnBorrarCapitulo_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from separatas where id=" & txtIdCapituloNuevo.Text)
+    Contenido = meConn.Exec("delete from separatas where id=" & txtIdCapituloNuevo.Text)
   Endif
 
   LimpiarCamposCapituloNuevo  'Limpiamos los campos
@@ -7941,7 +7838,7 @@ End
 
 Public Sub btnGuardarCambiosCapitulo_Click()
 
-  Contenido = conector.Edit("separatas", "id=" & txtIdCapituloNuevo.Text)
+  Contenido = meConn.Edit("separatas", "id=" & txtIdCapituloNuevo.Text)
   guardarCamposCapituloNuevo()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -7966,7 +7863,7 @@ Public Sub btnNuevoAutor_Click()
   Dim Ida As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM autoresGHP LIMIT 1")
+  Contenido = meConn.Exec("SELECT MAX(id) FROM autoresGHP LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -7991,7 +7888,7 @@ End
 
 Public Sub btnGuardarAutor_Click()
 
-  Contenido = conector.Create("autoresGHP")
+  Contenido = meConn.Create("autoresGHP")
 
   guardarCamposAutoresNuevo
 
@@ -8012,7 +7909,7 @@ End
 
 Public Sub btnGuardarCambiosAutor_Click()
 
-  Contenido = conector.Edit("autoresGHP", "id=" & txtIdAutorNuevo.Text)
+  Contenido = meConn.Edit("autoresGHP", "id=" & txtIdAutorNuevo.Text)
   guardarCamposAutoresNuevo()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -8038,7 +7935,7 @@ Public Sub btnBorrarAutor_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = conector.Exec("delete from autoresGHP where id=" & txtIdAutorNuevo.Text)
+    Contenido = meConn.Exec("delete from autoresGHP where id=" & txtIdAutorNuevo.Text)
   Endif
 
   LimpiarCamposAutorNuevo  'Limpiamos los campos
@@ -8068,7 +7965,7 @@ Public Sub MostrarListaAutoresNuevo() 'Función que rellena el GridView
 
   Dim i As Integer
 
-  Contenido = conector.Exec("SELECT * FROM autoresGHP WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
+  Contenido = meConn.Exec("SELECT * FROM autoresGHP WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
 
   'diseñamos el tableview
   tblAutores.Columns.Count = 4
@@ -8160,25 +8057,5 @@ Public Sub btnMostarNewsKeywords_Click()
 
   Form_TXTextendido.OriginalTextBox = txtKEYnewKEYhtml
   Form_TXTextendido.ShowModal
-
-End
-
-Public Sub btnSelecionarBBDD_Click()
-
-  Dim sArchivo As String
-
-  ' Abrir un cuadro de diálogo para seleccionar un archivo
-  Dialog.Title = "Seleccionar base de datos SQLite"
-  Dialog.Filter = ["*.sqlite", "Bases de datos SQLite (*.sqlite)"]
-  Dialog.Path = User.Home
-  If Dialog.OpenFile() Then Return
-
-  ' Mostrar la ruta seleccionada en el TextBox
-  sArchivo = Dialog.Path
-  TextBoxRuta.Text = sArchivo
-
-  Dim fecha As String
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-  Shell "cp " & sArchivo & " " & respaldoBBDD &/ fecha & "-" & "db_tex.sqlite" '&/ "db_tex.sqlite
 
 End
