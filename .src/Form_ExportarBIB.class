@@ -1,17 +1,8 @@
 ' Gambas class file
 
-Private meConn As New Connection
 Private Contenido As Result
 
 Public Sub Form_Open()
-
-  ' Usa la ruta seleccionada en el formulario de inicio
-  meConn.Type = "sqlite3"
-  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Open()
-  ' Configurar el modo de journal a DELETE
-  meConn.Exec("PRAGMA journal_mode=DELETE;")
 
 End
 
@@ -39,7 +30,7 @@ Public Sub btnExportarBIB_Click()
     buscar = "select * from bibtex where keywords like ',%" & txtFiltro.Text & ",%'"
 
     ' Exportar el registro seleccionado
-    Contenido = meConn.Exec(buscar)
+    Contenido = FMain.meConn.Exec(buscar)
 
     aFields.Clear
     For Each f In Contenido.Fields
@@ -140,20 +131,12 @@ End
 
 Public Sub btnCancelar_Click()
 
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
   Me.Close
 
 End
 
 Public Sub Form_Close()
 
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
   Me.Close
 
 End
