@@ -233,8 +233,11 @@ Public Sub btnSeleccion_Click()
     FMain.txt82_conference.Text = tituloSeleccionada
     FMain.txt82_conferenceVisual.Text = tituloVisualSeleccionada
     ' Cierra la conexión y el formulario actual
-    Mod_Conn.desconectar
-    Me.Close()
+    If meConn Then
+      meConn.Close()
+      meConn = Null
+    Endif
+    Me.Close
   Else
     Message.Warning("Debe seleccionar una conferencia.")
   Endif
