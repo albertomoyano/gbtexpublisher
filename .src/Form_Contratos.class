@@ -2,6 +2,13 @@
 
 Public Sub Form_Open()
 
+  btnNuevo.Enabled = True
+  btnBorrar.Enabled = False
+  btnGuardar.Enabled = False
+  btnGuardarCambios.Enabled = False
+  btnRefrescar.Enabled = False
+  btnExportarPDF.Enabled = False
+
 End
 
 Public Sub btnCerrar_Click()

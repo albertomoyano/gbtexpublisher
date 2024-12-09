@@ -11,10 +11,10 @@
   Margin = True
   Padding = 4
   { HBox2 HBox
-    Move(0,0,450,72)
+    Move(0,0,450,36)
     AutoResize = True
     { PictureBox1 PictureBox
-      Move(0,0,72,72)
+      Move(0,0,36,36)
       Picture = Picture.Load("iconos/info.svg")
       Stretch = True
       Alignment = Align.Center

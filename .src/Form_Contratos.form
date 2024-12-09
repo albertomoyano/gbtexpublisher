@@ -11,13 +11,13 @@
   Padding = 4
   { HBox1 HBox
     Move(9,9,927,36)
-    { tbNuevo Button
+    { btnNuevo Button
       Move(0,0,36,36)
       NoTabFocus = True
       ToolTip = ("Agregar entrada")
       Picture = Picture["iconos/+nuevo.svg"]
     }
-    { tbBorrar Button
+    { btnBorrar Button
       Move(36,0,36,36)
       NoTabFocus = True
       ToolTip = ("Eliminar entrada")
@@ -29,13 +29,13 @@
       ToolTip = ("Guardar entrada")
       Picture = Picture["iconos/guardar.svg"]
     }
-    { btnGuardarMod Button
+    { btnGuardarCambios Button
       Move(108,0,36,36)
       NoTabFocus = True
       ToolTip = ("Guardar cambios")
       Picture = Picture["iconos/guardarComo.svg"]
     }
-    { !btnRefresh Button
+    { !btnRefrescar Button
       Move(144,0,36,36)
       #Public = True
       Visible = False
@@ -43,13 +43,7 @@
       ToolTip = ("Refrescar datos")
       Picture = Picture["iconos/refrescar.svg"]
     }
-    { BtnExportarDOCX Button
-      Move(180,0,36,36)
-      NoTabFocus = True
-      ToolTip = ("Exportar la nota como archivo de texto plano")
-      Picture = Picture["iconos/ms-office.svg"]
-    }
-    { BtnExportarPDF Button
+    { btnExportarPDF Button
       Move(216,0,36,36)
       NoTabFocus = True
       ToolTip = ("Exportar la nota como archivo de texto plano")
@@ -94,7 +88,7 @@
       Alignment = Align.Right
       Text = ("Título  ")
     }
-    { !txAsunto TextBox
+    { !txtTitulo TextBox
       Move(153,0,189,36)
       #Public = True
       NoTabFocus = True
@@ -109,11 +103,10 @@
       Alignment = Align.Right
       Text = ("Tipo de obra  ")
     }
-    { !txAsunto10 TextBox
+    { cmbObra ComboBox
       Move(153,0,189,36)
-      #Public = True
-      NoTabFocus = True
       Expand = True
+      ReadOnly = True
     }
   }
   { HBox2 HBox
@@ -124,26 +117,48 @@
       Alignment = Align.Right
       Text = ("Nombre y apellido  ")
     }
-    { !txAsunto2 TextBox
+    { !txtNombre TextBox
       Move(153,0,189,36)
       #Public = True
       NoTabFocus = True
       Expand = True
+    }
+    { Label2 Label
+      Move(342,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("DI  ")
+    }
+    { !txtDI TextBox
+      Move(495,0,198,36)
+      #Public = True
+      NoTabFocus = True
     }
   }
   { HBox3 HBox
     Move(9,324,765,36)
-    { Label2 Label
+    { Label13 Label
       Move(0,0,144,36)
       NoTabFocus = True
       Alignment = Align.Right
-      Text = ("DNI  ")
+      Text = ("Email  ")
     }
-    { !txAsunto3 TextBox
+    { !txtEmail TextBox
       Move(153,0,189,36)
       #Public = True
       NoTabFocus = True
       Expand = True
+    }
+    { Label12 Label
+      Move(396,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Teléfono  ")
+    }
+    { !txtTelefono TextBox
+      Move(549,0,198,36)
+      #Public = True
+      NoTabFocus = True
     }
   }
   { HBox4 HBox
@@ -154,7 +169,7 @@
       Alignment = Align.Right
       Text = ("Domicilio  ")
     }
-    { !txAsunto4 TextBox
+    { !txtDomicilio TextBox
       Move(153,0,189,36)
       #Public = True
       NoTabFocus = True
@@ -169,11 +184,10 @@
       Alignment = Align.Right
       Text = ("Licencia  ")
     }
-    { !txAsunto5 TextBox
-      Move(153,0,189,36)
-      #Public = True
-      NoTabFocus = True
+    { cmbLicencia ComboBox
+      Move(153,0,144,36)
       Expand = True
+      ReadOnly = True
     }
   }
   { HBox6 HBox
@@ -182,10 +196,22 @@
       Move(0,0,144,36)
       NoTabFocus = True
       Alignment = Align.Right
+      Text = ("Fecha de contrato  ")
+    }
+    { !txtFechaContrato TextBox
+      Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+    { Label11 Label
+      Move(342,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
       Text = ("Fecha de salida  ")
     }
-    { !txAsunto6 TextBox
-      Move(153,0,189,36)
+    { !txtFechaSalida TextBox
+      Move(495,0,189,36)
       #Public = True
       NoTabFocus = True
       Expand = True
@@ -197,10 +223,22 @@
       Move(0,0,144,36)
       NoTabFocus = True
       Alignment = Align.Right
-      Text = ("Cantidad  ")
+      Text = ("Copias impresas  ")
     }
-    { !txAsunto7 TextBox
+    { !txtCopias TextBox
       Move(153,0,189,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+    { Label14 Label
+      Move(342,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Regalías  ")
+    }
+    { !txtRegalias TextBox
+      Move(495,0,189,36)
       #Public = True
       NoTabFocus = True
       Expand = True
@@ -212,9 +250,9 @@
       Move(0,0,144,36)
       NoTabFocus = True
       Alignment = Align.Right
-      Text = ("Importe  ")
+      Text = ("Importe final  ")
     }
-    { !txAsunto8 TextBox
+    { !txtImporte TextBox
       Move(153,0,189,36)
       #Public = True
       NoTabFocus = True
@@ -229,11 +267,15 @@
       Alignment = Align.Right
       Text = ("Detalles técnicos  ")
     }
-    { !txAsunto9 TextBox
+    { !txtDetalles TextBox
       Move(153,0,189,36)
       #Public = True
       NoTabFocus = True
       Expand = True
+    }
+    { btnDetalles Button
+      Move(342,0,36,36)
+      Picture = Picture["iconos/schedule.svg"]
     }
   }
 }
