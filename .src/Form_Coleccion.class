@@ -1,17 +1,10 @@
 ' Gambas class file
 
-Private conector As Connection
 Private Contenido As Result
 Private Busqueda As Result
 Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
-
-  ' Desconectar la base de datos
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
 
   Me.Close()
 
@@ -19,27 +12,10 @@ End
 
 Public Sub Form_Open()
 
-  ' Crear una nueva conexión
-  conector = New Connection
+  btnGuardarColeccion.Visible = False
+  btnGuardarCambiosColeccion.Visible = False
 
-  ' Configurar los parámetros de conexión
-  conector.Type = "sqlite3"
-  conector.Host = File.Dir(FMain.TextBoxRuta.Text)
-  conector.Name = "gbtexpublisher.sqlite"
-
-  ' Intentar abrir la conexión
-  Try conector.Open()
-
-  If Error Then
-    conector = Null
-    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>gbtexpublisher.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
-  Else
-
-    btnGuardarColeccion.Visible = False
-    btnGuardarCambiosColeccion.Visible = False
-
-    Mostrar_Lista()
-  Endif
+  Mostrar_Lista()
 
 End
 
@@ -51,7 +27,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridColeccion.Clear()
 
-  Contenido = conector.Exec("select * from coleccion ORDER BY id DESC")
+  Contenido = FMain.meConn.Exec("select * from coleccion ORDER BY id DESC")
 
   'diseñamos el tableview
   GridColeccion.Columns.Count = 4
@@ -77,7 +53,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = conector.Exec("SELECT COUNT(*) FROM coleccion")
+  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM coleccion")
 
   Record = Contenido[0]
   Count = Record
@@ -95,7 +71,7 @@ Public Sub BtnNuevoColeccion_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM coleccion LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM coleccion LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -131,7 +107,7 @@ Public Sub btnGuardarColeccion_Click()
   eliminarBlancos
 
   Comando = "SELECT * FROM coleccion WHERE coleccion = '" & tituloEscapado & "'"
-  Busqueda = conector.Exec(Comando)
+  Busqueda = FMain.meConn.Exec(Comando)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -139,7 +115,7 @@ Public Sub btnGuardarColeccion_Click()
     Return ' Salir de la función si el título ya existe
   Endif
 
-  Contenido = conector.Create("coleccion")
+  Contenido = FMain.meConn.Create("coleccion")
 
   guardarCampos
 
@@ -208,7 +184,7 @@ Public Sub btnGuardarCambiosColeccion_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = conector.Edit("coleccion", "id=" & txtID.Text)
+  Contenido = FMain.meConn.Edit("coleccion", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -229,8 +205,6 @@ Public Sub btnSeleccion_Click()
     FMain.txtCOLECCION.Text = coleccionSeleccionada
     FMain.txtDirection.Text = direccionSeleccionada
     FMain.txtFORMATO.Text = formatoSeleccionada
-    ' Cierra la base y el formulario actual.
-    conector.Close
     Me.Close()
   Else
     Message.Warning("Debe seleccionar una colección.")
@@ -239,12 +213,6 @@ Public Sub btnSeleccion_Click()
 End
 
 Public Sub Form_Close()
-
-  ' Desconectar la base de datos
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
 
   Me.Close()
 
