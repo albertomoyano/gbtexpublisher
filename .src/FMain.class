@@ -892,7 +892,8 @@ Public Sub menuAbrir_Click()'abrir un libro
     cbPDFx.Text = Contenido!pdfx_46
     txtVersionId.Text = Contenido!pdfversionid_47
     txt48_abstract.Text = Contenido!abstract_48
-    txtDescriptionHTML.Text = txt48_abstract.Text' textbox de GHP
+    txt48b_abstract.Text = Contenido!abstract_48b
+    txt48c_abstract.Text = Contenido!abstract_48c
     txt49_imagentapa.Text = Contenido!imagentapa_49
     txt50_pagetotal.Text = Contenido!pagetotal_50
     txtCOLECCION.Text = Contenido!relation_51
@@ -1072,7 +1073,8 @@ Public Sub mnuLast_Click()
     cbPDFx.Text = Contenido!pdfx_46
     txtVersionId.Text = Contenido!pdfversionid_47
     txt48_abstract.Text = Contenido!abstract_48
-    txtDescriptionHTML.Text = txt48_abstract.Text' textbox de GHP
+    txt48b_abstract.Text = Contenido!abstract_48b
+    txt48c_abstract.Text = Contenido!abstract_48c
     txt49_imagentapa.Text = Contenido!imagentapa_49
     txt50_pagetotal.Text = Contenido!pagetotal_50
     txtCOLECCION.Text = Contenido!relation_51
@@ -2142,6 +2144,8 @@ Public Sub guardarCamposMETA()
   Contenido!pdfx_46 = cbPDFx.Text
   Contenido!pdfversionid_47 = txtVersionId.Text
   Contenido!abstract_48 = txt48_abstract.Text
+  Contenido!abstract_48b = txt48b_abstract.Text
+  Contenido!abstract_48c = txt48c_abstract.Text
   Contenido!imagentapa_49 = txt49_imagentapa.Text
   Contenido!pagetotal_50 = txt50_pagetotal.Text
   Contenido!relation_51 = txtCOLECCION.Text
@@ -5920,7 +5924,8 @@ Public Sub menuAbrirRevista_Click()
     cbPDFx.Text = Contenido!pdfx_46
     txtVersionId.Text = Contenido!pdfversionid_47
     txt48_abstract.Text = Contenido!abstract_48
-    txtDescriptionHTML.Text = txt48_abstract.Text' textbox de GHP
+    txt48b_abstract.Text = Contenido!abstract_48b
+    txt48c_abstract.Text = Contenido!abstract_48c
     txt49_imagentapa.Text = Contenido!imagentapa_49
     txt50_pagetotal.Text = Contenido!pagetotal_50
     txtCOLECCION.Text = Contenido!relation_51
@@ -8254,5 +8259,40 @@ Public Sub tblColaboradores_RowClick(Row As Integer)
   txtColaborador.Enabled = True
   txtORCIDcolaborador.Enabled = True
   cmbRolColaborador.Enabled = True
+
+End
+
+Public Sub btnVerAbstract2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt48b_abstract
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerAbstract3_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt48c_abstract
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerClaves1_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt57_palabrasclave
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerClaves2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt57b_palabrasclave
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerClaves3_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt57c_palabrasclave
+  Form_TXTextendido.ShowModal()
 
 End

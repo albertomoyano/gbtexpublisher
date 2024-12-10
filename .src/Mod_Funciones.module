@@ -228,6 +228,8 @@ Public Sub limpiamosMetadatosLibrosRevistas()
   FMain.cbPDFx.Text = ""
   FMain.txtVersionId.Text = ""
   FMain.txt48_abstract.Text = ""
+  FMain.txt48b_abstract.Text = ""
+  FMain.txt48c_abstract.Text = ""
   FMain.txt49_imagentapa.Text = ""
   FMain.txt50_pagetotal.Text = ""
   FMain.txtCOLECCION.Text = ""

@@ -3117,45 +3117,107 @@
           }
         }
         { HBox109 HBox
-          MoveScaled(0,20,85,4)
+          MoveScaled(-4,20,89,4)
           { Label57 Label
-            MoveScaled(1,0,23,4)
+            MoveScaled(-7,0,23,4)
             Alignment = Align.Right
             Text = ("Palabras clave  ")
           }
           { !txt57_palabrasclave TextBox
-            MoveScaled(25,0,14,4)
+            MoveScaled(15,0,11,4)
             #Public = True
             Expand = True
             Placeholder = ("ESPAÑOL Palabras clave separadas por coma")
           }
+          { btnVerClaves1 Button
+            MoveScaled(26,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
           { Label227 Label
-            MoveScaled(39,0,10,4)
+            MoveScaled(33,0,10,4)
             AutoResize = True
             Alignment = Align.Right
             Text = ("  Keywords  ")
           }
-          { !txt57_palabrasclave2 TextBox
-            MoveScaled(49,0,14,4)
+          { !txt57b_palabrasclave TextBox
+            MoveScaled(43,0,10,4)
             #Public = True
             Expand = True
-            Placeholder = ("ESPAÑOL Palabras clave separadas por coma")
+            Placeholder = ("INGLÉS Palabras clave separadas por coma")
+          }
+          { btnVerClaves2 Button
+            MoveScaled(53,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
           }
           { Label228 Label
-            MoveScaled(63,0,10,4)
+            MoveScaled(57,0,10,4)
             AutoResize = True
             Alignment = Align.Right
             Text = ("  Palavras Chave  ")
           }
-          { !txt57_palabrasclave3 TextBox
-            MoveScaled(73,0,14,4)
+          { !txt57c_palabrasclave TextBox
+            MoveScaled(69,0,14,4)
             #Public = True
             Expand = True
-            Placeholder = ("ESPAÑOL Palabras clave separadas por coma")
+            Placeholder = ("PORTUGUES Palabras clave separadas por coma")
+          }
+          { btnVerClaves3 Button
+            MoveScaled(83,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+        }
+        { HBox146 HBox
+          MoveScaled(-12,24,99,4)
+          { Label94 Label
+            MoveScaled(1,0,23,4)
+            Alignment = Align.Right
+            Text = ("Resumen  ")
+          }
+          { !txt48_abstract TextBox
+            MoveScaled(25,0,12,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Resumen en segundo idioma")
+          }
+          { btnVerAbstract Button
+            MoveScaled(37,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label169 Label
+            MoveScaled(41,0,10,4)
+            AutoResize = True
+            Alignment = Align.Right
+            Text = ("  Summary  ")
+          }
+          { !txt48b_abstract TextBox
+            MoveScaled(52,0,12,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Resumen en inglés")
+          }
+          { btnVerAbstract2 Button
+            MoveScaled(64,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label170 Label
+            MoveScaled(69,0,10,4)
+            AutoResize = True
+            Alignment = Align.Right
+            Text = ("  Resumo  ")
+          }
+          { !txt48c_abstract TextBox
+            MoveScaled(80,0,12,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Resumen en portugués")
+          }
+          { btnVerAbstract3 Button
+            MoveScaled(92,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox111 HBox
-          MoveScaled(0,25,83,4)
+          MoveScaled(1,28,83,4)
           { Label50 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
@@ -3337,56 +3399,6 @@
             #Public = True
             Background = Color.Background
             ReadOnly = True
-          }
-        }
-        { HBox146 HBox
-          MoveScaled(-17,37,99,4)
-          { Label94 Label
-            MoveScaled(1,0,23,4)
-            Alignment = Align.Right
-            Text = ("Resumen  ")
-          }
-          { !txt48_abstract TextBox
-            MoveScaled(25,0,12,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("Resumen en segundo idioma")
-          }
-          { btnVerAbstract Button
-            MoveScaled(37,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
-          }
-          { Label169 Label
-            MoveScaled(41,0,10,4)
-            AutoResize = True
-            Alignment = Align.Right
-            Text = ("  Summary  ")
-          }
-          { !txt48_abstract2 TextBox
-            MoveScaled(52,0,12,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("Resumen en inglés")
-          }
-          { btnVerAbstract2 Button
-            MoveScaled(64,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
-          }
-          { Label170 Label
-            MoveScaled(69,0,10,4)
-            AutoResize = True
-            Alignment = Align.Right
-            Text = ("  Resumo  ")
-          }
-          { !txt48_abstract3 TextBox
-            MoveScaled(80,0,12,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("Resumen en portugués")
-          }
-          { btnVerAbstract3 Button
-            MoveScaled(92,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox126 HBox
