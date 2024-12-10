@@ -3121,7 +3121,7 @@
           { Label57 Label
             MoveScaled(1,0,23,4)
             Alignment = Align.Right
-            Text = ("Palabras claves  ")
+            Text = ("Palabras clave  ")
           }
           { !txt57_palabrasclave TextBox
             MoveScaled(25,0,14,4)
@@ -4584,105 +4584,6 @@
       Index = 0
     }
     Index = 4
-    Text = ("     Comentarios     ")
-    { HBox175 HBox
-      MoveScaled(2,0,95,4)
-      { BtnNuevoComenta Button
-        MoveScaled(0,0,4,4)
-        NoTabFocus = True
-        Picture = Picture["iconos/+nuevo.svg"]
-      }
-      { btnGuardarComenta Button
-        MoveScaled(4,0,4,4)
-        Enabled = False
-        Picture = Picture["iconos/guardar.svg"]
-      }
-      { btnGuardarCambiosComenta Button
-        MoveScaled(8,0,4,4)
-        Enabled = False
-        Picture = Picture["iconos/guardarComo.svg"]
-      }
-      { btnFont Button
-        MoveScaled(12,0,4,4)
-        ToolTip = ("Guardar modificaciones")
-        Picture = Picture["iconos/fonts.svg"]
-      }
-      { txtIdComenta TextBox
-        MoveScaled(24,0,6,4)
-        Visible = False
-        Enabled = False
-        NoTabFocus = True
-        ReadOnly = True
-      }
-      { Spring2 Spring
-        MoveScaled(36,0,5,4)
-      }
-      { lblAlta6 Label
-        MoveScaled(41,0,19,4)
-        AutoResize = True
-        Alignment = Align.Right
-        Text = ("    Comentarios para:  ")
-      }
-      { txtnombreArchivoComenta TextBox
-        MoveScaled(62,0,23,4)
-        Background = Color.Background
-        NoTabFocus = True
-        Expand = True
-        ReadOnly = True
-      }
-    }
-    { HBox176 HBox
-      MoveScaled(3,5,104,4)
-      { Label122 Label
-        MoveScaled(1,0,11,4)
-        Alignment = Align.Right
-        Text = ("Contacto  ")
-      }
-      { txtContacto TextBox
-        MoveScaled(12,0,23,4)
-        NoTabFocus = True
-        Expand = True
-      }
-    }
-    { HBox177 HBox
-      MoveScaled(3,9,104,4)
-      { Label123 Label
-        MoveScaled(1,0,11,4)
-        Alignment = Align.Right
-        Text = ("Correo  ")
-      }
-      { txtCorreo TextBox
-        MoveScaled(12,0,23,4)
-        NoTabFocus = True
-        Expand = True
-      }
-    }
-    { HBox179 HBox
-      MoveScaled(3,13,104,4)
-      { Label124 Label
-        MoveScaled(1,0,11,4)
-        Alignment = Align.Right
-        Text = ("Teléfono  ")
-      }
-      { txtTelefono TextBox
-        MoveScaled(12,0,23,4)
-        NoTabFocus = True
-        Expand = True
-      }
-    }
-    { Panel2 Panel
-      MoveScaled(4,22,32,24)
-      Expand = True
-      Arrangement = Arrange.Fill
-      Border = Border.Etched
-      { txtDisclaimer TextArea
-        MoveScaled(3,3,16,16)
-        Expand = True
-        Wrap = True
-        ScrollBar = Scroll.Vertical
-      }
-    }
-    Index = 5
     Text = ("GitHub Pages")
     { HBox181 HBox
       MoveScaled(1,1,118,4)
@@ -5024,24 +4925,25 @@
                 }
                 { cmbRolColaborador ComboBox
                   MoveScaled(23,0,20,4)
+                  Enabled = False
                   ReadOnly = True
                 }
-                { btnNuevoAutor2 Button
+                { btnNuevoColaborador Button
                   MoveScaled(44,0,4,4)
                   NoTabFocus = True
                   Picture = Picture["iconos/+nuevo.svg"]
                 }
-                { btnGuardarAutor2 Button
+                { btnGuardarColaborador Button
                   MoveScaled(48,0,4,4)
                   Enabled = False
                   Picture = Picture["iconos/guardar.svg"]
                 }
-                { btnGuardarCambiosAutor2 Button
+                { btnGuardarCambiosColaborador Button
                   MoveScaled(52,0,4,4)
                   Enabled = False
                   Picture = Picture["iconos/guardarComo.svg"]
                 }
-                { btnBorrarAutor2 Button
+                { btnBorrarColaborador Button
                   MoveScaled(57,0,4,4)
                   Enabled = False
                   NoTabFocus = True
@@ -5053,7 +4955,7 @@
                   Enabled = False
                   Alignment = Align.Normal
                 }
-                { txtIdColaborador TextLabel
+                { txtIdColaboradorNuevo TextLabel
                   MoveScaled(84,0,18,4)
                   Visible = False
                   Alignment = Align.Normal
@@ -5081,12 +4983,12 @@
                   Alignment = Align.Right
                   Text = ("    ORCID  ")
                 }
-                { btnBuscarORCID2 Button
+                { btnBuscarORCIDcolaborador Button
                   MoveScaled(80,0,4,4)
                   NoTabFocus = True
                   Picture = Picture["iconos/gitRemoto.svg"]
                 }
-                { !txtORCID2 TextBox
+                { !txtORCIDcolaborador TextBox
                   MoveScaled(85,0,22.5556,4)
                   #Public = True
                   Enabled = False
@@ -6086,6 +5988,105 @@
         }
       }
       Index = 0
+    }
+    Index = 5
+    Text = ("     Comentarios     ")
+    { HBox175 HBox
+      MoveScaled(2,0,95,4)
+      { BtnNuevoComenta Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        Picture = Picture["iconos/+nuevo.svg"]
+      }
+      { btnGuardarComenta Button
+        MoveScaled(4,0,4,4)
+        Enabled = False
+        Picture = Picture["iconos/guardar.svg"]
+      }
+      { btnGuardarCambiosComenta Button
+        MoveScaled(8,0,4,4)
+        Enabled = False
+        Picture = Picture["iconos/guardarComo.svg"]
+      }
+      { btnFont Button
+        MoveScaled(12,0,4,4)
+        ToolTip = ("Guardar modificaciones")
+        Picture = Picture["iconos/fonts.svg"]
+      }
+      { txtIdComenta TextBox
+        MoveScaled(24,0,6,4)
+        Visible = False
+        Enabled = False
+        NoTabFocus = True
+        ReadOnly = True
+      }
+      { Spring2 Spring
+        MoveScaled(36,0,5,4)
+      }
+      { lblAlta6 Label
+        MoveScaled(41,0,19,4)
+        AutoResize = True
+        Alignment = Align.Right
+        Text = ("    Comentarios para:  ")
+      }
+      { txtnombreArchivoComenta TextBox
+        MoveScaled(62,0,23,4)
+        Background = Color.Background
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
+      }
+    }
+    { HBox176 HBox
+      MoveScaled(3,5,104,4)
+      { Label122 Label
+        MoveScaled(1,0,11,4)
+        Alignment = Align.Right
+        Text = ("Contacto  ")
+      }
+      { txtContacto TextBox
+        MoveScaled(12,0,23,4)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox177 HBox
+      MoveScaled(3,9,104,4)
+      { Label123 Label
+        MoveScaled(1,0,11,4)
+        Alignment = Align.Right
+        Text = ("Correo  ")
+      }
+      { txtCorreo TextBox
+        MoveScaled(12,0,23,4)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox179 HBox
+      MoveScaled(3,13,104,4)
+      { Label124 Label
+        MoveScaled(1,0,11,4)
+        Alignment = Align.Right
+        Text = ("Teléfono  ")
+      }
+      { txtTelefono TextBox
+        MoveScaled(12,0,23,4)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { Panel2 Panel
+      MoveScaled(4,22,32,24)
+      Expand = True
+      Arrangement = Arrange.Fill
+      Border = Border.Etched
+      { txtDisclaimer TextArea
+        MoveScaled(3,3,16,16)
+        Expand = True
+        Wrap = True
+        ScrollBar = Scroll.Vertical
+      }
     }
     Index = 0
   }

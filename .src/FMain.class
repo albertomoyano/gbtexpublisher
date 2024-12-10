@@ -290,6 +290,20 @@ Public Sub Form_Open()
   cmbRolAutores.Add("Coordinadora")
   cmbRolAutores.Add("Coordinadores")
   cmbRolAutores.Add("Coordinadoras")
+  ' colaboradores
+  cmbRolColaborador.Add("")
+  cmbRolColaborador.Add("Autor de capítulo")
+  cmbRolColaborador.Add("Prólogo")
+  cmbRolColaborador.Add("Introducción")
+  cmbRolColaborador.Add("Prefacio")
+  cmbRolColaborador.Add("Epílogo")
+  cmbRolColaborador.Add("Postscriptum")
+  cmbRolColaborador.Add("Editor")
+  cmbRolColaborador.Add("Ilustrador")
+  cmbRolColaborador.Add("Fotógrafo")
+  cmbRolColaborador.Add("Traductor")
+  cmbRolColaborador.Add("Asesor")
+  cmbRolColaborador.Add("Productor")
 
   ' comienza bibtex
   BtnEliminarBib.Enabled = False
@@ -812,6 +826,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   levantarGitHubPages()
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+  MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
 
   contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
@@ -1109,6 +1124,7 @@ Public Sub mnuLast_Click()
   levantarComenta()'levantamos los datos de comentarios
   levantarGitHubPages()  ' levantamos los datos de githubpages
   MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+  MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
   LimpiarCamposBIB()' Limpiamos los campos de las entradas bib
 
@@ -8051,5 +8067,145 @@ End
 Public Sub Menu5_Click()
 
   Form_Contratos.ShowModal()
+
+End
+
+Public Sub btnBuscarORCIDcolaborador_Click()
+
+  Dim url As String
+
+  url = txtORCIDcolaborador.Text
+
+  If url <> "" Then Shell "xdg-open " & url
+
+End
+
+Public Sub btnNuevoColaborador_Click()
+
+  LimpiarCamposColaboradoresNuevo  'Limpiamos todos los campos
+
+  Dim Ida As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = meConn.Exec("SELECT MAX(id) FROM colaboradoresGHP LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Ida = 0
+  Else
+    Ida = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txtIdColaboradorNuevo.Text = Ida
+  txtnombreColaboradorGHP.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
+  MostrarListaColaboradoresNuevo()
+
+  btnNuevoColaborador.Enabled = False
+  btnGuardarColaborador.Enabled = True
+  btnGuardarCambiosColaborador.Enabled = False
+  btnBorrarColaborador.Enabled = False
+  cmbRolColaborador.Enabled = True
+  txtColaborador.Enabled = True
+  txtORCIDcolaborador.Enabled = True
+
+End
+
+Public Sub LimpiarCamposColaboradoresNuevo()
+
+  txtIdColaboradorNuevo.Text = ""
+  txtnombreColaboradorGHP.Text = ""
+  txtColaborador.Text = ""
+  txtORCIDcolaborador.Text = ""
+  cmbRolColaborador.Text = ""
+
+End
+
+Public Sub MostrarListaColaboradoresNuevo() 'Función que rellena el GridView
+
+  tblColaboradores.Clear()
+
+  Dim i As Integer
+
+  Contenido = meConn.Exec("SELECT * FROM colaboradoresGHP WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
+
+  'diseñamos el tableview
+  tblColaboradores.Columns.Count = 5
+  tblColaboradores.Header = True
+  tblColaboradores.Columns[0].Title = "Id"
+  tblColaboradores.Columns[0].Width = 0
+  tblColaboradores.Columns[1].Title = "Nombre de archivo"
+  tblColaboradores.Columns[1].Width = 0
+  tblColaboradores.Columns[2].Title = "Autor/a (nombre completo)"
+  tblColaboradores.Columns[2].Width = 1000
+  tblColaboradores.Columns[3].Title = "orcid"
+  tblColaboradores.Columns[3].Width = 0
+  tblColaboradores.Columns[4].Title = "rol"
+  tblColaboradores.Columns[4].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tblColaboradores.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tblColaboradores[i, 0].Text = Contenido!id
+    tblColaboradores[i, 1].Text = Contenido!nombreArchivo
+    tblColaboradores[i, 2].Text = Contenido!autorNombreCompleto' este campo se llama igual en ambas tablas
+    tblColaboradores[i, 3].Text = Contenido!orcid
+    tblColaboradores[i, 4].Text = Contenido!rol
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub guardarCamposColaboradoresNuevo()
+
+  Contenido!id = txtIdColaboradorNuevo.Text
+  Contenido!nombreArchivo = txtnombreColaboradorGHP.Text
+  Contenido!autorNombreCompleto = txtColaborador.Text
+  Contenido!orcid = txtORCIDcolaborador.Text
+  Contenido!rol = cmbRolColaborador.Text
+
+End
+
+Public Sub btnGuardarColaborador_Click()
+
+  Contenido = meConn.Create("colaboradoresGHP")
+
+  guardarCamposColaboradoresNuevo
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  LimpiarCamposColaboradoresNuevo ' Limpiamos los campos
+  MostrarListaColaboradoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoColaborador.Enabled = True
+  btnGuardarColaborador.Enabled = False
+  btnGuardarCambiosColaborador.Enabled = False
+  btnBorrarColaborador.Enabled = False
+  txtColaborador.Enabled = False
+  txtORCIDcolaborador.Enabled = False
+  cmbRolColaborador.Enabled = False
+
+End
+
+Public Sub btnGuardarCambiosColaborador_Click()
+
+  Contenido = meConn.Edit("colaboradoresGHP", "id=" & txtIdColaboradorNuevo.Text)
+  guardarCamposColaboradoresNuevo()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  LimpiarCamposColaboradoresNuevo' Limpiamos los campos
+  MostrarListaColaboradoresNuevo' Refrescamos la lista de entradas
+
+  btnNuevoColaborador.Enabled = True
+  btnGuardarColaborador.Enabled = False
+  btnGuardarCambiosColaborador.Enabled = False
+  btnBorrarColaborador.Enabled = False
+  txtColaborador.Enabled = False
+  txtORCIDcolaborador.Enabled = False
+  cmbRolColaborador.Enabled = False
 
 End
