@@ -7888,6 +7888,8 @@ Public Sub btnNuevoAutor_Click()
   txtAutor.Enabled = True
   txtORCID.Enabled = True
 
+  txtAutor.SetFocus
+
 End
 
 Public Sub btnGuardarAutor_Click()
@@ -8109,6 +8111,8 @@ Public Sub btnNuevoColaborador_Click()
   txtColaborador.Enabled = True
   txtORCIDcolaborador.Enabled = True
 
+  txtColaborador.SetFocus
+
 End
 
 Public Sub LimpiarCamposColaboradoresNuevo()
@@ -8207,5 +8211,48 @@ Public Sub btnGuardarCambiosColaborador_Click()
   txtColaborador.Enabled = False
   txtORCIDcolaborador.Enabled = False
   cmbRolColaborador.Enabled = False
+
+End
+
+Public Sub btnBorrarColaborador_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIdColaboradorNuevo.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = meConn.Exec("delete from colaboradoresGHP where id=" & txtIdColaboradorNuevo.Text)
+  Endif
+
+  LimpiarCamposColaboradoresNuevo' Limpiamos los campos
+  MostrarListaColaboradoresNuevo' Refrescamos la lista de entradas
+
+  btnNuevoColaborador.Enabled = True
+  btnGuardarColaborador.Enabled = False
+  btnGuardarCambiosColaborador.Enabled = False
+  btnBorrarColaborador.Enabled = False
+  txtColaborador.Enabled = False
+  txtORCIDcolaborador.Enabled = False
+  cmbRolColaborador.Enabled = False
+
+End
+
+Public Sub tblColaboradores_RowClick(Row As Integer)
+
+  txtIdColaboradorNuevo.Text = tblColaboradores[Row, 0].Text
+  txtnombreColaboradorGHP.Text = tblColaboradores[Row, 1].Text
+  txtColaborador.Text = tblColaboradores[Row, 2].Text
+  txtORCIDcolaborador.Text = tblColaboradores[Row, 3].Text
+  cmbRolColaborador.Text = tblColaboradores[Row, 4].Text
+
+  btnNuevoColaborador.Enabled = False
+  btnGuardarColaborador.Enabled = False
+  btnGuardarCambiosColaborador.Enabled = True
+  btnBorrarColaborador.Enabled = True
+  txtColaborador.Enabled = True
+  txtORCIDcolaborador.Enabled = True
+  cmbRolColaborador.Enabled = True
 
 End

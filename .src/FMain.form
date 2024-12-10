@@ -196,25 +196,25 @@
     { Menu79 Menu
     }
     { menuLTX Menu
-      Text = ("Compilar PDF complementarios")
+      Text = ("Generar PDF complementarios")
       Enabled = False
       { menuPDFweb Menu
-        Text = ("Generar PDF para la web")
+        Text = ("Compilar PDF para la web")
         Picture = Picture["iconos/acroread.svg"]
         Enabled = False
       }
       { menuOT Menu
-        Text = ("Orden de trabajo para el taller de imprenta")
+        Text = ("Compilar PDF de Orden de trabajo para imprenta")
         Picture = Picture["iconos/acroread.svg"]
         Enabled = False
       }
       { menuDisclaimer Menu
-        Text = ("Generar PDF de comentarios para corrección")
+        Text = ("Compilar PDF de comentarios para corrección")
         Picture = Picture["iconos/acroread.svg"]
         Enabled = False
       }
       { menuCatalogo Menu
-        Text = ("Generar PDF del catálogo/gacetilla de prensa")
+        Text = ("Compilar PDF del catálogo/gacetilla de prensa")
         Picture = Picture["iconos/acroread.svg"]
         Enabled = False
       }
@@ -4862,6 +4862,7 @@
                 { txtIdAutorNuevo TextLabel
                   MoveScaled(84,0,18,4)
                   Visible = False
+                  Enabled = False
                   Alignment = Align.Normal
                 }
                 { Spring10 Spring
@@ -4958,6 +4959,7 @@
                 { txtIdColaboradorNuevo TextLabel
                   MoveScaled(84,0,18,4)
                   Visible = False
+                  Enabled = False
                   Alignment = Align.Normal
                 }
                 { Spring11 Spring

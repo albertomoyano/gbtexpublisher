@@ -1,6 +1,5 @@
 ' Gambas class file
 
-Private conector As Connection
 Private Contenido As Result
 Private filePathPDF As String
 Private filePathTEX As String
@@ -12,49 +11,27 @@ Public Sub Form_Open()
 
   Splitter1.Layout = [1, 5]
   ' Crear una nueva conexión
-  conector = New Connection
 
-  ' Configurar los parámetros de conexión
-  conector.Type = "sqlite3"
-  conector.Host = File.Dir(FMain.TextBoxRuta.Text)
-  conector.Name = "gbtexpublisher.sqlite"
+  filePathPDF = File.Dir(FMain.TextBox1.Text) & "/pdf/" & NombreArchivoPDF
+  filePathTEX = File.Dir(FMain.TextBox1.Text) & NombreArchivoTEX
+  filePathFiles = File.Dir(FMain.TextBox1.Text) & "/files/"
 
-  ' Intentar abrir la conexión
-  Try conector.Open()
-
-  If Error Then
-    conector = Null
-    Message.Error("Error al conectar con la base de datos. Asegúrese de que el archivo con la base de datos se encuentre disponible. La misma debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+  If File.RealPath(filePathPDF) <> "" Then
+    ' Si el archivo existe, continuar con la apertura del formulario
+    verTipoDocumento
+    levantarOT()
+    levantarOTmetadatos()
+    'aquí van las funciones del formulario
+    '2) llenar los textbox básicos
+    '
   Else
-
-    filePathPDF = File.Dir(FMain.TextBox1.Text) & "/pdf/" & NombreArchivoPDF
-    filePathTEX = File.Dir(FMain.TextBox1.Text) & NombreArchivoTEX
-    filePathFiles = File.Dir(FMain.TextBox1.Text) & "/files/"
-
-    If File.RealPath(filePathPDF) <> "" Then
-      ' Si el archivo existe, continuar con la apertura del formulario
-      verTipoDocumento
-      levantarOT()
-      levantarOTmetadatos()
-      'aquí van las funciones del formulario
-      '2) llenar los textbox básicos
-      '
-    Else
-      Message.Error("El archivo <b>" & NombreArchivoPDF & "</b> no existe.")
-      Me.Close
-    Endif
-
+    Message.Error("El archivo <b>" & NombreArchivoPDF & "</b> no existe.")
+    Me.Close
   Endif
 
 End
 
 Public Sub btnSalirOT_Click()
-
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
 
   Me.Close()
 
@@ -73,7 +50,7 @@ Public Sub verTipoDocumento()
 
   ' Realizar la consulta
   comando = "SELECT * FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivoTEX & "'"
-  Contenido = conector.Exec(comando)
+  Contenido = FMain.meConn.Exec(comando)
 
   ' Verificar si la consulta devolvió resultados
   If Contenido.Available Then
@@ -120,7 +97,7 @@ Public Sub btnNuevaOT_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM ot LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM ot LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -139,7 +116,7 @@ End
 
 Public Sub btnGuardarOT_Click()
 
-  Contenido = conector.Create("ot")
+  Contenido = FMain.meConn.Create("ot")
 
   guardarCamposOT()
   Contenido.Update
@@ -154,7 +131,7 @@ End
 
 Public Sub btnGuardarCambiosOT_Click()
 
-  Contenido = conector.Edit("ot", "id=" & txtIDot.Text)
+  Contenido = FMain.meConn.Edit("ot", "id=" & txtIDot.Text)
 
   If Contenido.Available Then
     guardarCamposOT()
@@ -172,7 +149,7 @@ Public Sub levantarOT()
   Dim comandoOT As String
 
   comandoOT = "select * from ot where nombreArchivo = '" & nombreArchivoTEX & "'"
-  Contenido = conector.Exec(comandoOT)
+  Contenido = FMain.meConn.Exec(comandoOT)
   If Contenido.Count > 0 Then
     btnNuevaOT.Enabled = False
     btnGuardarOT.Enabled = False
@@ -214,7 +191,7 @@ Public Sub levantarOTmetadatos()
   Dim Himagen As String
 
   comandoOTmetadatos = "select * from metadatos where nombreArchivo = '" & nombreArchivoTEX & "'"
-  Contenido = conector.Exec(comandoOTmetadatos)
+  Contenido = FMain.meConn.Exec(comandoOTmetadatos)
   If Contenido.Count > 0 Then
     txtAutorOT.Text = Contenido!pdfauthor_05
     txtTituloOT.Text = Contenido!bookTitle_84
@@ -279,11 +256,11 @@ Public Sub Export2OrdenTaller()
   Dim ContenidoComenta As Result
 
   buscarOT = "select * from ot where nombreArchivo like '%" & NombreArchivoTEX & "%'"
-  Contenido = conector.Exec(buscarOT)
+  Contenido = FMain.meConn.Exec(buscarOT)
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & NombreArchivoTEX & "%'"
-  ContenidoMeta = conector.Exec(buscarMeta)
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
   buscarComenta = "select * from comentarios where nombreArchivo like '%" & NombreArchivoTEX & "%'"
-  ContenidoComenta = conector.Exec(buscarComenta)
+  ContenidoComenta = FMain.meConn.Exec(buscarComenta)
 
   aFields.Clear
   For Each f In Contenido.Fields
