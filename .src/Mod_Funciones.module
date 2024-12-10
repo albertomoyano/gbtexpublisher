@@ -239,6 +239,8 @@ Public Sub limpiamosMetadatosLibrosRevistas()
   FMain.txt55_ilustrador.Text = ""
   FMain.txt56_resumen.Text = ""
   FMain.txt57_palabrasclave.Text = ""
+  FMain.txt57b_palabrasclave.Text = ""
+  FMain.txt57c_palabrasclave.Text = ""
   FMain.txt58_papertitletwo.Text = ""
   FMain.txt59_artrecibido.Text = ""
   FMain.txt60_artaceptado.Text = ""

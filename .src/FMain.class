@@ -903,7 +903,8 @@ Public Sub menuAbrir_Click()'abrir un libro
     txt55_ilustrador.Text = Contenido!ilustrador_55
     txt56_resumen.Text = Contenido!resumen_56
     txt57_palabrasclave.Text = Contenido!palabrasclave_57
-    txtKEYhtml.Text = txt57_palabrasclave.Text' textbox de GHP
+    txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
+    txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
     txt58_papertitletwo.Text = Contenido!papertitletwo_58
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
@@ -1084,7 +1085,8 @@ Public Sub mnuLast_Click()
     txt55_ilustrador.Text = Contenido!ilustrador_55
     txt56_resumen.Text = Contenido!resumen_56
     txt57_palabrasclave.Text = Contenido!palabrasclave_57
-    txtKEYhtml.Text = txt57_palabrasclave.Text' textbox de GHP
+    txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
+    txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
     txt58_papertitletwo.Text = Contenido!papertitletwo_58
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
@@ -2155,6 +2157,8 @@ Public Sub guardarCamposMETA()
   Contenido!ilustrador_55 = txt55_ilustrador.Text
   Contenido!resumen_56 = txt56_resumen.Text
   Contenido!palabrasclave_57 = txt57_palabrasclave.Text
+  Contenido!palabrasclave_57b = txt57b_palabrasclave.Text
+  Contenido!palabrasclave_57c = txt57c_palabrasclave.Text
   Contenido!papertitletwo_58 = txt58_papertitletwo.Text
   Contenido!artrecibido_59 = txt59_artrecibido.Text
   Contenido!artaceptado_60 = txt60_artaceptado.Text
@@ -5935,7 +5939,8 @@ Public Sub menuAbrirRevista_Click()
     txt55_ilustrador.Text = Contenido!ilustrador_55
     txt56_resumen.Text = Contenido!resumen_56
     txt57_palabrasclave.Text = Contenido!palabrasclave_57
-    txtKEYhtml.Text = txt57_palabrasclave.Text' textbox de GHP
+    txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
+    txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
     txt58_papertitletwo.Text = Contenido!papertitletwo_58
     txt59_artrecibido.Text = Contenido!artrecibido_59
     txt60_artaceptado.Text = Contenido!artaceptado_60
@@ -8059,8 +8064,7 @@ End
 
 Public Sub btnCopiarKeywords_Click()
 
-  ' Copia el texto de TextBox1 a TextBox2
-  txtKEYnewKEYhtml.Text = txtKEYhtml.Text
+  txtKEYnewKEYhtml.Text = txt57_palabrasclave.Text & ", " & txt57b_palabrasclave.Text & ", " & txt57c_palabrasclave.Text
 
 End
 
