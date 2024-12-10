@@ -1655,13 +1655,13 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"citation_author\" content=\" --autor-- \"/>" & gb.NewLine
     ' van todos los resumenes en los 3 idiomas
     s &= "\t <meta name=\"citation_abstract\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_abstract\" xml:lang=\"en\" content=\" --resumen ingles-- \"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_abstract\" xml:lang=\"pt\" content=\" --resumen portugues-- \"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_abstract\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_abstract\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[92]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_doi\" content=\" --doi-- \"/>" & gb.NewLine
     ' va un loop con todas las keywords en los 3 idiomas
     s &= "\t <meta name=\"citation_keywords\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[57]] & "\"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_keywords\" xml:lang=\"en\" content=\" --claves en ingles-- \"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_keywords\" xml:lang=\"pt\" content=\" --claves en portugues-- \"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_keywords\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[93]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_keywords\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[94]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_fulltext_html_url\" content=\" --url del libro en linea-- \"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_pdf_url\" content=\" --url del pdf-- \"/>" & gb.NewLine
@@ -1695,14 +1695,14 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"dc.subject\" xml:lang=\"en\" content=\" --palabras clave en ingles-- \">" & gb.NewLine
     s &= "\t <meta name=\"dc.subject\" xml:lang=\"pt\" content=\" --palabras clave en portugues-- \">" & gb.NewLine
     s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"en\" content=\" --palabras clave en ingles-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"pt\" content=\" --palabras clave en portugues-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[93]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[94]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.description\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.description\" xml:lang=\"en\" content=\" --resumen en ingles-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.description\" xml:lang=\"pt\" content=\" --resumen en portugues-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[92]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"en\" content=\" --resumen en ingles-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"pt\" content=\" --resumen en portugues-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[92]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.description.tableofcontents\" xml:lang=\"es\" content=\" --sumario-- \">" & gb.NewLine
     s &= "\t <meta name=\"dc.identifier\" content=\"ISBN\">" & gb.NewLine
     s &= "\t <meta name=\"dc.identifier.isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\">" & gb.NewLine
