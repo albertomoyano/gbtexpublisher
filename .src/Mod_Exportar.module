@@ -1685,8 +1685,8 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"dc.date.created\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[2]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.date.datesubmitted\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[3]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.date.modified\" scheme=\"ISO8601\" content=\" --fecha modificacion-- \"/>" & gb.NewLine
-    s &= "\t <meta name=\"dc.source\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.source.uri\" content=\"" & ContenidoMeta[bFields[28]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.source\" content=\"" & ContenidoMeta[bFields[28]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.source.uri\" content=\"" & ContenidoMeta[bFields[41]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.type\" content=\"Text\">" & gb.NewLine
     s &= "\t <meta name=\"dc.format\" content=\"application/pdf\">" & gb.NewLine
 
@@ -1706,7 +1706,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[92]] & "\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.description.tableofcontents\" xml:lang=\"es\" content=\" --sumario-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description.tableofcontents\" xml:lang=\"es\" content=\"" & ContenidoGHP[gFields[13]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.identifier\" content=\"ISBN\">" & gb.NewLine
     s &= "\t <meta name=\"dc.identifier.isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.rights\" content=\"" & ContenidoMeta[bFields[15]] & "\">" & gb.NewLine

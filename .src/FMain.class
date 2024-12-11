@@ -7530,6 +7530,7 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!txtPieHTML = txtPieHTML.Text
   ContenidoGHP!txtCabeceraHTML = txtCabeceraHTML.Text
   ContenidoGHP!rolHTML = cmbRolAutores.Text
+  ContenidoGHP!txtSumarioHTML = txtSumarioHTML.Text
 
   BtnNuevoGHP.Enabled = False
   btnGuardarGHP.Enabled = False
@@ -7584,6 +7585,7 @@ Public Sub levantarGitHubPages()
     txtPieHTML.Text = ContenidoGHP!txtPieHTML
     txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
     cmbRolAutores.Text = ContenidoGHP!rolHTML
+    txtSumarioHTML.Text = ContenidoGHP!txtSumarioHTML
   Else
     txtnombreArchivoGHP.Text = ""
     txtCreateDateHTML.Text = ""
@@ -7597,6 +7599,7 @@ Public Sub levantarGitHubPages()
     txtPieHTML.Text = ""
     txtCabeceraHTML.Text = ""
     cmbRolAutores.Text = ""
+    txtSumarioHTML.Text = ""
     BtnNuevoGHP.Enabled = True
     btnGuardarGHP.Enabled = False
     btnGuardarCambiosGHP.Enabled = False
