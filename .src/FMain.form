@@ -3370,8 +3370,22 @@
             Placeholder = ("Total de páginas del documento")
           }
         }
+        { HBox124 HBox
+          MoveScaled(0,33,78,4)
+          { Label67 Label
+            MoveScaled(0,0,23,4)
+            Alignment = Align.Right
+            Text = ("Editorial  ")
+          }
+          { !txtPublisher28 TextBox
+            MoveScaled(27,0,16,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Nombre de la editorial")
+          }
+        }
         { HBox150 HBox
-          MoveScaled(1,33,78,4)
+          MoveScaled(1,37,78,4)
           { btnMostrarColeccion Button
             MoveScaled(0,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
@@ -4455,20 +4469,6 @@
           Placeholder = ("Apunta a la URL completa del documento")
         }
       }
-      { HBox124 HBox
-        MoveScaled(0,169,78,4)
-        { Label67 Label
-          MoveScaled(0,0,23,4)
-          Alignment = Align.Right
-          Text = ("Editorial  ")
-        }
-        { !txtPublisher2 TextBox
-          MoveScaled(27,0,16,4)
-          #Public = True
-          Expand = True
-          Placeholder = ("Nombre de la editorial")
-        }
-      }
       { HBox125 HBox
         MoveScaled(0,173,78,4)
         { Label68 Label
@@ -5133,46 +5133,6 @@
         Padding = 4
         Border = False
         ScrollBar = Scroll.Vertical
-        { HBox178 HBox
-          MoveScaled(0,0,106,4)
-          { btnRefrescarMetadatos Button
-            MoveScaled(1,0,4,4)
-            ToolTip = ("Refrescar listado de la base de datos")
-            Picture = Picture["iconos/refrescar.svg"]
-          }
-          { Label221 Label
-            MoveScaled(4,0,19,4)
-            Alignment = Align.Right
-          }
-          { Label155 Label
-            MoveScaled(26,0,23,4)
-            Font = Font["Bold"]
-            Expand = True
-            AutoResize = True
-            Text = ("Metadatos Generales  ")
-          }
-        }
-        { HBox224 HBox
-          MoveScaled(0,4,106,4)
-          { Label177 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("news_keywords  ")
-          }
-          { btnCopiarKeywords Button
-            MoveScaled(23,0,4,4)
-            Picture = Picture["iconos/exportar.svg"]
-          }
-          { !txtKEYnewKEYhtml TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-          { btnMostarNewsKeywords Button
-            MoveScaled(82,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
-          }
-        }
         { HBox196 HBox
           MoveScaled(0,8,106,4)
           { Label222 Label

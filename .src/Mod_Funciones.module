@@ -207,7 +207,7 @@ Public Sub limpiamosMetadatosLibrosRevistas()
   FMain.txtContactURL.Text = ""
   FMain.txtDocumentId.Text = ""
   FMain.txtPublication.Text = ""
-  FMain.txtPublisher.Text = ""
+  FMain.txtPublisher28.Text = ""
   FMain.cmbType.Text = ""
   FMain.cbPubType.Text = ""
   FMain.txtVolNum.Text = ""

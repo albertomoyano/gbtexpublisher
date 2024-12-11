@@ -871,7 +871,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     txtContactURL.Text = Contenido!pdfcontacturl_25
     txtDocumentId.Text = Contenido!pdfdocumentid_26
     txtPublication.Text = Contenido!pdfpublication_27
-    txtPublisher.Text = Contenido!pdfpublisher_28
+    txtPublisher28.Text = Contenido!pdfpublisher_28
     cmbType.Text = Contenido!pdftype_29
     cbPubType.Text = Contenido!pdfpubtype_30
     txtVolNum.Text = Contenido!pdfvolumenum_31
@@ -1053,7 +1053,7 @@ Public Sub mnuLast_Click()
     txtContactURL.Text = Contenido!pdfcontacturl_25
     txtDocumentId.Text = Contenido!pdfdocumentid_26
     txtPublication.Text = Contenido!pdfpublication_27
-    txtPublisher.Text = Contenido!pdfpublisher_28
+    txtPublisher28.Text = Contenido!pdfpublisher_28
     cmbType.Text = Contenido!pdftype_29
     cbPubType.Text = Contenido!pdfpubtype_30
     txtVolNum.Text = Contenido!pdfvolumenum_31
@@ -2125,7 +2125,7 @@ Public Sub guardarCamposMETA()
   Contenido!pdfcontacturl_25 = txtContactURL.Text
   Contenido!pdfdocumentid_26 = txtDocumentId.Text
   Contenido!pdfpublication_27 = txtPublication.Text
-  Contenido!pdfpublisher_28 = txtPublisher.Text
+  Contenido!pdfpublisher_28 = txtPublisher28.Text
   Contenido!pdftype_29 = cmbType.Text
   Contenido!pdfpubtype_30 = cbPubType.Text
   Contenido!pdfvolumenum_31 = txtVolNum.Text
@@ -5907,7 +5907,7 @@ Public Sub menuAbrirRevista_Click()
     txtContactURL.Text = Contenido!pdfcontacturl_25
     txtDocumentId.Text = Contenido!pdfdocumentid_26
     txtPublication.Text = Contenido!pdfpublication_27
-    txtPublisher.Text = Contenido!pdfpublisher_28
+    txtPublisher28.Text = Contenido!pdfpublisher_28
     cmbType.Text = Contenido!pdftype_29
     cbPubType.Text = Contenido!pdfpubtype_30
     txtVolNum.Text = Contenido!pdfvolumenum_31
@@ -7530,7 +7530,6 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!txtPieHTML = txtPieHTML.Text
   ContenidoGHP!txtCabeceraHTML = txtCabeceraHTML.Text
   ContenidoGHP!rolHTML = cmbRolAutores.Text
-  ContenidoGHP!txtKEYnewKEYhtml = txtKEYnewKEYhtml.Text
 
   BtnNuevoGHP.Enabled = False
   btnGuardarGHP.Enabled = False
@@ -7585,7 +7584,6 @@ Public Sub levantarGitHubPages()
     txtPieHTML.Text = ContenidoGHP!txtPieHTML
     txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
     cmbRolAutores.Text = ContenidoGHP!rolHTML
-    txtKEYnewKEYhtml.Text = ContenidoGHP!txtKEYnewKEYhtml
   Else
     txtnombreArchivoGHP.Text = ""
     txtCreateDateHTML.Text = ""
@@ -7599,7 +7597,6 @@ Public Sub levantarGitHubPages()
     txtPieHTML.Text = ""
     txtCabeceraHTML.Text = ""
     cmbRolAutores.Text = ""
-    txtKEYnewKEYhtml.Text = ""
     BtnNuevoGHP.Enabled = True
     btnGuardarGHP.Enabled = False
     btnGuardarCambiosGHP.Enabled = False
@@ -8059,19 +8056,6 @@ Public Sub btnBuscarORCID_Click()
   url = txtORCID.Text
 
   If url <> "" Then Shell "xdg-open " & url
-
-End
-
-Public Sub btnCopiarKeywords_Click()
-
-  txtKEYnewKEYhtml.Text = txt57_palabrasclave.Text & ", " & txt57b_palabrasclave.Text & ", " & txt57c_palabrasclave.Text
-
-End
-
-Public Sub btnMostarNewsKeywords_Click()
-
-  Form_TXTextendido.OriginalTextBox = txtKEYnewKEYhtml
-  Form_TXTextendido.ShowModal
 
 End
 

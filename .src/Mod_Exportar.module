@@ -1638,11 +1638,13 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"revisit-after\" content=\"7 days\">" & gb.NewLine
     s &= "\t <meta name=\"github:creator\" content=\"albertomoyano\">" & gb.NewLine
     s &= "\t <meta name=\"github:language\" content=\"LaTeX\">" & gb.NewLine
-    s &= "\t <meta name=\"author\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
+    s &= "\t <meta name=\"author\" content=\"Alberto Moyano\">" & gb.NewLine
     ' va un loop que carga las palabras clave de a una
     s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"subject\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"abstract\" content=\"" & ContenidoMeta[bFields[48]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
-    s &= "\t <title>Ediciones Imago Mundi | " & ContenidoMeta[bFields[84]] & "</title>" & gb.NewLine
+    s &= "\t <title>" & ContenidoMeta[bFields[28]] & " | " & ContenidoMeta[bFields[84]] & "</title>" & gb.NewLine
     '
     s &= "\t <!-- Google Fonts -->" & gb.NewLine
     s &= "\t <link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap\" rel=\"stylesheet\">" & gb.NewLine
@@ -1665,35 +1667,36 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"citation_fulltext_html_url\" content=\" --url del libro en linea-- \"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_pdf_url\" content=\" --url del pdf-- \"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_publisher\" content=\" --editorial-- \"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_volume\" content=\" --volumen-- \"/>" & gb.NewLine
-    s &= "\t <meta name=\"citation_issue\" content=\" --colección-- \"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_publisher\" content=\"" & ContenidoMeta[bFields[28]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_volume\" content=\"" & ContenidoMeta[bFields[31]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_issue\" content=\"" & ContenidoMeta[bFields[32]] & "\"/>" & gb.NewLine
     '
     s &= "<!-- Dublin Core (DC)  -->" & gb.NewLine
     s &= "<link rel=\"schema.dc\" href=\"http://purl.org/dc/elements/1.1/\">" & gb.NewLine
     s &= "<!-- Autor principal  -->" & gb.NewLine
-    ' va un loop si hay más autores
-    s &= "\t <meta name=\"dc.author\" content=\" --autor/editor/compilador-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.creator\" content=\" --autor/editor/compilador-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.creator.orcid\" content=\" --orcid del autor/editor/compilador-- \">" & gb.NewLine
-    ' va un loop con los colaboradores
-    s &= "\t <meta name=\"dc.contributor\" content=\" --contribucion , p.e. María González (Prólogo)-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.contributor.orcid\" content=\" --orcid del contribuidor, p.e. María González (Prólogo)-- \">" & gb.NewLine
-
+    ' va un loop si hay más compiladores o editores
+    s &= "\t <meta name=\"dc.creator\" content=\" --autores-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.creator.orcid\" content=\" --orcid del autor-- \">" & gb.NewLine
+    ' va un loop con los autores
+    s &= "\t <meta name=\"dc.contributor\" content=\" --contribucion , p.e. María González-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.contributor.orcid\" content=\" --orcid del contribuidor, p.e. María González-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description\" content=\" --nombre del autor más el rol entre parentesis-- \">" & gb.NewLine
+    '
     s &= "\t <meta name=\"dc.date.created\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[2]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.date.datesubmitted\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[3]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.date.modified\" scheme=\"ISO8601\" content=\" --fecha modificacion-- \"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.source\" content=\"Ediciones Imago Mundi\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.source.uri\" content=\"https://www.edicionesimagomundi.com/\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.type\" content=\"text.book\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.format\" content=\"text/html\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.source.uri\" content=\"" & ContenidoMeta[bFields[28]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.type\" content=\"Text\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.format\" content=\"application/pdf\">" & gb.NewLine
+
     s &= "\t <meta name=\"dc.title\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.title.alternative\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.title.alternative\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
     ' va todas las keywords en los 3 idiomas
     s &= "\t <meta name=\"dc.subject\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.subject\" xml:lang=\"en\" content=\" --palabras clave en ingles-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.subject\" xml:lang=\"pt\" content=\" --palabras clave en portugues-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[93]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[94]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[93]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[94]] & "\">" & gb.NewLine
@@ -1708,13 +1711,15 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"dc.identifier.isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.rights\" content=\"" & ContenidoMeta[bFields[15]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.rights.uri\" content=\"" & ContenidoMeta[bFields[16]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.coverage\" content=\" --ubicación de la imagen de tapa-- \">" & gb.NewLine
+    s &= "\t <meta name=\"dc.relation\" content=\" --relation-- \">" & gb.NewLine
 
     s &= "<!-- Open Graph para Redes Sociales  -->" & gb.NewLine
     s &= "\t <meta property=\"og:title\" content=\"" & ContenidoMeta[bFields[84]] & "\">" & gb.NewLine
     s &= "\t <meta property=\"og:description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
     s &= "\t <meta property=\"og:url\" content=\" --url del pdf-- \">" & gb.NewLine
     s &= "\t <meta property=\"og:type\" content=\"book\">" & gb.NewLine
-    s &= "\t <meta property=\"og:site_name\" content=\" --publisher-- \">" & gb.NewLine
+    s &= "\t <meta property=\"og:site_name\" content=\"" & ContenidoMeta[bFields[28]] & "\">" & gb.NewLine
 
     s &= "<!-- Twitter Card  -->" & gb.NewLine
     s &= "\t <meta name=\"twitter:title\" content=\"" & ContenidoMeta[bFields[84]] & "\">" & gb.NewLine
