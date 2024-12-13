@@ -3103,17 +3103,51 @@
           }
         }
         { HBox108 HBox
-          MoveScaled(0,16,78,4)
+          MoveScaled(-9,16,94,4)
           { Label45 Label
             MoveScaled(0,0,23,4)
             Alignment = Align.Right
-            Text = ("Asunto/Subject  ")
+            Text = ("Asunto  ")
           }
           { !txtSubjet TextBox
-            MoveScaled(27,0,16,4)
+            MoveScaled(23,0,9,4)
             #Public = True
             Expand = True
             Placeholder = ("Tema principal del libro")
+          }
+          { btnVerAsunto1 Button
+            MoveScaled(32,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label155 Label
+            MoveScaled(37,0,14,4)
+            Alignment = Align.Right
+            Text = ("Subject  ")
+          }
+          { !txtSubjet2 TextBox
+            MoveScaled(51,0,7,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Tema principal del libro")
+          }
+          { btnVerAsunto2 Button
+            MoveScaled(59,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
+          }
+          { Label159 Label
+            MoveScaled(64,0,14,4)
+            Alignment = Align.Right
+            Text = ("   Assunto  ")
+          }
+          { !txtSubjet3 TextBox
+            MoveScaled(78,0,9,4)
+            #Public = True
+            Expand = True
+            Placeholder = ("Tema principal del libro")
+          }
+          { btnVerAsunto3 Button
+            MoveScaled(89,0,4,4)
+            Picture = Picture["iconos/schedule.svg"]
           }
         }
         { HBox109 HBox
@@ -3134,13 +3168,12 @@
             Picture = Picture["iconos/schedule.svg"]
           }
           { Label227 Label
-            MoveScaled(33,0,10,4)
-            AutoResize = True
+            MoveScaled(30,0,14,4)
             Alignment = Align.Right
             Text = ("  Keywords  ")
           }
           { !txt57b_palabrasclave TextBox
-            MoveScaled(43,0,10,4)
+            MoveScaled(44,0,8,4)
             #Public = True
             Expand = True
             Placeholder = ("INGLÉS Palabras clave separadas por coma")
@@ -3150,19 +3183,18 @@
             Picture = Picture["iconos/schedule.svg"]
           }
           { Label228 Label
-            MoveScaled(57,0,10,4)
-            AutoResize = True
+            MoveScaled(57,0,14,4)
             Alignment = Align.Right
             Text = ("  Palavras Chave  ")
           }
           { !txt57c_palabrasclave TextBox
-            MoveScaled(69,0,14,4)
+            MoveScaled(72,0,7,4)
             #Public = True
             Expand = True
             Placeholder = ("PORTUGUES Palabras clave separadas por coma")
           }
           { btnVerClaves3 Button
-            MoveScaled(83,0,4,4)
+            MoveScaled(82,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
           }
         }
@@ -3174,39 +3206,37 @@
             Text = ("Resumen  ")
           }
           { !txt48_abstract TextBox
-            MoveScaled(25,0,12,4)
+            MoveScaled(23,0,12,4)
             #Public = True
             Expand = True
             Placeholder = ("Resumen en segundo idioma")
           }
           { btnVerAbstract Button
-            MoveScaled(37,0,4,4)
+            MoveScaled(35,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
           }
           { Label169 Label
-            MoveScaled(41,0,10,4)
-            AutoResize = True
+            MoveScaled(39,0,14,4)
             Alignment = Align.Right
             Text = ("  Summary  ")
           }
           { !txt48b_abstract TextBox
-            MoveScaled(52,0,12,4)
+            MoveScaled(54,0,8,4)
             #Public = True
             Expand = True
             Placeholder = ("Resumen en inglés")
           }
           { btnVerAbstract2 Button
-            MoveScaled(64,0,4,4)
+            MoveScaled(63,0,4,4)
             Picture = Picture["iconos/schedule.svg"]
           }
           { Label170 Label
-            MoveScaled(69,0,10,4)
-            AutoResize = True
+            MoveScaled(68,0,14,4)
             Alignment = Align.Right
             Text = ("  Resumo  ")
           }
           { !txt48c_abstract TextBox
-            MoveScaled(80,0,12,4)
+            MoveScaled(82,0,7,4)
             #Public = True
             Expand = True
             Placeholder = ("Resumen en portugués")

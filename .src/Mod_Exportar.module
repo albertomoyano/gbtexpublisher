@@ -1383,9 +1383,13 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\thispagestyle{empty}" & "\n"
 
     s &= "\\noindent \\subtitulo{Título: \\emph{" & ContenidoMeta[bFields[84]] & "}}\\\\" & gb.NewLine
-    s &= "\\noindent \\subtitulo{Autor(es): " & ContenidoMeta[bFields[5]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Autor/a/es: " & ContenidoMeta[bFields[5]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{Asunto: " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Subjet: " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Assunto: " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{Palabras clave: " & ContenidoMeta[bFields[57]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Keywords: " & ContenidoMeta[bFields[93]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Palavras Chave: " & ContenidoMeta[bFields[94]] & "}\\\\" & gb.NewLine
     s &= "\\\\" & gb.NewLine
     s &= "\\noindent \\titulo{Comentarios e indicaciones}\\\\"
     s &= "\\\\" & gb.NewLine
