@@ -542,7 +542,7 @@
       Placeholder = ("coloque aquí su usuario GitHub / GitLab")
     }
   }
-  { !TabPanel1 TabStrip
+  { !TabPanel1 TabPanel
     MoveScaled(1,13,162,365)
     #Public = True
     Enabled = False
@@ -553,7 +553,7 @@
     Padding = 4
     Count = 6
     Index = 0
-    Text = ("     Terminal y ChatGPT     ")
+    Text = ("     Terminal     ")
     { HBox93 HBox
       MoveScaled(1,1,158,4)
       { MenuButton1 MenuButton
@@ -586,7 +586,7 @@
       }
     }
     { Splitter1 Splitter
-      MoveScaled(1,6,109,65)
+      MoveScaled(3,6,109,65)
       Expand = True
       Border = False
       { !TerminalView1 TerminalView
@@ -818,7 +818,7 @@
         Placeholder = ("Clave filtro para printbibliography")
       }
     }
-    { TabPanel2 TabStrip
+    { TabPanel2 TabPanel
       MoveScaled(1,37,125,74)
       Expand = True
       Arrangement = Arrange.Vertical
@@ -3004,7 +3004,7 @@
         ReadOnly = True
       }
     }
-    { !TabStripMetaLibro TabStrip
+    { !TabStripMetaLibro TabPanel
       MoveScaled(2,12,89,340)
       #Public = True
       Expand = True
@@ -4664,7 +4664,7 @@
         ReadOnly = True
       }
     }
-    { TabStrip1 TabStrip
+    { TabStrip1 TabPanel
       MoveScaled(1,6,123,282)
       Expand = True
       Arrangement = Arrange.Vertical
@@ -4675,7 +4675,7 @@
       Index = 0
       Text = ("     Elementos generales     ")
       { ScrollView12 ScrollView
-        MoveScaled(1,1,118,96)
+        MoveScaled(2,1,118,96)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -4836,8 +4836,8 @@
           Margin = True
           Padding = 4
           Text = ("Autor(es) y colaboradores del libro")
-          { TabStrip2 TabStrip
-            MoveScaled(1,2,114,24)
+          { TabStrip2 TabPanel
+            MoveScaled(2,2,114,24)
             Expand = True
             Arrangement = Arrange.Fill
             Count = 2
