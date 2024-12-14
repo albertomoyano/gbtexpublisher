@@ -589,33 +589,16 @@
       MoveScaled(1,6,109,65)
       Expand = True
       Border = False
-      { TabGPT TabStrip
-        MoveScaled(4,9,45,24)
+      { !TerminalView1 TerminalView
+        MoveScaled(4,11,27,6)
+        #Public = True
         Expand = True
-        Arrangement = Arrange.Fill
-        Padding = 4
-        Count = 2
-        Index = 0
-        Text = ("  Terminal  ")
-        Picture = Picture["iconos/terminal.svg"]
-        { !TerminalView1 TerminalView
-          MoveScaled(2,2,27,6)
-          #Public = True
-          Expand = True
-          AutoResize = False
-          Blink = True
-          CursorStyle = TerminalView.Underline
-          ShowScrollBar = True
-          ShowLink = True
-          WindowCommands = True
-        }
-        Index = 1
-        Text = ("  ChatGPT  ")
-        Picture = Picture["iconos/ChatGPT_logo.svg"]
-        { WebViewGPT WebView
-          MoveScaled(2,2,27,16)
-        }
-        Index = 0
+        AutoResize = False
+        Blink = True
+        CursorStyle = TerminalView.Underline
+        ShowScrollBar = True
+        ShowLink = True
+        WindowCommands = True
       }
       { Splitter2 Splitter
         MoveScaled(51,2,57,61)
@@ -2827,6 +2810,8 @@
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
+      Margin = True
+      Padding = 4
       Border = False
       ScrollBar = Scroll.Vertical
       { HBox17 HBox

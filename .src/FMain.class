@@ -86,7 +86,6 @@ Public Sub Form_Open()
 
   pBash = TerminalView1.Exec(["/usr/bin/bash"])
   TerminalView1.SetFocus()
-  WebViewGPT.Url = "https://chatgpt.com/"
 
   'configuración del ToDo
   Splitter2.Layout = [3, 1]
@@ -333,8 +332,6 @@ Public Sub Form_Close()
   Wait 0.1
   Try fFile.Close
   Wait 1
-  Try WebViewGPT.Stop
-  Wait 0.1
   Quit
 
 End
@@ -630,8 +627,6 @@ Public Sub Menu11_Click()'cerrar el programa
   Wait 0.1
   Try fFile.Close
   Wait 1
-  Try WebViewGPT.Stop
-  Wait 0.1
   ' Cerrar la aplicación
   Form_ConectarBBDD.Close
   Quit
@@ -6166,7 +6161,6 @@ Public Sub BtnBuscarEnArchivos_Click()
 
   palabraAbuscar = TextBox2.Text
 
-  TabGPT.Index = 0
   TerminalView1.Clear
   TerminalView1.Input("python3 " & rutaApp & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
   TerminalView1.SetFocus
