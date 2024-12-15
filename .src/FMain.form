@@ -280,14 +280,6 @@
   }
   { Menu57 Menu
     Text = ("Ayuda")
-    { Menu25 Menu
-      Text = ("Ir al repositorio de la aplicación en GitHub")
-      Picture = Picture["iconos/github.svg"]
-    }
-    { Menu24 Menu
-      Text = ("Contactar al desarrollador")
-      Picture = Picture["iconos/go-home.svg"]
-    }
     { Menu27 Menu
       Text = ("Paquetes de LaTeX más utilizados")
       { Menu33 Menu
@@ -368,16 +360,21 @@
     }
     { Menu67 Menu
     }
-    { Menu64 Menu
-      Text = ("Aviso Legal")
-      Picture = Picture["iconos/clavebib.svg"]
-    }
     { Menu68 Menu
       Text = ("Acerca de gbTeXpublisher")
+      Picture = Picture["iconos/icono-gbtex.svg"]
+    }
+    { Menu24 Menu
+      Text = ("Contactar al desarrollador")
+      Picture = Picture["iconos/go-home.svg"]
     }
     { Menu66 Menu
       Text = ("Acerca de Gambas")
       Picture = Picture["iconos/logo-gambas.png"]
+    }
+    { Menu64 Menu
+      Text = ("Aviso Legal")
+      Picture = Picture["iconos/clavebib.svg"]
     }
   }
   { HBox171 HBox

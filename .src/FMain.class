@@ -450,12 +450,6 @@ Public Sub Button4_Click() 'local git
 
 End
 
-Public Sub Menu25_Click()'repositorio de la aplicación
-
-  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher"
-
-End
-
 Public Sub Menu33_Click()'babel
 
   Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/required/babel/base/babel.pdf"
