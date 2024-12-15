@@ -318,6 +318,8 @@ Public Sub Form_Open()
   TotalEntradasBIByGLO()'actualizamos el contador de entradas
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
 
+  rentaTrabajo.Enabled = False' inicia formulario sin habilitar menu renta del trabajo
+
 End
 
 Public Sub Form_Close()
@@ -794,6 +796,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
   Menu4.Enabled = True
+  rentaTrabajo.Enabled = True
   TabPanel1[3].Visible = True
   TabPanel1[4].Visible = True
 
@@ -994,6 +997,7 @@ Public Sub mnuLast_Click()
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
   Menu4.Enabled = True
+  rentaTrabajo.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -8053,12 +8057,6 @@ Public Sub btnBuscarORCID_Click()
   url = txtORCID.Text
 
   If url <> "" Then Shell "xdg-open " & url
-
-End
-
-Public Sub Menu5_Click()
-
-  Form_Contratos.ShowModal()
 
 End
 

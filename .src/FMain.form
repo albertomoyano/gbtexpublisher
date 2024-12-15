@@ -134,24 +134,6 @@
       Picture = Picture["iconos/notas.svg"]
     }
   }
-  { menuAdmin Menu
-    Text = ("Administración")
-    { Menu5 Menu
-      Text = ("Contratos de edición")
-      Picture = Picture["iconos/acroread.svg"]
-    }
-    { rentaTrabajo Menu
-      Text = ("Rentabilizar tiempo de trabajo")
-      Picture = Picture["iconos/renta.svg"]
-    }
-    { Menu10 Menu
-    }
-    { Menu11 Menu
-      Text = ("Cerrar el programa")
-      Picture = Picture["iconos/salir.svg"]
-      Shortcut = "Ctrl+Q"
-    }
-  }
   { menuArchivo Menu
     Text = ("Archivo")
     { menuAbrir Menu
@@ -168,6 +150,17 @@
     }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
+    }
+    { rentaTrabajo Menu
+      Text = ("Rentabilizar tiempo de trabajo")
+      Picture = Picture["iconos/renta.svg"]
+    }
+    { Menu10 Menu
+    }
+    { Menu11 Menu
+      Text = ("Cerrar el programa")
+      Picture = Picture["iconos/salir.svg"]
+      Shortcut = "Ctrl+Q"
     }
   }
   { menuTOOLS Menu
