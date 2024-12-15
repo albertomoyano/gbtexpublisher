@@ -24,7 +24,7 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="12.9375"
-     inkscape:cx="32.038647"
+     inkscape:cx="26.512077"
      inkscape:cy="25.816425"
      inkscape:window-width="1920"
      inkscape:window-height="1008"
@@ -85,7 +85,7 @@
          id="stop17" />
     </linearGradient>
     <path
-       style="fill:url(#gradient1)"
+       style="fill:#ffccaa"
        d="M 8,22 H 34 V 40 H 8 Z"
        id="path20" />
     <path

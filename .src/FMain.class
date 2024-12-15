@@ -2727,6 +2727,7 @@ Public Sub BtnNuevoBib_Click()
   btnAgregarCitationKey.Enabled = True
   btnAgregarKeyBIB.Enabled = True
   txtTMPbiblio.Enabled = True
+  txtTMPbiblio.Background = Color.White
   ToolPanel1.Index = 0
 
   txtTMPbiblio.Clear 'limpiamos el campo temporal
@@ -2844,6 +2845,7 @@ Public Sub btnGuardar_Click()
     btnGuardarIGUAL.Enabled = False
     btnAgregarKeyBIB.Enabled = False
     txtTMPbiblio.Enabled = False
+    txtTMPbiblio.Background = Color.LightGray
   Endif
 
 End

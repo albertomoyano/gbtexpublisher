@@ -643,19 +643,21 @@
       Arrangement = Arrange.Fill
       AutoResize = True
       Count = 2
+      Animated = True
       Border = True
       Index = 0
       Text = ("   Caja de texto temporal")
       { txtTMPbiblio TextArea
-        MoveScaled(1,1,36,13)
+        MoveScaled(14,1,36,13)
         Enabled = False
+        Background = Color.LightGray
         Wrap = True
         ScrollBar = Scroll.Vertical
       }
       Index = 1
       Text = ("   Mostrar referencias bibliográficas")
       { VListaBIB TableView
-        MoveScaled(1,1,44,12)
+        MoveScaled(10,1,44,12)
         Font = Font["-1"]
         Expand = True
         Mode = Select.Single
