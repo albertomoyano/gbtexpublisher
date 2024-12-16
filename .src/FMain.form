@@ -151,10 +151,6 @@
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
     }
-    { rentaTrabajo Menu
-      Text = ("Rentabilizar tiempo de trabajo")
-      Picture = Picture["iconos/renta.svg"]
-    }
     { Menu10 Menu
     }
     { Menu11 Menu
@@ -225,6 +221,10 @@
     { menuDRAW Menu
       Text = ("Contador / Estadísticas del archivo")
       Enabled = False
+    }
+    { rentaTrabajo Menu
+      Text = ("Rentabilizar tiempo de trabajo")
+      Picture = Picture["iconos/renta.svg"]
     }
     { adminGIT Menu
       Text = ("Administrar .gitignore")
