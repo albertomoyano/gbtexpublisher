@@ -328,12 +328,20 @@ Public Sub Form_Close()
     meConn.Close()
     meConn = Null
   Endif
+
   ' Guardar el último archivo abierto
   MS.SetLastListToSettings()
   Try pBash.Kill
   Wait 0.1
   Try fFile.Close
   Wait 1
+
+  ' Cerrar la aplicación
+  Form_ConectarBBDD.Close
+
+  Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
+  Wait 0.1
+
   Quit
 
 End
@@ -623,8 +631,13 @@ Public Sub Menu11_Click()'cerrar el programa
   Wait 0.1
   Try fFile.Close
   Wait 1
+
   ' Cerrar la aplicación
   Form_ConectarBBDD.Close
+
+  Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
+  Wait 0.1
+
   Quit
 
 End
