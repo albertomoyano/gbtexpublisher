@@ -162,7 +162,8 @@
   { menuTOOLS Menu
     Text = ("Herramientas")
     { menuBiblio Menu
-      Text = ("Biblioteca de trabajos")
+      Text = ("Biblioteca de trabajos alojados en GitHub")
+      Picture = Picture["iconos/basededatos.svg"]
     }
     { menuCONVERSOR Menu
       Text = ("Conversión de archivo .docx a .tex")

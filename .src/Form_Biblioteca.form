@@ -1,10 +1,193 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,960,740)
+  Move(0,0,960,640)
   #Scaled = False
+  Text = ("Biblioteca de trabajos")
+  Icon = Picture["iconos/basededatos.svg"]
   Resizable = False
+  Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
   Padding = 4
+  { HBox1 HBox
+    Move(0,0,927,36)
+    { tbNuevo Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar entrada")
+      Picture = Picture["iconos/+nuevo.svg"]
+    }
+    { tbBorrar Button
+      Move(36,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Eliminar entrada")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { btnGuardar Button
+      Move(72,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar entrada")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarMod Button
+      Move(108,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar cambios")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { !btnRefresh Button
+      Move(144,0,36,36)
+      #Public = True
+      NoTabFocus = True
+      ToolTip = ("Refrescar datos")
+      Picture = Picture["iconos/refrescar.svg"]
+    }
+    { Spring1 Spring
+      Move(450,0,234,36)
+    }
+    { btnCerrar ToolButton
+      Move(702,0,160,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la ventana")
+      Text = ("Cerrar")
+      Border = True
+    }
+  }
+  { HBox8 HBox
+    Move(0,63,765,36)
+    { !txtIdBiblioteca TextBox
+      Move(45,0,63,36)
+      #Public = True
+      Visible = False
+      NoTabFocus = True
+      Alignment = Align.Center
+      ReadOnly = True
+    }
+    { !txFecha TextBox
+      Move(117,0,126,36)
+      #Public = True
+      Visible = False
+      NoTabFocus = True
+      Alignment = Align.Center
+      ReadOnly = True
+    }
+    { Label7 Label
+      Move(270,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Archivo .tex  ")
+    }
+    { BtnBuscar Button
+      Move(468,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Buscar en toda la base de datos")
+      Picture = Picture["iconos/search.svg"]
+    }
+    { !txAsunto TextBox
+      Move(585,0,63,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox2 HBox
+    Move(0,99,765,36)
+    { Label1 Label
+      Move(288,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("URL GitHub  ")
+    }
+    { BtnBuscar2 Button
+      Move(468,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Buscar en toda la base de datos")
+      Picture = Picture["iconos/github-mark.svg"]
+    }
+    { !txAsunto2 TextBox
+      Move(585,0,63,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox3 HBox
+    Move(0,135,765,36)
+    { Label2 Label
+      Move(288,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("URL pdf  ")
+    }
+    { !txAsunto3 TextBox
+      Move(450,0,63,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox5 HBox
+    Move(0,171,765,36)
+    { Label3 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Fecha de inicio  ")
+    }
+    { !txAsunto4 TextBox
+      Move(180,0,63,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+    { Label4 Label
+      Move(243,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Fecha de cierre  ")
+    }
+    { !txAsunto5 TextBox
+      Move(423,0,63,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox7 HBox
+    Move(0,243,765,36)
+    { Label5 Label
+      Move(0,0,144,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Etiquetas  ")
+    }
+    { btnBuscarEtiquetas Button
+      Move(153,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Buscar en toda la base de datos")
+      Picture = Picture["iconos/search.svg"]
+    }
+    { !txAsunto6 TextBox
+      Move(450,0,63,36)
+      #Public = True
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox4 HBox
+    Move(18,414,765,207)
+    Expand = True
+    { gridBiblioteca TableView
+      Move(0,0,153,153)
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Horizontal
+      ScrollBar = Scroll.Vertical
+      Resizable = False
+    }
+  }
 }
