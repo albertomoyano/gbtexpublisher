@@ -1240,76 +1240,6 @@ Public Sub Menu68_Click()
 
 End
 
-Public Sub Menu75_Click()'gitlab
-
-  Dim fecha As String
-  Dim usuario As String = Trim(txtGIT.Text)
-  Dim IdGitLab As String
-
-  ' Obtener la fecha actual
-  fecha = Format(Date(), "dd-mm-yyyy")
-
-  ' Verificar si el nombre de usuario está vacío
-  If usuario = "" Then
-    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
-    Return
-  End If
-
-  IdGitLab = "git@gitlab.com:" & usuario & "/" & BaseName & ".git"
-  TabPanel1.Index = 0
-  TerminalView1.Input("git remote remove origin" & "\n")
-  TerminalView1.Input("git remote add origin " & IdGitLab & "\n")
-  TerminalView1.Input("git add ." & "\n")
-  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
-  TerminalView1.Input("git push --set-upstream origin main" & "\n")
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
-
-End
-
-Public Sub Menu77_Click()'github
-
-  Dim fecha As String
-  Dim usuario As String = Trim(txtGIT.Text)
-  Dim IdGitHub As String
-
-  ' Obtener la fecha actual
-  fecha = Format(Date(), "dd-mm-yyyy")
-
-  ' Verificar si el nombre de usuario está vacío
-  If usuario = "" Then
-    Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
-    Return
-  End If
-
-  IdGitHub = "git@github.com:" & usuario & "/" & BaseName & ".git"
-  TabPanel1.Index = 0
-  TerminalView1.Input("git remote remove origin" & "\n")
-  TerminalView1.Input("git remote add origin " & IdGitHub & "\n")
-  TerminalView1.Input("git add ." & "\n")
-  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
-  TerminalView1.Input("git push --set-upstream origin main" & "\n")
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
-
-End
-
-Public Sub Menu81_Click()
-
-  Dim ruta As String
-  Dim usuario As String = Trim(txtGIT.Text)
-
-  If usuario = "" Then
-    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
-    Return
-  End If
-
-  ruta = "https://gitlab.com/" & txtGIT.Text & "/" & BaseName & "/-/boards"
-
-  Shell "xdg-open " & ruta
-
-End
-
 Public Sub gitignote_github_Click()
 
   TerminalView1.Input("rm .gitignore" & "\n")
@@ -8292,5 +8222,32 @@ End
 Public Sub menuBiblio_Click()
 
   Form_Biblioteca.ShowModal()
+
+End
+
+Public Sub btnMenuGIT_Click()
+
+  Dim fecha As String
+  Dim usuario As String = Trim(txtGIT.Text)
+  Dim IdGitHub As String
+
+  ' Obtener la fecha actual
+  fecha = Format(Date(), "dd-mm-yyyy")
+
+  ' Verificar si el nombre de usuario está vacío
+  If usuario = "" Then
+    Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
+    Return
+  End If
+
+  IdGitHub = "git@github.com:" & usuario & "/" & BaseName & ".git"
+  TabPanel1.Index = 0
+  TerminalView1.Input("git remote remove origin" & "\n")
+  TerminalView1.Input("git remote add origin " & IdGitHub & "\n")
+  TerminalView1.Input("git add ." & "\n")
+  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
+  TerminalView1.Input("git push --set-upstream origin main" & "\n")
+  TerminalView1.SetFocus()
+  TerminalView1.Refresh()
 
 End

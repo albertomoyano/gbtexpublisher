@@ -116,24 +116,6 @@
       Text = ("Compilar revista")
     }
   }
-  { menuGIT Menu
-    Text = ("menuGit")
-    Visible = False
-    { Menu75 Menu
-      Text = ("Repositorio en GitLab")
-      Picture = Picture["iconos/gitlab.svg"]
-    }
-    { Menu77 Menu
-      Text = ("Repositorio en GitHub")
-      Picture = Picture["iconos/github.svg"]
-    }
-    { Menu69 Menu
-    }
-    { Menu81 Menu
-      Text = ("Ir a Kanban en GitLab")
-      Picture = Picture["iconos/notas.svg"]
-    }
-  }
   { menuArchivo Menu
     Text = ("Archivo")
     { menuAbrir Menu
@@ -512,28 +494,26 @@
       MoveScaled(22,0,17.7778,4)
       Enabled = False
       Text = ("Git local")
-      Picture = Picture["iconos/document.svg"]
+      Picture = Picture["iconos/github.svg"]
     }
     { Separator11 Separator
       MoveScaled(41,0,0.8889,4)
       Foreground = Color.Transparent
     }
-    { btnMenuGIT MenuButton
+    { btnMenuGIT Button
       MoveScaled(44,0,17.7778,4)
       Enabled = False
-      Text = ("Remoto a")
-      Picture = Picture["iconos/gitRemoto.svg"]
-      Menu = "menuGIT"
-      MenuOnly = True
+      Text = ("GitHub")
+      Picture = Picture["iconos/github-mark.svg"]
     }
     { Separator10 Separator
       MoveScaled(64,0,0.8889,4)
       Foreground = Color.Transparent
     }
     { txtGIT TextBox
-      MoveScaled(98,0,8,4)
+      MoveScaled(71,0,24,4)
       Expand = True
-      Placeholder = ("coloque aquí su usuario GitHub / GitLab")
+      Placeholder = ("coloque aquí su usuario GitHub")
     }
   }
   { !TabPanel1 TabPanel
