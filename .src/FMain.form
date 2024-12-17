@@ -161,6 +161,9 @@
   }
   { menuTOOLS Menu
     Text = ("Herramientas")
+    { menuBiblio Menu
+      Text = ("Biblioteca de trabajos")
+    }
     { menuCONVERSOR Menu
       Text = ("Conversión de archivo .docx a .tex")
       Picture = Picture["iconos/conversor.svg"]
@@ -1127,20 +1130,20 @@
           }
           { txtTITLE TextBox AllTextBoxes
             Name = "txtTITLE"
-            MoveScaled(33,0,12,3.5556)
+            MoveScaled(31,0,12,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Alignment = Align.Left
             Placeholder = ("Título")
           }
           { lblEVENTTITLEADDON6 Label
-            MoveScaled(45,0,16,3.5556)
+            MoveScaled(59,0,16,3.5556)
             Alignment = Align.Right
             Text = ("  TitleAddOn ")
           }
           { txtTitleAddOn TextBox AllTextBoxes
             Name = "txtTitleAddOn"
-            MoveScaled(66,0,16,3.5556)
+            MoveScaled(77,0,16,5)
             Expand = True
             PopupMenu = "menuTEXTBOX"
           }

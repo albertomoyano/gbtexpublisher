@@ -8288,3 +8288,9 @@ Public Sub btnVerClaves3_Click()
   Form_TXTextendido.ShowModal()
 
 End
+
+Public Sub menuBiblio_Click()
+
+  Form_Biblioteca.ShowModal()
+
+End
