@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=Form_ConectarBBDD
 Icon=iconos/icono-gbtex.svg
-Version=0.1.427
+Version=0.1.428
 Component=gb.image
 Component=gb.gtk3
 Component=gb.form
@@ -34,7 +34,7 @@ Address=alberto.alejandro.moyano@gmail.com
 Url=https://github.com/albertomoyano
 License=General Public License V3
 PackageName=gbtexpublisher-0.1.428
-PackageVersion=3
+PackageVersion=5
 CreateEachDirectory=1
 Packager=1
 Systems=ubuntu
