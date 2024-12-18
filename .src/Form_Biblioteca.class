@@ -11,6 +11,13 @@ End
 
 Public Sub Form_Open()
 
+  txtArchivoTeX.Enabled = False
+  txtGitHub.Enabled = False
+  txtPDF.Enabled = False
+  txtFechaInicio.Enabled = False
+  txtFechaCierre.Enabled = False
+  txtEtiquetas.Enabled = False
+
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
@@ -36,7 +43,6 @@ End
 
 Public Sub Mostrar_Lista_Biblioteca()
 
-  ' Dim Record As String
   Dim Count As Integer
   Dim i As Integer
 
@@ -94,6 +100,13 @@ End
 
 Public Sub tbNuevo_Click()
 
+  txtArchivoTeX.Enabled = True
+  txtGitHub.Enabled = True
+  txtPDF.Enabled = True
+  txtFechaInicio.Enabled = True
+  txtFechaCierre.Enabled = True
+  txtEtiquetas.Enabled = True
+
   tbNuevo.Visible = False
   tbBorrar.Visible = False
   btnGuardar.Visible = True
@@ -121,6 +134,13 @@ Public Sub tbNuevo_Click()
 End
 
 Public Sub gridBiblioteca_RowClick(Row As Integer)
+
+  txtArchivoTeX.Enabled = True
+  txtGitHub.Enabled = True
+  txtPDF.Enabled = True
+  txtFechaInicio.Enabled = True
+  txtFechaCierre.Enabled = True
+  txtEtiquetas.Enabled = True
 
   tbNuevo.Visible = False
   tbBorrar.Visible = True
@@ -155,6 +175,13 @@ Public Sub tbBorrar_Click()
   gridBiblioteca.Clear
   Mostrar_Lista_Biblioteca()
 
+  txtArchivoTeX.Enabled = False
+  txtGitHub.Enabled = False
+  txtPDF.Enabled = False
+  txtFechaInicio.Enabled = False
+  txtFechaCierre.Enabled = False
+  txtEtiquetas.Enabled = False
+
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
@@ -175,6 +202,13 @@ Public Sub btnGuardar_Click()
   Mostrar_Lista_Biblioteca() ' Refrescamos la lista de entradas
   LimpiarCampos() ' Limpiamos los campos
 
+  txtArchivoTeX.Enabled = False
+  txtGitHub.Enabled = False
+  txtPDF.Enabled = False
+  txtFechaInicio.Enabled = False
+  txtFechaCierre.Enabled = False
+  txtEtiquetas.Enabled = False
+
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
@@ -193,6 +227,13 @@ Public Sub btnGuardarMod_Click()
   Mostrar_Lista_Biblioteca()
   LimpiarCampos() 'limpiar campos
 
+  txtArchivoTeX.Enabled = False
+  txtGitHub.Enabled = False
+  txtPDF.Enabled = False
+  txtFechaInicio.Enabled = False
+  txtFechaCierre.Enabled = False
+  txtEtiquetas.Enabled = False
+
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
@@ -205,6 +246,13 @@ Public Sub btnRefresh_Click()
 
   gridBiblioteca.Clear
   Mostrar_Lista_Biblioteca()
+
+  txtArchivoTeX.Enabled = False
+  txtGitHub.Enabled = False
+  txtPDF.Enabled = False
+  txtFechaInicio.Enabled = False
+  txtFechaCierre.Enabled = False
+  txtEtiquetas.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
@@ -264,6 +312,13 @@ Public Sub btnBuscarEtiquetas_Click()
     Message.Info("No se ha encontrado ningún resultado.")
     Return
   Endif
+
+  txtArchivoTeX.Enabled = False
+  txtGitHub.Enabled = False
+  txtPDF.Enabled = False
+  txtFechaInicio.Enabled = False
+  txtFechaCierre.Enabled = False
+  txtEtiquetas.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
