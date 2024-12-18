@@ -1,7 +1,223 @@
 ' Gambas class file
 
+Private Contenido As Result
+Private Busqueda As Result
+
 Public Sub btnCerrar_Click()
 
   Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+
+  Mostrar_Lista_Biblioteca()
+
+End
+
+Public Function LimpiarCampos()
+
+  'Limpiamos los campos
+  txtIdBiblioteca.Text = ""
+  txtArchivoTeX.Text = ""
+  txtGitHub.Text = ""
+  txtPDF.Text = ""
+  txtFechaInicio.Text = ""
+  txtFechaCierre.Text = ""
+  txtEtiquetas.Text = ""
+
+End
+
+Public Sub Mostrar_Lista_Biblioteca()
+
+  Dim Record As String
+  Dim Count As Integer
+  Dim i As Integer
+
+  gridBiblioteca.Clear()
+
+  Contenido = FMain.meConn.Exec("select * from biblioteca ORDER BY id DESC")
+
+  'diseñamos el tableview
+  gridBiblioteca.Columns.Count = 7
+  gridBiblioteca.Header = True
+  gridBiblioteca.Columns[0].Title = "id"
+  gridBiblioteca.Columns[0].Width = 0
+  gridBiblioteca.Columns[1].Title = "Archivo TeX"
+  gridBiblioteca.Columns[1].Width = 250
+  gridBiblioteca.Columns[2].Title = "url GitHub"
+  gridBiblioteca.Columns[2].Width = 700
+  gridBiblioteca.Columns[3].Title = ""' url PDF
+  gridBiblioteca.Columns[3].Width = 0
+  gridBiblioteca.Columns[4].Title = ""' Fecha inicio
+  gridBiblioteca.Columns[4].Width = 0
+  gridBiblioteca.Columns[5].Title = ""' Fecha cierre
+  gridBiblioteca.Columns[5].Width = 0
+  gridBiblioteca.Columns[6].Title = ""' Etiquetas
+  ' gridBiblioteca.Columns[6].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  gridBiblioteca.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    gridBiblioteca[i, 0].Text = Contenido!id
+    gridBiblioteca[i, 1].Text = Contenido!txtArchivoTeX01
+    gridBiblioteca[i, 2].Text = Contenido!txtGitHub02
+    gridBiblioteca[i, 3].Text = Contenido!txtPDF03
+    gridBiblioteca[i, 4].Text = Contenido!txtFechaInicio04
+    gridBiblioteca[i, 5].Text = Contenido!txtFechaCierre05
+    gridBiblioteca[i, 6].Text = Contenido!txtEtiquetas06
+
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txtIdBiblioteca.Text
+  Contenido!txtArchivoTeX01 = txtArchivoTeX.Text
+  Contenido!txtGitHub02 = txtGitHub.Text
+  Contenido!txtPDF03 = txtPDF.Text
+  Contenido!txtFechaInicio04 = txtFechaInicio.Text
+  Contenido!txtFechaCierre05 = txtFechaCierre.Text
+  Contenido!txtEtiquetas06 = txtEtiquetas.Text
+
+End
+
+Public Sub tbNuevo_Click()
+
+  tbNuevo.Visible = False
+  tbBorrar.Visible = False
+  btnGuardar.Visible = True
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+
+  LimpiarCampos  'Limpiamos todos los campos
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM biblioteca LIMIT 1")
+
+  Dim Idn As Integer
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txtIdBiblioteca.Text = Idn
+  txtArchivoTeX.SetFocus
+
+  Mostrar_Lista_Biblioteca()
+
+End
+
+Public Sub gridBiblioteca_RowClick(Row As Integer)
+
+  tbNuevo.Visible = False
+  tbBorrar.Visible = True
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = True
+  btnRefresh.Visible = False
+
+  txtIdBiblioteca.Text = gridBiblioteca[Row, 0].Text
+  txtArchivoTeX.Text = gridBiblioteca[Row, 1].Text
+  txtGitHub.Text = gridBiblioteca[Row, 2].Text
+  txtPDF.Text = gridBiblioteca[Row, 3].Text
+  txtFechaInicio.Text = gridBiblioteca[Row, 4].Text
+  txtFechaCierre.Text = gridBiblioteca[Row, 5].Text
+  txtEtiquetas.Text = gridBiblioteca[Row, 6].Text
+
+End
+
+Public Sub tbBorrar_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIdBiblioteca.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = FMain.meConn.Exec("delete from biblioteca where id=" & txtIdBiblioteca.Text)
+  Endif
+
+  LimpiarCampos()  'Limpiamos los campos
+
+  gridBiblioteca.Clear
+  Mostrar_Lista_Biblioteca()
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+
+End
+
+Public Sub btnGuardar_Click()
+
+  Contenido = FMain.meConn.Create("biblioteca")
+
+  guardarCampos()
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  Mostrar_Lista_Biblioteca() ' Refrescamos la lista de entradas
+  LimpiarCampos() ' Limpiamos los campos
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+
+End
+
+Public Sub btnGuardarMod_Click()
+
+  Contenido = FMain.meConn.Edit("biblioteca", "id=" & txtIdBiblioteca.Text)
+  guardarCampos()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  Mostrar_Lista_Biblioteca()
+  LimpiarCampos() 'limpiar campos
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+
+End
+
+Public Sub btnRefresh_Click()
+
+  gridBiblioteca.Clear
+  Mostrar_Lista_Biblioteca()
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = False
+
+End
+
+Public Sub btnBuscarGitHub_Click()
+
+  Dim ruta As String = txtGitHub.Text
+
+  Shell "xdg-open " & txtGitHub.Text
 
 End
