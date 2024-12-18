@@ -36,7 +36,7 @@ End
 
 Public Sub Mostrar_Lista_Biblioteca()
 
-  Dim Record As String
+  ' Dim Record As String
   Dim Count As Integer
   Dim i As Integer
 
