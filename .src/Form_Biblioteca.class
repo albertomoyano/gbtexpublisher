@@ -221,3 +221,54 @@ Public Sub btnBuscarGitHub_Click()
   Shell "xdg-open " & txtGitHub.Text
 
 End
+
+Public Sub btnBuscarEtiquetas_Click()
+
+  Dim Comando As String
+  Dim ii As Integer
+
+  If txtEtiquetas.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Comando = "SELECT * FROM biblioteca WHERE txtEtiquetas06 LIKE '%" & txtEtiquetas.Text & "%'"
+  Busqueda = FMain.meConn.Exec(Comando)
+
+  ' Si la búsqueda arroja resultados
+  If Busqueda.Count > 0 Then
+    ' Limpia el Grid antes de mostrar los resultados de la búsqueda
+    gridBiblioteca.Clear()
+    ' Configura las columnas
+    gridBiblioteca.Columns.Count = 7
+    ' Inicializa rowIndex a 0
+    ii = 0
+
+    While (Busqueda.Available)
+      ' Llena las celdas de la fila con los datos del resultado
+      gridBiblioteca[ii, 0].Text = Busqueda!id
+      gridBiblioteca[ii, 1].Text = Busqueda!txtArchivoTeX01
+      gridBiblioteca[ii, 2].Text = Busqueda!txtGitHub02
+      gridBiblioteca[ii, 3].Text = Busqueda!txtPDF03
+      gridBiblioteca[ii, 4].Text = Busqueda!txtFechaInicio04
+      gridBiblioteca[ii, 5].Text = Busqueda!txtFechaCierre05
+      gridBiblioteca[ii, 6].Text = Busqueda!txtEtiquetas06
+
+      ' Incrementa el valor de rowIndex para la siguiente fila
+      ii = ii + 1
+
+      Busqueda.MoveNext
+    Wend
+  Else
+    ' Si no hay resultados, muestra un mensaje
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+  btnRefresh.Visible = True
+
+End

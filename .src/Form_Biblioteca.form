@@ -72,12 +72,6 @@
       Alignment = Align.Right
       Text = ("Archivo .tex  ")
     }
-    { BtnBuscar Button
-      Move(468,0,36,36)
-      NoTabFocus = True
-      ToolTip = ("Buscar en toda la base de datos")
-      Picture = Picture["iconos/search.svg"]
-    }
     { !txtArchivoTeX TextBox
       Move(585,0,135,36)
       #Public = True
