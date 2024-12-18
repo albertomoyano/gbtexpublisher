@@ -192,15 +192,59 @@ End
 
 Public Sub btnGuardar_Click()
 
-  Contenido = FMain.meConn.Create("biblioteca")
+  Dim i As Integer
 
-  guardarCampos()
+  ' Construir la consulta SQL
+  Dim Comando As String = "SELECT * FROM biblioteca WHERE txtGitHub02 = '" & txtGitHub.Text & "'"
 
-  Contenido.Update
-  Message.Info("Nueva entrada guardada.")
+  Busqueda = FMain.meConn.Exec(Comando)
 
-  Mostrar_Lista_Biblioteca() ' Refrescamos la lista de entradas
-  LimpiarCampos() ' Limpiamos los campos
+  ' Verificar si hay resultados
+  If Busqueda.Count > 0 Then
+    ' Limpia el Grid antes de mostrar los resultados de la búsqueda
+    gridBiblioteca.Clear()
+    ' Configura las columnas
+    gridBiblioteca.Columns.Count = 7
+    ' Inicializa rowIndex a 0
+    i = 0
+
+    While (Busqueda.Available)
+      ' Llena las celdas de la fila con los datos del resultado
+      gridBiblioteca[i, 0].Text = Busqueda!id
+      gridBiblioteca[i, 1].Text = Busqueda!txtArchivoTeX01
+      gridBiblioteca[i, 2].Text = Busqueda!txtGitHub02
+      gridBiblioteca[i, 3].Text = Busqueda!txtPDF03
+      gridBiblioteca[i, 4].Text = Busqueda!txtFechaInicio04
+      gridBiblioteca[i, 5].Text = Busqueda!txtFechaCierre05
+      gridBiblioteca[i, 6].Text = Busqueda!txtEtiquetas06
+
+      ' Incrementa el valor de i para la siguiente fila
+      i = i + 1
+
+      Busqueda.MoveNext
+    Wend
+    ' Si hay resultados, mostrar una alerta
+    Message.Info("El repositorio ya está declarado en la biblioteca.")
+    tbNuevo.Visible = True
+    tbBorrar.Visible = False
+    btnGuardar.Visible = False
+    btnGuardarMod.Visible = False
+    btnRefresh.Visible = True
+  Else
+
+    Contenido = FMain.meConn.Create("biblioteca")
+    guardarCampos()
+
+    Contenido.Update
+    Message.Info("Nueva entrada guardada.")
+    Mostrar_Lista_Biblioteca() ' Refrescamos la lista de entradas
+    LimpiarCampos() ' Limpiamos los campos
+    tbNuevo.Visible = True
+    tbBorrar.Visible = False
+    btnGuardar.Visible = False
+    btnGuardarMod.Visible = False
+    btnRefresh.Visible = False
+  Endif
 
   txtArchivoTeX.Enabled = False
   txtGitHub.Enabled = False
@@ -208,12 +252,6 @@ Public Sub btnGuardar_Click()
   txtFechaInicio.Enabled = False
   txtFechaCierre.Enabled = False
   txtEtiquetas.Enabled = False
-
-  tbNuevo.Visible = True
-  tbBorrar.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
 
 End
 
