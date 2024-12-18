@@ -1,9 +1,10 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,960,320)
+  Move(0,0,960,640)
   #Scaled = False
   Text = ("Acerca de GAMBAS")
+  Icon = Picture["iconos/logo-gambas.png"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
