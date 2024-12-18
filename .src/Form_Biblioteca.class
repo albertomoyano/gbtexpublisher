@@ -16,7 +16,6 @@ Public Sub Form_Open()
   txtPDF.Enabled = False
   txtFechaInicio.Enabled = False
   txtFechaCierre.Enabled = False
-  txtEtiquetas.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
@@ -105,8 +104,6 @@ Public Sub tbNuevo_Click()
   txtPDF.Enabled = True
   txtFechaInicio.Enabled = True
   txtFechaCierre.Enabled = True
-  txtEtiquetas.Enabled = True
-
   tbNuevo.Visible = False
   tbBorrar.Visible = False
   btnGuardar.Visible = True
@@ -140,13 +137,12 @@ Public Sub gridBiblioteca_RowClick(Row As Integer)
   txtPDF.Enabled = True
   txtFechaInicio.Enabled = True
   txtFechaCierre.Enabled = True
-  txtEtiquetas.Enabled = True
 
   tbNuevo.Visible = False
   tbBorrar.Visible = True
   btnGuardar.Visible = False
   btnGuardarMod.Visible = True
-  btnRefresh.Visible = False
+  btnRefresh.Visible = True
 
   txtIdBiblioteca.Text = gridBiblioteca[Row, 0].Text
   txtArchivoTeX.Text = gridBiblioteca[Row, 1].Text
@@ -180,8 +176,6 @@ Public Sub tbBorrar_Click()
   txtPDF.Enabled = False
   txtFechaInicio.Enabled = False
   txtFechaCierre.Enabled = False
-  txtEtiquetas.Enabled = False
-
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
@@ -251,7 +245,6 @@ Public Sub btnGuardar_Click()
   txtPDF.Enabled = False
   txtFechaInicio.Enabled = False
   txtFechaCierre.Enabled = False
-  txtEtiquetas.Enabled = False
 
 End
 
@@ -270,8 +263,6 @@ Public Sub btnGuardarMod_Click()
   txtPDF.Enabled = False
   txtFechaInicio.Enabled = False
   txtFechaCierre.Enabled = False
-  txtEtiquetas.Enabled = False
-
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
@@ -284,13 +275,13 @@ Public Sub btnRefresh_Click()
 
   gridBiblioteca.Clear
   Mostrar_Lista_Biblioteca()
+  LimpiarCampos()
 
   txtArchivoTeX.Enabled = False
   txtGitHub.Enabled = False
   txtPDF.Enabled = False
   txtFechaInicio.Enabled = False
   txtFechaCierre.Enabled = False
-  txtEtiquetas.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
@@ -311,7 +302,7 @@ End
 Public Sub btnBuscarEtiquetas_Click()
 
   Dim Comando As String
-  Dim ii As Integer
+  Dim i As Integer
 
   If txtEtiquetas.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
@@ -328,20 +319,20 @@ Public Sub btnBuscarEtiquetas_Click()
     ' Configura las columnas
     gridBiblioteca.Columns.Count = 7
     ' Inicializa rowIndex a 0
-    ii = 0
+    i = 0
 
     While (Busqueda.Available)
       ' Llena las celdas de la fila con los datos del resultado
-      gridBiblioteca[ii, 0].Text = Busqueda!id
-      gridBiblioteca[ii, 1].Text = Busqueda!txtArchivoTeX01
-      gridBiblioteca[ii, 2].Text = Busqueda!txtGitHub02
-      gridBiblioteca[ii, 3].Text = Busqueda!txtPDF03
-      gridBiblioteca[ii, 4].Text = Busqueda!txtFechaInicio04
-      gridBiblioteca[ii, 5].Text = Busqueda!txtFechaCierre05
-      gridBiblioteca[ii, 6].Text = Busqueda!txtEtiquetas06
+      gridBiblioteca[i, 0].Text = Busqueda!id
+      gridBiblioteca[i, 1].Text = Busqueda!txtArchivoTeX01
+      gridBiblioteca[i, 2].Text = Busqueda!txtGitHub02
+      gridBiblioteca[i, 3].Text = Busqueda!txtPDF03
+      gridBiblioteca[i, 4].Text = Busqueda!txtFechaInicio04
+      gridBiblioteca[i, 5].Text = Busqueda!txtFechaCierre05
+      gridBiblioteca[i, 6].Text = Busqueda!txtEtiquetas06
 
       ' Incrementa el valor de rowIndex para la siguiente fila
-      ii = ii + 1
+      i = i + 1
 
       Busqueda.MoveNext
     Wend
@@ -356,8 +347,6 @@ Public Sub btnBuscarEtiquetas_Click()
   txtPDF.Enabled = False
   txtFechaInicio.Enabled = False
   txtFechaCierre.Enabled = False
-  txtEtiquetas.Enabled = False
-
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
