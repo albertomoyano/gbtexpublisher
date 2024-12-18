@@ -3,7 +3,7 @@
 { Form Form
   Move(0,0,960,640)
   #Scaled = False
-  Text = ("Apuntes de producción")
+  Text = ("Cuaderno de notas")
   Icon = Picture["iconos/notas.svg"]
   Resizable = False
   Arrangement = Arrange.Vertical
@@ -96,14 +96,14 @@
       ReadOnly = True
     }
     { Label7 Label
-      Move(387,0,63,36)
+      Move(252,0,63,36)
       NoTabFocus = True
       AutoResize = True
       Alignment = Align.Right
       Text = ("Asunto  ")
     }
     { !txAsunto TextBox
-      Move(450,0,63,36)
+      Move(333,0,171,36)
       #Public = True
       NoTabFocus = True
       Expand = True

@@ -5,6 +5,9 @@ Private Busqueda As Result
 
 Public Sub Form_Open()
 
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
+
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
@@ -72,9 +75,11 @@ Public Sub btnGuardarMod_Click()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
 
-  Mostrar_Lista
-  txtBuscar.Clear
-  LimpiarCampos 'limpiar campos
+  Mostrar_Lista()
+  LimpiarCampos() 'limpiar campos
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
@@ -92,6 +97,9 @@ Public Sub tbNuevo_Click()
   Dim HOY As Date
 
   HOY = Date
+
+  txAsunto.Enabled = True
+  txContenido.Enabled = True
 
   tbNuevo.Visible = False
   tbBorrar.Visible = False
@@ -111,13 +119,12 @@ Public Sub tbNuevo_Click()
     Idn = 0
   Else
     Idn = CInt(Contenido["MAX(id)"]) + 1
+    txId.Text = Idn
+    txFecha.Text = (Format(HOY, "dd/mm/yyyy"))
+    txAsunto.SetFocus
   Endif
 
-  txId.Text = Idn
-  txFecha.Text = (Format(HOY, "dd/mm/yyyy"))
-  txAsunto.SetFocus
-
-  Mostrar_Lista
+  Mostrar_Lista()
 
 End
 
@@ -130,8 +137,11 @@ Public Sub btnGuardar_Click()
   Contenido.Update
   Message.Info("Nueva entrada guardada.")
 
-  Mostrar_Lista ' Refrescamos la lista de entradas
-  LimpiarCampos ' Limpiamos los campos
+  Mostrar_Lista() ' Refrescamos la lista de entradas
+  LimpiarCampos() ' Limpiamos los campos
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
@@ -155,10 +165,13 @@ Public Sub tbBorrar_Click()
     Contenido = FMain.meConn.Exec("delete from apuntes where id=" & txId.Text)
   Endif
 
-  LimpiarCampos  'Limpiamos los campos
+  LimpiarCampos()  'Limpiamos los campos
 
   VLista.Clear
   Mostrar_Lista
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
@@ -189,8 +202,11 @@ End
 Public Sub btnRefresh_Click()
 
   VLista.Clear
-  Mostrar_Lista
-  txtBuscar.Clear
+  Mostrar_Lista()
+  LimpiarCampos()  'Limpiamos los campos
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
@@ -209,6 +225,9 @@ Public Sub VLista_RowClick(Row As Integer)
   txAsunto.Text = VLista[Row, 2].Text
   txContenido.Text = VLista[Row, 3].Text
 
+  txAsunto.Enabled = True
+  txContenido.Enabled = True
+
   tbNuevo.Visible = False
   tbBorrar.Visible = True
   btnGuardar.Visible = False
@@ -222,6 +241,7 @@ End
 Public Function LimpiarCampos()
 
   'Limpiamos los campos
+  txtBuscar.Text = ""
   txId.Text = ""
   txFecha.Text = ""
   txAsunto.Text = ""
