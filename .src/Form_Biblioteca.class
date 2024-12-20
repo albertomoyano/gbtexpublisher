@@ -2,6 +2,8 @@
 
 Private Contenido As Result
 Private Busqueda As Result
+Private ruta As String = txtGitHub.Text
+Private Comando As String
 
 Public Sub btnCerrar_Click()
 
@@ -188,9 +190,7 @@ Public Sub btnGuardar_Click()
 
   Dim i As Integer
 
-  ' Construir la consulta SQL
-  Dim Comando As String = "SELECT * FROM biblioteca WHERE txtGitHub02 = '" & txtGitHub.Text & "'"
-
+  Comando = "SELECT * FROM biblioteca WHERE txtGitHub02 = '" & txtGitHub.Text & "'"
   Busqueda = FMain.meConn.Exec(Comando)
 
   ' Verificar si hay resultados
@@ -293,15 +293,12 @@ End
 
 Public Sub btnBuscarGitHub_Click()
 
-  Dim ruta As String = txtGitHub.Text
-
   Shell "xdg-open " & txtGitHub.Text
 
 End
 
 Public Sub btnBuscarEtiquetas_Click()
 
-  Dim Comando As String
   Dim i As Integer
 
   If txtEtiquetas.Text = "" Then
