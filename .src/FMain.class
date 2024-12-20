@@ -287,6 +287,7 @@ Public Sub Form_Open()
   ' colaboradores
   cmbRolColaborador.Add("")
   cmbRolColaborador.Add("Autor de capítulo")
+  cmbRolColaborador.Add("Estudio introductorio")
   cmbRolColaborador.Add("Prólogo")
   cmbRolColaborador.Add("Introducción")
   cmbRolColaborador.Add("Prefacio")
