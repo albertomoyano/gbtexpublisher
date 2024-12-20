@@ -94,7 +94,7 @@
       Picture = Picture["iconos/github-mark.svg"]
     }
     { !txtGitHub TextBox
-      Move(585,0,63,36)
+      Move(585,0,153,36)
       #Public = True
       NoTabFocus = True
       Expand = True

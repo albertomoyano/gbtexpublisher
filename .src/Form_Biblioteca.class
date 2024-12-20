@@ -2,7 +2,6 @@
 
 Private Contenido As Result
 Private Busqueda As Result
-' Private ruta As String = txtGitHub.Text
 Private Comando As String
 
 Public Sub btnCerrar_Click()
@@ -44,7 +43,6 @@ End
 
 Public Sub Mostrar_Lista_Biblioteca()
 
-  ' Dim Count As Integer
   Dim i As Integer
 
   gridBiblioteca.Clear()
