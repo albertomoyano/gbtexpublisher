@@ -2,7 +2,7 @@
 
 Private Contenido As Result
 Private Busqueda As Result
-Private ruta As String = txtGitHub.Text
+' Private ruta As String = txtGitHub.Text
 Private Comando As String
 
 Public Sub btnCerrar_Click()
