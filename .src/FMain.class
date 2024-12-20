@@ -180,11 +180,6 @@ Public Sub Form_Open()
     cbEDITORTYPEc.Add(item)
   Next
 
-  BtnEliminarGlo.Enabled = False
-  BtnRefrescarGlo.Enabled = False
-  btnGuardarGlo.Enabled = False
-  btnGuardarCambiosGlo.Enabled = False
-
   ' comienza metadatos
   cmbTypePub.Add("research-article")
   cmbTypePub.Add("review-article")
@@ -304,10 +299,40 @@ Public Sub Form_Open()
   cmbRolColaborador.Add("Asesor")
   cmbRolColaborador.Add("Productor")
 
-  ' comienza bibtex
-  BtnEliminarBib.Enabled = False
-  btnGuardar.Enabled = False
-  btnGuardarCambios.Enabled = False
+  ' botonera glosario de inicio
+  BtnNuevoGlo.Visible = True
+  BtnEliminarGlo.Visible = False
+  BtnRefrescarGlo.Visible = False
+  btnGuardarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = False
+
+  ' botonera biblatex de inicio
+  BtnNuevoBib.Visible = True
+  BtnEliminarBib.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarCambios.Visible = False
+  btnGuardarIGUAL.Visible = False
+  btnAgregarCitationKey.Visible = False
+  BtnRefrescarBib.Visible = False
+
+  ' botonera de githubpages de inicio
+  BtnNuevoGHP.Visible = True
+  btnGuardarGHP.Visible = False
+  btnGuardarCambiosGHP.Visible = False
+  btnGenerarIndex.Visible = False
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
 
   ' asignamos tipografia monoespaciada al textarea de biblio
   txtTMPbiblio.Font = Font["Monospace"]
@@ -786,7 +811,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   MenuButton2.Menu = "menuProcesarArchivos"
   menuOT.Enabled = True
   menuPDFweb.Enabled = True
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -844,9 +869,9 @@ Public Sub menuAbrir_Click()'abrir un libro
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
   Contenido = meConn.Exec(comando)
   If Contenido.Count > 0 Then
-    BtnNuevoMeta.Enabled = False
-    btnGuardarMeta.Enabled = False
-    btnGuardarCambiosMeta.Enabled = True
+    BtnNuevoMeta.Visible = False
+    btnGuardarMeta.Visible = False
+    btnGuardarCambiosMeta.Visible = True
 
     txtIDmetadatos.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
@@ -928,9 +953,9 @@ Public Sub menuAbrir_Click()'abrir un libro
 
   Else
     'falta limpiar el contenido de los textbox
-    BtnNuevoMeta.Enabled = True
-    btnGuardarMeta.Enabled = False
-    btnGuardarCambiosMeta.Enabled = False
+    BtnNuevoMeta.Visible = True
+    btnGuardarMeta.Visible = False
+    btnGuardarCambiosMeta.Visible = False
   Endif
   ' txtContactCountry.MaxLength = 1500
 
@@ -987,7 +1012,7 @@ Public Sub mnuLast_Click()
   MenuButton2.Menu = "menuProcesarArchivos"
   menuOT.Enabled = True
   menuPDFweb.Enabled = True
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -1028,9 +1053,9 @@ Public Sub mnuLast_Click()
   Contenido = meConn.Exec(comando)
 
   If Contenido.Count > 0 Then
-    BtnNuevoMeta.Enabled = False
-    btnGuardarMeta.Enabled = False
-    btnGuardarCambiosMeta.Enabled = True
+    BtnNuevoMeta.Visible = False
+    btnGuardarMeta.Visible = False
+    btnGuardarCambiosMeta.Visible = True
     txtIDmetadatos.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
@@ -1110,9 +1135,9 @@ Public Sub mnuLast_Click()
     txt90_eisbn.Text = Contenido!eISBN_90
 
   Else
-    BtnNuevoMeta.Enabled = True
-    btnGuardarMeta.Enabled = False
-    btnGuardarCambiosMeta.Enabled = False
+    BtnNuevoMeta.Visible = True
+    btnGuardarMeta.Visible = False
+    btnGuardarCambiosMeta.Visible = False
   Endif
 
   ' txtContactCountry.MaxLength = 1500
@@ -1389,12 +1414,12 @@ End
 Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
 
   ' Mostrar_ListaGLO
-  BtnNuevoGlo.Enabled = True
-  BtnEliminarGlo.Enabled = False
-  BtnRefrescarGlo.Enabled = False
-  btnGuardarGlo.Enabled = False
-  btnGuardarCambiosGlo.Enabled = False
-  btnAgregarGloKey.Enabled = False
+  BtnNuevoGlo.Visible = True
+  BtnEliminarGlo.Visible = False
+  BtnRefrescarGlo.Visible = False
+  btnGuardarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = False
 
   LimpiarCamposGLO
 
@@ -1578,12 +1603,12 @@ End
 
 Public Sub BtnNuevoGlo_Click()
 
-  BtnNuevoGlo.Enabled = False
-  BtnEliminarGlo.Enabled = False
-  BtnRefrescarGlo.Enabled = False
-  btnGuardarGlo.Enabled = True
-  btnGuardarCambiosGlo.Enabled = False
-  btnAgregarGloKey.Enabled = True
+  BtnNuevoGlo.Visible = False
+  BtnEliminarGlo.Visible = False
+  BtnRefrescarGlo.Visible = False
+  btnGuardarGlo.Visible = True
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = True
 
   Dim Idn As Integer
 
@@ -1625,9 +1650,9 @@ Public Sub BtnEliminarGlo_Click()
   ' VListaGLO.Clear
   ' Mostrar_ListaGLO
 
-  BtnEliminarGlo.Enabled = False
-  btnGuardarCambiosGlo.Enabled = False
-  btnAgregarGloKey.Enabled = False
+  BtnEliminarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = False
 
 End
 
@@ -1677,21 +1702,21 @@ Public Sub btnGuardarGlo_Click()
   ' Mostrar_ListaGLO ' Refrescamos la lista de entradas
   LimpiarCamposGLO ' Limpiamos los campos
 
-  btnGuardarCambiosGlo.Enabled = False
-  btnGuardarGlo.Enabled = False
-  BtnNuevoGlo.Enabled = True
-  BtnEliminarGlo.Enabled = False
-  btnAgregarGloKey.Enabled = False
+  btnGuardarCambiosGlo.Visible = False
+  btnGuardarGlo.Visible = False
+  BtnNuevoGlo.Visible = True
+  BtnEliminarGlo.Visible = False
+  btnAgregarGloKey.Visible = False
 
 End
 
 Public Sub btnGuardarCambiosGlo_Click()
 
-  BtnNuevoGlo.Enabled = True
-  btnGuardarGlo.Enabled = False
-  btnGuardarCambiosGlo.Enabled = False
-  BtnEliminarGlo.Enabled = False
-  btnAgregarGloKey.Enabled = False
+  BtnNuevoGlo.Visible = True
+  btnGuardarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  BtnEliminarGlo.Visible = False
+  btnAgregarGloKey.Visible = False
 
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancosGLO
@@ -1708,10 +1733,10 @@ End
 
 Public Sub VGridGLO_RowClick(Row As Integer)
 
-  btnGuardarCambiosGlo.Enabled = True
-  BtnEliminarGlo.Enabled = True
-  btnAgregarGloKey.Enabled = True
-  btnGuardarGlo.Enabled = False
+  btnGuardarCambiosGlo.Visible = True
+  BtnEliminarGlo.Visible = True
+  btnAgregarGloKey.Visible = True
+  btnGuardarGlo.Visible = False
 
   txtIDglosario.Text = VGridGLO[Row, 0].Text
   txtCLAVEglo.Text = VGridGLO[Row, 1].Text
@@ -1729,7 +1754,7 @@ End
 
 Public Sub btnBuscarNombreGLO_Click()
 
-  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -1778,7 +1803,7 @@ End
 
 Public Sub btnBuscarTextoGLO_Click()
 
-  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -1827,7 +1852,7 @@ End
 
 Public Sub btnBuscarClaveGLO_Click()
 
-  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -2007,9 +2032,9 @@ Public Sub BtnNuevoMeta_Click()
   txtIDmetadatos.Text = Idn
   txtnombreArchivo.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
 
-  BtnNuevoMeta.Enabled = False
-  btnGuardarMeta.Enabled = True
-  btnGuardarCambiosMeta.Enabled = False
+  BtnNuevoMeta.Visible = False
+  btnGuardarMeta.Visible = True
+  btnGuardarCambiosMeta.Visible = False
 
 End
 
@@ -2023,9 +2048,9 @@ Public Sub btnGuardarMeta_Click()
 
   Contenido.Update
 
-  BtnNuevoMeta.Enabled = False
-  btnGuardarMeta.Enabled = False
-  btnGuardarCambiosMeta.Enabled = True
+  BtnNuevoMeta.Visible = False
+  btnGuardarMeta.Visible = False
+  btnGuardarCambiosMeta.Visible = True
 
   Message.Info("Los cambios se guardaron con éxito.")
 
@@ -2654,21 +2679,21 @@ Public Sub BtnEliminarBib_Click()
   VListaBIB.Clear()
   Mostrar_ListaBIB()
 
-  BtnEliminarBib.Enabled = False
-  btnGuardarCambios.Enabled = False
-  btnAgregarCitationKey.Enabled = False
-  btnGuardarIGUAL.Enabled = False
+  BtnEliminarBib.Visible = False
+  btnGuardarCambios.Visible = False
+  btnAgregarCitationKey.Visible = False
+  btnGuardarIGUAL.Visible = False
 
 End
 
 Public Sub BtnNuevoBib_Click()
 
-  BtnNuevoBib.Enabled = False
-  BtnEliminarBib.Enabled = False
-  btnGuardar.Enabled = True
-  btnGuardarCambios.Enabled = False
-  btnAgregarCitationKey.Enabled = True
-  btnAgregarKeyBIB.Enabled = True
+  BtnNuevoBib.Visible = False
+  BtnEliminarBib.Visible = False
+  btnGuardar.Visible = True
+  btnGuardarCambios.Visible = False
+  btnAgregarCitationKey.Visible = True
+  btnAgregarKeyBIB.Visible = True
   txtTMPbiblio.Enabled = True
   txtTMPbiblio.Background = Color.White
   ToolPanel1.Index = 0
@@ -2703,13 +2728,13 @@ End
 
 Public Sub btnGuardarCambios_Click()
 
-  BtnNuevoBib.Enabled = True
-  btnGuardar.Enabled = False
-  btnGuardarCambios.Enabled = False
-  btnGuardarIGUAL.Enabled = False
-  BtnEliminarBib.Enabled = False
-  btnAgregarCitationKey.Enabled = False
-  btnAgregarKeyBIB.Enabled = False
+  BtnNuevoBib.Visible = True
+  btnGuardar.Visible = False
+  btnGuardarCambios.Visible = False
+  btnGuardarIGUAL.Visible = False
+  BtnEliminarBib.Visible = False
+  btnAgregarCitationKey.Visible = False
+  btnAgregarKeyBIB.Visible = False
   txtTMPbiblio.Enabled = False
 
   'eliminamos blancos de inicio y final de cadena en los textbox
@@ -2763,8 +2788,8 @@ Public Sub btnGuardar_Click()
     mostrarIguales()
     VListaBIB.ScrollY = 0
     ToolPanel1.Index = 1
-    btnGuardar.Enabled = False
-    btnGuardarIGUAL.Enabled = True
+    btnGuardar.Visible = False
+    btnGuardarIGUAL.Visible = True
     Return ' Salir de la función si el título ya existe
   Endif
 
@@ -2780,13 +2805,13 @@ Public Sub btnGuardar_Click()
     LimpiarCamposBIB() ' Limpiamos los campos
     txtTMPbiblio.Clear 'limpiamos el campo temporal
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
-    btnGuardarCambios.Enabled = False
-    btnGuardar.Enabled = False
-    BtnNuevoBib.Enabled = True
-    BtnEliminarBib.Enabled = False
-    btnAgregarCitationKey.Enabled = False
-    btnGuardarIGUAL.Enabled = False
-    btnAgregarKeyBIB.Enabled = False
+    btnGuardarCambios.Visible = False
+    btnGuardar.Visible = False
+    BtnNuevoBib.Visible = True
+    BtnEliminarBib.Visible = False
+    btnAgregarCitationKey.Visible = False
+    btnGuardarIGUAL.Visible = False
+    btnAgregarKeyBIB.Visible = False
     txtTMPbiblio.Enabled = False
     txtTMPbiblio.Background = Color.LightGray
   Endif
@@ -2945,19 +2970,19 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
 
 End
 
 Public Sub BtnRefrescarBib_Click()'refrescamos la vista
 
-  BtnNuevoBib.Enabled = True
-  BtnEliminarBib.Enabled = False
-  btnGuardar.Enabled = False
-  btnGuardarCambios.Enabled = False
-  btnAgregarCitationKey.Enabled = False
-  btnGuardarIGUAL.Enabled = False
-  btnAgregarKeyBIB.Enabled = False
+  BtnNuevoBib.Visible = True
+  BtnEliminarBib.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarCambios.Visible = False
+  btnAgregarCitationKey.Visible = False
+  btnGuardarIGUAL.Visible = False
+  btnAgregarKeyBIB.Visible = False
 
   LimpiarCamposBIB() ' Limpiamos los campos
   VListaBIB.Clear
@@ -4474,12 +4499,12 @@ Public Sub btnGuardarIGUAL_Click()
       Mostrar_ListaBIB ' Refrescamos la lista de entradas
       LimpiarCamposBIB() ' Limpiamos los campos
 
-      btnGuardarCambios.Enabled = False
-      btnGuardar.Enabled = False
-      BtnNuevoBib.Enabled = True
-      BtnEliminarBib.Enabled = False
-      btnAgregarCitationKey.Enabled = False
-      btnGuardarIGUAL.Enabled = False
+      btnGuardarCambios.Visible = False
+      btnGuardar.Visible = False
+      BtnNuevoBib.Visible = True
+      BtnEliminarBib.Visible = False
+      btnAgregarCitationKey.Visible = False
+      btnGuardarIGUAL.Visible = False
     End If
   Endif
 
@@ -4626,17 +4651,17 @@ Public Sub mostrarIguales()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
 
 End
 
 Public Sub VListaBIB_RowClick(Row As Integer)
 
-  btnGuardarCambios.Enabled = True
-  BtnEliminarBib.Enabled = True
-  btnAgregarCitationKey.Enabled = True
-  btnGuardar.Enabled = False
-  btnAgregarKeyBIB.Enabled = True
+  btnGuardarCambios.Visible = True
+  BtnEliminarBib.Visible = True
+  btnAgregarCitationKey.Visible = True
+  btnGuardar.Visible = False
+  btnAgregarKeyBIB.Visible = True
 
   txtIDbibtex.Text = VListaBIB[Row, 0].Text
   cbTYPEentrada.Text = VListaBIB[Row, 1].Text
@@ -4930,7 +4955,7 @@ Public Sub BtnBuscarBookTitle_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
 
 End
 
@@ -5197,13 +5222,13 @@ Public Sub BtnBuscarJournal_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   ToolPanel1.Index = 1
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
 
 End
 
 Public Sub btnBuscarFiltroGlosario_Click()
 
-  BtnRefrescarGlo.Enabled = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -5770,7 +5795,7 @@ Public Sub menuAbrirRevista_Click()
   ' rutaBIB = BaseName & ".bib"
 
   btnMONOpdf.Enabled = False
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -5814,9 +5839,9 @@ Public Sub menuAbrirRevista_Click()
   comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
   Contenido = meConn.Exec(Comando)
   If Contenido.Count > 0 Then
-    BtnNuevoMeta.Enabled = False
-    btnGuardarMeta.Enabled = False
-    btnGuardarCambiosMeta.Enabled = True
+    BtnNuevoMeta.Visible = False
+    btnGuardarMeta.Visible = False
+    btnGuardarCambiosMeta.Visible = True
     txtIDglosario.Text = Contenido!id
     txtnombreArchivo.Text = Contenido!nombreArchivo
     txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
@@ -5896,9 +5921,9 @@ Public Sub menuAbrirRevista_Click()
     txt90_eisbn.Text = Contenido!eISBN_90
 
   Else
-    BtnNuevoMeta.Enabled = True
-    btnGuardarMeta.Enabled = False
-    btnGuardarCambiosMeta.Enabled = False
+    BtnNuevoMeta.Visible = True
+    btnGuardarMeta.Visible = False
+    btnGuardarCambiosMeta.Visible = False
   Endif
   txtContactCountry.MaxLength = 1500
 
@@ -5998,9 +6023,9 @@ Public Sub BtnNuevoComenta_Click()
   txtIdComenta.Text = Idn
   txtnombreArchivoComenta.Text = BaseName & ".tex" 'colocamos el nombre del archivo
 
-  BtnNuevoComenta.Enabled = False
-  btnGuardarComenta.Enabled = True
-  btnGuardarCambiosComenta.Enabled = False
+  BtnNuevoComenta.Visible = False
+  btnGuardarComenta.Visible = True
+  btnGuardarCambiosComenta.Visible = False
 
 End
 
@@ -6013,9 +6038,9 @@ Public Sub btnGuardarComenta_Click()
 
   Message.Info("Los cambios se guardaron con éxito.")
 
-  BtnNuevoComenta.Enabled = False
-  btnGuardarComenta.Enabled = False
-  btnGuardarCambiosComenta.Enabled = True
+  BtnNuevoComenta.Visible = False
+  btnGuardarComenta.Visible = False
+  btnGuardarCambiosComenta.Visible = True
 
 End
 
@@ -6052,9 +6077,9 @@ Public Sub levantarComenta()
   comandoComenta = "select * from comentarios where nombreArchivo = " & "'" & BaseName & ".tex'"
   ContenidoComenta = meConn.Exec(comandoComenta)
   If ContenidoComenta.Count > 0 Then
-    BtnNuevoComenta.Enabled = False
-    btnGuardarComenta.Enabled = False
-    btnGuardarCambiosComenta.Enabled = True
+    BtnNuevoComenta.Visible = False
+    btnGuardarComenta.Visible = False
+    btnGuardarCambiosComenta.Visible = True
     txtIdComenta.Text = ContenidoComenta!id
     txtnombreArchivoComenta.Text = ContenidoComenta!nombreArchivo
     txtContacto.Text = ContenidoComenta!contacto
@@ -6067,9 +6092,9 @@ Public Sub levantarComenta()
     txtCorreo.Text = ""
     txtTelefono.Text = ""
     txtDisclaimer.Text = ""
-    BtnNuevoComenta.Enabled = True
-    btnGuardarComenta.Enabled = False
-    btnGuardarCambiosComenta.Enabled = False
+    BtnNuevoComenta.Visible = True
+    btnGuardarComenta.Visible = False
+    btnGuardarCambiosComenta.Visible = False
   Endif
 
 End
@@ -6142,7 +6167,7 @@ Public Sub menuMono_Click()'monografia academica
     UpdateMenu()
   End If
 
-  btnGuardarIGUAL.Enabled = False
+  btnGuardarIGUAL.Visible = False
   TabPanel1.Enabled = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
@@ -6171,9 +6196,9 @@ Public Sub menuMono_Click()'monografia academica
     Form_Contador.Close ' Cierra la ventana
   End If
 
-  BtnNuevoMeta.Enabled = True
-  btnGuardarMeta.Enabled = False
-  btnGuardarCambiosMeta.Enabled = False
+  BtnNuevoMeta.Visible = True
+  btnGuardarMeta.Visible = False
+  btnGuardarCambiosMeta.Visible = False
 
   Mod_Funciones_Monografia.CopiarArchivosMonografia(TextBox1.Text)
 
@@ -7469,9 +7494,9 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!rolHTML = cmbRolAutores.Text
   ContenidoGHP!txtSumarioHTML = txtSumarioHTML.Text
 
-  BtnNuevoGHP.Enabled = False
-  btnGuardarGHP.Enabled = False
-  btnGuardarCambiosGHP.Enabled = True
+  BtnNuevoGHP.Visible = False
+  btnGuardarGHP.Visible = False
+  btnGuardarCambiosGHP.Visible = True
 
 End
 
@@ -7506,9 +7531,10 @@ Public Sub levantarGitHubPages()
   comandoGHP = "select * from githubpages where nombreArchivo = " & "'" & BaseName & ".tex'"
   ContenidoGHP = meConn.Exec(comandoGHP)
   If ContenidoGHP.Count > 0 Then
-    BtnNuevoGHP.Enabled = False
-    btnGuardarGHP.Enabled = False
-    btnGuardarCambiosGHP.Enabled = True
+    BtnNuevoGHP.Visible = False
+    btnGuardarGHP.Visible = False
+    btnGuardarCambiosGHP.Visible = True
+    btnGenerarIndex.Visible = True
     txtIdGitHubPages.Text = ContenidoGHP!id
     txtnombreArchivoGHP.Text = ContenidoGHP!nombreArchivo
     txtCreateDateHTML.Text = ContenidoGHP!txtCreateDateHTML
@@ -7537,9 +7563,10 @@ Public Sub levantarGitHubPages()
     txtCabeceraHTML.Text = ""
     cmbRolAutores.Text = ""
     txtSumarioHTML.Text = ""
-    BtnNuevoGHP.Enabled = True
-    btnGuardarGHP.Enabled = False
-    btnGuardarCambiosGHP.Enabled = False
+    BtnNuevoGHP.Visible = True
+    btnGuardarGHP.Visible = False
+    btnGuardarCambiosGHP.Visible = False
+    btnGenerarIndex.Visible = False
   Endif
 
 End
@@ -7630,10 +7657,6 @@ Public Sub BtnNuevoGHP_Click()
   txtIdGitHubPages.Text = Idn
   txtnombreArchivoGHP.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
 
-  BtnNuevoGHP.Enabled = False
-  btnGuardarGHP.Enabled = True
-  btnGuardarCambiosGHP.Enabled = False
-
   If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
     Mkdir File.Dir(TextBox1.Text) & "/docs"
   End If
@@ -7649,6 +7672,11 @@ Public Sub BtnNuevoGHP_Click()
   If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/imago1.css") Then
     Copy "./imago1.css" To File.Dir(TextBox1.Text) & "/docs/imago1.css"
   End If
+
+  BtnNuevoGHP.Visible = False
+  btnGuardarGHP.Visible = True
+  btnGuardarCambiosGHP.Visible = False
+  btnGenerarIndex.Visible = True
 
 End
 
@@ -7673,10 +7701,10 @@ Public Sub btnNuevoCapitulo_Click()
 
   MostrarListaCapNuevo()
 
-  btnNuevoCapitulo.Enabled = False
-  btnGuardarCapitulo.Enabled = True
-  btnGuardarCambiosCapitulo.Enabled = False
-  btnBorrarCapitulo.Enabled = False
+  btnNuevoCapitulo.Visible = False
+  btnGuardarCapitulo.Visible = True
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = True
   txtRangoPaginas.Enabled = True
   txtURLdescarga.Enabled = True
@@ -7732,10 +7760,10 @@ Public Sub btnGuardarCapitulo_Click()
   MostrarListaCapNuevo ' Refrescamos la lista de entradas
   LimpiarCamposCapituloNuevo ' Limpiamos los campos
 
-  btnNuevoCapitulo.Enabled = True
-  btnGuardarCapitulo.Enabled = False
-  btnGuardarCambiosCapitulo.Enabled = False
-  btnBorrarCapitulo.Enabled = False
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
   txtURLdescarga.Enabled = False
@@ -7777,10 +7805,10 @@ Public Sub btnBorrarCapitulo_Click()
   LimpiarCamposCapituloNuevo  'Limpiamos los campos
   MostrarListaCapNuevo ' Refrescamos la lista de entradas
 
-  btnNuevoCapitulo.Enabled = True
-  btnGuardarCapitulo.Enabled = False
-  btnGuardarCambiosCapitulo.Enabled = False
-  btnBorrarCapitulo.Enabled = False
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
   txtURLdescarga.Enabled = False
@@ -7797,10 +7825,10 @@ Public Sub btnGuardarCambiosCapitulo_Click()
   LimpiarCamposCapituloNuevo  'Limpiamos los campos
   MostrarListaCapNuevo ' Refrescamos la lista de entradas
 
-  btnNuevoCapitulo.Enabled = True
-  btnGuardarCapitulo.Enabled = False
-  btnGuardarCambiosCapitulo.Enabled = False
-  btnBorrarCapitulo.Enabled = False
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
   txtURLdescarga.Enabled = False
@@ -7828,10 +7856,10 @@ Public Sub btnNuevoAutor_Click()
 
   MostrarListaAutoresNuevo()
 
-  btnNuevoAutor.Enabled = False
-  btnGuardarAutor.Enabled = True
-  btnGuardarCambiosAutor.Enabled = False
-  btnBorrarAutor.Enabled = False
+  btnNuevoAutor.Visible = False
+  btnGuardarAutor.Visible = True
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
   txtAutor.Enabled = True
   txtORCID.Enabled = True
 
@@ -7851,10 +7879,10 @@ Public Sub btnGuardarAutor_Click()
   LimpiarCamposAutorNuevo ' Limpiamos los campos
   MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
 
-  btnNuevoAutor.Enabled = True
-  btnGuardarAutor.Enabled = False
-  btnGuardarCambiosAutor.Enabled = False
-  btnBorrarAutor.Enabled = False
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
   txtAutor.Enabled = False
   txtORCID.Enabled = False
 
@@ -7870,10 +7898,10 @@ Public Sub btnGuardarCambiosAutor_Click()
   LimpiarCamposAutorNuevo  'Limpiamos los campos
   MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
 
-  btnNuevoAutor.Enabled = True
-  btnGuardarAutor.Enabled = False
-  btnGuardarCambiosAutor.Enabled = False
-  btnBorrarAutor.Enabled = False
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
   txtAutor.Enabled = False
   txtORCID.Enabled = False
 
@@ -7894,10 +7922,10 @@ Public Sub btnBorrarAutor_Click()
   LimpiarCamposAutorNuevo  'Limpiamos los campos
   MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
 
-  btnNuevoAutor.Enabled = True
-  btnGuardarAutor.Enabled = False
-  btnGuardarCambiosAutor.Enabled = False
-  btnBorrarAutor.Enabled = False
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
   txtAutor.Enabled = False
   txtORCID.Enabled = False
 
@@ -7963,10 +7991,10 @@ Public Sub tblArticulos_RowClick(Row As Integer)
   txtRangoPaginas.Text = tblArticulos[Row, 3].Text
   txtURLdescarga.Text = tblArticulos[Row, 4].Text
 
-  btnNuevoCapitulo.Enabled = False
-  btnGuardarCapitulo.Enabled = False
-  btnGuardarCambiosCapitulo.Enabled = True
-  btnBorrarCapitulo.Enabled = True
+  btnNuevoCapitulo.Visible = False
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = True
+  btnBorrarCapitulo.Visible = True
   txtCapitulo.Enabled = True
   txtRangoPaginas.Enabled = True
   txtURLdescarga.Enabled = True
@@ -7980,10 +8008,10 @@ Public Sub tblAutores_RowClick(Row As Integer)
   txtAutor.Text = tblAutores[Row, 2].Text
   txtORCID.Text = tblAutores[Row, 3].Text
 
-  btnNuevoAutor.Enabled = False
-  btnGuardarAutor.Enabled = False
-  btnGuardarCambiosAutor.Enabled = True
-  btnBorrarAutor.Enabled = True
+  btnNuevoAutor.Visible = False
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = True
+  btnBorrarAutor.Visible = True
   txtAutor.Enabled = True
   txtORCID.Enabled = True
 
@@ -8030,10 +8058,10 @@ Public Sub btnNuevoColaborador_Click()
 
   MostrarListaColaboradoresNuevo()
 
-  btnNuevoColaborador.Enabled = False
-  btnGuardarColaborador.Enabled = True
-  btnGuardarCambiosColaborador.Enabled = False
-  btnBorrarColaborador.Enabled = False
+  btnNuevoColaborador.Visible = False
+  btnGuardarColaborador.Visible = True
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
   cmbRolColaborador.Enabled = True
   txtColaborador.Enabled = True
   txtORCIDcolaborador.Enabled = True
@@ -8111,10 +8139,10 @@ Public Sub btnGuardarColaborador_Click()
   LimpiarCamposColaboradoresNuevo ' Limpiamos los campos
   MostrarListaColaboradoresNuevo ' Refrescamos la lista de entradas
 
-  btnNuevoColaborador.Enabled = True
-  btnGuardarColaborador.Enabled = False
-  btnGuardarCambiosColaborador.Enabled = False
-  btnBorrarColaborador.Enabled = False
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
   txtColaborador.Enabled = False
   txtORCIDcolaborador.Enabled = False
   cmbRolColaborador.Enabled = False
@@ -8131,10 +8159,10 @@ Public Sub btnGuardarCambiosColaborador_Click()
   LimpiarCamposColaboradoresNuevo' Limpiamos los campos
   MostrarListaColaboradoresNuevo' Refrescamos la lista de entradas
 
-  btnNuevoColaborador.Enabled = True
-  btnGuardarColaborador.Enabled = False
-  btnGuardarCambiosColaborador.Enabled = False
-  btnBorrarColaborador.Enabled = False
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
   txtColaborador.Enabled = False
   txtORCIDcolaborador.Enabled = False
   cmbRolColaborador.Enabled = False
@@ -8156,10 +8184,10 @@ Public Sub btnBorrarColaborador_Click()
   LimpiarCamposColaboradoresNuevo' Limpiamos los campos
   MostrarListaColaboradoresNuevo' Refrescamos la lista de entradas
 
-  btnNuevoColaborador.Enabled = True
-  btnGuardarColaborador.Enabled = False
-  btnGuardarCambiosColaborador.Enabled = False
-  btnBorrarColaborador.Enabled = False
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
   txtColaborador.Enabled = False
   txtORCIDcolaborador.Enabled = False
   cmbRolColaborador.Enabled = False
@@ -8174,10 +8202,10 @@ Public Sub tblColaboradores_RowClick(Row As Integer)
   txtORCIDcolaborador.Text = tblColaboradores[Row, 3].Text
   cmbRolColaborador.Text = tblColaboradores[Row, 4].Text
 
-  btnNuevoColaborador.Enabled = False
-  btnGuardarColaborador.Enabled = False
-  btnGuardarCambiosColaborador.Enabled = True
-  btnBorrarColaborador.Enabled = True
+  btnNuevoColaborador.Visible = False
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = True
+  btnBorrarColaborador.Visible = True
   txtColaborador.Enabled = True
   txtORCIDcolaborador.Enabled = True
   cmbRolColaborador.Enabled = True

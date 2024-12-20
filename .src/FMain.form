@@ -723,7 +723,6 @@
       }
       { btnAgregarCitationKey Button
         MoveScaled(22,0,4,4)
-        Enabled = False
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }
@@ -782,7 +781,6 @@
       }
       { btnAgregarKeyBIB Button
         MoveScaled(53,0,4,4)
-        Enabled = False
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }
@@ -2708,19 +2706,18 @@
         MoveScaled(0,0,4,4)
         Picture = Picture["iconos/search.svg"]
       }
-      { btnAgregarGloKey Button
-        MoveScaled(4,0,4,4)
-        Enabled = False
-        ToolTip = ("Agregar clave")
-        Picture = Picture["iconos/clave.svg"]
-      }
       { lblAlta2 Label
-        MoveScaled(10,0,8,4)
+        MoveScaled(10,0,12,4)
         Alignment = Align.Right
         Text = ("Clave  ")
       }
+      { btnAgregarGloKey Button
+        MoveScaled(33,0,4,4)
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
       { txtCLAVEglo TextBox
-        MoveScaled(23,0,14,4)
+        MoveScaled(38,0,14,4)
         NoTabFocus = True
         ToolTip = ("Clave para ser utilizada solo con LaTeX")
         Expand = True
@@ -2728,13 +2725,13 @@
         Placeholder = ("Clave GLO única")
       }
       { lblAlta3 Label
-        MoveScaled(37,0,21,4)
+        MoveScaled(56,0,21,4)
         AutoResize = True
         Alignment = Align.Right
         Text = ("    Exportar como  ")
       }
       { txtEXPORTARglo TextBox
-        MoveScaled(58,0,9,4)
+        MoveScaled(80,0,9,4)
         Background = Color.Background
         NoTabFocus = True
         Expand = True
@@ -2922,12 +2919,10 @@
       }
       { btnGuardarMeta Button
         MoveScaled(4,0,4,4)
-        Enabled = False
         Picture = Picture["iconos/guardar.svg"]
       }
       { btnGuardarCambiosMeta Button
         MoveScaled(8,0,4,4)
-        Enabled = False
         Picture = Picture["iconos/guardarComo.svg"]
       }
       { Separator6 Separator
@@ -4597,12 +4592,10 @@
       }
       { btnGuardarGHP Button
         MoveScaled(4,0,4,4)
-        Enabled = False
         Picture = Picture["iconos/guardar.svg"]
       }
       { btnGuardarCambiosGHP Button
         MoveScaled(8,0,4,4)
-        Enabled = False
         Picture = Picture["iconos/guardarComo.svg"]
       }
       { Separator21 Separator
@@ -4842,17 +4835,14 @@
                 }
                 { btnGuardarAutor Button
                   MoveScaled(48,0,4,4)
-                  Enabled = False
                   Picture = Picture["iconos/guardar.svg"]
                 }
                 { btnGuardarCambiosAutor Button
                   MoveScaled(52,0,4,4)
-                  Enabled = False
                   Picture = Picture["iconos/guardarComo.svg"]
                 }
                 { btnBorrarAutor Button
                   MoveScaled(57,0,4,4)
-                  Enabled = False
                   NoTabFocus = True
                   Picture = Picture["iconos/borrar.svg"]
                 }
@@ -4939,17 +4929,14 @@
                 }
                 { btnGuardarColaborador Button
                   MoveScaled(48,0,4,4)
-                  Enabled = False
                   Picture = Picture["iconos/guardar.svg"]
                 }
                 { btnGuardarCambiosColaborador Button
                   MoveScaled(52,0,4,4)
-                  Enabled = False
                   Picture = Picture["iconos/guardarComo.svg"]
                 }
                 { btnBorrarColaborador Button
                   MoveScaled(57,0,4,4)
-                  Enabled = False
                   NoTabFocus = True
                   Picture = Picture["iconos/borrar.svg"]
                 }
@@ -5034,17 +5021,14 @@
               }
               { btnGuardarCapitulo Button
                 MoveScaled(7,0,4,4)
-                Enabled = False
                 Picture = Picture["iconos/guardar.svg"]
               }
               { btnGuardarCambiosCapitulo Button
                 MoveScaled(11,0,4,4)
-                Enabled = False
                 Picture = Picture["iconos/guardarComo.svg"]
               }
               { btnBorrarCapitulo Button
                 MoveScaled(15,0,4,4)
-                Enabled = False
                 NoTabFocus = True
                 Picture = Picture["iconos/borrar.svg"]
               }
@@ -5363,12 +5347,10 @@
       }
       { btnGuardarComenta Button
         MoveScaled(4,0,4,4)
-        Enabled = False
         Picture = Picture["iconos/guardar.svg"]
       }
       { btnGuardarCambiosComenta Button
         MoveScaled(8,0,4,4)
-        Enabled = False
         Picture = Picture["iconos/guardarComo.svg"]
       }
       { btnFont Button
