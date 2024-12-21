@@ -6,6 +6,7 @@ Public ContenidoMeta As Result
 Public ContenidoGHP As Result
 Public ContenidoSeparatas As Result
 Public ContenidoAutores As Result
+Public ContenidoColaboradores As Result
 Public ResultadoMeta As Result
 
 Public Sub ExportarDOCX() ' Función para exportar el archivo a DOCX las notas
@@ -339,9 +340,6 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   Dim outputFile As String
   Dim id As Integer
 
-  ' me conceto a la base de datos
-  ' Conn = Mod_Conn.conectar()
-
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   Contenido = FMain.meConn.Exec(buscar)
@@ -470,9 +468,6 @@ Public Sub ExportToCatalogo(rutaTexto As String)
   Dim buscarAutor As String
   Dim outputFile As String
   Dim id As Integer
-
-  ' me conceto a la base de datos
-  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
@@ -703,9 +698,6 @@ Public Sub Exportar2BibTeX(rutaTexto As String)
   Dim outputFile As String
   Dim fecha As String
   Dim HOY As Date
-
-  ' me conceto a la base de datos
-  ' Conn = Mod_Conn.conectar()
 
   'me aseguro de que la búsqueda se encuentre entre comas
   buscar = "select * from bibtex where keywords like ',%" & File.BaseName(rutaTexto) & ",%'"
@@ -1007,9 +999,6 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
   Dim buscarAutor As String
   Dim outputFile As String
   Dim id As Integer
-
-  ' me conceto a la base de datos
-  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
@@ -1326,9 +1315,6 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
   Dim buscarMeta As String
   Dim outputFile As String
 
-  ' me conceto a la base de datos
-  ' Conn = Mod_Conn.conectar()
-
   ' Exportamos los registros seleccionados
   buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   Contenido = FMain.meConn.Exec(buscar)
@@ -1438,8 +1424,6 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     Contenido.MoveNext
   Wend
 
-  ' Next ' Cerrar el bucle For Each id In ids
-
   ' Establece la ruta y el nombre del archivo de salida
   outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXdisclaimer-" & File.BaseName(rutaTexto) & ".tex"
 
@@ -1487,9 +1471,6 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
   Dim fechaPDF As String
 
   fechaPDF = (Format(Now, "yyyymmddhhnnss"))
-
-  ' me conceto a la base de datos
-  ' Conn = Mod_Conn.conectar()
 
   ' Exportamos los registros seleccionados
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
@@ -1556,18 +1537,22 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Dim fb As ResultField
   Dim fg As ResultField
   Dim fx As ResultField
+  Dim fc As ResultField
   Dim aFields As New String[]
   Dim bFields As New String[]
   Dim gFields As New String[]
   Dim xFields As New String[]
+  Dim cFields As New String[]
   Dim wa As Integer
   Dim wb As Integer
   Dim wg As Integer
   Dim wx As Integer
+  Dim wc As Integer
   Dim buscarMeta As String
   Dim buscarGHP As String
   Dim buscarSeparatas As String
   Dim buscarAutores As String
+  Dim buscarColaboradores As String
   Dim outputFile As String
   Dim fechaPDF As String
 
@@ -1588,9 +1573,12 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   ' Exportamos los registros seleccionados
   buscarAutores = "select * from autoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   ContenidoAutores = FMain.meConn.Exec(buscarAutores)
+  ' Exportamos los registros seleccionados
+  buscarColaboradores = "select * from colaboradoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoColaboradores = FMain.meConn.Exec(buscarColaboradores)
 
   bFields.Clear
-  For Each fb In ContenidoMeta.Fields
+  For Each fb In ContenidoMeta.Fields' tabla metadatos
     bFields.Add(fb.Name)
     If Len(fb.Name) > wb Then
       wb = Len(fb.Name)
@@ -1598,7 +1586,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Next
 
   gFields.Clear
-  For Each fg In ContenidoGHP.Fields
+  For Each fg In ContenidoGHP.Fields' tabla githubpages
     gFields.Add(fg.Name)
     If Len(fg.Name) > wg Then
       wg = Len(fg.Name)
@@ -1606,7 +1594,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Next
 
   xFields.Clear
-  For Each fx In ContenidoSeparatas.Fields
+  For Each fx In ContenidoSeparatas.Fields' tabla separatas
     xFields.Add(fx.Name)
     If Len(fx.Name) > wb Then
       wx = Len(fx.Name)
@@ -1614,10 +1602,18 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Next
 
   aFields.Clear
-  For Each fa In ContenidoAutores.Fields
+  For Each fa In ContenidoAutores.Fields' autoresghp
     aFields.Add(fa.Name)
     If Len(fa.Name) > wa Then
       wa = Len(fa.Name)
+    Endif
+  Next
+
+  cFields.Clear
+  For Each fc In ContenidoColaboradores.Fields' tabla colaboradores
+    cFields.Add(fc.Name)
+    If Len(fc.Name) > wc Then
+      wc = Len(fc.Name)
     Endif
   Next
 
@@ -1686,14 +1682,35 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "<!-- Dublin Core (DC)  -->" & gb.NewLine
     s &= "<link rel=\"schema.dc\" href=\"http://purl.org/dc/elements/1.1/\">" & gb.NewLine
     s &= "<!-- Autor principal  -->" & gb.NewLine
-    ' va un loop si hay más compiladores o editores
-    s &= "\t <meta name=\"dc.creator\" content=\" --autores-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.creator.orcid\" content=\" --orcid del autor-- \">" & gb.NewLine
-    ' va un loop con los autores
-    s &= "\t <meta name=\"dc.contributor\" content=\" --contribucion , p.e. María González-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.contributor.orcid\" content=\" --orcid del contribuidor, p.e. María González-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.description\" content=\" --nombre del autor más el rol entre parentesis-- \">" & gb.NewLine
-    '
+
+    ' va un loop si hay más autores
+    While ContenidoAutores.Available
+      ' Verificar si aFields[3] es Null o está vacío
+      If IsNull(ContenidoAutores[aFields[3]]) Or ContenidoAutores[aFields[3]] = "" Then
+        ' Si el campo está vacío, solo mostrar el valor de aFields[2]
+        s &= "\t <meta name=\"dc.creator\" content=\"" & ContenidoAutores[aFields[2]] & "\">" & gb.NewLine
+      Else
+        s &= "\t <meta name=\"dc.creator\" content=\"" & ContenidoAutores[aFields[2]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.creator.orcid\" content=\"" & ContenidoAutores[aFields[3]] & "\">" & gb.NewLine
+      Endif
+      ContenidoAutores.MoveNext ' Avanzar al siguiente registro
+    Wend
+
+    ' va un loop si hay más colaboradores
+    While ContenidoColaboradores.Available
+      ' Verificar si aFields[3] es Null o está vacío
+      If IsNull(ContenidoColaboradores[cFields[3]]) Or ContenidoColaboradores[cFields[3]] = "" Then
+        ' Si el campo está vacío, solo mostrar el valor de aFields[2]
+        s &= "\t <meta name=\"dc.contributor\" content=\"" & ContenidoColaboradores[cFields[2]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.contributor.role\" content=\"" & ContenidoColaboradores[cFields[4]] & "\">" & gb.NewLine
+      Else
+        s &= "\t <meta name=\"dc.contributor\" content=\"" & ContenidoColaboradores[cFields[2]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.contributor.orcid\" content=\"" & ContenidoColaboradores[cFields[3]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.contributor.role\" content=\"" & ContenidoColaboradores[cFields[4]] & "\">" & gb.NewLine
+      Endif
+      ContenidoColaboradores.MoveNext ' Avanzar al siguiente registro
+    Wend
+
     s &= "\t <meta name=\"dc.date.created\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[2]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.date.datesubmitted\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[9]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"dc.date.modified\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[3]] & "\"/>" & gb.NewLine

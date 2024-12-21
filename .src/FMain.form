@@ -132,6 +132,7 @@
     }
     { mnu1LastFiles Menu
       Text = ("Archivos abiertos recientemente")
+      Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { Menu10 Menu
     }
