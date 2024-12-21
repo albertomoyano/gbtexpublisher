@@ -882,6 +882,8 @@ Public Sub menuAbrir_Click()'abrir un libro
     txt05_pdfauthor.Text = Contenido!pdfauthor_05
     txt06_pdftitle.Text = Contenido!pdftitle_06
     txtSubjet.Text = Contenido!pdfsubject_07
+    txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
+    txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
     txtKeywords.Text = Contenido!pdfkeywords_08
     txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
     txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
@@ -1065,6 +1067,8 @@ Public Sub mnuLast_Click()
     txt05_pdfauthor.Text = Contenido!pdfauthor_05
     txt06_pdftitle.Text = Contenido!pdftitle_06
     txtSubjet.Text = Contenido!pdfsubject_07
+    txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
+    txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
     txtKeywords.Text = Contenido!pdfkeywords_08
     txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
     txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
@@ -2067,6 +2071,8 @@ Public Sub guardarCamposMETA()
   Contenido!pdfauthor_05 = txt05_pdfauthor.Text
   Contenido!pdftitle_06 = txt06_pdftitle.Text
   Contenido!pdfsubject_07 = txtSubjet.Text
+  Contenido!pdfsubject_07b = txtpdfsubject_07b.Text
+  Contenido!pdfsubject_07c = txtpdfsubject_07c.Text
   Contenido!pdfkeywords_08 = txtKeywords.Text
   Contenido!pdfsubtitle_09 = txt09_pdfsubtitle.Text
   Contenido!pdfauthortitle_10 = txt10_pdfauthortitle.Text
@@ -5851,6 +5857,8 @@ Public Sub menuAbrirRevista_Click()
     txt05_pdfauthor.Text = Contenido!pdfauthor_05
     txt06_pdftitle.Text = Contenido!pdftitle_06
     txtSubjet.Text = Contenido!pdfsubject_07
+    txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
+    txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
     txtKeywords.Text = Contenido!pdfkeywords_08
     txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
     txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10

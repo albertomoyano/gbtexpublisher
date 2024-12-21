@@ -187,6 +187,8 @@ Public Sub limpiamosMetadatosLibrosRevistas()
   FMain.txt05_pdfauthor.Text = ""
   FMain.txt06_pdftitle.Text = ""
   FMain.txtSubjet.Text = ""
+  FMain.txtpdfsubject_07b.Text = ""
+  FMain.txtpdfsubject_07c.Text = ""
   FMain.txtKeywords.Text = ""
   FMain.txt09_pdfsubtitle.Text = ""
   FMain.txt10_pdfauthortitle.Text = ""

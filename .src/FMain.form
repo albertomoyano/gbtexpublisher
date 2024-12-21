@@ -3080,7 +3080,7 @@
             Alignment = Align.Right
             Text = ("Subject  ")
           }
-          { !txtSubjet2 TextBox
+          { !txtpdfsubject_07b TextBox
             MoveScaled(51,0,7,4)
             #Public = True
             Expand = True
@@ -3095,7 +3095,7 @@
             Alignment = Align.Right
             Text = ("   Assunto  ")
           }
-          { !txtSubjet3 TextBox
+          { !txtpdfsubject_07c TextBox
             MoveScaled(78,0,9,4)
             #Public = True
             Expand = True
@@ -4633,708 +4633,472 @@
         ReadOnly = True
       }
     }
-    { TabStrip1 TabPanel
-      MoveScaled(1,6,123,282)
+    { ScrollView12 ScrollView
+      MoveScaled(0,6,123,113)
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
       Margin = True
       Padding = 4
-      Count = 2
-      Index = 0
-      Text = ("     Elementos generales     ")
-      { ScrollView12 ScrollView
-        MoveScaled(2,1,118,96)
-        Expand = True
-        Arrangement = Arrange.Vertical
-        Spacing = True
+      Border = False
+      ScrollBar = Scroll.Vertical
+      { HBox189 HBox
+        MoveScaled(1,0,115,4)
+        { Label145 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Fecha de publicación  ")
+        }
+        { !txtPubDateHTML TextBox
+          MoveScaled(23,0,23,4)
+          #Public = True
+          Expand = True
+          Placeholder = ("DD-MM-YYYY")
+        }
+        { Label139 Label
+          MoveScaled(36,0,23,4)
+          Alignment = Align.Right
+          Text = ("Fecha de creación  ")
+        }
+        { !txtCreateDateHTML TextBox
+          MoveScaled(59,0,23,4)
+          #Public = True
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+          Placeholder = ("YYYYMMDDHHmmSS")
+        }
+        { Label137 Label
+          MoveScaled(82,0,23,4)
+          Alignment = Align.Right
+          Text = ("Fecha de modificación  ")
+        }
+        { !txtModDateHTML TextBox
+          MoveScaled(105,0,23,4)
+          #Public = True
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+          Placeholder = ("YYYYMMDDHHmmSS")
+        }
+      }
+      { HBox194 HBox
+        MoveScaled(1,4,106,4)
+        { Label142 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("URL para descarga PDF  ")
+        }
+        { !txtHREFpdfHTML TextBox
+          MoveScaled(58,0,23,4)
+          #Public = True
+          Expand = True
+        }
+      }
+      { HBox192 HBox
+        MoveScaled(1,8,106,4)
+        { Label143 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("URL para descarga ePub  ")
+        }
+        { !txtHREFepubHTML TextBox
+          MoveScaled(58,0,23,4)
+          #Public = True
+          Expand = True
+        }
+      }
+      { HBox193 HBox
+        MoveScaled(1,12,106,4)
+        { Label144 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("URL para lectura en línea  ")
+        }
+        { !txtHREFenlineaHTML TextBox
+          MoveScaled(58,0,23,4)
+          #Public = True
+          Expand = True
+        }
+      }
+      { HBox197 HBox
+        MoveScaled(1,16,106,4)
+        { Label147 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Imagen de cabecera  ")
+        }
+        { btnBuscarCabecera Button
+          MoveScaled(26,0,4,4)
+          Picture = Picture["iconos/abrirBuscar.svg"]
+        }
+        { !txtCabeceraHTML TextBox
+          MoveScaled(31,0,17,4)
+          #Public = True
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+        }
+        { Label140 Label
+          MoveScaled(48,0,23,4)
+          Alignment = Align.Right
+          Text = ("Imagen de tapa  ")
+        }
+        { btnBuscarImagen Button
+          MoveScaled(73,0,4,4)
+          Picture = Picture["iconos/search.svg"]
+        }
+        { !txtImagenHTML TextBox
+          MoveScaled(78,0,17,4)
+          #Public = True
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+        }
+      }
+      { HBox191 HBox
+        MoveScaled(1,20,106,4)
+        { Label141 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("CV autores  ")
+        }
+        { btnMostrarTexto Button
+          MoveScaled(26,0,4,4)
+          Picture = Picture["iconos/schedule.svg"]
+        }
+        { !txtCVautoresHTML TextBox
+          MoveScaled(31,0,17,4)
+          #Public = True
+          Expand = True
+          Alignment = Align.Left
+        }
+        { Label146 Label
+          MoveScaled(49,0,23,4)
+          Alignment = Align.Right
+          Text = ("Pie de página  ")
+        }
+        { btnMostrarTexto2 Button
+          MoveScaled(73,0,4,4)
+          Picture = Picture["iconos/schedule.svg"]
+        }
+        { !txtPieHTML TextBox
+          MoveScaled(78,0,13,4)
+          #Public = True
+          Expand = True
+          Alignment = Align.Left
+        }
+      }
+      { HBox178 HBox
+        MoveScaled(1,24,106,4)
+        { Label156 Label
+          MoveScaled(0,0,23,4)
+          Alignment = Align.Right
+          Text = ("Sumario  ")
+        }
+        { !txtSumarioHTML TextBox
+          MoveScaled(58,0,23,4)
+          #Public = True
+          Expand = True
+        }
+      }
+      { Frame2 Frame
+        MoveScaled(2,47,116,28)
+        Arrangement = Arrange.Fill
         Margin = True
         Padding = 4
-        Border = False
-        ScrollBar = Scroll.Vertical
-        { HBox189 HBox
-          MoveScaled(1,0,115,4)
-          { Label145 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("Fecha de publicación  ")
-          }
-          { !txtPubDateHTML TextBox
-            MoveScaled(23,0,23,4)
-            #Public = True
-            Expand = True
-            Placeholder = ("DD-MM-YYYY")
-          }
-          { Label139 Label
-            MoveScaled(36,0,23,4)
-            Alignment = Align.Right
-            Text = ("Fecha de creación  ")
-          }
-          { !txtCreateDateHTML TextBox
-            MoveScaled(59,0,23,4)
-            #Public = True
-            Background = Color.Background
-            Expand = True
-            ReadOnly = True
-            Placeholder = ("YYYYMMDDHHmmSS")
-          }
-          { Label137 Label
-            MoveScaled(82,0,23,4)
-            Alignment = Align.Right
-            Text = ("Fecha de modificación  ")
-          }
-          { !txtModDateHTML TextBox
-            MoveScaled(105,0,23,4)
-            #Public = True
-            Background = Color.Background
-            Expand = True
-            ReadOnly = True
-            Placeholder = ("YYYYMMDDHHmmSS")
-          }
-        }
-        { HBox194 HBox
-          MoveScaled(1,4,106,4)
-          { Label142 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para descarga PDF  ")
-          }
-          { !txtHREFpdfHTML TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox192 HBox
-          MoveScaled(1,8,106,4)
-          { Label143 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para descarga ePub  ")
-          }
-          { !txtHREFepubHTML TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox193 HBox
-          MoveScaled(1,12,106,4)
-          { Label144 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para lectura en línea  ")
-          }
-          { !txtHREFenlineaHTML TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox197 HBox
-          MoveScaled(1,16,106,4)
-          { Label147 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("Imagen de cabecera  ")
-          }
-          { btnBuscarCabecera Button
-            MoveScaled(26,0,4,4)
-            Picture = Picture["iconos/abrirBuscar.svg"]
-          }
-          { !txtCabeceraHTML TextBox
-            MoveScaled(31,0,17,4)
-            #Public = True
-            Background = Color.Background
-            Expand = True
-            ReadOnly = True
-          }
-          { Label140 Label
-            MoveScaled(48,0,23,4)
-            Alignment = Align.Right
-            Text = ("Imagen de tapa  ")
-          }
-          { btnBuscarImagen Button
-            MoveScaled(73,0,4,4)
-            Picture = Picture["iconos/search.svg"]
-          }
-          { !txtImagenHTML TextBox
-            MoveScaled(78,0,17,4)
-            #Public = True
-            Background = Color.Background
-            Expand = True
-            ReadOnly = True
-          }
-        }
-        { HBox191 HBox
-          MoveScaled(1,20,106,4)
-          { Label141 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("CV autores  ")
-          }
-          { btnMostrarTexto Button
-            MoveScaled(26,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
-          }
-          { !txtCVautoresHTML TextBox
-            MoveScaled(31,0,17,4)
-            #Public = True
-            Expand = True
-            Alignment = Align.Left
-          }
-          { Label146 Label
-            MoveScaled(49,0,23,4)
-            Alignment = Align.Right
-            Text = ("Pie de página  ")
-          }
-          { btnMostrarTexto2 Button
-            MoveScaled(73,0,4,4)
-            Picture = Picture["iconos/schedule.svg"]
-          }
-          { !txtPieHTML TextBox
-            MoveScaled(78,0,13,4)
-            #Public = True
-            Expand = True
-            Alignment = Align.Left
-          }
-        }
-        { Frame2 Frame
-          MoveScaled(1,25,116,28)
-          Arrangement = Arrange.Fill
-          Margin = True
-          Padding = 4
-          Text = ("Autor(es) y colaboradores del libro")
-          { TabStrip2 TabPanel
-            MoveScaled(2,2,114,24)
-            Expand = True
-            Arrangement = Arrange.Fill
-            Count = 2
-            Index = 0
-            Text = ("     Autoría     ")
-            { HBox200 VBox
-              MoveScaled(1,2,111,16)
-              Spacing = True
-              Margin = True
-              Padding = 4
-              { HBox201 HBox
-                MoveScaled(0,0,110,4)
-                { Label150 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Rol  ")
-                }
-                { cmbRolAutores ComboBox
-                  MoveScaled(23,0,20,4)
-                  ReadOnly = True
-                }
-                { btnNuevoAutor Button
-                  MoveScaled(44,0,4,4)
-                  NoTabFocus = True
-                  Picture = Picture["iconos/+nuevo.svg"]
-                }
-                { btnGuardarAutor Button
-                  MoveScaled(48,0,4,4)
-                  Picture = Picture["iconos/guardar.svg"]
-                }
-                { btnGuardarCambiosAutor Button
-                  MoveScaled(52,0,4,4)
-                  Picture = Picture["iconos/guardarComo.svg"]
-                }
-                { btnBorrarAutor Button
-                  MoveScaled(57,0,4,4)
-                  NoTabFocus = True
-                  Picture = Picture["iconos/borrar.svg"]
-                }
-                { txtnombreAutorGHP TextLabel
-                  MoveScaled(61,0,23,4)
-                  Visible = False
-                  Enabled = False
-                  Alignment = Align.Normal
-                }
-                { txtIdAutorNuevo TextLabel
-                  MoveScaled(84,0,18,4)
-                  Visible = False
-                  Enabled = False
-                  Alignment = Align.Normal
-                }
-                { Spring10 Spring
-                  MoveScaled(102,0,5,4)
-                }
-              }
-              { HBox203 HBox
-                MoveScaled(0,4,110,4)
-                { Label149 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Autor  ")
-                }
-                { !txtAutor TextBox
-                  MoveScaled(27,0,22.5556,4)
-                  #Public = True
-                  Enabled = False
-                  Expand = True
-                }
-                { Label154 Label
-                  MoveScaled(49.5556,0,23,4)
-                  AutoResize = True
-                  Alignment = Align.Right
-                  Text = ("    ORCID  ")
-                }
-                { btnBuscarORCID Button
-                  MoveScaled(80,0,4,4)
-                  NoTabFocus = True
-                  Picture = Picture["iconos/gitRemoto.svg"]
-                }
-                { !txtORCID TextBox
-                  MoveScaled(85,0,22.5556,4)
-                  #Public = True
-                  Enabled = False
-                  Expand = True
-                }
-              }
-              { tblAutores TableView
-                MoveScaled(1,8,27,8)
-                Expand = True
-                Mode = Select.Single
-                ShowCursor = True
-                Header = GridView.Horizontal
-                ScrollBar = Scroll.Vertical
-                Resizable = False
-              }
-            }
-            Index = 1
-            Text = ("     Colaboraciones     ")
-            { HBox216 VBox
-              MoveScaled(0,0,111,16)
-              Spacing = True
-              Margin = True
-              Padding = 4
-              { HBox217 HBox
-                MoveScaled(0,0,110,4)
-                { Label229 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Rol  ")
-                }
-                { cmbRolColaborador ComboBox
-                  MoveScaled(23,0,20,4)
-                  Enabled = False
-                  ReadOnly = True
-                }
-                { btnNuevoColaborador Button
-                  MoveScaled(44,0,4,4)
-                  NoTabFocus = True
-                  Picture = Picture["iconos/+nuevo.svg"]
-                }
-                { btnGuardarColaborador Button
-                  MoveScaled(48,0,4,4)
-                  Picture = Picture["iconos/guardar.svg"]
-                }
-                { btnGuardarCambiosColaborador Button
-                  MoveScaled(52,0,4,4)
-                  Picture = Picture["iconos/guardarComo.svg"]
-                }
-                { btnBorrarColaborador Button
-                  MoveScaled(57,0,4,4)
-                  NoTabFocus = True
-                  Picture = Picture["iconos/borrar.svg"]
-                }
-                { txtnombreColaboradorGHP TextLabel
-                  MoveScaled(61,0,23,4)
-                  Visible = False
-                  Enabled = False
-                  Alignment = Align.Normal
-                }
-                { txtIdColaboradorNuevo TextLabel
-                  MoveScaled(84,0,18,4)
-                  Visible = False
-                  Enabled = False
-                  Alignment = Align.Normal
-                }
-                { Spring11 Spring
-                  MoveScaled(102,0,5,4)
-                }
-              }
-              { HBox267 HBox
-                MoveScaled(0,4,110,4)
-                { Label230 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Colaborador/a  ")
-                }
-                { !txtColaborador TextBox
-                  MoveScaled(27,0,22.5556,4)
-                  #Public = True
-                  Enabled = False
-                  Expand = True
-                }
-                { Label231 Label
-                  MoveScaled(49.5556,0,23,4)
-                  AutoResize = True
-                  Alignment = Align.Right
-                  Text = ("    ORCID  ")
-                }
-                { btnBuscarORCIDcolaborador Button
-                  MoveScaled(80,0,4,4)
-                  NoTabFocus = True
-                  Picture = Picture["iconos/gitRemoto.svg"]
-                }
-                { !txtORCIDcolaborador TextBox
-                  MoveScaled(85,0,22.5556,4)
-                  #Public = True
-                  Enabled = False
-                  Expand = True
-                }
-              }
-              { tblColaboradores TableView
-                MoveScaled(1,8,27,8)
-                Expand = True
-                Mode = Select.Single
-                ShowCursor = True
-                Header = GridView.Horizontal
-                ScrollBar = Scroll.Vertical
-                Resizable = False
-              }
-            }
-            Index = 0
-          }
-        }
-        { Frame1 Frame
-          MoveScaled(1,57,90,32)
+        Text = ("Autor(es) y colaboradores del libro")
+        { TabStrip2 TabPanel
+          MoveScaled(2,2,114,24)
           Expand = True
           Arrangement = Arrange.Fill
-          Margin = True
-          Padding = 4
-          Text = ("Capítulos del libro")
-          { HBox199 VBox
-            MoveScaled(1,3,86,24)
+          Count = 2
+          Index = 0
+          Text = ("     Autoría     ")
+          { HBox200 VBox
+            MoveScaled(1,2,111,16)
             Spacing = True
             Margin = True
             Padding = 4
-            { HBox198 HBox
-              MoveScaled(1,0,80,4)
-              { btnNuevoCapitulo Button
-                MoveScaled(3,0,4,4)
+            { HBox201 HBox
+              MoveScaled(0,0,110,4)
+              { Label150 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Rol  ")
+              }
+              { cmbRolAutores ComboBox
+                MoveScaled(23,0,20,4)
+                ReadOnly = True
+              }
+              { btnNuevoAutor Button
+                MoveScaled(44,0,4,4)
                 NoTabFocus = True
                 Picture = Picture["iconos/+nuevo.svg"]
               }
-              { btnGuardarCapitulo Button
-                MoveScaled(7,0,4,4)
+              { btnGuardarAutor Button
+                MoveScaled(48,0,4,4)
                 Picture = Picture["iconos/guardar.svg"]
               }
-              { btnGuardarCambiosCapitulo Button
-                MoveScaled(11,0,4,4)
+              { btnGuardarCambiosAutor Button
+                MoveScaled(52,0,4,4)
                 Picture = Picture["iconos/guardarComo.svg"]
               }
-              { btnBorrarCapitulo Button
-                MoveScaled(15,0,4,4)
+              { btnBorrarAutor Button
+                MoveScaled(57,0,4,4)
                 NoTabFocus = True
                 Picture = Picture["iconos/borrar.svg"]
               }
-              { txtnombreArchivoCapNuevo TextLabel
-                MoveScaled(24,0,23,4)
+              { txtnombreAutorGHP TextLabel
+                MoveScaled(61,0,23,4)
                 Visible = False
                 Enabled = False
                 Alignment = Align.Normal
               }
-              { txtIdCapituloNuevo TextLabel
-                MoveScaled(49,0,18,4)
+              { txtIdAutorNuevo TextLabel
+                MoveScaled(84,0,18,4)
                 Visible = False
+                Enabled = False
                 Alignment = Align.Normal
               }
-              { Spring8 Spring
-                MoveScaled(67,0,5,4)
+              { Spring10 Spring
+                MoveScaled(102,0,5,4)
               }
             }
-            { HBox190 HBox
-              MoveScaled(1,4,54,4)
-              { Label151 Label
+            { HBox203 HBox
+              MoveScaled(0,4,110,4)
+              { Label149 Label
                 MoveScaled(0,0,22.5556,4)
                 Alignment = Align.Right
-                Text = ("Capítulo  ")
+                Text = ("Autor  ")
               }
-              { !txtCapitulo TextBox
-                MoveScaled(27,0,23,4)
+              { !txtAutor TextBox
+                MoveScaled(27,0,22.5556,4)
                 #Public = True
                 Enabled = False
                 Expand = True
               }
-            }
-            { HBox202 HBox
-              MoveScaled(1,8,82,4)
-              { Label152 Label
-                MoveScaled(0,0,22.5556,4)
-                Alignment = Align.Right
-                Text = ("Rango de páginas  ")
-              }
-              { !txtRangoPaginas TextBox
-                MoveScaled(27,0,16,4)
-                #Public = True
-                Enabled = False
-              }
-              { Label153 Label
-                MoveScaled(44,0,23,4)
+              { Label154 Label
+                MoveScaled(49.5556,0,23,4)
                 AutoResize = True
                 Alignment = Align.Right
-                Text = ("    URL de descarga  ")
+                Text = ("    ORCID  ")
               }
-              { !txtURLdescarga TextBox
-                MoveScaled(69,0,16,4)
+              { btnBuscarORCID Button
+                MoveScaled(80,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/gitRemoto.svg"]
+              }
+              { !txtORCID TextBox
+                MoveScaled(85,0,22.5556,4)
                 #Public = True
                 Enabled = False
                 Expand = True
               }
             }
-            { tblArticulos TableView
-              MoveScaled(1,13,19,10)
+            { tblAutores TableView
+              MoveScaled(1,8,27,8)
               Expand = True
               Mode = Select.Single
               ShowCursor = True
               Header = GridView.Horizontal
               ScrollBar = Scroll.Vertical
+              Resizable = False
             }
           }
+          Index = 1
+          Text = ("     Colaboraciones     ")
+          { HBox216 VBox
+            MoveScaled(0,0,111,16)
+            Spacing = True
+            Margin = True
+            Padding = 4
+            { HBox217 HBox
+              MoveScaled(0,0,110,4)
+              { Label229 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Rol  ")
+              }
+              { cmbRolColaborador ComboBox
+                MoveScaled(23,0,20,4)
+                Enabled = False
+                ReadOnly = True
+              }
+              { btnNuevoColaborador Button
+                MoveScaled(44,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/+nuevo.svg"]
+              }
+              { btnGuardarColaborador Button
+                MoveScaled(48,0,4,4)
+                Picture = Picture["iconos/guardar.svg"]
+              }
+              { btnGuardarCambiosColaborador Button
+                MoveScaled(52,0,4,4)
+                Picture = Picture["iconos/guardarComo.svg"]
+              }
+              { btnBorrarColaborador Button
+                MoveScaled(57,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/borrar.svg"]
+              }
+              { txtnombreColaboradorGHP TextLabel
+                MoveScaled(61,0,23,4)
+                Visible = False
+                Enabled = False
+                Alignment = Align.Normal
+              }
+              { txtIdColaboradorNuevo TextLabel
+                MoveScaled(84,0,18,4)
+                Visible = False
+                Enabled = False
+                Alignment = Align.Normal
+              }
+              { Spring11 Spring
+                MoveScaled(102,0,5,4)
+              }
+            }
+            { HBox267 HBox
+              MoveScaled(0,4,110,4)
+              { Label230 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Colaborador/a  ")
+              }
+              { !txtColaborador TextBox
+                MoveScaled(27,0,22.5556,4)
+                #Public = True
+                Enabled = False
+                Expand = True
+              }
+              { Label231 Label
+                MoveScaled(49.5556,0,23,4)
+                AutoResize = True
+                Alignment = Align.Right
+                Text = ("    ORCID  ")
+              }
+              { btnBuscarORCIDcolaborador Button
+                MoveScaled(80,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/gitRemoto.svg"]
+              }
+              { !txtORCIDcolaborador TextBox
+                MoveScaled(85,0,22.5556,4)
+                #Public = True
+                Enabled = False
+                Expand = True
+              }
+            }
+            { tblColaboradores TableView
+              MoveScaled(1,8,27,8)
+              Expand = True
+              Mode = Select.Single
+              ShowCursor = True
+              Header = GridView.Horizontal
+              ScrollBar = Scroll.Vertical
+              Resizable = False
+            }
+          }
+          Index = 0
         }
       }
-      Index = 1
-      Text = ("     Metadatos adicionales puntuales para la salida GitHub Pages     ")
-      { ScrollView13 ScrollView
-        MoveScaled(1,2,121,279)
+      { Frame1 Frame
+        MoveScaled(5,76,90,32)
         Expand = True
-        Arrangement = Arrange.Vertical
-        Spacing = True
+        Arrangement = Arrange.Fill
         Margin = True
         Padding = 4
-        Border = False
-        ScrollBar = Scroll.Vertical
-        { HBox196 HBox
-          MoveScaled(0,8,106,4)
-          { Label222 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
+        Text = ("Capítulos del libro")
+        { HBox199 VBox
+          MoveScaled(1,3,86,24)
+          Spacing = True
+          Margin = True
+          Padding = 4
+          { HBox198 HBox
+            MoveScaled(1,0,80,4)
+            { btnNuevoCapitulo Button
+              MoveScaled(3,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/+nuevo.svg"]
+            }
+            { btnGuardarCapitulo Button
+              MoveScaled(7,0,4,4)
+              Picture = Picture["iconos/guardar.svg"]
+            }
+            { btnGuardarCambiosCapitulo Button
+              MoveScaled(11,0,4,4)
+              Picture = Picture["iconos/guardarComo.svg"]
+            }
+            { btnBorrarCapitulo Button
+              MoveScaled(15,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/borrar.svg"]
+            }
+            { txtnombreArchivoCapNuevo TextLabel
+              MoveScaled(24,0,23,4)
+              Visible = False
+              Enabled = False
+              Alignment = Align.Normal
+            }
+            { txtIdCapituloNuevo TextLabel
+              MoveScaled(49,0,18,4)
+              Visible = False
+              Alignment = Align.Normal
+            }
+            { Spring8 Spring
+              MoveScaled(67,0,5,4)
+            }
           }
-          { Label156 Label
-            MoveScaled(36,0,30,4)
-            Font = Font["Bold"]
+          { HBox190 HBox
+            MoveScaled(1,4,54,4)
+            { Label151 Label
+              MoveScaled(0,0,22.5556,4)
+              Alignment = Align.Right
+              Text = ("Capítulo  ")
+            }
+            { !txtCapitulo TextBox
+              MoveScaled(27,0,23,4)
+              #Public = True
+              Enabled = False
+              Expand = True
+            }
+          }
+          { HBox202 HBox
+            MoveScaled(1,8,82,4)
+            { Label152 Label
+              MoveScaled(0,0,22.5556,4)
+              Alignment = Align.Right
+              Text = ("Rango de páginas  ")
+            }
+            { !txtRangoPaginas TextBox
+              MoveScaled(27,0,16,4)
+              #Public = True
+              Enabled = False
+            }
+            { Label153 Label
+              MoveScaled(44,0,23,4)
+              AutoResize = True
+              Alignment = Align.Right
+              Text = ("    URL de descarga  ")
+            }
+            { !txtURLdescarga TextBox
+              MoveScaled(69,0,16,4)
+              #Public = True
+              Enabled = False
+              Expand = True
+            }
+          }
+          { tblArticulos TableView
+            MoveScaled(1,13,19,10)
             Expand = True
-            AutoResize = True
-            Text = ("Metadatos de Citas Académicas  ")
-          }
-        }
-        { HBox234 HBox
-          MoveScaled(0,12,106,4)
-          { Label187 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("citation_pdf_url  ")
-          }
-          { !txtHREFpdfHTML28 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox225 HBox
-          MoveScaled(0,16,106,4)
-          { Label223 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-          }
-          { Label178 Label
-            MoveScaled(38,0,23,4)
-            Font = Font["Bold"]
-            Expand = True
-            AutoResize = True
-            Text = ("Metadatos de Dublin Core  ")
-          }
-        }
-        { HBox204 HBox
-          MoveScaled(0,20,106,4)
-          { Label188 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("dc.sumario  ")
-          }
-          { !txtSumarioHTML TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox241 HBox
-          MoveScaled(0,24,106,4)
-          { Label195 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("dc.coverage  ")
-          }
-          { !txtCoverageHTML TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox242 HBox
-          MoveScaled(0,28,106,4)
-          { Label196 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("dc.relation  ")
-          }
-          { !txtRelationHTML TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox205 HBox
-          MoveScaled(0,32,106,4)
-          { Label224 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-          }
-          { Label157 Label
-            MoveScaled(37,0,38,4)
-            Font = Font["Bold"]
-            Expand = True
-            AutoResize = True
-            Text = ("Metadatos Open Graph para Redes Sociales")
-          }
-        }
-        { HBox211 HBox
-          MoveScaled(0,36,106,4)
-          { Label162 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("og:type  ")
-          }
-          { !txtHREFpdfHTML4 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox212 HBox
-          MoveScaled(0,40,106,4)
-          { Label163 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("og:url  ")
-          }
-          { !txtHREFpdfHTML5 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox213 HBox
-          MoveScaled(0,44,106,4)
-          { Label164 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("og:image  ")
-          }
-          { !txtHREFpdfHTML6 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox215 HBox
-          MoveScaled(0,48,106,4)
-          { Label166 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("og:site_name  ")
-          }
-          { !txtHREFpdfHTML8 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox207 HBox
-          MoveScaled(0,52,106,4)
-          { Label226 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-          }
-          { Label158 Label
-            MoveScaled(27,0,23,4)
-            Font = Font["Bold"]
-            Expand = True
-            AutoResize = True
-            Text = ("Metadatos Twitter Card")
-          }
-        }
-        { HBox208 HBox
-          MoveScaled(0,56,106,4)
-          { Label160 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para descarga PDF  ")
-          }
-          { !txtHREFpdfHTML2 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox263 HBox
-          MoveScaled(0,60,106,4)
-          { Label217 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para descarga PDF  ")
-          }
-          { !txtHREFpdfHTML58 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox264 HBox
-          MoveScaled(0,64,106,4)
-          { Label218 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para descarga PDF  ")
-          }
-          { !txtHREFpdfHTML59 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox265 HBox
-          MoveScaled(0,68,106,4)
-          { Label219 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para descarga PDF  ")
-          }
-          { !txtHREFpdfHTML60 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
-          }
-        }
-        { HBox266 HBox
-          MoveScaled(0,72,106,4)
-          { Label220 Label
-            MoveScaled(0,0,23,4)
-            Alignment = Align.Right
-            Text = ("URL para descarga PDF  ")
-          }
-          { !txtHREFpdfHTML61 TextBox
-            MoveScaled(58,0,23,4)
-            #Public = True
-            Expand = True
+            Mode = Select.Single
+            ShowCursor = True
+            Header = GridView.Horizontal
+            ScrollBar = Scroll.Vertical
           }
         }
       }
-      Index = 0
     }
     Index = 5
     Text = ("     Comentarios     ")
