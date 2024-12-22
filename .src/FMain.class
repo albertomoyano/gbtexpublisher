@@ -7489,7 +7489,6 @@ Public Sub guardarCamposGHP()' As Boolean
   ContenidoGHP!PubDateHTML = txtPubDateHTML.Text
   ContenidoGHP!txtPieHTML = txtPieHTML.Text
   ContenidoGHP!txtCabeceraHTML = txtCabeceraHTML.Text
-  ContenidoGHP!rolHTML = cmbRolAutores.Text
   ContenidoGHP!txtSumarioHTML = txtSumarioHTML.Text
 
   BtnNuevoGHP.Visible = False
@@ -7545,7 +7544,6 @@ Public Sub levantarGitHubPages()
     txtPubDateHTML.Text = ContenidoGHP!PubDateHTML
     txtPieHTML.Text = ContenidoGHP!txtPieHTML
     txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
-    cmbRolAutores.Text = ContenidoGHP!rolHTML
     txtSumarioHTML.Text = ContenidoGHP!txtSumarioHTML
   Else
     txtnombreArchivoGHP.Text = ""
@@ -7559,7 +7557,6 @@ Public Sub levantarGitHubPages()
     txtPubDateHTML.Text = ""
     txtPieHTML.Text = ""
     txtCabeceraHTML.Text = ""
-    cmbRolAutores.Text = ""
     txtSumarioHTML.Text = ""
     BtnNuevoGHP.Visible = True
     btnGuardarGHP.Visible = False
@@ -7947,16 +7944,18 @@ Public Sub MostrarListaAutoresNuevo() 'Función que rellena el GridView
   Contenido = meConn.Exec("SELECT * FROM autoresGHP WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
 
   'diseñamos el tableview
-  tblAutores.Columns.Count = 4
+  tblAutores.Columns.Count = 5
   tblAutores.Header = True
   tblAutores.Columns[0].Title = "Id"
   tblAutores.Columns[0].Width = 0
   tblAutores.Columns[1].Title = "Nombre de archivo"
   tblAutores.Columns[1].Width = 0
-  tblAutores.Columns[2].Title = "Autor/a/es (nombre completo)"
-  tblAutores.Columns[2].Width = 1000
+  tblAutores.Columns[2].Title = "Autor/a (nombre completo)"
+  tblAutores.Columns[2].Width = 400
   tblAutores.Columns[3].Title = "orcid"
-  tblAutores.Columns[3].Width = 0
+  tblAutores.Columns[3].Width = 600
+  tblAutores.Columns[4].Title = "rol"
+  tblAutores.Columns[4].Width = 100
 
   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
   tblAutores.Rows.Count = Contenido.Count
@@ -7967,17 +7966,9 @@ Public Sub MostrarListaAutoresNuevo() 'Función que rellena el GridView
     tblAutores[i, 1].Text = Contenido!nombreArchivo
     tblAutores[i, 2].Text = Contenido!autorNombreCompleto
     tblAutores[i, 3].Text = Contenido!orcid
+    tblAutores[i, 4].Text = Contenido!rol
     Contenido.MoveNext
   Next
-
-End
-
-Public Sub guardarCamposAutoresNuevo()
-
-  Contenido!id = txtIdAutorNuevo.Text
-  Contenido!nombreArchivo = txtnombreAutorGHP.Text
-  Contenido!autorNombreCompleto = txtAutor.Text
-  Contenido!orcid = txtORCID.Text
 
 End
 
@@ -8005,6 +7996,7 @@ Public Sub tblAutores_RowClick(Row As Integer)
   txtnombreAutorGHP.Text = tblAutores[Row, 1].Text
   txtAutor.Text = tblAutores[Row, 2].Text
   txtORCID.Text = tblAutores[Row, 3].Text
+  cmbRolAutores.Text = tblAutores[Row, 4].Text
 
   btnNuevoAutor.Visible = False
   btnGuardarAutor.Visible = False
@@ -8094,11 +8086,11 @@ Public Sub MostrarListaColaboradoresNuevo() 'Función que rellena el GridView
   tblColaboradores.Columns[1].Title = "Nombre de archivo"
   tblColaboradores.Columns[1].Width = 0
   tblColaboradores.Columns[2].Title = "Autor/a (nombre completo)"
-  tblColaboradores.Columns[2].Width = 1000
+  tblColaboradores.Columns[2].Width = 400
   tblColaboradores.Columns[3].Title = "orcid"
-  tblColaboradores.Columns[3].Width = 0
+  tblColaboradores.Columns[3].Width = 600
   tblColaboradores.Columns[4].Title = "rol"
-  tblColaboradores.Columns[4].Width = 0
+  tblColaboradores.Columns[4].Width = 100
 
   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
   tblColaboradores.Rows.Count = Contenido.Count
@@ -8117,11 +8109,27 @@ End
 
 Public Sub guardarCamposColaboradoresNuevo()
 
+  ' Guardar otros campos directamente
   Contenido!id = txtIdColaboradorNuevo.Text
   Contenido!nombreArchivo = txtnombreColaboradorGHP.Text
   Contenido!autorNombreCompleto = txtColaborador.Text
   Contenido!orcid = txtORCIDcolaborador.Text
-  Contenido!rol = cmbRolColaborador.Text
+
+  ' Extraer solo la abreviatura del ComboBox
+  Dim rolCompleto As String = cmbRolColaborador.Text
+  Dim rolAbreviatura As String
+
+  ' Verificar si el texto contiene ":"
+  If InStr(rolCompleto, ":") > 0 Then
+    ' Extraer la parte izquierda de la cadena antes de los dos puntos
+    rolAbreviatura = Left(rolCompleto, InStr(rolCompleto, ":") - 1)
+  Else
+    ' Si no tiene ":", guardar el texto completo
+    rolAbreviatura = rolCompleto
+  End If
+
+  ' Guardar solo la abreviatura
+  Contenido!rol = rolAbreviatura
 
 End
 
@@ -8275,5 +8283,31 @@ Public Sub btnMenuGIT_Click()
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.SetFocus()
   TerminalView1.Refresh()
+
+End
+
+Public Sub guardarCamposAutoresNuevo()
+
+  ' Guardar otros campos directamente
+  Contenido!id = txtIdAutorNuevo.Text
+  Contenido!nombreArchivo = txtnombreAutorGHP.Text
+  Contenido!autorNombreCompleto = txtAutor.Text
+  Contenido!orcid = txtORCID.Text
+
+  ' Extraer solo la abreviatura del ComboBox
+  Dim rolCompleto As String = cmbRolAutores.Text
+  Dim rolAbreviatura As String
+
+  ' Verificar si el texto contiene ":"
+  If InStr(rolCompleto, ":") > 0 Then
+    ' Extraer la parte izquierda de la cadena antes de los dos puntos
+    rolAbreviatura = Left(rolCompleto, InStr(rolCompleto, ":") - 1)
+  Else
+    ' Si no tiene ":", guardar el texto completo
+    rolAbreviatura = rolCompleto
+  End If
+
+  ' Guardar solo la abreviatura
+  Contenido!rol = rolAbreviatura
 
 End
