@@ -4635,7 +4635,7 @@
       }
     }
     { ScrollView12 ScrollView
-      MoveScaled(0,6,123,113)
+      MoveScaled(0,6,123,92)
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
@@ -4808,13 +4808,16 @@
         Expand = True
         Arrangement = Arrange.Fill
         Count = 2
+        Highlight = True
         Index = 0
         Text = ("     Autor(es) y colaboradores del libro     ")
         { TabStrip2 TabPanel
           MoveScaled(1,1,114,33)
           Expand = True
           Arrangement = Arrange.Fill
+          Border = False
           Count = 2
+          Highlight = True
           Index = 0
           Text = ("     Autoría     ")
           { HBox200 VBox
