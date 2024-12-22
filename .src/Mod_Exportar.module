@@ -6,6 +6,8 @@ Public ContenidoMeta As Result
 Public ContenidoGHP As Result
 Public ContenidoSeparatas As Result
 Public ContenidoAutores As Result
+Public ContenidoAutoresA As Result
+Public ContenidoAutores3 As Result
 Public ContenidoColaboradores As Result
 Public ResultadoMeta As Result
 
@@ -1529,21 +1531,27 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
 
 End
 
-'exportamos el disclaimer
+
 Public Sub ExportToIndexHTML(rutaTexto As String)
 
   Dim s As String
   Dim fa As ResultField
+  Dim faa As ResultField
+  Dim fa3 As ResultField
   Dim fb As ResultField
   Dim fg As ResultField
   Dim fx As ResultField
   Dim fc As ResultField
   Dim aFields As New String[]
+  Dim aaFields As New String[]
+  Dim a3Fields As New String[]
   Dim bFields As New String[]
   Dim gFields As New String[]
   Dim xFields As New String[]
   Dim cFields As New String[]
   Dim wa As Integer
+  Dim waa As Integer
+  Dim wa3 As Integer
   Dim wb As Integer
   Dim wg As Integer
   Dim wx As Integer
@@ -1552,6 +1560,8 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Dim buscarGHP As String
   Dim buscarSeparatas As String
   Dim buscarAutores As String
+  Dim buscarAutoresA As String
+  Dim buscarAutores3 As String
   Dim buscarColaboradores As String
   Dim outputFile As String
   Dim fechaPDF As String
@@ -1573,6 +1583,8 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   ' Exportamos los registros seleccionados
   buscarAutores = "select * from autoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   ContenidoAutores = FMain.meConn.Exec(buscarAutores)
+  ContenidoAutoresA = FMain.meConn.Exec(buscarAutores)
+  ContenidoAutores3 = FMain.meConn.Exec(buscarAutores)
   ' Exportamos los registros seleccionados
   buscarColaboradores = "select * from colaboradoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   ContenidoColaboradores = FMain.meConn.Exec(buscarColaboradores)
@@ -1614,6 +1626,22 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     cFields.Add(fc.Name)
     If Len(fc.Name) > wc Then
       wc = Len(fc.Name)
+    Endif
+  Next
+
+  aaFields.Clear
+  For Each faa In ContenidoAutores.Fields' autoresghp
+    aaFields.Add(faa.Name)
+    If Len(faa.Name) > waa Then
+      waa = Len(faa.Name)
+    Endif
+  Next
+
+  a3Fields.Clear
+  For Each fa3 In ContenidoAutores3.Fields' autoresghp
+    a3Fields.Add(fa3.Name)
+    If Len(fa3.Name) > wa3 Then
+      wa3 = Len(fa3.Name)
     Endif
   Next
 
@@ -1662,7 +1690,10 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"citation_language\" content=\"es\"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_publication_date\" content=\"" & ContenidoGHP[gFields[9]] & "\"/>" & gb.NewLine
     ' va un loop con todos los autores
-    s &= "\t <meta name=\"citation_author\" content=\" --autor-- \"/>" & gb.NewLine
+    While ContenidoAutores3.Available
+      s &= "\t <meta name=\"citation_author\" content=\"" & ContenidoAutores3[a3Fields[2]] & "\"/>" & gb.NewLine
+      ContenidoAutores3.MoveNext ' Avanzar al siguiente registro
+    Wend
     ' van todos los resumenes en los 3 idiomas
     s &= "\t <meta name=\"citation_abstract\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\"/>" & gb.NewLine
     s &= "\t <meta name=\"citation_abstract\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\"/>" & gb.NewLine
@@ -1740,20 +1771,17 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "\t <meta name=\"dc.identifier.isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.rights\" content=\"" & ContenidoMeta[bFields[15]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"dc.rights.uri\" content=\"" & ContenidoMeta[bFields[16]] & "\">" & gb.NewLine
-    s &= "\t <meta name=\"dc.coverage\" content=\" --ubicación de la imagen de tapa-- \">" & gb.NewLine
-    s &= "\t <meta name=\"dc.relation\" content=\" --relation-- \">" & gb.NewLine
-
+    '
     s &= "<!-- Open Graph para Redes Sociales  -->" & gb.NewLine
     s &= "\t <meta property=\"og:title\" content=\"" & ContenidoMeta[bFields[84]] & "\">" & gb.NewLine
     s &= "\t <meta property=\"og:description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
     s &= "\t <meta property=\"og:url\" content=\"" & ContenidoGHP[gFields[7]] & "\">" & gb.NewLine
     s &= "\t <meta property=\"og:type\" content=\"book\">" & gb.NewLine
     s &= "\t <meta property=\"og:site_name\" content=\"" & ContenidoMeta[bFields[28]] & "\">" & gb.NewLine
-
+    '
     s &= "<!-- Twitter Card  -->" & gb.NewLine
     s &= "\t <meta name=\"twitter:title\" content=\"" & ContenidoMeta[bFields[84]] & "\">" & gb.NewLine
     s &= "\t <meta name=\"twitter:description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
-
     '
     s &= "<!-- Favicon -->" & gb.NewLine
     s &= "\t <link rel=\"icon\" href=\"favicon.jpg\">" & gb.NewLine
@@ -1764,7 +1792,6 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     '
     s &= "<body>" & gb.NewLine
     s &= "\t <header><img src=\"" & ContenidoGHP[gFields[11]] & "\" alt=\"Logo de Imago Mundi\"></header>" & gb.NewLine
-    '
     '
     s &= "<!-- Contenedor principal -->" & gb.NewLine
     s &= "<div class=\"container\">" & gb.NewLine
@@ -1804,17 +1831,17 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     End If
     s &= "\t\t </div>" & gb.NewLine
     s &= "<h3 style=\"font-weight: normal\">" & ContenidoGHP[gFields[12]] & "</h3>" & gb.NewLine
-    ' Construcción dinámica de la salida de la separata de capítulos
-    While ContenidoAutores.Available
+
+    While ContenidoAutoresA.Available
       ' Verificar si aFields[3] es Null o está vacío
-      If IsNull(ContenidoAutores[aFields[3]]) Or ContenidoAutores[aFields[3]] = "" Then
+      If IsNull(ContenidoAutoresA[aaFields[3]]) Or ContenidoAutoresA[aaFields[3]] = "" Then
         ' Si el campo está vacío, solo mostrar el valor de aFields[2]
-        s &= "<span><strong>" & ContenidoAutores[aFields[2]] & "&nbsp;&nbsp;&nbsp;&nbsp;</strong></span>"
+        s &= "<span><strong>" & ContenidoAutoresA[aaFields[2]] & "&nbsp;&nbsp;&nbsp;&nbsp;</strong></span>" & gb.NewLine
       Else
         ' Si no está vacío, incluir el enlace y el icono
-        s &= "<span><strong>" & ContenidoAutores[aFields[2]] & "<a href=\"" & ContenidoAutores[aFields[3]] & "\" target=\"_blank\"><img src=\"orcid.png\" alt=\"icono orcid\"></a></strong>&nbsp;</span>"
+        s &= "<span><strong>" & ContenidoAutoresA[aaFields[2]] & "<a href=\"" & ContenidoAutoresA[aaFields[3]] & "\" target=\"_blank\"><img src=\"orcid.png\" alt=\"icono orcid\"></a></strong>&nbsp;</span>" & gb.NewLine
       Endif
-      ContenidoAutores.MoveNext ' Avanzar al siguiente registro
+      ContenidoAutoresA.MoveNext ' Avanzar al siguiente registro
     Wend
     '
     s &= "<h2>" & ContenidoMeta[bFields[84]] & "</h2>" & gb.NewLine
