@@ -733,18 +733,20 @@
         MoveScaled(75,0,14,4)
         AutoResize = True
         Alignment = Align.Right
-        Text = ("    Exportar como  ")
+        Text = ("    Será exportado como:  ")
       }
       { txtEXPORTARbib TextLabel
-        MoveScaled(92,0,15,4)
+        MoveScaled(90,0,15,4)
         Background = Color.Background
         AutoResize = True
-        Border = Border.Raised
         Alignment = Align.Normal
         Wrap = False
       }
+      { Separator6 Separator
+        MoveScaled(106,0,2.3333,4)
+      }
       { Button1 Button
-        MoveScaled(107,0,16,4)
+        MoveScaled(110,0,16,4)
         ToolTip = ("Mostrar las entradas de este archivo")
         Picture = Picture["iconos/face.svg"]
       }
@@ -2684,16 +2686,15 @@
         ToolTip = ("Guardar modificaciones")
         Picture = Picture["iconos/guardarComo.svg"]
       }
-      { Separator7 Separator
-        MoveScaled(20,0,2.3333,4)
-      }
       { Label128 Label
         MoveScaled(25,0,5,4)
+        Visible = False
         AutoResize = True
         Text = ("ID  ")
       }
       { txtIDglosario TextBox
         MoveScaled(30,0,10,4)
+        Visible = False
         Background = Color.Background
         NoTabFocus = True
         ReadOnly = True
@@ -2711,7 +2712,7 @@
         Font = Font["Bold"]
         Foreground = &HFF0000
         Alignment = Align.Right
-        Text = ("Tipo  ")
+        Text = ("Tipo de entrada  ")
       }
       { cbTYPEentradaGlo ComboBox
         MoveScaled(17,0,16,4)
@@ -2740,7 +2741,7 @@
       }
     }
     { HBox2 HBox
-      MoveScaled(1,39,110,4)
+      MoveScaled(1,39,121,4)
       { btnBuscarClaveGLO Button
         MoveScaled(0,0,4,4)
         Picture = Picture["iconos/search.svg"]
@@ -2764,21 +2765,23 @@
         Placeholder = ("Clave GLO única")
       }
       { lblAlta3 Label
-        MoveScaled(56,0,21,4)
+        MoveScaled(53,0,21,4)
         AutoResize = True
         Alignment = Align.Right
-        Text = ("    Exportar como  ")
+        Text = ("    Será exportado como:  ")
       }
-      { txtEXPORTARglo TextBox
-        MoveScaled(80,0,9,4)
+      { txtEXPORTARglo TextLabel
+        MoveScaled(85,0,15,4)
         Background = Color.Background
-        NoTabFocus = True
-        Expand = True
-        Alignment = Align.Left
-        ReadOnly = True
+        AutoResize = True
+        Alignment = Align.Normal
+        Wrap = False
+      }
+      { Separator7 Separator
+        MoveScaled(103,0,2.3333,4)
       }
       { btnParcialGLO Button
-        MoveScaled(93,0,16,4)
+        MoveScaled(106,0,16,4)
         Picture = Picture["iconos/face.svg"]
       }
     }
@@ -2948,7 +2951,7 @@
       }
     }
     { HBox85 HBox
-      MoveScaled(2,5,104,4)
+      MoveScaled(2,5,124,4)
       Padding = 1
       { Label29 Label
         MoveScaled(1,0,23.8889,4)
@@ -2969,13 +2972,12 @@
         Alignment = Align.Right
         Text = ("    Será exportado como:  ")
       }
-      { !txtEXPORTARmeta TextBox
-        MoveScaled(86,0,26,3.5556)
-        #Public = True
+      { txtEXPORTARmeta TextLabel
+        MoveScaled(73,0,15,4)
         Background = Color.Background
-        NoTabFocus = True
-        Expand = True
-        ReadOnly = True
+        AutoResize = True
+        Alignment = Align.Normal
+        Wrap = False
       }
     }
     { !TabStripMetaLibro TabPanel
@@ -4591,6 +4593,13 @@
         AutoResize = True
         Text = ("   Generar el archivo index.html   ")
       }
+      { txtIdGitHubPages TextBox
+        MoveScaled(33,0,6,4)
+        Visible = False
+        Enabled = False
+        NoTabFocus = True
+        ReadOnly = True
+      }
       { Spring9 Spring
         MoveScaled(46,0,5,4)
       }
@@ -4599,20 +4608,12 @@
         Alignment = Align.Right
         Text = ("    GitHub Pages para  ")
       }
-      { !txtnombreArchivoGHP TextBox
-        MoveScaled(75,0,23,4)
-        #Public = True
+      { txtnombreArchivoGHP TextLabel
+        MoveScaled(79,0,20,4)
         Background = Color.Background
-        NoTabFocus = True
-        Expand = True
-        ReadOnly = True
-      }
-      { txtIdGitHubPages TextBox
-        MoveScaled(98,0,6,4)
-        Visible = False
-        Enabled = False
-        NoTabFocus = True
-        ReadOnly = True
+        AutoResize = True
+        Alignment = Align.Normal
+        Wrap = False
       }
     }
     { ScrollView12 ScrollView
