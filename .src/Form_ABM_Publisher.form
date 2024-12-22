@@ -1,9 +1,9 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,963,720)
+  Move(0,0,963,640)
   #Scaled = False
-  Text = ("Alta - Baja - Modificación de editoriales")
+  Text = ("Alta - Baja - Modificación de editoriales / revistas")
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
@@ -51,7 +51,7 @@
     }
   }
   { HBox6 Panel
-    Move(9,54,477,252)
+    Move(9,54,477,180)
     NoTabFocus = True
     Expand = True
     Arrangement = Arrange.Horizontal
@@ -67,124 +67,138 @@
       Resizable = False
     }
   }
-  { HBox4 HBox
-    Move(9,342,558,36)
-    { lblKEYWORDS2 Label
-      Move(0,0,144,36)
-      #Translate = False
-      Alignment = Align.Right
-      Text = "Ubicación  "
+  { TabPanel1 TabPanel
+    Move(9,243,927,324)
+    Expand = True
+    Arrangement = Arrange.Vertical
+    Spacing = True
+    Margin = True
+    Padding = 4
+    Count = 2
+    Index = 0
+    Text = ("     Editoriales     ")
+    { HBox4 HBox
+      Move(0,0,558,36)
+      { lblKEYWORDS2 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Ubicación  "
+      }
+      { txtLocation TextBox
+        Move(243,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
     }
-    { txtLocation TextBox
-      Move(243,0,216,36)
-      NoTabFocus = True
-      Expand = True
+    { HBox2 HBox
+      Move(0,36,558,36)
+      { btnBuscarPublisher Button
+        Move(0,0,36,36)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { lblAlta2 Label
+        Move(54,0,108,36)
+        Alignment = Align.Right
+        Text = ("Editorial  ")
+      }
+      { txtPublisher TextBox
+        Move(240,0,234,36)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
+      }
     }
-  }
-  { HBox2 HBox
-    Move(9,378,558,36)
-    { btnBuscarPublisher Button
-      Move(0,0,36,36)
-      Picture = Picture["iconos/search.svg"]
+    { HBox8 HBox
+      Move(0,72,558,36)
+      { lblKEYWORDS4 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "email "
+      }
+      { txtEmail TextBox
+        Move(216,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
     }
-    { lblAlta2 Label
-      Move(54,0,108,36)
-      Alignment = Align.Right
-      Text = ("Editorial  ")
+    { HBox9 HBox
+      Move(0,108,558,36)
+      { lblKEYWORDS5 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Website "
+      }
+      { txtWebsite TextBox
+        Move(216,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
     }
-    { txtPublisher TextBox
-      Move(240,0,234,36)
-      NoTabFocus = True
-      Expand = True
-      Alignment = Align.Left
+    Index = 1
+    Text = ("     Revistas     ")
+    { HBox7 HBox
+      Move(0,0,558,36)
+      { lblKEYWORDS1 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Revista  "
+      }
+      { txtJournal TextBox
+        Move(240,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
     }
-  }
-  { HBox8 HBox
-    Move(9,414,558,36)
-    { lblKEYWORDS4 Label
-      Move(0,0,144,36)
-      #Translate = False
-      Alignment = Align.Right
-      Text = "email "
+    { HBox10 HBox
+      Move(0,36,558,36)
+      { lblKEYWORDS7 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "ISSN "
+      }
+      { txtISSN TextBox
+        Move(243,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
     }
-    { txtEmail TextBox
-      Move(216,0,216,36)
-      NoTabFocus = True
-      Expand = True
+    { HBox3 HBox
+      Move(0,72,558,36)
+      { lblKEYWORDS6 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "eISSN "
+      }
+      { txteISSN TextBox
+        Move(198,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
     }
-  }
-  { HBox9 HBox
-    Move(9,450,558,36)
-    { lblKEYWORDS5 Label
-      Move(0,0,144,36)
-      #Translate = False
-      Alignment = Align.Right
-      Text = "Website "
+    { HBox5 HBox
+      Move(0,108,558,36)
+      { lblKEYWORDS3 Label
+        Move(0,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "DOI "
+      }
+      { txtDOI TextBox
+        Move(189,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
     }
-    { txtWebsite TextBox
-      Move(216,0,216,36)
-      NoTabFocus = True
-      Expand = True
-    }
-  }
-  { HBox7 HBox
-    Move(9,486,558,36)
-    { lblKEYWORDS1 Label
-      Move(0,0,144,36)
-      #Translate = False
-      Alignment = Align.Right
-      Text = "Revista  "
-    }
-    { txtJournal TextBox
-      Move(240,0,216,36)
-      NoTabFocus = True
-      Expand = True
-    }
-  }
-  { HBox10 HBox
-    Move(9,522,558,36)
-    { lblKEYWORDS7 Label
-      Move(0,0,144,36)
-      #Translate = False
-      Alignment = Align.Right
-      Text = "ISSN "
-    }
-    { txtISSN TextBox
-      Move(243,0,216,36)
-      NoTabFocus = True
-      Expand = True
-    }
-  }
-  { HBox3 HBox
-    Move(9,558,558,36)
-    { lblKEYWORDS6 Label
-      Move(0,0,144,36)
-      #Translate = False
-      Alignment = Align.Right
-      Text = "eISSN "
-    }
-    { txteISSN TextBox
-      Move(198,0,216,36)
-      NoTabFocus = True
-      Expand = True
-    }
-  }
-  { HBox5 HBox
-    Move(9,594,558,36)
-    { lblKEYWORDS3 Label
-      Move(0,0,144,36)
-      #Translate = False
-      Alignment = Align.Right
-      Text = "DOI "
-    }
-    { txtDOI TextBox
-      Move(189,0,216,36)
-      NoTabFocus = True
-      Expand = True
-    }
+    Index = 0
   }
   { HBox1 HBox
-    Move(9,630,630,36)
+    Move(9,594,630,36)
     { Spring2 Spring
       Move(270,0,126,36)
     }
