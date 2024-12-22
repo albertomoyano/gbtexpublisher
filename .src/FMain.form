@@ -4830,6 +4830,7 @@
               }
               { cmbRolAutores ComboBox
                 MoveScaled(23,0,20,4)
+                Expand = True
                 ReadOnly = True
               }
               { btnNuevoAutor Button
@@ -4861,9 +4862,6 @@
                 Visible = False
                 Enabled = False
                 Alignment = Align.Normal
-              }
-              { Spring10 Spring
-                MoveScaled(102,0,5,4)
               }
             }
             { HBox203 HBox
@@ -4923,7 +4921,7 @@
               }
               { cmbRolColaborador ComboBox
                 MoveScaled(23,0,20,4)
-                Enabled = False
+                Expand = True
                 ReadOnly = True
               }
               { btnNuevoColaborador Button
@@ -4955,9 +4953,6 @@
                 Visible = False
                 Enabled = False
                 Alignment = Align.Normal
-              }
-              { Spring11 Spring
-                MoveScaled(102,0,5,4)
               }
             }
             { HBox267 HBox
