@@ -116,6 +116,11 @@ Public Sub Form_Open()
   rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
   BaseName = File.BaseName(TextBox1.Text)
 
+  Mod_RellenarComboBox.RellenarCmbBibLaTeX()
+  Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
+  Mod_RellenarComboBox.RellenarCmbMetadatos()
+  Mod_RellenarComboBox.RellenarCmbGitHubPages()
+
   Dim mtmp As Menu
   Dim fileA As String
 
@@ -125,14 +130,9 @@ Public Sub Form_Open()
   Next
 
   ' ' comienza la carga de los combobox de FMain
-  ' Dim itemsGlo As String[] = Mod_ComboBox.cbTYPEentradaGlo()
-  ' For Each item As String In itemsGlo
-  '   cbTYPEentradaGlo.Add(item)
-  ' Next
-  '
-  ' Dim itemsTipo As String[] = Mod_RellenarComboBox.cbTYPEentrada()
+  ' Dim itemsTipo As String[] = Mod_ComboBox.cbTYPEentradaBib()
   ' For Each item As String In itemsTipo
-  '   cbTYPEentrada.Add(item)
+  '   cbTYPEentradaBib.Add(item)
   ' Next
   '
   ' Dim itemsLanguage As String[] = Mod_ComboBox.cbLANGUAGE()
@@ -221,16 +221,8 @@ Public Sub Form_Open()
   Mostrar_ListaBIBrelacion()
   TotalEntradasBIByGLO()'actualizamos el contador de entradas
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-  Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
-  Mod_RellenarComboBox.RellenarCmbBibLaTeX()
-  Mod_RellenarComboBox.RellenarCmbMetadatos()
-  Mod_RellenarComboBox.RellenarCmbGitHubPages()
 
   rentaTrabajo.Enabled = False' inicia formulario sin habilitar menu renta del trabajo
-
-  cbTYPEentrada.Add("")
-  cbTYPEentrada.Add("article")
-  cbTYPEentrada.Add("incollection")
 
 End
 
@@ -2457,7 +2449,6 @@ Public Sub BtnNuevoBib_Click()
   btnAgregarKeyBIB.Visible = True
   txtTMPbiblio.Enabled = True
   txtTMPbiblio.Background = Color.White
-  ToolPanel1.Index = 0
 
   txtTMPbiblio.Clear 'limpiamos el campo temporal
   txtTMPbiblio.SetFocus()
@@ -2548,15 +2539,14 @@ Public Sub btnGuardar_Click()
     ' Cambiar la visibilidad del botón
     mostrarIguales()
     VListaBIB.ScrollY = 0
-    ToolPanel1.Index = 1
     btnGuardar.Visible = False
     btnGuardarIGUAL.Visible = True
     Return ' Salir de la función si el título ya existe
   Endif
 
-  If cbTYPEentrada.Text = "" Or cbLANGUAGE.Text = "" Then
+  If cbTYPEentradaBib.Text = "" Or cbLANGUAGE.Text = "" Then
     Message.Error("No ha seleccionado el tipo de entrada o idioma.")
-  Else If cbTYPEentrada.Text = "thesis" And cbType.Text = "" Then
+  Else If cbTYPEentradaBib.Text = "thesis" And cbType.Text = "" Then
     Message.Error("No ha seleccionado el tipo de tesis.")
   Else
     Contenido = meConn.Create("bibtex")
@@ -2730,7 +2720,6 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
   btnGuardarIGUAL.Visible = False
 
 End
@@ -2899,7 +2888,6 @@ Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
   Wend
 
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
 
 End
 
@@ -3054,7 +3042,6 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
 
 End
 
@@ -3208,7 +3195,6 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
   Wend
 
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
 
 End
 
@@ -3265,7 +3251,7 @@ End
 Public Sub guardarCampos()
 
   Contenido!id = txtIDbibtex.Text
-  Contenido!tipoEntrada = cbTYPEentrada.Text
+  Contenido!tipoEntrada = cbTYPEentradaBib.Text
   Contenido!hyphenation = cbLANGUAGE.Text
   Contenido!relatedType = cbRELATEDTYPE.Text
   Contenido!pubState = cbPUBSTATE.Text
@@ -3529,7 +3515,6 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
   Wend
 
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
 
 End
 
@@ -4215,7 +4200,6 @@ Public Sub BtnBuscarClave_Click()
   Wend
 
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
 
 End
 
@@ -4245,7 +4229,7 @@ Public Sub btnGuardarIGUAL_Click()
   If idExistente Then
     Message.Error("No se puede generar forzar grabar la entrada porque el ID ya existe.")
   Else
-    If cbTYPEentrada.Text = "" Or cbLANGUAGE.Text = "" Then
+    If cbTYPEentradaBib.Text = "" Or cbLANGUAGE.Text = "" Then
       Message.Error("No ha seleccionado el tipo de entrada o el idioma.")
     Else
 
@@ -4411,7 +4395,6 @@ Public Sub mostrarIguales()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
   btnGuardarIGUAL.Visible = False
 
 End
@@ -4425,7 +4408,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   btnAgregarKeyBIB.Visible = True
 
   txtIDbibtex.Text = VListaBIB[Row, 0].Text
-  cbTYPEentrada.Text = VListaBIB[Row, 1].Text
+  cbTYPEentradaBib.Text = VListaBIB[Row, 1].Text
   txtCLAVEbib.Text = VListaBIB[Row, 2].Text
   txtKEYWORDS.Text = VListaBIB[Row, 3].Text
   txtAUTHOR.Text = VListaBIB[Row, 4].Text
@@ -4715,7 +4698,6 @@ Public Sub BtnBuscarBookTitle_Click()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
   btnGuardarIGUAL.Visible = False
 
 End
@@ -4982,7 +4964,6 @@ Public Sub BtnBuscarJournal_Click()
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
   btnGuardarIGUAL.Visible = False
 
 End
@@ -7094,7 +7075,6 @@ Public Sub btnBuscarFiltro_Click()
   Wend
 
   VListaBIB.ScrollY = 0
-  ToolPanel1.Index = 1
 
 End
 

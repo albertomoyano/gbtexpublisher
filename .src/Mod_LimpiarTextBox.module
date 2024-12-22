@@ -19,7 +19,7 @@ Public Sub LimpiarCamposBIB()
 
   FMain.txtIDbibtex.Clear
   FMain.cbType.Clear
-  FMain.cbTYPEentrada.Clear
+  FMain.cbTYPEentradaBib.Clear
   FMain.cbLANGUAGE.Clear
   FMain.cbRELATEDTYPE.Clear
   FMain.cbPUBSTATE.Clear

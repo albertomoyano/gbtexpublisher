@@ -517,9 +517,8 @@
       Placeholder = ("coloque aquí su usuario GitHub")
     }
   }
-  { !TabPanel1 TabPanel
-    MoveScaled(1,14,162,365)
-    #Public = True
+  { TabPanel1 TabPanel
+    MoveScaled(1,13,162,365)
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -623,37 +622,8 @@
     }
     Index = 1
     Text = ("     Referencias bibliográficas     ")
-    { ToolPanel1 ToolPanel
-      MoveScaled(3,0,69,23)
-      Arrangement = Arrange.Fill
-      AutoResize = True
-      Count = 2
-      Animated = True
-      Border = True
-      Index = 0
-      Text = ("   Caja de texto temporal")
-      { txtTMPbiblio TextArea
-        MoveScaled(14,1,36,13)
-        Enabled = False
-        Background = Color.LightGray
-        Wrap = True
-        ScrollBar = Scroll.Vertical
-      }
-      Index = 1
-      Text = ("   Mostrar referencias bibliográficas")
-      { VListaBIB TableView
-        MoveScaled(10,1,44,12)
-        Font = Font["-1"]
-        Expand = True
-        Mode = Select.Single
-        ShowCursor = True
-        Header = GridView.Horizontal
-        Resizable = False
-      }
-      Index = 0
-    }
     { HBox14 HBox
-      MoveScaled(0,23,105,4)
+      MoveScaled(9,1,105,4)
       { BtnNuevoBib Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
@@ -687,17 +657,16 @@
         ToolTip = ("Borrar entrada")
         Picture = Picture["iconos/borrar.svg"]
       }
-      { Separator8 Separator
-        MoveScaled(59,0,2.3333,4)
-      }
       { Label129 Label
         MoveScaled(61.3333,0,5,4)
+        Visible = False
         AutoResize = True
         Text = ("ID  ")
       }
       { !txtIDbibtex TextBox
         MoveScaled(69,0,10,4)
         #Public = True
+        Visible = False
         Background = Color.Background
         NoTabFocus = True
         Alignment = Align.Right
@@ -710,8 +679,34 @@
         Wrap = False
       }
     }
+    { HBox19 HBox
+      MoveScaled(9,5,103,4)
+      { btnBuscarFiltro Button
+        MoveScaled(0,0,4,4)
+        NoTabFocus = True
+        Picture = Picture["iconos/search.svg"]
+      }
+      { lblKEYWORDS3 Label
+        MoveScaled(5,0,12.4444,4)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Filtro "
+      }
+      { btnAgregarKeyBIB Button
+        MoveScaled(59,0,4,4)
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { !txtKEYWORDS TextBox
+        MoveScaled(63,0,24,4)
+        #Public = True
+        NoTabFocus = True
+        Expand = True
+        Placeholder = ("Clave filtro para printbibliography")
+      }
+    }
     { HBox18 HBox
-      MoveScaled(0,27,111,4)
+      MoveScaled(9,9,111,4)
       { BtnBuscarClave Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
@@ -756,46 +751,40 @@
         Picture = Picture["iconos/face.svg"]
       }
     }
-    { HBox19 HBox
-      MoveScaled(0,31,103,4)
-      { btnBuscarFiltro Button
-        MoveScaled(0,0,4,4)
-        NoTabFocus = True
-        Picture = Picture["iconos/search.svg"]
-      }
-      { Label2 Label
-        MoveScaled(6,0,12.4444,4)
-        Font = Font["Bold"]
-        Foreground = &HFF0000
-        Alignment = Align.Right
-        Text = ("Tipo ")
-      }
-      { cbTYPEentrada ComboBox
-        MoveScaled(21,0,18,4)
-        NoTabFocus = True
-        ReadOnly = True
-      }
-      { lblKEYWORDS3 Label
-        MoveScaled(44,0,8,4)
-        #Translate = False
-        Alignment = Align.Right
-        Text = "Filtro "
-      }
-      { btnAgregarKeyBIB Button
-        MoveScaled(53,0,4,4)
-        ToolTip = ("Agregar clave")
-        Picture = Picture["iconos/clave.svg"]
-      }
-      { !txtKEYWORDS TextBox
-        MoveScaled(57,0,24,4)
-        #Public = True
-        NoTabFocus = True
+    { Panel3 Panel
+      MoveScaled(1,13,86,21)
+      Arrangement = Arrange.Horizontal
+      AutoResize = True
+      { TabPanel5 TabPanel
+        MoveScaled(0,0,63,18)
         Expand = True
-        Placeholder = ("Clave filtro para printbibliography")
+        Arrangement = Arrange.Fill
+        Count = 2
+        Index = 0
+        Text = ("     Caja de texto temporal     ")
+        { txtTMPbiblio TextArea
+          MoveScaled(0,0,36,13)
+          Enabled = False
+          Background = Color.LightGray
+          Wrap = True
+          ScrollBar = Scroll.Vertical
+        }
+        Index = 1
+        Text = ("     Mostrar referencias bibliográficas     ")
+        { VListaBIB TableView
+          MoveScaled(1,1,44,12)
+          Font = Font["-1"]
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          Resizable = False
+        }
+        Index = 0
       }
     }
     { TabPanel2 TabPanel
-      MoveScaled(1,37,125,74)
+      MoveScaled(2,38,125,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True
@@ -804,7 +793,7 @@
       Index = 0
       Text = ("Autoría")
       { ScrollView2 ScrollView
-        MoveScaled(1,2,108,43)
+        MoveScaled(1,2,108,55)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -813,8 +802,23 @@
         Border = False
         ScrollBar = Scroll.Vertical
         Shadow = True
+        { HBox195 HBox
+          MoveScaled(0,1,97,4)
+          { Label2 Label
+            MoveScaled(0,0,16,4)
+            Font = Font["Bold"]
+            Foreground = &HFF0000
+            Alignment = Align.Right
+            Text = ("Tipo de entrada ")
+          }
+          { cbTYPEentradaBib ComboBox
+            MoveScaled(20,0,18,4)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+        }
         { HBox21 HBox
-          MoveScaled(1,0,97,4)
+          MoveScaled(0,5,97,4)
           { BtnBuscarAuthor Button
             MoveScaled(1,0,4,4)
             NoTabFocus = True
@@ -846,7 +850,7 @@
           }
         }
         { HBox22 HBox
-          MoveScaled(0,4,97,4)
+          MoveScaled(0,9,97,4)
           { lblBOOKAUTHOR2 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -872,7 +876,7 @@
           }
         }
         { HBox24 HBox
-          MoveScaled(0,8,97,4)
+          MoveScaled(0,13,97,4)
           { BtnBuscarAuthor2 Button
             MoveScaled(0,0,4,4)
             NoTabFocus = True
@@ -901,7 +905,7 @@
           }
         }
         { HBox23 HBox
-          MoveScaled(0,12,97,4)
+          MoveScaled(0,17,97,4)
           { lblEDITOR2 Label
             MoveScaled(-1,0,16,3.5556)
             Alignment = Align.Right
@@ -925,7 +929,7 @@
           }
         }
         { HBox25 HBox
-          MoveScaled(0,16,97,4)
+          MoveScaled(0,21,97,4)
           { lblEDITOR3 Label
             MoveScaled(-1,0,16,3.5556)
             Alignment = Align.Right
@@ -949,7 +953,7 @@
           }
         }
         { HBox26 HBox
-          MoveScaled(0,20,97,4)
+          MoveScaled(0,25,97,4)
           { lblEDITOR4 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -973,7 +977,7 @@
           }
         }
         { HBox39 HBox
-          MoveScaled(0,24,97,4)
+          MoveScaled(0,29,97,4)
           { lblAFTERWORD Label
             MoveScaled(1,0,16,4)
             Alignment = Align.Right
@@ -1000,7 +1004,7 @@
           }
         }
         { HBox40 HBox
-          MoveScaled(0,28,97,4)
+          MoveScaled(0,33,97,4)
           { lblCOMMENTATOR Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1027,7 +1031,7 @@
           }
         }
         { HBox38 HBox
-          MoveScaled(0,32,97,4)
+          MoveScaled(0,37,97,4)
           { lblTRANSLATOR Label
             MoveScaled(1,0,16,4)
             ToolTip = ("Traductor")
@@ -1055,7 +1059,7 @@
           }
         }
         { HBox27 HBox
-          MoveScaled(0,36,97,4)
+          MoveScaled(0,41,97,4)
           { lblANNOTATOR2 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
