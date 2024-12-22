@@ -26,7 +26,6 @@ TabSize=2
 Language=es
 ControlPublic=1
 ModulePublic=1
-ForceBytecodeVersion=3.15
 Maintainer=Alberto Moyano
 Vendor=AlbertoMoyano
 VendorPrefix=AM

@@ -116,7 +116,7 @@ Public Sub Form_Open()
   rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
   BaseName = File.BaseName(TextBox1.Text)
 
-  Mod_RellenarComboBox.RellenarCmbBibLaTeX()
+  Mod_RellenarComboBox.RellenarComboBoxBibTeX()
   Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
   Mod_RellenarComboBox.RellenarCmbMetadatos()
   Mod_RellenarComboBox.RellenarCmbGitHubPages()
@@ -128,55 +128,6 @@ Public Sub Form_Open()
     mtmp = New Menu(menuScriptsExternos) As "obs"
     mtmp.caption = fileA
   Next
-
-  ' ' comienza la carga de los combobox de FMain
-  ' Dim itemsTipo As String[] = Mod_ComboBox.cbTYPEentradaBib()
-  ' For Each item As String In itemsTipo
-  '   cbTYPEentradaBib.Add(item)
-  ' Next
-  '
-  ' Dim itemsLanguage As String[] = Mod_ComboBox.cbLANGUAGE()
-  ' For Each item As String In itemsLanguage
-  '   cbLANGUAGE.Add(item)
-  ' Next
-  '
-  ' For Each item As String In itemsLanguage
-  '   cbLANGUAGEID.Add(item)
-  ' Next
-  '
-  ' Dim itemsRelated As String[] = Mod_ComboBox.cbRELATEDTYPE()
-  ' For Each item As String In itemsRelated
-  '   cbRELATEDTYPE.Add(item)
-  ' Next
-  '
-  ' Dim itemsPubState As String[] = Mod_ComboBox.cbPUBSTATE()
-  ' For Each item As String In itemsPubState
-  '   cbPUBSTATE.Add(item)
-  ' Next
-  '
-  ' Dim itemsType As String[] = Mod_ComboBox.cbType()
-  ' For Each item As String In itemsType
-  '   cbType.Add(item)
-  ' Next
-  '
-  ' Dim itemsEditor As String[] = Mod_ComboBox.cbEDITORTYPE()
-  '
-  ' ' Llenar el primer ComboBox
-  ' For Each item As String In itemsEditor
-  '   cbEDITORTYPE.Add(item)
-  ' Next
-  '
-  ' For Each item As String In itemsEditor
-  '   cbEDITORTYPEa.Add(item)
-  ' Next
-  '
-  ' For Each item As String In itemsEditor
-  '   cbEDITORTYPEb.Add(item)
-  ' Next
-  '
-  ' For Each item As String In itemsEditor
-  '   cbEDITORTYPEc.Add(item)
-  ' Next
 
   ' botonera glosario de inicio
   BtnNuevoGlo.Visible = True
@@ -2544,9 +2495,9 @@ Public Sub btnGuardar_Click()
     Return ' Salir de la función si el título ya existe
   Endif
 
-  If cbTYPEentradaBib.Text = "" Or cbLANGUAGE.Text = "" Then
+  If ComboBox1.Text = "" Or cbLANGUAGE.Text = "" Then
     Message.Error("No ha seleccionado el tipo de entrada o idioma.")
-  Else If cbTYPEentradaBib.Text = "thesis" And cbType.Text = "" Then
+  Else If ComboBox1.Text = "thesis" And cbType.Text = "" Then
     Message.Error("No ha seleccionado el tipo de tesis.")
   Else
     Contenido = meConn.Create("bibtex")
@@ -3251,7 +3202,7 @@ End
 Public Sub guardarCampos()
 
   Contenido!id = txtIDbibtex.Text
-  Contenido!tipoEntrada = cbTYPEentradaBib.Text
+  Contenido!tipoEntrada = ComboBox1.Text
   Contenido!hyphenation = cbLANGUAGE.Text
   Contenido!relatedType = CmbRelatedType.Text
   Contenido!pubState = cbPUBSTATE.Text
@@ -4229,7 +4180,7 @@ Public Sub btnGuardarIGUAL_Click()
   If idExistente Then
     Message.Error("No se puede generar forzar grabar la entrada porque el ID ya existe.")
   Else
-    If cbTYPEentradaBib.Text = "" Or cbLANGUAGE.Text = "" Then
+    If ComboBox1.Text = "" Or cbLANGUAGE.Text = "" Then
       Message.Error("No ha seleccionado el tipo de entrada o el idioma.")
     Else
 
@@ -4408,7 +4359,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   btnAgregarKeyBIB.Visible = True
 
   txtIDbibtex.Text = VListaBIB[Row, 0].Text
-  cbTYPEentradaBib.Text = VListaBIB[Row, 1].Text
+  ComboBox1.Text = VListaBIB[Row, 1].Text
   txtCLAVEbib.Text = VListaBIB[Row, 2].Text
   txtKEYWORDS.Text = VListaBIB[Row, 3].Text
   txtAUTHOR.Text = VListaBIB[Row, 4].Text

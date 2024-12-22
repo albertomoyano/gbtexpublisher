@@ -518,7 +518,7 @@
     }
   }
   { TabPanel1 TabPanel
-    MoveScaled(1,13,162,365)
+    MoveScaled(2,13,162,365)
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -560,7 +560,7 @@
       }
     }
     { Splitter1 Splitter
-      MoveScaled(3,6,109,65)
+      MoveScaled(2,11,109,65)
       Expand = True
       Border = False
       { !TerminalView1 TerminalView
@@ -679,51 +679,25 @@
         Wrap = False
       }
     }
-    { HBox19 HBox
-      MoveScaled(9,5,103,4)
-      { btnBuscarFiltro Button
-        MoveScaled(0,0,4,4)
-        NoTabFocus = True
-        Picture = Picture["iconos/search.svg"]
-      }
-      { lblKEYWORDS3 Label
-        MoveScaled(5,0,12.4444,4)
-        #Translate = False
-        Alignment = Align.Right
-        Text = "Filtro "
-      }
-      { btnAgregarKeyBIB Button
-        MoveScaled(59,0,4,4)
-        ToolTip = ("Agregar clave")
-        Picture = Picture["iconos/clave.svg"]
-      }
-      { !txtKEYWORDS TextBox
-        MoveScaled(63,0,24,4)
-        #Public = True
-        NoTabFocus = True
-        Expand = True
-        Placeholder = ("Clave filtro para printbibliography")
-      }
-    }
     { HBox18 HBox
-      MoveScaled(9,9,111,4)
+      MoveScaled(1,5,125,4)
       { BtnBuscarClave Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
       { lblAlta1 Label
-        MoveScaled(8,0,12.4444,4)
+        MoveScaled(5,0,12.4444,4)
         Alignment = Align.Right
         Text = ("Clave ")
       }
       { btnAgregarCitationKey Button
-        MoveScaled(22,0,4,4)
+        MoveScaled(18,0,4,4)
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }
       { !txtCLAVEbib TextBox
-        MoveScaled(28,0,9,4)
+        MoveScaled(22,0,22,4)
         #Public = True
         NoTabFocus = True
         ToolTip = ("Clave para ser utilizada solo con LaTeX")
@@ -731,28 +705,52 @@
         Alignment = Align.Left
         Placeholder = ("Clave BIB única")
       }
+      { lblKEYWORDS3 Label
+        MoveScaled(44,0,7,4)
+        #Translate = False
+        AutoResize = True
+        Alignment = Align.Right
+        Text = "    Filtro "
+      }
+      { btnBuscarFiltro Button
+        MoveScaled(51,0,4,4)
+        NoTabFocus = True
+        Picture = Picture["iconos/search.svg"]
+      }
+      { btnAgregarKeyBIB Button
+        MoveScaled(55,0,4,4)
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { !txtKEYWORDS TextBox
+        MoveScaled(60,0,14,4)
+        #Public = True
+        NoTabFocus = True
+        Expand = True
+        Placeholder = ("Clave filtro para printbibliography")
+      }
       { lblAlta4 Label
-        MoveScaled(42,0,19,4)
+        MoveScaled(75,0,14,4)
         AutoResize = True
         Alignment = Align.Right
         Text = ("    Exportar como  ")
       }
-      { txtEXPORTARbib TextBox
-        MoveScaled(61,0,15,4)
+      { txtEXPORTARbib TextLabel
+        MoveScaled(92,0,15,4)
         Background = Color.Background
-        NoTabFocus = True
-        Expand = True
-        Alignment = Align.Left
-        ReadOnly = True
+        AutoResize = True
+        Border = Border.Raised
+        Alignment = Align.Normal
+        Wrap = False
       }
       { Button1 Button
-        MoveScaled(84,0,16,4)
+        MoveScaled(107,0,16,4)
         ToolTip = ("Mostrar las entradas de este archivo")
         Picture = Picture["iconos/face.svg"]
       }
     }
     { Panel3 Panel
-      MoveScaled(1,13,86,21)
+      MoveScaled(3,13,86,21)
       Arrangement = Arrange.Horizontal
       AutoResize = True
       { TabPanel5 TabPanel
@@ -783,8 +781,23 @@
         Index = 0
       }
     }
+    { HBox195 HBox
+      MoveScaled(3,34,97,4)
+      { Label2 Label
+        MoveScaled(0,0,16.8889,4)
+        Font = Font["Bold"]
+        Foreground = &HFF0000
+        Alignment = Align.Right
+        Text = ("Tipo de entrada ")
+      }
+      { ComboBox1 ComboBox
+        MoveScaled(28,0,15,4)
+        Expand = True
+        ReadOnly = True
+      }
+    }
     { TabPanel2 TabPanel
-      MoveScaled(2,38,125,66)
+      MoveScaled(2,41,125,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True
@@ -802,22 +815,6 @@
         Border = False
         ScrollBar = Scroll.Vertical
         Shadow = True
-        { HBox195 HBox
-          MoveScaled(0,1,97,4)
-          { Label2 Label
-            MoveScaled(0,0,16,4)
-            Font = Font["Bold"]
-            Foreground = &HFF0000
-            Alignment = Align.Right
-            Text = ("Tipo de entrada ")
-          }
-          { cbTYPEentradaBib ComboBox
-            MoveScaled(20,0,18,4)
-            NoTabFocus = True
-            Expand = True
-            ReadOnly = True
-          }
-        }
         { HBox21 HBox
           MoveScaled(0,5,97,4)
           { BtnBuscarAuthor Button
@@ -900,7 +897,7 @@
             Text = ("EditorType ")
           }
           { cbEDITORTYPE ComboBox
-            MoveScaled(63,0,16,3.5556)
+            MoveScaled(63,0,16,4)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -924,7 +921,7 @@
             Text = ("EditorAType ")
           }
           { cbEDITORTYPEa ComboBox
-            MoveScaled(61,0,16,3.5556)
+            MoveScaled(61,0,16,4)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -2571,7 +2568,7 @@
             Text = "RelatedType "
           }
           { cbRelatedTypeRelacion ComboBox
-            MoveScaled(19,0,24,3.5556)
+            MoveScaled(19,0,24,4)
             NoTabFocus = True
             ReadOnly = True
           }
@@ -2707,8 +2704,43 @@
         Alignment = Align.Center
       }
     }
+    { HBox7 HBox
+      MoveScaled(1,35,103,4)
+      { Label11 Label
+        MoveScaled(0,0,16.4444,4)
+        Font = Font["Bold"]
+        Foreground = &HFF0000
+        Alignment = Align.Right
+        Text = ("Tipo  ")
+      }
+      { cbTYPEentradaGlo ComboBox
+        MoveScaled(17,0,16,4)
+        NoTabFocus = True
+        ReadOnly = True
+      }
+      { lblKEYWORDS1 Label
+        MoveScaled(34,0,16,4)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Filtro "
+      }
+      { btnBuscarFiltroGlosario Button
+        MoveScaled(51,0,4,4)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { btnAgregarKey Button
+        MoveScaled(60,0,4,4)
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { txtARCHIVO TextBox
+        MoveScaled(65,0,13,4)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
     { HBox2 HBox
-      MoveScaled(1,36,110,4)
+      MoveScaled(1,39,110,4)
       { btnBuscarClaveGLO Button
         MoveScaled(0,0,4,4)
         Picture = Picture["iconos/search.svg"]
@@ -2748,41 +2780,6 @@
       { btnParcialGLO Button
         MoveScaled(93,0,16,4)
         Picture = Picture["iconos/face.svg"]
-      }
-    }
-    { HBox7 HBox
-      MoveScaled(1,40,103,4)
-      { Label11 Label
-        MoveScaled(0,0,16.4444,4)
-        Font = Font["Bold"]
-        Foreground = &HFF0000
-        Alignment = Align.Right
-        Text = ("Tipo  ")
-      }
-      { cbTYPEentradaGlo ComboBox
-        MoveScaled(17,0,16,4)
-        NoTabFocus = True
-        ReadOnly = True
-      }
-      { lblKEYWORDS1 Label
-        MoveScaled(34,0,16,4)
-        #Translate = False
-        Alignment = Align.Right
-        Text = "Filtro "
-      }
-      { btnBuscarFiltroGlosario Button
-        MoveScaled(51,0,4,4)
-        Picture = Picture["iconos/search.svg"]
-      }
-      { btnAgregarKey Button
-        MoveScaled(60,0,4,4)
-        ToolTip = ("Agregar clave")
-        Picture = Picture["iconos/clave.svg"]
-      }
-      { txtARCHIVO TextBox
-        MoveScaled(65,0,13,4)
-        NoTabFocus = True
-        Expand = True
       }
     }
     { ScrollView9 ScrollView
@@ -2932,17 +2929,16 @@
         MoveScaled(8,0,4,4)
         Picture = Picture["iconos/guardarComo.svg"]
       }
-      { Separator6 Separator
-        MoveScaled(12,0,2.3333,4)
-      }
       { Label127 Label
         MoveScaled(16,0,5,4)
+        Visible = False
         AutoResize = True
         Text = ("ID  ")
       }
       { !txtIDmetadatos TextBox
         MoveScaled(24,0,9,4)
         #Public = True
+        Visible = False
         Background = Color.Background
         NoTabFocus = True
         ReadOnly = True

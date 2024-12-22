@@ -27,17 +27,17 @@ End
 Public Sub LimpiarCamposBIB()
 
   FMain.txtIDbibtex.Clear
-  FMain.cbType.Clear
-  FMain.cbTYPEentradaBib.Clear
-  FMain.cbLANGUAGE.Clear
-  FMain.CmbRelatedType.Clear
-  FMain.cbPUBSTATE.Clear
-  FMain.cbEDITORTYPE.Clear
-  FMain.cbEDITORTYPEa.Clear
-  FMain.cbEDITORTYPEb.Clear
-  FMain.cbEDITORTYPEc.Clear
-  FMain.cbLANGUAGEID.Clear
-  FMain.cbOPTIONS.Clear
+  FMain.cbType.Text = ""
+  FMain.ComboBox1.Text = ""
+  FMain.cbLANGUAGE.Text = ""
+  FMain.CmbRelatedType.Text = ""
+  FMain.cbPUBSTATE.Text = ""
+  FMain.cbEDITORTYPE.Text = ""
+  FMain.cbEDITORTYPEa.Text = ""
+  FMain.cbEDITORTYPEb.Text = ""
+  FMain.cbEDITORTYPEc.Text = ""
+  FMain.cbLANGUAGEID.Text = ""
+  FMain.cbOPTIONS.Text = ""
   FMain.txtETIQ.Clear
   FMain.txtKEYWORDS.Clear
   FMain.txtCROSSREF.Clear
