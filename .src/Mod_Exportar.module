@@ -1531,7 +1531,6 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
 
 End
 
-
 Public Sub ExportToIndexHTML(rutaTexto As String)
 
   Dim s As String
@@ -1560,8 +1559,6 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Dim buscarGHP As String
   Dim buscarSeparatas As String
   Dim buscarAutores As String
-  Dim buscarAutoresA As String
-  Dim buscarAutores3 As String
   Dim buscarColaboradores As String
   Dim outputFile As String
   Dim fechaPDF As String
