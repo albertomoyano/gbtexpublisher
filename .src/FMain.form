@@ -518,7 +518,7 @@
     }
   }
   { !TabPanel1 TabPanel
-    MoveScaled(1,13,162,365)
+    MoveScaled(1,14,162,365)
     #Public = True
     Enabled = False
     Expand = True
@@ -727,8 +727,9 @@
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }
-      { txtCLAVEbib TextBox
+      { !txtCLAVEbib TextBox
         MoveScaled(28,0,9,4)
+        #Public = True
         NoTabFocus = True
         ToolTip = ("Clave para ser utilizada solo con LaTeX")
         Expand = True
@@ -770,7 +771,7 @@
         Text = ("Tipo ")
       }
       { cbTYPEentrada ComboBox
-        MoveScaled(18,0,18,4)
+        MoveScaled(21,0,18,4)
         NoTabFocus = True
         ReadOnly = True
       }

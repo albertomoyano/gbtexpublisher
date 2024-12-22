@@ -76,7 +76,7 @@ Public Sub btnGuardarMod_Click()
   Message.Info("Los cambios se guardaron con éxito.")
 
   Mostrar_Lista()
-  LimpiarCampos() 'limpiar campos
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   txAsunto.Enabled = False
   txContenido.Enabled = False
@@ -109,7 +109,7 @@ Public Sub tbNuevo_Click()
   BtnExportarDOCX.Visible = False
   BtnExportarPDF.Visible = False
 
-  LimpiarCampos  'Limpiamos todos los campos
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
   Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
@@ -138,7 +138,7 @@ Public Sub btnGuardar_Click()
   Message.Info("Nueva entrada guardada.")
 
   Mostrar_Lista() ' Refrescamos la lista de entradas
-  LimpiarCampos() ' Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   txAsunto.Enabled = False
   txContenido.Enabled = False
@@ -165,7 +165,7 @@ Public Sub tbBorrar_Click()
     Contenido = FMain.meConn.Exec("delete from apuntes where id=" & txId.Text)
   Endif
 
-  LimpiarCampos()  'Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   VLista.Clear
   Mostrar_Lista
@@ -203,7 +203,7 @@ Public Sub btnRefresh_Click()
 
   VLista.Clear
   Mostrar_Lista()
-  LimpiarCampos()  'Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   txAsunto.Enabled = False
   txContenido.Enabled = False
@@ -235,17 +235,6 @@ Public Sub VLista_RowClick(Row As Integer)
   btnRefresh.Visible = True
   BtnExportarDOCX.Visible = True
   BtnExportarPDF.Visible = True
-
-End
-
-Public Function LimpiarCampos()
-
-  'Limpiamos los campos
-  txtBuscar.Text = ""
-  txId.Text = ""
-  txFecha.Text = ""
-  txAsunto.Text = ""
-  txContenido.Text = ""
 
 End
 

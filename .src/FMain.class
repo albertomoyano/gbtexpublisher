@@ -124,170 +124,59 @@ Public Sub Form_Open()
     mtmp.caption = fileA
   Next
 
-  ' comienza la carga de los combobox de FMain
-  Dim itemsGlo As String[] = Mod_ComboBox.cbTYPEentradaGlo()
-  For Each item As String In itemsGlo
-    cbTYPEentradaGlo.Add(item)
-  Next
-
-  Dim itemsTipo As String[] = Mod_ComboBox.cbTYPEentrada()
-  For Each item As String In itemsTipo
-    cbTYPEentrada.Add(item)
-  Next
-
-  Dim itemsLanguage As String[] = Mod_ComboBox.cbLANGUAGE()
-
-  ' Llenar el primer ComboBox
-  For Each item As String In itemsLanguage
-    cbLANGUAGE.Add(item)
-  Next
-
-  For Each item As String In itemsLanguage
-    cbLANGUAGEID.Add(item)
-  Next
-
-  Dim itemsRelated As String[] = Mod_ComboBox.cbRELATEDTYPE()
-  For Each item As String In itemsRelated
-    cbRELATEDTYPE.Add(item)
-  Next
-
-  Dim itemsPubState As String[] = Mod_ComboBox.cbPUBSTATE()
-  For Each item As String In itemsPubState
-    cbPUBSTATE.Add(item)
-  Next
-
-  Dim itemsType As String[] = Mod_ComboBox.cbType()
-  For Each item As String In itemsType
-    cbType.Add(item)
-  Next
-
-  Dim itemsEditor As String[] = Mod_ComboBox.cbEDITORTYPE()
-
-  ' Llenar el primer ComboBox
-  For Each item As String In itemsEditor
-    cbEDITORTYPE.Add(item)
-  Next
-
-  For Each item As String In itemsEditor
-    cbEDITORTYPEa.Add(item)
-  Next
-
-  For Each item As String In itemsEditor
-    cbEDITORTYPEb.Add(item)
-  Next
-
-  For Each item As String In itemsEditor
-    cbEDITORTYPEc.Add(item)
-  Next
-
-  ' comienza metadatos
-  cmbTypePub.Add("research-article")
-  cmbTypePub.Add("review-article")
-  cmbTypePub.Add("editorial")
-  cmbTypePub.Add("case-report")
-  cmbTypePub.Add("letter")
-  cmbTypePub.Add("commentary")
-  cmbTypePub.Add("correction")
-  txt40_pdfmetalang.Add("es")
-  txt40_pdfmetalang.Add("pt")
-  txt40_pdfmetalang.Add("en")
-  txt40_pdfmetalang.Add("fr")
-  txt40_pdfmetalang.Add("de")
-  txt40_pdfmetalang.Add("it")
-  txt54_idiomaorig.Add("")
-  txt54_idiomaorig.Add("es")
-  txt54_idiomaorig.Add("pt")
-  txt54_idiomaorig.Add("en")
-  txt54_idiomaorig.Add("fr")
-  txt54_idiomaorig.Add("de")
-  txt54_idiomaorig.Add("it")
-  cbLang.Add("Español de España: es-ES")
-  cbLang.Add("Portugués de Brasil: pt-BR")
-  cbLang.Add("Inglés de Estados Unidos: en-US")
-  cbLang.Add("Francés de Francia: fr-FR")
-  cbLang.Add("Alemán de Alemania: de-DE")
-  cbLang.Add("Italiano: it-IT")
-  cbLang.Add("Japonés: ja-JP")
-  cbLang.Add("Chino simplificado: zh-Hans")
-  txt15_pdfcopyright.Add("Copyright")
-  If txt16_pdflicenseurl.Text = "" Then
-    txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Copyright"
-  Endif
-  txt15_pdfcopyright.Add("CC0 1.0 Universal")
-  txt15_pdfcopyright.Add("CC BY 4.0 Attribution 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-SA 4.0 Attribution-ShareAlike 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-ND 4.0 Attribution-NoDerivatives 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-NC 4.0 Attribution-NonCommercial 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-NC-SA 4.0 Attribution-NonCommercial-ShareAlike 4.0 International")
-  txt15_pdfcopyright.Add("CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International")
-  txt15_pdfcopyright.Add("GNU General Public License")
-  txt15_pdfcopyright.Add("Licencia MIT")
-  txt15_pdfcopyright.Add("Licencia BSD")
-  txt15_pdfcopyright.Add("Otra")
-  cmbType.Add("Text")
-  cmbType.Add("Software")
-  cmbType.Add("Sound")
-  cmbType.Add("Dataset")
-  cmbType.Add("InteractiveResource")
-  cbPDFrendition.Add("default")
-  cbPDFrendition.Add("draft")
-  cbPDFrendition.Add("low-res")
-  cbPDFrendition.Add("proof")
-  cbPDFrendition.Add("screen")
-  cbPDFrendition.Add("thumbnail")
-  cbPubType.Add("book")
-  cbPubType.Add("journal")
-  cbPubType.Add("magazine")
-  cbPubType.Add("manual")
-  cbPubType.Add("report")
-  cbPubType.Add("whitepaper")
-  cbPubStatus.Add("Author's Original: AO")
-  cbPubStatus.Add("Submitted Manuscript Under Review: SMUR")
-  cbPubStatus.Add("Accepted Manuscript: AM")
-  cbPubStatus.Add("Proof: P")
-  cbPubStatus.Add("Version Of Record: VoR")
-  cbPubStatus.Add("Corrected Version Of Record: CVoR")
-  cbPubStatus.Add("Enhanced Version Of Record: EVoR")
-  cbPDFx.Add("pdf/A")
-  cbPDFx.Add("pdf/x-1a:2001")
-  cbPDFx.Add("pdf/x-1a:2003")
-  cbPDFx.Add("pdf/x-3:2002")
-  cbPDFx.Add("pdf/x-3:2003")
-  cbPDFx.Add("pdf/x-4")
-  cbPDFx.Add("pdf/x-4p")
-  cbPDFx.Add("pdf/x-5g")
-  cbPDFx.Add("pdf/x-5n")
-  cbPDFx.Add("pdf/x-5pg")
-
-  txt89_binding.Add("")
-  txt89_binding.Add("Encolado")
-  txt89_binding.Add("Everflex")
-  txt89_binding.Add("Cosido a hilo")
-  txt89_binding.Add("Anillado")
-  txt89_binding.Add("Abrochado")
-
-  ' combobox de githubpages
-  cmbRolAutores.Add("")
-  cmbRolAutores.Add("aut: Author - Autor del contenido textual")
-  cmbRolAutores.Add("edt: Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido")
-  cmbRolAutores.Add("adp: Adapter - Persona que adapta o versiona una obra para otro medio o público")
-  cmbRolAutores.Add("rev: Reviewer - Revisor de contenido")
-  ' colaboradores
-  cmbRolColaborador.Add("")
-  cmbRolColaborador.Add("aut: Author - Autor del contenido textual")
-  cmbRolColaborador.Add("edt: Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido")
-  cmbRolColaborador.Add("trl: Translator - Persona que traduce una obra a otro idioma")
-  cmbRolColaborador.Add("ill: Illustrator - Ilustrador de libros o publicaciones")
-  cmbRolColaborador.Add("pbl: Publisher - Persona o entidad responsable de la publicación y distribución")
-  cmbRolColaborador.Add("prt: Printer - Impresor, responsable de imprimir la obra")
-  cmbRolColaborador.Add("cmp: Composer - Compositor de contenido literario o musical")
-  cmbRolColaborador.Add("rev: Reviewer - Revisor de contenido")
-  cmbRolColaborador.Add("red: Redactor - Persona que corrige o edita el contenido para la publicación")
-  cmbRolColaborador.Add("cov: Cover designer - Diseñador de la cubierta del libro")
-  cmbRolColaborador.Add("ill: Ilustrador - Similar a Illustrator, específico para ilustraciones de libros")
-  cmbRolColaborador.Add("adp: Adapter - Persona que adapta o versiona una obra para otro medio o público")
-  cmbRolColaborador.Add("art: Artist - Artista que colabora en la obra visualmente")
-  cmbRolColaborador.Add("bnd: Binder - Persona encargada de encuadernar el libro")
+  ' ' comienza la carga de los combobox de FMain
+  ' Dim itemsGlo As String[] = Mod_ComboBox.cbTYPEentradaGlo()
+  ' For Each item As String In itemsGlo
+  '   cbTYPEentradaGlo.Add(item)
+  ' Next
+  '
+  ' Dim itemsTipo As String[] = Mod_RellenarComboBox.cbTYPEentrada()
+  ' For Each item As String In itemsTipo
+  '   cbTYPEentrada.Add(item)
+  ' Next
+  '
+  ' Dim itemsLanguage As String[] = Mod_ComboBox.cbLANGUAGE()
+  ' For Each item As String In itemsLanguage
+  '   cbLANGUAGE.Add(item)
+  ' Next
+  '
+  ' For Each item As String In itemsLanguage
+  '   cbLANGUAGEID.Add(item)
+  ' Next
+  '
+  ' Dim itemsRelated As String[] = Mod_ComboBox.cbRELATEDTYPE()
+  ' For Each item As String In itemsRelated
+  '   cbRELATEDTYPE.Add(item)
+  ' Next
+  '
+  ' Dim itemsPubState As String[] = Mod_ComboBox.cbPUBSTATE()
+  ' For Each item As String In itemsPubState
+  '   cbPUBSTATE.Add(item)
+  ' Next
+  '
+  ' Dim itemsType As String[] = Mod_ComboBox.cbType()
+  ' For Each item As String In itemsType
+  '   cbType.Add(item)
+  ' Next
+  '
+  ' Dim itemsEditor As String[] = Mod_ComboBox.cbEDITORTYPE()
+  '
+  ' ' Llenar el primer ComboBox
+  ' For Each item As String In itemsEditor
+  '   cbEDITORTYPE.Add(item)
+  ' Next
+  '
+  ' For Each item As String In itemsEditor
+  '   cbEDITORTYPEa.Add(item)
+  ' Next
+  '
+  ' For Each item As String In itemsEditor
+  '   cbEDITORTYPEb.Add(item)
+  ' Next
+  '
+  ' For Each item As String In itemsEditor
+  '   cbEDITORTYPEc.Add(item)
+  ' Next
 
   ' botonera glosario de inicio
   BtnNuevoGlo.Visible = True
@@ -332,8 +221,16 @@ Public Sub Form_Open()
   Mostrar_ListaBIBrelacion()
   TotalEntradasBIByGLO()'actualizamos el contador de entradas
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+  Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
+  Mod_RellenarComboBox.RellenarCmbBibLaTeX()
+  Mod_RellenarComboBox.RellenarCmbMetadatos()
+  Mod_RellenarComboBox.RellenarCmbGitHubPages()
 
   rentaTrabajo.Enabled = False' inicia formulario sin habilitar menu renta del trabajo
+
+  cbTYPEentrada.Add("")
+  cbTYPEentrada.Add("article")
+  cbTYPEentrada.Add("incollection")
 
 End
 
@@ -777,7 +674,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     guardarTipoDocumentoLibro()
-    LimpiarCamposBIB() ' Limpiamos los campos de las entradas bib
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
   Endif
 
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
@@ -1155,7 +1052,7 @@ Public Sub mnuLast_Click()
   MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-  LimpiarCamposBIB()' Limpiamos los campos de las entradas bib
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
 
 End
 
@@ -1389,22 +1286,6 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
 
 End
 
-Public Sub LimpiarCamposGLO()
-
-  'Limpiamos los campos
-  txtIDglosario.Text = ""
-  txtCLAVEglo.Text = ""
-  txtARCHIVO.Text = ""
-  txtNAME.Text = ""
-  txtDESCRIPTION.Text = ""
-  txtFIRST.Text = ""
-  txtTEXT.Text = ""
-  txtPLURAL.Text = ""
-  txtFPLURAL.Text = ""
-  txtSORT.Text = ""
-
-End
-
 Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
 
   ' Mostrar_ListaGLO
@@ -1415,7 +1296,7 @@ Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
   btnGuardarCambiosGlo.Visible = False
   btnAgregarGloKey.Visible = False
 
-  LimpiarCamposGLO
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
 
 End
 
@@ -1606,7 +1487,7 @@ Public Sub BtnNuevoGlo_Click()
 
   Dim Idn As Integer
 
-  LimpiarCamposGLO  'Limpiamos todos los campos
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
 
   txtTMPglo.Clear
   txtTMPglo.SetFocus()
@@ -1639,7 +1520,7 @@ Public Sub BtnEliminarGlo_Click()
     Contenido = meConn.Exec("delete from glosarios where id=" & txtIDglosario.Text)
   Endif
 
-  LimpiarCamposGLO  'Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
 
   ' VListaGLO.Clear
   ' Mostrar_ListaGLO
@@ -1694,7 +1575,7 @@ Public Sub btnGuardarGlo_Click()
   Message.Info("Nueva entrada guardada.")
 
   ' Mostrar_ListaGLO ' Refrescamos la lista de entradas
-  LimpiarCamposGLO ' Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
 
   btnGuardarCambiosGlo.Visible = False
   btnGuardarGlo.Visible = False
@@ -1721,7 +1602,7 @@ Public Sub btnGuardarCambiosGlo_Click()
   Message.Info("Los cambios se guardaron con éxito.")
 
   ' Mostrar_ListaGLO
-  LimpiarCamposGLO 'limpiar campos
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
 
 End
 
@@ -2543,122 +2424,6 @@ Public Sub Mostrar_ListaBIB()
 
 End
 
-Public Sub LimpiarCamposBIB()
-
-  'Limpiamos los campos
-  txtIDbibtex.Text = ""
-  cbType.Text = "" 'tesis
-  cbTYPEentrada.Text = ""
-  cbLANGUAGE.Text = ""
-  cbRELATEDTYPE.Text = ""
-  cbPUBSTATE.Text = ""
-  cbEDITORTYPE.Text = ""
-  cbEDITORTYPEa.Text = ""
-  cbEDITORTYPEb.Text = ""
-  cbEDITORTYPEc.Text = ""
-  cbLANGUAGEID.Text = ""
-  cbOPTIONS.Text = ""
-  txtETIQ.Text = ""
-  txtKEYWORDS.Text = ""
-  txtCROSSREF.Text = ""
-  txtCLAVEbib.Text = ""
-  txtTITLE.Text = ""
-  txtRELATED.Text = ""
-  txtYEAR.Text = ""
-  txtDATEY.Text = ""
-  txtPUBLISHER.Text = ""
-  txtLOCATION.Text = ""
-  txtEDITOR.Text = ""
-  txtSERIES.Text = ""
-  txtRELATEDSTRING.Text = ""
-  txtMAINTITLE.Text = ""
-  txtLABEL.Text = ""
-  txtSHORTTITLE.Text = ""
-  txtEDITION.Text = ""
-  txtBOOKAUTHOR.Text = ""
-  txtBOOKTITLE.Text = ""
-  txtVOLUME.Text = ""
-  txtNUMBER.Text = ""
-  txtPAGES.Text = ""
-  txtJOURNALTITLE.Text = ""
-  txtURLDATE.Text = ""
-  txtDOI.Text = ""
-  txtPART.Text = ""
-  txtBOLUMES.Text = ""
-  txtPAGETOTAL.Text = ""
-  txtISBN.Text = ""
-  txtISSN.Text = ""
-  txtORGANIZATION.Text = ""
-  txtINSTITUTION.Text = ""
-  txtEVENTTITLE.Text = ""
-  txtEVENTDATE.Text = ""
-  txtINTRODUCTION.Text = ""
-  txtTRANSLATOR.Text = ""
-  txtAFTERWORD.Text = ""
-  txtFOREWORD.Text = ""
-  txtLIBRARY.Text = ""
-  txtANNOTATION.Text = ""
-  txtURL.Text = ""
-  txtCOMMENTATOR.Text = ""
-  txtANNOTATOR.Text = ""
-  txtNAMEADDON.Text = ""
-  txtAUTHOR.Text = ""
-  txtEDITORa.Text = ""
-  txtEDITORb.Text = ""
-  txtEDITORc.Text = ""
-  txtHOLDER.Text = ""
-  txtShortAuthor.Text = ""
-  txtBookTitleAddOn.Text = ""
-  txtMainTitleAddOn.Text = ""
-  txtJournalTitleAddOn.Text = ""
-  txtIssueTitleAddOn.Text = ""
-  txtEventTitleAddOn.Text = ""
-  txtChapter.Text = ""
-  txtORIGDATE.Text = ""
-  txtVERSION.Text = ""
-  txtGENDER.Text = ""
-  txtINDEXTITLE.Text = ""
-  txtISSUETITLE.Text = ""
-  txtREPRINTTITLE.Text = ""
-  txtPAGINATION.Text = ""
-  txtVENUE.Text = ""
-  txtBookPagination.Text = ""
-  txtLANGIDOPTS.Text = ""
-  txtORIGLANGUAGE.Text = ""
-  txtISAN.Text = ""
-  txtXREF.Text = ""
-  txtXDATA.Text = ""
-  txtPRESORT.Text = ""
-  txtSORTKEY.Text = ""
-  txtSORTNAME.Text = ""
-  txtSORTSHORTHAND.Text = ""
-  txtSORTTITLE.Text = ""
-  txtINDEXSORTTITLE.Text = ""
-  txtSORTYEAR.Text = ""
-  txtFILE.Text = ""
-  txtABSTRACT.Text = ""
-  txtORIGLOCATION.Text = ""
-  txtORIGPUBLISHER.Text = ""
-  txtISMN.Text = ""
-  txtISRN.Text = ""
-  txtISWC.Text = ""
-  txtEID.Text = ""
-  txtEPRINTYPE.Text = ""
-  txtEPRINT.Text = ""
-  txtENTRYSUBTYPE.Text = ""
-  txtHOWPUBLISHED.Text = ""
-  txtADDENDUM.Text = ""
-  txtSHORTHAND.Text = ""
-  txtSHORTHANDINTRO.Text = ""
-  txtIDS.Text = ""
-  txtENTRYSET.Text = ""
-  txtNOTE.Text = ""
-  txtLANGUAGE.Text = ""
-  txtTitleAddOn.Text = ""
-  txtSubTitle.Text = ""
-
-End
-
 Public Sub BtnEliminarBib_Click()
 
   'Chequeamos primero que se haya elegido una entrada
@@ -2671,7 +2436,7 @@ Public Sub BtnEliminarBib_Click()
     Contenido = meConn.Exec("delete from bibtex where id=" & txtIDbibtex.Text)
   Endif
 
-  LimpiarCamposBIB() ' Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
   VListaBIB.Clear()
   Mostrar_ListaBIB()
 
@@ -2696,7 +2461,7 @@ Public Sub BtnNuevoBib_Click()
 
   txtTMPbiblio.Clear 'limpiamos el campo temporal
   txtTMPbiblio.SetFocus()
-  LimpiarCamposBIB()
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
   ObtenerNuevoId()
 
   TabPanel2.Index = 0
@@ -2741,7 +2506,7 @@ Public Sub btnGuardarCambios_Click()
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
 
-  LimpiarCamposBIB() ' Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
 
 End
 
@@ -2798,7 +2563,7 @@ Public Sub btnGuardar_Click()
     guardarCampos()
     Contenido.Update
     Message.Info("Nueva entrada guardada.")
-    LimpiarCamposBIB() ' Limpiamos los campos
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
     txtTMPbiblio.Clear 'limpiamos el campo temporal
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     btnGuardarCambios.Visible = False
@@ -2980,7 +2745,7 @@ Public Sub BtnRefrescarBib_Click()'refrescamos la vista
   btnGuardarIGUAL.Visible = False
   btnAgregarKeyBIB.Visible = False
 
-  LimpiarCamposBIB() ' Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
   VListaBIB.Clear
   Mostrar_ListaBIB()
 
@@ -4493,7 +4258,7 @@ Public Sub btnGuardarIGUAL_Click()
       Message.Info("Nueva entrada guardada.")
 
       Mostrar_ListaBIB ' Refrescamos la lista de entradas
-      LimpiarCamposBIB() ' Limpiamos los campos
+      Mod_LimpiarTextBox.LimpiarCamposBIB()
 
       btnGuardarCambios.Visible = False
       btnGuardar.Visible = False
@@ -7196,7 +6961,7 @@ Public Sub btnBuscarFiltro_Click()
   ' Si la búsqueda no arroja resultados
   If Busqueda.Count = 0 Then
     Message.Info("No se ha encontrado ningún resultado.")
-    LimpiarCamposBIB() ' Limpiamos los campos
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
     Mostrar_ListaBIB()
     Return
   Endif
@@ -7546,18 +7311,7 @@ Public Sub levantarGitHubPages()
     txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
     txtSumarioHTML.Text = ContenidoGHP!txtSumarioHTML
   Else
-    txtnombreArchivoGHP.Text = ""
-    txtCreateDateHTML.Text = ""
-    txtModDateHTML.Text = ""
-    txtCVautoresHTML.Text = ""
-    txtHREFepubHTML.Text = ""
-    txtHREFenlineaHTML.Text = ""
-    txtHREFpdfHTML.Text = ""
-    txtImagenHTML.Text = ""
-    txtPubDateHTML.Text = ""
-    txtPieHTML.Text = ""
-    txtCabeceraHTML.Text = ""
-    txtSumarioHTML.Text = ""
+    Mod_LimpiarTextBox.LimpiarCamposGitHubPages()
     BtnNuevoGHP.Visible = True
     btnGuardarGHP.Visible = False
     btnGuardarCambiosGHP.Visible = False

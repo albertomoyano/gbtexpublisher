@@ -28,19 +28,6 @@ Public Sub Form_Open()
 
 End
 
-Public Function LimpiarCampos()
-
-  'Limpiamos los campos
-  txtIdBiblioteca.Text = ""
-  txtArchivoTeX.Text = ""
-  txtGitHub.Text = ""
-  txtPDF.Text = ""
-  txtFechaInicio.Text = ""
-  txtFechaCierre.Text = ""
-  txtEtiquetas.Text = ""
-
-End
-
 Public Sub Mostrar_Lista_Biblioteca()
 
   Dim i As Integer
@@ -110,7 +97,7 @@ Public Sub tbNuevo_Click()
   btnGuardarMod.Visible = False
   btnRefresh.Visible = False
 
-  LimpiarCampos  'Limpiamos todos los campos
+  Mod_LimpiarTextBox.LimpiarCamposBiblioteca()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
   Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM biblioteca LIMIT 1")
@@ -166,7 +153,7 @@ Public Sub tbBorrar_Click()
     Contenido = FMain.meConn.Exec("delete from biblioteca where id=" & txtIdBiblioteca.Text)
   Endif
 
-  LimpiarCampos()  'Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposBiblioteca()
 
   gridBiblioteca.Clear
   Mostrar_Lista_Biblioteca()
@@ -230,7 +217,7 @@ Public Sub btnGuardar_Click()
     Contenido.Update
     Message.Info("Nueva entrada guardada.")
     Mostrar_Lista_Biblioteca() ' Refrescamos la lista de entradas
-    LimpiarCampos() ' Limpiamos los campos
+    Mod_LimpiarTextBox.LimpiarCamposBiblioteca()
     tbNuevo.Visible = True
     tbBorrar.Visible = False
     btnGuardar.Visible = False
@@ -254,7 +241,7 @@ Public Sub btnGuardarMod_Click()
   Message.Info("Los cambios se guardaron con éxito.")
 
   Mostrar_Lista_Biblioteca()
-  LimpiarCampos() 'limpiar campos
+  Mod_LimpiarTextBox.LimpiarCamposBiblioteca()
 
   txtArchivoTeX.Enabled = False
   txtGitHub.Enabled = False
@@ -273,7 +260,7 @@ Public Sub btnRefresh_Click()
 
   gridBiblioteca.Clear
   Mostrar_Lista_Biblioteca()
-  LimpiarCampos()
+  Mod_LimpiarTextBox.LimpiarCamposBiblioteca()
 
   txtArchivoTeX.Enabled = False
   txtGitHub.Enabled = False
