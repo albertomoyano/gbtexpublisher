@@ -1,6 +1,5 @@
 ' Gambas class file
 
-Private conector As Connection
 Private Contenido As Result
 Private Busqueda As Result
 Private FilaSeleccionada As Integer
@@ -212,7 +211,7 @@ Public Sub btnBuscarPublisher_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = FMain.meConn.Exec(Comando)
 
   ' Limpia el GridView antes de mostrar los resultados de la búsqueda
   GridPublisher.Clear()

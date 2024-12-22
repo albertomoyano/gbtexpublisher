@@ -2951,7 +2951,7 @@
       MoveScaled(2,5,104,4)
       Padding = 1
       { Label29 Label
-        MoveScaled(1,0,23,4)
+        MoveScaled(1,0,23.8889,4)
         Alignment = Align.Right
         Text = ("    Metadatos para  ")
       }
@@ -4317,27 +4317,6 @@
           #Public = True
           Expand = True
           Placeholder = ("Título principal del documento")
-        }
-        { PictureBox9 PictureBox
-          MoveScaled(43,0,4,4)
-          Picture = Picture.Load("iconos/acroread.svg")
-          Alignment = Align.Center
-          Border = Border.Etched
-        }
-        { PictureBox10 PictureBox
-          MoveScaled(47,0,4,4)
-          Alignment = Align.Center
-          Border = Border.Etched
-        }
-        { PictureBox11 PictureBox
-          MoveScaled(51,0,4,4)
-          Alignment = Align.Center
-          Border = Border.Etched
-        }
-        { PictureBox12 PictureBox
-          MoveScaled(55,0,4,4)
-          Alignment = Align.Center
-          Border = Border.Etched
         }
       }
       { HBox96 HBox

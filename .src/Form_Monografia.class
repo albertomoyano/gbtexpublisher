@@ -1,90 +1,58 @@
 ' Gambas class file
 
-Private conector As Connection
 Public Contenido As Result
 Public BaseName As String = File.BaseName(FMain.TextBox1.Text)
 
 Public Sub btnCLOSEmonografia_Click()
-  ' Desconectar la base de datos
 
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
   Me.Close
 
 End
 
 Public Sub Form_Open()
 
-  Dim itemsRef As String[] = Mod_ComboBox.cmbEstiloReferencias()
+  Mod_RellenarComboBox.RellenarEstiloMonografia()
 
-  For Each item As String In itemsRef
-    cmbEstiloReferencias.Add(item)
-  Next
+  'levantamos los datos de metadatos
+  Dim comando As String
+  ' buscamos la entrada que coincida con el archivo
+  comando = "select * from monografias where nombreArchivo = " & "'" & BaseName & ".tex'"
+  Contenido = FMain.meConn.Exec(comando)
 
-  ' Crear una nueva conexión
-  conector = New Connection
-
-  ' Configurar los parámetros de conexión
-  conector.Type = "sqlite3"
-  conector.Host = File.Dir(FMain.TextBoxRuta.Text)
-  conector.Name = "gbtexpublisher.sqlite"
-
-  ' Intentar abrir la conexión
-  Try conector.Open()
-
-  If Error Then
-    conector = Null
-    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>gbtexpublisher.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
-  Else
-
-    'levantamos los datos de metadatos
-    Dim comando As String
-    ' buscamos la entrada que coincida con el archivo
-    comando = "select * from monografias where nombreArchivo = " & "'" & BaseName & ".tex'"
-    Contenido = conector.Exec(comando)
-    If Contenido.Count > 0 Then
-      'van funciones
-      BtnNuevoMonografia.Enabled = False
-      btnGuardarMonografia.Enabled = False
-      btnGuardarCambiosMonografia.Enabled = True
-      txtID.Text = Contenido!id
-      txtnombreArchivo.Text = Contenido!nombreArchivo
-      txtEMAIL.Text = Contenido!email
-      txtMATRICULA.Text = Contenido!matricula
-      txtALUMNO.Text = Contenido!alumno
-      txtDOCENTE.Text = Contenido!docente
-      txtMATERIA.Text = Contenido!materia
-      txtTITULO.Text = Contenido!titulo
-      cmbEstiloReferencias.Text = Contenido!estiloRef
-    Endif
-
+  If Contenido.Count > 0 Then
+    'van funciones
+    BtnNuevoMonografia.Visible = False
+    btnGuardarMonografia.Visible = False
+    btnGuardarCambiosMonografia.Visible = True
+    txtID.Text = Contenido!id
+    txtnombreArchivo.Text = Contenido!nombreArchivo
+    txtEMAIL.Text = Contenido!email
+    txtMATRICULA.Text = Contenido!matricula
+    txtALUMNO.Text = Contenido!alumno
+    txtDOCENTE.Text = Contenido!docente
+    txtMATERIA.Text = Contenido!materia
+    txtTITULO.Text = Contenido!titulo
+    cmbEstiloReferencias.Text = Contenido!estiloRef
   Endif
 
 End
 
 Public Sub Form_Close()
 
-  ' Desconectar la base de datos sin guardar los cambios
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
   Me.Close
 
 End
 
 Public Sub BtnNuevoMonografia_Click()
 
-  BtnNuevoMonografia.Enabled = False
-  btnGuardarMonografia.Enabled = True
-  btnGuardarCambiosMonografia.Enabled = False
+  BtnNuevoMonografia.Visible = False
+  btnGuardarMonografia.Visible = True
+  btnGuardarCambiosMonografia.Visible = False
 
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM monografias LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM monografias LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -99,7 +67,7 @@ End
 
 Public Sub btnGuardarMonografia_Click()
 
-  Contenido = conector.Create("monografias")
+  Contenido = FMain.meConn.Create("monografias")
 
   guardarCampos
 
@@ -128,11 +96,11 @@ End
 
 Public Sub btnGuardarCambiosMonografia_Click()
 
-  BtnNuevoMonografia.Enabled = False
-  btnGuardarMonografia.Enabled = False
-  btnGuardarCambiosMonografia.Enabled = True
+  BtnNuevoMonografia.Visible = False
+  btnGuardarMonografia.Visible = False
+  btnGuardarCambiosMonografia.Visible = True
 
-  Contenido = conector.Edit("monografias", "id=" & txtID.Text)
+  Contenido = FMain.meConn.Edit("monografias", "id=" & txtID.Text)
 
   If Contenido.Available Then
     guardarCampos()
