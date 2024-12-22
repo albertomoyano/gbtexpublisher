@@ -814,6 +814,7 @@
           { cbTYPEentradaBib ComboBox
             MoveScaled(20,0,18,4)
             NoTabFocus = True
+            Expand = True
             ReadOnly = True
           }
         }
@@ -2140,7 +2141,7 @@
             Alignment = Align.Right
             Text = "RelatedType "
           }
-          { cbRELATEDTYPE ComboBox
+          { CmbRelatedType ComboBox
             MoveScaled(18,0,24,3.5556)
             NoTabFocus = True
             ReadOnly = True
@@ -2713,7 +2714,7 @@
         Picture = Picture["iconos/search.svg"]
       }
       { lblAlta2 Label
-        MoveScaled(10,0,12,4)
+        MoveScaled(10,0,12.4444,4)
         Alignment = Align.Right
         Text = ("Clave  ")
       }
@@ -2752,7 +2753,7 @@
     { HBox7 HBox
       MoveScaled(1,40,103,4)
       { Label11 Label
-        MoveScaled(0,0,16,4)
+        MoveScaled(0,0,16.4444,4)
         Font = Font["Bold"]
         Foreground = &HFF0000
         Alignment = Align.Right

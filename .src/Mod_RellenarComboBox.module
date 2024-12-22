@@ -159,3 +159,14 @@ Public Sub RellenarCmbBibLaTeX()
   FMain.cbTYPEentradaBib.Add("figure")
 
 End
+
+Public Sub RellenarCmbRelatedType()
+
+  FMain.CmbRelatedType.Add("")
+  FMain.CmbRelatedType.Add("reprintof")
+  FMain.CmbRelatedType.Add("translationof")
+  FMain.CmbRelatedType.Add("translatedas")
+  FMain.CmbRelatedType.Add("multivolume")
+
+
+End

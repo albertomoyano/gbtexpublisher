@@ -3253,7 +3253,7 @@ Public Sub guardarCampos()
   Contenido!id = txtIDbibtex.Text
   Contenido!tipoEntrada = cbTYPEentradaBib.Text
   Contenido!hyphenation = cbLANGUAGE.Text
-  Contenido!relatedType = cbRELATEDTYPE.Text
+  Contenido!relatedType = CmbRelatedType.Text
   Contenido!pubState = cbPUBSTATE.Text
   Contenido!type = cbType.Text
   Contenido!editorType = cbEDITORTYPE.Text
@@ -4496,7 +4496,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   cbOPTIONS.Text = VListaBIB[Row, 86].Text
   txtIDS.Text = VListaBIB[Row, 87].Text 'Ids
   txtRELATED.Text = VListaBIB[Row, 88].Text
-  cbRELATEDTYPE.Text = VListaBIB[Row, 89].Text
+  CmbRelatedType.Text = VListaBIB[Row, 89].Text
   txtRELATEDSTRING.Text = VListaBIB[Row, 90].Text
   txtENTRYSET.Text = VListaBIB[Row, 91].Text
   txtCROSSREF.Text = VListaBIB[Row, 92].Text

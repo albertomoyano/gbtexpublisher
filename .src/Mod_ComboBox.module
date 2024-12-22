@@ -7,12 +7,12 @@
 '
 ' End Function
 
-'combobox de tipo de entrada en bibliografia
-Public Function cbTYPEentradaBib() As String[]
-
-  Return ["", "article", "incollection", "book", "thesis", "online", "inproceedings", "mvbook", "inbook", "bookinbook", "suppbook", "booklet", "collection", "mvcollection", "suppcollection", "manual", "misc", "patent", "periodical", "suppperiodical", "proceedings", "mvproceedings", "reference", "mvreference", "inreference", "report", "set", "unpublished", "xdata", "movie", "conference", "software", "figure"]
-
-End Function
+' 'combobox de tipo de entrada en bibliografia
+' Public Function cbTYPEentradaBib() As String[]
+'
+'   Return ["", "article", "incollection", "book", "thesis", "online", "inproceedings", "mvbook", "inbook", "bookinbook", "suppbook", "booklet", "collection", "mvcollection", "suppcollection", "manual", "misc", "patent", "periodical", "suppperiodical", "proceedings", "mvproceedings", "reference", "mvreference", "inreference", "report", "set", "unpublished", "xdata", "movie", "conference", "software", "figure"]
+'
+' End Function
 
 Public Function cbLANGUAGE() As String[]
 
@@ -20,11 +20,11 @@ Public Function cbLANGUAGE() As String[]
 
 End Function
 
-Public Function cbRELATEDTYPE() As String[]
-
-  Return ["", "reprintof", "translationof", "translatedas", "multivolume"]
-
-End Function
+' Public Function cbRELATEDTYPE() As String[]
+'
+'   Return ["", "reprintof", "translationof", "translatedas", "multivolume"]
+'
+' End Function
 
 Public Function cbPUBSTATE() As String[]
 

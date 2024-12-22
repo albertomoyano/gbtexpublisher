@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,960,468)
+  Move(0,0,963,720)
   #Scaled = False
   Text = ("Alta - Baja - Modificación de editoriales")
   Resizable = False
@@ -10,32 +10,31 @@
   Margin = True
   Padding = 4
   { HBox16 HBox
-    Move(0,9,711,36)
+    Move(9,9,711,36)
     { BtnNuevoPublisher Button
       Move(0,0,36,36)
       NoTabFocus = True
       ToolTip = ("Agregar una nueva referencia")
       Picture = Picture["iconos/+nuevo.svg"]
     }
-    { BtnRefrescarPublisher Button
-      Move(36,0,36,36)
-      ToolTip = ("Refrescar listado de la base de datos")
-      Picture = Picture["iconos/refrescar.svg"]
-    }
     { btnGuardarPublisher Button
-      Move(90,0,36,36)
+      Move(36,0,36,36)
       ToolTip = ("Guardar modificaciones")
       Picture = Picture["iconos/guardar.svg"]
     }
     { btnGuardarCambiosPublisher Button
-      Move(126,0,36,36)
+      Move(72,0,36,36)
       ToolTip = ("Guardar modificaciones")
       Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { BtnRefrescarPublisher Button
+      Move(108,0,36,36)
+      ToolTip = ("Refrescar listado de la base de datos")
+      Picture = Picture["iconos/refrescar.svg"]
     }
     { txtID TextBox
       Move(162,0,90,36)
       Visible = False
-      Background = Color.Background
       NoTabFocus = True
       Alignment = Align.Right
       ReadOnly = True
@@ -52,7 +51,7 @@
     }
   }
   { HBox6 Panel
-    Move(0,50,477,252)
+    Move(9,54,477,252)
     NoTabFocus = True
     Expand = True
     Arrangement = Arrange.Horizontal
@@ -68,8 +67,22 @@
       Resizable = False
     }
   }
+  { HBox4 HBox
+    Move(9,342,558,36)
+    { lblKEYWORDS2 Label
+      Move(0,0,144,36)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Ubicación  "
+    }
+    { txtLocation TextBox
+      Move(243,0,216,36)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
   { HBox2 HBox
-    Move(0,306,558,36)
+    Move(9,378,558,36)
     { btnBuscarPublisher Button
       Move(0,0,36,36)
       Picture = Picture["iconos/search.svg"]
@@ -77,7 +90,7 @@
     { lblAlta2 Label
       Move(54,0,108,36)
       Alignment = Align.Right
-      Text = ("Publisher  ")
+      Text = ("Editorial  ")
     }
     { txtPublisher TextBox
       Move(240,0,234,36)
@@ -86,13 +99,41 @@
       Alignment = Align.Left
     }
   }
+  { HBox8 HBox
+    Move(9,414,558,36)
+    { lblKEYWORDS4 Label
+      Move(0,0,144,36)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "email "
+    }
+    { txtEmail TextBox
+      Move(216,0,216,36)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox9 HBox
+    Move(9,450,558,36)
+    { lblKEYWORDS5 Label
+      Move(0,0,144,36)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "Website "
+    }
+    { txtWebsite TextBox
+      Move(216,0,216,36)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
   { HBox7 HBox
-    Move(0,342,558,36)
+    Move(9,486,558,36)
     { lblKEYWORDS1 Label
       Move(0,0,144,36)
       #Translate = False
       Alignment = Align.Right
-      Text = "Journal  "
+      Text = "Revista  "
     }
     { txtJournal TextBox
       Move(240,0,216,36)
@@ -100,22 +141,50 @@
       Expand = True
     }
   }
-  { HBox4 HBox
-    Move(0,378,558,36)
-    { lblKEYWORDS2 Label
+  { HBox10 HBox
+    Move(9,522,558,36)
+    { lblKEYWORDS7 Label
       Move(0,0,144,36)
       #Translate = False
       Alignment = Align.Right
-      Text = "Location  "
+      Text = "ISSN "
     }
-    { txtLocation TextBox
+    { txtISSN TextBox
       Move(243,0,216,36)
       NoTabFocus = True
       Expand = True
     }
   }
+  { HBox3 HBox
+    Move(9,558,558,36)
+    { lblKEYWORDS6 Label
+      Move(0,0,144,36)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "eISSN "
+    }
+    { txteISSN TextBox
+      Move(198,0,216,36)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox5 HBox
+    Move(9,594,558,36)
+    { lblKEYWORDS3 Label
+      Move(0,0,144,36)
+      #Translate = False
+      Alignment = Align.Right
+      Text = "DOI "
+    }
+    { txtDOI TextBox
+      Move(189,0,216,36)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
   { HBox1 HBox
-    Move(0,414,630,36)
+    Move(9,630,630,36)
     { Spring2 Spring
       Move(270,0,126,36)
     }

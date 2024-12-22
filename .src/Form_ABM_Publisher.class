@@ -36,11 +36,11 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
   GridPublisher.Header = True
   GridPublisher.Columns[0].Title = "id"
   GridPublisher.Columns[0].Width = 0
-  GridPublisher.Columns[1].Title = "Publisher"
+  GridPublisher.Columns[1].Title = "Editorial"
   GridPublisher.Columns[1].Width = 350
-  GridPublisher.Columns[2].Title = "Journal"
+  GridPublisher.Columns[2].Title = "Revista"
   GridPublisher.Columns[2].Width = 350
-  GridPublisher.Columns[3].Title = "Location"
+  GridPublisher.Columns[3].Title = "Ubicación"
   GridPublisher.Columns[3].Width = 200
 
   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
@@ -64,15 +64,13 @@ End
 
 Public Sub BtnNuevoPublisher_Click()
 
-  ' SELECT MAX(id) FROM clases LIMIT 1 --> Nos devuelve el total de IDs en la tabla
-
   BtnNuevoPublisher.Visible = False
   btnGuardarPublisher.Visible = True
   btnGuardarCambiosPublisher.visible = False
 
   Dim Idn As Integer
 
-  LimpiarCampos  'Limpiamos todos los campos
+  Mod_LimpiarTextBox.LimpiarCamposPublisher()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
   Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM publisher LIMIT 1")
@@ -89,20 +87,9 @@ Public Sub BtnNuevoPublisher_Click()
 
 End
 
-Public Function LimpiarCampos()
-
-  'Limpiamos los campos
-  txtID.Text = ""
-  txtPublisher.Text = ""
-  txtJournal.Text = ""
-  txtLocation.Text = ""
-
-End
-
 Public Sub btnGuardarPublisher_Click()
 
-  ' no revisamos que existan coincidencias, ya que una editorial
-  ' puede tener diferentes docmicilios
+  ' no revisamos que existan coincidencias, ya que una editorial y puede tener diferentes domicilios
   Contenido = FMain.meConn.Create("publisher")
 
   guardarCampos
@@ -111,7 +98,7 @@ Public Sub btnGuardarPublisher_Click()
   Message.Info("Nueva entrada guardada.")
 
   Mostrar_Lista ' Refrescamos la lista de entradas
-  LimpiarCampos ' Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposPublisher()
 
   btnGuardarCambiosPublisher.Visible = False
   btnGuardarPublisher.Visible = False
@@ -177,7 +164,7 @@ Public Sub btnGuardarCambiosPublisher_Click()
   Message.Info("Los cambios se guardaron con éxito.")
 
   Mostrar_Lista
-  LimpiarCampos 'limpiar campos
+  Mod_LimpiarTextBox.LimpiarCamposPublisher()
 
 End
 
@@ -194,10 +181,6 @@ Public Sub btnSeleccion_Click()
     ' FMain.txtLOCATION.Text = locationSeleccionada
     ' Cierra el formulario actual.
     ' Cerrar la conexión si está abierta
-    If conector Then
-      conector.Close()
-      conector = Null
-    Endif
     Me.Close()
   Else
     Message.Warning("Debe seleccionar una editorial.")
@@ -213,7 +196,7 @@ Public Sub BtnRefrescarPublisher_Click()
   btnGuardarPublisher.Visible = False
   btnGuardarCambiosPublisher.visible = False
 
-  LimpiarCampos
+  Mod_LimpiarTextBox.LimpiarCamposPublisher()
 
 End
 
@@ -264,12 +247,6 @@ Public Sub btnBuscarPublisher_Click()
 End
 
 Public Sub Form_Close()
-
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
 
   Me.Close()
 
