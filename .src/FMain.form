@@ -377,23 +377,18 @@
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
-    { btnCOMPhtml Button
-      MoveScaled(23,0,8.8889,4)
-      Text = ("HTML")
-      Picture = Picture["iconos/web.svg"]
-    }
     { btnCOMPepub Button
-      MoveScaled(32,0,8.8889,4)
+      MoveScaled(23,0,8.8889,4)
       Text = ("ePub")
       Picture = Picture["iconos/epub.svg"]
     }
-    { btnCOMPdocx Button
-      MoveScaled(41,0,8.8889,4)
-      Text = ("DOCX")
-      Picture = Picture["iconos/ms-office.svg"]
+    { btnCOMPhtml Button
+      MoveScaled(32,0,8.8889,4)
+      Text = ("HTML")
+      Picture = Picture["iconos/web.svg"]
     }
     { btnLibroCompliarXML Button
-      MoveScaled(49.8889,0,8.8889,4)
+      MoveScaled(41,0,8.8889,4)
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
     }
@@ -746,7 +741,7 @@
         MoveScaled(106,0,2.3333,4)
       }
       { Button1 Button
-        MoveScaled(110,0,16,4)
+        MoveScaled(108,0,16,4)
         ToolTip = ("Mostrar las entradas de este archivo")
         Picture = Picture["iconos/face.svg"]
       }
@@ -2459,164 +2454,217 @@
       }
       Index = 7
       Text = ("Construir relaciones")
-      { ScrollView11 ScrollView
-        MoveScaled(1,3,102,43)
+      { Splitter4 Splitter
+        MoveScaled(1,1,123,59)
         Expand = True
-        Arrangement = Arrange.Vertical
-        Spacing = True
-        Margin = True
-        Padding = 4
         Border = False
-        ScrollBar = Scroll.Vertical
-        Shadow = True
-        { HBox188 HBox
-          MoveScaled(0,0,89,4)
-          { btnGuardarRelacion Button
-            MoveScaled(1,0,4,4)
-            ToolTip = ("Guardar")
-            Picture = Picture["iconos/guardarComo.svg"]
-          }
-          { Spring4 Spring
-            MoveScaled(11,0,15,4)
-          }
-        }
-        { tbRefDup TableView
-          MoveScaled(3,7,47,9)
-          Visible = False
-          Font = Font["-1"]
+        { Panel4 Panel
+          MoveScaled(1,5,37,37)
           Expand = True
-          Mode = Select.Single
-          ShowCursor = True
-          Header = GridView.Horizontal
-          AutoResize = False
-        }
-        { HBox180 HBox
-          MoveScaled(0,16,97,4)
-          { BtnBuscarAuthorRelacion Button
-            MoveScaled(1,0,4,4)
-            NoTabFocus = True
-            Picture = Picture["iconos/search.svg"]
+          Arrangement = Arrange.Vertical
+          Spacing = True
+          Margin = True
+          Padding = 4
+          { HBox196 HBox
+            MoveScaled(0,0,36,4)
+            { BtnBuscarTituloReferenciaRelacion2 Button
+              MoveScaled(0,0,4,4)
+              NoTabFocus = True
+              ToolTip = ("Búsqueda rápida del título")
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label158 Label
+              MoveScaled(5,0,12,4)
+              Alignment = Align.Right
+              Text = ("Title ")
+            }
+            { txtTitleOrigen TextBox
+              MoveScaled(18,0,12,4)
+              Expand = True
+              Alignment = Align.Left
+              Placeholder = ("Título principal")
+            }
           }
-          { Label130 Label
-            MoveScaled(6,0,12,3.5556)
-            Alignment = Align.Right
-            Text = ("Author ")
+          { HBox19 HBox
+            MoveScaled(0,4,36,4)
+            { BtnBuscarAuthorRelacion2 Button
+              MoveScaled(0,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label157 Label
+              MoveScaled(5,0,12,4)
+              Alignment = Align.Right
+              Text = ("Author ")
+            }
+            { txtAuthorOrigen TextBox
+              MoveScaled(18,0,15,4)
+              Expand = True
+              Placeholder = ("Autor principal")
+            }
           }
-          { txtAUTHORrelacion TextBox
-            MoveScaled(24,0,15,4)
+          { HBox187 HBox
+            MoveScaled(0,8,36,4)
+            { Label133 Label
+              MoveScaled(1,0,16,4)
+              Alignment = Align.Right
+              Text = ("Clave ")
+            }
+            { txtClaveOrigen TextBox
+              MoveScaled(18,0,15,4)
+              Background = Color.Background
+              Expand = True
+              ReadOnly = True
+            }
+          }
+          { tblReferenciaOrigen TableView
+            MoveScaled(2,19,27,9)
+            Font = Font["-1"]
             Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Placeholder = ("Autor principal")
-          }
-        }
-        { HBox184 HBox
-          MoveScaled(0,21,100,4)
-          { BtnBuscarTituloReferenciaRelacion Button
-            MoveScaled(1,0,4,4)
-            NoTabFocus = True
-            ToolTip = ("Búsqueda rápida del título")
-            Picture = Picture["iconos/search.svg"]
-          }
-          { Label131 Label
-            MoveScaled(13,0,12,3.5556)
-            Alignment = Align.Right
-            Text = ("Title ")
-          }
-          { txtTITLErelacion TextBox
-            MoveScaled(33,0,12,3.5556)
-            Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Alignment = Align.Left
-            Placeholder = ("Título principal")
-          }
-        }
-        { HBox185 HBox
-          MoveScaled(0,25.4444,97,4)
-          { Label132 Label
-            MoveScaled(0,0,16,3.5556)
-            Alignment = Align.Right
-            Text = ("Filtro ")
-          }
-          { btnAgregarKeyBIBtwo Button
-            MoveScaled(18,0,4,4)
-            ToolTip = ("Agregar clave")
-            Picture = Picture["iconos/clave.svg"]
-          }
-          { txtFILTROrelacion TextBox
-            MoveScaled(32,0,17,4)
-            NoTabFocus = True
-            Expand = True
-          }
-          { Label133 Label
-            MoveScaled(51,0,12,4)
-            #Translate = False
-            NoTabFocus = True
-            Alignment = Align.Right
-            Text = "Clave "
-          }
-          { txtClaveRelacion TextBox
-            MoveScaled(65,0,30,4)
-            Background = Color.Background
-            NoTabFocus = True
-            ReadOnly = True
+            Mode = Select.Single
+            ShowCursor = True
+            Header = GridView.Horizontal
           }
         }
-        { HBox186 HBox
-          MoveScaled(0,29.4444,97,4)
-          { Label134 Label
-            MoveScaled(1,0,16,3.5556)
-            #Translate = False
-            Alignment = Align.Right
-            Text = "RelatedType "
+        { ScrollView11 ScrollView
+          MoveScaled(39,3,102,43)
+          Expand = True
+          Arrangement = Arrange.Vertical
+          Spacing = True
+          Margin = True
+          Padding = 4
+          Border = False
+          ScrollBar = Scroll.Vertical
+          Shadow = True
+          { HBox188 HBox
+            MoveScaled(0,0,51,4)
+            { btnGuardarRelacion Button
+              MoveScaled(1,0,4,4)
+              ToolTip = ("Guardar")
+              Picture = Picture["iconos/guardarComo.svg"]
+            }
+            { Spring4 Spring
+              MoveScaled(11,0,15,4)
+            }
           }
-          { cbRelatedTypeRelacion ComboBox
-            MoveScaled(19,0,24,4)
-            NoTabFocus = True
-            ReadOnly = True
+          { HBox180 HBox
+            MoveScaled(0,4,51,4)
+            { BtnBuscarAuthorRelacion Button
+              MoveScaled(1,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label130 Label
+              MoveScaled(6,0,12,3.5556)
+              Alignment = Align.Right
+              Text = ("Author ")
+            }
+            { txtAUTHORrelacion TextBox
+              MoveScaled(24,0,15,4)
+              Expand = True
+              Placeholder = ("Autor principal")
+            }
           }
-          { Label135 Label
-            MoveScaled(47,0,12,3.5556)
+          { HBox184 HBox
+            MoveScaled(0,8,51,4)
+            { BtnBuscarTituloReferenciaRelacion Button
+              MoveScaled(1,0,4,4)
+              NoTabFocus = True
+              ToolTip = ("Búsqueda rápida del título")
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label131 Label
+              MoveScaled(13,0,12,3.5556)
+              Alignment = Align.Right
+              Text = ("Title ")
+            }
+            { txtTITLErelacion TextBox
+              MoveScaled(33,0,12,3.5556)
+              Expand = True
+              Alignment = Align.Left
+              Placeholder = ("Título principal")
+            }
+          }
+          { HBox185 HBox
+            MoveScaled(0,12,97,4)
+            { btnAgregarKeyBIBtwo Button
+              MoveScaled(1,0,4,4)
+              ToolTip = ("Agregar clave")
+              Picture = Picture["iconos/clave.svg"]
+            }
+            { Label132 Label
+              MoveScaled(9,0,12,3.5556)
+              Alignment = Align.Right
+              Text = ("Filtro ")
+            }
+            { txtFILTROrelacion TextBox
+              MoveScaled(32,0,17,4)
+              NoTabFocus = True
+              Expand = True
+            }
+            { Label136 Label
+              MoveScaled(50,0,12,4)
+              #Translate = False
+              NoTabFocus = True
+              Alignment = Align.Right
+              Text = "CrossRef "
+            }
+            { txtCrossRefRelacion TextBox
+              MoveScaled(69,0,30,4)
+              NoTabFocus = True
+              Expand = True
+              Placeholder = ("Clave BIB relacionada")
+            }
+          }
+          { HBox186 HBox
+            MoveScaled(0,16,97,4)
+            { Label134 Label
+              MoveScaled(1,0,16,3.5556)
+              #Translate = False
+              Alignment = Align.Right
+              Text = "RelatedType "
+            }
+            { cbRelatedTypeRelacion ComboBox
+              MoveScaled(19,0,24,4)
+              NoTabFocus = True
+              Expand = True
+              ReadOnly = True
+            }
+            { Label135 Label
+              MoveScaled(43,0,12,4)
+              Alignment = Align.Right
+              Text = ("Related ")
+            }
+            { txtRelatedRelacion TextBox
+              MoveScaled(61,0,30,4)
+              NoTabFocus = True
+              Expand = True
+              Placeholder = ("Clave BIB asociada")
+            }
+          }
+          { HBox204 HBox
+            MoveScaled(0,20,52,4)
+            { lblRELATEDSTRING15 Label
+              MoveScaled(0,0,16,4)
+              #Translate = False
+              Alignment = Align.Right
+              Text = "RelatedString "
+            }
+            { txtRelatedString1 TextBox
+              MoveScaled(17,0,24,4)
+              NoTabFocus = True
+              Expand = True
+              Placeholder = ("Redacción manual del tipo de relación")
+            }
+          }
+          { tbRefDup TableView
+            MoveScaled(1,25,27,9)
+            Font = Font["-1"]
             Expand = True
-            Alignment = Align.Right
-            Text = ("Related ")
-          }
-          { txtRelatedRelacion TextBox
-            MoveScaled(65,0,30,4)
-            Background = Color.Background
-            NoTabFocus = True
-            ReadOnly = True
-            Placeholder = ("Clave BIB asociada")
-          }
-        }
-        { HBox187 HBox
-          MoveScaled(0,33.4444,97,4)
-          { lblRELATEDSTRING15 Label
-            MoveScaled(0,0,16,4)
-            #Translate = False
-            Alignment = Align.Right
-            Text = "RelatedString "
-          }
-          { txtRelatedString1 TextBox
-            MoveScaled(17,0,24,4)
-            Background = Color.Background
-            NoTabFocus = True
-            Expand = True
-            ReadOnly = True
-            Placeholder = ("Redacción manual del tipo de relación")
-          }
-          { Label136 Label
-            MoveScaled(41,0,12,3.5556)
-            #Translate = False
-            NoTabFocus = True
-            Alignment = Align.Right
-            Text = "CrossRef "
-          }
-          { txtCrossRefRelacion TextBox
-            MoveScaled(60,0,30,4)
-            Background = Color.Background
-            NoTabFocus = True
-            ReadOnly = True
-            Placeholder = ("Clave BIB relacionada")
+            Mode = Select.Single
+            ShowCursor = True
+            Header = GridView.Horizontal
+            AutoResize = False
           }
         }
       }

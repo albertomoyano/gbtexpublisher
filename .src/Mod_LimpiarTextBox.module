@@ -141,7 +141,6 @@ End
 
 Public Sub LimpiarCamposGitHubPages()
 
-  FMain.txtnombreArchivoGHP.Clear
   FMain.txtCreateDateHTML.Clear
   FMain.txtModDateHTML.Clear
   FMain.txtCVautoresHTML.Clear

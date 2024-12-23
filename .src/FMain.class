@@ -689,6 +689,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
 
   contarEntradasBIByGLO()' mostramos las cantidades en el boton
+  RellenarReferenciaOrigen()
 
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
@@ -986,9 +987,7 @@ Public Sub mnuLast_Click()
   TerminalView1.SetFocus()
 
   Dim nombreDelArchivo As String = File.Name(TextBox1.Text)
-
-  ' Verificar el tipo de documento por el nombre del archivo
-  seleccionarFuncionPorTipo(nombreDelArchivo)
+  seleccionarFuncionPorTipo(nombreDelArchivo)' Verificar el tipo de documento por el nombre del archivo
 
   levantarComenta()'levantamos los datos de comentarios
   levantarGitHubPages()  ' levantamos los datos de githubpages
@@ -996,6 +995,7 @@ Public Sub mnuLast_Click()
   MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
   Mod_LimpiarTextBox.LimpiarCamposBIB()
+  RellenarReferenciaOrigen()' rellenamos las entradas bib del archivo
 
 End
 
@@ -3325,7 +3325,7 @@ Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
     Return
   Endif
 
-  Comando = "SELECT * FROM bibtex WHERE keywords LIKE '%" & BaseName & "," & "%' ORDER BY author ASC"
+  Comando = "SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY author ASC"
 
   Busqueda = meConn.Exec(Comando)
 
@@ -6051,7 +6051,6 @@ Public Sub habilitamosLibro()
   btnCOMPpdf.Enabled = True
   btnCOMPhtml.Enabled = True
   btnCOMPepub.Enabled = True
-  btnCOMPdocx.Enabled = True
   btnLibroCompliarXML.Enabled = True
   btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
@@ -6078,7 +6077,6 @@ Public Sub habilitamosRevista()
   btnCOMPpdf.Enabled = False
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
-  btnCOMPdocx.Enabled = False
   btnLibroCompliarXML.Enabled = False
   btnGitHubPages.Enabled = True
   btnCOMPpdfRevista.Enabled = True
@@ -6105,7 +6103,6 @@ Public Sub habilitamosMonografia()
   btnCOMPpdf.Enabled = False
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
-  btnCOMPdocx.Enabled = False
   btnLibroCompliarXML.Enabled = False
   btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
@@ -7994,5 +7991,358 @@ Public Sub guardarCamposAutoresNuevo()
 
   ' Guardar solo la abreviatura
   Contenido!rol = rolAbreviatura
+
+End
+
+Public Sub RellenarReferenciaOrigen()
+
+  Dim i As Integer
+
+  tblReferenciaOrigen.Clear()
+
+  Contenido = FMain.meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%'")
+
+  'diseñamos el tableview
+  tblReferenciaOrigen.Columns.Count = 110
+  tblReferenciaOrigen.Header = True
+  tblReferenciaOrigen.Columns[0].Title = "ID"
+  tblReferenciaOrigen.Columns[0].Width = 0
+  tblReferenciaOrigen.Columns[1].Title = ""
+  tblReferenciaOrigen.Columns[1].Width = 0
+  tblReferenciaOrigen.Columns[2].Title = ""
+  tblReferenciaOrigen.Columns[2].Width = 0
+  tblReferenciaOrigen.Columns[3].Title = ""
+  tblReferenciaOrigen.Columns[3].Width = 0
+  tblReferenciaOrigen.Columns[4].Title = "Author"
+  tblReferenciaOrigen.Columns[4].Width = 250
+  tblReferenciaOrigen.Columns[5].Title = ""
+  tblReferenciaOrigen.Columns[5].Width = 0
+  tblReferenciaOrigen.Columns[6].Title = "Editor"
+  tblReferenciaOrigen.Columns[6].Width = 250
+  tblReferenciaOrigen.Columns[7].Title = ""
+  tblReferenciaOrigen.Columns[7].Width = 0
+  tblReferenciaOrigen.Columns[8].Title = ""
+  tblReferenciaOrigen.Columns[8].Width = 0
+  tblReferenciaOrigen.Columns[9].Title = ""
+  tblReferenciaOrigen.Columns[9].Width = 0
+  tblReferenciaOrigen.Columns[10].Title = ""
+  tblReferenciaOrigen.Columns[10].Width = 0
+  tblReferenciaOrigen.Columns[11].Title = ""
+  tblReferenciaOrigen.Columns[11].Width = 0
+  tblReferenciaOrigen.Columns[12].Title = ""
+  tblReferenciaOrigen.Columns[12].Width = 0
+  tblReferenciaOrigen.Columns[13].Title = ""
+  tblReferenciaOrigen.Columns[13].Width = 0
+  tblReferenciaOrigen.Columns[14].Title = ""
+  tblReferenciaOrigen.Columns[14].Width = 0
+  tblReferenciaOrigen.Columns[15].Title = ""
+  tblReferenciaOrigen.Columns[15].Width = 0
+  tblReferenciaOrigen.Columns[16].Title = ""
+  tblReferenciaOrigen.Columns[16].Width = 0
+  tblReferenciaOrigen.Columns[17].Title = ""
+  tblReferenciaOrigen.Columns[17].Width = 0
+  tblReferenciaOrigen.Columns[18].Title = ""
+  tblReferenciaOrigen.Columns[18].Width = 0
+  tblReferenciaOrigen.Columns[19].Title = ""
+  tblReferenciaOrigen.Columns[19].Width = 0
+  tblReferenciaOrigen.Columns[20].Title = ""
+  tblReferenciaOrigen.Columns[20].Width = 0
+  tblReferenciaOrigen.Columns[21].Title = ""
+  tblReferenciaOrigen.Columns[21].Width = 0
+  tblReferenciaOrigen.Columns[22].Title = ""
+  tblReferenciaOrigen.Columns[22].Width = 0
+  tblReferenciaOrigen.Columns[23].Title = ""
+  tblReferenciaOrigen.Columns[23].Width = 0
+  tblReferenciaOrigen.Columns[24].Title = "Título"
+  tblReferenciaOrigen.Columns[24].Width = 600
+  tblReferenciaOrigen.Columns[25].Title = ""
+  tblReferenciaOrigen.Columns[25].Width = 0
+  tblReferenciaOrigen.Columns[26].Title = ""
+  tblReferenciaOrigen.Columns[26].Width = 0
+  tblReferenciaOrigen.Columns[27].Title = ""
+  tblReferenciaOrigen.Columns[27].Width = 0
+  tblReferenciaOrigen.Columns[28].Title = ""
+  tblReferenciaOrigen.Columns[28].Width = 0
+  tblReferenciaOrigen.Columns[29].Title = "Journal"
+  tblReferenciaOrigen.Columns[29].Width = 200
+  tblReferenciaOrigen.Columns[30].Title = ""
+  tblReferenciaOrigen.Columns[30].Width = 0
+  tblReferenciaOrigen.Columns[31].Title = ""
+  tblReferenciaOrigen.Columns[31].Width = 0
+  tblReferenciaOrigen.Columns[32].Title = ""
+  tblReferenciaOrigen.Columns[32].Width = 0
+  tblReferenciaOrigen.Columns[33].Title = ""
+  tblReferenciaOrigen.Columns[33].Width = 0
+  tblReferenciaOrigen.Columns[34].Title = ""
+  tblReferenciaOrigen.Columns[34].Width = 0
+  tblReferenciaOrigen.Columns[35].Title = ""
+  tblReferenciaOrigen.Columns[35].Width = 0
+  tblReferenciaOrigen.Columns[36].Title = ""
+  tblReferenciaOrigen.Columns[36].Width = 0
+  tblReferenciaOrigen.Columns[37].Title = ""
+  tblReferenciaOrigen.Columns[37].Width = 0
+  tblReferenciaOrigen.Columns[38].Title = ""
+  tblReferenciaOrigen.Columns[38].Width = 0
+  tblReferenciaOrigen.Columns[39].Title = ""
+  tblReferenciaOrigen.Columns[39].Width = 0
+  tblReferenciaOrigen.Columns[40].Title = ""
+  tblReferenciaOrigen.Columns[40].Width = 0
+  tblReferenciaOrigen.Columns[41].Title = ""
+  tblReferenciaOrigen.Columns[41].Width = 0
+  tblReferenciaOrigen.Columns[42].Title = ""
+  tblReferenciaOrigen.Columns[42].Width = 0
+  tblReferenciaOrigen.Columns[43].Title = "Year"
+  tblReferenciaOrigen.Columns[43].Width = 70
+  tblReferenciaOrigen.Columns[44].Title = "Date"
+  tblReferenciaOrigen.Columns[44].Width = 70
+  tblReferenciaOrigen.Columns[45].Title = ""
+  tblReferenciaOrigen.Columns[45].Width = 0
+  tblReferenciaOrigen.Columns[46].Title = ""
+  tblReferenciaOrigen.Columns[46].Width = 0
+  tblReferenciaOrigen.Columns[47].Title = ""
+  tblReferenciaOrigen.Columns[47].Width = 0
+  tblReferenciaOrigen.Columns[48].Title = ""
+  tblReferenciaOrigen.Columns[48].Width = 0
+  tblReferenciaOrigen.Columns[49].Title = ""
+  tblReferenciaOrigen.Columns[49].Width = 0
+  tblReferenciaOrigen.Columns[50].Title = ""
+  tblReferenciaOrigen.Columns[50].Width = 0
+  tblReferenciaOrigen.Columns[51].Title = ""
+  tblReferenciaOrigen.Columns[51].Width = 0
+  tblReferenciaOrigen.Columns[52].Title = ""
+  tblReferenciaOrigen.Columns[52].Width = 0
+  tblReferenciaOrigen.Columns[53].Title = "Editorial"
+  tblReferenciaOrigen.Columns[53].Width = 200
+  tblReferenciaOrigen.Columns[54].Title = ""
+  tblReferenciaOrigen.Columns[54].Width = 0
+  tblReferenciaOrigen.Columns[55].Title = ""
+  tblReferenciaOrigen.Columns[55].Width = 0
+  tblReferenciaOrigen.Columns[56].Title = ""
+  tblReferenciaOrigen.Columns[56].Width = 0
+  tblReferenciaOrigen.Columns[57].Title = ""
+  tblReferenciaOrigen.Columns[57].Width = 0
+  tblReferenciaOrigen.Columns[58].Title = ""
+  tblReferenciaOrigen.Columns[58].Width = 0
+  tblReferenciaOrigen.Columns[59].Title = ""
+  tblReferenciaOrigen.Columns[59].Width = 0
+  tblReferenciaOrigen.Columns[60].Title = ""
+  tblReferenciaOrigen.Columns[60].Width = 0
+  tblReferenciaOrigen.Columns[61].Title = ""
+  tblReferenciaOrigen.Columns[61].Width = 0
+  tblReferenciaOrigen.Columns[62].Title = ""
+  tblReferenciaOrigen.Columns[62].Width = 0
+  tblReferenciaOrigen.Columns[63].Title = ""
+  tblReferenciaOrigen.Columns[63].Width = 0
+  tblReferenciaOrigen.Columns[64].Title = ""
+  tblReferenciaOrigen.Columns[64].Width = 0
+  tblReferenciaOrigen.Columns[65].Title = ""
+  tblReferenciaOrigen.Columns[65].Width = 0
+  tblReferenciaOrigen.Columns[66].Title = ""
+  tblReferenciaOrigen.Columns[66].Width = 0
+  tblReferenciaOrigen.Columns[67].Title = ""
+  tblReferenciaOrigen.Columns[67].Width = 0
+  tblReferenciaOrigen.Columns[68].Title = ""
+  tblReferenciaOrigen.Columns[68].Width = 0
+  tblReferenciaOrigen.Columns[69].Title = ""
+  tblReferenciaOrigen.Columns[69].Width = 0
+  tblReferenciaOrigen.Columns[70].Title = ""
+  tblReferenciaOrigen.Columns[70].Width = 0
+  tblReferenciaOrigen.Columns[71].Title = ""
+  tblReferenciaOrigen.Columns[71].Width = 0
+  tblReferenciaOrigen.Columns[72].Title = ""
+  tblReferenciaOrigen.Columns[72].Width = 0
+  tblReferenciaOrigen.Columns[73].Title = ""
+  tblReferenciaOrigen.Columns[73].Width = 0
+  tblReferenciaOrigen.Columns[74].Title = ""
+  tblReferenciaOrigen.Columns[74].Width = 0
+  tblReferenciaOrigen.Columns[75].Title = ""
+  tblReferenciaOrigen.Columns[75].Width = 0
+  tblReferenciaOrigen.Columns[76].Title = ""
+  tblReferenciaOrigen.Columns[76].Width = 0
+  tblReferenciaOrigen.Columns[77].Title = ""
+  tblReferenciaOrigen.Columns[77].Width = 0
+  tblReferenciaOrigen.Columns[78].Title = ""
+  tblReferenciaOrigen.Columns[78].Width = 0
+  tblReferenciaOrigen.Columns[79].Title = ""
+  tblReferenciaOrigen.Columns[79].Width = 0
+  tblReferenciaOrigen.Columns[80].Title = ""
+  tblReferenciaOrigen.Columns[80].Width = 0
+  tblReferenciaOrigen.Columns[81].Title = ""
+  tblReferenciaOrigen.Columns[81].Width = 0
+  tblReferenciaOrigen.Columns[82].Title = ""
+  tblReferenciaOrigen.Columns[82].Width = 0
+  tblReferenciaOrigen.Columns[83].Title = ""
+  tblReferenciaOrigen.Columns[83].Width = 0
+  tblReferenciaOrigen.Columns[84].Title = ""
+  tblReferenciaOrigen.Columns[84].Width = 0
+  tblReferenciaOrigen.Columns[85].Title = ""
+  tblReferenciaOrigen.Columns[85].Width = 0
+  tblReferenciaOrigen.Columns[86].Title = ""
+  tblReferenciaOrigen.Columns[86].Width = 0
+  tblReferenciaOrigen.Columns[87].Title = ""
+  tblReferenciaOrigen.Columns[87].Width = 0
+  tblReferenciaOrigen.Columns[88].Title = ""
+  tblReferenciaOrigen.Columns[88].Width = 0
+  tblReferenciaOrigen.Columns[89].Title = ""
+  tblReferenciaOrigen.Columns[89].Width = 0
+  tblReferenciaOrigen.Columns[90].Title = ""
+  tblReferenciaOrigen.Columns[90].Width = 0
+  tblReferenciaOrigen.Columns[91].Title = ""
+  tblReferenciaOrigen.Columns[91].Width = 0
+  tblReferenciaOrigen.Columns[92].Title = ""
+  tblReferenciaOrigen.Columns[92].Width = 0
+  tblReferenciaOrigen.Columns[93].Title = ""
+  tblReferenciaOrigen.Columns[93].Width = 0
+  tblReferenciaOrigen.Columns[94].Title = ""
+  tblReferenciaOrigen.Columns[94].Width = 0
+  tblReferenciaOrigen.Columns[95].Title = ""
+  tblReferenciaOrigen.Columns[95].Width = 0
+  tblReferenciaOrigen.Columns[96].Title = ""
+  tblReferenciaOrigen.Columns[96].Width = 0
+  tblReferenciaOrigen.Columns[97].Title = ""
+  tblReferenciaOrigen.Columns[97].Width = 0
+  tblReferenciaOrigen.Columns[98].Title = ""
+  tblReferenciaOrigen.Columns[98].Width = 0
+  tblReferenciaOrigen.Columns[99].Title = ""
+  tblReferenciaOrigen.Columns[99].Width = 0
+  tblReferenciaOrigen.Columns[100].Title = ""
+  tblReferenciaOrigen.Columns[100].Width = 0
+  tblReferenciaOrigen.Columns[101].Title = ""
+  tblReferenciaOrigen.Columns[101].Width = 0
+  tblReferenciaOrigen.Columns[102].Title = ""
+  tblReferenciaOrigen.Columns[102].Width = 0
+  tblReferenciaOrigen.Columns[103].Title = ""
+  tblReferenciaOrigen.Columns[103].Width = 0
+  tblReferenciaOrigen.Columns[104].Title = ""
+  tblReferenciaOrigen.Columns[104].Width = 0
+  tblReferenciaOrigen.Columns[105].Title = ""
+  tblReferenciaOrigen.Columns[105].Width = 0
+  tblReferenciaOrigen.Columns[106].Title = ""
+  tblReferenciaOrigen.Columns[106].Width = 0
+  tblReferenciaOrigen.Columns[107].Title = ""
+  tblReferenciaOrigen.Columns[107].Width = 0
+  tblReferenciaOrigen.Columns[108].Title = ""
+  tblReferenciaOrigen.Columns[108].Width = 0
+  tblReferenciaOrigen.Columns[109].Title = ""
+  tblReferenciaOrigen.Columns[109].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tblReferenciaOrigen.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tblReferenciaOrigen[i, 0].Text = Contenido!id
+    tblReferenciaOrigen[i, 1].Text = Contenido!tipoEntrada
+    tblReferenciaOrigen[i, 2].Text = Contenido!citationKey
+    tblReferenciaOrigen[i, 3].Text = Contenido!keywords
+    tblReferenciaOrigen[i, 4].Text = Contenido!author
+    tblReferenciaOrigen[i, 5].Text = Contenido!bookAuthor
+    tblReferenciaOrigen[i, 6].Text = Contenido!editor
+    tblReferenciaOrigen[i, 7].Text = Contenido!editorA
+    tblReferenciaOrigen[i, 8].Text = Contenido!editorB
+    tblReferenciaOrigen[i, 9].Text = Contenido!editorC
+    tblReferenciaOrigen[i, 10].Text = Contenido!afterword
+    tblReferenciaOrigen[i, 11].Text = Contenido!commentator
+    tblReferenciaOrigen[i, 12].Text = Contenido!translator
+    tblReferenciaOrigen[i, 13].Text = Contenido!holder
+    tblReferenciaOrigen[i, 14].Text = Contenido!shortAuthor
+    tblReferenciaOrigen[i, 15].Text = Contenido!editorType
+    tblReferenciaOrigen[i, 16].Text = Contenido!editorAtype
+    tblReferenciaOrigen[i, 17].Text = Contenido!editorBtype
+    tblReferenciaOrigen[i, 18].Text = Contenido!editorCtype
+    tblReferenciaOrigen[i, 19].Text = Contenido!foreword
+    tblReferenciaOrigen[i, 20].Text = Contenido!introduction
+    tblReferenciaOrigen[i, 21].Text = Contenido!annotator
+    tblReferenciaOrigen[i, 22].Text = Contenido!gender
+    tblReferenciaOrigen[i, 23].Text = Contenido!nameAddOn
+    tblReferenciaOrigen[i, 24].Text = Contenido!title
+    tblReferenciaOrigen[i, 25].Text = Contenido!shortTitle
+    tblReferenciaOrigen[i, 26].Text = Contenido!indexTitle
+    tblReferenciaOrigen[i, 27].Text = Contenido!bookTitle
+    tblReferenciaOrigen[i, 28].Text = Contenido!mainTitle
+    tblReferenciaOrigen[i, 29].Text = Contenido!journalTitle
+    tblReferenciaOrigen[i, 30].Text = Contenido!issueTitle
+    tblReferenciaOrigen[i, 31].Text = Contenido!eventTitle
+    tblReferenciaOrigen[i, 32].Text = Contenido!reprintTitle
+    tblReferenciaOrigen[i, 33].Text = Contenido!series
+    tblReferenciaOrigen[i, 34].Text = Contenido!bookTitleAddOn
+    tblReferenciaOrigen[i, 35].Text = Contenido!mainTitleAddOn
+    tblReferenciaOrigen[i, 36].Text = Contenido!journalTitleAddOn
+    tblReferenciaOrigen[i, 37].Text = Contenido!issueTitleAddOn
+    tblReferenciaOrigen[i, 38].Text = Contenido!eventTitleAddOn
+    tblReferenciaOrigen[i, 39].Text = Contenido!chapter
+    tblReferenciaOrigen[i, 40].Text = Contenido!volume
+    tblReferenciaOrigen[i, 41].Text = Contenido!edition
+    tblReferenciaOrigen[i, 42].Text = Contenido!pubState
+    tblReferenciaOrigen[i, 43].Text = Contenido!yearY
+    tblReferenciaOrigen[i, 44].Text = Contenido!dateD
+    tblReferenciaOrigen[i, 45].Text = Contenido!urlDate
+    tblReferenciaOrigen[i, 46].Text = Contenido!volumes
+    tblReferenciaOrigen[i, 47].Text = Contenido!part
+    tblReferenciaOrigen[i, 48].Text = Contenido!issue
+    tblReferenciaOrigen[i, 49].Text = Contenido!eventDate
+    tblReferenciaOrigen[i, 50].Text = Contenido!origDate
+    tblReferenciaOrigen[i, 51].Text = Contenido!version
+    tblReferenciaOrigen[i, 52].Text = Contenido!location
+    tblReferenciaOrigen[i, 53].Text = Contenido!publisher
+    tblReferenciaOrigen[i, 54].Text = Contenido!institution
+    tblReferenciaOrigen[i, 55].Text = Contenido!organization
+    tblReferenciaOrigen[i, 56].Text = Contenido!pages
+    tblReferenciaOrigen[i, 57].Text = Contenido!pagination
+    tblReferenciaOrigen[i, 58].Text = Contenido!hyphenation
+    tblReferenciaOrigen[i, 59].Text = Contenido!langId
+    tblReferenciaOrigen[i, 60].Text = Contenido!language
+    tblReferenciaOrigen[i, 61].Text = Contenido!origLocation
+    tblReferenciaOrigen[i, 62].Text = Contenido!origPublisher
+    tblReferenciaOrigen[i, 63].Text = Contenido!pageTotal
+    tblReferenciaOrigen[i, 64].Text = Contenido!venue
+    tblReferenciaOrigen[i, 65].Text = Contenido!bookPagination
+    tblReferenciaOrigen[i, 66].Text = Contenido!langIdOpts
+    tblReferenciaOrigen[i, 67].Text = Contenido!origLanguage
+    tblReferenciaOrigen[i, 68].Text = Contenido!isan
+    tblReferenciaOrigen[i, 69].Text = Contenido!isbn
+    tblReferenciaOrigen[i, 70].Text = Contenido!ismn
+    tblReferenciaOrigen[i, 71].Text = Contenido!isrn
+    tblReferenciaOrigen[i, 72].Text = Contenido!issn
+    tblReferenciaOrigen[i, 73].Text = Contenido!iswc
+    tblReferenciaOrigen[i, 74].Text = Contenido!url
+    tblReferenciaOrigen[i, 75].Text = Contenido!doi
+    tblReferenciaOrigen[i, 76].Text = Contenido!eid
+    tblReferenciaOrigen[i, 77].Text = Contenido!eprinttype
+    tblReferenciaOrigen[i, 78].Text = Contenido!eprint
+    tblReferenciaOrigen[i, 79].Text = Contenido!entrysubtype
+    tblReferenciaOrigen[i, 80].Text = Contenido!label
+    tblReferenciaOrigen[i, 81].Text = Contenido!howpublisher
+    tblReferenciaOrigen[i, 82].Text = Contenido!addendum
+    tblReferenciaOrigen[i, 83].Text = Contenido!shorthand
+    tblReferenciaOrigen[i, 84].Text = Contenido!shorthandintro
+    tblReferenciaOrigen[i, 85].Text = Contenido!etiquetas
+    tblReferenciaOrigen[i, 86].Text = Contenido!options
+    tblReferenciaOrigen[i, 87].Text = Contenido!ids
+    tblReferenciaOrigen[i, 88].Text = Contenido!related
+    tblReferenciaOrigen[i, 89].Text = Contenido!relatedType
+    tblReferenciaOrigen[i, 90].Text = Contenido!relatedString
+    tblReferenciaOrigen[i, 91].Text = Contenido!entryset
+    tblReferenciaOrigen[i, 92].Text = Contenido!crossref
+    tblReferenciaOrigen[i, 93].Text = Contenido!xref
+    tblReferenciaOrigen[i, 94].Text = Contenido!xdata
+    tblReferenciaOrigen[i, 95].Text = Contenido!presort
+    tblReferenciaOrigen[i, 96].Text = Contenido!sortkey
+    tblReferenciaOrigen[i, 97].Text = Contenido!sortname
+    tblReferenciaOrigen[i, 98].Text = Contenido!sortshorthand
+    tblReferenciaOrigen[i, 99].Text = Contenido!sorttitle
+    tblReferenciaOrigen[i, 100].Text = Contenido!indexsorttitle
+    tblReferenciaOrigen[i, 101].Text = Contenido!sortyear
+    tblReferenciaOrigen[i, 102].Text = Contenido!file
+    tblReferenciaOrigen[i, 103].Text = Contenido!abstract
+    tblReferenciaOrigen[i, 104].Text = Contenido!library
+    tblReferenciaOrigen[i, 105].Text = Contenido!note
+    tblReferenciaOrigen[i, 106].Text = Contenido!annotation
+    tblReferenciaOrigen[i, 107].Text = Contenido!number
+    tblReferenciaOrigen[i, 108].Text = Contenido!creationdate
+    tblReferenciaOrigen[i, 109].Text = Contenido!type
+
+    Contenido.MoveNext
+  Next
 
 End

@@ -1,34 +1,16 @@
 ' Gambas class file
 
-Private conector As Connection
 Private Contenido As Result
 Private Busqueda As Result
 Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
 
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
-
   Me.Close
 
 End
 
 Public Sub Form_Open()
-
-  ' Crear una nueva conexión
-  conector = New Connection
-
-  ' Configurar los parámetros de conexión
-  conector.Type = "sqlite3"
-  conector.Host = File.Dir(FMain.TextBoxRuta.Text)
-  conector.Name = "gbtexpublisher.sqlite"
-
-  ' Intentar abrir la conexión
-  Try conector.Open()
 
   btnGuardarAutores.Visible = False
   btnGuardarCambiosAutores.Visible = False
@@ -46,7 +28,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridAutores.Clear()
 
-  Contenido = conector.Exec("select * from autores ORDER BY id DESC")
+  Contenido = FMain.meConn.Exec("select * from autores ORDER BY id DESC")
 
   'diseñamos el tableview
   GridAutores.Columns.Count = 14
@@ -101,7 +83,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = conector.Exec("SELECT COUNT(*) FROM autores")
+  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM autores")
 
   Record = Contenido[0]
   Count = Record
@@ -119,7 +101,7 @@ Public Sub BtnNuevoAutores_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = conector.Exec("SELECT MAX(id) FROM autores LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM autores LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -157,7 +139,7 @@ Public Sub btnGuardarAutores_Click()
 
   ' no revisamos que existan coincidencias, ya que una editorial
   ' puede tener diferentes docmicilios
-  Contenido = conector.Create("autores")
+  Contenido = FMain.meConn.Create("autores")
 
   guardarCampos
 
@@ -257,7 +239,7 @@ Public Sub btnGuardarCambiosAutores_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = conector.Edit("autores", "id=" & txtID.Text)
+  Contenido = FMain.meConn.Edit("autores", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -291,7 +273,7 @@ Public Sub btnBuscarApellido_Click()
     Return
   Endif
 
-  Busqueda = conector.Exec(Comando)
+  Busqueda = FMain.meConn.Exec(Comando)
 
   ' Limpia el GridView antes de mostrar los resultados de la búsqueda
   GridAutores.Clear()
@@ -354,12 +336,6 @@ Public Sub btnSeleccion_Click()  ' Verificar si hay una fila seleccionada.
 End
 
 Public Sub Form_Close()
-
-  ' Cerrar la conexión si está abierta
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
 
   Me.Close
 
