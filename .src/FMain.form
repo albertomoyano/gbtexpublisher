@@ -751,7 +751,7 @@
       Arrangement = Arrange.Horizontal
       AutoResize = True
       { TabPanel5 TabPanel
-        MoveScaled(0,0,63,18)
+        MoveScaled(4,1,63,18)
         Expand = True
         Arrangement = Arrange.Fill
         Count = 2

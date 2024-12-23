@@ -2407,6 +2407,7 @@ Public Sub BtnNuevoBib_Click()
   ObtenerNuevoId()
 
   TabPanel2.Index = 0
+  TabPanel5.Index = 0
 
 End
 
