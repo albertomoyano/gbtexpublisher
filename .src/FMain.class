@@ -2673,6 +2673,7 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   btnGuardarIGUAL.Visible = False
+  TabPanel5.Index = 1
 
 End
 
@@ -2685,6 +2686,7 @@ Public Sub BtnRefrescarBib_Click()'refrescamos la vista
   btnAgregarCitationKey.Visible = False
   btnGuardarIGUAL.Visible = False
   btnAgregarKeyBIB.Visible = False
+  BtnRefrescarBib.Visible = False
 
   Mod_LimpiarTextBox.LimpiarCamposBIB()
   VListaBIB.Clear
@@ -2994,6 +2996,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
 
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
+  TabPanel5.Index = 1
 
 End
 
@@ -3147,6 +3150,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
   Wend
 
   VListaBIB.ScrollY = 0
+  TabPanel5.Index = 1
 
 End
 
@@ -4152,6 +4156,7 @@ Public Sub BtnBuscarClave_Click()
   Wend
 
   VListaBIB.ScrollY = 0
+  TabPanel5.Index = 1
 
 End
 
@@ -4358,6 +4363,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   btnAgregarCitationKey.Visible = True
   btnGuardar.Visible = False
   btnAgregarKeyBIB.Visible = True
+  BtnRefrescarBib.Visible = True
 
   txtIDbibtex.Text = VListaBIB[Row, 0].Text
   ComboBox1.Text = VListaBIB[Row, 1].Text
@@ -4651,6 +4657,7 @@ Public Sub BtnBuscarBookTitle_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   btnGuardarIGUAL.Visible = False
+  TabPanel5.Index = 1
 
 End
 
@@ -4917,6 +4924,7 @@ Public Sub BtnBuscarJournal_Click()
   ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
   VListaBIB.ScrollY = 0
   btnGuardarIGUAL.Visible = False
+  TabPanel5.Index = 1
 
 End
 
@@ -7024,14 +7032,7 @@ Public Sub btnBuscarFiltro_Click()
   Wend
 
   VListaBIB.ScrollY = 0
-
-End
-
-Public Sub TabPanel1_Click()
-
-End
-
-Public Sub TabPanel2_Click()
+  TabPanel5.Index = 1
 
 End
 
@@ -8345,5 +8346,11 @@ Public Sub RellenarReferenciaOrigen()
 
     Contenido.MoveNext
   Next
+
+End
+
+Public Sub btnRefrescarRefOrigen_Click()
+
+  RellenarReferenciaOrigen()
 
 End
