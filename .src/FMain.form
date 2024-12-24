@@ -2730,16 +2730,19 @@
           }
           { HBox207 HBox
             MoveScaled(0,8,36,4)
+            { BtnBuscarClaveRelacion Button
+              MoveScaled(0,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/search.svg"]
+            }
             { Label162 Label
-              MoveScaled(1,0,16,4)
+              MoveScaled(5,0,12,4)
               Alignment = Align.Right
               Text = ("Clave ")
             }
             { txtClaveOriginal TextBox
               MoveScaled(18,0,15,4)
-              Background = Color.Background
               Expand = True
-              ReadOnly = True
             }
           }
           { griBibOriginal TableView
@@ -2787,7 +2790,9 @@
             }
             { txtAuthorNueva TextBox
               MoveScaled(24,0,15,4)
+              Background = Color.Background
               Expand = True
+              ReadOnly = True
             }
           }
           { HBox213 HBox
@@ -2799,16 +2804,8 @@
             }
             { txtEditorNueva TextBox
               MoveScaled(24,0,15,4)
+              Background = Color.Background
               Expand = True
-            }
-            { lblEDITORtype5 Label
-              MoveScaled(39,0,12,3.5556)
-              Alignment = Align.Right
-              Text = ("EditorType ")
-            }
-            { cbEditorTypeDuplicado ComboBox
-              MoveScaled(58,0,16,4)
-              NoTabFocus = True
               ReadOnly = True
             }
           }
@@ -2821,8 +2818,10 @@
             }
             { txtTitleNueva TextBox
               MoveScaled(33,0,12,4)
+              Background = Color.Background
               Expand = True
               Alignment = Align.Left
+              ReadOnly = True
             }
           }
           { HBox211 HBox
