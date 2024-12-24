@@ -28,7 +28,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridAutores.Clear()
 
-  Contenido = FMain.meConn.Exec("select * from autores ORDER BY id DESC")
+  Contenido = FMain.meConn.Exec("select * from autores ORDER BY apellido DESC")
 
   'diseñamos el tableview
   GridAutores.Columns.Count = 14

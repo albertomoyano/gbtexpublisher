@@ -34,7 +34,7 @@ Public Sub Mostrar_Lista_Biblioteca()
 
   gridBiblioteca.Clear()
 
-  Contenido = FMain.meConn.Exec("select * from biblioteca ORDER BY id DESC")
+  Contenido = FMain.meConn.Exec("Select * FROM biblioteca ORDER BY txtArchivoTeX01 DESC")
 
   'diseñamos el tableview
   gridBiblioteca.Columns.Count = 7
