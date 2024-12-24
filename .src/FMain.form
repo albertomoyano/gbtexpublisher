@@ -2705,11 +2705,10 @@
               Alignment = Align.Right
               Text = ("Title ")
             }
-            { txtTitleOrigen2 TextBox
+            { txtTitleOriginal TextBox
               MoveScaled(18,0,12,4)
               Expand = True
               Alignment = Align.Left
-              Placeholder = ("Título principal")
             }
           }
           { HBox206 HBox
@@ -2724,10 +2723,9 @@
               Alignment = Align.Right
               Text = ("Author ")
             }
-            { txtAuthorOrigen2 TextBox
+            { txtAuthorOriginal TextBox
               MoveScaled(18,0,15,4)
               Expand = True
-              Placeholder = ("Autor principal")
             }
           }
           { HBox207 HBox
@@ -2737,20 +2735,21 @@
               Alignment = Align.Right
               Text = ("Clave ")
             }
-            { txtClaveOrigen2 TextBox
+            { txtClaveOriginal TextBox
               MoveScaled(18,0,15,4)
               Background = Color.Background
               Expand = True
               ReadOnly = True
             }
           }
-          { tblReferenciaOrigen2 TableView
-            MoveScaled(2,19,27,9)
+          { griBibOriginal TableView
+            MoveScaled(0,12,27,9)
             Font = Font["-1"]
             Expand = True
             Mode = Select.Single
             ShowCursor = True
             Header = GridView.Horizontal
+            AutoResize = False
           }
         }
         { ScrollView13 ScrollView
@@ -2764,80 +2763,103 @@
           ScrollBar = Scroll.Vertical
           Shadow = True
           { HBox208 HBox
-            MoveScaled(0,0,51,4)
+            MoveScaled(2,3,51,4)
+            { btnDuplicarRegistro Button
+              MoveScaled(0,0,4,4)
+              ToolTip = ("Guardar")
+              Picture = Picture["iconos/exportar.svg"]
+            }
             { btnGuardarRelacion2 Button
-              MoveScaled(1,0,4,4)
+              MoveScaled(5,0,4,4)
               ToolTip = ("Guardar")
               Picture = Picture["iconos/guardarComo.svg"]
             }
             { Spring10 Spring
-              MoveScaled(11,0,15,4)
+              MoveScaled(28,0,15,4)
             }
           }
           { HBox209 HBox
-            MoveScaled(0,4,51,4)
-            { BtnBuscarAuthorRelacion4 Button
-              MoveScaled(1,0,4,4)
-              NoTabFocus = True
-              Picture = Picture["iconos/search.svg"]
-            }
+            MoveScaled(2,7,51,4)
             { Label163 Label
-              MoveScaled(6,0,12,3.5556)
+              MoveScaled(6,0,16,3.5556)
               Alignment = Align.Right
               Text = ("Author ")
             }
-            { txtAUTHORrelacion2 TextBox
+            { txtAuthorNueva TextBox
               MoveScaled(24,0,15,4)
               Expand = True
-              Placeholder = ("Autor principal")
+            }
+          }
+          { HBox213 HBox
+            MoveScaled(2,11,81,4)
+            { Label167 Label
+              MoveScaled(6,0,16,3.5556)
+              Alignment = Align.Right
+              Text = ("Editor ")
+            }
+            { txtEditorNueva TextBox
+              MoveScaled(24,0,15,4)
+              Expand = True
+            }
+            { lblEDITORtype5 Label
+              MoveScaled(39,0,12,3.5556)
+              Alignment = Align.Right
+              Text = ("EditorType ")
+            }
+            { cbEditorTypeDuplicado ComboBox
+              MoveScaled(58,0,16,4)
+              NoTabFocus = True
+              ReadOnly = True
             }
           }
           { HBox210 HBox
-            MoveScaled(0,8,51,4)
-            { BtnBuscarTituloReferenciaRelacion4 Button
-              MoveScaled(1,0,4,4)
-              NoTabFocus = True
-              ToolTip = ("Búsqueda rápida del título")
-              Picture = Picture["iconos/search.svg"]
-            }
+            MoveScaled(2,15,51,4)
             { Label164 Label
-              MoveScaled(13,0,12,3.5556)
+              MoveScaled(13,0,16,3.5556)
               Alignment = Align.Right
               Text = ("Title ")
             }
-            { txtTITLErelacion2 TextBox
-              MoveScaled(33,0,12,3.5556)
+            { txtTitleNueva TextBox
+              MoveScaled(33,0,12,4)
               Expand = True
               Alignment = Align.Left
-              Placeholder = ("Título principal")
             }
           }
           { HBox211 HBox
-            MoveScaled(0,12,97,4)
+            MoveScaled(2,19,68,4)
+            { btnAgregarKeyBIBtwo3 Button
+              MoveScaled(0,0,4,4)
+              ToolTip = ("Agregar clave")
+              Picture = Picture["iconos/clave.svg"]
+            }
+            { Label166 Label
+              MoveScaled(5,0,12,3.5556)
+              Alignment = Align.Right
+              Text = ("Clave ")
+            }
+            { txtClaveNueva TextBox
+              MoveScaled(19,0,17,4)
+              NoTabFocus = True
+              Expand = True
+            }
+          }
+          { HBox214 HBox
+            MoveScaled(2,23,57,4)
             { btnAgregarKeyBIBtwo2 Button
-              MoveScaled(1,0,4,4)
+              MoveScaled(0,0,4,4)
               ToolTip = ("Agregar clave")
               Picture = Picture["iconos/clave.svg"]
             }
             { Label165 Label
-              MoveScaled(9,0,12,3.5556)
+              MoveScaled(5,0,12,3.5556)
               Alignment = Align.Right
               Text = ("Filtro ")
             }
-            { txtFILTROrelacion2 TextBox
-              MoveScaled(32,0,17,4)
+            { txtFiltroNueva TextBox
+              MoveScaled(21,0,17,4)
               NoTabFocus = True
               Expand = True
             }
-          }
-          { tbRefDup2 TableView
-            MoveScaled(1,25,27,9)
-            Font = Font["-1"]
-            Expand = True
-            Mode = Select.Single
-            ShowCursor = True
-            Header = GridView.Horizontal
-            AutoResize = False
           }
         }
       }
