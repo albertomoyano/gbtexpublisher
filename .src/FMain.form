@@ -2692,8 +2692,25 @@
           Spacing = True
           Margin = True
           Padding = 4
-          { HBox205 HBox
+          { HBox206 HBox
             MoveScaled(0,0,36,4)
+            { BtnBuscarAuthorRelacion3 Button
+              MoveScaled(0,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label161 Label
+              MoveScaled(5,0,12,4)
+              Alignment = Align.Right
+              Text = ("Author ")
+            }
+            { txtAuthorOriginal TextBox
+              MoveScaled(18,0,15,4)
+              Expand = True
+            }
+          }
+          { HBox205 HBox
+            MoveScaled(0,4,36,4)
             { BtnBuscarTituloReferenciaRelacion3 Button
               MoveScaled(0,0,4,4)
               NoTabFocus = True
@@ -2709,23 +2726,6 @@
               MoveScaled(18,0,12,4)
               Expand = True
               Alignment = Align.Left
-            }
-          }
-          { HBox206 HBox
-            MoveScaled(0,4,36,4)
-            { BtnBuscarAuthorRelacion3 Button
-              MoveScaled(0,0,4,4)
-              NoTabFocus = True
-              Picture = Picture["iconos/search.svg"]
-            }
-            { Label161 Label
-              MoveScaled(5,0,12,4)
-              Alignment = Align.Right
-              Text = ("Author ")
-            }
-            { txtAuthorOriginal TextBox
-              MoveScaled(18,0,15,4)
-              Expand = True
             }
           }
           { HBox207 HBox
