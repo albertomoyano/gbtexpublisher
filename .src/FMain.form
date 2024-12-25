@@ -2476,9 +2476,27 @@
               MoveScaled(11,0,4,4)
             }
           }
+          { HBox19 HBox
+            MoveScaled(1,4,36,4)
+            { btnBuscarAuthorOrigen Button
+              MoveScaled(0,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label157 Label
+              MoveScaled(5,0,12,4)
+              Alignment = Align.Right
+              Text = ("Author ")
+            }
+            { txtAuthorOrigen TextBox
+              MoveScaled(18,0,15,4)
+              Expand = True
+              Placeholder = ("Autor principal")
+            }
+          }
           { HBox196 HBox
-            MoveScaled(0,5,36,4)
-            { BtnBuscarTituloReferenciaRelacion2 Button
+            MoveScaled(1,8,36,4)
+            { btnBuscarTitleOrigen Button
               MoveScaled(0,0,4,4)
               NoTabFocus = True
               ToolTip = ("Búsqueda rápida del título")
@@ -2496,26 +2514,8 @@
               Placeholder = ("Título principal")
             }
           }
-          { HBox19 HBox
-            MoveScaled(0,9,36,4)
-            { BtnBuscarAuthorRelacion2 Button
-              MoveScaled(0,0,4,4)
-              NoTabFocus = True
-              Picture = Picture["iconos/search.svg"]
-            }
-            { Label157 Label
-              MoveScaled(5,0,12,4)
-              Alignment = Align.Right
-              Text = ("Author ")
-            }
-            { txtAuthorOrigen TextBox
-              MoveScaled(18,0,15,4)
-              Expand = True
-              Placeholder = ("Autor principal")
-            }
-          }
           { HBox187 HBox
-            MoveScaled(0,13,36,4)
+            MoveScaled(1,12,36,4)
             { Label133 Label
               MoveScaled(1,0,16,4)
               Alignment = Align.Right
@@ -2694,7 +2694,7 @@
           Padding = 4
           { HBox206 HBox
             MoveScaled(0,0,36,4)
-            { BtnBuscarAuthorRelacion3 Button
+            { BtnBuscarAuthorOriginal Button
               MoveScaled(0,0,4,4)
               NoTabFocus = True
               Picture = Picture["iconos/search.svg"]
@@ -2711,7 +2711,7 @@
           }
           { HBox205 HBox
             MoveScaled(0,4,36,4)
-            { BtnBuscarTituloReferenciaRelacion3 Button
+            { BtnBuscarTituloReferenciaOriginal Button
               MoveScaled(0,0,4,4)
               NoTabFocus = True
               ToolTip = ("Búsqueda rápida del título")
@@ -2730,7 +2730,7 @@
           }
           { HBox207 HBox
             MoveScaled(0,8,36,4)
-            { BtnBuscarClaveRelacion Button
+            { BtnBuscarClaveOriginal Button
               MoveScaled(0,0,4,4)
               NoTabFocus = True
               Picture = Picture["iconos/search.svg"]
