@@ -26,6 +26,7 @@ Public LastTextBox As TextBox
 Public horas As Integer
 Public minutos As Integer
 Public segundos As Integer
+Public idSeleccionado As Integer ' Variable global para almacenar el ID
 
 Public Sub Form_Open()
 
@@ -3528,146 +3529,17 @@ Public Sub mostrarIguales()
     CargarDatos(Consulta, VListaBIB)
     TabPanel5.Index = 1
   Endif
-  '
-  ' Dim Comando As String
-  ' Dim rowIndex As Integer
-  '
-  ' Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTITLE.Text & "%';"
-  ' Busqueda = meConn.Exec(Comando)
-  '
-  ' ' Limpia el Grid antes de mostrar los resultados de la búsqueda
-  ' VListaBIB.Clear()
-  '
-  ' ' Configura las columnas en el Grid
-  ' VListaBIB.Columns.Count = 112
-  '
-  ' ' Inicializa rowIndex a 0
-  ' rowIndex = 0
-  '
-  ' While (Busqueda.Available)
-  '   ' Llena las celdas de la fila con los datos del resultado
-  '   VListaBIB[rowIndex, 0].Text = Busqueda!id
-  '   VListaBIB[rowIndex, 1].Text = Busqueda!tipoEntrada
-  '   VListaBIB[rowIndex, 2].Text = Busqueda!citationKey
-  '   VListaBIB[rowIndex, 3].Text = Busqueda!keywords
-  '   VListaBIB[rowIndex, 4].Text = Busqueda!author
-  '   VListaBIB[rowIndex, 5].Text = Busqueda!bookAuthor
-  '   VListaBIB[rowIndex, 6].Text = Busqueda!editor
-  '   VListaBIB[rowIndex, 7].Text = Busqueda!editorA
-  '   VListaBIB[rowIndex, 8].Text = Busqueda!editorB
-  '   VListaBIB[rowIndex, 9].Text = Busqueda!editorC
-  '   VListaBIB[rowIndex, 10].Text = Busqueda!afterword
-  '   VListaBIB[rowIndex, 11].Text = Busqueda!commentator
-  '   VListaBIB[rowIndex, 12].Text = Busqueda!translator
-  '   VListaBIB[rowIndex, 13].Text = Busqueda!holder
-  '   VListaBIB[rowIndex, 14].Text = Busqueda!shortAuthor
-  '   VListaBIB[rowIndex, 15].Text = Busqueda!editorType
-  '   VListaBIB[rowIndex, 16].Text = Busqueda!editorAtype
-  '   VListaBIB[rowIndex, 17].Text = Busqueda!editorBtype
-  '   VListaBIB[rowIndex, 18].Text = Busqueda!editorCtype
-  '   VListaBIB[rowIndex, 19].Text = Busqueda!foreword
-  '   VListaBIB[rowIndex, 20].Text = Busqueda!introduction
-  '   VListaBIB[rowIndex, 21].Text = Busqueda!annotator
-  '   VListaBIB[rowIndex, 22].Text = Busqueda!gender
-  '   VListaBIB[rowIndex, 23].Text = Busqueda!nameAddOn
-  '   VListaBIB[rowIndex, 24].Text = Busqueda!title
-  '   VListaBIB[rowIndex, 25].Text = Busqueda!shortTitle
-  '   VListaBIB[rowIndex, 26].Text = Busqueda!indexTitle
-  '   VListaBIB[rowIndex, 27].Text = Busqueda!bookTitle
-  '   VListaBIB[rowIndex, 28].Text = Busqueda!mainTitle
-  '   VListaBIB[rowIndex, 29].Text = Busqueda!journalTitle
-  '   VListaBIB[rowIndex, 30].Text = Busqueda!issueTitle
-  '   VListaBIB[rowIndex, 31].Text = Busqueda!eventTitle
-  '   VListaBIB[rowIndex, 32].Text = Busqueda!reprintTitle
-  '   VListaBIB[rowIndex, 33].Text = Busqueda!series
-  '   VListaBIB[rowIndex, 34].Text = Busqueda!bookTitleAddOn
-  '   VListaBIB[rowIndex, 35].Text = Busqueda!mainTitleAddOn
-  '   VListaBIB[rowIndex, 36].Text = Busqueda!journalTitleAddOn
-  '   VListaBIB[rowIndex, 37].Text = Busqueda!issueTitleAddOn
-  '   VListaBIB[rowIndex, 38].Text = Busqueda!eventTitleAddOn
-  '   VListaBIB[rowIndex, 39].Text = Busqueda!chapter
-  '   VListaBIB[rowIndex, 40].Text = Busqueda!volume
-  '   VListaBIB[rowIndex, 41].Text = Busqueda!edition
-  '   VListaBIB[rowIndex, 42].Text = Busqueda!pubState
-  '   VListaBIB[rowIndex, 43].Text = Busqueda!yearY
-  '   VListaBIB[rowIndex, 44].Text = Busqueda!dateD
-  '   VListaBIB[rowIndex, 45].Text = Busqueda!urlDate
-  '   VListaBIB[rowIndex, 46].Text = Busqueda!volumes
-  '   VListaBIB[rowIndex, 47].Text = Busqueda!part
-  '   VListaBIB[rowIndex, 48].Text = Busqueda!issue
-  '   VListaBIB[rowIndex, 49].Text = Busqueda!eventDate
-  '   VListaBIB[rowIndex, 50].Text = Busqueda!origDate
-  '   VListaBIB[rowIndex, 51].Text = Busqueda!version
-  '   VListaBIB[rowIndex, 52].Text = Busqueda!location
-  '   VListaBIB[rowIndex, 53].Text = Busqueda!publisher
-  '   VListaBIB[rowIndex, 54].Text = Busqueda!institution
-  '   VListaBIB[rowIndex, 55].Text = Busqueda!organization
-  '   VListaBIB[rowIndex, 56].Text = Busqueda!pages
-  '   VListaBIB[rowIndex, 57].Text = Busqueda!pagination
-  '   VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
-  '   VListaBIB[rowIndex, 59].Text = Busqueda!langId
-  '   VListaBIB[rowIndex, 60].Text = Busqueda!language
-  '   VListaBIB[rowIndex, 61].Text = Busqueda!origLocation
-  '   VListaBIB[rowIndex, 62].Text = Busqueda!origPublisher
-  '   VListaBIB[rowIndex, 63].Text = Busqueda!pageTotal
-  '   VListaBIB[rowIndex, 64].Text = Busqueda!venue
-  '   VListaBIB[rowIndex, 65].Text = Busqueda!bookPagination
-  '   VListaBIB[rowIndex, 66].Text = Busqueda!langIdOpts
-  '   VListaBIB[rowIndex, 67].Text = Busqueda!origLanguage
-  '   VListaBIB[rowIndex, 68].Text = Busqueda!isan
-  '   VListaBIB[rowIndex, 69].Text = Busqueda!isbn
-  '   VListaBIB[rowIndex, 70].Text = Busqueda!ismn
-  '   VListaBIB[rowIndex, 71].Text = Busqueda!isrn
-  '   VListaBIB[rowIndex, 72].Text = Busqueda!issn
-  '   VListaBIB[rowIndex, 73].Text = Busqueda!iswc
-  '   VListaBIB[rowIndex, 74].Text = Busqueda!url
-  '   VListaBIB[rowIndex, 75].Text = Busqueda!doi
-  '   VListaBIB[rowIndex, 76].Text = Busqueda!eid
-  '   VListaBIB[rowIndex, 77].Text = Busqueda!eprinttype
-  '   VListaBIB[rowIndex, 78].Text = Busqueda!eprint
-  '   VListaBIB[rowIndex, 79].Text = Busqueda!entrysubtype
-  '   VListaBIB[rowIndex, 80].Text = Busqueda!label
-  '   VListaBIB[rowIndex, 81].Text = Busqueda!howpublisher
-  '   VListaBIB[rowIndex, 82].Text = Busqueda!addendum
-  '   VListaBIB[rowIndex, 83].Text = Busqueda!shorthand
-  '   VListaBIB[rowIndex, 84].Text = Busqueda!shorthandintro
-  '   VListaBIB[rowIndex, 85].Text = Busqueda!etiquetas
-  '   VListaBIB[rowIndex, 86].Text = Busqueda!options
-  '   VListaBIB[rowIndex, 87].Text = Busqueda!ids
-  '   VListaBIB[rowIndex, 88].Text = Busqueda!related
-  '   VListaBIB[rowIndex, 89].Text = Busqueda!relatedType
-  '   VListaBIB[rowIndex, 90].Text = Busqueda!relatedString
-  '   VListaBIB[rowIndex, 91].Text = Busqueda!entryset
-  '   VListaBIB[rowIndex, 92].Text = Busqueda!crossref
-  '   VListaBIB[rowIndex, 93].Text = Busqueda!xref
-  '   VListaBIB[rowIndex, 94].Text = Busqueda!xdata
-  '   VListaBIB[rowIndex, 95].Text = Busqueda!presort
-  '   VListaBIB[rowIndex, 96].Text = Busqueda!sortkey
-  '   VListaBIB[rowIndex, 97].Text = Busqueda!sortname
-  '   VListaBIB[rowIndex, 98].Text = Busqueda!sortshorthand
-  '   VListaBIB[rowIndex, 99].Text = Busqueda!sorttitle
-  '   VListaBIB[rowIndex, 100].Text = Busqueda!indexsorttitle
-  '   VListaBIB[rowIndex, 101].Text = Busqueda!sortyear
-  '   VListaBIB[rowIndex, 102].Text = Busqueda!file
-  '   VListaBIB[rowIndex, 103].Text = Busqueda!abstract
-  '   VListaBIB[rowIndex, 104].Text = Busqueda!library
-  '   VListaBIB[rowIndex, 105].Text = Busqueda!note
-  '   VListaBIB[rowIndex, 106].Text = Busqueda!annotation
-  '   VListaBIB[rowIndex, 107].Text = Busqueda!number
-  '   VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
-  '   VListaBIB[rowIndex, 109].Text = Busqueda!type
-  '   VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
-  '   VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
-  '
-  '   ' Incrementa el valor de rowIndex para la siguiente fila
-  '   rowIndex = rowIndex + 1
-  '
-  '   Busqueda.MoveNext
-  ' Wend
-  '
-  ' ' Ajusta la posición del scrollbar para mostrar los resultados en la parte superior
-  ' VListaBIB.ScrollY = 0
-  ' btnGuardarIGUAL.Visible = False
+
+End
+
+Public Sub AsignarValores(Grid As GridView, Row As Integer, Mapeo As Collection, Formulario As Form)
+
+  For Each NombreControl As String In Mapeo
+    Dim Control As Object = Formulario[NombreControl]
+    If Control <> Null Then
+      Control.Text = Grid[Row, Mapeo[NombreControl]].Text
+    End If
+  Next
 
 End
 
@@ -3788,7 +3660,7 @@ Public Sub VListaBIB_RowClick(Row As Integer)
   txtNOTE.Text = VListaBIB[Row, 105].Text
   txtANNOTATION.Text = VListaBIB[Row, 106].Text
   txtNUMBER.Text = VListaBIB[Row, 107].Text
-  ' = VListaBIB[Row, 108].Text
+  ' txtCreationDay108.Text = VListaBIB[Row, 108].Text' este registro quedo disponible
   cbType.Text = VListaBIB[Row, 109].Text
   txtTitleAddOn.Text = VListaBIB[Row, 110].Text
   txtSubTitle.Text = VListaBIB[Row, 111].Text
@@ -5093,7 +4965,6 @@ Public Sub habilitamosLibro()
   btnCOMPpdf.Enabled = True
   btnCOMPhtml.Enabled = True
   btnCOMPepub.Enabled = True
-  btnLibroCompliarXML.Enabled = True
   btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False
@@ -5119,7 +4990,6 @@ Public Sub habilitamosRevista()
   btnCOMPpdf.Enabled = False
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
-  btnLibroCompliarXML.Enabled = False
   btnGitHubPages.Enabled = True
   btnCOMPpdfRevista.Enabled = True
   btnCOMPrevistaHTML.Enabled = True
@@ -5145,7 +5015,6 @@ Public Sub habilitamosMonografia()
   btnCOMPpdf.Enabled = False
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
-  btnLibroCompliarXML.Enabled = False
   btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnCOMPrevistaHTML.Enabled = False
@@ -5566,15 +5435,6 @@ Public Sub Mostrar_ListaBIBrelacion()
 
     Contenido.MoveNext
   Next
-
-End
-
-Public Sub btnGuardarRelacion_Click()
-
-  txtAUTHORrelacion.Clear
-  txtTITLErelacion.Clear
-  txtFILTROrelacion.Clear
-  tbRefDup.Visible = False
 
 End
 
@@ -7425,5 +7285,478 @@ Public Sub btnBuscarTitleOrigen_Click()
     Consulta = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTitleOrigen.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, tblReferenciaOrigen)
   Endif
+
+End
+
+Public Sub griBibOriginal_RowClick(Row As Integer)
+
+  ' Definir los índices de las columnas y los controles correspondientes
+  Dim Columnas As Integer[] = [0, 3, 4, 24] ' Índices de las columnas
+  Dim TextBoxes As TextBox[] = [txtIdReferenciaDuplicada, txtClaveOriginal, txtAuthorOriginal, txtTitleOriginal] ' TextBoxes correspondientes
+  Dim ComboBoxes As ComboBox[] = [] ' ComboBoxes correspondientes
+  Dim TextAreas As TextArea[] = [] ' TextAreas correspondientes
+  Dim TextAreasColumnas As Integer[] = [] ' Columnas asociadas a los TextAreas
+  Dim ComboBoxesColumnas As Integer[] = [] ' Columnas asociadas a los comboboxes
+
+  ' Llamada a la función genérica
+  Mod_Funciones.AsignarValoresDesdeGridView(griBibOriginal, Row, Columnas, TextBoxes, ComboBoxes, TextAreas, TextAreasColumnas, ComboBoxesColumnas)
+
+  btnDuplicar.Visible = True
+
+End
+
+Public Sub tblReferenciaOrigen_RowClick(Row As Integer)
+
+  ' Definir los índices de las columnas y los controles correspondientes
+  Dim Columnas As Integer[] = [2, 4, 24] ' Índices de las columnas
+  Dim TextBoxes As TextBox[] = [txtClaveOrigen, txtAuthorOrigen, txtTitleOrigen] ' TextBoxes correspondientes
+  Dim ComboBoxes As ComboBox[] = [] ' ComboBoxes correspondientes
+  Dim TextAreas As TextArea[] = [] ' TextAreas correspondientes
+  Dim TextAreasColumnas As Integer[] = [] ' Columnas asociadas a los TextAreas
+  Dim ComboBoxesColumnas As Integer[] = [] ' Columnas asociadas a los comboboxes
+
+  ' Llamada a la función genérica
+  Mod_Funciones.AsignarValoresDesdeGridView(tblReferenciaOrigen, Row, Columnas, TextBoxes, ComboBoxes, TextAreas, TextAreasColumnas, ComboBoxesColumnas)
+
+End
+
+Public Sub tbRefDup_RowClick(Row As Integer)
+  ' Guardar el ID de la fila seleccionada
+
+  idSeleccionado = CInt(tbRefDup[Row, 0].Text)
+
+  ' Definir los índices de las columnas y los controles correspondientes
+  Dim Columnas As Integer[] = [0, 3, 4, 24, 88, 90, 92] ' Índices de las columnas
+  Dim TextBoxes As TextBox[] = [txtIdReferencia, txtFILTROrelacion, txtAUTHORrelacion, txtTITLErelacion, txtRelatedRelacion, txtRelatedString1, txtCrossRefRelacion] ' TextBoxes correspondientes
+  Dim ComboBoxes As ComboBox[] = [cbRelatedTypeRelacion] ' nombre de los ComboBoxes correspondientes
+  Dim TextAreas As TextArea[] = [] ' nombre de las TextAreas correspondientes
+  Dim TextAreasColumnas As Integer[] = [] ' Columnas asociadas a los TextAreas
+  Dim ComboBoxesColumnas As Integer[] = [89] ' Columnas asociadas a los comboboxes
+
+  ' Llamada a la función genérica
+  Mod_Funciones.AsignarValoresDesdeGridView(tbRefDup, Row, Columnas, TextBoxes, ComboBoxes, TextAreas, TextAreasColumnas, ComboBoxesColumnas)
+
+End
+
+Public Sub btnGuardarRelacion_Click()
+
+  Dim idReferencia As Integer
+
+  idReferencia = CInt(Trim(txtIdReferencia.Text))' Convertir el texto del TextBox a un número
+
+  Dim valor1 As String = txtFILTROrelacion.Text
+  Dim valor2 As String = txtCrossRefRelacion.Text
+  Dim valor3 As String = txtRelatedRelacion.Text
+  Dim valor4 As String = txtRelatedString1.Text
+  Dim valor5 As String = cbRelatedTypeRelacion.Text
+
+  ' Construir la consulta UPDATE
+  Dim Consulta As String
+  Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', crossref= '" & valor2 & "', related= '" & valor3 & "', relatedString= '" & valor4 & "', relatedType= '" & valor5 & "' WHERE id= " & idReferencia
+
+  meConn.Exec(Consulta)
+
+  txtAUTHORrelacion.Clear
+  txtTITLErelacion.Clear
+  txtFILTROrelacion.Clear
+  txtCrossRefRelacion.Clear
+  txtRelatedRelacion.Clear
+  txtRelatedString1.Clear
+  cbRelatedTypeRelacion.Text = ""
+
+End
+
+Public Sub btnDuplicar_Click()
+
+  Dim idSeleccionado As Integer
+
+  idSeleccionado = CInt(Trim(txtIdReferenciaDuplicada.Text))
+
+  ' Construir la consulta INSERT ... SELECT
+  Dim Consulta As String
+  Consulta = "INSERT INTO bibtex (" &
+    "tipoEntrada, citationKey, keywords, author, bookAuthor, editor, editorA, editorB, editorC, " &
+    "afterword, commentator, translator, holder, shortAuthor, editorType, editorAtype, editorBtype, " &
+    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shortTitle, indexTitle, " &
+    "bookTitle, mainTitle, journalTitle, issueTitle, eventTitle, reprintTitle, series, bookTitleAddOn, " &
+    "mainTitleAddOn, journalTitleAddOn, issueTitleAddOn, eventTitleAddOn, chapter, volume, edition, " &
+    "pubState, yearY, dateD, urlDate, volumes, part, issue, eventDate, origDate, version, location, " &
+    "publisher, institution, organization, pages, pagination, hyphenation, langId, language, " &
+    "origLocation, origPublisher, pageTotal, venue, bookPagination, langIdOpts, origLanguage, isan, " &
+    "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
+    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedType, " &
+    "relatedString, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, " &
+    "creationdate, type" &
+    ") SELECT " &
+    "tipoEntrada, citationKey, keywords, author, bookAuthor, editor, editorA, editorB, editorC, " &
+    "afterword, commentator, translator, holder, shortAuthor, editorType, editorAtype, editorBtype, " &
+    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shortTitle, indexTitle, " &
+    "bookTitle, mainTitle, journalTitle, issueTitle, eventTitle, reprintTitle, series, bookTitleAddOn, " &
+    "mainTitleAddOn, journalTitleAddOn, issueTitleAddOn, eventTitleAddOn, chapter, volume, edition, " &
+    "pubState, yearY, dateD, urlDate, volumes, part, issue, eventDate, origDate, version, location, " &
+    "publisher, institution, organization, pages, pagination, hyphenation, langId, language, " &
+    "origLocation, origPublisher, pageTotal, venue, bookPagination, langIdOpts, origLanguage, isan, " &
+    "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
+    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedType, " &
+    "relatedString, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, " &
+    "creationdate, type " &
+    "FROM bibtex WHERE id = " & idSeleccionado
+
+  ' Ejecutar la consulta
+  meConn.Exec(Consulta)
+
+  ' Obtener el último ID insertado antes del Commit
+  Dim nuevoId As Integer
+  Dim rs As Result = meConn.Exec("SELECT last_insert_rowid()")
+  If rs.Count > 0 Then
+    rs.MoveFirst()
+    nuevoId = CInt(rs[0])
+  End If
+
+  ' Realizar el Commit después de obtener el ID
+  meConn.Commit()
+
+  ' Seleccionar los campos del nuevo registro
+  Dim ConsultaSelect As String
+  ConsultaSelect = "SELECT author, editor, title, citationKey, keywords, yearY, dateD FROM bibtex WHERE id = " & nuevoId
+
+  ' Ejecutar la consulta de selección
+  Dim Resultado As Result
+  Resultado = meConn.Exec(ConsultaSelect)
+
+  ' Mostrar los valores en los TextBox
+  If Resultado.Available Then
+    txtIDnuevoRegistro.Text = nuevoId
+    txtAuthorNueva.Text = CStr(Resultado[0])
+    txtEditorNueva.Text = CStr(Resultado[1])
+    txtTitleNueva.Text = CStr(Resultado[2])
+    txtClaveNueva.Text = CStr(Resultado[3])
+    txtFiltroNueva.Text = CStr(Resultado[4])
+    txtYearDup.Text = CStr(Resultado[5])
+    txtDateDup.Text = CStr(Resultado[6])
+  Else
+    Message.Warning("No se encontraron datos para el nuevo registro.")
+  End If
+
+  ' Mostrar mensaje de éxito
+  Message.Info("Entrada duplicada correctamente.")
+
+End
+
+Public Sub btnAgregarKeyBIBtwo2_Click()
+
+  Dim TextoExistente As String
+  Dim TextoAAgregar As String
+
+  ' Obtener el texto actual del cuadro de texto
+  TextoExistente = txtFiltroNueva.Text
+
+  ' Verificar si el primer carácter es una coma
+  If Left$(TextoExistente, 1) <> "," Then
+    ' Agregar una coma al principio del texto
+    TextoExistente = "," & TextoExistente
+  Endif
+
+  ' Texto que deseas agregar
+  TextoAAgregar = BaseName & ","
+
+  ' Comprobar si el cuadro de texto ya tiene texto
+  If Len(Trim(TextoExistente)) > 0 Then
+    ' Si ya hay texto, agrega el texto nuevo
+    txtFiltroNueva.Text = TextoExistente & TextoAAgregar
+  Else
+    ' Si no hay texto, simplemente establece el texto a agregar
+    txtFiltroNueva.Text = TextoAAgregar
+  Endif
+
+End
+
+Public Sub btnAgregarKeyBIBtwo3_Click()
+
+  Dim textoOrigen As String
+  Dim posicion As Integer
+  Dim cadenaTercerTextBox As String
+  Dim cadenaCuartoTextBox As String
+  Dim Comando As String
+  Dim Header As String
+
+  Header = "@" & txtIDbibtex.Text & "-" 'prefijo de la clave bib
+
+  ' Escapa los caracteres especiales (comilla simple) en el título
+  Dim tituloEscapado As String
+
+  tituloEscapado = Replace(txtTITLE.Text, "'", "''")
+
+  eliminarBlancosBIB()
+
+  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTitleNueva.Text & "%'"
+  Busqueda = meConn.Exec(Comando)
+
+  ' Obtén el texto del TextBox de origen
+  If Trim(txtAuthorNueva.Text) = "" Then
+    ' Si el TextBox de origen está vacío, usa el contenido de otro TextBox
+    textoOrigen = txtEditorNueva.Text
+  Else
+    textoOrigen = txtAuthorNueva.Text
+  End If
+
+  ' Encuentra la posición de la primera coma, punto, punto y coma  o espacio en el texto
+  posicion = InStr(textoOrigen, ",")
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, ";")
+  End If
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, ".")
+  End If
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, " ")
+  End If
+
+  ' Si se encontró una coma, punto o espacio, copia el texto hasta esa posición
+  If posicion > 0 Then
+    textoOrigen = Left(textoOrigen, posicion - 1)
+  End If
+
+  ' Reemplaza caracteres problemáticos
+  textoOrigen = Replace(textoOrigen, "´", "")
+  textoOrigen = Replace(textoOrigen, "`", "")
+  textoOrigen = Replace(textoOrigen, " ", "")
+  textoOrigen = Replace(textoOrigen, "{", "")
+  textoOrigen = Replace(textoOrigen, "}", "")
+  textoOrigen = Replace(textoOrigen, "[", "")
+  textoOrigen = Replace(textoOrigen, "]", "")
+  textoOrigen = Replace(textoOrigen, "¿", "")
+  textoOrigen = Replace(textoOrigen, "?", "")
+  textoOrigen = Replace(textoOrigen, "¡", "")
+  textoOrigen = Replace(textoOrigen, "!", "")
+  textoOrigen = Replace(textoOrigen, "(", "")
+  textoOrigen = Replace(textoOrigen, ")", "")
+  textoOrigen = Replace(textoOrigen, "-", "")
+  textoOrigen = Replace(textoOrigen, "_", "")
+  textoOrigen = Replace(textoOrigen, "'", "")
+  textoOrigen = Replace(textoOrigen, "#", "")
+  textoOrigen = Replace(textoOrigen, "@", "")
+  textoOrigen = Replace(textoOrigen, "/", "")
+  textoOrigen = Replace(textoOrigen, "°", "")
+  textoOrigen = Replace(textoOrigen, "~", "")
+  textoOrigen = Replace(textoOrigen, "*", "")
+  textoOrigen = Replace(textoOrigen, "+", "")
+
+  textoOrigen = Replace(textoOrigen, "á", "A")
+  textoOrigen = Replace(textoOrigen, "à", "A")
+  textoOrigen = Replace(textoOrigen, "â", "A")
+  textoOrigen = Replace(textoOrigen, "ä", "A")
+  textoOrigen = Replace(textoOrigen, "ã", "A")
+  textoOrigen = Replace(textoOrigen, "å", "A")
+  textoOrigen = Replace(textoOrigen, "æ", "AE")
+  textoOrigen = Replace(textoOrigen, "ā", "A")
+  textoOrigen = Replace(textoOrigen, "ă", "A")
+  textoOrigen = Replace(textoOrigen, "ą", "A")
+  textoOrigen = Replace(textoOrigen, "ç", "C")
+  textoOrigen = Replace(textoOrigen, "ć", "C")
+  textoOrigen = Replace(textoOrigen, "č", "C")
+  textoOrigen = Replace(textoOrigen, "ď", "D")
+  textoOrigen = Replace(textoOrigen, "đ", "D")
+  textoOrigen = Replace(textoOrigen, "é", "E")
+  textoOrigen = Replace(textoOrigen, "è", "E")
+  textoOrigen = Replace(textoOrigen, "ê", "E")
+  textoOrigen = Replace(textoOrigen, "ë", "E")
+  textoOrigen = Replace(textoOrigen, "ē", "E")
+  textoOrigen = Replace(textoOrigen, "ė", "E")
+  textoOrigen = Replace(textoOrigen, "ę", "E")
+  textoOrigen = Replace(textoOrigen, "ě", "E")
+  textoOrigen = Replace(textoOrigen, "í", "I")
+  textoOrigen = Replace(textoOrigen, "ì", "I")
+  textoOrigen = Replace(textoOrigen, "î", "I")
+  textoOrigen = Replace(textoOrigen, "ï", "I")
+  textoOrigen = Replace(textoOrigen, "ī", "I")
+  textoOrigen = Replace(textoOrigen, "į", "I")
+  textoOrigen = Replace(textoOrigen, "ı", "I")
+  textoOrigen = Replace(textoOrigen, "ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "ľ", "L")
+  textoOrigen = Replace(textoOrigen, "ł", "L")
+  textoOrigen = Replace(textoOrigen, "ñ", "N")
+  textoOrigen = Replace(textoOrigen, "ń", "N")
+  textoOrigen = Replace(textoOrigen, "ň", "N")
+  textoOrigen = Replace(textoOrigen, "ó", "O")
+  textoOrigen = Replace(textoOrigen, "ò", "O")
+  textoOrigen = Replace(textoOrigen, "ô", "O")
+  textoOrigen = Replace(textoOrigen, "ö", "O")
+  textoOrigen = Replace(textoOrigen, "õ", "O")
+  textoOrigen = Replace(textoOrigen, "ő", "O")
+  textoOrigen = Replace(textoOrigen, "ø", "O")
+  textoOrigen = Replace(textoOrigen, "œ", "OE")
+  textoOrigen = Replace(textoOrigen, "ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "ř", "R")
+  textoOrigen = Replace(textoOrigen, "ś", "S")
+  textoOrigen = Replace(textoOrigen, "š", "S")
+  textoOrigen = Replace(textoOrigen, "ş", "S")
+  textoOrigen = Replace(textoOrigen, "ș", "S")
+  textoOrigen = Replace(textoOrigen, "ť", "T")
+  textoOrigen = Replace(textoOrigen, "ţ", "T")
+  textoOrigen = Replace(textoOrigen, "ț", "T")
+  textoOrigen = Replace(textoOrigen, "ú", "U")
+  textoOrigen = Replace(textoOrigen, "ù", "U")
+  textoOrigen = Replace(textoOrigen, "û", "U")
+  textoOrigen = Replace(textoOrigen, "ü", "U")
+  textoOrigen = Replace(textoOrigen, "ū", "U")
+  textoOrigen = Replace(textoOrigen, "ů", "U")
+  textoOrigen = Replace(textoOrigen, "ű", "U")
+  textoOrigen = Replace(textoOrigen, "ų", "U")
+  textoOrigen = Replace(textoOrigen, "ý", "Y")
+  textoOrigen = Replace(textoOrigen, "ÿ", "Y")
+  textoOrigen = Replace(textoOrigen, "ź", "Z")
+  textoOrigen = Replace(textoOrigen, "ż", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+
+  ' Mayúsculas
+  textoOrigen = Replace(textoOrigen, "Á", "A")
+  textoOrigen = Replace(textoOrigen, "À", "A")
+  textoOrigen = Replace(textoOrigen, "Â", "A")
+  textoOrigen = Replace(textoOrigen, "Ä", "A")
+  textoOrigen = Replace(textoOrigen, "Ã", "A")
+  textoOrigen = Replace(textoOrigen, "Å", "A")
+  textoOrigen = Replace(textoOrigen, "Æ", "AE")
+  textoOrigen = Replace(textoOrigen, "Ā", "A")
+  textoOrigen = Replace(textoOrigen, "Ă", "A")
+  textoOrigen = Replace(textoOrigen, "Ą", "A")
+  textoOrigen = Replace(textoOrigen, "Ç", "C")
+  textoOrigen = Replace(textoOrigen, "Ć", "C")
+  textoOrigen = Replace(textoOrigen, "Č", "C")
+  textoOrigen = Replace(textoOrigen, "Ď", "D")
+  textoOrigen = Replace(textoOrigen, "Đ", "D")
+  textoOrigen = Replace(textoOrigen, "É", "E")
+  textoOrigen = Replace(textoOrigen, "È", "E")
+  textoOrigen = Replace(textoOrigen, "Ê", "E")
+  textoOrigen = Replace(textoOrigen, "Ë", "E")
+  textoOrigen = Replace(textoOrigen, "Ē", "E")
+  textoOrigen = Replace(textoOrigen, "Ė", "E")
+  textoOrigen = Replace(textoOrigen, "Ę", "E")
+  textoOrigen = Replace(textoOrigen, "Ě", "E")
+  textoOrigen = Replace(textoOrigen, "Í", "I")
+  textoOrigen = Replace(textoOrigen, "Ì", "I")
+  textoOrigen = Replace(textoOrigen, "Î", "I")
+  textoOrigen = Replace(textoOrigen, "Ï", "I")
+  textoOrigen = Replace(textoOrigen, "Ī", "I")
+  textoOrigen = Replace(textoOrigen, "Į", "I")
+  textoOrigen = Replace(textoOrigen, "İ", "I")
+  textoOrigen = Replace(textoOrigen, "Ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "Ľ", "L")
+  textoOrigen = Replace(textoOrigen, "Ł", "L")
+  textoOrigen = Replace(textoOrigen, "Ñ", "N")
+  textoOrigen = Replace(textoOrigen, "Ń", "N")
+  textoOrigen = Replace(textoOrigen, "Ň", "N")
+  textoOrigen = Replace(textoOrigen, "Ó", "O")
+  textoOrigen = Replace(textoOrigen, "Ò", "O")
+  textoOrigen = Replace(textoOrigen, "Ô", "O")
+  textoOrigen = Replace(textoOrigen, "Ö", "O")
+  textoOrigen = Replace(textoOrigen, "Õ", "O")
+  textoOrigen = Replace(textoOrigen, "Ő", "O")
+  textoOrigen = Replace(textoOrigen, "Ø", "O")
+  textoOrigen = Replace(textoOrigen, "Œ", "OE")
+  textoOrigen = Replace(textoOrigen, "Ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "Ř", "R")
+  textoOrigen = Replace(textoOrigen, "Ś", "S")
+  textoOrigen = Replace(textoOrigen, "Š", "S")
+  textoOrigen = Replace(textoOrigen, "Ş", "S")
+  textoOrigen = Replace(textoOrigen, "Ș", "S")
+  textoOrigen = Replace(textoOrigen, "Ť", "T")
+  textoOrigen = Replace(textoOrigen, "Ţ", "T")
+  textoOrigen = Replace(textoOrigen, "Ț", "T")
+  textoOrigen = Replace(textoOrigen, "Ú", "U")
+  textoOrigen = Replace(textoOrigen, "Ù", "U")
+  textoOrigen = Replace(textoOrigen, "Û", "U")
+  textoOrigen = Replace(textoOrigen, "Ü", "U")
+  textoOrigen = Replace(textoOrigen, "Ū", "U")
+  textoOrigen = Replace(textoOrigen, "Ů", "U")
+  textoOrigen = Replace(textoOrigen, "Ű", "U")
+  textoOrigen = Replace(textoOrigen, "Ų", "U")
+  textoOrigen = Replace(textoOrigen, "Ý", "Y")
+  textoOrigen = Replace(textoOrigen, "Ÿ", "Y")
+  textoOrigen = Replace(textoOrigen, "Ź", "Z")
+  textoOrigen = Replace(textoOrigen, "Ż", "Z")
+  textoOrigen = Replace(textoOrigen, "Ž", "Z")
+
+  ' Adicionales
+  textoOrigen = Replace(textoOrigen, "ẑ", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+  textoOrigen = Replace(textoOrigen, "ẋ", "X")
+  textoOrigen = Replace(textoOrigen, "ẍ", "X")
+  textoOrigen = Replace(textoOrigen, "ṽ", "V")
+  textoOrigen = Replace(textoOrigen, "ṕ", "P")
+  textoOrigen = Replace(textoOrigen, "ṗ", "P")
+  textoOrigen = Replace(textoOrigen, "ʠ", "Q")
+  textoOrigen = Replace(textoOrigen, "ḿ", "M")
+  textoOrigen = Replace(textoOrigen, "ṁ", "M")
+  textoOrigen = Replace(textoOrigen, "ṃ", "M")
+  textoOrigen = Replace(textoOrigen, "ĵ", "J")
+  textoOrigen = Replace(textoOrigen, "ǰ", "J")
+  textoOrigen = Replace(textoOrigen, "ḅ", "B")
+  textoOrigen = Replace(textoOrigen, "ḃ", "B")
+  textoOrigen = Replace(textoOrigen, "ḟ", "F")
+
+  ' Elimina espacios al principio y al final
+  textoOrigen = Trim(textoOrigen)
+
+  ' Convierte el texto a mayúsculas
+  textoOrigen = UCase(textoOrigen)
+
+  ' Agregar el texto al final del TextBox de destino sin borrar su contenido actual
+  txtClaveNueva.Text = Header & textoOrigen
+
+  ' Obtén el texto del tercer TextBox
+  cadenaTercerTextBox = txtYearDup.Text
+  cadenaTercerTextBox = Replace(cadenaTercerTextBox, "/", "")
+  cadenaTercerTextBox = UCase(cadenaTercerTextBox)
+
+  ' Verifica si el tercer TextBox está vacío
+  If Trim(cadenaTercerTextBox) = "" Then
+    ' Si el tercer TextBox está vacío, obtén el texto del cuarto TextBox
+    cadenaCuartoTextBox = txtDateDup.Text
+    cadenaCuartoTextBox = Replace(cadenaCuartoTextBox, "/", "")
+    cadenaCuartoTextBox = UCase(cadenaCuartoTextBox)
+
+    ' Verifica si el cuarto TextBox también está vacío
+    If Trim(cadenaCuartoTextBox) = "" Then
+      ' En caso de que ambos TextBox estén vacíos, agrega "-SINFECHA"
+      txtClaveNueva.Text = txtClaveNueva.Text & "-SINFECHA"
+    Else
+      ' Si el cuarto TextBox no está vacío, toma los primeros 4 caracteres
+      txtClaveNueva.Text = txtClaveNueva.Text & Left(cadenaCuartoTextBox, 4)
+    End If
+  Else
+    ' Si el tercer TextBox no está vacío, toma los primeros 4 caracteres
+    txtClaveNueva.Text = txtClaveNueva.Text & cadenaTercerTextBox '& Left(cadenaTercerTextBox, 4)
+  End If
+
+End
+
+Public Sub btnGuardarRelacion2_Click()
+
+  Dim idReferencia As Integer
+
+  idReferencia = CInt(Trim(txtIDnuevoRegistro.Text))' Convertir el texto del TextBox a un número
+
+  Dim valor1 As String = txtClaveNueva.Text
+  Dim valor2 As String = txtFiltroNueva.Text
+
+  ' Construir la consulta UPDATE
+  Dim Consulta As String
+  Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', citationKey= '" & valor2 & "' WHERE id= " & idReferencia
+
+  meConn.Exec(Consulta)
+
+  txtYearDup.Clear
+  txtDateDup.Clear
+  txtAuthorNueva.Clear
+  txtEditorNueva.Clear
+  txtTitleNueva.Clear
+  txtClaveNueva.Clear
+  txtFiltroNueva.Clear
 
 End

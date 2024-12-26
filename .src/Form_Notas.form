@@ -133,7 +133,6 @@
       NoTabFocus = True
       Expand = True
       Wrap = True
-      ScrollBar = Scroll.Vertical
     }
   }
 }

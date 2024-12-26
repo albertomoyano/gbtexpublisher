@@ -131,13 +131,16 @@ Public Sub gridBiblioteca_RowClick(Row As Integer)
   btnGuardarMod.Visible = True
   btnRefresh.Visible = True
 
-  txtIdBiblioteca.Text = gridBiblioteca[Row, 0].Text
-  txtArchivoTeX.Text = gridBiblioteca[Row, 1].Text
-  txtGitHub.Text = gridBiblioteca[Row, 2].Text
-  txtPDF.Text = gridBiblioteca[Row, 3].Text
-  txtFechaInicio.Text = gridBiblioteca[Row, 4].Text
-  txtFechaCierre.Text = gridBiblioteca[Row, 5].Text
-  txtEtiquetas.Text = gridBiblioteca[Row, 6].Text
+  ' Definir los índices de las columnas y los controles correspondientes
+  Dim Columnas As Integer[] = [0, 1, 2, 3, 4, 5, 6] ' Índices de las columnas
+  Dim TextBoxes As TextBox[] = [txtIdBiblioteca, txtArchivoTeX, txtGitHub, txtPDF, txtFechaInicio, txtFechaCierre, txtEtiquetas] ' TextBoxes correspondientes
+  Dim ComboBoxes As ComboBox[] = [] ' ComboBoxes correspondientes
+  Dim TextAreas As TextArea[] = [] ' TextAreas correspondientes
+  Dim TextAreasColumnas As Integer[] = [] ' Columnas asociadas a los TextAreas
+  Dim ComboBoxesColumnas As Integer[] = [] ' Columnas asociadas a los comboboxes
+
+  ' Llamada a la función genérica
+  Mod_Funciones.AsignarValoresDesdeGridView(gridBiblioteca, Row, Columnas, TextBoxes, ComboBoxes, TextAreas, TextAreasColumnas, ComboBoxesColumnas)
 
 End
 
