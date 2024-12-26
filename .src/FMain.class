@@ -2023,7 +2023,6 @@ Public Sub BtnEliminarBib_Click()
   Endif
 
   Mod_LimpiarTextBox.LimpiarCamposBIB()
-  ' VListaBIB.Clear()
   Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
 
   BtnEliminarBib.Visible = False
