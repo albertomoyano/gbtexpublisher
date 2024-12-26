@@ -2477,17 +2477,6 @@
           Spacing = True
           Margin = True
           Padding = 4
-          { HBox212 HBox
-            MoveScaled(1,0,34,4)
-            { btnRefrescarRefOrigen Button
-              MoveScaled(0,0,4,4)
-              ToolTip = ("Refrescar listado de la base de datos")
-              Picture = Picture["iconos/refrescar.svg"]
-            }
-            { Spring11 Spring
-              MoveScaled(11,0,4,4)
-            }
-          }
           { HBox19 HBox
             MoveScaled(1,4,36,4)
             { btnBuscarAuthorOrigen Button
@@ -2802,12 +2791,12 @@
               MoveScaled(20,0,12,4)
               Visible = False
             }
-            { txtDateDup TextBox
-              MoveScaled(53,0,16,4)
-              Visible = False
-            }
             { txtYearDup TextBox
               MoveScaled(34,0,16,4)
+              Visible = False
+            }
+            { txtDateDup TextBox
+              MoveScaled(53,0,16,4)
               Visible = False
             }
           }
