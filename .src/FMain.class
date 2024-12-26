@@ -5950,7 +5950,7 @@ End
 
 Public Sub btnDuplicar_Click()
 
-  Dim idSeleccionado As Integer
+  ' Dim idSeleccionado As Integer
 
   idSeleccionado = CInt(Trim(txtIdReferenciaDuplicada.Text))
 

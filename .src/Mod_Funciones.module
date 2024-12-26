@@ -277,7 +277,7 @@ Public Sub VerificarPorcentajeEnTexto(TextoOriginal As String) As String
 
 End
 
-Public Sub AsignarValoresDesdeGridView(GridView As GridView, Row As Integer, Columnas As Integer[], TextBoxes As TextBox[], ComboBoxes As ComboBox[], TextAreas As TextArea[], TextAreasColumnas As Integer[], ComboBoxesColumnas As Integer[])
+Public Sub AsignarValoresDesdeGridView(GridV As GridView, Row As Integer, Columnas As Integer[], TextBoxes As TextBox[], ComboBoxes As ComboBox[], TextAreas As TextArea[], TextAreasColumnas As Integer[], ComboBoxesColumnas As Integer[])
 
   Dim Columna As Integer
   Dim Valor As String
@@ -286,7 +286,7 @@ Public Sub AsignarValoresDesdeGridView(GridView As GridView, Row As Integer, Col
   For i As Integer = 0 To TextBoxes.Length - 1
     If i < Columnas.Length Then
       Columna = Columnas[i] ' Asignar el índice de la columna
-      Valor = GridView[Row, Columna].Text ' Obtener el valor de la celda
+      Valor = GridV[Row, Columna].Text ' Obtener el valor de la celda
       TextBoxes[i].Text = Valor
     End If
   Next
@@ -295,7 +295,7 @@ Public Sub AsignarValoresDesdeGridView(GridView As GridView, Row As Integer, Col
   For i As Integer = 0 To ComboBoxes.Length - 1
     If i < ComboBoxesColumnas.Length Then
       Columna = ComboBoxesColumnas[i] ' Usar el índice específico para TextAreas
-      Valor = GridView[Row, Columna].Text ' Obtener el valor de la celda
+      Valor = GridV[Row, Columna].Text ' Obtener el valor de la celda
       ' Forzar la conversión a cadena
       Valor = CStr(Valor)
       ' Asignar el valor al TextArea
@@ -307,7 +307,7 @@ Public Sub AsignarValoresDesdeGridView(GridView As GridView, Row As Integer, Col
   For i As Integer = 0 To TextAreas.Length - 1
     If i < TextAreasColumnas.Length Then
       Columna = TextAreasColumnas[i] ' Usar el índice específico para TextAreas
-      Valor = GridView[Row, Columna].Text ' Obtener el valor de la celda
+      Valor = GridV[Row, Columna].Text ' Obtener el valor de la celda
       ' Forzar la conversión a cadena
       Valor = CStr(Valor)
       ' Asignar el valor al TextArea
