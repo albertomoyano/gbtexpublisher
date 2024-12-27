@@ -168,15 +168,6 @@ Public Sub Form_Open()
   ' asignamos tipografia monoespaciada al textarea de biblio
   txtTMPbiblio.Font = Font["Monospace"]
 
-  Mostrar_ListaGLO()
-  Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
-  Mod_Funciones.Mostrar_ListaBIB(tblReferenciaOrigen)
-  Mod_Funciones.Mostrar_ListaBIB(tbRefDup)
-  Mod_Funciones.Mostrar_ListaBIB(griBibOriginal)
-  '
-  TotalEntradasBIByGLO()'actualizamos el contador de entradas
-  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-
   rentaTrabajo.Enabled = False' inicia formulario sin habilitar menu renta del trabajo
 
 End
@@ -697,6 +688,16 @@ Public Sub menuAbrir_Click()'abrir un libro
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
+  'cargamos datos en los gridview
+  Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
+  Mostrar_ListaGLO()
+  Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
+  Mod_Funciones.Mostrar_ListaBIB(tblReferenciaOrigen)
+  Mod_Funciones.Mostrar_ListaBIB(tbRefDup)
+  Mod_Funciones.Mostrar_ListaBIB(griBibOriginal)
+  TotalEntradasBIByGLO()'actualizamos el contador de entradas
+  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+
   'levantamos los datos de metadatos
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
@@ -998,6 +999,15 @@ Public Sub mnuLast_Click()
   MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
   Mod_LimpiarTextBox.LimpiarCamposBIB()
+
+  Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)' cargamos la biblio del archivo actual
+  Mostrar_ListaGLO()
+  Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
+  Mod_Funciones.Mostrar_ListaBIB(tblReferenciaOrigen)
+  Mod_Funciones.Mostrar_ListaBIB(tbRefDup)
+  Mod_Funciones.Mostrar_ListaBIB(griBibOriginal)
+  TotalEntradasBIByGLO()'actualizamos el contador de entradas
+  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
 
 End
 
@@ -2024,6 +2034,7 @@ Public Sub BtnEliminarBib_Click()
 
   Mod_LimpiarTextBox.LimpiarCamposBIB()
   Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
+  Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
 
   BtnEliminarBib.Visible = False
   btnGuardarCambios.Visible = False
@@ -2192,6 +2203,7 @@ Public Sub BtnRefrescarBib_Click()'refrescamos la vista
   Mod_LimpiarTextBox.LimpiarCamposBIB()
   ' VListaBIB.Clear
   Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
+  Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
 
 End
 
@@ -2406,159 +2418,141 @@ Public Sub guardarCampos()
 
 End
 
-Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
-
-  Dim Comando As String
-  Dim rowIndex As Integer
-
-  If BaseName = "" Then
-    Message.Warning("Debe introducir contenido a buscar.")
-    Return
-  Endif
-
-  Comando = "SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY author ASC"
-
-  Busqueda = meConn.Exec(Comando)
-
-  ' Limpia el Grid antes de mostrar los resultados de la búsqueda
-  VListaBIB.Clear()
-
-  'Si la búsqueda no arroja resultados
-  If Busqueda.Count = 0 Then
-    Message.Info("No se ha encontrado ningún resultado.")
-    Return
-  Endif
-
-  ' Configura las columnas en el Grid
-  VListaBIB.Columns.Count = 112
-
-  ' Inicializa rowIndex a 0
-  rowIndex = 0
-
-  While (Busqueda.Available)
-    ' Llena las celdas de la fila con los datos del resultado
-    VListaBIB[rowIndex, 0].Text = Busqueda!id
-    VListaBIB[rowIndex, 1].Text = Busqueda!tipoEntrada
-    VListaBIB[rowIndex, 2].Text = Busqueda!citationKey
-    VListaBIB[rowIndex, 3].Text = Busqueda!keywords
-    VListaBIB[rowIndex, 4].Text = Busqueda!author
-    VListaBIB[rowIndex, 5].Text = Busqueda!bookAuthor
-    VListaBIB[rowIndex, 6].Text = Busqueda!editor
-    VListaBIB[rowIndex, 7].Text = Busqueda!editorA
-    VListaBIB[rowIndex, 8].Text = Busqueda!editorB
-    VListaBIB[rowIndex, 9].Text = Busqueda!editorC
-    VListaBIB[rowIndex, 10].Text = Busqueda!afterword
-    VListaBIB[rowIndex, 11].Text = Busqueda!commentator
-    VListaBIB[rowIndex, 12].Text = Busqueda!translator
-    VListaBIB[rowIndex, 13].Text = Busqueda!holder
-    VListaBIB[rowIndex, 14].Text = Busqueda!shortAuthor
-    VListaBIB[rowIndex, 15].Text = Busqueda!editorType
-    VListaBIB[rowIndex, 16].Text = Busqueda!editorAtype
-    VListaBIB[rowIndex, 17].Text = Busqueda!editorBtype
-    VListaBIB[rowIndex, 18].Text = Busqueda!editorCtype
-    VListaBIB[rowIndex, 19].Text = Busqueda!foreword
-    VListaBIB[rowIndex, 20].Text = Busqueda!introduction
-    VListaBIB[rowIndex, 21].Text = Busqueda!annotator
-    VListaBIB[rowIndex, 22].Text = Busqueda!gender
-    VListaBIB[rowIndex, 23].Text = Busqueda!nameAddOn
-    VListaBIB[rowIndex, 24].Text = Busqueda!title
-    VListaBIB[rowIndex, 25].Text = Busqueda!shortTitle
-    VListaBIB[rowIndex, 26].Text = Busqueda!indexTitle
-    VListaBIB[rowIndex, 27].Text = Busqueda!bookTitle
-    VListaBIB[rowIndex, 28].Text = Busqueda!mainTitle
-    VListaBIB[rowIndex, 29].Text = Busqueda!journalTitle
-    VListaBIB[rowIndex, 30].Text = Busqueda!issueTitle
-    VListaBIB[rowIndex, 31].Text = Busqueda!eventTitle
-    VListaBIB[rowIndex, 32].Text = Busqueda!reprintTitle
-    VListaBIB[rowIndex, 33].Text = Busqueda!series
-    VListaBIB[rowIndex, 34].Text = Busqueda!bookTitleAddOn
-    VListaBIB[rowIndex, 35].Text = Busqueda!mainTitleAddOn
-    VListaBIB[rowIndex, 36].Text = Busqueda!journalTitleAddOn
-    VListaBIB[rowIndex, 37].Text = Busqueda!issueTitleAddOn
-    VListaBIB[rowIndex, 38].Text = Busqueda!eventTitleAddOn
-    VListaBIB[rowIndex, 39].Text = Busqueda!chapter
-    VListaBIB[rowIndex, 40].Text = Busqueda!volume
-    VListaBIB[rowIndex, 41].Text = Busqueda!edition
-    VListaBIB[rowIndex, 42].Text = Busqueda!pubState
-    VListaBIB[rowIndex, 43].Text = Busqueda!yearY
-    VListaBIB[rowIndex, 44].Text = Busqueda!dateD
-    VListaBIB[rowIndex, 45].Text = Busqueda!urlDate
-    VListaBIB[rowIndex, 46].Text = Busqueda!volumes
-    VListaBIB[rowIndex, 47].Text = Busqueda!part
-    VListaBIB[rowIndex, 48].Text = Busqueda!issue
-    VListaBIB[rowIndex, 49].Text = Busqueda!eventDate
-    VListaBIB[rowIndex, 50].Text = Busqueda!origDate
-    VListaBIB[rowIndex, 51].Text = Busqueda!version
-    VListaBIB[rowIndex, 52].Text = Busqueda!location
-    VListaBIB[rowIndex, 53].Text = Busqueda!publisher
-    VListaBIB[rowIndex, 54].Text = Busqueda!institution
-    VListaBIB[rowIndex, 55].Text = Busqueda!organization
-    VListaBIB[rowIndex, 56].Text = Busqueda!pages
-    VListaBIB[rowIndex, 57].Text = Busqueda!pagination
-    VListaBIB[rowIndex, 58].Text = Busqueda!hyphenation
-    VListaBIB[rowIndex, 59].Text = Busqueda!langId
-    VListaBIB[rowIndex, 60].Text = Busqueda!language
-    VListaBIB[rowIndex, 61].Text = Busqueda!origLocation
-    VListaBIB[rowIndex, 62].Text = Busqueda!origPublisher
-    VListaBIB[rowIndex, 63].Text = Busqueda!pageTotal
-    VListaBIB[rowIndex, 64].Text = Busqueda!venue
-    VListaBIB[rowIndex, 65].Text = Busqueda!bookPagination
-    VListaBIB[rowIndex, 66].Text = Busqueda!langIdOpts
-    VListaBIB[rowIndex, 67].Text = Busqueda!origLanguage
-    VListaBIB[rowIndex, 68].Text = Busqueda!isan
-    VListaBIB[rowIndex, 69].Text = Busqueda!isbn
-    VListaBIB[rowIndex, 70].Text = Busqueda!ismn
-    VListaBIB[rowIndex, 71].Text = Busqueda!isrn
-    VListaBIB[rowIndex, 72].Text = Busqueda!issn
-    VListaBIB[rowIndex, 73].Text = Busqueda!iswc
-    VListaBIB[rowIndex, 74].Text = Busqueda!url
-    VListaBIB[rowIndex, 75].Text = Busqueda!doi
-    VListaBIB[rowIndex, 76].Text = Busqueda!eid
-    VListaBIB[rowIndex, 77].Text = Busqueda!eprinttype
-    VListaBIB[rowIndex, 78].Text = Busqueda!eprint
-    VListaBIB[rowIndex, 79].Text = Busqueda!entrysubtype
-    VListaBIB[rowIndex, 80].Text = Busqueda!label
-    VListaBIB[rowIndex, 81].Text = Busqueda!howpublisher
-    VListaBIB[rowIndex, 82].Text = Busqueda!addendum
-    VListaBIB[rowIndex, 83].Text = Busqueda!shorthand
-    VListaBIB[rowIndex, 84].Text = Busqueda!shorthandintro
-    VListaBIB[rowIndex, 85].Text = Busqueda!etiquetas
-    VListaBIB[rowIndex, 86].Text = Busqueda!options
-    VListaBIB[rowIndex, 87].Text = Busqueda!ids
-    VListaBIB[rowIndex, 88].Text = Busqueda!related
-    VListaBIB[rowIndex, 89].Text = Busqueda!relatedType
-    VListaBIB[rowIndex, 90].Text = Busqueda!relatedString
-    VListaBIB[rowIndex, 91].Text = Busqueda!entryset
-    VListaBIB[rowIndex, 92].Text = Busqueda!crossref
-    VListaBIB[rowIndex, 93].Text = Busqueda!xref
-    VListaBIB[rowIndex, 94].Text = Busqueda!xdata
-    VListaBIB[rowIndex, 95].Text = Busqueda!presort
-    VListaBIB[rowIndex, 96].Text = Busqueda!sortkey
-    VListaBIB[rowIndex, 97].Text = Busqueda!sortname
-    VListaBIB[rowIndex, 98].Text = Busqueda!sortshorthand
-    VListaBIB[rowIndex, 99].Text = Busqueda!sorttitle
-    VListaBIB[rowIndex, 100].Text = Busqueda!indexsorttitle
-    VListaBIB[rowIndex, 101].Text = Busqueda!sortyear
-    VListaBIB[rowIndex, 102].Text = Busqueda!file
-    VListaBIB[rowIndex, 103].Text = Busqueda!abstract
-    VListaBIB[rowIndex, 104].Text = Busqueda!library
-    VListaBIB[rowIndex, 105].Text = Busqueda!note
-    VListaBIB[rowIndex, 106].Text = Busqueda!annotation
-    VListaBIB[rowIndex, 107].Text = Busqueda!number
-    VListaBIB[rowIndex, 108].Text = Busqueda!creationdate
-    VListaBIB[rowIndex, 109].Text = Busqueda!type
-    VListaBIB[rowIndex, 110].Text = Busqueda!titleaddon
-    VListaBIB[rowIndex, 111].Text = Busqueda!subtitle
-
-    ' Incrementa el valor de rowIndex para la siguiente fila
-    rowIndex = rowIndex + 1
-
-    Busqueda.MoveNext
-  Wend
-
-  VListaBIB.ScrollY = 0
-
-End
+' Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
+'
+'   Dim i As Integer
+'   Dim Contenido As Result
+'
+'   ' Limpiar el GridView
+'   VListaBIB.Clear()
+'
+'   ' Configurar las columnas
+'   Mod_Funciones.Configurar_Columnas(VListaBIB)
+'
+'   ' Ejecutar la consulta SQL
+'   Comando = "SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY author ASC"
+'
+'   ' Asignar la cantidad de filas según los datos
+'   VListaBIB.Rows.Count = Contenido.Count
+'
+'   ' Recorrer el resultado de la consulta y llenar el GridView
+'   For i = 0 To Contenido.Count - 1
+'     VListaBIB[i, 0].Text = Contenido!id
+'     VListaBIB[i, 1].Text = Contenido!tipoEntrada
+'     VListaBIB[i, 2].Text = Contenido!citationKey
+'     grid[i, 3].Text = Contenido!keywords
+'     grid[i, 4].Text = Contenido!author
+'     grid[i, 5].Text = Contenido!bookAuthor
+'     grid[i, 6].Text = Contenido!editor
+'     grid[i, 7].Text = Contenido!editorA
+'     grid[i, 8].Text = Contenido!editorB
+'     grid[i, 9].Text = Contenido!editorC
+'     grid[i, 10].Text = Contenido!afterword
+'     grid[i, 11].Text = Contenido!commentator
+'     grid[i, 12].Text = Contenido!translator
+'     grid[i, 13].Text = Contenido!holder
+'     grid[i, 14].Text = Contenido!shortAuthor
+'     grid[i, 15].Text = Contenido!editorType
+'     grid[i, 16].Text = Contenido!editorAtype
+'     grid[i, 17].Text = Contenido!editorBtype
+'     grid[i, 18].Text = Contenido!editorCtype
+'     grid[i, 19].Text = Contenido!foreword
+'     grid[i, 20].Text = Contenido!introduction
+'     grid[i, 21].Text = Contenido!annotator
+'     grid[i, 22].Text = Contenido!gender
+'     grid[i, 23].Text = Contenido!nameAddOn
+'     grid[i, 24].Text = Contenido!title
+'     grid[i, 25].Text = Contenido!shortTitle
+'     grid[i, 26].Text = Contenido!indexTitle
+'     grid[i, 27].Text = Contenido!bookTitle
+'     grid[i, 28].Text = Contenido!mainTitle
+'     grid[i, 29].Text = Contenido!journalTitle
+'     grid[i, 30].Text = Contenido!issueTitle
+'     grid[i, 31].Text = Contenido!eventTitle
+'     grid[i, 32].Text = Contenido!reprintTitle
+'     grid[i, 33].Text = Contenido!series
+'     grid[i, 34].Text = Contenido!bookTitleAddOn
+'     grid[i, 35].Text = Contenido!mainTitleAddOn
+'     grid[i, 36].Text = Contenido!journalTitleAddOn
+'     grid[i, 37].Text = Contenido!issueTitleAddOn
+'     grid[i, 38].Text = Contenido!eventTitleAddOn
+'     grid[i, 39].Text = Contenido!chapter
+'     grid[i, 40].Text = Contenido!volume
+'     grid[i, 41].Text = Contenido!edition
+'     grid[i, 42].Text = Contenido!pubState
+'     grid[i, 43].Text = Contenido!yearY
+'     grid[i, 44].Text = Contenido!dateD
+'     grid[i, 45].Text = Contenido!urlDate
+'     grid[i, 46].Text = Contenido!volumes
+'     grid[i, 47].Text = Contenido!part
+'     grid[i, 48].Text = Contenido!issue
+'     grid[i, 49].Text = Contenido!eventDate
+'     grid[i, 50].Text = Contenido!origDate
+'     grid[i, 51].Text = Contenido!version
+'     grid[i, 52].Text = Contenido!location
+'     grid[i, 53].Text = Contenido!publisher
+'     grid[i, 54].Text = Contenido!institution
+'     grid[i, 55].Text = Contenido!organization
+'     grid[i, 56].Text = Contenido!pages
+'     grid[i, 57].Text = Contenido!pagination
+'     grid[i, 58].Text = Contenido!hyphenation
+'     grid[i, 59].Text = Contenido!langId
+'     grid[i, 60].Text = Contenido!language
+'     grid[i, 61].Text = Contenido!origLocation
+'     grid[i, 62].Text = Contenido!origPublisher
+'     grid[i, 63].Text = Contenido!pageTotal
+'     grid[i, 64].Text = Contenido!venue
+'     grid[i, 65].Text = Contenido!bookPagination
+'     grid[i, 66].Text = Contenido!langIdOpts
+'     grid[i, 67].Text = Contenido!origLanguage
+'     grid[i, 68].Text = Contenido!isan
+'     grid[i, 69].Text = Contenido!isbn
+'     grid[i, 70].Text = Contenido!ismn
+'     grid[i, 71].Text = Contenido!isrn
+'     grid[i, 72].Text = Contenido!issn
+'     grid[i, 73].Text = Contenido!iswc
+'     grid[i, 74].Text = Contenido!url
+'     grid[i, 75].Text = Contenido!doi
+'     grid[i, 76].Text = Contenido!eid
+'     grid[i, 77].Text = Contenido!eprinttype
+'     grid[i, 78].Text = Contenido!eprint
+'     grid[i, 79].Text = Contenido!entrysubtype
+'     grid[i, 80].Text = Contenido!label
+'     grid[i, 81].Text = Contenido!howpublisher
+'     grid[i, 82].Text = Contenido!addendum
+'     grid[i, 83].Text = Contenido!shorthand
+'     grid[i, 84].Text = Contenido!shorthandintro
+'     grid[i, 85].Text = Contenido!etiquetas
+'     grid[i, 86].Text = Contenido!options
+'     grid[i, 87].Text = Contenido!ids
+'     grid[i, 88].Text = Contenido!related
+'     grid[i, 89].Text = Contenido!relatedType
+'     grid[i, 90].Text = Contenido!relatedString
+'     grid[i, 91].Text = Contenido!entryset
+'     grid[i, 92].Text = Contenido!crossref
+'     grid[i, 93].Text = Contenido!xref
+'     grid[i, 94].Text = Contenido!xdata
+'     grid[i, 95].Text = Contenido!presort
+'     grid[i, 96].Text = Contenido!sortkey
+'     grid[i, 97].Text = Contenido!sortname
+'     grid[i, 98].Text = Contenido!sortshorthand
+'     grid[i, 99].Text = Contenido!sorttitle
+'     grid[i, 100].Text = Contenido!indexsorttitle
+'     grid[i, 101].Text = Contenido!sortyear
+'     grid[i, 102].Text = Contenido!file
+'     grid[i, 103].Text = Contenido!abstract
+'     grid[i, 104].Text = Contenido!library
+'     grid[i, 105].Text = Contenido!note
+'     grid[i, 106].Text = Contenido!annotation
+'     grid[i, 107].Text = Contenido!number
+'     grid[i, 108].Text = Contenido!creationdate
+'     grid[i, 109].Text = Contenido!type
+'     grid[i, 110].Text = Contenido!titleaddon
+'     grid[i, 111].Text = Contenido!subtitle
+'     Contenido.MoveNext
+'   Next
+'
+' End
 
 Public Sub btnAgregarKeyBIB_Click()
 
@@ -3143,8 +3137,9 @@ Public Sub btnGuardarIGUAL_Click()
       Contenido.Update
       Message.Info("Nueva entrada guardada.")
 
-      Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
       Mod_LimpiarTextBox.LimpiarCamposBIB()
+      Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
+      Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
 
       btnGuardarCambios.Visible = False
       btnGuardar.Visible = False

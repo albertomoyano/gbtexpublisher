@@ -685,3 +685,140 @@ Public Sub Mostrar_ListaBIB(grid As GridView)
   Next
 
 End
+
+' Función para llenar el GridView con datos
+Public Sub Mostrar_ListaBibActual(grid As GridView)
+
+  Dim i As Integer
+  Dim Contenido As Result
+  Dim nombreArchivo As String = File.BaseName(FMain.TextBox1.Text)
+  ' Limpiar el GridView
+  grid.Clear()
+
+  ' Configurar las columnas
+  Configurar_Columnas(grid)
+
+  ' Ejecutar la consulta SQL
+  Contenido = FMain.meConn.Exec("SELECT * FROM bibtex WHERE keywords LIKE '%" & nombreArchivo & "%' ORDER BY id DESC;")'LIKE
+
+  ' Asignar la cantidad de filas según los datos
+  grid.Rows.Count = Contenido.Count
+
+  ' Recorrer el resultado de la consulta y llenar el GridView
+  For i = 0 To Contenido.Count - 1
+    grid[i, 0].Text = Contenido!id
+    grid[i, 1].Text = Contenido!tipoEntrada
+    grid[i, 2].Text = Contenido!citationKey
+    grid[i, 3].Text = Contenido!keywords
+    grid[i, 4].Text = Contenido!author
+    grid[i, 5].Text = Contenido!bookAuthor
+    grid[i, 6].Text = Contenido!editor
+    grid[i, 7].Text = Contenido!editorA
+    grid[i, 8].Text = Contenido!editorB
+    grid[i, 9].Text = Contenido!editorC
+    grid[i, 10].Text = Contenido!afterword
+    grid[i, 11].Text = Contenido!commentator
+    grid[i, 12].Text = Contenido!translator
+    grid[i, 13].Text = Contenido!holder
+    grid[i, 14].Text = Contenido!shortAuthor
+    grid[i, 15].Text = Contenido!editorType
+    grid[i, 16].Text = Contenido!editorAtype
+    grid[i, 17].Text = Contenido!editorBtype
+    grid[i, 18].Text = Contenido!editorCtype
+    grid[i, 19].Text = Contenido!foreword
+    grid[i, 20].Text = Contenido!introduction
+    grid[i, 21].Text = Contenido!annotator
+    grid[i, 22].Text = Contenido!gender
+    grid[i, 23].Text = Contenido!nameAddOn
+    grid[i, 24].Text = Contenido!title
+    grid[i, 25].Text = Contenido!shortTitle
+    grid[i, 26].Text = Contenido!indexTitle
+    grid[i, 27].Text = Contenido!bookTitle
+    grid[i, 28].Text = Contenido!mainTitle
+    grid[i, 29].Text = Contenido!journalTitle
+    grid[i, 30].Text = Contenido!issueTitle
+    grid[i, 31].Text = Contenido!eventTitle
+    grid[i, 32].Text = Contenido!reprintTitle
+    grid[i, 33].Text = Contenido!series
+    grid[i, 34].Text = Contenido!bookTitleAddOn
+    grid[i, 35].Text = Contenido!mainTitleAddOn
+    grid[i, 36].Text = Contenido!journalTitleAddOn
+    grid[i, 37].Text = Contenido!issueTitleAddOn
+    grid[i, 38].Text = Contenido!eventTitleAddOn
+    grid[i, 39].Text = Contenido!chapter
+    grid[i, 40].Text = Contenido!volume
+    grid[i, 41].Text = Contenido!edition
+    grid[i, 42].Text = Contenido!pubState
+    grid[i, 43].Text = Contenido!yearY
+    grid[i, 44].Text = Contenido!dateD
+    grid[i, 45].Text = Contenido!urlDate
+    grid[i, 46].Text = Contenido!volumes
+    grid[i, 47].Text = Contenido!part
+    grid[i, 48].Text = Contenido!issue
+    grid[i, 49].Text = Contenido!eventDate
+    grid[i, 50].Text = Contenido!origDate
+    grid[i, 51].Text = Contenido!version
+    grid[i, 52].Text = Contenido!location
+    grid[i, 53].Text = Contenido!publisher
+    grid[i, 54].Text = Contenido!institution
+    grid[i, 55].Text = Contenido!organization
+    grid[i, 56].Text = Contenido!pages
+    grid[i, 57].Text = Contenido!pagination
+    grid[i, 58].Text = Contenido!hyphenation
+    grid[i, 59].Text = Contenido!langId
+    grid[i, 60].Text = Contenido!language
+    grid[i, 61].Text = Contenido!origLocation
+    grid[i, 62].Text = Contenido!origPublisher
+    grid[i, 63].Text = Contenido!pageTotal
+    grid[i, 64].Text = Contenido!venue
+    grid[i, 65].Text = Contenido!bookPagination
+    grid[i, 66].Text = Contenido!langIdOpts
+    grid[i, 67].Text = Contenido!origLanguage
+    grid[i, 68].Text = Contenido!isan
+    grid[i, 69].Text = Contenido!isbn
+    grid[i, 70].Text = Contenido!ismn
+    grid[i, 71].Text = Contenido!isrn
+    grid[i, 72].Text = Contenido!issn
+    grid[i, 73].Text = Contenido!iswc
+    grid[i, 74].Text = Contenido!url
+    grid[i, 75].Text = Contenido!doi
+    grid[i, 76].Text = Contenido!eid
+    grid[i, 77].Text = Contenido!eprinttype
+    grid[i, 78].Text = Contenido!eprint
+    grid[i, 79].Text = Contenido!entrysubtype
+    grid[i, 80].Text = Contenido!label
+    grid[i, 81].Text = Contenido!howpublisher
+    grid[i, 82].Text = Contenido!addendum
+    grid[i, 83].Text = Contenido!shorthand
+    grid[i, 84].Text = Contenido!shorthandintro
+    grid[i, 85].Text = Contenido!etiquetas
+    grid[i, 86].Text = Contenido!options
+    grid[i, 87].Text = Contenido!ids
+    grid[i, 88].Text = Contenido!related
+    grid[i, 89].Text = Contenido!relatedType
+    grid[i, 90].Text = Contenido!relatedString
+    grid[i, 91].Text = Contenido!entryset
+    grid[i, 92].Text = Contenido!crossref
+    grid[i, 93].Text = Contenido!xref
+    grid[i, 94].Text = Contenido!xdata
+    grid[i, 95].Text = Contenido!presort
+    grid[i, 96].Text = Contenido!sortkey
+    grid[i, 97].Text = Contenido!sortname
+    grid[i, 98].Text = Contenido!sortshorthand
+    grid[i, 99].Text = Contenido!sorttitle
+    grid[i, 100].Text = Contenido!indexsorttitle
+    grid[i, 101].Text = Contenido!sortyear
+    grid[i, 102].Text = Contenido!file
+    grid[i, 103].Text = Contenido!abstract
+    grid[i, 104].Text = Contenido!library
+    grid[i, 105].Text = Contenido!note
+    grid[i, 106].Text = Contenido!annotation
+    grid[i, 107].Text = Contenido!number
+    grid[i, 108].Text = Contenido!creationdate
+    grid[i, 109].Text = Contenido!type
+    grid[i, 110].Text = Contenido!titleaddon
+    grid[i, 111].Text = Contenido!subtitle
+    Contenido.MoveNext
+  Next
+
+End

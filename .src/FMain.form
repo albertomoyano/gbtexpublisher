@@ -742,14 +742,14 @@
       }
     }
     { Panel3 Panel
-      MoveScaled(3,13,86,21)
+      MoveScaled(3,13,123,21)
       Arrangement = Arrange.Horizontal
       AutoResize = True
       { TabPanel5 TabPanel
-        MoveScaled(4,1,63,18)
+        MoveScaled(4,1,117,18)
         Expand = True
         Arrangement = Arrange.Fill
-        Count = 2
+        Count = 3
         Index = 0
         Text = ("     Caja de texto temporal     ")
         { txtTMPbiblio TextArea
@@ -760,9 +760,20 @@
           ScrollBar = Scroll.Vertical
         }
         Index = 1
-        Text = ("     Mostrar referencias bibliográficas     ")
+        Text = ("     Referencias bibliográficas (todas)     ")
         { VListaBIB TableView
-          MoveScaled(1,1,44,12)
+          MoveScaled(3,1,44,12)
+          Font = Font["-1"]
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          Resizable = False
+        }
+        Index = 2
+        Text = ("     Referencias bibliográficas (archivo en curso)     ")
+        { gridListaBIBactual TableView
+          MoveScaled(2,1,44,12)
           Font = Font["-1"]
           Expand = True
           Mode = Select.Single
