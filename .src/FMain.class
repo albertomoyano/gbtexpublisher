@@ -689,12 +689,12 @@ Public Sub menuAbrir_Click()'abrir un libro
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
   'cargamos datos en los gridview
-  Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
   Mostrar_ListaGLO()
   Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
   Mod_Funciones.Mostrar_ListaBIB(tblReferenciaOrigen)
   Mod_Funciones.Mostrar_ListaBIB(tbRefDup)
   Mod_Funciones.Mostrar_ListaBIB(griBibOriginal)
+  Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
   TotalEntradasBIByGLO()'actualizamos el contador de entradas
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
 

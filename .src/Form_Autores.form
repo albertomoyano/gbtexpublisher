@@ -43,7 +43,7 @@
       Move(360,0,126,36)
     }
   }
-  { TabStrip1 TabStrip
+  { TabStrip1 TabPanel
     Move(9,54,954,279)
     Expand = True
     Arrangement = Arrange.Vertical
@@ -52,7 +52,7 @@
     Padding = 4
     Count = 2
     Index = 0
-    Text = ("Autor")
+    Text = ("Autor/a     ")
     Picture = Picture["iconos/candado-abierto.svg"]
     { HBox2 HBox
       Move(9,9,549,36)
@@ -130,7 +130,7 @@
       }
     }
     Index = 1
-    Text = ("Filiación")
+    Text = ("Filiación     ")
     { HBox9 HBox
       Move(9,9,936,36)
       { lblAlta1 Label

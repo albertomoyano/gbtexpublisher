@@ -739,7 +739,7 @@
       }
       { Button1 Button
         MoveScaled(108,0,16,4)
-        ToolTip = ("Nos indica la cantidad de entradas del archivo actual")
+        ToolTip = ("Referencias bibliográficas (archivo en curso)")
         Picture = Picture["iconos/face.svg"]
       }
     }
@@ -763,7 +763,8 @@
           ScrollBar = Scroll.Vertical
         }
         Index = 1
-        Text = ("     Referencias bibliográficas (todas)     ")
+        Text = ("Referencias bibliográficas (todas)     ")
+        Picture = Picture["iconos/bibtex.svg"]
         { VListaBIB TableView
           MoveScaled(3,1,44,12)
           Font = Font["-1"]
@@ -774,7 +775,8 @@
           Resizable = False
         }
         Index = 2
-        Text = ("     Referencias bibliográficas (archivo en curso)     ")
+        Text = ("Referencias bibliográficas (archivo en curso)     ")
+        Picture = Picture["iconos/face.svg"]
         { gridListaBIBactual TableView
           MoveScaled(2,1,44,12)
           Font = Font["-1"]
@@ -3023,53 +3025,8 @@
         Expand = True
       }
     }
-    { HBox2 HBox
-      MoveScaled(1,39,121,4)
-      { btnBuscarClaveGLO Button
-        MoveScaled(0,0,4,4)
-        Picture = Picture["iconos/search.svg"]
-      }
-      { lblAlta2 Label
-        MoveScaled(10,0,12.4444,4)
-        Alignment = Align.Right
-        Text = ("Clave  ")
-      }
-      { btnAgregarGloKey Button
-        MoveScaled(33,0,4,4)
-        ToolTip = ("Agregar clave")
-        Picture = Picture["iconos/clave.svg"]
-      }
-      { txtCLAVEglo TextBox
-        MoveScaled(38,0,14,4)
-        NoTabFocus = True
-        ToolTip = ("Clave para ser utilizada solo con LaTeX")
-        Expand = True
-        Alignment = Align.Left
-        Placeholder = ("Clave GLO única")
-      }
-      { lblAlta3 Label
-        MoveScaled(53,0,21,4)
-        AutoResize = True
-        Alignment = Align.Right
-        Text = ("    Será exportado como:  ")
-      }
-      { txtEXPORTARglo TextLabel
-        MoveScaled(85,0,15,4)
-        Background = Color.Background
-        AutoResize = True
-        Alignment = Align.Normal
-        Wrap = False
-      }
-      { Separator7 Separator
-        MoveScaled(103,0,2.3333,4)
-      }
-      { btnParcialGLO Button
-        MoveScaled(106,0,16,4)
-        Picture = Picture["iconos/face.svg"]
-      }
-    }
     { ScrollView9 ScrollView
-      MoveScaled(1,45,107,42)
+      MoveScaled(1,46,124,42)
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
@@ -3077,8 +3034,53 @@
       Padding = 4
       Border = False
       ScrollBar = Scroll.Vertical
+      { HBox2 HBox
+        MoveScaled(0,0,121,4)
+        { btnBuscarClaveGLO Button
+          MoveScaled(0,0,4,4)
+          Picture = Picture["iconos/search.svg"]
+        }
+        { lblAlta2 Label
+          MoveScaled(10,0,12,4)
+          Alignment = Align.Right
+          Text = ("Clave  ")
+        }
+        { btnAgregarGloKey Button
+          MoveScaled(33,0,4,4)
+          ToolTip = ("Agregar clave")
+          Picture = Picture["iconos/clave.svg"]
+        }
+        { txtCLAVEglo TextBox
+          MoveScaled(38,0,14,4)
+          NoTabFocus = True
+          ToolTip = ("Clave para ser utilizada solo con LaTeX")
+          Expand = True
+          Alignment = Align.Left
+          Placeholder = ("Clave GLO única")
+        }
+        { lblAlta3 Label
+          MoveScaled(53,0,21,4)
+          AutoResize = True
+          Alignment = Align.Right
+          Text = ("    Será exportado como:  ")
+        }
+        { txtEXPORTARglo TextLabel
+          MoveScaled(85,0,15,4)
+          Background = Color.Background
+          AutoResize = True
+          Alignment = Align.Normal
+          Wrap = False
+        }
+        { Separator7 Separator
+          MoveScaled(103,0,2.3333,4)
+        }
+        { btnParcialGLO Button
+          MoveScaled(106,0,16,4)
+          Picture = Picture["iconos/face.svg"]
+        }
+      }
       { HBox17 HBox
-        MoveScaled(1,0,87,4)
+        MoveScaled(1,7,87,4)
         { btnBuscarNombreGLO Button
           MoveScaled(1,0,4,4)
           Picture = Picture["iconos/search.svg"]
@@ -3099,10 +3101,10 @@
         }
       }
       { HBox20 HBox
-        MoveScaled(1,4,87,4)
+        MoveScaled(1,11,87,4)
         { ButtonMostrarTextoGlo Button
           MoveScaled(1,0,4,4)
-          Text = ("") & "..."
+          Picture = Picture["iconos/schedule.svg"]
         }
         { Label12 Label
           MoveScaled(7,0,12,3.5556)
@@ -3118,7 +3120,7 @@
         }
       }
       { HBox5 HBox
-        MoveScaled(1,8,87,4)
+        MoveScaled(1,15,87,4)
         { Label7 Label
           MoveScaled(2,0,16,3.5556)
           Alignment = Align.Right
@@ -3133,7 +3135,7 @@
         }
       }
       { HBox10 HBox
-        MoveScaled(1,12,87,4)
+        MoveScaled(1,19,87,4)
         { btnBuscarTextoGLO Button
           MoveScaled(1,0,4,4)
           Picture = Picture["iconos/search.svg"]
@@ -3152,7 +3154,7 @@
         }
       }
       { HBox11 HBox
-        MoveScaled(1,16,87,4)
+        MoveScaled(1,23,87,4)
         { Label1 Label
           MoveScaled(2,0,16,3.5556)
           Alignment = Align.Right
@@ -3167,7 +3169,7 @@
         }
       }
       { HBox12 HBox
-        MoveScaled(1,20,87,4)
+        MoveScaled(1,27,87,4)
         { lblLANGID2 Label
           MoveScaled(0,0,16,4)
           Alignment = Align.Right
@@ -3182,7 +3184,7 @@
         }
       }
       { HBox13 HBox
-        MoveScaled(0,24,87,4)
+        MoveScaled(0,31,87,4)
         { lblLANGID1 Label
           MoveScaled(0,0,16,4)
           Alignment = Align.Right
@@ -3272,7 +3274,8 @@
       Padding = 4
       Count = 2
       Index = 0
-      Text = ("     Generales y obligatorios para todas las salidas de tipo libro     ")
+      Text = ("Generales y obligatorios para todas las salidas de tipo libro     ")
+      Picture = Picture["iconos/meta1.svg"]
       { ScrollView10 ScrollView
         MoveScaled(2,6,97,90)
         Expand = True
@@ -3515,7 +3518,8 @@
         }
       }
       Index = 1
-      Text = ("     Particulares a cada tipo de salida  de tipo libro     ")
+      Text = ("Particulares a cada tipo de salida  de tipo libro     ")
+      Picture = Picture["iconos/meta2.svg"]
       { ScrollView1 ScrollView
         MoveScaled(1,1,84,156)
         Expand = True
@@ -5077,16 +5081,18 @@
         Count = 2
         Highlight = True
         Index = 0
-        Text = ("     Autor(es) y colaboradores del libro     ")
+        Text = ("Autor(es) y colaboradores del libro     ")
+        Picture = Picture["iconos/autores.svg"]
         { TabStrip2 TabPanel
-          MoveScaled(1,1,114,33)
+          MoveScaled(2,2,114,33)
           Expand = True
           Arrangement = Arrange.Fill
           Border = False
           Count = 2
           Highlight = True
           Index = 0
-          Text = ("     Autoría     ")
+          Text = ("Autoría     ")
+          Picture = Picture["iconos/candado-abierto.svg"]
           { HBox200 VBox
             MoveScaled(1,2,111,16)
             Spacing = True
@@ -5177,7 +5183,8 @@
             }
           }
           Index = 1
-          Text = ("     Colaboraciones     ")
+          Text = ("Colaboraciones     ")
+          Picture = Picture["iconos/candado-abierto.svg"]
           { HBox216 VBox
             MoveScaled(0,0,111,16)
             Spacing = True
@@ -5270,7 +5277,8 @@
           Index = 0
         }
         Index = 1
-        Text = ("     Capítulos del libro     ")
+        Text = ("Capítulos del libro     ")
+        Picture = Picture["iconos/titulo.svg"]
         { HBox199 VBox
           MoveScaled(2,3,86,24)
           Spacing = True
@@ -5463,6 +5471,6 @@
     Index = 0
   }
   { Timer1 #Timer
-    #MoveScaled(117,9)
+    #MoveScaled(116,5)
   }
 }
