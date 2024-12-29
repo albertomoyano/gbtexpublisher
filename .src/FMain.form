@@ -508,7 +508,7 @@
     }
   }
   { TabPanel1 TabPanel
-    MoveScaled(2,13,162,365)
+    MoveScaled(1,25,162,365)
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -771,7 +771,7 @@
           Expand = True
           Mode = Select.Single
           ShowCursor = True
-          Header = GridView.Horizontal
+          Header = GridView.Both
           Resizable = False
         }
         Index = 2
@@ -805,7 +805,7 @@
       }
     }
     { TabPanel2 TabPanel
-      MoveScaled(2,41,125,66)
+      MoveScaled(1,39,155,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True
@@ -2491,18 +2491,18 @@
       Text = ("Relaciones     ")
       Picture = Picture["iconos/relacionar.svg"]
       { Splitter4 Splitter
-        MoveScaled(2,2,123,59)
+        MoveScaled(1,1,123,59)
         Expand = True
         Border = False
         { Panel4 Panel
-          MoveScaled(1,5,37,37)
+          MoveScaled(1,9,37,37)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
           Margin = True
           Padding = 4
           { HBox19 HBox
-            MoveScaled(1,4,36,4)
+            MoveScaled(-6,4,43,4)
             { btnBuscarAuthorOrigen Button
               MoveScaled(0,0,4,4)
               NoTabFocus = True
@@ -2517,6 +2517,10 @@
               MoveScaled(18,0,15,4)
               Expand = True
               Placeholder = ("Autor principal")
+            }
+            { txtIDRelacionOrigen TextBox
+              MoveScaled(35,0,8,4)
+              Visible = False
             }
           }
           { HBox196 HBox
@@ -2560,16 +2564,13 @@
             Header = GridView.Horizontal
           }
         }
-        { ScrollView11 ScrollView
-          MoveScaled(40,1,102,50)
+        { Panel6 Panel
+          MoveScaled(39,9,77,44)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
           Margin = True
           Padding = 4
-          Border = False
-          ScrollBar = Scroll.Vertical
-          Shadow = True
           { HBox188 HBox
             MoveScaled(0,0,51,4)
             { btnGuardarRelacion Button
@@ -2624,25 +2625,25 @@
             }
           }
           { HBox185 HBox
-            MoveScaled(0,12,97,4)
+            MoveScaled(0,12,76,4)
             { btnAgregarKeyBIBtwo Button
               MoveScaled(1,0,4,4)
               ToolTip = ("Agregar clave")
               Picture = Picture["iconos/clave.svg"]
             }
             { Label132 Label
-              MoveScaled(9,0,12,3.5556)
+              MoveScaled(6,0,12,4)
               Alignment = Align.Right
               Text = ("Filtro ")
             }
             { txtFILTROrelacion TextBox
-              MoveScaled(32,0,17,4)
+              MoveScaled(22,0,17,4)
               NoTabFocus = True
               Expand = True
             }
           }
           { HBox218 HBox
-            MoveScaled(0,20,78,4)
+            MoveScaled(0,16,76,4)
             { Label136 Label
               MoveScaled(0,0,16,4)
               #Translate = False
@@ -2669,7 +2670,7 @@
             }
           }
           { HBox204 HBox
-            MoveScaled(0,24,78,4)
+            MoveScaled(0,20,73,4)
             { lblRELATEDSTRING15 Label
               MoveScaled(1,0,16,4)
               #Translate = False
@@ -2695,7 +2696,7 @@
             }
           }
           { tbRefDup TableView
-            MoveScaled(1,33,27,9)
+            MoveScaled(4,30,27,9)
             Font = Font["-1"]
             Expand = True
             Mode = Select.Single
@@ -2709,7 +2710,7 @@
       Text = ("Duplicar     ")
       Picture = Picture["iconos/duplicar.svg"]
       { Splitter5 Splitter
-        MoveScaled(0,0,123,59)
+        MoveScaled(1,1,123,59)
         Expand = True
         Border = False
         { Panel5 Panel
@@ -2727,16 +2728,16 @@
               Picture = Picture["iconos/search.svg"]
             }
             { Label161 Label
-              MoveScaled(5,0,12,4)
+              MoveScaled(2,0,12,4)
               Alignment = Align.Right
               Text = ("Author ")
             }
             { txtAuthorOriginal TextBox
-              MoveScaled(18,0,15,4)
+              MoveScaled(15,0,10,4)
               Expand = True
             }
             { txtIdReferenciaDuplicada TextBox
-              MoveScaled(34,0,12,4)
+              MoveScaled(26,0,12,4)
               Visible = False
             }
           }
@@ -2787,7 +2788,7 @@
           }
         }
         { ScrollView13 ScrollView
-          MoveScaled(39,3,102,43)
+          MoveScaled(41,3,102,43)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -2804,7 +2805,7 @@
               ToolTip = ("Guardar")
               Picture = Picture["iconos/exportar.svg"]
             }
-            { btnGuardarRelacion2 Button
+            { btnGuardarDuplicado Button
               MoveScaled(5,0,4,4)
               ToolTip = ("Guardar")
               Picture = Picture["iconos/guardarComo.svg"]
