@@ -1827,7 +1827,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
       s &= "\t\t <a href=\"" & ContenidoGHP[gFields[6]] & "\" target=\"_blank\">Leer en línea</a>" & gb.NewLine
     End If
     s &= "\t\t </div>" & gb.NewLine
-    s &= "<h3 style=\"font-weight: normal\">" & ContenidoGHP[gFields[12]] & "</h3>" & gb.NewLine
+    s &= "<h3 style=\"font-weight: normal\">Autoría</h3>" & gb.NewLine
 
     While ContenidoAutoresA.Available
       ' Verificar si aFields[3] es Null o está vacío

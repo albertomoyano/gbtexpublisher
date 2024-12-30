@@ -5131,7 +5131,7 @@
         Text = ("Autor(es) y colaboradores del libro     ")
         Picture = Picture["iconos/autores.svg"]
         { TabStrip2 TabPanel
-          MoveScaled(2,3,114,30)
+          MoveScaled(2,3,114,32)
           Expand = True
           Arrangement = Arrange.Fill
           Spacing = True
@@ -5143,9 +5143,36 @@
           Text = ("Autoría     ")
           Picture = Picture["iconos/candado-abierto.svg"]
           { HBox200 VBox
-            MoveScaled(1,2,111,21)
+            MoveScaled(1,0,111,26)
+            { HBox227 HBox
+              MoveScaled(1,0,110,4)
+              { btnNuevoAutor Button
+                MoveScaled(0,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/+nuevo.svg"]
+              }
+              { btnGuardarAutor Button
+                MoveScaled(4,0,4,4)
+                Picture = Picture["iconos/guardar.svg"]
+              }
+              { btnGuardarCambiosAutor Button
+                MoveScaled(8,0,4,4)
+                Picture = Picture["iconos/guardarComo.svg"]
+              }
+              { btnBorrarAutor Button
+                MoveScaled(13,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/borrar.svg"]
+              }
+              { Spring12 Spring
+                MoveScaled(31,0,19,4)
+              }
+            }
+            { HBox228 HBox
+              MoveScaled(1,5,110,0.4444)
+            }
             { HBox201 HBox
-              MoveScaled(1,2,110,4)
+              MoveScaled(1,7,110,4)
               { Label150 Label
                 MoveScaled(4,0,22.5556,4)
                 Alignment = Align.Right
@@ -5155,24 +5182,6 @@
                 MoveScaled(23,0,20,4)
                 Expand = True
                 ReadOnly = True
-              }
-              { btnNuevoAutor Button
-                MoveScaled(44,0,4,4)
-                NoTabFocus = True
-                Picture = Picture["iconos/+nuevo.svg"]
-              }
-              { btnGuardarAutor Button
-                MoveScaled(48,0,4,4)
-                Picture = Picture["iconos/guardar.svg"]
-              }
-              { btnGuardarCambiosAutor Button
-                MoveScaled(52,0,4,4)
-                Picture = Picture["iconos/guardarComo.svg"]
-              }
-              { btnBorrarAutor Button
-                MoveScaled(57,0,4,4)
-                NoTabFocus = True
-                Picture = Picture["iconos/borrar.svg"]
               }
               { txtnombreAutorGHP TextLabel
                 MoveScaled(61,0,16,4)
@@ -5188,10 +5197,10 @@
               }
             }
             { HBox212 HBox
-              MoveScaled(1,7,110,0.4444)
+              MoveScaled(1,12,110,0.4444)
             }
             { HBox203 HBox
-              MoveScaled(1,8,110,4)
+              MoveScaled(1,13,110,4)
               { Label149 Label
                 MoveScaled(5,0,22.5556,4)
                 Alignment = Align.Right
@@ -5222,10 +5231,10 @@
               }
             }
             { HBox219 HBox
-              MoveScaled(1,13,110,0.4444)
+              MoveScaled(1,18,110,0.4444)
             }
             { tblAutores TableView
-              MoveScaled(1,14,27,12)
+              MoveScaled(1,19,27,12)
               Expand = True
               Mode = Select.Single
               ShowCursor = True
@@ -5239,36 +5248,45 @@
           Text = ("Colaboraciones     ")
           Picture = Picture["iconos/candado-abierto.svg"]
           { HBox216 VBox
-            MoveScaled(1,2,111,21)
+            MoveScaled(1,1,111,26)
+            { HBox225 HBox
+              MoveScaled(1,0,110,4)
+              { btnNuevoColaborador Button
+                MoveScaled(0,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/+nuevo.svg"]
+              }
+              { btnGuardarColaborador Button
+                MoveScaled(4,0,4,4)
+                Picture = Picture["iconos/guardar.svg"]
+              }
+              { btnGuardarCambiosColaborador Button
+                MoveScaled(8,0,4,4)
+                Picture = Picture["iconos/guardarComo.svg"]
+              }
+              { btnBorrarColaborador Button
+                MoveScaled(13,0,4,4)
+                NoTabFocus = True
+                Picture = Picture["iconos/borrar.svg"]
+              }
+              { Spring11 Spring
+                MoveScaled(32,0,13,4)
+              }
+            }
+            { HBox221 HBox
+              MoveScaled(2,5,110,0.4444)
+            }
             { HBox217 HBox
-              MoveScaled(2,0,110,4)
+              MoveScaled(2,6,110,4)
               { Label229 Label
                 MoveScaled(3,0,22.5556,4)
                 Alignment = Align.Right
                 Text = ("Rol  ")
               }
               { cmbRolColaborador ComboBox
-                MoveScaled(23,0,20,4)
+                MoveScaled(28,0,20,4)
                 Expand = True
                 ReadOnly = True
-              }
-              { btnNuevoColaborador Button
-                MoveScaled(44,0,4,4)
-                NoTabFocus = True
-                Picture = Picture["iconos/+nuevo.svg"]
-              }
-              { btnGuardarColaborador Button
-                MoveScaled(48,0,4,4)
-                Picture = Picture["iconos/guardar.svg"]
-              }
-              { btnGuardarCambiosColaborador Button
-                MoveScaled(52,0,4,4)
-                Picture = Picture["iconos/guardarComo.svg"]
-              }
-              { btnBorrarColaborador Button
-                MoveScaled(57,0,4,4)
-                NoTabFocus = True
-                Picture = Picture["iconos/borrar.svg"]
               }
               { txtnombreColaboradorGHP TextLabel
                 MoveScaled(61,0,23,4)
@@ -5283,11 +5301,11 @@
                 Alignment = Align.Normal
               }
             }
-            { HBox221 HBox
-              MoveScaled(2,5,110,0.4444)
+            { HBox220 HBox
+              MoveScaled(2,11,110,0.4444)
             }
             { HBox267 HBox
-              MoveScaled(2,6,110,4)
+              MoveScaled(2,12,110,4)
               { Label230 Label
                 MoveScaled(3,0,22.5556,4)
                 Alignment = Align.Right
@@ -5317,11 +5335,11 @@
                 Expand = True
               }
             }
-            { HBox220 HBox
-              MoveScaled(2,11,110,0.4444)
+            { HBox226 HBox
+              MoveScaled(2,17,110,0.4444)
             }
             { tblColaboradores TableView
-              MoveScaled(2,12,27,12)
+              MoveScaled(2,19,27,12)
               Expand = True
               Mode = Select.Single
               ShowCursor = True
