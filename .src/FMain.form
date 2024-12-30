@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,165,390)
+  MoveScaled(0,0,165,335)
   Expand = True
   Icon = Picture["iconos/icono-gbtex.svg"]
   Maximized = True
@@ -508,7 +508,7 @@
     }
   }
   { TabPanel1 TabPanel
-    MoveScaled(1,26,162,365)
+    MoveScaled(1,13,162,96)
     Enabled = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -2698,7 +2698,6 @@
             Mode = Select.Single
             ShowCursor = True
             Header = GridView.Horizontal
-            AutoResize = False
           }
         }
       }
@@ -2774,13 +2773,12 @@
             }
           }
           { griBibOriginal TableView
-            MoveScaled(0,12,27,9)
+            MoveScaled(0,14,27,9)
             Font = Font["-1"]
             Expand = True
             Mode = Select.Single
             ShowCursor = True
             Header = GridView.Horizontal
-            AutoResize = False
           }
         }
         { ScrollView13 ScrollView
@@ -4831,7 +4829,6 @@
           Mode = Select.Single
           ShowCursor = True
           Header = GridView.Horizontal
-          AutoResize = False
           Resizable = False
         }
         { HBox172 HBox
@@ -4881,7 +4878,6 @@
           Mode = Select.Single
           ShowCursor = True
           Header = GridView.Horizontal
-          AutoResize = False
           Resizable = False
         }
         { HBox183 HBox
@@ -4949,14 +4945,13 @@
       }
       { txtnombreArchivoGHP TextLabel
         MoveScaled(79,0,20,4)
-        Background = Color.Background
         AutoResize = True
         Alignment = Align.Normal
         Wrap = False
       }
     }
     { ScrollView12 ScrollView
-      MoveScaled(0,6,123,92)
+      MoveScaled(2,7,123,75)
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
@@ -4967,7 +4962,7 @@
       { HBox189 HBox
         MoveScaled(1,0,115,4)
         { Label145 Label
-          MoveScaled(0,0,23,4)
+          MoveScaled(-3,0,23,4)
           Alignment = Align.Right
           Text = ("Fecha de publicación  ")
         }
@@ -5005,7 +5000,7 @@
         }
       }
       { HBox194 HBox
-        MoveScaled(1,4,106,4)
+        MoveScaled(5,4,106,4)
         { Label142 Label
           MoveScaled(0,0,23,4)
           Alignment = Align.Right
@@ -5125,33 +5120,35 @@
         }
       }
       { TabPanel4 TabPanel
-        MoveScaled(2,29,116,46)
+        MoveScaled(2,29,119,41)
         Expand = True
         Arrangement = Arrange.Fill
+        Spacing = True
+        Margin = True
+        Padding = 4
         Count = 2
         Highlight = True
         Index = 0
         Text = ("Autor(es) y colaboradores del libro     ")
         Picture = Picture["iconos/autores.svg"]
         { TabStrip2 TabPanel
-          MoveScaled(2,2,114,33)
+          MoveScaled(2,3,114,30)
           Expand = True
           Arrangement = Arrange.Fill
-          Border = False
+          Spacing = True
+          Margin = True
+          Padding = 4
           Count = 2
           Highlight = True
           Index = 0
           Text = ("Autoría     ")
           Picture = Picture["iconos/candado-abierto.svg"]
           { HBox200 VBox
-            MoveScaled(1,2,111,16)
-            Spacing = True
-            Margin = True
-            Padding = 4
+            MoveScaled(1,2,111,21)
             { HBox201 HBox
-              MoveScaled(0,0,110,4)
+              MoveScaled(1,2,110,4)
               { Label150 Label
-                MoveScaled(0,0,22.5556,4)
+                MoveScaled(4,0,22.5556,4)
                 Alignment = Align.Right
                 Text = ("Rol  ")
               }
@@ -5179,22 +5176,25 @@
                 Picture = Picture["iconos/borrar.svg"]
               }
               { txtnombreAutorGHP TextLabel
-                MoveScaled(61,0,23,4)
+                MoveScaled(61,0,16,4)
                 Visible = False
                 Enabled = False
                 Alignment = Align.Normal
               }
               { txtIdAutorNuevo TextLabel
-                MoveScaled(84,0,18,4)
+                MoveScaled(80,0,18,4)
                 Visible = False
                 Enabled = False
                 Alignment = Align.Normal
               }
             }
+            { HBox212 HBox
+              MoveScaled(1,7,110,0.4444)
+            }
             { HBox203 HBox
-              MoveScaled(0,4,110,4)
+              MoveScaled(1,8,110,4)
               { Label149 Label
-                MoveScaled(0,0,22.5556,4)
+                MoveScaled(5,0,22.5556,4)
                 Alignment = Align.Right
                 Text = ("Autor  ")
               }
@@ -5222,13 +5222,17 @@
                 Expand = True
               }
             }
+            { HBox219 HBox
+              MoveScaled(1,13,110,0.4444)
+            }
             { tblAutores TableView
-              MoveScaled(1,8,27,8)
+              MoveScaled(1,14,27,12)
               Expand = True
               Mode = Select.Single
               ShowCursor = True
               Header = GridView.Horizontal
               ScrollBar = Scroll.Vertical
+              AutoResize = False
               Resizable = False
             }
           }
@@ -5236,14 +5240,12 @@
           Text = ("Colaboraciones     ")
           Picture = Picture["iconos/candado-abierto.svg"]
           { HBox216 VBox
-            MoveScaled(0,0,111,16)
+            MoveScaled(1,2,111,21)
             Spacing = True
-            Margin = True
-            Padding = 4
             { HBox217 HBox
               MoveScaled(0,0,110,4)
               { Label229 Label
-                MoveScaled(0,0,22.5556,4)
+                MoveScaled(3,0,22.5556,4)
                 Alignment = Align.Right
                 Text = ("Rol  ")
               }
@@ -5315,12 +5317,13 @@
               }
             }
             { tblColaboradores TableView
-              MoveScaled(1,8,27,8)
+              MoveScaled(2,8,27,12)
               Expand = True
               Mode = Select.Single
               ShowCursor = True
               Header = GridView.Horizontal
               ScrollBar = Scroll.Vertical
+              AutoResize = False
               Resizable = False
             }
           }
@@ -5330,10 +5333,8 @@
         Text = ("Capítulos del libro     ")
         Picture = Picture["iconos/titulo.svg"]
         { HBox199 VBox
-          MoveScaled(2,3,86,24)
+          MoveScaled(3,4,86,30)
           Spacing = True
-          Margin = True
-          Padding = 4
           { HBox198 HBox
             MoveScaled(1,0,80,4)
             { btnNuevoCapitulo Button
@@ -5409,12 +5410,14 @@
             }
           }
           { tblArticulos TableView
-            MoveScaled(1,13,19,10)
+            MoveScaled(1,13,19,12)
             Expand = True
             Mode = Select.Single
+            Padding = 0
             ShowCursor = True
             Header = GridView.Horizontal
             ScrollBar = Scroll.Vertical
+            AutoResize = False
           }
         }
         Index = 0
