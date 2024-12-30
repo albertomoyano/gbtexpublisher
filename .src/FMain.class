@@ -147,7 +147,6 @@ Public Sub Form_Open()
   btnGuardarCambios.Visible = False
   btnGuardarIGUAL.Visible = False
   btnAgregarCitationKey.Visible = False
-  BtnRefrescarBib.Visible = False
 
   ' botonera de githubpages de inicio
   BtnNuevoGHP.Visible = True
@@ -709,7 +708,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
 
   ' Ejecutar la consulta SQL
-  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY author ASC")
+  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
   ' refrescamos los datos en los grid del archivo en curso
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
   tblReferenciaOrigen.Rows.Count = ContenidoBibActual.Count
@@ -900,7 +899,7 @@ Public Sub mnuLast_Click()
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
   ' Ejecutar la consulta SQL
-  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY author ASC")
+  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
   ' refrescamos los datos en los grid del archivo en curso
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
   tblReferenciaOrigen.Rows.Count = ContenidoBibActual.Count
@@ -1544,6 +1543,7 @@ Public Sub btnGuardarGlo_Click()
 
   Contenido.Update
   Message.Info("Nueva entrada guardada.")
+  RefrescarGrid()
 
   ' Mostrar_ListaGLO ' Refrescamos la lista de entradas
   Mod_LimpiarTextBox.LimpiarCamposGLO()
@@ -1570,6 +1570,7 @@ Public Sub btnGuardarCambiosGlo_Click()
   Contenido = meConn.Edit("glosarios", "id=" & txtIDglosario.Text)
   guardarCamposGLO
   Contenido.Update
+  RefrescarGrid()
   Message.Info("Los cambios se guardaron con éxito.")
 
   ' Mostrar_ListaGLO
@@ -2049,7 +2050,7 @@ Public Sub BtnEliminarBib_Click()
   Endif
 
   Mod_LimpiarTextBox.LimpiarCamposBIB()
-  Mod_Funciones.VerBibTeXenVListaBIB()' refrescamos el grid principal
+  RefrescarGrid()
 
   BtnEliminarBib.Visible = False
   btnGuardarCambios.Visible = False
@@ -2115,6 +2116,7 @@ Public Sub btnGuardarCambios_Click()
   Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
   guardarCampos()
   Contenido.Update
+  RefrescarGrid()
   Message.Info("Los cambios se guardaron con éxito.")
 
   Mod_LimpiarTextBox.LimpiarCamposBIB()
@@ -2172,6 +2174,7 @@ Public Sub btnGuardar_Click()
     Contenido = meConn.Create("bibtex")
     guardarCampos()
     Contenido.Update
+    RefrescarGrid()
     Message.Info("Nueva entrada guardada.")
     Mod_LimpiarTextBox.LimpiarCamposBIB()
     txtTMPbiblio.Clear 'limpiamos el campo temporal
@@ -2201,24 +2204,6 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
     CargarDatos(Consulta, VListaBIB)
     TabPanel5.Index = 1
   Endif
-
-End
-
-Public Sub BtnRefrescarBib_Click()'refrescamos la vista
-
-  BtnNuevoBib.Visible = True
-  BtnEliminarBib.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarCambios.Visible = False
-  btnAgregarCitationKey.Visible = False
-  btnGuardarIGUAL.Visible = False
-  btnAgregarKeyBIB.Visible = False
-  BtnRefrescarBib.Visible = False
-
-  Mod_LimpiarTextBox.LimpiarCamposBIB()
-  ' VListaBIB.Clear
-  ' Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
-  ' Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
 
 End
 
@@ -2432,142 +2417,6 @@ Public Sub guardarCampos()
   Contenido!subtitle = txtSubTitle.Text
 
 End
-
-' Public Sub Button1_Click()'visualizar las entradas del archivo en proceso
-'
-'   Dim i As Integer
-'   Dim Contenido As Result
-'
-'   ' Limpiar el GridView
-'   VListaBIB.Clear()
-'
-'   ' Configurar las columnas
-'   Mod_Funciones.Configurar_Columnas(VListaBIB)
-'
-'   ' Ejecutar la consulta SQL
-'   Comando = "SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY author ASC"
-'
-'   ' Asignar la cantidad de filas según los datos
-'   VListaBIB.Rows.Count = Contenido.Count
-'
-'   ' Recorrer el resultado de la consulta y llenar el GridView
-'   For i = 0 To Contenido.Count - 1
-'     VListaBIB[i, 0].Text = Contenido!id
-'     VListaBIB[i, 1].Text = Contenido!tipoEntrada
-'     VListaBIB[i, 2].Text = Contenido!citationKey
-'     grid[i, 3].Text = Contenido!keywords
-'     grid[i, 4].Text = Contenido!author
-'     grid[i, 5].Text = Contenido!bookAuthor
-'     grid[i, 6].Text = Contenido!editor
-'     grid[i, 7].Text = Contenido!editorA
-'     grid[i, 8].Text = Contenido!editorB
-'     grid[i, 9].Text = Contenido!editorC
-'     grid[i, 10].Text = Contenido!afterword
-'     grid[i, 11].Text = Contenido!commentator
-'     grid[i, 12].Text = Contenido!translator
-'     grid[i, 13].Text = Contenido!holder
-'     grid[i, 14].Text = Contenido!shortAuthor
-'     grid[i, 15].Text = Contenido!editorType
-'     grid[i, 16].Text = Contenido!editorAtype
-'     grid[i, 17].Text = Contenido!editorBtype
-'     grid[i, 18].Text = Contenido!editorCtype
-'     grid[i, 19].Text = Contenido!foreword
-'     grid[i, 20].Text = Contenido!introduction
-'     grid[i, 21].Text = Contenido!annotator
-'     grid[i, 22].Text = Contenido!gender
-'     grid[i, 23].Text = Contenido!nameAddOn
-'     grid[i, 24].Text = Contenido!title
-'     grid[i, 25].Text = Contenido!shortTitle
-'     grid[i, 26].Text = Contenido!indexTitle
-'     grid[i, 27].Text = Contenido!bookTitle
-'     grid[i, 28].Text = Contenido!mainTitle
-'     grid[i, 29].Text = Contenido!journalTitle
-'     grid[i, 30].Text = Contenido!issueTitle
-'     grid[i, 31].Text = Contenido!eventTitle
-'     grid[i, 32].Text = Contenido!reprintTitle
-'     grid[i, 33].Text = Contenido!series
-'     grid[i, 34].Text = Contenido!bookTitleAddOn
-'     grid[i, 35].Text = Contenido!mainTitleAddOn
-'     grid[i, 36].Text = Contenido!journalTitleAddOn
-'     grid[i, 37].Text = Contenido!issueTitleAddOn
-'     grid[i, 38].Text = Contenido!eventTitleAddOn
-'     grid[i, 39].Text = Contenido!chapter
-'     grid[i, 40].Text = Contenido!volume
-'     grid[i, 41].Text = Contenido!edition
-'     grid[i, 42].Text = Contenido!pubState
-'     grid[i, 43].Text = Contenido!yearY
-'     grid[i, 44].Text = Contenido!dateD
-'     grid[i, 45].Text = Contenido!urlDate
-'     grid[i, 46].Text = Contenido!volumes
-'     grid[i, 47].Text = Contenido!part
-'     grid[i, 48].Text = Contenido!issue
-'     grid[i, 49].Text = Contenido!eventDate
-'     grid[i, 50].Text = Contenido!origDate
-'     grid[i, 51].Text = Contenido!version
-'     grid[i, 52].Text = Contenido!location
-'     grid[i, 53].Text = Contenido!publisher
-'     grid[i, 54].Text = Contenido!institution
-'     grid[i, 55].Text = Contenido!organization
-'     grid[i, 56].Text = Contenido!pages
-'     grid[i, 57].Text = Contenido!pagination
-'     grid[i, 58].Text = Contenido!hyphenation
-'     grid[i, 59].Text = Contenido!langId
-'     grid[i, 60].Text = Contenido!language
-'     grid[i, 61].Text = Contenido!origLocation
-'     grid[i, 62].Text = Contenido!origPublisher
-'     grid[i, 63].Text = Contenido!pageTotal
-'     grid[i, 64].Text = Contenido!venue
-'     grid[i, 65].Text = Contenido!bookPagination
-'     grid[i, 66].Text = Contenido!langIdOpts
-'     grid[i, 67].Text = Contenido!origLanguage
-'     grid[i, 68].Text = Contenido!isan
-'     grid[i, 69].Text = Contenido!isbn
-'     grid[i, 70].Text = Contenido!ismn
-'     grid[i, 71].Text = Contenido!isrn
-'     grid[i, 72].Text = Contenido!issn
-'     grid[i, 73].Text = Contenido!iswc
-'     grid[i, 74].Text = Contenido!url
-'     grid[i, 75].Text = Contenido!doi
-'     grid[i, 76].Text = Contenido!eid
-'     grid[i, 77].Text = Contenido!eprinttype
-'     grid[i, 78].Text = Contenido!eprint
-'     grid[i, 79].Text = Contenido!entrysubtype
-'     grid[i, 80].Text = Contenido!label
-'     grid[i, 81].Text = Contenido!howpublisher
-'     grid[i, 82].Text = Contenido!addendum
-'     grid[i, 83].Text = Contenido!shorthand
-'     grid[i, 84].Text = Contenido!shorthandintro
-'     grid[i, 85].Text = Contenido!etiquetas
-'     grid[i, 86].Text = Contenido!options
-'     grid[i, 87].Text = Contenido!ids
-'     grid[i, 88].Text = Contenido!related
-'     grid[i, 89].Text = Contenido!relatedType
-'     grid[i, 90].Text = Contenido!relatedString
-'     grid[i, 91].Text = Contenido!entryset
-'     grid[i, 92].Text = Contenido!crossref
-'     grid[i, 93].Text = Contenido!xref
-'     grid[i, 94].Text = Contenido!xdata
-'     grid[i, 95].Text = Contenido!presort
-'     grid[i, 96].Text = Contenido!sortkey
-'     grid[i, 97].Text = Contenido!sortname
-'     grid[i, 98].Text = Contenido!sortshorthand
-'     grid[i, 99].Text = Contenido!sorttitle
-'     grid[i, 100].Text = Contenido!indexsorttitle
-'     grid[i, 101].Text = Contenido!sortyear
-'     grid[i, 102].Text = Contenido!file
-'     grid[i, 103].Text = Contenido!abstract
-'     grid[i, 104].Text = Contenido!library
-'     grid[i, 105].Text = Contenido!note
-'     grid[i, 106].Text = Contenido!annotation
-'     grid[i, 107].Text = Contenido!number
-'     grid[i, 108].Text = Contenido!creationdate
-'     grid[i, 109].Text = Contenido!type
-'     grid[i, 110].Text = Contenido!titleaddon
-'     grid[i, 111].Text = Contenido!subtitle
-'     Contenido.MoveNext
-'   Next
-'
-' End
 
 Public Sub btnAgregarKeyBIB_Click()
 
@@ -3150,11 +2999,10 @@ Public Sub btnGuardarIGUAL_Click()
       guardarCampos()
 
       Contenido.Update
+      RefrescarGrid()
       Message.Info("Nueva entrada guardada.")
 
       Mod_LimpiarTextBox.LimpiarCamposBIB()
-      Mod_Funciones.Mostrar_ListaBIB(VListaBIB)
-      Mod_Funciones.Mostrar_ListaBibActual(gridListaBIBactual)
 
       btnGuardarCambios.Visible = False
       btnGuardar.Visible = False
@@ -4826,7 +4674,7 @@ Public Sub habilitamosMonografia()
 
 End
 
-Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales
+Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales contarEntradasBIByGLO()
 
   Dim RecordBIB As String
   Dim CountBIB As Integer
@@ -6030,6 +5878,7 @@ Public Sub btnGuardarRelacion_Click()
   Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', crossref= '" & valor2 & "', related= '" & valor3 & "', relatedString= '" & valor4 & "', relatedType= '" & valor5 & "' WHERE id= " & idReferencia
 
   meConn.Exec(Consulta)
+  RefrescarGrid()
 
   txtAUTHORrelacion.Clear
   txtTITLErelacion.Clear
@@ -6425,7 +6274,7 @@ Public Sub btnGuardarDuplicado_Click()
   Consulta = "UPDATE bibtex SET keywords= '" & valor2 & "', citationKey= '" & valor1 & "' WHERE id= " & idReferencia
 
   meConn.Exec(Consulta)
-  Mod_Funciones.RefrescarGrid()
+  RefrescarGrid()
 
   txtYearDup.Clear
   txtDateDup.Clear
@@ -7633,13 +7482,6 @@ Public Sub gridListaBIBactual_Data(Row As Integer, Column As Integer)
 
 End
 
-' Public Sub Form_Activate()
-'
-'   VListaBIB.Rows.Count = 0
-'   VListaBIB.Rows.Count = ContenidoBibTotal.Count
-'
-' End
-
 Public Sub VListaBIB_Click()' grid en el formulario principal
 
   ' configurar como se muestran los botones
@@ -7648,8 +7490,8 @@ Public Sub VListaBIB_Click()' grid en el formulario principal
   btnAgregarCitationKey.Visible = True
   btnGuardar.Visible = False
   btnAgregarKeyBIB.Visible = True
-  BtnRefrescarBib.Visible = True
 
+  TabPanel2.Index = 0
   Mod_Funciones.VerBibTeXenVListaBIB()
 
 End
@@ -7677,6 +7519,40 @@ End
 
 Public Sub gridListaBIBactual_Click()' referencias del archivo en curso
 
+  TabPanel2.Index = 0
   Mod_Funciones.VerBibTeXengridListaBIBactual()
+
+End
+
+Public Sub RefrescarGrid()
+
+  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
+  VListaBIB.Rows.Count = 0
+  VListaBIB.Rows.Count = ContenidoBibTotal.Count
+  VListaBIB.Refresh
+
+  griBibOriginal.Rows.Count = 0
+  griBibOriginal.Rows.Count = ContenidoBibTotal.Count
+  griBibOriginal.Refresh
+
+  tbRefDup.Rows.Count = 0
+  tbRefDup.Rows.Count = ContenidoBibTotal.Count
+  tbRefDup.Refresh
+
+  ' Ejecutar la consulta SQL
+  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+  gridListaBIBactual.Rows.Count = 0
+  gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
+  gridListaBIBactual.Refresh
+
+  tblReferenciaOrigen.Rows.Count = 0
+  tblReferenciaOrigen.Rows.Count = ContenidoBibActual.Count
+  tblReferenciaOrigen.Refresh
+
+  ' tambien refrescamos los contadores
+  TotalEntradasBIByGLO()
+  contarEntradasBIByGLO()
+
+  ' FMain.VGridGLO.Refresh
 
 End

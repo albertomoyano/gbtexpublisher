@@ -1711,13 +1711,3 @@ Public Sub VerBibTeXengridListaBIBactual()
   FMain.txtSubTitle.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 111].Text
 
 End
-
-Public Sub RefrescarGrid()
-
-  FMain.VListaBIB.Refresh
-  FMain.gridListaBIBactual.Refresh
-  FMain.tblReferenciaOrigen.Refresh
-  FMain.tbRefDup.Refresh
-  FMain.griBibOriginal.Refresh
-
-End

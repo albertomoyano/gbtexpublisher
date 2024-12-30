@@ -638,11 +638,6 @@
         Text = ("Forzar")
         Picture = Picture["iconos/forzar.svg"]
       }
-      { BtnRefrescarBib Button
-        MoveScaled(27,0,4,4)
-        ToolTip = ("Refrescar listado de la base de datos")
-        Picture = Picture["iconos/refrescar.svg"]
-      }
       { BtnEliminarBib Button
         MoveScaled(31,0,4,4)
         NoTabFocus = True
@@ -815,7 +810,7 @@
       Text = ("Autoría     ")
       Picture = Picture["iconos/candado-abierto.svg"]
       { ScrollView2 ScrollView
-        MoveScaled(1,2,108,55)
+        MoveScaled(4,2,108,55)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
