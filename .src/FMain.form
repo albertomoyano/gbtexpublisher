@@ -509,7 +509,7 @@
   }
   { TabPanel1 TabPanel
     MoveScaled(1,13,162,85)
-    Enabled = False
+    Visible = False
     Expand = True
     Arrangement = Arrange.Vertical
     Spacing = True

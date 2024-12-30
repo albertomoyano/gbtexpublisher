@@ -651,7 +651,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuOT.Enabled = True
   menuPDFweb.Enabled = True
   btnGuardarIGUAL.Visible = False
-  TabPanel1.Enabled = True
+  TabPanel1.Visible = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
@@ -668,8 +668,8 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuDisclaimer.Enabled = True
   Menu4.Enabled = True
   rentaTrabajo.Enabled = True
-  TabPanel1[3].Visible = True
-  TabPanel1[4].Visible = True
+  ' TabPanel1[3].Visible = True
+  ' TabPanel1[4].Visible = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -865,7 +865,7 @@ Public Sub mnuLast_Click()
   menuOT.Enabled = True
   menuPDFweb.Enabled = True
   btnGuardarIGUAL.Visible = False
-  TabPanel1.Enabled = True
+  TabPanel1.visible = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
@@ -4047,7 +4047,7 @@ Public Sub menuAbrirRevista_Click()
 
   btnMONOpdf.Enabled = False
   btnGuardarIGUAL.Visible = False
-  TabPanel1.Enabled = True
+  TabPanel1.Visible = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
@@ -4062,8 +4062,8 @@ Public Sub menuAbrirRevista_Click()
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   Menu4.Enabled = True
-  TabPanel1[3].Visible = True
-  TabPanel1[4].Visible = True
+  ' TabPanel1[3].Visible = True
+  ' TabPanel1[4].Visible = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -4421,7 +4421,7 @@ Public Sub menuMono_Click()'monografia academica
   End If
 
   btnGuardarIGUAL.Visible = False
-  TabPanel1.Enabled = True
+  TabPanel1.Visible = True
   menuBORRARaux.Enabled = True
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
@@ -4606,8 +4606,8 @@ Public Sub habilitamosLibro()
   HBox83.Visible = True
   HBox85.Visible = True
   TabStripMetaLibro.Visible = True
-  TabPanel1[3].Visible = True
-  TabPanel1[4].Visible = True
+  ' TabPanel1[3].Visible = True
+  ' TabPanel1[4].Visible = True
   menuPDFweb.Visible = True
   menuOT.Visible = True
   ' Inicia el Timer al hacer clic en el botón
@@ -4630,8 +4630,8 @@ Public Sub habilitamosRevista()
   HBox83.Visible = True
   HBox85.Visible = True
   TabStripMetaLibro.Visible = False
-  TabPanel1[3].Visible = True
-  TabPanel1[4].Visible = True
+  ' TabPanel1[3].Visible = True
+  ' TabPanel1[4].Visible = True
   menuPDFweb.Visible = True
   menuOT.Visible = True
   ' Inicia el Timer al hacer clic en el botón
@@ -4651,8 +4651,8 @@ Public Sub habilitamosMonografia()
   btnRevistaCompliarXML.Enabled = False
   btnMONOpdf.Enabled = True
   btnMonoDocx.Enabled = True
-  TabPanel1[3].Visible = False
-  TabPanel1[4].Visible = False
+  ' TabPanel1[3].Visible = False
+  ' TabPanel1[4].Visible = False
   menuPDFweb.Visible = False
   menuOT.Visible = False
   ' Inicia el Timer al hacer clic en el botón
