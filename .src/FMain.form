@@ -2488,76 +2488,6 @@
         MoveScaled(1,1,123,59)
         Expand = True
         Border = False
-        { Panel4 Panel
-          MoveScaled(80,4,37,37)
-          Expand = True
-          Arrangement = Arrange.Vertical
-          Spacing = True
-          Margin = True
-          Padding = 4
-          { HBox19 HBox
-            MoveScaled(-6,4,43,4)
-            { btnBuscarAuthorOrigen Button
-              MoveScaled(0,0,4,4)
-              NoTabFocus = True
-              Picture = Picture["iconos/search.svg"]
-            }
-            { Label157 Label
-              MoveScaled(5,0,12,4)
-              Alignment = Align.Right
-              Text = ("Autor/a/es ")
-            }
-            { txtAuthorOrigen TextBox
-              MoveScaled(18,0,15,4)
-              Expand = True
-              Placeholder = ("Autor principal")
-            }
-            { txtIDRelacionOrigen TextBox
-              MoveScaled(35,0,8,4)
-              Visible = False
-            }
-          }
-          { HBox196 HBox
-            MoveScaled(1,8,36,4)
-            { btnBuscarTitleOrigen Button
-              MoveScaled(0,0,4,4)
-              NoTabFocus = True
-              ToolTip = ("Búsqueda rápida del título")
-              Picture = Picture["iconos/search.svg"]
-            }
-            { Label158 Label
-              MoveScaled(5,0,12,4)
-              Alignment = Align.Right
-              Text = ("Título ")
-            }
-            { txtTitleOrigen TextBox
-              MoveScaled(18,0,12,4)
-              Expand = True
-              Alignment = Align.Left
-              Placeholder = ("Título principal")
-            }
-          }
-          { HBox187 HBox
-            MoveScaled(1,12,36,4)
-            { Label133 Label
-              MoveScaled(1,0,16,4)
-              Alignment = Align.Right
-              Text = ("Clave BIB ")
-            }
-            { txtClaveOrigen TextBox
-              MoveScaled(18,0,15,4)
-              Expand = True
-            }
-          }
-          { tblReferenciaOrigen TableView
-            MoveScaled(1,17,27,9)
-            Font = Font["-1"]
-            Expand = True
-            Mode = Select.Single
-            ShowCursor = True
-            Header = GridView.Horizontal
-          }
-        }
         { Panel6 Panel
           MoveScaled(1,6,77,44)
           Expand = True
@@ -2692,6 +2622,76 @@
           }
           { tbRefDup TableView
             MoveScaled(1,25,27,9)
+            Font = Font["-1"]
+            Expand = True
+            Mode = Select.Single
+            ShowCursor = True
+            Header = GridView.Horizontal
+          }
+        }
+        { Panel4 Panel
+          MoveScaled(80,4,37,37)
+          Expand = True
+          Arrangement = Arrange.Vertical
+          Spacing = True
+          Margin = True
+          Padding = 4
+          { HBox19 HBox
+            MoveScaled(-6,4,43,4)
+            { btnBuscarAuthorOrigen Button
+              MoveScaled(0,0,4,4)
+              NoTabFocus = True
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label157 Label
+              MoveScaled(5,0,12,4)
+              Alignment = Align.Right
+              Text = ("Autor/a/es ")
+            }
+            { txtAuthorOrigen TextBox
+              MoveScaled(18,0,15,4)
+              Expand = True
+              Placeholder = ("Autor principal")
+            }
+            { txtIDRelacionOrigen TextBox
+              MoveScaled(35,0,8,4)
+              Visible = False
+            }
+          }
+          { HBox196 HBox
+            MoveScaled(1,8,36,4)
+            { btnBuscarTitleOrigen Button
+              MoveScaled(0,0,4,4)
+              NoTabFocus = True
+              ToolTip = ("Búsqueda rápida del título")
+              Picture = Picture["iconos/search.svg"]
+            }
+            { Label158 Label
+              MoveScaled(5,0,12,4)
+              Alignment = Align.Right
+              Text = ("Título ")
+            }
+            { txtTitleOrigen TextBox
+              MoveScaled(18,0,12,4)
+              Expand = True
+              Alignment = Align.Left
+              Placeholder = ("Título principal")
+            }
+          }
+          { HBox187 HBox
+            MoveScaled(1,12,36,4)
+            { Label133 Label
+              MoveScaled(1,0,16,4)
+              Alignment = Align.Right
+              Text = ("Clave BIB ")
+            }
+            { txtClaveOrigen TextBox
+              MoveScaled(18,0,15,4)
+              Expand = True
+            }
+          }
+          { tblReferenciaOrigen TableView
+            MoveScaled(1,17,27,9)
             Font = Font["-1"]
             Expand = True
             Mode = Select.Single

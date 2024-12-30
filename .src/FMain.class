@@ -5849,6 +5849,11 @@ End
 
 Public Sub btnGuardarRelacion_Click()
 
+  If txtRelatedRelacion.Text = "" Then
+    Message.Error("No a asignado una clave BIB de relación.")
+    Return
+  Endif
+
   Dim idReferencia As Integer
 
   idReferencia = CInt(Trim(txtIdReferencia.Text))' Convertir el texto del TextBox a un número
