@@ -5241,9 +5241,8 @@
           Picture = Picture["iconos/candado-abierto.svg"]
           { HBox216 VBox
             MoveScaled(1,2,111,21)
-            Spacing = True
             { HBox217 HBox
-              MoveScaled(0,0,110,4)
+              MoveScaled(2,0,110,4)
               { Label229 Label
                 MoveScaled(3,0,22.5556,4)
                 Alignment = Align.Right
@@ -5285,10 +5284,13 @@
                 Alignment = Align.Normal
               }
             }
+            { HBox221 HBox
+              MoveScaled(2,5,110,0.4444)
+            }
             { HBox267 HBox
-              MoveScaled(0,4,110,4)
+              MoveScaled(2,6,110,4)
               { Label230 Label
-                MoveScaled(0,0,22.5556,4)
+                MoveScaled(3,0,22.5556,4)
                 Alignment = Align.Right
                 Text = ("Colaborador/a  ")
               }
@@ -5316,8 +5318,11 @@
                 Expand = True
               }
             }
+            { HBox220 HBox
+              MoveScaled(2,11,110,0.4444)
+            }
             { tblColaboradores TableView
-              MoveScaled(2,8,27,12)
+              MoveScaled(2,12,27,12)
               Expand = True
               Mode = Select.Single
               ShowCursor = True
@@ -5334,9 +5339,8 @@
         Picture = Picture["iconos/titulo.svg"]
         { HBox199 VBox
           MoveScaled(3,4,86,30)
-          Spacing = True
           { HBox198 HBox
-            MoveScaled(1,0,80,4)
+            MoveScaled(2,0,80,4)
             { btnNuevoCapitulo Button
               MoveScaled(3,0,4,4)
               NoTabFocus = True
@@ -5370,8 +5374,11 @@
               MoveScaled(67,0,5,4)
             }
           }
+          { HBox222 HBox
+            MoveScaled(2,5,110,0.4444)
+          }
           { HBox190 HBox
-            MoveScaled(1,4,54,4)
+            MoveScaled(2,6,54,4)
             { Label151 Label
               MoveScaled(0,0,22.5556,4)
               Alignment = Align.Right
@@ -5384,8 +5391,11 @@
               Expand = True
             }
           }
+          { HBox223 HBox
+            MoveScaled(2,11,110,0.4444)
+          }
           { HBox202 HBox
-            MoveScaled(1,8,82,4)
+            MoveScaled(1,13,82,4)
             { Label152 Label
               MoveScaled(0,0,22.5556,4)
               Alignment = Align.Right
@@ -5409,8 +5419,11 @@
               Expand = True
             }
           }
+          { HBox224 HBox
+            MoveScaled(2,18,110,0.4444)
+          }
           { tblArticulos TableView
-            MoveScaled(1,13,19,12)
+            MoveScaled(1,20,19,12)
             Expand = True
             Mode = Select.Single
             Padding = 0
