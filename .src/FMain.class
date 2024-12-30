@@ -4484,18 +4484,6 @@ Public Sub btnMonoDocx_Click()'salida a odt y docx de monografia
 
 End
 
-Public Sub btnABMautores_Click()
-
-  Form_ABM_autores.ShowModal
-
-End
-
-Public Sub btnABMrevistas_Click()
-
-  Form_ABM_revistas.ShowModal
-
-End
-
 Public Sub guardarTipoDocumentoLibro()
 
   Dim tdL As String = "tipoLibro"
@@ -4618,7 +4606,6 @@ Public Sub habilitamosLibro()
   HBox83.Visible = True
   HBox85.Visible = True
   TabStripMetaLibro.Visible = True
-  TabPanel3.Visible = False
   TabPanel1[3].Visible = True
   TabPanel1[4].Visible = True
   menuPDFweb.Visible = True
@@ -4643,7 +4630,6 @@ Public Sub habilitamosRevista()
   HBox83.Visible = True
   HBox85.Visible = True
   TabStripMetaLibro.Visible = False
-  TabPanel3.Visible = True
   TabPanel1[3].Visible = True
   TabPanel1[4].Visible = True
   menuPDFweb.Visible = True
@@ -5888,6 +5874,8 @@ Public Sub btnGuardarRelacion_Click()
   txtRelatedString1.Clear
   cbRelatedTypeRelacion.Text = ""
 
+  Panel6.Visible = False
+
 End
 
 Public Sub btnDuplicar_Click()
@@ -6283,6 +6271,10 @@ Public Sub btnGuardarDuplicado_Click()
   txtTitleNueva.Clear
   txtClaveNueva.Clear
   txtFiltroNueva.Clear
+  btnDuplicar.Visible = False
+  btnGuardarDuplicado.Visible = False
+  btnAgregarKeyBIBtwo3.Enabled = False
+  btnAgregarKeyBIBtwo2.Enabled = False
 
 End
 
@@ -7500,6 +7492,9 @@ Public Sub griBibOriginal_Click()' grid en el formulario que duplica una entrada
 
   ' habilitamos el boton para duplicar
   btnDuplicar.Visible = True
+  btnGuardarDuplicado.Visible = True
+  btnAgregarKeyBIBtwo3.Enabled = True
+  btnAgregarKeyBIBtwo2.Enabled = True
 
   Mod_Funciones.VerBibTeXengriBibOriginal()
 
@@ -7507,12 +7502,14 @@ End
 
 Public Sub tbRefDup_Click()
 
+  btnGuardarRelacion.Visible = True
   Mod_Funciones.VerBibTeXentbRefDup()
 
 End
 
 Public Sub tblReferenciaOrigen_Click()' referencias del archivo en curso
 
+  Panel6.Visible = True
   Mod_Funciones.VerBibTeXentblReferenciaOrigen()
 
 End
