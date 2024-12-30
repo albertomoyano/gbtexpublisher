@@ -175,7 +175,7 @@ Public Sub Form_Open()
   ContenidoBibTotal = meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
   Mod_Funciones.DibujarGridBibTeX()' dibuja los 4 gridview
-  tbRefDup.Rows.Count = ContenidoBibTotal.Count
+  tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
 
 End
@@ -711,7 +711,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
   ' refrescamos los datos en los grid del archivo en curso
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
-  tblReferenciaOrigen.Rows.Count = ContenidoBibActual.Count
+  tbRefDup.Rows.Count = ContenidoBibActual.Count
 
   'levantamos los datos de metadatos
   Dim comando As String
@@ -902,7 +902,7 @@ Public Sub mnuLast_Click()
   ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
   ' refrescamos los datos en los grid del archivo en curso
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
-  tblReferenciaOrigen.Rows.Count = ContenidoBibActual.Count
+  tbRefDup.Rows.Count = ContenidoBibActual.Count
 
   'comienza metadatos
   Dim comando As String
@@ -5874,8 +5874,6 @@ Public Sub btnGuardarRelacion_Click()
   txtRelatedString1.Clear
   cbRelatedTypeRelacion.Text = ""
 
-  Panel6.Visible = False
-
 End
 
 Public Sub btnDuplicar_Click()
@@ -6518,237 +6516,237 @@ Public Sub VListaBIB_Data(Row As Integer, Column As Integer)
 
 End
 
-Public Sub tblReferenciaOrigen_Data(Row As Integer, Column As Integer)
+Public Sub tblReferenciaOrigen_Data(Row As Integer, Column As Integer)' grid de relacion que muestra todas las referencias de la base
 
-  If ContenidoBibActual = Null Then Return
-  If Row < 0 Or Row >= ContenidoBibActual.Count Then Return
-  ContenidoBibActual.MoveTo(Row)
+  If ContenidoBibTotal = Null Then Return
+  If Row < 0 Or Row >= ContenidoBibTotal.Count Then Return
+  ContenidoBibTotal.MoveTo(Row)
 
   Select Case Column
     Case 0
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["id"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["id"]
     Case 1
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["tipoEntrada"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["tipoEntrada"]
     Case 2
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["citationKey"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["citationKey"]
     Case 3
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["keywords"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["keywords"]
     Case 4
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["author"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["author"]
     Case 5
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["bookAuthor"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookAuthor"]
     Case 6
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editor"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editor"]
     Case 7
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editorA"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorA"]
     Case 8
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editorB"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorB"]
     Case 9
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editorC"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorC"]
     Case 10
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["afterword"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["afterword"]
     Case 11
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["commentator"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["commentator"]
     Case 12
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["translator"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["translator"]
     Case 13
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["holder"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["holder"]
     Case 14
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["shortAuthor"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shortAuthor"]
     Case 15
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editorType"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorType"]
     Case 16
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editorAtype"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorAtype"]
     Case 17
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editorBtype"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorBtype"]
     Case 18
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["editorCtype"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorCtype"]
     Case 19
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["foreword"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["foreword"]
     Case 20
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["introduction"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["introduction"]
     Case 21
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["annotator"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["annotator"]
     Case 22
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["gender"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["gender"]
     Case 23
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["nameAddOn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["nameAddOn"]
     Case 24
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["title"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["title"]
     Case 25
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["shortTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shortTitle"]
     Case 26
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["indexTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["indexTitle"]
     Case 27
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["bookTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookTitle"]
     Case 28
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["mainTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["mainTitle"]
     Case 29
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["journalTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["journalTitle"]
     Case 30
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["issueTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issueTitle"]
     Case 31
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["eventTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eventTitle"]
     Case 32
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["reprintTitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["reprintTitle"]
     Case 33
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["series"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["series"]
     Case 34
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["bookTitleAddOn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookTitleAddOn"]
     Case 35
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["mainTitleAddOn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["mainTitleAddOn"]
     Case 36
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["journalTitleAddOn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["journalTitleAddOn"]
     Case 37
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["issueTitleAddOn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issueTitleAddOn"]
     Case 38
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["eventTitleAddOn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eventTitleAddOn"]
     Case 39
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["chapter"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["chapter"]
     Case 40
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["volume"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["volume"]
     Case 41
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["edition"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["edition"]
     Case 42
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["pubState"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pubState"]
     Case 43
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["yearY"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["yearY"]
     Case 44
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["dateD"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["dateD"]
     Case 45
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["urlDate"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["urlDate"]
     Case 46
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["volumes"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["volumes"]
     Case 47
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["part"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["part"]
     Case 48
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["issue"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issue"]
     Case 49
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["eventDate"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eventDate"]
     Case 50
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["origDate"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origDate"]
     Case 51
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["version"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["version"]
     Case 52
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["location"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["location"]
     Case 53
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["publisher"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["publisher"]
     Case 54
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["institution"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["institution"]
     Case 55
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["organization"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["organization"]
     Case 56
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["pages"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pages"]
     Case 57
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["pagination"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pagination"]
     Case 58
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["hyphenation"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["hyphenation"]
     Case 59
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["langId"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["langId"]
     Case 60
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["language"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["language"]
     Case 61
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["origLocation"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origLocation"]
     Case 62
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["origPublisher"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origPublisher"]
     Case 63
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["pageTotal"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pageTotal"]
     Case 64
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["venue"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["venue"]
     Case 65
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["bookPagination"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookPagination"]
     Case 66
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["langIdOpts"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["langIdOpts"]
     Case 67
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["origLanguage"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origLanguage"]
     Case 68
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["isan"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["isan"]
     Case 69
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["isbn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["isbn"]
     Case 70
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["ismn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["ismn"]
     Case 71
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["isrn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["isrn"]
     Case 72
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["issn"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issn"]
     Case 73
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["iswc"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["iswc"]
     Case 74
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["url"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["url"]
     Case 75
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["doi"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["doi"]
     Case 76
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["eid"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eid"]
     Case 77
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["eprinttype"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eprinttype"]
     Case 78
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["eprint"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eprint"]
     Case 79
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["entrysubtype"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["entrysubtype"]
     Case 80
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["label"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["label"]
     Case 81
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["howpublisher"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["howpublisher"]
     Case 82
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["addendum"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["addendum"]
     Case 83
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["shorthand"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shorthand"]
     Case 84
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["shorthandintro"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shorthandintro"]
     Case 85
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["etiquetas"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["etiquetas"]
     Case 86
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["options"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["options"]
     Case 87
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["ids"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["ids"]
     Case 88
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["related"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["related"]
     Case 89
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["relatedType"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["relatedType"]
     Case 90
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["relatedString"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["relatedString"]
     Case 91
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["entryset"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["entryset"]
     Case 92
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["crossref"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["crossref"]
     Case 93
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["xref"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["xref"]
     Case 94
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["xdata"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["xdata"]
     Case 95
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["presort"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["presort"]
     Case 96
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["sortkey"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortkey"]
     Case 97
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["sortname"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortname"]
     Case 98
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["sortshorthand"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortshorthand"]
     Case 99
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["sorttitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sorttitle"]
     Case 100
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["indexsorttitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["indexsorttitle"]
     Case 101
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["sortyear"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortyear"]
     Case 102
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["file"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["file"]
     Case 103
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["abstract"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["abstract"]
     Case 104
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["library"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["library"]
     Case 105
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["note"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["note"]
     Case 106
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["annotation"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["annotation"]
     Case 107
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["number"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["number"]
     Case 108
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["creationdate"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["creationdate"]
     Case 109
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["type"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["type"]
     Case 110
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["titleaddon"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["titleaddon"]
     Case 111
-      tblReferenciaOrigen.Data.Text = ContenidoBibActual["subtitle"]
+      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["subtitle"]
   End Select
 
   If row Mod 2 = 0 Then
@@ -6759,235 +6757,235 @@ End
 
 Public Sub tbRefDup_Data(Row As Integer, Column As Integer)
 
-  If ContenidoBibTotal = Null Then Return
-  If Row < 0 Or Row >= ContenidoBibTotal.Count Then Return
-  ContenidoBibTotal.MoveTo(Row)
+  If ContenidoBibActual = Null Then Return
+  If Row < 0 Or Row >= ContenidoBibActual.Count Then Return
+  ContenidoBibActual.MoveTo(Row)
 
   Select Case Column
     Case 0
-      tbRefDup.Data.Text = ContenidoBibTotal["id"]
+      tbRefDup.Data.Text = ContenidoBibActual["id"]
     Case 1
-      tbRefDup.Data.Text = ContenidoBibTotal["tipoEntrada"]
+      tbRefDup.Data.Text = ContenidoBibActual["tipoEntrada"]
     Case 2
-      tbRefDup.Data.Text = ContenidoBibTotal["citationKey"]
+      tbRefDup.Data.Text = ContenidoBibActual["citationKey"]
     Case 3
-      tbRefDup.Data.Text = ContenidoBibTotal["keywords"]
+      tbRefDup.Data.Text = ContenidoBibActual["keywords"]
     Case 4
-      tbRefDup.Data.Text = ContenidoBibTotal["author"]
+      tbRefDup.Data.Text = ContenidoBibActual["author"]
     Case 5
-      tbRefDup.Data.Text = ContenidoBibTotal["bookAuthor"]
+      tbRefDup.Data.Text = ContenidoBibActual["bookAuthor"]
     Case 6
-      tbRefDup.Data.Text = ContenidoBibTotal["editor"]
+      tbRefDup.Data.Text = ContenidoBibActual["editor"]
     Case 7
-      tbRefDup.Data.Text = ContenidoBibTotal["editorA"]
+      tbRefDup.Data.Text = ContenidoBibActual["editorA"]
     Case 8
-      tbRefDup.Data.Text = ContenidoBibTotal["editorB"]
+      tbRefDup.Data.Text = ContenidoBibActual["editorB"]
     Case 9
-      tbRefDup.Data.Text = ContenidoBibTotal["editorC"]
+      tbRefDup.Data.Text = ContenidoBibActual["editorC"]
     Case 10
-      tbRefDup.Data.Text = ContenidoBibTotal["afterword"]
+      tbRefDup.Data.Text = ContenidoBibActual["afterword"]
     Case 11
-      tbRefDup.Data.Text = ContenidoBibTotal["commentator"]
+      tbRefDup.Data.Text = ContenidoBibActual["commentator"]
     Case 12
-      tbRefDup.Data.Text = ContenidoBibTotal["translator"]
+      tbRefDup.Data.Text = ContenidoBibActual["translator"]
     Case 13
-      tbRefDup.Data.Text = ContenidoBibTotal["holder"]
+      tbRefDup.Data.Text = ContenidoBibActual["holder"]
     Case 14
-      tbRefDup.Data.Text = ContenidoBibTotal["shortAuthor"]
+      tbRefDup.Data.Text = ContenidoBibActual["shortAuthor"]
     Case 15
-      tbRefDup.Data.Text = ContenidoBibTotal["editorType"]
+      tbRefDup.Data.Text = ContenidoBibActual["editorType"]
     Case 16
-      tbRefDup.Data.Text = ContenidoBibTotal["editorAtype"]
+      tbRefDup.Data.Text = ContenidoBibActual["editorAtype"]
     Case 17
-      tbRefDup.Data.Text = ContenidoBibTotal["editorBtype"]
+      tbRefDup.Data.Text = ContenidoBibActual["editorBtype"]
     Case 18
-      tbRefDup.Data.Text = ContenidoBibTotal["editorCtype"]
+      tbRefDup.Data.Text = ContenidoBibActual["editorCtype"]
     Case 19
-      tbRefDup.Data.Text = ContenidoBibTotal["foreword"]
+      tbRefDup.Data.Text = ContenidoBibActual["foreword"]
     Case 20
-      tbRefDup.Data.Text = ContenidoBibTotal["introduction"]
+      tbRefDup.Data.Text = ContenidoBibActual["introduction"]
     Case 21
-      tbRefDup.Data.Text = ContenidoBibTotal["annotator"]
+      tbRefDup.Data.Text = ContenidoBibActual["annotator"]
     Case 22
-      tbRefDup.Data.Text = ContenidoBibTotal["gender"]
+      tbRefDup.Data.Text = ContenidoBibActual["gender"]
     Case 23
-      tbRefDup.Data.Text = ContenidoBibTotal["nameAddOn"]
+      tbRefDup.Data.Text = ContenidoBibActual["nameAddOn"]
     Case 24
-      tbRefDup.Data.Text = ContenidoBibTotal["title"]
+      tbRefDup.Data.Text = ContenidoBibActual["title"]
     Case 25
-      tbRefDup.Data.Text = ContenidoBibTotal["shortTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["shortTitle"]
     Case 26
-      tbRefDup.Data.Text = ContenidoBibTotal["indexTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["indexTitle"]
     Case 27
-      tbRefDup.Data.Text = ContenidoBibTotal["bookTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["bookTitle"]
     Case 28
-      tbRefDup.Data.Text = ContenidoBibTotal["mainTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["mainTitle"]
     Case 29
-      tbRefDup.Data.Text = ContenidoBibTotal["journalTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["journalTitle"]
     Case 30
-      tbRefDup.Data.Text = ContenidoBibTotal["issueTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["issueTitle"]
     Case 31
-      tbRefDup.Data.Text = ContenidoBibTotal["eventTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["eventTitle"]
     Case 32
-      tbRefDup.Data.Text = ContenidoBibTotal["reprintTitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["reprintTitle"]
     Case 33
-      tbRefDup.Data.Text = ContenidoBibTotal["series"]
+      tbRefDup.Data.Text = ContenidoBibActual["series"]
     Case 34
-      tbRefDup.Data.Text = ContenidoBibTotal["bookTitleAddOn"]
+      tbRefDup.Data.Text = ContenidoBibActual["bookTitleAddOn"]
     Case 35
-      tbRefDup.Data.Text = ContenidoBibTotal["mainTitleAddOn"]
+      tbRefDup.Data.Text = ContenidoBibActual["mainTitleAddOn"]
     Case 36
-      tbRefDup.Data.Text = ContenidoBibTotal["journalTitleAddOn"]
+      tbRefDup.Data.Text = ContenidoBibActual["journalTitleAddOn"]
     Case 37
-      tbRefDup.Data.Text = ContenidoBibTotal["issueTitleAddOn"]
+      tbRefDup.Data.Text = ContenidoBibActual["issueTitleAddOn"]
     Case 38
-      tbRefDup.Data.Text = ContenidoBibTotal["eventTitleAddOn"]
+      tbRefDup.Data.Text = ContenidoBibActual["eventTitleAddOn"]
     Case 39
-      tbRefDup.Data.Text = ContenidoBibTotal["chapter"]
+      tbRefDup.Data.Text = ContenidoBibActual["chapter"]
     Case 40
-      tbRefDup.Data.Text = ContenidoBibTotal["volume"]
+      tbRefDup.Data.Text = ContenidoBibActual["volume"]
     Case 41
-      tbRefDup.Data.Text = ContenidoBibTotal["edition"]
+      tbRefDup.Data.Text = ContenidoBibActual["edition"]
     Case 42
-      tbRefDup.Data.Text = ContenidoBibTotal["pubState"]
+      tbRefDup.Data.Text = ContenidoBibActual["pubState"]
     Case 43
-      tbRefDup.Data.Text = ContenidoBibTotal["yearY"]
+      tbRefDup.Data.Text = ContenidoBibActual["yearY"]
     Case 44
-      tbRefDup.Data.Text = ContenidoBibTotal["dateD"]
+      tbRefDup.Data.Text = ContenidoBibActual["dateD"]
     Case 45
-      tbRefDup.Data.Text = ContenidoBibTotal["urlDate"]
+      tbRefDup.Data.Text = ContenidoBibActual["urlDate"]
     Case 46
-      tbRefDup.Data.Text = ContenidoBibTotal["volumes"]
+      tbRefDup.Data.Text = ContenidoBibActual["volumes"]
     Case 47
-      tbRefDup.Data.Text = ContenidoBibTotal["part"]
+      tbRefDup.Data.Text = ContenidoBibActual["part"]
     Case 48
-      tbRefDup.Data.Text = ContenidoBibTotal["issue"]
+      tbRefDup.Data.Text = ContenidoBibActual["issue"]
     Case 49
-      tbRefDup.Data.Text = ContenidoBibTotal["eventDate"]
+      tbRefDup.Data.Text = ContenidoBibActual["eventDate"]
     Case 50
-      tbRefDup.Data.Text = ContenidoBibTotal["origDate"]
+      tbRefDup.Data.Text = ContenidoBibActual["origDate"]
     Case 51
-      tbRefDup.Data.Text = ContenidoBibTotal["version"]
+      tbRefDup.Data.Text = ContenidoBibActual["version"]
     Case 52
-      tbRefDup.Data.Text = ContenidoBibTotal["location"]
+      tbRefDup.Data.Text = ContenidoBibActual["location"]
     Case 53
-      tbRefDup.Data.Text = ContenidoBibTotal["publisher"]
+      tbRefDup.Data.Text = ContenidoBibActual["publisher"]
     Case 54
-      tbRefDup.Data.Text = ContenidoBibTotal["institution"]
+      tbRefDup.Data.Text = ContenidoBibActual["institution"]
     Case 55
-      tbRefDup.Data.Text = ContenidoBibTotal["organization"]
+      tbRefDup.Data.Text = ContenidoBibActual["organization"]
     Case 56
-      tbRefDup.Data.Text = ContenidoBibTotal["pages"]
+      tbRefDup.Data.Text = ContenidoBibActual["pages"]
     Case 57
-      tbRefDup.Data.Text = ContenidoBibTotal["pagination"]
+      tbRefDup.Data.Text = ContenidoBibActual["pagination"]
     Case 58
-      tbRefDup.Data.Text = ContenidoBibTotal["hyphenation"]
+      tbRefDup.Data.Text = ContenidoBibActual["hyphenation"]
     Case 59
-      tbRefDup.Data.Text = ContenidoBibTotal["langId"]
+      tbRefDup.Data.Text = ContenidoBibActual["langId"]
     Case 60
-      tbRefDup.Data.Text = ContenidoBibTotal["language"]
+      tbRefDup.Data.Text = ContenidoBibActual["language"]
     Case 61
-      tbRefDup.Data.Text = ContenidoBibTotal["origLocation"]
+      tbRefDup.Data.Text = ContenidoBibActual["origLocation"]
     Case 62
-      tbRefDup.Data.Text = ContenidoBibTotal["origPublisher"]
+      tbRefDup.Data.Text = ContenidoBibActual["origPublisher"]
     Case 63
-      tbRefDup.Data.Text = ContenidoBibTotal["pageTotal"]
+      tbRefDup.Data.Text = ContenidoBibActual["pageTotal"]
     Case 64
-      tbRefDup.Data.Text = ContenidoBibTotal["venue"]
+      tbRefDup.Data.Text = ContenidoBibActual["venue"]
     Case 65
-      tbRefDup.Data.Text = ContenidoBibTotal["bookPagination"]
+      tbRefDup.Data.Text = ContenidoBibActual["bookPagination"]
     Case 66
-      tbRefDup.Data.Text = ContenidoBibTotal["langIdOpts"]
+      tbRefDup.Data.Text = ContenidoBibActual["langIdOpts"]
     Case 67
-      tbRefDup.Data.Text = ContenidoBibTotal["origLanguage"]
+      tbRefDup.Data.Text = ContenidoBibActual["origLanguage"]
     Case 68
-      tbRefDup.Data.Text = ContenidoBibTotal["isan"]
+      tbRefDup.Data.Text = ContenidoBibActual["isan"]
     Case 69
-      tbRefDup.Data.Text = ContenidoBibTotal["isbn"]
+      tbRefDup.Data.Text = ContenidoBibActual["isbn"]
     Case 70
-      tbRefDup.Data.Text = ContenidoBibTotal["ismn"]
+      tbRefDup.Data.Text = ContenidoBibActual["ismn"]
     Case 71
-      tbRefDup.Data.Text = ContenidoBibTotal["isrn"]
+      tbRefDup.Data.Text = ContenidoBibActual["isrn"]
     Case 72
-      tbRefDup.Data.Text = ContenidoBibTotal["issn"]
+      tbRefDup.Data.Text = ContenidoBibActual["issn"]
     Case 73
-      tbRefDup.Data.Text = ContenidoBibTotal["iswc"]
+      tbRefDup.Data.Text = ContenidoBibActual["iswc"]
     Case 74
-      tbRefDup.Data.Text = ContenidoBibTotal["url"]
+      tbRefDup.Data.Text = ContenidoBibActual["url"]
     Case 75
-      tbRefDup.Data.Text = ContenidoBibTotal["doi"]
+      tbRefDup.Data.Text = ContenidoBibActual["doi"]
     Case 76
-      tbRefDup.Data.Text = ContenidoBibTotal["eid"]
+      tbRefDup.Data.Text = ContenidoBibActual["eid"]
     Case 77
-      tbRefDup.Data.Text = ContenidoBibTotal["eprinttype"]
+      tbRefDup.Data.Text = ContenidoBibActual["eprinttype"]
     Case 78
-      tbRefDup.Data.Text = ContenidoBibTotal["eprint"]
+      tbRefDup.Data.Text = ContenidoBibActual["eprint"]
     Case 79
-      tbRefDup.Data.Text = ContenidoBibTotal["entrysubtype"]
+      tbRefDup.Data.Text = ContenidoBibActual["entrysubtype"]
     Case 80
-      tbRefDup.Data.Text = ContenidoBibTotal["label"]
+      tbRefDup.Data.Text = ContenidoBibActual["label"]
     Case 81
-      tbRefDup.Data.Text = ContenidoBibTotal["howpublisher"]
+      tbRefDup.Data.Text = ContenidoBibActual["howpublisher"]
     Case 82
-      tbRefDup.Data.Text = ContenidoBibTotal["addendum"]
+      tbRefDup.Data.Text = ContenidoBibActual["addendum"]
     Case 83
-      tbRefDup.Data.Text = ContenidoBibTotal["shorthand"]
+      tbRefDup.Data.Text = ContenidoBibActual["shorthand"]
     Case 84
-      tbRefDup.Data.Text = ContenidoBibTotal["shorthandintro"]
+      tbRefDup.Data.Text = ContenidoBibActual["shorthandintro"]
     Case 85
-      tbRefDup.Data.Text = ContenidoBibTotal["etiquetas"]
+      tbRefDup.Data.Text = ContenidoBibActual["etiquetas"]
     Case 86
-      tbRefDup.Data.Text = ContenidoBibTotal["options"]
+      tbRefDup.Data.Text = ContenidoBibActual["options"]
     Case 87
-      tbRefDup.Data.Text = ContenidoBibTotal["ids"]
+      tbRefDup.Data.Text = ContenidoBibActual["ids"]
     Case 88
-      tbRefDup.Data.Text = ContenidoBibTotal["related"]
+      tbRefDup.Data.Text = ContenidoBibActual["related"]
     Case 89
-      tbRefDup.Data.Text = ContenidoBibTotal["relatedType"]
+      tbRefDup.Data.Text = ContenidoBibActual["relatedType"]
     Case 90
-      tbRefDup.Data.Text = ContenidoBibTotal["relatedString"]
+      tbRefDup.Data.Text = ContenidoBibActual["relatedString"]
     Case 91
-      tbRefDup.Data.Text = ContenidoBibTotal["entryset"]
+      tbRefDup.Data.Text = ContenidoBibActual["entryset"]
     Case 92
-      tbRefDup.Data.Text = ContenidoBibTotal["crossref"]
+      tbRefDup.Data.Text = ContenidoBibActual["crossref"]
     Case 93
-      tbRefDup.Data.Text = ContenidoBibTotal["xref"]
+      tbRefDup.Data.Text = ContenidoBibActual["xref"]
     Case 94
-      tbRefDup.Data.Text = ContenidoBibTotal["xdata"]
+      tbRefDup.Data.Text = ContenidoBibActual["xdata"]
     Case 95
-      tbRefDup.Data.Text = ContenidoBibTotal["presort"]
+      tbRefDup.Data.Text = ContenidoBibActual["presort"]
     Case 96
-      tbRefDup.Data.Text = ContenidoBibTotal["sortkey"]
+      tbRefDup.Data.Text = ContenidoBibActual["sortkey"]
     Case 97
-      tbRefDup.Data.Text = ContenidoBibTotal["sortname"]
+      tbRefDup.Data.Text = ContenidoBibActual["sortname"]
     Case 98
-      tbRefDup.Data.Text = ContenidoBibTotal["sortshorthand"]
+      tbRefDup.Data.Text = ContenidoBibActual["sortshorthand"]
     Case 99
-      tbRefDup.Data.Text = ContenidoBibTotal["sorttitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["sorttitle"]
     Case 100
-      tbRefDup.Data.Text = ContenidoBibTotal["indexsorttitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["indexsorttitle"]
     Case 101
-      tbRefDup.Data.Text = ContenidoBibTotal["sortyear"]
+      tbRefDup.Data.Text = ContenidoBibActual["sortyear"]
     Case 102
-      tbRefDup.Data.Text = ContenidoBibTotal["file"]
+      tbRefDup.Data.Text = ContenidoBibActual["file"]
     Case 103
-      tbRefDup.Data.Text = ContenidoBibTotal["abstract"]
+      tbRefDup.Data.Text = ContenidoBibActual["abstract"]
     Case 104
-      tbRefDup.Data.Text = ContenidoBibTotal["library"]
+      tbRefDup.Data.Text = ContenidoBibActual["library"]
     Case 105
-      tbRefDup.Data.Text = ContenidoBibTotal["note"]
+      tbRefDup.Data.Text = ContenidoBibActual["note"]
     Case 106
-      tbRefDup.Data.Text = ContenidoBibTotal["annotation"]
+      tbRefDup.Data.Text = ContenidoBibActual["annotation"]
     Case 107
-      tbRefDup.Data.Text = ContenidoBibTotal["number"]
+      tbRefDup.Data.Text = ContenidoBibActual["number"]
     Case 108
-      tbRefDup.Data.Text = ContenidoBibTotal["creationdate"]
+      tbRefDup.Data.Text = ContenidoBibActual["creationdate"]
     Case 109
-      tbRefDup.Data.Text = ContenidoBibTotal["type"]
+      tbRefDup.Data.Text = ContenidoBibActual["type"]
     Case 110
-      tbRefDup.Data.Text = ContenidoBibTotal["titleaddon"]
+      tbRefDup.Data.Text = ContenidoBibActual["titleaddon"]
     Case 111
-      tbRefDup.Data.Text = ContenidoBibTotal["subtitle"]
+      tbRefDup.Data.Text = ContenidoBibActual["subtitle"]
   End Select
 
   If row Mod 2 = 0 Then
@@ -7509,7 +7507,6 @@ End
 
 Public Sub tblReferenciaOrigen_Click()' referencias del archivo en curso
 
-  Panel6.Visible = True
   Mod_Funciones.VerBibTeXentblReferenciaOrigen()
 
 End

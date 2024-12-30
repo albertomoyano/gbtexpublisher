@@ -508,7 +508,7 @@
     }
   }
   { TabPanel1 TabPanel
-    MoveScaled(1,13,162,85)
+    MoveScaled(2,14,162,85)
     Visible = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -799,7 +799,7 @@
       }
     }
     { TabPanel2 TabPanel
-      MoveScaled(1,39,155,66)
+      MoveScaled(1,40,155,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True
@@ -2489,7 +2489,7 @@
         Expand = True
         Border = False
         { Panel4 Panel
-          MoveScaled(1,9,37,37)
+          MoveScaled(80,4,37,37)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -2550,7 +2550,7 @@
             }
           }
           { tblReferenciaOrigen TableView
-            MoveScaled(2,19,27,9)
+            MoveScaled(1,17,27,9)
             Font = Font["-1"]
             Expand = True
             Mode = Select.Single
@@ -2559,8 +2559,7 @@
           }
         }
         { Panel6 Panel
-          MoveScaled(39,9,77,44)
-          Visible = False
+          MoveScaled(1,6,77,44)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -2692,7 +2691,7 @@
             }
           }
           { tbRefDup TableView
-            MoveScaled(4,30,27,9)
+            MoveScaled(1,25,27,9)
             Font = Font["-1"]
             Expand = True
             Mode = Select.Single
