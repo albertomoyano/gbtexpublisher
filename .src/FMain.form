@@ -3263,7 +3263,7 @@
       }
     }
     { TabPanel6 TabPanel
-      MoveScaled(1,9,124,70)
+      MoveScaled(1,9,159,70)
       Expand = True
       Arrangement = Arrange.Fill
       Margin = True
@@ -3273,17 +3273,17 @@
       Text = ("Libro     ")
       Picture = Picture["iconos/titulo.svg"]
       { !TabStripMetaLibro TabPanel
-        MoveScaled(2,2,89,62)
+        MoveScaled(2,2,156,62)
         #Public = True
         Expand = True
         Arrangement = Arrange.Vertical
         Padding = 4
-        Count = 2
+        Count = 3
         Index = 0
         Text = ("Generales y obligatorios para todas las salidas de tipo libro     ")
         Picture = Picture["iconos/meta1.svg"]
         { ScrollView10 ScrollView
-          MoveScaled(1,2,88,90)
+          MoveScaled(2,2,88,90)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -3498,28 +3498,6 @@
             { btnVerAbstract3 Button
               MoveScaled(92,0,4,4)
               Picture = Picture["iconos/schedule.svg"]
-            }
-          }
-          { HBox111 HBox
-            MoveScaled(1,28,83,4)
-            { Label50 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Caption Writer  ")
-            }
-            { !txtCaptionWriter TextBox
-              MoveScaled(23,0,14,4)
-              #Public = True
-              Expand = True
-            }
-            { Separator4 Separator
-              MoveScaled(37,0,2.3333,4)
-            }
-            { TextLabel1 TextLabel
-              MoveScaled(39,0,39,4)
-              AutoResize = True
-              Text = ("Persona que hace el mantenimiento del archivo")
-              Alignment = Align.Normal
             }
           }
         }
@@ -3935,21 +3913,42 @@
               Placeholder = ("Título en otro idioma")
             }
           }
-          { HBox174 HBox
-            MoveScaled(1,102,78,4)
-            { Label126 Label
+        }
+        Index = 2
+        Text = ("Datos del responsable técnico     ")
+        Picture = Picture["iconos/candado-abierto.svg"]
+        { ScrollView11 ScrollView
+          MoveScaled(3,3,117,53)
+          Expand = True
+          Arrangement = Arrange.Vertical
+          Spacing = True
+          Margin = True
+          Padding = 4
+          Border = False
+          { HBox111 HBox
+            MoveScaled(0,0,111,4)
+            { Label50 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
+              Text = ("Caption Writer  ")
             }
-            { TextLabel7 TextLabel
-              MoveScaled(27,0,47,4)
+            { !txtCaptionWriter TextBox
+              MoveScaled(23,0,14,4)
+              #Public = True
               Expand = True
-              Text = ("Datos del responsable técnico para ser contactado por los repositorios")
-              Alignment = Align.BottomNormal
+            }
+            { Separator4 Separator
+              MoveScaled(37,0,2.3333,4)
+            }
+            { TextLabel1 TextLabel
+              MoveScaled(39,0,59,4)
+              AutoResize = True
+              Text = ("Refiere a la persona que hace el mantenimiento del archivo digital")
+              Alignment = Align.Normal
             }
           }
           { HBox112 HBox
-            MoveScaled(1,106,78,4)
+            MoveScaled(1,6,78,4)
             { Label51 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -3960,11 +3959,10 @@
               #Public = True
               ToolTip = ("Los 8 puntos que siguen describen cómo ponerse en contacto con la persona o institución responsable del documento")
               Expand = True
-              Placeholder = ("Ver el ToolTip")
             }
           }
           { HBox113 HBox
-            MoveScaled(1,110,78,4)
+            MoveScaled(1,10,78,4)
             { Label52 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -3977,7 +3975,7 @@
             }
           }
           { HBox114 HBox
-            MoveScaled(1,114,78,4)
+            MoveScaled(1,14,78,4)
             { Label53 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -3990,7 +3988,7 @@
             }
           }
           { HBox116 HBox
-            MoveScaled(1,118,78,4)
+            MoveScaled(1,18,78,4)
             { Label55 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4003,7 +4001,7 @@
             }
           }
           { HBox115 HBox
-            MoveScaled(1,122,78,4)
+            MoveScaled(1,22,78,4)
             { Label54 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4016,7 +4014,7 @@
             }
           }
           { HBox117 HBox
-            MoveScaled(1,126,78,4)
+            MoveScaled(1,26,78,4)
             { Label56 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4029,7 +4027,7 @@
             }
           }
           { HBox118 HBox
-            MoveScaled(1,130,78,4)
+            MoveScaled(1,30,78,4)
             { Label61 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4042,7 +4040,7 @@
             }
           }
           { HBox119 HBox
-            MoveScaled(1,134,78,4)
+            MoveScaled(1,34,78,4)
             { Label62 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4061,7 +4059,7 @@
       Text = ("Revista     ")
       Picture = Picture["iconos/revista.svg"]
       { !TabPanel3 TabPanel
-        MoveScaled(2,2,107,348)
+        MoveScaled(2,2,155,348)
         #Public = True
         Expand = True
         Arrangement = Arrange.Vertical
