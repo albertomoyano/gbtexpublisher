@@ -171,10 +171,11 @@ Public Sub Form_Open()
 
   rentaTrabajo.Enabled = False' inicia formulario sin habilitar menu renta del trabajo
 
+  ' dibuja los 4 gridview
+  Mod_Funciones.DibujarGridBibTeX()
   ' Ejecutar las consultas SQL
   ContenidoBibTotal = meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
-  Mod_Funciones.DibujarGridBibTeX()' dibuja los 4 gridview
   tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
 
@@ -2116,10 +2117,11 @@ Public Sub btnGuardarCambios_Click()
   Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
   guardarCampos()
   Contenido.Update
-  RefrescarGrid()
   Message.Info("Los cambios se guardaron con éxito.")
 
+  TabPanel5.Index = 0
   Mod_LimpiarTextBox.LimpiarCamposBIB()
+  RefrescarGrid()
 
 End
 
@@ -2174,9 +2176,7 @@ Public Sub btnGuardar_Click()
     Contenido = meConn.Create("bibtex")
     guardarCampos()
     Contenido.Update
-    RefrescarGrid()
     Message.Info("Nueva entrada guardada.")
-    Mod_LimpiarTextBox.LimpiarCamposBIB()
     txtTMPbiblio.Clear 'limpiamos el campo temporal
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     btnGuardarCambios.Visible = False
@@ -2188,6 +2188,11 @@ Public Sub btnGuardar_Click()
     btnAgregarKeyBIB.Visible = False
     txtTMPbiblio.Enabled = False
     txtTMPbiblio.Background = Color.LightGray
+
+    TabPanel5.Index = 0
+    RefrescarGrid()
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
+
   Endif
 
 End
@@ -7525,26 +7530,18 @@ End
 
 Public Sub RefrescarGrid()
 
-  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
-  VListaBIB.Rows.Count = 0
+  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
   VListaBIB.Refresh
-
-  griBibOriginal.Rows.Count = 0
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Refresh
-
-  tblReferenciaOrigen.Rows.Count = 0
   tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
   tblReferenciaOrigen.Refresh
 
   ' Ejecutar la consulta SQL
   ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
-  gridListaBIBactual.Rows.Count = 0
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
   gridListaBIBactual.Refresh
-
-  tbRefDup.Rows.Count = 0
   tbRefDup.Rows.Count = ContenidoBibActual.Count
   tbRefDup.Refresh
 
@@ -7553,5 +7550,17 @@ Public Sub RefrescarGrid()
   contarEntradasBIByGLO()
 
   ' FMain.VGridGLO.Refresh
+
+End
+
+Public Sub Form_Activate()
+
+  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
+  VListaBIB.Rows.Count = ContenidoBibTotal.Count
+  VListaBIB.Refresh
+  griBibOriginal.Rows.Count = ContenidoBibTotal.Count
+  griBibOriginal.Refresh
+  tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
+  tblReferenciaOrigen.Refresh
 
 End

@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,960,208)
+  Move(0,0,963,342)
   #Scaled = False
   Expand = True
   Text = ("Exportar referencias bibliográficas")
@@ -18,6 +18,7 @@
       Padding = 4
       Text = ("Seleccionar destino  ")
       Alignment = Align.Right
+      Wrap = False
     }
     { btnDestino Button
       Move(225,0,36,36)
@@ -35,6 +36,7 @@
     Move(0,45,950,36)
     { Label1 Label
       Move(225,0,468,36)
+      Font = Font["Bold"]
       Expand = True
       Alignment = Align.Center
       Text = ("Asegurese de escribir correctamente el nombre del filtro de exportación")
@@ -47,24 +49,30 @@
       Padding = 4
       Text = ("Filtro  ")
       Alignment = Align.Right
+      Wrap = False
     }
     { txtFiltro TextBox
       Move(252,0,144,36)
       Expand = True
     }
+  }
+  { HBox5 HBox
+    Move(0,117,950,36)
     { TextLabel2 TextLabel
-      Move(369,0,144,36)
+      Move(0,0,162,36)
       Padding = 4
       Text = ("  Exportar como  ")
       Alignment = Align.Right
+      Wrap = False
     }
     { txtNombre TextBox
-      Move(513,0,198,36)
+      Move(252,0,198,36)
+      Expand = True
       Placeholder = ("Nombre sin la extensión")
     }
   }
   { HBox4 HBox
-    Move(0,117,950,36)
+    Move(0,153,950,36)
     { Label2 Label
       Move(225,0,468,36)
       Expand = True
@@ -72,7 +80,7 @@
     }
   }
   { HBox14 HBox
-    Move(0,153,950,36)
+    Move(0,198,950,36)
     { Spring1 Spring
       Move(63,0,90,36)
     }
