@@ -7534,9 +7534,9 @@ Public Sub RefrescarGrid()
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Refresh
 
-  tbRefDup.Rows.Count = 0
-  tbRefDup.Rows.Count = ContenidoBibTotal.Count
-  tbRefDup.Refresh
+  tblReferenciaOrigen.Rows.Count = 0
+  tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
+  tblReferenciaOrigen.Refresh
 
   ' Ejecutar la consulta SQL
   ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
@@ -7544,9 +7544,9 @@ Public Sub RefrescarGrid()
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
   gridListaBIBactual.Refresh
 
-  tblReferenciaOrigen.Rows.Count = 0
-  tblReferenciaOrigen.Rows.Count = ContenidoBibActual.Count
-  tblReferenciaOrigen.Refresh
+  tbRefDup.Rows.Count = 0
+  tbRefDup.Rows.Count = ContenidoBibActual.Count
+  tbRefDup.Refresh
 
   ' tambien refrescamos los contadores
   TotalEntradasBIByGLO()
