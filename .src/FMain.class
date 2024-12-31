@@ -5997,7 +5997,7 @@ Public Sub btnAgregarKeyBIBtwo3_Click()
   Dim Comando As String
   Dim Header As String
 
-  Header = "@" & txtIDbibtex.Text & "-" 'prefijo de la clave bib
+  Header = "@" & txtIDnuevoRegistro.Text & "-" 'prefijo de la clave bib
 
   ' Escapa los caracteres especiales (comilla simple) en el título
   Dim tituloEscapado As String
