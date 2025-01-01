@@ -2102,17 +2102,14 @@ End
 
 Public Sub btnGuardarCambios_Click()' update
 
-  ' Eliminamos blancos de inicio y final de cadena en los textbox
-  ' eliminarBlancosMETA
-
   ' Cargar el registro a modificar
   Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
 
-  ' Guardar los campos modificados
+  ' Guardardamos la actualización de los campos modificados
   guardarCampos()
-
-  ' Actualizar el contenido en la base de datos
   Contenido.Update
+  VListaBIB.ScrollY = 0
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
 
   ' Informar al usuario que los cambios se guardaron con éxito
   Message.Info("Los cambios se guardaron con éxito.")
@@ -5878,6 +5875,7 @@ Public Sub btnGuardarRelacion_Click()
 
   meConn.Exec(Consulta)
   RefrescarGrid()
+  tbRefDup.ScrollY = 0
 
   txtAUTHORrelacion.Clear
   txtTITLErelacion.Clear
@@ -6274,6 +6272,7 @@ Public Sub btnGuardarDuplicado_Click()
 
   meConn.Exec(Consulta)
   RefrescarGrid()
+  griBibOriginal.ScrollY = 0
 
   txtYearDup.Clear
   txtDateDup.Clear
