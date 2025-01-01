@@ -2100,7 +2100,22 @@ Public Sub ObtenerNuevoId()
 
 End
 
-Public Sub btnGuardarCambios_Click()
+Public Sub btnGuardarCambios_Click()' update
+
+  ' Eliminamos blancos de inicio y final de cadena en los textbox
+  ' eliminarBlancosMETA
+
+  ' Cargar el registro a modificar
+  Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
+
+  ' Guardar los campos modificados
+  guardarCampos()
+
+  ' Actualizar el contenido en la base de datos
+  Contenido.Update
+
+  ' Informar al usuario que los cambios se guardaron con éxito
+  Message.Info("Los cambios se guardaron con éxito.")
 
   BtnNuevoBib.Visible = True
   btnGuardar.Visible = False
@@ -2111,19 +2126,7 @@ Public Sub btnGuardarCambios_Click()
   btnAgregarKeyBIB.Visible = False
   txtTMPbiblio.Enabled = False
 
-  'eliminamos blancos de inicio y final de cadena en los textbox
-  eliminarBlancosBIB()
-
-  Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
-  guardarCampos()
-  Contenido.Update
-  Message.Info("Los cambios se guardaron con éxito.")
-
-  TabPanel5.Index = 0
-  Mod_LimpiarTextBox.LimpiarCamposBIB()
-  RefrescarGrid()
-
-End
+End Sub
 
 Public Sub btnGuardar_Click()
 
