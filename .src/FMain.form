@@ -614,8 +614,60 @@
     Index = 1
     Text = ("Referencias bibliográficas     ")
     Picture = Picture["iconos/imprenta.svg"]
+    { Panel3 Panel
+      MoveScaled(1,1,123,28)
+      Arrangement = Arrange.Horizontal
+      AutoResize = True
+      { TabPanel5 TabPanel
+        MoveScaled(2,1,117,26)
+        Expand = True
+        Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
+        Count = 3
+        Index = 0
+        Text = ("Caja de texto temporal     ")
+        Picture = Picture["iconos/textnormal.svg"]
+        { txtTMPbiblio TextArea
+          MoveScaled(2,0,36,13)
+          Enabled = False
+          Background = Color.LightGray
+          Expand = True
+          Wrap = True
+          ScrollBar = Scroll.Vertical
+        }
+        Index = 1
+        Text = ("Referencias bibliográficas (todas)     ")
+        Picture = Picture["iconos/bibtex.svg"]
+        { VListaBIB TableView
+          MoveScaled(1,10,44,8)
+          Font = Font["-1"]
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Both
+          AutoResize = False
+          Resizable = False
+        }
+        Index = 2
+        Text = ("Referencias bibliográficas (archivo en curso)     ")
+        Picture = Picture["iconos/face.svg"]
+        { gridListaBIBactual TableView
+          MoveScaled(2,1,44,12)
+          Font = Font["-1"]
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          AutoResize = False
+          Resizable = False
+        }
+        Index = 0
+      }
+    }
     { HBox14 HBox
-      MoveScaled(9,1,105,4)
+      MoveScaled(1,30,113,4)
       { BtnNuevoBib Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
@@ -667,14 +719,14 @@
       }
     }
     { HBox18 HBox
-      MoveScaled(1,5,125,4)
+      MoveScaled(1,35,127,4)
       { BtnBuscarClave Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
       { lblAlta1 Label
-        MoveScaled(5,0,12.4444,4)
+        MoveScaled(5,0,12.8889,4)
         Alignment = Align.Right
         Text = ("Clave BIB ")
       }
@@ -737,54 +789,8 @@
         Picture = Picture["iconos/face.svg"]
       }
     }
-    { Panel3 Panel
-      MoveScaled(3,13,123,21)
-      Arrangement = Arrange.Horizontal
-      AutoResize = True
-      { TabPanel5 TabPanel
-        MoveScaled(4,1,117,18)
-        Expand = True
-        Arrangement = Arrange.Fill
-        Count = 3
-        Index = 0
-        Text = ("Caja de texto temporal     ")
-        Picture = Picture["iconos/textnormal.svg"]
-        { txtTMPbiblio TextArea
-          MoveScaled(2,0,36,13)
-          Enabled = False
-          Background = Color.LightGray
-          Wrap = True
-          ScrollBar = Scroll.Vertical
-        }
-        Index = 1
-        Text = ("Referencias bibliográficas (todas)     ")
-        Picture = Picture["iconos/bibtex.svg"]
-        { VListaBIB TableView
-          MoveScaled(3,1,44,12)
-          Font = Font["-1"]
-          Expand = True
-          Mode = Select.Single
-          ShowCursor = True
-          Header = GridView.Both
-          Resizable = False
-        }
-        Index = 2
-        Text = ("Referencias bibliográficas (archivo en curso)     ")
-        Picture = Picture["iconos/face.svg"]
-        { gridListaBIBactual TableView
-          MoveScaled(2,1,44,12)
-          Font = Font["-1"]
-          Expand = True
-          Mode = Select.Single
-          ShowCursor = True
-          Header = GridView.Horizontal
-          Resizable = False
-        }
-        Index = 0
-      }
-    }
     { HBox195 HBox
-      MoveScaled(3,34,97,4)
+      MoveScaled(1,39,97,4)
       { Label2 Label
         MoveScaled(0,0,16.8889,4)
         Font = Font["Bold"]
@@ -799,7 +805,7 @@
       }
     }
     { TabPanel2 TabPanel
-      MoveScaled(1,40,155,66)
+      MoveScaled(1,46,155,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True

@@ -2100,7 +2100,7 @@ Public Sub ObtenerNuevoId()
 
 End
 
-Public Sub btnGuardarCambios_Click()' update
+Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
 
   ' Cargar el registro a modificar
   Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
@@ -2109,6 +2109,7 @@ Public Sub btnGuardarCambios_Click()' update
   guardarCampos()
   Contenido.Update
   VListaBIB.ScrollY = 0
+  gridListaBIBactual.ScreenY = 0
   Mod_LimpiarTextBox.LimpiarCamposBIB()
 
   ' Informar al usuario que los cambios se guardaron con éxito
