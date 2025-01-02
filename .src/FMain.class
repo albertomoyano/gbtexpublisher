@@ -2108,8 +2108,6 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   ' Guardardamos la actualización de los campos modificados
   guardarCampos()
   Contenido.Update
-  VListaBIB.ScrollY = 0
-  gridListaBIBactual.ScreenY = 0
   Mod_LimpiarTextBox.LimpiarCamposBIB()
 
   ' Informar al usuario que los cambios se guardaron con éxito
@@ -5876,7 +5874,6 @@ Public Sub btnGuardarRelacion_Click()
 
   meConn.Exec(Consulta)
   RefrescarGrid()
-  tbRefDup.ScrollY = 0
 
   txtAUTHORrelacion.Clear
   txtTITLErelacion.Clear
@@ -6273,7 +6270,6 @@ Public Sub btnGuardarDuplicado_Click()
 
   meConn.Exec(Consulta)
   RefrescarGrid()
-  griBibOriginal.ScrollY = 0
 
   txtYearDup.Clear
   txtDateDup.Clear
