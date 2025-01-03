@@ -1,8 +1,6 @@
 ' Gambas class file
 
 Private Contenido As Result
-' Private Busqueda As Result
-Private Consulta As String
 
 Public Sub Form_Activate()
 
@@ -161,6 +159,7 @@ Public Sub BtnBuscar_Click()
     Return
   Endif
 
+  Dim Consulta As String
   ' Crear la consulta SQL basada en el texto introducido
   Consulta = "SELECT * FROM notas WHERE asunto LIKE '%" & txtBuscar.Text & "%' OR contenido LIKE '%" & txtBuscar.Text & "%'"
 
