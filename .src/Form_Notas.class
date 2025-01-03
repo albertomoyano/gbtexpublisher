@@ -49,6 +49,7 @@ Public Sub btnGuardarMod_Click()
   Contenido = FMain.meConn.Edit("notas", "id=" & txId.Text)
   guardarCampos()
   Contenido.Update
+  gridNotas.Refresh
   Mod_LimpiarTextBox.LimpiarCamposNotas()
   Message.Info("Los cambios se guardaron con éxito.")
 
@@ -99,6 +100,7 @@ Public Sub btnGuardar_Click()
 
   guardarCampos()
   Contenido.Update
+  gridNotas.Refresh
   Message.Info("Nueva entrada guardada.")
   Mod_LimpiarTextBox.LimpiarCamposNotas()
 
@@ -148,6 +150,11 @@ End
 
 Public Sub BtnBuscar_Click()
 
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+
   ' Verificar si el campo de búsqueda está vacío
   If txtBuscar.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
@@ -168,11 +175,6 @@ Public Sub BtnBuscar_Click()
     ' Hay resultados: cargar los datos en el grid
     CargarDatos(Consulta, gridNotas)
   Endif
-
-  tbNuevo.Visible = True
-  tbBorrar.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarMod.Visible = False
 
 End
 
@@ -201,7 +203,7 @@ Public Sub gridNotas_Click()
 
   txAsunto.Enabled = True
   txContenido.Enabled = True
-  tbNuevo.Visible = False
+  tbNuevo.Visible = True
   tbBorrar.Visible = True
   btnGuardar.Visible = False
   btnGuardarMod.Visible = True
