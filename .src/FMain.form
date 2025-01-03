@@ -152,10 +152,6 @@
       Text = ("Conversión simple y directa de .docx a .tex")
       Picture = Picture["iconos/conversor.svg"]
     }
-    { menuBiblio Menu
-      Text = ("Biblioteca de trabajos alojados en GitHub")
-      Picture = Picture["iconos/basededatos.svg"]
-    }
     { menuAPUNTES Menu
       Text = ("Cuaderno de notas")
       Picture = Picture["iconos/notas.svg"]

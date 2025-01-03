@@ -1373,8 +1373,8 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
     s &= "\\noindent \\subtitulo{\\textbf{Título:} \\emph{" & ContenidoMeta[bFields[84]] & "}}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{\\textbf{Autor/a/es:} " & ContenidoMeta[bFields[5]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{\\textbf{Asunto:} " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
-    s &= "\\noindent \\subtitulo{\\textbf{Subjet:} " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
-    s &= "\\noindent \\subtitulo{\\textbf{Assunto:} " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Subjet:} " & ContenidoMeta[bFields[95]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Assunto:} " & ContenidoMeta[bFields[96]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{\\textbf{Palabras clave:} " & ContenidoMeta[bFields[57]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{\\textbf{Keywords:} " & ContenidoMeta[bFields[93]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{\\textbf{Palavras Chave:} " & ContenidoMeta[bFields[94]] & "}\\\\" & gb.NewLine

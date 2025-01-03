@@ -5689,12 +5689,6 @@ Public Sub btnVerClaves3_Click()
 
 End
 
-Public Sub menuBiblio_Click()
-
-  Form_Biblioteca.ShowModal()
-
-End
-
 Public Sub btnMenuGIT_Click()
 
   Dim fecha As String

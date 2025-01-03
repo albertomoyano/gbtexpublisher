@@ -2,8 +2,31 @@
 
 Private Contenido As Result
 Private Busqueda As Result
+Private Consulta As String
+
+Public Sub Form_Activate()
+
+  Contenido = FMain.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
+  gridNotas.Rows.Count = Contenido.Count
+
+End
 
 Public Sub Form_Open()
+
+  Contenido = FMain.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
+  gridNotas.Rows.Count = Contenido.Count
+
+  With gridNotas
+    .Header = True
+    .Grid = True
+    .Columns.Count = 3
+    .Columns[0].Title = "id"
+    .Columns[0].Width = 0
+    .Columns[1].Title = "Asunto"
+    .Columns[1].Width = 1000
+    .Columns[2].Title = "Contenido"
+    .Columns[2].Width = 0
+  End With
 
   txAsunto.Enabled = False
   txContenido.Enabled = False
@@ -12,53 +35,6 @@ Public Sub Form_Open()
   tbBorrar.Visible = False
   btnGuardar.Visible = False
   btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
-
-  Mostrar_Lista()
-
-End
-
-Public Sub Mostrar_Lista()
-
-  Dim Record As String
-  Dim Count As Integer
-  Dim i As Integer
-
-  VLista.Clear()
-
-  Contenido = FMain.meConn.Exec("select * from apuntes ORDER BY id DESC")
-
-  'diseñamos el tableview
-  VLista.Columns.Count = 4
-  VLista.Header = True
-  VLista.Columns[0].Title = "id"
-  VLista.Columns[0].Width = 0
-  VLista.Columns[1].Title = "Fecha"
-  VLista.Columns[1].Width = 100
-  VLista.Columns[2].Title = "Asunto"
-  VLista.Columns[2].Width = 900
-  VLista.Columns[3].Title = ""
-  ' VLista.Columns[3].Width = 0
-
-  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
-  VLista.Rows.Count = Contenido.Count
-
-  'recorremos el resutado de la consulta para mostrarlo
-  For i = 0 To Contenido.Count - 1
-    VLista[i, 0].Text = Contenido!id
-    VLista[i, 1].Text = Contenido!fecha
-    VLista[i, 2].Text = Contenido!asunto
-    VLista[i, 3].Text = Contenido!contenido
-
-    Contenido.MoveNext
-  Next
-
-  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM apuntes")
-
-  Record = Contenido[0]
-  Count = Record
 
 End
 
@@ -70,13 +46,11 @@ End
 
 Public Sub btnGuardarMod_Click()
 
-  Contenido = FMain.meConn.Edit("apuntes", "id=" & txId.Text)
-  guardarCampos
+  Contenido = FMain.meConn.Edit("notas", "id=" & txId.Text)
+  guardarCampos()
   Contenido.Update
-  Message.Info("Los cambios se guardaron con éxito.")
-
-  Mostrar_Lista()
   Mod_LimpiarTextBox.LimpiarCamposNotas()
+  Message.Info("Los cambios se guardaron con éxito.")
 
   txAsunto.Enabled = False
   txContenido.Enabled = False
@@ -85,59 +59,47 @@ Public Sub btnGuardarMod_Click()
   tbBorrar.Visible = False
   btnGuardar.Visible = False
   btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
 
 End
 
 Public Sub tbNuevo_Click()
 
-  Dim Idn As Integer
-  Dim HOY As Date
-
-  HOY = Date
-
+  ' Habilitamos los campos de entrada
   txAsunto.Enabled = True
   txContenido.Enabled = True
 
+  ' Ocultamos/mostramos botones según sea necesario
   tbNuevo.Visible = False
   tbBorrar.Visible = False
   btnGuardar.Visible = True
   btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
 
+  ' Limpiamos los campos
   Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM apuntes LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM notas LIMIT 1")
 
+  Dim Idn As Integer
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
     Idn = 0
   Else
     Idn = CInt(Contenido["MAX(id)"]) + 1
-    txId.Text = Idn
-    txFecha.Text = (Format(HOY, "dd/mm/yyyy"))
-    txAsunto.SetFocus
   Endif
 
-  Mostrar_Lista()
+  txId.Text = Idn
+  txAsunto.SetFocus
 
 End
 
 Public Sub btnGuardar_Click()
 
-  Contenido = FMain.meConn.Create("apuntes")
+  Contenido = FMain.meConn.Create("notas")
 
-  guardarCampos
-
+  guardarCampos()
   Contenido.Update
   Message.Info("Nueva entrada guardada.")
-
-  Mostrar_Lista() ' Refrescamos la lista de entradas
   Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   txAsunto.Enabled = False
@@ -147,9 +109,6 @@ Public Sub btnGuardar_Click()
   tbBorrar.Visible = False
   btnGuardar.Visible = False
   btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
 
 End
 
@@ -162,13 +121,12 @@ Public Sub tbBorrar_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = FMain.meConn.Exec("delete from apuntes where id=" & txId.Text)
+    Contenido = FMain.meConn.Exec("delete from notas where id=" & txId.Text)
   Endif
 
   Mod_LimpiarTextBox.LimpiarCamposNotas()
 
-  VLista.Clear
-  Mostrar_Lista
+  gridNotas.Clear
 
   txAsunto.Enabled = False
   txContenido.Enabled = False
@@ -177,76 +135,12 @@ Public Sub tbBorrar_Click()
   tbBorrar.Visible = False
   btnGuardar.Visible = False
   btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
-
-End
-
-Public Sub BtnExportarDOCX_Click()
-
-  If txId.Text = "" Then
-    Message.Warning("Debe elegir una entrada.")
-    Return
-  Endif
-
-  If Not Exist("/usr/bin/pandoc") Then
-    Message.Warning("Debe tener instalado el programa <b>pandoc</b> para realizar esta acción.")
-    Return
-  Endif
-
-  Mod_Exportar.ExportarDOCX
-
-End
-
-Public Sub btnRefresh_Click()
-
-  VLista.Clear
-  Mostrar_Lista()
-  Mod_LimpiarTextBox.LimpiarCamposNotas()
-
-  txAsunto.Enabled = False
-  txContenido.Enabled = False
-
-  tbNuevo.Visible = True
-  tbBorrar.Visible = False
-  btnGuardar.Visible = False
-  btnGuardarMod.Visible = False
-  btnRefresh.Visible = False
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
-
-End
-
-Public Sub VLista_RowClick(Row As Integer)
-
-  txAsunto.Enabled = True
-  txContenido.Enabled = True
-  tbNuevo.Visible = False
-  tbBorrar.Visible = True
-  btnGuardar.Visible = False
-  btnGuardarMod.Visible = True
-  btnRefresh.Visible = True
-  BtnExportarDOCX.Visible = True
-  BtnExportarPDF.Visible = True
-
-  ' Definir los índices de las columnas y los controles correspondientes
-  Dim Columnas As Integer[] = [0, 1, 2, 3] ' Índices de las columnas
-  Dim TextBoxes As TextBox[] = [txId, txFecha, txAsunto] ' TextBoxes correspondientes
-  Dim ComboBoxes As ComboBox[] = [] ' ComboBoxes correspondientes
-  Dim TextAreas As TextArea[] = [txContenido] ' TextAreas correspondientes
-  Dim TextAreasColumnas As Integer[] = [3] ' Columnas asociadas a los TextAreas
-  Dim ComboBoxesColumnas As Integer[] = [] ' Columnas asociadas a los comboboxes
-
-  ' Llamada a la función genérica
-  Mod_Funciones.AsignarValoresDesdeGridView(VLista, Row, Columnas, TextBoxes, ComboBoxes, TextAreas, TextAreasColumnas, ComboBoxesColumnas)
 
 End
 
 Public Function guardarCampos()
 
   Contenido!id = txId.Text
-  Contenido!fecha = txFecha.Text
   Contenido!asunto = txAsunto.Text
   Contenido!contenido = txContenido.Text
 
@@ -254,62 +148,94 @@ End
 
 Public Sub BtnBuscar_Click()
 
-  Dim Comando As String
-  Dim rowIndex As Integer
-
+  ' Verificar si el campo de búsqueda está vacío
   If txtBuscar.Text = "" Then
     Message.Warning("Debe introducir contenido a buscar.")
     Return
   Endif
 
-  Comando = "SELECT * FROM apuntes WHERE asunto LIKE '%" & txtBuscar.Text & "%' OR contenido LIKE '%" & txtBuscar.Text & "%'"
-  Busqueda = FMain.meConn.Exec(Comando)
+  ' Crear la consulta SQL basada en el texto introducido
+  Consulta = "SELECT * FROM notas WHERE asunto LIKE '%" & txtBuscar.Text & "%' OR contenido LIKE '%" & txtBuscar.Text & "%'"
 
-  ' Si la búsqueda no arroja resultados
-  If Busqueda.Count = 0 Then
+  ' Ejecutar la consulta y verificar si hay resultados
+  Contenido = FMain.meConn.Exec(Consulta)
+
+  If Contenido.Count = 0 Then
+    ' No hay resultados
     Message.Info("No se ha encontrado ningún resultado.")
     Return
-  Endif
-
-  ' Si la búsqueda arroja resultados
-  If Busqueda.Count > 0 Then
-    ' Limpia el Grid antes de mostrar los resultados de la búsqueda
-    VLista.Clear()
-    ' Configura las columnas
-    VLista.Columns.Count = 4
-    ' Inicializa rowIndex a 0
-    rowIndex = 0
-
-    While (Busqueda.Available)
-      ' Llena las celdas de la fila con los datos del resultado
-      VLista[rowIndex, 0].Text = Busqueda!id
-      VLista[rowIndex, 1].Text = Busqueda!fecha
-      VLista[rowIndex, 2].Text = Busqueda!asunto
-      VLista[rowIndex, 3].Text = Busqueda!contenido
-
-      ' Incrementa el valor de rowIndex para la siguiente fila
-      rowIndex = rowIndex + 1
-
-      Busqueda.MoveNext
-    Wend
   Else
-    ' Si no hay resultados, muestra un mensaje
-    Message.Info("No se ha encontrado ningún resultado.")
-    Return
+    ' Hay resultados: cargar los datos en el grid
+    ' CargarDatos(Consulta, gridNotas)
   Endif
 
   tbNuevo.Visible = True
   tbBorrar.Visible = False
   btnGuardar.Visible = False
   btnGuardarMod.Visible = False
-  btnRefresh.Visible = True
-  BtnExportarDOCX.Visible = False
-  BtnExportarPDF.Visible = False
 
 End
 
 Public Sub Form_Close()
 
   Me.Close
+
+End
+
+Public Sub gridNotas_Data(Row As Integer, Column As Integer)
+
+  If (Contenido <> Null) Then
+    If Row >= 0 Then
+      Contenido.moveTo(Row)
+      Try gridNotas.Data.Text = Str(Contenido[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    gridNotas.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub gridNotas_Click()
+
+  txAsunto.Enabled = True
+  txContenido.Enabled = True
+  tbNuevo.Visible = False
+  tbBorrar.Visible = True
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = True
+
+  ' Rellenar los campos de texto con los valores de la fila seleccionada
+  txId.Text = gridNotas[gridNotas.row, 0].Text
+  txAsunto.Text = gridNotas[gridNotas.row, 1].Text
+  txContenido.Text = gridNotas[gridNotas.row, 2].Text
+
+End
+
+Public Sub CargarDatos(Consulta As String, Grid As GridView)
+
+  Dim i As Integer
+
+  ' Ejecutar la consulta
+  Contenido = FMain.meConn.Exec(Consulta)
+
+  ' Si no hay resultados
+  If Contenido.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Limpiar el Grid antes de mostrar los resultados
+  Grid.Clear()
+  Grid.Rows.Count = Contenido.Count
+
+  ' Llenar el Grid con los resultados
+  For i = 0 To Contenido.Count - 1
+    For j As Integer = 0 To Grid.Columns.Count - 1
+      Grid[i, j].Text = Contenido[j]
+    Next
+    Contenido.MoveNext
+  Next
 
 End

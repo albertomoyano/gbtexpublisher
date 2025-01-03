@@ -286,8 +286,6 @@ Public Sub DibujarGridBibTeX()
     .Columns.Count = 112
     .Columns[0].Title = "Id"
     .Columns[0].Width = 0
-    .Columns[0].Title = "ID"
-    .Columns[0].Width = 0
     .Columns[1].Title = ""
     .Columns[1].Width = 0
     .Columns[2].Title = ""
@@ -517,8 +515,6 @@ Public Sub DibujarGridBibTeX()
     .Grid = True
     .Columns.Count = 112
     .Columns[0].Title = "Id"
-    .Columns[0].Width = 0
-    .Columns[0].Title = "ID"
     .Columns[0].Width = 0
     .Columns[1].Title = ""
     .Columns[1].Width = 0
@@ -750,8 +746,6 @@ Public Sub DibujarGridBibTeX()
     .Columns.Count = 112
     .Columns[0].Title = "Id"
     .Columns[0].Width = 0
-    .Columns[0].Title = "ID"
-    .Columns[0].Width = 0
     .Columns[1].Title = ""
     .Columns[1].Width = 0
     .Columns[2].Title = ""
@@ -982,8 +976,6 @@ Public Sub DibujarGridBibTeX()
     .Columns.Count = 112
     .Columns[0].Title = "Id"
     .Columns[0].Width = 0
-    .Columns[0].Title = "ID"
-    .Columns[0].Width = 0
     .Columns[1].Title = ""
     .Columns[1].Width = 0
     .Columns[2].Title = ""
@@ -1213,8 +1205,6 @@ Public Sub DibujarGridBibTeX()
     .Grid = True
     .Columns.Count = 112
     .Columns[0].Title = "Id"
-    .Columns[0].Width = 0
-    .Columns[0].Title = "ID"
     .Columns[0].Width = 0
     .Columns[1].Title = ""
     .Columns[1].Width = 0

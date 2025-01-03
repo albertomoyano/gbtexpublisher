@@ -171,7 +171,6 @@ Public Function LimpiarCamposNotas()
 
   Form_Notas.txtBuscar.Clear
   Form_Notas.txId.Clear
-  Form_Notas.txFecha.Clear
   Form_Notas.txAsunto.Clear
   Form_Notas.txContenido.Clear
 
