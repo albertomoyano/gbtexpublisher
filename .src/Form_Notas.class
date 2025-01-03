@@ -1,7 +1,7 @@
 ' Gambas class file
 
 Private Contenido As Result
-Private Busqueda As Result
+' Private Busqueda As Result
 Private Consulta As String
 
 Public Sub Form_Activate()
@@ -166,7 +166,7 @@ Public Sub BtnBuscar_Click()
     Return
   Else
     ' Hay resultados: cargar los datos en el grid
-    ' CargarDatos(Consulta, gridNotas)
+    CargarDatos(Consulta, gridNotas)
   Endif
 
   tbNuevo.Visible = True
