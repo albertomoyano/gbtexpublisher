@@ -6281,237 +6281,244 @@ End
 
 Public Sub VListaBIB_Data(Row As Integer, Column As Integer)
 
-  If ContenidoBibTotal = Null Then Return
-  If Row < 0 Or Row >= ContenidoBibTotal.Count Then Return
+  If (ContenidoBibTotal <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibTotal.moveTo(Row)
+      Try VListaBIB.Data.Text = Str(ContenidoBibTotal[Column])
+    Endif
+  Endif
 
-  ContenidoBibTotal.MoveTo(Row)
-
-  Select Case Column
-    Case 0
-      VListaBIB.Data.Text = ContenidoBibTotal["id"]
-    Case 1
-      VListaBIB.Data.Text = ContenidoBibTotal["tipoEntrada"]
-    Case 2
-      VListaBIB.Data.Text = ContenidoBibTotal["citationKey"]
-    Case 3
-      VListaBIB.Data.Text = ContenidoBibTotal["keywords"]
-    Case 4
-      VListaBIB.Data.Text = ContenidoBibTotal["author"]
-    Case 5
-      VListaBIB.Data.Text = ContenidoBibTotal["bookAuthor"]
-    Case 6
-      VListaBIB.Data.Text = ContenidoBibTotal["editor"]
-    Case 7
-      VListaBIB.Data.Text = ContenidoBibTotal["editorA"]
-    Case 8
-      VListaBIB.Data.Text = ContenidoBibTotal["editorB"]
-    Case 9
-      VListaBIB.Data.Text = ContenidoBibTotal["editorC"]
-    Case 10
-      VListaBIB.Data.Text = ContenidoBibTotal["afterword"]
-    Case 11
-      VListaBIB.Data.Text = ContenidoBibTotal["commentator"]
-    Case 12
-      VListaBIB.Data.Text = ContenidoBibTotal["translator"]
-    Case 13
-      VListaBIB.Data.Text = ContenidoBibTotal["holder"]
-    Case 14
-      VListaBIB.Data.Text = ContenidoBibTotal["shortAuthor"]
-    Case 15
-      VListaBIB.Data.Text = ContenidoBibTotal["editorType"]
-    Case 16
-      VListaBIB.Data.Text = ContenidoBibTotal["editorAtype"]
-    Case 17
-      VListaBIB.Data.Text = ContenidoBibTotal["editorBtype"]
-    Case 18
-      VListaBIB.Data.Text = ContenidoBibTotal["editorCtype"]
-    Case 19
-      VListaBIB.Data.Text = ContenidoBibTotal["foreword"]
-    Case 20
-      VListaBIB.Data.Text = ContenidoBibTotal["introduction"]
-    Case 21
-      VListaBIB.Data.Text = ContenidoBibTotal["annotator"]
-    Case 22
-      VListaBIB.Data.Text = ContenidoBibTotal["gender"]
-    Case 23
-      VListaBIB.Data.Text = ContenidoBibTotal["nameAddOn"]
-    Case 24
-      VListaBIB.Data.Text = ContenidoBibTotal["title"]
-    Case 25
-      VListaBIB.Data.Text = ContenidoBibTotal["shortTitle"]
-    Case 26
-      VListaBIB.Data.Text = ContenidoBibTotal["indexTitle"]
-    Case 27
-      VListaBIB.Data.Text = ContenidoBibTotal["bookTitle"]
-    Case 28
-      VListaBIB.Data.Text = ContenidoBibTotal["mainTitle"]
-    Case 29
-      VListaBIB.Data.Text = ContenidoBibTotal["journalTitle"]
-    Case 30
-      VListaBIB.Data.Text = ContenidoBibTotal["issueTitle"]
-    Case 31
-      VListaBIB.Data.Text = ContenidoBibTotal["eventTitle"]
-    Case 32
-      VListaBIB.Data.Text = ContenidoBibTotal["reprintTitle"]
-    Case 33
-      VListaBIB.Data.Text = ContenidoBibTotal["series"]
-    Case 34
-      VListaBIB.Data.Text = ContenidoBibTotal["bookTitleAddOn"]
-    Case 35
-      VListaBIB.Data.Text = ContenidoBibTotal["mainTitleAddOn"]
-    Case 36
-      VListaBIB.Data.Text = ContenidoBibTotal["journalTitleAddOn"]
-    Case 37
-      VListaBIB.Data.Text = ContenidoBibTotal["issueTitleAddOn"]
-    Case 38
-      VListaBIB.Data.Text = ContenidoBibTotal["eventTitleAddOn"]
-    Case 39
-      VListaBIB.Data.Text = ContenidoBibTotal["chapter"]
-    Case 40
-      VListaBIB.Data.Text = ContenidoBibTotal["volume"]
-    Case 41
-      VListaBIB.Data.Text = ContenidoBibTotal["edition"]
-    Case 42
-      VListaBIB.Data.Text = ContenidoBibTotal["pubState"]
-    Case 43
-      VListaBIB.Data.Text = ContenidoBibTotal["yearY"]
-    Case 44
-      VListaBIB.Data.Text = ContenidoBibTotal["dateD"]
-    Case 45
-      VListaBIB.Data.Text = ContenidoBibTotal["urlDate"]
-    Case 46
-      VListaBIB.Data.Text = ContenidoBibTotal["volumes"]
-    Case 47
-      VListaBIB.Data.Text = ContenidoBibTotal["part"]
-    Case 48
-      VListaBIB.Data.Text = ContenidoBibTotal["issue"]
-    Case 49
-      VListaBIB.Data.Text = ContenidoBibTotal["eventDate"]
-    Case 50
-      VListaBIB.Data.Text = ContenidoBibTotal["origDate"]
-    Case 51
-      VListaBIB.Data.Text = ContenidoBibTotal["version"]
-    Case 52
-      VListaBIB.Data.Text = ContenidoBibTotal["location"]
-    Case 53
-      VListaBIB.Data.Text = ContenidoBibTotal["publisher"]
-    Case 54
-      VListaBIB.Data.Text = ContenidoBibTotal["institution"]
-    Case 55
-      VListaBIB.Data.Text = ContenidoBibTotal["organization"]
-    Case 56
-      VListaBIB.Data.Text = ContenidoBibTotal["pages"]
-    Case 57
-      VListaBIB.Data.Text = ContenidoBibTotal["pagination"]
-    Case 58
-      VListaBIB.Data.Text = ContenidoBibTotal["hyphenation"]
-    Case 59
-      VListaBIB.Data.Text = ContenidoBibTotal["langId"]
-    Case 60
-      VListaBIB.Data.Text = ContenidoBibTotal["language"]
-    Case 61
-      VListaBIB.Data.Text = ContenidoBibTotal["origLocation"]
-    Case 62
-      VListaBIB.Data.Text = ContenidoBibTotal["origPublisher"]
-    Case 63
-      VListaBIB.Data.Text = ContenidoBibTotal["pageTotal"]
-    Case 64
-      VListaBIB.Data.Text = ContenidoBibTotal["venue"]
-    Case 65
-      VListaBIB.Data.Text = ContenidoBibTotal["bookPagination"]
-    Case 66
-      VListaBIB.Data.Text = ContenidoBibTotal["langIdOpts"]
-    Case 67
-      VListaBIB.Data.Text = ContenidoBibTotal["origLanguage"]
-    Case 68
-      VListaBIB.Data.Text = ContenidoBibTotal["isan"]
-    Case 69
-      VListaBIB.Data.Text = ContenidoBibTotal["isbn"]
-    Case 70
-      VListaBIB.Data.Text = ContenidoBibTotal["ismn"]
-    Case 71
-      VListaBIB.Data.Text = ContenidoBibTotal["isrn"]
-    Case 72
-      VListaBIB.Data.Text = ContenidoBibTotal["issn"]
-    Case 73
-      VListaBIB.Data.Text = ContenidoBibTotal["iswc"]
-    Case 74
-      VListaBIB.Data.Text = ContenidoBibTotal["url"]
-    Case 75
-      VListaBIB.Data.Text = ContenidoBibTotal["doi"]
-    Case 76
-      VListaBIB.Data.Text = ContenidoBibTotal["eid"]
-    Case 77
-      VListaBIB.Data.Text = ContenidoBibTotal["eprinttype"]
-    Case 78
-      VListaBIB.Data.Text = ContenidoBibTotal["eprint"]
-    Case 79
-      VListaBIB.Data.Text = ContenidoBibTotal["entrysubtype"]
-    Case 80
-      VListaBIB.Data.Text = ContenidoBibTotal["label"]
-    Case 81
-      VListaBIB.Data.Text = ContenidoBibTotal["howpublisher"]
-    Case 82
-      VListaBIB.Data.Text = ContenidoBibTotal["addendum"]
-    Case 83
-      VListaBIB.Data.Text = ContenidoBibTotal["shorthand"]
-    Case 84
-      VListaBIB.Data.Text = ContenidoBibTotal["shorthandintro"]
-    Case 85
-      VListaBIB.Data.Text = ContenidoBibTotal["etiquetas"]
-    Case 86
-      VListaBIB.Data.Text = ContenidoBibTotal["options"]
-    Case 87
-      VListaBIB.Data.Text = ContenidoBibTotal["ids"]
-    Case 88
-      VListaBIB.Data.Text = ContenidoBibTotal["related"]
-    Case 89
-      VListaBIB.Data.Text = ContenidoBibTotal["relatedType"]
-    Case 90
-      VListaBIB.Data.Text = ContenidoBibTotal["relatedString"]
-    Case 91
-      VListaBIB.Data.Text = ContenidoBibTotal["entryset"]
-    Case 92
-      VListaBIB.Data.Text = ContenidoBibTotal["crossref"]
-    Case 93
-      VListaBIB.Data.Text = ContenidoBibTotal["xref"]
-    Case 94
-      VListaBIB.Data.Text = ContenidoBibTotal["xdata"]
-    Case 95
-      VListaBIB.Data.Text = ContenidoBibTotal["presort"]
-    Case 96
-      VListaBIB.Data.Text = ContenidoBibTotal["sortkey"]
-    Case 97
-      VListaBIB.Data.Text = ContenidoBibTotal["sortname"]
-    Case 98
-      VListaBIB.Data.Text = ContenidoBibTotal["sortshorthand"]
-    Case 99
-      VListaBIB.Data.Text = ContenidoBibTotal["sorttitle"]
-    Case 100
-      VListaBIB.Data.Text = ContenidoBibTotal["indexsorttitle"]
-    Case 101
-      VListaBIB.Data.Text = ContenidoBibTotal["sortyear"]
-    Case 102
-      VListaBIB.Data.Text = ContenidoBibTotal["file"]
-    Case 103
-      VListaBIB.Data.Text = ContenidoBibTotal["abstract"]
-    Case 104
-      VListaBIB.Data.Text = ContenidoBibTotal["library"]
-    Case 105
-      VListaBIB.Data.Text = ContenidoBibTotal["note"]
-    Case 106
-      VListaBIB.Data.Text = ContenidoBibTotal["annotation"]
-    Case 107
-      VListaBIB.Data.Text = ContenidoBibTotal["number"]
-    Case 108
-      VListaBIB.Data.Text = ContenidoBibTotal["creationdate"]
-    Case 109
-      VListaBIB.Data.Text = ContenidoBibTotal["type"]
-    Case 110
-      VListaBIB.Data.Text = ContenidoBibTotal["titleaddon"]
-    Case 111
-      VListaBIB.Data.Text = ContenidoBibTotal["subtitle"]
-  End Select
+  ' If ContenidoBibTotal = Null Then Return
+  ' If Row < 0 Or Row >= ContenidoBibTotal.Count Then Return
+  '
+  ' ContenidoBibTotal.MoveTo(Row)
+  '
+  ' Select Case Column
+  '   Case 0
+  '     VListaBIB.Data.Text = ContenidoBibTotal["id"]
+  '   Case 1
+  '     VListaBIB.Data.Text = ContenidoBibTotal["tipoEntrada"]
+  '   Case 2
+  '     VListaBIB.Data.Text = ContenidoBibTotal["citationKey"]
+  '   Case 3
+  '     VListaBIB.Data.Text = ContenidoBibTotal["keywords"]
+  '   Case 4
+  '     VListaBIB.Data.Text = ContenidoBibTotal["author"]
+  '   Case 5
+  '     VListaBIB.Data.Text = ContenidoBibTotal["bookAuthor"]
+  '   Case 6
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editor"]
+  '   Case 7
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editorA"]
+  '   Case 8
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editorB"]
+  '   Case 9
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editorC"]
+  '   Case 10
+  '     VListaBIB.Data.Text = ContenidoBibTotal["afterword"]
+  '   Case 11
+  '     VListaBIB.Data.Text = ContenidoBibTotal["commentator"]
+  '   Case 12
+  '     VListaBIB.Data.Text = ContenidoBibTotal["translator"]
+  '   Case 13
+  '     VListaBIB.Data.Text = ContenidoBibTotal["holder"]
+  '   Case 14
+  '     VListaBIB.Data.Text = ContenidoBibTotal["shortAuthor"]
+  '   Case 15
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editorType"]
+  '   Case 16
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editorAtype"]
+  '   Case 17
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editorBtype"]
+  '   Case 18
+  '     VListaBIB.Data.Text = ContenidoBibTotal["editorCtype"]
+  '   Case 19
+  '     VListaBIB.Data.Text = ContenidoBibTotal["foreword"]
+  '   Case 20
+  '     VListaBIB.Data.Text = ContenidoBibTotal["introduction"]
+  '   Case 21
+  '     VListaBIB.Data.Text = ContenidoBibTotal["annotator"]
+  '   Case 22
+  '     VListaBIB.Data.Text = ContenidoBibTotal["gender"]
+  '   Case 23
+  '     VListaBIB.Data.Text = ContenidoBibTotal["nameAddOn"]
+  '   Case 24
+  '     VListaBIB.Data.Text = ContenidoBibTotal["title"]
+  '   Case 25
+  '     VListaBIB.Data.Text = ContenidoBibTotal["shortTitle"]
+  '   Case 26
+  '     VListaBIB.Data.Text = ContenidoBibTotal["indexTitle"]
+  '   Case 27
+  '     VListaBIB.Data.Text = ContenidoBibTotal["bookTitle"]
+  '   Case 28
+  '     VListaBIB.Data.Text = ContenidoBibTotal["mainTitle"]
+  '   Case 29
+  '     VListaBIB.Data.Text = ContenidoBibTotal["journalTitle"]
+  '   Case 30
+  '     VListaBIB.Data.Text = ContenidoBibTotal["issueTitle"]
+  '   Case 31
+  '     VListaBIB.Data.Text = ContenidoBibTotal["eventTitle"]
+  '   Case 32
+  '     VListaBIB.Data.Text = ContenidoBibTotal["reprintTitle"]
+  '   Case 33
+  '     VListaBIB.Data.Text = ContenidoBibTotal["series"]
+  '   Case 34
+  '     VListaBIB.Data.Text = ContenidoBibTotal["bookTitleAddOn"]
+  '   Case 35
+  '     VListaBIB.Data.Text = ContenidoBibTotal["mainTitleAddOn"]
+  '   Case 36
+  '     VListaBIB.Data.Text = ContenidoBibTotal["journalTitleAddOn"]
+  '   Case 37
+  '     VListaBIB.Data.Text = ContenidoBibTotal["issueTitleAddOn"]
+  '   Case 38
+  '     VListaBIB.Data.Text = ContenidoBibTotal["eventTitleAddOn"]
+  '   Case 39
+  '     VListaBIB.Data.Text = ContenidoBibTotal["chapter"]
+  '   Case 40
+  '     VListaBIB.Data.Text = ContenidoBibTotal["volume"]
+  '   Case 41
+  '     VListaBIB.Data.Text = ContenidoBibTotal["edition"]
+  '   Case 42
+  '     VListaBIB.Data.Text = ContenidoBibTotal["pubState"]
+  '   Case 43
+  '     VListaBIB.Data.Text = ContenidoBibTotal["yearY"]
+  '   Case 44
+  '     VListaBIB.Data.Text = ContenidoBibTotal["dateD"]
+  '   Case 45
+  '     VListaBIB.Data.Text = ContenidoBibTotal["urlDate"]
+  '   Case 46
+  '     VListaBIB.Data.Text = ContenidoBibTotal["volumes"]
+  '   Case 47
+  '     VListaBIB.Data.Text = ContenidoBibTotal["part"]
+  '   Case 48
+  '     VListaBIB.Data.Text = ContenidoBibTotal["issue"]
+  '   Case 49
+  '     VListaBIB.Data.Text = ContenidoBibTotal["eventDate"]
+  '   Case 50
+  '     VListaBIB.Data.Text = ContenidoBibTotal["origDate"]
+  '   Case 51
+  '     VListaBIB.Data.Text = ContenidoBibTotal["version"]
+  '   Case 52
+  '     VListaBIB.Data.Text = ContenidoBibTotal["location"]
+  '   Case 53
+  '     VListaBIB.Data.Text = ContenidoBibTotal["publisher"]
+  '   Case 54
+  '     VListaBIB.Data.Text = ContenidoBibTotal["institution"]
+  '   Case 55
+  '     VListaBIB.Data.Text = ContenidoBibTotal["organization"]
+  '   Case 56
+  '     VListaBIB.Data.Text = ContenidoBibTotal["pages"]
+  '   Case 57
+  '     VListaBIB.Data.Text = ContenidoBibTotal["pagination"]
+  '   Case 58
+  '     VListaBIB.Data.Text = ContenidoBibTotal["hyphenation"]
+  '   Case 59
+  '     VListaBIB.Data.Text = ContenidoBibTotal["langId"]
+  '   Case 60
+  '     VListaBIB.Data.Text = ContenidoBibTotal["language"]
+  '   Case 61
+  '     VListaBIB.Data.Text = ContenidoBibTotal["origLocation"]
+  '   Case 62
+  '     VListaBIB.Data.Text = ContenidoBibTotal["origPublisher"]
+  '   Case 63
+  '     VListaBIB.Data.Text = ContenidoBibTotal["pageTotal"]
+  '   Case 64
+  '     VListaBIB.Data.Text = ContenidoBibTotal["venue"]
+  '   Case 65
+  '     VListaBIB.Data.Text = ContenidoBibTotal["bookPagination"]
+  '   Case 66
+  '     VListaBIB.Data.Text = ContenidoBibTotal["langIdOpts"]
+  '   Case 67
+  '     VListaBIB.Data.Text = ContenidoBibTotal["origLanguage"]
+  '   Case 68
+  '     VListaBIB.Data.Text = ContenidoBibTotal["isan"]
+  '   Case 69
+  '     VListaBIB.Data.Text = ContenidoBibTotal["isbn"]
+  '   Case 70
+  '     VListaBIB.Data.Text = ContenidoBibTotal["ismn"]
+  '   Case 71
+  '     VListaBIB.Data.Text = ContenidoBibTotal["isrn"]
+  '   Case 72
+  '     VListaBIB.Data.Text = ContenidoBibTotal["issn"]
+  '   Case 73
+  '     VListaBIB.Data.Text = ContenidoBibTotal["iswc"]
+  '   Case 74
+  '     VListaBIB.Data.Text = ContenidoBibTotal["url"]
+  '   Case 75
+  '     VListaBIB.Data.Text = ContenidoBibTotal["doi"]
+  '   Case 76
+  '     VListaBIB.Data.Text = ContenidoBibTotal["eid"]
+  '   Case 77
+  '     VListaBIB.Data.Text = ContenidoBibTotal["eprinttype"]
+  '   Case 78
+  '     VListaBIB.Data.Text = ContenidoBibTotal["eprint"]
+  '   Case 79
+  '     VListaBIB.Data.Text = ContenidoBibTotal["entrysubtype"]
+  '   Case 80
+  '     VListaBIB.Data.Text = ContenidoBibTotal["label"]
+  '   Case 81
+  '     VListaBIB.Data.Text = ContenidoBibTotal["howpublisher"]
+  '   Case 82
+  '     VListaBIB.Data.Text = ContenidoBibTotal["addendum"]
+  '   Case 83
+  '     VListaBIB.Data.Text = ContenidoBibTotal["shorthand"]
+  '   Case 84
+  '     VListaBIB.Data.Text = ContenidoBibTotal["shorthandintro"]
+  '   Case 85
+  '     VListaBIB.Data.Text = ContenidoBibTotal["etiquetas"]
+  '   Case 86
+  '     VListaBIB.Data.Text = ContenidoBibTotal["options"]
+  '   Case 87
+  '     VListaBIB.Data.Text = ContenidoBibTotal["ids"]
+  '   Case 88
+  '     VListaBIB.Data.Text = ContenidoBibTotal["related"]
+  '   Case 89
+  '     VListaBIB.Data.Text = ContenidoBibTotal["relatedType"]
+  '   Case 90
+  '     VListaBIB.Data.Text = ContenidoBibTotal["relatedString"]
+  '   Case 91
+  '     VListaBIB.Data.Text = ContenidoBibTotal["entryset"]
+  '   Case 92
+  '     VListaBIB.Data.Text = ContenidoBibTotal["crossref"]
+  '   Case 93
+  '     VListaBIB.Data.Text = ContenidoBibTotal["xref"]
+  '   Case 94
+  '     VListaBIB.Data.Text = ContenidoBibTotal["xdata"]
+  '   Case 95
+  '     VListaBIB.Data.Text = ContenidoBibTotal["presort"]
+  '   Case 96
+  '     VListaBIB.Data.Text = ContenidoBibTotal["sortkey"]
+  '   Case 97
+  '     VListaBIB.Data.Text = ContenidoBibTotal["sortname"]
+  '   Case 98
+  '     VListaBIB.Data.Text = ContenidoBibTotal["sortshorthand"]
+  '   Case 99
+  '     VListaBIB.Data.Text = ContenidoBibTotal["sorttitle"]
+  '   Case 100
+  '     VListaBIB.Data.Text = ContenidoBibTotal["indexsorttitle"]
+  '   Case 101
+  '     VListaBIB.Data.Text = ContenidoBibTotal["sortyear"]
+  '   Case 102
+  '     VListaBIB.Data.Text = ContenidoBibTotal["file"]
+  '   Case 103
+  '     VListaBIB.Data.Text = ContenidoBibTotal["abstract"]
+  '   Case 104
+  '     VListaBIB.Data.Text = ContenidoBibTotal["library"]
+  '   Case 105
+  '     VListaBIB.Data.Text = ContenidoBibTotal["note"]
+  '   Case 106
+  '     VListaBIB.Data.Text = ContenidoBibTotal["annotation"]
+  '   Case 107
+  '     VListaBIB.Data.Text = ContenidoBibTotal["number"]
+  '   Case 108
+  '     VListaBIB.Data.Text = ContenidoBibTotal["creationdate"]
+  '   Case 109
+  '     VListaBIB.Data.Text = ContenidoBibTotal["type"]
+  '   Case 110
+  '     VListaBIB.Data.Text = ContenidoBibTotal["titleaddon"]
+  '   Case 111
+  '     VListaBIB.Data.Text = ContenidoBibTotal["subtitle"]
+  ' End Select
 
   If row Mod 2 = 0 Then
     VListaBIB.Data.Background = Color.RGB(230, 230, 230)
@@ -6521,236 +6528,12 @@ End
 
 Public Sub tblReferenciaOrigen_Data(Row As Integer, Column As Integer)' grid de relacion que muestra todas las referencias de la base
 
-  If ContenidoBibTotal = Null Then Return
-  If Row < 0 Or Row >= ContenidoBibTotal.Count Then Return
-  ContenidoBibTotal.MoveTo(Row)
-
-  Select Case Column
-    Case 0
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["id"]
-    Case 1
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["tipoEntrada"]
-    Case 2
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["citationKey"]
-    Case 3
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["keywords"]
-    Case 4
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["author"]
-    Case 5
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookAuthor"]
-    Case 6
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editor"]
-    Case 7
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorA"]
-    Case 8
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorB"]
-    Case 9
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorC"]
-    Case 10
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["afterword"]
-    Case 11
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["commentator"]
-    Case 12
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["translator"]
-    Case 13
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["holder"]
-    Case 14
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shortAuthor"]
-    Case 15
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorType"]
-    Case 16
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorAtype"]
-    Case 17
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorBtype"]
-    Case 18
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["editorCtype"]
-    Case 19
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["foreword"]
-    Case 20
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["introduction"]
-    Case 21
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["annotator"]
-    Case 22
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["gender"]
-    Case 23
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["nameAddOn"]
-    Case 24
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["title"]
-    Case 25
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shortTitle"]
-    Case 26
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["indexTitle"]
-    Case 27
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookTitle"]
-    Case 28
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["mainTitle"]
-    Case 29
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["journalTitle"]
-    Case 30
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issueTitle"]
-    Case 31
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eventTitle"]
-    Case 32
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["reprintTitle"]
-    Case 33
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["series"]
-    Case 34
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookTitleAddOn"]
-    Case 35
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["mainTitleAddOn"]
-    Case 36
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["journalTitleAddOn"]
-    Case 37
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issueTitleAddOn"]
-    Case 38
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eventTitleAddOn"]
-    Case 39
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["chapter"]
-    Case 40
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["volume"]
-    Case 41
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["edition"]
-    Case 42
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pubState"]
-    Case 43
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["yearY"]
-    Case 44
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["dateD"]
-    Case 45
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["urlDate"]
-    Case 46
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["volumes"]
-    Case 47
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["part"]
-    Case 48
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issue"]
-    Case 49
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eventDate"]
-    Case 50
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origDate"]
-    Case 51
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["version"]
-    Case 52
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["location"]
-    Case 53
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["publisher"]
-    Case 54
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["institution"]
-    Case 55
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["organization"]
-    Case 56
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pages"]
-    Case 57
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pagination"]
-    Case 58
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["hyphenation"]
-    Case 59
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["langId"]
-    Case 60
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["language"]
-    Case 61
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origLocation"]
-    Case 62
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origPublisher"]
-    Case 63
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["pageTotal"]
-    Case 64
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["venue"]
-    Case 65
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["bookPagination"]
-    Case 66
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["langIdOpts"]
-    Case 67
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["origLanguage"]
-    Case 68
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["isan"]
-    Case 69
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["isbn"]
-    Case 70
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["ismn"]
-    Case 71
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["isrn"]
-    Case 72
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["issn"]
-    Case 73
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["iswc"]
-    Case 74
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["url"]
-    Case 75
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["doi"]
-    Case 76
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eid"]
-    Case 77
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eprinttype"]
-    Case 78
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["eprint"]
-    Case 79
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["entrysubtype"]
-    Case 80
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["label"]
-    Case 81
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["howpublisher"]
-    Case 82
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["addendum"]
-    Case 83
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shorthand"]
-    Case 84
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["shorthandintro"]
-    Case 85
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["etiquetas"]
-    Case 86
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["options"]
-    Case 87
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["ids"]
-    Case 88
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["related"]
-    Case 89
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["relatedType"]
-    Case 90
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["relatedString"]
-    Case 91
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["entryset"]
-    Case 92
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["crossref"]
-    Case 93
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["xref"]
-    Case 94
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["xdata"]
-    Case 95
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["presort"]
-    Case 96
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortkey"]
-    Case 97
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortname"]
-    Case 98
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortshorthand"]
-    Case 99
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sorttitle"]
-    Case 100
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["indexsorttitle"]
-    Case 101
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["sortyear"]
-    Case 102
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["file"]
-    Case 103
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["abstract"]
-    Case 104
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["library"]
-    Case 105
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["note"]
-    Case 106
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["annotation"]
-    Case 107
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["number"]
-    Case 108
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["creationdate"]
-    Case 109
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["type"]
-    Case 110
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["titleaddon"]
-    Case 111
-      tblReferenciaOrigen.Data.Text = ContenidoBibTotal["subtitle"]
-  End Select
+  If (ContenidoBibTotal <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibTotal.moveTo(Row)
+      Try tblReferenciaOrigen.Data.Text = Str(ContenidoBibTotal[Column])
+    Endif
+  Endif
 
   If row Mod 2 = 0 Then
     tblReferenciaOrigen.Data.Background = Color.RGB(230, 230, 230)
@@ -6760,236 +6543,12 @@ End
 
 Public Sub tbRefDup_Data(Row As Integer, Column As Integer)
 
-  If ContenidoBibActual = Null Then Return
-  If Row < 0 Or Row >= ContenidoBibActual.Count Then Return
-  ContenidoBibActual.MoveTo(Row)
-
-  Select Case Column
-    Case 0
-      tbRefDup.Data.Text = ContenidoBibActual["id"]
-    Case 1
-      tbRefDup.Data.Text = ContenidoBibActual["tipoEntrada"]
-    Case 2
-      tbRefDup.Data.Text = ContenidoBibActual["citationKey"]
-    Case 3
-      tbRefDup.Data.Text = ContenidoBibActual["keywords"]
-    Case 4
-      tbRefDup.Data.Text = ContenidoBibActual["author"]
-    Case 5
-      tbRefDup.Data.Text = ContenidoBibActual["bookAuthor"]
-    Case 6
-      tbRefDup.Data.Text = ContenidoBibActual["editor"]
-    Case 7
-      tbRefDup.Data.Text = ContenidoBibActual["editorA"]
-    Case 8
-      tbRefDup.Data.Text = ContenidoBibActual["editorB"]
-    Case 9
-      tbRefDup.Data.Text = ContenidoBibActual["editorC"]
-    Case 10
-      tbRefDup.Data.Text = ContenidoBibActual["afterword"]
-    Case 11
-      tbRefDup.Data.Text = ContenidoBibActual["commentator"]
-    Case 12
-      tbRefDup.Data.Text = ContenidoBibActual["translator"]
-    Case 13
-      tbRefDup.Data.Text = ContenidoBibActual["holder"]
-    Case 14
-      tbRefDup.Data.Text = ContenidoBibActual["shortAuthor"]
-    Case 15
-      tbRefDup.Data.Text = ContenidoBibActual["editorType"]
-    Case 16
-      tbRefDup.Data.Text = ContenidoBibActual["editorAtype"]
-    Case 17
-      tbRefDup.Data.Text = ContenidoBibActual["editorBtype"]
-    Case 18
-      tbRefDup.Data.Text = ContenidoBibActual["editorCtype"]
-    Case 19
-      tbRefDup.Data.Text = ContenidoBibActual["foreword"]
-    Case 20
-      tbRefDup.Data.Text = ContenidoBibActual["introduction"]
-    Case 21
-      tbRefDup.Data.Text = ContenidoBibActual["annotator"]
-    Case 22
-      tbRefDup.Data.Text = ContenidoBibActual["gender"]
-    Case 23
-      tbRefDup.Data.Text = ContenidoBibActual["nameAddOn"]
-    Case 24
-      tbRefDup.Data.Text = ContenidoBibActual["title"]
-    Case 25
-      tbRefDup.Data.Text = ContenidoBibActual["shortTitle"]
-    Case 26
-      tbRefDup.Data.Text = ContenidoBibActual["indexTitle"]
-    Case 27
-      tbRefDup.Data.Text = ContenidoBibActual["bookTitle"]
-    Case 28
-      tbRefDup.Data.Text = ContenidoBibActual["mainTitle"]
-    Case 29
-      tbRefDup.Data.Text = ContenidoBibActual["journalTitle"]
-    Case 30
-      tbRefDup.Data.Text = ContenidoBibActual["issueTitle"]
-    Case 31
-      tbRefDup.Data.Text = ContenidoBibActual["eventTitle"]
-    Case 32
-      tbRefDup.Data.Text = ContenidoBibActual["reprintTitle"]
-    Case 33
-      tbRefDup.Data.Text = ContenidoBibActual["series"]
-    Case 34
-      tbRefDup.Data.Text = ContenidoBibActual["bookTitleAddOn"]
-    Case 35
-      tbRefDup.Data.Text = ContenidoBibActual["mainTitleAddOn"]
-    Case 36
-      tbRefDup.Data.Text = ContenidoBibActual["journalTitleAddOn"]
-    Case 37
-      tbRefDup.Data.Text = ContenidoBibActual["issueTitleAddOn"]
-    Case 38
-      tbRefDup.Data.Text = ContenidoBibActual["eventTitleAddOn"]
-    Case 39
-      tbRefDup.Data.Text = ContenidoBibActual["chapter"]
-    Case 40
-      tbRefDup.Data.Text = ContenidoBibActual["volume"]
-    Case 41
-      tbRefDup.Data.Text = ContenidoBibActual["edition"]
-    Case 42
-      tbRefDup.Data.Text = ContenidoBibActual["pubState"]
-    Case 43
-      tbRefDup.Data.Text = ContenidoBibActual["yearY"]
-    Case 44
-      tbRefDup.Data.Text = ContenidoBibActual["dateD"]
-    Case 45
-      tbRefDup.Data.Text = ContenidoBibActual["urlDate"]
-    Case 46
-      tbRefDup.Data.Text = ContenidoBibActual["volumes"]
-    Case 47
-      tbRefDup.Data.Text = ContenidoBibActual["part"]
-    Case 48
-      tbRefDup.Data.Text = ContenidoBibActual["issue"]
-    Case 49
-      tbRefDup.Data.Text = ContenidoBibActual["eventDate"]
-    Case 50
-      tbRefDup.Data.Text = ContenidoBibActual["origDate"]
-    Case 51
-      tbRefDup.Data.Text = ContenidoBibActual["version"]
-    Case 52
-      tbRefDup.Data.Text = ContenidoBibActual["location"]
-    Case 53
-      tbRefDup.Data.Text = ContenidoBibActual["publisher"]
-    Case 54
-      tbRefDup.Data.Text = ContenidoBibActual["institution"]
-    Case 55
-      tbRefDup.Data.Text = ContenidoBibActual["organization"]
-    Case 56
-      tbRefDup.Data.Text = ContenidoBibActual["pages"]
-    Case 57
-      tbRefDup.Data.Text = ContenidoBibActual["pagination"]
-    Case 58
-      tbRefDup.Data.Text = ContenidoBibActual["hyphenation"]
-    Case 59
-      tbRefDup.Data.Text = ContenidoBibActual["langId"]
-    Case 60
-      tbRefDup.Data.Text = ContenidoBibActual["language"]
-    Case 61
-      tbRefDup.Data.Text = ContenidoBibActual["origLocation"]
-    Case 62
-      tbRefDup.Data.Text = ContenidoBibActual["origPublisher"]
-    Case 63
-      tbRefDup.Data.Text = ContenidoBibActual["pageTotal"]
-    Case 64
-      tbRefDup.Data.Text = ContenidoBibActual["venue"]
-    Case 65
-      tbRefDup.Data.Text = ContenidoBibActual["bookPagination"]
-    Case 66
-      tbRefDup.Data.Text = ContenidoBibActual["langIdOpts"]
-    Case 67
-      tbRefDup.Data.Text = ContenidoBibActual["origLanguage"]
-    Case 68
-      tbRefDup.Data.Text = ContenidoBibActual["isan"]
-    Case 69
-      tbRefDup.Data.Text = ContenidoBibActual["isbn"]
-    Case 70
-      tbRefDup.Data.Text = ContenidoBibActual["ismn"]
-    Case 71
-      tbRefDup.Data.Text = ContenidoBibActual["isrn"]
-    Case 72
-      tbRefDup.Data.Text = ContenidoBibActual["issn"]
-    Case 73
-      tbRefDup.Data.Text = ContenidoBibActual["iswc"]
-    Case 74
-      tbRefDup.Data.Text = ContenidoBibActual["url"]
-    Case 75
-      tbRefDup.Data.Text = ContenidoBibActual["doi"]
-    Case 76
-      tbRefDup.Data.Text = ContenidoBibActual["eid"]
-    Case 77
-      tbRefDup.Data.Text = ContenidoBibActual["eprinttype"]
-    Case 78
-      tbRefDup.Data.Text = ContenidoBibActual["eprint"]
-    Case 79
-      tbRefDup.Data.Text = ContenidoBibActual["entrysubtype"]
-    Case 80
-      tbRefDup.Data.Text = ContenidoBibActual["label"]
-    Case 81
-      tbRefDup.Data.Text = ContenidoBibActual["howpublisher"]
-    Case 82
-      tbRefDup.Data.Text = ContenidoBibActual["addendum"]
-    Case 83
-      tbRefDup.Data.Text = ContenidoBibActual["shorthand"]
-    Case 84
-      tbRefDup.Data.Text = ContenidoBibActual["shorthandintro"]
-    Case 85
-      tbRefDup.Data.Text = ContenidoBibActual["etiquetas"]
-    Case 86
-      tbRefDup.Data.Text = ContenidoBibActual["options"]
-    Case 87
-      tbRefDup.Data.Text = ContenidoBibActual["ids"]
-    Case 88
-      tbRefDup.Data.Text = ContenidoBibActual["related"]
-    Case 89
-      tbRefDup.Data.Text = ContenidoBibActual["relatedType"]
-    Case 90
-      tbRefDup.Data.Text = ContenidoBibActual["relatedString"]
-    Case 91
-      tbRefDup.Data.Text = ContenidoBibActual["entryset"]
-    Case 92
-      tbRefDup.Data.Text = ContenidoBibActual["crossref"]
-    Case 93
-      tbRefDup.Data.Text = ContenidoBibActual["xref"]
-    Case 94
-      tbRefDup.Data.Text = ContenidoBibActual["xdata"]
-    Case 95
-      tbRefDup.Data.Text = ContenidoBibActual["presort"]
-    Case 96
-      tbRefDup.Data.Text = ContenidoBibActual["sortkey"]
-    Case 97
-      tbRefDup.Data.Text = ContenidoBibActual["sortname"]
-    Case 98
-      tbRefDup.Data.Text = ContenidoBibActual["sortshorthand"]
-    Case 99
-      tbRefDup.Data.Text = ContenidoBibActual["sorttitle"]
-    Case 100
-      tbRefDup.Data.Text = ContenidoBibActual["indexsorttitle"]
-    Case 101
-      tbRefDup.Data.Text = ContenidoBibActual["sortyear"]
-    Case 102
-      tbRefDup.Data.Text = ContenidoBibActual["file"]
-    Case 103
-      tbRefDup.Data.Text = ContenidoBibActual["abstract"]
-    Case 104
-      tbRefDup.Data.Text = ContenidoBibActual["library"]
-    Case 105
-      tbRefDup.Data.Text = ContenidoBibActual["note"]
-    Case 106
-      tbRefDup.Data.Text = ContenidoBibActual["annotation"]
-    Case 107
-      tbRefDup.Data.Text = ContenidoBibActual["number"]
-    Case 108
-      tbRefDup.Data.Text = ContenidoBibActual["creationdate"]
-    Case 109
-      tbRefDup.Data.Text = ContenidoBibActual["type"]
-    Case 110
-      tbRefDup.Data.Text = ContenidoBibActual["titleaddon"]
-    Case 111
-      tbRefDup.Data.Text = ContenidoBibActual["subtitle"]
-  End Select
+  If (ContenidoBibActual <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibActual.moveTo(Row)
+      Try tbRefDup.Data.Text = Str(ContenidoBibActual[Column])
+    Endif
+  Endif
 
   If row Mod 2 = 0 Then
     tbRefDup.Data.Background = Color.RGB(230, 230, 230)
@@ -6999,236 +6558,12 @@ End
 
 Public Sub griBibOriginal_Data(Row As Integer, Column As Integer)
 
-  If ContenidoBibTotal = Null Then Return
-  If Row < 0 Or Row >= ContenidoBibTotal.Count Then Return
-  ContenidoBibTotal.MoveTo(Row)
-
-  Select Case Column
-    Case 0
-      griBibOriginal.Data.Text = ContenidoBibTotal["id"]
-    Case 1
-      griBibOriginal.Data.Text = ContenidoBibTotal["tipoEntrada"]
-    Case 2
-      griBibOriginal.Data.Text = ContenidoBibTotal["citationKey"]
-    Case 3
-      griBibOriginal.Data.Text = ContenidoBibTotal["keywords"]
-    Case 4
-      griBibOriginal.Data.Text = ContenidoBibTotal["author"]
-    Case 5
-      griBibOriginal.Data.Text = ContenidoBibTotal["bookAuthor"]
-    Case 6
-      griBibOriginal.Data.Text = ContenidoBibTotal["editor"]
-    Case 7
-      griBibOriginal.Data.Text = ContenidoBibTotal["editorA"]
-    Case 8
-      griBibOriginal.Data.Text = ContenidoBibTotal["editorB"]
-    Case 9
-      griBibOriginal.Data.Text = ContenidoBibTotal["editorC"]
-    Case 10
-      griBibOriginal.Data.Text = ContenidoBibTotal["afterword"]
-    Case 11
-      griBibOriginal.Data.Text = ContenidoBibTotal["commentator"]
-    Case 12
-      griBibOriginal.Data.Text = ContenidoBibTotal["translator"]
-    Case 13
-      griBibOriginal.Data.Text = ContenidoBibTotal["holder"]
-    Case 14
-      griBibOriginal.Data.Text = ContenidoBibTotal["shortAuthor"]
-    Case 15
-      griBibOriginal.Data.Text = ContenidoBibTotal["editorType"]
-    Case 16
-      griBibOriginal.Data.Text = ContenidoBibTotal["editorAtype"]
-    Case 17
-      griBibOriginal.Data.Text = ContenidoBibTotal["editorBtype"]
-    Case 18
-      griBibOriginal.Data.Text = ContenidoBibTotal["editorCtype"]
-    Case 19
-      griBibOriginal.Data.Text = ContenidoBibTotal["foreword"]
-    Case 20
-      griBibOriginal.Data.Text = ContenidoBibTotal["introduction"]
-    Case 21
-      griBibOriginal.Data.Text = ContenidoBibTotal["annotator"]
-    Case 22
-      griBibOriginal.Data.Text = ContenidoBibTotal["gender"]
-    Case 23
-      griBibOriginal.Data.Text = ContenidoBibTotal["nameAddOn"]
-    Case 24
-      griBibOriginal.Data.Text = ContenidoBibTotal["title"]
-    Case 25
-      griBibOriginal.Data.Text = ContenidoBibTotal["shortTitle"]
-    Case 26
-      griBibOriginal.Data.Text = ContenidoBibTotal["indexTitle"]
-    Case 27
-      griBibOriginal.Data.Text = ContenidoBibTotal["bookTitle"]
-    Case 28
-      griBibOriginal.Data.Text = ContenidoBibTotal["mainTitle"]
-    Case 29
-      griBibOriginal.Data.Text = ContenidoBibTotal["journalTitle"]
-    Case 30
-      griBibOriginal.Data.Text = ContenidoBibTotal["issueTitle"]
-    Case 31
-      griBibOriginal.Data.Text = ContenidoBibTotal["eventTitle"]
-    Case 32
-      griBibOriginal.Data.Text = ContenidoBibTotal["reprintTitle"]
-    Case 33
-      griBibOriginal.Data.Text = ContenidoBibTotal["series"]
-    Case 34
-      griBibOriginal.Data.Text = ContenidoBibTotal["bookTitleAddOn"]
-    Case 35
-      griBibOriginal.Data.Text = ContenidoBibTotal["mainTitleAddOn"]
-    Case 36
-      griBibOriginal.Data.Text = ContenidoBibTotal["journalTitleAddOn"]
-    Case 37
-      griBibOriginal.Data.Text = ContenidoBibTotal["issueTitleAddOn"]
-    Case 38
-      griBibOriginal.Data.Text = ContenidoBibTotal["eventTitleAddOn"]
-    Case 39
-      griBibOriginal.Data.Text = ContenidoBibTotal["chapter"]
-    Case 40
-      griBibOriginal.Data.Text = ContenidoBibTotal["volume"]
-    Case 41
-      griBibOriginal.Data.Text = ContenidoBibTotal["edition"]
-    Case 42
-      griBibOriginal.Data.Text = ContenidoBibTotal["pubState"]
-    Case 43
-      griBibOriginal.Data.Text = ContenidoBibTotal["yearY"]
-    Case 44
-      griBibOriginal.Data.Text = ContenidoBibTotal["dateD"]
-    Case 45
-      griBibOriginal.Data.Text = ContenidoBibTotal["urlDate"]
-    Case 46
-      griBibOriginal.Data.Text = ContenidoBibTotal["volumes"]
-    Case 47
-      griBibOriginal.Data.Text = ContenidoBibTotal["part"]
-    Case 48
-      griBibOriginal.Data.Text = ContenidoBibTotal["issue"]
-    Case 49
-      griBibOriginal.Data.Text = ContenidoBibTotal["eventDate"]
-    Case 50
-      griBibOriginal.Data.Text = ContenidoBibTotal["origDate"]
-    Case 51
-      griBibOriginal.Data.Text = ContenidoBibTotal["version"]
-    Case 52
-      griBibOriginal.Data.Text = ContenidoBibTotal["location"]
-    Case 53
-      griBibOriginal.Data.Text = ContenidoBibTotal["publisher"]
-    Case 54
-      griBibOriginal.Data.Text = ContenidoBibTotal["institution"]
-    Case 55
-      griBibOriginal.Data.Text = ContenidoBibTotal["organization"]
-    Case 56
-      griBibOriginal.Data.Text = ContenidoBibTotal["pages"]
-    Case 57
-      griBibOriginal.Data.Text = ContenidoBibTotal["pagination"]
-    Case 58
-      griBibOriginal.Data.Text = ContenidoBibTotal["hyphenation"]
-    Case 59
-      griBibOriginal.Data.Text = ContenidoBibTotal["langId"]
-    Case 60
-      griBibOriginal.Data.Text = ContenidoBibTotal["language"]
-    Case 61
-      griBibOriginal.Data.Text = ContenidoBibTotal["origLocation"]
-    Case 62
-      griBibOriginal.Data.Text = ContenidoBibTotal["origPublisher"]
-    Case 63
-      griBibOriginal.Data.Text = ContenidoBibTotal["pageTotal"]
-    Case 64
-      griBibOriginal.Data.Text = ContenidoBibTotal["venue"]
-    Case 65
-      griBibOriginal.Data.Text = ContenidoBibTotal["bookPagination"]
-    Case 66
-      griBibOriginal.Data.Text = ContenidoBibTotal["langIdOpts"]
-    Case 67
-      griBibOriginal.Data.Text = ContenidoBibTotal["origLanguage"]
-    Case 68
-      griBibOriginal.Data.Text = ContenidoBibTotal["isan"]
-    Case 69
-      griBibOriginal.Data.Text = ContenidoBibTotal["isbn"]
-    Case 70
-      griBibOriginal.Data.Text = ContenidoBibTotal["ismn"]
-    Case 71
-      griBibOriginal.Data.Text = ContenidoBibTotal["isrn"]
-    Case 72
-      griBibOriginal.Data.Text = ContenidoBibTotal["issn"]
-    Case 73
-      griBibOriginal.Data.Text = ContenidoBibTotal["iswc"]
-    Case 74
-      griBibOriginal.Data.Text = ContenidoBibTotal["url"]
-    Case 75
-      griBibOriginal.Data.Text = ContenidoBibTotal["doi"]
-    Case 76
-      griBibOriginal.Data.Text = ContenidoBibTotal["eid"]
-    Case 77
-      griBibOriginal.Data.Text = ContenidoBibTotal["eprinttype"]
-    Case 78
-      griBibOriginal.Data.Text = ContenidoBibTotal["eprint"]
-    Case 79
-      griBibOriginal.Data.Text = ContenidoBibTotal["entrysubtype"]
-    Case 80
-      griBibOriginal.Data.Text = ContenidoBibTotal["label"]
-    Case 81
-      griBibOriginal.Data.Text = ContenidoBibTotal["howpublisher"]
-    Case 82
-      griBibOriginal.Data.Text = ContenidoBibTotal["addendum"]
-    Case 83
-      griBibOriginal.Data.Text = ContenidoBibTotal["shorthand"]
-    Case 84
-      griBibOriginal.Data.Text = ContenidoBibTotal["shorthandintro"]
-    Case 85
-      griBibOriginal.Data.Text = ContenidoBibTotal["etiquetas"]
-    Case 86
-      griBibOriginal.Data.Text = ContenidoBibTotal["options"]
-    Case 87
-      griBibOriginal.Data.Text = ContenidoBibTotal["ids"]
-    Case 88
-      griBibOriginal.Data.Text = ContenidoBibTotal["related"]
-    Case 89
-      griBibOriginal.Data.Text = ContenidoBibTotal["relatedType"]
-    Case 90
-      griBibOriginal.Data.Text = ContenidoBibTotal["relatedString"]
-    Case 91
-      griBibOriginal.Data.Text = ContenidoBibTotal["entryset"]
-    Case 92
-      griBibOriginal.Data.Text = ContenidoBibTotal["crossref"]
-    Case 93
-      griBibOriginal.Data.Text = ContenidoBibTotal["xref"]
-    Case 94
-      griBibOriginal.Data.Text = ContenidoBibTotal["xdata"]
-    Case 95
-      griBibOriginal.Data.Text = ContenidoBibTotal["presort"]
-    Case 96
-      griBibOriginal.Data.Text = ContenidoBibTotal["sortkey"]
-    Case 97
-      griBibOriginal.Data.Text = ContenidoBibTotal["sortname"]
-    Case 98
-      griBibOriginal.Data.Text = ContenidoBibTotal["sortshorthand"]
-    Case 99
-      griBibOriginal.Data.Text = ContenidoBibTotal["sorttitle"]
-    Case 100
-      griBibOriginal.Data.Text = ContenidoBibTotal["indexsorttitle"]
-    Case 101
-      griBibOriginal.Data.Text = ContenidoBibTotal["sortyear"]
-    Case 102
-      griBibOriginal.Data.Text = ContenidoBibTotal["file"]
-    Case 103
-      griBibOriginal.Data.Text = ContenidoBibTotal["abstract"]
-    Case 104
-      griBibOriginal.Data.Text = ContenidoBibTotal["library"]
-    Case 105
-      griBibOriginal.Data.Text = ContenidoBibTotal["note"]
-    Case 106
-      griBibOriginal.Data.Text = ContenidoBibTotal["annotation"]
-    Case 107
-      griBibOriginal.Data.Text = ContenidoBibTotal["number"]
-    Case 108
-      griBibOriginal.Data.Text = ContenidoBibTotal["creationdate"]
-    Case 109
-      griBibOriginal.Data.Text = ContenidoBibTotal["type"]
-    Case 110
-      griBibOriginal.Data.Text = ContenidoBibTotal["titleaddon"]
-    Case 111
-      griBibOriginal.Data.Text = ContenidoBibTotal["subtitle"]
-  End Select
+  If (ContenidoBibTotal <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibTotal.moveTo(Row)
+      Try griBibOriginal.Data.Text = Str(ContenidoBibTotal[Column])
+    Endif
+  Endif
 
   If row Mod 2 = 0 Then
     griBibOriginal.Data.Background = Color.RGB(230, 230, 230)
@@ -7238,236 +6573,12 @@ End
 
 Public Sub gridListaBIBactual_Data(Row As Integer, Column As Integer)
 
-  If ContenidoBibActual = Null Then Return
-  If Row < 0 Or Row >= ContenidoBibActual.Count Then Return
-  ContenidoBibActual.MoveTo(Row)
-
-  Select Case Column
-    Case 0
-      gridListaBIBactual.Data.Text = ContenidoBibActual["id"]
-    Case 1
-      gridListaBIBactual.Data.Text = ContenidoBibActual["tipoEntrada"]
-    Case 2
-      gridListaBIBactual.Data.Text = ContenidoBibActual["citationKey"]
-    Case 3
-      gridListaBIBactual.Data.Text = ContenidoBibActual["keywords"]
-    Case 4
-      gridListaBIBactual.Data.Text = ContenidoBibActual["author"]
-    Case 5
-      gridListaBIBactual.Data.Text = ContenidoBibActual["bookAuthor"]
-    Case 6
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editor"]
-    Case 7
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editorA"]
-    Case 8
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editorB"]
-    Case 9
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editorC"]
-    Case 10
-      gridListaBIBactual.Data.Text = ContenidoBibActual["afterword"]
-    Case 11
-      gridListaBIBactual.Data.Text = ContenidoBibActual["commentator"]
-    Case 12
-      gridListaBIBactual.Data.Text = ContenidoBibActual["translator"]
-    Case 13
-      gridListaBIBactual.Data.Text = ContenidoBibActual["holder"]
-    Case 14
-      gridListaBIBactual.Data.Text = ContenidoBibActual["shortAuthor"]
-    Case 15
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editorType"]
-    Case 16
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editorAtype"]
-    Case 17
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editorBtype"]
-    Case 18
-      gridListaBIBactual.Data.Text = ContenidoBibActual["editorCtype"]
-    Case 19
-      gridListaBIBactual.Data.Text = ContenidoBibActual["foreword"]
-    Case 20
-      gridListaBIBactual.Data.Text = ContenidoBibActual["introduction"]
-    Case 21
-      gridListaBIBactual.Data.Text = ContenidoBibActual["annotator"]
-    Case 22
-      gridListaBIBactual.Data.Text = ContenidoBibActual["gender"]
-    Case 23
-      gridListaBIBactual.Data.Text = ContenidoBibActual["nameAddOn"]
-    Case 24
-      gridListaBIBactual.Data.Text = ContenidoBibActual["title"]
-    Case 25
-      gridListaBIBactual.Data.Text = ContenidoBibActual["shortTitle"]
-    Case 26
-      gridListaBIBactual.Data.Text = ContenidoBibActual["indexTitle"]
-    Case 27
-      gridListaBIBactual.Data.Text = ContenidoBibActual["bookTitle"]
-    Case 28
-      gridListaBIBactual.Data.Text = ContenidoBibActual["mainTitle"]
-    Case 29
-      gridListaBIBactual.Data.Text = ContenidoBibActual["journalTitle"]
-    Case 30
-      gridListaBIBactual.Data.Text = ContenidoBibActual["issueTitle"]
-    Case 31
-      gridListaBIBactual.Data.Text = ContenidoBibActual["eventTitle"]
-    Case 32
-      gridListaBIBactual.Data.Text = ContenidoBibActual["reprintTitle"]
-    Case 33
-      gridListaBIBactual.Data.Text = ContenidoBibActual["series"]
-    Case 34
-      gridListaBIBactual.Data.Text = ContenidoBibActual["bookTitleAddOn"]
-    Case 35
-      gridListaBIBactual.Data.Text = ContenidoBibActual["mainTitleAddOn"]
-    Case 36
-      gridListaBIBactual.Data.Text = ContenidoBibActual["journalTitleAddOn"]
-    Case 37
-      gridListaBIBactual.Data.Text = ContenidoBibActual["issueTitleAddOn"]
-    Case 38
-      gridListaBIBactual.Data.Text = ContenidoBibActual["eventTitleAddOn"]
-    Case 39
-      gridListaBIBactual.Data.Text = ContenidoBibActual["chapter"]
-    Case 40
-      gridListaBIBactual.Data.Text = ContenidoBibActual["volume"]
-    Case 41
-      gridListaBIBactual.Data.Text = ContenidoBibActual["edition"]
-    Case 42
-      gridListaBIBactual.Data.Text = ContenidoBibActual["pubState"]
-    Case 43
-      gridListaBIBactual.Data.Text = ContenidoBibActual["yearY"]
-    Case 44
-      gridListaBIBactual.Data.Text = ContenidoBibActual["dateD"]
-    Case 45
-      gridListaBIBactual.Data.Text = ContenidoBibActual["urlDate"]
-    Case 46
-      gridListaBIBactual.Data.Text = ContenidoBibActual["volumes"]
-    Case 47
-      gridListaBIBactual.Data.Text = ContenidoBibActual["part"]
-    Case 48
-      gridListaBIBactual.Data.Text = ContenidoBibActual["issue"]
-    Case 49
-      gridListaBIBactual.Data.Text = ContenidoBibActual["eventDate"]
-    Case 50
-      gridListaBIBactual.Data.Text = ContenidoBibActual["origDate"]
-    Case 51
-      gridListaBIBactual.Data.Text = ContenidoBibActual["version"]
-    Case 52
-      gridListaBIBactual.Data.Text = ContenidoBibActual["location"]
-    Case 53
-      gridListaBIBactual.Data.Text = ContenidoBibActual["publisher"]
-    Case 54
-      gridListaBIBactual.Data.Text = ContenidoBibActual["institution"]
-    Case 55
-      gridListaBIBactual.Data.Text = ContenidoBibActual["organization"]
-    Case 56
-      gridListaBIBactual.Data.Text = ContenidoBibActual["pages"]
-    Case 57
-      gridListaBIBactual.Data.Text = ContenidoBibActual["pagination"]
-    Case 58
-      gridListaBIBactual.Data.Text = ContenidoBibActual["hyphenation"]
-    Case 59
-      gridListaBIBactual.Data.Text = ContenidoBibActual["langId"]
-    Case 60
-      gridListaBIBactual.Data.Text = ContenidoBibActual["language"]
-    Case 61
-      gridListaBIBactual.Data.Text = ContenidoBibActual["origLocation"]
-    Case 62
-      gridListaBIBactual.Data.Text = ContenidoBibActual["origPublisher"]
-    Case 63
-      gridListaBIBactual.Data.Text = ContenidoBibActual["pageTotal"]
-    Case 64
-      gridListaBIBactual.Data.Text = ContenidoBibActual["venue"]
-    Case 65
-      gridListaBIBactual.Data.Text = ContenidoBibActual["bookPagination"]
-    Case 66
-      gridListaBIBactual.Data.Text = ContenidoBibActual["langIdOpts"]
-    Case 67
-      gridListaBIBactual.Data.Text = ContenidoBibActual["origLanguage"]
-    Case 68
-      gridListaBIBactual.Data.Text = ContenidoBibActual["isan"]
-    Case 69
-      gridListaBIBactual.Data.Text = ContenidoBibActual["isbn"]
-    Case 70
-      gridListaBIBactual.Data.Text = ContenidoBibActual["ismn"]
-    Case 71
-      gridListaBIBactual.Data.Text = ContenidoBibActual["isrn"]
-    Case 72
-      gridListaBIBactual.Data.Text = ContenidoBibActual["issn"]
-    Case 73
-      gridListaBIBactual.Data.Text = ContenidoBibActual["iswc"]
-    Case 74
-      gridListaBIBactual.Data.Text = ContenidoBibActual["url"]
-    Case 75
-      gridListaBIBactual.Data.Text = ContenidoBibActual["doi"]
-    Case 76
-      gridListaBIBactual.Data.Text = ContenidoBibActual["eid"]
-    Case 77
-      gridListaBIBactual.Data.Text = ContenidoBibActual["eprinttype"]
-    Case 78
-      gridListaBIBactual.Data.Text = ContenidoBibActual["eprint"]
-    Case 79
-      gridListaBIBactual.Data.Text = ContenidoBibActual["entrysubtype"]
-    Case 80
-      gridListaBIBactual.Data.Text = ContenidoBibActual["label"]
-    Case 81
-      gridListaBIBactual.Data.Text = ContenidoBibActual["howpublisher"]
-    Case 82
-      gridListaBIBactual.Data.Text = ContenidoBibActual["addendum"]
-    Case 83
-      gridListaBIBactual.Data.Text = ContenidoBibActual["shorthand"]
-    Case 84
-      gridListaBIBactual.Data.Text = ContenidoBibActual["shorthandintro"]
-    Case 85
-      gridListaBIBactual.Data.Text = ContenidoBibActual["etiquetas"]
-    Case 86
-      gridListaBIBactual.Data.Text = ContenidoBibActual["options"]
-    Case 87
-      gridListaBIBactual.Data.Text = ContenidoBibActual["ids"]
-    Case 88
-      gridListaBIBactual.Data.Text = ContenidoBibActual["related"]
-    Case 89
-      gridListaBIBactual.Data.Text = ContenidoBibActual["relatedType"]
-    Case 90
-      gridListaBIBactual.Data.Text = ContenidoBibActual["relatedString"]
-    Case 91
-      gridListaBIBactual.Data.Text = ContenidoBibActual["entryset"]
-    Case 92
-      gridListaBIBactual.Data.Text = ContenidoBibActual["crossref"]
-    Case 93
-      gridListaBIBactual.Data.Text = ContenidoBibActual["xref"]
-    Case 94
-      gridListaBIBactual.Data.Text = ContenidoBibActual["xdata"]
-    Case 95
-      gridListaBIBactual.Data.Text = ContenidoBibActual["presort"]
-    Case 96
-      gridListaBIBactual.Data.Text = ContenidoBibActual["sortkey"]
-    Case 97
-      gridListaBIBactual.Data.Text = ContenidoBibActual["sortname"]
-    Case 98
-      gridListaBIBactual.Data.Text = ContenidoBibActual["sortshorthand"]
-    Case 99
-      gridListaBIBactual.Data.Text = ContenidoBibActual["sorttitle"]
-    Case 100
-      gridListaBIBactual.Data.Text = ContenidoBibActual["indexsorttitle"]
-    Case 101
-      gridListaBIBactual.Data.Text = ContenidoBibActual["sortyear"]
-    Case 102
-      gridListaBIBactual.Data.Text = ContenidoBibActual["file"]
-    Case 103
-      gridListaBIBactual.Data.Text = ContenidoBibActual["abstract"]
-    Case 104
-      gridListaBIBactual.Data.Text = ContenidoBibActual["library"]
-    Case 105
-      gridListaBIBactual.Data.Text = ContenidoBibActual["note"]
-    Case 106
-      gridListaBIBactual.Data.Text = ContenidoBibActual["annotation"]
-    Case 107
-      gridListaBIBactual.Data.Text = ContenidoBibActual["number"]
-    Case 108
-      gridListaBIBactual.Data.Text = ContenidoBibActual["creationdate"]
-    Case 109
-      gridListaBIBactual.Data.Text = ContenidoBibActual["type"]
-    Case 110
-      gridListaBIBactual.Data.Text = ContenidoBibActual["titleaddon"]
-    Case 111
-      gridListaBIBactual.Data.Text = ContenidoBibActual["subtitle"]
-  End Select
+  If (ContenidoBibActual <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibActual.moveTo(Row)
+      Try gridListaBIBactual.Data.Text = Str(ContenidoBibActual[Column])
+    Endif
+  Endif
 
   If row Mod 2 = 0 Then
     gridListaBIBactual.Data.Background = Color.RGB(230, 230, 230)
