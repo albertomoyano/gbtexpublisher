@@ -155,18 +155,6 @@ Public Sub LimpiarCamposGitHubPages()
 
 End
 
-Public Function LimpiarCamposBiblioteca()
-
-  Form_Biblioteca.txtIdBiblioteca.Clear
-  Form_Biblioteca.txtArchivoTeX.Clear
-  Form_Biblioteca.txtGitHub.Clear
-  Form_Biblioteca.txtPDF.Clear
-  Form_Biblioteca.txtFechaInicio.Clear
-  Form_Biblioteca.txtFechaCierre.Clear
-  Form_Biblioteca.txtEtiquetas.Clear
-
-End
-
 Public Function LimpiarCamposNotas()
 
   Form_Notas.txtBuscar.Clear
