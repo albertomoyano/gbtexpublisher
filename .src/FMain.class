@@ -171,8 +171,14 @@ Public Sub Form_Open()
 
   rentaTrabajo.Enabled = False' inicia formulario sin habilitar menu renta del trabajo
 
-  ' dibuja los 4 gridview
-  Mod_Funciones.DibujarGridBibTeX()
+  ' dibuja los gridview
+  ' Mod_Funciones.DibujarGridBibTeX()
+  Mod_Funciones.ConfigurarGridView(VListaBIB)
+  Mod_Funciones.ConfigurarGridView(tblReferenciaOrigen)
+  Mod_Funciones.ConfigurarGridView(tbRefDup)
+  Mod_Funciones.ConfigurarGridView(griBibOriginal)
+  Mod_Funciones.ConfigurarGridView(gridListaBIBactual)
+
   ' Ejecutar las consultas SQL
   ContenidoBibTotal = meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
@@ -669,8 +675,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuDisclaimer.Enabled = True
   Menu4.Enabled = True
   rentaTrabajo.Enabled = True
-  ' TabPanel1[3].Visible = True
-  ' TabPanel1[4].Visible = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -692,8 +696,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   ' levantamos los datos de comentario
   levantarComenta()
 
-  ' levantamos los datos de githubpages
-  levantarGitHubPages()
+  levantarGitHubPages()' levantamos los datos de githubpages
   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
   MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
@@ -714,103 +717,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
   tbRefDup.Rows.Count = ContenidoBibActual.Count
 
-  'levantamos los datos de metadatos
-  Dim comando As String
-  ' buscamos la entrada que coincida con el archivo
-  comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = meConn.Exec(comando)
-  If Contenido.Count > 0 Then
-    BtnNuevoMeta.Visible = False
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = True
-
-    txtIDmetadatos.Text = Contenido!id
-    txtnombreArchivo.Text = Contenido!nombreArchivo
-    txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
-    txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
-    txt04_pdfxmp3.Text = Contenido!pdfxmp3_04
-    txt05_pdfauthor.Text = Contenido!pdfauthor_05
-    txt06_pdftitle.Text = Contenido!pdftitle_06
-    txtSubjet.Text = Contenido!pdfsubject_07
-    txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
-    txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
-    txtKeywords.Text = Contenido!pdfkeywords_08
-    txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
-    txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
-    txtDate.Text = Contenido!pdfdate_11
-    txtCreationDate.Text = Contenido!pdfcreationdate_12
-    txtModDate.Text = Contenido!pdfmoddate_13
-    txtMetaDate.Text = Contenido!pdfmetadate_14
-    txt15_pdfcopyright.Text = Contenido!pdfcopyright_15
-    txt16_pdflicenseurl.Text = Contenido!pdflicenseurl_16
-    txtCaptionWriter.Text = Contenido!pdfcaptionwriter_17
-    txtContactAddress.Text = Contenido!pdfcontactaddress_18
-    txtContactCity.Text = Contenido!pdfcontactcity_19
-    txtContactPostCode.Text = Contenido!pdfcontactpostcode_20
-    txtContactCountry.Text = Contenido!pdfcontactcountry_21
-    txtContactRegion.Text = Contenido!pdfcontactregion_22
-    txtContactPhone.Text = Contenido!pdfcontactphone_23
-    txtContactEmail.Text = Contenido!pdfcontactemail_24
-    txtContactURL.Text = Contenido!pdfcontacturl_25
-    txtDocumentId.Text = Contenido!pdfdocumentid_26
-    txtPublication.Text = Contenido!pdfpublication_27
-    txtPublisher28.Text = Contenido!pdfpublisher_28
-    cmbType.Text = Contenido!pdftype_29
-    cbPubType.Text = Contenido!pdfpubtype_30
-    txtVolNum.Text = Contenido!pdfvolumenum_31
-    txtIssueNum.Text = Contenido!pdfissuenum_32
-    txt33_pdfpagerange.Text = Contenido!pdfpagerange_33
-    txt34_pdfbookedition.Text = Contenido!pdfbookedition_34
-    txt35_pdfisbn.Text = Contenido!pdfisbn_35
-    txt36_pdfissn.Text = Contenido!pdfissn_36
-    txt37_pdfeissn.Text = Contenido!pdfeissn_37
-    txt38_pdfpubstatus.Text = Contenido!pdfpubstatus_38
-    txtLang.Text = Contenido!pdflang_39
-    txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
-    txtBaseURL.Text = Contenido!pdfbaseurl_41
-    txt42_pdfurl.Text = Contenido!pdfurl_42
-    txt43_pdfdoi.Text = Contenido!pdfdoi_43
-    cbPDFrendition.Text = Contenido!pdfrendition_44
-    txtDocumentId.Text = Contenido!pdfidentifier_45
-    cbPDFx.Text = Contenido!pdfx_46
-    txtVersionId.Text = Contenido!pdfversionid_47
-    txt48_abstract.Text = Contenido!abstract_48
-    txt48b_abstract.Text = Contenido!abstract_48b
-    txt48c_abstract.Text = Contenido!abstract_48c
-    txt49_imagentapa.Text = Contenido!imagentapa_49
-    txt50_pagetotal.Text = Contenido!pagetotal_50
-    txtCOLECCION.Text = Contenido!relation_51
-    txtDirection.Text = Contenido!direction_52
-    txt53_traductor.Text = Contenido!traductor_53
-    txt54_idiomaorig.Text = Contenido!idiomaorig_54
-    txt55_ilustrador.Text = Contenido!ilustrador_55
-    txt56_resumen.Text = Contenido!resumen_56
-    txt57_palabrasclave.Text = Contenido!palabrasclave_57
-    txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
-    txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
-    txt58_papertitletwo.Text = Contenido!papertitletwo_58
-    txt59_artrecibido.Text = Contenido!artrecibido_59
-    txt60_artaceptado.Text = Contenido!artaceptado_60
-    txtFORMATO.Text = Contenido!formato_61
-    txt59_opt_source.Text = Contenido!source_69
-    txt82_conferenceVisual.Text = Contenido!opt_72
-    txt78_genero.Text = Contenido!genero_78
-    txt82_conference.Text = Contenido!conference_82
-    txt84_bookTitle.Text = Contenido!bookTitle_84
-    txt85_doiRevista.Text = Contenido!doiRevista_85
-    txt86_annotation.Text = Contenido!notas_86
-    txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
-    txt88_audiencia.Text = Contenido!audience_88
-    txt89_binding.Text = Contenido!binding_89
-    txt90_eisbn.Text = Contenido!eISBN_90
-
-  Else
-    'falta limpiar el contenido de los textbox
-    BtnNuevoMeta.Visible = True
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = False
-  Endif
-  ' txtContactCountry.MaxLength = 1500
+  Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
 
   txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
@@ -821,11 +728,8 @@ End
 ' Evento que se ejecuta cuando se detecta un cambio en el directorio
 Public Sub Watcher_Change()
 
-  ' Actualiza el DirChooser
-  DirViewRuta.Refresh
-
-  ' Actualiza la lista de archivos anterior
-  prevFiles = DirViewRuta.Files
+  DirViewRuta.Refresh' Actualiza el DirChooser
+  prevFiles = DirViewRuta.Files' Actualiza la lista de archivos anterior
 
 End
 
@@ -905,101 +809,7 @@ Public Sub mnuLast_Click()
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
   tbRefDup.Rows.Count = ContenidoBibActual.Count
 
-  'comienza metadatos
-  Dim comando As String
-  ' buscamos la entrada que coincida con el archivo
-  comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = meConn.Exec(comando)
-
-  If Contenido.Count > 0 Then
-    BtnNuevoMeta.Visible = False
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = True
-    txtIDmetadatos.Text = Contenido!id
-    txtnombreArchivo.Text = Contenido!nombreArchivo
-    txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
-    txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
-    txt04_pdfxmp3.Text = Contenido!pdfxmp3_04
-    txt05_pdfauthor.Text = Contenido!pdfauthor_05
-    txt06_pdftitle.Text = Contenido!pdftitle_06
-    txtSubjet.Text = Contenido!pdfsubject_07
-    txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
-    txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
-    txtKeywords.Text = Contenido!pdfkeywords_08
-    txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
-    txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
-    txtDate.Text = Contenido!pdfdate_11
-    txtCreationDate.Text = Contenido!pdfcreationdate_12
-    txtModDate.Text = Contenido!pdfmoddate_13
-    txtMetaDate.Text = Contenido!pdfmetadate_14
-    txt15_pdfcopyright.Text = Contenido!pdfcopyright_15
-    txt16_pdflicenseurl.Text = Contenido!pdflicenseurl_16
-    txtCaptionWriter.Text = Contenido!pdfcaptionwriter_17
-    txtContactAddress.Text = Contenido!pdfcontactaddress_18
-    txtContactCity.Text = Contenido!pdfcontactcity_19
-    txtContactPostCode.Text = Contenido!pdfcontactpostcode_20
-    txtContactCountry.Text = Contenido!pdfcontactcountry_21
-    txtContactRegion.Text = Contenido!pdfcontactregion_22
-    txtContactPhone.Text = Contenido!pdfcontactphone_23
-    txtContactEmail.Text = Contenido!pdfcontactemail_24
-    txtContactURL.Text = Contenido!pdfcontacturl_25
-    txtDocumentId.Text = Contenido!pdfdocumentid_26
-    txtPublication.Text = Contenido!pdfpublication_27
-    txtPublisher28.Text = Contenido!pdfpublisher_28
-    cmbType.Text = Contenido!pdftype_29
-    cbPubType.Text = Contenido!pdfpubtype_30
-    txtVolNum.Text = Contenido!pdfvolumenum_31
-    txtIssueNum.Text = Contenido!pdfissuenum_32
-    txt33_pdfpagerange.Text = Contenido!pdfpagerange_33
-    txt34_pdfbookedition.Text = Contenido!pdfbookedition_34
-    txt35_pdfisbn.Text = Contenido!pdfisbn_35
-    txt36_pdfissn.Text = Contenido!pdfissn_36
-    txt37_pdfeissn.Text = Contenido!pdfeissn_37
-    txt38_pdfpubstatus.Text = Contenido!pdfpubstatus_38
-    txtLang.Text = Contenido!pdflang_39
-    txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
-    txtBaseURL.Text = Contenido!pdfbaseurl_41
-    txt42_pdfurl.Text = Contenido!pdfurl_42
-    txt43_pdfdoi.Text = Contenido!pdfdoi_43
-    cbPDFrendition.Text = Contenido!pdfrendition_44
-    txtDocumentId.Text = Contenido!pdfidentifier_45
-    cbPDFx.Text = Contenido!pdfx_46
-    txtVersionId.Text = Contenido!pdfversionid_47
-    txt48_abstract.Text = Contenido!abstract_48
-    txt48b_abstract.Text = Contenido!abstract_48b
-    txt48c_abstract.Text = Contenido!abstract_48c
-    txt49_imagentapa.Text = Contenido!imagentapa_49
-    txt50_pagetotal.Text = Contenido!pagetotal_50
-    txtCOLECCION.Text = Contenido!relation_51
-    txtDirection.Text = Contenido!direction_52
-    txt53_traductor.Text = Contenido!traductor_53
-    txt54_idiomaorig.Text = Contenido!idiomaorig_54
-    txt55_ilustrador.Text = Contenido!ilustrador_55
-    txt56_resumen.Text = Contenido!resumen_56
-    txt57_palabrasclave.Text = Contenido!palabrasclave_57
-    txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
-    txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
-    txt58_papertitletwo.Text = Contenido!papertitletwo_58
-    txt59_artrecibido.Text = Contenido!artrecibido_59
-    txt60_artaceptado.Text = Contenido!artaceptado_60
-    txtFORMATO.Text = Contenido!formato_61
-    txt59_opt_source.Text = Contenido!source_69
-    txt82_conferenceVisual.Text = Contenido!opt_72
-    txt78_genero.Text = Contenido!genero_78
-    txt82_conference.Text = Contenido!conference_82
-    txt84_bookTitle.Text = Contenido!bookTitle_84
-    txt85_doiRevista.Text = Contenido!doiRevista_85
-    txt86_annotation.Text = Contenido!notas_86
-    txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
-    txt88_audiencia.Text = Contenido!audience_88
-    txt89_binding.Text = Contenido!binding_89
-    txt90_eisbn.Text = Contenido!eISBN_90
-
-  Else
-    BtnNuevoMeta.Visible = True
-    btnGuardarMeta.Visible = False
-    btnGuardarCambiosMeta.Visible = False
-  Endif
+  Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
 
   ' txtContactCountry.MaxLength = 1500
   txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
