@@ -32,6 +32,18 @@
       Enabled = False
     }
   }
+  { menuCOMPILAR Menu
+    Text = ("menuCompilar")
+    Visible = False
+    { menuCompLibro Menu
+      Text = ("vía BookML")
+      Picture = Picture["iconos/gitRemoto.svg"]
+    }
+    { menuComprevista Menu
+      Text = ("vía LWarp")
+      Picture = Picture["iconos/gitRemoto.svg"]
+    }
+  }
   { menuTEXTBOX Menu
     Text = ("menuContextual")
     Visible = False
@@ -104,16 +116,6 @@
     { mnuBorrarTODOS Menu
       Text = ("Borrar tareas completadas")
       Picture = Picture["iconos/borrar.svg"]
-    }
-  }
-  { menuCOMPILAR Menu
-    Text = ("menuCompilar")
-    Visible = False
-    { menuCompLibro Menu
-      Text = ("Compilar libro")
-    }
-    { menuComprevista Menu
-      Text = ("Compilar revista")
     }
   }
   { menuArchivo Menu
@@ -378,10 +380,11 @@
       Text = ("ePub")
       Picture = Picture["iconos/epub.svg"]
     }
-    { btnCOMPhtml Button
-      MoveScaled(32,0,8.8889,4)
+    { btnCOMPhtml MenuButton
+      MoveScaled(32,0,16,4)
       Text = ("HTML")
       Picture = Picture["iconos/web.svg"]
+      Menu = "menuCOMPILAR"
     }
     { Separator2 Separator
       MoveScaled(59,0,2.3333,4)

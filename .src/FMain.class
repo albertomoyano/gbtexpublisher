@@ -3256,16 +3256,6 @@ Public Sub btnCOMPpdf_Click()
 
 End
 
-Public Sub btnCOMPhtml_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    salidaHTML5
-  Endif
-
-End
-
 Public Sub btnCOMPepub_Click()
 
   If TextBox1.Text = "" Then
