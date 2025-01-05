@@ -1918,6 +1918,7 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   ' Guardardamos la actualización de los campos modificados
   guardarCampos()
   Contenido.Update
+  RefrescarGrid()
   Mod_LimpiarTextBox.LimpiarCamposBIB()
 
   ' Informar al usuario que los cambios se guardaron con éxito

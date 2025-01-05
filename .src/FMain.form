@@ -2786,7 +2786,7 @@
           }
         }
         { ScrollView13 ScrollView
-          MoveScaled(41,3,102,43)
+          MoveScaled(42,2,102,43)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
