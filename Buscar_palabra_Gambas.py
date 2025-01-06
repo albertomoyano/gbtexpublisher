@@ -1,8 +1,12 @@
 import os
 import sys
+import re
 
 def buscar_palabra_en_archivos(directorio, palabra):
     coincidencia_encontrada = False
+    # Crear un patrón para buscar solo palabras completas
+    patron = re.compile(rf'\b{re.escape(palabra)}\b')
+
     for root, dirs, files in os.walk(directorio):
         for file in files:
             if file.endswith(".tex"):
@@ -10,7 +14,7 @@ def buscar_palabra_en_archivos(directorio, palabra):
                 try:
                     with open(ruta_archivo, 'r', encoding='utf-8') as f:
                         for num_linea, linea in enumerate(f, 1):
-                            if palabra in linea:
+                            if patron.search(linea):  # Usar la búsqueda del patrón
                                 print(f"Encontrada en: {ruta_archivo}, línea {num_linea}")
                                 coincidencia_encontrada = True
                 except Exception as e:

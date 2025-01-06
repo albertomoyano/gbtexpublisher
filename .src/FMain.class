@@ -169,8 +169,6 @@ Public Sub Form_Open()
   ' asignamos tipografia monoespaciada al textarea de biblio
   txtTMPbiblio.Font = Font["Monospace"]
 
-  rentaTrabajo.Enabled = False' inicia formulario sin habilitar menu renta del trabajo
-
   ' dibuja los gridview
   ' Mod_Funciones.DibujarGridBibTeX()
   Mod_Funciones.ConfigurarGridView(VListaBIB)
@@ -674,7 +672,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
   Menu4.Enabled = True
-  rentaTrabajo.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
@@ -786,7 +783,6 @@ Public Sub mnuLast_Click()
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
   Menu4.Enabled = True
-  rentaTrabajo.Enabled = True
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
