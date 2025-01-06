@@ -4655,12 +4655,6 @@ Public Sub reinicamosTiempo()
 
 End
 
-Public Sub rentaTrabajo_Click()
-
-  Form_Renta.ShowModal()
-
-End
-
 Public Sub btnLimpiar_Click()
 
   TextBox2.Clear
