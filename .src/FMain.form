@@ -207,10 +207,6 @@
       Text = ("Contador / Estadísticas del archivo")
       Enabled = False
     }
-    { rentaTrabajo Menu
-      Text = ("Rentabilizar tiempo de trabajo")
-      Picture = Picture["iconos/renta.svg"]
-    }
     { adminGIT Menu
       Text = ("Administrar .gitignore")
       Picture = Picture["iconos/edit-select.svg"]
