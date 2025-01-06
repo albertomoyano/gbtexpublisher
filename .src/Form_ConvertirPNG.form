@@ -4,7 +4,7 @@
   Move(0,0,963,342)
   #Scaled = False
   Expand = True
-  Text = ("Convertir imagen a PNG")
+  Text = ("Convertir imagen a escala de grises (300 dpi) en formato PNG")
   Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True
