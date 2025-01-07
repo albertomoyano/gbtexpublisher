@@ -44,6 +44,16 @@
       Picture = Picture["iconos/gitRemoto.svg"]
     }
   }
+  { MenuEPUB Menu
+    Text = ("menuEpub")
+    Visible = False
+    { Menu5 Menu
+      Text = ("Modo HTML")
+    }
+    { Menu6 Menu
+      Text = ("Modo imágenes")
+    }
+  }
   { menuTEXTBOX Menu
     Text = ("menuContextual")
     Visible = False
@@ -371,13 +381,15 @@
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
-    { btnCOMPepub Button
-      MoveScaled(23,0,8.8889,4)
+    { btnCOMPepub MenuButton
+      MoveScaled(22.8889,0,14,4)
       Text = ("ePub")
       Picture = Picture["iconos/epub.svg"]
+      Menu = "MenuEPUB"
+      MenuOnly = True
     }
     { btnCOMPhtml MenuButton
-      MoveScaled(32,0,16,4)
+      MoveScaled(37,0,14,4)
       Text = ("HTML")
       Picture = Picture["iconos/web.svg"]
       Menu = "menuCOMPILAR"
@@ -497,7 +509,7 @@
       Foreground = Color.Transparent
     }
     { txtGIT TextBox
-      MoveScaled(71,0,24,4)
+      MoveScaled(63,0,24,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub")
     }
