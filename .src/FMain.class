@@ -1848,6 +1848,7 @@ Public Sub BtnEliminarBib_Click()
 
   Mod_LimpiarTextBox.LimpiarCamposBIB()
   RefrescarGrid()
+  VListaBIB.Refresh
 
   BtnEliminarBib.Visible = False
   btnGuardarCambios.Visible = False
