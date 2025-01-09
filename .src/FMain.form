@@ -35,11 +35,11 @@
   { menuCOMPILAR Menu
     Text = ("menuCompilar")
     Visible = False
-    { menuCompLibro Menu
+    { menuHTML1 Menu
       Text = ("vía BookML")
       Picture = Picture["iconos/gitRemoto.svg"]
     }
-    { menuComprevista Menu
+    { menuHTML2 Menu
       Text = ("vía LWarp")
       Picture = Picture["iconos/gitRemoto.svg"]
     }
@@ -47,10 +47,10 @@
   { MenuEPUB Menu
     Text = ("menuEpub")
     Visible = False
-    { Menu5 Menu
+    { menuEPUB1 Menu
       Text = ("Modo HTML")
     }
-    { Menu6 Menu
+    { menuEPUB2 Menu
       Text = ("Modo imágenes")
     }
   }
