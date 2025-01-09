@@ -520,51 +520,6 @@ Public Sub Form_Show()
 
 End
 
-Public Sub salidaEPUB() 'convertimos a epub
-
-  ' Llamamos a la función del módulo para verificar los metadatos
-  If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
-    ' Si la función retorna False, cancelamos la operación
-    Return
-  End If
-
-  ' Dim folder As String
-  ' Dim newFile As String
-  '
-  ' folder = BaseName & "-epub"
-  ' newFile = "epub-" & BaseName & ".tex"
-  ' Mod_Funciones.Borrar_Aux
-  ' Wait 0.2
-  '
-  ' ' exportamos los archivos bib, glo y meta
-  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  ' Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("cat " & rutaFILES & "/general-epub.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("rm -rf epub" & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
-  ' Wait 0.2
-  '
-  ' ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  ' ' Wait 0.2
-  '
-  ' TerminalView1.SetFocus()
-  ' Mod_Funciones.Borrar_Aux
-
-End
-
 Public Sub Menu24_Click()
 
   Shell "xdg-open https://www.linkedin.com/in/edicion-cientifica/"
@@ -1906,6 +1861,7 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   guardarCampos()
   Contenido.Update
   RefrescarGrid()
+  VListaBIB.Refresh
   Mod_LimpiarTextBox.LimpiarCamposBIB()
 
   ' Informar al usuario que los cambios se guardaron con éxito
@@ -3240,16 +3196,6 @@ Public Sub btnCOMPpdf_Click()
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
     salidaPDFlibro
-  Endif
-
-End
-
-Public Sub btnCOMPepub_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    salidaEPUB
   Endif
 
 End

@@ -377,12 +377,14 @@
     }
     { btnCOMPpdf Button
       MoveScaled(14,0,8.8889,4)
+      Enabled = False
       ToolTip = ("PDF de libro")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnCOMPepub MenuButton
       MoveScaled(22.8889,0,14,4)
+      Enabled = False
       Text = ("ePub")
       Picture = Picture["iconos/epub.svg"]
       Menu = "MenuEPUB"
@@ -390,6 +392,7 @@
     }
     { btnCOMPhtml MenuButton
       MoveScaled(37,0,14,4)
+      Enabled = False
       Text = ("HTML")
       Picture = Picture["iconos/web.svg"]
       Menu = "menuCOMPILAR"
@@ -404,22 +407,26 @@
     }
     { btnCOMPpdfRevista Button
       MoveScaled(75,0,8.8889,4)
+      Enabled = False
       ToolTip = ("PDF de revista")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnCOMPrevistaHTML Button
       MoveScaled(84,0,8.8889,4)
+      Enabled = False
       Text = ("HTML")
       Picture = Picture["iconos/web.svg"]
     }
     { btnGitHubPages Button
       MoveScaled(93,0,8.8889,4)
+      Enabled = False
       Text = ("Pages")
       Picture = Picture["iconos/github-mark.svg"]
     }
     { btnRevistaCompliarXML Button
       MoveScaled(102,0,8.8889,4)
+      Enabled = False
       Text = ("XML")
       Picture = Picture["iconos/xml.svg"]
     }
@@ -434,12 +441,14 @@
     }
     { btnMONOpdf Button
       MoveScaled(127,0,8.8889,4)
+      Enabled = False
       ToolTip = ("PDF de libro")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnMonoDocx Button
       MoveScaled(136,0,8.8889,4)
+      Enabled = False
       Text = ("DOCX")
       Picture = Picture["iconos/ms-office.svg"]
     }
