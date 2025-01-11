@@ -1802,10 +1802,12 @@ Public Sub BtnEliminarBib_Click()
   Endif
 
   Mod_LimpiarTextBox.LimpiarCamposBIB()
-  RefrescarGrid()
   VListaBIB.Refresh
+  RefrescarGrid()
 
+  BtnNuevoBib.Visible = True
   BtnEliminarBib.Visible = False
+  btnGuardar.Visible = False
   btnGuardarCambios.Visible = False
   btnAgregarCitationKey.Visible = False
   btnGuardarIGUAL.Visible = False
@@ -1860,8 +1862,8 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   ' Guardardamos la actualización de los campos modificados
   guardarCampos()
   Contenido.Update
-  RefrescarGrid()
   VListaBIB.Refresh
+  RefrescarGrid()
   Mod_LimpiarTextBox.LimpiarCamposBIB()
 
   ' Informar al usuario que los cambios se guardaron con éxito
@@ -1943,6 +1945,7 @@ Public Sub btnGuardar_Click()
     txtTMPbiblio.Background = Color.LightGray
 
     TabPanel5.Index = 0
+    VListaBIB.Refresh
     RefrescarGrid()
     Mod_LimpiarTextBox.LimpiarCamposBIB()
 
@@ -2757,6 +2760,7 @@ Public Sub btnGuardarIGUAL_Click()
       guardarCampos()
 
       Contenido.Update
+      VListaBIB.Refresh
       RefrescarGrid()
       Message.Info("Nueva entrada guardada.")
 
@@ -5535,6 +5539,7 @@ Public Sub btnGuardarRelacion_Click()
   Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', crossref= '" & valor2 & "', related= '" & valor3 & "', relatedString= '" & valor4 & "', relatedType= '" & valor5 & "' WHERE id= " & idReferencia
 
   meConn.Exec(Consulta)
+  tbRefDup.Refresh
   RefrescarGrid()
 
   txtAUTHORrelacion.Clear
@@ -5931,6 +5936,7 @@ Public Sub btnGuardarDuplicado_Click()
   Consulta = "UPDATE bibtex SET keywords= '" & valor2 & "', citationKey= '" & valor1 & "' WHERE id= " & idReferencia
 
   meConn.Exec(Consulta)
+  griBibOriginal.Refresh
   RefrescarGrid()
 
   txtYearDup.Clear
@@ -6112,10 +6118,10 @@ Public Sub menuHTML2_Click()' html via lwarp
 
 End
 
-Public Sub menuEPUB1_Click()' epub via html
+Public Sub menuEPUB1_Click()' epub via png
 
 End
 
-Public Sub menuEPUB2_Click()' epub via png
+Public Sub menuEPUB2_Click()' epub via html
 
 End

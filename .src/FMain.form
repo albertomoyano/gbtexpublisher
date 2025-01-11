@@ -48,10 +48,10 @@
     Text = ("menuEpub")
     Visible = False
     { menuEPUB1 Menu
-      Text = ("Modo HTML")
+      Text = ("Modo imágenes")
     }
     { menuEPUB2 Menu
-      Text = ("Modo imágenes")
+      Text = ("Modo HTML")
     }
   }
   { menuTEXTBOX Menu
@@ -524,7 +524,7 @@
     }
   }
   { TabPanel1 TabPanel
-    MoveScaled(2,14,162,85)
+    MoveScaled(2,13,162,85)
     Visible = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -821,7 +821,7 @@
       }
     }
     { TabPanel2 TabPanel
-      MoveScaled(1,46,155,66)
+      MoveScaled(1,44,155,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True

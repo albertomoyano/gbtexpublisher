@@ -2,10 +2,10 @@ import os
 import sys
 import re
 
-def buscar_palabra_en_archivos(directorio, palabra):
+def buscar_frase_en_archivos(directorio, frase):
     coincidencia_encontrada = False
-    # Crear un patrón para buscar solo palabras completas
-    patron = re.compile(rf'\b{re.escape(palabra)}\b')
+    # Crear un patrón para buscar la frase completa
+    patron = re.compile(re.escape(frase))  # Escapar cualquier carácter especial en la frase
 
     for root, dirs, files in os.walk(directorio):
         for file in files:
@@ -25,10 +25,10 @@ def buscar_palabra_en_archivos(directorio, palabra):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("No se proporcionó ninguna palabra para buscar.")
+        print("No se proporcionó ninguna frase para buscar.")
         sys.exit(1)
 
-    palabra = sys.argv[1]
+    frase = " ".join(sys.argv[1:])  # Combinar todos los argumentos como una frase
 
     directorio_actual = os.getcwd()
-    buscar_palabra_en_archivos(directorio_actual, palabra)
+    buscar_frase_en_archivos(directorio_actual, frase)

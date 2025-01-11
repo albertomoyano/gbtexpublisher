@@ -1,5 +1,27 @@
 ' Gambas module file
 
+Public Sub salidaEPUBpng()
+
+  ' Llamamos a la función del módulo para verificar los metadatos
+  ' If Not Mod_Funciones.registrosObligatorios(FMain.TextBox1.Text) Then
+  '   ' Si la función retorna False, cancelamos la operación
+  '   Return
+  ' Else
+  ' Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
+  ' End If
+
+  ' revisamos si existe la carpeta epub
+
+  ' generamos el archivo tex y compilamos el pdf
+
+  ' generamos las imagenes png
+
+  ' construimos el epub con los metadatos
+
+  ' booramos los archivos auxiliares
+
+End
+
 Public Sub salidaEPUBhtml()
 
   ' ' Llamamos a la función del módulo para verificar los metadatos
@@ -42,9 +64,5 @@ Public Sub salidaEPUBhtml()
   '
   ' TerminalView1.SetFocus()
   ' Mod_Funciones.Borrar_Aux
-
-End
-
-Public Sub salidaEPUBpng()
 
 End
