@@ -1,34 +1,97 @@
 ' Gambas module file
 
-Public Sub salidaEPUBpng()
+Public rutaFILES As String = File.Dir(FMain.TextBox1.Text) &/ "files"
+Public BaseName As String = File.BaseName(FMain.TextBox1.Text)
 
-  ' Llamamos a la función del módulo para verificar los metadatos
-  ' If Not Mod_Funciones.registrosObligatorios(FMain.TextBox1.Text) Then
+Public Sub salidaEPUBpng(rutaTexto As String)
+
+  ' primero revisamos la construccion de los metadatos
+  ' If Not Mod_Funciones.registrosObligatorios(rutaTexto) Then
   '   ' Si la función retorna False, cancelamos la operación
   '   Return
   ' Else
-  ' Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
+  ' Mod_Exportar.Export2MetaEPUB(rutaTexto)
   ' End If
 
-  ' revisamos si existe la carpeta epub
+  ' Lista de directorios que deseas crear dentro de "ebook"
+  Dim directorios As String[] = ["kindle", "png", "epub1"]
+
+  ' Asegurarse de que el directorio "ebook" existe
+  If Not Exist(File.Dir(rutaTexto) & "/ebook") Then
+    Mkdir File.Dir(rutaTexto) & "/ebook"
+  End If
+
+  ' Crear los subdirectorios dentro de "ebook" si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(rutaTexto) & "/ebook/" & directorio) Then
+      Mkdir File.Dir(rutaTexto) & "/ebook/" & directorio
+    End If
+  Next
+
+  Dim newFile As String = "epub1-pdf-" & BaseName & ".tex"
 
   ' generamos el archivo tex y compilamos el pdf
+  FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub1-pdf.tex " & File.Name(rutaTexto) & " > " & newFile & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
+  Wait 0.2
+
+  ' borramos el archivo que usamos para compilar
+  FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
+  Wait 0.2
+
+  'eliminamos los archivos auxiliares
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(rutaTexto) & "/artcap/*.aux" & "\n")' FMain.TextBox1.Text
+  Wait 0.2
+
+  ' movemos el pdf al directorio epub1
+  FMain.TerminalView1.Input("mv " & File.Dir(rutaTexto) & "/epub1-pdf-" & BaseName & ".pdf" & " " & File.Dir(rutaTexto) & "/ebook/epub1-pdf-" & BaseName & ".pdf" & "\n")
+  Wait 0.2
 
   ' generamos las imagenes png
+  FMain.TerminalView1.Input("gs -sDEVICE=pngmono -r300 -o" & " " & File.Dir(rutaTexto) & "/ebook/png/pagina_%03d.png" & " " & File.Dir(rutaTexto) &/ "ebook/epub1-pdf-" & BaseName & ".pdf" & "\n")
+  Wait 0.2
 
-  ' construimos el epub con los metadatos
+  ' generamos el epub
+
+  ' validamos el epub con un condicional para usar un mensaje de info
+
+  ' ' si la validación dio bien generamos un azw3 usando calibre
+  ' FMain.TerminalView1.Input("ebook-convert" & " " & File.Dir(rutaTexto) & "/ebook/epub1/epub1-pdf-" & BaseName & ".epub" & " " & File.Dir(rutaTexto) & "/ebook/kindle/kindle-pdf-" & BaseName & ".azw3" & "\n")
+  ' Wait 0.2
 
   ' booramos los archivos auxiliares
+  Mod_Funciones.Borrar_Aux
 
 End
 
-Public Sub salidaEPUBhtml()
+Public Sub salidaEPUBhtml(rutaTexto As String)
 
-  ' ' Llamamos a la función del módulo para verificar los metadatos
-  ' If Not Mod_Funciones.registrosObligatorios(FMain.TextBox1.Text) Then
+  ' primero revisamos la construccion de los metadatos
+  ' If Not Mod_Funciones.registrosObligatorios(rutaTexto) Then
   '   ' Si la función retorna False, cancelamos la operación
   '   Return
+  ' Else
+  ' Mod_Exportar.Export2MetaEPUB(rutaTexto)
   ' End If
+
+  ' Lista de directorios que deseas crear dentro de "ebook"
+  Dim directorios As String[] = ["kindle", "epub2"]
+
+  ' Asegurarse de que el directorio "ebook" existe
+  If Not Exist(File.Dir(rutaTexto) & "/ebook") Then
+    Mkdir File.Dir(rutaTexto) & "/ebook"
+  End If
+
+  ' Crear los subdirectorios dentro de "ebook" si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(rutaTexto) & "/ebook/" & directorio) Then
+      Mkdir File.Dir(rutaTexto) & "/ebook/" & directorio
+    End If
+  Next
+
+  Dim newFile As String = "epub2-pdf-" & BaseName & ".tex"
 
   ' Dim folder As String
   ' Dim newFile As String

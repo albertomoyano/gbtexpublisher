@@ -6,35 +6,25 @@ Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExte
 
 Public Sub CopiarArchivos(rutaTexto As String)'libros
 
-  ' usar Exist cuando refiere a directorios y File.RealPath cuando refiere a archivos
-  If Not Exist(File.Dir(rutaTexto) & "/files") Then
-    Mkdir File.Dir(rutaTexto) & "/files"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/correcciones") Then
-    Mkdir File.Dir(rutaTexto) & "/correcciones"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/media") Then
-    Mkdir File.Dir(rutaTexto) & "/media"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/originales") Then
-    Mkdir File.Dir(rutaTexto) & "/originales"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/tapa") Then
-    Mkdir File.Dir(rutaTexto) & "/tapa"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/pdf") Then
-    Mkdir File.Dir(rutaTexto) & "/pdf"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/artcap") Then
-    Mkdir File.Dir(rutaTexto) & "/artcap"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/docs") Then
-    Mkdir File.Dir(rutaTexto) & "/docs"
-  End If
+  ' Lista de directorios que deseas crear
+  Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "pdf", "artcap", "docs"]
+
+  ' Crear los directorios si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(rutaTexto) & "/" & directorio) Then
+      Mkdir File.Dir(rutaTexto) & "/" & directorio
+    End If
+  Next
 
   'copiamos los archivos de preámbulo de libro
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
     Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub1-pdf.tex") Then
+    Copy "./book-epub1-pdf.tex" To File.Dir(rutaTexto) & "/files/book-epub1-pdf.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub2-pdf.tex") Then
+    Copy "./book-epub2-pdf.tex" To File.Dir(rutaTexto) & "/files/book-epub2-pdf.tex"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-xml.tex") Then
     Copy "./book-xml.tex" To File.Dir(rutaTexto) & "/files/book-xml.tex"
@@ -277,7 +267,7 @@ Public Sub VerificarPorcentajeEnTexto(TextoOriginal As String) As String
 
 End
 
-Public Sub VerBibTeXenVListaBIB()
+Public Sub VerBibTeXenVListaBIB(iRow As Integer)' Recoger la fila como parámetro en la función del módulo, se ahorra recuperar 112 veces su valor desde el Gridview
 
   ' Rellenar los campos de texto con los valores de la fila seleccionada
   FMain.txtIDbibtex.Text = FMain.VListaBIB[FMain.VListaBIB.row, 0].Text

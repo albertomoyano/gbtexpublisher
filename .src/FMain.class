@@ -741,6 +741,8 @@ Public Sub mnuLast_Click()
     Form_Contador.Close ' Cierra la ventana
   End If
 
+  Mod_Funciones.CopiarArchivos(TextBox1.Text)
+
   ' limpiamos las entradas de los metadatos
   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
 
@@ -6038,7 +6040,7 @@ Public Sub VListaBIB_Click()' grid en el formulario principal
   btnAgregarKeyBIB.Visible = True
 
   TabPanel2.Index = 0
-  Mod_Funciones.VerBibTeXenVListaBIB()
+  Mod_Funciones.VerBibTeXenVListaBIB(VListaBIB.row)' en el evento Click de la celda pasar como parámetro la fila
 
 End
 
@@ -6120,8 +6122,12 @@ End
 
 Public Sub menuEPUB1_Click()' epub via png
 
+  Mod_GenerarEPUB.salidaEPUBpng(TextBox1.Text)
+
 End
 
 Public Sub menuEPUB2_Click()' epub via html
+
+  Mod_GenerarEPUB.salidaEPUBhtml(TextBox1.Text)
 
 End

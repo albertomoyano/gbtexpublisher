@@ -48,10 +48,10 @@
     Text = ("menuEpub")
     Visible = False
     { menuEPUB1 Menu
-      Text = ("Modo imágenes")
+      Text = ("epub + azw3 (modo imágenes png)")
     }
     { menuEPUB2 Menu
-      Text = ("Modo HTML")
+      Text = ("epub + azw3 (modo archivos html)")
     }
   }
   { menuTEXTBOX Menu
@@ -385,7 +385,7 @@
     { btnCOMPepub MenuButton
       MoveScaled(22.8889,0,14,4)
       Enabled = False
-      Text = ("ePub")
+      Text = ("e-book")
       Picture = Picture["iconos/epub.svg"]
       Menu = "MenuEPUB"
       MenuOnly = True
