@@ -384,7 +384,7 @@ Public Sub VerBibTeXenVListaBIB(iRow As Integer)'  Recoger la fila como parámet
     .txtTitleAddOn.Text = .VListaBIB[iRow, 110].Text
     .txtSubTitle.Text = .VListaBIB[iRow, 111].Text
   End With
-  
+
   ' ' Rellenar los campos de texto con los valores de la fila seleccionada
   ' With FMain
   '   .txtIDbibtex.Text = .VListaBIB[.VListaBIB.row, 0].Text

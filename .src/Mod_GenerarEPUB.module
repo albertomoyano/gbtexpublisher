@@ -95,8 +95,6 @@ Public Sub salidaEPUBhtml(rutaTexto As String)
   ' Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
   ' Wait 0.2
   '
-  ' TerminalView1.Input("cat " & rutaFILES & "/general-epub.tex " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  ' Wait 0.2
   '
   ' TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
   ' Wait 0.2
