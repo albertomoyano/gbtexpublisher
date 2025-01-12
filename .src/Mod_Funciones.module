@@ -23,8 +23,8 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub1-pdf.tex") Then
     Copy "./book-epub1-pdf.tex" To File.Dir(rutaTexto) & "/files/book-epub1-pdf.tex"
   End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub2-xml.tex") Then
-    Copy "./book-epub2-xml.tex" To File.Dir(rutaTexto) & "/files/book-epub2-xml.tex"
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub3.tex") Then
+    Copy "./book-epub3.tex" To File.Dir(rutaTexto) & "/files/book-epub3.tex"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-xml.tex") Then
     Copy "./book-xml.tex" To File.Dir(rutaTexto) & "/files/book-xml.tex"

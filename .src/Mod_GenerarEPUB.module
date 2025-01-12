@@ -77,7 +77,7 @@ Public Sub salidaEPUBhtml(rutaTexto As String)
   ' End If
 
   ' Lista de directorios que deseas crear dentro de "ebook"
-  Dim directorios As String[] = ["kindle", "epub2"]
+  Dim directorios As String[] = ["kindle", "epub3"]
 
   ' Asegurarse de que el directorio "ebook" existe
   If Not Exist(File.Dir(rutaTexto) & "/ebook") Then
@@ -91,10 +91,10 @@ Public Sub salidaEPUBhtml(rutaTexto As String)
     End If
   Next
 
-  Dim newFile As String = "epub2-xml-" & BaseName & ".tex"
+  Dim newFile As String = "epub3-" & BaseName & ".tex"
 
   ' generamos el archivo tex y compilamos el pdf
-  FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub2-xml.tex " & File.Name(rutaTexto) & " > " & newFile & "\n")
+  FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub3.tex " & File.Name(rutaTexto) & " > " & newFile & "\n")
   Wait 0.2
 
   ' Dim folder As String

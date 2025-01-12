@@ -1,11 +1,10 @@
 \documentclass[openany]{book}
 % Idiomas
 \usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
-\usepackage[autostyle=true]{csquotes}
+\usepackage{csquotes}
 \renewcommand{\spanishcontentsname}{Sumario}
 \renewcommand{\spanishindexname}{Índice alfabético}
 
-\tracinglostchars=2
 \usepackage{fontspec}
 
 % configuración de los valores decimales de los cuadros
@@ -28,7 +27,6 @@
 \usepackage[labelfont=bf,font=small,labelsep=period,format=plain]{caption}
 \usepackage{ragged2e}
 \usepackage{xcolor}
-\usepackage[framemethod=tikz]{mdframed}
 \usepackage{bchart}
 \usepackage[most]{tcolorbox}
 % control sobre parrafos de una linea a final de página
@@ -206,7 +204,6 @@
 
 \newcommand{\TheAuthor}{}
 \newcommand{\Author}[1]{\renewcommand{\TheAuthor}{#1}}
-
 
 % NUEVO TIPO DE ENTORNO FLOTANTE PARA FOTOGRAFIAS (\listofimagen)
 \usepackage{newfloat}
