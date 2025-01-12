@@ -1,5 +1,5 @@
 \documentclass[openany]{book}
-% Idiomas y babel
+% Idiomas
 \usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
 \usepackage[autostyle=true]{csquotes}
 \renewcommand{\spanishcontentsname}{Sumario}
@@ -7,7 +7,6 @@
 
 \tracinglostchars=2
 \usepackage{fontspec}
-\usepackage{microtype}
 
 % configuración de los valores decimales de los cuadros
 \usepackage{siunitx}
@@ -17,14 +16,6 @@
          table-text-alignment=center,
          detect-all,
          per-mode=fraction}
-
-% control de ruptura de linea
-\usepackage{linebreaker}
-\linebreakersetup{
-	maxtolerance=90,
-	maxemergencystretch=1em,
-	maxcycles=4
-}
 
 % paquetes varios
 \usepackage{froufrou}
@@ -73,27 +64,6 @@
 % niveles para los contadores
 \setcounter{tocdepth}{0}
 \setcounter{secnumdepth}{4}
-
-% dibujo de caja contenedora, solo para desarrollo
-%\usepackage{showframe}
-%\renewcommand\ShowFrameLinethickness{0.1pt}
-%\renewcommand\ShowFrameColor{\color{blue}}
-
-% diseño del pie de página
-\usepackage[bottom,stable,hang]{footmisc}
-\makeatletter
-\patchcmd{\@footnotetext}{\footnotesize}{\small}{}{}% tamaño del cuerpo del texto del footnote
-\makeatother
-\renewcommand*{\thefootnote}{\scriptsize\sf{[\arabic{footnote}]}}% tamaño del cuerpo de puntero del footnote
-
-% KOMA script
-\usepackage{scrextend}
-% \KOMAoptions{footnotes=multiple}% maybe you want to use this option?
-\newcommand*\footnotemarkspace{0em} % set distance of the footnote text from the margin
-\deffootnote{\footnotemarkspace}% use distance from above
-{\parindent}% paragraph indent in footnotes (footnotes should never have paragraphs!)
-{\makebox[\footnotemarkspace][r]{\llap{\thefootnotemark\quad}}} % footfont with period for footnote marks in footnote
-%   {\makebox[\footnotemarkspace][l]{\footfont\phantom{99}\llap{\thefootnotemark.}}} % footfont with period for footnote marks in footnote
 
 % cambiar la font specification for the name "PART"
 \renewcommand\thepart{\arabic{part}}
@@ -237,14 +207,6 @@
 \newcommand{\TheAuthor}{}
 \newcommand{\Author}[1]{\renewcommand{\TheAuthor}{#1}}
 
-% Ajustes de viudas y huérfanas
-\raggedbottom
-\clubpenalty=10000
-\widowpenalty=10000
-% \finalhyphendemerits% evitamos el corte en la última línea del párrafo
-%% CON ESTAS 2 INSTRUCCIONES NUNCA VA A GUIONIZAR PALABRAS MENORES A 7 CARACTERES
-% \lefthyphenmin3 %% determina el minimo de caracteres de final de linea a la izquierda
-% \righthyphenmin3 %% determina el minimo de caracteres de final de linea a la derecha
 
 % NUEVO TIPO DE ENTORNO FLOTANTE PARA FOTOGRAFIAS (\listofimagen)
 \usepackage{newfloat}
@@ -256,22 +218,6 @@ placement=ht,
 %within=section,% activate it if you want
 %chapterlistsgaps=on,% meaningful only if chapters exist
 ]{imagen}
-
-% DISEÑO DE RAYA DEL MEDIO
-\makeatletter
-\def\thinskip{\hskip 0.16667em\relax}
-\def\endash{--}
-\def\emdash{\endash-}
-\def\d@sh#1#2{\unskip#1\thinskip#2\thinskip\ignorespaces}
-\def\dash{\d@sh\nobreak\endash}
-\def\Dash{\d@sh\nobreak\emdash}
-\def\ldash{\d@sh\empty{\hbox{\endash}\nobreak}}
-\def\rdash{\d@sh\nobreak\endash}
-\def\Ldash{\d@sh\empty{\hbox{\emdash}\nobreak}}
-\def\Rdash{\d@sh\nobreak\emdash}
-\def\hyph{-\penalty\z@\hskip\z@skip}
-\def\slash{/\penalty\z@\hskip\z@skip}
-\makeatother
 
 % CENTRADO DEL AUTOR DE LOS CAPITULOS
 \newcommand\nombreautor[1]{\textsc{\MakeLowercase{#1}}}
@@ -559,11 +505,6 @@ uniquelist=minyear]{biblatex}
 % Instrucciones de salida
 %\printnoidxglossary[type=\acronymtype,title={Índice de siglas}]
 %\printnoidxglossary[title={Glosario de términos}]
-
-\usepackage{url}%[allowmove]
-\Urlmuskip = 0mu plus 1mu
-\def\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do.\do:\do\%\do?\do_\do-\do+\do/\do\#\do~}
-\def\UrlFont{\rm}
 
 \usepackage{ifthen}
 
