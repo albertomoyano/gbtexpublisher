@@ -68,14 +68,6 @@ End
 
 Public Sub salidaEPUBhtml(rutaTexto As String)
 
-  ' primero revisamos la construccion de los metadatos
-  ' If Not Mod_Funciones.registrosObligatorios(rutaTexto) Then
-  '   ' Si la función retorna False, cancelamos la operación
-  '   Return
-  ' Else
-  ' Mod_Exportar.Export2MetaEPUB(rutaTexto)
-  ' End If
-
   ' Lista de directorios que deseas crear dentro de "ebook"
   Dim directorios As String[] = ["kindle", "epub3"]
 
@@ -97,14 +89,6 @@ Public Sub salidaEPUBhtml(rutaTexto As String)
   FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub3.tex " & File.Name(rutaTexto) & " > " & newFile & "\n")
   Wait 0.2
 
-  ' Dim folder As String
-  ' Dim newFile As String
-  '
-  ' folder = BaseName & "-epub"
-  ' newFile = "epub-" & BaseName & ".tex"
-  ' Mod_Funciones.Borrar_Aux
-  ' Wait 0.2
-  '
   ' ' exportamos los archivos bib, glo y meta
   ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
   ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
@@ -117,12 +101,14 @@ Public Sub salidaEPUBhtml(rutaTexto As String)
   ' TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
   ' Wait 0.2
   '
-  ' TerminalView1.Input("rm -rf epub" & "\n")
-  ' Wait 0.2
   '
   ' TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
   ' Wait 0.2
-  '
+
+  ' ' si la validación dio bien generamos un azw3 usando calibre
+  ' FMain.TerminalView1.Input("ebook-convert" & " " & File.Dir(rutaTexto) & "/ebook/epub1/epub1-pdf-" & BaseName & ".epub" & " " & File.Dir(rutaTexto) & "/ebook/kindle/kindle-pdf-" & BaseName & ".azw3" & "\n")
+  ' Wait 0.2
+
   ' TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
   ' Wait 0.2
   '
