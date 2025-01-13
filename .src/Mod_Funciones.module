@@ -267,9 +267,9 @@ Public Sub VerificarPorcentajeEnTexto(TextoOriginal As String) As String
 
 End
 
-Public Sub VerBibTeXenVListaBIB(iRow As Integer)'  Recoger la fila como parámetro en la función del módulo, se ahorra recuperar 112 veces su valor desde el Gridview
+Public Sub VerBibTeXenVListaBIB(iRow As Integer)
+  ' Recoger la fila como parámetro en la función del módulo, se ahorra recuperar 112 veces su valor desde el Gridview
 
-  ' Rellenar los campos de texto con los valores de la fila seleccionada
   With FMain
     .txtIDbibtex.Text = .VListaBIB[iRow, 0].Text
     .ComboBox1.Text = .VListaBIB[iRow, 1].Text
