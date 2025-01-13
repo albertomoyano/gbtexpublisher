@@ -801,3 +801,31 @@ Public Sub CargarMetadatosArchivoActual()
   Endif
 
 End
+
+Public Sub CerrarTodo()
+
+  If FMain.meConn Then
+    FMain.meConn.Close()
+    FMain.meConn = Null
+    FMain.Contenido = Null
+    FMain.ContenidoBibTotal = Null
+    FMain.ContenidoBibActual = Null
+  Endif
+
+  ' Guardar el último archivo abierto
+  MS.SetLastListToSettings()
+  Try FMain.pBash.Kill
+  Wait 0.1
+  Try FMain.fFile.Close
+  Wait 1
+
+  ' Cerrar la aplicación
+  Form_ConectarBBDD.Close
+
+  ' borramos las carpetas que se crean en el cache
+  Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
+  Wait 0.1
+
+  Quit
+
+End
