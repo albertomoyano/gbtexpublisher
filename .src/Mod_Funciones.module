@@ -34,6 +34,9 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
     Copy "./imagoCustom.css" To File.Dir(rutaTexto) & "/files/imagoCustom.css"
   End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/build.lua") Then
+    Copy "./build.lua" To File.Dir(rutaTexto) & "/files/build.lua"
+  End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoEpub.css") Then
     Copy "./imagoEpub.css" To File.Dir(rutaTexto) & "/files/imagoEpub.css"
   End If

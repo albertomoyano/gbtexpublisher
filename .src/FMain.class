@@ -188,29 +188,6 @@ End
 Public Sub Form_Close()
 
   Mod_Funciones.CerrarTodo()
-  ' If meConn Then
-  '   meConn.Close()
-  '   meConn = Null
-  '   Contenido = Null
-  '   ContenidoBibTotal = Null
-  '   ContenidoBibActual = Null
-  ' Endif
-  '
-  ' ' Guardar el último archivo abierto
-  ' MS.SetLastListToSettings()
-  ' Try pBash.Kill
-  ' Wait 0.1
-  ' Try fFile.Close
-  ' Wait 1
-  '
-  ' ' Cerrar la aplicación
-  ' Form_ConectarBBDD.Close
-  '
-  ' ' borramos las carpetas que se crean en el cache
-  ' Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
-  ' Wait 0.1
-  '
-  ' Quit
 
 End
 
@@ -489,29 +466,6 @@ End
 Public Sub Menu11_Click()'cerrar el programa
 
   Mod_Funciones.CerrarTodo()
-  ' If meConn Then
-  '   meConn.Close()
-  '   meConn = Null
-  '   Contenido = Null
-  '   ContenidoBibTotal = Null
-  '   ContenidoBibActual = Null
-  ' Endif
-  '
-  ' ' Guardar el último archivo abierto
-  ' MS.SetLastListToSettings()
-  ' Try pBash.Kill
-  ' Wait 0.1
-  ' Try fFile.Close
-  ' Wait 1
-  '
-  ' ' Cerrar la aplicación
-  ' Form_ConectarBBDD.Close
-  '
-  ' ' borramos las carpetas que se crean en el cache
-  ' Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
-  ' Wait 0.1
-  '
-  ' Quit
 
 End
 
