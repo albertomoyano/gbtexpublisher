@@ -4,6 +4,8 @@ Public meConn As New Connection
 
 Public Sub Form_Open()
 
+  Form_ConectarBBDD.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+
   ' por el momento esta funcion se deshabilita
   Dim name As String
   ' Usamos pgrep para buscar procesos por el nombre exacto de la aplicación
