@@ -6089,3 +6089,24 @@ Public Sub menuEPUB2_Click()' epub via html
   Mod_GenerarEPUB.salidaEPUBhtml(TextBox1.Text)
 
 End
+
+Public Sub btnVerAsunto1_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtSubjet
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerAsunto2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtpdfsubject_07b
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerAsunto3_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtpdfsubject_07c
+  Form_TXTextendido.ShowModal()
+
+End
