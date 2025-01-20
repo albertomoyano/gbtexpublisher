@@ -6117,7 +6117,7 @@ End
 
 Public Sub Menu5_Click()' blog de gbTeXpublisher
 
-  Shell "xdg-open https://albertomoyano.github.io/gbtexpublisher/"
+  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher/wiki"
 
 End
 

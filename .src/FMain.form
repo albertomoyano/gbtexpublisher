@@ -356,7 +356,7 @@
       Picture = Picture["iconos/icono-gbtex.svg"]
     }
     { Menu5 Menu
-      Text = ("Blog de gbTeXpublisher")
+      Text = ("wiki del proyecto")
     }
     { Menu24 Menu
       Text = ("Contactar al desarrollador")
