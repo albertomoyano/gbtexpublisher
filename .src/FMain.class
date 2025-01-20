@@ -571,6 +571,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   MenuApp.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
+  btnMenuGitLab.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
@@ -682,6 +683,7 @@ Public Sub mnuLast_Click()
   MenuApp.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
+  btnMenuGitLab.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
@@ -3705,6 +3707,7 @@ Public Sub menuAbrirRevista_Click()
   MenuApp.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
+  btnMenuGitLab.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   Menu4.Enabled = True
@@ -4079,6 +4082,7 @@ Public Sub menuMono_Click()'monografia academica
   MenuApp.Enabled = True
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
+  btnMenuGitLab.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   Menu4.Enabled = True
@@ -6108,5 +6112,11 @@ Public Sub btnVerAsunto3_Click()
 
   Form_TXTextendido.OriginalTextBox = txtpdfsubject_07c
   Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub Menu5_Click()' blog de gbTeXpublisher
+
+  Shell "xdg-open https://albertomoyano.github.io/gbtexpublisher/"
 
 End

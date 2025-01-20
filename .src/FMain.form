@@ -355,6 +355,9 @@
       Text = ("Acerca de gbTeXpublisher")
       Picture = Picture["iconos/icono-gbtex.svg"]
     }
+    { Menu5 Menu
+      Text = ("Blog de gbTeXpublisher")
+    }
     { Menu24 Menu
       Text = ("Contactar al desarrollador")
       Picture = Picture["iconos/go-home.svg"]
@@ -484,7 +487,7 @@
     }
   }
   { HBox9 HBox
-    MoveScaled(1,8,114,4)
+    MoveScaled(1,8,123,4)
     { MenuApp MenuButton
       MoveScaled(1,0,17.7778,4)
       Enabled = False
@@ -501,7 +504,7 @@
       MoveScaled(22,0,17.7778,4)
       Enabled = False
       Text = ("Git local")
-      Picture = Picture["iconos/github.svg"]
+      Picture = Picture["iconos/git-local.svg"]
     }
     { Separator11 Separator
       MoveScaled(41,0,0.8889,4)
@@ -511,16 +514,31 @@
       MoveScaled(44,0,17.7778,4)
       Enabled = False
       Text = ("GitHub")
-      Picture = Picture["iconos/github-mark.svg"]
+      Picture = Picture["iconos/github.svg"]
     }
     { Separator10 Separator
       MoveScaled(64,0,0.8889,4)
       Foreground = Color.Transparent
     }
     { txtGIT TextBox
-      MoveScaled(63,0,24,4)
+      MoveScaled(63,0,8,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub")
+    }
+    { Separator8 Separator
+      MoveScaled(86,0,0.8889,4)
+      Foreground = Color.Transparent
+    }
+    { btnMenuGitLab Button
+      MoveScaled(88,0,17.7778,4)
+      Enabled = False
+      Text = ("GitHub")
+      Picture = Picture["iconos/gitlab.svg"]
+    }
+    { txtGitLab TextBox
+      MoveScaled(107,0,8,4)
+      Expand = True
+      Placeholder = ("coloque aquí su usuario GitLab")
     }
   }
   { TabPanel1 TabPanel
@@ -4928,8 +4946,8 @@
       Index = 0
     }
     Index = 4
-    Text = ("GitHub Pages     ")
-    Picture = Picture["iconos/github-mark.svg"]
+    Text = ("Git Hub/Lab Pages     ")
+    Picture = Picture["iconos/web.svg"]
     { HBox181 HBox
       MoveScaled(1,1,118,4)
       { BtnNuevoGHP Button
@@ -4995,7 +5013,7 @@
           Text = ("Fecha de publicación  ")
         }
         { !txtPubDateHTML TextBox
-          MoveScaled(23,0,23,4)
+          MoveScaled(20,0,23,4)
           #Public = True
           Expand = True
           Placeholder = ("DD-MM-YYYY")
@@ -5583,6 +5601,6 @@
     Index = 0
   }
   { Timer1 #Timer
-    #MoveScaled(116,5)
+    #MoveScaled(125,5)
   }
 }
