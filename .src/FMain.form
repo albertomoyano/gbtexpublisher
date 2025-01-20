@@ -503,7 +503,7 @@
     { Button4 Button
       MoveScaled(22,0,17.7778,4)
       Enabled = False
-      Text = ("Git local")
+      Text = ("Git Local")
       Picture = Picture["iconos/git-local.svg"]
     }
     { Separator11 Separator
@@ -515,10 +515,6 @@
       Enabled = False
       Text = ("GitHub")
       Picture = Picture["iconos/github.svg"]
-    }
-    { Separator10 Separator
-      MoveScaled(64,0,0.8889,4)
-      Foreground = Color.Transparent
     }
     { txtGIT TextBox
       MoveScaled(63,0,8,4)
@@ -532,7 +528,7 @@
     { btnMenuGitLab Button
       MoveScaled(88,0,17.7778,4)
       Enabled = False
-      Text = ("GitHub")
+      Text = ("GitLab")
       Picture = Picture["iconos/gitlab.svg"]
     }
     { txtGitLab TextBox
