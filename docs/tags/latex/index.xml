@@ -1,126 +1,135 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LaTeX on Alberto Moyano</title>
-    <link>https://albertomoyano.github.io/blog-gbtexpublisher/tags/latex/</link>
-    <description>Recent content in LaTeX on Alberto Moyano</description>
+    <title>LaTeX on gbTeXpublisher</title>
+    <link>http://localhost:1313/blog-gbtexpublisher/tags/latex/</link>
+    <description>Recent content in LaTeX on gbTeXpublisher</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
-    <lastBuildDate>Sun, 05 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://albertomoyano.github.io/blog-gbtexpublisher/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog-gbtexpublisher/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Funciones para el trabajo de corrección</title>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/menues/</link>
+      <pubDate>Wed, 14 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/menues/</guid>
+      <description>&lt;p&gt;Nota en desarrollo&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Primeras aproximaciones a dPID</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/pid/</link>
-      <pubDate>Sun, 05 May 2024 00:00:00 +0000</pubDate>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/pid/</link>
+      <pubDate>Thu, 11 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/pid/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/pid/</guid>
       <description>&lt;p&gt;Los Identificadores Persistentes Descentralizados (dPID) en el contexto de revistas académicas y la gestión de información científica son una novedosa forma de asignar identificadores únicos a objetos digitales (como pueden ser documentos de investigación, datos de investigación, autores, contribuidores, etc.) de manera que estos puedan ser localizados e identificados de forma precisa en el vasto ecosistema digital.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Cambio de GitLab a GitHub</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/github-gitlab/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/github-gitlab/</link>
       <pubDate>Wed, 10 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/github-gitlab/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/github-gitlab/</guid>
       <description>&lt;p&gt;Me complace informarles que he tomado la decisión de trasladar el desarrollo de GitLab a GitHub. Si bien no hay motivos críticos que hayan impulsado esta decisión, encontré ciertas ventajas que ofrece GitHub.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>III Jornadas Latinoamericanas de Estudios de Edición</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/iiijornadas/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/iiijornadas/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/iiijornadas/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/iiijornadas/</guid>
       <description>&lt;p&gt;El pasado 14 de marzo, tuve la posibilidad de dar una charla sobre edición ramificada utilizando gbTeXpublisher, como el tiempo fue escaso y quedaron muchas características sin mostrar, decidí hacer esta serie de videos que dan una muestra integral del software.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Utilizar docx2tex</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/docx2tex/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/docx2tex/</link>
       <pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/docx2tex/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/docx2tex/</guid>
       <description>&lt;p&gt;gbTeXpublisher suma la posibilidad de convertir los archivos docx a tex utilizando docx2tex.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Metadatos en Libre Office</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/metadatosenodt/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/metadatosenodt/</link>
       <pubDate>Wed, 24 Jan 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/metadatosenodt/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/metadatosenodt/</guid>
       <description>&lt;p&gt;Me complace informar que se ha lanzado una nueva versión de gbTeXpublisher, la cual está disponible para su descarga. Esta actualización presenta varias mejoras, siendo la más destacada la capacidad de compilar con salida a LibreOffice y MS Word con los metadatos incrustados.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Nueva versión de gbTeXpublisher</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/tareas/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/tareas/</link>
       <pubDate>Tue, 16 Jan 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/tareas/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/tareas/</guid>
       <description>&lt;p&gt;Me complace anunciar que se encuentra disponible una nueva versión de gbTeXpublisher para su descarga. Esta actualización incluye dos cambios significativos, uno de los cuales no es visible para el usuario, mientras que el segundo presenta una característica notable.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Presentación de gbTeXpublisher</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/gbtex/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/gbtex/</link>
       <pubDate>Tue, 26 Dec 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/gbtex/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/gbtex/</guid>
       <description>&lt;p&gt;gbTeXpublisher es una aplicación diseñada para facilitar la producción editorial. Si te desempeñas como editor, corrector o diseñador de libros, especialmente con un enfoque significativo en la edición científica, este artículo introductorio podría resultarte de interés.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>URL largas en los libros</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-15-urllargas/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/2023-03-15-urllargas/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-15-urllargas/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/2023-03-15-urllargas/</guid>
       <description>&lt;p&gt;Esta situación la vengo revisando desde hace mucho tiempo, pero aún hoy, no sé que solución es la más satisfactoria.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Trabajo editorial en el aparato crítico</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/ibidem/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/ibidem/</link>
       <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/ibidem/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/ibidem/</guid>
       <description>&lt;p&gt;Este listado de abreviaturas es de uso general, pero las aclaraciones al final se limitan al estándar desarrollado por &lt;a href=&#34;https://www.ctan.org/pkg/biblatex-philosophy&#34;&gt;Iván Valbusa&lt;/a&gt;, él toma como base el &lt;em&gt;default&lt;/em&gt; de BibLaTeX; que si bien tiene muchas similitudes con otros estándares (APA, Chicago, Harvard, etc.), también tiene sutiles diferencias.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Énfasis o itálicas (I)</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/enfasis/</link>
       <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/enfasis/</guid>
       <description>&lt;p&gt;Doy comienzo a una serie de artículos en los que voy a comentar características interesantes surgidas al calor de la producción editorial trabajando con LaTeX (ya sean de corrección, edición, maquetado o impresión). Si bien todos los libros en su proceso de producción tienen lugares comunes (léase estandarizados) en lo referente al modelo de edición, siempre hay espacio para situaciones especiales, la idea es compartirlas. Como existe la posibilidad de que algunos libros tengan varias situaciones para comentar y, considerando no hacer estos textos muy extensos (ya que la idea es que se conviertan en &lt;em&gt;tips&lt;/em&gt; de producción), voy a numerar los artículos con mayúsculas en romanos, si más adelante apareciera un artículo donde el número en romano se acompaña de una letra, esto obedece a que ese libro ya fue comentado en otra oportunidad, para esos casos voy a mantener relaciones cruzadas entre los diferentes artículos.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Opciones tipográficas</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/condicional-minion/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/condicional-minion/</link>
       <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/condicional-minion/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/condicional-minion/</guid>
       <description>&lt;p&gt;Este artículo pretende desarrollar un ejercicio con las &lt;em&gt;features&lt;/em&gt; que poseen las tipografías &lt;a href=&#34;https://es.wikipedia.org/wiki/OpenType&#34;&gt;OpenType&lt;/a&gt; y mostrar:&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>La bibliografía en libros de VVAA</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/vvaa/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/vvaa/</link>
       <pubDate>Sat, 08 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/vvaa/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/vvaa/</guid>
       <description>&lt;p&gt;Como consecuencia de una pregunta que se dio en un &lt;a href=&#34;https://www.linkedin.com/groups/12515598/&#34;&gt;seminario que cursé en la UBA&lt;/a&gt; en el segundo cuatrimestre de 2021 y, para ampliar mi mirada sobre el tema, decidí hacer una pequeña investigación que involucró a varios autores, correctores profesionales y editores con bastante experiencia, hago explícito que no lo hice con ninguna pretensión de investigación académica ni nada parecido, de ahí también que haya trabajado con un universo pequeño.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Homeoarchy, «esa te la debo»</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/homeoarchy/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/homeoarchy/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/homeoarchy/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/homeoarchy/</guid>
       <description>En un listado de los diferentes momentos que existen durante el proceso de edición de un libro –a mi juicio– la corrección (en todas sus etapas) está entre los más importantes, son muchas las editoriales que pueden mandar a imprimir un libro, incluso son muchas más las que simplemente «ensucian papel», pero realmente son pocas las que editan y publican con extremos cuidados y de manera profesional.
 El rubro editorial no escapa de la pelea –paradigma del desarrollo capitalista– por mantener y, en el mejor de las casos, intentar aumentar su tasa de ganancia, la idea de la edición romántica solo vale para quienes editan por hobby (dicho de otra manera, no viven de lo que obtienen como renta por editar), en muchos casos el mantenimiento de esta tasa se obtiene a través de la eliminación de procesos de control, una baja en la calidad de los materiales utilizados y, en el peor de los mundos, mentir, lisa y llanamente, esto es, decir asegurar hacer cosas que en realidad no se hacen.</description>
     </item>

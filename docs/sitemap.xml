@@ -2,172 +2,175 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/</loc>
-    <lastmod>2024-05-05T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog-gbtexpublisher/</loc>
+    <lastmod>2024-08-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/gbtexpublisher/</loc>
-    <lastmod>2024-05-05T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/menues/</loc>
+    <lastmod>2024-08-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/index/</loc>
-    <lastmod>2024-05-05T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/gbtexpublisher/</loc>
+    <lastmod>2024-08-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/latex/</loc>
-    <lastmod>2024-05-05T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/index/</loc>
+    <lastmod>2024-08-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/</loc>
-    <lastmod>2024-05-05T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/latex/</loc>
+    <lastmod>2024-08-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/pid/</loc>
-    <lastmod>2024-05-05T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/</loc>
+    <lastmod>2024-08-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/</loc>
-    <lastmod>2024-05-05T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/</loc>
+    <lastmod>2024-08-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/github-gitlab/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/pid/</loc>
+    <lastmod>2024-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/github-gitlab/</loc>
     <lastmod>2024-04-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/git/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/git/</loc>
     <lastmod>2024-04-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/iiijornadas/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/iiijornadas/</loc>
     <lastmod>2024-03-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/docx2tex/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/docx2tex/</loc>
     <lastmod>2024-02-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/libre-office/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/libre-office/</loc>
     <lastmod>2024-01-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/metadatos/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/metadatos/</loc>
     <lastmod>2024-01-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/metadatosenodt/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/metadatosenodt/</loc>
     <lastmod>2024-01-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/tareas/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/tareas/</loc>
     <lastmod>2024-01-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/gbtex/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/gbtex/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/about/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/about/</loc>
     <lastmod>2023-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/categories/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/categories/</loc>
     <lastmod>2023-03-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/edici%C3%B3n/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/edici%C3%B3n/</loc>
     <lastmod>2023-03-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/categories/libros/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/categories/libros/</loc>
     <lastmod>2023-03-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/url/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/url/</loc>
     <lastmod>2023-03-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-15-urllargas/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/2023-03-15-urllargas/</loc>
     <lastmod>2023-03-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/bibtex/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/bibtex/</loc>
     <lastmod>2023-03-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/ibidem/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/ibidem/</loc>
     <lastmod>2023-03-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/academia/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/academia/</loc>
     <lastmod>2023-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/categories/edici%C3%B3n/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/categories/edici%C3%B3n/</loc>
     <lastmod>2023-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/markdown/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/markdown/</loc>
     <lastmod>2023-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/2023-03-09-markdown/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/2023-03-09-markdown/</loc>
     <lastmod>2023-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/css/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/css/</loc>
     <lastmod>2022-07-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/markdown-syntax/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/markdown-syntax/</loc>
     <lastmod>2022-07-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/html/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/html/</loc>
     <lastmod>2022-07-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/categories/syntax/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/categories/syntax/</loc>
     <lastmod>2022-07-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/categories/themes/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/categories/themes/</loc>
     <lastmod>2022-07-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/enfasis/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/enfasis/</loc>
     <lastmod>2022-01-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/condicional-minion/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/condicional-minion/</loc>
     <lastmod>2022-01-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/tipograf%C3%ADa/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/tipograf%C3%ADa/</loc>
     <lastmod>2022-01-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/vvaa/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/vvaa/</loc>
     <lastmod>2022-01-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/jabref/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/jabref/</loc>
     <lastmod>2021-12-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/peliculas/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/peliculas/</loc>
     <lastmod>2021-12-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/rae/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/rae/</loc>
     <lastmod>2021-12-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/gambas/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/gambas/</loc>
     <lastmod>2021-12-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/categories/lenguajes/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/categories/lenguajes/</loc>
     <lastmod>2021-12-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/programaci%C3%B3n/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/programaci%C3%B3n/</loc>
     <lastmod>2021-12-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/homeoarchy/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/homeoarchy/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/ortotipograf%C3%ADa/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/ortotipograf%C3%ADa/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/2020-12-30-005/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/2020-12-30-005/</loc>
     <lastmod>2020-12-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/xml/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/xml/</loc>
     <lastmod>2020-12-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/archives/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/privacy/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/privacy/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/rich-content/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/rich-content/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/shortcodes/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/shortcodes/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/placeholder-text/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/placeholder-text/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/text/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/text/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/math-typesetting/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/math-typesetting/</loc>
     <lastmod>2019-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/tags/emoji/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/tags/emoji/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://albertomoyano.github.io/blog-gbtexpublisher/post/emoji-support/</loc>
+    <loc>http://localhost:1313/blog-gbtexpublisher/post/emoji-support/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url>
 </urlset>

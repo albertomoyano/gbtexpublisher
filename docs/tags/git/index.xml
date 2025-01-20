@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git on Alberto Moyano</title>
-    <link>https://albertomoyano.github.io/blog-gbtexpublisher/tags/git/</link>
-    <description>Recent content in Git on Alberto Moyano</description>
+    <title>Git on gbTeXpublisher</title>
+    <link>http://localhost:1313/blog-gbtexpublisher/tags/git/</link>
+    <description>Recent content in Git on gbTeXpublisher</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
-    <lastBuildDate>Wed, 10 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://albertomoyano.github.io/blog-gbtexpublisher/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog-gbtexpublisher/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cambio de GitLab a GitHub</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/github-gitlab/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/github-gitlab/</link>
       <pubDate>Wed, 10 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/github-gitlab/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/github-gitlab/</guid>
       <description>&lt;p&gt;Me complace informarles que he tomado la decisión de trasladar el desarrollo de GitLab a GitHub. Si bien no hay motivos críticos que hayan impulsado esta decisión, encontré ciertas ventajas que ofrece GitHub.&lt;/p&gt;</description>
     </item>
     

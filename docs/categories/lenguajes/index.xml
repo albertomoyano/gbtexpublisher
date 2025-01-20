@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lenguajes on Alberto Moyano</title>
-    <link>https://albertomoyano.github.io/blog-gbtexpublisher/categories/lenguajes/</link>
-    <description>Recent content in Lenguajes on Alberto Moyano</description>
+    <title>Lenguajes on gbTeXpublisher</title>
+    <link>http://localhost:1313/blog-gbtexpublisher/categories/lenguajes/</link>
+    <description>Recent content in Lenguajes on gbTeXpublisher</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
-    <lastBuildDate>Mon, 27 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://albertomoyano.github.io/blog-gbtexpublisher/categories/lenguajes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog-gbtexpublisher/categories/lenguajes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Consultas a la RAE</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/rae/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/rae/</link>
       <pubDate>Mon, 27 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/rae/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/rae/</guid>
       <description>En el trabajo consulto de manera permanente a varios diccionarios en linea, el de la RAE y el DPD (también de la RAE) son 2 de ellos, estar cambiando de pestañas dentro del navegador (además de obligarme a tenerlo abierto) en algún momento se volvió molesto, así que decidí hacerme una pequeña aplicación para hacer las consultas en simultáneo a ambos diccionarios sin tener que recurrir a ningún navegador en particular.</description>
     </item>
     

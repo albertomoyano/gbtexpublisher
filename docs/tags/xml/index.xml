@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>XML on Alberto Moyano</title>
-    <link>https://albertomoyano.github.io/blog-gbtexpublisher/tags/xml/</link>
-    <description>Recent content in XML on Alberto Moyano</description>
+    <title>XML on gbTeXpublisher</title>
+    <link>http://localhost:1313/blog-gbtexpublisher/tags/xml/</link>
+    <description>Recent content in XML on gbTeXpublisher</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
-    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://albertomoyano.github.io/blog-gbtexpublisher/tags/xml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog-gbtexpublisher/tags/xml/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PreText y el uso de XML</title>
-      <link>https://albertomoyano.github.io/blog-gbtexpublisher/post/2020-12-30-005/</link>
+      <link>http://localhost:1313/blog-gbtexpublisher/post/2020-12-30-005/</link>
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://albertomoyano.github.io/blog-gbtexpublisher/post/2020-12-30-005/</guid>
+      <guid>http://localhost:1313/blog-gbtexpublisher/post/2020-12-30-005/</guid>
       <description>&lt;p&gt;Desde hace más de un año que vengo siguiendo el proyecto &lt;a href=&#34;https://pretextbook.org&#34;&gt;PreText&lt;/a&gt;, he realizado algunos ejercicios llegando hasta la edición «casi» completa de un libro de mediana complejidad y observo que algunas cosas han mejorado mucho. El lenguaje de trabajo es básicamente &lt;a href=&#34;https://es.wikipedia.org/wiki/Extensible_Markup_Language&#34;&gt;XML&lt;/a&gt;, con salida a xHTML, ePub o PDF.&lt;/p&gt;</description>
     </item>
     
