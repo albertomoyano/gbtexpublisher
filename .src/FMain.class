@@ -6133,7 +6133,7 @@ End
 '
 '   ' Verificar si el nombre de usuario está vacío
 '   If usuario = "" Then
-'     Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
+'     Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
 '     Return
 '   End If
 '
