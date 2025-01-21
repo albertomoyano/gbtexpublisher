@@ -119,7 +119,7 @@ Public Sub btnEnsamblar_Click()
   FMain.TerminalView1.Input("pdftk " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " cat output " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf" & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("pdftk " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf update_info " & metadatos & " output " & File.Dir(FMain.TextBox1.Text) & "/pdf/web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
+  FMain.TerminalView1.Input("pdftk " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf update_info " & metadatos & " output " & File.Dir(FMain.TextBox1.Text) & "/docs/web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
 
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf" & "\n" & "clear" & "\n")
