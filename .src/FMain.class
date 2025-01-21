@@ -304,132 +304,6 @@ Public Sub Button4_Click() 'local git
 
 End
 
-Public Sub Menu33_Click()'babel
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/required/babel/base/babel.pdf"
-
-End
-
-Public Sub Menu45_Click()'biblatex base
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf"
-
-End
-
-Public Sub Menu43_Click()'biblatex philosophy
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/biblatex-contrib/biblatex-philosophy/biblatex-philosophy.pdf"
-
-End
-
-Public Sub Menu44_Click()'biblatex 690
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/biblatex-contrib/biblatex-iso690/biblatex-iso690.pdf"
-
-End
-
-Public Sub Menu37_Click()'caption
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/caption/caption.pdf"
-
-End
-
-Public Sub Menu29_Click()'easyreview
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/easyreview/doc/easyReview.pdf"
-
-End
-
-Public Sub Menu36_Click()'enumitem
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/enumitem/enumitem.pdf"
-
-End
-
-Public Sub Menu38_Click()'footmisc
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/footmisc/footmisc-doc.pdf"
-
-End
-
-Public Sub Menu28_Click()'geometry
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/geometry/geometry.pdf"
-
-End
-
-Public Sub Menu41_Click()'glossaries
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/glossaries/glossaries-user.pdf"
-
-End
-
-Public Sub Menu32_Click()'hyperref
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/hyperref/doc/hyperref-doc.pdf"
-
-End
-
-Public Sub Menu42_Click()'imakeidx
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/imakeidx/imakeidx.pdf"
-
-End
-
-Public Sub Menu31_Click()'make4ht
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/support/make4ht/make4ht-doc.pdf"
-
-End
-
-Public Sub Menu35_Click()'microtype
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/microtype/microtype.pdf"
-
-End
-
-Public Sub Menu34_Click()'polyglosia
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/unicodetex/latex/polyglossia/polyglossia.pdf"
-
-End
-
-Public Sub Menu30_Click()'tex4ebook
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/support/tex4ebook/tex4ebook-doc.pdf"
-
-End
-
-Public Sub Menu40_Click()'titlesec
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/titlesec/titlesec.pdf"
-
-End
-
-Public Sub Menu14_Click()'url
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/url/url.pdf"
-
-End
-
-Public Sub Menu26_Click()'crop
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/crop/crop.pdf"
-
-End
-
-Public Sub Menu46_Click()'booktabs
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/booktabs/booktabs.pdf"
-
-End
-
-Public Sub Menu47_Click()'svg
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/graphics/svg/doc/svg.pdf"
-
-End
-
 Public Sub Menu17_Click()'abrir pdf
 
   Dim filePath As String
@@ -455,12 +329,6 @@ Public Sub Menu20_Click()'abrir epub
   Else
     Message.Error("El archivo <b> epub-" & BaseName & ".epub</b> no existe.")
   Endif
-
-End
-
-Public Sub Menu58_Click()'siunitx
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/siunitx/siunitx.pdf"
 
 End
 
@@ -3032,12 +2900,6 @@ Public Sub txtABSTRACT_DblClick()
 
 End
 
-Public Sub menuLWARP_Click()
-
-  Shell "xdg-open https://linorg.usp.br/CTAN/macros/latex/contrib/lwarp/lwarp.pdf"
-
-End
-
 Public Sub menuAPA_Click()
 
   Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/biblatex-contrib/biblatex-apa/biblatex-apa.pdf"
@@ -3616,7 +3478,7 @@ End
 Public Sub menuAbrirRevista_Click()
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
+  Dialog.Filter = ["*.qmd", "Archivos de Quarto"]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
