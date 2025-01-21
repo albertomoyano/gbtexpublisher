@@ -571,6 +571,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   btnMenuGitLab.Enabled = True
+  btnKanban.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
@@ -682,6 +683,7 @@ Public Sub mnuLast_Click()
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   btnMenuGitLab.Enabled = True
+  btnKanban.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   menuDisclaimer.Enabled = True
@@ -3670,6 +3672,7 @@ Public Sub menuAbrirRevista_Click()
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   btnMenuGitLab.Enabled = True
+  btnKanban.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   Menu4.Enabled = True
@@ -4044,6 +4047,7 @@ Public Sub menuMono_Click()'monografia academica
   Button4.Enabled = True
   btnMenuGIT.Enabled = True
   btnMenuGitLab.Enabled = True
+  btnKanban.Enabled = True
   menuGray.Enabled = True
   menuCatalogo.Enabled = True
   Menu4.Enabled = True
@@ -4470,7 +4474,19 @@ Public Sub btnAbrirPublisher_Click()
 
 End
 
-Public Sub Button2_Click()
+Public Sub btnKanban_Click()
+
+  Dim ruta As String
+  Dim usuario As String = Trim(txtGitLab.Text)
+
+  If usuario = "" Then
+    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
+    Return
+  End If
+
+  ruta = "https://gitlab.com/" & txtGitLab.Text & "/" & File.BaseName(TextBox1.Text) & "/-/boards"
+
+  Shell "xdg-open " & ruta
 
 End
 
@@ -6097,7 +6113,7 @@ Public Sub btnMenuGitLab_Click()
     Return
   End If
 
-  IdGitLab = "git@gitlab.com:" & usuario & "/" & BaseName & ".git"
+  IdGitLab = "git@gitlab.com:" & usuario & "/" & File.BaseName(TextBox1.Text) & ".git"
   TabPanel1.Index = 0
   TerminalView1.Input("git remote remove origin" & "\n")
   TerminalView1.Input("git remote add origin " & IdGitLab & "\n")

@@ -510,17 +510,23 @@
       Placeholder = ("coloque aquí su usuario GitHub")
     }
     { Separator8 Separator
-      MoveScaled(86,0,0.8889,4)
+      MoveScaled(74,0,0.8889,4)
       Foreground = Color.Transparent
     }
     { btnMenuGitLab Button
-      MoveScaled(88,0,17.7778,4)
+      MoveScaled(83,0,17.7778,4)
       Enabled = False
       Text = ("GitLab")
       Picture = Picture["iconos/gitlab.svg"]
     }
+    { btnKanban Button
+      MoveScaled(101,0,4,4)
+      Enabled = False
+      ToolTip = ("Acceder al kanban del proyecto alojado en GitLab")
+      Picture = Picture["iconos/kanban.svg"]
+    }
     { txtGitLab TextBox
-      MoveScaled(107,0,8,4)
+      MoveScaled(107,0,10,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitLab")
     }
