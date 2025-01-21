@@ -6104,6 +6104,10 @@ Public Sub btnMenuGitLab_Click()
   Dim usuario As String = Trim(txtGitLab.Text)
   Dim IdGitLab As String
 
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/.gitlab-ci.yml") Then
+    Copy "./gitlab-ci.yml" To File.Dir(TextBox1.Text) & "/.gitlab-ci.yml"
+  End If
+
   ' Obtener la fecha actual
   fecha = Format(Date(), "dd-mm-yyyy")
 
