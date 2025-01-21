@@ -371,18 +371,21 @@
     }
     { btnCOMPepub MenuButton
       MoveScaled(22.8889,0,14,4)
+      #Translate = False
       Enabled = False
-      Text = ("e-book")
+      Text = "e-book"
       Picture = Picture["iconos/epub.svg"]
       Menu = "MenuEPUB"
       MenuOnly = True
     }
     { btnCOMPhtml MenuButton
       MoveScaled(37,0,14,4)
+      #Translate = False
       Enabled = False
-      Text = ("HTML")
+      Text = "HTML"
       Picture = Picture["iconos/web.svg"]
       Menu = "menuCOMPILAR"
+      MenuOnly = True
     }
     { Separator2 Separator
       MoveScaled(59,0,2.3333,4)
@@ -474,8 +477,9 @@
     MoveScaled(1,8,123,4)
     { MenuApp MenuButton
       MoveScaled(1,0,17.7778,4)
+      #Translate = False
       Enabled = False
-      Text = ("Ver salidas")
+      Text = "Ver salidas"
       Picture = Picture["iconos/document.svg"]
       Menu = "AbrirApp"
       MenuOnly = True
