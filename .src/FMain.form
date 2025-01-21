@@ -217,22 +217,6 @@
       Text = ("Contador / Estadísticas del archivo")
       Enabled = False
     }
-    { adminGIT Menu
-      Text = ("Administrar .gitignore")
-      Picture = Picture["iconos/edit-select.svg"]
-      Enabled = False
-      { limpiarCache Menu
-        Text = ("Limpiar cache para GitHub")
-      }
-      { gitignote_github Menu
-        Text = ("gitignore_PARCIAL")
-        Picture = Picture["iconos/github.svg"]
-      }
-      { gitignote_gitlab Menu
-        Text = ("gitignore_VACIO")
-        Picture = Picture["iconos/gitlab.svg"]
-      }
-    }
   }
   { AbrirApp Menu
     Text = ("AbrirApp")
@@ -266,7 +250,7 @@
       Text = ("Ver orden para impresión")
     }
     { menuHTMLghp Menu
-      Text = ("Ver página HTML para GitHub Pages")
+      Text = ("Ver página HTML para Pages")
     }
   }
   { Menu57 Menu

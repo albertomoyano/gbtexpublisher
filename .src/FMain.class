@@ -564,7 +564,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
-  adminGIT.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   menuLTX.Enabled = True
@@ -676,7 +675,6 @@ Public Sub mnuLast_Click()
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
-  adminGIT.Enabled = True
   menuTOOLS.Visible = True
   menuScriptsExternos.Enabled = True
   menuLTX.Enabled = True
@@ -839,41 +837,6 @@ End
 Public Sub Menu68_Click()
 
   Form_gbTeX.ShowModal()
-
-End
-
-Public Sub gitignote_github_Click()
-
-  TerminalView1.Input("rm .gitignore" & "\n")
-  TerminalView1.Input("cp " & rutaApp &/ "gitignore_github" & " " & File.Dir(TextBox1.Text) &/ ".gitignore" & "\n")
-  TerminalView1.Input("clear" & "\n")
-
-End
-
-Public Sub gitignote_gitlab_Click()
-
-  TerminalView1.Input("rm .gitignore" & "\n")
-  TerminalView1.Input("cp " & rutaApp &/ "gitignore_gitlab" & " " & File.Dir(TextBox1.Text) &/ ".gitignore" & "\n")
-  TerminalView1.Input("clear" & "\n")
-
-End
-
-Public Sub limpiarCache_Click()
-
-  TerminalView1.Input("git rm --cached -r files/" & "\n")
-  TerminalView1.Input("git rm --cached -r correcciones/" & "\n")
-  TerminalView1.Input("git rm --cached -r originales/" & "\n")
-  TerminalView1.Input("git rm --cached -r catalogo/" & "\n")
-  TerminalView1.Input("git rm --cached -r tapa/" & "\n")
-  TerminalView1.Input("git rm --cached -r pdf/" & "\n")
-  TerminalView1.Input("git rm --cached -r epub/" & "\n")
-  TerminalView1.Input("git rm --cached -r epub3/" & "\n")
-  TerminalView1.Input("git rm --cached -r mobi/" & "\n")
-  TerminalView1.Input("git rm --cached -r azw/" & "\n")
-  TerminalView1.Input("git rm --cached -r html5/" & "\n")
-  TerminalView1.Input("git rm --cached -r xhtml/" & "\n")
-  TerminalView1.Input("git rm --cached -r odt-docx/" & "\n")
-  TerminalView1.Input("git rm --cached -r jats/" & "\n")
 
 End
 
@@ -3700,7 +3663,6 @@ Public Sub menuAbrirRevista_Click()
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
-  adminGIT.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   menuLTX.Enabled = True
@@ -4075,7 +4037,6 @@ Public Sub menuMono_Click()'monografia academica
   menuDRAW.Enabled = True
   menuLOGFILE.Enabled = True
   menuComprimir.Enabled = True
-  adminGIT.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
   menuLTX.Enabled = True
@@ -6121,31 +6082,29 @@ Public Sub Menu5_Click()' blog de gbTeXpublisher
 
 End
 
-' Public Sub btnMenuGitLab_Click()
-'
-'
-'   Dim fecha As String
-'   Dim usuario As String = Trim(txtGIT.Text)
-'   Dim IdGitHub As String
-'
-'   ' Obtener la fecha actual
-'   fecha = Format(Date(), "dd-mm-yyyy")
-'
-'   ' Verificar si el nombre de usuario está vacío
-'   If usuario = "" Then
-'     Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
-'     Return
-'   End If
-'
-'   IdGitHub = "git@github.com:" & usuario & "/" & BaseName & ".git"
-'   TabPanel1.Index = 0
-'   TerminalView1.Input("git remote remove origin" & "\n")
-'   TerminalView1.Input("git remote add origin " & IdGitHub & "\n")
-'   TerminalView1.Input("git add ." & "\n")
-'   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
-'   TerminalView1.Input("git push --set-upstream origin main" & "\n")
-'   TerminalView1.SetFocus()
-'   TerminalView1.Refresh()
-'
-'
-' End
+Public Sub btnMenuGitLab_Click()
+
+  Dim fecha As String
+  Dim usuario As String = Trim(txtGitLab.Text)
+  Dim IdGitLab As String
+
+  ' Obtener la fecha actual
+  fecha = Format(Date(), "dd-mm-yyyy")
+
+  ' Verificar si el nombre de usuario está vacío
+  If usuario = "" Then
+    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
+    Return
+  End If
+
+  IdGitLab = "git@gitlab.com:" & usuario & "/" & BaseName & ".git"
+  TabPanel1.Index = 0
+  TerminalView1.Input("git remote remove origin" & "\n")
+  TerminalView1.Input("git remote add origin " & IdGitLab & "\n")
+  TerminalView1.Input("git add ." & "\n")
+  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
+  TerminalView1.Input("git push --set-upstream origin main" & "\n")
+  TerminalView1.SetFocus()
+  TerminalView1.Refresh()
+
+End
