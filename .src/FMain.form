@@ -4926,7 +4926,7 @@
       Index = 0
     }
     Index = 4
-    Text = ("Git Hub/Lab Pages     ")
+    Text = ("Pages para Git     ")
     Picture = Picture["iconos/web.svg"]
     { HBox181 HBox
       MoveScaled(1,1,118,4)
