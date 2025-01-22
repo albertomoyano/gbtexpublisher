@@ -3649,25 +3649,7 @@ End
 Public Sub btnCOMPpdfRevista_Click()
 
   If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-    ' Else
-  Endif
-
-End
-
-Public Sub btnCOMPrevistaHTML_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-    ' Else
-  Endif
-
-End
-
-Public Sub btnRevistaCompliarXML_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
+    Message.Warning("Debe tener un proyecto Quarto asociado.")
     ' Else
   Endif
 
@@ -4049,10 +4031,7 @@ Public Sub habilitamosLibro()
   btnCOMPpdf.Enabled = True
   btnCOMPhtml.Enabled = True
   btnCOMPepub.Enabled = True
-  btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
-  btnCOMPrevistaHTML.Enabled = False
-  btnRevistaCompliarXML.Enabled = False
   btnMONOpdf.Enabled = False
   btnMonoDocx.Enabled = False
   HBox83.Visible = True
@@ -4071,10 +4050,7 @@ Public Sub habilitamosRevista()
   btnCOMPpdf.Enabled = False
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
-  btnGitHubPages.Enabled = True
   btnCOMPpdfRevista.Enabled = True
-  btnCOMPrevistaHTML.Enabled = True
-  btnRevistaCompliarXML.Enabled = True
   btnMONOpdf.Enabled = False
   btnMonoDocx.Enabled = False
   HBox83.Visible = True
@@ -4093,14 +4069,9 @@ Public Sub habilitamosMonografia()
   btnCOMPpdf.Enabled = False
   btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
-  btnGitHubPages.Enabled = False
   btnCOMPpdfRevista.Enabled = False
-  btnCOMPrevistaHTML.Enabled = False
-  btnRevistaCompliarXML.Enabled = False
   btnMONOpdf.Enabled = True
   btnMonoDocx.Enabled = True
-  ' TabPanel1[3].Visible = False
-  ' TabPanel1[4].Visible = False
   menuPDFweb.Visible = False
   menuOT.Visible = False
   ' Inicia el Timer al hacer clic en el botón

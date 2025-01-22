@@ -307,29 +307,10 @@
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista Button
-      MoveScaled(75,0,8.8889,4)
+      MoveScaled(75,0,14,4)
       Enabled = False
-      ToolTip = ("PDF de revista")
-      Text = ("PDF")
-      Picture = Picture["iconos/acroread.svg"]
-    }
-    { btnCOMPrevistaHTML Button
-      MoveScaled(84,0,8.8889,4)
-      Enabled = False
-      Text = ("HTML")
-      Picture = Picture["iconos/web.svg"]
-    }
-    { btnGitHubPages Button
-      MoveScaled(93,0,8.8889,4)
-      Enabled = False
-      Text = ("Pages")
-      Picture = Picture["iconos/github-mark.svg"]
-    }
-    { btnRevistaCompliarXML Button
-      MoveScaled(102,0,8.8889,4)
-      Enabled = False
-      Text = ("XML")
-      Picture = Picture["iconos/xml.svg"]
+      Text = ("Compilar")
+      Picture = Picture["iconos/forzar.svg"]
     }
     { Separator3 Separator
       MoveScaled(111,0,2.3333,4)
@@ -4034,8 +4015,11 @@
         Spacing = True
         Margin = True
         Padding = 4
-        Count = 3
+        Count = 4
         Index = 0
+        Text = ("_quarto.yml     ")
+        Picture = Picture["iconos/quarto.svg"]
+        Index = 1
         Text = ("Obligatorios a la salida de tipo revista     ")
         Picture = Picture["iconos/meta1.svg"]
         { ScrollView14 ScrollView
@@ -4755,7 +4739,7 @@
             }
           }
         }
-        Index = 1
+        Index = 2
         Text = ("Opcionales a la salida  de tipo revista     ")
         Picture = Picture["iconos/meta2.svg"]
         { HBox3 HBox
@@ -4803,7 +4787,7 @@
             Placeholder = ("Título principal del documento")
           }
         }
-        Index = 2
+        Index = 3
         Text = ("Particulares para cada autor a la salida  de tipo revista")
         Picture = Picture["iconos/autores.svg"]
         { HBox186 HBox
