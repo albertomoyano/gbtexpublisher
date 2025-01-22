@@ -399,7 +399,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
-    TabPanelRevista.Visible = False
+    ' TabPanelRevista.Visible = False
     habilitamosLibro()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
@@ -524,7 +524,7 @@ Public Sub mnuLast_Click()
     DirViewRuta.Root = File.Dir(TextBox1.Text)
   Endif
 
-  TabPanelRevista.Visible = False
+  ' TabPanelRevista.Visible = False
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
   BaseName = File.BaseName(TextBox1.Text)
 
@@ -3989,7 +3989,6 @@ Public Sub habilitamosLibro()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = True
-  btnCOMPhtml.Enabled = True
   btnCOMPepub.Enabled = True
   btnCOMPpdfRevista.Enabled = False
   btnMONOpdf.Enabled = False
@@ -4007,7 +4006,6 @@ Public Sub habilitamosRevista()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = False
-  btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPpdfRevista.Enabled = True
   btnMONOpdf.Enabled = False
@@ -4025,7 +4023,6 @@ Public Sub habilitamosMonografia()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = False
-  btnCOMPhtml.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnMONOpdf.Enabled = True
