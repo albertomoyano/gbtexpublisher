@@ -3194,7 +3194,7 @@
       }
     }
     { TabPanel6 TabPanel
-      MoveScaled(1,9,159,70)
+      MoveScaled(2,11,159,70)
       Expand = True
       Arrangement = Arrange.Fill
       Margin = True
@@ -3214,7 +3214,7 @@
         Text = ("Obligatorios a la salida de tipo libro     ")
         Picture = Picture["iconos/meta1.svg"]
         { ScrollView10 ScrollView
-          MoveScaled(2,2,88,90)
+          MoveScaled(1,1,103,46)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -3265,7 +3265,7 @@
             }
           }
           { HBox102 HBox
-            MoveScaled(0,12,84,4)
+            MoveScaled(0,12,95,4)
             { Label35 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -3281,14 +3281,14 @@
               MoveScaled(50,0,2.3333,4)
             }
             { TextLabel2 TextLabel
-              MoveScaled(53,0,23,4)
+              MoveScaled(53,0,39,4)
               Expand = True
               Text = ("Refiere a la fecha de creación del archivo .tex")
               Alignment = Align.Normal
             }
           }
           { HBox108 HBox
-            MoveScaled(-9,16,94,4)
+            MoveScaled(0,16,94,4)
             { Label45 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -3336,7 +3336,7 @@
             }
           }
           { HBox109 HBox
-            MoveScaled(-4,20,89,4)
+            MoveScaled(0,20,89,4)
             { Label57 Label
               MoveScaled(-7,0,23,4)
               Alignment = Align.Right
@@ -3384,7 +3384,7 @@
             }
           }
           { HBox146 HBox
-            MoveScaled(-12,24,99,4)
+            MoveScaled(0,24,99,4)
             { Label94 Label
               MoveScaled(1,0,23,4)
               Alignment = Align.Right
@@ -4009,7 +4009,7 @@
       Text = ("Quarto     ")
       Picture = Picture["iconos/revista.svg"]
       { !TabPanelRevista TabPanel
-        MoveScaled(2,2,155,348)
+        MoveScaled(1,1,155,348)
         #Public = True
         Expand = True
         Arrangement = Arrange.Vertical
@@ -4021,7 +4021,7 @@
         Text = ("_quarto.yml     ")
         Picture = Picture["iconos/quarto.svg"]
         { ScrollView15 ScrollView
-          MoveScaled(2,2,87,55)
+          MoveScaled(1,1,90,80)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -4029,596 +4029,196 @@
           Padding = 4
           Border = False
           ScrollBar = Scroll.Vertical
-          { HBox174 HBox
-            MoveScaled(1,-138,79,4)
+          { HBox3 HBox
+            MoveScaled(0,0,78,4)
+            { Label119 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("Texto  ")
+            }
+            { ComboBox2 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
+            }
+          }
+          { HBox172 HBox
+            MoveScaled(0,4,78,4)
             { Label126 Label
-              MoveScaled(3,0,23,4)
+              MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Traductor  ")
+              Text = ("Texto  ")
             }
-            { !txt53_traductor2 TextBox
-              MoveScaled(26,0,17,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Nombre y Apellido del traductor")
+            { ComboBox3 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
-            { lblIdiomaOriginal2 Label
-              MoveScaled(42,0,14,4)
+          }
+          { HBox174 HBox
+            MoveScaled(0,8,78,4)
+            { Label168 Label
+              MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("IdiomaOriginal  ")
+              Text = ("Texto  ")
             }
-            { !txt54_idiomaorig2 ComboBox
-              MoveScaled(60,0,16,4)
-              #Public = True
+            { ComboBox4 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
+            }
+          }
+          { HBox183 HBox
+            MoveScaled(0,12,78,4)
+            { Label171 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("Texto  ")
+            }
+            { ComboBox5 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
+            }
+          }
+          { HBox186 HBox
+            MoveScaled(0,16,78,4)
+            { Label172 Label
+              MoveScaled(0,0,23,4)
+              Alignment = Align.Right
+              Text = ("Texto  ")
+            }
+            { ComboBox6 ComboBox
+              MoveScaled(39,0,18,4)
               ReadOnly = True
             }
           }
           { HBox229 HBox
-            MoveScaled(0,-134,78,4)
-            { Label171 Label
+            MoveScaled(0,20,78,4)
+            { Label173 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("DOI Artículo  ")
+              Text = ("Texto  ")
             }
-            { !txt85_doiRevista2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("DOI del artículo")
+            { ComboBox7 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
           { HBox230 HBox
-            MoveScaled(0,-130,78,4)
-            { Label172 Label
+            MoveScaled(0,24,78,4)
+            { Label174 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("ARK CAICYT  ")
+              Text = ("Texto  ")
             }
-            { !txtXX_arkcaicyt2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Código de clasificación")
+            { ComboBox8 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
           { HBox231 HBox
-            MoveScaled(0,-126,78,4)
-            { btnVerNota2 Button
-              MoveScaled(1,0,4,4)
-              Text = ("") & "..."
-            }
-            { Label173 Label
-              MoveScaled(7,0,19,4)
+            MoveScaled(0,28,78,4)
+            { Label175 Label
+              MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Nota sobre el artículo  ")
+              Text = ("Texto  ")
             }
-            { !txt71_note2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Anotaciones sobre el artículo")
+            { ComboBox9 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
           { HBox232 HBox
-            MoveScaled(0,-122,78,4)
-            { btnMostarRevision2 Button
-              MoveScaled(0,0,4,4)
-              Picture = Picture["iconos/schedule.svg"]
-            }
-            { Label174 Label
-              MoveScaled(6,0,19,4)
-              Alignment = Align.Right
-              Text = ("Revisión por pares  ")
-            }
-            { !txt73_reviewer2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Background = Color.Background
-              Expand = True
-              ReadOnly = True
-              Placeholder = ("Revisión por pares")
-            }
-            { btnLimpiarRevisor2 Button
-              MoveScaled(72,0,4,4)
-              Picture = Picture["iconos/borrar.svg"]
-            }
-          }
-          { HBox233 HBox
-            MoveScaled(0,-118,78,4)
-            { Label175 Label
-              MoveScaled(2,0,23,4)
-              Alignment = Align.Right
-              Text = ("Copy editor  ")
-            }
-            { !txt74_proofreader2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Editor de copia")
-            }
-          }
-          { HBox234 HBox
-            MoveScaled(0,-114,78,4)
+            MoveScaled(0,32,78,4)
             { Label176 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Financiamiento  ")
+              Text = ("Texto  ")
             }
-            { !txt76_fundingGroup2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Grupo de financiamiento")
+            { ComboBox10 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
-          { HBox235 HBox
-            MoveScaled(0,-110,78,4)
+          { HBox233 HBox
+            MoveScaled(0,36,78,4)
             { Label177 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Código de clas.  ")
+              Text = ("Texto  ")
             }
-            { !txt77_subjGroup2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Código de clasificación")
+            { ComboBox11 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
-          { HBox236 HBox
-            MoveScaled(0,-106,78,4)
+          { HBox234 HBox
+            MoveScaled(0,40,78,4)
             { Label178 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Fecha de edición  ")
+              Text = ("Texto  ")
             }
-            { !txtANIO6 TextBox
-              MoveScaled(27,0,11,4)
-              #Public = True
-              Placeholder = ("Año")
-            }
-            { !txtMES6 TextBox
-              MoveScaled(38,0,11,4)
-              #Public = True
-              Placeholder = ("Mes")
-            }
-            { !txtDIA6 TextBox
-              MoveScaled(49,0,11,4)
-              #Public = True
-              Placeholder = ("Día")
+            { ComboBox12 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
-          { HBox237 HBox
-            MoveScaled(0,-102,78,4)
+          { HBox235 HBox
+            MoveScaled(0,44,78,4)
             { Label179 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Fecha pub. en línea  ")
+              Text = ("Texto  ")
             }
-            { !txtANIO9 TextBox
-              MoveScaled(27,0,11,4)
-              #Public = True
-              Placeholder = ("Año")
-            }
-            { !txtMES9 TextBox
-              MoveScaled(38,0,11,4)
-              #Public = True
-              Placeholder = ("Mes")
-            }
-            { !txtDIA9 TextBox
-              MoveScaled(49,0,11,4)
-              #Public = True
-              Placeholder = ("Día")
+            { ComboBox13 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
-          { HBox238 HBox
-            MoveScaled(0,-98,78,4)
+          { HBox236 HBox
+            MoveScaled(0,48,78,4)
             { Label180 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Fecha pub. impresa  ")
+              Text = ("Texto  ")
             }
-            { !txtANIO10 TextBox
-              MoveScaled(28,0,11,4)
-              #Public = True
-              Placeholder = ("Año")
-            }
-            { !txtMES10 TextBox
-              MoveScaled(39,0,11,4)
-              #Public = True
-              Placeholder = ("Mes")
-            }
-            { !txtDIA10 TextBox
-              MoveScaled(50,0,11,4)
-              #Public = True
-              Placeholder = ("Día")
+            { ComboBox14 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
-          { HBox239 HBox
-            MoveScaled(0,-94,78,4)
-            { btnMostarConferencia2 Button
-              MoveScaled(1,0,4,4)
-              Picture = Picture["iconos/schedule.svg"]
-            }
+          { HBox237 HBox
+            MoveScaled(0,52,78,4)
             { Label181 Label
-              MoveScaled(5,0,19,4)
+              MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Conferencia  ")
+              Text = ("Texto  ")
             }
-            { !txt82_conference2 TextBox
-              MoveScaled(27,0,10,4)
-              #Public = True
-              Background = Color.Background
+            { ComboBox15 ComboBox
+              MoveScaled(39,0,18,4)
               ReadOnly = True
-            }
-            { !txt82_conferenceVisual2 TextBox
-              MoveScaled(37,0,26,4)
-              #Public = True
-              Background = Color.Background
-              Expand = True
-              ReadOnly = True
-              Placeholder = ("Título de la conferencia")
-            }
-            { btnLimpiarConferencia2 Button
-              MoveScaled(72,0,4,4)
-              Picture = Picture["iconos/borrar.svg"]
             }
           }
-          { HBox240 HBox
-            MoveScaled(0,-90,78,4)
+          { HBox238 HBox
+            MoveScaled(0,56,78,4)
             { Label182 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Notas  ")
+              Text = ("Texto  ")
             }
-            { !txt86_annotation2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Notas y/o comentarios")
+            { ComboBox16 ComboBox
+              MoveScaled(39,0,18,4)
+              ReadOnly = True
             }
           }
-          { HBox241 HBox
-            MoveScaled(0,-86,78,4)
+          { HBox239 HBox
+            MoveScaled(0,60,78,19)
             { Label183 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
-              Text = ("Audiencia  ")
+              Text = ("yml personalizado  ")
             }
-            { !txt88_audiencia2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
+            { txtYMLpersonal TextArea
+              MoveScaled(48,1,16,16)
               Expand = True
-              Placeholder = ("Audiencia")
-            }
-          }
-          { HBox242 HBox
-            MoveScaled(0,-82,78,4)
-            { Label184 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("HTMLFirstPageBottom  ")
-            }
-            { !txt87_HTMLFirstPageBottom2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Pie de la web del libro")
-            }
-          }
-          { HBox243 HBox
-            MoveScaled(0,-74,78,4)
-            { Label185 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Origen  ")
-            }
-            { !txt59_opt_source2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Archivo que da origen a la salida")
-            }
-          }
-          { HBox244 HBox
-            MoveScaled(0,-70,78,4)
-            { Label186 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Ilustrador  ")
-            }
-            { !txt55_ilustrador2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Nombre y Apellido del ilustrador")
-            }
-          }
-          { HBox245 HBox
-            MoveScaled(0,-66,78,4)
-            { Label187 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Categoría del artículo  ")
-            }
-            { !txtCatArt2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Categoría o disciplina del artículo (por ej.: Medicina)")
-            }
-          }
-          { HBox246 HBox
-            MoveScaled(0,-62,78,4)
-            { Label188 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("DOI relacionado  ")
-            }
-            { !txtDOIRel2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("DOI del artículo relacionado")
-            }
-          }
-          { HBox247 HBox
-            MoveScaled(0,-58,78,4)
-            { Label189 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Género  ")
-            }
-            { !txt78_genero2 TextBox
-              MoveScaled(27,0,20,4)
-              #Public = True
-              Expand = True
-            }
-          }
-          { HBox248 HBox
-            MoveScaled(0,-54,78,4)
-            { Label190 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Fecha artículo recibido  ")
-            }
-            { !txt59_artrecibido2 TextBox
-              MoveScaled(23,0,20,4)
-              #Public = True
-              Placeholder = ("DD-mes-YYYY")
-            }
-            { txtANIO11 TextBox
-              MoveScaled(43,0,11,4)
-              Alignment = Align.Right
-              Placeholder = ("Año")
-            }
-            { txtMES11 TextBox
-              MoveScaled(54,0,11,4)
-              Alignment = Align.Right
-              Placeholder = ("Mes")
-            }
-            { txtDIA11 TextBox
-              MoveScaled(65,0,11,4)
-              Alignment = Align.Right
-              Placeholder = ("Día")
-            }
-          }
-          { HBox249 HBox
-            MoveScaled(0,-49,78,4)
-            { Label191 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Fecha artículo aceptado  ")
-            }
-            { !txt60_artaceptado2 TextBox
-              MoveScaled(23,0,20,4)
-              #Public = True
-              Placeholder = ("DD-mes-YYYY")
-            }
-            { txtANIO12 TextBox
-              MoveScaled(43,0,11,4)
-              Placeholder = ("Año")
-            }
-            { txtMES12 TextBox
-              MoveScaled(54,0,11,4)
-              Placeholder = ("Mes")
-            }
-            { txtDIA12 TextBox
-              MoveScaled(65,0,11,4)
-              Placeholder = ("Día")
-            }
-          }
-          { HBox250 HBox
-            MoveScaled(0,-44,84,4)
-            { Label192 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Fecha de creación  ")
-            }
-            { !txtCreationDate2 TextBox
-              MoveScaled(27,0,20,4)
-              #Public = True
-            }
-            { txtANIO13 TextBox
-              MoveScaled(47,0,11,4)
-              Placeholder = ("Año")
-            }
-            { txtMES13 TextBox
-              MoveScaled(58,0,11,4)
-              Placeholder = ("Mes")
-            }
-            { txtDIA13 TextBox
-              MoveScaled(69,0,11,4)
-              Placeholder = ("Día")
-            }
-          }
-          { HBox251 HBox
-            MoveScaled(0,-39,84,4)
-            { Label193 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Mod. date  ")
-            }
-            { !txtModDate2 TextBox
-              MoveScaled(27,0,20,4)
-              #Public = True
-            }
-            { txtANIO14 TextBox
-              MoveScaled(47,0,11,4)
-              Placeholder = ("Año")
-            }
-            { txtMES14 TextBox
-              MoveScaled(58,0,11,4)
-              Placeholder = ("Mes")
-            }
-            { txtDIA14 TextBox
-              MoveScaled(69,0,11,4)
-              Placeholder = ("Día")
-            }
-          }
-          { HBox252 HBox
-            MoveScaled(0,-34,84,4)
-            { Label194 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Meta Date  ")
-            }
-            { !txtMetaDate2 TextBox
-              MoveScaled(27,0,20,4)
-              #Public = True
-              Placeholder = ("YYYY/MM/DD")
-            }
-          }
-          { HBox253 HBox
-            MoveScaled(0,-30,78,4)
-            { Label195 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Encuadernación  ")
-            }
-            { !txt89_binding2 ComboBox
-              MoveScaled(25,0,20,3.5556)
-              #Public = True
-              ReadOnly = True
-            }
-          }
-          { HBox254 HBox
-            MoveScaled(0,-26,78,4)
-            { Label196 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Primera página  ")
-            }
-            { !txt62_fpage2 TextBox
-              MoveScaled(26,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Número de página inicial")
-            }
-            { Label197 Label
-              MoveScaled(38,0,16,4)
-              Alignment = Align.Right
-              Text = ("Última página  ")
-            }
-            { !txt63_lpage2 TextBox
-              MoveScaled(54,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Número de página final")
-            }
-          }
-          { HBox255 HBox
-            MoveScaled(0,-22,78,4)
-            { btnMostarJournal1 Button
-              MoveScaled(0,0,4,4)
-              Picture = Picture["iconos/schedule.svg"]
-            }
-            { Label198 Label
-              MoveScaled(5,0,19,4)
-              Alignment = Align.Right
-              Text = ("Revista  ")
-            }
-            { !txtPublication2 TextBox
-              MoveScaled(35,0,25,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Especifica el título del diario, revista  o documento principal")
-            }
-            { btnLimpiarJournal2 Button
-              MoveScaled(63,0,4,4)
-              Picture = Picture["iconos/borrar.svg"]
-            }
-          }
-          { HBox256 HBox
-            MoveScaled(1,-18,78,4)
-            { Label199 Label
-              MoveScaled(3,0,23,3.5556)
-              Alignment = Align.Right
-              Text = ("Título del artículo / capítulo  ")
-            }
-            { !txt06_pdftitle2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Título principal del documento")
-            }
-          }
-          { HBox257 HBox
-            MoveScaled(0,-13,78,4)
-            { Label200 Label
-              MoveScaled(3,0,23,4)
-              Alignment = Align.Right
-              Text = ("Título en segundo idioma  ")
-            }
-            { !txt58_papertitletwo2 TextBox
-              MoveScaled(27,0,23,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Título principal en segundo idioma")
-            }
-          }
-          { hbISSN2 HBox
-            MoveScaled(0,-9,78,4)
-            { Label201 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("ISSN  ")
-            }
-            { !txt36_pdfissn2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Background = Color.Background
-              Expand = True
-              ReadOnly = True
-              Placeholder = ("Se refiere al ISSN de la versión impresa del documento")
-            }
-          }
-          { hbEISSN2 HBox
-            MoveScaled(0,-5,78,4)
-            { Label202 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("eISSN  ")
-            }
-            { !txt37_pdfeissn2 TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Background = Color.Background
-              Expand = True
-              ReadOnly = True
-              Placeholder = ("Se refiere al ISSN de la versión electrónica del documento")
-            }
-          }
-          { HBox263 HBox
-            MoveScaled(1,1,78,4)
-            { Label208 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("URL documento  ")
-            }
-            { ComboBox2 ComboBox
-              MoveScaled(28,0,16,4)
-              ReadOnly = True
             }
           }
         }
@@ -4629,7 +4229,7 @@
         Text = ("Opcionales a la salida  de tipo revista     ")
         Picture = Picture["iconos/revista.svg"]
         { ScrollView14 ScrollView
-          MoveScaled(1,2,90,53)
+          MoveScaled(2,2,90,53)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
