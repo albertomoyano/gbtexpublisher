@@ -3829,7 +3829,7 @@ End
 Public Sub menuMono_Click()'monografia academica
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
+  Dialog.Filter = ["*.qmd", "Archivos de Quarto"]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
@@ -3895,26 +3895,6 @@ Public Sub menuMono_Click()'monografia academica
   'posicionamos la consola con el path del archivo de trabajo
   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
   TerminalView1.SetFocus()
-
-End
-
-Public Sub btnMONOpdf_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    Mod_Funciones_Monografia.salidaPDFmonografia()
-  Endif
-
-End
-
-Public Sub btnMonoDocx_Click()'salida a odt y docx de monografia
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    Mod_Funciones_Monografia.salidaODTmonografia()
-  Endif
 
 End
 
@@ -4033,7 +4013,6 @@ Public Sub habilitamosLibro()
   btnCOMPepub.Enabled = True
   btnCOMPpdfRevista.Enabled = False
   btnMONOpdf.Enabled = False
-  btnMonoDocx.Enabled = False
   HBox83.Visible = True
   HBox85.Visible = True
   TabStripMetaLibro.Visible = True
@@ -4052,7 +4031,6 @@ Public Sub habilitamosRevista()
   btnCOMPepub.Enabled = False
   btnCOMPpdfRevista.Enabled = True
   btnMONOpdf.Enabled = False
-  btnMonoDocx.Enabled = False
   HBox83.Visible = True
   HBox85.Visible = True
   TabStripMetaLibro.Visible = False
@@ -4071,7 +4049,6 @@ Public Sub habilitamosMonografia()
   btnCOMPepub.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   btnMONOpdf.Enabled = True
-  btnMonoDocx.Enabled = True
   menuPDFweb.Visible = False
   menuOT.Visible = False
   ' Inicia el Timer al hacer clic en el botón

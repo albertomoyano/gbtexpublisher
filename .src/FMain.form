@@ -193,19 +193,19 @@
     Text = ("Generar PDF complementarios")
     Visible = False
     { menuPDFweb Menu
-      Text = ("Compilar PDF para la web")
+      Text = ("PDF completo para la web")
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuOT Menu
-      Text = ("Compilar PDF de Orden de trabajo para imprenta")
+      Text = ("Orden de trabajo para imprenta")
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuDisclaimer Menu
-      Text = ("Compilar PDF de comentarios para corrección")
+      Text = ("Comentarios para la corrección")
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuCatalogo Menu
-      Text = ("Compilar PDF del catálogo/gacetilla de prensa")
+      Text = ("Gacetilla de prensa")
       Picture = Picture["iconos/acroread.svg"]
     }
   }
@@ -267,21 +267,21 @@
     }
   }
   { HBox171 HBox
-    MoveScaled(1,0,163,4)
+    MoveScaled(1,0,128,4)
     { btnAbrirLibro Button
       MoveScaled(0,0,14,4)
       Text = ("Libro")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdf Button
-      MoveScaled(14,0,8.8889,4)
+      MoveScaled(14,0,14,4)
       Enabled = False
       ToolTip = ("PDF de libro")
       Text = ("PDF")
       Picture = Picture["iconos/acroread.svg"]
     }
     { btnCOMPepub MenuButton
-      MoveScaled(22.8889,0,14,4)
+      MoveScaled(28,0,14,4)
       #Translate = False
       Enabled = False
       Text = "e-book"
@@ -290,7 +290,7 @@
       MenuOnly = True
     }
     { btnCOMPhtml MenuButton
-      MoveScaled(37,0,14,4)
+      MoveScaled(42,0,14,4)
       #Translate = False
       Enabled = False
       Text = "HTML"
@@ -313,26 +313,19 @@
       Picture = Picture["iconos/forzar.svg"]
     }
     { Separator3 Separator
-      MoveScaled(111,0,2.3333,4)
+      MoveScaled(91,0,2.3333,4)
     }
     { btnAbrirMonografia Button
-      MoveScaled(113,0,14,4)
+      MoveScaled(94,0,14,4)
       NoTabFocus = True
       Text = ("Monografía")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnMONOpdf Button
-      MoveScaled(127,0,8.8889,4)
+      MoveScaled(110,0,14,4)
       Enabled = False
-      ToolTip = ("PDF de libro")
-      Text = ("PDF")
-      Picture = Picture["iconos/acroread.svg"]
-    }
-    { btnMonoDocx Button
-      MoveScaled(136,0,8.8889,4)
-      Enabled = False
-      Text = ("DOCX")
-      Picture = Picture["iconos/ms-office.svg"]
+      Text = ("Compilar")
+      Picture = Picture["iconos/forzar.svg"]
     }
   }
   { HBox1 HBox
