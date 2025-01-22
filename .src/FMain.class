@@ -399,6 +399,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    TabPanelRevista.Visible = False
     habilitamosLibro()
     TextBox1.Text = Dialog.Path
     sCurrentFilePath = TextBox1.Text
@@ -528,6 +529,7 @@ Public Sub mnuLast_Click()
     DirViewRuta.Root = File.Dir(TextBox1.Text)
   Endif
 
+  TabPanelRevista.Visible = False
   rutaFILES = File.Dir(TextBox1.Text) & "/files"
   BaseName = File.BaseName(TextBox1.Text)
 
@@ -4019,7 +4021,7 @@ Public Sub habilitamosLibro()
   btnMONOpdf.Enabled = False
   HBox83.Visible = True
   HBox85.Visible = True
-  TabStripMetaLibro.Visible = True
+  TabPanelLibro.Visible = True
   menuPDFweb.Visible = True
   menuOT.Visible = True
   ' Inicia el Timer al hacer clic en el botón
@@ -4037,7 +4039,7 @@ Public Sub habilitamosRevista()
   btnMONOpdf.Enabled = False
   HBox83.Visible = True
   HBox85.Visible = True
-  TabStripMetaLibro.Visible = False
+  TabPanelLibro.Visible = False
   menuPDFweb.Visible = True
   menuOT.Visible = True
   ' Inicia el Timer al hacer clic en el botón

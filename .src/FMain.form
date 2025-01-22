@@ -310,7 +310,7 @@
       MoveScaled(75,0,14,4)
       Enabled = False
       Text = ("Compilar")
-      Picture = Picture["iconos/forzar.svg"]
+      Picture = Picture["iconos/revista.svg"]
     }
     { Separator3 Separator
       MoveScaled(91,0,2.3333,4)
@@ -325,7 +325,7 @@
       MoveScaled(110,0,14,4)
       Enabled = False
       Text = ("Compilar")
-      Picture = Picture["iconos/forzar.svg"]
+      Picture = Picture["iconos/logfile.svg"]
     }
   }
   { HBox1 HBox
@@ -3191,11 +3191,11 @@
       Arrangement = Arrange.Fill
       Margin = True
       Padding = 4
-      Count = 2
+      Count = 3
       Index = 0
       Text = ("Libro     ")
       Picture = Picture["iconos/titulo.svg"]
-      { !TabStripMetaLibro TabPanel
+      { !TabPanelLibro TabPanel
         MoveScaled(2,2,156,62)
         #Public = True
         Expand = True
@@ -4000,7 +4000,7 @@
       Index = 1
       Text = ("Revista     ")
       Picture = Picture["iconos/revista.svg"]
-      { !TabPanel3 TabPanel
+      { !TabPanelRevista TabPanel
         MoveScaled(2,2,155,348)
         #Public = True
         Expand = True
@@ -4830,6 +4830,9 @@
         }
         Index = 0
       }
+      Index = 2
+      Text = ("Monografía")
+      Picture = Picture["iconos/logfile.svg"]
       Index = 0
     }
     Index = 4
