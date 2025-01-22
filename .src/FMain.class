@@ -432,7 +432,6 @@ Public Sub menuAbrir_Click()'abrir un libro
   btnGuardarIGUAL.Visible = False
   TabPanel1.Visible = True
   menuBORRARaux.Enabled = True
-  menuDRAW.Enabled = True
   menuComprimir.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
@@ -449,10 +448,6 @@ Public Sub menuAbrir_Click()'abrir un libro
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
-  End If
-
-  If Form_Contador.Visible Then
-    Form_Contador.Close ' Cierra la ventana
   End If
 
   Mod_Funciones.CopiarArchivos(TextBox1.Text)
@@ -540,7 +535,6 @@ Public Sub mnuLast_Click()
   btnGuardarIGUAL.Visible = False
   TabPanel1.visible = True
   menuBORRARaux.Enabled = True
-  menuDRAW.Enabled = True
   menuComprimir.Enabled = True
   menuTOOLS.Visible = True
   menuScriptsExternos.Enabled = True
@@ -557,10 +551,6 @@ Public Sub mnuLast_Click()
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
-  End If
-
-  If Form_Contador.Visible Then
-    Form_Contador.Close ' Cierra la ventana
   End If
 
   Mod_Funciones.CopiarArchivos(TextBox1.Text)
@@ -701,12 +691,6 @@ End
 Public Sub Menu68_Click()
 
   Form_gbTeX.ShowModal()
-
-End
-
-Public Sub menuDRAW_Click()
-
-  Form_Contador.Show()
 
 End
 
@@ -3512,7 +3496,6 @@ Public Sub menuAbrirRevista_Click()
   btnGuardarIGUAL.Visible = False
   TabPanel1.Visible = True
   menuBORRARaux.Enabled = True
-  menuDRAW.Enabled = True
   menuComprimir.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
@@ -3530,10 +3513,6 @@ Public Sub menuAbrirRevista_Click()
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
-  End If
-
-  If Form_Contador.Visible Then
-    Form_Contador.Close ' Cierra la ventana
   End If
 
   Mod_Funciones.CopiarArchivosRevista(TextBox1.Text)
@@ -3867,7 +3846,6 @@ Public Sub menuMono_Click()'monografia academica
   btnGuardarIGUAL.Visible = False
   TabPanel1.Visible = True
   menuBORRARaux.Enabled = True
-  menuDRAW.Enabled = True
   menuComprimir.Enabled = True
   menuTOOLS.Enabled = True
   menuScriptsExternos.Enabled = True
@@ -3883,10 +3861,6 @@ Public Sub menuMono_Click()'monografia academica
 
   If Form_Notas.Visible Then
     Form_Notas.Close ' Cierra la ventana
-  End If
-
-  If Form_Contador.Visible Then
-    Form_Contador.Close ' Cierra la ventana
   End If
 
   BtnNuevoMeta.Visible = True

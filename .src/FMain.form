@@ -36,11 +36,13 @@
     Text = ("menuCompilar")
     Visible = False
     { menuHTML1 Menu
-      Text = ("vía BookML")
+      #Translate = False
+      Text = "vía BookML"
       Picture = Picture["iconos/gitRemoto.svg"]
     }
     { menuHTML2 Menu
-      Text = ("vía LWarp")
+      #Translate = False
+      Text = "vía LWarp"
       Picture = Picture["iconos/gitRemoto.svg"]
     }
   }
@@ -48,60 +50,76 @@
     Text = ("menuEpub")
     Visible = False
     { menuEPUB1 Menu
-      Text = ("epub + azw3 (modo imágenes png)")
+      #Translate = False
+      Text = "epub + azw3 (modo imágenes png)"
     }
     { menuEPUB2 Menu
-      Text = ("epub + azw3 (modo archivos html)")
+      #Translate = False
+      Text = "epub + azw3 (modo archivos html)"
     }
   }
   { menuTEXTBOX Menu
     Text = ("menuContextual")
     Visible = False
     { menuGlifos Menu
-      Text = ("Normalizar glifos")
+      #Translate = False
+      Text = "Normalizar glifos"
     }
     { menuMIN Menu
-      Text = ("Convertir todo a minúsculas")
+      #Translate = False
+      Text = "Convertir todo a minúsculas"
     }
     { menuMAYand Menu
-      Text = ("Normalizar autores para bibLaTeX")
+      #Translate = False
+      Text = "Normalizar autores para bibLaTeX"
     }
     { menuMAY Menu
-      Text = ("Todo a MAYÚSCULAS")
+      #Translate = False
+      Text = "Todo a MAYÚSCULAS"
     }
     { menuMAYexcepciones Menu
-      Text = ("Todo a MAYÚSCULAS (menos «and» para bibLaTeX)")
+      #Translate = False
+      Text = "Todo a MAYÚSCULAS (menos «and» para bibLaTeX)"
     }
     { menuMAYinicialESPANOL Menu
-      Text = ("MAYÚSCULA inicial para español")
+      #Translate = False
+      Text = "MAYÚSCULA inicial para español"
     }
     { menuMAYinicialINGLES Menu
-      Text = ("Todo a MAYÚSCULAS (Title Case) para inglés")
+      #Translate = False
+      Text = "Todo a MAYÚSCULAS (Title Case) para inglés"
     }
     { Menu2 Menu
     }
     { menuBUSCARgoogle Menu
-      Text = ("Buscar con Google")
+      #Translate = False
+      Text = "Buscar con Google"
     }
     { menuBUSCARduckduckgo Menu
-      Text = ("Buscar con DuckDuckGo")
+      #Translate = False
+      Text = "Buscar con DuckDuckGo"
     }
     { menuBUSCARbing Menu
-      Text = ("Buscar con Bing")
+      #Translate = False
+      Text = "Buscar con Bing"
     }
     { menuWordReference Menu
-      Text = ("Buscar definición en WordReference")
+      #Translate = False
+      Text = "Buscar definición en WordReference"
     }
     { menuBUSCARrae Menu
-      Text = ("Buscar en la RAE")
+      #Translate = False
+      Text = "Buscar en la RAE"
     }
     { menuFUNDEU Menu
-      Text = ("Buscar definición en FundéuRAE")
+      #Translate = False
+      Text = "Buscar definición en FundéuRAE"
     }
     { Menu1 Menu
     }
     { menuIrURL Menu
-      Text = ("Ir a la URL")
+      #Translate = False
+      Text = "Ir a la URL"
     }
   }
   { menuTareas Menu
@@ -155,57 +173,56 @@
     }
   }
   { menuTOOLS Menu
-    Text = ("Herramientas")
+    #Translate = False
+    Text = "Herramientas"
     { menuCONVERSOR Menu
-      Text = ("Conversión de archivo .docx a .tex")
+      #Translate = False
+      Text = "Conversión de archivo .docx a .tex"
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuCONVERSORpandoc Menu
-      Text = ("Conversión simple y directa de .docx a .tex")
+      #Translate = False
+      Text = "Conversión simple y directa de .docx a .tex"
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuAPUNTES Menu
-      Text = ("Cuaderno de notas")
+      #Translate = False
+      Text = "Cuaderno de notas"
       Picture = Picture["iconos/notas.svg"]
     }
     { Menu78 Menu
-      Text = ("Exportar referencias bibliográficas")
+      #Translate = False
+      Text = "Exportar referencias bibliográficas"
       Picture = Picture["iconos/exportar.svg"]
-    }
-    { menuESTADISTICAS Menu
-      Text = ("Estadísticas de autores y revisores")
-      Enabled = False
-      Visible = False
-    }
-    { Menu79 Menu
     }
     { menuScriptsExternos Menu
       Text = ("Script externos")
       Picture = Picture["iconos/edit-select.svg"]
       Enabled = False
-    }
-    { menuDRAW Menu
-      Text = ("Contador / Estadísticas del archivo")
-      Enabled = False
+      Visible = False
     }
   }
   { menuLTX Menu
     Text = ("Generar PDF complementarios")
     Visible = False
     { menuPDFweb Menu
-      Text = ("PDF completo para la web")
+      #Translate = False
+      Text = "PDF completo para la web"
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuOT Menu
-      Text = ("Orden de trabajo para imprenta")
+      #Translate = False
+      Text = "Orden de trabajo para imprenta"
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuDisclaimer Menu
-      Text = ("Comentarios para la corrección")
+      #Translate = False
+      Text = "Comentarios para la corrección"
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuCatalogo Menu
-      Text = ("Gacetilla de prensa")
+      #Translate = False
+      Text = "Gacetilla de prensa"
       Picture = Picture["iconos/acroread.svg"]
     }
   }
@@ -215,54 +232,68 @@
     Toggle = True
     Visible = False
     { Menu17 Menu
-      Text = ("Abrir PDF")
+      #Translate = False
+      Text = "Abrir PDF"
       Picture = Picture["iconos/acroread.svg"]
     }
     { MenuHTMLview Menu
-      Text = ("Abrir HTML")
+      #Translate = False
+      Text = "Abrir HTML"
       Picture = Picture["iconos/web.svg"]
     }
     { Menu20 Menu
-      Text = ("Abrir ePub")
+      #Translate = False
+      Text = "Abrir ePub"
       Picture = Picture["iconos/epub.svg"]
     }
     { Menu22 Menu
     }
     { Menu74 Menu
-      Text = ("Ver página del catálogo")
+      #Translate = False
+      Text = "Ver página del catálogo"
     }
     { menuComentarios Menu
-      Text = ("Ver página de comentarios")
+      #Translate = False
+      Text = "Ver página de comentarios"
     }
     { Menu3 Menu
-      Text = ("Ver archivo PDF para web")
+      #Translate = False
+      Text = "Ver archivo PDF para web"
     }
     { menuVerOt Menu
-      Text = ("Ver orden para impresión")
+      #Translate = False
+      Text = "Ver orden para impresión"
     }
     { menuHTMLghp Menu
-      Text = ("Ver página HTML para Pages")
+      #Translate = False
+      Text = "Ver página HTML para Pages"
     }
   }
   { Menu57 Menu
     Text = ("Ayuda")
     { Menu68 Menu
-      Text = ("Acerca de gbTeXpublisher")
+      #Translate = False
+      Text = "Acerca de gbTeXpublisher"
       Picture = Picture["iconos/icono-gbtex.svg"]
     }
     { Menu5 Menu
-      Text = ("wiki del proyecto")
+      #Translate = False
+      Text = "wiki del proyecto"
+      Picture = Picture["iconos/logfile.svg"]
     }
     { Menu24 Menu
-      Text = ("Contactar al desarrollador")
+      #Translate = False
+      Text = "Contactar al desarrollador"
       Picture = Picture["iconos/go-home.svg"]
     }
     { Menu66 Menu
-      Text = ("Acerca de Gambas")
+      #Translate = False
+      Text = "Acerca de Gambas"
       Picture = Picture["iconos/logo-gambas.png"]
     }
     { Menu64 Menu
-      Text = ("Aviso Legal")
+      #Translate = False
+      Text = "Aviso Legal"
       Picture = Picture["iconos/clavebib.svg"]
     }
   }
