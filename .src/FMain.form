@@ -408,13 +408,14 @@
     }
   }
   { TabPanel1 TabPanel
-    MoveScaled(2,13,162,85)
+    MoveScaled(2,14,162,85)
     Visible = False
     Expand = True
     Arrangement = Arrange.Vertical
     Spacing = True
     Margin = True
     Padding = 4
+    Border = False
     Count = 6
     Index = 0
     Text = ("Terminal     ")
@@ -3178,25 +3179,30 @@
       MoveScaled(2,11,159,70)
       Expand = True
       Arrangement = Arrange.Fill
+      Spacing = True
       Margin = True
       Padding = 4
+      Border = False
       Count = 2
       Highlight = True
       Index = 0
       Text = ("LaTeX     ")
       Picture = Picture["iconos/titulo.svg"]
       { !TabPanelLibro TabPanel
-        MoveScaled(2,2,156,62)
+        MoveScaled(2,3,156,62)
         #Public = True
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
         Padding = 4
+        Border = False
         Count = 3
         Index = 0
         Text = ("Obligatorios a la salida de tipo libro     ")
         Picture = Picture["iconos/meta1.svg"]
         { ScrollView10 ScrollView
-          MoveScaled(1,1,103,46)
+          MoveScaled(2,1,103,46)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -3998,18 +4004,16 @@
         Spacing = True
         Margin = True
         Padding = 4
-        Count = 4
+        Border = False
+        Count = 2
         Highlight = True
         Index = 0
         Text = ("_quarto.yml     ")
         Picture = Picture["iconos/quarto.svg"]
         { ScrollView15 ScrollView
-          MoveScaled(1,1,115,50)
+          MoveScaled(5,3,115,50)
           Expand = True
           Arrangement = Arrange.Vertical
-          Spacing = True
-          Margin = True
-          Padding = 4
           Border = False
           ScrollBar = Scroll.Vertical
           { HBox3 HBox
@@ -4060,7 +4064,7 @@
             }
           }
           { TabPanelQuartoSalidas TabPanel
-            MoveScaled(1,5,110,43)
+            MoveScaled(1,6,110,43)
             Expand = True
             Arrangement = Arrange.Vertical
             Spacing = True
@@ -4070,10 +4074,196 @@
             Highlight = True
             Index = 0
             Text = ("PDF     ")
+            { HBox174 HBox
+              MoveScaled(0,0,78,4)
+              { Label168 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("LaTeX_engine  ")
+              }
+              { cmbLTXengine ComboBox
+                MoveScaled(23,0,18,4)
+                ReadOnly = True
+                List = [("LuaLaTeX"), ("XeLaTeX")]
+              }
+            }
+            { HBox183 HBox
+              MoveScaled(0,4,78,4)
+              { Label171 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Template  ")
+              }
+              { CheckBox6 CheckBox
+                MoveScaled(23,0,12,4)
+                AutoResize = True
+                Text = ("Interno     ")
+                Value = CheckBox.True
+              }
+              { txtTEMPLATEquarto TextBox
+                MoveScaled(41,0,25,4)
+                Enabled = False
+                Expand = True
+              }
+            }
+            { HBox186 HBox
+              MoveScaled(0,8,78,4)
+              { Label172 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Bibliography  ")
+              }
+              { txtBIBquarto TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
             Index = 1
             Text = ("ePub     ")
             Index = 2
             Text = ("HTML     ")
+            { HBox229 HBox
+              MoveScaled(0,0,78,4)
+              { Label173 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Theme  ")
+              }
+              { cmbHTMLtheme ComboBox
+                MoveScaled(22.5556,0,18,4)
+                ReadOnly = True
+                List = [("journal"), ("cosmos")]
+              }
+            }
+            { HBox230 HBox
+              MoveScaled(0,4,78,4)
+              { Label174 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("TOC  ")
+              }
+              { cmbHTMLtoc ComboBox
+                MoveScaled(22.5556,0,18,4)
+                ReadOnly = True
+                List = [("True"), ("False")]
+              }
+            }
+            { HBox231 HBox
+              MoveScaled(0,8,78,4)
+              { Label175 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("TOC_depth  ")
+              }
+              { txtBIBquarto4 TextBox
+                MoveScaled(23,0,18,4)
+              }
+            }
+            { HBox232 HBox
+              MoveScaled(0,12,78,4)
+              { Label176 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Number_sections  ")
+              }
+              { cmbHTMLnumbersection ComboBox
+                MoveScaled(23,0,18,4)
+                ReadOnly = True
+                List = [("True"), ("False")]
+              }
+            }
+            { HBox233 HBox
+              MoveScaled(0,16,78,4)
+              { Label177 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("CSS  ")
+              }
+              { txtHTMLcss TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
+            { HBox234 HBox
+              MoveScaled(0,20,78,4)
+              { Label178 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Self_contained  ")
+              }
+              { txtBIBquarto7 TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
+            { HBox235 HBox
+              MoveScaled(0,24,78,4)
+              { Label179 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Code_download  ")
+              }
+              { txtBIBquarto8 TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
+            { HBox236 HBox
+              MoveScaled(0,28,78,4)
+              { Label180 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Code_fold  ")
+              }
+              { txtBIBquarto9 TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
+            { HBox237 HBox
+              MoveScaled(0,32,78,4)
+              { Label181 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Highlight  ")
+              }
+              { txtBIBquarto10 TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
+            { HBox238 HBox
+              MoveScaled(0,36,78,4)
+              { Label182 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Bibliography  ")
+              }
+              { txtBIBquarto11 TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
+            { HBox239 HBox
+              MoveScaled(0,40,78,4)
+              { Label183 Label
+                MoveScaled(0,0,22.5556,4)
+                Alignment = Align.Right
+                Text = ("Biblio_style  ")
+              }
+              { txtBIBquarto12 TextBox
+                MoveScaled(23,0,25,4)
+                Expand = True
+                Placeholder = ("coloque aquí su usuario GitHub")
+              }
+            }
             Index = 3
             Text = ("JATS     ")
             Index = 4
@@ -4098,15 +4288,14 @@
             { txtYMLpersonal TextArea
               MoveScaled(3,7,16,16)
               Expand = True
+              Wrap = True
+              ScrollBar = Scroll.Vertical
             }
             Index = 0
           }
         }
         Index = 1
-        Text = ("Opcionales a la salida de tipo libro     ")
-        Picture = Picture["iconos/titulo.svg"]
-        Index = 2
-        Text = ("Opcionales a la salida  de tipo revista     ")
+        Text = ("Opcionales para la salida de tipo revista     ")
         Picture = Picture["iconos/revista.svg"]
         { ScrollView14 ScrollView
           MoveScaled(2,2,90,53)
@@ -4825,9 +5014,6 @@
             }
           }
         }
-        Index = 3
-        Text = ("Particulares para cada autor a la salida  de tipo revista")
-        Picture = Picture["iconos/autores.svg"]
         Index = 0
       }
       Index = 0
