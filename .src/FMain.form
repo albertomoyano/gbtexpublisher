@@ -318,6 +318,14 @@
       Text = ("Compilar")
       Picture = Picture["iconos/revista.svg"]
     }
+    { Spring3 Spring
+      MoveScaled(92,0,16,4)
+    }
+    { btnCerrarPrograma Button
+      MoveScaled(113,0,14,4)
+      Text = ("Salir")
+      Picture = Picture["iconos/salir.svg"]
+    }
   }
   { HBox1 HBox
     MoveScaled(1,4,107,4)
@@ -4079,7 +4087,7 @@
               { Label168 Label
                 MoveScaled(0,0,22.5556,4)
                 Alignment = Align.Right
-                Text = ("LaTeX_engine  ")
+                Text = ("Motor de compilación  ")
               }
               { cmbLTXengine ComboBox
                 MoveScaled(23,0,18,4)
@@ -4092,17 +4100,22 @@
               { Label171 Label
                 MoveScaled(0,0,22.5556,4)
                 Alignment = Align.Right
-                Text = ("Template  ")
+                Text = ("Matriz de diseño  ")
               }
-              { CheckBox6 CheckBox
+              { chkInterno CheckBox
                 MoveScaled(23,0,12,4)
                 AutoResize = True
                 Text = ("Interno     ")
                 Value = CheckBox.True
               }
+              { btnBuscarTemplate Button
+                MoveScaled(35,0,4,4)
+                Visible = False
+                Picture = Picture["iconos/abrirBuscar.svg"]
+              }
               { txtTEMPLATEquarto TextBox
-                MoveScaled(41,0,25,4)
-                Enabled = False
+                MoveScaled(51,0,25,4)
+                Visible = False
                 Expand = True
               }
             }
@@ -4156,7 +4169,7 @@
                 Alignment = Align.Right
                 Text = ("TOC_depth  ")
               }
-              { txtBIBquarto4 TextBox
+              { txtHTMLtocDepth TextBox
                 MoveScaled(23,0,18,4)
               }
             }
@@ -4183,7 +4196,6 @@
               { txtHTMLcss TextBox
                 MoveScaled(23,0,25,4)
                 Expand = True
-                Placeholder = ("coloque aquí su usuario GitHub")
               }
             }
             { HBox234 HBox
@@ -4196,7 +4208,6 @@
               { txtBIBquarto7 TextBox
                 MoveScaled(23,0,25,4)
                 Expand = True
-                Placeholder = ("coloque aquí su usuario GitHub")
               }
             }
             { HBox235 HBox
@@ -4209,7 +4220,6 @@
               { txtBIBquarto8 TextBox
                 MoveScaled(23,0,25,4)
                 Expand = True
-                Placeholder = ("coloque aquí su usuario GitHub")
               }
             }
             { HBox236 HBox
@@ -4222,7 +4232,6 @@
               { txtBIBquarto9 TextBox
                 MoveScaled(23,0,25,4)
                 Expand = True
-                Placeholder = ("coloque aquí su usuario GitHub")
               }
             }
             { HBox237 HBox
@@ -4235,7 +4244,6 @@
               { txtBIBquarto10 TextBox
                 MoveScaled(23,0,25,4)
                 Expand = True
-                Placeholder = ("coloque aquí su usuario GitHub")
               }
             }
             { HBox238 HBox
@@ -4248,7 +4256,6 @@
               { txtBIBquarto11 TextBox
                 MoveScaled(23,0,25,4)
                 Expand = True
-                Placeholder = ("coloque aquí su usuario GitHub")
               }
             }
             { HBox239 HBox

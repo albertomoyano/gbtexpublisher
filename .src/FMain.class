@@ -339,6 +339,12 @@ Public Sub Menu11_Click()'cerrar el programa
 
 End
 
+Public Sub btnCerrarPrograma_Click()
+
+  Mod_Funciones.CerrarTodo()
+
+End
+
 ' Evento Show del formulario
 Public Sub Form_Show()
   ' Configura las coordenadas del formulario para ubicarlo en el margen superior derecho
@@ -5811,5 +5817,22 @@ Public Sub btnMenuGitLab_Click()
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.SetFocus()
   TerminalView1.Refresh()
+
+End
+
+'
+' condicionales para para las opciones de Quarto
+Public Sub chkInterno_Click()
+
+  If chkInterno.Value = True Then
+    ' Oculta el TextBox y lo limpia
+    btnBuscarTemplate.Visible = False
+    txtTEMPLATEquarto.Visible = False
+    txtTEMPLATEquarto.Text = ""
+  Else
+    ' Muestra el TextBox
+    btnBuscarTemplate.Visible = True
+    txtTEMPLATEquarto.Visible = True
+  End If
 
 End
