@@ -5836,3 +5836,33 @@ Public Sub chkInterno_Click()
   End If
 
 End
+
+Public Sub btnSintaxisYML_Click()
+
+  Dim textoYAML As String = txtYMLpersonal.Text
+  Dim resultado As String
+
+  ' Verificar si el TextBox está vacío
+  If textoYAML = "" Then
+    Message.Error("El área de escritura está vacío. Introduzca código YAML válido.")
+    Return ' Salir del sub sin continuar
+  Endif
+
+  ' Guardar el YAML temporalmente en un archivo
+  Dim archivoTemp As String = "/tmp/temp_yaml.yml"
+  File.Save(archivoTemp, textoYAML)
+
+  ' Ejecutar Python para validar YAML
+  Shell "python3 -c \"import yaml; yaml.safe_load(open('" & archivoTemp & "')); print('VALIDO')\"" To resultado
+
+  ' Verificar el resultado
+  If Trim(resultado) = "VALIDO" Then
+    Message.Info("El texto YAML es válido.")
+  Else
+    Message.Error("El texto YAML no es válido.")
+  Endif
+
+  ' Eliminar archivo temporal
+  ' File.Kill(archivoTemp)
+
+End

@@ -4124,10 +4124,14 @@
               { Label172 Label
                 MoveScaled(0,0,22.5556,4)
                 Alignment = Align.Right
-                Text = ("Bibliography  ")
+                Text = ("Archivo .bib  ")
+              }
+              { btnBuscarArchivoBIB Button
+                MoveScaled(29,0,4,4)
+                Picture = Picture["iconos/abrirBuscar.svg"]
               }
               { txtBIBquarto TextBox
-                MoveScaled(23,0,25,4)
+                MoveScaled(36,0,25,4)
                 Expand = True
                 Placeholder = ("coloque aquí su usuario GitHub")
               }
