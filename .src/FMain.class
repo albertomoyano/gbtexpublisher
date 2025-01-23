@@ -3492,7 +3492,6 @@ Public Sub menuAbrirRevista_Click()
   BaseName = File.BaseName(TextBox1.Text)
   ' rutaBIB = BaseName & ".bib"
 
-  btnMONOpdf.Enabled = False
   btnGuardarIGUAL.Visible = False
   TabPanel1.Visible = True
   menuBORRARaux.Enabled = True
@@ -3811,73 +3810,6 @@ Public Sub BtnBuscarEnArchivos_Click()
 
 End
 
-Public Sub menuMono_Click()'monografia academica
-
-  Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.qmd", "Archivos de Quarto"]
-  Dialog.AutoExt = True
-  Dialog.Path = User.Home
-  If Dialog.OpenFile() Then
-    Return
-  Else
-    habilitamosMonografia()
-    TextBox1.Text = Dialog.Path
-    sCurrentFilePath = TextBox1.Text
-    DirViewRuta.Root = File.Dir(TextBox1.Text)
-    If Not Exist(File.Dir(TextBox1.Text) & "/media") Then
-      Mkdir File.Dir(TextBox1.Text) & "/media"
-    End If
-    If Not Exist(File.Dir(TextBox1.Text) & "/files") Then
-      Mkdir File.Dir(TextBox1.Text) & "/files"
-    End If
-    guardarTipoDocumentoMonografia()
-  Endif
-
-  If Not MS.Matrix.Exist(Dialog.Path) Then
-    If MS.Matrix.Count = MS.iLastNumber Then
-      MS.Matrix.Remove(0)
-      MS.ShortMatrix.Remove(0)
-    End If
-    MS.Matrix.Add(Dialog.Path)
-    MS.ShortMatrix.Add(File.Name(Dialog.Path))
-    UpdateMenu()
-  End If
-
-  btnGuardarIGUAL.Visible = False
-  TabPanel1.Visible = True
-  menuBORRARaux.Enabled = True
-  menuComprimir.Enabled = True
-  menuTOOLS.Enabled = True
-  menuScriptsExternos.Enabled = True
-  menuLTX.Enabled = True
-  MenuApp.Enabled = True
-  Button4.Enabled = True
-  btnMenuGIT.Enabled = True
-  btnMenuGitLab.Enabled = True
-  btnKanban.Enabled = True
-  menuGray.Enabled = True
-  menuCatalogo.Enabled = True
-  Menu4.Enabled = True
-
-  If Form_Notas.Visible Then
-    Form_Notas.Close ' Cierra la ventana
-  End If
-
-  BtnNuevoMeta.Visible = True
-  btnGuardarMeta.Visible = False
-  btnGuardarCambiosMeta.Visible = False
-
-  Mod_Funciones_Monografia.CopiarArchivosMonografia(TextBox1.Text)
-
-  txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
-  txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-
-  'posicionamos la consola con el path del archivo de trabajo
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
-  TerminalView1.SetFocus()
-
-End
-
 Public Sub guardarTipoDocumentoLibro()
 
   Dim tdL As String = "tipoLibro"
@@ -3991,7 +3923,6 @@ Public Sub habilitamosLibro()
   btnCOMPpdf.Enabled = True
   btnCOMPepub.Enabled = True
   btnCOMPpdfRevista.Enabled = False
-  btnMONOpdf.Enabled = False
   HBox83.Visible = True
   HBox85.Visible = True
   TabPanelLibro.Visible = True
@@ -4008,7 +3939,6 @@ Public Sub habilitamosRevista()
   btnCOMPpdf.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPpdfRevista.Enabled = True
-  btnMONOpdf.Enabled = False
   HBox83.Visible = True
   HBox85.Visible = True
   TabPanelLibro.Visible = False
@@ -4025,7 +3955,6 @@ Public Sub habilitamosMonografia()
   btnCOMPpdf.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPpdfRevista.Enabled = False
-  btnMONOpdf.Enabled = True
   menuPDFweb.Visible = False
   menuOT.Visible = False
   ' Inicia el Timer al hacer clic en el botón
@@ -4166,12 +4095,6 @@ End
 Public Sub btnAbrirRevista_Click()
 
   menuAbrirRevista_Click()
-
-End
-
-Public Sub btnAbrirMonografia_Click()
-
-  menuMono_Click()
 
 End
 
