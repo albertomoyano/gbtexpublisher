@@ -5866,3 +5866,23 @@ Public Sub btnSintaxisYML_Click()
   ' File.Kill(archivoTemp)
 
 End
+
+Public Sub chkPDF_Click()
+
+  If chkPDF.Value = True Then
+    contenedorPDF.Visible = True
+  Else
+    contenedorPDF.Visible = False
+  End If
+
+End
+
+Public Sub chkHTML_Click()
+
+  If chkHTML.Value = True Then
+    contenedorHTML.Visible = True
+  Else
+    contenedorHTML.Visible = False
+  End If
+
+End
