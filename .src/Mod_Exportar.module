@@ -1815,11 +1815,14 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
 
     s &= "\t\t <h3>Fecha de publicación</h3>" & gb.NewLine
     s &= "\t\t <p>" & ContenidoGHP[gFields[9]] & "</p>" & gb.NewLine
-    s &= "\t </aside>" & gb.NewLine
+    s &= "\t </aside>" & gb.NewLine' termina columna de la izquierda
     '
     s &= "\t <section>" & gb.NewLine
     s &= "\t\t <div class=\"button-container\">" & gb.NewLine
-    s &= "\t\t <a href=\"" & ContenidoGHP[gFields[7]] & "\" target=\"_blank\">Descargar PDF</a>" & gb.NewLine
+    ' uso 3 condionales para saber si los botones se muestran
+    If Not IsNull(ContenidoGHP[gFields[7]]) And Len(ContenidoGHP[gFields[7]]) > 0 Then
+      s &= "\t\t <a href=\"" & ContenidoGHP[gFields[7]] & "\" target=\"_blank\">PDF completo</a>" & gb.NewLine
+    End If
     If Not IsNull(ContenidoGHP[gFields[5]]) And Len(ContenidoGHP[gFields[5]]) > 0 Then
       s &= "\t\t <a href=\"" & ContenidoGHP[gFields[5]] & "\" target=\"_blank\">Descargar ePub</a>" & gb.NewLine
     End If
@@ -1828,7 +1831,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     End If
     s &= "\t\t </div>" & gb.NewLine
     s &= "<h3 style=\"font-weight: normal\">Autoría</h3>" & gb.NewLine
-
+    '
     While ContenidoAutoresA.Available
       ' Verificar si aFields[3] es Null o está vacío
       If IsNull(ContenidoAutoresA[aaFields[3]]) Or ContenidoAutoresA[aaFields[3]] = "" Then
@@ -1859,11 +1862,20 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
     s &= "<tbody>" & gb.NewLine
     '
     ' Construcción dinámica de la salida de la separata de capítulos
+    ' dentro de este loop va un control que revisa si se muestra el icono de descarga
     While ContenidoSeparatas.Available
       ' Usamos solo las columnas necesarias (índices 2, 3 y 4)
-      s &= "<tr><td>" & ContenidoSeparatas[xFields[2]] & "</td>"
-      s &= "<td>" & ContenidoSeparatas[xFields[3]] & "</td>"
-      s &= "<td><a href=\"" & ContenidoSeparatas[xFields[4]] & "\" target=\"_blank\"><img src=\"descarga.png\" alt=\"icono descargar\"></a></td></tr>" & gb.NewLine
+      s &= "<tr><td>" & ContenidoSeparatas[xFields[2]] & "</td>" ' título
+      ' Verificamos si xFields[3] tiene contenido
+      If ContenidoSeparatas[xFields[4]] <> Null And ContenidoSeparatas[xFields[4]] <> "" Then
+        s &= "<td>" & ContenidoSeparatas[xFields[3]] & "</td>" ' rango de páginas
+        s &= "<td><a href=\"" & ContenidoSeparatas[xFields[4]] & "\" target=\"_blank\"><img src=\"descarga.png\" alt=\"icono descargar\"></a></td></tr>" & gb.NewLine
+      Else
+        s &= "<td>" & ContenidoSeparatas[xFields[3]] & "</td>" ' rango de páginas
+        ' Si xFields[4] está vacío, no mostramos el icono
+        s &= "<td></td><td></td></tr>" & gb.NewLine
+      End If
+
       ContenidoSeparatas.MoveNext ' Avanzar al siguiente registro
     Wend
 
