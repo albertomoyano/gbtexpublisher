@@ -3163,7 +3163,7 @@
       Index = 0
       Text = ("LaTeX     ")
       Picture = Picture["iconos/titulo.svg"]
-      { HBox83 HBox
+      { HBoxPanelLibro HBox
         MoveScaled(1,0,95,4)
         { BtnNuevoMeta Button
           MoveScaled(0,0,4,4)
@@ -4004,7 +4004,7 @@
       Index = 1
       Text = ("Quarto     ")
       Picture = Picture["iconos/revista.svg"]
-      { HBox240 HBox
+      { HBoxPanelRevista HBox
         MoveScaled(2,0,95,4)
         { BtnNuevoMeta2 Button
           MoveScaled(0,0,4,4)
@@ -5600,15 +5600,19 @@
               #Public = True
               Enabled = False
             }
-            { Label153 Label
-              MoveScaled(44,0,23,4)
+            { Separator3 Separator
+              MoveScaled(44,0,1.7778,4)
+              Foreground = Color.Transparent
+            }
+            { chkURLdescarga CheckBox
+              MoveScaled(53,0,13,4)
               AutoResize = True
-              Alignment = Align.Right
-              Text = ("    URL de descarga  ")
+              Text = ("URL de descarga  ")
             }
             { !txtURLdescarga TextBox
-              MoveScaled(69,0,16,4)
+              MoveScaled(67,0,16,4)
               #Public = True
+              Visible = False
               Enabled = False
               Expand = True
             }

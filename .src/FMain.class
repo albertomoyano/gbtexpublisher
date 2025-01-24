@@ -3929,7 +3929,7 @@ Public Sub habilitamosLibro()
   btnCOMPpdf.Enabled = True
   btnCOMPepub.Enabled = True
   btnCOMPpdfRevista.Enabled = False
-  HBox83.Visible = True
+  HBoxPanelLibro.Visible = True
   HBox85.Visible = True
   TabPanelLibro.Visible = True
   menuPDFweb.Visible = True
@@ -3945,7 +3945,7 @@ Public Sub habilitamosRevista()
   btnCOMPpdf.Enabled = False
   btnCOMPepub.Enabled = False
   btnCOMPpdfRevista.Enabled = True
-  HBox83.Visible = True
+  HBoxPanelLibro.Visible = True
   HBox85.Visible = True
   TabPanelLibro.Visible = False
   menuPDFweb.Visible = True
@@ -5883,6 +5883,16 @@ Public Sub chkHTML_Click()
     contenedorHTML.Visible = True
   Else
     contenedorHTML.Visible = False
+  End If
+
+End
+
+Public Sub chkURLdescarga_Click()
+
+  If chkURLdescarga.Value = True Then
+    txtURLdescarga.Visible = True
+  Else
+    txtURLdescarga.Visible = False
   End If
 
 End
