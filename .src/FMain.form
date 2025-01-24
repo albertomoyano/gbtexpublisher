@@ -3122,39 +3122,6 @@
     Index = 3
     Text = ("Metadatos     ")
     Picture = Picture["iconos/metadatos.svg"]
-    { HBox83 HBox
-      MoveScaled(1,0,95,4)
-      { BtnNuevoMeta Button
-        MoveScaled(0,0,4,4)
-        NoTabFocus = True
-        Picture = Picture["iconos/+nuevo.svg"]
-      }
-      { btnGuardarMeta Button
-        MoveScaled(4,0,4,4)
-        Picture = Picture["iconos/guardar.svg"]
-      }
-      { btnGuardarCambiosMeta Button
-        MoveScaled(8,0,4,4)
-        Picture = Picture["iconos/guardarComo.svg"]
-      }
-      { Label127 Label
-        MoveScaled(16,0,5,4)
-        Visible = False
-        AutoResize = True
-        Text = ("ID  ")
-      }
-      { !txtIDmetadatos TextBox
-        MoveScaled(24,0,9,4)
-        #Public = True
-        Visible = False
-        Background = Color.Background
-        NoTabFocus = True
-        ReadOnly = True
-      }
-      { Spring6 Spring
-        MoveScaled(49,0,5,4)
-      }
-    }
     { HBox85 HBox
       MoveScaled(2,5,124,4)
       { Label29 Label
@@ -3186,7 +3153,7 @@
     { TabPanel6 TabPanel
       MoveScaled(2,11,159,70)
       Expand = True
-      Arrangement = Arrange.Fill
+      Arrangement = Arrange.Vertical
       Spacing = True
       Margin = True
       Padding = 4
@@ -3196,8 +3163,41 @@
       Index = 0
       Text = ("LaTeX     ")
       Picture = Picture["iconos/titulo.svg"]
+      { HBox83 HBox
+        MoveScaled(1,0,95,4)
+        { BtnNuevoMeta Button
+          MoveScaled(0,0,4,4)
+          NoTabFocus = True
+          Picture = Picture["iconos/+nuevo.svg"]
+        }
+        { btnGuardarMeta Button
+          MoveScaled(4,0,4,4)
+          Picture = Picture["iconos/guardar.svg"]
+        }
+        { btnGuardarCambiosMeta Button
+          MoveScaled(8,0,4,4)
+          Picture = Picture["iconos/guardarComo.svg"]
+        }
+        { Label127 Label
+          MoveScaled(16,0,5,4)
+          Visible = False
+          AutoResize = True
+          Text = ("ID  ")
+        }
+        { !txtIDmetadatos TextBox
+          MoveScaled(24,0,9,4)
+          #Public = True
+          Visible = False
+          Background = Color.Background
+          NoTabFocus = True
+          ReadOnly = True
+        }
+        { Spring6 Spring
+          MoveScaled(49,0,5,4)
+        }
+      }
       { !TabPanelLibro TabPanel
-        MoveScaled(2,3,156,62)
+        MoveScaled(1,5,156,62)
         #Public = True
         Expand = True
         Arrangement = Arrange.Vertical
@@ -4004,8 +4004,41 @@
       Index = 1
       Text = ("Quarto     ")
       Picture = Picture["iconos/revista.svg"]
+      { HBox240 HBox
+        MoveScaled(2,0,95,4)
+        { BtnNuevoMeta2 Button
+          MoveScaled(0,0,4,4)
+          NoTabFocus = True
+          Picture = Picture["iconos/+nuevo.svg"]
+        }
+        { btnGuardarMeta2 Button
+          MoveScaled(4,0,4,4)
+          Picture = Picture["iconos/guardar.svg"]
+        }
+        { btnGuardarCambiosMeta2 Button
+          MoveScaled(8,0,4,4)
+          Picture = Picture["iconos/guardarComo.svg"]
+        }
+        { Label184 Label
+          MoveScaled(16,0,5,4)
+          Visible = False
+          AutoResize = True
+          Text = ("ID  ")
+        }
+        { !txtIDquarto TextBox
+          MoveScaled(24,0,9,4)
+          #Public = True
+          Visible = False
+          Background = Color.Background
+          NoTabFocus = True
+          ReadOnly = True
+        }
+        { Spring5 Spring
+          MoveScaled(49,0,5,4)
+        }
+      }
       { !TabPanelRevista TabPanel
-        MoveScaled(1,2,155,348)
+        MoveScaled(1,5,155,348)
         #Public = True
         Expand = True
         Arrangement = Arrange.Vertical
@@ -4019,13 +4052,13 @@
         Text = ("_quarto.yml     ")
         Picture = Picture["iconos/quarto.svg"]
         { ScrollView15 ScrollView
-          MoveScaled(5,3,115,50)
+          MoveScaled(5,5,115,50)
           Expand = True
           Arrangement = Arrange.Vertical
           Border = False
           ScrollBar = Scroll.Vertical
           { HBox3 HBox
-            MoveScaled(0,0,111,4)
+            MoveScaled(0,1,113,4)
             { Label119 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4133,7 +4166,6 @@
               { txtBIBquarto TextBox
                 MoveScaled(36,0,25,4)
                 Expand = True
-                Placeholder = ("coloque aquí su usuario GitHub")
               }
             }
             Index = 1
