@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=Form_ConectarBBDD
 Icon=iconos/icono-gbtex.svg
-Version=0.1.512
+Version=0.1.513
 Component=gb.image
 Component=gb.gtk3
 Component=gb.form
