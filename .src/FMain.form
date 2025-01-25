@@ -169,6 +169,10 @@
       Text = "Conversión simple y directa de .docx a .tex"
       Picture = Picture["iconos/conversor.svg"]
     }
+    { menuConversorQMD Menu
+      Text = ("Conversión de archivo .docx a .qmd")
+      Picture = Picture["iconos/conversor.svg"]
+    }
     { menuAPUNTES Menu
       #Translate = False
       Text = "Cuaderno de notas"
