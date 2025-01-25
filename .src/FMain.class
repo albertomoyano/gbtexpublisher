@@ -205,7 +205,7 @@ Public Sub salidaPDFlibro() 'generamos el PDF libro
   Dim rutaFija As String
   Dim newLog As String
 
-  ' exportamos el archivo para separata
+  ' exportamos el archivo de separata
   Mod_Exportar.ExportToSeparata(TextBox1.Text)
 
   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
@@ -4502,6 +4502,7 @@ Public Sub btnGuardarCapitulo_Click()
   btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
+  chkURLdescarga.Value = False
   txtURLdescarga.Enabled = False
 
 End
@@ -4567,6 +4568,7 @@ Public Sub btnGuardarCambiosCapitulo_Click()
   btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
+  chkURLdescarga.Value = False
   txtURLdescarga.Enabled = False
 
 End
