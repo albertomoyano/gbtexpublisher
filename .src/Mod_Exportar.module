@@ -1437,6 +1437,11 @@ End
 'exportamos el archivo de separata
 Public Sub ExportToSeparata(rutaTexto As String)
 
+  ' verificamos si existe el directorio docs
+  If Not Exist(File.Dir(rutaTexto) & "/docs") Then
+    Mkdir File.Dir(rutaTexto) & "/docs"
+  End If
+
   Dim s As String
   Dim outputFile As String
 
@@ -1448,7 +1453,7 @@ Public Sub ExportToSeparata(rutaTexto As String)
   s &= "\\immediate\\openout\\script=separatas.sh" & gb.NewLine
   s &= "\\immediate\\write\\script{\\string#!/bin/bash}" & gb.NewLine
   s &= "\\newcommand{\\separata}[1]{"
-  s &= "\\immediate\\write\\script{pdftk ./pdf/\\jobname.pdf cat \\thePrimPag-\\theCurrentPage\\space output ./pdf/#1-\\jobname.pdf}"
+  s &= "\\immediate\\write\\script{pdftk ./pdf/\\jobname.pdf cat \\thePrimPag-\\theCurrentPage\\space output ./docs/#1-\\jobname.pdf}"
   s &= "}"
   s &= "\n"
   ' %acá termina el script

@@ -10,9 +10,6 @@ Public Sub Form_Open()
   ' Llamar a la verificación al inicio por si ya hay algún texto en los TextBox
   VerificarCampos
 
-  ' exportamos los metadatos para pdftk
-  Mod_Exportar.ExportToMetadatosPDFTK(FMain.TextBox1.Text)
-
 End
 
 ' Evento que se dispara cuando cambia el contenido de txtTapa
@@ -108,6 +105,8 @@ End
 
 Public Sub btnEnsamblar_Click()
 
+  Mod_Exportar.ExportToMetadatosPDFTK()
+
   FMain.TabPanel1.Index = 0
 
   Dim rutaTapa As String = File.RealPath(txtTapa.Text)
@@ -121,7 +120,9 @@ Public Sub btnEnsamblar_Click()
 
   FMain.TerminalView1.Input("pdftk " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf update_info " & metadatos & " output " & File.Dir(FMain.TextBox1.Text) & "/docs/web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
-
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf" & "\n" & "clear" & "\n")
+  Wait 0.2
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXpdfTKmeta-" & File.BaseName(FMain.TextBox1.Text) & ".txt" & "\n" & "clear" & "\n")
+  Wait 0.2
 
 End
