@@ -134,6 +134,8 @@
   }
   { menuArchivo Menu
     Text = ("Archivo")
+    Enabled = False
+    Visible = False
     { menuAbrir Menu
       Text = ("Abrir libro")
       Picture = Picture["iconos/document.svg"]

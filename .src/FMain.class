@@ -5886,3 +5886,9 @@ Public Sub chkURLdescarga_Click()
   End If
 
 End
+
+Public Sub menuConversorQMD_Click()
+
+  Form_ConversorMD.ShowModal()
+
+End
