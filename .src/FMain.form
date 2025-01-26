@@ -139,8 +139,8 @@
       Picture = Picture["iconos/document.svg"]
       Visible = False
     }
-    { menuAbrirRevista Menu
-      Text = ("Abrir revista")
+    { menuAbrirQuarto Menu
+      Text = ("Abrir Quarto")
       Picture = Picture["iconos/document.svg"]
       Visible = False
     }
@@ -311,7 +311,7 @@
     { Separator2 Separator
       MoveScaled(59,0,2.3333,4)
     }
-    { btnAbrirRevista Button
+    { btnAbrirQuarto Button
       MoveScaled(61,0,14,4)
       Text = ("Quarto")
       Picture = Picture["iconos/abrirBuscar.svg"]
@@ -4071,41 +4071,12 @@
             { cmbProjetType ComboBox
               MoveScaled(23,0,18,4)
               ReadOnly = True
-              List = [("document"), ("presentation"), ("book"), ("report"), ("website")]
+              List = [("book"), ("document"), ("presentation"), ("report"), ("website")]
             }
             { Label126 Label
-              MoveScaled(41,0,11,4)
+              MoveScaled(41,0,58,4)
               AutoResize = True
-              Alignment = Align.Right
-              Text = ("    Salida  ")
-            }
-            { chkPDF CheckBox
-              MoveScaled(55,0,9,4)
-              AutoResize = True
-              Text = ("PDF     ")
-              Value = CheckBox.True
-            }
-            { chkEPUB CheckBox
-              MoveScaled(64,0,10,4)
-              AutoResize = True
-              Text = ("ePub     ")
-              Value = CheckBox.True
-            }
-            { chkHTML CheckBox
-              MoveScaled(74,0,10,4)
-              AutoResize = True
-              Text = ("HTML     ")
-              Value = CheckBox.True
-            }
-            { chkJATS CheckBox
-              MoveScaled(84,0,10,4)
-              AutoResize = True
-              Text = ("JATS     ")
-            }
-            { chkWORD CheckBox
-              MoveScaled(95,0,12,4)
-              AutoResize = True
-              Text = ("MSWord     ")
+              Text = ("    en book se obtienen salidas para pdf, epub, html, jats y word")
             }
           }
           { TabPanelQuartoSalidas TabPanel
@@ -4115,10 +4086,10 @@
             Spacing = True
             Margin = True
             Padding = 4
-            Count = 6
+            Count = 2
             Highlight = True
             Index = 0
-            Text = ("PDF     ")
+            Text = ("yml genérico     ")
             { contenedorPDF ScrollView
               MoveScaled(2,2,105,24)
               Expand = True
@@ -4180,157 +4151,7 @@
               }
             }
             Index = 1
-            Text = ("ePub     ")
-            Index = 2
-            Text = ("HTML     ")
-            { contenedorHTML ScrollView
-              MoveScaled(1,1,108,35)
-              Expand = True
-              Arrangement = Arrange.Vertical
-              Border = False
-              ScrollBar = Scroll.Vertical
-              { HBox229 HBox
-                MoveScaled(1,1,78,4)
-                { Label173 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Theme  ")
-                }
-                { cmbHTMLtheme ComboBox
-                  MoveScaled(22.5556,0,18,4)
-                  ReadOnly = True
-                  List = [("journal"), ("cosmos")]
-                }
-              }
-              { HBox230 HBox
-                MoveScaled(1,5,78,4)
-                { Label174 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("TOC  ")
-                }
-                { cmbHTMLtoc ComboBox
-                  MoveScaled(22.5556,0,18,4)
-                  ReadOnly = True
-                  List = [("True"), ("False")]
-                }
-              }
-              { HBox231 HBox
-                MoveScaled(1,9,78,4)
-                { Label175 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("TOC_depth  ")
-                }
-                { txtHTMLtocDepth TextBox
-                  MoveScaled(23,0,18,4)
-                }
-              }
-              { HBox232 HBox
-                MoveScaled(1,13,78,4)
-                { Label176 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Number_sections  ")
-                }
-                { cmbHTMLnumbersection ComboBox
-                  MoveScaled(23,0,18,4)
-                  ReadOnly = True
-                  List = [("True"), ("False")]
-                }
-              }
-              { HBox233 HBox
-                MoveScaled(1,17,78,4)
-                { Label177 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("CSS  ")
-                }
-                { txtHTMLcss TextBox
-                  MoveScaled(23,0,25,4)
-                  Expand = True
-                }
-              }
-              { HBox234 HBox
-                MoveScaled(1,21,78,4)
-                { Label178 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Self_contained  ")
-                }
-                { txtBIBquarto7 TextBox
-                  MoveScaled(23,0,25,4)
-                  Expand = True
-                }
-              }
-              { HBox235 HBox
-                MoveScaled(1,25,78,4)
-                { Label179 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Code_download  ")
-                }
-                { txtBIBquarto8 TextBox
-                  MoveScaled(23,0,25,4)
-                  Expand = True
-                }
-              }
-              { HBox236 HBox
-                MoveScaled(1,29,78,4)
-                { Label180 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Code_fold  ")
-                }
-                { txtBIBquarto9 TextBox
-                  MoveScaled(23,0,25,4)
-                  Expand = True
-                }
-              }
-              { HBox237 HBox
-                MoveScaled(1,33,78,4)
-                { Label181 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Highlight  ")
-                }
-                { txtBIBquarto10 TextBox
-                  MoveScaled(23,0,25,4)
-                  Expand = True
-                }
-              }
-              { HBox238 HBox
-                MoveScaled(1,37,78,4)
-                { Label182 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Bibliography  ")
-                }
-                { txtBIBquarto11 TextBox
-                  MoveScaled(23,0,25,4)
-                  Expand = True
-                }
-              }
-              { HBox239 HBox
-                MoveScaled(1,41,78,4)
-                { Label183 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Biblio_style  ")
-                }
-                { txtBIBquarto12 TextBox
-                  MoveScaled(23,0,25,4)
-                  Expand = True
-                  Placeholder = ("coloque aquí su usuario GitHub")
-                }
-              }
-            }
-            Index = 3
-            Text = ("JATS     ")
-            Index = 4
-            Text = ("MSWord     ")
-            Index = 5
-            Text = ("yml personalizado     ")
+            Text = ("yml adicionales     ")
             { HBox172 HBox
               MoveScaled(0,0,95,4)
               { btnGuardarYML Button

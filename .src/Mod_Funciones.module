@@ -163,7 +163,7 @@ End Function
 
 Public Sub Borrar_Aux()
 
-  FMain.TerminalView1.Input("cd " & File.Dir(FMain.TextBox1.Text) & "\n" & "rm *.xmpi *.*1 *.*2 *.*3 *.eledsec* *.*end *.fuse* odt-*.tex *.bcf-SAVE-ERROR html5-*_html.tex *.bbl-SAVE-ERROR html5-*.tex *.css *.lwarpmkconf *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
+  FMain.TerminalView1.Input("cd " & File.Dir(FMain.TextBox1.Text) & "\n" & "rm .fuse* *.xmpi *.*1 *.*2 *.*3 *.eledsec* *.*end *.fuse* odt-*.tex *.bcf-SAVE-ERROR html5-*_html.tex *.bbl-SAVE-ERROR html5-*.tex *.css *.lwarpmkconf *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
   Wait 0.2
 
   FMain.TerminalView1.SetFocus()
@@ -714,5 +714,80 @@ Public Sub CerrarTodo()
   Wait 0.1
 
   Quit
+
+End
+
+Public Sub CopiarArchivosQuadro(rutaTexto As String)'libros
+
+  ' Lista de directorios que se van a crear
+  Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "artcap", "docs", "salidas"]
+
+  ' Crear los directorios si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(rutaTexto) & "/" & directorio) Then
+      Mkdir File.Dir(rutaTexto) & "/" & directorio
+    End If
+  Next
+
+  'copiamos los archivos de preámbulo de libro
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/qbook-pdf.tex") Then
+    Copy "./qbook-pdf.tex" To File.Dir(rutaTexto) & "/files/qbook-pdf.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/qrevista-pdf.tex") Then
+    Copy "./qrevista-pdf.tex" To File.Dir(rutaTexto) & "/files/qrevista-pdf.tex"
+  End If
+
+  ' 'copiamos los archivos de configuracion general
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
+  '   Copy "./imagoCustom.css" To File.Dir(rutaTexto) & "/files/imagoCustom.css"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/build.lua") Then
+  '   Copy "./build.lua" To File.Dir(rutaTexto) & "/files/build.lua"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoEpub.css") Then
+  '   Copy "./imagoEpub.css" To File.Dir(rutaTexto) & "/files/imagoEpub.css"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
+  '   Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
+  '   Copy "./agradecimientos.tex" To File.Dir(rutaTexto) & "/artcap/agradecimientos.tex"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/colofon.tex") Then
+  '   Copy "./colofon.tex" To File.Dir(rutaTexto) & "/artcap/colofon.tex"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
+  '   Copy "./indiceautores.tex" To File.Dir(rutaTexto) & "/artcap/indiceautores.tex"
+  ' End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/readme.md") Then
+    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
+    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
+  End If
+
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
+    Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
+    Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
+  End If
+
+  ' copiamos archivos para página html
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/logo-imago.png") Then
+    Copy "./logo-imago.png" To File.Dir(rutaTexto) & "/docs/logo-imago.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/descarga.png") Then
+    Copy "./descarga.png" To File.Dir(rutaTexto) & "/docs/descarga.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/orcid.png") Then
+    Copy "./orcid.png" To File.Dir(rutaTexto) & "/docs/orcid.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/imago1.css") Then
+    Copy "./imago1.css" To File.Dir(rutaTexto) & "/docs/imago1.css"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/favicon.jpg") Then
+    Copy "./favicon.jpg" To File.Dir(rutaTexto) & "/docs/favicon.jpg"
+  End If
 
 End
