@@ -9,7 +9,8 @@
   Spacing = True
   Margin = True
   { menuProcesarArchivos Menu
-    Text = ("Procesar archivos")
+    #Translate = False
+    Text = "Procesar archivos"
     Visible = False
     { Menu4 Menu
       Text = ("Ejecutar separatas")
@@ -33,7 +34,8 @@
     }
   }
   { MenuEPUB Menu
-    Text = ("menuEpub")
+    #Translate = False
+    Text = "menuEpub"
     Visible = False
     { menuEPUB1 Menu
       #Translate = False
@@ -45,7 +47,8 @@
     }
   }
   { menuTEXTBOX Menu
-    Text = ("menuContextual")
+    #Translate = False
+    Text = "menuContextual"
     Visible = False
     { menuGlifos Menu
       #Translate = False
@@ -109,7 +112,8 @@
     }
   }
   { menuTareas Menu
-    Text = ("menuTareas")
+    #Translate = False
+    Text = "menuTareas"
     Visible = False
     { menuADD Menu
       Text = ("Agregar tarea")
@@ -133,7 +137,8 @@
     }
   }
   { menuArchivo Menu
-    Text = ("Archivo")
+    #Translate = False
+    Text = "Archivo"
     Enabled = False
     Visible = False
     { menuAbrir Menu
@@ -161,6 +166,7 @@
   { menuTOOLS Menu
     #Translate = False
     Text = "Herramientas"
+    Visible = False
     { menuCONVERSOR Menu
       #Translate = False
       Text = "Conversión de archivo .docx a .tex"
@@ -193,7 +199,8 @@
     }
   }
   { menuLTX Menu
-    Text = ("Generar PDF complementarios")
+    #Translate = False
+    Text = "Generar PDF complementarios"
     Visible = False
     { menuPDFweb Menu
       #Translate = False
@@ -217,9 +224,8 @@
     }
   }
   { AbrirApp Menu
-    Text = ("AbrirApp")
-    Enabled = False
-    Toggle = True
+    #Translate = False
+    Text = "AbrirApp"
     Visible = False
     { Menu17 Menu
       #Translate = False
@@ -260,7 +266,9 @@
     }
   }
   { Menu57 Menu
-    Text = ("Ayuda")
+    #Translate = False
+    Text = "Ayuda"
+    Visible = False
     { Menu68 Menu
       #Translate = False
       Text = "Acerca de gbTeXpublisher"
@@ -311,21 +319,38 @@
       MenuOnly = True
     }
     { Separator2 Separator
-      MoveScaled(59,0,2.3333,4)
+      MoveScaled(42,0,2.3333,4)
     }
     { btnAbrirQuarto Button
-      MoveScaled(61,0,14,4)
+      MoveScaled(44,0,14,4)
       Text = ("Quarto")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista Button
-      MoveScaled(75,0,14,4)
+      MoveScaled(58,0,14,4)
       Enabled = False
       Text = ("Compilar")
       Picture = Picture["iconos/revista.svg"]
     }
-    { Spring3 Spring
+    { Separator13 Separator
+      MoveScaled(72,0,2.3333,4)
+    }
+    { menuHERRA MenuButton
+      MoveScaled(75,0,16,4)
+      Text = ("Otros")
+      Picture = Picture["iconos/conversor.svg"]
+      Menu = "menuTOOLS"
+      MenuOnly = True
+    }
+    { menuAcereca MenuButton
       MoveScaled(92,0,16,4)
+      Text = ("Acerca")
+      Picture = Picture["iconos/info.svg"]
+      Menu = "Menu57"
+      MenuOnly = True
+    }
+    { Spring3 Spring
+      MoveScaled(108,0,4,4)
     }
     { btnCerrarPrograma Button
       MoveScaled(113,0,14,4)
