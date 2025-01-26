@@ -411,7 +411,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   Else
     habilitamosLibro()
     TextBox1.Text = Dialog.Path
-    sCurrentFilePath = TextBox1.Text
+    ' sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     guardarTipoDocumentoLibro()
     Mod_LimpiarTextBox.LimpiarCamposBIB()
@@ -419,80 +419,69 @@ Public Sub menuAbrir_Click()'abrir un libro
     TabPanelRevista.Visible = False
     HBoxPanelLibro.Visible = True
     TabPanelLibro.Visible = True
+    BaseName = File.BaseName(TextBox1.Text)
+    rutaFILES = File.Dir(TextBox1.Text) & "/files"
+    btnGuardarIGUAL.Visible = False
+    TabPanel1.Visible = True
+    menuBORRARaux.Enabled = True
+    menuComprimir.Enabled = True
+    menuTOOLS.Enabled = True
+    menuScriptsExternos.Enabled = True
+    menuLTX.Enabled = True
+    MenuApp.Enabled = True
+    Button4.Enabled = True
+    btnMenuGIT.Enabled = True
+    btnMenuGitLab.Enabled = True
+    btnKanban.Enabled = True
+    menuGray.Enabled = True
+    menuCatalogo.Enabled = True
+    MenuButton1.Menu = "menuScriptsExternos"
+    MenuButton2.Menu = "menuProcesarArchivos"
+    Menu4.Enabled = True
+    menuOT.Enabled = True
+    menuPDFweb.Enabled = True
+    menuDisclaimer.Enabled = True
+    If Form_Notas.Visible Then
+      Form_Notas.Close ' Cierra la ventana
+    End If
+    Mod_Funciones.CopiarArchivos(TextBox1.Text)
+    ' levantamos los datos de comentario
+    levantarComenta()
+    levantarGitHubPages()' levantamos los datos de githubpages
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
+    contarEntradasBIByGLO()' mostramos las cantidades en el boton
+    ' limpiamos las entradas de los metadatos
+    Mod_Funciones.limpiamosMetadatosLibrosRevistas()
+    'cargamos datos en los gridview
+    Mostrar_ListaGLO()
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    ' Ejecutar la consulta SQL
+    ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+    ' refrescamos los datos en los grid del archivo en curso
+    gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
+    tbRefDup.Rows.Count = ContenidoBibActual.Count
+    Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
+    txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
+    txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
+    txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
     'posicionamos la consola con el path del archivo de trabajo
     TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
     TerminalView1.SetFocus()
   Endif
 
-  rutaFILES = File.Dir(TextBox1.Text) & "/files"
-  BaseName = File.BaseName(TextBox1.Text)
-
-  If Not MS.Matrix.Exist(Dialog.Path) Then
-    If MS.Matrix.Count = MS.iLastNumber Then
-      MS.Matrix.Remove(0)
-      MS.ShortMatrix.Remove(0)
-    End If
-    MS.Matrix.Add(Dialog.Path)
-    MS.ShortMatrix.Add(File.Name(Dialog.Path))
-    UpdateMenu()
-  End If
-
-  MenuButton1.Menu = "menuScriptsExternos"
-  MenuButton2.Menu = "menuProcesarArchivos"
-  menuOT.Enabled = True
-  menuPDFweb.Enabled = True
-  btnGuardarIGUAL.Visible = False
-  TabPanel1.Visible = True
-  menuBORRARaux.Enabled = True
-  menuComprimir.Enabled = True
-  menuTOOLS.Enabled = True
-  menuScriptsExternos.Enabled = True
-  menuLTX.Enabled = True
-  MenuApp.Enabled = True
-  Button4.Enabled = True
-  btnMenuGIT.Enabled = True
-  btnMenuGitLab.Enabled = True
-  btnKanban.Enabled = True
-  menuGray.Enabled = True
-  menuCatalogo.Enabled = True
-  menuDisclaimer.Enabled = True
-  Menu4.Enabled = True
-
-  If Form_Notas.Visible Then
-    Form_Notas.Close ' Cierra la ventana
-  End If
-
-  Mod_Funciones.CopiarArchivos(TextBox1.Text)
-
-  ' levantamos los datos de comentario
-  levantarComenta()
-
-  levantarGitHubPages()' levantamos los datos de githubpages
-  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-  MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
-  MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
-
-  contarEntradasBIByGLO()' mostramos las cantidades en el boton
-
-  ' limpiamos las entradas de los metadatos
-  Mod_Funciones.limpiamosMetadatosLibrosRevistas()
-
-  'cargamos datos en los gridview
-  Mostrar_ListaGLO()
-  TotalEntradasBIByGLO()'actualizamos el contador de entradas
-  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-
-  ' Ejecutar la consulta SQL
-  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
-  ' refrescamos los datos en los grid del archivo en curso
-  gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
-  tbRefDup.Rows.Count = ContenidoBibActual.Count
-
-  Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
-
-  txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
-  txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
-  txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
+  ' momentaneamente supriminos el menu de recientes
+  ' If Not MS.Matrix.Exist(Dialog.Path) Then
+  '   If MS.Matrix.Count = MS.iLastNumber Then
+  '     MS.Matrix.Remove(0)
+  '     MS.ShortMatrix.Remove(0)
+  '   End If
+  '   MS.Matrix.Add(Dialog.Path)
+  '   MS.ShortMatrix.Add(File.Name(Dialog.Path))
+  '   UpdateMenu()
+  ' End If
 
 End
 
@@ -500,6 +489,7 @@ End
 Public Sub Watcher_Change()
 
   DirViewRuta.Refresh' Actualiza el DirChooser
+  Me.Refresh
   prevFiles = DirViewRuta.Files' Actualiza la lista de archivos anterior
 
 End
@@ -3482,14 +3472,16 @@ Public Sub menuAbrirQuarto_Click()
   Else
     habilitamosRevista()
     TextBox1.Text = Dialog.Path
-    sCurrentFilePath = TextBox1.Text
+    ' sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     guardarTipoDocumentoRevista()
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
     HBoxPanelRevista.Visible = True
     TabPanelRevista.Visible = True
     HBoxPanelLibro.Visible = False
     TabPanelLibro.Visible = False
     BaseName = File.BaseName(TextBox1.Text)
+    rutaFILES = File.Dir(TextBox1.Text) & "/files"
     btnGuardarIGUAL.Visible = False
     TabPanel1.Visible = True
     menuBORRARaux.Enabled = True
@@ -3504,13 +3496,38 @@ Public Sub menuAbrirQuarto_Click()
     btnKanban.Enabled = True
     menuGray.Enabled = True
     menuCatalogo.Enabled = True
-    Menu4.Enabled = True
     MenuButton2.Visible = False
     MenuButton3.Visible = False
+    Menu4.Enabled = True
+    menuOT.Enabled = True
+    menuPDFweb.Enabled = True
+    menuDisclaimer.Enabled = True
     If Form_Notas.Visible Then
       Form_Notas.Close ' Cierra la ventana
     End If
     Mod_Funciones.CopiarArchivosQuadro(TextBox1.Text)
+    ' levantamos los datos de comentario
+    levantarComenta()
+    levantarGitHubPages()' levantamos los datos de githubpages
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
+    contarEntradasBIByGLO()' mostramos las cantidades en el boton
+    ' limpiamos las entradas de los metadatos
+    Mod_Funciones.limpiamosMetadatosLibrosRevistas()
+    'cargamos datos en los gridview
+    Mostrar_ListaGLO()
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    ' Ejecutar la consulta SQL
+    ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+    ' refrescamos los datos en los grid del archivo en curso
+    gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
+    tbRefDup.Rows.Count = ContenidoBibActual.Count
+    Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
+    txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
+    txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
+    txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
     'posicionamos la consola con el path del archivo de trabajo
     TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
     TerminalView1.SetFocus()
@@ -3526,14 +3543,7 @@ Public Sub menuAbrirQuarto_Click()
   '   UpdateMenu()
   ' End If
 
-  ' rutaFILES = File.Dir(TextBox1.Text) & "/files"
-
-  ' Mod_Funciones.CopiarArchivosRevista(TextBox1.Text)
   '
-  ' ' limpiamos las entradas de los metadatos
-  ' Mod_Funciones.limpiamosMetadatosLibrosRevistas()
-  '
-  ' contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
   ' 'comienza metadatos
   ' Dim comando As String
@@ -3629,11 +3639,6 @@ Public Sub menuAbrirQuarto_Click()
   '   btnGuardarMeta.Visible = False
   '   btnGuardarCambiosMeta.Visible = False
   ' Endif
-  ' txtContactCountry.MaxLength = 1500
-  '
-  ' txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
-  ' txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
-  ' txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
 
 End
 
