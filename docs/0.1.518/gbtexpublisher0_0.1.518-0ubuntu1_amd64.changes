@@ -1,0 +1,32 @@
+Format: 1.8
+Date: Sun, 26 Jan 2025 12:00:00 +0000
+Source: gbtexpublisher0
+Binary: gbtexpublisher0
+Built-For-Profiles: noudeb
+Architecture: source all
+Version: 0.1.518-0ubuntu1
+Distribution: unstable
+Urgency: low
+Maintainer: Alberto Moyano <alberto.alejandro.moyano@gmail.com>
+Changed-By: Alberto Moyano <alberto.alejandro.moyano@gmail.com>
+Description:
+ gbtexpublisher0 - gbTeXpublisher es una aplicación que permite gestionar los proc..
+Changes:
+ gbtexpublisher0 (0.1.518-0ubuntu1) unstable; urgency=low
+ .
+   * New release version
+Checksums-Sha1:
+ b5e898a7edf868d8b5996a54370cf9920c224272 1961 gbtexpublisher0_0.1.518-0ubuntu1.dsc
+ ae3c9cec934f5e18d1d8340012ad483ba8f751bc 4288 gbtexpublisher0_0.1.518-0ubuntu1.diff.gz
+ 0b09ad68b5ec9ffc91ff2021df662bd4c0d5c3c8 576202 gbtexpublisher0_0.1.518-0ubuntu1_all.deb
+ 9e7db80070153279c4e614fe78bc6fad2102cb46 14240 gbtexpublisher0_0.1.518-0ubuntu1_amd64.buildinfo
+Checksums-Sha256:
+ 95a06096ed3981d5345375f55d808a2677a6a588e65f847a10eb646520c06cdf 1961 gbtexpublisher0_0.1.518-0ubuntu1.dsc
+ 04194d88b98bf80a0089d66441fa3e30f3d9fe067f82fad022bd8ee5bf252ea1 4288 gbtexpublisher0_0.1.518-0ubuntu1.diff.gz
+ 5c83c1509928de038d701fd02c7a313b30dd913981b14555d76ef86977775bda 576202 gbtexpublisher0_0.1.518-0ubuntu1_all.deb
+ 409f62a2bac0c731d78e147736b2831a5cd327797c730c4fcac1d938fe4cd451 14240 gbtexpublisher0_0.1.518-0ubuntu1_amd64.buildinfo
+Files:
+ efb06f7421a0fc0e3d5d35d0a295207e 1961 contrib/editors optional gbtexpublisher0_0.1.518-0ubuntu1.dsc
+ d4021b433582d9b31f50de1d56db20b0 4288 contrib/editors optional gbtexpublisher0_0.1.518-0ubuntu1.diff.gz
+ 41a10dc31e8d9060fed18c85c8526062 576202 contrib/editors optional gbtexpublisher0_0.1.518-0ubuntu1_all.deb
+ 53467166ca1c0af72f49e1c3ebef1581 14240 contrib/editors optional gbtexpublisher0_0.1.518-0ubuntu1_amd64.buildinfo
