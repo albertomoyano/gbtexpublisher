@@ -409,6 +409,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    HBoxNuevoArtCap.Visible = False
     habilitamosLibro()
     TextBox1.Text = Dialog.Path
     ' sCurrentFilePath = TextBox1.Text
@@ -3470,6 +3471,7 @@ Public Sub menuAbrirQuarto_Click()
   If Dialog.OpenFile() Then
     Return
   Else
+    HBoxNuevoArtCap.Visible = True
     habilitamosRevista()
     TextBox1.Text = Dialog.Path
     ' sCurrentFilePath = TextBox1.Text
@@ -5895,5 +5897,37 @@ End
 Public Sub menuConversorQMD_Click()
 
   Form_ConversorMD.ShowModal()
+
+End
+
+Public Sub chkNuevoArtCap_Click()
+
+  If chkNuevoArtCap.Value = True Then
+    txtNuevoArtCap.Visible = True
+    txtNuevoArtCap.SetFocus
+    btnGuardarArtCap.Visible = True
+  Else
+    txtNuevoArtCap.Visible = False
+    btnGuardarArtCap.Visible = False
+  End If
+
+End
+
+Public Sub btnGuardarArtCap_Click()
+
+  Mod_Exportar.ExportToNuevoArtCap(TextBox1.Text)
+
+  ' establecer el nombre del archivo
+  Dim nombreSalida As String = txtNuevoArtCap.Text
+
+  ' Depuración: Verifica si el archivo se guardó correctamente
+  If File.RealPath(File.Dir(TextBox1.Text) & "/artcap/" & nombreSalida & ".qmd") Then
+    chkNuevoArtCap.Value = False
+    txtNuevoArtCap.Text = ""
+    ' Informar al usuario que los cambios se guardaron con éxito
+    Message.Info("El archivo se ha creado exitosamente.")
+  Else
+    Message.Error("El archivo se pudo guardar.")
+  End If
 
 End

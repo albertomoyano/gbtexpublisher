@@ -1908,3 +1908,56 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   File.Save(outputFile, s)
 
 End
+
+Public Sub ExportToNuevoArtCap(rutaTexto As String)
+
+  Dim s As String
+  Dim outputFile As String
+  Dim outputDir As String
+
+  ' Generamos el contenido del archivo
+  s &= "# Este es una entrada básica para artículos en YAML" & gb.NewLine
+  s &= "# puede ajustarla según su necesidad" & gb.NewLine
+  s &= "---" & gb.NewLine
+  s &= "title: \"Título del Artículo\"" & gb.NewLine
+  s &= "author:" & gb.NewLine
+  s &= "  - name: \"Juan Palotes\"" & gb.NewLine
+  s &= "    affiliation: \"Universidad de Ejemplo\"" & gb.NewLine
+  s &= "    orcid: \"0000-0000-0000-0000\"" & gb.NewLine
+  s &= "    email: \"juan.palotes@ejemplo.edu\"" & gb.NewLine
+  s &= "    corresponding: false" & gb.NewLine
+  s &= "    contribution: \"Vaya uno a saber\"" & gb.NewLine
+  s &= "    address: \"Calle Falsa 123, Ciudad de Ejemplo, País\"" & gb.NewLine
+  s &= "    url: \"https://juanpalotes.ejemplo.edu\"" & gb.NewLine
+  s &= "  - name: \"María Palotes\"" & gb.NewLine
+  s &= "    affiliation: \"Universidad de Ejemplo\"" & gb.NewLine
+  s &= "    orcid: \"0000-0000-0000-0000\"" & gb.NewLine
+  s &= "    email: \"maria.palotes@ejemplo.edu\"" & gb.NewLine
+  s &= "    corresponding: false" & gb.NewLine
+  s &= "    contribution: \"Vaya uno a saber\"" & gb.NewLine
+  s &= "    address: \"Calle Falsa 123, Ciudad de Ejemplo, País\"" & gb.NewLine
+  s &= "    url: \"https://mariapalotes.ejemplo.edu\"" & gb.NewLine
+  s &= "date: \"2099-01-01\"" & gb.NewLine
+  s &= "abstract: \"Este es un resumen puntual de este artículo.\"" & gb.NewLine
+  s &= "keywords:" & gb.NewLine
+  s &= "  - \"Palabra Clave 1\"" & gb.NewLine
+  s &= "  - \"Palabra Clave 2\"" & gb.NewLine
+  s &= "  - \"Palabra Clave 3\"" & gb.NewLine
+  s &= "---" & gb.NewLine
+  s &= "" & gb.NewLine
+  s &= "" & gb.NewLine
+  s &= "# Acá comienza su archivo" & gb.NewLine
+
+  ' Establece la ruta del directorio de salida
+  outputDir = File.Dir(rutaTexto) & "/artcap/"
+
+  ' establecer el nombre del archivo
+  Dim nombreSalida As String = FMain.txtNuevoArtCap.Text
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = outputDir & nombreSalida & ".qmd"
+
+  ' Guarda el contenido en un nuevo archivo
+  File.Save(outputFile, s)
+
+End
