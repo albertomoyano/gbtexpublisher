@@ -2,6 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,165,103)
+  Visible = False
   Expand = True
   Icon = Picture["iconos/icono-gbtex.svg"]
   Maximized = True
@@ -389,7 +390,7 @@
     }
     { HBoxNuevoArtCap HBox
       MoveScaled(67,0,48,4)
-      Visible = False
+      Enabled = False
       Expand = True
       { Separator20 Separator
         MoveScaled(0,0,2.3333,4)

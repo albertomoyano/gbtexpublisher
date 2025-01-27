@@ -409,6 +409,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    HBoxNuevoArtCap.Enabled = False
     HBoxNuevoArtCap.Visible = False
     habilitamosLibro()
     TextBox1.Text = Dialog.Path
@@ -3471,6 +3472,7 @@ Public Sub menuAbrirQuarto_Click()
   If Dialog.OpenFile() Then
     Return
   Else
+    HBoxNuevoArtCap.Enabled = True
     HBoxNuevoArtCap.Visible = True
     habilitamosRevista()
     TextBox1.Text = Dialog.Path
