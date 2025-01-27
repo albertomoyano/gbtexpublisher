@@ -2018,7 +2018,7 @@ Public Sub ExportToNuevoArtCap(rutaTexto As String)
   Dim nombreSalida As String = FMain.txtNuevoArtCap.Text
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = outputDir & nombreSalida & ".qmd"
+  outputFile = outputDir & nombreSalida & ".md"
 
   ' Guarda el contenido en un nuevo archivo
   File.Save(outputFile, s)
