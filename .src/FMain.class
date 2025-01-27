@@ -409,6 +409,10 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    PanelLaTeX.Visible = True
+    PanelLaTeX.Enabled = True
+    PanelQuarto.Visible = False
+    PanelQuarto.Enabled = False
     HBoxNuevoArtCap.Enabled = False
     HBoxNuevoArtCap.Visible = False
     habilitamosLibro()
@@ -3466,12 +3470,16 @@ End
 Public Sub menuAbrirQuarto_Click()
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.qmd", "Archivo de Quarto"]
+  Dialog.Filter = ["*.md", "Archivo de Markdown"]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
     Return
   Else
+    PanelLaTeX.Visible = False
+    PanelLaTeX.Enabled = False
+    PanelQuarto.Visible = True
+    PanelQuarto.Enabled = True
     HBoxNuevoArtCap.Enabled = True
     HBoxNuevoArtCap.Visible = True
     habilitamosRevista()
@@ -5923,7 +5931,7 @@ Public Sub btnGuardarArtCap_Click()
   Dim nombreSalida As String = txtNuevoArtCap.Text
 
   ' Depuración: Verifica si el archivo se guardó correctamente
-  If File.RealPath(File.Dir(TextBox1.Text) & "/artcap/" & nombreSalida & ".qmd") Then
+  If File.RealPath(File.Dir(TextBox1.Text) & "/artcap/" & nombreSalida & ".md") Then
     chkNuevoArtCap.Value = False
     txtNuevoArtCap.Text = ""
     ' Informar al usuario que los cambios se guardaron con éxito
