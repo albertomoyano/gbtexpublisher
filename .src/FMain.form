@@ -4200,6 +4200,22 @@
                   Expand = True
                 }
               }
+              { HBox83 HBox
+                MoveScaled(0,12,78,4)
+                { Label153 Label
+                  MoveScaled(0,0,22.5556,4)
+                  Alignment = Align.Right
+                  Text = ("Archivo CSL  ")
+                }
+                { btnBuscarArchivoCSL Button
+                  MoveScaled(29,0,4,4)
+                  Picture = Picture["iconos/abrirBuscar.svg"]
+                }
+                { txtCSLquarto TextBox
+                  MoveScaled(36,0,25,4)
+                  Expand = True
+                }
+              }
             }
             Index = 1
             Text = ("yml adicionales     ")
