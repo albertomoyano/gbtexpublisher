@@ -1634,9 +1634,9 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   ' Guardardamos la actualización de los campos modificados
   guardarCampos()
   Contenido.Update
-  VListaBIB.Refresh
-  RefrescarGrid()
+  meConn.Commit()  ' confirmar cambios en la base de datos
   Mod_LimpiarTextBox.LimpiarCamposBIB()
+  VListaBIB.Refresh()
 
   ' Informar al usuario que los cambios se guardaron con éxito
   Message.Info("Los cambios se guardaron con éxito.")
@@ -1652,76 +1652,157 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
 
 End Sub
 
+' Public Sub btnGuardar_Click()
+'
+'   ' Escapa los caracteres especiales (comilla simple) en el título
+'   Dim tituloEscapado As String
+'
+'   tituloEscapado = Replace(txtTITLE.Text, "'", "''")
+'
+'   eliminarBlancosBIB()
+'
+'   ' Variables para almacenar los datos de los TextBox
+'   Dim booktitulo As String
+'   Dim titulo As String
+'   Dim maintitulo As String
+'
+'   ' Verificar y formatear los textos de los TextBox
+'   titulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtTITLE.Text)
+'   booktitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtBOOKTITLE.Text)
+'   maintitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtMAINTITLE.Text)
+'
+'   ' Actualizar los TextBox por si quieres reflejar los cambios visualmente
+'   txtBOOKTITLE.Text = booktitulo
+'   txtTITLE.Text = titulo
+'   txtMAINTITLE.Text = maintitulo
+'
+'   ' Verificar si el campo txtAUTHOR contiene un punto y coma (;)
+'   If InStr(txtAUTHOR.Text, ";") > 0 Then
+'     Message.Error("El campo de autor no debe contener el carácter <strong>;</strong>. Por favor, revisa tu entrada.")
+'     Return ' Salir de la función si contiene alguno de estos caracteres
+'   Endif
+'
+'   Busqueda = meConn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+'
+'   ' Verificar si se encontraron resultados en la consulta
+'   If Busqueda.Count > 0 Then
+'     Message.Error("El título que desea agregar ya existe en la base de datos.")
+'     ' Cambiar la visibilidad del botón
+'     mostrarIguales()
+'     VListaBIB.ScrollY = 0
+'     btnGuardar.Visible = False
+'     btnGuardarIGUAL.Visible = True
+'     Return ' Salir de la función si el título ya existe
+'   Endif
+'
+'   If ComboBox1.Text = "" Or cbLANGUAGE.Text = "" Then
+'     Message.Error("No ha seleccionado el tipo de entrada o idioma.")
+'   Else If ComboBox1.Text = "thesis" And cbType.Text = "" Then
+'     Message.Error("No ha seleccionado el tipo de tesis.")
+'   Else
+'     Contenido = meConn.Create("bibtex")
+'     guardarCampos()
+'     Contenido.Update
+'     meConn.Commit()  ' confirmar cambios en la base de datos
+'     VListaBIB.Refresh()
+'     Message.Info("Nueva entrada guardada.")
+'     txtTMPbiblio.Clear 'limpiamos el campo temporal
+'     TotalEntradasBIByGLO()'actualizamos el contador de entradas
+'     btnGuardarCambios.Visible = False
+'     btnGuardar.Visible = False
+'     BtnNuevoBib.Visible = True
+'     BtnEliminarBib.Visible = False
+'     btnAgregarCitationKey.Visible = False
+'     btnGuardarIGUAL.Visible = False
+'     btnAgregarKeyBIB.Visible = False
+'     txtTMPbiblio.Enabled = False
+'     txtTMPbiblio.Background = Color.LightGray
+'
+'     TabPanel5.Index = 0
+'     VListaBIB.Refresh
+'     RefrescarGrid()
+'     Mod_LimpiarTextBox.LimpiarCamposBIB()
+'
+'   Endif
+'
+' End
+
 Public Sub btnGuardar_Click()
 
-  ' Escapa los caracteres especiales (comilla simple) en el título
-  Dim tituloEscapado As String
+  ' --- Validaciones iniciales ---
+  Dim bValido As Boolean = True ' Bandera para controlar el flujo
 
-  tituloEscapado = Replace(txtTITLE.Text, "'", "''")
-
+  ' Escapar caracteres y eliminar blancos
   eliminarBlancosBIB()
+  Dim tituloEscapado As String = Replace(txtTITLE.Text, "'", "''")
 
-  ' Variables para almacenar los datos de los TextBox
-  Dim booktitulo As String
-  Dim titulo As String
-  Dim maintitulo As String
-
-  ' Verificar y formatear los textos de los TextBox
-  titulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtTITLE.Text)
-  booktitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtBOOKTITLE.Text)
-  maintitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtMAINTITLE.Text)
-
-  ' Actualizar los TextBox por si quieres reflejar los cambios visualmente
-  txtBOOKTITLE.Text = booktitulo
-  txtTITLE.Text = titulo
-  txtMAINTITLE.Text = maintitulo
-
-  ' Verificar si el campo txtAUTHOR contiene un punto y coma (;)
+  ' Verificar caracteres prohibidos en autor
   If InStr(txtAUTHOR.Text, ";") > 0 Then
-    Message.Error("El campo de autor no debe contener el carácter <strong>;</strong>. Por favor, revisa tu entrada.")
-    Return ' Salir de la función si contiene alguno de estos caracteres
+    Message.Error("El campo de autor no debe contener <strong>;</strong>")
+    bValido = False
   Endif
 
-  Busqueda = meConn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
-
-  ' Verificar si se encontraron resultados en la consulta
-  If Busqueda.Count > 0 Then
-    Message.Error("El título que desea agregar ya existe en la base de datos.")
-    ' Cambiar la visibilidad del botón
-    mostrarIguales()
-    VListaBIB.ScrollY = 0
-    btnGuardar.Visible = False
-    btnGuardarIGUAL.Visible = True
-    Return ' Salir de la función si el título ya existe
+  ' Verificar existencia del título
+  If bValido Then
+    Dim Busqueda As Result = meConn.Exec("SELECT * FROM bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+    If Busqueda.Count > 0 Then
+      Message.Error("El título ya existe en la base de datos")
+      mostrarIguales()
+      VListaBIB.ScrollY = 0
+      btnGuardar.Visible = False
+      btnGuardarIGUAL.Visible = True
+      bValido = False
+    Endif
   Endif
 
-  If ComboBox1.Text = "" Or cbLANGUAGE.Text = "" Then
-    Message.Error("No ha seleccionado el tipo de entrada o idioma.")
-  Else If ComboBox1.Text = "thesis" And cbType.Text = "" Then
-    Message.Error("No ha seleccionado el tipo de tesis.")
-  Else
-    Contenido = meConn.Create("bibtex")
-    guardarCampos()
-    Contenido.Update
-    Message.Info("Nueva entrada guardada.")
-    txtTMPbiblio.Clear 'limpiamos el campo temporal
-    TotalEntradasBIByGLO()'actualizamos el contador de entradas
-    btnGuardarCambios.Visible = False
-    btnGuardar.Visible = False
-    BtnNuevoBib.Visible = True
-    BtnEliminarBib.Visible = False
-    btnAgregarCitationKey.Visible = False
-    btnGuardarIGUAL.Visible = False
-    btnAgregarKeyBIB.Visible = False
-    txtTMPbiblio.Enabled = False
-    txtTMPbiblio.Background = Color.LightGray
+  ' Validar comboboxes
+  If bValido Then
+    Select Case True
+      Case ComboBox1.Text = "" Or cbLANGUAGE.Text = ""
+        Message.Error("Falta tipo de entrada o idioma")
+        bValido = False
 
-    TabPanel5.Index = 0
-    VListaBIB.Refresh
-    RefrescarGrid()
-    Mod_LimpiarTextBox.LimpiarCamposBIB()
-
+      Case ComboBox1.Text = "thesis" And cbType.Text = ""
+        Message.Error("Falta tipo de tesis")
+        bValido = False
+    End Select
   Endif
+
+  ' --- Procesamiento principal ---
+  If Not bValido Then Return ' Salir si hay errores
+
+  ' Formatear textos
+  txtTITLE.Text = Mod_Funciones.VerificarPorcentajeEnTexto(txtTITLE.Text)
+  txtBOOKTITLE.Text = Mod_Funciones.VerificarPorcentajeEnTexto(txtBOOKTITLE.Text)
+  txtMAINTITLE.Text = Mod_Funciones.VerificarPorcentajeEnTexto(txtMAINTITLE.Text)
+
+  ' Crear nuevo registro
+  Contenido = meConn.Create("bibtex")
+  guardarCampos()
+  Contenido.Update
+  meConn.Commit()
+
+  ' Actualizar UI
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
+  VListaBIB.Refresh()
+  RefrescarGrid()
+  TotalEntradasBIByGLO()
+  Message.Info("Nueva entrada guardada")
+
+  ' Resetear controles
+  txtTMPbiblio.Clear
+  txtTMPbiblio.Enabled = False
+  txtTMPbiblio.Background = Color.LightGray
+
+  ' Manejo de visibilidad de botones
+  BtnNuevoBib.Visible = True
+  btnGuardar.Visible = False
+  BtnEliminarBib.Visible = False
+  btnAgregarCitationKey.Visible = False
+  btnGuardarIGUAL.Visible = False
+  btnAgregarKeyBIB.Visible = False
+
+  TabPanel5.Index = 0
 
 End
 

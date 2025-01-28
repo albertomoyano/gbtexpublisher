@@ -1,5 +1,10 @@
 \documentclass{book}
-% Diseño general de página
+
+% Deben cargarse temprano para parches de macros
+\usepackage{etoolbox}
+\usepackage{ifthen}
+
+% Configuración geométrica detallada
 \usepackage[paperwidth=155mm,
 paperheight=230mm,
 textwidth=110mm,
@@ -11,30 +16,29 @@ headsep=14pt,
 top=35pt,
 footskip=0mm,
 footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
-\usepackage{etoolbox}
 
-% Idiomas y babel
-\usepackage[french,portuguese,italian,english,british,american,german,spanish,es-ucroman,es-noshorthands]{babel}
-\usepackage[autostyle=true]{csquotes}
-\frenchspacing
-\renewcommand{\spanishcontentsname}{Sumario}
+% Configuración de idioma
+\usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
+\usepackage[autostyle=true]{csquotes}% Citas automáticas con estilo idiomático correcto
+\frenchspacing% Espaciado uniforme después de puntos
+\renewcommand{\spanishcontentsname}{Sumario}% Personalización del nombre del índice
 
-\tracinglostchars=2
-\usepackage{fontspec}
-\usepackage[final]{microtype}
+\usepackage{fontspec}% Soporte para fuentes OpenType
+\usepackage[final]{microtype}% Mejoras tipográficas micro
 \newfontfeature{Microtypography}{protrusion=default;expansion=default}
 \directlua{fonts.protrusions.setups.default.factor=.5}
 \renewcommand{\normalsize}{\fontsize{10pt}{14pt}\selectfont}
 \topskip=14pt
 
-%% tipografía Libertinus
+% Fuente principal Libertinus con características tipográficas
 \setmainfont{Libertinus Serif}
 [Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.18]
-%% soporte matemático con Libertinus
-\usepackage{unicode-math}
-\setmathfont[Scale=1.18]{Libertinus Math}
 
-%% configuración y tipografía por default en TeXlive para idioma chino
+% Matemáticas con Libertinus Math
+\usepackage{unicode-math}
+\setmathfont{Libertinus Math}
+
+% Configuración de fuentes para chino
 \usepackage{luatexja-fontspec}
 \setmainjfont{FandolSong}
 
@@ -53,15 +57,6 @@ ItalicFont = IBMPlexMono-Italic.otf,
 BoldFont = IBMPlexMono-Bold.otf,
 BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 
-% configuración de los valores decimales de los cuadros
-\usepackage{siunitx}
-\sisetup{output-decimal-marker={.},
-         group-separator={\hspace{0.15em}},
-         group-minimum-digits=3,
-         table-text-alignment=center,
-         detect-all,
-         per-mode=fraction}
-
 % control de ruptura de linea
 \usepackage{linebreaker}
 \linebreakersetup{
@@ -73,7 +68,6 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 % paquetes varios
 \usepackage{pageslts}
 \usepackage{calc}
-\usepackage{MnSymbol}
 \usepackage{qrcode}% generamos el QR
 \usepackage{froufrou}
 \usepackage{nccfoots}
@@ -629,6 +623,13 @@ uniquelist=minyear]{biblatex}
 \def\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do.\do:\do\%\do?\do_\do-\do+\do/\do\#\do~}
 \def\UrlFont{\rm}
 
-\usepackage{ifthen}
+% configuración de los valores decimales de los cuadros
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={.},
+	group-separator={\hspace{0.15em}},
+	group-minimum-digits=3,
+	table-text-alignment=center,
+	detect-all,
+	per-mode=fraction}
 
 % fin del preambulo
