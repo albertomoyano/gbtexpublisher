@@ -389,24 +389,31 @@
       ReadOnly = True
     }
     { HBoxNuevoArtCap HBox
-      MoveScaled(67,0,48,4)
+      MoveScaled(67,0,54,4)
       Enabled = False
       Expand = True
       { Separator20 Separator
         MoveScaled(0,0,2.3333,4)
       }
       { chkNuevoArtCap CheckBox
-        MoveScaled(5,0,22,4)
+        MoveScaled(2,0,22,4)
         AutoResize = True
         Text = ("agregar artículo/capítulo")
       }
+      { cmbTipoArtCap ComboBox
+        MoveScaled(24,0,14,4)
+        Visible = False
+        NoTabFocus = True
+        ReadOnly = True
+        List = [("Artículo"), ("Capítulo")]
+      }
       { btnGuardarArtCap Button
-        MoveScaled(27,0,4,4)
+        MoveScaled(39,0,4,4)
         Visible = False
         Picture = Picture["iconos/guardar.svg"]
       }
       { txtNuevoArtCap TextBox
-        MoveScaled(32,0,14,4)
+        MoveScaled(43,0,10,4)
         Visible = False
         Expand = True
       }

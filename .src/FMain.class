@@ -5920,10 +5920,12 @@ Public Sub chkNuevoArtCap_Click()
     txtNuevoArtCap.Visible = True
     txtNuevoArtCap.SetFocus
     btnGuardarArtCap.Visible = True
+    cmbTipoArtCap.Visible = True
   Else
     txtNuevoArtCap.Visible = False
     btnGuardarArtCap.Visible = False
     txtNuevoArtCap.Text = ""
+    cmbTipoArtCap.Visible = False
   End If
 
 End
@@ -5934,28 +5936,27 @@ Public Sub btnGuardarArtCap_Click()
   Dim nombreSalida As String = txtNuevoArtCap.Text
   Dim rutaArchivo As String = File.Dir(TextBox1.Text) &/ "artcap" &/ nombreSalida & ".md"
 
-  ' Verificar si el archivo ya existe
+  If txtNuevoArtCap.Text = "" Then
+    Message.Error("Debe colocar un nombre al archivo.")
+    Return
+  End If
+
   If Not File.RealPath(rutaArchivo) Then
-    ' Si el archivo no existe, proceder con la exportación
-    Mod_Exportar.ExportToNuevoArtCap(TextBox1.Text)
+    ' Determinar qué función de exportación usar según la selección del ComboBox
+    Select Case cmbTipoArtCap.Text
+      Case "Artículo"
+        Mod_Exportar.ExportToNuevoArticulo(TextBox1.Text)
+      Case "Capítulo"
+        Mod_Exportar.ExportToNuevoCapitulo(TextBox1.Text)
+      Case Else
+        Message.Error("Selección no válida en el ComboBox.")
+        Return
+    End Select
     chkNuevoArtCap.Value = False
     txtNuevoArtCap.Text = ""
     Message.Info("El archivo se ha creado exitosamente.")
   Else
-    ' Si el archivo existe, informar al usuario
     Message.Info("El archivo ya existe. Por favor, elija otro nombre.")
   End If
-
-  ' ' Verificar si el archivo ya existe
-  ' If Not File.Test(rutaArchivo, gb.File) Then
-  '   Mod_Exportar.ExportToNuevoArtCap(TextBox1.Text)
-  '   chkNuevoArtCap.Value = False
-  '   txtNuevoArtCap.Text = ""
-  '   ' Informar al usuario que los cambios se guardaron con éxito
-  '   Message.Info("El archivo se ha creado exitosamente.")
-  ' Else
-  '   ' Si el archivo existe, informar al usuario y no continuar con el guardado
-  '   Message.Info("El archivo ya existe. Por favor, elija otro nombre.")
-  ' End If
 
 End
