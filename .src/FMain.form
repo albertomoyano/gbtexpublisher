@@ -297,7 +297,7 @@
     }
   }
   { HBox171 HBox
-    MoveScaled(1,0,128,4)
+    MoveScaled(1,0,130,4)
     { btnAbrirLibro Button
       MoveScaled(0,0,14,4)
       Text = ("LaTeX")
@@ -351,10 +351,10 @@
       MenuOnly = True
     }
     { Spring3 Spring
-      MoveScaled(108,0,4,4)
+      MoveScaled(109,0,4,4)
     }
     { btnCerrarPrograma Button
-      MoveScaled(113,0,14,4)
+      MoveScaled(114,0,14,4)
       Text = ("Salir")
       Picture = Picture["iconos/salir.svg"]
     }
@@ -705,17 +705,17 @@
         Picture = Picture["iconos/search.svg"]
       }
       { lblAlta1 Label
-        MoveScaled(5,0,12.8889,4)
+        MoveScaled(4,0,12.8889,4)
         Alignment = Align.Right
         Text = ("Clave BIB ")
       }
       { btnAgregarCitationKey Button
-        MoveScaled(18,0,4,4)
+        MoveScaled(17,0,4,4)
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }
       { !txtCLAVEbib TextBox
-        MoveScaled(22,0,22,4)
+        MoveScaled(22,0,12,4)
         #Public = True
         NoTabFocus = True
         ToolTip = ("Clave para ser utilizada solo con LaTeX")
@@ -724,46 +724,49 @@
         Placeholder = ("Clave BIB única")
       }
       { lblKEYWORDS3 Label
-        MoveScaled(44,0,7,4)
+        MoveScaled(35,0,7,4)
         #Translate = False
         AutoResize = True
         Alignment = Align.Right
         Text = "    Filtro "
       }
       { btnBuscarFiltro Button
-        MoveScaled(51,0,4,4)
+        MoveScaled(44,0,4,4)
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
       { btnAgregarKeyBIB Button
-        MoveScaled(55,0,4,4)
+        MoveScaled(48,0,4,4)
         ToolTip = ("Agregar clave")
         Picture = Picture["iconos/clave.svg"]
       }
       { !txtKEYWORDS TextBox
-        MoveScaled(60,0,14,4)
+        MoveScaled(52,0,14,4)
         #Public = True
         NoTabFocus = True
         Expand = True
         Placeholder = ("Clave filtro para printbibliography")
       }
       { lblAlta4 Label
-        MoveScaled(75,0,14,4)
+        MoveScaled(67,0,14,4)
         AutoResize = True
         Alignment = Align.Right
-        Text = ("    Será exportado como:  ")
+        Text = ("    Será exportado como  ")
       }
-      { txtEXPORTARbib TextLabel
-        MoveScaled(90,0,15,4)
-        AutoResize = True
-        Alignment = Align.Normal
-        Wrap = False
+      { !txtEXPORTARbib TextBox
+        MoveScaled(95,0,12,4)
+        #Public = True
+        Background = Color.Background
+        Foreground = Color.Blue
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
       }
       { Separator6 Separator
-        MoveScaled(106,0,2.3333,4)
+        MoveScaled(107,0,2.3333,4)
       }
       { Button1 Button
-        MoveScaled(108,0,16,4)
+        MoveScaled(110,0,16,4)
         ToolTip = ("Referencias bibliográficas (archivo en curso)")
         Picture = Picture["iconos/face.svg"]
       }
@@ -3023,17 +3026,17 @@
           Picture = Picture["iconos/search.svg"]
         }
         { lblAlta2 Label
-          MoveScaled(10,0,12,4)
+          MoveScaled(5,0,12,4)
           Alignment = Align.Right
           Text = ("Clave  ")
         }
         { btnAgregarGloKey Button
-          MoveScaled(33,0,4,4)
+          MoveScaled(18,0,4,4)
           ToolTip = ("Agregar clave")
           Picture = Picture["iconos/clave.svg"]
         }
         { txtCLAVEglo TextBox
-          MoveScaled(38,0,14,4)
+          MoveScaled(23,0,14,4)
           NoTabFocus = True
           ToolTip = ("Clave para ser utilizada solo con LaTeX")
           Expand = True
@@ -3041,16 +3044,19 @@
           Placeholder = ("Clave GLO única")
         }
         { lblAlta3 Label
-          MoveScaled(53,0,21,4)
+          MoveScaled(38,0,21,4)
           AutoResize = True
           Alignment = Align.Right
-          Text = ("    Será exportado como:  ")
+          Text = ("    Será exportado como  ")
         }
-        { txtEXPORTARglo TextLabel
-          MoveScaled(85,0,15,4)
-          AutoResize = True
-          Alignment = Align.Normal
-          Wrap = False
+        { !txtEXPORTARglo TextBox
+          MoveScaled(59,0,23,4)
+          #Public = True
+          Background = Color.Background
+          Foreground = Color.Blue
+          NoTabFocus = True
+          Expand = True
+          ReadOnly = True
         }
         { Separator7 Separator
           MoveScaled(103,0,2.3333,4)
@@ -3187,28 +3193,32 @@
       MoveScaled(1,1,124,4)
       { Label29 Label
         MoveScaled(1,0,23.8889,4)
+        Visible = False
         Alignment = Align.Right
         Text = ("    Metadatos para  ")
       }
       { !txtnombreArchivo TextBox
         MoveScaled(25,0,23,4)
         #Public = True
+        Visible = False
         Background = Color.Background
         NoTabFocus = True
         Expand = True
         ReadOnly = True
       }
       { lblAlta5 Label
-        MoveScaled(50,0,19,4)
-        AutoResize = True
+        MoveScaled(50,0,23.8889,4)
         Alignment = Align.Right
-        Text = ("    Será exportado como:  ")
+        Text = ("    Será exportado como  ")
       }
-      { txtEXPORTARmeta TextLabel
-        MoveScaled(73,0,15,4)
-        AutoResize = True
-        Alignment = Align.Normal
-        Wrap = False
+      { !txtEXPORTARmeta TextBox
+        MoveScaled(97,0,23,4)
+        #Public = True
+        Background = Color.Background
+        Foreground = Color.Blue
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
       }
     }
     { PanelQuarto Panel
@@ -4971,7 +4981,7 @@
     Text = ("Pages para Git     ")
     Picture = Picture["iconos/web.svg"]
     { HBox181 HBox
-      MoveScaled(1,1,118,4)
+      MoveScaled(1,1,124,4)
       { BtnNuevoGHP Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
@@ -5011,11 +5021,14 @@
         Alignment = Align.Right
         Text = ("    GitHub Pages para  ")
       }
-      { txtnombreArchivoGHP TextLabel
-        MoveScaled(79,0,20,4)
-        AutoResize = True
-        Alignment = Align.Normal
-        Wrap = False
+      { !txtnombreArchivoGHP TextBox
+        MoveScaled(99,0,23,4)
+        #Public = True
+        Background = Color.Background
+        Foreground = Color.Blue
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
       }
     }
     { ScrollView12 ScrollView
@@ -5530,7 +5543,7 @@
     Text = ("Comentarios     ")
     Picture = Picture["iconos/ChatGPT_logo.svg"]
     { HBox175 HBox
-      MoveScaled(2,0,95,4)
+      MoveScaled(2,0,123,4)
       { BtnNuevoComenta Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
@@ -5559,55 +5572,58 @@
       { Spring2 Spring
         MoveScaled(36,0,5,4)
       }
+    }
+    { HBox229 HBox
+      MoveScaled(4,6,104,4)
       { lblAlta6 Label
-        MoveScaled(41,0,19,4)
-        AutoResize = True
+        MoveScaled(0,0,19,4)
         Alignment = Align.Right
-        Text = ("    Comentarios para:  ")
+        Text = ("    Comentarios para  ")
       }
       { txtnombreArchivoComenta TextBox
-        MoveScaled(62,0,23,4)
+        MoveScaled(21,0,23,4)
         Background = Color.Background
+        Foreground = Color.Blue
         NoTabFocus = True
         Expand = True
         ReadOnly = True
       }
     }
     { HBox176 HBox
-      MoveScaled(3,5,104,4)
+      MoveScaled(4,10,104,4)
       { Label122 Label
-        MoveScaled(1,0,11,4)
+        MoveScaled(1,0,19,4)
         Alignment = Align.Right
         Text = ("Contacto  ")
       }
       { txtContacto TextBox
-        MoveScaled(12,0,23,4)
+        MoveScaled(26,0,23,4)
         NoTabFocus = True
         Expand = True
       }
     }
     { HBox177 HBox
-      MoveScaled(3,9,104,4)
+      MoveScaled(4,14,104,4)
       { Label123 Label
-        MoveScaled(1,0,11,4)
+        MoveScaled(1,0,19,4)
         Alignment = Align.Right
         Text = ("Correo  ")
       }
       { txtCorreo TextBox
-        MoveScaled(12,0,23,4)
+        MoveScaled(26,0,23,4)
         NoTabFocus = True
         Expand = True
       }
     }
     { HBox179 HBox
-      MoveScaled(3,13,104,4)
+      MoveScaled(4,18,104,4)
       { Label124 Label
-        MoveScaled(1,0,11,4)
+        MoveScaled(1,0,19,4)
         Alignment = Align.Right
         Text = ("Teléfono  ")
       }
       { txtTelefono TextBox
-        MoveScaled(12,0,23,4)
+        MoveScaled(26,-1,23,4)
         NoTabFocus = True
         Expand = True
       }

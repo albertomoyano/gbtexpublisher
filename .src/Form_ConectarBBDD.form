@@ -11,14 +11,16 @@
     MoveScaled(4,6,50,4)
     { btnSelecionarBBDD Button
       MoveScaled(0,0,21,4)
+      NoTabFocus = True
       ToolTip = ("Seleccionar la base de datos")
-      AutoResize = True
       Text = ("Base de datos")
       Picture = Picture["iconos/basededatos.svg"]
     }
     { txtBBDDorigen TextBox
       MoveScaled(28,0,16,4)
       Background = Color.Background
+      Foreground = Color.Blue
+      NoTabFocus = True
       Expand = True
       ReadOnly = True
     }
@@ -27,15 +29,18 @@
     MoveScaled(0,10,83,4)
     { Spring1 Spring
       MoveScaled(10,0,9,4)
+      NoTabFocus = True
     }
     { btnConectar Button
       MoveScaled(32,0,17.7778,4)
       Background = &H8BE06F
+      NoTabFocus = True
       Text = ("Conectar")
     }
     { Separator11 Separator
       MoveScaled(53,0,0.8889,4)
       Foreground = Color.Transparent
+      NoTabFocus = True
     }
     { btnCerrar ToolButton
       MoveScaled(58,0,17.7778,4)
