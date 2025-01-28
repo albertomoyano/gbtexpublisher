@@ -13,7 +13,7 @@ End
 Public Sub btnBuscar_Click()
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.docx", ("Archivos word"), "*.rtf", ("Archivos rtf"), "*", ("Todos los archivos")]
+  Dialog.Filter = ["*.docx", "Archivos word"]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
@@ -63,6 +63,19 @@ Public Sub btnCONVERTIR_Click()
   If Not Exist(rutaMEDIA) Then
     Mkdir rutaMEDIA
   End If
+
+  ' conversion desde un archivo docx
+  If Trim(txtDESTINO.Text) = "" Then
+    Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+  Else
+    Shell "pandoc -s " & File.RealPath(Dialog.Path) & " --citeproc -t markdown -o " & File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".md" & " --extract-media=" & File.Dir(Dialog.Path) & "/media" & " --reference-links --wrap=none --strip-comments --no-highlight"
+    Wait 0.2
+    ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+    Shell "mv " & escapedPath & " " & escapedOriginalesPath
+    Wait 0.2
+    btnListo.Visible = True
+    btnListo.Default = True
+  Endif
 
 End
 

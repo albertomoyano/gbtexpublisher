@@ -170,16 +170,16 @@
     Visible = False
     { menuCONVERSOR Menu
       #Translate = False
-      Text = "Conversión de archivo .docx a .tex"
+      Text = "Conversión con esquema de archivo .docx a LaTeX"
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuCONVERSORpandoc Menu
       #Translate = False
-      Text = "Conversión simple y directa de .docx a .tex"
+      Text = "Conversión simple de archivo .docx a LaTeX"
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuConversorQMD Menu
-      Text = ("Conversión de archivo .docx a .qmd")
+      Text = ("Conversión de archivo .docx a MD")
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuAPUNTES Menu
