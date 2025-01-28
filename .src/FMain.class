@@ -1636,7 +1636,7 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   Contenido.Update
   meConn.Commit()  ' confirmar cambios en la base de datos
   Mod_LimpiarTextBox.LimpiarCamposBIB()
-  VListaBIB.Refresh()
+  RefrescarGrid()
 
   ' Informar al usuario que los cambios se guardaron con éxito
   Message.Info("Los cambios se guardaron con éxito.")
@@ -1742,19 +1742,6 @@ Public Sub btnGuardar_Click()
     bValido = False
   Endif
 
-  ' Verificar existencia del título
-  If bValido Then
-    Dim Busqueda As Result = meConn.Exec("SELECT * FROM bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
-    If Busqueda.Count > 0 Then
-      Message.Error("El título ya existe en la base de datos")
-      mostrarIguales()
-      VListaBIB.ScrollY = 0
-      btnGuardar.Visible = False
-      btnGuardarIGUAL.Visible = True
-      bValido = False
-    Endif
-  Endif
-
   ' Validar comboboxes
   If bValido Then
     Select Case True
@@ -1766,6 +1753,24 @@ Public Sub btnGuardar_Click()
         Message.Error("Falta tipo de tesis")
         bValido = False
     End Select
+  Endif
+
+  ' Verificar existencia del título
+  If bValido Then
+    Dim Busqueda As Result = meConn.Exec("SELECT * FROM bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+    If Busqueda.Count > 0 Then
+      Message.Error("El título ya existe en la base de datos")
+      mostrarIguales()
+      VListaBIB.ScrollY = 0
+      ' Manejo de visibilidad de botones
+      BtnNuevoBib.Visible = False
+      btnGuardar.Visible = False
+      BtnEliminarBib.Visible = False
+      btnAgregarCitationKey.Visible = False
+      btnGuardarIGUAL.Visible = True
+      btnAgregarKeyBIB.Visible = False
+      bValido = False
+    Endif
   Endif
 
   ' --- Procesamiento principal ---
@@ -1781,11 +1786,10 @@ Public Sub btnGuardar_Click()
   guardarCampos()
   Contenido.Update
   meConn.Commit()
+  RefrescarGrid()
 
   ' Actualizar UI
   Mod_LimpiarTextBox.LimpiarCamposBIB()
-  VListaBIB.Refresh()
-  RefrescarGrid()
   TotalEntradasBIByGLO()
   Message.Info("Nueva entrada guardada")
 
@@ -2613,8 +2617,8 @@ Public Sub btnGuardarIGUAL_Click()
       guardarCampos()
 
       Contenido.Update
-      VListaBIB.Refresh
       RefrescarGrid()
+      ' VListaBIB.Refresh
       Message.Info("Nueva entrada guardada.")
 
       Mod_LimpiarTextBox.LimpiarCamposBIB()
@@ -5278,7 +5282,7 @@ Public Sub btnGuardarRelacion_Click()
   Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', crossref= '" & valor2 & "', related= '" & valor3 & "', relatedString= '" & valor4 & "', relatedType= '" & valor5 & "' WHERE id= " & idReferencia
 
   meConn.Exec(Consulta)
-  tbRefDup.Refresh
+  meConn.Commit
   RefrescarGrid()
 
   txtAUTHORrelacion.Clear
@@ -5675,7 +5679,7 @@ Public Sub btnGuardarDuplicado_Click()
   Consulta = "UPDATE bibtex SET keywords= '" & valor2 & "', citationKey= '" & valor1 & "' WHERE id= " & idReferencia
 
   meConn.Exec(Consulta)
-  griBibOriginal.Refresh
+  meConn.Commit
   RefrescarGrid()
 
   txtYearDup.Clear
@@ -5808,27 +5812,33 @@ End
 
 Public Sub gridListaBIBactual_Click()' referencias del archivo en curso
 
-  TabPanel2.Index = 0
+  ' configurar como se muestran los botones
+  btnGuardarCambios.Visible = True
+  BtnEliminarBib.Visible = True
+  btnAgregarCitationKey.Visible = True
+  btnGuardar.Visible = False
+  btnAgregarKeyBIB.Visible = True
+
+  TabPanel2.Index = 1
   Mod_Funciones.VerBibTeXengridListaBIBactual()
 
 End
 
 Public Sub RefrescarGrid()
 
+  VListaBIB.Clear()
   ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
-  VListaBIB.Refresh
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
-  griBibOriginal.Refresh
   tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
-  tblReferenciaOrigen.Refresh
 
   ' Ejecutar la consulta SQL
+  gridListaBIBactual.Clear
+  tbRefDup.Clear
   ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
-  gridListaBIBactual.Refresh
   tbRefDup.Rows.Count = ContenidoBibActual.Count
-  tbRefDup.Refresh
+
   VGridGLO.Refresh
 
   ' refrescamos los contadores

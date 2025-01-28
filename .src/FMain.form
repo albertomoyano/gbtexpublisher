@@ -611,19 +611,6 @@
           ScrollBar = Scroll.Vertical
         }
         Index = 1
-        Text = ("Referencias bibliográficas (todas)     ")
-        Picture = Picture["iconos/bibtex.svg"]
-        { VListaBIB TableView
-          MoveScaled(1,10,44,8)
-          Font = Font["-1"]
-          Expand = True
-          Mode = Select.Single
-          ShowCursor = True
-          Header = GridView.Both
-          AutoResize = False
-          Resizable = False
-        }
-        Index = 2
         Text = ("Referencias bibliográficas (archivo en curso)     ")
         Picture = Picture["iconos/face.svg"]
         { gridListaBIBactual TableView
@@ -633,6 +620,19 @@
           Mode = Select.Single
           ShowCursor = True
           Header = GridView.Horizontal
+          AutoResize = False
+          Resizable = False
+        }
+        Index = 2
+        Text = ("Referencias bibliográficas (todas)     ")
+        Picture = Picture["iconos/bibtex.svg"]
+        { VListaBIB TableView
+          MoveScaled(1,10,44,8)
+          Font = Font["-1"]
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Both
           AutoResize = False
           Resizable = False
         }
