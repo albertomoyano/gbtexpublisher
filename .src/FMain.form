@@ -3253,7 +3253,7 @@
         Count = 2
         Highlight = True
         Index = 0
-        Text = ("_quarto.yml     ")
+        Text = ("index.yml     ")
         Picture = Picture["iconos/quarto.svg"]
         { ScrollView15 ScrollView
           MoveScaled(1,2,115,50)
