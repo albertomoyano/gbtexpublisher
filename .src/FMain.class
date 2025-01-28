@@ -183,6 +183,10 @@ Public Sub Form_Open()
   tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
 
+  ' por default hacemos no mostramos el hbox de los artículos
+  HBoxNuevoArtCap.Enabled = False
+  HBoxNuevoArtCap.Visible = False
+
 End
 
 Public Sub Form_Close()

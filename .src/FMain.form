@@ -389,14 +389,13 @@
       ReadOnly = True
     }
     { HBoxNuevoArtCap HBox
-      MoveScaled(67,0,54,4)
-      Enabled = False
+      MoveScaled(61,0,61,4)
       Expand = True
       { Separator20 Separator
         MoveScaled(0,0,2.3333,4)
       }
       { chkNuevoArtCap CheckBox
-        MoveScaled(2,0,22,4)
+        MoveScaled(3,0,22,4)
         AutoResize = True
         Text = ("agregar artículo/capítulo")
       }
@@ -3301,6 +3300,9 @@
               MoveScaled(2,2,105,35)
               Expand = True
               Arrangement = Arrange.Vertical
+              Spacing = True
+              Margin = True
+              Padding = 4
               Border = False
               ScrollBar = Scroll.Vertical
               { HBox174 HBox
