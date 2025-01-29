@@ -44,6 +44,8 @@
     { menuPDFgray Menu
       Text = ("PDF imprenta")
     }
+    { Menu6 Menu
+    }
     { menuEPUB1 Menu
       #Translate = False
       Text = "epub + azw3 (modo imágenes png)"
@@ -51,6 +53,11 @@
     { menuEPUB2 Menu
       #Translate = False
       Text = "epub + azw3 (modo archivos html)"
+    }
+    { Menu7 Menu
+    }
+    { menuHTML Menu
+      Text = ("HTML")
     }
   }
   { menuTEXTBOX Menu

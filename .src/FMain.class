@@ -5971,3 +5971,13 @@ Public Sub menuEPUB2_Click()' epub via html
   Endif
 
 End
+
+Public Sub menuHTML_Click()' html con lwarp
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarHTML.salidaHTML5lwarp
+  Endif
+
+End
