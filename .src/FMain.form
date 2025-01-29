@@ -37,17 +37,13 @@
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
+    Visible = False
     { menuPDFcolor Menu
       Text = ("PDF web")
     }
     { menuPDFgray Menu
       Text = ("PDF imprenta")
     }
-  }
-  { MenuEPUB Menu
-    #Translate = False
-    Text = "menuEpub"
-    Visible = False
     { menuEPUB1 Menu
       #Translate = False
       Text = "epub + azw3 (modo imágenes png)"
@@ -56,6 +52,11 @@
       #Translate = False
       Text = "epub + azw3 (modo archivos html)"
     }
+  }
+  { MenuEPUB Menu
+    #Translate = False
+    Text = "menuEpub"
+    Visible = False
   }
   { menuTEXTBOX Menu
     #Translate = False
@@ -317,36 +318,29 @@
       MoveScaled(14,0,14,4)
       #Translate = False
       Enabled = False
-      Text = "PDF"
-      Picture = Picture["iconos/acroread.svg"]
+      Text = "Salidas"
+      Picture = Picture["iconos/salidas.svg"]
       Menu = "menuPDF"
       MenuOnly = True
     }
-    { btnCOMPepub MenuButton
-      MoveScaled(28,0,14,4)
-      #Translate = False
-      Enabled = False
-      Text = "e-book"
-      Picture = Picture["iconos/epub.svg"]
-      Menu = "MenuEPUB"
-      MenuOnly = True
-    }
     { Separator2 Separator
-      MoveScaled(42,0,2.3333,4)
+      MoveScaled(29,0,2.3333,4)
     }
     { btnAbrirQuarto Button
-      MoveScaled(44,0,14,4)
+      MoveScaled(32,0,14,4)
       Text = ("Markdown")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
-    { btnCOMPpdfRevista Button
-      MoveScaled(58,0,14,4)
+    { btnCOMPpdfRevista MenuButton
+      MoveScaled(47,0,14,4)
+      #Translate = False
       Enabled = False
-      Text = ("Compilar")
-      Picture = Picture["iconos/revista.svg"]
+      Text = "Salidas"
+      Picture = Picture["iconos/salidas.svg"]
+      MenuOnly = True
     }
     { Separator13 Separator
-      MoveScaled(72,0,2.3333,4)
+      MoveScaled(62,0,2.3333,4)
     }
     { menuHERRA MenuButton
       MoveScaled(75,0,16,4)

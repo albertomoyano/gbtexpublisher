@@ -3937,7 +3937,7 @@ Public Sub habilitamosLibro()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = True
-  btnCOMPepub.Enabled = True
+  btnCOMPpdfRevista.Enabled = True
   btnCOMPpdfRevista.Enabled = False
   HBoxPanelLibro.Visible = True
   HBox85.Visible = True
@@ -3953,7 +3953,7 @@ Public Sub habilitamosRevista()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = False
-  btnCOMPepub.Enabled = False
+  btnCOMPpdfRevista.Enabled = False
   btnCOMPpdfRevista.Enabled = True
   HBoxPanelLibro.Visible = True
   HBox85.Visible = True
@@ -3969,7 +3969,7 @@ Public Sub habilitamosMonografia()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = False
-  btnCOMPepub.Enabled = False
+  btnCOMPpdfRevista.Enabled = False
   btnCOMPpdfRevista.Enabled = False
   menuPDFweb.Visible = False
   menuOT.Visible = False
@@ -5960,15 +5960,6 @@ Public Sub menuPDFgray_Click()' pdf imprenta
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
     Mod_GenerarPDF.salidaPDFimprenta
-  Endif
-
-End
-
-Public Sub btnCOMPpdfRevista_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un Markdown asociado.")
-    ' Else
   Endif
 
 End
