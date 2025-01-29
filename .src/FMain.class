@@ -203,79 +203,85 @@ Public Sub obs_click()
 
 End
 
-Public Sub salidaPDFlibro() 'generamos el PDF libro
-
-  Dim newFile As String
-  Dim rutaFija As String
-  Dim newLog As String
-
-  ' exportamos el archivo de separata
-  Mod_Exportar.ExportToSeparata(TextBox1.Text)
-
-  ' Llamamos a la función del módulo para verificar los metadatos obligatorios
-  If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
-    ' Si la función retorna False, cancelamos la operación
-    Return
-  End If
-
-  newFile = "pdf-" & BaseName & ".tex"
-  rutaFija = File.Dir(TextBox1.Text) &/ "files"
-  newLog = "gbTeX-" & BaseName & ".log"
-
-  Mod_Funciones.Borrar_Aux
-  Wait 0.2
-
-  TabPanel1.Index = 0
-
-  ' obtenemos la exportación de los archivos bib, glo y metadatos
-  Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
-  Wait 0.2
-
-  'revisamos la carpeta pdf y borramos el archivo
-  Mod_Funciones.ManagePdfFolder(TextBox1.Text)
-
-  TerminalView1.Input("cat " & rutaFija &/ "book-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-  Wait 0.2
-
-  'ejecutamos en conteo del archivo LaTeX
-  TerminalView1.Input("texcount -sub -sum -incbib -out=" & rutaFILES & "/gbTeX-" & BaseName & ".txt " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("rm -rf " & newFile & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
-  Wait 0.2
-
-  'copiamos /files el archivo .log
-  TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n")
-  Wait 0.2
-
-  'eliminamos los archivos auxiliares
-  TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/artcap/*.aux" & "\n")
-  Wait 0.2
-
-  'eliminamos los archivos bib y glo
-  TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXglo-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-  TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
-  TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-  TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-  Wait 0.2
-
-  Mod_Funciones.Borrar_Aux
-
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
-
-End
+' Public Sub salidaPDFweb() 'generamos el PDF web del libro
+'
+'   Dim newFile As String
+'   Dim rutaFija As String
+'   Dim newLog As String
+'
+'   ' exportamos el archivo de separata
+'   Mod_Exportar.ExportToSeparata(TextBox1.Text)
+'
+'   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
+'   If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
+'     ' Si la función retorna False, cancelamos la operación
+'     Return
+'   End If
+'
+'   newFile = "pdf-" & BaseName & ".tex"
+'   rutaFija = File.Dir(TextBox1.Text) &/ "files"
+'   newLog = "gbTeX-" & BaseName & ".log"
+'
+'   Mod_Funciones.Borrar_Aux
+'   Wait 0.2
+'
+'   TabPanel1.Index = 0
+'
+'   ' obtenemos la exportación de los archivos bib, glo y metadatos
+'   Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
+'   Mod_Exportar.Exportar2Glosario(TextBox1.Text)
+'   Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
+'   Wait 0.2
+'
+'   'revisamos la carpeta pdf y borramos el archivo
+'   Mod_Funciones.ManagePdfFolder(TextBox1.Text)
+'
+'   Dim condicional As String = "\\\\PDFtrue"
+'   TerminalView1.Input("echo " & condicional & " >> " & rutaFija & "/book-pdf.tex" & "\n")
+'
+'   TerminalView1.Input("cat " & rutaFija & "/book-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
+'   Wait 0.2
+'
+'   Dim limpiarCondicional As String
+'   limpiarCondicional = "sed -i '/\\\\PDFtrue/d' " & rutaFija & "/book-pdf.tex" & "\n"
+'   TerminalView1.Input(limpiarCondicional)
+'
+'   Dim compilar As String
+'   compilar = "latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n"
+'   ' Envía el comando al terminal
+'   TerminalView1.Input(compilar)
+'   Wait 0.2
+'
+'   ' TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
+'   ' Wait 0.2
+'
+'   ' TerminalView1.Input("rm -rf " & newFile & "\n")
+'   ' Wait 0.2
+'
+'   TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
+'   Wait 0.2
+'
+'   'copiamos /files el archivo .log
+'   TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n")
+'   Wait 0.2
+'
+'   'eliminamos los archivos auxiliares
+'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/artcap/*.aux" & "\n")
+'   Wait 0.2
+'
+'   'eliminamos los archivos bib y glo
+'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXglo-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
+'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+'   Wait 0.2
+'
+'   Mod_Funciones.Borrar_Aux
+'
+'   TerminalView1.SetFocus()
+'   TerminalView1.Refresh()
+'
+' End
 
 Public Sub menuAPUNTES_Click()
 
@@ -2906,16 +2912,6 @@ Public Sub menuESTADISTICAS_Click()
 
 End
 
-Public Sub btnCOMPpdf_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    salidaPDFlibro
-  Endif
-
-End
-
 Public Sub BtnBuscarJournal_Click()
 
   Dim Consulta As String
@@ -3653,15 +3649,6 @@ Public Sub menuAbrirQuarto_Click()
   '   btnGuardarMeta.Visible = False
   '   btnGuardarCambiosMeta.Visible = False
   ' Endif
-
-End
-
-Public Sub btnCOMPpdfRevista_Click()
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un proyecto Quarto asociado.")
-    ' Else
-  Endif
 
 End
 
@@ -5776,14 +5763,6 @@ Public Sub Form_Activate()
 
 End
 
-Public Sub menuHTML1_Click()' html via gitbook
-
-End
-
-Public Sub menuHTML2_Click()' html via lwarp
-
-End
-
 Public Sub menuEPUB1_Click()' epub via png
 
   Mod_GenerarEPUB.salidaEPUBpng(TextBox1.Text)
@@ -5962,5 +5941,34 @@ Public Sub btnGuardarArtCap_Click()
   Else
     Message.Info("El archivo ya existe. Por favor, elija otro nombre.")
   End If
+
+End
+
+Public Sub menuPDFcolor_Click()' pdf web
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarPDF.salidaPDFweb
+  Endif
+
+End
+
+Public Sub menuPDFgray_Click()' pdf imprenta
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarPDF.salidaPDFimprenta
+  Endif
+
+End
+
+Public Sub btnCOMPpdfRevista_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un Markdown asociado.")
+    ' Else
+  Endif
 
 End

@@ -34,6 +34,16 @@
       Enabled = False
     }
   }
+  { menuPDF Menu
+    #Translate = False
+    Text = "menuPDF"
+    { menuPDFcolor Menu
+      Text = ("PDF web")
+    }
+    { menuPDFgray Menu
+      Text = ("PDF imprenta")
+    }
+  }
   { MenuEPUB Menu
     #Translate = False
     Text = "menuEpub"
@@ -303,12 +313,14 @@
       Text = ("LaTeX")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
-    { btnCOMPpdf Button
+    { btnCOMPpdf MenuButton
       MoveScaled(14,0,14,4)
+      #Translate = False
       Enabled = False
-      ToolTip = ("PDF de libro")
-      Text = ("PDF")
+      Text = "PDF"
       Picture = Picture["iconos/acroread.svg"]
+      Menu = "menuPDF"
+      MenuOnly = True
     }
     { btnCOMPepub MenuButton
       MoveScaled(28,0,14,4)

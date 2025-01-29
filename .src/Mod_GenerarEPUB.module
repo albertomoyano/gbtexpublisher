@@ -1,7 +1,7 @@
 ' Gambas module file
 
-Public rutaFILES As String = File.Dir(FMain.TextBox1.Text) &/ "files"
-Public BaseName As String = File.BaseName(FMain.TextBox1.Text)
+Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
+Private rutaFILES As String = File.Dir(FMain.TextBox1.Text) & "/files"
 
 Public Sub salidaEPUBpng(rutaTexto As String)
 
@@ -61,7 +61,7 @@ Public Sub salidaEPUBpng(rutaTexto As String)
   ' FMain.TerminalView1.Input("ebook-convert" & " " & File.Dir(rutaTexto) & "/ebook/epub1/epub1-pdf-" & BaseName & ".epub" & " " & File.Dir(rutaTexto) & "/ebook/kindle/kindle-pdf-" & BaseName & ".azw3" & "\n")
   ' Wait 0.2
 
-  ' booramos los archivos auxiliares
+  ' borramos los archivos auxiliares
   Mod_Funciones.Borrar_Aux
 
 End
@@ -89,30 +89,28 @@ Public Sub salidaEPUBhtml(rutaTexto As String)
   FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub3.tex " & File.Name(rutaTexto) & " > " & newFile & "\n")
   Wait 0.2
 
-  ' ' exportamos los archivos bib, glo y meta
-  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  ' Mod_Exportar.Export2MetaEPUB(TextBox1.Text)
-  ' Wait 0.2
-  '
-  '
-  ' TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  ' Wait 0.2
-  '
-  '
-  ' TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
+  ' exportamos los archivos bib, glo y meta
+  Mod_Exportar.Exportar2BibTeX(rutaTexto)
+  Mod_Exportar.Exportar2Glosario(rutaTexto)
+  Mod_Exportar.Export2MetaEPUB(rutaTexto)
+  Wait 0.2
+
+  FMain.TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(rutaTexto) & "\n" & "rm -rf " & newFile & "\n")
+  Wait 0.2
+
+  ' si la validación dio bien generamos un azw3 usando calibre
+  FMain.TerminalView1.Input("ebook-convert" & " " & File.Dir(rutaTexto) & "/ebook/epub1/epub1-pdf-" & BaseName & ".epub" & " " & File.Dir(rutaTexto) & "/ebook/kindle/kindle-pdf-" & BaseName & ".azw3" & "\n")
+  Wait 0.2
+
+  ' FMain.TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
   ' Wait 0.2
 
-  ' ' si la validación dio bien generamos un azw3 usando calibre
-  ' FMain.TerminalView1.Input("ebook-convert" & " " & File.Dir(rutaTexto) & "/ebook/epub1/epub1-pdf-" & BaseName & ".epub" & " " & File.Dir(rutaTexto) & "/ebook/kindle/kindle-pdf-" & BaseName & ".azw3" & "\n")
+  ' FMain.TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
   ' Wait 0.2
 
-  ' TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
-  ' Wait 0.2
-  '
-  ' ' TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  ' ' Wait 0.2
-  '
   ' TerminalView1.SetFocus()
   ' Mod_Funciones.Borrar_Aux
 
