@@ -9,9 +9,6 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   Dim rutaFija As String
   Dim newLog As String
 
-  ' exportamos el archivo de separata
-  Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
-
   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
   If Not Mod_Funciones.registrosObligatorios(FMain.TextBox1.Text) Then
     ' Si la función retorna False, cancelamos la operación
@@ -27,7 +24,8 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
 
   FMain.TabPanel1.Index = 0
 
-  ' obtenemos la exportación de los archivos bib, glo y metadatos
+  ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
+  Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2MetadatosPDF(FMain.TextBox1.Text)
@@ -89,9 +87,6 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
   Dim rutaFija As String
   Dim newLog As String
 
-  ' exportamos el archivo de separata
-  Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
-
   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
   If Not Mod_Funciones.registrosObligatorios(FMain.TextBox1.Text) Then
     ' Si la función retorna False, cancelamos la operación
@@ -107,7 +102,8 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
 
   FMain.TabPanel1.Index = 0
 
-  ' obtenemos la exportación de los archivos bib, glo y metadatos
+  ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
+  Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2MetadatosPDF(FMain.TextBox1.Text)

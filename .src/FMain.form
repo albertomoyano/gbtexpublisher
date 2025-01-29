@@ -53,11 +53,6 @@
       Text = "epub + azw3 (modo archivos html)"
     }
   }
-  { MenuEPUB Menu
-    #Translate = False
-    Text = "menuEpub"
-    Visible = False
-  }
   { menuTEXTBOX Menu
     #Translate = False
     Text = "menuContextual"

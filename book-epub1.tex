@@ -1,4 +1,9 @@
 \documentclass[oneside,onecolumn,openany,final]{book}
+
+% Deben cargarse temprano para parches de macros
+\usepackage{etoolbox}
+\usepackage{ifthen}
+
 % Diseño pantalla de 10 pulgadas
 \usepackage[paperwidth=124mm,
 paperheight=220mm,
@@ -15,7 +20,7 @@ footskip=0mm,
 footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
 
 % Idiomas y babel
-\usepackage[french,portuguese,italian,english,british,american,german,spanish,es-ucroman,es-noshorthands]{babel}
+\usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
 \usepackage[autostyle=true]{csquotes}
 \renewcommand{\spanishcontentsname}{Sumario}
 \renewcommand{\spanishindexname}{Índice alfabético}
@@ -34,9 +39,9 @@ footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
 \usepackage{unicode-math}
 \setmathfont{Libertinus Math}
 
-% configuración y tipografía por default en TeXlive para idioma chino
-\usepackage{luatexja-fontspec}
-\setmainjfont{FandolSong}
+%% configuración y tipografía por default en TeXlive para idioma chino
+%\usepackage{luatexja-fontspec}
+%\setmainjfont{FandolSong}
 
 \setsansfont[Scale=MatchLowercase,
 Ligatures=TeX,
@@ -71,6 +76,9 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 }
 
 % paquetes varios
+\usepackage{pageslts}
+\usepackage{calc}
+\usepackage{qrcode}% generamos el QR
 \usepackage{froufrou}
 \usepackage{nccfoots}
 \usepackage{booktabs}
@@ -133,7 +141,7 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 % KOMA script
 \usepackage{scrextend}
 % \KOMAoptions{footnotes=multiple}% maybe you want to use this option?
-\newcommand*\footnotemarkspace{0em} % set distance of the footnote text from the margin
+\newcommand*\footnotemarkspace{8mm} % set distance of the footnote text from the margin
 \deffootnote{\footnotemarkspace}% use distance from above
 {\parindent}% paragraph indent in footnotes (footnotes should never have paragraphs!)
 {\makebox[\footnotemarkspace][r]{\llap{\thefootnotemark\quad}}} % footfont with period for footnote marks in footnote
@@ -609,6 +617,8 @@ uniquelist=minyear]{biblatex}
 \def\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do.\do:\do\%\do?\do_\do-\do+\do/\do\#\do~}
 \def\UrlFont{\rm}
 
-\usepackage{ifthen}
-
-% fin del preambulo
+% declaramos los condicionales
+\newif\ifPDF
+\newif\ifBNPDF
+\newif\ifPNGEPUB
+\newif\ifHTMLEPUB

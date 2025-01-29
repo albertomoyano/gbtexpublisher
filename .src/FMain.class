@@ -5763,18 +5763,6 @@ Public Sub Form_Activate()
 
 End
 
-Public Sub menuEPUB1_Click()' epub via png
-
-  Mod_GenerarEPUB.salidaEPUBpng(TextBox1.Text)
-
-End
-
-Public Sub menuEPUB2_Click()' epub via html
-
-  Mod_GenerarEPUB.salidaEPUBhtml(TextBox1.Text)
-
-End
-
 Public Sub btnVerAsunto1_Click()
 
   Form_TXTextendido.OriginalTextBox = txtSubjet
@@ -5960,6 +5948,26 @@ Public Sub menuPDFgray_Click()' pdf imprenta
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
     Mod_GenerarPDF.salidaPDFimprenta
+  Endif
+
+End
+
+Public Sub menuEPUB1_Click()' epub via png
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarEPUB.salidaEPUBpng
+  Endif
+
+End
+
+Public Sub menuEPUB2_Click()' epub via html
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarEPUB.salidaEPUBhtml
   Endif
 
 End
