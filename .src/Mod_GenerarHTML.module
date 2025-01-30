@@ -59,7 +59,7 @@ Public Sub salidaHTML5gitbook()
 
 End
 
-Public Sub salidaHTML5lwarp()
+Public Sub salidaHTML5()
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0

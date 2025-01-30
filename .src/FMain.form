@@ -57,7 +57,7 @@
     { Menu7 Menu
     }
     { menuHTML Menu
-      Text = ("HTML")
+      Text = ("HTML5")
     }
   }
   { menuTEXTBOX Menu

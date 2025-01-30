@@ -5977,7 +5977,7 @@ Public Sub menuHTML_Click()' html con lwarp
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    Mod_GenerarHTML.salidaHTML5lwarp
+    Mod_GenerarHTML.salidaHTML5
   Endif
 
 End
