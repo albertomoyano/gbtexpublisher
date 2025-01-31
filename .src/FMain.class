@@ -97,9 +97,9 @@ Public Sub Form_Open()
   txtTAREAS.Visible = False
   Mostrar_Lista_Tareas
 
-  MS.Init()
-  MS.GetLastListFromSettings()
-  UpdateMenu()
+  ' MS.Init()
+  ' MS.GetLastListFromSettings()
+  ' UpdateMenu()
 
   ' Verifica si el TextBox1 tiene una ruta válida
   If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then

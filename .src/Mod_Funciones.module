@@ -703,12 +703,12 @@ Public Sub CerrarTodo()
     FMain.ContenidoBibActual = Null
   Endif
 
-  ' Guardar el último archivo abierto
-  MS.SetLastListToSettings()
-  Try FMain.pBash.Kill
-  Wait 0.1
-  Try FMain.fFile.Close
-  Wait 1
+  ' ' Guardar el último archivo abierto
+  ' MS.SetLastListToSettings()
+  ' Try FMain.pBash.Kill
+  ' Wait 0.1
+  ' Try FMain.fFile.Close
+  ' Wait 1
 
   ' Cerrar la aplicación
   Form_ConectarBBDD.Close
