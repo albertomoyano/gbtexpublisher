@@ -25,10 +25,12 @@ Public BaseName As String
 Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
 Public sTB_Text As String
 Public LastTextBox As TextBox
-Public horas As Integer
-Public minutos As Integer
-Public segundos As Integer
-Public idSeleccionado As Integer ' Variable global para almacenar el ID
+' Variables para el tiempo
+Private segundos As Integer
+Private minutos As Integer
+Private horas As Integer
+' Variable global para almacenar el ID
+Public idSeleccionado As Integer
 
 Public Sub Form_Open()
 
@@ -186,6 +188,13 @@ Public Sub Form_Open()
   ' por default hacemos no mostramos el hbox de los artículos
   HBoxNuevoArtCap.Enabled = False
   HBoxNuevoArtCap.Visible = False
+
+End
+
+' Función para actualizar el display del tiempo
+Public Sub ActualizarDisplay()
+
+  txtTiempo.Caption = Right$("0" & horas, 2) & ":" & Right$("0" & minutos, 2) & ":" & Right$("0" & segundos, 2)
 
 End
 
@@ -505,109 +514,108 @@ End
 Public Sub Watcher_Change()
 
   DirViewRuta.Refresh' Actualiza el DirChooser
-  Me.Refresh
   prevFiles = DirViewRuta.Files' Actualiza la lista de archivos anterior
 
 End
 
-Public Sub UpdateMenu()
-
-  Dim MenuItem As Menu
-  Dim sFileName As String
-
-  mnu1LastFiles.Children.Clear
-  If MS.ShortMatrix.Count = 0 Then
-    mnu1LastFiles.Visible = False
-  Else
-    For Each sFileName In MS.ShortMatrix
-      MenuItem = New Menu(mnu1LastFiles) As "mnuLast"
-      MenuItem.Text = sFileName
-    Next
-  End If
-
-End
-
-' me que muestra los ultimos archivos abiertos
-Public Sub mnuLast_Click()
-
-  Dim iIndex As Integer
-
-  If MS.ShortMatrix.Find(Last.Text) <> -1 Then
-    iIndex = MS.ShortMatrix.Find(Last.Text)
-    TextBox1.Text = MS.Matrix[iIndex]
-    fFile = Open TextBox1.Text For Input
-    DirViewRuta.Root = File.Dir(TextBox1.Text)
-  Endif
-
-  ' TabPanelRevista.Visible = False
-  rutaFILES = File.Dir(TextBox1.Text) & "/files"
-  BaseName = File.BaseName(TextBox1.Text)
-
-  MenuButton1.Menu = "menuScriptsExternos"
-  MenuButton2.Menu = "menuProcesarArchivos"
-  menuOT.Enabled = True
-  menuPDFweb.Enabled = True
-  btnGuardarIGUAL.Visible = False
-  TabPanel1.visible = True
-  menuBORRARaux.Enabled = True
-  menuComprimir.Enabled = True
-  menuTOOLS.Visible = True
-  menuScriptsExternos.Enabled = True
-  menuLTX.Enabled = True
-  MenuApp.Enabled = True
-  Button4.Enabled = True
-  btnMenuGIT.Enabled = True
-  btnMenuGitLab.Enabled = True
-  btnKanban.Enabled = True
-  menuGray.Enabled = True
-  menuCatalogo.Enabled = True
-  menuDisclaimer.Enabled = True
-  Menu4.Enabled = True
-
-  If Form_Notas.Visible Then
-    Form_Notas.Close ' Cierra la ventana
-  End If
-
-  Mod_Funciones.CopiarArchivos(TextBox1.Text)
-
-  ' limpiamos las entradas de los metadatos
-  Mod_Funciones.limpiamosMetadatosLibrosRevistas()
-
-  ' Ejecutar la consulta SQL
-  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
-  ' refrescamos los datos en los grid del archivo en curso
-  gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
-  tbRefDup.Rows.Count = ContenidoBibActual.Count
-
-  Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
-
-  ' txtContactCountry.MaxLength = 1500
-  txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
-  txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
-  txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-
-  contarEntradasBIByGLO()' mostramos las cantidades en el boton
-
-  'posicionamos la consola con el path del archivo de trabajo
-  TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
-  TerminalView1.SetFocus()
-
-  Dim nombreDelArchivo As String = File.Name(TextBox1.Text)
-  seleccionarFuncionPorTipo(nombreDelArchivo)' Verificar el tipo de documento por el nombre del archivo
-
-  levantarComenta()'levantamos los datos de comentarios
-  levantarGitHubPages()  ' levantamos los datos de githubpages
-  MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
-  MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
-  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-  Mod_LimpiarTextBox.LimpiarCamposBIB()
-
-  Mostrar_ListaGLO()
-
-  TotalEntradasBIByGLO()'actualizamos el contador de entradas
-  MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-
-End
+' Public Sub UpdateMenu()
+'
+'   Dim MenuItem As Menu
+'   Dim sFileName As String
+'
+'   mnu1LastFiles.Children.Clear
+'   If MS.ShortMatrix.Count = 0 Then
+'     mnu1LastFiles.Visible = False
+'   Else
+'     For Each sFileName In MS.ShortMatrix
+'       MenuItem = New Menu(mnu1LastFiles) As "mnuLast"
+'       MenuItem.Text = sFileName
+'     Next
+'   End If
+'
+' End
+'
+' ' me que muestra los ultimos archivos abiertos
+' Public Sub mnuLast_Click()
+'
+'   Dim iIndex As Integer
+'
+'   If MS.ShortMatrix.Find(Last.Text) <> -1 Then
+'     iIndex = MS.ShortMatrix.Find(Last.Text)
+'     TextBox1.Text = MS.Matrix[iIndex]
+'     fFile = Open TextBox1.Text For Input
+'     DirViewRuta.Root = File.Dir(TextBox1.Text)
+'   Endif
+'
+'   ' TabPanelRevista.Visible = False
+'   rutaFILES = File.Dir(TextBox1.Text) & "/files"
+'   BaseName = File.BaseName(TextBox1.Text)
+'
+'   MenuButton1.Menu = "menuScriptsExternos"
+'   MenuButton2.Menu = "menuProcesarArchivos"
+'   menuOT.Enabled = True
+'   menuPDFweb.Enabled = True
+'   btnGuardarIGUAL.Visible = False
+'   TabPanel1.visible = True
+'   menuBORRARaux.Enabled = True
+'   menuComprimir.Enabled = True
+'   menuTOOLS.Visible = True
+'   menuScriptsExternos.Enabled = True
+'   menuLTX.Enabled = True
+'   MenuApp.Enabled = True
+'   Button4.Enabled = True
+'   btnMenuGIT.Enabled = True
+'   btnMenuGitLab.Enabled = True
+'   btnKanban.Enabled = True
+'   menuGray.Enabled = True
+'   menuCatalogo.Enabled = True
+'   menuDisclaimer.Enabled = True
+'   Menu4.Enabled = True
+'
+'   If Form_Notas.Visible Then
+'     Form_Notas.Close ' Cierra la ventana
+'   End If
+'
+'   Mod_Funciones.CopiarArchivos(TextBox1.Text)
+'
+'   ' limpiamos las entradas de los metadatos
+'   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
+'
+'   ' Ejecutar la consulta SQL
+'   ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+'   ' refrescamos los datos en los grid del archivo en curso
+'   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
+'   tbRefDup.Rows.Count = ContenidoBibActual.Count
+'
+'   Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
+'
+'   ' txtContactCountry.MaxLength = 1500
+'   txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
+'   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
+'   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
+'
+'   contarEntradasBIByGLO()' mostramos las cantidades en el boton
+'
+'   'posicionamos la consola con el path del archivo de trabajo
+'   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
+'   TerminalView1.SetFocus()
+'
+'   Dim nombreDelArchivo As String = File.Name(TextBox1.Text)
+'   seleccionarFuncionPorTipo(nombreDelArchivo)' Verificar el tipo de documento por el nombre del archivo
+'
+'   levantarComenta()'levantamos los datos de comentarios
+'   levantarGitHubPages()  ' levantamos los datos de githubpages
+'   MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+'   MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
+'   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+'   Mod_LimpiarTextBox.LimpiarCamposBIB()
+'
+'   Mostrar_ListaGLO()
+'
+'   TotalEntradasBIByGLO()'actualizamos el contador de entradas
+'   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+'
+' End
 
 Public Sub d2t_Click()
 
@@ -4137,14 +4145,6 @@ Public Sub Timer1_Timer()
 
 End
 ' Función para actualizar el display del botón
-
-Public Sub ActualizarDisplay()
-
-  ' Formateamos horas, minutos y segundos en "hh:mm:ss"
-  ' txtTiempo.Caption = horas & ":" & minutos & ":" & segundos
-  txtTiempo.Caption = Right$("0" & horas, 2) & ":" & Right$("0" & minutos, 2) & ":" & Right$("0" & segundos, 2)
-
-End
 
 Public Sub reinicamosTiempo()
 

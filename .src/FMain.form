@@ -531,7 +531,7 @@
       }
     }
     { Splitter1 Splitter
-      MoveScaled(2,11,126,65)
+      MoveScaled(1,6,126,65)
       Expand = True
       Border = False
       { !TerminalView1 TerminalView
@@ -580,7 +580,6 @@
             #Translate = False
             Expand = True
             ShowFile = True
-            ShowBookmark = False
             ShowToolbar = False
           }
         }
