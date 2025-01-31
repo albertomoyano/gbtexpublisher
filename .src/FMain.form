@@ -183,26 +183,26 @@
     Visible = False
     { menuCONVERSOR Menu
       #Translate = False
-      Text = "Conversión con esquema de archivo .docx a LaTeX"
+      Text = ".docx a LaTeX (con carpetas del proyecto)"
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuCONVERSORpandoc Menu
       #Translate = False
-      Text = "Conversión simple de archivo .docx a LaTeX"
+      Text = ".docx a LaTeX (esquema simple)"
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuConversorQMD Menu
-      Text = ("Conversión de archivo .docx a MD")
+      Text = (".docx a MD (con carpetas del proyecto)")
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuAPUNTES Menu
       #Translate = False
-      Text = "Cuaderno de notas"
+      Text = "Cuaderno de apuntes"
       Picture = Picture["iconos/notas.svg"]
     }
     { Menu78 Menu
       #Translate = False
-      Text = "Exportar referencias bibliográficas"
+      Text = "Exportar referencias en archivo .bib"
       Picture = Picture["iconos/exportar.svg"]
     }
     { menuScriptsExternos Menu
