@@ -22,7 +22,7 @@ Public sCurrentFilePath As String
 Public rutaORIGINALES As String
 Public rutaTAPA As String
 Public BaseName As String
-Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
+' Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
 Public sTB_Text As String
 Public LastTextBox As TextBox
 ' Variables para el tiempo
@@ -107,8 +107,8 @@ Public Sub Form_Open()
     Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
     Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
     Watcher.Start
-    ' Inicializa la lista de archivos
-    prevFiles = DirViewRuta.Files
+    ' ' Inicializa la lista de archivos
+    ' prevFiles = DirViewRuta.Files
   End If
 
   'declaramos las rutas a utilizar
@@ -435,6 +435,8 @@ Public Sub menuAbrir_Click()'abrir un libro
     ' sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     Mod_Funciones.Borrar_Aux
+    Shell "rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log" & "\n"
+    Wait 0.1
     BaseName = File.BaseName(TextBox1.Text)
     rutaFILES = File.Dir(TextBox1.Text) & "/files"
     PanelLaTeX.Visible = True
@@ -515,9 +517,9 @@ End
 ' Evento que se ejecuta cuando se detecta un cambio en el directorio
 Public Sub Watcher_Change()
 
-  DirViewRuta.Root = File.Dir(TextBox1.Text)
+  DirViewRuta.Root = File.Dir(TextBox1.Text)' reforzamos la indicación de la ruta
   DirViewRuta.Refresh' Actualiza el DirChooser
-  prevFiles = DirViewRuta.Files' Actualiza la lista de archivos anterior
+  ' prevFiles = DirViewRuta.Files' Actualiza la lista de archivos
 
 End
 
