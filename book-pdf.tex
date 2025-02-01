@@ -579,6 +579,12 @@ uniquelist=minyear]{biblatex}
 	{\indexnames{labelname}}
 	{}}
 
+% Esto inserta la entrada relacionada con el contenido como parte de las últimas cosas antes de que el índice se imprima realmente.
+\makeatletter
+\g@addto@macro{\theindex}{\addcontentsline{toc}{chapter}{\hspace{2pc}Índice de autoras y autores del aparato bibliográfico}}
+\makeatother
+\renewcommand{\spanishindexname}{Índice de autoras y autores del aparato bibliográfico}
+
 %% generamos los glosarios
 \usepackage[acronym,sanitizesort,toc=true,nonumberlist]{glossaries}
 \preto\chapter{\glsresetall}
