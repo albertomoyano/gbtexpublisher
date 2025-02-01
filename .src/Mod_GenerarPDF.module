@@ -1,12 +1,10 @@
 ' Gambas module file
 
-Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
 Private rutaFILES As String = File.Dir(FMain.TextBox1.Text) & "/files"
 
 Public Sub salidaPDFweb() 'generamos el PDF web del libro
 
   Dim newFile As String
-  Dim rutaFija As String
   Dim newLog As String
 
   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
@@ -15,9 +13,8 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
     Return
   End If
 
-  newFile = "pdf-" & BaseName & ".tex"
-  rutaFija = File.Dir(FMain.TextBox1.Text) &/ "files"
-  newLog = "gbTeX-" & BaseName & ".log"
+  newFile = "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".tex"
+  newLog = "gbTeX-" & File.BaseName(FMain.TextBox1.Text) & ".log"
 
   Mod_Funciones.Borrar_Aux
   Wait 0.2
@@ -35,13 +32,13 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   Mod_Funciones.ManagePdfFolder(FMain.TextBox1.Text)
 
   Dim condicional As String = "\\\\PDFtrue"
-  FMain.TerminalView1.Input("echo " & condicional & " >> " & rutaFija & "/book-pdf.tex" & "\n")
+  FMain.TerminalView1.Input("echo " & condicional & " >> " & File.Dir(FMain.TextBox1.Text) & "/files" & "/book-pdf.tex" & "\n")
 
-  FMain.TerminalView1.Input("cat " & rutaFija & "/book-pdf.tex" & " " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
+  FMain.TerminalView1.Input("cat " & File.Dir(FMain.TextBox1.Text) & "/files" & "/book-pdf.tex" & " " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2
 
   Dim limpiarCondicional As String
-  limpiarCondicional = "sed -i '/\\\\PDFtrue/d' " & rutaFija & "/book-pdf.tex" & "\n"
+  limpiarCondicional = "sed -i '/\\\\PDFtrue/d' " & File.Dir(FMain.TextBox1.Text) & "/files" & "/book-pdf.tex" & "\n"
   FMain.TerminalView1.Input(limpiarCondicional)
 
   Dim compilar As String
@@ -50,17 +47,14 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   FMain.TerminalView1.Input(compilar)
   Wait 0.2
 
-  ' TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-  ' Wait 0.2
-
   FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
+  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
 
   'copiamos /files el archivo .log
-  FMain.TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n")
+  FMain.TerminalView1.Input("cat pdf-" & File.BaseName(FMain.TextBox1.Text) & ".log > " & rutaFILES & "/gbTeX-" & File.BaseName(FMain.TextBox1.Text) & ".log" & "\n")
   Wait 0.2
 
   'eliminamos los archivos auxiliares
@@ -84,7 +78,6 @@ End
 Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
 
   Dim newFile As String
-  Dim rutaFija As String
   Dim newLog As String
 
   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
@@ -93,9 +86,8 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
     Return
   End If
 
-  newFile = "pdf-" & BaseName & ".tex"
-  rutaFija = File.Dir(FMain.TextBox1.Text) &/ "files"
-  newLog = "gbTeX-" & BaseName & ".log"
+  newFile = "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".tex"
+  newLog = "gbTeX-" & File.BaseName(FMain.TextBox1.Text) & ".log"
 
   Mod_Funciones.Borrar_Aux
   Wait 0.2
@@ -112,13 +104,13 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
   Mod_Funciones.ManagePdfFolder(FMain.TextBox1.Text)
 
   Dim condicional As String = "\\\\BNPDFtrue"
-  FMain.TerminalView1.Input("echo " & condicional & " >> " & rutaFija & "/book-pdf.tex" & "\n")
+  FMain.TerminalView1.Input("echo " & condicional & " >> " & File.Dir(FMain.TextBox1.Text) & "/files" & "/book-pdf.tex" & "\n")
 
-  FMain.TerminalView1.Input("cat " & rutaFija & "/book-pdf.tex" & " " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
+  FMain.TerminalView1.Input("cat " & File.Dir(FMain.TextBox1.Text) & "/files" & "/book-pdf.tex" & " " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2
 
   Dim limpiarCondicional As String
-  limpiarCondicional = "sed -i '/\\\\BNPDFtrue/d' " & rutaFija & "/book-pdf.tex" & "\n"
+  limpiarCondicional = "sed -i '/\\\\BNPDFtrue/d' " & File.Dir(FMain.TextBox1.Text) & "/files" & "/book-pdf.tex" & "\n"
   FMain.TerminalView1.Input(limpiarCondicional)
 
   Dim compilar As String
@@ -129,11 +121,11 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
   FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
+  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
 
   'copiamos /files el archivo .log
-  FMain.TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n")
+  FMain.TerminalView1.Input("cat pdf-" & File.BaseName(FMain.TextBox1.Text) & ".log > " & rutaFILES & "/gbTeX-" & File.BaseName(FMain.TextBox1.Text) & ".log" & "\n")
   Wait 0.2
 
   'eliminamos los archivos auxiliares

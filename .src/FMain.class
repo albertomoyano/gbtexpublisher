@@ -428,6 +428,15 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    ' borramos las carpetas que se crean en el cache
+    Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
+    Wait 0.1
+    TextBox1.Text = Dialog.Path
+    ' sCurrentFilePath = TextBox1.Text
+    DirViewRuta.Root = File.Dir(TextBox1.Text)
+    Mod_Funciones.Borrar_Aux
+    BaseName = File.BaseName(TextBox1.Text)
+    rutaFILES = File.Dir(TextBox1.Text) & "/files"
     PanelLaTeX.Visible = True
     PanelLaTeX.Enabled = True
     PanelQuarto.Visible = False
@@ -435,17 +444,11 @@ Public Sub menuAbrir_Click()'abrir un libro
     HBoxNuevoArtCap.Enabled = False
     HBoxNuevoArtCap.Visible = False
     habilitamosLibro()
-    TextBox1.Text = Dialog.Path
-    ' sCurrentFilePath = TextBox1.Text
-    DirViewRuta.Root = File.Dir(TextBox1.Text)
     guardarTipoDocumentoLibro()
-    Mod_LimpiarTextBox.LimpiarCamposBIB()
     HBoxPanelRevista.Visible = False
     TabPanelRevista.Visible = False
     HBoxPanelLibro.Visible = True
     TabPanelLibro.Visible = True
-    BaseName = File.BaseName(TextBox1.Text)
-    rutaFILES = File.Dir(TextBox1.Text) & "/files"
     btnGuardarIGUAL.Visible = False
     TabPanel1.Visible = True
     menuBORRARaux.Enabled = True
@@ -466,35 +469,34 @@ Public Sub menuAbrir_Click()'abrir un libro
     menuOT.Enabled = True
     menuPDFweb.Enabled = True
     menuDisclaimer.Enabled = True
-    If Form_Notas.Visible Then
-      Form_Notas.Close ' Cierra la ventana
-    End If
-    Mod_Funciones.CopiarArchivos(TextBox1.Text)
-    ' levantamos los datos de comentario
-    levantarComenta()
-    levantarGitHubPages()' levantamos los datos de githubpages
-    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-    MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
-    MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
-    contarEntradasBIByGLO()' mostramos las cantidades en el boton
-    ' limpiamos las entradas de los metadatos
-    Mod_Funciones.limpiamosMetadatosLibrosRevistas()
-    'cargamos datos en los gridview
-    Mostrar_ListaGLO()
-    TotalEntradasBIByGLO()'actualizamos el contador de entradas
-    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
     ' Ejecutar la consulta SQL
     ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
     ' refrescamos los datos en los grid del archivo en curso
     gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
     tbRefDup.Rows.Count = ContenidoBibActual.Count
+    ' Cierra la ventana de notas
+    If Form_Notas.Visible Then
+      Form_Notas.Close
+    End If
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
+    Mod_Funciones.CopiarArchivos(TextBox1.Text)
+    levantarComenta()' levantamos los datos de comentario
+    levantarGitHubPages()' levantamos los datos de githubpages
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
+    contarEntradasBIByGLO()' mostramos las cantidades en el boton
+    Mod_Funciones.limpiamosMetadatosLibrosRevistas()' limpiamos las entradas de los metadatos
+    'cargamos datos en los gridview
+    Mostrar_ListaGLO()
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
     Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
     txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
     txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
     txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
     'posicionamos la consola con el path del archivo de trabajo
     TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
-    TerminalView1.SetFocus()
   Endif
 
   ' momentaneamente supriminos el menu de recientes
@@ -513,6 +515,7 @@ End
 ' Evento que se ejecuta cuando se detecta un cambio en el directorio
 Public Sub Watcher_Change()
 
+  DirViewRuta.Root = File.Dir(TextBox1.Text)
   DirViewRuta.Refresh' Actualiza el DirChooser
   prevFiles = DirViewRuta.Files' Actualiza la lista de archivos anterior
 

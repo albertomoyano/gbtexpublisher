@@ -580,6 +580,7 @@
             #Translate = False
             Expand = True
             ShowFile = True
+            ShowBookmark = False
             ShowToolbar = False
           }
         }
