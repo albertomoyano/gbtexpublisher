@@ -38,9 +38,9 @@ footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
 \usepackage{unicode-math}
 \setmathfont{Libertinus Math}
 
-% Configuración de fuentes para chino
-\usepackage{luatexja-fontspec}
-\setmainjfont{FandolSong}
+%% Configuración de fuentes para chino
+% \usepackage{luatexja-fontspec}
+% \setmainjfont{FandolSong}
 
 \setsansfont[Scale=MatchLowercase,
 Ligatures=TeX,
@@ -66,6 +66,7 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 }
 
 % paquetes varios
+\usepackage{zref-totpages}% contar el total de páginas
 \usepackage{pageslts}
 \usepackage{calc}
 \usepackage{qrcode}% generamos el QR
@@ -573,24 +574,18 @@ uniquelist=minyear]{biblatex}
 	{\namepartgiven}
 	{\namepartprefix}
 	{\namepartsuffix}}
-\renewbibmacro*{citeindex}{%
+  \renewbibmacro*{citeindex}{%
 	\ifciteindex
 	{\indexnames{labelname}}
 	{}}
 
-% Esto inserta la entrada relacionada con el contenido como parte de las últimas cosas antes de que el índice se imprima realmente.
-\makeatletter
-\g@addto@macro{\theindex}{\addcontentsline{toc}{chapter}{\hspace{2pc}Índice de autoras y autores del aparato bibliográfico}}
-\makeatother
-\renewcommand{\spanishindexname}{Índice de autoras y autores del aparato bibliográfico}
-
-% generamos los glosarios
+%% generamos los glosarios
 \usepackage[acronym,sanitizesort,toc=true,nonumberlist]{glossaries}
 \preto\chapter{\glsresetall}
 \makenoidxglossaries
 \renewcommand{\glsnamefont}[1]{\sf\textbf{\textup{#1}}}
 
-% Diseño y estilo a glosario y acrónimo
+%% Diseño y estilo a glosario y acrónimo
 \newglossarystyle{crossreflist}%
 {% base it on list (adapt as required)
 	\renewcommand*{\glossentry}[2]{%
@@ -609,12 +604,12 @@ uniquelist=minyear]{biblatex}
 }
 \setglossarystyle{crossreflist}
 
-% deshabilitamos mostrar el número de página
+%% deshabilitamos mostrar el número de página
 %\renewcommand{\glossaryentrynumbers}[1]{Véase página #1.}
 \renewcommand{\delimN}{, }
 \renewcommand{\delimR}{--}
 
-% Instrucciones de salida
+%% Instrucciones de salida
 %\printnoidxglossary[type=\acronymtype,title={Índice de siglas}]
 %\printnoidxglossary[title={Glosario de términos}]
 
@@ -632,8 +627,16 @@ uniquelist=minyear]{biblatex}
 	detect-all,
 	per-mode=fraction}
 
+% Comando para insertar una página en blanco
+\newcommand{\PaginaEnBlanco}{
+    \newpage
+    \thispagestyle{empty}
+    {\textcolor{white}{.}} % Punto invisible para forzar la página
+}
+
 % declaramos los condicionales
 \newif\ifPDF
 \newif\ifBNPDF
 \newif\ifPNGEPUB
 \newif\ifHTMLEPUB
+\newif\ifHTML
