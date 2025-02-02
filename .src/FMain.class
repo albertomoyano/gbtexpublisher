@@ -4872,34 +4872,6 @@ Public Sub btnMenuGIT_Click()
 
 End
 
-' Public Sub btnMenuGIT_Click()
-'
-'   Dim fecha As String
-'   Dim usuario As String = Trim(txtGIT.Text)
-'   Dim IdGitHub As String
-'
-'   ' Obtener la fecha actual
-'   fecha = Format(Date(), "dd-mm-yyyy")
-'
-'   ' Verificar si el nombre de usuario está vacío
-'   If usuario = "" Then
-'     Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
-'     Return
-'   End If
-'
-'   Mod_Funciones.Borrar_Aux()
-'   IdGitHub = "git@github.com:" & usuario & "/" & BaseName & ".git"
-'   TabPanel1.Index = 0
-'   TerminalView1.Input("git remote remove origin" & "\n")
-'   TerminalView1.Input("git remote add origin " & IdGitHub & "\n")
-'   TerminalView1.Input("git add ." & "\n")
-'   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
-'   TerminalView1.Input("git push --set-upstream origin main" & "\n")
-'   TerminalView1.SetFocus()
-'   TerminalView1.Refresh()
-'
-' End
-
 Public Sub guardarCamposAutoresNuevo()
 
   ' Guardar otros campos directamente

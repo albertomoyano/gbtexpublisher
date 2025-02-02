@@ -23,7 +23,6 @@ Public Sub Form_Open()
     levantarOTmetadatos()
     'aquí van las funciones del formulario
     '2) llenar los textbox básicos
-    '
   Else
     Message.Error("El archivo <b>" & NombreArchivoPDF & "</b> no existe.")
     Me.Close
@@ -85,14 +84,16 @@ Public Sub guardarCamposOT()' As Boolean
   Contenido!papelTapa = txtPapelTapaOT.Text
   Contenido!revestimiento = txtRevestimientoOT.Text
   Contenido!notas = txtNotasOT.Text
+  Contenido!archivotapa = txtArchAdjunto1.Text
+  Contenido!archivointerior = txtArchAdjunto2.Text
 
 End
 
 Public Sub btnNuevaOT_Click()
 
-  btnNuevaOT.Enabled = True
-  btnGuardarOT.Enabled = False
-  btnGuardarCambiosOT.Enabled = False
+  btnNuevaOT.Visible = True
+  btnGuardarOT.Visible = False
+  btnGuardarCambiosOT.Visible = False
 
   Dim Idn As Integer
 
@@ -108,9 +109,9 @@ Public Sub btnNuevaOT_Click()
   txtIDot.Text = Idn
   txtOrigenOT.Text = NombreArchivoTEX 'colocamos el nombre del archivo
 
-  btnNuevaOT.Enabled = False
-  btnGuardarOT.Enabled = True
-  btnGuardarCambiosOT.Enabled = False
+  btnNuevaOT.Visible = False
+  btnGuardarOT.Visible = True
+  btnGuardarCambiosOT.Visible = False
 
 End
 
@@ -151,9 +152,9 @@ Public Sub levantarOT()
   comandoOT = "select * from ot where nombreArchivo = '" & nombreArchivoTEX & "'"
   Contenido = FMain.meConn.Exec(comandoOT)
   If Contenido.Count > 0 Then
-    btnNuevaOT.Enabled = False
-    btnGuardarOT.Enabled = False
-    btnGuardarCambiosOT.Enabled = True
+    btnNuevaOT.Visible = False
+    btnGuardarOT.Visible = False
+    btnGuardarCambiosOT.Visible = True
     txtIDot.Text = Contenido!id
     txtOrigenOT.Text = Contenido!nombreArchivo
     txtProveedorOT.Text = Contenido!proveedor
@@ -165,6 +166,8 @@ Public Sub levantarOT()
     txtPapelTapaOT.Text = Contenido!papelTapa
     txtRevestimientoOT.Text = Contenido!revestimiento
     txtNotasOT.Text = Contenido!notas
+    txtArchAdjunto1.Text = Contenido!archivotapa
+    txtArchAdjunto2.Text = Contenido!archivointerior
   Else
     txtIDot.Text = ""
     txtOrigenOT.Text = ""
@@ -177,9 +180,11 @@ Public Sub levantarOT()
     txtPapelTapaOT.Text = ""
     txtRevestimientoOT.Text = ""
     txtNotasOT.Text = ""
-    btnNuevaOT.Enabled = True
-    btnGuardarOT.Enabled = False
-    btnGuardarCambiosOT.Enabled = False
+    txtArchAdjunto1.Text = ""
+    txtArchAdjunto2.Text = ""
+    btnNuevaOT.Visible = True
+    btnGuardarOT.Visible = False
+    btnGuardarCambiosOT.Visible = False
   Endif
 
 End
@@ -231,6 +236,9 @@ Public Sub btnGenerarPDF_Click()
   FMain.TerminalView1.Input("mv gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) & "/pdf/gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.1
 
+  ' borramos las carpetas que se crean en el cache
+  Shell "rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n"
+  Wait 0.1
   Mod_Funciones.Borrar_Aux()
 
 End
@@ -326,8 +334,9 @@ Public Sub Export2OrdenTaller()
     s &= "\\noindent \\subtitulo{Papel de interior: " & Contenido[aFields[5]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{Encuadernación: " & Contenido[aFields[6]] & "}\\\\" & gb.NewLine
     s &= "\\noindent \\subtitulo{Tintas de tapa: " & Contenido[aFields[7]] & "}\\\\" & gb.NewLine
-    s &= "\\noindent \\subtitulo{Papel de tapa: " & Contenido[aFields[8]] & "}\\\\" & gb.NewLine
-    s &= "\\noindent \\subtitulo{Revestimiento: " & Contenido[aFields[9]] & "}\\\\" & gb.NewLine & gb.NewLine
+    s &= "\\noindent \\subtitulo{Revestimiento: " & Contenido[aFields[9]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Archivo de tapa: \\textbf{" & Contenido[aFields[11]] & "}}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Archivo de interiores: \\textbf{" & Contenido[aFields[12]] & "}}\\\\" & gb.NewLine & gb.NewLine & gb.NewLine
 
     s &= "\\linespread{1.0}" & "\n"
     s &= "\\noindent \\subtitulo{\\textbf{Observaciones}}\\\\" & gb.NewLine
@@ -365,7 +374,7 @@ Public Sub Export2OrdenTaller()
 
     'pie de página
     s &= "\\vfill" & gb.NewLine
-    s &= "\\noindent\\foot{\\textbf{Disclaimer:} Esta página no forma parte del contenido oficial del libro. La misma se generó para proporcionar al taller de imprenta instrucciones y comentarios. Asegúrese de revisar las observaciones aquí indicadas antes de realizar la impresión.}" & gb.NewLine & gb.NewLine
+    s &= "\\noindent\\foot{\\textbf{Disclaimer:} Esta página no forma parte del contenido oficial del libro. La misma se generó para proporcionar al taller de imprenta instrucciones y comentarios. Asegúrese de revisar las observaciones aquí indicadas antes de realizar la impresión y no dude en ponerse en contacto con la editorial si encuentra un problema en el trabajo.}" & gb.NewLine & gb.NewLine
     s &= "\\noindent\\foot{\\textbf{Fecha de emisión de esta OT:} \\today}" & gb.NewLine & gb.NewLine
     s &= "\\end{document}" & gb.NewLine
     s &= "\n"
