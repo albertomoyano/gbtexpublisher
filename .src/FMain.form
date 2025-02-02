@@ -429,7 +429,7 @@
     }
   }
   { HBox9 HBox
-    MoveScaled(1,8,123,4)
+    MoveScaled(1,8,155,4)
     { MenuApp MenuButton
       MoveScaled(1,0,17.7778,4)
       #Translate = False
@@ -444,7 +444,7 @@
       Foreground = Color.Transparent
     }
     { Button4 Button
-      MoveScaled(22,0,17.7778,4)
+      MoveScaled(19,0,17.7778,4)
       Enabled = False
       Text = ("Git Local")
       Picture = Picture["iconos/git-local.svg"]
@@ -454,34 +454,34 @@
       Foreground = Color.Transparent
     }
     { btnMenuGIT Button
-      MoveScaled(44,0,17.7778,4)
+      MoveScaled(37,0,17.7778,4)
       Enabled = False
       Text = ("GitHub")
       Picture = Picture["iconos/github.svg"]
     }
     { txtGIT TextBox
-      MoveScaled(63,0,8,4)
+      MoveScaled(55,0,8,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub")
     }
     { Separator8 Separator
-      MoveScaled(74,0,0.8889,4)
+      MoveScaled(113,0,0.8889,4)
       Foreground = Color.Transparent
     }
     { btnMenuGitLab Button
-      MoveScaled(83,0,17.7778,4)
+      MoveScaled(119,0,17.7778,4)
       Enabled = False
       Text = ("GitLab")
       Picture = Picture["iconos/gitlab.svg"]
     }
     { btnKanban Button
-      MoveScaled(101,0,4,4)
+      MoveScaled(137,0,4,4)
       Enabled = False
       ToolTip = ("Acceder al kanban del proyecto alojado en GitLab")
       Picture = Picture["iconos/kanban.svg"]
     }
     { txtGitLab TextBox
-      MoveScaled(107,0,10,4)
+      MoveScaled(142,0,10,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitLab")
     }
@@ -5653,6 +5653,6 @@
     Index = 0
   }
   { Timer1 #Timer
-    #MoveScaled(125,5)
+    #MoveScaled(157,5)
   }
 }
