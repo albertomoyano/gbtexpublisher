@@ -22,7 +22,6 @@ Public sCurrentFilePath As String
 Public rutaORIGINALES As String
 Public rutaTAPA As String
 Public BaseName As String
-' Private prevFiles As String[]' Variable para almacenar la lista de archivos anterior
 Public sTB_Text As String
 Public LastTextBox As TextBox
 ' Variables para el tiempo
@@ -97,18 +96,12 @@ Public Sub Form_Open()
   txtTAREAS.Visible = False
   Mostrar_Lista_Tareas
 
-  ' MS.Init()
-  ' MS.GetLastListFromSettings()
-  ' UpdateMenu()
-
   ' Verifica si el TextBox1 tiene una ruta válida
   If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
     ' Hacemos el seguimiento del DirChooser
     Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
     Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
     Watcher.Start
-    ' ' Inicializa la lista de archivos
-    ' prevFiles = DirViewRuta.Files
   End If
 
   'declaramos las rutas a utilizar
@@ -172,7 +165,6 @@ Public Sub Form_Open()
   txtTMPbiblio.Font = Font["Monospace"]
 
   ' dibuja los gridview
-  ' Mod_Funciones.DibujarGridBibTeX()
   Mod_Funciones.ConfigurarGridView(VListaBIB)
   Mod_Funciones.ConfigurarGridView(tblReferenciaOrigen)
   Mod_Funciones.ConfigurarGridView(tbRefDup)
@@ -211,86 +203,6 @@ Public Sub obs_click()
   TerminalView1.Input("python3 " & rutaScriptsExternos &/ Last.caption & " " & File.Name(TextBox1.Text) & "\n")
 
 End
-
-' Public Sub salidaPDFweb() 'generamos el PDF web del libro
-'
-'   Dim newFile As String
-'   Dim rutaFija As String
-'   Dim newLog As String
-'
-'   ' exportamos el archivo de separata
-'   Mod_Exportar.ExportToSeparata(TextBox1.Text)
-'
-'   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
-'   If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
-'     ' Si la función retorna False, cancelamos la operación
-'     Return
-'   End If
-'
-'   newFile = "pdf-" & BaseName & ".tex"
-'   rutaFija = File.Dir(TextBox1.Text) &/ "files"
-'   newLog = "gbTeX-" & BaseName & ".log"
-'
-'   Mod_Funciones.Borrar_Aux
-'   Wait 0.2
-'
-'   TabPanel1.Index = 0
-'
-'   ' obtenemos la exportación de los archivos bib, glo y metadatos
-'   Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-'   Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-'   Mod_Exportar.Exportar2MetadatosPDF(TextBox1.Text)
-'   Wait 0.2
-'
-'   'revisamos la carpeta pdf y borramos el archivo
-'   Mod_Funciones.ManagePdfFolder(TextBox1.Text)
-'
-'   Dim condicional As String = "\\\\PDFtrue"
-'   TerminalView1.Input("echo " & condicional & " >> " & rutaFija & "/book-pdf.tex" & "\n")
-'
-'   TerminalView1.Input("cat " & rutaFija & "/book-pdf.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-'   Wait 0.2
-'
-'   Dim limpiarCondicional As String
-'   limpiarCondicional = "sed -i '/\\\\PDFtrue/d' " & rutaFija & "/book-pdf.tex" & "\n"
-'   TerminalView1.Input(limpiarCondicional)
-'
-'   Dim compilar As String
-'   compilar = "latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n"
-'   ' Envía el comando al terminal
-'   TerminalView1.Input(compilar)
-'   Wait 0.2
-'
-'   ' TerminalView1.Input("lualatex --interaction=nonstopmode " & newFile & "\n")
-'   ' Wait 0.2
-'
-'   ' TerminalView1.Input("rm -rf " & newFile & "\n")
-'   ' Wait 0.2
-'
-'   TerminalView1.Input("mv " & File.Dir(TextBox1.Text) &/ "pdf-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/pdf-" & BaseName & ".pdf" & "\n")
-'   Wait 0.2
-'
-'   'copiamos /files el archivo .log
-'   TerminalView1.Input("cat pdf-" & BaseName & ".log > " & rutaFILES & "/gbTeX-" & BaseName & ".log" & "\n")
-'   Wait 0.2
-'
-'   'eliminamos los archivos auxiliares
-'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/artcap/*.aux" & "\n")
-'   Wait 0.2
-'
-'   'eliminamos los archivos bib y glo
-'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXglo-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
-'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-'   TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-'   Wait 0.2
-'
-'   Mod_Funciones.Borrar_Aux
-'
-'   TerminalView1.SetFocus()
-'   TerminalView1.Refresh()
-'
-' End
 
 Public Sub menuAPUNTES_Click()
 
@@ -432,7 +344,6 @@ Public Sub menuAbrir_Click()'abrir un libro
     Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
     Wait 0.1
     TextBox1.Text = Dialog.Path
-    ' sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     Mod_Funciones.Borrar_Aux
     Shell "rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log" & "\n"
@@ -501,17 +412,6 @@ Public Sub menuAbrir_Click()'abrir un libro
     TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
   Endif
 
-  ' momentaneamente supriminos el menu de recientes
-  ' If Not MS.Matrix.Exist(Dialog.Path) Then
-  '   If MS.Matrix.Count = MS.iLastNumber Then
-  '     MS.Matrix.Remove(0)
-  '     MS.ShortMatrix.Remove(0)
-  '   End If
-  '   MS.Matrix.Add(Dialog.Path)
-  '   MS.ShortMatrix.Add(File.Name(Dialog.Path))
-  '   UpdateMenu()
-  ' End If
-
 End
 
 ' Evento que se ejecuta cuando se detecta un cambio en el directorio
@@ -519,108 +419,8 @@ Public Sub Watcher_Change()
 
   DirViewRuta.Root = File.Dir(TextBox1.Text)' reforzamos la indicación de la ruta
   DirViewRuta.Refresh' Actualiza el DirChooser
-  ' prevFiles = DirViewRuta.Files' Actualiza la lista de archivos
 
 End
-
-' Public Sub UpdateMenu()
-'
-'   Dim MenuItem As Menu
-'   Dim sFileName As String
-'
-'   mnu1LastFiles.Children.Clear
-'   If MS.ShortMatrix.Count = 0 Then
-'     mnu1LastFiles.Visible = False
-'   Else
-'     For Each sFileName In MS.ShortMatrix
-'       MenuItem = New Menu(mnu1LastFiles) As "mnuLast"
-'       MenuItem.Text = sFileName
-'     Next
-'   End If
-'
-' End
-'
-' ' me que muestra los ultimos archivos abiertos
-' Public Sub mnuLast_Click()
-'
-'   Dim iIndex As Integer
-'
-'   If MS.ShortMatrix.Find(Last.Text) <> -1 Then
-'     iIndex = MS.ShortMatrix.Find(Last.Text)
-'     TextBox1.Text = MS.Matrix[iIndex]
-'     fFile = Open TextBox1.Text For Input
-'     DirViewRuta.Root = File.Dir(TextBox1.Text)
-'   Endif
-'
-'   ' TabPanelRevista.Visible = False
-'   rutaFILES = File.Dir(TextBox1.Text) & "/files"
-'   BaseName = File.BaseName(TextBox1.Text)
-'
-'   MenuButton1.Menu = "menuScriptsExternos"
-'   MenuButton2.Menu = "menuProcesarArchivos"
-'   menuOT.Enabled = True
-'   menuPDFweb.Enabled = True
-'   btnGuardarIGUAL.Visible = False
-'   TabPanel1.visible = True
-'   menuBORRARaux.Enabled = True
-'   menuComprimir.Enabled = True
-'   menuTOOLS.Visible = True
-'   menuScriptsExternos.Enabled = True
-'   menuLTX.Enabled = True
-'   MenuApp.Enabled = True
-'   Button4.Enabled = True
-'   btnMenuGIT.Enabled = True
-'   btnMenuGitLab.Enabled = True
-'   btnKanban.Enabled = True
-'   menuGray.Enabled = True
-'   menuCatalogo.Enabled = True
-'   menuDisclaimer.Enabled = True
-'   Menu4.Enabled = True
-'
-'   If Form_Notas.Visible Then
-'     Form_Notas.Close ' Cierra la ventana
-'   End If
-'
-'   Mod_Funciones.CopiarArchivos(TextBox1.Text)
-'
-'   ' limpiamos las entradas de los metadatos
-'   Mod_Funciones.limpiamosMetadatosLibrosRevistas()
-'
-'   ' Ejecutar la consulta SQL
-'   ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
-'   ' refrescamos los datos en los grid del archivo en curso
-'   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
-'   tbRefDup.Rows.Count = ContenidoBibActual.Count
-'
-'   Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
-'
-'   ' txtContactCountry.MaxLength = 1500
-'   txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
-'   txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
-'   txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-'
-'   contarEntradasBIByGLO()' mostramos las cantidades en el boton
-'
-'   'posicionamos la consola con el path del archivo de trabajo
-'   TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
-'   TerminalView1.SetFocus()
-'
-'   Dim nombreDelArchivo As String = File.Name(TextBox1.Text)
-'   seleccionarFuncionPorTipo(nombreDelArchivo)' Verificar el tipo de documento por el nombre del archivo
-'
-'   levantarComenta()'levantamos los datos de comentarios
-'   levantarGitHubPages()  ' levantamos los datos de githubpages
-'   MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
-'   MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
-'   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-'   Mod_LimpiarTextBox.LimpiarCamposBIB()
-'
-'   Mostrar_ListaGLO()
-'
-'   TotalEntradasBIByGLO()'actualizamos el contador de entradas
-'   MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-'
-' End
 
 Public Sub d2t_Click()
 
@@ -1039,9 +839,6 @@ Public Sub BtnEliminarGlo_Click()
 
   Mod_LimpiarTextBox.LimpiarCamposGLO()
 
-  ' VListaGLO.Clear
-  ' Mostrar_ListaGLO
-
   BtnEliminarGlo.Visible = False
   btnGuardarCambiosGlo.Visible = False
   btnAgregarGloKey.Visible = False
@@ -1092,7 +889,6 @@ Public Sub btnGuardarGlo_Click()
   Message.Info("Nueva entrada guardada.")
   RefrescarGrid()
 
-  ' Mostrar_ListaGLO ' Refrescamos la lista de entradas
   Mod_LimpiarTextBox.LimpiarCamposGLO()
 
   btnGuardarCambiosGlo.Visible = False
@@ -1120,7 +916,6 @@ Public Sub btnGuardarCambiosGlo_Click()
   RefrescarGrid()
   Message.Info("Los cambios se guardaron con éxito.")
 
-  ' Mostrar_ListaGLO
   Mod_LimpiarTextBox.LimpiarCamposGLO()
 
 End
