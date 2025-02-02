@@ -34,10 +34,10 @@
       Picture = Picture["iconos/guardarComo.svg"]
     }
     { Separator1 Separator
-      Move(333,-9,18,36)
+      Move(225,0,18,36)
     }
     { txtLabel TextLabel
-      Move(369,0,171,36)
+      Move(252,0,171,36)
       Expand = True
       Alignment = Align.Normal
     }
