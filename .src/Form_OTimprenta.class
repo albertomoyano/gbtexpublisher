@@ -228,7 +228,10 @@ Public Sub btnGenerarPDF_Click()
   Endif
 
   FMain.TabPanel1.Index = 0
-  Export2OrdenTaller()
+  ' borramos la orden de taller anterior
+  Shell "rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n"
+  Wait 0.1
+  ExportToOrdenTaller()
 
   FMain.TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & filePathFiles & "gbTeXOT-" & NombreArchivoTEX & "\n")
   Wait 0.1
@@ -236,15 +239,12 @@ Public Sub btnGenerarPDF_Click()
   FMain.TerminalView1.Input("mv gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) & "/pdf/gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.1
 
-  ' borramos las carpetas que se crean en el cache
-  Shell "rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n"
-  Wait 0.1
   Mod_Funciones.Borrar_Aux()
 
 End
 
 'exportamos la OT
-Public Sub Export2OrdenTaller()
+Public Sub ExportToOrdenTaller()
 
   Dim s As String
   Dim f As ResultField
