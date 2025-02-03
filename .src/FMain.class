@@ -5818,3 +5818,55 @@ Public Sub menuHTML_Click()' html con lwarp
   Endif
 
 End
+
+Public Sub cmbRolAutores_Click()
+
+  Select Case cmbRolAutores.Text
+    Case ""
+      txtDescripcion.Text = "Seleccionar un rol"
+    Case "aut"
+      txtDescripcion.Text = "Author - Autor del contenido textual"
+    Case "edt"
+      txtDescripcion.Text = "Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido"
+    Case "adp"
+      txtDescripcion.Text = "Adapter - Persona que adapta o versiona una obra para otro medio o público"
+    Case "rev"
+      txtDescripcion.Text = "Reviewer - Revisor de contenido"
+  End Select
+
+End
+
+Public Sub cmbRolColaborador_Click()
+
+  Select Case cmbRolColaborador.Text
+    Case ""
+      txtDescripcionColaboradores.Text = "Seleccionar un rol"
+    Case "aut"
+      txtDescripcionColaboradores.Text = "Author - Autor del contenido textual"
+    Case "edt"
+      txtDescripcionColaboradores.Text = "Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido"
+    Case "trl"
+      txtDescripcionColaboradores.Text = "Translator - Persona que traduce una obra a otro idioma"
+    Case "ill"
+      txtDescripcionColaboradores.Text = "Illustrator - Ilustrador de libros o publicaciones"
+    Case "pbl"
+      txtDescripcionColaboradores.Text = "Publisher - Persona o entidad responsable de la publicación y distribución"
+    Case "prt"
+      txtDescripcionColaboradores.Text = "Printer - Impresor, responsable de imprimir la obra"
+    Case "cmp"
+      txtDescripcionColaboradores.Text = "Composer - Compositor de contenido literario o musical"
+    Case "rev"
+      txtDescripcionColaboradores.Text = "Reviewer - Revisor de contenido"
+    Case "red"
+      txtDescripcionColaboradores.Text = "Redactor - Persona que corrige o edita el contenido para la publicación"
+    Case "cov"
+      txtDescripcionColaboradores.Text = "Cover designer - Diseñador de la cubierta del libro"
+    Case "adp"
+      txtDescripcionColaboradores.Text = "Adapter - Persona que adapta o versiona una obra para otro medio o público"
+    Case "art"
+      txtDescripcionColaboradores.Text = "Artist - Artista que colabora en la obra visualmente"
+    Case "bnd"
+      txtDescripcionColaboradores.Text = "Binder - Persona encargada de encuadernar el libro"
+  End Select
+
+End

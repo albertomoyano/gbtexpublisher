@@ -5266,12 +5266,21 @@
             { HBox201 HBox
               MoveScaled(1,7,110,4)
               { Label150 Label
-                MoveScaled(4,0,22.5556,4)
+                MoveScaled(-11,0,22.5556,4)
                 Alignment = Align.Right
                 Text = ("Rol  ")
               }
               { cmbRolAutores ComboBox
-                MoveScaled(23,0,20,4)
+                MoveScaled(12,0,20,4)
+                ReadOnly = True
+              }
+              { Separator22 Separator
+                MoveScaled(34,0,0.8889,4)
+                Foreground = Color.Transparent
+              }
+              { txtDescripcion TextBox
+                MoveScaled(38,0,19,4)
+                Background = Color.Background
                 Expand = True
                 ReadOnly = True
               }
@@ -5371,12 +5380,21 @@
             { HBox217 HBox
               MoveScaled(2,6,110,4)
               { Label229 Label
-                MoveScaled(3,0,22.5556,4)
+                MoveScaled(-9,0,22.5556,4)
                 Alignment = Align.Right
                 Text = ("Rol  ")
               }
               { cmbRolColaborador ComboBox
-                MoveScaled(28,0,20,4)
+                MoveScaled(15,0,20,4)
+                ReadOnly = True
+              }
+              { Separator23 Separator
+                MoveScaled(37,0,0.8889,4)
+                Foreground = Color.Transparent
+              }
+              { txtDescripcionColaboradores TextBox
+                MoveScaled(41,0,19,4)
+                Background = Color.Background
                 Expand = True
                 ReadOnly = True
               }

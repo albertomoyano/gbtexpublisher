@@ -2,28 +2,28 @@
 
 Public Sub RellenarCmbGitHubPages()
 
-  ' combobox de githubpages
-  FMain.cmbRolAutores.Add("")
-  FMain.cmbRolAutores.Add("aut: Author - Autor del contenido textual")
-  FMain.cmbRolAutores.Add("edt: Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido")
-  FMain.cmbRolAutores.Add("adp: Adapter - Persona que adapta o versiona una obra para otro medio o público")
-  FMain.cmbRolAutores.Add("rev: Reviewer - Revisor de contenido")
+  FMain.cmbRolAutores.Add("")': Seleccionar un rol
+  FMain.cmbRolAutores.Add("aut")': Author - Autor del contenido textual
+  FMain.cmbRolAutores.Add("edt")': Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido
+  FMain.cmbRolAutores.Add("adp")': Adapter - Persona que adapta o versiona una obra para otro medio o público
+  FMain.cmbRolAutores.Add("rev")': Reviewer - Revisor de contenido
+
   ' colaboradores
   FMain.cmbRolColaborador.Add("")
-  FMain.cmbRolColaborador.Add("aut: Author - Autor del contenido textual")
-  FMain.cmbRolColaborador.Add("edt: Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido")
-  FMain.cmbRolColaborador.Add("trl: Translator - Persona que traduce una obra a otro idioma")
-  FMain.cmbRolColaborador.Add("ill: Illustrator - Ilustrador de libros o publicaciones")
-  FMain.cmbRolColaborador.Add("pbl: Publisher - Persona o entidad responsable de la publicación y distribución")
-  FMain.cmbRolColaborador.Add("prt: Printer - Impresor, responsable de imprimir la obra")
-  FMain.cmbRolColaborador.Add("cmp: Composer - Compositor de contenido literario o musical")
-  FMain.cmbRolColaborador.Add("rev: Reviewer - Revisor de contenido")
-  FMain.cmbRolColaborador.Add("red: Redactor - Persona que corrige o edita el contenido para la publicación")
-  FMain.cmbRolColaborador.Add("cov: Cover designer - Diseñador de la cubierta del libro")
-  FMain.cmbRolColaborador.Add("ill: Ilustrador - Similar a Illustrator, específico para ilustraciones de libros")
-  FMain.cmbRolColaborador.Add("adp: Adapter - Persona que adapta o versiona una obra para otro medio o público")
-  FMain.cmbRolColaborador.Add("art: Artist - Artista que colabora en la obra visualmente")
-  FMain.cmbRolColaborador.Add("bnd: Binder - Persona encargada de encuadernar el libro")
+  FMain.cmbRolColaborador.Add("aut")': Author - Autor del contenido textual
+  FMain.cmbRolColaborador.Add("edt")': Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido
+  FMain.cmbRolColaborador.Add("trl")': Translator - Persona que traduce una obra a otro idioma
+  FMain.cmbRolColaborador.Add("ill")': Illustrator - Ilustrador de libros o publicaciones
+  FMain.cmbRolColaborador.Add("pbl")': Publisher - Persona o entidad responsable de la publicación y distribución
+  FMain.cmbRolColaborador.Add("prt")': Printer - Impresor, responsable de imprimir la obra
+  FMain.cmbRolColaborador.Add("cmp")': Composer - Compositor de contenido literario o musical
+  FMain.cmbRolColaborador.Add("rev")': Reviewer - Revisor de contenido
+  FMain.cmbRolColaborador.Add("red")': Redactor - Persona que corrige o edita el contenido para la publicación
+  FMain.cmbRolColaborador.Add("cov")': Cover designer - Diseñador de la cubierta del libro
+  FMain.cmbRolColaborador.Add("ill")': Ilustrador - Similar a Illustrator, específico para ilustraciones de libros
+  FMain.cmbRolColaborador.Add("adp")': Adapter - Persona que adapta o versiona una obra para otro medio o público
+  FMain.cmbRolColaborador.Add("art")': Artist - Artista que colabora en la obra visualmente
+  FMain.cmbRolColaborador.Add("bnd")': Binder - Persona encargada de encuadernar el libro
 
 End
 
