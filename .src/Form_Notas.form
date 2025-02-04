@@ -4,7 +4,6 @@
   Move(0,0,960,640)
   #Scaled = False
   Text = ("Cuaderno de notas")
-  Icon = Picture["iconos/notas.svg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
