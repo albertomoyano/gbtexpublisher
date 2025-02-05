@@ -71,7 +71,6 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   Mod_Funciones.Borrar_Aux
 
   FMain.TerminalView1.SetFocus()
-  FMain.TerminalView1.Refresh()
 
 End
 

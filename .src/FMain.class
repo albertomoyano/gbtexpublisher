@@ -1551,7 +1551,7 @@ Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
   Else
     Consulta = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTITLE.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
-    TabPanel5.Index = 1
+    TabPanel5.Index = 2
   Endif
 
 End
@@ -1581,7 +1581,7 @@ Public Sub BtnBuscarAuthor_Click()' buscar autor
   Else
     Consulta = "SELECT * FROM bibtex WHERE author LIKE '%" & txtAUTHOR.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
-    TabPanel5.Index = 1
+    TabPanel5.Index = 2
   Endif
 
 End
@@ -1596,7 +1596,7 @@ Public Sub BtnBuscarAuthor2_Click()'buscar editor
   Else
     Consulta = "SELECT * FROM bibtex WHERE editor LIKE '%" & txtEDITOR.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
-    TabPanel5.Index = 1
+    TabPanel5.Index = 2
   Endif
 
 End
@@ -2307,7 +2307,7 @@ Public Sub BtnBuscarClave_Click()
   Else
     Consulta = "SELECT * FROM bibtex WHERE citationKey LIKE '%" & txtCLAVEbib.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
-    TabPanel5.Index = 1
+    TabPanel5.Index = 2
   Endif
 
 End
@@ -2696,7 +2696,7 @@ Public Sub BtnBuscarBookTitle_Click()
   Else
     Consulta = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & txtBOOKTITLE.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
-    TabPanel5.Index = 1
+    TabPanel5.Index = 2
   Endif
 
 End
@@ -2730,7 +2730,7 @@ Public Sub BtnBuscarJournal_Click()
   Else
     Consulta = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & txtJOURNALTITLE.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
-    TabPanel5.Index = 1
+    TabPanel5.Index = 2
   Endif
 
 End
@@ -3905,7 +3905,7 @@ Public Sub btnBuscarFiltro_Click()
   Else
     Consulta = "SELECT * FROM bibtex WHERE keywords LIKE '%" & txtKEYWORDS.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
-    TabPanel5.Index = 1
+    TabPanel5.Index = 2
   Endif
 
 End
