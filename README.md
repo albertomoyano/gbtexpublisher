@@ -6,7 +6,4 @@ Adhiere al modelo de producción de fuente única [(_single source_)](https://en
 
 ![](./iconos/arbol.png)
 
-# Licencia
-
-El código fuente de gbTeXpublisher está disponible gratuitamente bajo una licencia GPL 3.0. La licencia completa está disponible en línea en https://www.gnu.org/licenses/gpl-3.0.en.html
 
