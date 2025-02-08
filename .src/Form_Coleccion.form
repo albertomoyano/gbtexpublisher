@@ -1,0 +1,123 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,400)
+  #Scaled = False
+  Expand = True
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox16 HBox
+    Move(0,9,711,36)
+    { BtnNuevoColeccion Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar una nueva referencia")
+      Picture = Picture["iconos/+nuevo.svg"]
+    }
+    { btnGuardarColeccion Button
+      Move(36,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarCambiosColeccion Button
+      Move(72,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { txtID TextBox
+      Move(108,0,90,36)
+      Visible = False
+      Background = Color.Background
+      NoTabFocus = True
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Spring1 Spring
+      Move(360,0,126,36)
+    }
+    { btnCerrarColeccion Button
+      Move(513,0,144,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la aplicación")
+      Text = ("Cerrar")
+    }
+  }
+  { HBox3 Panel
+    Move(0,45,942,72)
+    NoTabFocus = True
+    Arrangement = Arrange.Vertical
+    { HBox2 HBox
+      Move(0,0,864,36)
+      { lblAlta2 Label
+        Move(0,0,108,36)
+        Alignment = Align.Right
+        Text = ("Colección  ")
+      }
+      { txtColeccion TextBox
+        Move(126,0,234,36)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
+      }
+      { lblKEYWORDS2 Label
+        Move(360,0,108,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Formato "
+      }
+      { txtFormato TextBox
+        Move(477,0,144,36)
+        NoTabFocus = True
+      }
+    }
+    { HBox7 HBox
+      Move(0,36,558,36)
+      { lblKEYWORDS1 Label
+        Move(0,0,108,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Dirección "
+      }
+      { txtDireccion TextBox
+        Move(117,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+  }
+  { HBox6 Panel
+    Move(0,180,477,162)
+    NoTabFocus = True
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { GridColeccion TableView
+      Move(18,18,153,90)
+      Font = Font["-1"]
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Horizontal
+      ScrollBar = Scroll.Vertical
+      AutoResize = False
+      Resizable = False
+    }
+  }
+  { HBox1 HBox
+    Move(0,351,792,36)
+    { Spring2 Spring
+      Move(126,0,126,36)
+    }
+    { btnSeleccion Button
+      Move(270,0,144,36)
+      Visible = False
+      Background = &H8BE06F
+      NoTabFocus = True
+      Text = ("Aplicar")
+    }
+  }
+}

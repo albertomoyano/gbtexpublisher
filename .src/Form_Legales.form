@@ -1,0 +1,55 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,640)
+  #Scaled = False
+  Text = ("Aviso Legal")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox3 HBox
+    Move(0,0,450,72)
+    AutoResize = True
+    Padding = 4
+    { PictureBox1 PictureBox
+      Move(0,0,72,72)
+      Picture = Picture.Load("iconos/candado-abierto.svg")
+      Stretch = True
+      Alignment = Align.Center
+      Mode = PictureBox.Fill
+    }
+  }
+  { HBox2 HBox
+    Move(18,117,900,36)
+    { Label1 Label
+      Move(9,0,738,36)
+      Font = Font["Bold"]
+      Expand = True
+      Text = ("Aviso de Ausencia de Garantía y Condiciones de la Licencia LGPL-3.0")
+    }
+  }
+  { TextArea1 TextArea
+    Move(27,162,837,315)
+    Font = Font["Monospace"]
+    Background = Color.Background
+    Expand = True
+    Text = ("Descargo de responsabilidad:\nEste software se proporciona «TAL CUAL», SIN GARANTÍA DE NINGÚN TIPO, expresa o implícita, incluyendo, pero no limitado a, las garantías de comerciabilidad, idoneidad para un propósito particular y no infracción. En ningún caso los autores o titulares de los derechos de autor serán responsables por cualquier reclamo, daños u otras responsabilidades, ya sea en una acción de contrato, agravio o de otra manera, derivados de, fuera de, o en conexión con el software o el uso u otros negocios en el software.\n\nLicencia del software:\nEste software es software libre y se distribuye bajo los términos de la Licencia Pública General Reducida de GNU versión 3 (LGPL-3.0). Puedes obtener más información sobre esta licencia en el siguiente enlace: https://www.gnu.org/licenses/lgpl-3.0.html.\n\nCódigo fuente:\nEl código fuente de este software está disponible bajo solicitud. Si deseas acceder al código fuente para realizar modificaciones o contribuir al proyecto, por favor contacta al autor. Tu solicitud será evaluada y, si es aprobada, se te proporcionará acceso al código fuente bajo los términos de la LGPL-3.0.\n\nRecursos adicionales utilizados:\nÍconos del proyecto Haiku: esta aplicación utiliza íconos proporcionados por el proyecto Haiku, disponibles bajo la licencia MIT. Agradezco a los desarrolladores y colaboradores de Haiku por su trabajo. Puedes obtener más información sobre el proyecto en: https://www.haiku-os.org/. Bibliotecas GTK: esta aplicación utiliza las bibliotecas GTK, que están disponibles bajo la licencia LGPL.")
+    ReadOnly = True
+    Wrap = True
+    ScrollBar = Scroll.Vertical
+  }
+  { HBox1 HBox
+    Move(27,531,306,36)
+    { Spring1 Spring
+      Move(18,0,45,36)
+    }
+    { btnCerrar Button
+      Move(81,0,198,36)
+      Background = &H8BE06F
+      NoTabFocus = True
+      Text = ("Acepto los términos")
+    }
+  }
+}

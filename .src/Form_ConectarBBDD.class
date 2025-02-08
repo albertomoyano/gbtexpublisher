@@ -1,0 +1,64 @@
+' Gambas class file
+
+Public meConn As New Connection
+
+Public Sub Form_Open()
+
+  Form_ConectarBBDD.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+
+  ' por el momento esta funcion se deshabilita
+  Dim name As String
+  ' Usamos pgrep para buscar procesos por el nombre exacto de la aplicación
+  Exec ["pgrep", "-fl", Application.Name] Wait To name
+  ' Mostramos el resultado para depurar (puedes eliminar esta línea después)
+  ' Comprobamos que el resultado contenga más de un proceso
+  If Split(Trim$(name), gb.NewLine, "", True).Count > 1 Then
+    Message.Warning(Application.Name & " ya se está ejecutando.")
+    Quit
+  Endif
+
+End
+
+Public Sub btnSelecionarBBDD_Click()
+
+  Dim sArchivo As String
+
+  ' Abrir un cuadro de diálogo para seleccionar un archivo
+  Dialog.Title = "Seleccionar base de datos SQLite"
+  Dialog.Filter = ["gbtexpublisher.sqlite", ""]' gbtexpublisher.sqlite
+  Dialog.Path = txtBBDDorigen.Text
+  If Dialog.OpenFile() Then Return
+
+  ' Mostrar la ruta seleccionada en el TextBox
+  sArchivo = Dialog.Path
+  txtBBDDorigen.Text = sArchivo
+
+  Dim respaldoBBDD As String = User.Home &/ ".respaldogbTeX"
+  If Not Exist(respaldoBBDD) Then
+    Mkdir respaldoBBDD
+  Else
+    Dim fecha As String
+    fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+    Shell "cp " & sArchivo & " " & respaldoBBDD &/ fecha & "-" & "gbtexpublisher.sqlite"
+  End If
+
+End
+
+Public Sub btnCerrar_Click()
+
+  Quit
+
+End
+
+Public Sub btnConectar_Click()
+
+  ' condicional que revisa que exista la ruta y verifica si el TextBox está vacío o es Null
+  If IsNull(txtBBDDorigen.Text) Or txtBBDDorigen.Text = "" Then
+    Message.Info("Por favor, complete la ruta donde debe estar la base de datos.")
+    Return ' Detiene la ejecución
+  End If
+
+  Me.Hide
+  FMain.Show
+
+End

@@ -1,0 +1,165 @@
+' Gambas module file
+
+Public Function LimpiarCamposPublisher()
+
+  Form_ABM_Publisher.txtID.Clear
+  Form_ABM_Publisher.txtPublisher.Clear
+  Form_ABM_Publisher.txtJournal.Clear
+  Form_ABM_Publisher.txtLocation.Clear
+
+End
+
+Public Sub LimpiarCamposGLO()
+
+  FMain.txtIDglosario.Clear
+  FMain.txtCLAVEglo.Clear
+  FMain.txtARCHIVO.Clear
+  FMain.txtNAME.Clear
+  FMain.txtDESCRIPTION.Clear
+  FMain.txtFIRST.Clear
+  FMain.txtTEXT.Clear
+  FMain.txtPLURAL.Clear
+  FMain.txtFPLURAL.Clear
+  FMain.txtSORT.Clear
+
+End
+
+Public Sub LimpiarCamposBIB()
+
+  FMain.txtIDbibtex.Clear
+  FMain.cbType.Text = ""
+  FMain.ComboBox1.Text = ""
+  FMain.cbLANGUAGE.Text = ""
+  FMain.CmbRelatedType.Text = ""
+  FMain.cbPUBSTATE.Text = ""
+  FMain.cbEDITORTYPE.Text = ""
+  FMain.cbEDITORTYPEa.Text = ""
+  FMain.cbEDITORTYPEb.Text = ""
+  FMain.cbEDITORTYPEc.Text = ""
+  FMain.cbLANGUAGEID.Text = ""
+  FMain.cbOPTIONS.Text = ""
+  FMain.txtETIQ.Clear
+  FMain.txtKEYWORDS.Clear
+  FMain.txtCROSSREF.Clear
+  FMain.txtCLAVEbib.Clear
+  FMain.txtTITLE.Clear
+  FMain.txtRELATED.Clear
+  FMain.txtYEAR.Clear
+  FMain.txtDATEY.Clear
+  FMain.txtPUBLISHER.Clear
+  FMain.txtLOCATION.Clear
+  FMain.txtEDITOR.Clear
+  FMain.txtSERIES.Clear
+  FMain.txtRELATEDSTRING.Clear
+  FMain.txtMAINTITLE.Clear
+  FMain.txtLABEL.Clear
+  FMain.txtSHORTTITLE.Clear
+  FMain.txtEDITION.Clear
+  FMain.txtBOOKAUTHOR.Clear
+  FMain.txtBOOKTITLE.Clear
+  FMain.txtVOLUME.Clear
+  FMain.txtNUMBER.Clear
+  FMain.txtPAGES.Clear
+  FMain.txtJOURNALTITLE.Clear
+  FMain.txtURLDATE.Clear
+  FMain.txtDOI.Clear
+  FMain.txtPART.Clear
+  FMain.txtBOLUMES.Clear
+  FMain.txtPAGETOTAL.Clear
+  FMain.txtISBN.Clear
+  FMain.txtISSN.Clear
+  FMain.txtORGANIZATION.Clear
+  FMain.txtINSTITUTION.Clear
+  FMain.txtEVENTTITLE.Clear
+  FMain.txtEVENTDATE.Clear
+  FMain.txtINTRODUCTION.Clear
+  FMain.txtTRANSLATOR.Clear
+  FMain.txtAFTERWORD.Clear
+  FMain.txtFOREWORD.Clear
+  FMain.txtLIBRARY.Clear
+  FMain.txtANNOTATION.Clear
+  FMain.txtURL.Clear
+  FMain.txtCOMMENTATOR.Clear
+  FMain.txtANNOTATOR.Clear
+  FMain.txtNAMEADDON.Clear
+  FMain.txtAUTHOR.Clear
+  FMain.txtEDITORa.Clear
+  FMain.txtEDITORb.Clear
+  FMain.txtEDITORc.Clear
+  FMain.txtHOLDER.Clear
+  FMain.txtShortAuthor.Clear
+  FMain.txtBookTitleAddOn.Clear
+  FMain.txtMainTitleAddOn.Clear
+  FMain.txtJournalTitleAddOn.Clear
+  FMain.txtIssueTitleAddOn.Clear
+  FMain.txtEventTitleAddOn.Clear
+  FMain.txtChapter.Clear
+  FMain.txtORIGDATE.Clear
+  FMain.txtVERSION.Clear
+  FMain.txtGENDER.Clear
+  FMain.txtINDEXTITLE.Clear
+  FMain.txtISSUETITLE.Clear
+  FMain.txtREPRINTTITLE.Clear
+  FMain.txtPAGINATION.Clear
+  FMain.txtVENUE.Clear
+  FMain.txtBookPagination.Clear
+  FMain.txtLANGIDOPTS.Clear
+  FMain.txtORIGLANGUAGE.Clear
+  FMain.txtISAN.Clear
+  FMain.txtXREF.Clear
+  FMain.txtXDATA.Clear
+  FMain.txtPRESORT.Clear
+  FMain.txtSORTKEY.Clear
+  FMain.txtSORTNAME.Clear
+  FMain.txtSORTSHORTHAND.Clear
+  FMain.txtSORTTITLE.Clear
+  FMain.txtINDEXSORTTITLE.Clear
+  FMain.txtSORTYEAR.Clear
+  FMain.txtFILE.Clear
+  FMain.txtABSTRACT.Clear
+  FMain.txtORIGLOCATION.Clear
+  FMain.txtORIGPUBLISHER.Clear
+  FMain.txtISMN.Clear
+  FMain.txtISRN.Clear
+  FMain.txtISWC.Clear
+  FMain.txtEID.Clear
+  FMain.txtEPRINTYPE.Clear
+  FMain.txtEPRINT.Clear
+  FMain.txtENTRYSUBTYPE.Clear
+  FMain.txtHOWPUBLISHED.Clear
+  FMain.txtADDENDUM.Clear
+  FMain.txtSHORTHAND.Clear
+  FMain.txtSHORTHANDINTRO.Clear
+  FMain.txtIDS.Clear
+  FMain.txtENTRYSET.Clear
+  FMain.txtNOTE.Clear
+  FMain.txtLANGUAGE.Clear
+  FMain.txtTitleAddOn.Clear
+  FMain.txtSubTitle.Clear
+
+End
+
+Public Sub LimpiarCamposGitHubPages()
+
+  FMain.txtCreateDateHTML.Clear
+  FMain.txtModDateHTML.Clear
+  FMain.txtCVautoresHTML.Clear
+  FMain.txtHREFepubHTML.Clear
+  FMain.txtHREFenlineaHTML.Clear
+  FMain.txtHREFpdfHTML.Clear
+  FMain.txtImagenHTML.Clear
+  FMain.txtPubDateHTML.Clear
+  FMain.txtPieHTML.Clear
+  FMain.txtCabeceraHTML.Clear
+  FMain.txtSumarioHTML.Clear
+
+End
+
+Public Function LimpiarCamposNotas()
+
+  Form_Notas.txtBuscar.Clear
+  Form_Notas.txId.Clear
+  Form_Notas.txAsunto.Clear
+  Form_Notas.txContenido.Clear
+
+End

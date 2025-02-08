@@ -1,0 +1,241 @@
+\documentclass[12pt,twoside]{article}
+
+% Diseño de la página: define las dimensiones de la página y los márgenes.
+\usepackage[paperwidth=210mm,
+paperheight=297mm,
+top=15mm,
+includehead,
+headheight=3\baselineskip,
+bottom=20mm,
+left=20mm,
+marginparsep=6mm,
+marginparwidth=44mm,
+textwidth=13cm,
+footskip=20pt,
+footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}
+
+
+% Configuración de idiomas y opciones de Babel: permite utilizar múltiples idiomas en el documento.
+\usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
+
+% Estilo bibliográfico APA
+\usepackage[style=ieee]{biblatex}
+
+%% Estilo bibliográfico IEEE
+%\usepackage[style=ieee]{biblatex}
+%
+%% Estilo bibliográfico Vancouver
+%\usepackage[style=ieee]{biblatex}
+%
+%% Estilo bibliográfico Oxford (nota a pie)
+%\usepackage[style=ieee]{biblatex}
+%
+%% Estilo bibliográfico Verona (autor/año)
+%\usepackage[style=ieee]{biblatex}
+
+\defcounter{biburlnumpenalty}{3000}
+\defcounter{biburlucpenalty}{6000}
+\defcounter{biburllcpenalty}{9000}
+
+% Soporte para fuentes OpenType y TrueType: permite la utilización de fuentes personalizadas.
+\usepackage{fontspec}
+
+% Mejoras tipográficas: mejora la calidad tipográfica, como la justificación y el espaciado.
+\usepackage{microtype}
+
+% Configuración de microtipografía: personaliza la microtipografía con ajustes específicos.
+\newfontfeature{Microtypography}{protrusion=default;expansion=default}
+\directlua{fonts.protrusions.setups.default.factor=.5}
+
+% Redefinición del tamaño de fuente normal: ajusta el tamaño y el interlineado del texto.
+\renewcommand{\normalsize}{\fontsize{11pt}{13.5pt}\selectfont}
+\topskip=13.5pt
+
+% Tipografía principal Libertinus: define la fuente principal del documento.
+\setmainfont{Libertinus Serif}
+[Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.18]
+
+% Soporte para símbolos matemáticos: utiliza la tipografía Libertinus para las matemáticas.
+\usepackage{unicode-math}
+\setmathfont{Libertinus Math}
+
+% Configuración para el idioma chino con tipografía predeterminada: soporte para escritura en chino.
+\usepackage{luatexja-fontspec}
+\setmainjfont{FandolSong}
+
+% Tipografía sans-serif y monoespaciada: define las fuentes para texto sans-serif y monoespaciado.
+\setsansfont[Scale=MatchLowercase,
+Ligatures=TeX,
+Extension=.otf,
+UprightFont=*-Regular,
+ItalicFont=*-Italic,
+BoldFont=*-SemiBold,
+BoldItalicFont=*-SemiBoldItalic]{IBMPlexSansCondensed}
+
+\setmonofont[Scale=0.91,
+Extension=.otf,
+UprightFont=*-Regular,
+ItalicFont = IBMPlexMono-Italic.otf,
+BoldFont = IBMPlexMono-Bold.otf,
+BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
+
+% El paquete 'froufrou' proporciona decoraciones para mejorar la presentación del texto.
+\usepackage{froufrou}
+
+% El paquete 'booktabs' facilita la creación de tablas de calidad profesional, proporcionando comandos para mejorar el diseño de las tablas.
+\usepackage{booktabs}
+
+% El paquete 'rotating' permite rotar objetos como figuras, tablas y texto en cualquier ángulo, útil para presentar contenido en orientaciones diferentes.
+\usepackage{rotating}
+
+% El paquete 'graphicx' es fundamental para la inclusión de imágenes en un documento LaTeX, permitiendo redimensionar, rotar y recortar imágenes.
+\usepackage{graphicx}
+
+% El paquete 'svg' permite la inclusión directa de gráficos SVG en el documento, mejorando la calidad visual y la escalabilidad de los gráficos vectoriales.
+\usepackage{svg}
+
+% El paquete 'pdfpages' facilita la inclusión de páginas completas de archivos PDF dentro de un documento LaTeX, ideal para incorporar documentos externos.
+\usepackage[final]{pdfpages}
+
+% El paquete 'caption' proporciona herramientas para personalizar las leyendas de figuras y tablas, incluyendo el formato, la fuente, y la posición de la etiqueta.
+\usepackage[labelfont=bf,font=small,labelsep=period,format=plain]{caption}
+
+% El paquete 'ragged2e' ofrece opciones avanzadas de justificación del texto, permitiendo alinearlo a la izquierda, derecha o centrado, sin justificarlo completamente.
+\usepackage{ragged2e}
+
+% El paquete 'xcolor' permite utilizar colores en el texto, fondos y gráficos dentro del documento, con una amplia gama de opciones de personalización.
+\usepackage{xcolor}
+
+% Definición de colores personalizados: establece colores que pueden ser usados en el documento.
+\definecolor{color1}{RGB}{0,0,0}
+\definecolor{color2}{RGB}{144,12,63}
+
+% El paquete 'mdframed', con el método 'tikz', permite crear cuadros alrededor de secciones de texto o gráficos, personalizables con bordes, fondos y más.
+\usepackage[framemethod=tikz]{mdframed}
+
+% El paquete 'bchart' permite crear gráficos de barras simples y personalizables dentro de un documento LaTeX, ideal para visualizaciones básicas de datos.
+\usepackage{bchart}
+
+% El paquete 'tcolorbox', con la opción 'most', proporciona cajas de texto coloreadas y decoradas para resaltar secciones importantes, con muchas opciones de personalización.
+\usepackage[most]{tcolorbox}
+
+% El paquete 'marginnote' permite agregar notas en el margen del documento, útil para comentarios o anotaciones que no interfieren con el texto principal.
+\usepackage{marginnote}
+
+% El paquete 'ifthen' ofrece herramientas para realizar evaluaciones condicionales dentro del documento, permitiendo ejecutar comandos basados en ciertas condiciones.
+\usepackage{ifthen}
+
+\usepackage{lastpage}
+
+% Configuración de secciones y títulos: define el estilo y el espaciado de los títulos de secciones.
+\usepackage[sf,bf,compact,topmarks,calcwidth,pagestyles,clearempty,newlinetospace]{titlesec}
+
+% Diseño de cabecera
+\renewpagestyle{plain}[]{
+\sethead[][][]{}{}{}
+\setfoot{}{}{}}
+
+\newpagestyle{myps}[]{
+    \sethead[][][]{
+                  \begin{minipage}[b]{.2\textwidth}
+                  \raggedright
+                  \includegraphics[height=20mm]{\logo}
+                  \end{minipage}
+                  }{}{
+                     \begin{minipage}[b]{.8\textwidth+\marginparsep+\marginparwidth}
+                     \raggedleft
+                     \textsc{\MakeLowercase\autor}\\
+                     \textsc{\MakeLowercase\materia}\\
+                    \textsc{\fecha}
+                    \end{minipage}
+                    }
+    \setfoot[pág.~\textbf{\usepage} de \pageref{LastPage}]
+    []
+    []
+    {}
+    {}
+    {pág.~\textbf{\usepage} de \pageref{LastPage}}
+}
+\pagestyle{myps}
+
+% Diseño de la sección principal: formato del título de las secciones.
+\titleformat{\section}[hang]
+{\sf\bfseries\large\raggedright\color{color2}}
+{\thesection}{.5em}{}[]
+
+% Espaciado y margen de las secciones principales.
+\titlespacing{\section}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+% Diseño de subsecciones: formato del título de las subsecciones.
+\titleformat{\subsection}[hang]
+{\sf\large\raggedright}
+{\thesubsection}{.5em}{}[]
+
+% Espaciado y margen de las subsecciones.
+\titlespacing{\subsection}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+% Diseño de subsubsecciones: formato del título de las subsubsecciones.
+\titleformat{\subsubsection}[hang]
+{\rm\bfseries\normalsize\raggedright}
+{\thesubsubsection}{.5em}{}[]
+
+% Espaciado y margen de las subsubsecciones.
+\titlespacing{\subsubsection}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+% Diseño de párrafos: formato de los párrafos.
+\titleformat{\paragraph}[runin]
+  {\bfseries}
+  {}{0em}{}
+  [\mbox{ --- }]
+
+% Espaciado y margen de los párrafos.
+\titlespacing{\paragraph}
+  {0pt}% antes de la raya
+  {6.75pt plus 0.5pt minus 0.5pt}% antes del párrafo
+  {0pt}% después de la raya
+
+% Diseño de subpárrafos: formato de los subpárrafos.
+\titleformat{\subparagraph}[hang]
+{\sf\bfseries\large\centering}
+{\thesubparagraph}{.5em}{}[]
+
+% Espaciado y margen de los subpárrafos.
+\titlespacing{\subparagraph}
+{\parindent}{18pt plus 0.5pt minus 0.5pt}{6.75pt}
+
+% Configuraciones directas para la maquetación del documento.
+\raggedbottom % Evita el estiramiento vertical de las páginas.
+\clubpenalty=10000 % Evita líneas huérfanas al final de una página.
+\widowpenalty=10000 % Evita líneas viudas al comienzo de una página.
+
+% Permite tener un control más preciso sobre el corte de la url
+\RequirePackage{url}
+\Urlmuskip = 0mu plus 1mu
+\def\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do.\do:\do\%\do?\do_\do-\do+\do/\do\#\do~}
+\def\UrlFont{\rm}
+
+% Paquete necesario para \mathbb
+\usepackage{amssymb}
+
+% Paquete necesario para los entornos matemáticos
+\usepackage{amsthm}
+
+% Definición de entornos matemáticos personalizados
+\newtheorem{theorem}{Teorema}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{definition}{Definición}
+\newtheorem{example}{Ejemplo}
+\newtheorem{axiom}{Axioma}
+\newtheorem{conjecture}{Conjetura}
+\theoremstyle{remark}% ---> necesita amsthm
+\newtheorem{remark}{Observación}
+
+% Hipervínculos y referencias: permite enlaces y referencias dentro del documento.
+\usepackage[allcolors=blue,colorlinks,unicode]{hyperref}
+
+

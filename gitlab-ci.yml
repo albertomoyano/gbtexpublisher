@@ -1,0 +1,9 @@
+pages:
+  stage: deploy
+  script:
+    - echo "Desplegando desde la carpeta docs..."
+  artifacts:
+    paths:
+      - docs
+  only:
+    - main  # Cambia 'main' por la rama que uses (puede ser 'master' u otra).

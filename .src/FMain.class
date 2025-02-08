@@ -1,0 +1,5864 @@
+' Gambas class file
+
+Public meConn As New Connection
+Public Contenido As Result
+Public ContenidoBibTotal As Result' resultado completo de bibtex
+Public ContenidoBibActual As Result' resultado actual de bibtex
+Private ContenidoComenta As Result
+Private ContenidoGHP As Result
+Private Busqueda As Result
+Public $Bash As Process
+Public rutaFILES As String
+Public rutaMEDIA As String
+Public rutaCONTADOR As String
+Public rutaCATALOGO As String
+Public rutaARTCAP As String
+Public rutaApp As String = User.Home &/ ".gbtexpublisher"
+Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+Public rutaCORRECCIONES As String
+Public Item_Seleccionado As Integer
+Public fFile As File
+Public sCurrentFilePath As String
+Public rutaORIGINALES As String
+Public rutaTAPA As String
+Public BaseName As String
+Public sTB_Text As String
+Public LastTextBox As TextBox
+' Variables para el tiempo
+Private segundos As Integer
+Private minutos As Integer
+Private horas As Integer
+' Variable global para almacenar el ID
+Public idSeleccionado As Integer
+
+Public Sub Form_Open()
+
+  ' Usa la ruta seleccionada en el formulario de inicio
+  meConn.Type = "sqlite3"
+  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Open()
+  ' Configurar el modo de journal a DELETE
+  meConn.Exec("PRAGMA journal_mode=DELETE;")
+
+  ' controlamos que existan los directorios principales o los creamos
+  If Not Exist(rutaApp) Then
+    Mkdir rutaApp
+  End If
+
+  If Not Exist(rutaScriptsExternos) Then
+    Mkdir rutaScriptsExternos
+  End If
+
+  Dim archivos As String[] = [
+    "falta-tapa.png",
+    "gitignore_github",
+    "gitignore_gitlab",
+    "Buscar_palabra_Gambas.py"
+  ]
+
+  For Each archivo As String In archivos
+    If Not File.RealPath(rutaApp &/ archivo) Then
+      Copy "./" & archivo To rutaApp &/ archivo
+    Endif
+  Next
+
+  ' aseguramos la copia de los scripts externos
+  Dim archivosP As String[] = [
+    "01_Error?.py", "02_ContadorGlobal.py", "03_ControlarLlaves.py", "04_ControlarCorchetes.py",
+    "05_ControlarParentesis.py", "06_ControlarPregunta.py", "07_ControlarAdmiracion.py",
+    "08_LigarSiglo.py", "09_BuscarLigaduras.py", "10_LimpiezaConExpReg.py", "11_ReemplazarComillas.py",
+    "12_ControlarNumeros.py", "13_ControlarEspacioIzquierda.py", "14_BuscarParencite.py",
+    "15_PalabrasRepetidas.py", "16_ControlarEntornos.py", "17_UniformarEndash.py", "18_ControlarComa.py"
+  ]
+
+  For Each archivopy As String In archivosP
+    If Not File.RealPath(rutaScriptsExternos &/ archivopy) Then
+      Copy "./" & archivopy To rutaScriptsExternos &/ archivopy
+    Endif
+  Next
+
+  ' Inicializamos los contadores de minutos y segundos
+  horas = 0
+  minutos = 0
+  segundos = 0
+  ' Configuramos el Timer para que se ejecute cada segundo (1000 milisegundos)
+  Timer1.Delay = 1000
+  Timer1.Stop  ' No iniciamos el Timer de inmediato
+
+  Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+
+  $Bash = TerminalView1.Shell("/usr/bin/bash")
+  TerminalView1.SetFocus()
+
+  'configuración del ToDo
+  Splitter2.Layout = [3, 1]
+  txtTAREAS.Visible = False
+  Mostrar_Lista_Tareas
+
+  ' Verifica si el TextBox1 tiene una ruta válida
+  If Not IsNull(TextBox1.Text) And TextBox1.Text <> "" Then
+    ' Hacemos el seguimiento del DirChooser
+    Watcher.Path = File.Dir(TextBox1.Text) ' Establece la ruta del directorio a monitorear
+    Watcher.AddMask("create,delete") ' Monitorea eventos de creación y eliminación
+    Watcher.Start
+  End If
+
+  'declaramos las rutas a utilizar
+  rutaFILES = File.Dir(TextBox1.Text) &/ "files"
+  rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
+  rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
+  rutaORIGINALES = File.Dir(TextBox1.Text) &/ "originales"
+  rutaTAPA = File.Dir(TextBox1.Text) &/ "tapa"
+  rutaCATALOGO = File.Dir(TextBox1.Text) &/ "catalogo"
+  rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
+  BaseName = File.BaseName(TextBox1.Text)
+
+  Mod_RellenarComboBox.RellenarComboBoxBibTeX()
+  Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
+  Mod_RellenarComboBox.RellenarCmbMetadatos()
+  Mod_RellenarComboBox.RellenarCmbGitHubPages()
+
+  Dim mtmp As Menu
+  Dim fileA As String
+
+  For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
+    mtmp = New Menu(menuScriptsExternos) As "obs"
+    mtmp.caption = fileA
+  Next
+
+  ' botonera glosario de inicio
+  BtnNuevoGlo.Visible = True
+  BtnEliminarGlo.Visible = False
+  BtnRefrescarGlo.Visible = False
+  btnGuardarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = False
+
+  ' botonera biblatex de inicio
+  BtnNuevoBib.Visible = True
+  BtnEliminarBib.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarCambios.Visible = False
+  btnGuardarIGUAL.Visible = False
+  btnAgregarCitationKey.Visible = False
+
+  ' botonera de githubpages de inicio
+  BtnNuevoGHP.Visible = True
+  btnGuardarGHP.Visible = False
+  btnGuardarCambiosGHP.Visible = False
+  btnGenerarIndex.Visible = False
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
+
+  ' asignamos tipografia monoespaciada al textarea de biblio
+  txtTMPbiblio.Font = Font["Monospace"]
+
+  ' dibuja los gridview
+  Mod_Funciones.ConfigurarGridView(VListaBIB)
+  Mod_Funciones.ConfigurarGridView(tblReferenciaOrigen)
+  Mod_Funciones.ConfigurarGridView(tbRefDup)
+  Mod_Funciones.ConfigurarGridView(griBibOriginal)
+  Mod_Funciones.ConfigurarGridView(gridListaBIBactual)
+
+  ' Ejecutar las consultas SQL
+  ContenidoBibTotal = meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
+  VListaBIB.Rows.Count = ContenidoBibTotal.Count
+  tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
+  griBibOriginal.Rows.Count = ContenidoBibTotal.Count
+
+  ' por default hacemos no mostramos el hbox de los artículos
+  HBoxNuevoArtCap.Enabled = False
+  HBoxNuevoArtCap.Visible = False
+
+End
+
+' Función para actualizar el display del tiempo
+Public Sub ActualizarDisplay()
+
+  txtTiempo.Caption = Right$("0" & horas, 2) & ":" & Right$("0" & minutos, 2) & ":" & Right$("0" & segundos, 2)
+
+End
+
+Public Sub Form_Close()
+
+  Mod_Funciones.CerrarTodo()
+
+End
+
+'ejecutamos el evento click del observador
+Public Sub obs_click()
+
+  TerminalView1.Input("clear" & "\n")
+  TerminalView1.Input("python3 " & rutaScriptsExternos &/ Last.caption & " " & File.Name(TextBox1.Text) & "\n")
+
+End
+
+Public Sub menuAPUNTES_Click()
+
+  Form_Notas.Show()
+
+End
+
+Public Sub menuCONVERSOR_Click()
+
+  Form_Conversor.ShowModal()
+
+End
+
+Public Sub Button4_Click() 'local git
+
+  Dim fecha As String
+  Dim rutaGit As String
+
+  TabPanel1.Index = 0
+
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+  rutaGit = File.Dir(TextBox1.Text) &/ ".git"
+
+  ' Verificar si el directorio existe
+  If Not Exist(rutaGit) Then
+    TerminalView1.Input("git init --initial-branch=main" & "\n")
+    TerminalView1.Input("git add ." & "\n")
+    TerminalView1.Input("git commit -m " & fecha & "\n")
+    TerminalView1.SetFocus()
+  Else
+    TerminalView1.Input("git add ." & "\n")
+    TerminalView1.Input("git commit -m " & fecha & "\n")
+    TerminalView1.SetFocus()
+  Endif
+
+End
+
+Public Sub Menu17_Click()'abrir pdf
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>pdf-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
+
+Public Sub Menu11_Click()'cerrar el programa
+
+  Mod_Funciones.CerrarTodo()
+
+End
+
+Public Sub btnCerrarPrograma_Click()
+
+  Mod_Funciones.CerrarTodo()
+
+End
+
+' Evento Show del formulario
+Public Sub Form_Show()
+  ' Configura las coordenadas del formulario para ubicarlo en el margen superior derecho
+
+  Me.Left = Screen.Width - Me.Width ' Establece la posición izquierda
+  Me.Top = 0 ' Establece la posición superior
+
+End
+
+Public Sub Menu24_Click()
+
+  Shell "xdg-open https://www.linkedin.com/in/edicion-cientifica/"
+
+End
+
+Public Sub MenuHTMLview_Click()' abrir html
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/html5/index.html"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>index.html</b> no existe.")
+  Endif
+
+End
+
+Public Sub menuGray_Click()
+
+  Form_ConvertirPNG.ShowModal()
+
+End
+
+Public Sub Menu4_Click()
+
+  Dim sFilePath As String = File.Dir(TextBox1.Text) &/ "separatas.sh"
+
+  ' Comprobamos si el archivo existe
+  If File.RealPath(sFilePath) Then
+    ' Si existe, ejecutamos el script
+    TerminalView1.Input("sh " & sFilePath & "\n" & "clear" & "\n")
+    Wait 0.2
+  Else
+    ' Si no existe, mostramos un mensaje
+    Message.Info("El archivo <b>separatas.sh</b> no existe. Por favor, analice la configuración de su proyecto.")
+  Endif
+
+End
+
+Public Sub menuAbrir_Click()'abrir un libro
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
+  Dialog.AutoExt = True
+  Dialog.Path = User.Home
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    ' borramos las carpetas que se crean en el cache
+    Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
+    Wait 0.1
+    TextBox1.Text = Dialog.Path
+    DirViewRuta.Root = File.Dir(TextBox1.Text)
+    Mod_Funciones.Borrar_Aux
+    Shell "rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log" & "\n"
+    Wait 0.1
+    BaseName = File.BaseName(TextBox1.Text)
+    rutaFILES = File.Dir(TextBox1.Text) & "/files"
+    PanelLaTeX.Visible = True
+    PanelLaTeX.Enabled = True
+    PanelQuarto.Visible = False
+    PanelQuarto.Enabled = False
+    HBoxNuevoArtCap.Enabled = False
+    HBoxNuevoArtCap.Visible = False
+    habilitamosLibro()
+    guardarTipoDocumentoLibro()
+    HBoxPanelRevista.Visible = False
+    TabPanelRevista.Visible = False
+    HBoxPanelLibro.Visible = True
+    TabPanelLibro.Visible = True
+    btnGuardarIGUAL.Visible = False
+    TabPanel1.Visible = True
+    menuBORRARaux.Enabled = True
+    menuComprimir.Enabled = True
+    menuTOOLS.Enabled = True
+    menuScriptsExternos.Enabled = True
+    menuLTX.Enabled = True
+    MenuApp.Enabled = True
+    Button4.Enabled = True
+    btnMenuGIT.Enabled = True
+    btnMenuGitLab.Enabled = True
+    btnKanban.Enabled = True
+    menuGray.Enabled = True
+    menuCatalogo.Enabled = True
+    MenuButton1.Menu = "menuScriptsExternos"
+    MenuButton2.Menu = "menuProcesarArchivos"
+    Menu4.Enabled = True
+    menuOT.Enabled = True
+    menuPDFweb.Enabled = True
+    menuDisclaimer.Enabled = True
+    ' Ejecutar la consulta SQL
+    ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+    ' refrescamos los datos en los grid del archivo en curso
+    gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
+    tbRefDup.Rows.Count = ContenidoBibActual.Count
+    ' Cierra la ventana de notas
+    If Form_Notas.Visible Then
+      Form_Notas.Close
+    End If
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
+    Mod_Funciones.CopiarArchivos(TextBox1.Text)
+    levantarComenta()' levantamos los datos de comentario
+    levantarGitHubPages()' levantamos los datos de githubpages
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
+    contarEntradasBIByGLO()' mostramos las cantidades en el boton
+    Mod_Funciones.limpiamosMetadatosLibrosRevistas()' limpiamos las entradas de los metadatos
+    'cargamos datos en los gridview
+    Mostrar_ListaGLO()
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
+    txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
+    txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
+    txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
+    'posicionamos la consola con el path del archivo de trabajo
+    TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
+  Endif
+
+End
+
+' Evento que se ejecuta cuando se detecta un cambio en el directorio
+Public Sub Watcher_Change()
+
+  DirViewRuta.Root = File.Dir(TextBox1.Text)' reforzamos la indicación de la ruta
+  DirViewRuta.Refresh' Actualiza el DirChooser
+
+End
+
+Public Sub d2t_Click()
+
+  Form_Conversor.ShowModal()
+
+End
+
+Public Sub Menu74_Click()'ver pdf página del catálogo
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>gbTeXcatalogo-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
+
+Public Sub menuComentarios_Click()'ver pdf página de comentarios
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>gbTeXdisclaimer-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
+
+Public Sub menuVerOt_Click()'ver pdf página de comentarios
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXOT-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>gbTeXOT-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
+
+Public Sub menuHTMLghp_Click()'ver pagina index.html
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/docs/index.html"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>index.html</b> no existe.")
+  Endif
+
+End
+
+Public Sub menu3_Click()'ver pdf página para web
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/pdf/web-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>web-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
+
+Public Sub Menu78_Click()'exportar referencias bibligráficas
+
+  Form_ExportarBIB.ShowModal()
+
+End
+
+Public Sub Menu64_Click()
+
+  Form_Legales.ShowModal()
+
+End
+
+Public Sub Menu66_Click()
+
+  Form_Gambas.ShowModal()
+
+End
+
+Public Sub Menu68_Click()
+
+  Form_gbTeX.ShowModal()
+
+End
+
+Public Sub menuBORRARaux_Click()
+
+  Mod_Funciones.Borrar_Aux
+
+End
+
+Public Sub menuCatalogo_Click()
+
+  TabPanel1.Index = 0
+
+  Mod_Exportar.ExportToCatalogo(TextBox1.Text)
+  Wait 0.2
+
+  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXcatalogo-" & BaseName & ".tex" & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
+  Wait 0.2
+
+  TerminalView1.SetFocus()
+  Mod_Funciones.Borrar_Aux
+
+End
+
+Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
+
+  Dim i As Integer
+  Dim Comando As String
+
+  VGridGLO.Clear()
+
+  Comando = "select * from glosarios ORDER BY id DESC"
+  Contenido = meConn.Exec(Comando)
+
+  'diseñamos el tableview
+  VGridGLO.Columns.Count = 11
+  VGridGLO.Header = True
+  VGridGLO.Columns[0].Title = "ID"
+  VGridGLO.Columns[0].Width = 0
+  VGridGLO.Columns[1].Title = "Clave"
+  VGridGLO.Columns[1].Width = 200
+  VGridGLO.Columns[2].Title = "Tipo"
+  VGridGLO.Columns[2].Width = 100
+  VGridGLO.Columns[3].Title = ""
+  VGridGLO.Columns[3].Width = 0
+  VGridGLO.Columns[4].Title = "Nombre"
+  VGridGLO.Columns[4].Width = 200
+  VGridGLO.Columns[5].Title = ""
+  VGridGLO.Columns[5].Width = 0
+  VGridGLO.Columns[6].Title = "Primera vez"
+  VGridGLO.Columns[6].Width = 800
+  VGridGLO.Columns[7].Title = ""
+  VGridGLO.Columns[7].Width = 0
+  VGridGLO.Columns[8].Title = ""
+  VGridGLO.Columns[8].Width = 0
+  VGridGLO.Columns[9].Title = ""
+  VGridGLO.Columns[9].Width = 0
+  VGridGLO.Columns[10].Title = ""
+  VGridGLO.Columns[10].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  VGridGLO.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    VGridGLO[i, 0].Text = Contenido!id
+    VGridGLO[i, 1].Text = Contenido!key
+    VGridGLO[i, 2].Text = Contenido!type
+    VGridGLO[i, 3].Text = Contenido!archivo
+    VGridGLO[i, 4].Text = Contenido!name
+    VGridGLO[i, 5].Text = Contenido!description
+    VGridGLO[i, 6].Text = Contenido!first
+    VGridGLO[i, 7].Text = Contenido!text
+    VGridGLO[i, 8].Text = Contenido!plural
+    VGridGLO[i, 9].Text = Contenido!firstplural
+    VGridGLO[i, 10].Text = Contenido!sort
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
+
+  ' Mostrar_ListaGLO
+  BtnNuevoGlo.Visible = True
+  BtnEliminarGlo.Visible = False
+  BtnRefrescarGlo.Visible = False
+  btnGuardarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = False
+
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
+
+End
+
+Public Sub txtCLAVEglo_KeyRelease()' Convertir el texto ingresado a minusculas
+
+  ' Obtener el texto actual del TextBox
+  Dim texto As String
+
+  texto = txtCLAVEglo.Text
+
+  ' Lista de caracteres permitidos
+  Dim caracteresPermitidos As String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@-"
+
+  ' Filtrar el texto para eliminar caracteres no permitidos
+  Dim textoFiltrado As String
+  For i As Integer = 1 To Len(texto)
+    Dim tecla As String
+    tecla = Mid(texto, i, 1)
+    If InStr(caracteresPermitidos, tecla) > 0 Then
+      textoFiltrado = textoFiltrado & tecla
+    End If
+  Next
+
+  ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
+  txtCLAVEglo.Text = LCase(textoFiltrado)
+
+End
+
+Public Sub txtARCHIVO_KeyRelease()'caracteres permitidos en los keywords
+
+  ' Obtener el texto actual del TextBox
+  Dim texto As String
+
+  texto = txtARCHIVO.Text
+
+  ' Lista de caracteres permitidos
+  Dim caracteresPermitidos As String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,-"
+
+  ' Filtrar el texto para eliminar caracteres no permitidos
+  Dim textoFiltrado As String
+  For i As Integer = 1 To Len(texto)
+    Dim tecla As String
+    tecla = Mid(texto, i, 1)
+    If InStr(caracteresPermitidos, tecla) > 0 Then
+      textoFiltrado = textoFiltrado & tecla
+    End If
+  Next
+
+  ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
+  txtARCHIVO.Text = UCase(textoFiltrado)
+
+End
+
+Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
+
+  Dim texto As String
+
+  texto = textbox.Text
+  texto = Trim$(texto)
+  textbox.Text = texto
+
+End
+
+Public Sub eliminarBlancosGLO()
+
+  EliminarEspaciosAlInicioYFinal(txtARCHIVO)
+  EliminarEspaciosAlInicioYFinal(txtNAME)
+  EliminarEspaciosAlInicioYFinal(txtDESCRIPTION)
+  EliminarEspaciosAlInicioYFinal(txtFIRST)
+  EliminarEspaciosAlInicioYFinal(txtTEXT)
+  EliminarEspaciosAlInicioYFinal(txtPLURAL)
+  EliminarEspaciosAlInicioYFinal(txtFPLURAL)
+  EliminarEspaciosAlInicioYFinal(txtSORT)
+
+End
+
+Public Sub BtnBuscarGoogleGLO_Click()
+
+  Dim Consulta As String = txtNAME.Text
+
+  ' Reemplaza los espacios en blanco con el signo de "+" para formatear la consulta de búsqueda
+  Consulta = Replace(Consulta, " ", "+")
+
+  If Consulta <> "" Then
+    Shell "xdg-open https://www.google.com/search?q=" & Consulta
+  End If
+
+End
+
+Public Sub btnAgregarGloKey_Click()
+
+  Dim textoOrigen As String
+
+  textoOrigen = txtTEXT.Text
+
+  ' Reemplaza caracteres problemáticos
+  textoOrigen = Replace(textoOrigen, "´", "")
+  textoOrigen = Replace(textoOrigen, "`", "")
+  textoOrigen = Replace(textoOrigen, " ", "")
+  textoOrigen = Replace(textoOrigen, "á", "a")
+  textoOrigen = Replace(textoOrigen, "à", "a")
+  textoOrigen = Replace(textoOrigen, "ä", "a")
+  textoOrigen = Replace(textoOrigen, "é", "e")
+  textoOrigen = Replace(textoOrigen, "è", "e")
+  textoOrigen = Replace(textoOrigen, "ë", "e")
+  textoOrigen = Replace(textoOrigen, "í", "i")
+  textoOrigen = Replace(textoOrigen, "ì", "i")
+  textoOrigen = Replace(textoOrigen, "ï", "i")
+  textoOrigen = Replace(textoOrigen, "ó", "o")
+  textoOrigen = Replace(textoOrigen, "ò", "o")
+  textoOrigen = Replace(textoOrigen, "ö", "o")
+  textoOrigen = Replace(textoOrigen, "ú", "u")
+  textoOrigen = Replace(textoOrigen, "ù", "u")
+  textoOrigen = Replace(textoOrigen, "ü", "u")
+  textoOrigen = Replace(textoOrigen, "ñ", "n")
+  textoOrigen = Replace(textoOrigen, "&", "")
+  textoOrigen = Replace(textoOrigen, "ç", "c")
+  textoOrigen = Replace(textoOrigen, "{", "")
+  textoOrigen = Replace(textoOrigen, "}", "")
+  textoOrigen = Replace(textoOrigen, "[", "")
+  textoOrigen = Replace(textoOrigen, "]", "")
+  textoOrigen = Replace(textoOrigen, "¿", "")
+  textoOrigen = Replace(textoOrigen, "?", "")
+  textoOrigen = Replace(textoOrigen, "¡", "")
+  textoOrigen = Replace(textoOrigen, "!", "")
+  textoOrigen = Replace(textoOrigen, "(", "")
+  textoOrigen = Replace(textoOrigen, ")", "")
+  textoOrigen = Replace(textoOrigen, "-", "")
+  textoOrigen = Replace(textoOrigen, "_", "")
+  textoOrigen = Replace(textoOrigen, "'", "")
+  textoOrigen = Replace(textoOrigen, "#", "")
+  textoOrigen = Replace(textoOrigen, "@", "")
+  textoOrigen = Replace(textoOrigen, "/", "")
+  textoOrigen = Replace(textoOrigen, "°", "")
+  textoOrigen = Replace(textoOrigen, "~", "")
+
+  ' Convierte el texto a minúsculas y elimina espacios al principio y al final
+  textoOrigen = Trim(LCase(textoOrigen))
+  '
+  ' Agrega el texto al final del TextBox de destino sin borrar su contenido actual
+  txtCLAVEglo.Text = txtCLAVEglo.Text & textoOrigen
+
+End
+
+Public Sub ButtonMostrarTextoGlo_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtDESCRIPTION
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnAgregarKey_Click()
+
+  Dim TextoExistente As String
+  Dim TextoAAgregar As String
+
+  ' Obtener el texto actual del cuadro de texto
+  TextoExistente = txtARCHIVO.Text
+
+  ' Verificar si el primer carácter es una coma
+  If Left$(TextoExistente, 1) <> "," Then
+    ' Agregar una coma al principio del texto
+    TextoExistente = "," & TextoExistente
+  Endif
+
+  ' Texto que deseas agregar
+  TextoAAgregar = BaseName & ","
+
+  ' Comprobar si el cuadro de texto ya tiene texto
+  If Len(Trim(TextoExistente)) > 0 Then
+    ' Si ya hay texto, agrega el texto nuevo
+    txtARCHIVO.Text = TextoExistente & TextoAAgregar
+  Else
+    ' Si no hay texto, simplemente establece el texto a agregar
+    txtARCHIVO.Text = TextoAAgregar
+  Endif
+
+End
+
+Public Sub BtnNuevoGlo_Click()
+
+  BtnNuevoGlo.Visible = False
+  BtnEliminarGlo.Visible = False
+  BtnRefrescarGlo.Visible = False
+  btnGuardarGlo.Visible = True
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = True
+
+  Dim Idn As Integer
+
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
+
+  txtTMPglo.Clear
+  txtTMPglo.SetFocus()
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = meConn.Exec("SELECT MAX(id) FROM glosarios LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtIDglosario.Text = Idn
+  txtCLAVEglo.Text = "@glo" & Idn & "-" 'colocamos el prefijo de la clave bib
+  txtARCHIVO.Text = "," & BaseName & "," 'colocamos el key con el nombre del archivo
+  ' Mostrar_ListaGLO
+
+End
+
+Public Sub BtnEliminarGlo_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIDglosario.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = meConn.Exec("delete from glosarios where id=" & txtIDglosario.Text)
+  Endif
+
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
+
+  BtnEliminarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  btnAgregarGloKey.Visible = False
+
+End
+
+Public Sub guardarCamposGLO()
+
+  Contenido!id = txtIDglosario.Text
+  Contenido!key = txtCLAVEglo.Text
+  Contenido!type = cbTYPEentradaGlo.Text
+  Contenido!archivo = txtARCHIVO.Text
+  Contenido!name = txtNAME.Text
+  Contenido!description = txtDESCRIPTION.Text
+  Contenido!first = txtFIRST.Text
+  Contenido!text = txtTEXT.Text
+  Contenido!plural = txtPLURAL.Text
+  Contenido!firstplural = txtFPLURAL.Text
+  Contenido!sort = txtSORT.Text
+
+End
+
+Public Sub btnGuardarGlo_Click()
+
+  Dim Comando As String
+
+  ' Escapa los caracteres especiales(comilla simple)en el título
+  Dim tituloEscapado As String
+
+  tituloEscapado = Replace(txtTEXT.Text, "'", "''")
+
+  eliminarBlancosGLO
+
+  Comando = "SELECT * FROM glosarios WHERE text = '" & tituloEscapado & "'"
+  Busqueda = meConn.Exec(Comando)
+
+  ' Verificar si se encontraron resultados en la consulta
+  If Busqueda.Count > 0 Then
+    Message.Warning("La sigla que desea agregar ya existe en la base de datos.")
+    Return ' Salir de la función si el título ya existe
+  Endif
+
+  Contenido = meConn.Create("glosarios")
+
+  guardarCamposGLO
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+  RefrescarGrid()
+
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
+
+  btnGuardarCambiosGlo.Visible = False
+  btnGuardarGlo.Visible = False
+  BtnNuevoGlo.Visible = True
+  BtnEliminarGlo.Visible = False
+  btnAgregarGloKey.Visible = False
+
+End
+
+Public Sub btnGuardarCambiosGlo_Click()
+
+  BtnNuevoGlo.Visible = True
+  btnGuardarGlo.Visible = False
+  btnGuardarCambiosGlo.Visible = False
+  BtnEliminarGlo.Visible = False
+  btnAgregarGloKey.Visible = False
+
+  'eliminamos blancos de inicio y final de cadena en los textbox
+  eliminarBlancosGLO
+
+  Contenido = meConn.Edit("glosarios", "id=" & txtIDglosario.Text)
+  guardarCamposGLO
+  Contenido.Update
+  RefrescarGrid()
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  Mod_LimpiarTextBox.LimpiarCamposGLO()
+
+End
+
+Public Sub VGridGLO_RowClick(Row As Integer)
+
+  btnGuardarCambiosGlo.Visible = True
+  BtnEliminarGlo.Visible = True
+  btnAgregarGloKey.Visible = True
+  btnGuardarGlo.Visible = False
+
+  txtIDglosario.Text = VGridGLO[Row, 0].Text
+  txtCLAVEglo.Text = VGridGLO[Row, 1].Text
+  cbTYPEentradaGlo.Text = VGridGLO[Row, 2].Text
+  txtARCHIVO.Text = VGridGLO[Row, 3].Text
+  txtNAME.Text = VGridGLO[Row, 4].Text
+  txtDESCRIPTION.Text = VGridGLO[Row, 5].Text
+  txtFIRST.Text = VGridGLO[Row, 6].Text
+  txtTEXT.Text = VGridGLO[Row, 7].Text
+  txtPLURAL.Text = VGridGLO[Row, 8].Text
+  txtFPLURAL.Text = VGridGLO[Row, 9].Text
+  txtSORT.Text = VGridGLO[Row, 10].Text
+
+End
+
+Public Sub btnBuscarNombreGLO_Click()
+
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "SELECT * FROM glosarios WHERE name = '" & txtNAME.Text & "%' ORDER BY id DESC;"
+
+  If txtNAME.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = meConn.Exec(Comando)
+
+  ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
+  VGridGLO.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el VGridGLO
+  VGridGLO.Columns.Count = 11
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    VGridGLO[rowIndex, 0].Text = Busqueda!id
+    VGridGLO[rowIndex, 1].Text = Busqueda!key
+    VGridGLO[rowIndex, 2].Text = Busqueda!type
+    VGridGLO[rowIndex, 3].Text = Busqueda!archivo
+    VGridGLO[rowIndex, 4].Text = Busqueda!name
+    VGridGLO[rowIndex, 5].Text = Busqueda!description
+    VGridGLO[rowIndex, 6].Text = Busqueda!first
+    VGridGLO[rowIndex, 7].Text = Busqueda!text
+    VGridGLO[rowIndex, 8].Text = Busqueda!plural
+    VGridGLO[rowIndex, 9].Text = Busqueda!firstplural
+    VGridGLO[rowIndex, 10].Text = Busqueda!sort
+    Busqueda.MoveNext
+  Wend
+
+End
+
+Public Sub btnBuscarTextoGLO_Click()
+
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "select * from glosarios where name " & " like " & "'%" & txtTEXT.Text & "%' ORDER BY id DESC;"
+
+  If txtTEXT.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = meConn.Exec(Comando)
+
+  ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
+  VGridGLO.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el VGridGLO
+  VGridGLO.Columns.Count = 11
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    VGridGLO[rowIndex, 0].Text = Busqueda!id
+    VGridGLO[rowIndex, 1].Text = Busqueda!key
+    VGridGLO[rowIndex, 2].Text = Busqueda!type
+    VGridGLO[rowIndex, 3].Text = Busqueda!archivo
+    VGridGLO[rowIndex, 4].Text = Busqueda!name
+    VGridGLO[rowIndex, 5].Text = Busqueda!description
+    VGridGLO[rowIndex, 6].Text = Busqueda!first
+    VGridGLO[rowIndex, 7].Text = Busqueda!text
+    VGridGLO[rowIndex, 8].Text = Busqueda!plural
+    VGridGLO[rowIndex, 9].Text = Busqueda!firstplural
+    VGridGLO[rowIndex, 10].Text = Busqueda!sort
+    Busqueda.MoveNext
+  Wend
+
+End
+
+Public Sub btnBuscarClaveGLO_Click()
+
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "SELECT * FROM glosarios WHERE key LIKE '%" & txtCLAVEglo.Text & "%' ORDER BY id DESC;"
+
+  If txtCLAVEglo.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = meConn.Exec(Comando)
+
+  ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
+  VGridGLO.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el VGridGLO
+  VGridGLO.Columns.Count = 11
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    VGridGLO[rowIndex, 0].Text = Busqueda!id
+    VGridGLO[rowIndex, 1].Text = Busqueda!key
+    VGridGLO[rowIndex, 2].Text = Busqueda!type
+    VGridGLO[rowIndex, 3].Text = Busqueda!archivo
+    VGridGLO[rowIndex, 4].Text = Busqueda!name
+    VGridGLO[rowIndex, 5].Text = Busqueda!description
+    VGridGLO[rowIndex, 6].Text = Busqueda!first
+    VGridGLO[rowIndex, 7].Text = Busqueda!text
+    VGridGLO[rowIndex, 8].Text = Busqueda!plural
+    VGridGLO[rowIndex, 9].Text = Busqueda!firstplural
+    VGridGLO[rowIndex, 10].Text = Busqueda!sort
+    Busqueda.MoveNext
+  Wend
+
+End
+
+Public Sub btnVerAbstract_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt48_abstract
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnLimpiarRelation_Click()
+
+  txtCOLECCION.Clear
+  txtDirection.Clear
+  txtFORMATO.Clear
+
+End
+
+Public Sub txt15_pdfcopyright_Click()
+
+  If txt15_pdfcopyright.Index = 0 Then
+    txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Copyright"
+  Endif
+  If txt15_pdfcopyright.Index = 1 Then
+    txt16_pdflicenseurl.Text = "https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1"
+  Endif
+  If txt15_pdfcopyright.Index = 2 Then
+    txt16_pdflicenseurl.Text = "https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1"
+  Endif
+  If txt15_pdfcopyright.Index = 3 Then
+    txt16_pdflicenseurl.Text = "https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+  Endif
+  If txt15_pdfcopyright.Index = 4 Then
+    txt16_pdflicenseurl.Text = "https://creativecommons.org/licenses/by-nd/4.0/?ref=chooser-v1"
+  Endif
+  If txt15_pdfcopyright.Index = 5 Then
+    txt16_pdflicenseurl.Text = "https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1"
+  Endif
+  If txt15_pdfcopyright.Index = 6 Then
+    txt16_pdflicenseurl.Text = "https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+  Endif
+  If txt15_pdfcopyright.Index = 7 Then
+    txt16_pdflicenseurl.Text = "https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1"
+  Endif
+  If txt15_pdfcopyright.Index = 8 Then
+    txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/GNU_General_Public_License"
+  Endif
+  If txt15_pdfcopyright.Index = 9 Then
+    txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Licencia_MIT"
+  Endif
+  If txt15_pdfcopyright.Index = 10 Then
+    txt16_pdflicenseurl.Text = "https://es.wikipedia.org/wiki/Licencia_BSD"
+  Endif
+  If txt15_pdfcopyright.Index = 12 Then
+    txt16_pdflicenseurl.Text = "Otra licencia"
+  Endif
+
+End
+
+Public Sub btnVerResumen_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt56_resumen
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnLimpiarJournal_Click()
+
+  txtPublication.Clear
+  txt36_pdfissn.Clear
+  txt37_pdfeissn.Clear
+  txtBaseURL.Clear
+
+End
+
+Public Sub btnVerNota_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt71_note
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnLimpiarRevisor_Click()
+
+  txt73_reviewer.Clear
+
+End
+
+Public Sub btnLimpiarConferencia_Click()
+
+  txt82_conference.Clear
+  txt82_conferenceVisual.Clear
+
+End
+
+Public Sub btnAbrirPNG_Click()
+
+  Dialog.Title = "Seleccionar archivo de tapa"
+  Dialog.Filter = ["*.png", "Archivos de PNG"]
+  Dialog.AutoExt = True
+  Dialog.Path = rutaFILES
+  Dialog.ShowHidden = False
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    Dim rutaCover As String = File.Dir(Dialog.Path) &/ File.Name(Dialog.Path)
+    txt49_imagentapa.Text = rutaCover
+  Endif
+
+End
+
+Public Sub BtnNuevoMeta_Click()
+
+  Dim fecha As String
+  Dim HOY As Date
+
+  If txtDate.Text = "" Then
+    HOY = Now
+    fecha = Format(HOY, "yyyymmddhhnnss")
+    txtDate.Text = fecha
+  Endif
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = meConn.Exec("SELECT MAX(id) FROM metadatos LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtIDmetadatos.Text = Idn
+  txtnombreArchivo.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
+
+  BtnNuevoMeta.Visible = False
+  btnGuardarMeta.Visible = True
+  btnGuardarCambiosMeta.Visible = False
+
+End
+
+Public Sub btnGuardarMeta_Click()
+
+  eliminarBlancosMETA
+
+  Contenido = meConn.Create("metadatos")
+
+  guardarCamposMETA
+
+  Contenido.Update
+
+  BtnNuevoMeta.Visible = False
+  btnGuardarMeta.Visible = False
+  btnGuardarCambiosMeta.Visible = True
+
+  Message.Info("Los cambios se guardaron con éxito.")
+
+End
+
+Public Sub guardarCamposMETA()
+
+  Contenido!id = txtIdmetadatos.Text
+  Contenido!nombreArchivo = txtnombreArchivo.Text
+  Contenido!pdfxmp1_02 = txt02_pdfxmp1.Text
+  Contenido!pdfxmp2_03 = txt03_pdfxmp2.Text
+  Contenido!pdfxmp3_04 = txt04_pdfxmp3.Text
+  Contenido!pdfauthor_05 = txt05_pdfauthor.Text
+  Contenido!pdftitle_06 = txt06_pdftitle.Text
+  Contenido!pdfsubject_07 = txtSubjet.Text
+  Contenido!pdfsubject_07b = txtpdfsubject_07b.Text
+  Contenido!pdfsubject_07c = txtpdfsubject_07c.Text
+  Contenido!pdfkeywords_08 = txtKeywords.Text
+  Contenido!pdfsubtitle_09 = txt09_pdfsubtitle.Text
+  Contenido!pdfauthortitle_10 = txt10_pdfauthortitle.Text
+  Contenido!pdfdate_11 = txtDate.Text
+  Contenido!pdfcreationdate_12 = txtCreationDate.Text
+  Contenido!pdfmoddate_13 = txtModDate.Text
+  Contenido!pdfmetadate_14 = txtMetaDate.Text
+  Contenido!pdfcopyright_15 = txt15_pdfcopyright.Text
+  Contenido!pdflicenseurl_16 = txt16_pdflicenseurl.Text
+  Contenido!pdfcaptionwriter_17 = txtCaptionWriter.Text
+  Contenido!pdfcontactaddress_18 = txtContactAddress.Text
+  Contenido!pdfcontactcity_19 = txtContactCity.Text
+  Contenido!pdfcontactpostcode_20 = txtContactPostCode.Text
+  Contenido!pdfcontactcountry_21 = txtContactCountry.Text
+  Contenido!pdfcontactregion_22 = txtContactRegion.Text
+  Contenido!pdfcontactphone_23 = txtContactPhone.Text
+  Contenido!pdfcontactemail_24 = txtContactEmail.Text
+  Contenido!pdfcontacturl_25 = txtContactURL.Text
+  Contenido!pdfdocumentid_26 = txtDocumentId.Text
+  Contenido!pdfpublication_27 = txtPublication.Text
+  Contenido!pdfpublisher_28 = txtPublisher28.Text
+  Contenido!pdftype_29 = cmbType.Text
+  Contenido!pdfpubtype_30 = cbPubType.Text
+  Contenido!pdfvolumenum_31 = txtVolNum.Text
+  Contenido!pdfissuenum_32 = txtIssueNum.Text
+  Contenido!pdfpagerange_33 = txt33_pdfpagerange.Text
+  Contenido!pdfbookedition_34 = txt34_pdfbookedition.Text
+  Contenido!pdfisbn_35 = txt35_pdfisbn.Text
+  Contenido!pdfissn_36 = txt36_pdfissn.Text
+  Contenido!pdfeissn_37 = txt37_pdfeissn.Text
+  Contenido!pdfpubstatus_38 = txt38_pdfpubstatus.Text
+  Contenido!pdflang_39 = txtLang.Text
+  Contenido!pdfmetalang_40 = txt40_pdfmetalang.Text
+  Contenido!pdfbaseurl_41 = txtBaseURL.Text
+  Contenido!pdfurl_42 = txt42_pdfurl.Text
+  Contenido!pdfdoi_43 = txt43_pdfdoi.Text
+  Contenido!pdfrendition_44 = cbPDFrendition.Text
+  Contenido!pdfidentifier_45 = txtDocumentId.Text
+  Contenido!pdfx_46 = cbPDFx.Text
+  Contenido!pdfversionid_47 = txtVersionId.Text
+  Contenido!abstract_48 = txt48_abstract.Text
+  Contenido!abstract_48b = txt48b_abstract.Text
+  Contenido!abstract_48c = txt48c_abstract.Text
+  Contenido!imagentapa_49 = txt49_imagentapa.Text
+  Contenido!pagetotal_50 = txt50_pagetotal.Text
+  Contenido!relation_51 = txtCOLECCION.Text
+  Contenido!direction_52 = txtDirection.Text
+  Contenido!traductor_53 = txt53_traductor.Text
+  Contenido!idiomaorig_54 = txt54_idiomaorig.Text
+  Contenido!ilustrador_55 = txt55_ilustrador.Text
+  Contenido!resumen_56 = txt56_resumen.Text
+  Contenido!palabrasclave_57 = txt57_palabrasclave.Text
+  Contenido!palabrasclave_57b = txt57b_palabrasclave.Text
+  Contenido!palabrasclave_57c = txt57c_palabrasclave.Text
+  Contenido!papertitletwo_58 = txt58_papertitletwo.Text
+  Contenido!artrecibido_59 = txt59_artrecibido.Text
+  Contenido!artaceptado_60 = txt60_artaceptado.Text
+  Contenido!formato_61 = txtFORMATO.Text
+  Contenido!source_69 = txt59_opt_source.Text
+  Contenido!opt_72 = txt82_conferenceVisual.Text
+  Contenido!genero_78 = txt78_genero.Text
+  Contenido!conference_82 = txt82_conference.Text
+  Contenido!bookTitle_84 = txt84_bookTitle.Text
+  Contenido!doiRevista_85 = txt85_doiRevista.Text
+  Contenido!notas_86 = txt86_annotation.Text
+  Contenido!piehtml_87 = txt87_HTMLFirstPageBottom.Text
+  Contenido!audience_88 = txt88_audiencia.Text
+  Contenido!binding_89 = txt89_binding.Text
+  Contenido!eISBN_90 = txt90_eisbn.Text
+
+End
+
+Public Sub eliminarBlancosMETA()
+
+  EliminarEspaciosAlInicioYFinal(txt05_pdfauthor)
+  EliminarEspaciosAlInicioYFinal(txt06_pdftitle)
+
+End
+
+Public Sub btnGuardarCambiosMeta_Click()
+
+  ' Eliminamos blancos de inicio y final de cadena en los textbox
+  eliminarBlancosMETA
+
+  ' Cargar el registro a modificar
+  Contenido = meConn.Edit("metadatos", "id=" & txtIDmetadatos.Text)
+
+  ' Guardar los campos modificados
+  guardarCamposMETA()
+
+  ' Actualizar el contenido en la base de datos
+  Contenido.Update
+
+  ' Informar al usuario que los cambios se guardaron con éxito
+  Message.Info("Los cambios se guardaron con éxito.")
+
+End
+
+Public Sub btnLimpiarTapa_Click()
+
+  txt49_imagentapa.Clear
+
+End
+
+Public Sub btnMostarJournal2_Click()
+
+  Form_Journal.ShowModal()
+
+End
+
+Public Sub btnMostrarColeccion_Click()
+
+  Form_Coleccion.ShowModal()
+
+End
+
+Public Sub btnMostarConferencia_Click()
+
+  Form_Conferencia.ShowModal()
+
+End
+
+Public Sub BtnEliminarBib_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIDbibtex.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = meConn.Exec("delete from bibtex where id=" & txtIDbibtex.Text)
+  Endif
+
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
+  VListaBIB.Refresh
+  RefrescarGrid()
+
+  BtnNuevoBib.Visible = True
+  BtnEliminarBib.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarCambios.Visible = False
+  btnAgregarCitationKey.Visible = False
+  btnGuardarIGUAL.Visible = False
+
+End
+
+Public Sub BtnNuevoBib_Click()
+
+  BtnNuevoBib.Visible = False
+  BtnEliminarBib.Visible = False
+  btnGuardar.Visible = True
+  btnGuardarCambios.Visible = False
+  btnAgregarCitationKey.Visible = True
+  btnAgregarKeyBIB.Visible = True
+  txtTMPbiblio.Enabled = True
+  txtTMPbiblio.Background = Color.White
+
+  txtTMPbiblio.Clear 'limpiamos el campo temporal
+  txtTMPbiblio.SetFocus()
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
+  ObtenerNuevoId()
+
+  TabPanel2.Index = 0
+  TabPanel5.Index = 0
+
+End
+
+Public Sub ObtenerNuevoId()
+
+  Dim Idn As Integer
+  Dim MaxId As Variant
+
+  MaxId = meConn.Exec("SELECT MAX(id) FROM bibtex LIMIT 1")
+
+  If MaxId["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(MaxId["MAX(id)"]) + 1
+  Endif
+
+  txtIDbibtex.Text = Idn
+  txtCLAVEbib.Text = "@" & Idn & "-"
+  txtKEYWORDS.Text = "," & BaseName & ","
+
+End
+
+Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
+
+  ' Cargar el registro a modificar
+  Contenido = meConn.Edit("bibtex", "id=" & txtIDbibtex.Text)
+
+  ' Guardardamos la actualización de los campos modificados
+  guardarCampos()
+  Contenido.Update
+  meConn.Commit()  ' confirmar cambios en la base de datos
+  Mod_LimpiarTextBox.LimpiarCamposBIB()
+  RefrescarGrid()
+
+  ' Informar al usuario que los cambios se guardaron con éxito
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  BtnNuevoBib.Visible = True
+  btnGuardar.Visible = False
+  btnGuardarCambios.Visible = False
+  btnGuardarIGUAL.Visible = False
+  BtnEliminarBib.Visible = False
+  btnAgregarCitationKey.Visible = False
+  btnAgregarKeyBIB.Visible = False
+  txtTMPbiblio.Enabled = False
+
+End Sub
+
+Public Sub btnGuardar_Click()
+
+  ' Escapa los caracteres especiales (comilla simple) en el título
+  Dim tituloEscapado As String
+
+  tituloEscapado = Replace(txtTITLE.Text, "'", "''")
+
+  eliminarBlancosBIB()
+
+  ' Variables para almacenar los datos de los TextBox
+  Dim booktitulo As String
+  Dim titulo As String
+  Dim maintitulo As String
+
+  ' Verificar y formatear los textos de los TextBox
+  titulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtTITLE.Text)
+  booktitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtBOOKTITLE.Text)
+  maintitulo = Mod_Funciones.VerificarPorcentajeEnTexto(txtMAINTITLE.Text)
+
+  ' Actualizar los TextBox por si quieres reflejar los cambios visualmente
+  txtBOOKTITLE.Text = booktitulo
+  txtTITLE.Text = titulo
+  txtMAINTITLE.Text = maintitulo
+
+  ' Verificar si el campo txtAUTHOR contiene un punto y coma (;)
+  If InStr(txtAUTHOR.Text, ";") > 0 Then
+    Message.Error("El campo de autor no debe contener el carácter <strong>;</strong>. Por favor, revisa tu entrada.")
+    Return ' Salir de la función si contiene alguno de estos caracteres
+  Endif
+
+  Busqueda = meConn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+
+  ' Verificar si se encontraron resultados en la consulta
+  If Busqueda.Count > 0 Then
+    Message.Error("El título que desea agregar ya existe en la base de datos.")
+    ' Cambiar la visibilidad del botón
+    mostrarIguales()
+    VListaBIB.ScrollY = 0
+    btnGuardar.Visible = False
+    btnGuardarIGUAL.Visible = True
+    Return ' Salir de la función si el título ya existe
+  Endif
+
+  If ComboBox1.Text = "" Or cbLANGUAGE.Text = "" Then
+    Message.Error("No ha seleccionado el tipo de entrada o idioma.")
+  Else If ComboBox1.Text = "thesis" And cbType.Text = "" Then
+    Message.Error("No ha seleccionado el tipo de tesis.")
+  Else
+    Contenido = meConn.Create("bibtex")
+    guardarCampos()
+    Contenido.Update
+    meConn.Commit()  ' confirmar cambios en la base de datos
+    RefrescarGrid()
+    Message.Info("Nueva entrada guardada.")
+    txtTMPbiblio.Clear 'limpiamos el campo temporal
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
+    btnGuardarCambios.Visible = False
+    btnGuardar.Visible = False
+    BtnNuevoBib.Visible = True
+    BtnEliminarBib.Visible = False
+    btnAgregarCitationKey.Visible = False
+    btnGuardarIGUAL.Visible = False
+    btnAgregarKeyBIB.Visible = False
+    txtTMPbiblio.Enabled = False
+    txtTMPbiblio.Background = Color.LightGray
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
+    TabPanel5.Index = 1
+  Endif
+
+End
+
+Public Sub BtnBuscarTituloReferencia_Click()'buscar título solamente
+
+  Dim Consulta As String
+
+  If txtTITLE.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTITLE.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 2
+  Endif
+
+End
+
+Public Sub BtnBuscarEtiquetas_Click()'buscar etiquetas
+
+  Dim Consulta As String
+
+  If txtETIQ.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE etiquetas LIKE '%" & txtETIQ.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 1
+  Endif
+
+End
+
+Public Sub BtnBuscarAuthor_Click()' buscar autor
+
+  Dim Consulta As String
+
+  If txtAUTHOR.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE author LIKE '%" & txtAUTHOR.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 2
+  Endif
+
+End
+
+Public Sub BtnBuscarAuthor2_Click()'buscar editor
+
+  Dim Consulta As String
+
+  If txtEDITOR.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE editor LIKE '%" & txtEDITOR.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 2
+  Endif
+
+End
+
+Public Sub txtCLAVEbib_KeyRelease()' Convertir el texto ingresado a mayúsculas
+
+  ' Obtener el texto actual del TextBox
+  Dim texto As String
+
+  texto = txtCLAVEbib.Text
+
+  ' Lista de caracteres permitidos
+  Dim caracteresPermitidos As String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@-"
+
+  ' Filtrar el texto para eliminar caracteres no permitidos
+  Dim textoFiltrado As String
+  For i As Integer = 1 To Len(texto)
+    Dim tecla As String
+    tecla = Mid(texto, i, 1)
+    If InStr(caracteresPermitidos, tecla) > 0 Then
+      textoFiltrado = textoFiltrado & tecla
+    End If
+  Next
+
+  ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
+  txtCLAVEbib.Text = UCase(textoFiltrado)
+
+End
+
+Public Sub txtKEYWORDS_KeyRelease()'caracteres permitidos en los keywords
+
+  ' Obtener el texto actual del TextBox
+  Dim texto As String
+
+  texto = txtKEYWORDS.Text
+
+  ' Lista de caracteres permitidos
+  Dim caracteresPermitidos As String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,-"
+
+  ' Filtrar el texto para eliminar caracteres no permitidos
+  Dim textoFiltrado As String
+  For i As Integer = 1 To Len(texto)
+    Dim tecla As String
+    tecla = Mid(texto, i, 1)
+    If InStr(caracteresPermitidos, tecla) > 0 Then
+      textoFiltrado = textoFiltrado & tecla
+    End If
+  Next
+
+  ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
+  txtKEYWORDS.Text = UCase(textoFiltrado)
+
+End
+
+Public Sub guardarCampos()
+
+  Contenido!id = txtIDbibtex.Text
+  Contenido!tipoEntrada = ComboBox1.Text
+  Contenido!hyphenation = cbLANGUAGE.Text
+  Contenido!relatedType = CmbRelatedType.Text
+  Contenido!pubState = cbPUBSTATE.Text
+  Contenido!type = cbType.Text
+  Contenido!editorType = cbEDITORTYPE.Text
+  Contenido!etiquetas = txtETIQ.Text
+  Contenido!keywords = txtKEYWORDS.Text
+  Contenido!crossref = txtCROSSREF.Text
+  Contenido!citationKey = txtCLAVEbib.Text
+  Contenido!title = txtTITLE.Text
+  Contenido!related = txtRELATED.Text
+  Contenido!yearY = txtYEAR.Text
+  Contenido!dateD = txtDATEY.Text
+  Contenido!publisher = txtPUBLISHER.Text
+  Contenido!location = txtLOCATION.Text
+  Contenido!editor = txtEDITOR.Text
+  Contenido!series = txtSERIES.Text
+  Contenido!relatedString = txtRELATEDSTRING.Text
+  Contenido!mainTitle = txtMAINTITLE.Text
+  Contenido!label = txtLABEL.Text
+  Contenido!shortTitle = txtSHORTTITLE.Text
+  Contenido!edition = txtEDITION.Text
+  Contenido!bookAuthor = txtBOOKAUTHOR.Text
+  Contenido!bookTitle = txtBOOKTITLE.Text
+  Contenido!volume = txtVOLUME.Text
+  Contenido!number = txtNUMBER.Text
+  Contenido!pages = txtPAGES.Text
+  Contenido!journalTitle = txtJOURNALTITLE.Text
+  Contenido!urlDate = txtURLDATE.Text
+  Contenido!doi = txtDOI.Text
+  Contenido!part = txtPART.Text
+  Contenido!volumes = txtBOLUMES.Text
+  Contenido!pageTotal = txtPAGETOTAL.Text
+  Contenido!isbn = txtISBN.Text
+  Contenido!issn = txtISSN.Text
+  Contenido!organization = txtORGANIZATION.Text
+  Contenido!institution = txtINSTITUTION.Text
+  Contenido!eventTitle = txtEVENTTITLE.Text
+  Contenido!eventDate = txtEVENTDATE.Text
+  Contenido!introduction = txtINTRODUCTION.Text
+  Contenido!translator = txtTRANSLATOR.Text
+  Contenido!afterword = txtAFTERWORD.Text
+  Contenido!foreword = txtFOREWORD.Text
+  Contenido!library = txtLIBRARY.Text
+  Contenido!annotation = txtANNOTATION.Text
+  Contenido!url = txtURL.Text
+  Contenido!commentator = txtCOMMENTATOR.Text
+  Contenido!annotator = txtANNOTATOR.Text
+  Contenido!nameAddOn = txtNAMEADDON.Text
+  Contenido!author = txtAUTHOR.Text
+  Contenido!editorA = txtEDITORa.Text
+  Contenido!editorB = txtEDITORb.Text
+  Contenido!editorC = txtEDITORc.Text
+  Contenido!holder = txtHOLDER.Text
+  Contenido!shortAuthor = txtShortAuthor.Text
+  Contenido!editorAtype = cbEDITORTYPEa.Text
+  Contenido!editorBtype = cbEDITORTYPEb.Text
+  Contenido!editorCtype = cbEDITORTYPEc.Text
+  Contenido!bookTitleAddOn = txtBookTitleAddOn.Text
+  Contenido!mainTitleAddOn = txtMainTitleAddOn.Text
+  Contenido!journalTitleAddOn = txtJournalTitleAddOn.Text
+  Contenido!issueTitleAddOn = txtIssueTitleAddOn.Text
+  Contenido!eventTitleAddOn = txtEventTitleAddOn.Text
+  Contenido!chapter = txtChapter.Text
+  Contenido!origDate = txtORIGDATE.Text
+  Contenido!version = txtVERSION.Text
+  Contenido!gender = txtGENDER.Text
+  Contenido!indexTitle = txtINDEXTITLE.Text
+  Contenido!issueTitle = txtISSUETITLE.Text
+  Contenido!reprintTitle = txtREPRINTTITLE.Text
+  Contenido!pagination = txtPAGINATION.Text
+  Contenido!langId = cbLANGUAGEID.Text
+  Contenido!venue = txtVENUE.Text
+  Contenido!bookPagination = txtBookPagination.Text
+  Contenido!langIdOpts = txtLANGIDOPTS.Text
+  Contenido!origLanguage = txtORIGLANGUAGE.Text
+  Contenido!isan = txtISAN.Text
+  Contenido!xref = txtXREF.Text
+  Contenido!xdata = txtXDATA.Text
+  Contenido!presort = txtPRESORT.Text
+  Contenido!sortkey = txtSORTKEY.Text
+  Contenido!sortname = txtSORTNAME.Text
+  Contenido!sortshorthand = txtSORTSHORTHAND.Text
+  Contenido!sorttitle = txtSORTTITLE.Text
+  Contenido!indexsorttitle = txtINDEXSORTTITLE.Text
+  Contenido!sortyear = txtSORTYEAR.Text
+  Contenido!file = txtFILE.Text
+  Contenido!abstract = txtABSTRACT.Text
+  Contenido!origLocation = txtORIGLOCATION.Text
+  Contenido!origPublisher = txtORIGPUBLISHER.Text
+  Contenido!ismn = txtISMN.Text
+  Contenido!isrn = txtISRN.Text
+  Contenido!iswc = txtISWC.Text
+  Contenido!eid = txtEID.Text
+  Contenido!eprinttype = txtEPRINTYPE.Text
+  Contenido!eprint = txtEPRINT.Text
+  Contenido!entrysubtype = txtENTRYSUBTYPE.Text
+  Contenido!howpublisher = txtHOWPUBLISHED.Text
+  Contenido!addendum = txtADDENDUM.Text
+  Contenido!shorthand = txtSHORTHAND.Text
+  Contenido!shorthandintro = txtSHORTHANDINTRO.Text
+  Contenido!options = cbOPTIONS.Text
+  Contenido!ids = txtIDS.Text
+  Contenido!entryset = txtENTRYSET.Text
+  Contenido!note = txtNOTE.Text
+  Contenido!language = txtLANGUAGE.Text
+  Contenido!issue = txtISSUE.Text
+  Contenido!titleaddon = txtTitleAddOn.Text
+  Contenido!subtitle = txtSubTitle.Text
+
+End
+
+Public Sub btnAgregarKeyBIB_Click()
+
+  Dim TextoExistente As String
+  Dim TextoAAgregar As String
+
+  ' Obtener el texto actual del cuadro de texto
+  TextoExistente = txtKEYWORDS.Text
+
+  ' Verificar si el primer carácter es una coma
+  If Left$(TextoExistente, 1) <> "," Then
+    ' Agregar una coma al principio del texto
+    TextoExistente = "," & TextoExistente
+  Endif
+
+  ' Texto que deseas agregar
+  TextoAAgregar = BaseName & ","
+
+  ' Comprobar si el cuadro de texto ya tiene texto
+  If Len(Trim(TextoExistente)) > 0 Then
+    ' Si ya hay texto, agrega el texto nuevo
+    txtKEYWORDS.Text = TextoExistente & TextoAAgregar
+  Else
+    ' Si no hay texto, simplemente establece el texto a agregar
+    txtKEYWORDS.Text = TextoAAgregar
+  Endif
+
+End
+
+Public Sub txtAUTHOR_Change()
+
+  ' Obtén la posición actual del cursor en el TextBox
+  Dim curpos As Integer
+
+  curpos = txtAUTHOR.Pos
+
+  ' Obtén el texto actual en el TextBox
+  Dim texto As String
+
+  texto = txtAUTHOR.Text
+
+  ' Reemplaza " y " por " and "
+  texto = Replace(texto, " y ", " and ")
+  texto = Replace(texto, " & ", " and ")
+  texto = Replace(texto, "’", "'")
+  texto = Replace(texto, "´", "'")
+  texto = Replace(texto, "–", "-")
+
+  ' Actualiza el contenido del TextBox
+  txtAUTHOR.Text = texto
+
+  ' Restaura la posición del cursor
+  txtAUTHOR.pos = curpos
+
+End
+
+Public Sub txtBOOKAUTHOR_Change()
+
+  Dim curpos As Integer
+
+  curpos = txtBOOKAUTHOR.Pos
+  ' Obtén el texto actual en el TextBox
+
+  ' Obtén el texto actual en el TextBox
+  Dim texto As String
+
+  texto = txtBOOKAUTHOR.Text
+
+  ' Reemplaza " y " por " and "
+  texto = Replace(texto, " y ", " and ")
+  texto = Replace(texto, " & ", " and ")
+
+  ' Actualiza el contenido del TextBox
+  txtBOOKAUTHOR.Text = texto
+
+  ' Restaura la posición del cursor
+  txtBOOKAUTHOR.pos = curpos
+
+End
+
+Public Sub txtEDITOR_Change()
+  ' Obtén la posición actual del cursor en el TextBox
+
+  Dim curpos As Integer
+
+  curpos = txtEDITOR.Pos
+  ' Obtén el texto actual en el TextBox
+
+  Dim texto As String
+
+  texto = txtEDITOR.Text
+
+  ' Reemplaza " y " por " and "
+  texto = Replace(texto, " y ", " and ")
+  texto = Replace(texto, " & ", " and ")
+
+  ' Actualiza el contenido del TextBox
+  txtEDITOR.Text = texto
+
+  ' Restaura la posición del cursor
+  txtEDITOR.pos = curpos
+
+End
+
+Public Sub eliminarBlancosBIB()
+
+  EliminarEspaciosAlInicioYFinal(txtETIQ)
+  EliminarEspaciosAlInicioYFinal(txtKEYWORDS)
+  EliminarEspaciosAlInicioYFinal(txtCROSSREF)
+  EliminarEspaciosAlInicioYFinal(txtCLAVEbib)
+  EliminarEspaciosAlInicioYFinal(txtTITLE)
+  EliminarEspaciosAlInicioYFinal(txtRELATED)
+  EliminarEspaciosAlInicioYFinal(txtYEAR)
+  EliminarEspaciosAlInicioYFinal(txtDATEY)
+  EliminarEspaciosAlInicioYFinal(txtPUBLISHER)
+  EliminarEspaciosAlInicioYFinal(txtLOCATION)
+  EliminarEspaciosAlInicioYFinal(txtEDITOR)
+  EliminarEspaciosAlInicioYFinal(txtSERIES)
+  EliminarEspaciosAlInicioYFinal(txtRELATEDSTRING)
+  EliminarEspaciosAlInicioYFinal(txtMAINTITLE)
+  EliminarEspaciosAlInicioYFinal(txtLABEL)
+  EliminarEspaciosAlInicioYFinal(txtSHORTTITLE)
+  EliminarEspaciosAlInicioYFinal(txtEDITION)
+  EliminarEspaciosAlInicioYFinal(txtBOOKAUTHOR)
+  EliminarEspaciosAlInicioYFinal(txtBOOKTITLE)
+  EliminarEspaciosAlInicioYFinal(txtVOLUME)
+  EliminarEspaciosAlInicioYFinal(txtNUMBER)
+  EliminarEspaciosAlInicioYFinal(txtPAGES)
+  EliminarEspaciosAlInicioYFinal(txtJOURNALTITLE)
+  EliminarEspaciosAlInicioYFinal(txtURLDATE)
+  EliminarEspaciosAlInicioYFinal(txtDOI)
+  EliminarEspaciosAlInicioYFinal(txtPART)
+  EliminarEspaciosAlInicioYFinal(txtBOLUMES)
+  EliminarEspaciosAlInicioYFinal(txtPAGETOTAL)
+  EliminarEspaciosAlInicioYFinal(txtISBN)
+  EliminarEspaciosAlInicioYFinal(txtISSN)
+  EliminarEspaciosAlInicioYFinal(txtORGANIZATION)
+  EliminarEspaciosAlInicioYFinal(txtINSTITUTION)
+  EliminarEspaciosAlInicioYFinal(txtEVENTTITLE)
+  EliminarEspaciosAlInicioYFinal(txtEVENTDATE)
+  EliminarEspaciosAlInicioYFinal(txtINTRODUCTION)
+  EliminarEspaciosAlInicioYFinal(txtTRANSLATOR)
+  EliminarEspaciosAlInicioYFinal(txtAFTERWORD)
+  EliminarEspaciosAlInicioYFinal(txtFOREWORD)
+  EliminarEspaciosAlInicioYFinal(txtURL)
+  EliminarEspaciosAlInicioYFinal(txtCOMMENTATOR)
+  EliminarEspaciosAlInicioYFinal(txtANNOTATOR)
+  EliminarEspaciosAlInicioYFinal(txtNAMEADDON)
+  EliminarEspaciosAlInicioYFinal(txtAUTHOR)
+  EliminarEspaciosAlInicioYFinal(txtEDITORa)
+  EliminarEspaciosAlInicioYFinal(txtEDITORb)
+  EliminarEspaciosAlInicioYFinal(txtEDITORc)
+  EliminarEspaciosAlInicioYFinal(txtHOLDER)
+  EliminarEspaciosAlInicioYFinal(txtShortAuthor)
+  EliminarEspaciosAlInicioYFinal(txtBookTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(txtMainTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(txtJournalTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(txtIssueTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(txtEventTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(txtChapter)
+  EliminarEspaciosAlInicioYFinal(txtORIGDATE)
+  EliminarEspaciosAlInicioYFinal(txtVERSION)
+  EliminarEspaciosAlInicioYFinal(txtGENDER)
+  EliminarEspaciosAlInicioYFinal(txtINDEXTITLE)
+  EliminarEspaciosAlInicioYFinal(txtISSUETITLE)
+  EliminarEspaciosAlInicioYFinal(txtREPRINTTITLE)
+  EliminarEspaciosAlInicioYFinal(txtPAGINATION)
+  EliminarEspaciosAlInicioYFinal(txtVENUE)
+  EliminarEspaciosAlInicioYFinal(txtBookPagination)
+  EliminarEspaciosAlInicioYFinal(txtLANGIDOPTS)
+  EliminarEspaciosAlInicioYFinal(txtORIGLANGUAGE)
+  EliminarEspaciosAlInicioYFinal(txtISAN)
+  EliminarEspaciosAlInicioYFinal(txtXREF)
+  EliminarEspaciosAlInicioYFinal(txtXDATA)
+  EliminarEspaciosAlInicioYFinal(txtPRESORT)
+  EliminarEspaciosAlInicioYFinal(txtSORTKEY)
+  EliminarEspaciosAlInicioYFinal(txtSORTNAME)
+  EliminarEspaciosAlInicioYFinal(txtSORTSHORTHAND)
+  EliminarEspaciosAlInicioYFinal(txtSORTTITLE)
+  EliminarEspaciosAlInicioYFinal(txtINDEXSORTTITLE)
+  EliminarEspaciosAlInicioYFinal(txtSORTYEAR)
+  EliminarEspaciosAlInicioYFinal(txtFILE)
+  EliminarEspaciosAlInicioYFinal(txtORIGLOCATION)
+  EliminarEspaciosAlInicioYFinal(txtORIGPUBLISHER)
+  EliminarEspaciosAlInicioYFinal(txtISMN)
+  EliminarEspaciosAlInicioYFinal(txtISRN)
+  EliminarEspaciosAlInicioYFinal(txtISWC)
+  EliminarEspaciosAlInicioYFinal(txtEID)
+  EliminarEspaciosAlInicioYFinal(txtEPRINTYPE)
+  EliminarEspaciosAlInicioYFinal(txtEPRINT)
+  EliminarEspaciosAlInicioYFinal(txtENTRYSUBTYPE)
+  EliminarEspaciosAlInicioYFinal(txtHOWPUBLISHED)
+  EliminarEspaciosAlInicioYFinal(txtADDENDUM)
+  EliminarEspaciosAlInicioYFinal(txtSHORTHAND)
+  EliminarEspaciosAlInicioYFinal(txtSHORTHANDINTRO)
+  EliminarEspaciosAlInicioYFinal(txtIDS)
+  EliminarEspaciosAlInicioYFinal(txtENTRYSET)
+  EliminarEspaciosAlInicioYFinal(txtLANGUAGE)
+  EliminarEspaciosAlInicioYFinal(txtTitleAddOn)
+
+End
+
+Public Sub btnChequearISBN_Click()
+
+  Dim ISBN As String = txtISBN.Text
+
+  If Mod_Exportar.EsISBNValido(ISBN) Then
+    Message.Info("El ISBN es válido.")
+  Else
+    Message.Warning("El ISBN no es válido.")
+  End If
+
+End
+
+Public Sub btnAgregarCitationKey_Click()
+
+  Dim textoOrigen As String
+  Dim posicion As Integer
+  Dim cadenaTercerTextBox As String
+  Dim cadenaCuartoTextBox As String
+  Dim Comando As String
+  Dim Header As String
+
+  Header = "@" & txtIDbibtex.Text & "-" 'prefijo de la clave bib
+
+  ' Escapa los caracteres especiales (comilla simple) en el título
+  Dim tituloEscapado As String
+
+  tituloEscapado = Replace(txtTITLE.Text, "'", "''")
+
+  eliminarBlancosBIB()
+
+  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & tituloEscapado & "%'"
+  Busqueda = meConn.Exec(Comando)
+
+  ' Obtén el texto del TextBox de origen
+  If Trim(txtAUTHOR.Text) = "" Then
+    ' Si el TextBox de origen está vacío, usa el contenido de otro TextBox
+    textoOrigen = txtEDITOR.Text
+  Else
+    textoOrigen = txtAUTHOR.Text
+  End If
+
+  ' Encuentra la posición de la primera coma, punto, punto y coma  o espacio en el texto
+  posicion = InStr(textoOrigen, ",")
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, ";")
+  End If
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, ".")
+  End If
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, " ")
+  End If
+
+  ' Si se encontró una coma, punto o espacio, copia el texto hasta esa posición
+  If posicion > 0 Then
+    textoOrigen = Left(textoOrigen, posicion - 1)
+  End If
+
+  ' Reemplaza caracteres problemáticos
+  textoOrigen = Replace(textoOrigen, "´", "")
+  textoOrigen = Replace(textoOrigen, "`", "")
+  textoOrigen = Replace(textoOrigen, " ", "")
+  textoOrigen = Replace(textoOrigen, "{", "")
+  textoOrigen = Replace(textoOrigen, "}", "")
+  textoOrigen = Replace(textoOrigen, "[", "")
+  textoOrigen = Replace(textoOrigen, "]", "")
+  textoOrigen = Replace(textoOrigen, "¿", "")
+  textoOrigen = Replace(textoOrigen, "?", "")
+  textoOrigen = Replace(textoOrigen, "¡", "")
+  textoOrigen = Replace(textoOrigen, "!", "")
+  textoOrigen = Replace(textoOrigen, "(", "")
+  textoOrigen = Replace(textoOrigen, ")", "")
+  textoOrigen = Replace(textoOrigen, "-", "")
+  textoOrigen = Replace(textoOrigen, "_", "")
+  textoOrigen = Replace(textoOrigen, "'", "")
+  textoOrigen = Replace(textoOrigen, "#", "")
+  textoOrigen = Replace(textoOrigen, "@", "")
+  textoOrigen = Replace(textoOrigen, "/", "")
+  textoOrigen = Replace(textoOrigen, "°", "")
+  textoOrigen = Replace(textoOrigen, "~", "")
+  textoOrigen = Replace(textoOrigen, "*", "")
+  textoOrigen = Replace(textoOrigen, "+", "")
+
+  textoOrigen = Replace(textoOrigen, "á", "A")
+  textoOrigen = Replace(textoOrigen, "à", "A")
+  textoOrigen = Replace(textoOrigen, "â", "A")
+  textoOrigen = Replace(textoOrigen, "ä", "A")
+  textoOrigen = Replace(textoOrigen, "ã", "A")
+  textoOrigen = Replace(textoOrigen, "å", "A")
+  textoOrigen = Replace(textoOrigen, "æ", "AE")
+  textoOrigen = Replace(textoOrigen, "ā", "A")
+  textoOrigen = Replace(textoOrigen, "ă", "A")
+  textoOrigen = Replace(textoOrigen, "ą", "A")
+  textoOrigen = Replace(textoOrigen, "ç", "C")
+  textoOrigen = Replace(textoOrigen, "ć", "C")
+  textoOrigen = Replace(textoOrigen, "č", "C")
+  textoOrigen = Replace(textoOrigen, "ď", "D")
+  textoOrigen = Replace(textoOrigen, "đ", "D")
+  textoOrigen = Replace(textoOrigen, "é", "E")
+  textoOrigen = Replace(textoOrigen, "è", "E")
+  textoOrigen = Replace(textoOrigen, "ê", "E")
+  textoOrigen = Replace(textoOrigen, "ë", "E")
+  textoOrigen = Replace(textoOrigen, "ē", "E")
+  textoOrigen = Replace(textoOrigen, "ė", "E")
+  textoOrigen = Replace(textoOrigen, "ę", "E")
+  textoOrigen = Replace(textoOrigen, "ě", "E")
+  textoOrigen = Replace(textoOrigen, "í", "I")
+  textoOrigen = Replace(textoOrigen, "ì", "I")
+  textoOrigen = Replace(textoOrigen, "î", "I")
+  textoOrigen = Replace(textoOrigen, "ï", "I")
+  textoOrigen = Replace(textoOrigen, "ī", "I")
+  textoOrigen = Replace(textoOrigen, "į", "I")
+  textoOrigen = Replace(textoOrigen, "ı", "I")
+  textoOrigen = Replace(textoOrigen, "ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "ľ", "L")
+  textoOrigen = Replace(textoOrigen, "ł", "L")
+  textoOrigen = Replace(textoOrigen, "ñ", "N")
+  textoOrigen = Replace(textoOrigen, "ń", "N")
+  textoOrigen = Replace(textoOrigen, "ň", "N")
+  textoOrigen = Replace(textoOrigen, "ó", "O")
+  textoOrigen = Replace(textoOrigen, "ò", "O")
+  textoOrigen = Replace(textoOrigen, "ô", "O")
+  textoOrigen = Replace(textoOrigen, "ö", "O")
+  textoOrigen = Replace(textoOrigen, "õ", "O")
+  textoOrigen = Replace(textoOrigen, "ő", "O")
+  textoOrigen = Replace(textoOrigen, "ø", "O")
+  textoOrigen = Replace(textoOrigen, "œ", "OE")
+  textoOrigen = Replace(textoOrigen, "ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "ř", "R")
+  textoOrigen = Replace(textoOrigen, "ś", "S")
+  textoOrigen = Replace(textoOrigen, "š", "S")
+  textoOrigen = Replace(textoOrigen, "ş", "S")
+  textoOrigen = Replace(textoOrigen, "ș", "S")
+  textoOrigen = Replace(textoOrigen, "ť", "T")
+  textoOrigen = Replace(textoOrigen, "ţ", "T")
+  textoOrigen = Replace(textoOrigen, "ț", "T")
+  textoOrigen = Replace(textoOrigen, "ú", "U")
+  textoOrigen = Replace(textoOrigen, "ù", "U")
+  textoOrigen = Replace(textoOrigen, "û", "U")
+  textoOrigen = Replace(textoOrigen, "ü", "U")
+  textoOrigen = Replace(textoOrigen, "ū", "U")
+  textoOrigen = Replace(textoOrigen, "ů", "U")
+  textoOrigen = Replace(textoOrigen, "ű", "U")
+  textoOrigen = Replace(textoOrigen, "ų", "U")
+  textoOrigen = Replace(textoOrigen, "ý", "Y")
+  textoOrigen = Replace(textoOrigen, "ÿ", "Y")
+  textoOrigen = Replace(textoOrigen, "ź", "Z")
+  textoOrigen = Replace(textoOrigen, "ż", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+
+  ' Mayúsculas
+  textoOrigen = Replace(textoOrigen, "Á", "A")
+  textoOrigen = Replace(textoOrigen, "À", "A")
+  textoOrigen = Replace(textoOrigen, "Â", "A")
+  textoOrigen = Replace(textoOrigen, "Ä", "A")
+  textoOrigen = Replace(textoOrigen, "Ã", "A")
+  textoOrigen = Replace(textoOrigen, "Å", "A")
+  textoOrigen = Replace(textoOrigen, "Æ", "AE")
+  textoOrigen = Replace(textoOrigen, "Ā", "A")
+  textoOrigen = Replace(textoOrigen, "Ă", "A")
+  textoOrigen = Replace(textoOrigen, "Ą", "A")
+  textoOrigen = Replace(textoOrigen, "Ç", "C")
+  textoOrigen = Replace(textoOrigen, "Ć", "C")
+  textoOrigen = Replace(textoOrigen, "Č", "C")
+  textoOrigen = Replace(textoOrigen, "Ď", "D")
+  textoOrigen = Replace(textoOrigen, "Đ", "D")
+  textoOrigen = Replace(textoOrigen, "É", "E")
+  textoOrigen = Replace(textoOrigen, "È", "E")
+  textoOrigen = Replace(textoOrigen, "Ê", "E")
+  textoOrigen = Replace(textoOrigen, "Ë", "E")
+  textoOrigen = Replace(textoOrigen, "Ē", "E")
+  textoOrigen = Replace(textoOrigen, "Ė", "E")
+  textoOrigen = Replace(textoOrigen, "Ę", "E")
+  textoOrigen = Replace(textoOrigen, "Ě", "E")
+  textoOrigen = Replace(textoOrigen, "Í", "I")
+  textoOrigen = Replace(textoOrigen, "Ì", "I")
+  textoOrigen = Replace(textoOrigen, "Î", "I")
+  textoOrigen = Replace(textoOrigen, "Ï", "I")
+  textoOrigen = Replace(textoOrigen, "Ī", "I")
+  textoOrigen = Replace(textoOrigen, "Į", "I")
+  textoOrigen = Replace(textoOrigen, "İ", "I")
+  textoOrigen = Replace(textoOrigen, "Ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "Ľ", "L")
+  textoOrigen = Replace(textoOrigen, "Ł", "L")
+  textoOrigen = Replace(textoOrigen, "Ñ", "N")
+  textoOrigen = Replace(textoOrigen, "Ń", "N")
+  textoOrigen = Replace(textoOrigen, "Ň", "N")
+  textoOrigen = Replace(textoOrigen, "Ó", "O")
+  textoOrigen = Replace(textoOrigen, "Ò", "O")
+  textoOrigen = Replace(textoOrigen, "Ô", "O")
+  textoOrigen = Replace(textoOrigen, "Ö", "O")
+  textoOrigen = Replace(textoOrigen, "Õ", "O")
+  textoOrigen = Replace(textoOrigen, "Ő", "O")
+  textoOrigen = Replace(textoOrigen, "Ø", "O")
+  textoOrigen = Replace(textoOrigen, "Œ", "OE")
+  textoOrigen = Replace(textoOrigen, "Ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "Ř", "R")
+  textoOrigen = Replace(textoOrigen, "Ś", "S")
+  textoOrigen = Replace(textoOrigen, "Š", "S")
+  textoOrigen = Replace(textoOrigen, "Ş", "S")
+  textoOrigen = Replace(textoOrigen, "Ș", "S")
+  textoOrigen = Replace(textoOrigen, "Ť", "T")
+  textoOrigen = Replace(textoOrigen, "Ţ", "T")
+  textoOrigen = Replace(textoOrigen, "Ț", "T")
+  textoOrigen = Replace(textoOrigen, "Ú", "U")
+  textoOrigen = Replace(textoOrigen, "Ù", "U")
+  textoOrigen = Replace(textoOrigen, "Û", "U")
+  textoOrigen = Replace(textoOrigen, "Ü", "U")
+  textoOrigen = Replace(textoOrigen, "Ū", "U")
+  textoOrigen = Replace(textoOrigen, "Ů", "U")
+  textoOrigen = Replace(textoOrigen, "Ű", "U")
+  textoOrigen = Replace(textoOrigen, "Ų", "U")
+  textoOrigen = Replace(textoOrigen, "Ý", "Y")
+  textoOrigen = Replace(textoOrigen, "Ÿ", "Y")
+  textoOrigen = Replace(textoOrigen, "Ź", "Z")
+  textoOrigen = Replace(textoOrigen, "Ż", "Z")
+  textoOrigen = Replace(textoOrigen, "Ž", "Z")
+
+  ' Adicionales
+  textoOrigen = Replace(textoOrigen, "ẑ", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+  textoOrigen = Replace(textoOrigen, "ẋ", "X")
+  textoOrigen = Replace(textoOrigen, "ẍ", "X")
+  textoOrigen = Replace(textoOrigen, "ṽ", "V")
+  textoOrigen = Replace(textoOrigen, "ṕ", "P")
+  textoOrigen = Replace(textoOrigen, "ṗ", "P")
+  textoOrigen = Replace(textoOrigen, "ʠ", "Q")
+  textoOrigen = Replace(textoOrigen, "ḿ", "M")
+  textoOrigen = Replace(textoOrigen, "ṁ", "M")
+  textoOrigen = Replace(textoOrigen, "ṃ", "M")
+  textoOrigen = Replace(textoOrigen, "ĵ", "J")
+  textoOrigen = Replace(textoOrigen, "ǰ", "J")
+  textoOrigen = Replace(textoOrigen, "ḅ", "B")
+  textoOrigen = Replace(textoOrigen, "ḃ", "B")
+  textoOrigen = Replace(textoOrigen, "ḟ", "F")
+
+  ' Elimina espacios al principio y al final
+  textoOrigen = Trim(textoOrigen)
+
+  ' Convierte el texto a mayúsculas
+  textoOrigen = UCase(textoOrigen)
+
+  ' Agregar el texto al final del TextBox de destino sin borrar su contenido actual
+  txtCLAVEbib.Text = Header & textoOrigen
+
+  ' Obtén el texto del tercer TextBox
+  cadenaTercerTextBox = txtYEAR.Text
+  cadenaTercerTextBox = Replace(cadenaTercerTextBox, "/", "")
+  cadenaTercerTextBox = UCase(cadenaTercerTextBox)
+
+  ' Verifica si el tercer TextBox está vacío
+  If Trim(cadenaTercerTextBox) = "" Then
+    ' Si el tercer TextBox está vacío, obtén el texto del cuarto TextBox
+    cadenaCuartoTextBox = txtDATEY.Text
+    cadenaCuartoTextBox = Replace(cadenaCuartoTextBox, "/", "")
+    cadenaCuartoTextBox = UCase(cadenaCuartoTextBox)
+
+    ' Verifica si el cuarto TextBox también está vacío
+    If Trim(cadenaCuartoTextBox) = "" Then
+      ' En caso de que ambos TextBox estén vacíos, agrega "-SINFECHA"
+      txtCLAVEbib.Text = txtCLAVEbib.Text & "-SINFECHA"
+    Else
+      ' Si el cuarto TextBox no está vacío, toma los primeros 4 caracteres
+      txtCLAVEbib.Text = txtCLAVEbib.Text & Left(cadenaCuartoTextBox, 4)
+    End If
+  Else
+    ' Si el tercer TextBox no está vacío, toma los primeros 4 caracteres
+    txtCLAVEbib.Text = txtCLAVEbib.Text & cadenaTercerTextBox '& Left(cadenaTercerTextBox, 4)
+  End If
+
+End
+
+Public Sub ButtonMostrarTexto1_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtABSTRACT
+  Form_TXTextendido.ShowModal
+
+End
+
+Public Sub ButtonMostrarTexto2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtNOTE
+  Form_TXTextendido.ShowModal
+
+End
+
+Public Sub ButtonMostrarTexto3_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtLIBRARY
+  Form_TXTextendido.ShowModal
+
+End
+
+Public Sub ButtonMostrarTexto4_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtANNOTATION
+  Form_TXTextendido.ShowModal
+
+End
+
+Public Sub txtPAGES_Change()
+
+  Dim curpos As Integer
+
+  curpos = txtPAGES.pos
+
+  Dim texto As String
+
+  texto = txtPAGES.Text
+
+  texto = Replace(texto, "  ", " ")
+  texto = Replace(texto, "–", "-")
+  texto = Replace(texto, "--", "-")
+  texto = Replace(texto, " -", "-")
+  texto = Replace(texto, "- ", "-")
+  texto = Replace(texto, " a ", "-")
+  texto = Replace(texto, ".", "")
+  texto = Replace(texto, " al ", "-")
+
+  txtPAGES.Text = texto
+
+  ' Restaura la posición del cursor
+  txtPAGES.pos = curpos
+
+End
+
+Public Sub BtnBuscarClave_Click()
+
+  Dim Consulta As String
+
+  If txtCLAVEbib.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE citationKey LIKE '%" & txtCLAVEbib.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 2
+  Endif
+
+End
+
+Public Sub btnGuardarIGUAL_Click()
+
+  ' Escapa los caracteres especiales (comilla simple) en el título
+  Dim tituloEscapado As String
+  Dim idExistente As Boolean
+
+  tituloEscapado = Replace(txtTITLE.Text, "'", "''")
+
+  eliminarBlancosBIB()
+
+  ' Verificar si el campo txtAUTHOR contiene un punto y coma (;)
+  If InStr(txtAUTHOR.Text, ";") > 0 Then
+    Message.Error("El campo Author no debe contener el caracter ';' (punto y coma).")
+    Return ' Salir de la función si contiene alguno de estos caracteres
+  Endif
+
+  Busqueda = meConn.Exec("SELECT * FROM  bibtex WHERE title=&1 COLLATE NOCASE", tituloEscapado)
+
+  If Busqueda.Count > 0 Then
+    idExistente = False
+  End If
+
+  ' Ahora, utilizamos una estructura if para controlar el flujo
+  If idExistente Then
+    Message.Error("No se puede generar forzar grabar la entrada porque el ID ya existe.")
+  Else
+    If ComboBox1.Text = "" Or cbLANGUAGE.Text = "" Then
+      Message.Error("No ha seleccionado el tipo de entrada o el idioma.")
+    Else
+
+      ' Contenido = Conn.Create("bibtex")
+      Contenido = meConn.Create("bibtex")
+
+      guardarCampos()
+
+      Contenido.Update
+      RefrescarGrid()
+      ' VListaBIB.Refresh
+      Message.Info("Nueva entrada guardada.")
+
+      Mod_LimpiarTextBox.LimpiarCamposBIB()
+
+      btnGuardarCambios.Visible = False
+      btnGuardar.Visible = False
+      BtnNuevoBib.Visible = True
+      BtnEliminarBib.Visible = False
+      btnAgregarCitationKey.Visible = False
+      btnGuardarIGUAL.Visible = False
+    End If
+  Endif
+
+End
+
+Public Sub mostrarIguales()
+
+  Dim Consulta As String
+
+  If txtTITLE.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTITLE.Text & "%';"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 1
+  Endif
+
+End
+
+Public Sub AsignarValores(Grid As GridView, Row As Integer, Mapeo As Collection, Formulario As Form)
+
+  For Each NombreControl As String In Mapeo
+    Dim Control As Object = Formulario[NombreControl]
+    If Control <> Null Then
+      Control.Text = Grid[Row, Mapeo[NombreControl]].Text
+    End If
+  Next
+
+End
+
+' Public Sub VListaBIB_RowClick(Row As Integer)
+'
+'   ' configurar como se muestran los botones
+'   btnGuardarCambios.Visible = True
+'   BtnEliminarBib.Visible = True
+'   btnAgregarCitationKey.Visible = True
+'   btnGuardar.Visible = False
+'   btnAgregarKeyBIB.Visible = True
+'   BtnRefrescarBib.Visible = True
+'
+'   ' Asegura de que hay una fila seleccionada y datos válidos
+'   If Row < 0 Or Row >= ContenidoBibTotal.Count Then
+'     Return
+'   Endif
+'
+'   ' ' Mover el cursor al registro seleccionado
+'   ' ContenidoBibTotal.MoveTo(Row)
+'
+'   ' ' Mover el cursor al registro seleccionado
+'   ' VListaBIB.MoveTo(Row)
+'
+'   If Row = VListaBIB.SelectedRow Then
+'
+'     ' Rellenar los campos de texto con los valores de la fila seleccionada
+'     txtIDbibtex.Text = VListaBIB[Row, 0].Text
+'     ComboBox1.Text = VListaBIB[Row, 1].Text
+'     txtCLAVEbib.Text = VListaBIB[Row, 2].Text
+'     txtKEYWORDS.Text = VListaBIB[Row, 3].Text
+'     txtAUTHOR.Text = VListaBIB[Row, 4].Text
+'   Endif
+
+' txtIDbibtex.Text = VListaBIB[Row, 0].Text
+' ComboBox1.Text = VListaBIB[Row, 1].Text
+' txtCLAVEbib.Text = VListaBIB[Row, 2].Text
+' txtKEYWORDS.Text = VListaBIB[Row, 3].Text
+' txtAUTHOR.Text = VListaBIB[Row, 4].Text
+' txtBOOKAUTHOR.Text = VListaBIB[Row, 5].Text
+' txtEDITOR.Text = VListaBIB[Row, 6].Text
+' txtEDITORa.Text = VListaBIB[Row, 7].Text
+' txtEDITORb.Text = VListaBIB[Row, 8].Text
+' txtEDITORc.Text = VListaBIB[Row, 9].Text
+' txtAFTERWORD.Text = VListaBIB[Row, 10].Text
+' txtCOMMENTATOR.Text = VListaBIB[Row, 11].Text
+' txtTRANSLATOR.Text = VListaBIB[Row, 12].Text
+' txtHOLDER.Text = VListaBIB[Row, 13].Text
+' txtShortAuthor.Text = VListaBIB[Row, 14].Text
+' cbEDITORTYPE.Text = VListaBIB[Row, 15].Text
+' cbEDITORTYPEa.Text = VListaBIB[Row, 16].Text
+' cbEDITORTYPEb.Text = VListaBIB[Row, 17].Text
+' cbEDITORTYPEc.Text = VListaBIB[Row, 18].Text
+' txtFOREWORD.Text = VListaBIB[Row, 19].Text
+' txtINTRODUCTION.Text = VListaBIB[Row, 20].Text
+' txtANNOTATOR.Text = VListaBIB[Row, 21].Text
+' txtGENDER.Text = VListaBIB[Row, 22].Text
+' txtNAMEADDON.Text = VListaBIB[Row, 23].Text
+' txtTITLE.Text = VListaBIB[Row, 24].Text
+' txtSHORTTITLE.Text = VListaBIB[Row, 25].Text
+' txtINDEXTITLE.Text = VListaBIB[Row, 26].Text
+' txtBOOKTITLE.Text = VListaBIB[Row, 27].Text
+' txtMAINTITLE.Text = VListaBIB[Row, 28].Text
+' txtJOURNALTITLE.Text = VListaBIB[Row, 29].Text
+' txtISSUETITLE.Text = VListaBIB[Row, 30].Text
+' txtEVENTTITLE.Text = VListaBIB[Row, 31].Text
+' txtREPRINTTITLE.Text = VListaBIB[Row, 32].Text
+' txtSERIES.Text = VListaBIB[Row, 33].Text
+' txtBookTitleAddOn.Text = VListaBIB[Row, 34].Text
+' txtMainTitleAddOn.Text = VListaBIB[Row, 35].Text
+' txtJournalTitleAddOn.Text = VListaBIB[Row, 36].Text
+' txtIssueTitleAddOn.Text = VListaBIB[Row, 37].Text
+' txtEventTitleAddOn.Text = VListaBIB[Row, 38].Text
+' txtChapter.Text = VListaBIB[Row, 39].Text
+' txtVOLUME.Text = VListaBIB[Row, 40].Text
+' txtEDITION.Text = VListaBIB[Row, 41].Text
+' cbPUBSTATE.Text = VListaBIB[Row, 42].Text
+' txtYEAR.Text = VListaBIB[Row, 43].Text
+' txtDATEY.Text = VListaBIB[Row, 44].Text
+' txtURLDATE.Text = VListaBIB[Row, 45].Text
+' txtBOLUMES.Text = VListaBIB[Row, 46].Text
+' txtPART.Text = VListaBIB[Row, 47].Text
+' txtISSUE.Text = VListaBIB[Row, 48].Text
+' txtEVENTDATE.Text = VListaBIB[Row, 49].Text
+' txtORIGDATE.Text = VListaBIB[Row, 50].Text
+' txtVERSION.Text = VListaBIB[Row, 51].Text
+' txtLOCATION.Text = VListaBIB[Row, 52].Text
+' txtPUBLISHER.Text = VListaBIB[Row, 53].Text
+' txtINSTITUTION.Text = VListaBIB[Row, 54].Text
+' txtORGANIZATION.Text = VListaBIB[Row, 55].Text
+' txtPAGES.Text = VListaBIB[Row, 56].Text
+' txtPAGINATION.Text = VListaBIB[Row, 57].Text
+' cbLANGUAGE.Text = VListaBIB[Row, 58].Text
+' cbLANGUAGEID.Text = VListaBIB[Row, 59].Text
+' txtLANGUAGE.Text = VListaBIB[Row, 60].Text
+' txtORIGLOCATION.Text = VListaBIB[Row, 61].Text
+' txtORIGPUBLISHER.Text = VListaBIB[Row, 62].Text
+' txtPAGETOTAL.Text = VListaBIB[Row, 63].Text
+' txtVENUE.Text = VListaBIB[Row, 64].Text
+' txtBookPagination.Text = VListaBIB[Row, 65].Text
+' txtLANGIDOPTS.Text = VListaBIB[Row, 66].Text
+' txtORIGLANGUAGE.Text = VListaBIB[Row, 67].Text
+' txtISAN.Text = VListaBIB[Row, 68].Text
+' txtISBN.Text = VListaBIB[Row, 69].Text
+' txtISMN.Text = VListaBIB[Row, 70].Text
+' txtISRN.Text = VListaBIB[Row, 71].Text
+' txtISSN.Text = VListaBIB[Row, 72].Text
+' txtISWC.Text = VListaBIB[Row, 73].Text
+' txtURL.Text = VListaBIB[Row, 74].Text
+' txtDOI.Text = VListaBIB[Row, 75].Text
+' txtEID.Text = VListaBIB[Row, 76].Text
+' txtEPRINTYPE.Text = VListaBIB[Row, 77].Text
+' txtEPRINT.Text = VListaBIB[Row, 78].Text
+' txtENTRYSUBTYPE.Text = VListaBIB[Row, 79].Text
+' txtLABEL.Text = VListaBIB[Row, 80].Text
+' txtHOWPUBLISHED.Text = VListaBIB[Row, 81].Text
+' txtADDENDUM.Text = VListaBIB[Row, 82].Text
+' txtSHORTHAND.Text = VListaBIB[Row, 83].Text
+' txtSHORTHANDINTRO.Text = VListaBIB[Row, 84].Text
+' txtETIQ.Text = VListaBIB[Row, 85].Text
+' cbOPTIONS.Text = VListaBIB[Row, 86].Text
+' txtIDS.Text = VListaBIB[Row, 87].Text 'Ids
+' txtRELATED.Text = VListaBIB[Row, 88].Text
+' CmbRelatedType.Text = VListaBIB[Row, 89].Text
+' txtRELATEDSTRING.Text = VListaBIB[Row, 90].Text
+' txtENTRYSET.Text = VListaBIB[Row, 91].Text
+' txtCROSSREF.Text = VListaBIB[Row, 92].Text
+' txtXREF.Text = VListaBIB[Row, 93].Text
+' txtXDATA.Text = VListaBIB[Row, 94].Text
+' txtPRESORT.Text = VListaBIB[Row, 95].Text
+' txtSORTKEY.Text = VListaBIB[Row, 96].Text
+' txtSORTNAME.Text = VListaBIB[Row, 97].Text
+' txtSORTSHORTHAND.Text = VListaBIB[Row, 98].Text
+' txtSORTTITLE.Text = VListaBIB[Row, 99].Text
+' txtINDEXSORTTITLE.Text = VListaBIB[Row, 100].Text
+' txtSORTYEAR.Text = VListaBIB[Row, 101].Text
+' txtFILE.Text = VListaBIB[Row, 102].Text
+' txtABSTRACT.Text = VListaBIB[Row, 103].Text
+' txtLIBRARY.Text = VListaBIB[Row, 104].Text
+' txtNOTE.Text = VListaBIB[Row, 105].Text
+' txtANNOTATION.Text = VListaBIB[Row, 106].Text
+' txtNUMBER.Text = VListaBIB[Row, 107].Text
+' ' txtCreationDay108.Text = VListaBIB[Row, 108].Text' este registro quedo disponible
+' cbType.Text = VListaBIB[Row, 109].Text
+' txtTitleAddOn.Text = VListaBIB[Row, 110].Text
+' txtSubTitle.Text = VListaBIB[Row, 111].Text
+
+' End
+
+' Public Sub VListaBIB_RowClick(Row As Integer)
+'
+'   btnGuardarCambios.Visible = True
+'   BtnEliminarBib.Visible = True
+'   btnAgregarCitationKey.Visible = True
+'   btnGuardar.Visible = False
+'   btnAgregarKeyBIB.Visible = True
+'   BtnRefrescarBib.Visible = True
+'
+'   txtIDbibtex.Text = VListaBIB[Row, 0].Text
+'   ComboBox1.Text = VListaBIB[Row, 1].Text
+'   txtCLAVEbib.Text = VListaBIB[Row, 2].Text
+'   txtKEYWORDS.Text = VListaBIB[Row, 3].Text
+'   txtAUTHOR.Text = VListaBIB[Row, 4].Text
+'   txtBOOKAUTHOR.Text = VListaBIB[Row, 5].Text
+'   txtEDITOR.Text = VListaBIB[Row, 6].Text
+'   txtEDITORa.Text = VListaBIB[Row, 7].Text
+'   txtEDITORb.Text = VListaBIB[Row, 8].Text
+'   txtEDITORc.Text = VListaBIB[Row, 9].Text
+'   txtAFTERWORD.Text = VListaBIB[Row, 10].Text
+'   txtCOMMENTATOR.Text = VListaBIB[Row, 11].Text
+'   txtTRANSLATOR.Text = VListaBIB[Row, 12].Text
+'   txtHOLDER.Text = VListaBIB[Row, 13].Text
+'   txtShortAuthor.Text = VListaBIB[Row, 14].Text
+'   cbEDITORTYPE.Text = VListaBIB[Row, 15].Text
+'   cbEDITORTYPEa.Text = VListaBIB[Row, 16].Text
+'   cbEDITORTYPEb.Text = VListaBIB[Row, 17].Text
+'   cbEDITORTYPEc.Text = VListaBIB[Row, 18].Text
+'   txtFOREWORD.Text = VListaBIB[Row, 19].Text
+'   txtINTRODUCTION.Text = VListaBIB[Row, 20].Text
+'   txtANNOTATOR.Text = VListaBIB[Row, 21].Text
+'   txtGENDER.Text = VListaBIB[Row, 22].Text
+'   txtNAMEADDON.Text = VListaBIB[Row, 23].Text
+'   txtTITLE.Text = VListaBIB[Row, 24].Text
+'   txtSHORTTITLE.Text = VListaBIB[Row, 25].Text
+'   txtINDEXTITLE.Text = VListaBIB[Row, 26].Text
+'   txtBOOKTITLE.Text = VListaBIB[Row, 27].Text
+'   txtMAINTITLE.Text = VListaBIB[Row, 28].Text
+'   txtJOURNALTITLE.Text = VListaBIB[Row, 29].Text
+'   txtISSUETITLE.Text = VListaBIB[Row, 30].Text
+'   txtEVENTTITLE.Text = VListaBIB[Row, 31].Text
+'   txtREPRINTTITLE.Text = VListaBIB[Row, 32].Text
+'   txtSERIES.Text = VListaBIB[Row, 33].Text
+'   txtBookTitleAddOn.Text = VListaBIB[Row, 34].Text
+'   txtMainTitleAddOn.Text = VListaBIB[Row, 35].Text
+'   txtJournalTitleAddOn.Text = VListaBIB[Row, 36].Text
+'   txtIssueTitleAddOn.Text = VListaBIB[Row, 37].Text
+'   txtEventTitleAddOn.Text = VListaBIB[Row, 38].Text
+'   txtChapter.Text = VListaBIB[Row, 39].Text
+'   txtVOLUME.Text = VListaBIB[Row, 40].Text
+'   txtEDITION.Text = VListaBIB[Row, 41].Text
+'   cbPUBSTATE.Text = VListaBIB[Row, 42].Text
+'   txtYEAR.Text = VListaBIB[Row, 43].Text
+'   txtDATEY.Text = VListaBIB[Row, 44].Text
+'   txtURLDATE.Text = VListaBIB[Row, 45].Text
+'   txtBOLUMES.Text = VListaBIB[Row, 46].Text
+'   txtPART.Text = VListaBIB[Row, 47].Text
+'   txtISSUE.Text = VListaBIB[Row, 48].Text
+'   txtEVENTDATE.Text = VListaBIB[Row, 49].Text
+'   txtORIGDATE.Text = VListaBIB[Row, 50].Text
+'   txtVERSION.Text = VListaBIB[Row, 51].Text
+'   txtLOCATION.Text = VListaBIB[Row, 52].Text
+'   txtPUBLISHER.Text = VListaBIB[Row, 53].Text
+'   txtINSTITUTION.Text = VListaBIB[Row, 54].Text
+'   txtORGANIZATION.Text = VListaBIB[Row, 55].Text
+'   txtPAGES.Text = VListaBIB[Row, 56].Text
+'   txtPAGINATION.Text = VListaBIB[Row, 57].Text
+'   cbLANGUAGE.Text = VListaBIB[Row, 58].Text
+'   cbLANGUAGEID.Text = VListaBIB[Row, 59].Text
+'   txtLANGUAGE.Text = VListaBIB[Row, 60].Text
+'   txtORIGLOCATION.Text = VListaBIB[Row, 61].Text
+'   txtORIGPUBLISHER.Text = VListaBIB[Row, 62].Text
+'   txtPAGETOTAL.Text = VListaBIB[Row, 63].Text
+'   txtVENUE.Text = VListaBIB[Row, 64].Text
+'   txtBookPagination.Text = VListaBIB[Row, 65].Text
+'   txtLANGIDOPTS.Text = VListaBIB[Row, 66].Text
+'   txtORIGLANGUAGE.Text = VListaBIB[Row, 67].Text
+'   txtISAN.Text = VListaBIB[Row, 68].Text
+'   txtISBN.Text = VListaBIB[Row, 69].Text
+'   txtISMN.Text = VListaBIB[Row, 70].Text
+'   txtISRN.Text = VListaBIB[Row, 71].Text
+'   txtISSN.Text = VListaBIB[Row, 72].Text
+'   txtISWC.Text = VListaBIB[Row, 73].Text
+'   txtURL.Text = VListaBIB[Row, 74].Text
+'   txtDOI.Text = VListaBIB[Row, 75].Text
+'   txtEID.Text = VListaBIB[Row, 76].Text
+'   txtEPRINTYPE.Text = VListaBIB[Row, 77].Text
+'   txtEPRINT.Text = VListaBIB[Row, 78].Text
+'   txtENTRYSUBTYPE.Text = VListaBIB[Row, 79].Text
+'   txtLABEL.Text = VListaBIB[Row, 80].Text
+'   txtHOWPUBLISHED.Text = VListaBIB[Row, 81].Text
+'   txtADDENDUM.Text = VListaBIB[Row, 82].Text
+'   txtSHORTHAND.Text = VListaBIB[Row, 83].Text
+'   txtSHORTHANDINTRO.Text = VListaBIB[Row, 84].Text
+'   txtETIQ.Text = VListaBIB[Row, 85].Text
+'   cbOPTIONS.Text = VListaBIB[Row, 86].Text
+'   txtIDS.Text = VListaBIB[Row, 87].Text 'Ids
+'   txtRELATED.Text = VListaBIB[Row, 88].Text
+'   CmbRelatedType.Text = VListaBIB[Row, 89].Text
+'   txtRELATEDSTRING.Text = VListaBIB[Row, 90].Text
+'   txtENTRYSET.Text = VListaBIB[Row, 91].Text
+'   txtCROSSREF.Text = VListaBIB[Row, 92].Text
+'   txtXREF.Text = VListaBIB[Row, 93].Text
+'   txtXDATA.Text = VListaBIB[Row, 94].Text
+'   txtPRESORT.Text = VListaBIB[Row, 95].Text
+'   txtSORTKEY.Text = VListaBIB[Row, 96].Text
+'   txtSORTNAME.Text = VListaBIB[Row, 97].Text
+'   txtSORTSHORTHAND.Text = VListaBIB[Row, 98].Text
+'   txtSORTTITLE.Text = VListaBIB[Row, 99].Text
+'   txtINDEXSORTTITLE.Text = VListaBIB[Row, 100].Text
+'   txtSORTYEAR.Text = VListaBIB[Row, 101].Text
+'   txtFILE.Text = VListaBIB[Row, 102].Text
+'   txtABSTRACT.Text = VListaBIB[Row, 103].Text
+'   txtLIBRARY.Text = VListaBIB[Row, 104].Text
+'   txtNOTE.Text = VListaBIB[Row, 105].Text
+'   txtANNOTATION.Text = VListaBIB[Row, 106].Text
+'   txtNUMBER.Text = VListaBIB[Row, 107].Text
+'   txtCreationDay108.Text = VListaBIB[Row, 108].Text' este registro quedo disponible
+'   cbType.Text = VListaBIB[Row, 109].Text
+'   txtTitleAddOn.Text = VListaBIB[Row, 110].Text
+'   txtSubTitle.Text = VListaBIB[Row, 111].Text
+'
+' End
+
+Public Sub txtPUBLISHER_Change()
+
+  Dim curpos As Integer
+
+  curpos = txtPUBLISHER.Pos
+
+  ' Obtén el texto actual en el TextBox
+  Dim texto As String
+
+  texto = txtPUBLISHER.Text
+
+  ' Reemplazos
+  texto = Replace(texto, " y ", " and ")
+  texto = Replace(texto, " & ", " \\& ")
+  texto = Replace(texto, "’", "'")
+  texto = Replace(texto, "´", "'")
+
+  ' Actualiza el contenido del TextBox
+  txtPUBLISHER.Text = texto
+
+  ' Restaura la posición del cursor
+  txtPUBLISHER.pos = curpos
+
+End
+
+Public Sub BtnBuscarBookTitle_Click()
+
+  Dim Consulta As String
+
+  If txtBOOKTITLE.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & txtBOOKTITLE.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 2
+  Endif
+
+End
+
+Public Sub txtABSTRACT_DblClick()
+
+  Form_TXTextendido.OriginalTextBox = txtABSTRACT
+  Form_TXTextendido.ShowModal
+
+End
+
+Public Sub menuAPA_Click()
+
+  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/biblatex-contrib/biblatex-apa/biblatex-apa.pdf"
+
+End
+
+Public Sub menuESTADISTICAS_Click()
+
+  Message.Info("Función en desarrollo.", "Aceptar")
+
+End
+
+Public Sub BtnBuscarJournal_Click()
+
+  Dim Consulta As String
+
+  If txtJOURNALTITLE.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & txtJOURNALTITLE.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 2
+  Endif
+
+End
+
+Public Sub btnBuscarFiltroGlosario_Click()
+
+  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "SELECT * FROM glosarios WHERE archivo LIKE '%" & txtARCHIVO.Text & "%' ORDER BY id DESC;"
+
+  If txtARCHIVO.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = meConn.Exec(Comando)
+
+  ' Limpia el VGridGLO antes de mostrar los resultados de la búsqueda
+  VGridGLO.Clear()
+
+  ' Si la búsqueda no arroja resultados
+  If Busqueda.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Configura las columnas en el VGridGLO
+  VGridGLO.Columns.Count = 11
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Llena las celdas de la fila con los datos del resultado
+    VGridGLO[rowIndex, 0].Text = Busqueda!id
+    VGridGLO[rowIndex, 1].Text = Busqueda!key
+    VGridGLO[rowIndex, 2].Text = Busqueda!type
+    VGridGLO[rowIndex, 3].Text = Busqueda!archivo
+    VGridGLO[rowIndex, 4].Text = Busqueda!name
+    VGridGLO[rowIndex, 5].Text = Busqueda!description
+    VGridGLO[rowIndex, 6].Text = Busqueda!first
+    VGridGLO[rowIndex, 7].Text = Busqueda!text
+    VGridGLO[rowIndex, 8].Text = Busqueda!plural
+    VGridGLO[rowIndex, 9].Text = Busqueda!firstplural
+    VGridGLO[rowIndex, 10].Text = Busqueda!sort
+
+    ' Incrementa rowIndex para la siguiente fila
+    rowIndex += 1
+
+    ' Avanza al siguiente resultado
+    Busqueda.MoveNext
+  Wend
+
+End
+
+Public Sub Splitter2_Resize()
+
+  Splitter2.Layout = [3, 1]
+
+End
+
+Public Sub Mostrar_Lista_Tareas() ' Función para popular la lista de eventos
+
+  Contenido = meConn.Exec("select id, completado, titulo from tareas")
+  If Contenido.Available Then
+    VLista.Clear
+    While (Contenido.Available)
+      If Contenido!completado = False Then
+        VLista.Add(CInt(Contenido!id), Contenido!titulo, Picture["./iconos/incomp.svg"])
+      Else
+        VLista.Add(CInt(Contenido!id), Contenido!titulo, Picture["./iconos/comp.svg"])
+      Endif
+      Contenido.MoveNext
+    Wend
+
+  End If
+
+  If VLista.Count = 0 Then 'Si no hay ningún contenido en la lista limpiar ocultar el panel de contenido y desactivar menú borrar todos
+    txtTAREAS.Text = ""
+    txtTAREAS.Visible = False
+    mnuBorrarTODOS.Enabled = False
+  Else
+    mnuBorrarTODOS.Enabled = True
+  End If
+
+  Chequear_Realizados()
+
+End
+
+Public Sub mnuBorrarTODOS_Click()
+
+  If Message.Question("¿Está seguro de que desea borrar todos los ítems marcados como completados?") = 1 Then
+    ' Conn.Exec("delete from tareas where completado=True")
+    meConn.Exec("delete from tareas where completado=True")
+    'Limpiamos lista y recargamos
+    VLista.Clear
+    Mostrar_Lista_Tareas
+  Else
+    Return
+
+  Endif
+
+  txtTAREAS.Visible = False ' Cerramos el panel lateral por si queda abierto tras borrar ítem realizado
+
+End
+
+Public Sub Chequear_Realizados()
+  ' Función para chequear si hay elementos completados de la lista así habilitamos / deshabilitamos el menú de borrado los elementos completados
+
+  mnuBorrarTODOS.Enabled = False
+
+  Contenido = meConn.Exec("select completado from tareas where completado=true")
+  If Contenido.Available = ""
+    Return
+  Else
+    mnuBorrarTODOS.Enabled = True
+  Endif
+
+End
+
+' esta función no me convence su utilidad
+Public Sub mnMarcarIncompleto_Click()
+
+  If VLista.Selected = False Then
+    Message.Error("Debe elegir un ítem primero")
+    Return
+  Endif
+
+  Contenido = meConn.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido!completado = False
+  contenido.Update
+
+  'Limpiamos lista y recargamos
+  VLista.Clear
+  Mostrar_Lista_Tareas
+
+End
+
+Public Sub mnMarcarCompletado_Click()
+  'Chequeamos primero que se haya seleccionado un elemento de la lista
+
+  If VLista.Selected = False Then
+    Message.Error("Debe elegir un ítem primero")
+    Return
+  Endif
+
+  Contenido = meConn.Edit("tareas", "id=" & Item_Seleccionado)
+  Contenido!completado = True
+  contenido.Update
+
+  'Limpiamos lista y recargamos
+  VLista.Clear
+  Mostrar_Lista_Tareas
+
+End
+
+Public Sub menuBORRARtarea_Click()
+
+  'Chequeamos primero que se haya seleccionado un elemento de la lista
+  If VLista.Selected = False Then
+    Message.Error("Debe elegir un ítem primero")
+    Return
+  Endif
+
+  If Message.Question("¿Está seguro de que desea borrar este ítem?", "Si", "No") = 1 Then
+    Contenido = meConn.Exec("delete from tareas where id=" & Item_Seleccionado)
+  Endif
+
+  If VLista.Count = 0 Then 'Si no hay ningún contenido en la lista limpiar ocultar el panel de contenido
+    txtTAREAS.Text = ""
+    txtTAREAS.Visible = False
+  Endif
+
+  'Limpiamos lista y recargamos
+  VLista.Clear
+  Mostrar_Lista_Tareas
+
+  txtTAREAS.Visible = False 'Cerramos el panel lateral para que no quede abierto tras borrar ítem que pueda conetener
+
+End
+
+Public Sub VLista_Select() ' Función que nos muestra el contenido del título elegido en la ListView
+
+  Contenido = meConn.Exec("select contenido from tareas where id = " & VLista.Item.key)
+  If Contenido!contenido <> "" Then
+    txtTAREAS.Text = Contenido!contenido
+    txtTAREAS.pos = 0
+    txtTAREAS.Visible = True
+  Else
+    txtTAREAS.Visible = False
+  Endif
+
+  Item_Seleccionado = VLista.Item.key
+
+  Print (Item_Seleccionado)
+
+End
+
+Public Sub menuADD_Click()
+
+  Form_Tareas.ShowModal()
+
+End
+
+Public Sub AplicarMayusculasALetras(textBox As TextBox)
+
+  Dim Resultado As String
+  Dim convertir As Boolean = True ' Capitalizar la primera letra al inicio
+
+  ' Obtener el texto actual del TextBox
+  sTB_Text = TextBox.Text
+
+  ' Recorrer cada carácter en la cadena
+  For i As Integer = 1 To String.Len(sTB_Text)
+    Dim caracter As String = String.Mid(sTB_Text, i, 1)
+
+    ' Verificar si se debe convertir a mayúscula
+    If convertir And (caracter >= "a" And caracter <= "z") Then
+      Resultado &= String.UCase(caracter)
+      convertir = False ' Después de convertir, no se debe convertir el siguiente carácter
+    Else
+      Resultado &= String.LCase(caracter)
+    End If
+
+    ' Si el carácter actual es un punto
+    If caracter = "." Then
+      ' Asegurarse de que haya un espacio después del punto
+      If i < String.Len(sTB_Text) And String.Mid(sTB_Text, i + 1, 1) = " " Then
+        convertir = True
+      End If
+    End If
+
+    ' Si el carácter actual es un espacio, el próximo carácter debe convertirse a mayúscula si se siguió un punto
+    If caracter = " " Then
+      ' Solo reactivar convertir si el carácter anterior era un punto
+      If i > 1 And String.Mid(sTB_Text, i - 1, 1) = "." Then
+        convertir = True
+      End If
+    End If
+  Next
+
+  ' Establecer el nuevo texto en el TextBox
+  textBox.Text = Resultado
+
+End
+
+Public Sub AplicarMayusculasTotal(textBox As TextBox)
+
+  Dim Resultado As String
+
+  ' Obtener el texto actual del TextBox
+  sTB_Text = textBox.Text
+
+  ' Variable para determinar si el próximo carácter debe convertirse a mayúscula
+  Dim convertir As Boolean = True
+
+  ' Recorrer cada carácter en la cadena
+  For i As Integer = 1 To String.Len(sTB_Text)
+    Dim caracter As String = String.Mid(sTB_Text, i, 1)
+
+    ' Verificar si se debe convertir a mayúscula
+    If convertir Then
+      ' Verificar la excepción para la palabra "and"
+      Dim palabraAnd As String = String.LCase(String.Mid(sTB_Text, i, 3))
+
+      If palabraAnd = "and" Then
+        Resultado &= "and" ' Agregar "and" sin cambios
+        i = i + 2 ' Saltar las letras de la palabra "and"
+      Else
+        Resultado &= String.UCase(caracter) ' Convertir a mayúscula
+      End If
+
+      convertir = False
+    Else
+      Resultado &= String.UCase(caracter) ' Convertir a mayúscula
+    End If
+
+    ' Si el carácter actual es un espacio, el próximo carácter debe convertirse
+    If caracter = " " Then
+      convertir = True
+    End If
+  Next
+
+  ' Establecer el nuevo texto en el TextBox
+  textBox.Text = Resultado
+
+End
+
+Public Sub menuMAYexcepciones_Click()
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarMayusculasTotal(LastTextBox)
+
+End
+
+Public Sub menuCONVERSORpandoc_Click()
+  ' Configura el diálogo para seleccionar un archivo DOCX
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.docx", "Archivos Word", "*", "Todos los archivos"]
+  Dialog.AutoExt = True
+  Dialog.Path = User.Home
+
+  ' Abre el diálogo para seleccionar el archivo
+  If Dialog.OpenFile() Then
+    Return
+  Endif
+
+  ' Obtiene la ruta del directorio del archivo seleccionado
+  Dim directoryPath As String
+  directoryPath = File.Dir(Dialog.Path)
+
+  ' Construye la ruta completa para el archivo de salida
+  Dim outputPath As String
+  outputPath = directoryPath &/ "tmp.tex"
+
+  ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
+  Shell "pandoc -f docx -t latex --wrap=none " & Quote$(Dialog.Path) & " -o " & Quote$(outputPath) Wait
+
+  ' Verifica si el archivo tmp.tex fue creado exitosamente
+  If Exist(outputPath) Then
+    Message.Info("La conversión a sido exitosa, el archivo: " & outputPath & " ha sido creado.")
+  Else
+    Message.Error("Error: No se pudo convertir el archivo.")
+  Endif
+
+End
+
+Public Sub AllTextBoxes_MouseDown()
+
+  LastTextBox = Last
+  sTB_Text = Last.Text
+
+End
+
+Public Sub menuBUSCARgoogle_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://www.google.com/search?q=" & sTB_Text)
+
+End
+
+Public Sub menuBUSCARduckduckgo_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://html.duckduckgo.com/html?q=" & sTB_Text)'
+
+End
+
+Public Sub menuBUSCARbing_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://www.bing.com/search?q=" & sTB_Text)
+
+End
+
+Public Sub menuBUSCARrae_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://dle.rae.es/" & sTB_Text)
+
+End
+
+Public Sub menuWordReference_Click()
+
+  If sTB_Text <> "" Then Desktop.Open("https://www.wordreference.com/definicion/" & sTB_Text)
+
+End
+
+Public Sub menuFUNDEU_Click()
+
+  ' Reemplaza los espacios en blanco con el signo de "+" para formatear la consulta de búsqueda
+  sTB_Text = Replace(Replace(sTB_Text, " ", "+"), ",+", "+")
+
+  If sTB_Text <> "" Then Desktop.Open("https://cse.google.com/cse?cx=005053095451413799011:alg8dd3pluq&q=" & sTB_Text)
+
+End
+
+Public Sub menuGlifos_Click()' Corregir glifos
+
+  If sTB_Text <> "" Then
+    LastTextBox.Text = Replace(LastTextBox.Text, "’", "'")
+    LastTextBox.Text = Replace(LastTextBox.Text, "´", "'")
+  End If
+
+End
+
+Public Sub menuMIN_Click()' Convierte el texto del TextBox capturado a minúscula
+
+  If sTB_Text <> "" Then
+    LastTextBox.Text = Trim(LastTextBox.Text)
+    LastTextBox.Text = String.LCase(LastTextBox.Text)
+  End If
+
+End
+
+Public Sub menuMAYinicialESPANOL_Click()
+
+  If sTB_Text <> "" Then
+    LastTextBox.Text = String.LCase(LastTextBox.Text)
+    AplicarMayusculasALetras(LastTextBox)
+  End If
+
+End
+
+Public Sub menuMAY_Click()' Convierte el texto del TextBox capturado a mayúsculas
+
+  If sTB_Text <> "" Then
+    LastTextBox.Text = Trim(LastTextBox.Text)
+    LastTextBox.Text = String.UCase(LastTextBox.Text)
+  End If
+
+End
+
+Public Sub AplicarMayusculasConExcepcion(textBox As TextBox)'usada para normalizar autores
+
+  Dim Resultado As String
+  Dim palabras As String[] = Split(textBox.Text, " ")
+  Dim palabraActual As String
+
+  For i As Integer = 0 To palabras.Max
+    palabraActual = palabras[i]
+
+    ' Verificar si la palabra es "y" o "&"
+    If palabraActual = "y" Or palabraActual = "&" Or palabraActual = ", y" Then
+      Resultado &= "and"
+    Else If palabraActual = "and" Then
+      Resultado &= "and"
+    Else
+      ' Convertir la primera letra a mayúscula y el resto a minúscula
+      Resultado &= String.UCase(String.Left(palabraActual, 1)) & String.LCase(Mid(palabraActual, 2))
+      ' Reemplazar la secuencia ", y" por " and " (con espacios antes y después)
+      Resultado = Replace(Resultado, ", and ", " and ")
+      Resultado = Replace(Resultado, "; and ", " and ")
+      Resultado = Replace(Resultado, ". and ", " and ")
+    End If
+
+    ' Agregar un espacio entre palabras excepto al final
+    If i < palabras.Max Then
+      Resultado &= " "
+    End If
+  Next
+
+  ' Establecer el nuevo texto en el TextBox
+  textBox.Text = Resultado
+
+End
+
+Public Sub AplicarTitleCase(textBox As TextBox)
+
+  Dim Resultado As String
+  Dim palabras As String[]
+
+  ' Dividir el texto en palabras separadas por espacios
+  palabras = Split(sTB_Text, " ")
+
+  ' Lista de palabras que deben ir en minúsculas (excepto si son la primera, última palabra, o después de un punto)
+  Dim minusc As New Collection
+
+  minusc.Add("and", "and")
+  minusc.Add("but", "but")
+  minusc.Add("or", "or")
+  minusc.Add("the", "the")
+  minusc.Add("a", "a")
+  minusc.Add("an", "an")
+  minusc.Add("in", "in")
+  minusc.Add("on", "on")
+  minusc.Add("at", "at")
+  minusc.Add("by", "by")
+  minusc.Add("for", "for")
+  minusc.Add("with", "with")
+  minusc.Add("about", "about")
+  minusc.Add("from", "from")
+  minusc.Add("of", "of")
+  minusc.Add("to", "to")
+
+  Dim convertirProximaPalabra As Boolean = True ' Para manejar después de un punto y la primera palabra
+
+  For i As Integer = 0 To palabras.Max
+    Dim palabra As String = String.LCase(palabras[i])
+
+    ' Manejo de palabras con guiones
+    Dim subPalabras As String[] = Split(palabra, "-")
+    Dim palabraFinal As String = "" ' Inicializar palabraFinal en cada iteración
+
+    For Each subPalabra As String In subPalabras
+      ' Si es la primera, última palabra, después de un punto, o la subpalabra no está en la lista de minúsculas
+      If convertirProximaPalabra Or i = 0 Or i = palabras.Max Or Not minusc.Exist(subPalabra) Then
+        palabraFinal &= String.UCase(String.Left(subPalabra, 1)) & String.LCase(String.Mid(subPalabra, 2))
+      Else
+        palabraFinal &= subPalabra
+      End If
+
+      ' Añadir guion entre las subpalabras
+      If subPalabra <> subPalabras.Last Then
+        palabraFinal &= "-"
+      End If
+    Next
+
+    Resultado &= palabraFinal
+
+    ' Verificar si la palabra actual termina con un punto
+    If String.Right(palabras[i], 1) = "." Then
+      convertirProximaPalabra = True
+    Else
+      convertirProximaPalabra = False
+    End If
+
+    ' Añadir un espacio después de cada palabra, excepto la última
+    If i < palabras.Max Then
+      Resultado &= " "
+    End If
+  Next
+
+  ' Establecer el nuevo texto en el TextBox
+  textBox.Text = Resultado
+
+End
+
+Public Sub menuMAYinicialINGLES_Click()
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarTitleCase(LastTextBox)
+
+End
+
+Public Sub menuIrURL_Click()
+
+  Dim url As String
+
+  url = sTB_Text
+
+  If url <> "" Then Shell "xdg-open " & url
+
+End
+
+Public Sub menuMAYand_Click()'aplicar mayuscula para autores
+
+  If sTB_Text <> "" Then LastTextBox.Text = String.LCase(LastTextBox.Text)
+  AplicarMayusculasConExcepcion(LastTextBox)
+
+End
+
+Public Sub menuAbrirQuarto_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.md", "Archivo de Markdown"]
+  Dialog.AutoExt = True
+  Dialog.Path = User.Home
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    PanelLaTeX.Visible = False
+    PanelLaTeX.Enabled = False
+    PanelQuarto.Visible = True
+    PanelQuarto.Enabled = True
+    HBoxNuevoArtCap.Enabled = True
+    HBoxNuevoArtCap.Visible = True
+    habilitamosRevista()
+    TextBox1.Text = Dialog.Path
+    ' sCurrentFilePath = TextBox1.Text
+    DirViewRuta.Root = File.Dir(TextBox1.Text)
+    guardarTipoDocumentoRevista()
+    Mod_LimpiarTextBox.LimpiarCamposBIB()
+    HBoxPanelRevista.Visible = True
+    TabPanelRevista.Visible = True
+    HBoxPanelLibro.Visible = False
+    TabPanelLibro.Visible = False
+    BaseName = File.BaseName(TextBox1.Text)
+    rutaFILES = File.Dir(TextBox1.Text) & "/files"
+    btnGuardarIGUAL.Visible = False
+    TabPanel1.Visible = True
+    menuBORRARaux.Enabled = True
+    menuComprimir.Enabled = True
+    menuTOOLS.Enabled = True
+    menuScriptsExternos.Enabled = True
+    menuLTX.Enabled = True
+    MenuApp.Enabled = True
+    Button4.Enabled = True
+    btnMenuGIT.Enabled = True
+    btnMenuGitLab.Enabled = True
+    btnKanban.Enabled = True
+    menuGray.Enabled = True
+    menuCatalogo.Enabled = True
+    MenuButton2.Visible = False
+    MenuButton3.Visible = False
+    Menu4.Enabled = True
+    menuOT.Enabled = True
+    menuPDFweb.Enabled = True
+    menuDisclaimer.Enabled = True
+    If Form_Notas.Visible Then
+      Form_Notas.Close ' Cierra la ventana
+    End If
+    Mod_Funciones.CopiarArchivosQuadro(TextBox1.Text)
+    ' levantamos los datos de comentario
+    levantarComenta()
+    levantarGitHubPages()' levantamos los datos de githubpages
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
+    MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
+    contarEntradasBIByGLO()' mostramos las cantidades en el boton
+    ' limpiamos las entradas de los metadatos
+    Mod_Funciones.limpiamosMetadatosLibrosRevistas()
+    'cargamos datos en los gridview
+    Mostrar_ListaGLO()
+    TotalEntradasBIByGLO()'actualizamos el contador de entradas
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
+    ' Ejecutar la consulta SQL
+    ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+    ' refrescamos los datos en los grid del archivo en curso
+    gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
+    tbRefDup.Rows.Count = ContenidoBibActual.Count
+    Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
+    txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
+    txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
+    txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
+    'posicionamos la consola con el path del archivo de trabajo
+    TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
+    TerminalView1.SetFocus()
+  Endif
+
+  ' If Not MS.Matrix.Exist(Dialog.Path) Then
+  '   If MS.Matrix.Count = MS.iLastNumber Then
+  '     MS.Matrix.Remove(0)
+  '     MS.ShortMatrix.Remove(0)
+  '   End If
+  '   MS.Matrix.Add(Dialog.Path)
+  '   MS.ShortMatrix.Add(File.Name(Dialog.Path))
+  '   UpdateMenu()
+  ' End If
+
+  '
+
+  ' 'comienza metadatos
+  ' Dim comando As String
+  ' ' buscamos la entrada que coincida con el archivo
+  ' comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
+  ' Contenido = meConn.Exec(Comando)
+  ' If Contenido.Count > 0 Then
+  '   BtnNuevoMeta.Visible = False
+  '   btnGuardarMeta.Visible = False
+  '   btnGuardarCambiosMeta.Visible = True
+  '   txtIDglosario.Text = Contenido!id
+  '   txtnombreArchivo.Text = Contenido!nombreArchivo
+  '   txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
+  '   txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
+  '   txt04_pdfxmp3.Text = Contenido!pdfxmp3_04
+  '   txt05_pdfauthor.Text = Contenido!pdfauthor_05
+  '   txt06_pdftitle.Text = Contenido!pdftitle_06
+  '   txtSubjet.Text = Contenido!pdfsubject_07
+  '   txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
+  '   txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
+  '   txtKeywords.Text = Contenido!pdfkeywords_08
+  '   txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
+  '   txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
+  '   txtDate.Text = Contenido!pdfdate_11
+  '   txtCreationDate.Text = Contenido!pdfcreationdate_12
+  '   txtModDate.Text = Contenido!pdfmoddate_13
+  '   txtMetaDate.Text = Contenido!pdfmetadate_14
+  '   txt15_pdfcopyright.Text = Contenido!pdfcopyright_15
+  '   txt16_pdflicenseurl.Text = Contenido!pdflicenseurl_16
+  '   txtCaptionWriter.Text = Contenido!pdfcaptionwriter_17
+  '   txtContactAddress.Text = Contenido!pdfcontactaddress_18
+  '   txtContactCity.Text = Contenido!pdfcontactcity_19
+  '   txtContactPostCode.Text = Contenido!pdfcontactpostcode_20
+  '   txtContactCountry.Text = Contenido!pdfcontactcountry_21
+  '   txtContactRegion.Text = Contenido!pdfcontactregion_22
+  '   txtContactPhone.Text = Contenido!pdfcontactphone_23
+  '   txtContactEmail.Text = Contenido!pdfcontactemail_24
+  '   txtContactURL.Text = Contenido!pdfcontacturl_25
+  '   txtDocumentId.Text = Contenido!pdfdocumentid_26
+  '   txtPublication.Text = Contenido!pdfpublication_27
+  '   txtPublisher28.Text = Contenido!pdfpublisher_28
+  '   cmbType.Text = Contenido!pdftype_29
+  '   cbPubType.Text = Contenido!pdfpubtype_30
+  '   txtVolNum.Text = Contenido!pdfvolumenum_31
+  '   txtIssueNum.Text = Contenido!pdfissuenum_32
+  '   txt33_pdfpagerange.Text = Contenido!pdfpagerange_33
+  '   txt34_pdfbookedition.Text = Contenido!pdfbookedition_34
+  '   txt35_pdfisbn.Text = Contenido!pdfisbn_35
+  '   txt36_pdfissn.Text = Contenido!pdfissn_36
+  '   txt37_pdfeissn.Text = Contenido!pdfeissn_37
+  '   txt38_pdfpubstatus.Text = Contenido!pdfpubstatus_38
+  '   txtLang.Text = Contenido!pdflang_39
+  '   txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
+  '   txtBaseURL.Text = Contenido!pdfbaseurl_41
+  '   txt42_pdfurl.Text = Contenido!pdfurl_42
+  '   txt43_pdfdoi.Text = Contenido!pdfdoi_43
+  '   cbPDFrendition.Text = Contenido!pdfrendition_44
+  '   txtDocumentId.Text = Contenido!pdfidentifier_45
+  '   cbPDFx.Text = Contenido!pdfx_46
+  '   txtVersionId.Text = Contenido!pdfversionid_47
+  '   txt48_abstract.Text = Contenido!abstract_48
+  '   txt48b_abstract.Text = Contenido!abstract_48b
+  '   txt48c_abstract.Text = Contenido!abstract_48c
+  '   txt49_imagentapa.Text = Contenido!imagentapa_49
+  '   txt50_pagetotal.Text = Contenido!pagetotal_50
+  '   txtCOLECCION.Text = Contenido!relation_51
+  '   txtDirection.Text = Contenido!direction_52
+  '   txt53_traductor.Text = Contenido!traductor_53
+  '   txt54_idiomaorig.Text = Contenido!idiomaorig_54
+  '   txt55_ilustrador.Text = Contenido!ilustrador_55
+  '   txt56_resumen.Text = Contenido!resumen_56
+  '   txt57_palabrasclave.Text = Contenido!palabrasclave_57
+  '   txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
+  '   txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
+  '   txt58_papertitletwo.Text = Contenido!papertitletwo_58
+  '   txt59_artrecibido.Text = Contenido!artrecibido_59
+  '   txt60_artaceptado.Text = Contenido!artaceptado_60
+  '   txtFORMATO.Text = Contenido!formato_61
+  '   txt59_opt_source.Text = Contenido!source_69
+  '   txt82_conferenceVisual.Text = Contenido!opt_72
+  '   txt78_genero.Text = Contenido!genero_78
+  '   txt82_conference.Text = Contenido!conference_82
+  '   txt84_bookTitle.Text = Contenido!bookTitle_84
+  '   txt85_doiRevista.Text = Contenido!doiRevista_85
+  '   txt86_annotation.Text = Contenido!notas_86
+  '   txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
+  '   txt88_audiencia.Text = Contenido!audience_88
+  '   txt89_binding.Text = Contenido!binding_89
+  '   txt90_eisbn.Text = Contenido!eISBN_90
+  '
+  ' Else
+  '   BtnNuevoMeta.Visible = True
+  '   btnGuardarMeta.Visible = False
+  '   btnGuardarCambiosMeta.Visible = False
+  ' Endif
+
+End
+
+Public Sub menuDisclaimer_Click()
+
+  Dim buscar As String
+  Dim Resultado As Result
+  'condicional para revisar que exista la entrada de comentarios en la base de datos
+  ' Exportamos los registros seleccionados
+  buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(TextBox1.Text) & "%'"
+  Resultado = meConn.Exec(buscar)
+
+  If Resultado.Available Then
+    TabPanel1.Index = 0
+
+    Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
+    Wait 0.2
+
+    TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXdisclaimer-" & BaseName & ".tex" & "\n")
+    Wait 0.1
+
+    TerminalView1.Input("mv gbTeXdisclaimer-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & "\n")
+    Wait 0.1
+
+    Dim pdfPath As String
+    pdfPath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
+
+    ' Verificar si el archivo existe
+    If Not File.RealPath(pdfPath) Then
+      ' Si el archivo no existe, no hacer nada o mostrar un mensaje
+      Message.Warning("Se a generado el archivo de comentarios, pero <strong>pdf-" & BaseName & ".pdf</strong> no existe. No es posible completar la operación.")
+    Else
+      ' Si el archivo existe, ejecutar la función
+      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/_pdf-" & BaseName & ".pdf" & "\n")
+      Wait 0.1
+    End If
+
+    Mod_Funciones.Borrar_Aux
+    TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXdisclaimer-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+    Wait 0.2
+    TerminalView1.SetFocus()
+
+  Else
+    Message.Info("No se encontró registro de comentarios en la base de datos para el archivo especificado. Será dirigido a la pestaña de comentarios para dar el alta el registro.")
+    TabPanel1.Index = 4
+  Endif
+
+End
+
+Public Sub BtnNuevoComenta_Click()
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  ContenidoComenta = meConn.Exec("SELECT MAX(id) FROM comentarios LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If ContenidoComenta["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(ContenidoComenta["MAX(id)"]) + 1
+  Endif
+  txtIdComenta.Text = Idn
+  txtnombreArchivoComenta.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
+  BtnNuevoComenta.Visible = False
+  btnGuardarComenta.Visible = True
+  btnGuardarCambiosComenta.Visible = False
+
+End
+
+Public Sub btnGuardarComenta_Click()
+
+  ContenidoComenta = meConn.Create("comentarios")
+
+  guardarCamposComenta()
+  ContenidoComenta.Update
+
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  BtnNuevoComenta.Visible = False
+  btnGuardarComenta.Visible = False
+  btnGuardarCambiosComenta.Visible = True
+
+End
+
+Public Sub btnGuardarCambiosComenta_Click()
+
+  ContenidoComenta = meConn.Edit("comentarios", "id=" & txtIdComenta.Text)
+
+  If ContenidoComenta.Available Then
+    guardarCamposComenta()
+    ContenidoComenta.Update
+    Message.Info("Los cambios se guardaron con éxito.")
+  Else
+    Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
+  Endif
+
+End
+
+Public Sub guardarCamposComenta()' As Boolean
+
+  ContenidoComenta!id = txtIdComenta.Text
+  ContenidoComenta!nombreArchivo = txtnombreArchivoComenta.Text
+  ContenidoComenta!contacto = txtContacto.Text
+  ContenidoComenta!correo = txtCorreo.Text
+  ContenidoComenta!telefono = txtTelefono.Text
+  ContenidoComenta!disclaimer = txtDisclaimer.Text
+
+End
+
+Public Sub levantarComenta()
+
+  'levantamos los datos de comentarios
+  Dim comandoComenta As String
+
+  comandoComenta = "select * from comentarios where nombreArchivo = " & "'" & BaseName & ".tex'"
+  ContenidoComenta = meConn.Exec(comandoComenta)
+  If ContenidoComenta.Count > 0 Then
+    BtnNuevoComenta.Visible = False
+    btnGuardarComenta.Visible = False
+    btnGuardarCambiosComenta.Visible = True
+    txtIdComenta.Text = ContenidoComenta!id
+    txtnombreArchivoComenta.Text = ContenidoComenta!nombreArchivo
+    txtContacto.Text = ContenidoComenta!contacto
+    txtCorreo.Text = ContenidoComenta!correo
+    txtTelefono.Text = ContenidoComenta!telefono
+    txtDisclaimer.Text = ContenidoComenta!disclaimer
+  Else
+    txtnombreArchivoComenta.Text = ""
+    txtContacto.Text = ""
+    txtCorreo.Text = ""
+    txtTelefono.Text = ""
+    txtDisclaimer.Text = ""
+    BtnNuevoComenta.Visible = True
+    btnGuardarComenta.Visible = False
+    btnGuardarCambiosComenta.Visible = False
+  Endif
+
+End
+
+Public Sub btnFont_Click()
+
+  Dialog.Title = "Seleccione una tipografía"
+  Dialog.Font = txtDisclaimer.Font
+  Dialog.FixedOnly = False
+  If Dialog.SelectFont() Then Return
+  txtDisclaimer.Font = Dialog.Font
+
+End
+
+Public Sub menuComprimir_Click()
+
+  Dim fecha As String
+
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+
+  Dim comando As String
+
+  comando = "tar cvzf " & fecha & "-" & BaseName & ".tar.gz *" & "\n"
+
+  TerminalView1.Input(comando)
+
+End
+
+Public Sub BtnBuscarEnArchivos_Click()
+
+  Dim palabraAbuscar As String
+
+  palabraAbuscar = TextBox2.Text
+
+  TerminalView1.Clear
+  TerminalView1.Input("python3 " & rutaApp & "/Buscar_palabra_Gambas.py " & palabraAbuscar & "\n")
+  TerminalView1.SetFocus
+
+End
+
+Public Sub guardarTipoDocumentoLibro()
+
+  Dim tdL As String = "tipoLibro"
+  Dim nombreArchivo As String = File.Name(TextBox1.Text)
+  Dim consulta As Result
+  Dim existe As Boolean = False
+
+  ' Verificar si el archivo ya existe en la tabla
+  consulta = meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Comprobar si la consulta devolvió algún resultado
+  If consulta.Available Then
+    existe = True
+  End If
+
+  ' Solo si no existe, insertamos el nuevo registro
+  If Not existe Then
+    Contenido = meConn.Create("tipoDocumento")
+    Contenido!nombreArchivo = nombreArchivo
+    Contenido!tipoDocumento = tdL
+    Contenido.Update
+  End If
+
+End
+
+Public Sub guardarTipoDocumentoRevista()
+
+  Dim tdR As String = "tipoRevista"
+  Dim nombreArchivo As String = File.Name(TextBox1.Text)
+  Dim consulta As Result
+  Dim existe As Boolean = False
+
+  ' Verificar si el archivo ya existe en la tabla
+  consulta = meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Comprobar si la consulta devolvió algún resultado
+  If consulta.Available Then
+    existe = True
+  End If
+
+  ' Solo si no existe, insertamos el nuevo registro
+  If Not existe Then
+    Contenido = meConn.Create("tipoDocumento")
+    Contenido!nombreArchivo = nombreArchivo
+    Contenido!tipoDocumento = tdR
+    Contenido.Update
+  End If
+
+End
+
+Public Sub guardarTipoDocumentoMonografia()
+
+  Dim tdM As String = "tipoMonografia"
+  Dim nombreArchivo As String = File.Name(TextBox1.Text)
+  Dim consulta As Result
+  Dim existe As Boolean = False
+
+  ' Verificar si el archivo ya existe en la tabla
+  consulta = meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Comprobar si la consulta devolvió algún resultado
+  If consulta.Available Then
+    existe = True
+  End If
+
+  ' Solo si no existe, insertamos el nuevo registro
+  If Not existe Then
+    Contenido = meConn.Create("tipoDocumento")
+    Contenido!nombreArchivo = nombreArchivo
+    Contenido!tipoDocumento = tdM
+    Contenido.Update
+  End If
+
+End
+
+Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
+
+  Dim consulta As Result
+  Dim tipoDocumento As String
+
+  ' Realizar la consulta
+  Print "Buscando archivo: "; nombreArchivo
+  consulta = meConn.Exec("SELECT tipoDocumento FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+
+  ' Verificar si la consulta devolvió resultados
+  If consulta.Fields Then
+    ' Obtener el valor de tipoDocumento
+    tipoDocumento = consulta["tipoDocumento"]
+    Print "Tipo de documento encontrado: "; tipoDocumento
+
+    ' Condicional para elegir la función según el tipo de documento
+    Select Case tipoDocumento
+      Case "tipoLibro"
+        habilitamosLibro
+      Case "tipoRevista"
+        habilitamosRevista
+      Case "tipoMonografia"
+        habilitamosMonografia
+      Case Else
+        Message.Error("Tipo de documento desconocido.")
+    End Select
+  Else
+    Message.Error("El archivo no existe en la base de datos.")
+  End If
+
+End
+
+Public Sub habilitamosLibro()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  btnCOMPpdf.Enabled = True
+  btnCOMPpdfRevista.Enabled = True
+  btnCOMPpdfRevista.Enabled = False
+  HBoxPanelLibro.Visible = True
+  HBox85.Visible = True
+  TabPanelLibro.Visible = True
+  menuPDFweb.Visible = True
+  menuOT.Visible = True
+  ' Inicia el Timer al hacer clic en el botón
+  reinicamosTiempo
+
+End
+
+Public Sub habilitamosRevista()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  btnCOMPpdf.Enabled = False
+  btnCOMPpdfRevista.Enabled = False
+  btnCOMPpdfRevista.Enabled = True
+  HBoxPanelLibro.Visible = True
+  HBox85.Visible = True
+  TabPanelLibro.Visible = False
+  menuPDFweb.Visible = True
+  menuOT.Visible = True
+  ' Inicia el Timer al hacer clic en el botón
+  reinicamosTiempo
+
+End
+
+Public Sub habilitamosMonografia()
+
+  'habilitamos o deshabilitamos libros, revistas y monografias
+  btnCOMPpdf.Enabled = False
+  btnCOMPpdfRevista.Enabled = False
+  btnCOMPpdfRevista.Enabled = False
+  menuPDFweb.Visible = False
+  menuOT.Visible = False
+  ' Inicia el Timer al hacer clic en el botón
+  reinicamosTiempo
+
+End
+
+Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales contarEntradasBIByGLO()
+
+  Dim RecordBIB As String
+  Dim CountBIB As Integer
+  Dim RecordGLO As String
+  Dim CountGLO As Integer
+
+  Contenido = meConn.Exec("SELECT COUNT(*) FROM bibtex")
+  RecordBIB = Contenido[0]
+  CountBIB = RecordBIB
+  txtTOTALbib.Text = "<b>Total de referencias en la base de datos: " & CountBIB & "</b>"
+
+  Contenido = meConn.Exec("SELECT COUNT(*) FROM glosarios")
+  RecordGLO = Contenido[0]
+  CountGLO = RecordGLO
+  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
+
+End
+
+Public Sub contarEntradasBIByGLO()' mostramos las cantidades en el boton
+
+  Dim Record2BIB As String
+  Dim Count2BIB As Integer
+  Dim ContenidoBIB As Result
+
+  ContenidoBIB = meConn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
+  Record2BIB = ContenidoBIB[0]
+  Count2BIB = Record2BIB
+  Button1.Text = "(" & Count2BIB & ")"
+
+  Dim Record2GLO As String
+  Dim Count2GLO As Integer
+  Dim ContenidoGLO As Result
+
+  ContenidoGLO = meConn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
+  Record2GLO = ContenidoGLO[0]
+  Count2GLO = Record2GLO
+  btnParcialGLO.Text = "(" & Count2GLO & ")"
+
+End
+
+Public Sub BtnBuscarAuthorRelacion_Click()
+
+  Dim Consulta As String
+
+  If txtAUTHORrelacion.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE author LIKE '%" & txtAUTHORrelacion.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, tbRefDup)
+  Endif
+
+End
+
+Public Sub BtnBuscarTituloReferenciaRelacion_Click()
+
+  Dim Consulta As String
+
+  If txtTITLErelacion.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTITLErelacion.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, tbRefDup)
+  Endif
+
+End
+
+Public Sub btnAgregarKeyBIBtwo_Click()
+
+  Dim TextoExistente As String
+  Dim TextoAAgregar As String
+
+  ' Obtener el texto actual del cuadro de texto
+  TextoExistente = txtFILTROrelacion.Text
+
+  ' Verificar si el primer carácter es una coma
+  If Left$(TextoExistente, 1) <> "," Then
+    ' Agregar una coma al principio del texto
+    TextoExistente = "," & TextoExistente
+  Endif
+
+  ' Texto que deseas agregar
+  TextoAAgregar = BaseName & ","
+
+  ' Comprobar si el cuadro de texto ya tiene texto
+  If Len(Trim(TextoExistente)) > 0 Then
+    ' Si ya hay texto, agrega el texto nuevo
+    txtFILTROrelacion.Text = TextoExistente & TextoAAgregar
+  Else
+    ' Si no hay texto, simplemente establece el texto a agregar
+    txtFILTROrelacion.Text = TextoAAgregar
+  Endif
+
+End
+
+Public Sub menuPDFweb_Click()
+
+  Form_CombinarPDF.ShowModal()
+
+End
+
+Public Sub menuOT_Click()
+
+  Form_OTimprenta.ShowModal()
+
+End
+
+Public Sub btnBuscarFiltro_Click()
+
+  Dim Consulta As String
+
+  If txtKEYWORDS.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE keywords LIKE '%" & txtKEYWORDS.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, VListaBIB)
+    TabPanel5.Index = 2
+  Endif
+
+End
+
+Public Sub btnAbrirLibro_Click()
+
+  menuAbrir_Click()
+
+End
+
+Public Sub btnAbrirQuarto_Click()
+
+  menuAbrirQuarto_Click()
+
+End
+
+' Evento que se ejecuta cada segundo
+Public Sub Timer1_Timer()
+
+  ' Incrementamos los segundos
+  segundos += 1
+
+  ' Si los segundos llegan a 60, incrementamos los minutos y reiniciamos los segundos
+  If segundos = 60 Then
+    segundos = 0
+    minutos += 1
+  Endif
+
+  ' Si los minutos llegan a 60, incrementamos las horas y reiniciamos los minutos
+  If minutos = 60 Then
+    minutos = 0
+    horas += 1
+  Endif
+
+  ' Actualizamos el display del tiempo
+  ActualizarDisplay
+
+End
+' Función para actualizar el display del botón
+
+Public Sub reinicamosTiempo()
+
+  ' Reiniciamos el conteo de horas, minutos y segundos
+  horas = 0
+  minutos = 0
+  segundos = 0
+
+  ' Detenemos el Timer si está corriendo, luego lo reiniciamos
+  Timer1.Stop
+  Timer1.Start
+
+  ' Actualizamos el display para reflejar el reinicio
+  ActualizarDisplay
+
+End
+
+Public Sub btnLimpiar_Click()
+
+  TextBox2.Clear
+  TerminalView1.Input("clear" & "\n")
+
+End
+
+Public Sub btnAbrirPublisher_Click()
+
+  Form_ABM_Publisher.ShowModal()
+
+End
+
+Public Sub btnKanban_Click()
+
+  Dim ruta As String
+  Dim usuario As String = Trim(txtGitLab.Text)
+
+  If usuario = "" Then
+    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
+    Return
+  End If
+
+  ruta = "https://gitlab.com/" & txtGitLab.Text & "/" & File.BaseName(TextBox1.Text) & "/-/boards"
+
+  Shell "xdg-open " & ruta
+
+End
+
+Public Sub btnGenerarIndex_Click()
+
+  Mod_Exportar.ExportToIndexHTML(TextBox1.Text)
+
+  ' Ruta completa del archivo
+  Dim sFilePath As String = File.Dir(TextBox1.Text) & "/docs/index.html"
+
+  ' Verificamos si el archivo fue generado
+  If File.RealPath(sFilePath) Then
+    ' Mostrar mensaje de éxito
+    Message.Info("El archivo <strong>index.html</strong> se generó correctamente en " & sFilePath)
+  Else
+    ' Mostrar mensaje de error
+    Message.Error("No se pudo generar el archivo <strong>index.html</strong>. Verifique el contenido.")
+  End If
+
+End
+
+Public Sub btnGuardarGHP_Click()
+
+  ' actualizamos la fecha de última modificación
+  Dim fecha As String
+  Dim HOY As Date
+
+  HOY = Now
+  fecha = Format(HOY, "yyyy-mm-dd")
+  txtModDateHTML.Text = fecha
+
+  ContenidoGHP = meConn.Create("githubpages")
+
+  guardarCamposGHP()
+  ContenidoGHP.Update
+
+  Message.Info("Los cambios se guardaron con éxito.")
+
+End
+
+Public Sub guardarCamposGHP()' As Boolean
+
+  ' actualizamos la fecha de última modificación
+  Dim fecha As String
+  Dim HOY As Date
+
+  HOY = Now
+  fecha = Format(HOY, "yyyy-mm-dd")
+  txtModDateHTML.Text = fecha
+
+  ContenidoGHP!id = txtIdGitHubPages.Text
+  ContenidoGHP!nombreArchivo = txtnombreArchivoGHP.Text
+  ContenidoGHP!txtCreateDateHTML = txtCreateDateHTML.Text
+  ContenidoGHP!txtModDateHTML = txtModDateHTML.Text
+  ContenidoGHP!cvautoresHTML = txtCVautoresHTML.Text
+  ContenidoGHP!hrefepubHTML = txtHREFepubHTML.Text
+  ContenidoGHP!hrefelineaHTML = txtHREFenlineaHTML.Text
+  ContenidoGHP!hrefpdfHTML = txtHREFpdfHTML.Text
+  ContenidoGHP!ImagenHTML = txtImagenHTML.Text
+  ContenidoGHP!PubDateHTML = txtPubDateHTML.Text
+  ContenidoGHP!txtPieHTML = txtPieHTML.Text
+  ContenidoGHP!txtCabeceraHTML = txtCabeceraHTML.Text
+  ContenidoGHP!txtSumarioHTML = txtSumarioHTML.Text
+
+  BtnNuevoGHP.Visible = False
+  btnGuardarGHP.Visible = False
+  btnGuardarCambiosGHP.Visible = True
+
+End
+
+Public Sub btnGuardarCambiosGHP_Click()
+
+  ' actualizamos la fecha de última modificación
+  Dim fecha As String
+  Dim HOY As Date
+
+  HOY = Now
+  fecha = Format(HOY, "yyyy-mm-dd")
+  txtModDateHTML.Text = fecha
+
+  ContenidoGHP = meConn.Edit("githubpages", "id=" & txtIdGitHubPages.Text)
+
+  If ContenidoGHP.Available Then
+    guardarCamposGHP()
+    ContenidoGHP.Update
+    MostrarListaCapNuevo()' Refrescamos la lista de entradas de los capítulos
+    Message.Info("Los cambios se guardaron con éxito.")
+  Else
+    Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
+  Endif
+
+End
+
+Public Sub levantarGitHubPages()
+
+  'levantamos los datos de githubpages
+  Dim comandoGHP As String
+
+  comandoGHP = "select * from githubpages where nombreArchivo = " & "'" & BaseName & ".tex'"
+  ContenidoGHP = meConn.Exec(comandoGHP)
+  If ContenidoGHP.Count > 0 Then
+    BtnNuevoGHP.Visible = False
+    btnGuardarGHP.Visible = False
+    btnGuardarCambiosGHP.Visible = True
+    btnGenerarIndex.Visible = True
+    txtIdGitHubPages.Text = ContenidoGHP!id
+    txtnombreArchivoGHP.Text = ContenidoGHP!nombreArchivo
+    txtCreateDateHTML.Text = ContenidoGHP!txtCreateDateHTML
+    txtModDateHTML.Text = ContenidoGHP!txtModDateHTML
+    txtCVautoresHTML.Text = ContenidoGHP!cvautoresHTML
+    txtHREFepubHTML.Text = ContenidoGHP!hrefepubHTML
+    txtHREFenlineaHTML.Text = ContenidoGHP!hrefelineaHTML
+    txtHREFpdfHTML.Text = ContenidoGHP!hrefpdfHTML
+    txtImagenHTML.Text = ContenidoGHP!ImagenHTML
+    txtPubDateHTML.Text = ContenidoGHP!PubDateHTML
+    txtPieHTML.Text = ContenidoGHP!txtPieHTML
+    txtCabeceraHTML.Text = ContenidoGHP!txtCabeceraHTML
+    txtSumarioHTML.Text = ContenidoGHP!txtSumarioHTML
+  Else
+    Mod_LimpiarTextBox.LimpiarCamposGitHubPages()
+    BtnNuevoGHP.Visible = True
+    btnGuardarGHP.Visible = False
+    btnGuardarCambiosGHP.Visible = False
+    btnGenerarIndex.Visible = False
+  Endif
+
+End
+
+Public Sub btnBuscarImagen_Click()
+
+  ' Configurar el título y los filtros del cuadro de diálogo
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.png", "Archivos PNG", "*.jpg", "Archivos JPG"] ' Añadimos soporte para JPG
+  Dialog.AutoExt = True
+  Dialog.Path = File.RealPath(TextBox1.Text)
+
+  ' Abrir el cuadro de diálogo de selección de archivo
+  If Dialog.OpenFile() Then
+    Return
+  Else
+
+    ' Si se seleccionó un archivo, actualizar el TextBox y la ruta
+    txtImagenHTML.Text = Dialog.Path
+
+    ' Construir la ruta de destino
+    Dim archivoDestino As String
+    archivoDestino = File.Dir(TextBox1.Text) & "/docs/260x-tapa-" & File.BaseName(TextBox1.Text) & ".png"
+
+    ' Ejecutar el comando convert para redimensionar la imagen
+    TerminalView1.Input("convert " & File.RealPath(txtImagenHTML.Text) & " -resize 260x " & archivoDestino & "\n")
+
+    ' Actualizar el TextBox con el nuevo nombre de archivo resultante
+    txtImagenHTML.Text = File.Name(archivoDestino)
+  Endif
+
+End
+
+Public Sub btnMostrarTexto_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtCVautoresHTML
+  Form_TXTextendido.ShowModal
+
+End
+
+Public Sub btnMostrarTexto2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtPieHTML
+  Form_TXTextendido.ShowModal
+
+End
+
+Public Sub btnBuscarCabecera_Click()
+
+  ' Configurar el título y los filtros del cuadro de diálogo
+  Dialog.Title = "Seleccionar archivo para el header de la página html"
+  Dialog.Filter = ["*.png", "Archivos PNG"]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(TextBox1.Text) & "/docs/"
+
+  ' Abrir el cuadro de diálogo de selección de archivo
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    ' Actualizar el TextBox con el archivo seleccionado
+    txtCabeceraHTML.Text = File.Name(Dialog.Path)
+  Endif
+
+End
+
+Public Sub BtnNuevoGHP_Click()
+
+  Dim fecha As String
+  Dim HOY As Date
+
+  If txtModDateHTML.Text = "" Then
+    HOY = Now
+    fecha = Format(HOY, "yyyy-mm-dd")
+    txtCreateDateHTML.Text = fecha
+  Endif
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  ContenidoGHP = meConn.Exec("SELECT MAX(id) FROM githubpages LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If ContenidoGHP["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(ContenidoGHP["MAX(id)"]) + 1
+  Endif
+  txtIdGitHubPages.Text = Idn
+  txtnombreArchivoGHP.Text = BaseName & ".tex" 'colocamos el key con el nombre del archivo
+
+  If Not Exist(File.Dir(TextBox1.Text) & "/docs") Then
+    Mkdir File.Dir(TextBox1.Text) & "/docs"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/logo-imago.png") Then
+    Copy "./logo-imago.png" To File.Dir(TextBox1.Text) & "/docs/logo-imago.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/descarga.png") Then
+    Copy "./descarga.png" To File.Dir(TextBox1.Text) & "/docs/descarga.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/orcid.png") Then
+    Copy "./orcid.png" To File.Dir(TextBox1.Text) & "/docs/orcid.png"
+  End If
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/docs/imago1.css") Then
+    Copy "./imago1.css" To File.Dir(TextBox1.Text) & "/docs/imago1.css"
+  End If
+
+  BtnNuevoGHP.Visible = False
+  btnGuardarGHP.Visible = True
+  btnGuardarCambiosGHP.Visible = False
+  btnGenerarIndex.Visible = True
+
+End
+
+Public Sub btnNuevoCapitulo_Click()
+
+  LimpiarCamposCapituloNuevo  'Limpiamos todos los campos
+
+  Dim Idc As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = meConn.Exec("SELECT MAX(id) FROM separatas LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idc = 0
+  Else
+    Idc = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txtIdCapituloNuevo.Text = Idc
+  txtnombreArchivoCapNuevo.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
+  MostrarListaCapNuevo()
+
+  btnNuevoCapitulo.Visible = False
+  btnGuardarCapitulo.Visible = True
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
+  txtCapitulo.Enabled = True
+  txtRangoPaginas.Enabled = True
+  txtURLdescarga.Enabled = True
+
+End
+
+Public Sub MostrarListaCapNuevo() 'Función que rellena el GridView
+
+  tblArticulos.Clear()
+
+  Dim i As Integer
+
+  Contenido = meConn.Exec("SELECT * FROM separatas WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
+
+  'diseñamos el tableview
+  tblArticulos.Columns.Count = 5
+  tblArticulos.Header = True
+  tblArticulos.Columns[0].Title = "Id"
+  tblArticulos.Columns[0].Width = 0
+  tblArticulos.Columns[1].Title = "Nombre de archivo"
+  tblArticulos.Columns[1].Width = 0
+  tblArticulos.Columns[2].Title = "Número y título del capítulo"
+  tblArticulos.Columns[2].Width = 1000
+  tblArticulos.Columns[3].Title = "Paginas"
+  tblArticulos.Columns[3].Width = 100
+  tblArticulos.Columns[4].Title = "url de descarga"
+  tblArticulos.Columns[4].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tblArticulos.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tblArticulos[i, 0].Text = Contenido!id
+    tblArticulos[i, 1].Text = Contenido!nombreArchivo
+    tblArticulos[i, 2].Text = Contenido!titulo_02
+    tblArticulos[i, 3].Text = Contenido!paginas_03
+    tblArticulos[i, 4].Text = Contenido!pdf_04
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub btnGuardarCapitulo_Click()
+
+  Contenido = meConn.Create("separatas")
+
+  guardarCamposCapituloNuevo
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  MostrarListaCapNuevo ' Refrescamos la lista de entradas
+  LimpiarCamposCapituloNuevo ' Limpiamos los campos
+
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
+  txtCapitulo.Enabled = False
+  txtRangoPaginas.Enabled = False
+  chkURLdescarga.Value = False
+  txtURLdescarga.Enabled = False
+
+End
+
+Public Sub guardarCamposCapituloNuevo()
+
+  Contenido!id = txtIdCapituloNuevo.Text
+  Contenido!nombreArchivo = txtnombreArchivoCapNuevo.Text
+  Contenido!titulo_02 = txtCapitulo.Text
+  Contenido!paginas_03 = txtRangoPaginas.Text
+  Contenido!pdf_04 = txtURLdescarga.Text
+
+End
+
+Public Sub LimpiarCamposCapituloNuevo()
+
+  txtIdCapituloNuevo.Text = ""
+  txtnombreArchivoCapNuevo.Text = ""
+  txtCapitulo.Text = ""
+  txtRangoPaginas.Text = ""
+  txtURLdescarga.Text = ""
+
+End
+
+Public Sub btnBorrarCapitulo_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIdCapituloNuevo.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = meConn.Exec("delete from separatas where id=" & txtIdCapituloNuevo.Text)
+  Endif
+
+  LimpiarCamposCapituloNuevo  'Limpiamos los campos
+  MostrarListaCapNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
+  txtCapitulo.Enabled = False
+  txtRangoPaginas.Enabled = False
+  txtURLdescarga.Enabled = False
+
+End
+
+Public Sub btnGuardarCambiosCapitulo_Click()
+
+  Contenido = meConn.Edit("separatas", "id=" & txtIdCapituloNuevo.Text)
+  guardarCamposCapituloNuevo()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  LimpiarCamposCapituloNuevo  'Limpiamos los campos
+  MostrarListaCapNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoCapitulo.Visible = True
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = False
+  btnBorrarCapitulo.Visible = False
+  txtCapitulo.Enabled = False
+  txtRangoPaginas.Enabled = False
+  chkURLdescarga.Value = False
+  txtURLdescarga.Enabled = False
+
+End
+
+Public Sub btnNuevoAutor_Click()
+
+  LimpiarCamposAutorNuevo  'Limpiamos todos los campos
+
+  Dim Ida As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = meConn.Exec("SELECT MAX(id) FROM autoresGHP LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Ida = 0
+  Else
+    Ida = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txtIdAutorNuevo.Text = Ida
+  txtnombreAutorGHP.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
+  MostrarListaAutoresNuevo()
+
+  btnNuevoAutor.Visible = False
+  btnGuardarAutor.Visible = True
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
+  txtAutor.Enabled = True
+  txtORCID.Enabled = True
+
+  txtAutor.SetFocus
+
+End
+
+Public Sub btnGuardarAutor_Click()
+
+  Contenido = meConn.Create("autoresGHP")
+
+  guardarCamposAutoresNuevo
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  LimpiarCamposAutorNuevo ' Limpiamos los campos
+  MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
+  txtAutor.Enabled = False
+  txtORCID.Enabled = False
+
+End
+
+Public Sub btnGuardarCambiosAutor_Click()
+
+  Contenido = meConn.Edit("autoresGHP", "id=" & txtIdAutorNuevo.Text)
+  guardarCamposAutoresNuevo()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  LimpiarCamposAutorNuevo  'Limpiamos los campos
+  MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
+  txtAutor.Enabled = False
+  txtORCID.Enabled = False
+
+End
+
+Public Sub btnBorrarAutor_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIdAutorNuevo.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = meConn.Exec("delete from autoresGHP where id=" & txtIdAutorNuevo.Text)
+  Endif
+
+  LimpiarCamposAutorNuevo  'Limpiamos los campos
+  MostrarListaAutoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoAutor.Visible = True
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = False
+  btnBorrarAutor.Visible = False
+  txtAutor.Enabled = False
+  txtORCID.Enabled = False
+
+End
+
+Public Sub LimpiarCamposAutorNuevo()
+
+  txtIdCapituloNuevo.Text = ""
+  txtnombreArchivoCapNuevo.Text = ""
+  txtAutor.Text = ""
+  txtORCID.Text = ""
+
+End
+
+Public Sub MostrarListaAutoresNuevo() 'Función que rellena el GridView
+
+  tblAutores.Clear()
+
+  Dim i As Integer
+
+  Contenido = meConn.Exec("SELECT * FROM autoresGHP WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
+
+  'diseñamos el tableview
+  tblAutores.Columns.Count = 5
+  tblAutores.Header = True
+  tblAutores.Columns[0].Title = "Id"
+  tblAutores.Columns[0].Width = 0
+  tblAutores.Columns[1].Title = "Nombre de archivo"
+  tblAutores.Columns[1].Width = 0
+  tblAutores.Columns[2].Title = "Autor/a (nombre completo)"
+  tblAutores.Columns[2].Width = 400
+  tblAutores.Columns[3].Title = "orcid"
+  tblAutores.Columns[3].Width = 600
+  tblAutores.Columns[4].Title = "rol"
+  tblAutores.Columns[4].Width = 100
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tblAutores.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tblAutores[i, 0].Text = Contenido!id
+    tblAutores[i, 1].Text = Contenido!nombreArchivo
+    tblAutores[i, 2].Text = Contenido!autorNombreCompleto
+    tblAutores[i, 3].Text = Contenido!orcid
+    tblAutores[i, 4].Text = Contenido!rol
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub tblArticulos_RowClick(Row As Integer)
+
+  txtIdCapituloNuevo.Text = tblArticulos[Row, 0].Text
+  txtnombreArchivoCapNuevo.Text = tblArticulos[Row, 1].Text
+  txtCapitulo.Text = tblArticulos[Row, 2].Text
+  txtRangoPaginas.Text = tblArticulos[Row, 3].Text
+  txtURLdescarga.Text = tblArticulos[Row, 4].Text
+
+  btnNuevoCapitulo.Visible = False
+  btnGuardarCapitulo.Visible = False
+  btnGuardarCambiosCapitulo.Visible = True
+  btnBorrarCapitulo.Visible = True
+  txtCapitulo.Enabled = True
+  txtRangoPaginas.Enabled = True
+  txtURLdescarga.Enabled = True
+
+End
+
+Public Sub tblAutores_RowClick(Row As Integer)
+
+  txtIdAutorNuevo.Text = tblAutores[Row, 0].Text
+  txtnombreAutorGHP.Text = tblAutores[Row, 1].Text
+  txtAutor.Text = tblAutores[Row, 2].Text
+  txtORCID.Text = tblAutores[Row, 3].Text
+  cmbRolAutores.Text = tblAutores[Row, 4].Text
+
+  btnNuevoAutor.Visible = False
+  btnGuardarAutor.Visible = False
+  btnGuardarCambiosAutor.Visible = True
+  btnBorrarAutor.Visible = True
+  txtAutor.Enabled = True
+  txtORCID.Enabled = True
+
+End
+
+Public Sub btnBuscarORCID_Click()
+
+  Dim url As String
+
+  url = txtORCID.Text
+
+  If url <> "" Then Shell "xdg-open " & url
+
+End
+
+Public Sub btnBuscarORCIDcolaborador_Click()
+
+  Dim url As String
+
+  url = txtORCIDcolaborador.Text
+
+  If url <> "" Then Shell "xdg-open " & url
+
+End
+
+Public Sub btnNuevoColaborador_Click()
+
+  LimpiarCamposColaboradoresNuevo  'Limpiamos todos los campos
+
+  Dim Ida As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = meConn.Exec("SELECT MAX(id) FROM colaboradoresGHP LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Ida = 0
+  Else
+    Ida = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txtIdColaboradorNuevo.Text = Ida
+  txtnombreColaboradorGHP.Text = BaseName & ".tex" 'colocamos el nombre del archivo
+
+  MostrarListaColaboradoresNuevo()
+
+  btnNuevoColaborador.Visible = False
+  btnGuardarColaborador.Visible = True
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
+  cmbRolColaborador.Enabled = True
+  txtColaborador.Enabled = True
+  txtORCIDcolaborador.Enabled = True
+
+  txtColaborador.SetFocus
+
+End
+
+Public Sub LimpiarCamposColaboradoresNuevo()
+
+  txtIdColaboradorNuevo.Text = ""
+  txtnombreColaboradorGHP.Text = ""
+  txtColaborador.Text = ""
+  txtORCIDcolaborador.Text = ""
+  cmbRolColaborador.Text = ""
+
+End
+
+Public Sub MostrarListaColaboradoresNuevo() 'Función que rellena el GridView
+
+  tblColaboradores.Clear()
+
+  Dim i As Integer
+
+  Contenido = meConn.Exec("SELECT * FROM colaboradoresGHP WHERE nombreArchivo LIKE '%" & BaseName & ".tex'")
+
+  'diseñamos el tableview
+  tblColaboradores.Columns.Count = 5
+  tblColaboradores.Header = True
+  tblColaboradores.Columns[0].Title = "Id"
+  tblColaboradores.Columns[0].Width = 0
+  tblColaboradores.Columns[1].Title = "Nombre de archivo"
+  tblColaboradores.Columns[1].Width = 0
+  tblColaboradores.Columns[2].Title = "Autor/a (nombre completo)"
+  tblColaboradores.Columns[2].Width = 400
+  tblColaboradores.Columns[3].Title = "orcid"
+  tblColaboradores.Columns[3].Width = 600
+  tblColaboradores.Columns[4].Title = "rol"
+  tblColaboradores.Columns[4].Width = 100
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  tblColaboradores.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    tblColaboradores[i, 0].Text = Contenido!id
+    tblColaboradores[i, 1].Text = Contenido!nombreArchivo
+    tblColaboradores[i, 2].Text = Contenido!autorNombreCompleto' este campo se llama igual en ambas tablas
+    tblColaboradores[i, 3].Text = Contenido!orcid
+    tblColaboradores[i, 4].Text = Contenido!rol
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub guardarCamposColaboradoresNuevo()
+
+  ' Guardar otros campos directamente
+  Contenido!id = txtIdColaboradorNuevo.Text
+  Contenido!nombreArchivo = txtnombreColaboradorGHP.Text
+  Contenido!autorNombreCompleto = txtColaborador.Text
+  Contenido!orcid = txtORCIDcolaborador.Text
+
+  ' Extraer solo la abreviatura del ComboBox
+  Dim rolCompleto As String = cmbRolColaborador.Text
+  Dim rolAbreviatura As String
+
+  ' Verificar si el texto contiene ":"
+  If InStr(rolCompleto, ":") > 0 Then
+    ' Extraer la parte izquierda de la cadena antes de los dos puntos
+    rolAbreviatura = Left(rolCompleto, InStr(rolCompleto, ":") - 1)
+  Else
+    ' Si no tiene ":", guardar el texto completo
+    rolAbreviatura = rolCompleto
+  End If
+
+  ' Guardar solo la abreviatura
+  Contenido!rol = rolAbreviatura
+
+End
+
+Public Sub btnGuardarColaborador_Click()
+
+  Contenido = meConn.Create("colaboradoresGHP")
+
+  guardarCamposColaboradoresNuevo
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  LimpiarCamposColaboradoresNuevo ' Limpiamos los campos
+  MostrarListaColaboradoresNuevo ' Refrescamos la lista de entradas
+
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
+  txtColaborador.Enabled = False
+  txtORCIDcolaborador.Enabled = False
+  cmbRolColaborador.Enabled = False
+  cmbRolColaborador.Text = ""
+
+End
+
+Public Sub btnGuardarCambiosColaborador_Click()
+
+  Contenido = meConn.Edit("colaboradoresGHP", "id=" & txtIdColaboradorNuevo.Text)
+  guardarCamposColaboradoresNuevo()
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  LimpiarCamposColaboradoresNuevo' Limpiamos los campos
+  MostrarListaColaboradoresNuevo' Refrescamos la lista de entradas
+
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
+  txtColaborador.Enabled = False
+  txtORCIDcolaborador.Enabled = False
+  cmbRolColaborador.Enabled = False
+  cmbRolColaborador.Text = ""
+
+End
+
+Public Sub btnBorrarColaborador_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txtIdColaboradorNuevo.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = meConn.Exec("delete from colaboradoresGHP where id=" & txtIdColaboradorNuevo.Text)
+  Endif
+
+  LimpiarCamposColaboradoresNuevo' Limpiamos los campos
+  MostrarListaColaboradoresNuevo' Refrescamos la lista de entradas
+
+  btnNuevoColaborador.Visible = True
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = False
+  btnBorrarColaborador.Visible = False
+  txtColaborador.Enabled = False
+  txtORCIDcolaborador.Enabled = False
+  cmbRolColaborador.Enabled = False
+
+End
+
+Public Sub tblColaboradores_RowClick(Row As Integer)
+
+  txtIdColaboradorNuevo.Text = tblColaboradores[Row, 0].Text
+  txtnombreColaboradorGHP.Text = tblColaboradores[Row, 1].Text
+  txtColaborador.Text = tblColaboradores[Row, 2].Text
+  txtORCIDcolaborador.Text = tblColaboradores[Row, 3].Text
+  cmbRolColaborador.Text = tblColaboradores[Row, 4].Text
+
+  btnNuevoColaborador.Visible = False
+  btnGuardarColaborador.Visible = False
+  btnGuardarCambiosColaborador.Visible = True
+  btnBorrarColaborador.Visible = True
+  txtColaborador.Enabled = True
+  txtORCIDcolaborador.Enabled = True
+  cmbRolColaborador.Enabled = True
+
+End
+
+Public Sub btnVerAbstract2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt48b_abstract
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerAbstract3_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt48c_abstract
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerClaves1_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt57_palabrasclave
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerClaves2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt57b_palabrasclave
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerClaves3_Click()
+
+  Form_TXTextendido.OriginalTextBox = txt57c_palabrasclave
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnMenuGIT_Click()
+
+  Dim fecha As String
+  Dim usuario As String = Trim(txtGIT.Text)
+  Dim IdGitHub As String
+  Dim resultado As String
+  Dim repoLocal As Boolean = False
+  Dim repoConfigurado As Boolean = False
+  Dim ramaMain As Boolean = False
+
+  ' Obtener la fecha actual
+  fecha = Format(Date(), "dd-mm-yyyy")
+
+  ' Verificar si el nombre de usuario está vacío
+  If usuario = "" Then
+    Message.Error("Debe indicar su nombre de usuario en GitHub", "Ok")
+    Return
+  End If
+
+  Mod_Funciones.Borrar_Aux()
+  IdGitHub = "git@github.com:" & usuario & "/" & BaseName & ".git"
+
+  ' Verificar si el directorio actual es un repositorio Git
+  resultado = Shell$("git rev-parse --is-inside-work-tree 2>/dev/null")
+  If Trim(resultado) = "true" Then
+    repoLocal = True
+  Endif
+
+  ' Si no es un repositorio, inicializarlo
+  If Not repoLocal Then
+    TerminalView1.Input("git init" & "\n")
+  Endif
+
+  ' Verificar si el repositorio ya tiene un origin configurado
+  resultado = Shell$("git remote -v")
+  If InStr(resultado, IdGitHub) > 0 Then
+    repoConfigurado = True
+  Endif
+
+  ' Verificar si la rama actual es main
+  resultado = Shell$("git branch --show-current")
+  If Trim(resultado) = "main" Then
+    ramaMain = True
+  Endif
+
+  ' Si el repo no está configurado, agregar origin
+  If Not repoConfigurado Then
+    TerminalView1.Input("git remote add origin " & IdGitHub & "\n")
+  Endif
+
+  ' Si la rama no es main, cambiar a main
+  If Not ramaMain Then
+    TerminalView1.Input("git branch -M main" & "\n")
+  Endif
+
+  ' Ejecutar los comandos principales
+  TabPanel1.Index = 0
+  TerminalView1.Input("git add ." & "\n")
+  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
+  TerminalView1.Input("git push --set-upstream origin main" & "\n")
+  TerminalView1.SetFocus()
+  TerminalView1.Refresh()
+
+End
+
+Public Sub guardarCamposAutoresNuevo()
+
+  ' Guardar otros campos directamente
+  Contenido!id = txtIdAutorNuevo.Text
+  Contenido!nombreArchivo = txtnombreAutorGHP.Text
+  Contenido!autorNombreCompleto = txtAutor.Text
+  Contenido!orcid = txtORCID.Text
+
+  ' Extraer solo la abreviatura del ComboBox
+  Dim rolCompleto As String = cmbRolAutores.Text
+  Dim rolAbreviatura As String
+
+  ' Verificar si el texto contiene ":"
+  If InStr(rolCompleto, ":") > 0 Then
+    ' Extraer la parte izquierda de la cadena antes de los dos puntos
+    rolAbreviatura = Left(rolCompleto, InStr(rolCompleto, ":") - 1)
+  Else
+    ' Si no tiene ":", guardar el texto completo
+    rolAbreviatura = rolCompleto
+  End If
+
+  ' Guardar solo la abreviatura
+  Contenido!rol = rolAbreviatura
+
+End
+
+Public Sub BtnBuscarAuthorOriginal_Click()
+
+  Dim Consulta As String
+
+  If txtAuthorOriginal.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE author LIKE '%" & txtAuthorOriginal.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, griBibOriginal)
+    txtTitleOriginal.Clear
+    txtClaveOriginal.Clear
+  Endif
+
+End
+
+Public Sub BtnBuscarTituloReferenciaOriginal_Click()
+
+  Dim Consulta As String
+
+  If txtTitleOriginal.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTitleOriginal.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, griBibOriginal)
+    txtAuthorOriginal.Clear
+    txtClaveOriginal.Clear
+  Endif
+
+End
+
+Public Sub BtnBuscarClaveOriginal_Click()
+
+  Dim Consulta As String
+
+  If txtClaveOriginal.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE citationKey LIKE '%" & txtClaveOriginal.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, griBibOriginal)
+    txtAuthorOriginal.Clear
+    txtTitleOriginal.Clear
+  Endif
+
+End
+
+Public Sub CargarDatos(Consulta As String, Grid As GridView)
+
+  Dim i As Integer
+
+  ' Ejecutar la consulta
+  Contenido = meConn.Exec(Consulta)
+
+  ' Si no hay resultados
+  If Contenido.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Limpiar el Grid antes de mostrar los resultados
+  Grid.Clear()
+  Grid.Rows.Count = Contenido.Count
+
+  ' Llenar el Grid con los resultados
+  For i = 0 To Contenido.Count - 1
+    For j As Integer = 0 To Grid.Columns.Count - 1
+      Grid[i, j].Text = Contenido[j]
+    Next
+    Contenido.MoveNext
+  Next
+
+End
+
+Public Sub btnBuscarAuthorOrigen_Click()
+
+  Dim Consulta As String
+
+  If txtAuthorOrigen.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE author LIKE '%" & txtAuthorOrigen.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, tblReferenciaOrigen)
+  Endif
+
+End
+
+Public Sub btnBuscarTitleOrigen_Click()
+
+  Dim Consulta As String
+
+  If txtTitleOrigen.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Else
+    Consulta = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTitleOrigen.Text & "%' ORDER BY id DESC;"
+    CargarDatos(Consulta, tblReferenciaOrigen)
+  Endif
+
+End
+
+Public Sub btnGuardarRelacion_Click()
+
+  If txtRelatedRelacion.Text = "" Then
+    Message.Error("No a asignado una clave BIB de relación.")
+    Return
+  Endif
+
+  Dim idReferencia As Integer
+
+  idReferencia = CInt(Trim(txtIdReferencia.Text))' Convertir el texto del TextBox a un número
+
+  Dim valor1 As String = txtFILTROrelacion.Text
+  Dim valor2 As String = txtCrossRefRelacion.Text
+  Dim valor3 As String = txtRelatedRelacion.Text
+  Dim valor4 As String = txtRelatedString1.Text
+  Dim valor5 As String = cbRelatedTypeRelacion.Text
+
+  ' Construir la consulta UPDATE
+  Dim Consulta As String
+  Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', crossref= '" & valor2 & "', related= '" & valor3 & "', relatedString= '" & valor4 & "', relatedType= '" & valor5 & "' WHERE id= " & idReferencia
+
+  meConn.Exec(Consulta)
+  meConn.Commit
+  RefrescarGrid()
+
+  txtAUTHORrelacion.Clear
+  txtTITLErelacion.Clear
+  txtFILTROrelacion.Clear
+  txtCrossRefRelacion.Clear
+  txtRelatedRelacion.Clear
+  txtRelatedString1.Clear
+  cbRelatedTypeRelacion.Text = ""
+
+End
+
+Public Sub btnDuplicar_Click()
+
+  ' Dim idSeleccionado As Integer
+
+  idSeleccionado = CInt(Trim(txtIdReferenciaDuplicada.Text))
+
+  ' Construir la consulta INSERT ... SELECT
+  Dim Consulta As String
+  Consulta = "INSERT INTO bibtex (" &
+    "tipoEntrada, citationKey, keywords, author, bookAuthor, editor, editorA, editorB, editorC, " &
+    "afterword, commentator, translator, holder, shortAuthor, editorType, editorAtype, editorBtype, " &
+    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shortTitle, indexTitle, " &
+    "bookTitle, mainTitle, journalTitle, issueTitle, eventTitle, reprintTitle, series, bookTitleAddOn, " &
+    "mainTitleAddOn, journalTitleAddOn, issueTitleAddOn, eventTitleAddOn, chapter, volume, edition, " &
+    "pubState, yearY, dateD, urlDate, volumes, part, issue, eventDate, origDate, version, location, " &
+    "publisher, institution, organization, pages, pagination, hyphenation, langId, language, " &
+    "origLocation, origPublisher, pageTotal, venue, bookPagination, langIdOpts, origLanguage, isan, " &
+    "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
+    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedType, " &
+    "relatedString, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, " &
+    "creationdate, type" &
+    ") SELECT " &
+    "tipoEntrada, citationKey, keywords, author, bookAuthor, editor, editorA, editorB, editorC, " &
+    "afterword, commentator, translator, holder, shortAuthor, editorType, editorAtype, editorBtype, " &
+    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shortTitle, indexTitle, " &
+    "bookTitle, mainTitle, journalTitle, issueTitle, eventTitle, reprintTitle, series, bookTitleAddOn, " &
+    "mainTitleAddOn, journalTitleAddOn, issueTitleAddOn, eventTitleAddOn, chapter, volume, edition, " &
+    "pubState, yearY, dateD, urlDate, volumes, part, issue, eventDate, origDate, version, location, " &
+    "publisher, institution, organization, pages, pagination, hyphenation, langId, language, " &
+    "origLocation, origPublisher, pageTotal, venue, bookPagination, langIdOpts, origLanguage, isan, " &
+    "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
+    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedType, " &
+    "relatedString, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, " &
+    "creationdate, type " &
+    "FROM bibtex WHERE id = " & idSeleccionado
+
+  ' Ejecutar la consulta
+  meConn.Exec(Consulta)
+
+  ' Obtener el último ID insertado antes del Commit
+  Dim nuevoId As Integer
+  Dim rs As Result = meConn.Exec("SELECT last_insert_rowid()")
+  If rs.Count > 0 Then
+    rs.MoveFirst()
+    nuevoId = CInt(rs[0])
+  End If
+
+  ' Realizar el Commit después de obtener el ID
+  meConn.Commit()
+
+  ' Seleccionar los campos del nuevo registro
+  Dim ConsultaSelect As String
+  ConsultaSelect = "SELECT author, editor, title, citationKey, keywords, yearY, dateD FROM bibtex WHERE id = " & nuevoId
+
+  ' Ejecutar la consulta de selección
+  Dim Resultado As Result
+  Resultado = meConn.Exec(ConsultaSelect)
+
+  ' Mostrar los valores en los TextBox
+  If Resultado.Available Then
+    txtIDnuevoRegistro.Text = nuevoId
+    txtAuthorNueva.Text = CStr(Resultado[0])
+    txtEditorNueva.Text = CStr(Resultado[1])
+    txtTitleNueva.Text = CStr(Resultado[2])
+    txtClaveNueva.Text = CStr(Resultado[3])
+    txtFiltroNueva.Text = CStr(Resultado[4])
+    txtYearDup.Text = CStr(Resultado[5])
+    txtDateDup.Text = CStr(Resultado[6])
+  Else
+    Message.Warning("No se encontraron datos para el nuevo registro.")
+  End If
+
+  ' Mostrar mensaje de éxito
+  Message.Info("Entrada duplicada correctamente.")
+
+End
+
+Public Sub btnAgregarKeyBIBtwo2_Click()
+
+  Dim TextoExistente As String
+  Dim TextoAAgregar As String
+
+  ' Obtener el texto actual del cuadro de texto
+  TextoExistente = txtFiltroNueva.Text
+
+  ' Verificar si el primer carácter es una coma
+  If Left$(TextoExistente, 1) <> "," Then
+    ' Agregar una coma al principio del texto
+    TextoExistente = "," & TextoExistente
+  Endif
+
+  ' Texto que deseas agregar
+  TextoAAgregar = BaseName & ","
+
+  ' Comprobar si el cuadro de texto ya tiene texto
+  If Len(Trim(TextoExistente)) > 0 Then
+    ' Si ya hay texto, agrega el texto nuevo
+    txtFiltroNueva.Text = TextoExistente & TextoAAgregar
+  Else
+    ' Si no hay texto, simplemente establece el texto a agregar
+    txtFiltroNueva.Text = TextoAAgregar
+  Endif
+
+End
+
+Public Sub btnAgregarKeyBIBtwo3_Click()
+
+  Dim textoOrigen As String
+  Dim posicion As Integer
+  Dim cadenaTercerTextBox As String
+  Dim cadenaCuartoTextBox As String
+  Dim Comando As String
+  Dim Header As String
+
+  Header = "@" & txtIDnuevoRegistro.Text & "-" 'prefijo de la clave bib
+
+  ' Escapa los caracteres especiales (comilla simple) en el título
+  Dim tituloEscapado As String
+
+  tituloEscapado = Replace(txtTITLE.Text, "'", "''")
+
+  eliminarBlancosBIB()
+
+  Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTitleNueva.Text & "%'"
+  Busqueda = meConn.Exec(Comando)
+
+  ' Obtén el texto del TextBox de origen
+  If Trim(txtAuthorNueva.Text) = "" Then
+    ' Si el TextBox de origen está vacío, usa el contenido de otro TextBox
+    textoOrigen = txtEditorNueva.Text
+  Else
+    textoOrigen = txtAuthorNueva.Text
+  End If
+
+  ' Encuentra la posición de la primera coma, punto, punto y coma  o espacio en el texto
+  posicion = InStr(textoOrigen, ",")
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, ";")
+  End If
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, ".")
+  End If
+
+  If posicion = 0 Then
+    posicion = InStr(textoOrigen, " ")
+  End If
+
+  ' Si se encontró una coma, punto o espacio, copia el texto hasta esa posición
+  If posicion > 0 Then
+    textoOrigen = Left(textoOrigen, posicion - 1)
+  End If
+
+  ' Reemplaza caracteres problemáticos
+  textoOrigen = Replace(textoOrigen, "´", "")
+  textoOrigen = Replace(textoOrigen, "`", "")
+  textoOrigen = Replace(textoOrigen, " ", "")
+  textoOrigen = Replace(textoOrigen, "{", "")
+  textoOrigen = Replace(textoOrigen, "}", "")
+  textoOrigen = Replace(textoOrigen, "[", "")
+  textoOrigen = Replace(textoOrigen, "]", "")
+  textoOrigen = Replace(textoOrigen, "¿", "")
+  textoOrigen = Replace(textoOrigen, "?", "")
+  textoOrigen = Replace(textoOrigen, "¡", "")
+  textoOrigen = Replace(textoOrigen, "!", "")
+  textoOrigen = Replace(textoOrigen, "(", "")
+  textoOrigen = Replace(textoOrigen, ")", "")
+  textoOrigen = Replace(textoOrigen, "-", "")
+  textoOrigen = Replace(textoOrigen, "_", "")
+  textoOrigen = Replace(textoOrigen, "'", "")
+  textoOrigen = Replace(textoOrigen, "#", "")
+  textoOrigen = Replace(textoOrigen, "@", "")
+  textoOrigen = Replace(textoOrigen, "/", "")
+  textoOrigen = Replace(textoOrigen, "°", "")
+  textoOrigen = Replace(textoOrigen, "~", "")
+  textoOrigen = Replace(textoOrigen, "*", "")
+  textoOrigen = Replace(textoOrigen, "+", "")
+
+  textoOrigen = Replace(textoOrigen, "á", "A")
+  textoOrigen = Replace(textoOrigen, "à", "A")
+  textoOrigen = Replace(textoOrigen, "â", "A")
+  textoOrigen = Replace(textoOrigen, "ä", "A")
+  textoOrigen = Replace(textoOrigen, "ã", "A")
+  textoOrigen = Replace(textoOrigen, "å", "A")
+  textoOrigen = Replace(textoOrigen, "æ", "AE")
+  textoOrigen = Replace(textoOrigen, "ā", "A")
+  textoOrigen = Replace(textoOrigen, "ă", "A")
+  textoOrigen = Replace(textoOrigen, "ą", "A")
+  textoOrigen = Replace(textoOrigen, "ç", "C")
+  textoOrigen = Replace(textoOrigen, "ć", "C")
+  textoOrigen = Replace(textoOrigen, "č", "C")
+  textoOrigen = Replace(textoOrigen, "ď", "D")
+  textoOrigen = Replace(textoOrigen, "đ", "D")
+  textoOrigen = Replace(textoOrigen, "é", "E")
+  textoOrigen = Replace(textoOrigen, "è", "E")
+  textoOrigen = Replace(textoOrigen, "ê", "E")
+  textoOrigen = Replace(textoOrigen, "ë", "E")
+  textoOrigen = Replace(textoOrigen, "ē", "E")
+  textoOrigen = Replace(textoOrigen, "ė", "E")
+  textoOrigen = Replace(textoOrigen, "ę", "E")
+  textoOrigen = Replace(textoOrigen, "ě", "E")
+  textoOrigen = Replace(textoOrigen, "í", "I")
+  textoOrigen = Replace(textoOrigen, "ì", "I")
+  textoOrigen = Replace(textoOrigen, "î", "I")
+  textoOrigen = Replace(textoOrigen, "ï", "I")
+  textoOrigen = Replace(textoOrigen, "ī", "I")
+  textoOrigen = Replace(textoOrigen, "į", "I")
+  textoOrigen = Replace(textoOrigen, "ı", "I")
+  textoOrigen = Replace(textoOrigen, "ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "ľ", "L")
+  textoOrigen = Replace(textoOrigen, "ł", "L")
+  textoOrigen = Replace(textoOrigen, "ñ", "N")
+  textoOrigen = Replace(textoOrigen, "ń", "N")
+  textoOrigen = Replace(textoOrigen, "ň", "N")
+  textoOrigen = Replace(textoOrigen, "ó", "O")
+  textoOrigen = Replace(textoOrigen, "ò", "O")
+  textoOrigen = Replace(textoOrigen, "ô", "O")
+  textoOrigen = Replace(textoOrigen, "ö", "O")
+  textoOrigen = Replace(textoOrigen, "õ", "O")
+  textoOrigen = Replace(textoOrigen, "ő", "O")
+  textoOrigen = Replace(textoOrigen, "ø", "O")
+  textoOrigen = Replace(textoOrigen, "œ", "OE")
+  textoOrigen = Replace(textoOrigen, "ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "ř", "R")
+  textoOrigen = Replace(textoOrigen, "ś", "S")
+  textoOrigen = Replace(textoOrigen, "š", "S")
+  textoOrigen = Replace(textoOrigen, "ş", "S")
+  textoOrigen = Replace(textoOrigen, "ș", "S")
+  textoOrigen = Replace(textoOrigen, "ť", "T")
+  textoOrigen = Replace(textoOrigen, "ţ", "T")
+  textoOrigen = Replace(textoOrigen, "ț", "T")
+  textoOrigen = Replace(textoOrigen, "ú", "U")
+  textoOrigen = Replace(textoOrigen, "ù", "U")
+  textoOrigen = Replace(textoOrigen, "û", "U")
+  textoOrigen = Replace(textoOrigen, "ü", "U")
+  textoOrigen = Replace(textoOrigen, "ū", "U")
+  textoOrigen = Replace(textoOrigen, "ů", "U")
+  textoOrigen = Replace(textoOrigen, "ű", "U")
+  textoOrigen = Replace(textoOrigen, "ų", "U")
+  textoOrigen = Replace(textoOrigen, "ý", "Y")
+  textoOrigen = Replace(textoOrigen, "ÿ", "Y")
+  textoOrigen = Replace(textoOrigen, "ź", "Z")
+  textoOrigen = Replace(textoOrigen, "ż", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+
+  ' Mayúsculas
+  textoOrigen = Replace(textoOrigen, "Á", "A")
+  textoOrigen = Replace(textoOrigen, "À", "A")
+  textoOrigen = Replace(textoOrigen, "Â", "A")
+  textoOrigen = Replace(textoOrigen, "Ä", "A")
+  textoOrigen = Replace(textoOrigen, "Ã", "A")
+  textoOrigen = Replace(textoOrigen, "Å", "A")
+  textoOrigen = Replace(textoOrigen, "Æ", "AE")
+  textoOrigen = Replace(textoOrigen, "Ā", "A")
+  textoOrigen = Replace(textoOrigen, "Ă", "A")
+  textoOrigen = Replace(textoOrigen, "Ą", "A")
+  textoOrigen = Replace(textoOrigen, "Ç", "C")
+  textoOrigen = Replace(textoOrigen, "Ć", "C")
+  textoOrigen = Replace(textoOrigen, "Č", "C")
+  textoOrigen = Replace(textoOrigen, "Ď", "D")
+  textoOrigen = Replace(textoOrigen, "Đ", "D")
+  textoOrigen = Replace(textoOrigen, "É", "E")
+  textoOrigen = Replace(textoOrigen, "È", "E")
+  textoOrigen = Replace(textoOrigen, "Ê", "E")
+  textoOrigen = Replace(textoOrigen, "Ë", "E")
+  textoOrigen = Replace(textoOrigen, "Ē", "E")
+  textoOrigen = Replace(textoOrigen, "Ė", "E")
+  textoOrigen = Replace(textoOrigen, "Ę", "E")
+  textoOrigen = Replace(textoOrigen, "Ě", "E")
+  textoOrigen = Replace(textoOrigen, "Í", "I")
+  textoOrigen = Replace(textoOrigen, "Ì", "I")
+  textoOrigen = Replace(textoOrigen, "Î", "I")
+  textoOrigen = Replace(textoOrigen, "Ï", "I")
+  textoOrigen = Replace(textoOrigen, "Ī", "I")
+  textoOrigen = Replace(textoOrigen, "Į", "I")
+  textoOrigen = Replace(textoOrigen, "İ", "I")
+  textoOrigen = Replace(textoOrigen, "Ĺ", "L")
+  textoOrigen = Replace(textoOrigen, "Ľ", "L")
+  textoOrigen = Replace(textoOrigen, "Ł", "L")
+  textoOrigen = Replace(textoOrigen, "Ñ", "N")
+  textoOrigen = Replace(textoOrigen, "Ń", "N")
+  textoOrigen = Replace(textoOrigen, "Ň", "N")
+  textoOrigen = Replace(textoOrigen, "Ó", "O")
+  textoOrigen = Replace(textoOrigen, "Ò", "O")
+  textoOrigen = Replace(textoOrigen, "Ô", "O")
+  textoOrigen = Replace(textoOrigen, "Ö", "O")
+  textoOrigen = Replace(textoOrigen, "Õ", "O")
+  textoOrigen = Replace(textoOrigen, "Ő", "O")
+  textoOrigen = Replace(textoOrigen, "Ø", "O")
+  textoOrigen = Replace(textoOrigen, "Œ", "OE")
+  textoOrigen = Replace(textoOrigen, "Ŕ", "R")
+  textoOrigen = Replace(textoOrigen, "Ř", "R")
+  textoOrigen = Replace(textoOrigen, "Ś", "S")
+  textoOrigen = Replace(textoOrigen, "Š", "S")
+  textoOrigen = Replace(textoOrigen, "Ş", "S")
+  textoOrigen = Replace(textoOrigen, "Ș", "S")
+  textoOrigen = Replace(textoOrigen, "Ť", "T")
+  textoOrigen = Replace(textoOrigen, "Ţ", "T")
+  textoOrigen = Replace(textoOrigen, "Ț", "T")
+  textoOrigen = Replace(textoOrigen, "Ú", "U")
+  textoOrigen = Replace(textoOrigen, "Ù", "U")
+  textoOrigen = Replace(textoOrigen, "Û", "U")
+  textoOrigen = Replace(textoOrigen, "Ü", "U")
+  textoOrigen = Replace(textoOrigen, "Ū", "U")
+  textoOrigen = Replace(textoOrigen, "Ů", "U")
+  textoOrigen = Replace(textoOrigen, "Ű", "U")
+  textoOrigen = Replace(textoOrigen, "Ų", "U")
+  textoOrigen = Replace(textoOrigen, "Ý", "Y")
+  textoOrigen = Replace(textoOrigen, "Ÿ", "Y")
+  textoOrigen = Replace(textoOrigen, "Ź", "Z")
+  textoOrigen = Replace(textoOrigen, "Ż", "Z")
+  textoOrigen = Replace(textoOrigen, "Ž", "Z")
+
+  ' Adicionales
+  textoOrigen = Replace(textoOrigen, "ẑ", "Z")
+  textoOrigen = Replace(textoOrigen, "ž", "Z")
+  textoOrigen = Replace(textoOrigen, "ẋ", "X")
+  textoOrigen = Replace(textoOrigen, "ẍ", "X")
+  textoOrigen = Replace(textoOrigen, "ṽ", "V")
+  textoOrigen = Replace(textoOrigen, "ṕ", "P")
+  textoOrigen = Replace(textoOrigen, "ṗ", "P")
+  textoOrigen = Replace(textoOrigen, "ʠ", "Q")
+  textoOrigen = Replace(textoOrigen, "ḿ", "M")
+  textoOrigen = Replace(textoOrigen, "ṁ", "M")
+  textoOrigen = Replace(textoOrigen, "ṃ", "M")
+  textoOrigen = Replace(textoOrigen, "ĵ", "J")
+  textoOrigen = Replace(textoOrigen, "ǰ", "J")
+  textoOrigen = Replace(textoOrigen, "ḅ", "B")
+  textoOrigen = Replace(textoOrigen, "ḃ", "B")
+  textoOrigen = Replace(textoOrigen, "ḟ", "F")
+
+  ' Elimina espacios al principio y al final
+  textoOrigen = Trim(textoOrigen)
+
+  ' Convierte el texto a mayúsculas
+  textoOrigen = UCase(textoOrigen)
+
+  ' Agregar el texto al final del TextBox de destino sin borrar su contenido actual
+  txtClaveNueva.Text = Header & textoOrigen
+
+  ' Obtén el texto del tercer TextBox
+  cadenaTercerTextBox = txtYearDup.Text
+  cadenaTercerTextBox = Replace(cadenaTercerTextBox, "/", "")
+  cadenaTercerTextBox = UCase(cadenaTercerTextBox)
+
+  ' Verifica si el tercer TextBox está vacío
+  If Trim(cadenaTercerTextBox) = "" Then
+    ' Si el tercer TextBox está vacío, obtén el texto del cuarto TextBox
+    cadenaCuartoTextBox = txtDateDup.Text
+    cadenaCuartoTextBox = Replace(cadenaCuartoTextBox, "/", "")
+    cadenaCuartoTextBox = UCase(cadenaCuartoTextBox)
+
+    ' Verifica si el cuarto TextBox también está vacío
+    If Trim(cadenaCuartoTextBox) = "" Then
+      ' En caso de que ambos TextBox estén vacíos, agrega "-SINFECHA"
+      txtClaveNueva.Text = txtClaveNueva.Text & "-SINFECHA"
+    Else
+      ' Si el cuarto TextBox no está vacío, toma los primeros 4 caracteres
+      txtClaveNueva.Text = txtClaveNueva.Text & Left(cadenaCuartoTextBox, 4)
+    End If
+  Else
+    ' Si el tercer TextBox no está vacío, toma los primeros 4 caracteres
+    txtClaveNueva.Text = txtClaveNueva.Text & cadenaTercerTextBox '& Left(cadenaTercerTextBox, 4)
+  End If
+
+End
+
+Public Sub btnGuardarDuplicado_Click()
+
+  Dim idReferencia As Integer
+
+  idReferencia = CInt(Trim(txtIDnuevoRegistro.Text))' Convertir el texto del TextBox a un número
+
+  Dim valor1 As String = txtClaveNueva.Text
+  Dim valor2 As String = txtFiltroNueva.Text
+
+  ' Construir la consulta UPDATE
+  Dim Consulta As String
+  Consulta = "UPDATE bibtex SET keywords= '" & valor2 & "', citationKey= '" & valor1 & "' WHERE id= " & idReferencia
+
+  meConn.Exec(Consulta)
+  meConn.Commit
+  RefrescarGrid()
+
+  txtYearDup.Clear
+  txtDateDup.Clear
+  txtAuthorNueva.Clear
+  txtEditorNueva.Clear
+  txtTitleNueva.Clear
+  txtClaveNueva.Clear
+  txtFiltroNueva.Clear
+  btnDuplicar.Visible = False
+  btnGuardarDuplicado.Visible = False
+  btnAgregarKeyBIBtwo3.Enabled = False
+  btnAgregarKeyBIBtwo2.Enabled = False
+
+End
+
+Public Sub VListaBIB_Data(Row As Integer, Column As Integer)
+
+  If (ContenidoBibTotal <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibTotal.moveTo(Row)
+      Try VListaBIB.Data.Text = Str(ContenidoBibTotal[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    VListaBIB.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub tblReferenciaOrigen_Data(Row As Integer, Column As Integer)' grid de relacion que muestra todas las referencias de la base
+
+  If (ContenidoBibTotal <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibTotal.moveTo(Row)
+      Try tblReferenciaOrigen.Data.Text = Str(ContenidoBibTotal[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    tblReferenciaOrigen.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub tbRefDup_Data(Row As Integer, Column As Integer)
+
+  If (ContenidoBibActual <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibActual.moveTo(Row)
+      Try tbRefDup.Data.Text = Str(ContenidoBibActual[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    tbRefDup.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub griBibOriginal_Data(Row As Integer, Column As Integer)
+
+  If (ContenidoBibTotal <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibTotal.moveTo(Row)
+      Try griBibOriginal.Data.Text = Str(ContenidoBibTotal[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    griBibOriginal.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub gridListaBIBactual_Data(Row As Integer, Column As Integer)
+
+  If (ContenidoBibActual <> Null) Then
+    If Row >= 0 Then
+      ContenidoBibActual.moveTo(Row)
+      Try gridListaBIBactual.Data.Text = Str(ContenidoBibActual[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    gridListaBIBactual.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub VListaBIB_Click()' grid en el formulario principal
+
+  ' configurar como se muestran los botones
+  btnGuardarCambios.Visible = True
+  BtnEliminarBib.Visible = True
+  btnAgregarCitationKey.Visible = True
+  btnGuardar.Visible = False
+  btnAgregarKeyBIB.Visible = True
+
+  TabPanel2.Index = 0
+  Mod_Funciones.VerBibTeXenVListaBIB(VListaBIB.row)' en el evento Click de la celda pasar como parámetro la fila
+
+End
+
+Public Sub griBibOriginal_Click()' grid en el formulario que duplica una entrada
+
+  ' habilitamos el boton para duplicar
+  btnDuplicar.Visible = True
+  btnGuardarDuplicado.Visible = True
+  btnAgregarKeyBIBtwo3.Enabled = True
+  btnAgregarKeyBIBtwo2.Enabled = True
+
+  Mod_Funciones.VerBibTeXengriBibOriginal()
+
+End
+
+Public Sub tbRefDup_Click()
+
+  btnGuardarRelacion.Visible = True
+  Mod_Funciones.VerBibTeXentbRefDup()
+
+End
+
+Public Sub tblReferenciaOrigen_Click()' referencias del archivo en curso
+
+  Mod_Funciones.VerBibTeXentblReferenciaOrigen()
+
+End
+
+Public Sub gridListaBIBactual_Click()' referencias del archivo en curso
+
+  ' configurar como se muestran los botones
+  btnGuardarCambios.Visible = True
+  BtnEliminarBib.Visible = True
+  btnAgregarCitationKey.Visible = True
+  btnGuardar.Visible = False
+  btnAgregarKeyBIB.Visible = True
+
+  TabPanel2.Index = 1
+  Mod_Funciones.VerBibTeXengridListaBIBactual()
+
+End
+
+Public Sub RefrescarGrid()
+
+  VListaBIB.Clear()
+  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
+  VListaBIB.Rows.Count = ContenidoBibTotal.Count
+  griBibOriginal.Rows.Count = ContenidoBibTotal.Count
+  tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
+
+  ' Ejecutar la consulta SQL
+  gridListaBIBactual.Clear
+  tbRefDup.Clear
+  ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+  gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
+  tbRefDup.Rows.Count = ContenidoBibActual.Count
+
+  VGridGLO.Refresh
+
+  ' refrescamos los contadores
+  TotalEntradasBIByGLO()
+  contarEntradasBIByGLO()
+
+End
+
+Public Sub Form_Activate()
+
+  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
+  VListaBIB.Rows.Count = ContenidoBibTotal.Count
+  VListaBIB.Refresh
+  griBibOriginal.Rows.Count = ContenidoBibTotal.Count
+  griBibOriginal.Refresh
+  tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
+  tblReferenciaOrigen.Refresh
+
+End
+
+Public Sub btnVerAsunto1_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtSubjet
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerAsunto2_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtpdfsubject_07b
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub btnVerAsunto3_Click()
+
+  Form_TXTextendido.OriginalTextBox = txtpdfsubject_07c
+  Form_TXTextendido.ShowModal()
+
+End
+
+Public Sub Menu5_Click()' blog de gbTeXpublisher
+
+  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher/wiki"
+
+End
+
+Public Sub btnMenuGitLab_Click()
+
+  Dim fecha As String
+  Dim usuario As String = Trim(txtGitLab.Text)
+  Dim IdGitLab As String
+
+  If Not File.RealPath(File.Dir(TextBox1.Text) & "/.gitlab-ci.yml") Then
+    Copy "./gitlab-ci.yml" To File.Dir(TextBox1.Text) & "/.gitlab-ci.yml"
+  End If
+
+  ' Obtener la fecha actual
+  fecha = Format(Date(), "dd-mm-yyyy")
+
+  ' Verificar si el nombre de usuario está vacío
+  If usuario = "" Then
+    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
+    Return
+  End If
+
+  Mod_Funciones.Borrar_Aux()
+  IdGitLab = "git@gitlab.com:" & usuario & "/" & File.BaseName(TextBox1.Text) & ".git"
+  TabPanel1.Index = 0
+  TerminalView1.Input("git remote remove origin" & "\n")
+  TerminalView1.Input("git remote add origin " & IdGitLab & "\n")
+  TerminalView1.Input("git add ." & "\n")
+  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
+  TerminalView1.Input("git push --set-upstream origin main" & "\n")
+  TerminalView1.SetFocus()
+  TerminalView1.Refresh()
+
+End
+
+'
+' condicionales para para las opciones de Quarto
+Public Sub chkInterno_Click()
+
+  If chkInterno.Value = True Then
+    ' Oculta el TextBox y lo limpia
+    btnBuscarTemplate.Visible = False
+    txtTEMPLATEquarto.Visible = False
+    txtTEMPLATEquarto.Text = ""
+  Else
+    ' Muestra el TextBox
+    btnBuscarTemplate.Visible = True
+    txtTEMPLATEquarto.Visible = True
+  End If
+
+End
+
+Public Sub btnSintaxisYML_Click()
+
+  Dim textoYAML As String = txtYMLpersonal.Text
+  Dim resultado As String
+
+  ' Verificar si el TextBox está vacío
+  If textoYAML = "" Then
+    Message.Error("El área de escritura está vacío. Introduzca código YAML válido.")
+    Return ' Salir del sub sin continuar
+  Endif
+
+  ' Guardar el YAML temporalmente en un archivo
+  Dim archivoTemp As String = "/tmp/temp_yaml.yml"
+  File.Save(archivoTemp, textoYAML)
+
+  ' Ejecutar Python para validar YAML
+  Shell "python3 -c \"import yaml; yaml.safe_load(open('" & archivoTemp & "')); print('VALIDO')\"" To resultado
+
+  ' Verificar el resultado
+  If Trim(resultado) = "VALIDO" Then
+    Message.Info("El texto YAML es válido.")
+  Else
+    Message.Error("El texto YAML no es válido.")
+  Endif
+
+  ' Eliminar archivo temporal
+  ' File.Kill(archivoTemp)
+
+End
+
+Public Sub chkURLdescarga_Click()
+
+  If chkURLdescarga.Value = True Then
+    txtURLdescarga.Visible = True
+  Else
+    txtURLdescarga.Visible = False
+  End If
+
+End
+
+Public Sub menuConversorQMD_Click()
+
+  Form_ConversorMD.ShowModal()
+
+End
+
+Public Sub chkNuevoArtCap_Click()
+
+  If chkNuevoArtCap.Value = True Then
+    txtNuevoArtCap.Visible = True
+    txtNuevoArtCap.SetFocus
+    btnGuardarArtCap.Visible = True
+    cmbTipoArtCap.Visible = True
+  Else
+    txtNuevoArtCap.Visible = False
+    btnGuardarArtCap.Visible = False
+    txtNuevoArtCap.Text = ""
+    cmbTipoArtCap.Visible = False
+  End If
+
+End
+
+Public Sub btnGuardarArtCap_Click()
+
+  ' Establecer el nombre del archivo
+  Dim nombreSalida As String = txtNuevoArtCap.Text
+  Dim rutaArchivo As String = File.Dir(TextBox1.Text) &/ "artcap" &/ nombreSalida & ".md"
+
+  If txtNuevoArtCap.Text = "" Then
+    Message.Error("Debe colocar un nombre al archivo.")
+    Return
+  End If
+
+  If Not File.RealPath(rutaArchivo) Then
+    ' Determinar qué función de exportación usar según la selección del ComboBox
+    Select Case cmbTipoArtCap.Text
+      Case "Artículo"
+        Mod_Exportar.ExportToNuevoArticulo(TextBox1.Text)
+      Case "Capítulo"
+        Mod_Exportar.ExportToNuevoCapitulo(TextBox1.Text)
+      Case Else
+        Message.Error("Selección no válida en el ComboBox.")
+        Return
+    End Select
+    chkNuevoArtCap.Value = False
+    txtNuevoArtCap.Text = ""
+    Message.Info("El archivo se ha creado exitosamente.")
+  Else
+    Message.Info("El archivo ya existe. Por favor, elija otro nombre.")
+  End If
+
+End
+
+Public Sub menuPDFcolor_Click()' pdf web
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarPDF.salidaPDFweb
+  Endif
+
+End
+
+Public Sub menuPDFgray_Click()' pdf imprenta
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarPDF.salidaPDFimprenta
+  Endif
+
+End
+
+Public Sub menuPARTE1_Click()' epub via png
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarEPUB.salidaEPUBpng
+  Endif
+
+End
+
+Public Sub menuPARTE2_Click()' epub via png
+
+  Mod_GenerarEPUB.creacionEpubPNG
+
+End
+
+Public Sub menuEPUB2_Click()' epub via html
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarEPUB.salidaEPUBhtml
+  Endif
+
+End
+
+Public Sub menuHTML_Click()' html con lwarp
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    Mod_GenerarHTML.salidaHTML5
+  Endif
+
+End
+
+Public Sub cmbRolAutores_Click()
+
+  Select Case cmbRolAutores.Text
+    Case ""
+      txtDescripcion.Text = "Seleccionar un rol"
+    Case "aut"
+      txtDescripcion.Text = "Author - Autor del contenido textual"
+    Case "edt"
+      txtDescripcion.Text = "Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido"
+    Case "adp"
+      txtDescripcion.Text = "Adapter - Persona que adapta o versiona una obra para otro medio o público"
+    Case "rev"
+      txtDescripcion.Text = "Reviewer - Revisor de contenido"
+  End Select
+
+End
+
+Public Sub cmbRolColaborador_Click()
+
+  Select Case cmbRolColaborador.Text
+    Case ""
+      txtDescripcionColaboradores.Text = "Seleccionar un rol"
+    Case "aut"
+      txtDescripcionColaboradores.Text = "Author - Autor del contenido textual"
+    Case "edt"
+      txtDescripcionColaboradores.Text = "Editor - Persona o entidad responsable de compilar, revisar o supervisar el contenido"
+    Case "trl"
+      txtDescripcionColaboradores.Text = "Translator - Persona que traduce una obra a otro idioma"
+    Case "ill"
+      txtDescripcionColaboradores.Text = "Illustrator - Ilustrador de libros o publicaciones"
+    Case "pbl"
+      txtDescripcionColaboradores.Text = "Publisher - Persona o entidad responsable de la publicación y distribución"
+    Case "prt"
+      txtDescripcionColaboradores.Text = "Printer - Impresor, responsable de imprimir la obra"
+    Case "cmp"
+      txtDescripcionColaboradores.Text = "Composer - Compositor de contenido literario o musical"
+    Case "rev"
+      txtDescripcionColaboradores.Text = "Reviewer - Revisor de contenido"
+    Case "red"
+      txtDescripcionColaboradores.Text = "Redactor - Persona que corrige o edita el contenido para la publicación"
+    Case "cov"
+      txtDescripcionColaboradores.Text = "Cover designer - Diseñador de la cubierta del libro"
+    Case "adp"
+      txtDescripcionColaboradores.Text = "Adapter - Persona que adapta o versiona una obra para otro medio o público"
+    Case "art"
+      txtDescripcionColaboradores.Text = "Artist - Artista que colabora en la obra visualmente"
+    Case "bnd"
+      txtDescripcionColaboradores.Text = "Binder - Persona encargada de encuadernar el libro"
+  End Select
+
+End

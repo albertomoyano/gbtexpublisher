@@ -1,0 +1,2051 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: gbTeXpublisher 3.19.0\n"
+"PO-Revision-Date: 2024-04-04 10:56 UTC\n"
+"Last-Translator: alberto <alberto.alejandro.moyano@gmail.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: Form_Bib.form:1410
+msgid "00-000"
+msgstr ""
+
+#: Form_Metadatos.form:563
+msgid "0000-00"
+msgstr ""
+
+#: FMain.form:147
+msgid "Abrir"
+msgstr "Open"
+
+#: FMain.form:339
+msgid "AbrirApp"
+msgstr ""
+
+#: FMain.form:367
+msgid "Abrir AZW"
+msgstr "Open AZW"
+
+#: FMain.form:351
+msgid "Abrir ePub"
+msgstr "Open ePub"
+
+#: FMain.form:378
+msgid "Abrir ePub (con Sigil)"
+msgstr ""
+
+#: FMain.form:356
+msgid "Abrir ePub 3"
+msgstr "Open ePub3"
+
+#: FMain.form:383
+msgid "Abrir ePub 3 (con Sigil)"
+msgstr ""
+
+#: FMain.form:392
+msgid "Abrir HTML5"
+msgstr "Open HTML5"
+
+#: FMain.form:361
+msgid "Abrir MOBI"
+msgstr "Open MOBI"
+
+#: FMain.form:405
+msgid "Abrir ODT"
+msgstr "Open ODT"
+
+#: FMain.form:141
+msgid "Abrir old"
+msgstr ""
+
+#: FMain.form:343
+msgid "Abrir PDF"
+msgstr ""
+
+#: FMain.form:397
+msgid "Abrir XHTML"
+msgstr ""
+
+#: Form_Bib.form:2163
+msgid "Abstract "
+msgstr ""
+
+#: Form_Metadatos.form:1342
+msgid "Abstract  "
+msgstr ""
+
+#: Form_Legales.form:50
+msgid "Acepto los términos"
+msgstr ""
+
+#: Form_Bib.form:1798
+msgid "Addendum "
+msgstr ""
+
+#: Form_Bib.form:730
+msgid "Afterword "
+msgstr ""
+
+#: Form_Tareas.form:29
+msgid " Agregar a la lista"
+msgstr ""
+
+#: Form_Bib.form:471 Form_Glosario.form:192
+msgid "Agregar clave"
+msgstr ""
+
+#: Form_Notas.form:40
+msgid "Agregar entrada"
+msgstr ""
+
+#: FMain.form:432
+msgid "Agregar tarea"
+msgstr ""
+
+#: Form_Autores.form:75 Form_Bib.form:379 Form_Coleccion.form:42 Form_Conferencia.form:58 Form_ConnServ.form:52 Form_Glosario.form:115 Form_Journal.form:52 Form_Metadatos.form:299 Form_Publisher.form:45 Form_Revisores.form:72 Form_Sponsor.form:41
+msgid "Agregar una nueva referencia"
+msgstr ""
+
+#: Form_Bib.form:2223
+msgid "Annotation "
+msgstr ""
+
+#: Form_Bib.form:804
+msgid "Annotator "
+msgstr ""
+
+#: Form_Metadatos.form:1590
+msgid "Anotaciones sobre el artículo"
+msgstr ""
+
+#: Form_Bib.form:2009
+msgid "another entry key"
+msgstr ""
+
+#: Form_Autores.form:139 Form_Revisores.form:136
+msgid "Apellido  "
+msgstr ""
+
+#: Form_Metadatos.form:1187
+msgid "Apunta a la URL completa del documento"
+msgstr ""
+
+#: Form_Notas.form:26
+msgid "Apuntes"
+msgstr ""
+
+#: FMain.form:285
+msgid "Apuntes de producción"
+msgstr ""
+
+#: Form_Bib.form:1698
+msgid "archive-specific electronic identifier"
+msgstr ""
+
+#: FMain.form:138
+msgid "Archivo"
+msgstr ""
+
+#: Form_Conversor.form:52
+msgid "Archivo DOCX (docx2tex) "
+msgstr ""
+
+#: Form_Conversor.form:45
+msgid "Archivo DOCX (Pandoc) "
+msgstr ""
+
+#: Form_Metadatos.form:1369
+msgid "Archivo que da origen a la salida"
+msgstr ""
+
+#: Form_Conversor.form:58
+msgid "Archivo RTF (Pandoc) "
+msgstr ""
+
+#: FMain.form:152
+msgid "Archivos abiertos recientemente"
+msgstr ""
+
+#: FMain.form:332
+msgid "Archivos de configuración"
+msgstr ""
+
+#: Form_ExportarBIB.form:62
+msgid "Asegurese de escribir correctamente el nombre del filtro de exportación"
+msgstr ""
+
+#: Form_Notas.form:129
+msgid "Asunto  "
+msgstr ""
+
+#: Form_Metadatos.form:649
+msgid "Asunto/Subject  "
+msgstr ""
+
+#: Form_Metadatos.form:1406
+msgid "Atribución de la imagen  "
+msgstr ""
+
+#: Form_Metadatos.form:1412
+msgid "Atribución de la imagen"
+msgstr ""
+
+#: Form_Bib.form:555
+msgid "Author "
+msgstr ""
+
+#: Form_Autores.form:125
+msgid "Autor"
+msgstr ""
+
+#: Form_BIB_duplicada.form:113
+msgid "Autor "
+msgstr ""
+
+#: Form_Metadatos.form:489
+msgid "Autor  "
+msgstr ""
+
+#: Form_Metadatos.form:497
+msgid "Autor del documento"
+msgstr ""
+
+#: Form_Bib.form:590
+msgid "Autor del libro"
+msgstr ""
+
+#: Form_Bib.form:541
+msgid "Autoría"
+msgstr ""
+
+#: Form_Bib.form:561
+msgid "Autor principal"
+msgstr ""
+
+#: Form_Legales.form:26
+msgid "Aviso de Ausencia de Garantía y Condiciones de la Licencia GPL-3.0"
+msgstr ""
+
+#: FMain.form:597
+msgid "Aviso Legal"
+msgstr ""
+
+#: FMain.form:458 Form_Bib.form:2237
+msgid "Ayuda"
+msgstr ""
+
+#: FMain.form:202
+msgid "AZW"
+msgstr ""
+
+#: FMain.form:483
+msgid "babel"
+msgstr ""
+
+#: FMain.form:490
+msgid "base"
+msgstr ""
+
+#: FMain.form:667
+msgid "Bib"
+msgstr ""
+
+#: FMain.form:487
+msgid "biblatex"
+msgstr ""
+
+#: FMain.form:254
+msgid "Blog personal con HUGO"
+msgstr ""
+
+#: Form_Bib.form:583
+msgid "BookAuthor "
+msgstr ""
+
+#: Form_Bib.form:1478
+msgid "BookPagination "
+msgstr ""
+
+#: FMain.form:503
+msgid "booktabs"
+msgstr ""
+
+#: Form_Bib.form:926
+msgid "BookTitle "
+msgstr ""
+
+#: Form_Bib.form:939
+msgid "  BookTitleAddOn "
+msgstr ""
+
+#: Form_BIB_duplicada.form:69 Form_Bib.form:386 Form_ConnServ.form:59 Form_Glosario.form:122
+msgid "Borrar entrada"
+msgstr ""
+
+#: FMain.form:437
+msgid "Borrar tarea"
+msgstr ""
+
+#: FMain.form:452
+msgid "Borrar tareas completadas"
+msgstr ""
+
+#: Form_CFG.form:56
+msgid "build"
+msgstr ""
+
+#: Form_CFG.form:66
+msgid "buildSite"
+msgstr ""
+
+#: Form_CSV.form:45 Form_Conversor.form:85
+msgid "Buscar"
+msgstr ""
+
+#: Form_Bib.form:873
+msgid "Buscar en internet"
+msgstr ""
+
+#: Form_Notas.form:87
+msgid "Buscar en toda la base de datos"
+msgstr ""
+
+#: Form_Bib.form:1848
+msgid "Buscar etiquetas"
+msgstr ""
+
+#: Form_Bib.form:853
+msgid "Búsqueda rápida del título"
+msgstr ""
+
+#: Form_Bib.form:351
+msgid "Caja de texto temporal"
+msgstr ""
+
+#: Form_CSV.form:110 Form_Tareas.form:79
+msgid "Cancelar"
+msgstr ""
+
+#: FMain.form:507
+msgid "caption"
+msgstr ""
+
+#: Form_Metadatos.form:696
+msgid "Caption Writer  "
+msgstr ""
+
+#: Form_Conversor.form:105
+msgid "caracteres permitidos: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-"
+msgstr ""
+
+#: Form_Metadatos.form:518
+msgid "Cargo o título académico del autor principal (solo uno)"
+msgstr ""
+
+#: Form_Bib.form:1363
+msgid "Casa editorial"
+msgstr ""
+
+#: Form_Metadatos.form:1522
+msgid "Categoría del artículo  "
+msgstr ""
+
+#: Form_Metadatos.form:1528
+msgid "Categoría o disciplina del artículo (por ej.: Medicina)"
+msgstr ""
+
+#: Form_Autores.form:114 Form_CFG.form:44 Form_Coleccion.form:75 Form_Conferencia.form:91 Form_Contador.form:29 Form_Conversor.form:139 Form_ExportarBIB.form:115 Form_Glosario.form:161 Form_Journal.form:85 Form_Logfile.form:29 Form_Metadatos.form:322 Form_Notas.form:99 Form_Publisher.form:84 Form_Revisores.form:111 Form_Sponsor.form:74 Form_TXTextendido.form:37
+msgid "Cerrar"
+msgstr ""
+
+#: FMain.form:160
+msgid "Cerrar el programa"
+msgstr ""
+
+#: Form_Autores.form:113 Form_BIB_duplicada.form:95 Form_Bib.form:431 Form_Coleccion.form:74 Form_Conferencia.form:90 Form_Control_Ref.form:95 Form_Glosario.form:160 Form_Journal.form:84 Form_Publisher.form:83 Form_Revisores.form:110 Form_Sponsor.form:73
+msgid "Cerrar la aplicación"
+msgstr ""
+
+#: Form_Contador.form:28 Form_Logfile.form:28 Form_Metadatos.form:305 Form_Notas.form:98 Form_TXTextendido.form:36
+msgid "Cerrar la ventana"
+msgstr ""
+
+#: Form_Bib.form:1111
+msgid "Chapter "
+msgstr ""
+
+#: Form_Bib.form:1904
+msgid "citation key aliases"
+msgstr ""
+
+#: Form_Bib.form:449 Form_Glosario.form:177
+msgid "Clave  "
+msgstr ""
+
+#: Form_Bib.form:1921 Form_Control_Ref.form:165
+msgid "Clave BIB asociada"
+msgstr ""
+
+#: Form_Bib.form:1993 Form_Control_Ref.form:199
+msgid "Clave BIB relacionada"
+msgstr ""
+
+#: Form_Bib.form:458
+msgid "Clave BIB única"
+msgstr ""
+
+#: Form_Bib.form:530
+msgid "Clave filtro para printbibliography"
+msgstr ""
+
+#: Form_Glosario.form:186
+msgid "Clave GLO única"
+msgstr ""
+
+#: Form_Bib.form:455 Form_Glosario.form:183
+msgid "Clave para ser utilizada solo con LaTeX"
+msgstr ""
+
+#: Form_Metadatos.form:664
+msgid "Claves/Etiquetas  "
+msgstr ""
+
+#: Form_Coleccion.form:91 Form_Metadatos.form:1427
+msgid "Colección  "
+msgstr ""
+
+#: Form_Metadatos.form:1435
+msgid "Colección o Serie de la editorial"
+msgstr ""
+
+#: FMain.form:714
+msgid "coloque aquí su usuario GitLab /GitHub"
+msgstr ""
+
+#: Form_Bib.form:760
+msgid "Commentator "
+msgstr ""
+
+#: FMain.form:166
+msgid "Compilar"
+msgstr ""
+
+#: Form_Bib.form:811
+msgid "Con anotaciones de"
+msgstr ""
+
+#: Form_Bib.form:767
+msgid "Con comentarios de"
+msgstr ""
+
+#: Form_Bib.form:737
+msgid "Con Epílogo de"
+msgstr ""
+
+#: Form_Bib.form:1244
+msgid "conference or event date as (yyyy-mm-dd)"
+msgstr ""
+
+#: Form_Metadatos.form:1761
+msgid "Conferencia  "
+msgstr ""
+
+#: Form_CFG.form:76
+msgid "configEPUB"
+msgstr ""
+
+#: Form_CFG.form:85
+msgid "configHTML"
+msgstr ""
+
+#: Form_CFG.form:94
+msgid "configODT"
+msgstr ""
+
+#: FMain.form:674
+msgid "Configuración general y metadatos"
+msgstr ""
+
+#: Form_CFG.form:120
+msgid "configXML-JATS"
+msgstr ""
+
+#: Form_CFG.form:103
+msgid "configXML-TEI"
+msgstr ""
+
+#: Form_Bib.form:780
+msgid "Con Introducción de"
+msgstr ""
+
+#: Form_Bib.form:750
+msgid "Con Prólogo de"
+msgstr ""
+
+#: Form_Metadatos.form:712
+msgid "Contact Address  "
+msgstr ""
+
+#: FMain.form:474
+msgid "Contactar al desarrollador"
+msgstr ""
+
+#: Form_Metadatos.form:729
+msgid "Contact City  "
+msgstr ""
+
+#: Form_Metadatos.form:759
+msgid "Contact Country  "
+msgstr ""
+
+#: Form_Metadatos.form:804
+msgid "Contact Email  "
+msgstr ""
+
+#: Form_Metadatos.form:789
+msgid "Contact Phone  "
+msgstr ""
+
+#: Form_Metadatos.form:744
+msgid "Contact Postcode  "
+msgstr ""
+
+#: Form_Metadatos.form:774
+msgid "Contact Region  "
+msgstr ""
+
+#: Form_Metadatos.form:819
+msgid "Contact URL  "
+msgstr ""
+
+#: FMain.form:649
+msgid "Contar"
+msgstr ""
+
+#: Form_Bib.form:2021
+msgid "Contenedor de entradas de claves para @xdata"
+msgstr ""
+
+#: Form_ConnServ.form:149
+msgid "Contraseña  "
+msgstr ""
+
+#: FMain.form:300 Form_BIB_duplicada.form:58
+msgid "Control de bibliografía duplicada"
+msgstr ""
+
+#: FMain.form:305 Form_Control_Ref.form:51
+msgid "Control de referencias relacionadas"
+msgstr ""
+
+#: FMain.form:280
+msgid "Conversión de archivo .docx a .tex"
+msgstr ""
+
+#: Form_Conversor.form:112
+msgid "Convertir"
+msgstr ""
+
+#: Form_CSV.form:61
+msgid "Convertir CSV"
+msgstr ""
+
+#: FMain.form:326
+msgid "Convertir imágenes a .png en grayscale"
+msgstr ""
+
+#: Form_Metadatos.form:1633
+msgid "Copy editor  "
+msgstr ""
+
+#: Form_Metadatos.form:886
+msgid "Corresponde al DOI del libro"
+msgstr ""
+
+#: Form_Metadatos.form:1665
+msgid "Código de clas.  "
+msgstr ""
+
+#: Form_Metadatos.form:1671
+msgid "Código de clasificación"
+msgstr ""
+
+#: FMain.form:511
+msgid "crop"
+msgstr ""
+
+#: Form_Bib.form:1254
+msgid "Date "
+msgstr ""
+
+#: Form_Metadatos.form:558
+msgid "Date  "
+msgstr ""
+
+#: Form_Metadatos.form:533
+msgid "DD-mes-YYYY"
+msgstr ""
+
+#: Form_Bib.form:2244
+msgid "Debe seleccionar un tipo de entrada para acceder a la ayuda."
+msgstr ""
+
+#: Form_Tareas.form:48
+msgid " Descripción"
+msgstr ""
+
+#: Form_Bib.form:1887
+msgid "Descripción del tipo de entrada"
+msgstr ""
+
+#: Form_Glosario.form:300
+msgid "Description "
+msgstr ""
+
+#: Form_Conversor.form:98
+msgid "Destino "
+msgstr ""
+
+#: Form_ExportarBIB.form:42
+msgid "Destino  "
+msgstr ""
+
+#: Form_Bib.form:1670
+msgid "Digital Object Identifier"
+msgstr ""
+
+#: Form_Metadatos.form:1457
+msgid "Dirección/Editor  "
+msgstr ""
+
+#: Form_ConnServ.form:117
+msgid "Dirección IP  "
+msgstr ""
+
+#: FMain.form:237 Form_CFG.form:111
+msgid "DocBook"
+msgstr ""
+
+#: Form_Bib.form:1664
+msgid "DOI "
+msgstr ""
+
+#: Form_Metadatos.form:870
+msgid "DOI de la revista"
+msgstr ""
+
+#: Form_Metadatos.form:1544
+msgid "DOI del artículo relacionado"
+msgstr ""
+
+#: Form_Metadatos.form:880
+msgid "DOI Libro  "
+msgstr ""
+
+#: Form_Metadatos.form:1538
+msgid "DOI relacionado  "
+msgstr ""
+
+#: Form_Metadatos.form:862
+msgid "DOI Revista  "
+msgstr ""
+
+#: FMain.form:515
+msgid "easyreview"
+msgstr ""
+
+#: Form_Metadatos.form:1064
+msgid "Edición del libro, especificado como texto, NO en número"
+msgstr ""
+
+#: Form_Bib.form:1179
+msgid "Edition "
+msgstr ""
+
+#: Form_Bib.form:618
+msgid "Editor "
+msgstr ""
+
+#: Form_Bib.form:646
+msgid "EditorA "
+msgstr ""
+
+#: Form_Bib.form:658
+msgid "EditorAType "
+msgstr ""
+
+#: Form_Bib.form:674
+msgid "EditorB "
+msgstr ""
+
+#: Form_Bib.form:686
+msgid "EditorBType "
+msgstr ""
+
+#: Form_Bib.form:702
+msgid "EditorC "
+msgstr ""
+
+#: Form_Bib.form:714
+msgid "EditorCType "
+msgstr ""
+
+#: Form_Metadatos.form:1639
+msgid "Editor de copia"
+msgstr ""
+
+#: Form_Metadatos.form:896
+msgid "Editorial  "
+msgstr ""
+
+#: Form_Bib.form:630
+msgid "EditorType "
+msgstr ""
+
+#: Form_Bib.form:1680
+msgid "Eid "
+msgstr ""
+
+#: Form_Metadatos.form:1107
+msgid "eISSN  "
+msgstr ""
+
+#: Form_Bib.form:1686
+msgid "electronic identifier of @article"
+msgstr ""
+
+#: Form_Notas.form:47
+msgid "Eliminar entrada"
+msgstr ""
+
+#: Form_Glosario.form:284
+msgid "El nombre de la entrada. Respetar mayúscula/minúscula en la búsqueda."
+msgstr ""
+
+#: FMain.form:270
+msgid "En formato HTML5"
+msgstr ""
+
+#: FMain.form:265
+msgid "En formato PDF"
+msgstr ""
+
+#: Form_Bib.form:1750
+msgid "EntrysubType "
+msgstr ""
+
+#: FMain.form:519
+msgid "enumitem"
+msgstr ""
+
+#: Form_Bib.form:1692
+msgid "Eprint "
+msgstr ""
+
+#: Form_Bib.form:1708
+msgid "EprintType "
+msgstr ""
+
+#: FMain.form:184
+msgid "ePub"
+msgstr ""
+
+#: Form_Metadatos.form:392
+msgid "ePub/Mobi  "
+msgstr ""
+
+#: FMain.form:190
+msgid "ePub 3"
+msgstr ""
+
+#: Form_Metadatos.form:1150
+msgid "es-ES"
+msgstr ""
+
+#: Form_Metadatos.form:670
+msgid "ESPAÑOL Palabras clave separadas por coma"
+msgstr ""
+
+#: Form_Metadatos.form:847
+msgid "Especifica el título del diario, revista  o documento principal"
+msgstr ""
+
+#: Form_Glosario.form:380
+msgid "Esta entrada aparecerá en el texto cuando se utilice \\glspl."
+msgstr ""
+
+#: Form_Glosario.form:348
+msgid "Esta entrada aparecerá en el texto del documento."
+msgstr ""
+
+#: Form_Glosario.form:327
+msgid "Esta entrada aparecerá en el texto del documento la primera vez que se use."
+msgstr ""
+
+#: Form_Glosario.form:364
+msgid "Esta entrada es igual que plural, pero es solo válida para la primera vez que se llame a \\glspl."
+msgstr ""
+
+#: Form_Metadatos.form:1125
+msgid "Estatus del documento  "
+msgstr ""
+
+#: Form_Legales.form:34
+msgid "Este software se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, expresa o implícita, incluyendo, pero no limitado a, las garantías de comerciabilidad, idoneidad para un propósito particular y no infracción. En ningún caso los autores o titulares de los derechos de autor serán responsables por cualquier reclamo, daños u otras responsabilidades, ya sea en una acción de contrato, agravio o de otra manera, derivados de, fuera de o en conexión con el software o el uso u otros negocios en el software.\n\nAdemás, este software se distribuye bajo los términos de la Licencia Pública General de GNU versión 3 (GPL-3.0). Por favor, consulte la licencia para los detalles completos de los derechos y limitaciones legales aplicables a este software."
+msgstr ""
+
+#: Form_Glosario.form:396
+msgid "Este valor indica como makeindex deberı́a ordenar las entradas."
+msgstr ""
+
+#: Form_Bib.form:1862
+msgid "Etiquetas adicionales para el motor de búsqueda"
+msgstr ""
+
+#: Form_Bib.form:1238
+msgid "EventDate "
+msgstr ""
+
+#: Form_Bib.form:1046
+msgid "EventTitle "
+msgstr ""
+
+#: Form_Bib.form:1059
+msgid "  EventTitleAddOn "
+msgstr ""
+
+#: Form_ExportarBIB.form:121
+msgid "Exportar"
+msgstr ""
+
+#: Form_ExportarBIB.form:83
+msgid "  Exportar como  "
+msgstr ""
+
+#: Form_Notas.form:76
+msgid "Exportar la nota como archivo de texto plano"
+msgstr ""
+
+#: FMain.form:290 Form_ExportarBIB.form:24
+msgid "Exportar referencias bibliográficas"
+msgstr ""
+
+#: Form_Bib.form:1772
+msgid "fall-back label"
+msgstr ""
+
+#: Form_Metadatos.form:543
+msgid "Fecha art. aceptado  "
+msgstr ""
+
+#: Form_Metadatos.form:528
+msgid "Fecha art. recibido  "
+msgstr ""
+
+#: Form_Metadatos.form:574
+msgid "Fecha de creación  "
+msgstr ""
+
+#: Form_Metadatos.form:1681
+msgid "Fecha de edición  "
+msgstr ""
+
+#: Form_Metadatos.form:1706
+msgid "Fecha pub. en línea  "
+msgstr ""
+
+#: Form_Metadatos.form:1731
+msgid "Fecha pub. impresa  "
+msgstr ""
+
+#: Form_Bib.form:2145
+msgid "File "
+msgstr ""
+
+#: Form_Autores.form:225 Form_Revisores.form:206
+msgid "Filiación"
+msgstr ""
+
+#: Form_BIB_duplicada.form:129 Form_Control_Ref.form:114
+msgid "Filtro "
+msgstr ""
+
+#: Form_ExportarBIB.form:72
+msgid "Filtro  "
+msgstr ""
+
+#: Form_Metadatos.form:1649
+msgid "Financiamiento  "
+msgstr ""
+
+#: Form_Glosario.form:358
+msgid "Firstplural "
+msgstr ""
+
+#: FMain.form:523
+msgid "footmisc"
+msgstr ""
+
+#: Form_Bib.form:743
+msgid "Foreword "
+msgstr ""
+
+#: Form_Bib.form:1756
+msgid "for finer-grained specification of type"
+msgstr ""
+
+#: Form_Metadatos.form:951
+msgid "Formato  "
+msgstr ""
+
+#: Form_Metadatos.form:963
+msgid "Formato de la publicación"
+msgstr ""
+
+#: Form_Bib.form:464
+msgid "Forzar guardar"
+msgstr ""
+
+#: .project:1
+msgid "gbTeXpublisher"
+msgstr ""
+
+#: .project:2
+msgid "gbTeXpublisher es una aplicación que permite gestionar los procesos de producción editorial basados en el lenguaje LaTeX."
+msgstr ""
+
+#: Form_Bib.form:841
+msgid "gender of author or editor"
+msgstr ""
+
+#: FMain.form:527
+msgid "geometry"
+msgstr ""
+
+#: Form_Bib.form:335
+msgid "Gestión de referencias bibliográficas"
+msgstr ""
+
+#: Form_Glosario.form:63
+msgid "Gestión de siglas y glosarios"
+msgstr ""
+
+#: Form_Metadatos.form:1554
+msgid "Género  "
+msgstr ""
+
+#: FMain.form:707
+msgid "GitHub  "
+msgstr ""
+
+#: FMain.form:699
+msgid "GitLab"
+msgstr ""
+
+#: FMain.form:658
+msgid "Glo"
+msgstr ""
+
+#: FMain.form:531
+msgid "glossaries"
+msgstr ""
+
+#: Form_Metadatos.form:1655
+msgid "Grupo de financiamiento"
+msgstr ""
+
+#: Form_BIB_duplicada.form:247 Form_Bib.form:398 Form_CFG.form:38 Form_ConnServ.form:65 Form_Control_Ref.form:226
+msgid "Guardar"
+msgstr ""
+
+#: Form_Notas.form:61
+msgid "Guardar cambios"
+msgstr ""
+
+#: Form_Notas.form:54
+msgid "Guardar entrada"
+msgstr ""
+
+#: Form_Autores.form:87 Form_Bib.form:404 Form_Coleccion.form:48 Form_Conferencia.form:64 Form_Glosario.form:134 Form_Journal.form:58 Form_Metadatos.form:311 Form_Publisher.form:57 Form_Revisores.form:84 Form_Sponsor.form:47
+msgid "Guardar modificaciones"
+msgstr ""
+
+#: FMain.form:277
+msgid "Herramientas"
+msgstr ""
+
+#: Form_Bib.form:821
+msgid "Holder "
+msgstr ""
+
+#: Form_Bib.form:1782
+msgid "Howpublished "
+msgstr ""
+
+#: FMain.form:217
+msgid "HTML5"
+msgstr ""
+
+#: FMain.form:584
+msgid "https://iedra.es/"
+msgstr ""
+
+#: FMain.form:592
+msgid "https://tex.stackexchange.com/"
+msgstr ""
+
+#: FMain.form:580
+msgid "https://www.fundeu.es/"
+msgstr ""
+
+#: FMain.form:588
+msgid "https://www.reverso.net/"
+msgstr ""
+
+#: FMain.form:535
+msgid "hyperref"
+msgstr ""
+
+#: Form_Metadatos.form:1212
+msgid "ID documento  "
+msgstr ""
+
+#: Form_Metadatos.form:1227
+msgid "ID editorial  "
+msgstr ""
+
+#: Form_Metadatos.form:1145
+msgid "Idioma  "
+msgstr ""
+
+#: Form_Metadatos.form:1491
+msgid "IdiomaOriginal  "
+msgstr ""
+
+#: Form_Metadatos.form:1197
+msgid "ID versión  "
+msgstr ""
+
+#: Form_Bib.form:909
+msgid "if different from title"
+msgstr ""
+
+#: Form_Metadatos.form:1506
+msgid "Ilustrador  "
+msgstr ""
+
+#: FMain.form:539
+msgid "imakeidx"
+msgstr ""
+
+#: Form_CSV.form:94
+msgid "Importar"
+msgstr ""
+
+#: FMain.form:295
+msgid "Incorporar bibliografía"
+msgstr ""
+
+#: Form_Bib.form:902
+msgid "IndexTitle "
+msgstr ""
+
+#: Form_Autores.form:238 Form_Revisores.form:219
+msgid "Institución  "
+msgstr ""
+
+#: Form_Bib.form:1373
+msgid "Institution "
+msgstr ""
+
+#: Form_Bib.form:1620
+msgid "International Standard Audiovisual Number"
+msgstr ""
+
+#: Form_Bib.form:1564
+msgid "International Standard Book Number"
+msgstr ""
+
+#: Form_Bib.form:1592
+msgid "International Standard Music Number"
+msgstr ""
+
+#: Form_Bib.form:1576
+msgid "International Standard Serial Number"
+msgstr ""
+
+#: Form_Bib.form:1604
+msgid " International Standard Technical Report Number"
+msgstr ""
+
+#: Form_Bib.form:1632
+msgid "International Standard Work Code"
+msgstr ""
+
+#: Form_Bib.form:773
+msgid "Introduction "
+msgstr ""
+
+#: Form_Bib.form:1545
+msgid "IS**/Dig."
+msgstr ""
+
+#: Form_Bib.form:1614
+msgid "ISAN "
+msgstr ""
+
+#: Form_Bib.form:1558
+msgid "ISBN "
+msgstr ""
+
+#: Form_Metadatos.form:1074
+msgid "ISBN  "
+msgstr ""
+
+#: Form_Bib.form:1586
+msgid "ISMN "
+msgstr ""
+
+#: FMain.form:498
+msgid "ISO690"
+msgstr ""
+
+#: Form_Bib.form:1598
+msgid "ISRN "
+msgstr ""
+
+#: Form_Bib.form:1570
+msgid "ISSN "
+msgstr ""
+
+#: Form_Metadatos.form:1089
+msgid "ISSN  "
+msgstr ""
+
+#: Form_Bib.form:1190
+msgid "Issue "
+msgstr ""
+
+#: Form_Metadatos.form:988
+msgid "Issue núm.  "
+msgstr ""
+
+#: Form_Bib.form:1017
+msgid "IssueTitle "
+msgstr ""
+
+#: Form_Bib.form:1030
+msgid "  IssueTitleAddOn "
+msgstr ""
+
+#: Form_Bib.form:1626
+msgid "ISWC "
+msgstr ""
+
+#: Form_Bib.form:989
+msgid "JournalTitle "
+msgstr ""
+
+#: Form_Bib.form:1001
+msgid "  JournalTitleAddOn "
+msgstr ""
+
+#: FMain.form:734
+msgid "Kanban"
+msgstr ""
+
+#: Form_Metadatos.form:680
+msgid "Keyword  "
+msgstr ""
+
+#: Form_Bib.form:1766
+msgid "Label "
+msgstr ""
+
+#: Form_Glosario.form:306
+msgid "La descripción del término."
+msgstr ""
+
+#: Form_Bib.form:1523
+msgid "Language "
+msgstr ""
+
+#: Form_Bib.form:1529
+msgid "language of work"
+msgstr ""
+
+#: Form_ConnServ.form:45 Form_Legales.form:13
+msgid "Legales"
+msgstr ""
+
+#: Form_Bib.form:2203
+msgid "Library "
+msgstr ""
+
+#: Form_Metadatos.form:404
+msgid "Libre Office"
+msgstr ""
+
+#: FMain.form:622
+msgid "Limpiar"
+msgstr ""
+
+#: Form_Bib.form:1979
+msgid "listado de claves (2 o más) para @set"
+msgstr ""
+
+#: Form_Conversor.form:132 Form_Tareas.form:73
+msgid "Listo"
+msgstr ""
+
+#: FMain.form:720 Form_ConnServ.form:193
+msgid "Local"
+msgstr ""
+
+#: Form_Bib.form:1312
+msgid "Location "
+msgstr ""
+
+#: FMain.form:640
+msgid "Log"
+msgstr ""
+
+#: Form_Metadatos.form:717
+msgid "Los 8 puntos que siguen describen cómo ponerse en contacto con la persona o institución responsable del documento"
+msgstr ""
+
+#: Form_Bib.form:955
+msgid "MainTitle "
+msgstr ""
+
+#: Form_Bib.form:968
+msgid "  MainTitleAddOn "
+msgstr ""
+
+#: FMain.form:543
+msgid "make4ht"
+msgstr ""
+
+#: FMain.form:447
+msgid "Marcar tarea como incompleta"
+msgstr ""
+
+#: FMain.form:442
+msgid "Marcar tarea completada"
+msgstr ""
+
+#: FMain.form:677
+msgid "Meta"
+msgstr ""
+
+#: Form_Metadatos.form:602
+msgid "Meta Date  "
+msgstr ""
+
+#: Form_Metadatos.form:340
+msgid "Metadatos para  "
+msgstr ""
+
+#: Form_Metadatos.form:1166
+msgid "Meta Lang  "
+msgstr ""
+
+#: FMain.form:547
+msgid "microtype"
+msgstr ""
+
+#: Form_Bib.form:1718
+msgid "Misc. 1"
+msgstr ""
+
+#: Form_Bib.form:1840
+msgid "Misc. 2"
+msgstr ""
+
+#: Form_Bib.form:2025
+msgid "Misc. 3"
+msgstr ""
+
+#: Form_Bib.form:2155
+msgid "Misc. 4"
+msgstr ""
+
+#: Form_Bib.form:1804
+msgid "miscellaneous data printed at end of entry"
+msgstr ""
+
+#: FMain.form:196
+msgid "Mobi"
+msgstr ""
+
+#: Form_Metadatos.form:588
+msgid "Mod. date  "
+msgstr ""
+
+#: Form_Bib.form:2039
+msgid "modify sorting"
+msgstr ""
+
+#: Form_Bib.form:492
+msgid "Mostrar las entradas de este archivo"
+msgstr ""
+
+#: Form_Bib.form:359
+msgid "Mostrar referencias bibliográficas"
+msgstr ""
+
+#: FMain.form:760
+msgid "Mostrar tareas"
+msgstr ""
+
+#: FMain.form:743
+msgid "Mostrar terminal"
+msgstr ""
+
+#: FMain.form:245
+msgid "MS docx / ODT"
+msgstr ""
+
+#: Form_Bib.form:596
+msgid "NameAddOn "
+msgstr ""
+
+#: Form_ConnServ.form:100
+msgid "Nombre  "
+msgstr ""
+
+#: Form_Metadatos.form:902
+msgid "Nombre de la editorial"
+msgstr ""
+
+#: Form_Bib.form:995
+msgid "Nombre de la revista"
+msgstr ""
+
+#: Form_ExportarBIB.form:89
+msgid "Nombre sin la extensión"
+msgstr ""
+
+#: Form_Metadatos.form:1512
+msgid "Nombre y Apellido del ilustrador"
+msgstr ""
+
+#: Form_Metadatos.form:1485
+msgid "Nombre y Apellido del traductor"
+msgstr ""
+
+#: Form_Bib.form:1196
+msgid "non-number issue of journal"
+msgstr ""
+
+#: Form_Bib.form:1788
+msgid "non-standard publication details"
+msgstr ""
+
+#: Form_Metadatos.form:1584
+msgid "Nota sobre el artículo  "
+msgstr ""
+
+#: Form_Bib.form:2183
+msgid "Note "
+msgstr ""
+
+#: Form_Bib.form:1153
+msgid "Number "
+msgstr ""
+
+#: Form_Bib.form:1143
+msgid "number of volumes for multi-volume work"
+msgstr ""
+
+#: Form_Metadatos.form:1058
+msgid "Número de edición  "
+msgstr ""
+
+#: Form_Metadatos.form:1233
+msgid "Número de identificación de la editorial"
+msgstr ""
+
+#: Form_Metadatos.form:1048
+msgid "Número de página final"
+msgstr ""
+
+#: Form_Metadatos.form:1036
+msgid "Número de página inicial"
+msgstr ""
+
+#: Form_Metadatos.form:1008
+msgid "Números de página en los que el documento aparece dentro de la publicación"
+msgstr ""
+
+#: Form_Bib.form:1453
+msgid "of event"
+msgstr ""
+
+#: Form_Bib.form:828
+msgid "of patent"
+msgstr ""
+
+#: Form_Bib.form:1872
+msgid "Options "
+msgstr ""
+
+#: Form_Bib.form:1304
+msgid "Org./Pág./Ub./Id."
+msgstr ""
+
+#: Form_Bib.form:1393
+msgid "Organizador"
+msgstr ""
+
+#: Form_Bib.form:1386
+msgid "Organization "
+msgstr ""
+
+#: Form_Bib.form:1266
+msgid "  OrigDate "
+msgstr ""
+
+#: Form_Conversor.form:70
+msgid "Origen "
+msgstr ""
+
+#: Form_Metadatos.form:1363
+msgid "Origen  "
+msgstr ""
+
+#: Form_Bib.form:1535
+msgid "  OrigLanguage "
+msgstr ""
+
+#: Form_Bib.form:1541
+msgid "orig language of work"
+msgstr ""
+
+#: Form_Bib.form:1323
+msgid "OrigLocation "
+msgstr ""
+
+#: Form_Bib.form:1356
+msgid "OrigPublisher "
+msgstr ""
+
+#: Form_Bib.form:1836
+msgid "override default introduction of shorthand"
+msgstr ""
+
+#: Form_Bib.form:1403
+msgid "Pages "
+msgstr ""
+
+#: Form_Bib.form:1416
+msgid "PageTotal "
+msgstr ""
+
+#: Form_Bib.form:1433
+msgid "Pagination "
+msgstr ""
+
+#: Form_Bib.form:1440
+msgid "pagination format of (book)title"
+msgstr ""
+
+#: Form_Metadatos.form:686
+msgid "Palabras clave para el segundo idioma separadas por coma"
+msgstr ""
+
+#: FMain.form:479
+msgid "Paquetes de LaTeX más utilizados"
+msgstr ""
+
+#: Form_Bib.form:1164
+msgid "Part "
+msgstr ""
+
+#: Form_Bib.form:1380
+msgid "Patrocinante"
+msgstr ""
+
+#: Form_Sponsor.form:90
+msgid "Patrocinio  "
+msgstr ""
+
+#: Form_Sponsor.form:27
+msgid "Patrocinio / Sponsor"
+msgstr ""
+
+#: FMain.form:260
+msgid "Página del catálogo"
+msgstr ""
+
+#: FMain.form:175
+msgid "PDF"
+msgstr ""
+
+#: FMain.form:169
+msgid "PDF (artículo de revista)"
+msgstr ""
+
+#: Form_Metadatos.form:386
+msgid "PDF (libro)  "
+msgstr ""
+
+#: Form_Metadatos.form:380
+msgid "PDF (revista)  "
+msgstr ""
+
+#: FMain.form:422
+msgid "PDF página del catálogo"
+msgstr ""
+
+#: Form_Metadatos.form:1243
+msgid "PDF Rendition  "
+msgstr ""
+
+#: Form_Metadatos.form:1258
+msgid "PDFx Standard  "
+msgstr ""
+
+#: FMain.form:494
+msgid "philosophy"
+msgstr ""
+
+#: Form_Glosario.form:374
+msgid "Plural "
+msgstr ""
+
+#: FMain.form:551
+msgid "polyglosia"
+msgstr ""
+
+#: Form_Bib.form:1513
+msgid "polyglossia options for langid"
+msgstr ""
+
+#: Form_Control_Ref.form:83
+msgid "Por autor  "
+msgstr ""
+
+#: Form_Control_Ref.form:89
+msgid "Por título"
+msgstr ""
+
+#: Form_Metadatos.form:1030
+msgid "Primera página  "
+msgstr ""
+
+#: Form_Glosario.form:321
+msgid "Primera vez "
+msgstr ""
+
+#: Form_Metadatos.form:839
+msgid "Publicación  "
+msgstr ""
+
+#: Form_Bib.form:1099
+msgid "publication series"
+msgstr ""
+
+#: Form_Bib.form:1345
+msgid "Publisher "
+msgstr ""
+
+#: Form_Publisher.form:100
+msgid "Publisher  "
+msgstr ""
+
+#: Form_Bib.form:1206
+msgid "PubState "
+msgstr ""
+
+#: Form_Metadatos.form:1002
+msgid "Rango de páginas  "
+msgstr ""
+
+#: Form_Bib.form:1963 Form_Control_Ref.form:184
+msgid "Redacción manual del tipo de relación"
+msgstr ""
+
+#: Form_Control_Ref.form:221
+msgid "Referencias del archivo .tex en curso"
+msgstr ""
+
+#: Form_Metadatos.form:940
+msgid "Refiere a: artículos, libros, disertaciones, periódicos, etc."
+msgstr ""
+
+#: Form_Notas.form:69
+msgid "Refrescar datos"
+msgstr ""
+
+#: Form_Autores.form:81 Form_BIB_duplicada.form:75 Form_Bib.form:392 Form_Glosario.form:128 Form_Publisher.form:51 Form_Revisores.form:78
+msgid "Refrescar listado de la base de datos"
+msgstr ""
+
+#: Form_Bib.form:1914 Form_Control_Ref.form:157
+msgid "Related "
+msgstr ""
+
+#: FMain.form:727 Form_ConnServ.form:183
+msgid "Remoto"
+msgstr ""
+
+#: Form_Bib.form:2071
+msgid "replaces author or editor when sorting"
+msgstr ""
+
+#: Form_Bib.form:2103
+msgid "replaces title when sorting"
+msgstr ""
+
+#: Form_Bib.form:2119
+msgid "replaces title when sorting index"
+msgstr ""
+
+#: Form_Bib.form:2135
+msgid "replaces year (from date) when sorting"
+msgstr ""
+
+#: Form_Bib.form:1075
+msgid "ReprintTitle "
+msgstr ""
+
+#: Form_Metadatos.form:1321
+msgid "Resumen  "
+msgstr ""
+
+#: Form_Metadatos.form:1327
+msgid "Resumen en idioma principal"
+msgstr ""
+
+#: Form_Metadatos.form:1348
+msgid "Resumen en segundo idioma"
+msgstr ""
+
+#: Form_Bib.form:1300
+msgid "revision number for software or manual"
+msgstr ""
+
+#: Form_Metadatos.form:1610
+msgid "Revisión por pares  "
+msgstr ""
+
+#: Form_Metadatos.form:1618
+msgid "Revisión por pares"
+msgstr ""
+
+#: Form_Revisores.form:122
+msgid "Revisor"
+msgstr ""
+
+#: Form_Journal.form:101
+msgid "Revista  "
+msgstr ""
+
+#: Form_Bib.form:2151
+msgid "ruta fija a un archivo"
+msgstr ""
+
+#: Form_BIB_duplicada.form:96 Form_Bib.form:432 Form_ConnServ.form:177 Form_Control_Ref.form:96
+msgid "Salir"
+msgstr ""
+
+#: FMain.form:320
+msgid "Script externos"
+msgstr ""
+
+#: Form_Coleccion.form:160 Form_Conferencia.form:264 Form_Journal.form:223 Form_Publisher.form:183 Form_Sponsor.form:148
+msgid "Seleccionar"
+msgstr ""
+
+#: Form_Autores.form:385
+msgid "Seleccionar autor"
+msgstr ""
+
+#: Form_ConnServ.form:35
+msgid "Seleccionar el modo de trabajo con la base de datos"
+msgstr ""
+
+#: Form_Revisores.form:364
+msgid "Seleccionar revisor"
+msgstr ""
+
+#: Form_Bib.form:479 Form_Glosario.form:200
+msgid "  Será exportado como:  "
+msgstr ""
+
+#: Form_Metadatos.form:355
+msgid "Será exportado como:  "
+msgstr ""
+
+#: Form_Metadatos.form:1115
+msgid "Se refiere al ISSN de la versión electrónica del documento"
+msgstr ""
+
+#: Form_Metadatos.form:1097
+msgid "Se refiere al ISSN de la versión impresa del documento"
+msgstr ""
+
+#: Form_Bib.form:1092
+msgid "Series "
+msgstr ""
+
+#: Form_CSV.form:74
+msgid "Se sugiere revisar el archivo .csv de manera externa para confirmar que no tenga errores."
+msgstr ""
+
+#: Form_Metadatos.form:702
+msgid "Se utiliza para especificar el nombre de quien a modificado el contenido del documento"
+msgstr ""
+
+#: Form_Bib.form:567
+msgid "ShortAuthor "
+msgstr ""
+
+#: Form_Bib.form:1814
+msgid "Shorthand "
+msgstr ""
+
+#: Form_Bib.form:1830
+msgid "Shorthandintro "
+msgstr ""
+
+#: Form_Bib.form:884
+msgid "ShortTitle "
+msgstr ""
+
+#: Form_Bib.form:945
+msgid "Sigla"
+msgstr ""
+
+#: Form_Bib.form:573
+msgid "Sigla o apodo"
+msgstr ""
+
+#: Form_ConnServ.form:84
+msgid "Sincronizar"
+msgstr ""
+
+#: FMain.form:311
+msgid "Sincronizar datos <-local  --- remoto->"
+msgstr ""
+
+#: FMain.form:555
+msgid "siunitx"
+msgstr ""
+
+#: Form_Glosario.form:390
+msgid "Sort "
+msgstr ""
+
+#: Form_Bib.form:2055
+msgid "sort key, overrides everything except presort"
+msgstr ""
+
+#: Form_Bib.form:2087
+msgid "sortkey if entry has shorthand"
+msgstr ""
+
+#: Form_Bib.form:1820
+msgid "special designator, overrides label in citations"
+msgstr ""
+
+#: Form_Metadatos.form:468
+msgid "Subtítulo del doc.  "
+msgstr ""
+
+#: Form_Metadatos.form:474
+msgid "Subtítulo del título principal"
+msgstr ""
+
+#: FMain.form:559
+msgid "svg"
+msgstr ""
+
+#: Form_Metadatos.form:1384
+msgid "Tapa del libro  "
+msgstr ""
+
+#: FMain.form:631
+msgid "tar.gz"
+msgstr ""
+
+#: FMain.form:428
+msgid "Tareas"
+msgstr ""
+
+#: FMain.form:563
+msgid "tex4ebook"
+msgstr ""
+
+#: Form_Glosario.form:342
+msgid "Text "
+msgstr ""
+
+#: Form_TXTextendido.form:11
+msgid "Texto completo"
+msgstr ""
+
+#: Form_Bib.form:505 Form_Glosario.form:248
+msgid "Tipo  "
+msgstr ""
+
+#: Form_Metadatos.form:928
+msgid "Tipo de documento  "
+msgstr ""
+
+#: Form_Bib.form:1740
+msgid "tipo de entrada para @thesis, @manual, @patent o @report"
+msgstr ""
+
+#: Form_Metadatos.form:616
+msgid "Tipo de licencia  "
+msgstr ""
+
+#: Form_Metadatos.form:1569
+msgid "Tipo de publicación  "
+msgstr ""
+
+#: Form_Bib.form:860
+msgid "Title "
+msgstr ""
+
+#: Form_Bib.form:1082
+msgid "title of a reprint of the work"
+msgstr ""
+
+#: Form_Bib.form:1053
+msgid "title of conference or event"
+msgstr ""
+
+#: Form_Bib.form:1024
+msgid "title of journal special issue"
+msgstr ""
+
+#: FMain.form:567
+msgid "titlesec"
+msgstr ""
+
+#: Form_Conferencia.form:107
+msgid "Título de la conferencia  "
+msgstr ""
+
+#: Form_Metadatos.form:1775
+msgid "Título de la conferencia"
+msgstr ""
+
+#: Form_Metadatos.form:512
+msgid "Título del autor  "
+msgstr ""
+
+#: Form_Metadatos.form:436
+msgid "Título del documento  "
+msgstr ""
+
+#: Form_Bib.form:933 Form_Metadatos.form:426
+msgid "Título del libro"
+msgstr ""
+
+#: Form_Metadatos.form:420
+msgid "Título del libro  "
+msgstr ""
+
+#: Form_Metadatos.form:1279
+msgid "Título en otro idioma"
+msgstr ""
+
+#: Form_Bib.form:962
+msgid "Título mayor"
+msgstr ""
+
+#: Form_Bib.form:868
+msgid "Título principal"
+msgstr ""
+
+#: Form_Metadatos.form:442
+msgid "Título principal del documento"
+msgstr ""
+
+#: Form_Metadatos.form:458
+msgid "Título principal en segundo idioma"
+msgstr ""
+
+#: Form_Bib.form:892
+msgid "Título recortado para footcite"
+msgstr ""
+
+#: Form_Bib.form:845
+msgid "Títulos"
+msgstr ""
+
+#: Form_Metadatos.form:452
+msgid "Título segundo idioma  "
+msgstr ""
+
+#: Form_Metadatos.form:373
+msgid "Todos  "
+msgstr ""
+
+#: Form_Metadatos.form:1014
+msgid "Total de páginas  "
+msgstr ""
+
+#: Form_Metadatos.form:1020
+msgid "Total de páginas del documento"
+msgstr ""
+
+#: Form_Bib.form:1423
+msgid "total number of pages"
+msgstr ""
+
+#: Form_Bib.form:798
+msgid "Traducido por"
+msgstr ""
+
+#: Form_Bib.form:789
+msgid "Traductor"
+msgstr ""
+
+#: Form_Metadatos.form:1479
+msgid "Traductor  "
+msgstr ""
+
+#: Form_Bib.form:791
+msgid "Translator "
+msgstr ""
+
+#: Form_Bib.form:1726
+msgid "Type "
+msgstr ""
+
+#: Form_Bib.form:1714
+msgid "type of identifier, eprintclass for further details"
+msgstr ""
+
+#: Form_Bib.form:1330
+msgid "Ubicación de la casa editora"
+msgstr ""
+
+#: FMain.form:571
+msgid "url"
+msgstr ""
+
+#: Form_Bib.form:1648
+msgid "URL "
+msgstr ""
+
+#: Form_Bib.form:1654
+msgid "URL"
+msgstr ""
+
+#: Form_Bib.form:1282
+msgid "urlDate "
+msgstr ""
+
+#: Form_Metadatos.form:918
+msgid "URL de la editorial"
+msgstr ""
+
+#: Form_Metadatos.form:1181
+msgid "URL documento  "
+msgstr ""
+
+#: Form_Metadatos.form:912
+msgid "URL editorial  "
+msgstr ""
+
+#: Form_Metadatos.form:632
+msgid "URL licencia  "
+msgstr ""
+
+#: Form_ConnServ.form:134
+msgid "Usuario  "
+msgstr ""
+
+#: Form_Metadatos.form:1042
+msgid "Última página  "
+msgstr ""
+
+#: Form_Bib.form:1446
+msgid "Venue "
+msgstr ""
+
+#: FMain.form:684
+msgid "Ver"
+msgstr ""
+
+#: Form_Metadatos.form:719
+msgid "Ver el ToolTip"
+msgstr ""
+
+#: Form_Bib.form:1294
+msgid "Version "
+msgstr ""
+
+#: FMain.form:466
+msgid "Visitar el blog del autor"
+msgstr ""
+
+#: FMain.form:461
+msgid "Visitar el repositorio de la aplicación"
+msgstr ""
+
+#: Form_Bib.form:1103
+msgid "Vol./Núm./Fe."
+msgstr ""
+
+#: Form_Bib.form:1126
+msgid "Volume "
+msgstr ""
+
+#: Form_Bib.form:1137
+msgid "Volume(s) "
+msgstr ""
+
+#: Form_Metadatos.form:974
+msgid "Volumen núm.  "
+msgstr ""
+
+#: FMain.form:576
+msgid "WEB más consultadas"
+msgstr ""
+
+#: FMain.form:211
+msgid "XHTML"
+msgstr ""
+
+#: FMain.form:226
+msgid "XML-JATS"
+msgstr ""
+
+#: Form_Metadatos.form:398
+msgid "xml-JATS  "
+msgstr ""
+
+#: FMain.form:232
+msgid "XML-TEI"
+msgstr ""
+
+#: Form_Metadatos.form:1273
+msgid "XMPLangAlt  "
+msgstr ""
+
+#: FMain.class:43
+msgid " ya se está ejecutando"
+msgstr ""
+
+#: Form_Bib.form:1226
+msgid "Year "
+msgstr ""
+
+#: Form_Bib.form:1232
+msgid "YYYY (usar en revistas)"
+msgstr ""
+
+#: Form_Bib.form:1260 Form_Metadatos.form:564
+msgid "YYYY-MM-DD"
+msgstr ""
+

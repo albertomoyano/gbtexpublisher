@@ -1,0 +1,799 @@
+' Gambas module file
+
+Public rutaApp As String = User.Home &/ ".gbtexpublisher"
+Public rutaAppR As String = User.Home &/ ".respaldogbTeX"
+Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+
+Public Sub CopiarArchivos(rutaTexto As String)'libros
+
+  ' Lista de directorios que deseas crear
+  Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "pdf", "artcap", "docs"]
+
+  ' Crear los directorios si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(rutaTexto) & "/" & directorio) Then
+      Mkdir File.Dir(rutaTexto) & "/" & directorio
+    End If
+  Next
+
+  'copiamos los archivos de preámbulo de libro
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
+    Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub1.tex") Then
+    Copy "./book-epub1.tex" To File.Dir(rutaTexto) & "/files/book-epub1.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub2.tex") Then
+    Copy "./book-epub2.tex" To File.Dir(rutaTexto) & "/files/book-epub2.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaAY-config.tex") Then
+    Copy "./biblatex-veronaAY-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaAY-config.tex"
+  End If
+
+  'copiamos los archivos de configuracion general
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
+    Copy "./imagoCustom.css" To File.Dir(rutaTexto) & "/files/imagoCustom.css"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/build.lua") Then
+    Copy "./build.lua" To File.Dir(rutaTexto) & "/files/build.lua"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoEpub.css") Then
+    Copy "./imagoEpub.css" To File.Dir(rutaTexto) & "/files/imagoEpub.css"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/configHTML.cfg") Then
+    Copy "./configHTML.cfg" To File.Dir(rutaTexto) & "/files/configHTML.cfg"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/configEPUB.cfg") Then
+    Copy "./configEPUB.cfg" To File.Dir(rutaTexto) & "/files/configEPUB.cfg"
+  End If
+
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
+    Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
+    Copy "./agradecimientos.tex" To File.Dir(rutaTexto) & "/artcap/agradecimientos.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/colofon.tex") Then
+    Copy "./colofon.tex" To File.Dir(rutaTexto) & "/artcap/colofon.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
+    Copy "./indiceautores.tex" To File.Dir(rutaTexto) & "/artcap/indiceautores.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/readme.md") Then
+    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
+    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
+  End If
+
+  '
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
+    Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
+    Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
+  End If
+
+  ' copiamos archivos para página html
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/logo-imago.png") Then
+    Copy "./logo-imago.png" To File.Dir(rutaTexto) & "/docs/logo-imago.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/descarga.png") Then
+    Copy "./descarga.png" To File.Dir(rutaTexto) & "/docs/descarga.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/orcid.png") Then
+    Copy "./orcid.png" To File.Dir(rutaTexto) & "/docs/orcid.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/imago1.css") Then
+    Copy "./imago1.css" To File.Dir(rutaTexto) & "/docs/imago1.css"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/favicon.jpg") Then
+    Copy "./favicon.jpg" To File.Dir(rutaTexto) & "/docs/favicon.jpg"
+  End If
+
+End
+
+Public Sub ManagePdfFolder(rutaTexto As String)
+
+  Dim pdfPath As String = File.Dir(rutaTexto) & "/pdf"
+
+  ' Verifica si la carpeta existe
+  If Not Exist(pdfPath) Then
+    ' Si no existe, crea la carpeta
+    Mkdir pdfPath
+  Else
+    ' borramos todos los archivos pdf del proyecto
+    Shell "rm -rf " & pdfPath & "/*.pdf" Wait
+  End If
+
+End Sub
+
+Public Sub GitVersion(raw As String) As String 'Función para chequear si hay versiones nuevas
+
+  Dim s As String
+  Dim stx As String[]
+  Dim r As String
+  Dim v As String
+
+  v = ""
+  If File.RealPath("/tmp/project.txt") Then
+    Shell "rm /tmp/project.txt" Wait
+  Endif
+
+  Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
+  If File.RealPath("/tmp/project.txt") Then
+    s = File.Load("/tmp/project.txt")
+    stx = Split(s, "\n")
+    For Each r In stx
+      If InStr(r, "Version=") Then
+        If Split(r, "=")[0] = "Version" Then
+          v = Split(r, "=")[1]
+          Break
+        Endif
+      Endif
+    Next
+  Endif
+  Return v
+
+End
+
+'funcion para asegurar metadatos basicos a los archivos
+Public Function registrosObligatorios(rutaTexto As String) As Boolean
+
+  Dim campo0, campo1, campo2, campo3, campo4, campo5, campo6, campo7 As String
+
+  campo0 = FMain.txtnombreArchivo.Text
+  campo1 = FMain.txt84_bookTitle.Text
+  campo2 = FMain.txt05_pdfauthor.Text
+  campo3 = FMain.txtDate.Text
+  campo4 = FMain.txtSubjet.Text
+  campo5 = FMain.txt57_palabrasclave.Text
+  campo6 = FMain.txt10_pdfauthortitle.Text
+  campo7 = FMain.txtCaptionWriter.Text
+
+  ' Verificar si el campo de metadatos existe
+  If campo0 = "" Then
+    Message.Error("Debe asegurar la construcción del archivo de metadatos para <strong>" & File.Name(rutaTexto) & "</strong>", "Aceptar")
+    FMain.TabPanel1.Index = 3
+    Return False
+  End If
+
+  ' Verificamos si los otros campos están vacíos
+  If campo1 = "" Or campo2 = "" Or campo3 = "" Or campo4 = "" Or campo5 = "" Or campo6 = "" Or campo7 = "" Then
+    Message.Error("Uno o más registros de los metadatos obligatorios están vacíos, la operación será cancelada.", "Aceptar")
+    FMain.TabPanel1.Index = 3
+    Return False
+  End If
+  ' Si todo está bien, retornamos True
+  Return True
+
+End Function
+
+Public Sub Borrar_Aux()
+
+  FMain.TerminalView1.Input("cd " & File.Dir(FMain.TextBox1.Text) & "\n" & "rm .fuse* *.xmpi *.*1 *.*2 *.*3 *.eledsec* *.*end *.fuse* pdf-*.tex odt-*.tex *.bcf-SAVE-ERROR html5-*_html.tex *.bbl-SAVE-ERROR html5-*.tex *.css *.lwarpmkconf *.sidetoc *.conf *.cut *.upa *.upb *.bib.backup *.ndx *.ps *.tex.backup *.bib *.csv *.published *.dat *.txt *.pdf *.bib.sav *.xml *.html *.xhtml *.opf *.xref *.ncx *.tmp *.4ct *.4tc *.4of *.4ot *.4os *.4oy *.4oo *.4og *.lg *.idv *.acn *.acr *.alg *.glg *.gls *.ist *.bak *.log *.aux *.dvi *.lof *.lot *.bit *.idx *.glo *.bbl *.bcf *.ilg *.toc *.ind *.out *.blg *.fdb_latexmk *.fls *.run.xml *.ida *.idn *.inn *.synctex.gz *.xdy *.opf *.epub *.mobi *.ent *.cfg *.lua *.mk4 *.png *.jpg *.svg" & "\n" & "clear" & "\n") 'desde la raiz al directorio padre
+  Wait 0.2
+
+End
+
+Public Sub limpiamosMetadatosLibrosRevistas()
+
+  FMain.txtIdmetadatos.Text = ""
+  FMain.txtnombreArchivo.Text = ""
+  FMain.txt02_pdfxmp1.Text = ""
+  FMain.txt03_pdfxmp2.Text = ""
+  FMain.txt04_pdfxmp3.Text = ""
+  FMain.txt05_pdfauthor.Text = ""
+  FMain.txt06_pdftitle.Text = ""
+  FMain.txtSubjet.Text = ""
+  FMain.txtpdfsubject_07b.Text = ""
+  FMain.txtpdfsubject_07c.Text = ""
+  FMain.txtKeywords.Text = ""
+  FMain.txt09_pdfsubtitle.Text = ""
+  FMain.txt10_pdfauthortitle.Text = ""
+  FMain.txtDate.Text = ""
+  FMain.txtCreationDate.Text = ""
+  FMain.txtModDate.Text = ""
+  FMain.txtMetaDate.Text = ""
+  FMain.txt15_pdfcopyright.Text = ""
+  FMain.txt16_pdflicenseurl.Text = ""
+  FMain.txtCaptionWriter.Text = ""
+  FMain.txtContactAddress.Text = ""
+  FMain.txtContactCity.Text = ""
+  FMain.txtContactPostCode.Text = ""
+  FMain.txtContactCountry.Text = ""
+  FMain.txtContactRegion.Text = ""
+  FMain.txtContactPhone.Text = ""
+  FMain.txtContactEmail.Text = ""
+  FMain.txtContactURL.Text = ""
+  FMain.txtDocumentId.Text = ""
+  FMain.txtPublication.Text = ""
+  FMain.txtPublisher28.Text = ""
+  FMain.cmbType.Text = ""
+  FMain.cbPubType.Text = ""
+  FMain.txtVolNum.Text = ""
+  FMain.txtIssueNum.Text = ""
+  FMain.txt33_pdfpagerange.Text = ""
+  FMain.txt34_pdfbookedition.Text = ""
+  FMain.txt35_pdfisbn.Text = ""
+  FMain.txt36_pdfissn.Text = ""
+  FMain.txt37_pdfeissn.Text = ""
+  FMain.txt38_pdfpubstatus.Text = ""
+  FMain.txtLang.Text = ""
+  FMain.txt40_pdfmetalang.Text = ""
+  FMain.txtBaseURL.Text = ""
+  FMain.txt42_pdfurl.Text = ""
+  FMain.txt43_pdfdoi.Text = ""
+  FMain.cbPDFrendition.Text = ""
+  FMain.txtDocumentId.Text = ""
+  FMain.cbPDFx.Text = ""
+  FMain.txtVersionId.Text = ""
+  FMain.txt48_abstract.Text = ""
+  FMain.txt48b_abstract.Text = ""
+  FMain.txt48c_abstract.Text = ""
+  FMain.txt49_imagentapa.Text = ""
+  FMain.txt50_pagetotal.Text = ""
+  FMain.txtCOLECCION.Text = ""
+  FMain.txtDirection.Text = ""
+  FMain.txt53_traductor.Text = ""
+  FMain.txt54_idiomaorig.Text = ""
+  FMain.txt55_ilustrador.Text = ""
+  FMain.txt56_resumen.Text = ""
+  FMain.txt57_palabrasclave.Text = ""
+  FMain.txt57b_palabrasclave.Text = ""
+  FMain.txt57c_palabrasclave.Text = ""
+  FMain.txt58_papertitletwo.Text = ""
+  FMain.txt59_artrecibido.Text = ""
+  FMain.txt60_artaceptado.Text = ""
+  FMain.txtFORMATO.Text = ""
+  FMain.txt59_opt_source.Text = ""
+  FMain.txt82_conferenceVisual.Text = ""
+  FMain.txt78_genero.Text = ""
+  FMain.txt82_conference.Text = ""
+  FMain.txt84_bookTitle.Text = ""
+  FMain.txt85_doiRevista.Text = ""
+  FMain.txt86_annotation.Text = ""
+  FMain.txt87_HTMLFirstPageBottom.Text = ""
+  FMain.txt88_audiencia.Text = ""
+  FMain.txt89_binding.Text = ""
+  FMain.txt90_eisbn.Text = ""
+
+End
+
+Public Sub VerificarPorcentajeEnTexto(TextoOriginal As String) As String
+
+  Dim nuevoTexto As String
+
+  nuevoTexto = TextoOriginal
+
+  ' hacemos reemplazos de seguridad
+  nuevoTexto = Replace(nuevoTexto, "%", "\\%")
+  nuevoTexto = Replace(nuevoTexto, "´", "'")
+  nuevoTexto = Replace(nuevoTexto, "’", "'")
+
+  ' Devolvemos el texto modificado
+  Return nuevoTexto
+
+End
+
+Public Sub VerBibTeXenVListaBIB(iRow As Integer)
+  ' Recoger la fila como parámetro en la función del módulo, se ahorra recuperar 112 veces su valor desde el Gridview
+
+  With FMain
+    .txtIDbibtex.Text = .VListaBIB[iRow, 0].Text
+    .ComboBox1.Text = .VListaBIB[iRow, 1].Text
+    .txtCLAVEbib.Text = .VListaBIB[iRow, 2].Text
+    .txtKEYWORDS.Text = .VListaBIB[iRow, 3].Text
+    .txtAUTHOR.Text = .VListaBIB[iRow, 4].Text
+    .txtBOOKAUTHOR.Text = .VListaBIB[iRow, 5].Text
+    .txtEDITOR.Text = .VListaBIB[iRow, 6].Text
+    .txtEDITORa.Text = .VListaBIB[iRow, 7].Text
+    .txtEDITORb.Text = .VListaBIB[iRow, 8].Text
+    .txtEDITORc.Text = .VListaBIB[iRow, 9].Text
+    .txtAFTERWORD.Text = .VListaBIB[iRow, 10].Text
+    .txtCOMMENTATOR.Text = .VListaBIB[iRow, 11].Text
+    .txtTRANSLATOR.Text = .VListaBIB[iRow, 12].Text
+    .txtHOLDER.Text = .VListaBIB[iRow, 13].Text
+    .txtShortAuthor.Text = .VListaBIB[iRow, 14].Text
+    .cbEDITORTYPE.Text = .VListaBIB[iRow, 15].Text
+    .cbEDITORTYPEa.Text = .VListaBIB[iRow, 16].Text
+    .cbEDITORTYPEb.Text = .VListaBIB[iRow, 17].Text
+    .cbEDITORTYPEc.Text = .VListaBIB[iRow, 18].Text
+    .txtFOREWORD.Text = .VListaBIB[iRow, 19].Text
+    .txtINTRODUCTION.Text = .VListaBIB[iRow, 20].Text
+    .txtANNOTATOR.Text = .VListaBIB[iRow, 21].Text
+    .txtGENDER.Text = .VListaBIB[iRow, 22].Text
+    .txtNAMEADDON.Text = .VListaBIB[iRow, 23].Text
+    .txtTITLE.Text = .VListaBIB[iRow, 24].Text
+    .txtSHORTTITLE.Text = .VListaBIB[iRow, 25].Text
+    .txtINDEXTITLE.Text = .VListaBIB[iRow, 26].Text
+    .txtBOOKTITLE.Text = .VListaBIB[iRow, 27].Text
+    .txtMAINTITLE.Text = .VListaBIB[iRow, 28].Text
+    .txtJOURNALTITLE.Text = .VListaBIB[iRow, 29].Text
+    .txtISSUETITLE.Text = .VListaBIB[iRow, 30].Text
+    .txtEVENTTITLE.Text = .VListaBIB[iRow, 31].Text
+    .txtREPRINTTITLE.Text = .VListaBIB[iRow, 32].Text
+    .txtSERIES.Text = .VListaBIB[iRow, 33].Text
+    .txtBookTitleAddOn.Text = .VListaBIB[iRow, 34].Text
+    .txtMainTitleAddOn.Text = .VListaBIB[iRow, 35].Text
+    .txtJournalTitleAddOn.Text = .VListaBIB[iRow, 36].Text
+    .txtIssueTitleAddOn.Text = .VListaBIB[iRow, 37].Text
+    .txtEventTitleAddOn.Text = .VListaBIB[iRow, 38].Text
+    .txtChapter.Text = .VListaBIB[iRow, 39].Text
+    .txtVOLUME.Text = .VListaBIB[iRow, 40].Text
+    .txtEDITION.Text = .VListaBIB[iRow, 41].Text
+    .cbPUBSTATE.Text = .VListaBIB[iRow, 42].Text
+    .txtYEAR.Text = .VListaBIB[iRow, 43].Text
+    .txtDATEY.Text = .VListaBIB[iRow, 44].Text
+    .txtURLDATE.Text = .VListaBIB[iRow, 45].Text
+    .txtBOLUMES.Text = .VListaBIB[iRow, 46].Text
+    .txtPART.Text = .VListaBIB[iRow, 47].Text
+    .txtISSUE.Text = .VListaBIB[iRow, 48].Text
+    .txtEVENTDATE.Text = .VListaBIB[iRow, 49].Text
+    .txtORIGDATE.Text = .VListaBIB[iRow, 50].Text
+    .txtVERSION.Text = .VListaBIB[iRow, 51].Text
+    .txtLOCATION.Text = .VListaBIB[iRow, 52].Text
+    .txtPUBLISHER.Text = .VListaBIB[iRow, 53].Text
+    .txtINSTITUTION.Text = .VListaBIB[iRow, 54].Text
+    .txtORGANIZATION.Text = .VListaBIB[iRow, 55].Text
+    .txtPAGES.Text = .VListaBIB[iRow, 56].Text
+    .txtPAGINATION.Text = .VListaBIB[iRow, 57].Text
+    .cbLANGUAGE.Text = .VListaBIB[iRow, 58].Text
+    .cbLANGUAGEID.Text = .VListaBIB[iRow, 59].Text
+    .txtLANGUAGE.Text = .VListaBIB[iRow, 60].Text
+    .txtORIGLOCATION.Text = .VListaBIB[iRow, 61].Text
+    .txtORIGPUBLISHER.Text = .VListaBIB[iRow, 62].Text
+    .txtPAGETOTAL.Text = .VListaBIB[iRow, 63].Text
+    .txtVENUE.Text = .VListaBIB[iRow, 64].Text
+    .txtBookPagination.Text = .VListaBIB[iRow, 65].Text
+    .txtLANGIDOPTS.Text = .VListaBIB[iRow, 66].Text
+    .txtORIGLANGUAGE.Text = .VListaBIB[iRow, 67].Text
+    .txtISAN.Text = .VListaBIB[iRow, 68].Text
+    .txtISBN.Text = .VListaBIB[iRow, 69].Text
+    .txtISMN.Text = .VListaBIB[iRow, 70].Text
+    .txtISRN.Text = .VListaBIB[iRow, 71].Text
+    .txtISSN.Text = .VListaBIB[iRow, 72].Text
+    .txtISWC.Text = .VListaBIB[iRow, 73].Text
+    .txtURL.Text = .VListaBIB[iRow, 74].Text
+    .txtDOI.Text = .VListaBIB[iRow, 75].Text
+    .txtEID.Text = .VListaBIB[iRow, 76].Text
+    .txtEPRINTYPE.Text = .VListaBIB[iRow, 77].Text
+    .txtEPRINT.Text = .VListaBIB[iRow, 78].Text
+    .txtENTRYSUBTYPE.Text = .VListaBIB[iRow, 79].Text
+    .txtLABEL.Text = .VListaBIB[iRow, 80].Text
+    .txtHOWPUBLISHED.Text = .VListaBIB[iRow, 81].Text
+    .txtADDENDUM.Text = .VListaBIB[iRow, 82].Text
+    .txtSHORTHAND.Text = .VListaBIB[iRow, 83].Text
+    .txtSHORTHANDINTRO.Text = .VListaBIB[iRow, 84].Text
+    .txtETIQ.Text = .VListaBIB[iRow, 85].Text
+    .cbOPTIONS.Text = .VListaBIB[iRow, 86].Text
+    .txtIDS.Text = .VListaBIB[iRow, 87].Text 'Ids
+    .txtRELATED.Text = .VListaBIB[iRow, 88].Text
+    .CmbRelatedType.Text = .VListaBIB[iRow, 89].Text
+    .txtRELATEDSTRING.Text = .VListaBIB[iRow, 90].Text
+    .txtENTRYSET.Text = .VListaBIB[iRow, 91].Text
+    .txtCROSSREF.Text = .VListaBIB[iRow, 92].Text
+    .txtXREF.Text = .VListaBIB[iRow, 93].Text
+    .txtXDATA.Text = .VListaBIB[iRow, 94].Text
+    .txtPRESORT.Text = .VListaBIB[iRow, 95].Text
+    .txtSORTKEY.Text = .VListaBIB[iRow, 96].Text
+    .txtSORTNAME.Text = .VListaBIB[iRow, 97].Text
+    .txtSORTSHORTHAND.Text = .VListaBIB[iRow, 98].Text
+    .txtSORTTITLE.Text = .VListaBIB[iRow, 99].Text
+    .txtINDEXSORTTITLE.Text = .VListaBIB[iRow, 100].Text
+    .txtSORTYEAR.Text = .VListaBIB[iRow, 101].Text
+    .txtFILE.Text = .VListaBIB[iRow, 102].Text
+    .txtABSTRACT.Text = .VListaBIB[iRow, 103].Text
+    .txtLIBRARY.Text = .VListaBIB[iRow, 104].Text
+    .txtNOTE.Text = .VListaBIB[iRow, 105].Text
+    .txtANNOTATION.Text = .VListaBIB[iRow, 106].Text
+    .txtNUMBER.Text = .VListaBIB[iRow, 107].Text
+    .txtCreationDay108.Text = .VListaBIB[iRow, 108].Text
+    .cbType.Text = .VListaBIB[iRow, 109].Text
+    .txtTitleAddOn.Text = .VListaBIB[iRow, 110].Text
+    .txtSubTitle.Text = .VListaBIB[iRow, 111].Text
+  End With
+
+End
+
+Public Sub VerBibTeXengriBibOriginal()
+
+  ' Rellenar los campos de texto con los valores de la fila seleccionada
+  FMain.txtIdReferenciaDuplicada.Text = FMain.griBibOriginal[FMain.griBibOriginal.row, 0].Text
+  FMain.txtClaveOriginal.Text = FMain.griBibOriginal[FMain.griBibOriginal.row, 2].Text
+  FMain.txtAuthorOriginal.Text = FMain.griBibOriginal[FMain.griBibOriginal.row, 4].Text
+  FMain.txtTitleOriginal.Text = FMain.griBibOriginal[FMain.griBibOriginal.row, 24].Text
+
+End
+
+Public Sub VerBibTeXentblReferenciaOrigen()
+
+  ' Rellenar los campos de texto con los valores de la fila seleccionada
+  FMain.txtAuthorOrigen.Text = FMain.tblReferenciaOrigen[FMain.tblReferenciaOrigen.row, 0].Text
+  FMain.txtClaveOrigen.Text = FMain.tblReferenciaOrigen[FMain.tblReferenciaOrigen.row, 2].Text
+  FMain.txtAuthorOrigen.Text = FMain.tblReferenciaOrigen[FMain.tblReferenciaOrigen.row, 4].Text
+  FMain.txtTitleOrigen.Text = FMain.tblReferenciaOrigen[FMain.tblReferenciaOrigen.row, 24].Text
+
+End
+
+Public Sub VerBibTeXentbRefDup()
+
+  ' Rellenar los campos de texto con los valores de la fila seleccionada
+  FMain.txtIdReferencia.Text = FMain.tbRefDup[FMain.tbRefDup.row, 0].Text
+  FMain.txtFILTROrelacion.Text = FMain.tbRefDup[FMain.tbRefDup.row, 3].Text
+  FMain.txtAUTHORrelacion.Text = FMain.tbRefDup[FMain.tbRefDup.row, 4].Text
+  FMain.txtTITLErelacion.Text = FMain.tbRefDup[FMain.tbRefDup.row, 24].Text
+  FMain.txtRelatedRelacion.Text = FMain.tbRefDup[FMain.tbRefDup.row, 88].Text
+  FMain.cbRelatedTypeRelacion.Text = FMain.tbRefDup[FMain.tbRefDup.row, 89].Text
+  FMain.txtRelatedString1.Text = FMain.tbRefDup[FMain.tbRefDup.row, 90].Text
+  FMain.txtCrossRefRelacion.Text = FMain.tbRefDup[FMain.tbRefDup.row, 92].Text
+
+End
+
+Public Sub VerBibTeXengridListaBIBactual()
+
+  ' Rellenar los campos de texto con los valores de la fila seleccionada
+  FMain.txtIDbibtex.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 0].Text
+  FMain.ComboBox1.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 1].Text
+  FMain.txtCLAVEbib.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 2].Text
+  FMain.txtKEYWORDS.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 3].Text
+  FMain.txtAUTHOR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 4].Text
+  FMain.txtBOOKAUTHOR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 5].Text
+  FMain.txtEDITOR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 6].Text
+  FMain.txtEDITORa.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 7].Text
+  FMain.txtEDITORb.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 8].Text
+  FMain.txtEDITORc.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 9].Text
+  FMain.txtAFTERWORD.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 10].Text
+  FMain.txtCOMMENTATOR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 11].Text
+  FMain.txtTRANSLATOR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 12].Text
+  FMain.txtHOLDER.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 13].Text
+  FMain.txtShortAuthor.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 14].Text
+  FMain.cbEDITORTYPE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 15].Text
+  FMain.cbEDITORTYPEa.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 16].Text
+  FMain.cbEDITORTYPEb.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 17].Text
+  FMain.cbEDITORTYPEc.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 18].Text
+  FMain.txtFOREWORD.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 19].Text
+  FMain.txtINTRODUCTION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 20].Text
+  FMain.txtANNOTATOR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 21].Text
+  FMain.txtGENDER.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 22].Text
+  FMain.txtNAMEADDON.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 23].Text
+  FMain.txtTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 24].Text
+  FMain.txtSHORTTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 25].Text
+  FMain.txtINDEXTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 26].Text
+  FMain.txtBOOKTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 27].Text
+  FMain.txtMAINTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 28].Text
+  FMain.txtJOURNALTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 29].Text
+  FMain.txtISSUETITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 30].Text
+  FMain.txtEVENTTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 31].Text
+  FMain.txtREPRINTTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 32].Text
+  FMain.txtSERIES.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 33].Text
+  FMain.txtBookTitleAddOn.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 34].Text
+  FMain.txtMainTitleAddOn.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 35].Text
+  FMain.txtJournalTitleAddOn.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 36].Text
+  FMain.txtIssueTitleAddOn.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 37].Text
+  FMain.txtEventTitleAddOn.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 38].Text
+  FMain.txtChapter.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 39].Text
+  FMain.txtVOLUME.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 40].Text
+  FMain.txtEDITION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 41].Text
+  FMain.cbPUBSTATE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 42].Text
+  FMain.txtYEAR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 43].Text
+  FMain.txtDATEY.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 44].Text
+  FMain.txtURLDATE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 45].Text
+  FMain.txtBOLUMES.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 46].Text
+  FMain.txtPART.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 47].Text
+  FMain.txtISSUE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 48].Text
+  FMain.txtEVENTDATE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 49].Text
+  FMain.txtORIGDATE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 50].Text
+  FMain.txtVERSION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 51].Text
+  FMain.txtLOCATION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 52].Text
+  FMain.txtPUBLISHER.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 53].Text
+  FMain.txtINSTITUTION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 54].Text
+  FMain.txtORGANIZATION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 55].Text
+  FMain.txtPAGES.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 56].Text
+  FMain.txtPAGINATION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 57].Text
+  FMain.cbLANGUAGE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 58].Text
+  FMain.cbLANGUAGEID.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 59].Text
+  FMain.txtLANGUAGE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 60].Text
+  FMain.txtORIGLOCATION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 61].Text
+  FMain.txtORIGPUBLISHER.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 62].Text
+  FMain.txtPAGETOTAL.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 63].Text
+  FMain.txtVENUE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 64].Text
+  FMain.txtBookPagination.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 65].Text
+  FMain.txtLANGIDOPTS.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 66].Text
+  FMain.txtORIGLANGUAGE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 67].Text
+  FMain.txtISAN.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 68].Text
+  FMain.txtISBN.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 69].Text
+  FMain.txtISMN.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 70].Text
+  FMain.txtISRN.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 71].Text
+  FMain.txtISSN.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 72].Text
+  FMain.txtISWC.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 73].Text
+  FMain.txtURL.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 74].Text
+  FMain.txtDOI.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 75].Text
+  FMain.txtEID.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 76].Text
+  FMain.txtEPRINTYPE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 77].Text
+  FMain.txtEPRINT.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 78].Text
+  FMain.txtENTRYSUBTYPE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 79].Text
+  FMain.txtLABEL.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 80].Text
+  FMain.txtHOWPUBLISHED.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 81].Text
+  FMain.txtADDENDUM.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 82].Text
+  FMain.txtSHORTHAND.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 83].Text
+  FMain.txtSHORTHANDINTRO.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 84].Text
+  FMain.txtETIQ.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 85].Text
+  FMain.cbOPTIONS.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 86].Text
+  FMain.txtIDS.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 87].Text 'Ids
+  FMain.txtRELATED.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 88].Text
+  FMain.CmbRelatedType.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 89].Text
+  FMain.txtRELATEDSTRING.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 90].Text
+  FMain.txtENTRYSET.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 91].Text
+  FMain.txtCROSSREF.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 92].Text
+  FMain.txtXREF.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 93].Text
+  FMain.txtXDATA.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 94].Text
+  FMain.txtPRESORT.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 95].Text
+  FMain.txtSORTKEY.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 96].Text
+  FMain.txtSORTNAME.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 97].Text
+  FMain.txtSORTSHORTHAND.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 98].Text
+  FMain.txtSORTTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 99].Text
+  FMain.txtINDEXSORTTITLE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 100].Text
+  FMain.txtSORTYEAR.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 101].Text
+  FMain.txtFILE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 102].Text
+  FMain.txtABSTRACT.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 103].Text
+  FMain.txtLIBRARY.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 104].Text
+  FMain.txtNOTE.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 105].Text
+  FMain.txtANNOTATION.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 106].Text
+  FMain.txtNUMBER.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 107].Text
+  FMain.txtCreationDay108.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 108].Text
+  FMain.cbType.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 109].Text
+  FMain.txtTitleAddOn.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 110].Text
+  FMain.txtSubTitle.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 111].Text
+
+End
+
+' Módulo para configurar los GridView
+Public Sub ConfigurarGridView(grid As GridView)
+
+  With grid
+    .Header = True
+    .Grid = True
+    .Columns.Count = 112
+
+    ' Configuración de columnas
+    For i As Integer = 0 To 111
+      Select Case i
+        Case 0
+          .Columns[i].Title = "Id"
+          .Columns[i].Width = 0
+        Case 4
+          .Columns[i].Title = "Autor/a/es"
+          .Columns[i].Width = 250
+        Case 6
+          .Columns[i].Title = "Editor/a/es"
+          .Columns[i].Width = 250
+        Case 24
+          .Columns[i].Title = "Título principal"
+          .Columns[i].Width = 600
+        Case 29
+          .Columns[i].Title = "Revista"
+          .Columns[i].Width = 200
+        Case 43
+          .Columns[i].Title = "Año"
+          .Columns[i].Width = 70
+        Case 44
+          .Columns[i].Title = "Fecha"
+          .Columns[i].Width = 120
+        Case 53
+          .Columns[i].Title = "Editorial"
+          .Columns[i].Width = 200
+        Case Else
+          .Columns[i].Title = ""
+          .Columns[i].Width = 0
+      End Select
+    Next
+  End With
+
+End
+
+Public Sub CargarMetadatosArchivoActual()
+
+  Dim consulta As String
+  Dim Contenido As Result
+  Dim BaseName As String = File.RealPath(File.BaseName(FMain.TextBox1.Text))
+
+  consulta = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
+  Contenido = FMain.meConn.Exec(consulta)
+
+  If Contenido.Count > 0 Then
+    FMain.BtnNuevoMeta.Visible = False
+    FMain.btnGuardarMeta.Visible = False
+    FMain.btnGuardarCambiosMeta.Visible = True
+
+    FMain.txtIDmetadatos.Text = Contenido!id
+    FMain.txtnombreArchivo.Text = Contenido!nombreArchivo
+    FMain.txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
+    FMain.txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
+    FMain.txt04_pdfxmp3.Text = Contenido!pdfxmp3_04
+    FMain.txt05_pdfauthor.Text = Contenido!pdfauthor_05
+    FMain.txt06_pdftitle.Text = Contenido!pdftitle_06
+    FMain.txtSubjet.Text = Contenido!pdfsubject_07
+    FMain.txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
+    FMain.txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
+    FMain.txtKeywords.Text = Contenido!pdfkeywords_08
+    FMain.txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
+    FMain.txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
+    FMain.txtDate.Text = Contenido!pdfdate_11
+    FMain.txtCreationDate.Text = Contenido!pdfcreationdate_12
+    FMain.txtModDate.Text = Contenido!pdfmoddate_13
+    FMain.txtMetaDate.Text = Contenido!pdfmetadate_14
+    FMain.txt15_pdfcopyright.Text = Contenido!pdfcopyright_15
+    FMain.txt16_pdflicenseurl.Text = Contenido!pdflicenseurl_16
+    FMain.txtCaptionWriter.Text = Contenido!pdfcaptionwriter_17
+    FMain.txtContactAddress.Text = Contenido!pdfcontactaddress_18
+    FMain.txtContactCity.Text = Contenido!pdfcontactcity_19
+    FMain.txtContactPostCode.Text = Contenido!pdfcontactpostcode_20
+    FMain.txtContactCountry.Text = Contenido!pdfcontactcountry_21
+    FMain.txtContactRegion.Text = Contenido!pdfcontactregion_22
+    FMain.txtContactPhone.Text = Contenido!pdfcontactphone_23
+    FMain.txtContactEmail.Text = Contenido!pdfcontactemail_24
+    FMain.txtContactURL.Text = Contenido!pdfcontacturl_25
+    FMain.txtDocumentId.Text = Contenido!pdfdocumentid_26
+    FMain.txtPublication.Text = Contenido!pdfpublication_27
+    FMain.txtPublisher28.Text = Contenido!pdfpublisher_28
+    FMain.cmbType.Text = Contenido!pdftype_29
+    FMain.cbPubType.Text = Contenido!pdfpubtype_30
+    FMain.txtVolNum.Text = Contenido!pdfvolumenum_31
+    FMain.txtIssueNum.Text = Contenido!pdfissuenum_32
+    FMain.txt33_pdfpagerange.Text = Contenido!pdfpagerange_33
+    FMain.txt34_pdfbookedition.Text = Contenido!pdfbookedition_34
+    FMain.txt35_pdfisbn.Text = Contenido!pdfisbn_35
+    FMain.txt36_pdfissn.Text = Contenido!pdfissn_36
+    FMain.txt37_pdfeissn.Text = Contenido!pdfeissn_37
+    FMain.txt38_pdfpubstatus.Text = Contenido!pdfpubstatus_38
+    FMain.txtLang.Text = Contenido!pdflang_39
+    FMain.txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
+    FMain.txtBaseURL.Text = Contenido!pdfbaseurl_41
+    FMain.txt42_pdfurl.Text = Contenido!pdfurl_42
+    FMain.txt43_pdfdoi.Text = Contenido!pdfdoi_43
+    FMain.cbPDFrendition.Text = Contenido!pdfrendition_44
+    FMain.txtDocumentId.Text = Contenido!pdfidentifier_45
+    FMain.cbPDFx.Text = Contenido!pdfx_46
+    FMain.txtVersionId.Text = Contenido!pdfversionid_47
+    FMain.txt48_abstract.Text = Contenido!abstract_48
+    FMain.txt48b_abstract.Text = Contenido!abstract_48b
+    FMain.txt48c_abstract.Text = Contenido!abstract_48c
+    FMain.txt49_imagentapa.Text = Contenido!imagentapa_49
+    FMain.txt50_pagetotal.Text = Contenido!pagetotal_50
+    FMain.txtCOLECCION.Text = Contenido!relation_51
+    FMain.txtDirection.Text = Contenido!direction_52
+    FMain.txt53_traductor.Text = Contenido!traductor_53
+    FMain.txt54_idiomaorig.Text = Contenido!idiomaorig_54
+    FMain.txt55_ilustrador.Text = Contenido!ilustrador_55
+    FMain.txt56_resumen.Text = Contenido!resumen_56
+    FMain.txt57_palabrasclave.Text = Contenido!palabrasclave_57
+    FMain.txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
+    FMain.txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
+    FMain.txt58_papertitletwo.Text = Contenido!papertitletwo_58
+    FMain.txt59_artrecibido.Text = Contenido!artrecibido_59
+    FMain.txt60_artaceptado.Text = Contenido!artaceptado_60
+    FMain.txtFORMATO.Text = Contenido!formato_61
+    FMain.txt59_opt_source.Text = Contenido!source_69
+    FMain.txt82_conferenceVisual.Text = Contenido!opt_72
+    FMain.txt78_genero.Text = Contenido!genero_78
+    FMain.txt82_conference.Text = Contenido!conference_82
+    FMain.txt84_bookTitle.Text = Contenido!bookTitle_84
+    FMain.txt85_doiRevista.Text = Contenido!doiRevista_85
+    FMain.txt86_annotation.Text = Contenido!notas_86
+    FMain.txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
+    FMain.txt88_audiencia.Text = Contenido!audience_88
+    FMain.txt89_binding.Text = Contenido!binding_89
+    FMain.txt90_eisbn.Text = Contenido!eISBN_90
+
+  Else
+    'falta limpiar el contenido de los textbox
+    FMain.BtnNuevoMeta.Visible = True
+    FMain.btnGuardarMeta.Visible = False
+    FMain.btnGuardarCambiosMeta.Visible = False
+  Endif
+
+End
+
+Public Sub CerrarTodo()
+
+  If FMain.meConn Then
+    FMain.meConn.Close()
+    FMain.meConn = Null
+    FMain.Contenido = Null
+    FMain.ContenidoBibTotal = Null
+    FMain.ContenidoBibActual = Null
+  Endif
+
+  ' ' Guardar el último archivo abierto
+  ' MS.SetLastListToSettings()
+  ' Try FMain.$Bash.Kill
+  ' Wait 0.1
+  ' Try FMain.fFile.Close
+  ' Wait 1
+
+  ' Cerrar la aplicación
+  Form_ConectarBBDD.Close
+
+  ' borramos las carpetas que se crean en el cache
+  Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
+  Wait 0.1
+
+  Quit
+
+End
+
+Public Sub CopiarArchivosQuadro(rutaTexto As String)'libros
+
+  ' Lista de directorios que se van a crear
+  Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "artcap", "docs", "salidas"]
+
+  ' Crear los directorios si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(rutaTexto) & "/" & directorio) Then
+      Mkdir File.Dir(rutaTexto) & "/" & directorio
+    End If
+  Next
+
+  'copiamos los archivos de preámbulo de libro
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/qbook-pdf.tex") Then
+    Copy "./qbook-pdf.tex" To File.Dir(rutaTexto) & "/files/qbook-pdf.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/qrevista-pdf.tex") Then
+    Copy "./qrevista-pdf.tex" To File.Dir(rutaTexto) & "/files/qrevista-pdf.tex"
+  End If
+
+  ' 'copiamos los archivos de configuracion general
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
+  '   Copy "./imagoCustom.css" To File.Dir(rutaTexto) & "/files/imagoCustom.css"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/build.lua") Then
+  '   Copy "./build.lua" To File.Dir(rutaTexto) & "/files/build.lua"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoEpub.css") Then
+  '   Copy "./imagoEpub.css" To File.Dir(rutaTexto) & "/files/imagoEpub.css"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
+  '   Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
+  '   Copy "./agradecimientos.tex" To File.Dir(rutaTexto) & "/artcap/agradecimientos.tex"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/colofon.tex") Then
+  '   Copy "./colofon.tex" To File.Dir(rutaTexto) & "/artcap/colofon.tex"
+  ' End If
+  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
+  '   Copy "./indiceautores.tex" To File.Dir(rutaTexto) & "/artcap/indiceautores.tex"
+  ' End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/readme.md") Then
+    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
+    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
+  End If
+
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
+    Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
+    Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
+  End If
+
+  ' copiamos archivos para página html
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/logo-imago.png") Then
+    Copy "./logo-imago.png" To File.Dir(rutaTexto) & "/docs/logo-imago.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/descarga.png") Then
+    Copy "./descarga.png" To File.Dir(rutaTexto) & "/docs/descarga.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/orcid.png") Then
+    Copy "./orcid.png" To File.Dir(rutaTexto) & "/docs/orcid.png"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/imago1.css") Then
+    Copy "./imago1.css" To File.Dir(rutaTexto) & "/docs/imago1.css"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/favicon.jpg") Then
+    Copy "./favicon.jpg" To File.Dir(rutaTexto) & "/docs/favicon.jpg"
+  End If
+
+End

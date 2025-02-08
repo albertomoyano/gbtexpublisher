@@ -1,0 +1,53 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,640)
+  #Scaled = False
+  Text = ("Acerca de GAMBAS")
+  Icon = Picture["iconos/logo-gambas.png"]
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox2 HBox
+    Move(9,9,450,72)
+    AutoResize = True
+    { PictureBox1 PictureBox
+      Move(0,0,72,72)
+      Picture = Picture.Load("iconos/logo-gambas.png")
+      Stretch = True
+      Alignment = Align.Center
+      Mode = PictureBox.Fill
+    }
+  }
+  { TextArea1 TextArea
+    Move(18,108,459,63)
+    Background = Color.Background
+    Expand = True
+    Text = ("¿Qué es Gambas?\n\nGambas es un lenguaje de programación libre y fácil de aprender, basado en BASIC. Es ideal para quienes están comenzando en el mundo de la programación o para aquellos que buscan una alternativa más sencilla a otros lenguajes. Gambas se distribuye bajo la licencia GNU GPL, lo que significa que es completamente gratuito y de código abierto.\n\n¿Cómo funciona Gambas?\n\nUna de las características interesantes de Gambas es que, al igual que Java, requiere de un entorno de ejecución especial llamado «Gambas Runtime». Este entorno es necesario para que tu computadora pueda entender y ejecutar las aplicaciones que desarrolles en Gambas. El \"Gambas Runtime\" actúa como un intérprete, convirtiendo el código de tu aplicación en algo que el computador puede ejecutar.\n\n¿Por qué elegir Gambas?\n\nGambas es una excelente opción si buscas un lenguaje de programación que sea:\n\n- Fácil de aprender: Con una sintaxis similar a BASIC, es accesible para principiantes.\n- Potente: Aunque es sencillo, Gambas ofrece muchas herramientas y bibliotecas que te permiten crear aplicaciones complejas.\n- Libre y gratuito: Al estar bajo la licencia GNU GPL, puedes usar, modificar y compartir Gambas sin restricciones.\n\nEn resumen, Gambas es una herramienta versátil y amigable que te permite crear aplicaciones de manera rápida y eficiente, sin necesidad de conocimientos avanzados en programación.")
+    ReadOnly = True
+    Wrap = True
+    ScrollBar = Scroll.Vertical
+  }
+  { HBox1 HBox
+    Move(50,240,567,36)
+    { Spring1 Spring
+      Move(36,0,36,36)
+    }
+    { btnGAMBAS Button
+      Move(90,0,216,36)
+      Text = ("Visitar la web de GAMBAS")
+    }
+    { Separator1 Separator
+      Move(351,0,9,36)
+      Foreground = Color.Transparent
+    }
+    { btnCerrar Button
+      Move(414,0,144,36)
+      Background = &HE00000
+      Foreground = Color.White
+      Text = ("Cerrar")
+    }
+  }
+}

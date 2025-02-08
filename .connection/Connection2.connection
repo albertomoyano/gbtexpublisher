@@ -1,0 +1,12 @@
+# Gambas Connection File 3.0
+[Connection]
+Type="sqlite"
+Path="~/Dropbox/gbBaseDatos"
+NoPassword=False
+RememberPassword=False
+IgnoreCharset=False
+DisplayMetadata=False
+RememberTemplate=False
+Database="gbtexpublisher.sqlite"
+Requests=[""]
+

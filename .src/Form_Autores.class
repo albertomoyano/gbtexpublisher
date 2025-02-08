@@ -1,0 +1,342 @@
+' Gambas class file
+
+Private Contenido As Result
+Private Busqueda As Result
+Private FilaSeleccionada As Integer
+
+Public Sub btnCerrarColeccion_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  btnGuardarAutores.Visible = False
+  btnGuardarCambiosAutores.Visible = False
+  BtnRefrescarAutores.Visible = False
+
+  Mostrar_Lista()
+
+End
+
+Public Sub Mostrar_Lista() 'Función que rellena el GridView
+
+  Dim Record As String
+  Dim Count As Integer
+  Dim i As Integer
+
+  GridAutores.Clear()
+
+  Contenido = FMain.meConn.Exec("select * from autores ORDER BY apellido DESC")
+
+  'diseñamos el tableview
+  GridAutores.Columns.Count = 14
+  GridAutores.Columns[0].Title = "ID"
+  GridAutores.Columns[0].Width = 60
+  GridAutores.Columns[1].Title = "Apellido"
+  GridAutores.Columns[1].Width = 150
+  GridAutores.Columns[2].Title = "Nombre"
+  GridAutores.Columns[2].Width = 240
+  GridAutores.Columns[3].Title = "email"
+  GridAutores.Columns[3].Width = 520
+  GridAutores.Columns[4].Title = "orcid"
+  GridAutores.Columns[4].Width = 0
+  GridAutores.Columns[5].Title = "institucion"
+  GridAutores.Columns[5].Width = 0
+  GridAutores.Columns[6].Title = "departamento"
+  GridAutores.Columns[6].Width = 0
+  GridAutores.Columns[7].Title = "direccion"
+  GridAutores.Columns[7].Width = 0
+  GridAutores.Columns[8].Title = "provincia"
+  GridAutores.Columns[8].Width = 0
+  GridAutores.Columns[9].Title = "pais"
+  GridAutores.Columns[9].Width = 0
+  GridAutores.Columns[10].Title = "postal"
+  GridAutores.Columns[10].Width = 0
+  GridAutores.Columns[11].Title = "emailinstitucion"
+  GridAutores.Columns[11].Width = 0
+  GridAutores.Columns[12].Title = "website"
+  GridAutores.Columns[12].Width = 0
+  GridAutores.Columns[13].Title = "blog"
+  GridAutores.Columns[13].Width = 0
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  GridAutores.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    GridAutores[i, 0].Text = Contenido!id
+    GridAutores[i, 1].Text = Contenido!apellido
+    GridAutores[i, 2].Text = Contenido!nombre
+    GridAutores[i, 3].Text = Contenido!email
+    GridAutores[i, 4].Text = Contenido!orcid
+    GridAutores[i, 5].Text = Contenido!institucion
+    GridAutores[i, 6].Text = Contenido!departamento
+    GridAutores[i, 7].Text = Contenido!direccion
+    GridAutores[i, 8].Text = Contenido!provincia
+    GridAutores[i, 9].Text = Contenido!pais
+    GridAutores[i, 10].Text = Contenido!postal
+    GridAutores[i, 11].Text = Contenido!emailinstitucion
+    GridAutores[i, 12].Text = Contenido!website
+    GridAutores[i, 13].Text = Contenido!blog
+    Contenido.MoveNext
+  Next
+
+  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM autores")
+
+  Record = Contenido[0]
+  Count = Record
+
+End
+
+Public Sub BtnNuevoAutores_Click()
+
+  BtnNuevoAutores.Visible = False
+  btnGuardarAutores.Visible = True
+  btnGuardarCambiosAutores.visible = False
+
+  Dim Idn As Integer
+
+  LimpiarCampos  'Limpiamos todos los campos
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM autores LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtID.Text = Idn
+  Mostrar_Lista
+  txtApellido.SetFocus()
+
+End
+
+Public Function LimpiarCampos()
+
+  'Limpiamos los campos
+  txtID.Text = ""
+  txtApellido.Text = ""
+  txtNombre.Text = ""
+  txtEmail.Text = ""
+  txtORCID.Text = ""
+  txtInstitucion.Text = ""
+  txtDepartamento.Text = ""
+  txtDireccion.Text = ""
+  txtProvincia.Text = ""
+  txtPais.Text = ""
+  txtPostal.Text = ""
+  txtEmailInstitucion.Text = ""
+  txtWebsite.Text = ""
+  txtBlog.Text = ""
+
+End
+
+Public Sub btnGuardarAutores_Click()
+
+  ' no revisamos que existan coincidencias, ya que una editorial
+  ' puede tener diferentes docmicilios
+  Contenido = FMain.meConn.Create("autores")
+
+  guardarCampos
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  Mostrar_Lista ' Refrescamos la lista de entradas
+  LimpiarCampos ' Limpiamos los campos
+
+  btnGuardarCambiosAutores.Visible = False
+  btnGuardarAutores.Visible = False
+  BtnNuevoAutores.Visible = True
+
+End
+
+Public Function eliminarBlancos()
+
+  EliminarEspaciosAlInicioYFinal(txtApellido)
+  EliminarEspaciosAlInicioYFinal(txtNombre)
+  EliminarEspaciosAlInicioYFinal(txtEmail)
+  EliminarEspaciosAlInicioYFinal(txtORCID)
+  EliminarEspaciosAlInicioYFinal(txtInstitucion)
+  EliminarEspaciosAlInicioYFinal(txtDepartamento)
+  EliminarEspaciosAlInicioYFinal(txtDireccion)
+  EliminarEspaciosAlInicioYFinal(txtProvincia)
+  EliminarEspaciosAlInicioYFinal(txtPais)
+  EliminarEspaciosAlInicioYFinal(txtPostal)
+  EliminarEspaciosAlInicioYFinal(txtEmailInstitucion)
+  EliminarEspaciosAlInicioYFinal(txtWebsite)
+  EliminarEspaciosAlInicioYFinal(txtBlog)
+
+End
+
+Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
+
+  Dim texto As String
+
+  texto = textbox.Text
+  texto = Trim$(texto)
+  textbox.Text = texto
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txtID.Text
+  Contenido!apellido = txtApellido.Text
+  Contenido!nombre = txtNombre.Text
+  Contenido!email = txtEmail.Text
+  Contenido!orcid = txtORCID.Text
+  Contenido!institucion = txtInstitucion.Text
+  Contenido!departamento = txtDepartamento.Text
+  Contenido!direccion = txtDireccion.Text
+  Contenido!provincia = txtProvincia.Text
+  Contenido!pais = txtPais.Text
+  Contenido!postal = txtPostal.Text
+  Contenido!emailinstitucion = txtEmailInstitucion.Text
+  Contenido!website = txtWebsite.Text
+  Contenido!blog = txtBlog.Text
+
+End
+
+Public Sub GridAutores_RowClick(Row As Integer)
+
+  BtnNuevoAutores.Visible = False
+  btnGuardarCambiosAutores.visible = True
+  btnGuardarAutores.Visible = False
+
+  txtID.Text = GridAutores[Row, 0].Text
+  txtApellido.Text = GridAutores[Row, 1].Text
+  txtNombre.Text = GridAutores[Row, 2].Text
+  txtEmail.Text = GridAutores[Row, 3].Text
+  txtORCID.Text = GridAutores[Row, 4].Text
+  txtInstitucion.Text = GridAutores[Row, 5].Text
+  txtDepartamento.Text = GridAutores[Row, 6].Text
+  txtDireccion.Text = GridAutores[Row, 7].Text
+  txtProvincia.Text = GridAutores[Row, 8].Text
+  txtPais.Text = GridAutores[Row, 9].Text
+  txtPostal.Text = GridAutores[Row, 10].Text
+  txtEmailInstitucion.Text = GridAutores[Row, 11].Text
+  txtWebsite.Text = GridAutores[Row, 12].Text
+  txtBlog.Text = GridAutores[Row, 13].Text
+
+  FilaSeleccionada = Row
+
+  ' Ahora habilita el botón después de confirmar que hay una fila seleccionada.
+  btnSeleccion.Enabled = True
+
+End
+
+Public Sub btnGuardarCambiosAutores_Click()
+
+  BtnNuevoAutores.Visible = True
+  btnGuardarAutores.Visible = False
+  btnGuardarCambiosAutores.visible = False
+
+  'eliminamos blancos de inicio y final de cadena en los textbox
+  eliminarBlancos
+
+  Contenido = FMain.meConn.Edit("autores", "id=" & txtID.Text)
+  guardarCampos
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  Mostrar_Lista
+  LimpiarCampos 'limpiar campos
+
+End
+
+Public Sub BtnRefrescarAutores_Click()
+
+  Mostrar_Lista
+  BtnNuevoAutores.Visible = True
+  BtnRefrescarAutores.Visible = False
+  btnGuardarAutores.Visible = False
+  btnGuardarCambiosAutores.visible = False
+
+  LimpiarCampos
+
+End
+
+Public Sub btnBuscarApellido_Click()
+
+  Dim Comando As String
+  Dim rowIndex As Integer
+
+  Comando = "SELECT * FROM autores WHERE apellido LIKE '%" & txtApellido.Text & "%'"
+
+  If txtApellido.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Busqueda = FMain.meConn.Exec(Comando)
+
+  ' Limpia el GridView antes de mostrar los resultados de la búsqueda
+  GridAutores.Clear()
+
+  ' Configura las columnas
+  GridAutores.Columns.Count = 14
+
+  ' Inicializa rowIndex a 0
+  rowIndex = 0
+
+  While (Busqueda.Available)
+    ' Añade una nueva fila al GridView
+    GridAutores.Rows.Insert(1)
+
+    ' Llena las celdas de la nueva fila con los datos del resultado
+    GridAutores[rowIndex, 0].Text = Busqueda!id
+    GridAutores[rowIndex, 1].Text = Busqueda!apellido
+    GridAutores[rowIndex, 2].Text = Busqueda!nombre
+    GridAutores[rowIndex, 3].Text = Busqueda!email
+    GridAutores[rowIndex, 4].Text = Busqueda!orcid
+    GridAutores[rowIndex, 5].Text = Busqueda!institucion
+    GridAutores[rowIndex, 6].Text = Busqueda!departamento
+    GridAutores[rowIndex, 7].Text = Busqueda!direccion
+    GridAutores[rowIndex, 8].Text = Busqueda!provincia
+    GridAutores[rowIndex, 9].Text = Busqueda!pais
+    GridAutores[rowIndex, 10].Text = Busqueda!postal
+    GridAutores[rowIndex, 11].Text = Busqueda!emailinstitucion
+    GridAutores[rowIndex, 12].Text = Busqueda!website
+    GridAutores[rowIndex, 13].Text = Busqueda!blog
+
+    Busqueda.MoveNext
+
+    ' Incrementa el índice de fila
+    rowIndex = rowIndex + 1
+  Wend
+
+  If rowIndex = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    BtnRefrescarAutores.Visible = True ' Mostramos el botón de refresh en el formulario original para recargar las entradas
+  Else
+    BtnRefrescarAutores.Visible = True ' Mostramos el botón de refresh en el formulario original para recargar las entradas
+  Endif
+
+End
+
+Public Sub btnSeleccion_Click()  ' Verificar si hay una fila seleccionada.
+
+  ' Dim IdSeleccionado As String = GridAutores[FilaSeleccionada, 0].Text
+  '
+  ' If FilaSeleccionada >= 0 Then
+  '   ' Accede al formulario original y establece los valores en los TextBox.
+  '   FMain.txt05_pdfauthor.Text = FMain.txt05_pdfauthor.Text & " " & IdSeleccionado
+  '   ' Cierra la base y el formulario actual.
+  '   conector.Close()
+  '   Me.Close()
+  ' Else
+  '   Message.Warning("Debe seleccionar un autor.")
+  ' Endif
+
+End
+
+Public Sub Form_Close()
+
+  Me.Close
+
+End

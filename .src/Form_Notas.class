@@ -1,0 +1,242 @@
+' Gambas class file
+
+Private Contenido As Result
+
+Public Sub Form_Activate()
+
+  Contenido = FMain.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
+  gridNotas.Rows.Count = Contenido.Count
+
+End
+
+Public Sub Form_Open()
+
+  Contenido = FMain.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
+  gridNotas.Rows.Count = Contenido.Count
+
+  With gridNotas
+    .Header = True
+    .Grid = True
+    .Columns.Count = 3
+    .Columns[0].Title = "id"
+    .Columns[0].Width = 0
+    .Columns[1].Title = "Asunto"
+    .Columns[1].Width = 1000
+    .Columns[2].Title = "Contenido"
+    .Columns[2].Width = 0
+  End With
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+
+End
+
+Public Sub btnCerrar_Click()
+
+  Me.Close
+
+End
+
+Public Sub btnGuardarMod_Click()
+
+  Contenido = FMain.meConn.Edit("notas", "id=" & txId.Text)
+  guardarCampos()
+  Contenido.Update
+  gridNotas.Refresh
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+
+End
+
+Public Sub tbNuevo_Click()
+
+  ' Habilitamos los campos de entrada
+  txAsunto.Enabled = True
+  txContenido.Enabled = True
+
+  ' Ocultamos/mostramos botones según sea necesario
+  tbNuevo.Visible = False
+  tbBorrar.Visible = False
+  btnGuardar.Visible = True
+  btnGuardarMod.Visible = False
+
+  ' Limpiamos los campos
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM notas LIMIT 1")
+
+  Dim Idn As Integer
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  txId.Text = Idn
+  txAsunto.SetFocus
+
+End
+
+Public Sub btnGuardar_Click()
+
+  Contenido = FMain.meConn.Create("notas")
+
+  guardarCampos()
+  Contenido.Update
+  gridNotas.Refresh
+  Message.Info("Nueva entrada guardada.")
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+
+End
+
+Public Sub tbBorrar_Click()
+
+  'Chequeamos primero que se haya elegido una entrada
+  If txId.Text = "" Then
+    Message.Info("Debe primero seleccionarse la entrada a borrar.")
+    Return
+  Endif
+
+  If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
+    Contenido = FMain.meConn.Exec("delete from notas where id=" & txId.Text)
+  Endif
+
+  Mod_LimpiarTextBox.LimpiarCamposNotas()
+
+  gridNotas.Clear
+
+  txAsunto.Enabled = False
+  txContenido.Enabled = False
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txId.Text
+  Contenido!asunto = txAsunto.Text
+  Contenido!contenido = txContenido.Text
+
+End
+
+Public Sub BtnBuscar_Click()
+
+  tbNuevo.Visible = True
+  tbBorrar.Visible = False
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = False
+
+  ' Verificar si el campo de búsqueda está vacío
+  If txtBuscar.Text = "" Then
+    Message.Warning("Debe introducir contenido a buscar.")
+    Return
+  Endif
+
+  Dim Consulta As String
+  ' Crear la consulta SQL basada en el texto introducido
+  Consulta = "SELECT * FROM notas WHERE asunto LIKE '%" & txtBuscar.Text & "%' OR contenido LIKE '%" & txtBuscar.Text & "%'"
+
+  ' Ejecutar la consulta y verificar si hay resultados
+  Contenido = FMain.meConn.Exec(Consulta)
+
+  If Contenido.Count = 0 Then
+    ' No hay resultados
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Else
+    ' Hay resultados: cargar los datos en el grid
+    CargarDatos(Consulta, gridNotas)
+  Endif
+
+End
+
+Public Sub Form_Close()
+
+  Me.Close
+
+End
+
+Public Sub gridNotas_Data(Row As Integer, Column As Integer)
+
+  If (Contenido <> Null) Then
+    If Row >= 0 Then
+      Contenido.moveTo(Row)
+      Try gridNotas.Data.Text = Str(Contenido[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    gridNotas.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub gridNotas_Click()
+
+  txAsunto.Enabled = True
+  txContenido.Enabled = True
+  tbNuevo.Visible = True
+  tbBorrar.Visible = True
+  btnGuardar.Visible = False
+  btnGuardarMod.Visible = True
+
+  ' Rellenar los campos de texto con los valores de la fila seleccionada
+  txId.Text = gridNotas[gridNotas.row, 0].Text
+  txAsunto.Text = gridNotas[gridNotas.row, 1].Text
+  txContenido.Text = gridNotas[gridNotas.row, 2].Text
+
+End
+
+Public Sub CargarDatos(Consulta As String, Grid As GridView)
+
+  Dim i As Integer
+
+  ' Ejecutar la consulta
+  Contenido = FMain.meConn.Exec(Consulta)
+
+  ' Si no hay resultados
+  If Contenido.Count = 0 Then
+    Message.Info("No se ha encontrado ningún resultado.")
+    Return
+  Endif
+
+  ' Limpiar el Grid antes de mostrar los resultados
+  Grid.Clear()
+  Grid.Rows.Count = Contenido.Count
+
+  ' Llenar el Grid con los resultados
+  For i = 0 To Contenido.Count - 1
+    For j As Integer = 0 To Grid.Columns.Count - 1
+      Grid[i, j].Text = Contenido[j]
+    Next
+    Contenido.MoveNext
+  Next
+
+End

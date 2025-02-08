@@ -1,0 +1,107 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,640)
+  #Scaled = False
+  Text = ("Cuaderno de notas")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox1 HBox
+    Move(9,9,927,36)
+    { tbNuevo Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar entrada")
+      Picture = Picture["iconos/+nuevo.svg"]
+    }
+    { tbBorrar Button
+      Move(36,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Eliminar entrada")
+      Picture = Picture["iconos/borrar.svg"]
+    }
+    { btnGuardar Button
+      Move(72,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar entrada")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarMod Button
+      Move(108,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Guardar cambios")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { BtnBuscar Button
+      Move(261,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Buscar en toda la base de datos")
+      Picture = Picture["iconos/search.svg"]
+    }
+    { txtBuscar TextBox
+      Move(306,0,135,36)
+      Expand = True
+    }
+    { Spring1 Spring
+      Move(640,0,36,40)
+    }
+    { btnCerrar ToolButton
+      Move(702,0,160,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la ventana")
+      Text = ("Cerrar")
+      Border = True
+    }
+  }
+  { HBox8 HBox
+    Move(18,72,765,36)
+    { txId TextBox
+      Move(45,0,63,36)
+      Visible = False
+      NoTabFocus = True
+      Alignment = Align.Center
+    }
+    { Label7 Label
+      Move(315,0,126,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Asunto  ")
+    }
+    { txAsunto TextBox
+      Move(468,0,171,36)
+      NoTabFocus = True
+      Expand = True
+    }
+  }
+  { HBox4 HBox
+    Move(18,135,765,207)
+    { gridNotas TableView
+      Move(0,0,153,153)
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Horizontal
+      ScrollBar = Scroll.Vertical
+      Resizable = False
+    }
+  }
+  { Panel1 Panel
+    Move(378,414,333,180)
+    Expand = True
+    Arrangement = Arrange.Fill
+    Border = Border.Sunken
+    { txContenido TextArea
+      Move(9,27,162,63)
+      Font = Font["Monospace"]
+      NoTabFocus = True
+      Expand = True
+      Wrap = True
+      ScrollBar = Scroll.Vertical
+    }
+  }
+}

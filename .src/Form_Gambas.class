@@ -1,0 +1,13 @@
+' Gambas class file
+
+Public Sub btnCerrar_Click()
+
+  Me.Close()
+
+End
+
+Public Sub btnGAMBAS_Click()
+
+  Shell "xdg-open https://gambas.sourceforge.net/en/main.html"
+
+End

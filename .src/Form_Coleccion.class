@@ -1,0 +1,219 @@
+' Gambas class file
+
+Private Contenido As Result
+Private Busqueda As Result
+Private FilaSeleccionada As Integer
+
+Public Sub btnCerrarColeccion_Click()
+
+  Me.Close()
+
+End
+
+Public Sub Form_Open()
+
+  btnGuardarColeccion.Visible = False
+  btnGuardarCambiosColeccion.Visible = False
+
+  Mostrar_Lista()
+
+End
+
+Public Sub Mostrar_Lista() 'Función que rellena el GridView
+
+  Dim Record As String
+  Dim Count As Integer
+  Dim i As Integer
+
+  GridColeccion.Clear()
+
+  Contenido = FMain.meConn.Exec("select * from coleccion ORDER BY id DESC")
+
+  'diseñamos el tableview
+  GridColeccion.Columns.Count = 4
+  GridColeccion.Header = True
+  GridColeccion.Columns[0].Title = "id"
+  GridColeccion.Columns[0].Width = 0
+  GridColeccion.Columns[1].Title = "Colección"
+  GridColeccion.Columns[1].Width = 450
+  GridColeccion.Columns[2].Title = "Dirección"
+  GridColeccion.Columns[2].Width = 300
+  GridColeccion.Columns[3].Title = "Formato"
+  GridColeccion.Columns[3].Width = 150
+
+  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+  GridColeccion.Rows.Count = Contenido.Count
+
+  'recorremos el resutado de la consulta para mostrarlo
+  For i = 0 To Contenido.Count - 1
+    GridColeccion[i, 0].Text = Contenido!id
+    GridColeccion[i, 1].Text = Contenido!coleccion
+    GridColeccion[i, 2].Text = Contenido!direccion
+    GridColeccion[i, 3].Text = Contenido!formato
+    Contenido.MoveNext
+  Next
+
+  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM coleccion")
+
+  Record = Contenido[0]
+  Count = Record
+
+End
+
+Public Sub BtnNuevoColeccion_Click()
+
+  BtnNuevoColeccion.Visible = False
+  btnGuardarColeccion.Visible = True
+  btnGuardarCambiosColeccion.visible = False
+
+  Dim Idn As Integer
+
+  LimpiarCampos  'Limpiamos todos los campos
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM coleccion LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtID.Text = Idn
+  Mostrar_Lista
+  txtColeccion.SetFocus()
+
+End
+
+Public Function LimpiarCampos()
+
+  'Limpiamos los campos
+  txtID.Text = ""
+  txtColeccion.Text = ""
+  txtDireccion.Text = ""
+  txtFormato.Text = ""
+
+End
+
+Public Sub btnGuardarColeccion_Click()
+
+  Dim Comando As String
+
+  ' Escapa los caracteres especiales(comilla simple)en el título
+  Dim tituloEscapado As String
+
+  tituloEscapado = Replace(txtColeccion.Text, "'", "''")
+
+  eliminarBlancos
+
+  Comando = "SELECT * FROM coleccion WHERE coleccion = '" & tituloEscapado & "'"
+  Busqueda = FMain.meConn.Exec(Comando)
+
+  ' Verificar si se encontraron resultados en la consulta
+  If Busqueda.Count > 0 Then
+    Message.Warning("La colección que desea agregar ya existe en la base de datos.")
+    Return ' Salir de la función si el título ya existe
+  Endif
+
+  Contenido = FMain.meConn.Create("coleccion")
+
+  guardarCampos
+
+  Contenido.Update
+  Message.Info("Nueva colección guardada.")
+
+  Mostrar_Lista ' Refrescamos la lista de entradas
+  LimpiarCampos ' Limpiamos los campos
+
+  btnGuardarCambiosColeccion.Visible = False
+  btnGuardarColeccion.Visible = False
+  BtnNuevoColeccion.Visible = True
+
+End
+
+Public Function eliminarBlancos()
+
+  EliminarEspaciosAlInicioYFinal(txtColeccion)
+  EliminarEspaciosAlInicioYFinal(txtDireccion)
+
+End
+
+Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
+
+  Dim texto As String
+
+  texto = textbox.Text
+  texto = Trim$(texto)
+  textbox.Text = texto
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txtID.Text
+  Contenido!coleccion = txtColeccion.Text
+  Contenido!direccion = txtDireccion.Text
+  Contenido!formato = txtFormato.Text
+
+End
+
+Public Sub GridColeccion_RowClick(Row As Integer)
+
+  BtnNuevoColeccion.Visible = False
+  btnGuardarCambiosColeccion.visible = True
+  btnGuardarColeccion.Visible = False
+
+  txtID.Text = GridColeccion[Row, 0].Text
+  txtColeccion.Text = GridColeccion[Row, 1].Text
+  txtDireccion.Text = GridColeccion[Row, 2].Text
+  txtFormato.Text = GridColeccion[Row, 3].Text
+
+  FilaSeleccionada = Row
+
+  ' Ahora habilita el botón después de confirmar que hay una fila seleccionada.
+  btnSeleccion.Visible = True
+
+End
+
+Public Sub btnGuardarCambiosColeccion_Click()
+
+  BtnNuevoColeccion.Visible = True
+  btnGuardarColeccion.Visible = False
+  btnGuardarCambiosColeccion.visible = False
+
+  'eliminamos blancos de inicio y final de cadena en los textbox
+  eliminarBlancos
+
+  Contenido = FMain.meConn.Edit("coleccion", "id=" & txtID.Text)
+  guardarCampos
+  Contenido.Update
+  Message.Info("Los cambios se guardaron con éxito.")
+
+  Mostrar_Lista
+  LimpiarCampos 'limpiar campos
+
+End
+
+Public Sub btnSeleccion_Click()
+
+  Dim coleccionSeleccionada As String = GridColeccion[FilaSeleccionada, 1].Text
+  Dim direccionSeleccionada As String = GridColeccion[FilaSeleccionada, 2].Text
+  Dim formatoSeleccionada As String = GridColeccion[FilaSeleccionada, 3].Text
+
+  ' Verificar si hay una fila seleccionada.
+  If FilaSeleccionada >= 0 Then
+    FMain.txtCOLECCION.Text = coleccionSeleccionada
+    FMain.txtDirection.Text = direccionSeleccionada
+    FMain.txtFORMATO.Text = formatoSeleccionada
+    Me.Close()
+  Else
+    Message.Warning("Debe seleccionar una colección.")
+  Endif
+
+End
+
+Public Sub Form_Close()
+
+  Me.Close()
+
+End

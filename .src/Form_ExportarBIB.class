@@ -1,0 +1,142 @@
+' Gambas class file
+
+Private Contenido As Result
+
+Public Sub Form_Open()
+
+End
+
+Public Sub btnExportarBIB_Click()
+  'exportamos el archivo bib
+
+  Dim s As String
+  Dim f As ResultField
+  Dim aFields As New String[]
+  Dim i As Integer
+  Dim w As Integer
+  Dim tab As String
+  Dim buscar As String
+  Dim outputFile As String
+  Dim fecha As String
+  Dim HOY As Date
+
+  ' Verificar si los campos están vacíos
+  If txtdestino.Text = "" Or txtFiltro.Text = "" Or txtNombre.Text = "" Then
+    ' Mostrar mensaje de alerta
+    Message.Warning("Por favor, complete todos los campos.")
+  Else
+
+    'me aseguro de que la búsqueda se encuentre entre comas
+    buscar = "select * from bibtex where keywords like ',%" & txtFiltro.Text & ",%'"
+
+    ' Exportar el registro seleccionado
+    Contenido = FMain.meConn.Exec(buscar)
+
+    aFields.Clear
+    For Each f In Contenido.Fields
+      aFields.Add(f.Name)
+      If Len(f.Name) > w Then
+        w = Len(f.Name)
+      Endif
+    Next
+
+    s = "" ' Inicializa la cadena vacía
+
+    While Contenido.Available
+      s &= "\n@" & Contenido["tipoEntrada"] & "{" & Contenido[aFields[2]] & ",\n"
+      For i = 3 To aFields.Max
+        tab = ""
+        If Len(aFields[i]) / i < w Then
+          tab = String(w - Len(aFields[i]), " ")
+        Endif
+        If Not IsNull(Contenido[aFields[i]]) And Len(Contenido[aFields[i]]) > 0 Then
+          s &= aFields[i] & tab & " = {" & Contenido[aFields[i]] & "},\n"
+        Endif
+      Next
+      s &= "}"
+      Contenido.MoveNext
+    Wend
+
+    ' Realiza los reemplazos
+    s = Replace(s, ",}", "}")
+    s = Replace(s, "dateD", "date ")
+    s = Replace(s, "yearY", "year ")
+
+    HOY = Date
+    fecha = (Format(HOY, "dd/mm/yyyy"))
+
+    ' Guarda el contenido acumulado en un solo archivo
+    s &= "\n\n@Comment{gbTeXpublisher: databaseType:biblatex; fecha de creación: " & fecha & ";}"
+
+    ' Establece la ruta y el nombre del archivo de salida
+    outputFile = txtdestino.Text &/ txtNombre.Text & ".bib"
+    File.Save(outputFile, s)
+
+    ' Mostrar mensaje de exportación terminada en el label
+    Label2.Text = "Exportación terminada, puede cerrar el formulario o realizar una nueva exportación"
+    txtdestino.Text = ""
+    txtFiltro.Text = ""
+    txtNombre.Text = ""
+  Endif
+
+End
+
+Public Sub btnDestino_Click()
+
+  Dialog.Title = "Seleccionar directorio"
+  Dialog.Path = User.Home
+
+  If Dialog.SelectDirectory() Then
+    Return
+  Else
+    txtdestino.Text = Dialog.Path
+  Endif
+
+Catch
+  Message.Error("La selección del directorio fue cancelada.")
+
+End Sub
+
+Public Sub txtFiltro_KeyRelease()
+
+  Dim texto As String
+
+  texto = txtFiltro.Text
+
+  ' Lista de caracteres permitidos
+  Dim caracteresPermitidos As String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-"
+
+  ' Filtrar el texto para eliminar caracteres no permitidos
+  Dim textoFiltrado As String
+  For i As Integer = 1 To Len(texto)
+    Dim tecla As String
+    tecla = Mid(texto, i, 1)
+    If InStr(caracteresPermitidos, tecla) > 0 Then
+      textoFiltrado = textoFiltrado & tecla
+    End If
+  Next
+
+  ' Limitar la longitud del texto a 11 caracteres
+  If Len(textoFiltrado) > 20 Then
+    ' Mostrar un mensaje de aviso
+    Message.Warning("El nombre del filtro no puede contener más de 11 caracteres.", "Entendido")
+    ' Eliminar los caracteres adicionales
+    txtFiltro.Text = Left(textoFiltrado, 20)
+  Else
+    ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
+    txtFiltro.Text = UCase(textoFiltrado)
+  End If
+
+End
+
+Public Sub btnCancelar_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_Close()
+
+  Me.Close
+
+End

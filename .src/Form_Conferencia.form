@@ -1,0 +1,201 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,640)
+  #Scaled = False
+  Expand = True
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox16 HBox
+    Move(0,9,873,36)
+    { BtnNuevoColeccion Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar una nueva referencia")
+      Picture = Picture["iconos/+nuevo.svg"]
+    }
+    { btnGuardarColeccion Button
+      Move(36,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarCambiosColeccion Button
+      Move(72,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { txtID TextBox
+      Move(108,0,90,36)
+      Visible = False
+      Background = Color.Background
+      NoTabFocus = True
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Spring1 Spring
+      Move(360,0,126,36)
+    }
+    { btnCerrarColeccion Button
+      Move(513,0,144,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      ToolTip = ("Cerrar la aplicación")
+      Text = ("Cerrar")
+    }
+  }
+  { HBox3 Panel
+    Move(0,45,942,180)
+    NoTabFocus = True
+    Arrangement = Arrange.Vertical
+    { HBox2 HBox
+      Move(0,0,864,36)
+      { lblAlta2 Label
+        Move(0,0,180,36)
+        Alignment = Align.Right
+        Text = ("Título de la conferencia  ")
+      }
+      { txtTitulo01 TextBox
+        Move(207,0,234,36)
+        NoTabFocus = True
+        Expand = True
+        Alignment = Align.Left
+      }
+      { lblKEYWORDS4 Label
+        Move(441,0,90,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "  Serie "
+      }
+      { txtSerie02 TextBox
+        Move(540,0,90,36)
+        NoTabFocus = True
+      }
+      { lblKEYWORDS5 Label
+        Move(630,0,90,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Acrónimo "
+      }
+      { txtAcronimo03 TextBox
+        Move(756,0,108,36)
+        NoTabFocus = True
+      }
+    }
+    { HBox4 HBox
+      Move(0,36,891,36)
+      { lblKEYWORDS2 Label
+        Move(0,0,180,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Lugar "
+      }
+      { txtLugar04 TextBox
+        Move(198,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+      { lblKEYWORDS1 Label
+        Move(630,0,90,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Año "
+      }
+      { txtFecha05 ValueBox
+        Move(756,0,108,36)
+        NoTabFocus = True
+        Alignment = Align.Right
+      }
+    }
+    { HBox5 HBox
+      Move(0,72,891,36)
+      { lblKEYWORDS3 Label
+        Move(0,0,180,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Organizador "
+      }
+      { txtOrganizador06 TextBox
+        Move(207,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+    }
+    { HBox14 HBox
+      Move(0,108,891,36)
+      { btnMostarSponsor Button
+        Move(0,0,36,36)
+        Picture = Picture["iconos/schedule.svg"]
+      }
+      { lblKEYWORDS12 Label
+        Move(54,0,144,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Patrocinio "
+      }
+      { !txtPatrocinio07 TextBox
+        Move(207,0,216,36)
+        #Public = True
+        Background = Color.Background
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
+      }
+      { btnLimpiar Button
+        Move(819,0,36,36)
+        Picture = Picture["iconos/borrar.svg"]
+      }
+    }
+    { HBox13 HBox
+      Move(0,144,558,36)
+      { lblKEYWORDS9 Label
+        Move(0,0,180,36)
+        #Translate = False
+        Alignment = Align.Right
+        Text = "Resumen "
+      }
+      { txtResumen08 TextBox
+        Move(207,0,216,36)
+        NoTabFocus = True
+        Expand = True
+      }
+      { btnResumen Button
+        Move(423,0,36,36)
+        Text = ("") & "..."
+      }
+    }
+  }
+  { HBox6 Panel
+    Move(9,270,477,162)
+    NoTabFocus = True
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { GridConferencia TableView
+      Move(18,18,261,117)
+      Font = Font["-1"]
+      Expand = True
+      Mode = Select.Single
+      ShowCursor = True
+      Header = GridView.Both
+      ScrollBar = Scroll.Vertical
+      AutoResize = False
+      Resizable = False
+    }
+  }
+  { HBox8 HBox
+    Move(0,567,873,36)
+    { Spring2 Spring
+      Move(81,0,126,36)
+    }
+    { btnSeleccion Button
+      Move(261,0,144,36)
+      Visible = False
+      Background = &H8BE06F
+      NoTabFocus = True
+      Text = ("Seleccionar")
+    }
+  }
+}

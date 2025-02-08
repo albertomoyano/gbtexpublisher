@@ -1,0 +1,2141 @@
+' Gambas module file
+
+Public Contenido As Result
+Public ContenidoAutor As Result
+Public ContenidoMeta As Result
+Public ContenidoGHP As Result
+Public ContenidoSeparatas As Result
+Public ContenidoAutores As Result
+Public ContenidoAutoresA As Result
+Public ContenidoAutores3 As Result
+Public ContenidoColaboradores As Result
+Public ResultadoMeta As Result
+
+Public Sub ExportarDOCX() ' Función para exportar el archivo a DOCX las notas
+
+  Dim tArchivo As File
+  Dim Ftemp As String, Comando As String, Ruta As String
+  Dim exportExitoso As Boolean = True
+  Dim guardarArchivo As Boolean = True
+
+  If Form_Notas.txId.Text = "" Then
+    Message.Warning("Debe elegir una entrada.")
+    Return
+  Endif
+
+  ' Primero creamos el archivo temporal
+  FTemp = Temp$()
+  tArchivo = Open FTemp For Write Create
+  Print #tArchivo, "Fecha: " & Form_Notas.txfecha.Text & gb.CrLf
+  Print #tArchivo, "Asunto: " & Form_Notas.txAsunto.Text & gb.CrLf
+  Print #tArchivo, "Contenido:" & gb.CrLf
+  Print #tArchivo, Form_Notas.txContenido.Text
+  Close tArchivo
+
+  While guardarArchivo
+    Dialog.Title = "Guardar archivo como..."
+    Dialog.Filter = ["*.txt", "Archivo de texto plano"]
+    Dialog.AutoExt = True
+    If Dialog.SaveFile() = 0 Then
+      Ruta = Dialog.Path
+
+      If Ruta = "" Then
+        Message.Warning("Debe proporcionar un nombre de archivo válido.")
+      Else
+
+        ' Comando = "/usr/bin/pandoc " & FTemp & " -t plain -s -o " & Ruta
+        Comando = "/usr/bin/pandoc " & FTemp & " -o " & Ruta
+
+        Try Shell Comando
+        If Error Then
+          Message.Warning("No se ha podido convertir el archivo. " & Error.Text)
+          exportExitoso = False
+        Else
+          exportExitoso = True
+          Message.Info("Archivo exportado de manera exitosa.")
+        Endif
+        guardarArchivo = False ' Salir del bucle después de procesar el archivo
+      Endif
+    Else
+      ' El usuario canceló la operación de guardar el archivo
+      guardarArchivo = False
+      exportExitoso = False
+    Endif
+  Wend
+
+End
+
+' Función para validar un número ISBN
+Public Sub EsISBNValido(ISBN As String) As Boolean
+  ' Elimina los guiones o espacios en blanco del número ISBN
+
+  ISBN = Replace(ISBN, "-", "")
+  ISBN = Replace(ISBN, " ", "")
+
+  ' Comprueba si el ISBN tiene 10 o 13 dígitos
+  If Len(ISBN) <> 10 And Len(ISBN) <> 13 Then
+    Return False
+  End If
+
+  ' Comprueba si el último dígito de verificación es válido
+  Dim Suma As Integer
+  Dim UltimoDigito As Integer
+  Dim Factor As Integer
+
+  If Len(ISBN) = 10 Then
+    Factor = 10
+    For i As Integer = 1 To 9
+      Suma += Val(Mid(ISBN, i, 1)) * Factor
+      Factor -= 1
+    Next
+    Dim UltimoChar As String = Mid(ISBN, 10, 1)
+    If UltimoChar = "X" Then
+      UltimoDigito = 10
+    Else
+      UltimoDigito = Val(UltimoChar)
+    End If
+
+  Else If Len(ISBN) = 13 Then
+    Factor = 1
+    For i As Integer = 1 To 12
+      Suma += Val(Mid(ISBN, i, 1)) * Factor
+      Factor = IIf(Factor = 1, 3, 1)
+    Next
+    UltimoDigito = Val(Mid(ISBN, 13, 1))
+  End If
+
+  Dim DigitoVerificacion As Integer
+  DigitoVerificacion = 10 - (Suma Mod 10)
+
+  Return UltimoDigito = DigitoVerificacion
+
+End
+
+'exportamos el archivo metadatos
+Public Sub Export2MetaDOCX(rutaTexto As String)
+
+  Dim s As String
+  Dim sb As String
+  Dim f As ResultField
+  Dim fb As ResultField
+  Dim aFields As New String[]
+  Dim bFields As New String[]
+  Dim w As Integer
+  Dim wb As Integer
+  Dim buscar As String
+  Dim buscarAutor As String
+  Dim outputFile As String
+  Dim id As Integer
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
+
+  ' Inicializa la cadena vacía
+  sb = ""
+
+  ' Iterar sobre los IDs y obtener la información correspondiente
+  For Each id In ids
+    ' Establecer el valor de 'id' antes de ejecutar la consulta
+    buscarAutor = "SELECT * FROM autores WHERE id = " & id
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
+
+    bFields.Clear
+    For Each fb In ContenidoAutor.Fields
+      bFields.Add(fb.Name)
+      If Len(fb.Name) > wb Then
+        wb = Len(fb.Name)
+      Endif
+    Next
+
+    ' Agregar la información al resultado
+    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  Next
+
+  ' Eliminar la coma adicional al final y cerrar la cadena
+  sb = Left(sb, Len(sb) - 2)
+
+  s = "" ' Inicializa la cadena definitiva
+
+  While Contenido.Available
+    s &= "\n"
+    s &= "\\Configure{META}{" & "\n"
+    s &= "<dc:title>" & Contenido[aFields[6]] & "</dc:title>\\Hnewline\n" 'titulo del libro
+    s &= "<dc:alternative>" & Contenido[aFields[58]] & "</dc:alternative>\\Hnewline\n" 'titulo en segundo idioma
+    s &= "<dc:subject>" & Contenido[aFields[7]] & "</dc:subject>\\Hnewline\n" 'subjet
+    s &= "<dc:keyword>" & Contenido[aFields[57]] & "</dc:keyword>\\Hnewline\n" 'palabras claves
+    s &= "<dc:created>" & Contenido[aFields[12]] & "</dc:created>\\Hnewline\n" 'fecha de creación
+    s &= "<dc:modified>" & Contenido[aFields[13]] & "</dc:modified>\\Hnewline\n" 'fecha de modificación
+    s &= "<dc:creator>" & sb & "</dc:creator>\\Hnewline\n" 'author
+
+    If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
+      s &= "<dc:contributor>Director de Colección: " & Contenido[aFields[52]] & "</dc:contributor>\\Hnewline\n"
+    Endif
+    If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
+      s &= "<dc:contributor>Traductor: " & Contenido[aFields[53]] & "</dc:contributor>\\Hnewline\n"
+    Endif
+    If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
+      s &= "<dc:contributor>Ilustrador: " & Contenido[aFields[55]] & "</dc:contributor>\\Hnewline\n"
+    Endif
+    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
+      s &= "<dc:description>" & Contenido[aFields[56]] & "</dc:description>\\Hnewline\n" 'description
+    Endif
+    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
+      s &= "<dc:identifier>ISBN: " & Contenido[aFields[35]] & "</dc:identifier>\\Hnewline\n" 'isbn
+    Endif
+    If Not IsNull(Contenido[aFields[49]]) And Len(Contenido[aFields[49]]) > 0 Then
+      s &= "<dc:coverage>" & Contenido[aFields[49]] & "</dc:coverage>\\Hnewline\n" 'coverage
+    Endif
+    If Not IsNull(Contenido[aFields[69]]) And Len(Contenido[aFields[69]]) > 0 Then
+      s &= "<dc:source>" & Contenido[aFields[69]] & "</dc:source>\\Hnewline\n" 'coverage
+    Endif
+
+    s &= "<dc:type>" & Contenido[aFields[30]] & "</dc:type>\\Hnewline\n" 'tipo de formato
+    s &= "<dc:language>" & Contenido[aFields[39]] & "</dc:language>\\Hnewline\n" 'idioma principal
+    s &= "<dc:publisher>" & Contenido[aFields[28]] & "</dc:publisher>\\Hnewline\n" 'publihser
+    s &= "<dc:license>" & Contenido[aFields[15]] & "</dc:license>\\Hnewline\n" 'licencia
+    s &= "<dc:rights>" & Contenido[aFields[16]] & "</dc:rights>\\Hnewline\n" 'url de la licencia
+    s &= "}\n"
+    s &= "\\makeatother" & "\n"
+    s &= "\\begin{document}\n"
+    s &= "\\EndPreamble" & "\n"
+    s &= "\n"
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el archivo metadatos para articulo para hacer el maketitle
+Public Sub ExportToMetaTMP(rutaTexto As String)
+
+  Dim s As String
+  Dim sb As String
+  Dim f As ResultField
+  Dim fb As ResultField
+  Dim aFields As New String[]
+  Dim bFields As New String[]
+  Dim w As Integer
+  Dim wb As Integer
+  Dim buscar As String
+  Dim buscarAutor As String
+  Dim outputFile As String
+  Dim id As Integer
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
+
+  ' Inicializa la cadena vacía
+  sb = ""
+
+  ' Iterar sobre los IDs y obtener la información correspondiente
+  For Each id In ids
+    ' Establecer el valor de 'id' antes de ejecutar la consulta
+    buscarAutor = "SELECT * FROM autores WHERE id = " & id
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
+
+    bFields.Clear
+    For Each fb In ContenidoAutor.Fields
+      bFields.Add(fb.Name)
+      If Len(fb.Name) > wb Then
+        wb = Len(fb.Name)
+      Endif
+    Next
+
+    ' Agregar la información al resultado
+    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  Next
+
+  ' Eliminar la coma adicional al final y cerrar la cadena
+  sb = Left(sb, Len(sb) - 2)
+
+  ' Inicializa la cadena definitiva
+  s = ""
+
+  While Contenido.Available
+    s &= "\n"
+    s &= "% contenido agregado de manera dinámica, no edite este archivo" & "\n"
+    s &= "\n"
+    s &= "\\JournalInfo{" & Contenido[aFields[27]] & ", vol. " & Contenido[aFields[31]] & ", núm. " & Contenido[aFields[32]] & " (págs. " & Contenido[aFields[33]] & "), " & Contenido[aFields[11]] & "}\n"
+
+    s &= "\\Archive{"
+    If Not IsNull(Contenido[aFields[85]]) And Len(Contenido[aFields[85]]) > 0 Then
+      s &= "DOI: " & Contenido[aFields[85]] & " "
+    End If
+
+    If Not IsNull(Contenido[aFields[36]]) And Len(Contenido[aFields[36]]) > 0 Then
+      s &= "ISSN: " & Contenido[aFields[36]] & " "
+    End If
+
+    If Not IsNull(Contenido[aFields[37]]) And Len(Contenido[aFields[37]]) > 0 Then
+      s &= "eISSN: " & Contenido[aFields[37]]
+    End If
+
+    s &= "}\n"
+
+    s &= "\\PaperTitle{" & Contenido[aFields[6]] & "}\n"
+    s &= "\\PaperSubtitle{" & Contenido[aFields[9]] & "}\n"
+    s &= "\\PaperTitleTwo{" & Contenido[aFields[58]] & "}\n"
+    s &= "\\ArchiveTwo{Recibido: " & Contenido[aFields[59]] & " -- Aceptado: " & Contenido[aFields[60]] & "}\n"
+
+    s &= "\\Authors{" & sb & "}\n" 'autores
+    ' s &= "\\affiliation" & "\n"
+
+    s &= "\\Resumen{" & Contenido[aFields[56]] & "}\n"
+    s &= "\\PalabrasClave{" & Contenido[aFields[57]] & "}\n"
+    s &= "\\Abstract{" & Contenido[aFields[48]] & "}\n" 'en inglés
+    s &= "\\Keywords{" & Contenido[aFields[8]] & "}\n" 'en inglés
+
+    s &= "\n"
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida para usar en al archivo fuente de tex
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmetaTMP-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el archivo metadatos
+Public Sub Export2MetaEPUB(rutaTexto As String)
+
+  Dim s As String
+  Dim sb As String
+  Dim f As ResultField
+  Dim fb As ResultField
+  Dim aFields As New String[]
+  Dim bFields As New String[]
+  Dim w As Integer
+  Dim wb As Integer
+  Dim buscar As String
+  Dim buscarAutor As String
+  Dim outputFile As String
+  Dim id As Integer
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
+
+  ' Inicializa la cadena vacía
+  sb = ""
+
+  ' Iterar sobre los IDs y obtener la información correspondiente
+  For Each id In ids
+    ' Establecer el valor de 'id' antes de ejecutar la consulta
+    buscarAutor = "SELECT * FROM autores WHERE id = " & id
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
+
+    bFields.Clear
+    For Each fb In ContenidoAutor.Fields
+      bFields.Add(fb.Name)
+      If Len(fb.Name) > wb Then
+        wb = Len(fb.Name)
+      Endif
+    Next
+
+    ' Agregar la información al resultado
+    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  Next
+
+  ' Eliminar la coma adicional al final y cerrar la cadena
+  sb = Left(sb, Len(sb) - 2)
+
+  s = "" ' Inicializa la cadena definitiva
+
+  While Contenido.Available
+    s &= "\n"
+    s &= "% contenido agregado de manera dinámica, no edite este archivo" & "\n"
+    ' s &= "\n"
+    ' s &= "\\Configure{CoverMimeType}{image/jpeg}" & "\n"
+    ' s &= "\\CoverMetadata{./media/" & Contenido[aFields[49]] & "}\n" 'tapa
+    s &= "\n"
+    s &= "\\begin{document}" & "\n"
+    s &= "\\def\\Author{" & sb & "}\n" '
+    s &= "\\def\\Title{" & Contenido[aFields[6]] & ": " & Contenido[aFields[9]] & "}\n"
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:subject>" & Contenido[aFields[57]] & "</dc:subject>}}\n" 'palabras clave
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:date>" & Contenido[aFields[11]] & "</dc:date>}}\n" 'fecha original opf:event=\"original-publication\"
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:created>" & Contenido[aFields[12]] & "</dc:created>}}\n" 'fecha de creación
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:modified>" & Contenido[aFields[13]] & "</dc:modified>}}\n"
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:rights>" & Contenido[aFields[15]] & "</dc:rights>}}\n" 'licencia
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:identifier id=\"uuid\" opf:scheme=\"UUID\">" & Contenido[aFields[26]] & "</dc:identifier>}}\n" 'identificador
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:publisher>" & Contenido[aFields[28]] & "</dc:publisher>}}\n" 'editorial
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:identifier id=\"bookid\">" & Contenido[aFields[35]] & "</dc:identifier>}}\n" 'isbn
+    s &= "\\Configure{DocumentLanguage}{" & Contenido[aFields[39]] & "}\n"
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:identifier id=\"bookid\" opf:scheme=\"URI\">" & Contenido[aFields[42]] & "</dc:identifier>}}\n" 'identificador uuid 42
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:description>" & Contenido[aFields[56]] & "</dc:description>}}\n" 'resumen
+
+    If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
+      s &= "\\Configure{OpfMetadata}" & "\n"
+      s &= "{\\HCode{<dc:relation>" & Contenido[aFields[51]] & "</dc:relation>}}\n" 'relation
+    Endif
+
+    If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
+      s &= "\\Configure{OpfMetadata}" & "\n"
+      s &= "{\\HCode{<dc:contributor opf:role=\"edt\">" & Contenido[aFields[52]] & "</dc:contributor>}}\n" 'editor
+    Endif
+
+    If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
+      s &= "\\Configure{OpfMetadata}" & "\n"
+      s &= "{\\HCode{<dc:contributor opf:role=\"trl\">" & Contenido[aFields[53]] & "</dc:contributor>}}\n" 'traductor
+    Endif
+
+    If Not IsNull(Contenido[aFields[54]]) And Len(Contenido[aFields[54]]) > 0 Then
+      s &= "\\Configure{OpfMetadata}" & "\n"
+      s &= "{\\HCode{<dc:language opf:file-as=\"Original Language\">" & Contenido[aFields[54]] & "</dc:language>}}\n" 'idioma original
+    Endif
+
+    If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
+      s &= "\\Configure{OpfMetadata}" & "\n"
+      s &= "{\\HCode{<dc:contributor opf:role=\"ill\">" & Contenido[aFields[55]] & "</dc:contributor>}}\n" 'ilustrador
+    Endif
+
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:format>EPUB</dc:format>}}\n" 'formato
+    s &= "\\EndPreamble" & "\n"
+    s &= "\n"
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el catalogo
+Public Sub ExportToCatalogo(rutaTexto As String)
+
+  Dim s As String
+  Dim sb As String
+  Dim f As ResultField
+  Dim fb As ResultField
+  Dim aFields As New String[]
+  Dim bFields As New String[]
+  Dim w As Integer
+  Dim wb As Integer
+  Dim buscar As String
+  Dim buscarAutor As String
+  Dim outputFile As String
+  Dim id As Integer
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  Dim ids As String[] = Split(Contenido[aFields[0]], " ")
+
+  ' Inicializa la cadena vacía
+  sb = ""
+
+  ' Iterar sobre los IDs y obtener la información correspondiente
+  For Each id In ids
+    ' Establecer el valor de 'id' antes de ejecutar la consulta
+    buscarAutor = "SELECT * FROM autores WHERE id = " & id
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
+
+    bFields.Clear
+    For Each fb In ContenidoAutor.Fields
+      bFields.Add(fb.Name)
+      If Len(fb.Name) > wb Then
+        wb = Len(fb.Name)
+      Endif
+    Next
+
+    ' ' Agregar la información al resultado
+    ' sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  Next
+
+  ' ' Eliminar la coma adicional al final y cerrar la cadena
+  ' sb = Left(sb, Len(sb) - 2)
+
+  s = "" ' Inicializa la cadena definitiva
+
+  While Contenido.Available
+    s &= "\\documentclass{article}" & "\n"
+    s &= "\\usepackage[paperwidth=210mm,paperheight=297mm,top=20mm,bottom=20mm,left=20mm,right=20mm,headsep=0pt,headheight=0pt,footskip=0pt,marginparsep=0pt,marginparwidth=0pt,footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}" & "\n"
+    s &= "\\usepackage[spanish,es-ucroman,es-noshorthands]{babel}" & "\n"
+    s &= "\\usepackage[autostyle=true]{csquotes}" & "\n"
+    s &= "\\tracinglostchars=2" & "\n"
+    s &= "\\usepackage{fontspec}" & "\n"
+    s &= "\\usepackage{microtype}" & "\n"
+    s &= "\\newfontfeature{Microtypography}{protrusion=default;expansion=default}" & "\n"
+    s &= "\\directlua{fonts.protrusions.setups.default.factor=.5}" & "\n"
+    s &= "\\renewcommand{\\normalsize}{\\fontsize{10pt}{13.5pt}\\selectfont}" & "\n"
+    s &= "\\topskip=13.5pt" & "\n"
+    s &= "\\setmainfont{Libertinus Serif}[Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.2]" & "\n"
+    s &= "\\setsansfont{IBMPlexSansCondensed}[Scale=MatchLowercase,Ligatures=TeX,Extension=.otf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-SemiBold,BoldItalicFont=*-SemiBoldItalic]" & "\n"
+    s &= "\\setmonofont{IBMPlexMono.otf}[Scale=0.91,Extension=.otf,UprightFont=*-Regular,ItalicFont = IBMPlexMono-Italic.otf,BoldFont = IBMPlexMono-Bold.otf,BoldItalicFont = IBMPlexMono-BoldItalic.otf]" & "\n"
+    s &= "\\usepackage{graphicx}" & "\n"
+    s &= "\\usepackage{ragged2e}" & "\n"
+    s &= "\\usepackage{xcolor}" & "\n"
+    s &= "\\definecolor{color2}{RGB}{144,12,63}" & "\n"
+    s &= "\\pagecolor{color2!1}" & "\n"
+    s &= "\\usepackage[absolute]{textpos}" & "\n"
+    s &= "\\newcommand\\cabecera[1]{\\sf\\normalsize{#1}}" & "\n"
+    s &= "\\newcommand\\titulo[1]{\\sf\\LARGE{\\textbf{#1}}}" & "\n"
+    s &= "\\newcommand\\subtitulo[1]{\\sf\\Large{#1}}" & "\n"
+    s &= "\\newcommand\\autoria[1]{\\color{color2}\\sf\\Large{#1}}" & "\n"
+    s &= "\\newcommand\\legales[1]{\\sf\\normalsize{#1}}" & "\n"
+    s &= "\\newcommand\\texto[1]{\\normalsize{#1}}" & "\n"
+    s &= "\\newcommand\\biografia[1]{\\sf\\small{#1}}" & "\n"
+    s &= "\\usepackage{url}" & "\n"
+    s &= "\\def\\UrlFont{\\tt\\footnotesize}" & "\n"
+
+    s &= "\\begin{document}" & "\n"
+    s &= "\\thispagestyle{empty}" & "\n"
+
+    s &= "\\begin{textblock*}{45mm}(15mm,20mm)" & "\n"
+    If Not IsNull(Contenido[aFields[49]]) And Len(Contenido[aFields[49]]) > 0 Then
+      s &= "\\includegraphics[width=45mm]{" & Contenido[aFields[49]] & "}" & "\n"
+    Else
+      ' Si no hay registro, usa una imagen predefinida
+      s &= "\\includegraphics[width=45mm]{" & User.Home & "/.gbtexpublisher/falta-tapa.png}" & "\n"
+    Endif
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{45mm}(15mm,100mm)" & "\n"
+    s &= "\\begin{minipage}{45mm}" & "\n"
+    s &= "\\noindent\\legales{ISBN: \\textbf{" & Contenido[aFields[35]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Formato: \\textbf{" & Contenido[aFields[61]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Páginas: \\textbf{" & Contenido[aFields[50]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Idioma: \\textbf{" & Contenido[aFields[39]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Fecha: \\textbf{" & Contenido[aFields[11]] & "}}\\\\" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,20mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\noindent \\cabecera{Colección {\\color{color2}\\textbf{" & Contenido[aFields[51]] & "}}}\\\\" & "\n"
+    s &= "\\noindent \\cabecera{Dirigida por \\textbf{" & Contenido[aFields[52]] & "}}\\\\" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,45mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\raggedright \\titulo{" & Contenido[aFields[84]] & "}\\\\" & "\n"
+    s &= "\\raggedright \\subtitulo{" & Contenido[aFields[9]] & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,100mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\noindent \\texto{" & Contenido[aFields[56]] & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{11cm}(75mm,77mm)" & "\n"
+    s &= "\\begin{minipage}{11cm}" & "\n"
+    s &= "\\noindent \\autoria{" & sb & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    ' s &= "\\begin{textblock*}{164mm}(15mm,220mm)" & "\n"
+    ' s &= "\\fboxsep2mm" & "\n"
+    ' s &= "\\colorbox{black!5}{" & "\n"
+    ' s &= "\\begin{minipage}{164mm}" & "\n"
+    ' s &= "\\noindent \\biografia{" & txtCV.Text & "}" & "\n"
+    ' s &= "\\end{minipage}}" & "\n"
+    ' s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{18cm}(15mm,277mm)" & "\n"
+    s &= "\\begin{minipage}{18cm}" & "\n"
+    s &= "\\centering" & "\n"
+    s &= "\\url{" & Contenido[aFields[42]] & "}" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\end{document}" & "\n"
+    s &= "\n"
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXcatalogo-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el archivo glosario
+Public Sub Exportar2Glosario(rutaTexto As String)
+
+  Dim s As String
+  Dim f As ResultField
+  Dim aFields As New String[]
+  Dim i As Integer
+  Dim w As Integer
+  Dim tab As String
+  Dim buscar As String
+  Dim outputFile As String
+  Dim fecha As String
+  Dim HOY As Date
+
+  ' me conceto a la base de datos
+  ' Conn = Mod_Conn.conectar()
+
+  buscar = "select * from glosarios where archivo like ',%" & File.BaseName(rutaTexto) & ",%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  s = "" ' Inicializa la cadena vacía
+
+  While Contenido.Available
+    If Contenido[aFields[2]] = "sigla" Then
+      ' Estructura para type = sigla
+      s &= "\n\\newglossaryentry" & "{" & Contenido[aFields[1]] & "}{" & "\n" & "type = " & Contenido[aFields[2]] & ",\n"
+    Else If Contenido[aFields[2]] = "glosario" Then
+      ' Estructura para type = glosario
+      s &= "\n\\newglossaryentry" & "{" & Contenido[aFields[1]] & "}{" & "\n"
+    End If
+
+    For i = 4 To aFields.Max
+      tab = ""
+      If Len(aFields[i]) / i < w Then
+        tab = String(w - Len(aFields[i]), " ")
+      Endif
+      If Not IsNull(Contenido[aFields[i]]) And Len(Contenido[aFields[i]]) > 0 Then
+        s &= aFields[i] & tab & " = {" & Contenido[aFields[i]] & "},\n"
+      Endif
+    Next
+
+    s &= "}"
+    Contenido.MoveNext
+  Wend
+
+  ' Realiza los reemplazos
+  s = Replace(s, ",}", "}") '
+  s = Replace(s, "= sigla,", "= \\acronymtype,")
+
+  HOY = Date
+  fecha = (Format(HOY, "dd/mm/yyyy"))
+
+  ' Establece la ruta y el nombre del archivo de salida
+  ' Guarda el contenido acumulado en un solo archivo
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXglo-" & File.BaseName(rutaTexto) & ".tex"
+
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el archivo bibtex
+Public Sub Exportar2BibTeX(rutaTexto As String)
+
+  Dim s As String
+  Dim f As ResultField
+  Dim aFields As New String[]
+  Dim i As Integer
+  Dim w As Integer
+  Dim tab As String
+  Dim buscar As String
+  Dim outputFile As String
+  Dim fecha As String
+  Dim HOY As Date
+
+  'me aseguro de que la búsqueda se encuentre entre comas
+  buscar = "select * from bibtex where keywords like ',%" & File.BaseName(rutaTexto) & ",%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  s = "" ' Inicializa la cadena vacía
+
+  While Contenido.Available
+    s &= "\n@" & Contenido["tipoEntrada"] & "{" & Contenido[aFields[2]] & ",\n"
+    For i = 3 To aFields.Max
+      tab = ""
+      If Len(aFields[i]) / i < w Then
+        tab = String(w - Len(aFields[i]), " ")
+      Endif
+      If Not IsNull(Contenido[aFields[i]]) And Len(Contenido[aFields[i]]) > 0 Then
+        s &= aFields[i] & tab & " = {" & Contenido[aFields[i]] & "},\n"
+      Endif
+    Next
+    s &= "}"
+    Contenido.MoveNext
+  Wend
+
+  ' Realiza los reemplazos
+  s = Replace(s, ",}", "}")
+  s = Replace(s, "dateD", "date ")
+  s = Replace(s, "yearY", "year ")
+
+  HOY = Date
+  fecha = (Format(HOY, "dd/mm/yyyy"))
+
+  ' Establece la ruta y el nombre del archivo de salida
+  ' Guarda el contenido acumulado en un solo archivo
+  s &= "\n\n@Comment{generado con gbTeXpublisher; databaseType:biblatex; fecha de creación: " & fecha & ";}"
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXbib-" & File.BaseName(rutaTexto) & ".bib"
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el archivo metadatos para PDF libro
+Public Sub Exportar2MetadatosPDF(rutaTexto As String)
+
+  Dim s As String
+  Dim f As ResultField
+  ' Dim fb As ResultField
+  Dim aFields As New String[]
+  ' Dim bFields As New String[]
+  Dim w As Integer
+  ' Dim wb As Integer
+  Dim buscar As String
+  ' Dim buscarAutor As String
+  Dim outputFile As String
+  ' Dim id As Integer
+
+  ' me conceto a la base de datos
+  ' Conn = Mod_Conn.conectar()
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  s = "" ' Inicializa la cadena vacía
+
+  While Contenido.Available
+    s &= "\\hypersetup" & "{" & "\n"
+
+    s &= "pdfauthor={" & Contenido[aFields[5]] & "},\n"
+
+    If Not IsNull(Contenido[aFields[2]]) And Len(Contenido[aFields[2]]) > 0 Then
+      s &= "\\XMPLangAlt" & Contenido[aFields[2]] & "\n"
+    Endif
+    If Not IsNull(Contenido[aFields[3]]) And Len(Contenido[aFields[3]]) > 0 Then
+      s &= "\\XMPLangAlt" & Contenido[aFields[3]] & "\n"
+    Endif
+    If Not IsNull(Contenido[aFields[4]]) And Len(Contenido[aFields[4]]) > 0 Then
+      s &= "\\XMPLangAlt" & Contenido[aFields[4]] & "\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[7]]) And Len(Contenido[aFields[7]]) > 0 Then
+      s &= "pdfsubject={" & Contenido[aFields[7]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[9]]) And Len(Contenido[aFields[9]]) > 0 Then
+      s &= "pdfsubtitle={" & Contenido[aFields[9]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[10]]) And Len(Contenido[aFields[10]]) > 0 Then
+      s &= "pdfauthortitle={" & Contenido[aFields[10]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[11]]) And Len(Contenido[aFields[11]]) > 0 Then
+      s &= "pdfdate={" & Contenido[aFields[11]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[12]]) And Len(Contenido[aFields[12]]) > 0 Then
+      s &= "pdfcreationdate={" & Contenido[aFields[12]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[13]]) And Len(Contenido[aFields[13]]) > 0 Then
+      s &= "pdfmoddate={" & Contenido[aFields[13]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
+      s &= "pdfmetadate={" & Contenido[aFields[14]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
+      s &= "pdfcopyright={" & Contenido[aFields[15]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[16]]) And Len(Contenido[aFields[16]]) > 0 Then
+      s &= "pdflicenseurl={" & Contenido[aFields[16]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[17]]) And Len(Contenido[aFields[17]]) > 0 Then
+      s &= "pdfcaptionwriter={" & Contenido[aFields[17]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[18]]) And Len(Contenido[aFields[18]]) > 0 Then
+      s &= "pdfcontactaddress={" & Contenido[aFields[18]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[19]]) And Len(Contenido[aFields[19]]) > 0 Then
+      s &= "pdfcontactcity={" & Contenido[aFields[19]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[20]]) And Len(Contenido[aFields[20]]) > 0 Then
+      s &= "pdfcontactpostcode={" & Contenido[aFields[20]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[21]]) And Len(Contenido[aFields[21]]) > 0 Then
+      s &= "pdfcontactcountry={" & Contenido[aFields[21]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[22]]) And Len(Contenido[aFields[22]]) > 0 Then
+      s &= "pdfcontactregion={" & Contenido[aFields[22]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[23]]) And Len(Contenido[aFields[23]]) > 0 Then
+      s &= "pdfcontactphone={" & Contenido[aFields[23]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[24]]) And Len(Contenido[aFields[24]]) > 0 Then
+      s &= "pdfcontactemail={" & Contenido[aFields[24]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[25]]) And Len(Contenido[aFields[25]]) > 0 Then
+      s &= "pdfcontacturl={" & Contenido[aFields[25]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[26]]) And Len(Contenido[aFields[26]]) > 0 Then
+      s &= "pdfdocumentid={" & Contenido[aFields[26]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[27]]) And Len(Contenido[aFields[27]]) > 0 Then
+      s &= "pdfpublication={" & Contenido[aFields[27]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[28]]) And Len(Contenido[aFields[28]]) > 0 Then
+      s &= "pdfpublisher={" & Contenido[aFields[28]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[29]]) And Len(Contenido[aFields[29]]) > 0 Then
+      s &= "pdftype={" & Contenido[aFields[29]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[30]]) And Len(Contenido[aFields[30]]) > 0 Then
+      s &= "pdfpubtype={" & Contenido[aFields[30]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[31]]) And Len(Contenido[aFields[31]]) > 0 Then
+      s &= "pdfvolumenum={" & Contenido[aFields[31]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[32]]) And Len(Contenido[aFields[32]]) > 0 Then
+      s &= "pdfissuenum={" & Contenido[aFields[32]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[50]]) And Len(Contenido[aFields[50]]) > 0 Then
+      s &= "pdfpagerange={" & Contenido[aFields[50]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[34]]) And Len(Contenido[aFields[34]]) > 0 Then
+      s &= "pdfbookedition={" & Contenido[aFields[34]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
+      s &= "pdfisbn={" & Contenido[aFields[35]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[36]]) And Len(Contenido[aFields[36]]) > 0 Then
+      s &= "pdfissn={" & Contenido[aFields[36]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[37]]) And Len(Contenido[aFields[37]]) > 0 Then
+      s &= "pdfeissn={" & Contenido[aFields[37]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[38]]) And Len(Contenido[aFields[38]]) > 0 Then
+      s &= "pdfpubstatus={" & Contenido[aFields[38]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[39]]) And Len(Contenido[aFields[39]]) > 0 Then
+      s &= "pdflang={" & Contenido[aFields[39]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[40]]) And Len(Contenido[aFields[40]]) > 0 Then
+      s &= "pdfmetalang={" & Contenido[aFields[40]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[41]]) And Len(Contenido[aFields[41]]) > 0 Then
+      s &= "pdfbaseurl={" & Contenido[aFields[41]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
+      s &= "pdfurl={" & Contenido[aFields[42]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[43]]) And Len(Contenido[aFields[43]]) > 0 Then
+      s &= "pdfdoi={" & Contenido[aFields[43]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[44]]) And Len(Contenido[aFields[44]]) > 0 Then
+      s &= "pdfrendition={" & Contenido[aFields[44]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[45]]) And Len(Contenido[aFields[45]]) > 0 Then
+      s &= "pdfidentifier={" & Contenido[aFields[45]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[46]]) And Len(Contenido[aFields[46]]) > 0 Then
+      s &= "pdfx={" & Contenido[aFields[46]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[47]]) And Len(Contenido[aFields[47]]) > 0 Then
+      s &= "pdfversionid={" & Contenido[aFields[47]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
+      s &= "pdfsummary={" & Contenido[aFields[56]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[57]]) And Len(Contenido[aFields[57]]) > 0 Then
+      s &= "pdfkeywords={" & Contenido[aFields[57]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
+      s &= "pdfformato={" & Contenido[aFields[61]] & "},\n"
+    Endif
+
+    ' 'el titulo del libro es campo obligatorio
+    s &= "pdftitle={" & Contenido[aFields[84]] & "},\n"
+    s &= "pdfcreator={gbTeXpublisher}" & ",\n"
+    s &= "pdfproducer={Ecosistema de LaTeX}" & ",\n"
+    s &= "unicode=true" & ",\n"
+    s &= "bookmarks=true" & ",\n"
+    s &= "pdfdisplaydoctitle=true" & ",\n"
+    s &= "pdfnewwindow=true" & "\n"
+    s &= "}" & "\n"
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+' exportamos el archivo metadatos para libro en HTML
+Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
+
+  Dim s As String
+  Dim sb As String
+  Dim f As ResultField
+  Dim fb As ResultField
+  Dim aFields As New String[]
+  Dim bFields As New String[]
+  Dim w As Integer
+  Dim wb As Integer
+  Dim buscar As String
+  Dim buscarAutor As String
+  Dim outputFile As String
+  Dim id As Integer
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = FMain.meConn.Exec(buscar)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
+
+  ' Inicializa la cadena vacía
+  sb = ""
+
+  ' Iterar sobre los IDs y obtener la información correspondiente
+  For Each id In ids
+    ' Establecer el valor de 'id' antes de ejecutar la consulta
+    buscarAutor = "SELECT * FROM autores WHERE id = " & id
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
+
+    bFields.Clear
+    For Each fb In ContenidoAutor.Fields
+      bFields.Add(fb.Name)
+      If Len(fb.Name) > wb Then
+        wb = Len(fb.Name)
+      Endif
+    Next
+
+    ' Agregar la información al resultado
+    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  Next
+
+  ' Eliminar la coma adicional al final y cerrar la cadena
+  sb = Left(sb, Len(sb) - 2)
+
+  s = "" ' Inicializa la cadena vacía
+
+  While Contenido.Available
+    s &= "\\boolfalse{FileSectionNames}" & "\n"
+    s &= "\\renewcommand{\\linkhomename}{Inicio}" & "\n"
+    s &= "\\renewcommand{\\linkpreviousname}{Anterior}" & "\n"
+    s &= "\\renewcommand{\\linknextname}{Siguiente}" & "\n"
+    s &= "\\renewcommand{\\sidetocname}{Sumario}" & "\n"
+    s &= "\\setcounter{tocdepth}{1}" & "\n"
+    s &= "\\setcounter{secnumdepth}{2}" & "\n"
+    s &= "\\setcounter{FileDepth}{1}" & "\n"
+    s &= "\\setcounter{FootnoteDepth}{1}" & "\n"
+    s &= "\\booltrue{CombineHigherDepths}" & "\n"
+    s &= "\\setcounter{SideTOCDepth}{1}" & "\n"
+    s &= "\\CSSFilename{imago_custom.css}" & "\n"
+    s &= "\\HTMLPageBottom{\\LinkPrevious | \\LinkNext}" & "\n"
+    s &= "\\HTMLFirstPageTop{\\includegraphics[width=5cm]{./media/cover.png}}" & "\n"
+    s &= "\\HTMLTitle{" & Contenido[aFields[84]] & "}\n"
+    s &= "\\HTMLLanguage{" & Contenido[aFields[39]] & "}\n"
+    s &= "\\HTMLAuthor{" & sb & "}\n"
+
+    If Not IsNull(Contenido[aFields[87]]) And Len(Contenido[aFields[87]]) > 0 Then
+      s &= "\\HTMLFirstPageBottom{" & Contenido[aFields[87]] & "}\n"'pie de libro web
+    Endif
+
+    ' s &= "<!-- W3C para un libro -->" & "\n"
+    '
+    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
+      s &= "\\HTMLAddMeta{isbn}{" & Contenido[aFields[35]] & "}\n"'isbn
+    Endif
+
+    If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
+      s &= "\\HTMLAddMeta{book-title}{" & Contenido[aFields[84]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[9]]) And Len(Contenido[aFields[9]]) > 0 Then
+      s &= "\\HTMLAddMeta{subtitle}{" & Contenido[aFields[9]] & "}\n"'subtitle
+    Endif
+
+    If Not IsNull(Contenido[aFields[31]]) And Len(Contenido[aFields[31]]) > 0 Then
+      s &= "\\HTMLAddMeta{volume}{" & Contenido[aFields[31]] & "}\n"'volume
+    Endif
+
+    If Not IsNull(Contenido[aFields[34]]) And Len(Contenido[aFields[34]]) > 0 Then
+      s &= "\\HTMLAddMeta{edition}{" & Contenido[aFields[34]] & "}\n"'edition
+    Endif
+
+    If Not IsNull(Contenido[aFields[28]]) And Len(Contenido[aFields[28]]) > 0 Then
+      s &= "\\HTMLAddMeta{publisher-name}{" & Contenido[aFields[28]] & "}\n"'publisher
+    Endif
+
+    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
+      s &= "\\HTMLAddMeta{license}{" & Contenido[aFields[15]] & "}\n"'licencia"
+    Endif
+
+    If Not IsNull(Contenido[aFields[57]]) And Len(Contenido[aFields[57]]) > 0 Then
+      s &= "\\HTMLAddMeta{keywords}{" & Contenido[aFields[57]] & "}\n"'claves
+    Endif
+
+    If Not IsNull(Contenido[aFields[78]]) And Len(Contenido[aFields[78]]) > 0 Then
+      s &= "\\HTMLAddMeta{series}{" & Contenido[aFields[78]] & "}\n"'colección
+    Endif
+
+    If Not IsNull(Contenido[aFields[40]]) And Len(Contenido[aFields[40]]) > 0 Then
+      s &= "\\HTMLAddMeta{language}{" & Contenido[aFields[40]] & "}\n"'idioma
+    Endif
+
+    If Not IsNull(Contenido[aFields[50]]) And Len(Contenido[aFields[50]]) > 0 Then
+      s &= "\\HTMLAddMeta{page-count}{" & Contenido[aFields[50]] & "}\n"'total de páginas
+    Endif
+
+    If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
+      s &= "\\HTMLAddMeta{dimensions}{" & Contenido[aFields[61]] & "}\n"'formato del libro
+    Endif
+
+    If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
+      s &= "\\HTMLAddMeta{illustrator}{" & Contenido[aFields[55]] & "}\n"'ilustrador
+    Endif
+
+    If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
+      s &= "\\HTMLAddMeta{translator}{" & Contenido[aFields[53]] & "}\n"'traductor
+    Endif
+
+    If Not IsNull(Contenido[aFields[78]]) And Len(Contenido[aFields[78]]) > 0 Then
+      s &= "\\HTMLAddMeta{genre}{" & Contenido[aFields[78]] & "}\n"'género del libro
+    Endif
+
+    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
+      s &= "\\HTMLAddMeta{description}{" & Contenido[aFields[56]] & "}\n"'resumen
+    Endif
+
+    If Not IsNull(Contenido[aFields[30]]) And Len(Contenido[aFields[30]]) > 0 Then
+      s &= "\\HTMLAddMeta{format}{" & Contenido[aFields[30]] & "}\n"'tipo de libro
+    Endif
+
+    If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
+      s &= "\\HTMLAddMeta{editor}{" & Contenido[aFields[52]] & "}\n"'direction
+    Endif
+
+    If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
+      s &= "\\HTMLAddMeta{date}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
+    Endif
+
+    If Not IsNull(Contenido[aFields[86]]) And Len(Contenido[aFields[86]]) > 0 Then
+      s &= "\\HTMLAddMeta{annotation}{" & Contenido[aFields[86]] & "}\n"'notas
+    Endif
+
+    If Not IsNull(Contenido[aFields[88]]) And Len(Contenido[aFields[88]]) > 0 Then
+      s &= "\\HTMLAddMeta{audience}{" & Contenido[aFields[88]] & "}\n"'audiencia
+    Endif
+
+    If Not IsNull(Contenido[aFields[89]]) And Len(Contenido[aFields[89]]) > 0 Then
+      s &= "\\HTMLAddMeta{binding}{" & Contenido[aFields[89]] & "}\n"'encuadernación
+    Endif
+
+    ' <!-- comienza Dublin Core -->
+    s &= "\\HTMLAddMeta{DC.Creator.PersonalName}{" & sb & "}\n"'creator/author
+
+    If Not IsNull(Contenido[aFields[39]]) And Len(Contenido[aFields[39]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.language}{" & Contenido[aFields[39]] & "}\n"'idioma
+    Endif
+
+    If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.Date.created}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
+    Endif
+
+    If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.title}{" & Contenido[aFields[84]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[58]]) And Len(Contenido[aFields[58]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.Title.Alternative}{" & Contenido[aFields[58]] & "}\n"'title alternative"
+    Endif
+
+    If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.isPartOf}{" & Contenido[aFields[51]] & "}\n"'colección
+    Endif
+
+    If Not IsNull(Contenido[aFields[69]]) And Len(Contenido[aFields[69]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.source}{" & Contenido[aFields[69]] & "}\n"'origen / fuente
+    Endif
+
+    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.source.ISBN}{" & Contenido[aFields[35]] & "}\n"'isbn
+    Endif
+
+    If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.source.URI}{" & Contenido[aFields[42]] & "}\n"'url del documento
+    Endif
+
+    If Not IsNull(Contenido[aFields[3]]) And Len(Contenido[aFields[3]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.source.Volume}{" & Contenido[aFields[31]] & "}\n"'volumen
+    Endif
+
+    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.rights}{" & Contenido[aFields[15]] & "}\n"'licencia"
+    Endif
+
+    If Not IsNull(Contenido[aFields[28]]) And Len(Contenido[aFields[28]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.publisher}{" & Contenido[aFields[28]] & "}\n"'publisher
+    Endif
+
+    If Not IsNull(Contenido[aFields[57]]) And Len(Contenido[aFields[57]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.subject}{" & Contenido[aFields[57]] & "}\n"'claves
+    Endif
+
+    If Not IsNull(Contenido[aFields[88]]) And Len(Contenido[aFields[88]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.audience}{" & Contenido[aFields[88]] & "}\n"'audiencia
+    Endif
+
+    If Not IsNull(Contenido[aFields[40]]) And Len(Contenido[aFields[40]]) > 0 Then
+      s &= "\\HTMLAddMeta{DC.Language}{" & Contenido[aFields[40]] & "}\n"'audiencia
+    Endif
+
+    ' s &= "<!-- METS -->" & "\n"
+    s &= "\\HTMLAddMeta{METS.creator}{" & sb & "}\n"'creator/author
+
+    If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
+      s &= "\\HTMLAddMeta{METS.documentType}{" & Contenido[aFields[14]] & "}\n"'tipo de docuumento
+    Endif
+
+    If Not IsNull(Contenido[aFields[14]]) And Len(Contenido[aFields[14]]) > 0 Then
+      s &= "\\HTMLAddMeta{METS.creationDate}{" & Contenido[aFields[14]] & "}\n"'fecha de publicación
+    Endif
+
+    If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
+      s &= "\\HTMLAddMeta{METS.label}{" & Contenido[aFields[84]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[29]]) And Len(Contenido[aFields[29]]) > 0 Then
+      s &= "\\HTMLAddMeta{METS.documentType}{" & Contenido[aFields[29]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
+      s &= "\\HTMLAddMeta{METS.objectIdentifierType}{URL}\n"
+      s &= "\\HTMLAddMeta{METS.objectIdentifier}{" & Contenido[aFields[42]] & "}\n"'url del documento
+    Endif
+    ' hacer lo mismo en revistas para el DOI
+
+    ' s &= "<!-- MODS -->" & "\n"
+    s &= "\\HTMLAddMeta{MODS.name.namePart}{" & sb & "}\n"'creator/author
+
+    If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
+      s &= "\\HTMLAddMeta{MODS.titleInfo.title}{" & Contenido[aFields[84]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[39]]) And Len(Contenido[aFields[39]]) > 0 Then
+      s &= "\\HTMLAddMeta{MODS.language.languageTerm}{" & Contenido[aFields[39]] & "}\n"'idioma
+    Endif
+
+    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
+      s &= "\\HTMLAddMeta{MODS.identifier}{ISBN " & Contenido[aFields[35]] & "}\n"'isbn
+    Endif
+
+    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
+      s &= "\\HTMLAddMeta{MODS.abstract}{" & Contenido[aFields[56]] & "}\n"'resumen
+    Endif
+
+    If Not IsNull(Contenido[aFields[50]]) And Len(Contenido[aFields[50]]) > 0 Then
+      s &= "\\HTMLAddMeta{MODS.physicalDescription.extent}{" & Contenido[aFields[50]] & " páginas}\n"'cantidad de páginas
+    Endif
+
+    If Not IsNull(Contenido[aFields[29]]) And Len(Contenido[aFields[29]]) > 0 Then
+      s &= "\\HTMLAddMeta{MODS.typeOfResource}{" & Contenido[aFields[29]] & "}\n"'tipo de recurso
+    Endif
+
+    If Not IsNull(Contenido[aFields[78]]) And Len(Contenido[aFields[78]]) > 0 Then
+      s &= "\\HTMLAddMeta{MODS.genre}{" & Contenido[aFields[78]] & "}\n"'genero
+    Endif
+
+    'todavía no tengo location en la bbdd
+    ' If Not IsNull(Contenido[aFields[78]]) And Len(Contenido[aFields[78]]) > 0 Then
+    '   s &= "\\HTMLAddMeta{MODS.location}{" & Contenido[aFields[78]] & "}\n"'location (del publisher)
+    ' Endif
+
+    ' s &= "<!-- PRISM -->" & "\n" es para revistas
+    '
+    ' s &= "<!-- Twitter Cards para un libro -->" & "\n"
+    s &= "\\HTMLAddMeta{twitter:author}{" & sb & "}\n"'creator/author
+
+    If Not IsNull(Contenido[aFields[84]]) And Len(Contenido[aFields[84]]) > 0 Then
+      s &= "\\HTMLAddMeta{twitter:title}{" & Contenido[aFields[84]] & "}\n"'title
+    Endif
+
+    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
+      s &= "\\HTMLAddMeta{twitter:description}{" & Contenido[aFields[56]] & "}\n"'resumen
+    Endif
+
+    If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
+      s &= "\\HTMLAddMeta{twitter:url}{" & Contenido[aFields[42]] & "}\n"'url del libro
+    Endif
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End' exportamos el archivo metadatos para libro en HTML
+
+'exportamos el disclaimer
+Public Sub ExportToDisclaimer(rutaTexto As String)
+
+  Dim s As String
+  Dim f As ResultField
+  Dim fb As ResultField
+  Dim aFields As New String[]
+  Dim bFields As New String[]
+  Dim w As Integer
+  Dim wb As Integer
+  Dim buscar As String
+  Dim buscarMeta As String
+  Dim outputFile As String
+
+  ' Exportamos los registros seleccionados
+  buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  Contenido = FMain.meConn.Exec(buscar)
+  buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
+
+  aFields.Clear
+  For Each f In Contenido.Fields
+    aFields.Add(f.Name)
+    If Len(f.Name) > w Then
+      w = Len(f.Name)
+    Endif
+  Next
+
+  bFields.Clear
+  For Each fb In ContenidoMeta.Fields
+    bFields.Add(fb.Name)
+    If Len(fb.Name) > wb Then
+      wb = Len(fb.Name)
+    Endif
+  Next
+
+  While Contenido.Available
+    s &= "\\documentclass[11pt]{article}" & "\n"
+    s &= "\\usepackage[paperwidth=210mm,paperheight=297mm,top=20mm,bottom=20mm,left=20mm,marginparsep=6mm,marginparwidth=44mm,textwidth=13cm,headsep=0pt,headheight=0pt,footskip=0pt,footnotesep=13.5pt plus 0.1pt minus 0.1pt]{geometry}" & "\n"
+    s &= "\\usepackage[spanish,es-ucroman,es-noshorthands]{babel}" & "\n"
+    s &= "\\usepackage[autostyle=true]{csquotes}" & "\n"
+    s &= "\\usepackage{paralist}" & "\n"
+    s &= "\\usepackage{enumitem}" & "\n"
+    s &= "\\setlist{nosep,topsep=4pt}" & "\n"
+    s &= "\\usepackage{easyReview}" & "\n"
+    s &= "\\usepackage{graphicx}" & "\n"
+    s &= "\\tracinglostchars=2" & "\n"
+    s &= "\\usepackage{fontspec}" & "\n"
+    s &= "\\usepackage{microtype}" & "\n"
+    s &= "\\newfontfeature{Microtypography}{protrusion=default;expansion=default}" & "\n"
+    s &= "\\directlua{fonts.protrusions.setups.default.factor=.5}" & "\n"
+    s &= "\\renewcommand{\\normalsize}{\\fontsize{10pt}{13.5pt}\\selectfont}" & "\n"
+    s &= "\\topskip=13.5pt" & "\n"
+    s &= "\\setmainfont{Libertinus Serif}[Numbers={OldStyle,Proportional},Ligatures=TeX,Scale=1.2]" & "\n"
+    s &= "\\setsansfont{IBMPlexSansCondensed}[Scale=MatchLowercase,Ligatures=TeX,Extension=.otf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-SemiBold,BoldItalicFont=*-SemiBoldItalic]" & "\n"
+    s &= "\\setmonofont{IBMPlexMono.otf}[Scale=0.91,Extension=.otf,UprightFont=*-Regular,ItalicFont = IBMPlexMono-Italic.otf,BoldFont = IBMPlexMono-Bold.otf,BoldItalicFont = IBMPlexMono-BoldItalic.otf]" & "\n"
+    s &= "\\usepackage[absolute]{textpos}" & "\n"
+    s &= "\\newcommand\\titulo[1]{\\sf\\Large{\\textbf{#1}}}" & "\n"
+    s &= "\\newcommand\\subtitulo[1]{\\sf\\large{#1}}" & "\n"
+    s &= "\\newcommand\\texto[1]{\\rm\\normalsize{#1}}" & "\n"
+    s &= "\\newcommand\\foot[1]{\\sf\\footnotesize{#1}}" & "\n"
+    s &= "\\usepackage{url}" & "\n"
+    s &= "\\def\\UrlFont{\\tt\\footnotesize}" & "\n"
+
+    s &= "\\begin{document}" & "\n"
+    s &= "\\thispagestyle{empty}" & "\n"
+
+    s &= "\\noindent \\subtitulo{\\textbf{Título:} \\emph{" & ContenidoMeta[bFields[84]] & "}}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Autor/a/es:} " & ContenidoMeta[bFields[5]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Asunto:} " & ContenidoMeta[bFields[7]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Subjet:} " & ContenidoMeta[bFields[95]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Assunto:} " & ContenidoMeta[bFields[96]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Palabras clave:} " & ContenidoMeta[bFields[57]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Keywords:} " & ContenidoMeta[bFields[93]] & "}\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{\\textbf{Palavras Chave:} " & ContenidoMeta[bFields[94]] & "}\\\\" & gb.NewLine
+    s &= "\\\\" & gb.NewLine
+    s &= "\\noindent \\titulo{Comentarios e indicaciones}\\\\"
+    s &= "\\\\" & gb.NewLine
+    s &= "\\noindent \\subtitulo{Este libro requiere las siguientes revisiones antes de su publicación final:}\\\\"
+    s &= "\\\\" & gb.NewLine
+    s &= "\\texto{" & Contenido[aFields[5]] & "}\\\\" & gb.NewLine
+
+    s &= "\\begin{textblock*}{44mm}(152mm,20mm)" & "\n"
+    If Not IsNull(ContenidoMeta[bFields[49]]) And Len(ContenidoMeta[bFields[49]]) > 0 Then
+      s &= "\\includegraphics[width=44mm]{" & ContenidoMeta[bFields[49]] & "}" & "\n"
+    Else
+      ' Si no hay registro, usa una imagen predefinida
+      s &= "\\includegraphics[width=44mm]{" & User.Home & "/.gbtexpublisher/falta-tapa.png}" & "\n"
+    Endif
+    s &= "\\end{textblock*}" & "\n"
+
+    s &= "\\begin{textblock*}{44mm}(152mm,90mm)" & "\n"
+    s &= "\\begin{minipage}{44mm}" & "\n"
+    s &= "\\noindent\\foot{ISBN: \\textbf{" & ContenidoMeta[bFields[35]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Formato: \\textbf{" & ContenidoMeta[bFields[61]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Páginas: \\textbf{" & ContenidoMeta[bFields[50]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Idioma: \\textbf{" & ContenidoMeta[bFields[39]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\foot{Fecha: \\textbf{" & ContenidoMeta[bFields[11]] & "}}\\\\" & "\n"
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    'datos del contacto
+    s &= "\\begin{textblock*}{44mm}(152mm,150mm)" & "\n"
+    s &= "\\begin{minipage}{44mm}" & "\n"
+    s &= "\\noindent \\foot{Para consultas}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{contacto}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{\\textbf{" & Contenido[aFields[2]] & "}}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{correo}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{\\textbf{" & Contenido[aFields[3]] & "}}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{teléfono}\\\\" & gb.NewLine
+    s &= "\\noindent \\foot{\\textbf{" & Contenido[aFields[4]] & "}}\\\\" & gb.NewLine
+    s &= "\\end{minipage}" & "\n"
+    s &= "\\end{textblock*}" & "\n"
+
+    'pie de página
+    s &= "\\vfill" & gb.NewLine
+    s &= "\\noindent\\foot{\\textbf{Disclaimer:} Esta página no forma parte del contenido oficial del libro y debe ser eliminada antes de la publicación final. La misma se generó para proporcionar comentarios y observaciones sobre el contenido del libro. Los elementos mencionados aquí son para fines internos y no deben considerarse parte del material final del libro. Asegúrese de revisar y actualizar el contenido según las observaciones aquí indicadas antes de la publicación definitiva.}" & gb.NewLine
+    s &= "\\end{document}" & gb.NewLine
+    s &= "\n"
+
+    Contenido.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXdisclaimer-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el archivo de separata
+Public Sub ExportToSeparata(rutaTexto As String)
+
+  ' verificamos si existe el directorio docs
+  If Not Exist(File.Dir(rutaTexto) & "/docs") Then
+    Mkdir File.Dir(rutaTexto) & "/docs"
+  End If
+
+  Dim s As String
+  Dim outputFile As String
+
+  ' %acá comienza el script
+  s &= "\\newcounter{PrimPag}" & gb.NewLine
+  s &= "\\setcounter{PrimPag}{1}" & gb.NewLine
+  s &= "\\setcounter{PrimPag}{\\theCurrentPage+1}" & gb.NewLine
+  s &= "\\newwrite\\script" & gb.NewLine
+  s &= "\\immediate\\openout\\script=separatas.sh" & gb.NewLine
+  s &= "\\immediate\\write\\script{\\string#!/bin/bash}" & gb.NewLine
+  s &= "\\newcommand{\\separata}[1]{"
+  s &= "\\immediate\\write\\script{pdftk ./pdf/\\jobname.pdf cat \\thePrimPag-\\theCurrentPage\\space output ./docs/#1-\\jobname.pdf}"
+  s &= "}"
+  s &= "\n"
+  ' %acá termina el script
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXseparata-" & File.BaseName(rutaTexto) & ".tex"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+'exportamos el disclaimer
+Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
+
+  Dim s As String
+  Dim fb As ResultField
+  Dim bFields As New String[]
+  Dim wb As Integer
+  Dim buscarMeta As String
+  Dim outputFile As String
+  Dim fechaPDF As String
+
+  fechaPDF = (Format(Now, "yyyymmddhhnnss"))
+
+  ' Exportamos los registros seleccionados
+  buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
+
+  bFields.Clear
+  For Each fb In ContenidoMeta.Fields
+    bFields.Add(fb.Name)
+    If Len(fb.Name) > wb Then
+      wb = Len(fb.Name)
+    Endif
+  Next
+
+  While ContenidoMeta.Available
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Title" & gb.NewLine
+    s &= "InfoValue: " & ContenidoMeta[bFields[84]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Author" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[5]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Subject" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[7]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Keywords" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[57]] & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Creator" & gb.NewLine
+    s &= "InfoValue:gbTeXpublisher y el ecosistema de LaTeX" & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Producer" & gb.NewLine
+    s &= "InfoValue:" & ContenidoMeta[bFields[17]] & gb.NewLine
+
+    ' refiere a la fecha de creación de este pdf compaginado
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:CreationDate" & gb.NewLine
+    s &= "InfoValue:D:" & FechaPDF & gb.NewLine
+
+    s &= "InfoBegin" & gb.NewLine
+    s &= "InfoKey:Trapped" & gb.NewLine
+    s &= "InfoValue:Unknown" & gb.NewLine
+
+    ContenidoMeta.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXpdfTKmeta-" & File.BaseName(rutaTexto) & ".txt"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+Public Sub ExportToIndexHTML(rutaTexto As String)
+
+  Dim s As String
+  Dim fa As ResultField
+  Dim faa As ResultField
+  Dim fa3 As ResultField
+  Dim fb As ResultField
+  Dim fg As ResultField
+  Dim fx As ResultField
+  Dim fc As ResultField
+  Dim aFields As New String[]
+  Dim aaFields As New String[]
+  Dim a3Fields As New String[]
+  Dim bFields As New String[]
+  Dim gFields As New String[]
+  Dim xFields As New String[]
+  Dim cFields As New String[]
+  Dim wa As Integer
+  Dim waa As Integer
+  Dim wa3 As Integer
+  Dim wb As Integer
+  Dim wg As Integer
+  Dim wx As Integer
+  Dim wc As Integer
+  Dim buscarMeta As String
+  Dim buscarGHP As String
+  Dim buscarSeparatas As String
+  Dim buscarAutores As String
+  Dim buscarColaboradores As String
+  Dim outputFile As String
+  Dim fechaPDF As String
+
+  fechaPDF = (Format(Now, "yyyymmddhhnnss"))
+
+  ' me conceto a la base de datos
+  ' Conn = Mod_Conn.conectar()
+
+  ' Exportamos los registros seleccionados
+  buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
+  ' Exportamos los registros seleccionados
+  buscarGHP = "select * from githubpages where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoGHP = FMain.meConn.Exec(buscarGHP)
+  ' Exportamos los registros seleccionados
+  buscarSeparatas = "select * from separatas where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoSeparatas = FMain.meConn.Exec(buscarSeparatas)
+  ' Exportamos los registros seleccionados
+  buscarAutores = "select * from autoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoAutores = FMain.meConn.Exec(buscarAutores)
+  ContenidoAutoresA = FMain.meConn.Exec(buscarAutores)
+  ContenidoAutores3 = FMain.meConn.Exec(buscarAutores)
+  ' Exportamos los registros seleccionados
+  buscarColaboradores = "select * from colaboradoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoColaboradores = FMain.meConn.Exec(buscarColaboradores)
+
+  bFields.Clear
+  For Each fb In ContenidoMeta.Fields' tabla metadatos
+    bFields.Add(fb.Name)
+    If Len(fb.Name) > wb Then
+      wb = Len(fb.Name)
+    Endif
+  Next
+
+  gFields.Clear
+  For Each fg In ContenidoGHP.Fields' tabla githubpages
+    gFields.Add(fg.Name)
+    If Len(fg.Name) > wg Then
+      wg = Len(fg.Name)
+    Endif
+  Next
+
+  xFields.Clear
+  For Each fx In ContenidoSeparatas.Fields' tabla separatas
+    xFields.Add(fx.Name)
+    If Len(fx.Name) > wb Then
+      wx = Len(fx.Name)
+    Endif
+  Next
+
+  aFields.Clear
+  For Each fa In ContenidoAutores.Fields' autoresghp
+    aFields.Add(fa.Name)
+    If Len(fa.Name) > wa Then
+      wa = Len(fa.Name)
+    Endif
+  Next
+
+  cFields.Clear
+  For Each fc In ContenidoColaboradores.Fields' tabla colaboradores
+    cFields.Add(fc.Name)
+    If Len(fc.Name) > wc Then
+      wc = Len(fc.Name)
+    Endif
+  Next
+
+  aaFields.Clear
+  For Each faa In ContenidoAutores.Fields' autoresghp
+    aaFields.Add(faa.Name)
+    If Len(faa.Name) > waa Then
+      waa = Len(faa.Name)
+    Endif
+  Next
+
+  a3Fields.Clear
+  For Each fa3 In ContenidoAutores3.Fields' autoresghp
+    a3Fields.Add(fa3.Name)
+    If Len(fa3.Name) > wa3 Then
+      wa3 = Len(fa3.Name)
+    Endif
+  Next
+
+  While ContenidoMeta.Available
+    s &= "<!DOCTYPE html>" & gb.NewLine
+    s &= "<html lang=\"es\">" & gb.NewLine
+    '
+    s &= "<head>" & gb.NewLine
+    s &= "\t <meta charset=\"utf-8\">" & gb.NewLine
+    s &= "\t <meta name=\"generator\" content=\"gbTeXpublisher y el ecosistema de LaTeX\">" & gb.NewLine
+    s &= "\t <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" & gb.NewLine
+    s &= "\t <meta name=\"robots\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"googlebot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"bingbot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"exabot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"sogou\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"baiduspider\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"applebot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"pinterest\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"twitterbot\" content=\"index, follow\">" & gb.NewLine
+    s &= "\t <meta name=\"rating\" content=\"general\">" & gb.NewLine
+    s &= "\t <meta name=\"revisit-after\" content=\"7 days\">" & gb.NewLine
+    s &= "\t <meta name=\"github:creator\" content=\"albertomoyano\">" & gb.NewLine
+    s &= "\t <meta name=\"github:language\" content=\"LaTeX\">" & gb.NewLine
+    s &= "\t <meta name=\"author\" content=\"Alberto Moyano\">" & gb.NewLine
+    ' va un loop que carga las palabras clave de a una
+    s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine' español
+    s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[93]] & "\">" & gb.NewLine' ingles
+    s &= "\t <meta name=\"keywords\" content=\"" & ContenidoMeta[bFields[94]] & "\">" & gb.NewLine' portugues
+    s &= "\t <meta name=\"subject\" content=\"" & ContenidoMeta[bFields[7]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"subject\" content=\"" & ContenidoMeta[bFields[95]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"subject\" content=\"" & ContenidoMeta[bFields[96]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"abstract\" content=\"" & ContenidoMeta[bFields[48]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"abstract\" content=\"" & ContenidoMeta[bFields[91]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"abstract\" content=\"" & ContenidoMeta[bFields[92]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"description\" content=\"" & ContenidoMeta[bFields[91]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"description\" content=\"" & ContenidoMeta[bFields[92]] & "\">" & gb.NewLine
+    s &= "\t <title>" & ContenidoMeta[bFields[28]] & " | " & ContenidoMeta[bFields[84]] & "</title>" & gb.NewLine
+    '
+    s &= "\t <!-- Google Fonts -->" & gb.NewLine
+    s &= "\t <link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap\" rel=\"stylesheet\">" & gb.NewLine
+    '
+    s &= "<!-- Google Scholar, CrosRef y PubMed -->" & gb.NewLine
+    s &= "\t <meta name=\"citation_title\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_language\" content=\"es\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_publication_date\" content=\"" & ContenidoGHP[gFields[9]] & "\"/>" & gb.NewLine
+    ' va un loop con todos los autores
+    While ContenidoAutores3.Available
+      s &= "\t <meta name=\"citation_author\" content=\"" & ContenidoAutores3[a3Fields[2]] & "\"/>" & gb.NewLine
+      ContenidoAutores3.MoveNext ' Avanzar al siguiente registro
+    Wend
+    ' van todos los resumenes en los 3 idiomas
+    s &= "\t <meta name=\"citation_abstract\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_abstract\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_abstract\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[92]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_doi\" content=\"" & ContenidoMeta[bFields[43]] & "\"/>" & gb.NewLine
+    ' va un loop con todas las keywords en los 3 idiomas
+    s &= "\t <meta name=\"citation_keywords\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[57]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_keywords\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[93]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_keywords\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[94]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_fulltext_html_url\" content=\"" & ContenidoGHP[gFields[6]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_pdf_url\" content=\"" & ContenidoGHP[gFields[7]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_publisher\" content=\"" & ContenidoMeta[bFields[28]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_volume\" content=\"" & ContenidoMeta[bFields[31]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"citation_issue\" content=\"" & ContenidoMeta[bFields[32]] & "\"/>" & gb.NewLine
+    '
+    s &= "<!-- Dublin Core (DC)  -->" & gb.NewLine
+    s &= "<link rel=\"schema.dc\" href=\"http://purl.org/dc/elements/1.1/\">" & gb.NewLine
+    s &= "<!-- Autor principal  -->" & gb.NewLine
+
+    ' va un loop si hay más autores
+    While ContenidoAutores.Available
+      ' Verificar si aFields[3] es Null o está vacío
+      If IsNull(ContenidoAutores[aFields[3]]) Or ContenidoAutores[aFields[3]] = "" Then
+        ' Si el campo está vacío, solo mostrar el valor de aFields[2]
+        s &= "\t <meta name=\"dc.creator\" content=\"" & ContenidoAutores[aFields[2]] & "\">" & gb.NewLine
+      Else
+        s &= "\t <meta name=\"dc.creator\" content=\"" & ContenidoAutores[aFields[2]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.creator.orcid\" content=\"" & ContenidoAutores[aFields[3]] & "\">" & gb.NewLine
+      Endif
+      ContenidoAutores.MoveNext ' Avanzar al siguiente registro
+    Wend
+
+    ' va un loop si hay más colaboradores
+    While ContenidoColaboradores.Available
+      ' Verificar si aFields[3] es Null o está vacío
+      If IsNull(ContenidoColaboradores[cFields[3]]) Or ContenidoColaboradores[cFields[3]] = "" Then
+        ' Si el campo está vacío, solo mostrar el valor de aFields[2]
+        s &= "\t <meta name=\"dc.contributor\" content=\"" & ContenidoColaboradores[cFields[2]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.contributor.role\" content=\"" & ContenidoColaboradores[cFields[4]] & "\">" & gb.NewLine
+      Else
+        s &= "\t <meta name=\"dc.contributor\" content=\"" & ContenidoColaboradores[cFields[2]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.contributor.orcid\" content=\"" & ContenidoColaboradores[cFields[3]] & "\">" & gb.NewLine
+        s &= "\t <meta name=\"dc.contributor.role\" content=\"" & ContenidoColaboradores[cFields[4]] & "\">" & gb.NewLine
+      Endif
+      ContenidoColaboradores.MoveNext ' Avanzar al siguiente registro
+    Wend
+
+    s &= "\t <meta name=\"dc.date.created\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[2]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.date.datesubmitted\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[9]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.date.modified\" scheme=\"ISO8601\" content=\"" & ContenidoGHP[gFields[3]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.source\" content=\"" & ContenidoMeta[bFields[28]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.source.uri\" content=\"" & ContenidoMeta[bFields[41]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.type\" content=\"Text\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.format\" content=\"application/pdf\">" & gb.NewLine
+
+    s &= "\t <meta name=\"dc.title\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.title.alternative\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    s &= "\t <meta name=\"dc.title.alternative\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[84]] & "\"/>" & gb.NewLine
+    ' va todas las keywords en los 3 idiomas
+    s &= "\t <meta name=\"dc.subject\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[93]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[94]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[57]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[93]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.subject.keywords\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[94]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[92]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"es\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"en\" content=\"" & ContenidoMeta[bFields[91]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description.abstract\" xml:lang=\"pt\" content=\"" & ContenidoMeta[bFields[92]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.description.tableofcontents\" xml:lang=\"es\" content=\"" & ContenidoGHP[gFields[12]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.identifier\" content=\"ISBN\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.identifier.isbn\" content=\"" & ContenidoMeta[bFields[35]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.rights\" content=\"" & ContenidoMeta[bFields[15]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"dc.rights.uri\" content=\"" & ContenidoMeta[bFields[16]] & "\">" & gb.NewLine
+    '
+    s &= "<!-- Open Graph para Redes Sociales  -->" & gb.NewLine
+    s &= "\t <meta property=\"og:title\" content=\"" & ContenidoMeta[bFields[84]] & "\">" & gb.NewLine
+    s &= "\t <meta property=\"og:description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
+    s &= "\t <meta property=\"og:url\" content=\"" & ContenidoGHP[gFields[7]] & "\">" & gb.NewLine
+    s &= "\t <meta property=\"og:type\" content=\"book\">" & gb.NewLine
+    s &= "\t <meta property=\"og:site_name\" content=\"" & ContenidoMeta[bFields[28]] & "\">" & gb.NewLine
+    '
+    s &= "<!-- Twitter Card  -->" & gb.NewLine
+    s &= "\t <meta name=\"twitter:title\" content=\"" & ContenidoMeta[bFields[84]] & "\">" & gb.NewLine
+    s &= "\t <meta name=\"twitter:description\" content=\"" & ContenidoMeta[bFields[48]] & "\">" & gb.NewLine
+    '
+    s &= "<!-- Favicon -->" & gb.NewLine
+    s &= "\t <link rel=\"icon\" href=\"favicon.jpg\">" & gb.NewLine
+    '
+    s &= "<!-- Estilos -->" & gb.NewLine
+    s &= "\t <link rel=\"stylesheet\" href=\"imago1.css\">" & gb.NewLine
+    s &= "</head>" & gb.NewLine 'termina al head
+    '
+    s &= "<body>" & gb.NewLine
+    s &= "\t <header><img src=\"" & ContenidoGHP[gFields[11]] & "\" alt=\"Logo de Imago Mundi\"></header>" & gb.NewLine
+    '
+    s &= "<!-- Contenedor principal -->" & gb.NewLine
+    s &= "<div class=\"container\">" & gb.NewLine
+    s &= "\t <div class=\"main-content\">" & gb.NewLine
+    '
+    s &= "<!-- Aside -->" & gb.NewLine
+    s &= "\t <aside>" & gb.NewLine
+    s &= "\t\t <img src=\"" & ContenidoGHP[gFields[8]] & "\" alt=\"Imagen de tapa\">" & gb.NewLine
+    s &= "\t\t <h3>Licencia</h3>" & gb.NewLine
+    s &= "\t\t <a href=\"" & ContenidoMeta[bFields[16]] & "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"url-link\">" & ContenidoMeta[bFields[15]] & "</a>" & gb.NewLine
+
+    s &= "\t\t <h3>Identificadores</h3>" & gb.NewLine
+    If Not IsNull(ContenidoMeta[bFields[43]]) And Len(ContenidoMeta[bFields[43]]) > 0 Then
+      s &= "\t\t <p>DOI: " & ContenidoMeta[bFields[43]] & "</p>" & gb.NewLine
+    End If
+    If Not IsNull(ContenidoMeta[bFields[35]]) And Len(ContenidoMeta[bFields[35]]) > 0 Then
+      s &= "\t\t <p>ISBN: " & ContenidoMeta[bFields[35]] & "</p>" & gb.NewLine
+    Else
+      Message.Warning("El campo ISBN está vacío o no definido, revise los metadatos.", "Aceptar")
+    End If
+    If Not IsNull(ContenidoMeta[bFields[90]]) And Len(ContenidoMeta[bFields[90]]) > 0 Then
+      s &= "\t\t <p>eISBN: " & ContenidoMeta[bFields[90]] & "</p>" & gb.NewLine
+    End If
+
+    s &= "\t\t <h3>Fecha de publicación</h3>" & gb.NewLine
+    s &= "\t\t <p>" & ContenidoGHP[gFields[9]] & "</p>" & gb.NewLine
+    s &= "\t </aside>" & gb.NewLine' termina columna de la izquierda
+    '
+    s &= "\t <section>" & gb.NewLine
+    s &= "\t\t <div class=\"button-container\">" & gb.NewLine
+    ' uso 3 condionales para saber si los botones se muestran
+    If Not IsNull(ContenidoGHP[gFields[7]]) And Len(ContenidoGHP[gFields[7]]) > 0 Then
+      s &= "\t\t <a href=\"" & ContenidoGHP[gFields[7]] & "\" target=\"_blank\">PDF completo</a>" & gb.NewLine
+    End If
+    If Not IsNull(ContenidoGHP[gFields[5]]) And Len(ContenidoGHP[gFields[5]]) > 0 Then
+      s &= "\t\t <a href=\"" & ContenidoGHP[gFields[5]] & "\" target=\"_blank\">Descargar ePub</a>" & gb.NewLine
+    End If
+    If Not IsNull(ContenidoGHP[gFields[6]]) And Len(ContenidoGHP[gFields[6]]) > 0 Then
+      s &= "\t\t <a href=\"" & ContenidoGHP[gFields[6]] & "\" target=\"_blank\">Leer en línea</a>" & gb.NewLine
+    End If
+    s &= "\t\t </div>" & gb.NewLine
+    s &= "<h3 style=\"font-weight: normal\">Autoría</h3>" & gb.NewLine
+    '
+    While ContenidoAutoresA.Available
+      ' Verificar si aFields[3] es Null o está vacío
+      If IsNull(ContenidoAutoresA[aaFields[3]]) Or ContenidoAutoresA[aaFields[3]] = "" Then
+        ' Si el campo está vacío, solo mostrar el valor de aFields[2]
+        s &= "<span><strong>" & ContenidoAutoresA[aaFields[2]] & "&nbsp;&nbsp;&nbsp;&nbsp;</strong></span>" & gb.NewLine
+      Else
+        ' Si no está vacío, incluir el enlace y el icono
+        s &= "<span><strong>" & ContenidoAutoresA[aaFields[2]] & "<a href=\"" & ContenidoAutoresA[aaFields[3]] & "\" target=\"_blank\"><img src=\"orcid.png\" alt=\"icono orcid\"></a></strong>&nbsp;</span>" & gb.NewLine
+      Endif
+      ContenidoAutoresA.MoveNext ' Avanzar al siguiente registro
+    Wend
+    '
+    s &= "<h2>" & ContenidoMeta[bFields[84]] & "</h2>" & gb.NewLine
+    s &= "<h3>" & ContenidoMeta[bFields[9]] & "</h3>" & gb.NewLine
+
+    s &= "\t\t <p class=\"resumen\">" & ContenidoMeta[bFields[48]] & "</p>" & gb.NewLine
+    s &= "\t\t <p class=\"autor\">" & ContenidoGHP[gFields[4]] & "</p>" & gb.NewLine
+
+    s &= "<!-- Tabla al final de la sección -->" & gb.NewLine
+    s &= "<table class=\"info-table\">" & gb.NewLine
+    s &= "<thead>" & gb.NewLine
+    s &= "<tr>" & gb.NewLine
+    s &= "<th>Sumario</th>" & gb.NewLine
+    s &= "<th>Páginas</th>" & gb.NewLine
+    s &= "<th>PDF</th>" & gb.NewLine
+    s &= "</tr>" & gb.NewLine
+    s &= "</thead>" & gb.NewLine
+    s &= "<tbody>" & gb.NewLine
+    '
+    ' Construcción dinámica de la salida de la separata de capítulos
+    ' dentro de este loop va un control que revisa si se muestra el icono de descarga
+    While ContenidoSeparatas.Available
+      ' Usamos solo las columnas necesarias (índices 2, 3 y 4)
+      s &= "<tr><td>" & ContenidoSeparatas[xFields[2]] & "</td>" ' título
+      ' Verificamos si xFields[3] tiene contenido
+      If ContenidoSeparatas[xFields[4]] <> Null And ContenidoSeparatas[xFields[4]] <> "" Then
+        s &= "<td>" & ContenidoSeparatas[xFields[3]] & "</td>" ' rango de páginas
+        s &= "<td><a href=\"" & ContenidoSeparatas[xFields[4]] & "\" target=\"_blank\"><img src=\"descarga.png\" alt=\"icono descargar\"></a></td></tr>" & gb.NewLine
+      Else
+        s &= "<td>" & ContenidoSeparatas[xFields[3]] & "</td>" ' rango de páginas
+        ' Si xFields[4] está vacío, no mostramos el icono
+        s &= "<td></td><td></td></tr>" & gb.NewLine
+      End If
+
+      ContenidoSeparatas.MoveNext ' Avanzar al siguiente registro
+    Wend
+
+    s &= "</tbody>" & gb.NewLine
+    s &= "</table>" & gb.NewLine
+
+    s &= "\t </section>" & gb.NewLine
+    s &= "\t </div>" & gb.NewLine
+    s &= "</div>" & gb.NewLine
+
+    s &= "<footer id=\"ancho-del-pie\">" & gb.NewLine
+    s &= "\t <p>" & ContenidoGHP[gFields[10]] & "</p>" & gb.NewLine
+    s &= "</footer>" & gb.NewLine
+    '
+    s &= "</body>" & gb.NewLine
+    s &= "</html>" & gb.NewLine
+
+    ContenidoMeta.MoveNext
+  Wend
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = File.Dir(rutaTexto) &/ "docs" &/ "index.html"
+
+  ' Guarda el contenido acumulado en un solo archivo
+  File.Save(outputFile, s)
+
+End
+
+Public Sub ExportToNuevoArticulo(rutaTexto As String)
+
+  Dim s As String
+  Dim outputFile As String
+  Dim outputDir As String
+
+  ' Generamos el contenido del archivo
+  s &= "# Identificadores para artículo de revista científica," & gb.NewLine
+  s &= "# fue adaptado de https://github.com/estedeahora/guri" & gb.NewLine
+  s &= "# " & gb.NewLine
+  s &= "---" & gb.NewLine
+  s &= "article:" & gb.NewLine
+  s &= "  heading: Introducción" & gb.NewLine
+  s &= "  type: editorial # https://jats.nlm.nih.gov/publishing/tag-library/1.3/attribute/article-type.html" & gb.NewLine
+  s &= "  elocation-id: a101" & gb.NewLine
+  s &= "  ojs_id: 4581 # Identificador usado por OJS (Si usa OJS es necesario para construir url-resources y, potencialmente, doi)" & gb.NewLine
+  s &= "  publisher-id: # Identificador personalizado asignado por el editor. En jats article-id pub-id-type=\"publisher-id'" & gb.NewLine
+  s &= "  doi: 00.0000/articulo" & gb.NewLine
+  s &= "  fpage: # Número de página inicial" & gb.NewLine
+  s &= "  lpage: # Número de página final" & gb.NewLine
+  s &= "  resources:" & gb.NewLine
+  s &= "    pdf:" & gb.NewLine
+  s &= "    html:" & gb.NewLine
+  s &= "    epub:" & gb.NewLine
+  s &= "    jats:" & gb.NewLine
+  s &= "    docx:" & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Metadatos del artículo (language principal)" & gb.NewLine
+  s &= "metadata:" & gb.NewLine
+  s &= "  title: Lorem ipsum" & gb.NewLine
+  s &= "  subtitle: Lorem ipsum" & gb.NewLine
+  s &= "  abstract: |" & gb.NewLine
+  s &= "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." & gb.NewLine
+  s &= "  keyword:" & gb.NewLine
+  s &= "  - \"Palabra Clave 1\"" & gb.NewLine
+  s &= "  - \"Palabra Clave 2\" # Lo ideal es manejar hasta 15" & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Metadatos de idiomas para el artículo" & gb.NewLine
+  s &= "metadata_lang:" & gb.NewLine
+  s &= "  - lang: es" & gb.NewLine
+  s &= "    title: Título en español" & gb.NewLine
+  s &= "    subtitle: Subtítulo en español" & gb.NewLine
+  s &= "    abstract: |" & gb.NewLine
+  s &= "     Es importante cuidar al paciente, ser seguido por el cliente, pero al mismo tiempo se verán afectados por algunos grandes dolores y sufrimientos. Para llegar al más mínimo detalle, nadie debe practicar ningún tipo de trabajo a menos que obtenga algún beneficio de él. No se enfaden con el dolor en la reprimenda, en el placer quiere ser un pelo del dolor, que huya del dolor. A menos que estén cegados por la lujuria, no salen adelante; están en falta quienes abandonan sus deberes y ablandan sus corazones, es decir, sus labores." & gb.NewLine
+  s &= "  - lang: en" & gb.NewLine
+  s &= "    title: Pain itself" & gb.NewLine
+  s &= "    subtitle: Do not let the pain go away" & gb.NewLine
+  s &= "    abstract: |" & gb.NewLine
+  s &= "      It is important to take care of the patient, to be followed by the client, but at the same time they will be affected by some great pains and sufferings. For to come to the smallest detail, no one should practice any kind of work unless he derives some benefit from it. Do not be angry with the pain in the rebuke, in the pleasure he wants to be a hair from the pain, let him run away from the pain. Unless they are blinded by lust, they do not come forth; they are in fault who abandon their duties and soften their hearts, that is, their labors." & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Autores (un bloque por autor)" & gb.NewLine
+  s &= "author:" & gb.NewLine
+  s &= "  - given-names: De Palotes" & gb.NewLine
+  s &= "    surname: Juan" & gb.NewLine
+  s &= "    email: \"juan.palotes@ejemplo.edu\"" & gb.NewLine
+  s &= "    orcid: \"0000-0000-0000-0000\"" & gb.NewLine
+  s &= "    cor-id: yes # si no es autor de correspondencia comentar. Se recomienda utilizar sólo un autor de correspondencia" & gb.NewLine
+  s &= "    affiliation: # Usar aff(n), etc., para referir a las diferentes afiliaciones." & gb.NewLine
+  s &= "      - aff1" & gb.NewLine
+  s &= "# Afiliaciones insitucionales" & gb.NewLine
+  s &= "affiliation:" & gb.NewLine
+  s &= "  - id: aff1" & gb.NewLine
+  s &= "    organization: Universidad del Conurbano Bonaerense" & gb.NewLine
+  s &= "    ror: 000000000" & gb.NewLine
+  s &= "    country-code: ES # https://www.nationsonline.org/oneworld/country_code_list.htm" & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Historial del artículo" & gb.NewLine
+  s &= "history:" & gb.NewLine
+  s &= "  - type: received" & gb.NewLine
+  s &= "    day: 0" & gb.NewLine
+  s &= "    month: 0" & gb.NewLine
+  s &= "    year: 0000" & gb.NewLine
+  s &= "  - type: accepted" & gb.NewLine
+  s &= "    day: 0" & gb.NewLine
+  s &= "    month: 0" & gb.NewLine
+  s &= "    year: 0000" & gb.NewLine
+  s &= "  - type: epub # Para fecha de publicación electrónica (utilizar obligatoriamente si se usa AoP o continua)" & gb.NewLine
+  s &= "    day: 0" & gb.NewLine
+  s &= "    month: 0" & gb.NewLine
+  s &= "    year: 0000" & gb.NewLine
+  s &= "# " & gb.NewLine
+  s &= "# Declaraciones" & gb.NewLine
+  s &= "statements:" & gb.NewLine
+  s &= "  ack: |" & gb.NewLine
+  s &= "    Porta phasellus natoque fusce tempus aptent sem fames, mattis suspendisse inceptos ligula accumsan taciti." & gb.NewLine
+  s &= "  funding:" & gb.NewLine
+  s &= "    text: Haec investigatio independenter funditur." & gb.NewLine
+  s &= "  data:" & gb.NewLine
+  s &= "    text: Haec investigatio independenter funditur." & gb.NewLine
+  s &= "    # link: URL a los datos" & gb.NewLine
+  s &= "    # doi: zenodo/00000000000" & gb.NewLine
+  s &= "  coi: |" & gb.NewLine
+  s &= "    Porta phasellus natoque fusce tempus aptent sem fames, mattis suspendisse inceptos ligula accumsan taciti." & gb.NewLine
+  s &= "---" & gb.NewLine
+  s &= "" & gb.NewLine
+  s &= "" & gb.NewLine
+  s &= "# Acá comienza su archivo" & gb.NewLine
+
+  ' Establece la ruta del directorio de salida
+  outputDir = File.Dir(rutaTexto) & "/artcap/"
+
+  ' establecer el nombre del archivo
+  Dim nombreSalida As String = FMain.txtNuevoArtCap.Text
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = outputDir & nombreSalida & ".md"
+
+  ' Guarda el contenido en un nuevo archivo
+  File.Save(outputFile, s)
+
+End
+
+Public Sub ExportToNuevoCapitulo(rutaTexto As String)
+
+  Dim s As String
+  Dim outputFile As String
+  Dim outputDir As String
+
+  ' Generamos el contenido del archivo
+  s &= "# Identificadores para capítulo de libro," & gb.NewLine
+  s &= "# " & gb.NewLine
+  s &= "---" & gb.NewLine
+  s &= "article:" & gb.NewLine
+  s &= "  heading: Introducción" & gb.NewLine
+  s &= "  type: editorial # https://jats.nlm.nih.gov/publishing/tag-library/1.3/attribute/article-type.html" & gb.NewLine
+  s &= "  elocation-id: a101" & gb.NewLine
+  s &= "  ojs_id: 4581 # Identificador usado por OJS (Si usa OJS es necesario para construir url-resources y, potencialmente, doi)" & gb.NewLine
+  s &= "  publisher-id: # Identificador personalizado asignado por el editor. En jats article-id pub-id-type=\"publisher-id'" & gb.NewLine
+  s &= "  doi: 00.0000/articulo" & gb.NewLine
+  s &= "  fpage: # Número de página inicial" & gb.NewLine
+  s &= "  lpage: # Número de página final" & gb.NewLine
+  s &= "  resources:" & gb.NewLine
+  s &= "    pdf:" & gb.NewLine
+  s &= "    html:" & gb.NewLine
+  s &= "    epub:" & gb.NewLine
+  s &= "    jats:" & gb.NewLine
+  s &= "    docx:" & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Metadatos del artículo (language principal)" & gb.NewLine
+  s &= "metadata:" & gb.NewLine
+  s &= "  title: Lorem ipsum" & gb.NewLine
+  s &= "  subtitle: Lorem ipsum" & gb.NewLine
+  s &= "  abstract: |" & gb.NewLine
+  s &= "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." & gb.NewLine
+  s &= "  keyword:" & gb.NewLine
+  s &= "  - \"Palabra Clave 1\"" & gb.NewLine
+  s &= "  - \"Palabra Clave 2\" # Lo ideal es manejar hasta 15" & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Metadatos de idiomas para el artículo" & gb.NewLine
+  s &= "metadata_lang:" & gb.NewLine
+  s &= "  - lang: es" & gb.NewLine
+  s &= "    title: Título en español" & gb.NewLine
+  s &= "    subtitle: Subtítulo en español" & gb.NewLine
+  s &= "    abstract: |" & gb.NewLine
+  s &= "     Es importante cuidar al paciente, ser seguido por el cliente, pero al mismo tiempo se verán afectados por algunos grandes dolores y sufrimientos. Para llegar al más mínimo detalle, nadie debe practicar ningún tipo de trabajo a menos que obtenga algún beneficio de él. No se enfaden con el dolor en la reprimenda, en el placer quiere ser un pelo del dolor, que huya del dolor. A menos que estén cegados por la lujuria, no salen adelante; están en falta quienes abandonan sus deberes y ablandan sus corazones, es decir, sus labores." & gb.NewLine
+  s &= "  - lang: en" & gb.NewLine
+  s &= "    title: Pain itself" & gb.NewLine
+  s &= "    subtitle: Do not let the pain go away" & gb.NewLine
+  s &= "    abstract: |" & gb.NewLine
+  s &= "      It is important to take care of the patient, to be followed by the client, but at the same time they will be affected by some great pains and sufferings. For to come to the smallest detail, no one should practice any kind of work unless he derives some benefit from it. Do not be angry with the pain in the rebuke, in the pleasure he wants to be a hair from the pain, let him run away from the pain. Unless they are blinded by lust, they do not come forth; they are in fault who abandon their duties and soften their hearts, that is, their labors." & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Autores (un bloque por autor)" & gb.NewLine
+  s &= "author:" & gb.NewLine
+  s &= "  - given-names: De Palotes" & gb.NewLine
+  s &= "    surname: Juan" & gb.NewLine
+  s &= "    email: \"juan.palotes@ejemplo.edu\"" & gb.NewLine
+  s &= "    orcid: \"0000-0000-0000-0000\"" & gb.NewLine
+  s &= "    cor-id: yes # si no es autor de correspondencia comentar. Se recomienda utilizar sólo un autor de correspondencia" & gb.NewLine
+  s &= "    affiliation: # Usar aff(n), etc., para referir a las diferentes afiliaciones." & gb.NewLine
+  s &= "      - aff1" & gb.NewLine
+  s &= "# Afiliaciones insitucionales" & gb.NewLine
+  s &= "affiliation:" & gb.NewLine
+  s &= "  - id: aff1" & gb.NewLine
+  s &= "    organization: Universidad del Conurbano Bonaerense" & gb.NewLine
+  s &= "    ror: 000000000" & gb.NewLine
+  s &= "    country-code: ES # https://www.nationsonline.org/oneworld/country_code_list.htm" & gb.NewLine
+  s &= "# " & gb.NewLine
+  '
+  s &= "# Historial del artículo" & gb.NewLine
+  s &= "history:" & gb.NewLine
+  s &= "  - type: received" & gb.NewLine
+  s &= "    day: 0" & gb.NewLine
+  s &= "    month: 0" & gb.NewLine
+  s &= "    year: 0000" & gb.NewLine
+  s &= "  - type: accepted" & gb.NewLine
+  s &= "    day: 0" & gb.NewLine
+  s &= "    month: 0" & gb.NewLine
+  s &= "    year: 0000" & gb.NewLine
+  s &= "  - type: epub # Para fecha de publicación electrónica (utilizar obligatoriamente si se usa AoP o continua)" & gb.NewLine
+  s &= "    day: 0" & gb.NewLine
+  s &= "    month: 0" & gb.NewLine
+  s &= "    year: 0000" & gb.NewLine
+  s &= "# " & gb.NewLine
+  s &= "# Declaraciones" & gb.NewLine
+  s &= "statements:" & gb.NewLine
+  s &= "  ack: |" & gb.NewLine
+  s &= "    Porta phasellus natoque fusce tempus aptent sem fames, mattis suspendisse inceptos ligula accumsan taciti." & gb.NewLine
+  s &= "  funding:" & gb.NewLine
+  s &= "    text: Haec investigatio independenter funditur." & gb.NewLine
+  s &= "  data:" & gb.NewLine
+  s &= "    text: Haec investigatio independenter funditur." & gb.NewLine
+  s &= "    # link: URL a los datos" & gb.NewLine
+  s &= "    # doi: zenodo/00000000000" & gb.NewLine
+  s &= "  coi: |" & gb.NewLine
+  s &= "    Porta phasellus natoque fusce tempus aptent sem fames, mattis suspendisse inceptos ligula accumsan taciti." & gb.NewLine
+  s &= "---" & gb.NewLine
+  s &= "" & gb.NewLine
+  s &= "" & gb.NewLine
+  s &= "# Acá comienza su archivo" & gb.NewLine
+
+  ' Establece la ruta del directorio de salida
+  outputDir = File.Dir(rutaTexto) & "/artcap/"
+
+  ' establecer el nombre del archivo
+  Dim nombreSalida As String = FMain.txtNuevoArtCap.Text
+
+  ' Establece la ruta y el nombre del archivo de salida
+  outputFile = outputDir & nombreSalida & ".md"
+
+  ' Guarda el contenido en un nuevo archivo
+  File.Save(outputFile, s)
+
+End

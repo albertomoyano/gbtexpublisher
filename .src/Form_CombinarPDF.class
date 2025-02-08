@@ -1,0 +1,152 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+  ' Asigna el evento Change de cada TextBox al procedimiento VerificarCampos
+  txtTapa_Change()
+  txtInterior_Change()
+  txtContratapa_Change()
+
+  ' Llamar a la verificación al inicio por si ya hay algún texto en los TextBox
+  VerificarCampos
+
+End
+
+' Evento que se dispara cuando cambia el contenido de txtTapa
+Public Sub txtTapa_Change()
+
+  VerificarCampos()
+
+End
+
+' Evento que se dispara cuando cambia el contenido de txtInterior
+Public Sub txtInterior_Change()
+
+  VerificarCampos()
+
+End
+
+' Evento que se dispara cuando cambia el contenido de txtContratapa
+Public Sub txtContratapa_Change()
+
+  VerificarCampos()
+
+End
+
+Public Sub btnBuscarTapa_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.pdf", ("Archivos pdf")]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(FMain.TextBox1.Text) & "/pdf/"
+  ' Abre el diálogo para seleccionar archivo
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    ' Asigna la ruta del archivo seleccionado al TextBox
+    txtTapa.Text = Dialog.Path
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+Public Sub btnBuscarInterior_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.pdf", ("Archivos pdf")]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(FMain.TextBox1.Text) & "/pdf/"
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    txtInterior.Text = Dialog.Path
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+Public Sub btnBuscarcontratapa_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.pdf", ("Archivos pdf")]
+  Dialog.AutoExt = True
+  Dialog.Path = File.Dir(FMain.TextBox1.Text) & "/pdf/"
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    txtContratapa.Text = Dialog.Path
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+' Función que verifica si todos los TextBox tienen texto
+Public Sub VerificarCampos()
+
+  If txtTapa.Text <> "" And txtInterior.Text <> "" And txtContratapa.Text <> "" Then
+    btnEnsamblar.Visible = True
+  Else
+    btnEnsamblar.Visible = False
+  Endif
+
+End
+
+Public Sub btnSalir_Click()
+
+  Me.Close()
+
+End
+
+Public Sub btnEnsamblar_Click()
+
+  Mod_Exportar.ExportToMetadatosPDFTK(FMain.TextBox1.Text)
+
+  FMain.TabPanel1.Index = 0
+
+  Dim rutaTapa As String = File.RealPath(txtTapa.Text)
+  Dim rutaInterior As String = File.RealPath(txtInterior.Text)
+  Dim rutaContratapa As String = File.RealPath(txtContratapa.Text)
+
+  Dim metadatos As String = File.Dir(FMain.TextBox1.Text) & "/files/" & "gbTeXpdfTKmeta-" & File.BaseName(FMain.TextBox1.Text) & ".txt"
+
+  ' generamos el pdf para web con pdftk
+  FMain.TerminalView1.Input("pdftk " & rutaTapa & " " & rutaInterior & " " & rutaContratapa & " cat output " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf" & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("pdftk " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf update_info " & metadatos & " output " & File.Dir(FMain.TextBox1.Text) & "/docs/web-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
+  Wait 0.2
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/pdf/q.pdf" & "\n" & "clear" & "\n")
+  Wait 0.2
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXpdfTKmeta-" & File.BaseName(FMain.TextBox1.Text) & ".txt" & "\n" & "clear" & "\n")
+  Wait 0.2
+
+End
+
+Public Sub btnConvertirCOVER_Click()
+
+  ' Obtener la ruta de la tapa
+  Dim rutaTapa As String = File.RealPath(txtTapa.Text)
+
+  ' Verificar si rutaTapa es null o está vacía
+  If rutaTapa = Null Or rutaTapa = "" Then
+    Message.Error("La ruta de la tapa no es válida. Por favor, selecciona un archivo.")
+    Return ' Salir de la función si la ruta no es válida
+  End If
+
+  ' Definir la ruta de salida para la imagen de la tapa
+  Dim salidaCover As String = File.Dir(FMain.TextBox1.Text) & "/tapa/cover.png"
+
+  ' Ejecutar el comando Ghostscript para convertir la tapa
+  FMain.TerminalView1.Input("gs -sDEVICE=png16m -r300 -dUsePDFXObject -o " & salidaCover & " " & rutaTapa & "\n" & "clear" & "\n")
+  Wait 0.2
+
+  ' Mensaje de éxito
+  Message.Info("La tapa se ha convertido correctamente en " & salidaCover)
+
+End

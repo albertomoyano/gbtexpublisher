@@ -1,0 +1,113 @@
+' Gambas class file
+
+Public Contenido As Result
+Public BaseName As String = File.BaseName(FMain.TextBox1.Text)
+
+Public Sub btnCLOSEmonografia_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  Mod_RellenarComboBox.RellenarEstiloMonografia()
+
+  'levantamos los datos de metadatos
+  Dim comando As String
+  ' buscamos la entrada que coincida con el archivo
+  comando = "select * from monografias where nombreArchivo = " & "'" & BaseName & ".tex'"
+  Contenido = FMain.meConn.Exec(comando)
+
+  If Contenido.Count > 0 Then
+    'van funciones
+    BtnNuevoMonografia.Visible = False
+    btnGuardarMonografia.Visible = False
+    btnGuardarCambiosMonografia.Visible = True
+    txtID.Text = Contenido!id
+    txtnombreArchivo.Text = Contenido!nombreArchivo
+    txtEMAIL.Text = Contenido!email
+    txtMATRICULA.Text = Contenido!matricula
+    txtALUMNO.Text = Contenido!alumno
+    txtDOCENTE.Text = Contenido!docente
+    txtMATERIA.Text = Contenido!materia
+    txtTITULO.Text = Contenido!titulo
+    cmbEstiloReferencias.Text = Contenido!estiloRef
+  Endif
+
+End
+
+Public Sub Form_Close()
+
+  Me.Close
+
+End
+
+Public Sub BtnNuevoMonografia_Click()
+
+  BtnNuevoMonografia.Visible = False
+  btnGuardarMonografia.Visible = True
+  btnGuardarCambiosMonografia.Visible = False
+
+  Dim Idn As Integer
+
+  ' Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM monografias LIMIT 1")
+
+  ' Si no hay ninguna entrada entonces arrancamos desde 0
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+  txtID.Text = Idn
+  txtnombreArchivo.Text = BaseName & ".tex"
+
+End
+
+Public Sub btnGuardarMonografia_Click()
+
+  Contenido = FMain.meConn.Create("monografias")
+
+  guardarCampos
+
+  Contenido.Update
+  Message.Info("Nueva entrada guardada.")
+
+  BtnNuevoMonografia.Enabled = False
+  btnGuardarMonografia.Enabled = False
+  btnGuardarCambiosMonografia.Enabled = True
+
+End
+
+Public Function guardarCampos()
+
+  Contenido!id = txtID.Text
+  Contenido!nombreArchivo = txtnombreArchivo.Text
+  Contenido!email = txtEMAIL.Text
+  Contenido!matricula = txtMATRICULA.Text
+  Contenido!alumno = txtALUMNO.Text
+  Contenido!docente = txtDOCENTE.Text
+  Contenido!materia = txtMATERIA.Text
+  Contenido!titulo = txtTITULO.Text
+  Contenido!estiloRef = cmbEstiloReferencias.Text
+
+End
+
+Public Sub btnGuardarCambiosMonografia_Click()
+
+  BtnNuevoMonografia.Visible = False
+  btnGuardarMonografia.Visible = False
+  btnGuardarCambiosMonografia.Visible = True
+
+  Contenido = FMain.meConn.Edit("monografias", "id=" & txtID.Text)
+
+  If Contenido.Available Then
+    guardarCampos()
+    Contenido.Update
+    Message.Info("Los cambios se guardaron con éxito.")
+  Else
+    Message.Error("<strong>No se pudieron guardar los cambios.</strong>")
+  Endif
+
+End

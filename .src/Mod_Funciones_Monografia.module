@@ -1,0 +1,124 @@
+' Gambas module file
+
+Private Name As String = File.Name(FMain.TextBox1.Text)
+Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
+Private rutaBase As String = File.Dir(FMain.TextBox1.Text)
+
+Public Sub CopiarArchivosMonografia(rutaTexto As String)
+
+  If Not Exist(File.Dir(rutaTexto) & "/media") Then
+    Mkdir File.Dir(rutaTexto) & "/media"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/files") Then
+    Mkdir File.Dir(rutaTexto) & "/files"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/readme.md") Then
+    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
+  End If
+  If Not Exist(File.Dir(rutaTexto) & "/LICENSE") Then
+    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
+  End If
+  ' copiamos los archivos de preámbulo de revista
+  If Not Exist(File.Dir(rutaTexto) & "/files/monografia-pdf.tex") Then
+    Copy "./monografia-pdf.tex" To File.Dir(rutaTexto) & "/files/monografia-pdf.tex"
+  End If
+
+End
+
+Public Sub salidaPDFmonografia()
+
+  Dim newFile As String
+
+  newFile = "monografia-" & Name
+  Mod_Funciones.Borrar_Aux
+  Wait 0.2
+
+  FMain.TabPanel1.Index = 0
+
+  ' obtenemos la exportación de los archivos bib, glo y metadatos
+  Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
+  Wait 0.2
+
+  'revisamos la carpeta pdf y borramos el archivo
+  ManagePdfFolderMonografia(FMain.TextBox1.Text)
+
+  FMain.TerminalView1.Input("cat " & rutaBase & "/files/monografia-pdf.tex" & " " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("mv " & rutaBase & "/monografia-" & BaseName & ".pdf" & " " & rutaBase & "/pdf/" & BaseName & ".pdf" & "\n")
+  Wait 0.2
+
+  Mod_Funciones.Borrar_Aux
+
+  FMain.TerminalView1.SetFocus()
+  FMain.TerminalView1.Refresh()
+
+End
+
+Public Sub ManagePdfFolderMonografia(rutaTexto As String)
+
+  Dim pdfPath As String = rutaBase & "/pdf/"
+
+  ' Verifica si la carpeta existe
+  If Not Exist(pdfPath) Then
+    ' Si no existe, crea la carpeta
+    Mkdir pdfPath
+  Else
+    ' Si existe, borra los archivos con extensión .pdf
+    Shell "rm -rf " & pdfPath & File.BaseName(rutaTexto) & ".pdf" Wait
+  End If
+
+End
+
+Public Sub salidaODTmonografia()
+
+  Dim folder As String
+  Dim newFile As String
+
+  folder = File.Dir(FMain.TextBox1.Text) & "/odt-docx"
+  newFile = "odt-" & Name
+
+  ' limpiamos el directorio
+  Mod_Funciones.Borrar_Aux
+  Wait 0.2
+
+  ' exportamos los archivos
+  Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
+  Wait 0.2
+
+  FMain.TabPanel1.Index = 0
+
+  FMain.TerminalView1.Input("cat " & rutaBase & "/monografia-odt.tex " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("rm -rf odt-docx" & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("mkdir odt-docx" & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("pandoc -s -o " & "salida.odt " & newFile & "\n")' & " --bibliography=referencias.bib --csl=apa.csl --filter pandoc-crossref" & "\n")
+  Wait 0.2
+
+  'convertimos el odt a docx
+  FMain.TerminalView1.Input("libreoffice --headless --convert-to docx" & " " & "salida.odt" & "\n")
+  Wait 0.2
+
+  ' movemos los archivos al directorio odt-docx
+  FMain.TerminalView1.Input("mv salida.odt" & " " & folder & "/" & BaseName & ".odt" & "\n")
+  Wait 0.2
+
+  ' movemos los archivos al directorio odt-docx
+  FMain.TerminalView1.Input("mv salida.docx" & " " & folder & "/" & BaseName & ".docx" & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.SetFocus()
+  Mod_Funciones.Borrar_Aux
+
+End

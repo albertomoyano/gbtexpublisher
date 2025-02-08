@@ -1,0 +1,89 @@
+' Gambas class file
+
+Private meConn As New Connection
+Private Contenido As Result
+
+Public Sub Form_Open()
+
+  ' Usa la ruta seleccionada en el formulario de inicio
+  meConn.Type = "sqlite3"
+  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
+  meConn.Open()
+  ' Configurar el modo de journal a DELETE
+  meConn.Exec("PRAGMA journal_mode=DELETE;")
+
+End
+
+Public Sub Form_Close()
+
+  If meConn Then
+    meConn.Close()
+    meConn = Null
+  Endif
+  Me.Close
+
+End
+
+Public Sub btnCancelar_Click()
+
+  If meConn Then
+    meConn.Close()
+    meConn = Null
+  Endif
+  Me.Close
+
+End
+
+Public Sub btnAgregar_Click()
+
+  If txtAgregarLista.Text = "" Then
+    Message.Warning("No puede agregar un elemento vacío a la lista")
+    Return
+  Endif
+
+  'Obtenemos el último ID y sumamos +1 para el nuevo registro
+  Contenido = meConn.Exec("SELECT MAX(id) FROM tareas LIMIT 1")
+
+  Dim Idn As Integer
+  If Contenido["MAX(id)"] = Null Then
+    Idn = 0
+  Else
+    Idn = CInt(Contenido["MAX(id)"]) + 1
+  Endif
+
+  Contenido = meConn.Create("tareas")
+  Contenido!id = Idn
+  Contenido!titulo = txtAgregarLista.Text
+
+  If txtAgregarDescripcion.Text <> "" Then
+    Contenido!contenido = txtAgregarDescripcion.Text
+  Endif
+
+  Contenido!completado = False
+  Contenido.Update
+  FMain.Mostrar_Lista_Tareas
+
+  If meConn Then
+    meConn.Close()
+    meConn = Null
+  Endif
+  Me.Close
+
+End
+
+Public Sub Form_KeyRelease()
+
+  If Key.Code = Key.Esc Then
+    Me.Close
+  Endif
+
+End
+
+Public Sub txtAgregarLista_KeyRelease()
+
+  If Key.Code = 16777220 Or Key.code = 16777221 Then 'No me funciona de otra manera que no sea usando el código
+    btnAgregar_Click
+  Endif
+
+End

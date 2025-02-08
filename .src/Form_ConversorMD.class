@@ -1,0 +1,119 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+  Dim fecha As String
+
+  fecha = Format(Date(), "yyyymmdd") ' Obtener la fecha actual
+
+  txtFecha.Text = fecha
+
+End
+
+Public Sub btnBuscar_Click()
+
+  Dialog.Title = "Seleccionar archivo"
+  Dialog.Filter = ["*.docx", "Archivos word"]
+  Dialog.AutoExt = True
+  Dialog.Path = User.Home
+  If Dialog.OpenFile() Then
+    Return
+  Else
+    txtORIGEN.Text = Dialog.Path
+    btnCONVERTIR.Enabled = True
+  Endif
+
+Catch
+  Message.Error("No se pudo abrir el archivo")
+
+End
+
+Public Sub Form_Close()
+
+  Me.Close()
+
+End
+
+Public Sub btnSalir_Click()
+
+  Me.Close()
+
+End
+
+Public Sub btnListo_Click()
+
+  Me.Close()
+
+End
+
+Public Sub btnCONVERTIR_Click()
+
+  Dim rutaORIGINALES As String = File.Dir(Dialog.Path) &/ "originales"
+  Dim rutaMEDIA As String = File.Dir(Dialog.Path) &/ "media"
+  ' Escapa las rutas de origen y destino
+  Dim escapedPath As String = EscapePath(Dialog.Path)
+  Dim escapedOriginalesPath As String = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
+
+  txtORIGEN.Text = Dialog.Path
+
+  If Not Exist(rutaORIGINALES) Then
+    Mkdir rutaORIGINALES
+  End If
+
+  If Not Exist(rutaMEDIA) Then
+    Mkdir rutaMEDIA
+  End If
+
+  ' conversion desde un archivo docx
+  If Trim(txtDESTINO.Text) = "" Then
+    Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+  Else
+    Shell "pandoc -s " & File.RealPath(Dialog.Path) & " --citeproc -t markdown -o " & File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".md" & " --extract-media=" & File.Dir(Dialog.Path) & "/media" & " --reference-links --wrap=none --strip-comments --no-highlight"
+    Wait 0.2
+    ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+    Shell "mv " & escapedPath & " " & escapedOriginalesPath
+    Wait 0.2
+    btnListo.Visible = True
+    btnListo.Default = True
+  Endif
+
+End
+
+Private Function EscapePath(path As String) As String
+
+  Return "'" & Replace(path, "'", "'\\''") & "'"
+
+End
+
+Public Sub txtDESTINO_KeyRelease()
+  ' Obtener el texto actual del TextBox
+
+  Dim texto As String
+
+  texto = txtDESTINO.Text
+
+  ' Lista de caracteres permitidos
+  Dim caracteresPermitidos As String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+  ' Filtrar el texto para eliminar caracteres no permitidos
+  Dim textoFiltrado As String
+  For i As Integer = 1 To Len(texto)
+    Dim tecla As String
+    tecla = Mid(texto, i, 1)
+    If InStr(caracteresPermitidos, tecla) > 0 Then
+      textoFiltrado = textoFiltrado & tecla
+    End If
+  Next
+
+  ' Limitar la longitud del texto a 11 caracteres
+  If Len(textoFiltrado) > 20 Then
+    ' Mostrar un mensaje de aviso
+    Message.Warning("El nombre de salida del archivo no puede contener más de 20 caracteres.", "Entendido")
+    ' Eliminar los caracteres adicionales
+    txtDESTINO.Text = Left(textoFiltrado, 20)
+  Else
+    ' Actualizar el TextBox con el texto filtrado y convertirlo a mayúsculas
+    txtDESTINO.Text = UCase(textoFiltrado)
+  End If
+
+End

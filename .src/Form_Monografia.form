@@ -1,0 +1,167 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,960,414)
+  #Scaled = False
+  Expand = True
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  AutoResize = True
+  Spacing = True
+  Margin = True
+  Padding = 4
+  { HBox83 HBox
+    Move(10,0,960,36)
+    { BtnNuevoMonografia Button
+      Move(0,0,36,36)
+      NoTabFocus = True
+      ToolTip = ("Agregar una nueva referencia")
+      Picture = Picture["iconos/+nuevo.svg"]
+    }
+    { btnGuardarMonografia Button
+      Move(120,0,36,36)
+      ToolTip = ("Cerrar la ventana")
+      Picture = Picture["iconos/guardar.svg"]
+    }
+    { btnGuardarCambiosMonografia Button
+      Move(180,0,36,36)
+      ToolTip = ("Guardar modificaciones")
+      Picture = Picture["iconos/guardarComo.svg"]
+    }
+    { Spring6 Spring
+      Move(490,0,50,36)
+    }
+    { btnCLOSEmonografia Button
+      Move(760,0,160,36)
+      Background = &HE00000
+      Foreground = Color.White
+      NoTabFocus = True
+      Text = ("Cerrar")
+    }
+  }
+  { HBox2 HBox
+    Move(0,36,1017,36)
+    AutoResize = True
+    { Label2 Label
+      Move(30,0,146,36)
+      Padding = 4
+      Alignment = Align.Right
+      Text = ("Archivo asociado  ")
+    }
+    { txtnombreArchivo TextBox
+      Move(189,0,207,36)
+      Background = Color.Background
+      Expand = True
+      ReadOnly = True
+    }
+    { Label3 Label
+      Move(432,0,270,36)
+      Padding = 4
+      AutoResize = True
+      Alignment = Align.Right
+      Text = ("  Estilo p/referencias  ")
+    }
+    { cmbEstiloReferencias ComboBox
+      Move(792,0,216,36)
+      ReadOnly = True
+    }
+  }
+  { HBox1 HBox
+    Move(0,76,780,36)
+    AutoResize = True
+    { Label1 Label
+      Move(30,0,146,36)
+      Padding = 4
+      Alignment = Align.Right
+      Text = ("Título  ")
+    }
+    { !txtTITULO TextBox
+      Move(270,0,160,36)
+      #Public = True
+      Expand = True
+    }
+  }
+  { HBox175 HBox
+    Move(0,121,780,36)
+    AutoResize = True
+    { Label122 Label
+      Move(30,0,146,36)
+      Padding = 4
+      Alignment = Align.Right
+      Text = ("Materia  ")
+    }
+    { !txtMATERIA TextBox
+      Move(450,0,240,36)
+      #Public = True
+      Expand = True
+    }
+  }
+  { HBox7 HBox
+    Move(0,166,780,36)
+    AutoResize = True
+    { Label21 Label
+      Move(30,0,146,36)
+      Padding = 4
+      Alignment = Align.Right
+      Text = ("Docente  ")
+    }
+    { !txtDOCENTE TextBox
+      Move(270,0,160,36)
+      #Public = True
+      Expand = True
+    }
+  }
+  { HBox187 HBox
+    Move(0,202,780,36)
+    AutoResize = True
+    { Label134 Label
+      Move(30,0,146,36)
+      Padding = 4
+      Alignment = Align.Right
+      Text = ("Alumno  ")
+    }
+    { !txtALUMNO TextBox
+      Move(280,0,160,36)
+      #Public = True
+      Expand = True
+    }
+    { txtID TextBox
+      Move(459,0,160,36)
+      Visible = False
+      Background = Color.Background
+      NoTabFocus = True
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+  }
+  { HBox173 HBox
+    Move(0,238,780,36)
+    AutoResize = True
+    { Label120 Label
+      Move(30,0,146,36)
+      Padding = 4
+      Alignment = Align.Right
+      Text = ("Matrícula  ")
+    }
+    { !txtMATRICULA TextBox
+      Move(270,0,160,36)
+      #Public = True
+      Expand = True
+    }
+  }
+  { HBox174 HBox
+    Move(0,274,780,36)
+    AutoResize = True
+    { Label121 Label
+      Move(30,0,146,36)
+      Padding = 4
+      Alignment = Align.Right
+      Text = ("email")
+    }
+    { !txtEMAIL TextBox
+      Move(270,0,160,36)
+      #Public = True
+      Expand = True
+    }
+  }
+}

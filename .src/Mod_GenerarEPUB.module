@@ -1,0 +1,259 @@
+' Gambas module file
+
+Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
+Private rutaFILES As String = File.Dir(FMain.TextBox1.Text) & "/files"
+
+Public Sub salidaEPUBpng()' parte 1
+
+  ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
+  FMain.TabPanel1.Index = 0
+  Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
+  Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
+  Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
+  Mod_Exportar.Exportar2MetadatosPDF(FMain.TextBox1.Text)
+  Wait 0.2
+
+  ' limpiamos el directorio ebook
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/ebook" & "\n")
+  Wait 0.2
+
+  ' Lista de directorios que deseas crear dentro de "ebook"
+  Dim directorios As String[] = ["kindle", "epub1"]
+
+  ' Asegurarse de que el directorio "ebook" existe
+  If Not Exist(File.Dir(FMain.TextBox1.Text) & "/ebook") Then
+    Mkdir File.Dir(FMain.TextBox1.Text) & "/ebook"
+  End If
+
+  ' Crear los subdirectorios dentro de "ebook" si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(FMain.TextBox1.Text) & "/ebook/" & directorio) Then
+      Mkdir File.Dir(FMain.TextBox1.Text) & "/ebook/" & directorio
+    End If
+  Next
+
+  Dim condicional As String = "\\\\PNGEPUBtrue"
+  FMain.TerminalView1.Input("echo " & condicional & " >> " & rutaFILES & "/book-epub1.tex" & "\n")
+
+  Dim newFile As String = "epub1-" & BaseName & ".tex"  ' generamos el archivo tex
+  FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub1.tex " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
+  Wait 0.2
+
+  Dim limpiarCondicional As String
+  limpiarCondicional = "sed -i '/\\\\PNGEPUBtrue/d' " & rutaFILES & "/book-epub1.tex" & "\n"
+  FMain.TerminalView1.Input(limpiarCondicional)
+
+  Dim compilar As String
+  compilar = "latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n"
+  FMain.TerminalView1.Input(compilar)
+  Wait 0.2
+
+  ' borramos el archivo que usamos para compilar
+  FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
+  Wait 0.2
+
+  'eliminamos los archivos auxiliares
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/artcap/*.aux" & "\n")
+  Wait 0.2
+
+  ' movemos el pdf al directorio epub1
+  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) & "/epub1-" & BaseName & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) & "/ebook/epub1-" & BaseName & ".pdf" & "\n")
+  Wait 0.2
+
+  ' generamos las imagenes png
+  FMain.TerminalView1.Input("gs -sDEVICE=png16m -r300 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -o" & " " & File.Dir(FMain.TextBox1.Text) & "/ebook/epub1/pagina_%03d.png" & " " & File.Dir(FMain.TextBox1.Text) & "/ebook/epub1-" & BaseName & ".pdf" & "\n")
+  Wait 0.2
+
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/ebook/epub1/cover.png") Then
+    Copy File.Dir(FMain.TextBox1.Text) & "/tapa/cover.png" To File.Dir(FMain.TextBox1.Text) & "/ebook/epub1/cover.png"
+  End If
+
+  ' borramos los archivos auxiliares
+  Mod_Funciones.Borrar_Aux
+  Wait 0.2
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXglo-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  FMain.TerminalView1.Input("clear" & "\n")
+  Wait 0.2
+
+End
+
+Public Sub creacionEpubPNG()' parte 2
+
+  Dim archivoHTML As File
+  Dim imagenes As New String[]
+  Dim imagen As String
+  Dim rutaEPUB1 As String = File.Dir(FMain.TextBox1.Text) & "/ebook/epub1/"
+  Dim rutaCover As String = File.RealPath(File.Dir(FMain.TextBox1.Text) & "/tapa/cover.png")
+  Dim rutaCoverDestino As String = rutaEPUB1 & "cover.png"
+  Dim rutaIndex As String = rutaEPUB1 & "index.html"
+  Dim rutaOPF As String = rutaEPUB1 & "content.opf"
+
+  ' Verificar si la imagen de tapa ya está en el directorio EPUB1
+  If Not File.RealPath(rutaCoverDestino) Then
+    Copy rutaCover To rutaCoverDestino
+  Endif
+
+  ' Obtener la lista de imágenes del contenido
+  For Each imagen In Dir(rutaEPUB1, "pagina_*.png")
+    Print "Detectado:", imagen
+    imagenes.Add(imagen)
+  Next
+
+  ' Ordenar la lista por nombre
+  imagenes.Sort()
+
+  If Not File.RealPath(rutaOPF) Then
+    Copy "./content.opf" To rutaEPUB1 & "content.opf"
+  End If
+
+  If Not File.RealPath(rutaIndex) Then
+    Copy "./index.html" To rutaEPUB1 & "index.html"
+  End If
+
+  archivoHTML = Open rutaEPUB1 & "index.html" For Write
+
+  ' Escribir la declaración DOCTYPE y la estructura básica del HTML
+  Print #archivoHTML, "<!DOCTYPE html>"
+  Print #archivoHTML, "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='es' lang='es'>"
+  Print #archivoHTML, "<head>"
+  Print #archivoHTML, "    <meta charset='UTF-8' />"
+  Print #archivoHTML, "    <title>" & BaseName & "</title>"
+  Print #archivoHTML, "</head>"
+  Print #archivoHTML, "<body>"
+  Print #archivoHTML, "    <h1>" & BaseName & "</h1>"
+  Print #archivoHTML, "    <p>Este es el contenido de mi libro.</p>"
+  Print #archivoHTML, "</body>"
+  Print #archivoHTML, "</html>"
+
+  ' Agregar las imágenes del contenido en orden
+  For Each imagen In imagenes
+    Print "Agregando al HTML:", imagen
+    Print #archivoHTML, "<img src='./" & imagen & "'/>"
+  Next
+
+  Close archivoHTML
+  Wait 0.2
+
+  Dim archivoOPF As File
+  archivoOPF = Open rutaEPUB1 & "content.opf" For Write
+
+  Print #archivoOPF, "<?xml version='1.0' encoding='UTF-8'?>"
+  Print #archivoOPF, "<package xmlns='http://www.idpf.org/2007/opf' unique-identifier='bookid' version='3.0'>"
+  Print #archivoOPF, "<metadata xmlns:dc='http://purl.org/dc/elements/1.1/'>"
+  Print #archivoOPF, "<dc:title>" & BaseName & "</dc:title>"
+  Print #archivoOPF, "<dc:creator>Autor Desconocido</dc:creator>"
+  Print #archivoOPF, "<dc:language>es</dc:language>"
+  Print #archivoOPF, "<dc:identifier id='bookid'>urn:uuid:12345678-1234-5678-1234-567812345678</dc:identifier>"
+  Print #archivoOPF, "<dc:publisher>Mi Editorial</dc:publisher>"
+  Print #archivoOPF, "<dc:description>Descripción del libro</dc:description>"
+  Print #archivoOPF, "<dc:date>2023-10-01</dc:date>"
+  Print #archivoOPF, "<dc:rights>Copyright © 2023 Mi Editorial. Todos los derechos reservados.</dc:rights>"
+  Print #archivoOPF, "<dc:type>Text</dc:type>"
+  Print #archivoOPF, "<dc:format>application/epub+zip</dc:format>"
+  Print #archivoOPF, "<dc:source>ISBN: 123-4567890123</dc:source>"
+  Print #archivoOPF, "<dc:subject>Ficción</dc:subject>"
+  Print #archivoOPF, "<dc:subject>Aventura</dc:subject>"
+  Print #archivoOPF, "<dc:contributor>Editor: Juan Pérez</dc:contributor>"
+  Print #archivoOPF, "<dc:contributor > Ilustrador: Ana G ómez</dc:contributor>"
+  Print #archivoOPF, "<meta name='cover' content='cover-image'/>"
+  Print #archivoOPF, "</metadata>"
+  Print #archivoOPF, "<manifest>"
+  Print #archivoOPF, "    <item id='cover-image' href='cover.png' media-type='image/png'/>"
+  Print #archivoOPF, "    <item id='content' href='index.html' media-type='application/xhtml+xml'/>"
+  Print #archivoOPF, "</manifest>"
+  Print #archivoOPF, "<spine>"
+  Print #archivoOPF, "    <itemref idref='content'/>"
+  Print #archivoOPF, "</spine>"
+  Print #archivoOPF, "</package>"
+
+  Close archivoOPF
+
+  ' Generar el EPUB con metadatos
+  FMain.TerminalView1.Input("ebook-convert " & rutaEPUB1 & "content.opf " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & " --title " & Quote(BaseName) & " --language es --cover " & rutaEPUB1 & "cover.png --toc-threshold=1" & "\n")
+  Wait 0.2
+
+  ' Validar el EPUB
+  FMain.TerminalView1.Input("epubcheck " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & "\n")
+
+  ' Generar un AZW3 para Kindle
+  FMain.TerminalView1.Input("ebook-convert " & rutaEPUB1 & "epub1-" & BaseName & ".epub " & File.Dir(FMain.TextBox1.Text) & "/ebook/kindle/kindle-" & BaseName & ".azw3" & "\n")
+  Wait 0.2
+
+  ' Limpieza de archivos temporales
+  FMain.TerminalView1.Input("rm -rf " & rutaEPUB1 & "index.html" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & rutaEPUB1 & "content.opf" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & rutaEPUB1 & "*.png" & "\n")
+  FMain.TerminalView1.Input("clear" & "\n")
+  Wait 0.2
+
+End
+
+Public Sub salidaEPUBhtml()
+
+  ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
+  FMain.TabPanel1.Index = 0
+  Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
+  Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
+  Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
+  Mod_Exportar.Exportar2MetadatosPDF(FMain.TextBox1.Text)
+  Wait 0.2
+
+  Mod_Funciones.Borrar_Aux
+  Wait 0.2
+
+  ' Lista de directorios que deseas crear dentro de "ebook"
+  Dim directorios As String[] = ["kindle", "epub2"]
+
+  ' Asegurarse de que el directorio "ebook" existe
+  If Not Exist(File.Dir(FMain.TextBox1.Text) & "/ebook") Then
+    Mkdir File.Dir(FMain.TextBox1.Text) & "/ebook"
+  End If
+
+  ' Crear los subdirectorios dentro de "ebook" si no existen
+  For Each directorio As String In directorios
+    If Not Exist(File.Dir(FMain.TextBox1.Text) & "/ebook/" & directorio) Then
+      Mkdir File.Dir(FMain.TextBox1.Text) & "/ebook/" & directorio
+    End If
+  Next
+
+  Dim condicional As String = "\\\\HTMLEPUBtrue"
+  FMain.TerminalView1.Input("echo " & condicional & " >> " & rutaFILES & "/book-epub2.tex" & "\n")
+
+  Dim newFile As String = "epub2-" & BaseName & ".tex"
+  FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub2.tex " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
+  Wait 0.2
+
+  Dim limpiarCondicional As String
+  limpiarCondicional = "sed -i '/\\\\HTMLEPUBtrue/d' " & rutaFILES & "/book-epub2.tex" & "\n"
+  FMain.TerminalView1.Input(limpiarCondicional)
+
+  FMain.TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  Wait 0.2
+
+  FMain.TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg -a Debug " & "epub-" & File.Name(FMain.TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
+  Wait 0.2
+
+  ' si la validación dio bien generamos un azw3 usando calibre
+  FMain.TerminalView1.Input("ebook-convert" & " " & File.Dir(FMain.TextBox1.Text) & "/ebook/epub2/epub2-pdf-" & BaseName & ".epub" & " " & File.Dir(FMain.TextBox1.Text) & "/ebook/kindle/kindle-pdf-" & BaseName & ".azw3" & "\n")
+  Wait 0.2
+
+  ' FMain.TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
+  ' Wait 0.2
+
+  ' FMain.TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
+  ' Wait 0.2
+
+  ' eliminamos los archivos auxiliares
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXglo-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  Wait 0.2
+
+  ' borramos los archivos auxiliares
+  Mod_Funciones.Borrar_Aux
+
+End
