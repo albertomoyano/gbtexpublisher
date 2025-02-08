@@ -24,16 +24,5 @@ Public Sub CopiarArchivosRevista(rutaTexto As String)
   If Not Exist(File.Dir(rutaTexto) & "/LICENSE") Then
     Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
   End If
-  'copiamos los archivos de preámbulo de revista
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/revista-pdf.tex") Then
-  '   Copy "./revista-pdf.tex" To File.Dir(rutaTexto) & "/files/revista-pdf.tex"
-  ' End If
-  'copiamos los archivos de preámbulo de revista
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/revista-xml.tex") Then
-  '   Copy "./revista-xml.tex" To File.Dir(rutaTexto) & "/files/revista-xml.tex"
-  ' End If
-  ' If Not Exist(File.Dir(rutaTexto) & "/files/gbTeXcls.cls") Then
-  '   Copy "./gbTeXcls.cls" To File.Dir(rutaTexto) & "/files/gbTeXcls.cls"
-  ' End If
 
 End
