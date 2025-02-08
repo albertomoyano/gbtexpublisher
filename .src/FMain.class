@@ -5607,9 +5607,9 @@ Public Sub btnVerAsunto3_Click()
 
 End
 
-Public Sub Menu5_Click()' blog de gbTeXpublisher
+Public Sub Menu5_Click()' área de debate de gbTeXpublisher
 
-  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher/wiki"
+  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher/discussions"
 
 End
 
