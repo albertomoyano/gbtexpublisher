@@ -504,7 +504,7 @@ End
 
 Public Sub Menu68_Click()
 
-  Form_gbTeX.ShowModal()
+  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher"
 
 End
 

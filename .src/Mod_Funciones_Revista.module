@@ -1,9 +1,5 @@
 ' Gambas module file
 
-' Private Name As String = File.Name(FMain.TextBox1.Text)
-' Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
-' Private rutaBase As String = File.Dir(FMain.TextBox1.Text)
-
 Public Sub CopiarArchivosRevista(rutaTexto As String)
 
   If Not Exist(File.Dir(rutaTexto) & "/media") Then

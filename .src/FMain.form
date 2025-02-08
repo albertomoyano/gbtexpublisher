@@ -291,7 +291,7 @@
     }
     { Menu5 Menu
       #Translate = False
-      Text = "Área de debate proyecto"
+      Text = "Área de debate del proyecto en GitHub"
       Picture = Picture["iconos/logfile.svg"]
     }
     { Menu24 Menu
