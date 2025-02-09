@@ -5546,7 +5546,6 @@
             { !txtURLdescarga TextBox
               MoveScaled(67,0,16,4)
               #Public = True
-              Visible = False
               Enabled = False
               Expand = True
             }

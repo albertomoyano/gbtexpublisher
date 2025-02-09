@@ -4238,7 +4238,7 @@ Public Sub btnNuevoCapitulo_Click()
   btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = True
   txtRangoPaginas.Enabled = True
-  txtURLdescarga.Enabled = True
+  ' txtURLdescarga.Enabled = True
 
 End
 
@@ -4257,7 +4257,7 @@ Public Sub MostrarListaCapNuevo() 'Función que rellena el GridView
   tblArticulos.Columns[0].Width = 0
   tblArticulos.Columns[1].Title = "Nombre de archivo"
   tblArticulos.Columns[1].Width = 0
-  tblArticulos.Columns[2].Title = "Número y título del capítulo"
+  tblArticulos.Columns[2].Title = "Capítulos del libro"
   tblArticulos.Columns[2].Width = 1000
   tblArticulos.Columns[3].Title = "Paginas"
   tblArticulos.Columns[3].Width = 100
@@ -4298,7 +4298,7 @@ Public Sub btnGuardarCapitulo_Click()
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
   chkURLdescarga.Value = False
-  txtURLdescarga.Enabled = False
+  ' txtURLdescarga.Enabled = False
 
 End
 
@@ -4343,7 +4343,7 @@ Public Sub btnBorrarCapitulo_Click()
   btnBorrarCapitulo.Visible = False
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
-  txtURLdescarga.Enabled = False
+  ' txtURLdescarga.Enabled = False
 
 End
 
@@ -4364,7 +4364,7 @@ Public Sub btnGuardarCambiosCapitulo_Click()
   txtCapitulo.Enabled = False
   txtRangoPaginas.Enabled = False
   chkURLdescarga.Value = False
-  txtURLdescarga.Enabled = False
+  ' txtURLdescarga.Enabled = False
 
 End
 
@@ -4524,7 +4524,7 @@ Public Sub tblArticulos_RowClick(Row As Integer)
   btnBorrarCapitulo.Visible = True
   txtCapitulo.Enabled = True
   txtRangoPaginas.Enabled = True
-  txtURLdescarga.Enabled = True
+  ' txtURLdescarga.Enabled = True
 
 End
 
@@ -5695,9 +5695,9 @@ End
 Public Sub chkURLdescarga_Click()
 
   If chkURLdescarga.Value = True Then
-    txtURLdescarga.Visible = True
+    txtURLdescarga.Enabled = True
   Else
-    txtURLdescarga.Visible = False
+    txtURLdescarga.Enabled = False
   End If
 
 End
