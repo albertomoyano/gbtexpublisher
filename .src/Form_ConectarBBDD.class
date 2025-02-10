@@ -54,7 +54,7 @@ Public Sub btnConectar_Click()
 
   ' condicional que revisa que exista la ruta y verifica si el TextBox está vacío o es Null
   If IsNull(txtBBDDorigen.Text) Or txtBBDDorigen.Text = "" Then
-    Message.Info("Por favor, complete la ruta donde debe estar la base de datos.")
+    Message.Error("Debe indicar una ruta válida donde encontrar la base de datos <strong>gbtexpublisher.sqlite</strong>.")
     Return ' Detiene la ejecución
   End If
 
