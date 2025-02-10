@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=Form_ConectarBBDD
 Icon=iconos/consola.png
-Version=0.1.552
+Version=0.1.553
 Component=gb.image
 Component=gb.qt5
 Component=gb.form
