@@ -1,7 +1,7 @@
 # Gambas Project File 3.0
 Title=gbTeXpublisher
 Startup=Form_ConectarBBDD
-Icon=iconos/consola.png
+Icon=iconos/terminal.png
 Version=0.1.554
 Component=gb.image
 Component=gb.qt5
@@ -29,7 +29,7 @@ VendorPrefix=AM
 Address=alberto.alejandro.moyano@gmail.com
 Url=https://github.com/albertomoyano
 License=Lesser General Public License V3
-PackageName=gbtexpublisher0-0.1.552
+PackageName=gbtexpublisher0-0.1.554
 PackageNameWithMajor=1
 CreateEachDirectory=1
 Packager=1
