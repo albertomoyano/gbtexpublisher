@@ -4,7 +4,6 @@
   MoveScaled(0,0,165,103)
   Visible = False
   Expand = True
-  Icon = Picture["iconos/icono-gbtex.svg"]
   Maximized = True
   Arrangement = Arrange.Vertical
   Spacing = True
