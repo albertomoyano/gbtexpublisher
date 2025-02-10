@@ -34,6 +34,7 @@
     { btnConectar Button
       MoveScaled(32,0,17.7778,4)
       Background = &H8BE06F
+      Foreground = Color.Black
       NoTabFocus = True
       Text = ("Conectar")
     }
