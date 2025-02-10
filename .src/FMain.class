@@ -498,7 +498,7 @@ End
 
 Public Sub Menu66_Click()
 
-  Form_Gambas.ShowModal()
+  Shell "xdg-open https://gambas.sourceforge.net/en/main.html"
 
 End
 
