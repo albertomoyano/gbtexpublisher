@@ -11,8 +11,9 @@
     MoveScaled(0,0,71,8)
     { PictureBox1 PictureBox
       MoveScaled(22,1,8,8)
+      NoTabFocus = True
       Picture = Picture.Load("iconos/terminal.png")
-      Stretch = True
+      AutoResize = True
       Alignment = Align.Center
     }
     { Spring2 Spring
