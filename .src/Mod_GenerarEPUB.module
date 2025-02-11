@@ -120,11 +120,21 @@ Public Sub creacionEpubPNG()' parte 2
   Print #archivoHTML, "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='es' lang='es'>"
   Print #archivoHTML, "<head>"
   Print #archivoHTML, "    <meta charset='UTF-8' />"
-  Print #archivoHTML, "    <title>" & BaseName & "</title>"
+  Print #archivoHTML, "    <meta name=\"generator\" content=\"EPUB Generator\">"
+  Print #archivoHTML, "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+  Print #archivoHTML, "    <html lang=\"es\">"
+
+  ' Print #archivoHTML, "    <title>" & BaseName & "</title>"
+  Print #archivoHTML, "    <style>"
+  Print #archivoHTML, "    img{"
+  Print #archivoHTML, "    max-width: 100 %;"
+  Print #archivoHTML, "    height: auto;"
+  Print #archivoHTML, "    }"
+  Print #archivoHTML, "    </style>"
   Print #archivoHTML, "</head>"
   Print #archivoHTML, "<body>"
-  Print #archivoHTML, "    <h1>" & BaseName & "</h1>"
-  Print #archivoHTML, "    <p>Este es el contenido de mi libro.</p>"
+  ' Print #archivoHTML, "    <h1>" & BaseName & "</h1>"
+  ' Print #archivoHTML, "    <p>Sumario.</p>"
   Print #archivoHTML, "</body>"
   Print #archivoHTML, "</html>"
 
@@ -172,11 +182,11 @@ Public Sub creacionEpubPNG()' parte 2
   Close archivoOPF
 
   ' Generar el EPUB con metadatos
-  FMain.TerminalView1.Input("ebook-convert " & rutaEPUB1 & "content.opf " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & " --title " & Quote(BaseName) & " --language es --cover " & rutaEPUB1 & "cover.png --toc-threshold=1" & "\n")
+  FMain.TerminalView1.Input("ebook-convert " & rutaEPUB1 & "content.opf " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & " --title " & Quote(BaseName) & " --language es --cover " & rutaEPUB1 & "cover.png --toc-threshold=1" & "\n" & "clear" & "\n")
   Wait 0.2
 
-  ' Validar el EPUB
-  FMain.TerminalView1.Input("epubcheck " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & "\n")
+  ' ' Validar el EPUB
+  ' FMain.TerminalView1.Input("epubcheck " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & "\n")
 
   ' Generar un AZW3 para Kindle
   FMain.TerminalView1.Input("ebook-convert " & rutaEPUB1 & "epub1-" & BaseName & ".epub " & File.Dir(FMain.TextBox1.Text) & "/ebook/kindle/kindle-" & BaseName & ".azw3" & "\n")
