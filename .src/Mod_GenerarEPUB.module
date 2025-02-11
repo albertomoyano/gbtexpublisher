@@ -123,8 +123,7 @@ Public Sub creacionEpubPNG()' parte 2
   Print #archivoHTML, "    <meta name=\"generator\" content=\"EPUB Generator\">"
   Print #archivoHTML, "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
   Print #archivoHTML, "    <html lang=\"es\">"
-
-  ' Print #archivoHTML, "    <title>" & BaseName & "</title>"
+  Print #archivoHTML, "    <title>" & BaseName & "</title>"
   Print #archivoHTML, "    <style>"
   Print #archivoHTML, "    img{"
   Print #archivoHTML, "    max-width: 100 %;"
