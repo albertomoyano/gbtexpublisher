@@ -1496,6 +1496,7 @@ Public Sub btnGuardar_Click()
     VListaBIB.ScrollY = 0
     btnGuardar.Visible = False
     btnGuardarIGUAL.Visible = True
+    TabPanel5.Index = 2
     Return ' Salir de la función si el título ya existe
   Endif
 
