@@ -1961,15 +1961,15 @@
             Text = ("Type ")
           }
           { cbType ComboBox
-            MoveScaled(20,0,23,4)
+            MoveScaled(17,0,26,4)
             ReadOnly = True
           }
           { Separator25 Separator
-            MoveScaled(40,0,0.8889,4)
+            MoveScaled(54,0,0.8889,4)
             Foreground = Color.Transparent
           }
           { txtTYPE TextBox
-            MoveScaled(45,0,20,4)
+            MoveScaled(56,0,20,4)
             Background = Color.Background
             NoTabFocus = True
             Expand = True
