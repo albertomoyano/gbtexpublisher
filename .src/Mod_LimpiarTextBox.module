@@ -38,6 +38,8 @@ Public Sub LimpiarCamposBIB()
   FMain.cbEDITORTYPEc.Text = ""
   FMain.cbLANGUAGEID.Text = ""
   FMain.cbOPTIONS.Text = ""
+  FMain.txtLANGUAGE.Text = ""
+  FMain.txtORIGLANGUAGE.Text = ""
   FMain.txtETIQ.Clear
   FMain.txtKEYWORDS.Clear
   FMain.txtCROSSREF.Clear

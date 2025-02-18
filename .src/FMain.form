@@ -1656,7 +1656,7 @@
           }
         }
         { HBox68 HBox
-          MoveScaled(-46,13,158,4)
+          MoveScaled(-12,13,158,4)
           { lblHyphenation Label
             MoveScaled(0,0,16,3.5556)
             #Translate = False
@@ -1677,7 +1677,7 @@
             Text = ("Language ")
           }
           { txtLANGUAGE ComboBox
-            MoveScaled(43,0,18,4)
+            MoveScaled(47,0,18,4)
             NoTabFocus = True
             Expand = True
             ReadOnly = True
