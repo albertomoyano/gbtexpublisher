@@ -355,7 +355,6 @@ Public Sub menuAbrir_Click()'abrir un libro
     menuTOOLS.Enabled = True
     menuScriptsExternos.Enabled = True
     menuLTX.Enabled = True
-    MenuApp.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     btnMenuGitLab.Enabled = True
@@ -470,11 +469,11 @@ Public Sub menuHTMLghp_Click()'ver pagina index.html
 
 End
 
-Public Sub menu3_Click()'ver pdf página para web
+Public Sub menuwebPDFcompleto_Click()'ver pdf página para web
 
   Dim filePath As String
 
-  filePath = File.Dir(TextBox1.Text) & "/pdf/web-" & BaseName & ".pdf"
+  filePath = File.Dir(TextBox1.Text) & "/docs/web-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
     Shell "xdg-open " & filePath
@@ -1923,7 +1922,6 @@ Public Sub eliminarBlancosBIB()
   EliminarEspaciosAlInicioYFinal(txtVENUE)
   EliminarEspaciosAlInicioYFinal(txtBookPagination)
   EliminarEspaciosAlInicioYFinal(txtLANGIDOPTS)
-  EliminarEspaciosAlInicioYFinal(txtORIGLANGUAGE)
   EliminarEspaciosAlInicioYFinal(txtISAN)
   EliminarEspaciosAlInicioYFinal(txtXREF)
   EliminarEspaciosAlInicioYFinal(txtXDATA)
@@ -3294,7 +3292,6 @@ Public Sub menuAbrirQuarto_Click()
     menuTOOLS.Enabled = True
     menuScriptsExternos.Enabled = True
     menuLTX.Enabled = True
-    MenuApp.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     btnMenuGitLab.Enabled = True

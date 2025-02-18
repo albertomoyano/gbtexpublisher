@@ -223,12 +223,12 @@
     Visible = False
     { menuPDFweb Menu
       #Translate = False
-      Text = "PDF completo para la web"
+      Text = "PDF completo para web"
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuOT Menu
       #Translate = False
-      Text = "Orden de trabajo para imprenta"
+      Text = "Orden de Trabajo para imprenta"
       Picture = Picture["iconos/acroread.svg"]
     }
     { menuDisclaimer Menu
@@ -238,7 +238,7 @@
     }
     { menuCatalogo Menu
       #Translate = False
-      Text = "Gacetilla de prensa"
+      Text = "Gacetilla para prensa"
       Picture = Picture["iconos/acroread.svg"]
     }
   }
@@ -258,25 +258,27 @@
     }
     { Menu22 Menu
     }
-    { Menu74 Menu
+    { menuwebPDFcompleto Menu
       #Translate = False
-      Text = "Ver página del catálogo"
-    }
-    { menuComentarios Menu
-      #Translate = False
-      Text = "Ver página de comentarios"
-    }
-    { Menu3 Menu
-      #Translate = False
-      Text = "Ver archivo PDF para web"
+      Text = "Ver archivo PDF completo para web"
     }
     { menuVerOt Menu
       #Translate = False
-      Text = "Ver orden para impresión"
+      Text = "Ver Orden de Trabajo para imprenta"
+    }
+    { menuComentarios Menu
+      #Translate = False
+      Text = "Ver página de comentarios para corrección"
+    }
+    { Menu74 Menu
+      #Translate = False
+      Text = "Ver página de Gacetilla para prensa"
+    }
+    { Menu3 Menu
     }
     { menuHTMLghp Menu
       #Translate = False
-      Text = "Ver página HTML para Pages"
+      Text = "Ver página HTML estática /docs"
     }
   }
   { Menu57 Menu
@@ -430,15 +432,6 @@
   }
   { HBox9 HBox
     MoveScaled(1,8,155,4)
-    { MenuApp MenuButton
-      MoveScaled(1,0,17.7778,4)
-      #Translate = False
-      Enabled = False
-      Text = "Ver salidas"
-      Picture = Picture["iconos/document.svg"]
-      Menu = "AbrirApp"
-      MenuOnly = True
-    }
     { Separator12 Separator
       MoveScaled(20,0,0.8889,4)
       Foreground = Color.Transparent
@@ -555,23 +548,36 @@
           Arrangement = Arrange.Vertical
           { HBox182 HBox
             MoveScaled(1,1,69,4)
-            { MenuButton2 MenuButton
-              MoveScaled(1,0,23,4)
+            { MenuApp MenuButton
+              MoveScaled(0,0,17,4)
+              #Translate = False
               Expand = True
-              Text = ("Procesar archivos por lotes")
-              Picture = Picture["iconos/conversor.svg"]
+              Text = "Ver salidas"
+              Picture = Picture["iconos/document.svg"]
+              Menu = "AbrirApp"
               MenuOnly = True
             }
             { Separator10 Separator
-              MoveScaled(26,0,0.8889,4)
+              MoveScaled(18,0,0.8889,4)
               Foreground = Color.Transparent
             }
             { MenuButton3 MenuButton
-              MoveScaled(33,0,23,4)
+              MoveScaled(22,0,19,4)
               Expand = True
               Text = ("Complementos para PDF y ePub")
               Picture = Picture["iconos/conversor.svg"]
               Menu = "menuLTX"
+              MenuOnly = True
+            }
+            { Separator24 Separator
+              MoveScaled(42,0,0.8889,4)
+              Foreground = Color.Transparent
+            }
+            { MenuButton2 MenuButton
+              MoveScaled(45,0,17,4)
+              Expand = True
+              Text = ("Procesar archivos por lotes")
+              Picture = Picture["iconos/conversor.svg"]
               MenuOnly = True
             }
           }
@@ -1704,7 +1710,7 @@
           }
         }
         { HBox68 HBox
-          MoveScaled(2,25,88,4)
+          MoveScaled(2,25,104,4)
           { lblLocation6 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1722,12 +1728,11 @@
             Alignment = Align.Right
             Text = ("  OrigLanguage ")
           }
-          { txtORIGLANGUAGE TextBox AllTextBoxes
-            Name = "txtORIGLANGUAGE"
-            MoveScaled(55,0,21,4)
+          { txtORIGLANGUAGE ComboBox
+            MoveScaled(57,0,18,4)
+            NoTabFocus = True
             Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Placeholder = ("orig language of work")
+            ReadOnly = True
           }
         }
         { HBox63 HBox
