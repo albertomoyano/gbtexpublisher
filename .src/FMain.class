@@ -1948,7 +1948,6 @@ Public Sub eliminarBlancosBIB()
   EliminarEspaciosAlInicioYFinal(txtSHORTHANDINTRO)
   EliminarEspaciosAlInicioYFinal(txtIDS)
   EliminarEspaciosAlInicioYFinal(txtENTRYSET)
-  EliminarEspaciosAlInicioYFinal(txtLANGUAGE)
   EliminarEspaciosAlInicioYFinal(txtTitleAddOn)
 
 End

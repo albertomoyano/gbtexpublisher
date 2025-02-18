@@ -104,7 +104,6 @@ Public Sub LimpiarCamposBIB()
   FMain.txtVENUE.Clear
   FMain.txtBookPagination.Clear
   FMain.txtLANGIDOPTS.Clear
-  FMain.txtORIGLANGUAGE.Clear
   FMain.txtISAN.Clear
   FMain.txtXREF.Clear
   FMain.txtXDATA.Clear
@@ -133,7 +132,6 @@ Public Sub LimpiarCamposBIB()
   FMain.txtIDS.Clear
   FMain.txtENTRYSET.Clear
   FMain.txtNOTE.Clear
-  FMain.txtLANGUAGE.Clear
   FMain.txtTitleAddOn.Clear
   FMain.txtSubTitle.Clear
 
