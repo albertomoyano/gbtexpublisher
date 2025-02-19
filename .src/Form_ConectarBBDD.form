@@ -1,63 +1,109 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,83,37)
+  Move(0,0,747,351)
+  #Scaled = False
+  Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True
   Spacing = True
   Margin = True
   Padding = 4
   { HBox3 HBox
-    MoveScaled(0,0,71,8)
+    Move(0,0,639,72)
     { PictureBox1 PictureBox
-      MoveScaled(22,1,8,8)
+      Move(198,0,72,72)
       NoTabFocus = True
       Picture = Picture.Load("iconos/terminal.png")
       AutoResize = True
       Alignment = Align.Center
     }
     { Spring2 Spring
-      MoveScaled(50,2,15,3)
+      Move(450,18,135,27)
     }
   }
-  { HBox1 HBox
-    MoveScaled(0,14,50,4)
-    { btnSelecionarBBDD Button
-      MoveScaled(0,0,21,4)
-      NoTabFocus = True
-      ToolTip = ("Seleccionar la base de datos")
-      Text = ("Base de datos")
-      Picture = Picture["iconos/basededatos.svg"]
+  { TabPanel1 TabPanel
+    Move(0,81,738,216)
+    Arrangement = Arrange.Vertical
+    Spacing = True
+    Margin = True
+    Padding = 4
+    Count = 2
+    Index = 0
+    Text = ("SQLite")
+    { HBox1 HBox
+      Move(0,36,450,36)
+      { btnSelecionarBBDD Button
+        Move(0,0,189,36)
+        NoTabFocus = True
+        ToolTip = ("Seleccionar la base de datos")
+        Text = ("Base de datos")
+        Picture = Picture["iconos/basededatos.svg"]
+      }
+      { txtBBDDorigen TextBox
+        Move(252,0,144,36)
+        Background = Color.Background
+        Foreground = Color.Blue
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
+      }
     }
-    { txtBBDDorigen TextBox
-      MoveScaled(28,0,16,4)
-      Background = Color.Background
-      Foreground = Color.Blue
-      NoTabFocus = True
+    { HBox2 HBox
+      Move(0,72,720,36)
+      { Spring1 Spring
+        Move(90,0,81,36)
+        NoTabFocus = True
+      }
+      { btnConectar Button
+        Move(288,0,160,36)
+        Background = &H8BE06F
+        Foreground = Color.Black
+        NoTabFocus = True
+        Text = ("Conectar")
+      }
+    }
+    Index = 1
+    Text = ("MariaDB")
+    { HBox6 HBox
+      Move(27,9,450,36)
       Expand = True
-      ReadOnly = True
+      AutoResize = True
     }
+    { HBox7 HBox
+      Move(27,45,450,36)
+      Expand = True
+      AutoResize = True
+    }
+    { HBox5 HBox
+      Move(27,81,450,36)
+      Expand = True
+      AutoResize = True
+    }
+    { HBox4 HBox
+      Move(27,117,702,36)
+      Expand = True
+      AutoResize = True
+      { Spring3 Spring
+        Move(90,0,81,36)
+        NoTabFocus = True
+      }
+      { Separator1 Separator
+        Move(477,0,8,36)
+        Foreground = Color.Transparent
+        NoTabFocus = True
+      }
+    }
+    Index = 0
   }
-  { HBox2 HBox
-    MoveScaled(0,18,83,4)
-    { Spring1 Spring
-      MoveScaled(10,0,9,4)
-      NoTabFocus = True
-    }
-    { btnConectar Button
-      MoveScaled(32,0,17.7778,4)
-      Background = &H8BE06F
-      Foreground = Color.Black
-      NoTabFocus = True
-      Text = ("Conectar")
-    }
-    { Separator11 Separator
-      MoveScaled(53,0,0.8889,4)
-      Foreground = Color.Transparent
+  { HBox8 HBox
+    Move(0,306,720,36)
+    { Spring4 Spring
+      Move(90,0,81,36)
       NoTabFocus = True
     }
     { btnCerrar ToolButton
-      MoveScaled(58,0,17.7778,4)
+      Move(468,0,164,36)
       Background = &HE00000
       Foreground = Color.White
       NoTabFocus = True
