@@ -29,6 +29,15 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaAY-config.tex") Then
     Copy "./biblatex-veronaAY-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaAY-config.tex"
   End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaFN-config.tex") Then
+    Copy "./biblatex-veronaFN-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaFN-config.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-APA-config.tex") Then
+    Copy "./biblatex-APA-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-APA-config.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex") Then
+    Copy "./biblatex-ISO690-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex"
+  End If
 
   'copiamos los archivos de configuracion general
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
