@@ -92,7 +92,7 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   End If
 
   ' aseguramos que los epub y kindle no vayan al repositorio
-  If Not File.RealPath(File.Dir(rutaTexto) & "/gitignore") Then
+  If Not File.RealPath(File.Dir(rutaTexto) & "/.gitignore") Then
     Copy "./gitignore" To File.Dir(rutaTexto) & "/.gitignore"
   End If
 
