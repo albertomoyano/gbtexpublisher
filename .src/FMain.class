@@ -52,8 +52,6 @@ Public Sub Form_Open()
 
   Dim archivos As String[] = [
     "falta-tapa.png",
-    "gitignore_github",
-    "gitignore_gitlab",
     "Buscar_palabra_Gambas.py"
   ]
 
