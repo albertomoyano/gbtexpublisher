@@ -5847,3 +5847,9 @@ Public Sub cmbRolColaborador_Click()
   End Select
 
 End
+
+Public Sub btnKitty_Click()
+
+  Shell "kitty"
+
+End
