@@ -4,6 +4,7 @@ Public meConn As New Connection
 Public Contenido As Result
 Public ContenidoBibTotal As Result' resultado completo de bibtex
 Public ContenidoBibActual As Result' resultado actual de bibtex
+Public ContenidoGLOTotal As Result
 Private ContenidoComenta As Result
 Private ContenidoGHP As Result
 Private Busqueda As Result
@@ -174,6 +175,12 @@ Public Sub Form_Open()
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
   tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
+
+  '
+  ContenidoGLOTotal = meConn.Exec("SELECT * FROM glosarios ORDER BY name ASC")'
+  VGridGLO.Rows.Count = ContenidoGLOTotal.Count
+  ' glosarios debe pasar a evento data
+  Mostrar_ListaGLO()
 
   ' por default hacemos no mostramos el hbox de los artículos
   HBoxNuevoArtCap.Enabled = False
@@ -536,7 +543,7 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
 
   VGridGLO.Clear()
 
-  Comando = "select * from glosarios ORDER BY id DESC"
+  Comando = "select * from glosarios ORDER BY name ASC"
   Contenido = meConn.Exec(Comando)
 
   'diseñamos el tableview
@@ -597,6 +604,8 @@ Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
   btnAgregarGloKey.Visible = False
 
   Mod_LimpiarTextBox.LimpiarCamposGLO()
+
+  VGridGLO.Refresh()
 
 End
 
@@ -690,7 +699,7 @@ Public Sub btnAgregarGloKey_Click()
 
   Dim textoOrigen As String
 
-  textoOrigen = txtTEXT.Text
+  textoOrigen = txtNAME.Text
 
   ' Reemplaza caracteres problemáticos
   textoOrigen = Replace(textoOrigen, "´", "")
@@ -789,9 +798,6 @@ Public Sub BtnNuevoGlo_Click()
 
   Mod_LimpiarTextBox.LimpiarCamposGLO()
 
-  txtTMPglo.Clear
-  txtTMPglo.SetFocus()
-
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
   Contenido = meConn.Exec("SELECT MAX(id) FROM glosarios LIMIT 1")
 
@@ -880,6 +886,8 @@ Public Sub btnGuardarGlo_Click()
   BtnEliminarGlo.Visible = False
   btnAgregarGloKey.Visible = False
 
+  Mostrar_ListaGLO()
+
 End
 
 Public Sub btnGuardarCambiosGlo_Click()
@@ -897,9 +905,12 @@ Public Sub btnGuardarCambiosGlo_Click()
   guardarCamposGLO
   Contenido.Update
   RefrescarGrid()
+
   Message.Info("Los cambios se guardaron con éxito.")
 
   Mod_LimpiarTextBox.LimpiarCamposGLO()
+
+  Mostrar_ListaGLO()
 
 End
 
@@ -5549,7 +5560,7 @@ End
 Public Sub RefrescarGrid()
 
   VListaBIB.Clear()
-  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
+  ContenidoBibTotal = meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
   tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
@@ -5561,7 +5572,9 @@ Public Sub RefrescarGrid()
   gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
   tbRefDup.Rows.Count = ContenidoBibActual.Count
 
-  VGridGLO.Refresh
+  VGridGLO.Clear()
+  ContenidoGLOTotal = meConn.Exec("SELECT * FROM glosarios ORDER BY id DESC")'
+  VGridGLO.Rows.Count = ContenidoGLOTotal.Count
 
   ' refrescamos los contadores
   TotalEntradasBIByGLO()
@@ -5571,13 +5584,16 @@ End
 
 Public Sub Form_Activate()
 
-  ContenidoBibTotal = FMain.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
+  ContenidoBibTotal = meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")'
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
   VListaBIB.Refresh
   griBibOriginal.Rows.Count = ContenidoBibTotal.Count
   griBibOriginal.Refresh
   tblReferenciaOrigen.Rows.Count = ContenidoBibTotal.Count
   tblReferenciaOrigen.Refresh
+  ContenidoGLOTotal = meConn.Exec("SELECT * FROM glosarios ORDER BY name ASC")'
+  VGridGLO.Rows.Count = ContenidoGLOTotal.Count
+  VGridGLO.Refresh
 
 End
 

@@ -625,7 +625,7 @@
         Text = ("Caja de texto temporal     ")
         Picture = Picture["iconos/textnormal.svg"]
         { txtTMPbiblio TextArea
-          MoveScaled(2,0,36,13)
+          MoveScaled(2,2,36,13)
           Enabled = False
           Background = Color.LightGray
           Expand = True
@@ -803,7 +803,7 @@
       }
     }
     { TabPanel2 TabPanel
-      MoveScaled(1,44,155,66)
+      MoveScaled(1,45,155,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True
@@ -2823,28 +2823,37 @@
     Index = 2
     Text = ("Siglas y glosarios     ")
     Picture = Picture["iconos/glosarios.svg"]
-    { HBox15 Panel
-      MoveScaled(1,0,15,10)
-      NoTabFocus = True
-      Arrangement = Arrange.Horizontal
-      { txtTMPglo TextArea
-        MoveScaled(0,0,12,6)
-        Expand = True
-        Wrap = True
-        ScrollBar = Scroll.Vertical
-      }
-    }
     { HBox8 Panel
-      MoveScaled(3,10,52,20)
+      MoveScaled(1,1,122,27)
       NoTabFocus = True
       Arrangement = Arrange.Horizontal
-      { HBox6 Panel
-        MoveScaled(3,0,40,19)
-        NoTabFocus = True
+      { TabPanel3 TabPanel
+        MoveScaled(1,1,119,25)
         Expand = True
         Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
+        Count = 3
+        Index = 0
+        Text = ("Caja de texto temporal     ")
+        Picture = Picture["iconos/textnormal.svg"]
+        { txtTMPglosario TextArea
+          MoveScaled(1,1,13,6)
+          Enabled = False
+          Background = Color.LightGray
+          Expand = True
+          Wrap = True
+          ScrollBar = Scroll.Vertical
+        }
+        Index = 1
+        Text = ("Siglas y glosarios (archivo en curso)     ")
+        Picture = Picture["iconos/face.svg"]
+        Index = 2
+        Text = ("Siglas y glosarios (todas)     ")
+        Picture = Picture["iconos/bibtex.svg"]
         { VGridGLO TableView
-          MoveScaled(14,1,17,9)
+          MoveScaled(1,1,30,10)
           Font = Font["-1"]
           Expand = True
           Mode = Select.Single
@@ -2852,6 +2861,7 @@
           Header = GridView.Horizontal
           Resizable = False
         }
+        Index = 0
       }
     }
     { HBox16 HBox
@@ -2902,8 +2912,55 @@
         Alignment = Align.Center
       }
     }
+    { HBox2 HBox
+      MoveScaled(1,35,112,4)
+      { btnBuscarClaveGLO Button
+        MoveScaled(0,0,4,4)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { lblAlta2 Label
+        MoveScaled(5,0,12.4444,4)
+        Alignment = Align.Right
+        Text = ("Clave  ")
+      }
+      { btnAgregarGloKey Button
+        MoveScaled(18,0,4,4)
+        ToolTip = ("Agregar clave")
+        Picture = Picture["iconos/clave.svg"]
+      }
+      { txtCLAVEglo TextBox
+        MoveScaled(23,0,14,4)
+        NoTabFocus = True
+        ToolTip = ("Clave para ser utilizada solo con LaTeX")
+        Expand = True
+        Alignment = Align.Left
+        Placeholder = ("Clave GLO única")
+      }
+      { lblAlta3 Label
+        MoveScaled(38,0,21,4)
+        AutoResize = True
+        Alignment = Align.Right
+        Text = ("    Será exportado como  ")
+      }
+      { !txtEXPORTARglo TextBox
+        MoveScaled(59,0,23,4)
+        #Public = True
+        Background = Color.Background
+        Foreground = Color.Blue
+        NoTabFocus = True
+        Expand = True
+        ReadOnly = True
+      }
+      { Separator7 Separator
+        MoveScaled(85,0,2.3333,4)
+      }
+      { btnParcialGLO Button
+        MoveScaled(89,0,16,4)
+        Picture = Picture["iconos/face.svg"]
+      }
+    }
     { HBox7 HBox
-      MoveScaled(1,35,103,4)
+      MoveScaled(1,39,103,4)
       { Label11 Label
         MoveScaled(0,0,16.4444,4)
         Font = Font["Bold"]
@@ -2942,71 +2999,22 @@
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
-      Margin = True
       Padding = 4
       Border = False
       ScrollBar = Scroll.Vertical
-      { HBox2 HBox
-        MoveScaled(0,0,121,4)
-        { btnBuscarClaveGLO Button
-          MoveScaled(0,0,4,4)
-          Picture = Picture["iconos/search.svg"]
-        }
-        { lblAlta2 Label
-          MoveScaled(5,0,12,4)
-          Alignment = Align.Right
-          Text = ("Clave  ")
-        }
-        { btnAgregarGloKey Button
-          MoveScaled(18,0,4,4)
-          ToolTip = ("Agregar clave")
-          Picture = Picture["iconos/clave.svg"]
-        }
-        { txtCLAVEglo TextBox
-          MoveScaled(23,0,14,4)
-          NoTabFocus = True
-          ToolTip = ("Clave para ser utilizada solo con LaTeX")
-          Expand = True
-          Alignment = Align.Left
-          Placeholder = ("Clave GLO única")
-        }
-        { lblAlta3 Label
-          MoveScaled(38,0,21,4)
-          AutoResize = True
-          Alignment = Align.Right
-          Text = ("    Será exportado como  ")
-        }
-        { !txtEXPORTARglo TextBox
-          MoveScaled(59,0,23,4)
-          #Public = True
-          Background = Color.Background
-          Foreground = Color.Blue
-          NoTabFocus = True
-          Expand = True
-          ReadOnly = True
-        }
-        { Separator7 Separator
-          MoveScaled(103,0,2.3333,4)
-        }
-        { btnParcialGLO Button
-          MoveScaled(106,0,16,4)
-          Picture = Picture["iconos/face.svg"]
-        }
-      }
       { HBox17 HBox
-        MoveScaled(1,7,87,4)
+        MoveScaled(2,1,87,4)
         { btnBuscarNombreGLO Button
           MoveScaled(1,0,4,4)
           Picture = Picture["iconos/search.svg"]
         }
         { lblKEYWORDS2 Label
-          MoveScaled(10,0,12,4)
+          MoveScaled(10,0,12.4444,4)
           #Translate = False
           Alignment = Align.Right
           Text = "Nombre "
         }
-        { txtNAME TextBox AllTextBoxes
-          Name = "txtNAME"
+        { txtNAME TextBox
           MoveScaled(28,0,24,4)
           NoTabFocus = True
           Expand = True
@@ -3015,13 +3023,9 @@
         }
       }
       { HBox20 HBox
-        MoveScaled(1,11,87,4)
-        { ButtonMostrarTextoGlo Button
-          MoveScaled(1,0,4,4)
-          Picture = Picture["iconos/schedule.svg"]
-        }
+        MoveScaled(2,5,87,4)
         { Label12 Label
-          MoveScaled(7,0,12,3.5556)
+          MoveScaled(1,0,16.4444,3.5556)
           Alignment = Align.Right
           Text = ("Description ")
         }
@@ -3032,11 +3036,15 @@
           PopupMenu = "menuTEXTBOX"
           Placeholder = ("La descripción del término.")
         }
+        { ButtonMostrarTextoGlo Button
+          MoveScaled(37,0,4,4)
+          Picture = Picture["iconos/schedule.svg"]
+        }
       }
       { HBox5 HBox
-        MoveScaled(1,15,87,4)
+        MoveScaled(2,9,87,4)
         { Label7 Label
-          MoveScaled(2,0,16,3.5556)
+          MoveScaled(2,0,16.4444,3.5556)
           Alignment = Align.Right
           Text = ("Primera vez ")
         }
@@ -3049,13 +3057,13 @@
         }
       }
       { HBox10 HBox
-        MoveScaled(1,19,87,4)
+        MoveScaled(2,13,87,4)
         { btnBuscarTextoGLO Button
           MoveScaled(1,0,4,4)
           Picture = Picture["iconos/search.svg"]
         }
         { Label8 Label
-          MoveScaled(17,0,12,3.5556)
+          MoveScaled(17,0,12.4444,3.5556)
           Alignment = Align.Right
           Text = ("Text ")
         }
@@ -3068,9 +3076,9 @@
         }
       }
       { HBox11 HBox
-        MoveScaled(1,23,87,4)
+        MoveScaled(2,17,87,4)
         { Label1 Label
-          MoveScaled(2,0,16,3.5556)
+          MoveScaled(2,0,16.4444,3.5556)
           Alignment = Align.Right
           Text = ("Firstplural ")
         }
@@ -3083,9 +3091,9 @@
         }
       }
       { HBox12 HBox
-        MoveScaled(1,27,87,4)
+        MoveScaled(2,21,87,4)
         { lblLANGID2 Label
-          MoveScaled(0,0,16,4)
+          MoveScaled(0,0,16.4444,4)
           Alignment = Align.Right
           Text = ("Plural ")
         }
@@ -3098,9 +3106,9 @@
         }
       }
       { HBox13 HBox
-        MoveScaled(0,31,87,4)
+        MoveScaled(2,25,87,4)
         { lblLANGID1 Label
-          MoveScaled(0,0,16,4)
+          MoveScaled(0,0,16.4444,4)
           Alignment = Align.Right
           Text = ("Sort ")
         }
