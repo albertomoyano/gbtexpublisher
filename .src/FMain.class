@@ -3767,7 +3767,7 @@ Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales contarEntradas
   Contenido = meConn.Exec("SELECT COUNT(*) FROM glosarios")
   RecordGLO = Contenido[0]
   CountGLO = RecordGLO
-  lblTotalesGLO.Text = "<b>Total de entradas en la base de datos: " & CountGLO & "</b>"
+  lblTotalesGLO.Text = "<b>Total de siglas y glosarios en la base de datos: " & CountGLO & "</b>"
 
 End
 

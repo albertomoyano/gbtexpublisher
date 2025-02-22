@@ -797,9 +797,11 @@
         Text = ("Tipo de entrada ")
       }
       { ComboBox1 ComboBox
-        MoveScaled(28,0,15,4)
-        Expand = True
+        MoveScaled(28,0,24,4)
         ReadOnly = True
+      }
+      { Spring7 Spring
+        MoveScaled(62,0,27,3)
       }
     }
     { TabPanel2 TabPanel
@@ -2987,10 +2989,12 @@
         Text = ("Tipo de entrada  ")
       }
       { cbTYPEentradaGlo ComboBox
-        MoveScaled(17,0,16,4)
+        MoveScaled(17,0,24,4)
         NoTabFocus = True
-        Expand = True
         ReadOnly = True
+      }
+      { Spring13 Spring
+        MoveScaled(56,0,26,3)
       }
     }
     { ScrollView9 ScrollView
