@@ -2880,11 +2880,6 @@
         ToolTip = ("Borrar entrada")
         Picture = Picture["iconos/borrar.svg"]
       }
-      { BtnRefrescarGlo Button
-        MoveScaled(8,0,4,4)
-        ToolTip = ("Refrescar listado de la base de datos")
-        Picture = Picture["iconos/refrescar.svg"]
-      }
       { btnGuardarGlo Button
         MoveScaled(12,0,4,4)
         ToolTip = ("Guardar modificaciones")

@@ -129,7 +129,6 @@ Public Sub Form_Open()
   ' botonera glosario de inicio
   BtnNuevoGlo.Visible = True
   BtnEliminarGlo.Visible = False
-  BtnRefrescarGlo.Visible = False
   btnGuardarGlo.Visible = False
   btnGuardarCambiosGlo.Visible = False
   btnAgregarGloKey.Visible = False
@@ -593,22 +592,6 @@ Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
 
 End
 
-Public Sub BtnRefrescarGlo_Click()'refrescamos la vista
-
-  ' Mostrar_ListaGLO
-  BtnNuevoGlo.Visible = True
-  BtnEliminarGlo.Visible = False
-  BtnRefrescarGlo.Visible = False
-  btnGuardarGlo.Visible = False
-  btnGuardarCambiosGlo.Visible = False
-  btnAgregarGloKey.Visible = False
-
-  Mod_LimpiarTextBox.LimpiarCamposGLO()
-
-  VGridGLO.Refresh()
-
-End
-
 Public Sub txtCLAVEglo_KeyRelease()' Convertir el texto ingresado a minusculas
 
   ' Obtener el texto actual del TextBox
@@ -789,7 +772,6 @@ Public Sub BtnNuevoGlo_Click()
 
   BtnNuevoGlo.Visible = False
   BtnEliminarGlo.Visible = False
-  BtnRefrescarGlo.Visible = False
   btnGuardarGlo.Visible = True
   btnGuardarCambiosGlo.Visible = False
   btnAgregarGloKey.Visible = True
@@ -937,8 +919,6 @@ End
 
 Public Sub btnBuscarNombreGLO_Click()
 
-  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
-
   Dim Comando As String
   Dim rowIndex As Integer
 
@@ -986,8 +966,6 @@ End
 
 Public Sub btnBuscarTextoGLO_Click()
 
-  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
-
   Dim Comando As String
   Dim rowIndex As Integer
 
@@ -1034,8 +1012,6 @@ Public Sub btnBuscarTextoGLO_Click()
 End
 
 Public Sub btnBuscarClaveGLO_Click()
-
-  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
@@ -2729,8 +2705,6 @@ Public Sub BtnBuscarJournal_Click()
 End
 
 Public Sub btnBuscarFiltroGlosario_Click()
-
-  BtnRefrescarGlo.Visible = True ' Mostramos el botón de refresh en el form original para recargar las entradas
 
   Dim Comando As String
   Dim rowIndex As Integer
