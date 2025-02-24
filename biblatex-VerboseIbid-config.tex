@@ -1,5 +1,8 @@
 %refsection=chapter,% para obtener las referencias por capítulo
-\usepackage[style=verbose-ibid,
+\usepackage[style=philosophy-verbose,
+commacit=true,
+volnumformat=strings,
+relatedformat=brackets,
 citetracker=context,
 ibidtracker=true,
 pagetracker=true,
@@ -12,6 +15,11 @@ useprefix=true,
 citereset=chapter,
 texencoding=utf8,
 bibencoding=utf8,
+singletitle=true,
+scauthorsbib=true,
+lowscauthors=true,
+inbeforejournal=true,
+latinemph=true,
 sorting=nyvt]{biblatex}
 
 %GENERAR LOS INDICES, DESACTIVAMOS LAS OPCIONES PARA TITULOS
@@ -68,18 +76,10 @@ sorting=nyvt]{biblatex}
 %modifico el valor por default (4) de indentacion del año
 \setlength{\bibhang}{3pc}
 
+% especificamos el corte para las url
 \defcounter{biburlnumpenalty}{3000}
 \defcounter{biburlucpenalty}{6000}
 \defcounter{biburllcpenalty}{9000}
-
-% agregamos vol y n.° en el modo footcite
-\renewbibmacro*{volume+number+eid}{%
-	\printfield{volume}%
-	\newunit
-	\printfield{number}%
-	\newunit
-	\printfield{eid}%
-}
 
 %% REDISEÑO PARA OBTENER MODO LARGO EN ALGUNAS ENTRADAS
 \NewBibliographyString{organizator}
@@ -151,7 +151,10 @@ sorting=nyvt]{biblatex}
 	backrefpages     = {re\-fe\-ren\-cia ci\-ta\-da en pági\-nas},
 	seenote          = {véase nota},
 	quotedin         = {citado en},
-	opcit            = {\emph{op\adddotspace cit\adddot}},
+	opcited          = {op\adddot~cit\adddot},
+	opcit            = {op\adddot~cit\adddot},
+	ibidem           = {\emph{ibidem}},
+	loccit           = {ibidem},
 	idem             = {ídem},
 	idemsf           = {ídem},
 	idemsm           = {ídem},
@@ -160,7 +163,6 @@ sorting=nyvt]{biblatex}
 	idempm           = {ídem},
 	idempn           = {ídem},
 	idempp           = {ídem},
-	ibidem           = {\emph{ibidem}},
 	prepublished     = {previamente publicado},
 	nodate           = {s/f},
 	withcommentator  = {con comentario de},
