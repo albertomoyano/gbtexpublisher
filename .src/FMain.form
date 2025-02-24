@@ -365,7 +365,8 @@
     }
     { btnKitty Button
       MoveScaled(109,0,4,4)
-      Picture = Picture["iconos/terminal.svg"]
+      Enabled = False
+      Picture = Picture["iconos/kitty.svg"]
     }
     { btnCerrarPrograma Button
       MoveScaled(114,0,14,4)

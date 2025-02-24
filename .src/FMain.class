@@ -359,6 +359,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     menuTOOLS.Enabled = True
     menuScriptsExternos.Enabled = True
     menuLTX.Enabled = True
+    btnKitty.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     btnMenuGitLab.Enabled = True
@@ -5850,6 +5851,6 @@ End
 
 Public Sub btnKitty_Click()
 
-  Shell "kitty"
+  Shell "kitty --directory " & File.Dir(TextBox1.Text)
 
 End
