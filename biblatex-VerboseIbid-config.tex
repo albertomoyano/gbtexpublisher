@@ -1,30 +1,18 @@
 %refsection=chapter,% para obtener las referencias por capítulo
-\usepackage[style=philosophy-verbose,% modelo para notas a pie
-autocite=footnote,
+\usepackage[style=verbose-ibid,
 citetracker=context,
 ibidtracker=true,
 pagetracker=true,
 ibidpage=true,
 indexing=true,
-singletitle=false,% op. cit. para este modelo
 sortcites=true,
 backend=biber,
-labeldateparts=true,
 backref=true,
 useprefix=true,
 citereset=chapter,
 texencoding=utf8,
 bibencoding=utf8,
-latinemph=true,
-commacit=true,% coma después del shorttitle
-lowscauthors=true,
-scauthorsbib=true,
-annotation=true,
-relatedformat=brackets,
-publocformat=loccolonpub,
-volnumformat=strings,
-sorting=nyvt,
-shorthandintro=true]{biblatex}
+sorting=nyvt]{biblatex}
 
 %GENERAR LOS INDICES, DESACTIVAMOS LAS OPCIONES PARA TITULOS
 \renewbibmacro*{bibindex}{%
