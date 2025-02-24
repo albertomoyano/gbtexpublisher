@@ -1,11 +1,12 @@
 %refsection=chapter,% para obtener las referencias por capítulo
 \usepackage[style=philosophy-verbose,
+autocite=footnote,
+citetracker=context,
+ibidtracker=constrict,
+pagetracker=true,
 commacit=true,
 volnumformat=strings,
 relatedformat=brackets,
-citetracker=context,
-ibidtracker=true,
-pagetracker=true,
 ibidpage=true,
 indexing=true,
 sortcites=true,
@@ -15,7 +16,7 @@ useprefix=true,
 citereset=chapter,
 texencoding=utf8,
 bibencoding=utf8,
-singletitle=true,
+singletitle=false,
 scauthorsbib=true,
 lowscauthors=true,
 inbeforejournal=true,
@@ -39,7 +40,7 @@ sorting=nyvt]{biblatex}
 		\indexnames{commentator}}
 	{}}
 
-% CAMBIAMOS URL PARA QUE APAREZCA LA LEYENDA EN LINEA
+% Cambiamos url para que aparezca la leyenda en linea
 \makeatletter
 \newrobustcmd{\mkbiblege}[1]{%
 	\begingroup
@@ -51,7 +52,7 @@ sorting=nyvt]{biblatex}
 
 \DeclareFieldFormat{url}{\bibstring{url}\space\mkbiblege{\url{#1}}}
 
-% REDEFINIR EL FORMATO DE CITADO EN PÁGINA 00
+% Redefinir el formato de citado en página 00
 % \DeclareFieldFormat{pagerefformat}{\mkbibparens{{\color{red}\mkbibemph{#1}}}}
 \renewbibmacro*{pageref}{%
 	\iflistundef{pageref}
@@ -62,10 +63,10 @@ sorting=nyvt]{biblatex}
 			{\bibstring{backrefpage}\ppspace}%
 			\printlist[pageref][-\value{listtotal}]{pageref}}}}
 
-% DECLARO UNA ALIAS PARA TRATAR MOVIE COMO MISC
+% Declaro una alias para tratar movie como misc
 \DeclareBibliographyAlias{movie}{misc}
 
-% PONE PUNTO Y COMA ENTRE NOMBRE DE VARIOS AUTORES
+% Pone punto y coma entre nombre de varios autores
 \renewcommand*{\multinamedelim}{\addsemicolon\space}
 
 % Cambia la tipografia de la bibliografia
@@ -81,7 +82,7 @@ sorting=nyvt]{biblatex}
 \defcounter{biburlucpenalty}{6000}
 \defcounter{biburllcpenalty}{9000}
 
-%% REDISEÑO PARA OBTENER MODO LARGO EN ALGUNAS ENTRADAS
+%% Rediseño para traducir algunas entradas
 \NewBibliographyString{organizator}
 \NewBibliographyString{organizators}
 \NewBibliographyString{byorganizator}
@@ -100,7 +101,7 @@ sorting=nyvt]{biblatex}
 \NewBibliographyString{documentjob}
 \NewBibliographyString{posgradothesis}
 \NewBibliographyString{magisterthesis}
-\NewBibliographyString{dirigida}% MODIFICACIONES PARA FILMES
+\NewBibliographyString{dirigida}% modificaciones para filmes
 \NewBibliographyString{dirigidas}
 \NewBibliographyString{bydirigida}
 \NewBibliographyString{escrita}
