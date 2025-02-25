@@ -5915,6 +5915,7 @@ Public Sub FileView1_Click()
         ImageView1.Image = imgPreview
         ImagePreviewSelected = sRutaArchivo
         txtEditorRapido.Text = ""         ' Limpiar el TextArea
+        txtEditorRapido.Enabled = False
         TabPanel6.Index = 0' saltar al paner de consola
       Endif
     Else
@@ -5926,6 +5927,8 @@ Public Sub FileView1_Click()
     If Exist(sRutaArchivo) Then
       ' Intentar cargar el contenido del archivo de texto
       sContenido = File.Load(sRutaArchivo)
+      txtEditorRapido.Enabled = True
+      txtEditorRapido.SetFocus()
 
       ' Verificar si el contenido se cargó correctamente
       If IsNull(sContenido) Then
@@ -5946,6 +5949,7 @@ Public Sub FileView1_Click()
     ' Si el archivo no es una imagen ni un archivo de texto, limpiar el ImageView y el TextArea
     ImageView1.Image = Null
     txtEditorRapido.Text = ""
+    txtEditorRapido.Enabled = False
     ImagePreviewSelected = ""
   Endif
 
