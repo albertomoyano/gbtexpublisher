@@ -311,6 +311,13 @@
       Picture = Picture["iconos/clavebib.svg"]
     }
   }
+  { mnuContextual Menu
+    Text = ("mnuContextual")
+    Visible = False
+    { Menu8 Menu
+      Text = ("Abrir")
+    }
+  }
   { HBox171 HBox
     MoveScaled(1,0,130,4)
     { btnAbrirLibro Button

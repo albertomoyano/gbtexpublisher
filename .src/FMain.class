@@ -5887,48 +5887,6 @@ Public Sub DirViewRuta_Click()
 
 End
 
-' ' Evento click en FileView1 para cargar la imagen en ImageView
-' Public Sub FileView1_Click()
-'
-'   Dim sRutaArchivo As String
-'   Dim ImagePreviewSelected As String
-'
-'   archivoFileClick = True
-'   Application.Busy = 1
-'
-'   ' Verificar si el archivo seleccionado es una imagen
-'   If Lower(FileView1.Current) Like "*.{jpg,png,jpeg}" Then
-'     ' Construir la ruta completa del archivo
-'     sRutaArchivo = FileView1.Dir &/ FileView1.Current
-'
-'     ' Verificar si el archivo existe
-'     If Exist(sRutaArchivo) Then
-'       ' Intentar cargar la imagen
-'       imgPreview = Image.Load(sRutaArchivo)
-'
-'       ' Verificar si la imagen se cargó correctamente
-'       If IsNull(imgPreview) Then
-'         Message.Error("No se pudo cargar la imagen:\n\n" & sRutaArchivo)
-'       Else
-'         ' Limpiar el ImageView antes de asignar la nueva imagen
-'         ImageView1.Image = Null
-'         ImageView1.Image = imgPreview
-'         ImagePreviewSelected = sRutaArchivo
-'       Endif
-'     Else
-'       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
-'     Endif
-'   Else
-'     ' Si el archivo no es una imagen, limpiar el ImageView
-'     ImageView1.Image = Null
-'     ImagePreviewSelected = ""
-'   Endif
-'
-'   ' Desactivar el estado ocupado
-'   Application.Busy = 0
-'
-' End
-
 ' Evento click en FileView1 para cargar la imagen en ImageView o el texto en TextArea
 Public Sub FileView1_Click()
 
@@ -5948,7 +5906,6 @@ Public Sub FileView1_Click()
     If Exist(sRutaArchivo) Then
       ' Intentar cargar la imagen
       imgPreview = Image.Load(sRutaArchivo)
-
       ' Verificar si la imagen se cargó correctamente
       If IsNull(imgPreview) Then
         Message.Error("No se pudo cargar la imagen:\n\n" & sRutaArchivo)
@@ -5957,12 +5914,14 @@ Public Sub FileView1_Click()
         ImageView1.Image = Null
         ImageView1.Image = imgPreview
         ImagePreviewSelected = sRutaArchivo
+        txtEditorRapido.Text = ""         ' Limpiar el TextArea
+        TabPanel6.Index = 0' saltar al paner de consola
       Endif
     Else
       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
     Endif
     ' Verificar si el archivo seleccionado es un archivo de texto
-  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,md,lua,css}" Then
+  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css}" Then
     ' Verificar si el archivo existe
     If Exist(sRutaArchivo) Then
       ' Intentar cargar el contenido del archivo de texto
@@ -5975,6 +5934,7 @@ Public Sub FileView1_Click()
         ' Asignar el contenido al TextArea
         TabPanel6.Index = 1
         txtEditorRapido.Text = sContenido
+        ImageView1.Image = Null' limpia el imageview
       Endif
     Else
       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
@@ -6001,5 +5961,17 @@ Public Sub btnFontEditor_Click()
   Dialog.FixedOnly = False
   If Dialog.SelectFont() Then Return
   txtEditorRapido.Font = Dialog.Font
+
+End
+
+Public Sub btnGuardarMod_Click()
+
+  Dim sRutaArchivo As String = FileView1.Dir &/ FileView1.Current
+
+  If File.Save(sRutaArchivo, txtEditorRapido.Text) <> Null Then
+    Message.Info("Los cambios se guardaron con éxito.")
+  Else
+    Message.Error("No se pueden guardar los cambios.")
+  Endif
 
 End
