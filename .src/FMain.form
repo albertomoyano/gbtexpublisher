@@ -604,11 +604,11 @@
                 Mode = Select.Multiple
               }
             }
-            { picImagenes PictureBox
-              MoveScaled(41,10,18,15)
-            }
-            { txtPropiedades TextLabel
-              MoveScaled(39,1,15,6)
+            { !ImageView1 ImageView
+              MoveScaled(39,11,18,12)
+              #Public = True
+              #Translate = False
+              Alignment = Align.Normal
             }
           }
         }

@@ -29,6 +29,8 @@ Private minutos As Integer
 Private horas As Integer
 Public idSeleccionado As Integer
 Private bloquear As Boolean
+Private archivoFileClick As Boolean
+Private imgPreview As New Image
 
 Public Sub Form_Open()
 
@@ -372,6 +374,8 @@ Public Sub menuAbrir_Click()'abrir un libro
     menuOT.Enabled = True
     menuPDFweb.Enabled = True
     menuDisclaimer.Enabled = True
+    ' limpiamos el ImageView
+    ImageView1.Image = Null
     ' Ejecutar la consulta SQL
     ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
     ' refrescamos los datos en los grid del archivo en curso
@@ -5861,10 +5865,53 @@ Public Sub Splitter6_Resize()
 
 End
 
+' Evento click en DirView actualiza los archivos que se muestran en FileView1
 Public Sub DirViewRuta_Click()
 
-  If bloquear = False Then
+  If Not bloquear Then
     FileView1.Dir = DirViewRuta.Current
-  End If
+  Endif
+
+End
+
+' Evento click en FileView1 para cargar la imagen en ImageView
+Public Sub FileView1_Click()
+
+  Dim sRutaArchivo As String
+  Dim ImagePreviewSelected As String
+
+  archivoFileClick = True
+  Application.Busy = 1
+
+  ' Verificar si el archivo seleccionado es una imagen
+  If Lower(FileView1.Current) Like "*.{jpg,png,jpeg}" Then
+    ' Construir la ruta completa del archivo
+    sRutaArchivo = FileView1.Dir &/ FileView1.Current
+
+    ' Verificar si el archivo existe
+    If Exist(sRutaArchivo) Then
+      ' Intentar cargar la imagen
+      imgPreview = Image.Load(sRutaArchivo)
+
+      ' Verificar si la imagen se cargó correctamente
+      If IsNull(imgPreview) Then
+        Message.Error("No se pudo cargar la imagen:\n\n" & sRutaArchivo)
+      Else
+        ' Limpiar el ImageView antes de asignar la nueva imagen
+        ImageView1.Image = Null
+        ImageView1.Image = imgPreview
+        ImagePreviewSelected = sRutaArchivo
+      Endif
+    Else
+      Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
+    Endif
+  Else
+    ' Si el archivo no es una imagen, limpiar el ImageView
+    ImageView1.Image = Null
+    ImagePreviewSelected = ""
+  Endif
+
+  ' Desactivar el estado ocupado
+  Application.Busy = 0
 
 End
