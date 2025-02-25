@@ -495,8 +495,8 @@
     Border = False
     Count = 6
     Index = 0
-    Text = ("Terminal     ")
-    Picture = Picture["iconos/terminal.svg"]
+    Text = ("Salidas y configuraciones     ")
+    Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
       MoveScaled(1,1,158,4)
       { MenuButton1 MenuButton
@@ -532,16 +532,60 @@
       MoveScaled(1,6,126,65)
       Expand = True
       Border = False
-      { !TerminalView1 TerminalView
-        MoveScaled(4,11,27,6)
-        #Public = True
-        Expand = True
-        AutoResize = False
-        Blink = True
-        CursorStyle = TerminalView.Underline
-        ShowScrollBar = True
-        ShowLink = True
-        WindowCommands = True
+      { TabPanel6 TabPanel
+        MoveScaled(1,6,48,49)
+        Arrangement = Arrange.Vertical
+        Border = False
+        Count = 2
+        Index = 0
+        Text = ("Terminal     ")
+        Picture = Picture["iconos/terminal.svg"]
+        { !TerminalView1 TerminalView
+          MoveScaled(3,3,27,6)
+          #Public = True
+          Expand = True
+          AutoResize = False
+          Blink = True
+          CursorStyle = TerminalView.Underline
+          ShowScrollBar = True
+          ShowLink = True
+          WindowCommands = True
+        }
+        Index = 1
+        Text = ("Edición rápida     ")
+        Picture = Picture["iconos/textnormal.svg"]
+        { HBox6 HBox
+          MoveScaled(1,1,37,4)
+          { btnGuardarMod Button
+            MoveScaled(1,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Guardar cambios")
+            Picture = Picture["iconos/guardarComo.svg"]
+          }
+          { btnFont2 Button
+            MoveScaled(5,0,4,4)
+            ToolTip = ("Guardar modificaciones")
+            Picture = Picture["iconos/fonts.svg"]
+          }
+          { Spring14 Spring
+            MoveScaled(27,0,4,4.4444)
+          }
+        }
+        { Panel7 Panel
+          MoveScaled(1,22,37,20)
+          Expand = True
+          Arrangement = Arrange.Fill
+          Border = Border.Sunken
+          { txtEditorRapido TextArea
+            MoveScaled(1,3,18,7)
+            Font = Font["Monospace"]
+            NoTabFocus = True
+            Expand = True
+            Wrap = True
+            ScrollBar = Scroll.Vertical
+          }
+        }
+        Index = 0
       }
       { Splitter2 Splitter
         MoveScaled(51,2,74,61)
