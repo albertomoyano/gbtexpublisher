@@ -28,7 +28,6 @@ Private segundos As Integer
 Private minutos As Integer
 Private horas As Integer
 Public idSeleccionado As Integer
-Private bloquear As Boolean
 Private archivoFileClick As Boolean
 Private imgPreview As New Image
 
@@ -5867,6 +5866,8 @@ End
 
 ' Evento click en DirView actualiza los archivos que se muestran en FileView1
 Public Sub DirViewRuta_Click()
+
+  Dim bloquear As Boolean = False
 
   If Not bloquear Then
     FileView1.Dir = DirViewRuta.Current
