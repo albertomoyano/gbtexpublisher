@@ -19,18 +19,16 @@ Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExte
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
 Public fFile As File
-Public sCurrentFilePath As String
 Public rutaORIGINALES As String
 Public rutaTAPA As String
 Public BaseName As String
 Public sTB_Text As String
 Public LastTextBox As TextBox
-' Variables para el tiempo
 Private segundos As Integer
 Private minutos As Integer
 Private horas As Integer
-' Variable global para almacenar el ID
 Public idSeleccionado As Integer
+Private bloquear As Boolean
 
 Public Sub Form_Open()
 
@@ -184,6 +182,8 @@ Public Sub Form_Open()
   ' por default hacemos no mostramos el hbox de los artículos
   HBoxNuevoArtCap.Enabled = False
   HBoxNuevoArtCap.Visible = False
+
+  Splitter6.Layout = [1, 1]
 
 End
 
@@ -5852,5 +5852,19 @@ End
 Public Sub btnKitty_Click()
 
   Shell "kitty --directory " & File.Dir(TextBox1.Text)
+
+End
+
+Public Sub Splitter6_Resize()
+
+  Splitter6.Layout = [1, 1]
+
+End
+
+Public Sub DirViewRuta_Click()
+
+  If bloquear = False Then
+    FileView1.Dir = DirViewRuta.Current
+  End If
 
 End

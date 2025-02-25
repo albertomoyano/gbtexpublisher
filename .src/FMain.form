@@ -548,7 +548,7 @@
         Arrangement = Arrange.Vertical
         Border = False
         { Panel1 Panel
-          MoveScaled(1,6,72,29)
+          MoveScaled(1,6,72,38)
           Expand = True
           Arrangement = Arrange.Vertical
           { HBox182 HBox
@@ -586,17 +586,34 @@
               MenuOnly = True
             }
           }
-          { DirViewRuta DirChooser
-            MoveScaled(1,13,34,15)
-            #Translate = False
+          { Splitter6 Splitter
+            MoveScaled(2,6,68,30)
             Expand = True
-            ShowFile = True
-            ShowBookmark = False
-            ShowToolbar = False
+            Border = False
+            { Splitter7 Splitter
+              MoveScaled(0,4,30,25)
+              Arrangement = Arrange.Vertical
+              Border = False
+              { DirViewRuta DirView
+                MoveScaled(4,4,25,9)
+              }
+              { !FileView1 FileView
+                MoveScaled(2,14,27,9)
+                #Public = True
+                View = FileView.Detailed
+                Mode = Select.Multiple
+              }
+            }
+            { picImagenes PictureBox
+              MoveScaled(41,10,18,15)
+            }
+            { txtPropiedades TextLabel
+              MoveScaled(39,1,15,6)
+            }
           }
         }
         { Splitter3 Splitter
-          MoveScaled(1,36,41,15)
+          MoveScaled(1,45,41,15)
           Border = False
           { VLista ListView
             MoveScaled(6,4,16,8)
