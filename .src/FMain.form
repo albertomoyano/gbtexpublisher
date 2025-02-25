@@ -562,7 +562,7 @@
             ToolTip = ("Guardar cambios")
             Picture = Picture["iconos/guardarComo.svg"]
           }
-          { btnFont2 Button
+          { btnFontEditor Button
             MoveScaled(5,0,4,4)
             ToolTip = ("Guardar modificaciones")
             Picture = Picture["iconos/fonts.svg"]

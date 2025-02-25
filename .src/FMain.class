@@ -331,6 +331,7 @@ Public Sub menuAbrir_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    TabPanel6.Index = 0
     ' borramos las carpetas que se crean en el cache
     Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
     Wait 0.1
@@ -373,8 +374,9 @@ Public Sub menuAbrir_Click()'abrir un libro
     menuOT.Enabled = True
     menuPDFweb.Enabled = True
     menuDisclaimer.Enabled = True
-    ' limpiamos el ImageView
+    ' limpiamos el ImageView y el EditorRapido
     ImageView1.Image = Null
+    txtEditorRapido.Text = ""
     ' Ejecutar la consulta SQL
     ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
     ' refrescamos los datos en los grid del archivo en curso
@@ -3855,12 +3857,14 @@ End
 
 Public Sub menuPDFweb_Click()
 
+  TabPanel6.Index = 0
   Form_CombinarPDF.ShowModal()
 
 End
 
 Public Sub menuOT_Click()
 
+  TabPanel6.Index = 0
   Form_OTimprenta.ShowModal()
 
 End
@@ -5751,6 +5755,7 @@ Public Sub menuPDFcolor_Click()' pdf web
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
+    TabPanel6.Index = 0
     Mod_GenerarPDF.salidaPDFweb
   Endif
 
@@ -5761,6 +5766,7 @@ Public Sub menuPDFgray_Click()' pdf imprenta
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
+    TabPanel6.Index = 0
     Mod_GenerarPDF.salidaPDFimprenta
   Endif
 
@@ -5771,6 +5777,7 @@ Public Sub menuPARTE1_Click()' epub via png
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
+    TabPanel6.Index = 0
     Mod_GenerarEPUB.salidaEPUBpng
   Endif
 
@@ -5778,6 +5785,7 @@ End
 
 Public Sub menuPARTE2_Click()' epub via png
 
+  TabPanel6.Index = 0
   Mod_GenerarEPUB.creacionEpubPNG
 
 End
@@ -5787,6 +5795,7 @@ Public Sub menuEPUB2_Click()' epub via html
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
+    TabPanel6.Index = 0
     Mod_GenerarEPUB.salidaEPUBhtml
   Endif
 
@@ -5797,6 +5806,7 @@ Public Sub menuHTML_Click()' html con lwarp
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
+    TabPanel6.Index = 0
     Mod_GenerarHTML.salidaHTML5
   Endif
 
@@ -5877,20 +5887,63 @@ Public Sub DirViewRuta_Click()
 
 End
 
-' Evento click en FileView1 para cargar la imagen en ImageView
+' ' Evento click en FileView1 para cargar la imagen en ImageView
+' Public Sub FileView1_Click()
+'
+'   Dim sRutaArchivo As String
+'   Dim ImagePreviewSelected As String
+'
+'   archivoFileClick = True
+'   Application.Busy = 1
+'
+'   ' Verificar si el archivo seleccionado es una imagen
+'   If Lower(FileView1.Current) Like "*.{jpg,png,jpeg}" Then
+'     ' Construir la ruta completa del archivo
+'     sRutaArchivo = FileView1.Dir &/ FileView1.Current
+'
+'     ' Verificar si el archivo existe
+'     If Exist(sRutaArchivo) Then
+'       ' Intentar cargar la imagen
+'       imgPreview = Image.Load(sRutaArchivo)
+'
+'       ' Verificar si la imagen se cargó correctamente
+'       If IsNull(imgPreview) Then
+'         Message.Error("No se pudo cargar la imagen:\n\n" & sRutaArchivo)
+'       Else
+'         ' Limpiar el ImageView antes de asignar la nueva imagen
+'         ImageView1.Image = Null
+'         ImageView1.Image = imgPreview
+'         ImagePreviewSelected = sRutaArchivo
+'       Endif
+'     Else
+'       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
+'     Endif
+'   Else
+'     ' Si el archivo no es una imagen, limpiar el ImageView
+'     ImageView1.Image = Null
+'     ImagePreviewSelected = ""
+'   Endif
+'
+'   ' Desactivar el estado ocupado
+'   Application.Busy = 0
+'
+' End
+
+' Evento click en FileView1 para cargar la imagen en ImageView o el texto en TextArea
 Public Sub FileView1_Click()
 
   Dim sRutaArchivo As String
   Dim ImagePreviewSelected As String
+  Dim sContenido As String
 
   archivoFileClick = True
   Application.Busy = 1
 
+  ' Construir la ruta completa del archivo
+  sRutaArchivo = FileView1.Dir &/ FileView1.Current
+
   ' Verificar si el archivo seleccionado es una imagen
   If Lower(FileView1.Current) Like "*.{jpg,png,jpeg}" Then
-    ' Construir la ruta completa del archivo
-    sRutaArchivo = FileView1.Dir &/ FileView1.Current
-
     ' Verificar si el archivo existe
     If Exist(sRutaArchivo) Then
       ' Intentar cargar la imagen
@@ -5908,13 +5961,45 @@ Public Sub FileView1_Click()
     Else
       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
     Endif
-  Else
-    ' Si el archivo no es una imagen, limpiar el ImageView
+    ' Verificar si el archivo seleccionado es un archivo de texto
+  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,md,lua,css}" Then
+    ' Verificar si el archivo existe
+    If Exist(sRutaArchivo) Then
+      ' Intentar cargar el contenido del archivo de texto
+      sContenido = File.Load(sRutaArchivo)
+
+      ' Verificar si el contenido se cargó correctamente
+      If IsNull(sContenido) Then
+        Message.Error("No se pudo cargar el archivo de texto:\n\n" & sRutaArchivo)
+      Else
+        ' Asignar el contenido al TextArea
+        TabPanel6.Index = 1
+        txtEditorRapido.Text = sContenido
+      Endif
+    Else
+      Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
+    Endif
+    ' Limpiar el ImageView si no es una imagen
     ImageView1.Image = Null
+    ImagePreviewSelected = ""
+  Else
+    ' Si el archivo no es una imagen ni un archivo de texto, limpiar el ImageView y el TextArea
+    ImageView1.Image = Null
+    txtEditorRapido.Text = ""
     ImagePreviewSelected = ""
   Endif
 
   ' Desactivar el estado ocupado
   Application.Busy = 0
+
+End
+
+Public Sub btnFontEditor_Click()
+
+  Dialog.Title = "Seleccione una tipografía"
+  Dialog.Font = txtEditorRapido.Font
+  Dialog.FixedOnly = False
+  If Dialog.SelectFont() Then Return
+  txtEditorRapido.Font = Dialog.Font
 
 End
