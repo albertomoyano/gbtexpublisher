@@ -565,12 +565,14 @@
           MoveScaled(1,1,45,4)
           { btnGuardarMod Button
             MoveScaled(1,0,4,4)
+            Enabled = False
             NoTabFocus = True
             ToolTip = ("Guardar cambios")
             Picture = Picture["iconos/guardarComo.svg"]
           }
           { btnFontEditor Button
             MoveScaled(5,0,4,4)
+            Enabled = False
             ToolTip = ("Guardar modificaciones")
             Picture = Picture["iconos/fonts.svg"]
           }

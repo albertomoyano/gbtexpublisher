@@ -5916,6 +5916,8 @@ Public Sub FileView1_Click()
         ImagePreviewSelected = sRutaArchivo
         txtEditorRapido.Text = ""         ' Limpiar el TextArea
         txtEditorRapido.Enabled = False
+        btnGuardarMod.Enabled = False
+        btnFontEditor.Enabled = False
         TabPanel6.Index = 0' saltar al paner de consola
       Endif
     Else
@@ -5928,6 +5930,8 @@ Public Sub FileView1_Click()
       ' Intentar cargar el contenido del archivo de texto
       sContenido = File.Load(sRutaArchivo)
       txtEditorRapido.Enabled = True
+      btnGuardarMod.Enabled = True
+      btnFontEditor.Enabled = True
       txtEditorRapido.SetFocus()
 
       ' Verificar si el contenido se cargó correctamente
@@ -5950,6 +5954,8 @@ Public Sub FileView1_Click()
     ImageView1.Image = Null
     txtEditorRapido.Text = ""
     txtEditorRapido.Enabled = False
+    btnGuardarMod.Enabled = False
+    btnFontEditor.Enabled = False
     ImagePreviewSelected = ""
   Endif
 
