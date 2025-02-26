@@ -20,6 +20,7 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   Wait 0.2
 
   FMain.TabPanel1.Index = 0
+  FMain.TabPanel6.Index = 0
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
@@ -92,6 +93,7 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
   Wait 0.2
 
   FMain.TabPanel1.Index = 0
+  FMain.TabPanel6.Index = 0
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)

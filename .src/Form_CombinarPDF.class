@@ -108,6 +108,7 @@ Public Sub btnEnsamblar_Click()
   Mod_Exportar.ExportToMetadatosPDFTK(FMain.TextBox1.Text)
 
   FMain.TabPanel1.Index = 0
+  FMain.TabPanel6.Index = 0
 
   Dim rutaTapa As String = File.RealPath(txtTapa.Text)
   Dim rutaInterior As String = File.RealPath(txtInterior.Text)

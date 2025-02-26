@@ -227,6 +227,7 @@ Public Sub Button4_Click() 'local git
   Dim rutaGit As String
 
   TabPanel1.Index = 0
+  TabPanel6.Index = 0
 
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
   rutaGit = File.Dir(TextBox1.Text) &/ ".git"
@@ -526,6 +527,7 @@ End
 Public Sub menuCatalogo_Click()
 
   TabPanel1.Index = 0
+  TabPanel6.Index = 0
 
   Mod_Exportar.ExportToCatalogo(TextBox1.Text)
   Wait 0.2
@@ -3443,6 +3445,7 @@ Public Sub menuDisclaimer_Click()
 
   If Resultado.Available Then
     TabPanel1.Index = 0
+    TabPanel6.Index = 0
 
     Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
     Wait 0.2
@@ -4840,6 +4843,7 @@ Public Sub btnMenuGIT_Click()
 
   ' Ejecutar los comandos principales
   TabPanel1.Index = 0
+  TabPanel6.Index = 0
   TerminalView1.Input("git add ." & "\n")
   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
@@ -5630,6 +5634,7 @@ Public Sub btnMenuGitLab_Click()
   Mod_Funciones.Borrar_Aux()
   IdGitLab = "git@gitlab.com:" & usuario & "/" & File.BaseName(TextBox1.Text) & ".git"
   TabPanel1.Index = 0
+  TabPanel6.Index = 0
   TerminalView1.Input("git remote remove origin" & "\n")
   TerminalView1.Input("git remote add origin " & IdGitLab & "\n")
   TerminalView1.Input("git add ." & "\n")
@@ -5924,7 +5929,7 @@ Public Sub FileView1_Click()
       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
     Endif
     ' Verificar si el archivo seleccionado es un archivo de texto
-  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css}" Then
+  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css,md}" Then
     ' Verificar si el archivo existe
     If Exist(sRutaArchivo) Then
       ' Intentar cargar el contenido del archivo de texto
