@@ -5985,3 +5985,48 @@ Public Sub btnGuardarMod_Click()
   Endif
 
 End
+
+Public Sub Menu9_Click()' verificar integridad de gbTeXpublisher
+
+  RevisarComponentes()
+
+End
+
+Public Sub RevisarComponentes()
+
+  Dim aComponentes As String[] = [
+    "gb.db", "gb.db.sqlite3", "gb.dbus", "gb.desktop", "gb.form",
+    "gb.form.dialog", "gb.form.terminal", "gb.image", "gb.inotify",
+    "gb.qt5", "gb.qt5.ext", "gb.settings", "gb.terminal", "gb.util", "pandoc", "pdftk", "gs", "ebook-convert"
+
+  ]
+
+  Dim sComponente As String
+  Dim sComponentesFaltantes As String
+  Dim bFaltanComponentes As Boolean = False
+
+  For Each sComponente In aComponentes
+    ' Verificar si el componente está disponible
+    If Not ComponenteDisponible(sComponente) Then
+      sComponentesFaltantes &= sComponente & gb.NewLine
+      bFaltanComponentes = True
+    End If
+  Next
+
+  If bFaltanComponentes Then
+    Message.Warning("Los siguientes componentes de Gambas no están disponibles:" & gb.NewLine & gb.NewLine & sComponentesFaltantes)
+  Else
+    Message.Info("Todos los componentes necesarios están instalados." & gb.NewLine & "Esta revisión no analiza su instalación de LaTeX, mi sugerencia es instalar TeXlive completo.")
+  End If
+
+End
+
+Private Function ComponenteDisponible(sComponente As String) As Boolean
+
+  Try
+  Object.Type("[" & sComponente & "]") ' Verifica si el componente existe
+  Return True
+Catch
+  Return False
+
+End

@@ -284,7 +284,10 @@
   { Menu57 Menu
     #Translate = False
     Text = "Ayuda"
-    Visible = False
+    { Menu9 Menu
+      Text = ("Verificar la integridad de gbTeXpublisher")
+      Picture = Picture["iconos/integridad.svg"]
+    }
     { Menu68 Menu
       #Translate = False
       Text = "Acerca de gbTeXpublisher"
