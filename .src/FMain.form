@@ -343,12 +343,14 @@
     }
     { btnAbrirQuarto Button
       MoveScaled(32,0,14,4)
+      Visible = False
       Text = ("Markdown")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista MenuButton
       MoveScaled(47,0,14,4)
       #Translate = False
+      Visible = False
       Enabled = False
       Text = "Salidas"
       Picture = Picture["iconos/salidas.svg"]
@@ -356,6 +358,7 @@
     }
     { Separator13 Separator
       MoveScaled(61,0,2.3333,4)
+      Visible = False
     }
     { menuHERRA MenuButton
       MoveScaled(64,0,16,4)
