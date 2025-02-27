@@ -206,7 +206,7 @@
     { menuAPUNTES Menu
       #Translate = False
       Text = "Cuaderno de apuntes"
-      Picture = Picture["iconos/notas.svg"]
+      Picture = Picture["iconos/textnormal.svg"]
     }
     { Menu78 Menu
       #Translate = False
