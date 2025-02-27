@@ -5702,12 +5702,6 @@ Public Sub chkURLdescarga_Click()
 
 End
 
-Public Sub menuConversorQMD_Click()
-
-  Form_ConversorMD.ShowModal()
-
-End
-
 Public Sub chkNuevoArtCap_Click()
 
   If chkNuevoArtCap.Value = True Then

@@ -197,8 +197,11 @@
       Picture = Picture["iconos/conversor.svg"]
     }
     { menuConversorQMD Menu
-      Text = (".docx a MD (con carpetas del proyecto)")
+      #Translate = False
+      Text = ".docx a MD (con carpetas del proyecto)"
       Picture = Picture["iconos/conversor.svg"]
+      Enabled = False
+      Visible = False
     }
     { menuAPUNTES Menu
       #Translate = False
@@ -211,7 +214,8 @@
       Picture = Picture["iconos/exportar.svg"]
     }
     { menuScriptsExternos Menu
-      Text = ("Script externos")
+      #Translate = False
+      Text = "Script externos"
       Picture = Picture["iconos/edit-select.svg"]
       Enabled = False
       Visible = False
