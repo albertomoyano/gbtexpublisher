@@ -38,6 +38,12 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex") Then
     Copy "./biblatex-ISO690-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex"
   End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex") Then
+    Copy "./biblatex-custom-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex"
+End If
+If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
+    Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
+  End If
 
   'copiamos los archivos de configuracion general
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
@@ -74,8 +80,8 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
     Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
   End If
-
   '
+  'User.Home &/ ".gbtexpublisher"
   If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
     Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
   End If

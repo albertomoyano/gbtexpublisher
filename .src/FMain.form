@@ -43,6 +43,9 @@
     { menuPDFgray Menu
       Text = ("PDF imprenta")
     }
+    { menuPDFespecial Menu
+      Text = ("PDF especial")
+    }
     { Menu6 Menu
     }
     { menuEPUB1 Menu

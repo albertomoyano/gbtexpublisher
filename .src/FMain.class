@@ -76,6 +76,10 @@ Public Sub Form_Open()
     Endif
   Next
 
+  If Not File.RealPath(User.Home &/ ".gbtexpublisher/book-pdf-especial.tex") Then
+    Copy "./book-pdf-especial.tex" To User.Home &/ ".gbtexpublisher/book-pdf-especial.tex"
+  End If
+
   ' Inicializamos los contadores de minutos y segundos
   horas = 0
   minutos = 0
@@ -6027,5 +6031,16 @@ Private Function ComponenteDisponible(sComponente As String) As Boolean
   Return True
 Catch
   Return False
+
+End
+
+Public Sub menuPDFespecial_Click()
+
+  If TextBox1.Text = "" Then
+    Message.Warning("Debe tener un archivo LaTeX asociado.")
+  Else
+    TabPanel6.Index = 0
+    Mod_GenerarPDF.salidaPDFespecial
+  Endif
 
 End
