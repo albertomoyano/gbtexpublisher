@@ -258,6 +258,10 @@
       Text = "Abrir PDF"
       Picture = Picture["iconos/acroread.svg"]
     }
+    { Menu8 Menu
+      Text = ("Abrir PDF parte 1 ePub")
+      Picture = Picture["iconos/acroread.svg"]
+    }
     { MenuHTMLview Menu
       #Translate = False
       Text = "Abrir HTML"
@@ -320,13 +324,6 @@
       #Translate = False
       Text = "Aviso Legal"
       Picture = Picture["iconos/clavebib.svg"]
-    }
-  }
-  { mnuContextual Menu
-    Text = ("mnuContextual")
-    Visible = False
-    { Menu8 Menu
-      Text = ("Abrir")
     }
   }
   { HBox171 HBox

@@ -6054,3 +6054,17 @@ Public Sub menuPDFespecial_Click()
   Endif
 
 End
+
+Public Sub Menu8_Click()' abrir pdf parte 1 de epub
+
+  Dim filePath As String
+
+  filePath = File.Dir(TextBox1.Text) & "/ebook/epub1-" & BaseName & ".pdf"
+
+  If File.RealPath(filePath) <> "" Then
+    Shell "xdg-open " & filePath
+  Else
+    Message.Error("El archivo <b>epub1-" & BaseName & ".pdf</b> no existe.")
+  Endif
+
+End
