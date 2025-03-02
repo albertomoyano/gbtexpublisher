@@ -31,6 +31,13 @@ Public idSeleccionado As Integer
 Private archivoFileClick As Boolean
 Private imgPreview As New Image
 
+' Actualizar el Label cada segundo
+Public Sub TimerHOY_Timer()
+
+  txtHOY.Text = Format(Now, "dd/mm/yyyy hh:nn:ss")
+
+End
+
 Public Sub Form_Open()
 
   ' Usa la ruta seleccionada en el formulario de inicio
@@ -89,6 +96,9 @@ Public Sub Form_Open()
   Timer1.Stop  ' No iniciamos el Timer de inmediato
 
   Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+  TimerHOY.Enabled = True
+
+  ' Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ") - (acá quiero poner el dia y la hora)"
 
   $Bash = TerminalView1.Shell("/usr/bin/bash")
   TerminalView1.SetFocus()

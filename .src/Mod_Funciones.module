@@ -40,8 +40,8 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex") Then
     Copy "./biblatex-custom-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex"
-End If
-If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
     Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
   End If
 
