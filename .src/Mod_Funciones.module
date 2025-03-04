@@ -568,50 +568,6 @@ Public Sub VerBibTeXengridListaBIBactual()
 
 End
 
-' Módulo para configurar los GridView
-Public Sub ConfigurarGridView(grid As GridView)
-
-  With grid
-    .Header = True
-    .Grid = True
-    .Columns.Count = 112
-
-    ' Configuración de columnas
-    For i As Integer = 0 To 111
-      Select Case i
-        Case 0
-          .Columns[i].Title = "Id"
-          .Columns[i].Width = 0
-        Case 4
-          .Columns[i].Title = "Autor/a/es"
-          .Columns[i].Width = 250
-        Case 6
-          .Columns[i].Title = "Editor/a/es"
-          .Columns[i].Width = 250
-        Case 24
-          .Columns[i].Title = "Título principal"
-          .Columns[i].Width = 600
-        Case 29
-          .Columns[i].Title = "Revista"
-          .Columns[i].Width = 200
-        Case 43
-          .Columns[i].Title = "Año"
-          .Columns[i].Width = 70
-        Case 44
-          .Columns[i].Title = "Fecha"
-          .Columns[i].Width = 120
-        Case 53
-          .Columns[i].Title = "Editorial"
-          .Columns[i].Width = 200
-        Case Else
-          .Columns[i].Title = ""
-          .Columns[i].Width = 0
-      End Select
-    Next
-  End With
-
-End
-
 Public Sub CargarMetadatosArchivoActual()
 
   Dim consulta As String
@@ -829,5 +785,121 @@ Public Sub CopiarArchivosQuadro(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/docs/favicon.jpg") Then
     Copy "./favicon.jpg" To File.Dir(rutaTexto) & "/docs/favicon.jpg"
   End If
+
+End
+
+Public Sub VerGLOenVGridGLO(Row As Integer)
+  ' Recoger la fila como parámetro en la función del módulo, se ahorra recuperar 112 veces su valor desde el Gridview
+
+  With FMain
+    .txtIDglosario.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 0].Text
+    .txtCLAVEglo.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 1].Text
+    .cbTYPEentradaGlo.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 2].Text
+    .txtARCHIVO.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 3].Text
+    .txtNAME.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 4].Text
+    .txtDESCRIPTION.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 5].Text
+    .txtFIRST.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 6].Text
+    .txtTEXT.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 7].Text
+    .txtPLURAL.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 8].Text
+    .txtFPLURAL.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 9].Text
+    .txtSORT.Text = FMain.VGridGLO[FMain.VGridGLO.Row, 10].Text
+  End With
+
+End
+
+Public Sub VerGloActual()
+
+  With FMain
+    .txtIDglosario.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 0].Text
+    .txtCLAVEglo.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 1].Text
+    .cbTYPEentradaGlo.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 2].Text
+    .txtARCHIVO.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 3].Text
+    .txtNAME.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 4].Text
+    .txtDESCRIPTION.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 5].Text
+    .txtFIRST.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 6].Text
+    .txtTEXT.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 7].Text
+    .txtPLURAL.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 8].Text
+    .txtFPLURAL.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 9].Text
+    .txtSORT.Text = FMain.gidGLOactual[FMain.gidGLOactual.Row, 10].Text
+  End With
+
+End
+
+' Módulo para configurar los GridView
+Public Sub ConfigurarGridView(grid As GridView)
+
+  With grid
+    .Header = True
+    .Grid = True
+    .Columns.Count = 112
+
+    ' Configuración de columnas
+    For i As Integer = 0 To 111
+      Select Case i
+        Case 0
+          .Columns[i].Title = "Id"
+          .Columns[i].Width = 0
+        Case 4
+          .Columns[i].Title = "Autor/a/es"
+          .Columns[i].Width = 250
+        Case 6
+          .Columns[i].Title = "Editor/a/es"
+          .Columns[i].Width = 250
+        Case 24
+          .Columns[i].Title = "Título principal"
+          .Columns[i].Width = 600
+        Case 29
+          .Columns[i].Title = "Revista"
+          .Columns[i].Width = 200
+        Case 43
+          .Columns[i].Title = "Año"
+          .Columns[i].Width = 70
+        Case 44
+          .Columns[i].Title = "Fecha"
+          .Columns[i].Width = 120
+        Case 53
+          .Columns[i].Title = "Editorial"
+          .Columns[i].Width = 200
+        Case Else
+          .Columns[i].Title = ""
+          .Columns[i].Width = 0
+      End Select
+    Next
+  End With
+
+End
+
+' Módulo para configurar los GridView
+Public Sub ConfigurarGridGLO(grid As GridView)
+
+  With grid
+    .Header = True
+    .Grid = True
+    .Columns.Count = 13
+
+    ' Configuración de columnas
+    For i As Integer = 0 To 12
+      Select Case i
+        Case 0
+          .Columns[i].Title = "Id"
+          .Columns[i].Width = 0
+        Case 1
+          .Columns[i].Title = "Clave"
+          .Columns[i].Width = 200
+        Case 2
+          .Columns[i].Title = "Tipo"
+          .Columns[i].Width = 100
+        Case 4
+          .Columns[i].Title = "Nombre"
+          .Columns[i].Width = 100
+        Case 6
+          .Columns[i].Title = "Primera vez"
+          .Columns[i].Width = 800
+        Case Else
+          .Columns[i].Title = ""
+          .Columns[i].Width = 0
+      End Select
+    Next
+  End With
 
 End

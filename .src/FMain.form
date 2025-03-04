@@ -2954,11 +2954,20 @@
         Index = 1
         Text = ("Siglas y glosarios (archivo en curso)     ")
         Picture = Picture["iconos/face.svg"]
+        { gidGLOactual TableView
+          MoveScaled(3,4,30,10)
+          Font = Font["-1"]
+          Expand = True
+          Mode = Select.Single
+          ShowCursor = True
+          Header = GridView.Horizontal
+          Resizable = False
+        }
         Index = 2
         Text = ("Siglas y glosarios (todas)     ")
         Picture = Picture["iconos/bibtex.svg"]
         { VGridGLO TableView
-          MoveScaled(1,1,30,10)
+          MoveScaled(4,3,30,10)
           Font = Font["-1"]
           Expand = True
           Mode = Select.Single

@@ -5,6 +5,7 @@ Public Contenido As Result
 Public ContenidoBibTotal As Result' resultado completo de bibtex
 Public ContenidoBibActual As Result' resultado actual de bibtex
 Public ContenidoGLOTotal As Result
+Public ContenidoGLOActual As Result
 Private ContenidoComenta As Result
 Private ContenidoGHP As Result
 Private Busqueda As Result
@@ -181,7 +182,9 @@ Public Sub Form_Open()
   Mod_Funciones.ConfigurarGridView(tbRefDup)
   Mod_Funciones.ConfigurarGridView(griBibOriginal)
   Mod_Funciones.ConfigurarGridView(gridListaBIBactual)
-
+  Mod_Funciones.ConfigurarGridGLO(VGridGLO)
+  Mod_Funciones.ConfigurarGridGLO(gidGLOactual)
+  '
   ' Ejecutar las consultas SQL
   ContenidoBibTotal = meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
   VListaBIB.Rows.Count = ContenidoBibTotal.Count
@@ -192,7 +195,7 @@ Public Sub Form_Open()
   ContenidoGLOTotal = meConn.Exec("SELECT * FROM glosarios ORDER BY name ASC")'
   VGridGLO.Rows.Count = ContenidoGLOTotal.Count
   ' glosarios debe pasar a evento data
-  Mostrar_ListaGLO()
+  ' Mostrar_ListaGLO()
 
   ' por default hacemos no mostramos el hbox de los artículos
   HBoxNuevoArtCap.Enabled = False
@@ -392,11 +395,15 @@ Public Sub menuAbrir_Click()'abrir un libro
     ' limpiamos el ImageView y el EditorRapido
     ImageView1.Image = Null
     txtEditorRapido.Text = ""
-    ' Ejecutar la consulta SQL
+    ' Ejecutar la consulta SQL bibtex
     ContenidoBibActual = meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
     ' refrescamos los datos en los grid del archivo en curso
     gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
     tbRefDup.Rows.Count = ContenidoBibActual.Count
+    ' Ejecutar la consulta SQL glosarios
+    ContenidoGLOActual = meConn.Exec("SELECT * FROM glosarios WHERE ',' || archivo || ',' LIKE '%," & BaseName & ",%' ORDER BY name ASC")
+    'refrescamos los datos del grid de glosarios local
+    gidGLOactual.Rows.Count = ContenidoGLOActual.Count
     ' Cierra la ventana de notas
     If Form_Notas.Visible Then
       Form_Notas.Close
@@ -411,7 +418,7 @@ Public Sub menuAbrir_Click()'abrir un libro
     contarEntradasBIByGLO()' mostramos las cantidades en el boton
     Mod_Funciones.limpiamosMetadatosLibrosRevistas()' limpiamos las entradas de los metadatos
     'cargamos datos en los gridview
-    Mostrar_ListaGLO()
+    ' Mostrar_ListaGLO()
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
     Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
@@ -557,62 +564,62 @@ Public Sub menuCatalogo_Click()
 
 End
 
-Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
-
-  Dim i As Integer
-  Dim Comando As String
-
-  VGridGLO.Clear()
-
-  Comando = "select * from glosarios ORDER BY name ASC"
-  Contenido = meConn.Exec(Comando)
-
-  'diseñamos el tableview
-  VGridGLO.Columns.Count = 11
-  VGridGLO.Header = True
-  VGridGLO.Columns[0].Title = "ID"
-  VGridGLO.Columns[0].Width = 0
-  VGridGLO.Columns[1].Title = "Clave"
-  VGridGLO.Columns[1].Width = 200
-  VGridGLO.Columns[2].Title = "Tipo"
-  VGridGLO.Columns[2].Width = 100
-  VGridGLO.Columns[3].Title = ""
-  VGridGLO.Columns[3].Width = 0
-  VGridGLO.Columns[4].Title = "Nombre"
-  VGridGLO.Columns[4].Width = 200
-  VGridGLO.Columns[5].Title = ""
-  VGridGLO.Columns[5].Width = 0
-  VGridGLO.Columns[6].Title = "Primera vez"
-  VGridGLO.Columns[6].Width = 800
-  VGridGLO.Columns[7].Title = ""
-  VGridGLO.Columns[7].Width = 0
-  VGridGLO.Columns[8].Title = ""
-  VGridGLO.Columns[8].Width = 0
-  VGridGLO.Columns[9].Title = ""
-  VGridGLO.Columns[9].Width = 0
-  VGridGLO.Columns[10].Title = ""
-  VGridGLO.Columns[10].Width = 0
-
-  'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
-  VGridGLO.Rows.Count = Contenido.Count
-
-  'recorremos el resutado de la consulta para mostrarlo
-  For i = 0 To Contenido.Count - 1
-    VGridGLO[i, 0].Text = Contenido!id
-    VGridGLO[i, 1].Text = Contenido!key
-    VGridGLO[i, 2].Text = Contenido!type
-    VGridGLO[i, 3].Text = Contenido!archivo
-    VGridGLO[i, 4].Text = Contenido!name
-    VGridGLO[i, 5].Text = Contenido!description
-    VGridGLO[i, 6].Text = Contenido!first
-    VGridGLO[i, 7].Text = Contenido!text
-    VGridGLO[i, 8].Text = Contenido!plural
-    VGridGLO[i, 9].Text = Contenido!firstplural
-    VGridGLO[i, 10].Text = Contenido!sort
-    Contenido.MoveNext
-  Next
-
-End
+' Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
+'
+'   Dim i As Integer
+'   Dim Comando As String
+'
+'   VGridGLO.Clear()
+'
+'   Comando = "select * from glosarios ORDER BY name ASC"
+'   Contenido = meConn.Exec(Comando)
+'
+'   'diseñamos el tableview
+'   VGridGLO.Columns.Count = 11
+'   VGridGLO.Header = True
+'   VGridGLO.Columns[0].Title = "ID"
+'   VGridGLO.Columns[0].Width = 0
+'   VGridGLO.Columns[1].Title = "Clave"
+'   VGridGLO.Columns[1].Width = 200
+'   VGridGLO.Columns[2].Title = "Tipo"
+'   VGridGLO.Columns[2].Width = 100
+'   VGridGLO.Columns[3].Title = ""
+'   VGridGLO.Columns[3].Width = 0
+'   VGridGLO.Columns[4].Title = "Nombre"
+'   VGridGLO.Columns[4].Width = 200
+'   VGridGLO.Columns[5].Title = ""
+'   VGridGLO.Columns[5].Width = 0
+'   VGridGLO.Columns[6].Title = "Primera vez"
+'   VGridGLO.Columns[6].Width = 800
+'   VGridGLO.Columns[7].Title = ""
+'   VGridGLO.Columns[7].Width = 0
+'   VGridGLO.Columns[8].Title = ""
+'   VGridGLO.Columns[8].Width = 0
+'   VGridGLO.Columns[9].Title = ""
+'   VGridGLO.Columns[9].Width = 0
+'   VGridGLO.Columns[10].Title = ""
+'   VGridGLO.Columns[10].Width = 0
+'
+'   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
+'   VGridGLO.Rows.Count = Contenido.Count
+'
+'   'recorremos el resutado de la consulta para mostrarlo
+'   For i = 0 To Contenido.Count - 1
+'     VGridGLO[i, 0].Text = Contenido!id
+'     VGridGLO[i, 1].Text = Contenido!key
+'     VGridGLO[i, 2].Text = Contenido!type
+'     VGridGLO[i, 3].Text = Contenido!archivo
+'     VGridGLO[i, 4].Text = Contenido!name
+'     VGridGLO[i, 5].Text = Contenido!description
+'     VGridGLO[i, 6].Text = Contenido!first
+'     VGridGLO[i, 7].Text = Contenido!text
+'     VGridGLO[i, 8].Text = Contenido!plural
+'     VGridGLO[i, 9].Text = Contenido!firstplural
+'     VGridGLO[i, 10].Text = Contenido!sort
+'     Contenido.MoveNext
+'   Next
+'
+' End
 
 Public Sub txtCLAVEglo_KeyRelease()' Convertir el texto ingresado a minusculas
 
@@ -792,14 +799,18 @@ End
 
 Public Sub BtnNuevoGlo_Click()
 
+  Dim Idn As Integer
+
   BtnNuevoGlo.Visible = False
   BtnEliminarGlo.Visible = False
   btnGuardarGlo.Visible = True
   btnGuardarCambiosGlo.Visible = False
   btnAgregarGloKey.Visible = True
-
-  Dim Idn As Integer
-
+  TabPanel3.Index = 0
+  txtTMPglosario.Enabled = True
+  txtTMPglosario.Background = Color.White
+  txtTMPglosario.Clear 'limpiamos el campo temporal
+  txtTMPglosario.SetFocus()
   Mod_LimpiarTextBox.LimpiarCamposGLO()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
@@ -814,7 +825,6 @@ Public Sub BtnNuevoGlo_Click()
   txtIDglosario.Text = Idn
   txtCLAVEglo.Text = "@glo" & Idn & "-" 'colocamos el prefijo de la clave bib
   txtARCHIVO.Text = "," & BaseName & "," 'colocamos el key con el nombre del archivo
-  ' Mostrar_ListaGLO
 
 End
 
@@ -890,7 +900,7 @@ Public Sub btnGuardarGlo_Click()
   BtnEliminarGlo.Visible = False
   btnAgregarGloKey.Visible = False
 
-  Mostrar_ListaGLO()
+  ' Mostrar_ListaGLO()
 
 End
 
@@ -914,28 +924,7 @@ Public Sub btnGuardarCambiosGlo_Click()
 
   Mod_LimpiarTextBox.LimpiarCamposGLO()
 
-  Mostrar_ListaGLO()
-
-End
-
-Public Sub VGridGLO_RowClick(Row As Integer)
-
-  btnGuardarCambiosGlo.Visible = True
-  BtnEliminarGlo.Visible = True
-  btnAgregarGloKey.Visible = True
-  btnGuardarGlo.Visible = False
-
-  txtIDglosario.Text = VGridGLO[Row, 0].Text
-  txtCLAVEglo.Text = VGridGLO[Row, 1].Text
-  cbTYPEentradaGlo.Text = VGridGLO[Row, 2].Text
-  txtARCHIVO.Text = VGridGLO[Row, 3].Text
-  txtNAME.Text = VGridGLO[Row, 4].Text
-  txtDESCRIPTION.Text = VGridGLO[Row, 5].Text
-  txtFIRST.Text = VGridGLO[Row, 6].Text
-  txtTEXT.Text = VGridGLO[Row, 7].Text
-  txtPLURAL.Text = VGridGLO[Row, 8].Text
-  txtFPLURAL.Text = VGridGLO[Row, 9].Text
-  txtSORT.Text = VGridGLO[Row, 10].Text
+  ' Mostrar_ListaGLO()
 
 End
 
@@ -1406,7 +1395,6 @@ Public Sub BtnNuevoBib_Click()
   btnAgregarKeyBIB.Visible = True
   txtTMPbiblio.Enabled = True
   txtTMPbiblio.Background = Color.White
-
   txtTMPbiblio.Clear 'limpiamos el campo temporal
   txtTMPbiblio.SetFocus()
   Mod_LimpiarTextBox.LimpiarCamposBIB()
@@ -3322,7 +3310,7 @@ Public Sub menuAbrirQuarto_Click()
     ' limpiamos las entradas de los metadatos
     Mod_Funciones.limpiamosMetadatosLibrosRevistas()
     'cargamos datos en los gridview
-    Mostrar_ListaGLO()
+    ' Mostrar_ListaGLO()
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
     ' Ejecutar la consulta SQL
@@ -3799,6 +3787,7 @@ Public Sub contarEntradasBIByGLO()' mostramos las cantidades en el boton
   Dim Record2BIB As String
   Dim Count2BIB As Integer
   Dim ContenidoBIB As Result
+  Dim ContenidoGLO As Result
 
   ContenidoBIB = meConn.Exec("SELECT COUNT(*) FROM bibtex WHERE keywords LIKE '%" & "," & BaseName & "," & "%'")
   Record2BIB = ContenidoBIB[0]
@@ -3807,7 +3796,6 @@ Public Sub contarEntradasBIByGLO()' mostramos las cantidades en el boton
 
   Dim Record2GLO As String
   Dim Count2GLO As Integer
-  Dim ContenidoGLO As Result
 
   ContenidoGLO = meConn.Exec("SELECT COUNT(*) FROM glosarios WHERE archivo LIKE '%" & "," & BaseName & "," & "%'")
   Record2GLO = ContenidoGLO[0]
@@ -5577,6 +5565,8 @@ Public Sub RefrescarGrid()
   VGridGLO.Clear()
   ContenidoGLOTotal = meConn.Exec("SELECT * FROM glosarios ORDER BY id DESC")'
   VGridGLO.Rows.Count = ContenidoGLOTotal.Count
+  ContenidoGLOActual = meConn.Exec("SELECT * FROM glosarios WHERE ',' || archivo || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
+  gidGLOactual.Rows.Count = ContenidoGLOActual.Count
 
   ' refrescamos los contadores
   TotalEntradasBIByGLO()
@@ -5937,7 +5927,7 @@ Public Sub FileView1_Click()
       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
     Endif
     ' Verificar si el archivo seleccionado es un archivo de texto
-  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css,md}" Then
+  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css,md,log,tex}" Then
     ' Verificar si el archivo existe
     If Exist(sRutaArchivo) Then
       ' Intentar cargar el contenido del archivo de texto
@@ -6066,5 +6056,61 @@ Public Sub Menu8_Click()' abrir pdf parte 1 de epub
   Else
     Message.Error("El archivo <b>epub1-" & BaseName & ".pdf</b> no existe.")
   Endif
+
+End
+
+Public Sub VGridGLO_Data(Row As Integer, Column As Integer)
+
+  If (ContenidoGLOTotal <> Null) Then
+    If Row >= 0 Then
+      ContenidoGLOTotal.moveTo(Row)
+      Try VGridGLO.Data.Text = Str(ContenidoGLOTotal[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    VGridGLO.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub VGridGLO_Click()
+
+  ' configurar como se muestran los botones
+  btnGuardarCambiosGlo.Visible = True
+  BtnEliminarGlo.Visible = True
+  btnAgregarGloKey.Visible = True
+  btnGuardarGlo.Visible = False
+
+  ' en el evento Click de la celda pasar como parámetro la fila
+  Mod_Funciones.VerGLOenVGridGLO(VGridGLO.row)
+
+End
+
+Public Sub gidGLOactual_Data(Row As Integer, Column As Integer)
+
+  If (ContenidoGLOActual <> Null) Then
+    If Row >= 0 Then
+      ContenidoGLOActual.moveTo(Row)
+      Try gidGLOactual.Data.Text = Str(ContenidoGLOActual[Column])
+    Endif
+  Endif
+
+  If row Mod 2 = 0 Then
+    gidGLOactual.Data.Background = Color.RGB(230, 230, 230)
+  Endif
+
+End
+
+Public Sub gidGLOactual_Click()
+
+  ' configurar como se muestran los botones
+  btnGuardarCambiosGlo.Visible = True
+  BtnEliminarGlo.Visible = True
+  btnAgregarGloKey.Visible = True
+  btnGuardarGlo.Visible = False
+
+  ' en el evento Click de la celda pasar como parámetro la fila
+  Mod_Funciones.VerGloActual()
 
 End
