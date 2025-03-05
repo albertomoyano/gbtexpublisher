@@ -74,6 +74,9 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
     Copy "./indiceautores.tex" To File.Dir(rutaTexto) & "/artcap/indiceautores.tex"
   End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/siglas.tex") Then
+    Copy "./siglas.tex" To File.Dir(rutaTexto) & "/artcap/siglas.tex"
+  End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/readme.md") Then
     Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
   End If

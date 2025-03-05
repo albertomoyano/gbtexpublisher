@@ -19,16 +19,20 @@ footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
 % Definir el valor de página para este preámbulo
 \newcommand{\valorEspecifico}{15.5x23cm}
 
-%% Configuración de idioma
+% Configuración de idioma
 \usepackage[french,portuguese,italian,english,german,spanish,es-ucroman,es-noshorthands]{babel}
-\usepackage[autostyle=true]{csquotes}% Citas automáticas con estilo idiomático correcto
+% Citas automáticas con estilo idiomático correcto
+\usepackage[autostyle=true]{csquotes}
 \frenchspacing% Espaciado uniforme después de puntos
-\renewcommand{\spanishcontentsname}{Sumario}% Personalización del nombre del índice
+% Personalización del nombre del índice
+\renewcommand{\spanishcontentsname}{Sumario}
+% cambiamos el nombre de sigla
+\newcommand{\acronymsname}{Índice de siglas}
 
 \usepackage{fontspec}% Soporte para fuentes OpenType
 \usepackage[final]{microtype}% Mejoras tipográficas micro
 \microtypecontext{spacing=nonfrench}% Mejora espaciado sin modificar el interletrado
-%% solo trabajamos con protusion y sin expansion para Libertinus
+% solo trabajamos con protusion y sin expansion para Libertinus
 \SetProtrusion
 [ name=libertinus ]
 { encoding = * }
@@ -374,7 +378,7 @@ placement=ht,
 \renewcommand{\spanishindexname}{Índice de autoras y autores del aparato bibliográfico}
 
 %% generamos los glosarios
-\usepackage[acronym,sanitizesort,toc=true,nonumberlist]{glossaries}
+\usepackage[acronym,sanitizesort,toc=false,nonumberlist]{glossaries}
 \preto\chapter{\glsresetall}
 \makenoidxglossaries
 \renewcommand{\glsnamefont}[1]{\sf\textbf{\textup{#1}}}
