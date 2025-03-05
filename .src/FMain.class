@@ -6074,19 +6074,6 @@ Public Sub VGridGLO_Data(Row As Integer, Column As Integer)
 
 End
 
-Public Sub VGridGLO_Click()
-
-  ' configurar como se muestran los botones
-  btnGuardarCambiosGlo.Visible = True
-  BtnEliminarGlo.Visible = True
-  btnAgregarGloKey.Visible = True
-  btnGuardarGlo.Visible = False
-
-  ' en el evento Click de la celda pasar como parámetro la fila
-  Mod_Funciones.VerGLOenVGridGLO(VGridGLO.row)
-
-End
-
 Public Sub gidGLOactual_Data(Row As Integer, Column As Integer)
 
   If (ContenidoGLOActual <> Null) Then
@@ -6099,6 +6086,19 @@ Public Sub gidGLOactual_Data(Row As Integer, Column As Integer)
   If row Mod 2 = 0 Then
     gidGLOactual.Data.Background = Color.RGB(230, 230, 230)
   Endif
+
+End
+
+Public Sub VGridGLO_Click()' vista total
+
+  ' configurar como se muestran los botones
+  btnGuardarCambiosGlo.Visible = True
+  BtnEliminarGlo.Visible = True
+  btnAgregarGloKey.Visible = True
+  btnGuardarGlo.Visible = False
+
+  ' en el evento Click de la celda pasar como parámetro la fila
+  Mod_Funciones.VerGLOenVGridGLO()
 
 End
 

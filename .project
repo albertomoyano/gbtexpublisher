@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=Form_ConectarBBDD
 Icon=iconos/terminal.png
-Version=0.1.590
+Version=0.1.591
 Component=gb.image
 Component=gb.qt5
 Component=gb.form
@@ -30,6 +30,7 @@ Address=alberto.alejandro.moyano@gmail.com
 Url=https://github.com/albertomoyano
 License=Lesser General Public License V3
 PackageName=gbtexpublisher0-0.1.590
+PackageVersion=3
 PackageNameWithMajor=1
 CreateEachDirectory=1
 Packager=1
