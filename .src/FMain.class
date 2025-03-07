@@ -3897,7 +3897,7 @@ End
 
 Public Sub btnAbrirQuarto_Click()
 
-  Message.Info("Para este seminario se deshabilita trabajar con MD")
+  Message.Info("Se deshabilita este módulo para este seminario")
   ' por el momento se deshabilita trabajar con MD
   ' menuAbrirQuarto_Click()
 

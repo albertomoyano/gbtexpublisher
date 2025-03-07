@@ -330,7 +330,7 @@
     MoveScaled(1,0,130,4)
     { btnAbrirLibro Button
       MoveScaled(0,0,14,4)
-      Text = ("LaTeX")
+      Text = ("Libro")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdf MenuButton
@@ -347,39 +347,36 @@
     }
     { btnAbrirQuarto Button
       MoveScaled(32,0,14,4)
-      Visible = False
-      Text = ("Markdown")
+      Text = ("Revista")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista MenuButton
-      MoveScaled(47,0,14,4)
+      MoveScaled(46,0,14,4)
       #Translate = False
-      Visible = False
       Enabled = False
       Text = "Salidas"
       Picture = Picture["iconos/salidas.svg"]
       MenuOnly = True
     }
     { Separator13 Separator
-      MoveScaled(61,0,2.3333,4)
-      Visible = False
+      MoveScaled(64,0,2.3333,4)
     }
     { menuHERRA MenuButton
-      MoveScaled(64,0,16,4)
+      MoveScaled(69,0,16,4)
       Text = ("Otros")
       Picture = Picture["iconos/conversor.svg"]
       Menu = "menuTOOLS"
       MenuOnly = True
     }
     { menuAcereca MenuButton
-      MoveScaled(80,0,16,4)
+      MoveScaled(85,0,16,4)
       Text = ("Acerca")
       Picture = Picture["iconos/info.svg"]
       Menu = "Menu57"
       MenuOnly = True
     }
     { Spring3 Spring
-      MoveScaled(97,0,4,4)
+      MoveScaled(103,0,4,4)
     }
     { btnKitty Button
       MoveScaled(109,0,4,4)
