@@ -340,7 +340,7 @@ Public Sub Menu4_Click()
 
 End
 
-Public Sub menuAbrir_Click()'abrir un libro
+Public Sub menuAbrirLibro_Click()'abrir un libro
 
   Dialog.Title = "Seleccionar archivo"
   Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
@@ -3250,10 +3250,10 @@ Public Sub menuMAYand_Click()'aplicar mayuscula para autores
 
 End
 
-Public Sub menuAbrirQuarto_Click()
+Public Sub menuAbrirRevista_Click()
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.md", "Archivo de Markdown"]
+  Dialog.Filter = ["*.tex", "Archivo de LaTeX"]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
@@ -3299,7 +3299,7 @@ Public Sub menuAbrirQuarto_Click()
     If Form_Notas.Visible Then
       Form_Notas.Close ' Cierra la ventana
     End If
-    Mod_Funciones.CopiarArchivosQuadro(TextBox1.Text)
+    Mod_Funciones.CopiarArchivos(TextBox1.Text)
     ' levantamos los datos de comentario
     levantarComenta()
     levantarGitHubPages()' levantamos los datos de githubpages
@@ -3326,18 +3326,6 @@ Public Sub menuAbrirQuarto_Click()
     TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
     TerminalView1.SetFocus()
   Endif
-
-  ' If Not MS.Matrix.Exist(Dialog.Path) Then
-  '   If MS.Matrix.Count = MS.iLastNumber Then
-  '     MS.Matrix.Remove(0)
-  '     MS.ShortMatrix.Remove(0)
-  '   End If
-  '   MS.Matrix.Add(Dialog.Path)
-  '   MS.ShortMatrix.Add(File.Name(Dialog.Path))
-  '   UpdateMenu()
-  ' End If
-
-  '
 
   ' 'comienza metadatos
   ' Dim comando As String
@@ -3891,15 +3879,14 @@ End
 
 Public Sub btnAbrirLibro_Click()
 
-  menuAbrir_Click()
+  menuAbrirLibro_Click()' abrir libro
 
 End
 
-Public Sub btnAbrirQuarto_Click()
+Public Sub btnAbrirRevista_Click()
 
-  Message.Info("Se deshabilita este módulo para este seminario")
-  ' por el momento se deshabilita trabajar con MD
-  ' menuAbrirQuarto_Click()
+  ' Message.Info("Se deshabilita este módulo para este seminario")
+  menuAbrirRevista_Click()' abrir revista
 
 End
 

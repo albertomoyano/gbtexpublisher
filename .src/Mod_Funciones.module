@@ -4,7 +4,7 @@ Public rutaApp As String = User.Home &/ ".gbtexpublisher"
 Public rutaAppR As String = User.Home &/ ".respaldogbTeX"
 Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
 
-Public Sub CopiarArchivos(rutaTexto As String)'libros
+Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
 
   ' Lista de directorios que deseas crear
   Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "pdf", "artcap", "docs"]
@@ -16,7 +16,7 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
     End If
   Next
 
-  'copiamos los archivos de preámbulo de libro
+  'copiamos los archivos de preámbulo de libro y revista
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
     Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
   End If
@@ -41,6 +41,10 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex") Then
     Copy "./biblatex-custom-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex"
   End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/revista-pdf.tex") Then
+    Copy "./revista-pdf.tex" To File.Dir(rutaTexto) & "/files/revista-pdf.tex"
+  End If
+  ' esta copia es diferente
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
     Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
   End If
@@ -686,13 +690,6 @@ Public Sub CerrarTodo()
     Form_ConectarBBDD.Close
   Endif
 
-  ' ' Guardar el último archivo abierto
-  ' MS.SetLastListToSettings()
-  ' Try FMain.$Bash.Kill
-  ' Wait 0.1
-  ' Try FMain.fFile.Close
-  ' Wait 1
-
   ' borramos las carpetas que se crean en el cache
   Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
   Wait 0.1
@@ -713,81 +710,6 @@ Public Sub CerrarTodo()
   Endif
 
   Quit
-
-End
-
-Public Sub CopiarArchivosQuadro(rutaTexto As String)'libros
-
-  ' Lista de directorios que se van a crear
-  Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "artcap", "docs", "salidas"]
-
-  ' Crear los directorios si no existen
-  For Each directorio As String In directorios
-    If Not Exist(File.Dir(rutaTexto) & "/" & directorio) Then
-      Mkdir File.Dir(rutaTexto) & "/" & directorio
-    End If
-  Next
-
-  'copiamos los archivos de preámbulo de libro
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/qbook-pdf.tex") Then
-    Copy "./qbook-pdf.tex" To File.Dir(rutaTexto) & "/files/qbook-pdf.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/qrevista-pdf.tex") Then
-    Copy "./qrevista-pdf.tex" To File.Dir(rutaTexto) & "/files/qrevista-pdf.tex"
-  End If
-
-  ' 'copiamos los archivos de configuracion general
-  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
-  '   Copy "./imagoCustom.css" To File.Dir(rutaTexto) & "/files/imagoCustom.css"
-  ' End If
-  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/build.lua") Then
-  '   Copy "./build.lua" To File.Dir(rutaTexto) & "/files/build.lua"
-  ' End If
-  ' If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoEpub.css") Then
-  '   Copy "./imagoEpub.css" To File.Dir(rutaTexto) & "/files/imagoEpub.css"
-  ' End If
-  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
-  '   Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
-  ' End If
-  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/agradecimientos.tex") Then
-  '   Copy "./agradecimientos.tex" To File.Dir(rutaTexto) & "/artcap/agradecimientos.tex"
-  ' End If
-  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/colofon.tex") Then
-  '   Copy "./colofon.tex" To File.Dir(rutaTexto) & "/artcap/colofon.tex"
-  ' End If
-  ' If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/indiceautores.tex") Then
-  '   Copy "./indiceautores.tex" To File.Dir(rutaTexto) & "/artcap/indiceautores.tex"
-  ' End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/readme.md") Then
-    Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
-    Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
-  End If
-
-  If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
-    Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
-    Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
-  End If
-
-  ' copiamos archivos para página html
-  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/logo-imago.png") Then
-    Copy "./logo-imago.png" To File.Dir(rutaTexto) & "/docs/logo-imago.png"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/descarga.png") Then
-    Copy "./descarga.png" To File.Dir(rutaTexto) & "/docs/descarga.png"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/orcid.png") Then
-    Copy "./orcid.png" To File.Dir(rutaTexto) & "/docs/orcid.png"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/imago1.css") Then
-    Copy "./imago1.css" To File.Dir(rutaTexto) & "/docs/imago1.css"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/favicon.jpg") Then
-    Copy "./favicon.jpg" To File.Dir(rutaTexto) & "/docs/favicon.jpg"
-  End If
 
 End
 

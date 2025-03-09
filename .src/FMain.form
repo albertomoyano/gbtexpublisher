@@ -345,7 +345,7 @@
     { Separator2 Separator
       MoveScaled(29,0,2.3333,4)
     }
-    { btnAbrirQuarto Button
+    { btnAbrirRevista Button
       MoveScaled(32,0,14,4)
       Text = ("Revista")
       Picture = Picture["iconos/abrirBuscar.svg"]
