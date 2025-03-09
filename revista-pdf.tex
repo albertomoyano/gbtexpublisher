@@ -27,7 +27,6 @@
 \usepackage{lastpage}             % Referencia a la última página
 \usepackage{textcomp}             % Símbolos de texto adicionales
 \usepackage{csquotes}             % Comillas contextuales
-\usepackage{etoolbox}             % Herramientas adicionales de TeX
 \usepackage{siunitx}              % Unidades del SI
 \usepackage{marginnote}           % Notas al margen
 \usepackage{pdfpages}             % Inclusión de páginas PDF
@@ -42,6 +41,36 @@
 { . = {50,50}, , = {40,40}, - = {30,30}, " = {50,50}, ( = {40,50}, ) = {50,40} }
 \renewcommand{\normalsize}{\fontsize{10pt}{14pt}\selectfont}
 \topskip=14pt
+
+% Fuente principal Libertinus con características tipográficas
+\setmainfont{Libertinus Serif}
+[Numbers={OldStyle,Proportional},
+Ligatures={TeX,Common,Discretionary},
+RawFeature={+cv01,+cv02}, % Variantes de caracteres opcionales
+Scale=1.18]
+
+% Matemáticas con Libertinus Math
+\usepackage{unicode-math}
+\setmathfont{Libertinus Math}[Scale=MatchLowercase]
+
+%% Configuración de fuentes para chino
+% \usepackage{luatexja-fontspec}
+% \setmainjfont{FandolSong}
+
+\setsansfont[Scale=MatchLowercase,
+Ligatures=TeX,
+Extension=.otf,
+UprightFont=*-Regular,
+ItalicFont=*-Italic,
+BoldFont=*-SemiBold,
+BoldItalicFont=*-SemiBoldItalic]{IBMPlexSansCondensed}
+
+\setmonofont[Scale=0.91,
+Extension=.otf,
+UprightFont=*-Regular,
+ItalicFont = IBMPlexMono-Italic.otf,
+BoldFont = IBMPlexMono-Bold.otf,
+BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 
 % Referencias
 \usepackage[style=apa,backend=biber]{biblatex}
@@ -83,15 +112,15 @@
   \stepcounter{article}
   \refstepcounter{section}
   \addcontentsline{toc}{section}{\articleauthorsshort{} - \articletitle{}}
-  
+
   % Encabezado del artículo
   \begingroup
   \centering
   \vspace*{1em}
-  
+
   % Tipo de artículo
   \textcolor{gray}{\textsc{\articletype}}\\[0.5em]
-  
+
   % Título
   {\LARGE\bfseries\articletitle\par}
   \ifdefempty{\articlesubtitle}{}{
@@ -99,15 +128,15 @@
     {\large\textit{\articlesubtitle}\par}
   }
   \vspace{1.5em}
-  
+
   % Autores
   {\large\articleauthors\par}
   \vspace{0.5em}
-  
+
   % Afiliaciones
   {\footnotesize\articleaffiliations\par}
   \vspace{1em}
-  
+
   % Historial del artículo
   \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedleft\arraybackslash}X}
     \multicolumn{2}{c}{\textbf{\textit{Historial del artículo}}} \\
@@ -117,14 +146,14 @@
     Publicado en línea: & \articlepublishedonline \\
   \end{tabularx}
   \vspace{0.5em}
-  
+
   % DOI
   \begin{center}
     \footnotesize DOI: \href{https://doi.org/\articledoi}{\nolinkurl{\articledoi}}
   \end{center}
   \vspace{1em}
   \endgroup
-  
+
   % Resumen en cuadro
   \begin{mdframed}[linewidth=0.5pt, backgroundcolor=gray!5]
     \begin{center}
@@ -135,7 +164,7 @@
     \noindent\textbf{Palabras clave:} \articlekeywords
   \end{mdframed}
   \vspace{1em}
-  
+
   % Abstract en inglés
   \begin{mdframed}[linewidth=0.5pt, backgroundcolor=gray!5]
     \begin{center}
@@ -150,31 +179,31 @@
   % Sección para contribuciones de autores, financiamiento, etc.
   \clearpage
   \section*{Información adicional}
-  
+
   \subsection*{Contribuciones de los autores}
   \authorcontributions
-  
+
   \subsection*{Financiamiento}
   \funding
-  
+
   \subsection*{Agradecimientos}
   \acknowledgments
-  
+
   \subsection*{Conflictos de interés}
   \conflictsofinterest
-  
+
   \subsection*{Disponibilidad de datos}
   \dataavailability
-  
+
   \subsection*{Material suplementario}
   \supplementarymaterials
-  
+
   \subsection*{Derechos de autor}
   \copyrightinfo
 
   % Bibliografía
   \printbibliography[heading=bibintoc, title=Referencias]
-  
+
   \clearpage
 }
 
@@ -219,7 +248,7 @@
   {\normalfont\normalsize\itshape}{\thesubsubsection.}{1em}{}
 
 % CARGAR COMANDOS PERSONALIZADOS
-\input{config/custom-commands.tex}
+\input{files/custom-commands.tex}
 
 % Enlaces
 \usepackage{hyperref}

@@ -524,6 +524,7 @@
       MoveScaled(1,1,158,4)
       { MenuButton1 MenuButton
         MoveScaled(8,0,23,4)
+        Expand = True
         Text = ("Guiones externos")
         Picture = Picture["iconos/conversor.svg"]
         MenuOnly = True
@@ -546,9 +547,36 @@
         Picture = Picture["iconos/search.svg"]
       }
       { Label125 Label
-        MoveScaled(73,0,26,4)
+        MoveScaled(73,0,14,4)
         AutoResize = True
         Text = ("  Buscar palabras en todo el proyecto")
+      }
+      { Separator9 Separator
+        MoveScaled(90,0,2.3333,4)
+      }
+      { MenuApp MenuButton
+        MoveScaled(92.3333,0,17,4)
+        #Translate = False
+        Expand = True
+        Text = "Ver salidas"
+        Picture = Picture["iconos/document.svg"]
+        Menu = "AbrirApp"
+        MenuOnly = True
+      }
+      { MenuButton3 MenuButton
+        MoveScaled(109.3333,0,19,4)
+        Expand = True
+        Text = ("Complementos para PDF y ePub")
+        Picture = Picture["iconos/conversor.svg"]
+        Menu = "menuLTX"
+        MenuOnly = True
+      }
+      { MenuButton2 MenuButton
+        MoveScaled(128.3333,0,17,4)
+        Expand = True
+        Text = ("Procesar archivos por lotes")
+        Picture = Picture["iconos/conversor.svg"]
+        MenuOnly = True
       }
     }
     { Splitter1 Splitter
@@ -556,10 +584,11 @@
       Expand = True
       Border = False
       { TabPanel6 TabPanel
-        MoveScaled(1,6,48,49)
+        MoveScaled(2,7,48,49)
         Arrangement = Arrange.Vertical
         Border = False
         Count = 2
+        Orientation = Align.Bottom
         Index = 0
         Text = ("Terminal     ")
         Picture = Picture["iconos/terminal.svg"]
@@ -624,68 +653,28 @@
         MoveScaled(51,2,74,61)
         Arrangement = Arrange.Vertical
         Border = False
-        { Panel1 Panel
-          MoveScaled(1,6,72,38)
+        { Splitter6 Splitter
+          MoveScaled(1,7,68,30)
           Expand = True
-          Arrangement = Arrange.Vertical
-          { HBox182 HBox
-            MoveScaled(1,1,69,4)
-            { MenuApp MenuButton
-              MoveScaled(0,0,17,4)
-              #Translate = False
-              Expand = True
-              Text = "Ver salidas"
-              Picture = Picture["iconos/document.svg"]
-              Menu = "AbrirApp"
-              MenuOnly = True
+          Border = False
+          { Splitter7 Splitter
+            MoveScaled(6,5,30,25)
+            Arrangement = Arrange.Vertical
+            Border = False
+            { DirViewRuta DirView
+              MoveScaled(4,4,25,9)
             }
-            { Separator10 Separator
-              MoveScaled(18,0,0.8889,4)
-              Foreground = Color.Transparent
-            }
-            { MenuButton3 MenuButton
-              MoveScaled(22,0,19,4)
-              Expand = True
-              Text = ("Complementos para PDF y ePub")
-              Picture = Picture["iconos/conversor.svg"]
-              Menu = "menuLTX"
-              MenuOnly = True
-            }
-            { Separator24 Separator
-              MoveScaled(42,0,0.8889,4)
-              Foreground = Color.Transparent
-            }
-            { MenuButton2 MenuButton
-              MoveScaled(45,0,17,4)
-              Expand = True
-              Text = ("Procesar archivos por lotes")
-              Picture = Picture["iconos/conversor.svg"]
-              MenuOnly = True
+            { !FileView1 FileView
+              MoveScaled(2,14,27,9)
+              #Public = True
+              View = FileView.Detailed
+              Mode = Select.Multiple
             }
           }
-          { Splitter6 Splitter
-            MoveScaled(2,6,68,30)
-            Expand = True
-            Border = False
-            { Splitter7 Splitter
-              MoveScaled(0,4,30,25)
-              Arrangement = Arrange.Vertical
-              Border = False
-              { DirViewRuta DirView
-                MoveScaled(4,4,25,9)
-              }
-              { !FileView1 FileView
-                MoveScaled(2,14,27,9)
-                #Public = True
-                View = FileView.Detailed
-                Mode = Select.Multiple
-              }
-            }
-            { !ImageView1 ImageView
-              MoveScaled(39,11,18,12)
-              #Public = True
-              #Translate = False
-            }
+          { !ImageView1 ImageView
+            MoveScaled(39,11,18,12)
+            #Public = True
+            #Translate = False
           }
         }
         { Splitter3 Splitter
