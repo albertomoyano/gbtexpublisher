@@ -3299,7 +3299,7 @@ Public Sub menuAbrirRevista_Click()
     If Form_Notas.Visible Then
       Form_Notas.Close ' Cierra la ventana
     End If
-    Mod_Funciones.CopiarArchivos(TextBox1.Text)
+    Mod_Funciones.CopiarArchivosRevista(TextBox1.Text)
     ' levantamos los datos de comentario
     levantarComenta()
     levantarGitHubPages()' levantamos los datos de githubpages
@@ -5633,53 +5633,6 @@ Public Sub btnMenuGitLab_Click()
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.SetFocus()
   TerminalView1.Refresh()
-
-End
-
-'
-' condicionales para para las opciones de Quarto
-Public Sub chkInterno_Click()
-
-  If chkInterno.Value = True Then
-    ' Oculta el TextBox y lo limpia
-    btnBuscarTemplate.Visible = False
-    txtTEMPLATEquarto.Visible = False
-    txtTEMPLATEquarto.Text = ""
-  Else
-    ' Muestra el TextBox
-    btnBuscarTemplate.Visible = True
-    txtTEMPLATEquarto.Visible = True
-  End If
-
-End
-
-Public Sub btnSintaxisYML_Click()
-
-  Dim textoYAML As String = txtYMLpersonal.Text
-  Dim resultado As String
-
-  ' Verificar si el TextBox está vacío
-  If textoYAML = "" Then
-    Message.Error("El área de escritura está vacío. Introduzca código YAML válido.")
-    Return ' Salir del sub sin continuar
-  Endif
-
-  ' Guardar el YAML temporalmente en un archivo
-  Dim archivoTemp As String = "/tmp/temp_yaml.yml"
-  File.Save(archivoTemp, textoYAML)
-
-  ' Ejecutar Python para validar YAML
-  Shell "python3 -c \"import yaml; yaml.safe_load(open('" & archivoTemp & "')); print('VALIDO')\"" To resultado
-
-  ' Verificar el resultado
-  If Trim(resultado) = "VALIDO" Then
-    Message.Info("El texto YAML es válido.")
-  Else
-    Message.Error("El texto YAML no es válido.")
-  Endif
-
-  ' Eliminar archivo temporal
-  ' File.Kill(archivoTemp)
 
 End
 

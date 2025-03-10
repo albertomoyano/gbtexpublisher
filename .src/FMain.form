@@ -33,6 +33,22 @@
       Enabled = False
     }
   }
+  { menuPDFrevista Menu
+    Text = ("menuPDFrevista")
+    Visible = False
+    { menuPDFrevistaWEB Menu
+      Text = ("PDF web")
+    }
+    { menuPDFrevistaIMPRENTA Menu
+      Text = ("PDF imprenta")
+    }
+    { menuHTMLrevista Menu
+      Text = ("HTML5")
+    }
+    { menuXMLrevista Menu
+      Text = ("XML-JATS")
+    }
+  }
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
@@ -356,6 +372,7 @@
       Enabled = False
       Text = "Salidas"
       Picture = Picture["iconos/salidas.svg"]
+      Menu = "menuPDFrevista"
       MenuOnly = True
     }
     { Separator13 Separator
@@ -521,7 +538,7 @@
     Text = ("Salidas y configuraciones     ")
     Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
-      MoveScaled(1,1,158,4)
+      MoveScaled(3,1,158,4)
       { MenuButton1 MenuButton
         MoveScaled(8,0,23,4)
         Expand = True
@@ -3300,156 +3317,24 @@
         Spacing = True
         Margin = True
         Padding = 4
-        Count = 2
+        Count = 3
         Highlight = True
         Index = 0
-        Text = ("index.yml     ")
-        Picture = Picture["iconos/quarto.svg"]
+        Text = ("Obligatorios a la salida de tipo revista     ")
+        Picture = Picture["iconos/revista.svg"]
         { ScrollView15 ScrollView
           MoveScaled(1,2,115,50)
           Expand = True
           Arrangement = Arrange.Vertical
           Border = False
           ScrollBar = Scroll.Vertical
-          { HBox3 HBox
-            MoveScaled(1,1,113,4)
-            { Label119 Label
-              MoveScaled(0,0,23,4)
-              Alignment = Align.Right
-              Text = ("Tipo de proyecto  ")
-            }
-            { cmbProjetType ComboBox
-              MoveScaled(23,0,18,4)
-              ReadOnly = True
-              List = [("book"), ("document"), ("presentation"), ("report"), ("website")]
-            }
-            { Label126 Label
-              MoveScaled(43,0,58,4)
-              AutoResize = True
-              Text = ("    en book se obtienen salidas para pdf, epub, html, jats y word")
-            }
-          }
-          { TabPanelQuartoSalidas TabPanel
-            MoveScaled(2,6,110,43)
-            Expand = True
-            Arrangement = Arrange.Vertical
-            Spacing = True
-            Margin = True
-            Padding = 4
-            Count = 2
-            Highlight = True
-            Index = 0
-            Text = ("yml genérico     ")
-            { contenedorPDF ScrollView
-              MoveScaled(2,2,105,35)
-              Expand = True
-              Arrangement = Arrange.Vertical
-              Spacing = True
-              Margin = True
-              Padding = 4
-              Border = False
-              ScrollBar = Scroll.Vertical
-              { HBox174 HBox
-                MoveScaled(0,0,70,4)
-                { Label168 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Motor de compilación  ")
-                }
-                { cmbLTXengine ComboBox
-                  MoveScaled(23,0,18,4)
-                  ReadOnly = True
-                  List = [("LuaLaTeX"), ("XeLaTeX")]
-                }
-              }
-              { HBox183 HBox
-                MoveScaled(0,4,70,4)
-                { Label171 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Matriz de diseño  ")
-                }
-                { chkInterno CheckBox
-                  MoveScaled(23,0,12,4)
-                  AutoResize = True
-                  Text = ("Interno     ")
-                  Value = CheckBox.True
-                }
-                { btnBuscarTemplate Button
-                  MoveScaled(35,0,4,4)
-                  Visible = False
-                  Picture = Picture["iconos/abrirBuscar.svg"]
-                }
-                { txtTEMPLATEquarto TextBox
-                  MoveScaled(41,0,25,4)
-                  Visible = False
-                  Expand = True
-                }
-              }
-              { HBox186 HBox
-                MoveScaled(0,8,70,4)
-                { Label172 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Archivo .bib  ")
-                }
-                { btnBuscarArchivoBIB Button
-                  MoveScaled(29,0,4,4)
-                  Picture = Picture["iconos/abrirBuscar.svg"]
-                }
-                { txtBIBquarto TextBox
-                  MoveScaled(36,0,25,4)
-                  Expand = True
-                }
-              }
-              { HBox83 HBox
-                MoveScaled(0,12,70,4)
-                { Label153 Label
-                  MoveScaled(0,0,22.5556,4)
-                  Alignment = Align.Right
-                  Text = ("Archivo CSL  ")
-                }
-                { btnBuscarArchivoCSL Button
-                  MoveScaled(29,0,4,4)
-                  Picture = Picture["iconos/abrirBuscar.svg"]
-                }
-                { txtCSLquarto TextBox
-                  MoveScaled(36,0,25,4)
-                  Expand = True
-                }
-              }
-            }
-            Index = 1
-            Text = ("yml adicionales     ")
-            { HBox172 HBox
-              MoveScaled(3,1,60,4)
-              { btnGuardarYML Button
-                MoveScaled(2,0,4,4)
-                Picture = Picture["iconos/guardarComo.svg"]
-              }
-              { btnSintaxisYML Button
-                MoveScaled(6,0,17.7778,4)
-                Text = ("Sintaxis")
-                Picture = Picture["iconos/comp.svg"]
-              }
-              { Spring1 Spring
-                MoveScaled(49,0,5,4)
-              }
-            }
-            { txtYMLpersonal TextArea
-              MoveScaled(3,7,16,16)
-              Expand = True
-              Wrap = True
-              ScrollBar = Scroll.Vertical
-            }
-            Index = 0
-          }
         }
         Index = 1
         Text = ("Opcionales para la salida de tipo revista     ")
         Picture = Picture["iconos/revista.svg"]
         { ScrollView14 ScrollView
           MoveScaled(2,2,90,53)
+          Visible = False
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -4165,6 +4050,9 @@
             }
           }
         }
+        Index = 2
+        Text = ("Opcionales para la salida por artículo     ")
+        Picture = Picture["iconos/textnormal.svg"]
         Index = 0
       }
     }
