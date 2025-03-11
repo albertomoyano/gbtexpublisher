@@ -15,22 +15,18 @@
     { Menu4 Menu
       Text = ("Ejecutar separatas")
       Picture = Picture["iconos/terminal.svg"]
-      Enabled = False
     }
     { menuGray Menu
       Text = ("Convertir imágenes a .png en grayscale")
       Picture = Picture["iconos/terminal.svg"]
-      Enabled = False
     }
     { menuComprimir Menu
       Text = ("Comprimir proyecto (.tar.gz)")
       Picture = Picture["iconos/archive-insert.svg"]
-      Enabled = False
     }
     { menuBORRARaux Menu
       Text = ("Borrar archivos auxiliares")
       Picture = Picture["iconos/borrar.svg"]
-      Enabled = False
     }
   }
   { menuPDFrevista Menu
@@ -62,8 +58,6 @@
     { menuPDFespecial Menu
       Text = ("PDF especial")
     }
-    { Menu6 Menu
-    }
     { menuEPUB1 Menu
       #Translate = False
       Text = "epub + azw3 (modo imágenes png)"
@@ -77,8 +71,6 @@
     { menuEPUB2 Menu
       #Translate = False
       Text = "epub + azw3 (modo archivos html)"
-    }
-    { Menu7 Menu
     }
     { menuHTML Menu
       Text = ("HTML5")
@@ -174,33 +166,6 @@
       Picture = Picture["iconos/borrar.svg"]
     }
   }
-  { menuArchivo Menu
-    #Translate = False
-    Text = "Archivo"
-    Enabled = False
-    Visible = False
-    { menuAbrir Menu
-      Text = ("Abrir libro")
-      Picture = Picture["iconos/document.svg"]
-      Visible = False
-    }
-    { menuAbrirQuarto Menu
-      Text = ("Abrir Quarto")
-      Picture = Picture["iconos/document.svg"]
-      Visible = False
-    }
-    { mnu1LastFiles Menu
-      Text = ("Archivos abiertos recientemente")
-      Picture = Picture["iconos/abrirBuscar.svg"]
-    }
-    { Menu10 Menu
-    }
-    { Menu11 Menu
-      Text = ("Cerrar el programa")
-      Picture = Picture["iconos/salir.svg"]
-      Shortcut = "Ctrl+Q"
-    }
-  }
   { menuTOOLS Menu
     #Translate = False
     Text = "Herramientas"
@@ -214,13 +179,6 @@
       #Translate = False
       Text = ".docx a LaTeX (esquema simple)"
       Picture = Picture["iconos/conversor.svg"]
-    }
-    { menuConversorQMD Menu
-      #Translate = False
-      Text = ".docx a MD (con carpetas del proyecto)"
-      Picture = Picture["iconos/conversor.svg"]
-      Enabled = False
-      Visible = False
     }
     { menuAPUNTES Menu
       #Translate = False
@@ -445,35 +403,6 @@
       Expand = True
       ReadOnly = True
     }
-    { HBoxNuevoArtCap HBox
-      MoveScaled(61,0,61,4)
-      Expand = True
-      { Separator20 Separator
-        MoveScaled(0,0,2.3333,4)
-      }
-      { chkNuevoArtCap CheckBox
-        MoveScaled(3,0,22,4)
-        AutoResize = True
-        Text = ("agregar artículo/capítulo")
-      }
-      { cmbTipoArtCap ComboBox
-        MoveScaled(24,0,14,4)
-        Visible = False
-        NoTabFocus = True
-        ReadOnly = True
-        List = [("Artículo"), ("Capítulo")]
-      }
-      { btnGuardarArtCap Button
-        MoveScaled(39,0,4,4)
-        Visible = False
-        Picture = Picture["iconos/guardar.svg"]
-      }
-      { txtNuevoArtCap TextBox
-        MoveScaled(43,0,10,4)
-        Visible = False
-        Expand = True
-      }
-    }
   }
   { HBox9 HBox
     MoveScaled(1,8,155,4)
@@ -541,35 +470,42 @@
       MoveScaled(3,1,158,4)
       { MenuButton1 MenuButton
         MoveScaled(8,0,23,4)
+        #Translate = False
         Expand = True
-        Text = ("Guiones externos")
+        Text = "Guiones externos"
         Picture = Picture["iconos/conversor.svg"]
         MenuOnly = True
       }
       { Separator1 Separator
         MoveScaled(32,0,2.3333,4)
+        #Translate = False
       }
       { btnLimpiar Button
         MoveScaled(38,0,4,4)
+        #Translate = False
         NoTabFocus = True
-        ToolTip = ("Borrar entrada")
+        ToolTip = "Borrar entrada"
         Picture = Picture["iconos/borrar.svg"]
       }
       { TextBox2 TextBox
         MoveScaled(43,0,23,4)
+        #Translate = False
       }
       { BtnBuscarEnArchivos Button
         MoveScaled(67,0,4,4)
+        #Translate = False
         NoTabFocus = True
         Picture = Picture["iconos/search.svg"]
       }
       { Label125 Label
         MoveScaled(73,0,14,4)
+        #Translate = False
         AutoResize = True
-        Text = ("  Buscar palabras en todo el proyecto")
+        Text = "  Buscar palabras en todo el proyecto"
       }
       { Separator9 Separator
         MoveScaled(90,0,2.3333,4)
+        #Translate = False
       }
       { MenuApp MenuButton
         MoveScaled(92.3333,0,17,4)
@@ -582,17 +518,20 @@
       }
       { MenuButton3 MenuButton
         MoveScaled(109.3333,0,19,4)
+        #Translate = False
         Expand = True
-        Text = ("Complementos para PDF y ePub")
+        Text = "Complementos para PDF y ePub"
         Picture = Picture["iconos/conversor.svg"]
         Menu = "menuLTX"
         MenuOnly = True
       }
       { MenuButton2 MenuButton
         MoveScaled(128.3333,0,17,4)
+        #Translate = False
         Expand = True
-        Text = ("Procesar archivos por lotes")
+        Text = "Procesar archivos por lotes"
         Picture = Picture["iconos/conversor.svg"]
+        Menu = "menuProcesarArchivos"
         MenuOnly = True
       }
     }

@@ -197,10 +197,6 @@ Public Sub Form_Open()
   ' glosarios debe pasar a evento data
   ' Mostrar_ListaGLO()
 
-  ' por default hacemos no mostramos el hbox de los artículos
-  HBoxNuevoArtCap.Enabled = False
-  HBoxNuevoArtCap.Visible = False
-
   Splitter6.Layout = [1, 1]
 
 End
@@ -364,8 +360,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     PanelLaTeX.Enabled = True
     PanelQuarto.Visible = False
     PanelQuarto.Enabled = False
-    HBoxNuevoArtCap.Enabled = False
-    HBoxNuevoArtCap.Visible = False
     habilitamosLibro()
     guardarTipoDocumentoLibro()
     HBoxPanelRevista.Visible = False
@@ -377,8 +371,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     menuBORRARaux.Enabled = True
     menuComprimir.Enabled = True
     menuTOOLS.Enabled = True
-    menuScriptsExternos.Enabled = True
-    menuLTX.Enabled = True
     btnKitty.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
@@ -386,12 +378,13 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     btnKanban.Enabled = True
     menuGray.Enabled = True
     menuCatalogo.Enabled = True
-    MenuButton1.Menu = "menuScriptsExternos"
-    MenuButton2.Menu = "menuProcesarArchivos"
     Menu4.Enabled = True
     menuOT.Enabled = True
     menuPDFweb.Enabled = True
     menuDisclaimer.Enabled = True
+    menuScriptsExternos.Enabled = True
+    MenuButton1.Menu = "menuScriptsExternos"
+    HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
     ImageView1.Image = Null
     txtEditorRapido.Text = ""
@@ -417,8 +410,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
     contarEntradasBIByGLO()' mostramos las cantidades en el boton
     Mod_Funciones.limpiamosMetadatosLibrosRevistas()' limpiamos las entradas de los metadatos
-    'cargamos datos en los gridview
-    ' Mostrar_ListaGLO()
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
     Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
@@ -3263,8 +3254,6 @@ Public Sub menuAbrirRevista_Click()
     PanelLaTeX.Enabled = False
     PanelQuarto.Visible = True
     PanelQuarto.Enabled = True
-    HBoxNuevoArtCap.Enabled = True
-    HBoxNuevoArtCap.Visible = True
     habilitamosRevista()
     TextBox1.Text = Dialog.Path
     ' sCurrentFilePath = TextBox1.Text
@@ -3283,19 +3272,19 @@ Public Sub menuAbrirRevista_Click()
     menuComprimir.Enabled = True
     menuTOOLS.Enabled = True
     menuScriptsExternos.Enabled = True
-    menuLTX.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     btnMenuGitLab.Enabled = True
     btnKanban.Enabled = True
     menuGray.Enabled = True
     menuCatalogo.Enabled = True
-    MenuButton2.Visible = False
-    MenuButton3.Visible = False
     Menu4.Enabled = True
     menuOT.Enabled = True
     menuPDFweb.Enabled = True
     menuDisclaimer.Enabled = True
+    menuScriptsExternos.Enabled = True
+    MenuButton1.Menu = "menuScriptsExternos"
+    HBox93.Visible = True
     If Form_Notas.Visible Then
       Form_Notas.Close ' Cierra la ventana
     End If
@@ -3310,7 +3299,6 @@ Public Sub menuAbrirRevista_Click()
     ' limpiamos las entradas de los metadatos
     Mod_Funciones.limpiamosMetadatosLibrosRevistas()
     'cargamos datos en los gridview
-    ' Mostrar_ListaGLO()
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
     ' Ejecutar la consulta SQL
@@ -5642,53 +5630,6 @@ Public Sub chkURLdescarga_Click()
     txtURLdescarga.Enabled = True
   Else
     txtURLdescarga.Enabled = False
-  End If
-
-End
-
-Public Sub chkNuevoArtCap_Click()
-
-  If chkNuevoArtCap.Value = True Then
-    txtNuevoArtCap.Visible = True
-    txtNuevoArtCap.SetFocus
-    btnGuardarArtCap.Visible = True
-    cmbTipoArtCap.Visible = True
-  Else
-    txtNuevoArtCap.Visible = False
-    btnGuardarArtCap.Visible = False
-    txtNuevoArtCap.Text = ""
-    cmbTipoArtCap.Visible = False
-  End If
-
-End
-
-Public Sub btnGuardarArtCap_Click()
-
-  ' Establecer el nombre del archivo
-  Dim nombreSalida As String = txtNuevoArtCap.Text
-  Dim rutaArchivo As String = File.Dir(TextBox1.Text) &/ "artcap" &/ nombreSalida & ".md"
-
-  If txtNuevoArtCap.Text = "" Then
-    Message.Error("Debe colocar un nombre al archivo.")
-    Return
-  End If
-
-  If Not File.RealPath(rutaArchivo) Then
-    ' Determinar qué función de exportación usar según la selección del ComboBox
-    Select Case cmbTipoArtCap.Text
-      Case "Artículo"
-        Mod_Exportar.ExportToNuevoArticulo(TextBox1.Text)
-      Case "Capítulo"
-        Mod_Exportar.ExportToNuevoCapitulo(TextBox1.Text)
-      Case Else
-        Message.Error("Selección no válida en el ComboBox.")
-        Return
-    End Select
-    chkNuevoArtCap.Value = False
-    txtNuevoArtCap.Text = ""
-    Message.Info("El archivo se ha creado exitosamente.")
-  Else
-    Message.Info("El archivo ya existe. Por favor, elija otro nombre.")
   End If
 
 End
