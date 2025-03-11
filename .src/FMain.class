@@ -5685,17 +5685,6 @@ Public Sub menuEPUB2_Click()' epub via html
 
 End
 
-Public Sub menuHTML_Click()' html con lwarp
-
-  If TextBox1.Text = "" Then
-    Message.Warning("Debe tener un archivo LaTeX asociado.")
-  Else
-    TabPanel6.Index = 0
-    Mod_GenerarHTML.salidaHTML5
-  Endif
-
-End
-
 Public Sub cmbRolAutores_Click()
 
   Select Case cmbRolAutores.Text
