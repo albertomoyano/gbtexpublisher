@@ -76,7 +76,6 @@ Public Sub salidaEPUBpng()' parte 1
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-  FMain.TerminalView1.Input("clear" & "\n")
   Wait 0.2
 
 End

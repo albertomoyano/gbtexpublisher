@@ -297,6 +297,7 @@ Public Sub RellenarComboBoxBibTeX()
   FMain.cbPUBSTATE.Add("forthcoming")
   FMain.cbPUBSTATE.Add("inpress")
   FMain.cbPUBSTATE.Add("prepublished")
+  FMain.cbPUBSTATE.Add("edauthor")
 
   FMain.cbEDITORTYPE.Add("")
   FMain.cbEDITORTYPE.Add("editor")

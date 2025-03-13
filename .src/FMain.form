@@ -48,7 +48,6 @@
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
-    Visible = False
     { menuPDFcolor Menu
       Text = ("PDF web")
     }
@@ -1669,8 +1668,57 @@
             Placeholder = ("Ubicación de la casa editora")
           }
         }
+        { HBox63 HBox
+          MoveScaled(0,9,127,4)
+          { lblIstitution Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Institution ")
+          }
+          { txtINSTITUTION TextBox AllTextBoxes
+            Name = "txtINSTITUTION"
+            MoveScaled(18,0,15,4)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+            Placeholder = ("Patrocinante")
+          }
+          { Label25 Label
+            MoveScaled(34,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Organization ")
+          }
+          { txtORGANIZATION TextBox AllTextBoxes
+            Name = "txtORGANIZATION"
+            MoveScaled(50,0,17,4)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+            Placeholder = ("Organizador")
+          }
+          { lblLocation2 Label
+            MoveScaled(67,0,16,4)
+            Alignment = Align.Right
+            Text = ("Venue ")
+          }
+          { txtVENUE TextBox AllTextBoxes
+            Name = "txtVENUE"
+            MoveScaled(84,0,10,4)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+            Placeholder = ("of event")
+          }
+          { lblPUBSTATE Label
+            MoveScaled(97,0,16,4)
+            Alignment = Align.Right
+            Text = ("PubState ")
+          }
+          { cbPUBSTATE ComboBox
+            MoveScaled(113,0,16,4)
+            NoTabFocus = True
+            ReadOnly = True
+          }
+        }
         { HBox61 HBox
-          MoveScaled(0,9,112,4)
+          MoveScaled(0,13,112,4)
           { btnAbrirPublisher Button
             MoveScaled(1,0,4,4)
             Picture = Picture["iconos/abrirBuscar.svg"]
@@ -1701,7 +1749,7 @@
           }
         }
         { HBox68 HBox
-          MoveScaled(-12,13,158,4)
+          MoveScaled(0,17,158,4)
           { lblHyphenation Label
             MoveScaled(0,0,16,3.5556)
             #Translate = False
@@ -1762,55 +1810,6 @@
             Expand = True
             PopupMenu = "menuTEXTBOX"
             Placeholder = ("polyglossia options for langid")
-          }
-        }
-        { HBox63 HBox
-          MoveScaled(-13,17,127,4)
-          { lblIstitution Label
-            MoveScaled(0,0,16,3.5556)
-            Alignment = Align.Right
-            Text = ("Institution ")
-          }
-          { txtINSTITUTION TextBox AllTextBoxes
-            Name = "txtINSTITUTION"
-            MoveScaled(18,0,15,4)
-            Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Placeholder = ("Patrocinante")
-          }
-          { Label25 Label
-            MoveScaled(34,0,16,3.5556)
-            Alignment = Align.Right
-            Text = ("Organization ")
-          }
-          { txtORGANIZATION TextBox AllTextBoxes
-            Name = "txtORGANIZATION"
-            MoveScaled(50,0,17,4)
-            Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Placeholder = ("Organizador")
-          }
-          { lblLocation2 Label
-            MoveScaled(67,0,16,4)
-            Alignment = Align.Right
-            Text = ("Venue ")
-          }
-          { txtVENUE TextBox AllTextBoxes
-            Name = "txtVENUE"
-            MoveScaled(84,0,10,4)
-            Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Placeholder = ("of event")
-          }
-          { lblPUBSTATE Label
-            MoveScaled(97,0,16,4)
-            Alignment = Align.Right
-            Text = ("PubState ")
-          }
-          { cbPUBSTATE ComboBox
-            MoveScaled(113,0,16,4)
-            NoTabFocus = True
-            ReadOnly = True
           }
         }
       }
