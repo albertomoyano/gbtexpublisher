@@ -549,7 +549,7 @@
         MoveScaled(2,7,48,49)
         Arrangement = Arrange.Vertical
         Border = False
-        Count = 2
+        Count = 3
         Orientation = Align.Bottom
         Index = 0
         Text = ("Terminal     ")
@@ -595,7 +595,7 @@
           }
         }
         { Panel7 Panel
-          MoveScaled(1,22,37,20)
+          MoveScaled(2,22,37,20)
           Expand = True
           Arrangement = Arrange.Fill
           Border = Border.Sunken
@@ -607,6 +607,69 @@
             Expand = True
             Wrap = True
             ScrollBar = Scroll.Vertical
+          }
+        }
+        Index = 2
+        Text = ("Asistencia de AI     ")
+        Picture = Picture["iconos/openAI.svg"]
+        { Splitter8 Splitter
+          MoveScaled(1,2,45,41)
+          Expand = True
+          Arrangement = Arrange.Vertical
+          Border = False
+          { HBox50 VBox
+            MoveScaled(1,6,41,16)
+            Expand = True
+            Spacing = True
+            Margin = True
+            Padding = 4
+            { Panel1 Panel
+              MoveScaled(0,0,25,11)
+              Expand = True
+              Arrangement = Arrange.Fill
+              Border = Border.Sunken
+              { !WebViewAI WebView
+                MoveScaled(1,2,19,6)
+                #Public = True
+                #Translate = False
+                Expand = True
+              }
+            }
+          }
+          { HBox44 VBox
+            MoveScaled(1,23,41,16)
+            Expand = True
+            Spacing = True
+            Margin = True
+            Padding = 4
+            { txtAI TextArea
+              MoveScaled(1,1,25,4)
+              Expand = True
+              Wrap = True
+              ScrollBar = Scroll.Vertical
+            }
+            { HBox3 HBox
+              MoveScaled(1,9,38,4)
+              { Label119 Label
+                MoveScaled(0,0,12,3.5556)
+                Alignment = Align.Right
+                Text = ("API Key ")
+              }
+              { txtAPIKEY TextBox
+                MoveScaled(14,0,11,4)
+                Expand = True
+                Placeholder = ("Coloque su appikey para acceder al servidor")
+              }
+              { Separator10 Separator
+                MoveScaled(26,0,2.3333,4)
+                #Translate = False
+              }
+              { btnSENDai Button
+                MoveScaled(30,0,16,4)
+                Background = &H8BE06F
+                Text = ("Enviar")
+              }
+            }
           }
         }
         Index = 0
