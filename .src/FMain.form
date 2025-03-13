@@ -38,6 +38,9 @@
     { menuPDFrevistaIMPRENTA Menu
       Text = ("PDF imprenta")
     }
+    { menuPDFespecialRevista Menu
+      Text = ("PDF especial")
+    }
     { menuHTMLrevista Menu
       Text = ("HTML5")
     }
@@ -48,13 +51,14 @@
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
+    Visible = False
     { menuPDFcolor Menu
       Text = ("PDF web")
     }
     { menuPDFgray Menu
       Text = ("PDF imprenta")
     }
-    { menuPDFespecial Menu
+    { menuPDFespecialLibro Menu
       Text = ("PDF especial")
     }
     { menuEPUB1 Menu
@@ -73,6 +77,9 @@
     }
     { menuHTML Menu
       Text = ("HTML5")
+    }
+    { menuXMLTEI Menu
+      Text = ("XML-TEI")
     }
   }
   { menuTEXTBOX Menu
