@@ -228,7 +228,7 @@ Public Sub btnGenerarPDF_Click()
   Endif
 
   FMain.TabPanel1.Index = 0
-  FMain.TabPanel6.Index = 0
+  FMain.TabPanel6.Index = 2
   ' borramos la orden de taller anterior
   Shell "rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXOT-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n"
   Wait 0.1

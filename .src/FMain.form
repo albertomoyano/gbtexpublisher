@@ -51,7 +51,6 @@
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
-    Visible = False
     { menuPDFcolor Menu
       Text = ("PDF web")
     }
@@ -552,64 +551,6 @@
         Count = 3
         Orientation = Align.Bottom
         Index = 0
-        Text = ("Terminal     ")
-        Picture = Picture["iconos/terminal.svg"]
-        { !TerminalView1 TerminalView
-          MoveScaled(3,3,27,6)
-          #Public = True
-          Expand = True
-          AutoResize = False
-          Blink = True
-          CursorStyle = TerminalView.Underline
-          ShowScrollBar = True
-          ShowLink = True
-          WindowCommands = True
-        }
-        Index = 1
-        Text = ("Edición rápida     ")
-        Picture = Picture["iconos/textnormal.svg"]
-        { HBox6 HBox
-          MoveScaled(1,1,45,4)
-          { btnGuardarMod Button
-            MoveScaled(1,0,4,4)
-            Enabled = False
-            NoTabFocus = True
-            ToolTip = ("Guardar cambios")
-            Picture = Picture["iconos/guardarComo.svg"]
-          }
-          { btnFontEditor Button
-            MoveScaled(5,0,4,4)
-            Enabled = False
-            ToolTip = ("Guardar modificaciones")
-            Picture = Picture["iconos/fonts.svg"]
-          }
-          { Separator26 Separator
-            MoveScaled(9,0,2.3333,4)
-          }
-          { TextLabel7 TextLabel
-            MoveScaled(16,0,18,4)
-            Expand = True
-            AutoResize = True
-            Text = ("La edición rápida de este editor no tiene autoguardar.")
-            Alignment = Align.Normal
-          }
-        }
-        { Panel7 Panel
-          MoveScaled(2,22,37,20)
-          Expand = True
-          Arrangement = Arrange.Fill
-          Border = Border.Sunken
-          { txtEditorRapido TextArea
-            MoveScaled(1,3,18,7)
-            Enabled = False
-            Font = Font["Monospace"]
-            NoTabFocus = True
-            Expand = True
-            Wrap = True
-            ScrollBar = Scroll.Vertical
-          }
-        }
-        Index = 2
         Text = ("DeepSeek     ")
         Picture = Picture["iconos/DeepSeek.png"]
         { Panel1 Panel
@@ -670,6 +611,64 @@
               }
             }
           }
+        }
+        Index = 1
+        Text = ("Edición rápida     ")
+        Picture = Picture["iconos/textnormal.svg"]
+        { HBox6 HBox
+          MoveScaled(1,1,45,4)
+          { btnGuardarMod Button
+            MoveScaled(1,0,4,4)
+            Enabled = False
+            NoTabFocus = True
+            ToolTip = ("Guardar cambios")
+            Picture = Picture["iconos/guardarComo.svg"]
+          }
+          { btnFontEditor Button
+            MoveScaled(5,0,4,4)
+            Enabled = False
+            ToolTip = ("Guardar modificaciones")
+            Picture = Picture["iconos/fonts.svg"]
+          }
+          { Separator26 Separator
+            MoveScaled(9,0,2.3333,4)
+          }
+          { TextLabel7 TextLabel
+            MoveScaled(16,0,18,4)
+            Expand = True
+            AutoResize = True
+            Text = ("La edición rápida de este editor no tiene autoguardar.")
+            Alignment = Align.Normal
+          }
+        }
+        { Panel7 Panel
+          MoveScaled(2,22,37,20)
+          Expand = True
+          Arrangement = Arrange.Fill
+          Border = Border.Sunken
+          { txtEditorRapido TextArea
+            MoveScaled(1,3,18,7)
+            Enabled = False
+            Font = Font["Monospace"]
+            NoTabFocus = True
+            Expand = True
+            Wrap = True
+            ScrollBar = Scroll.Vertical
+          }
+        }
+        Index = 2
+        Text = ("Terminal     ")
+        Picture = Picture["iconos/terminal.svg"]
+        { !TerminalView1 TerminalView
+          MoveScaled(3,3,27,6)
+          #Public = True
+          Expand = True
+          AutoResize = False
+          Blink = True
+          CursorStyle = TerminalView.Underline
+          ShowScrollBar = True
+          ShowLink = True
+          WindowCommands = True
         }
         Index = 0
       }
