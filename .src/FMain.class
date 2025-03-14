@@ -31,6 +31,7 @@ Private horas As Integer
 Public idSeleccionado As Integer
 Private archivoFileClick As Boolean
 Private imgPreview As New Image
+Public url As String
 
 ' Actualizar el Label cada segundo
 Public Sub TimerHOY_Timer()
@@ -4527,8 +4528,6 @@ End
 
 Public Sub btnBuscarORCID_Click()
 
-  Dim url As String
-
   url = txtORCID.Text
 
   If url <> "" Then Shell "xdg-open " & url
@@ -4536,8 +4535,6 @@ Public Sub btnBuscarORCID_Click()
 End
 
 Public Sub btnBuscarORCIDcolaborador_Click()
-
-  Dim url As String
 
   url = txtORCIDcolaborador.Text
 
@@ -6009,10 +6006,10 @@ Public Sub btnSENDai_Click()' En el evento Click del botón "Enviar"
     Return
   Endif
 
-  ' ' Obtén el prompt del TextArea
-  ' Dim sPrompt As String = txtPROMPT.Text
-  '
-  ' ' Obtén la API key del TextBox
-  ' Dim sApiKey As String = txtAPIKEY.Text
+  ' Obtén el prompt del TextArea
+  Dim sPrompt As String = txtPROMPT.Text
+
+  ' Obtén la API key del TextBox
+  Dim sApiKey As String = txtAPIKEY.Text
 
 End
