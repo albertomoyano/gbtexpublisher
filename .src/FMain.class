@@ -31,7 +31,7 @@ Private horas As Integer
 Public idSeleccionado As Integer
 Private archivoFileClick As Boolean
 Private imgPreview As New Image
-Public url As String
+Public sURL As String
 
 ' Actualizar el Label cada segundo
 Public Sub TimerHOY_Timer()
@@ -3235,15 +3235,13 @@ Public Sub menuMAYinicialINGLES_Click()
 
 End
 
-' Public Sub menuIrURL_Click()
-'
-'   Dim url As String
-'
-'   url = sTB_Text
-'
-'   If url <> "" Then Shell "xdg-open " & url
-'
-' End
+Public Sub menuIrURL_Click()
+
+  sURL = sTB_Text
+
+  If sURL <> "" Then Shell "xdg-open " & sURL
+
+End
 
 Public Sub menuMAYand_Click()'aplicar mayuscula para autores
 
@@ -4528,17 +4526,17 @@ End
 
 Public Sub btnBuscarORCID_Click()
 
-  url = txtORCID.Text
+  sURL = txtORCID.Text
 
-  If url <> "" Then Shell "xdg-open " & url
+  If sURL <> "" Then Shell "xdg-open " & sURL
 
 End
 
 Public Sub btnBuscarORCIDcolaborador_Click()
 
-  url = txtORCIDcolaborador.Text
+  sURL = txtORCIDcolaborador.Text
 
-  If url <> "" Then Shell "xdg-open " & url
+  If sURL <> "" Then Shell "xdg-open " & sURL
 
 End
 
