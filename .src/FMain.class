@@ -3234,15 +3234,15 @@ Public Sub menuMAYinicialINGLES_Click()
 
 End
 
-Public Sub menuIrURL_Click()
-
-  Dim url As String
-
-  url = sTB_Text
-
-  If url <> "" Then Shell "xdg-open " & url
-
-End
+' Public Sub menuIrURL_Click()
+'
+'   Dim url As String
+'
+'   url = sTB_Text
+'
+'   If url <> "" Then Shell "xdg-open " & url
+'
+' End
 
 Public Sub menuMAYand_Click()'aplicar mayuscula para autores
 
@@ -6009,10 +6009,10 @@ Public Sub btnSENDai_Click()' En el evento Click del botón "Enviar"
     Return
   Endif
 
-  ' Obtén el prompt del TextArea
-  Dim sPrompt As String = txtPROMPT.Text
-
-  ' Obtén la API key del TextBox
-  Dim sApiKey As String = txtAPIKEY.Text
+  ' ' Obtén el prompt del TextArea
+  ' Dim sPrompt As String = txtPROMPT.Text
+  '
+  ' ' Obtén la API key del TextBox
+  ' Dim sApiKey As String = txtAPIKEY.Text
 
 End
