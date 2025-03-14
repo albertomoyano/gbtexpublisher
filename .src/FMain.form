@@ -610,40 +610,39 @@
           }
         }
         Index = 2
-        Text = ("Asistencia de AI     ")
-        Picture = Picture["iconos/openAI.svg"]
+        Text = ("DeepSeek     ")
+        Picture = Picture["iconos/DeepSeek.png"]
+        { Panel1 Panel
+          MoveScaled(4,3,25,11)
+          Expand = True
+          Arrangement = Arrange.Fill
+          Border = Border.Sunken
+          { WebKit1 WebView
+            MoveScaled(5,3,17,5)
+          }
+        }
         { Splitter8 Splitter
-          MoveScaled(1,2,45,41)
+          MoveScaled(2,17,45,24)
+          Visible = False
           Expand = True
           Arrangement = Arrange.Vertical
           Border = False
           { HBox50 VBox
-            MoveScaled(1,6,41,16)
+            MoveScaled(1,1,41,5)
             Expand = True
             Spacing = True
             Margin = True
             Padding = 4
-            { Panel1 Panel
-              MoveScaled(0,0,25,11)
-              Expand = True
-              Arrangement = Arrange.Fill
-              Border = Border.Sunken
-              { !WebViewAI WebView
-                MoveScaled(1,2,19,6)
-                #Public = True
-                #Translate = False
-                Expand = True
-              }
-            }
           }
           { HBox44 VBox
-            MoveScaled(1,23,41,16)
+            MoveScaled(1,7,41,16)
             Expand = True
             Spacing = True
             Margin = True
             Padding = 4
-            { txtAI TextArea
+            { txtPROMPT TextArea
               MoveScaled(1,1,25,4)
+              #Translate = False
               Expand = True
               Wrap = True
               ScrollBar = Scroll.Vertical
@@ -658,7 +657,7 @@
               { txtAPIKEY TextBox
                 MoveScaled(14,0,11,4)
                 Expand = True
-                Placeholder = ("Coloque su appikey para acceder al servidor")
+                Placeholder = ("Coloque su APIKey para acceder al servidor")
               }
               { Separator10 Separator
                 MoveScaled(26,0,2.3333,4)

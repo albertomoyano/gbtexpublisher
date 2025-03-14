@@ -41,6 +41,9 @@ End
 
 Public Sub Form_Open()
 
+  ' Cargar la URL después de configurar
+  WebKit1.URL = "https://chat.deepseek.com/"
+
   ' Usa la ruta seleccionada en el formulario de inicio
   meConn.Type = "sqlite3"
   meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
@@ -5992,52 +5995,24 @@ Public Sub gidGLOactual_Click()
 
 End
 
-' ' Evento Click del botón
-' Public Sub btnSENDai_Click()
-'
-'   Dim sPrompt As String
-'   Dim sResponse As String
-'
-'   ' Obtener el texto del TextArea
-'   sPrompt = txtAI.Text
-'
-'   ' Llamar a la función para enviar el prompt a Qwen
-'   sResponse = SendToQwen(sPrompt)
-'
-'   ' Mostrar la respuesta en el WebKit (como HTML)
-'   WebViewAI.Html = "<html><body style='font-family: Arial; padding: 20px;'>" & sResponse & "</body></html>"
-'
-' End
-'
-' Private Function SendToQwen(sPrompt As String) As String
-'
-'   Dim curl As New Curl
-'   Dim sUrl As String = "https://api.qwen.com/v1/generate" ' URL de la API (verifica en la documentación)
-'   Dim sApiKey As String = "TU_API_KEY" ' Reemplaza con tu API Key
-'   Dim sData As String
-'   Dim sResult As String
-'
-'   ' Configurar los datos del prompt (ajusta según la API)
-'   sData = "{" "prompt" ": " "" & sPrompt & "" ", " "max_tokens" ": 500}"
-'
-'   ' Configurar la solicitud HTTP POST
-'   curl.Url = sUrl
-'   curl.Headers["Content-Type"] = "application/json"
-'   curl.Headers["Authorization"] = "Bearer " & sApiKey
-'   curl.PostData = sData
-'
-'   ' Ejecutar la solicitud
-'   curl.Exec()
-'
-'   ' Obtener la respuesta
-'   sResult = curl.Response
-'
-'   ' Extraer el texto de la respuesta JSON (ejemplo simplificado)
-'   ' Ajusta según la estructura real de la respuesta de la API
-'   sResult = Mid$(sResult, InStr(sResult, "content") + 9)
-'   sResult = Left$(sResult, InStr(sResult, "}") - 1)
-'   sResult = Replace$(sResult, "\"" ", " "")
-'
-'   Return sResult
-'
-' End
+Public Sub btnSENDai_Click()' En el evento Click del botón "Enviar"
+
+  ' Verifica si el TextArea del prompt o el TextBox de la API key están vacíos
+  If Trim(txtPROMPT.Text) = "" And Trim(txtAPIKEY.Text) = "" Then
+    Message("Por favor, ingresa una consulta al prompt y tu API key.")
+    Return
+  Else If Trim(txtPROMPT.Text) = "" Then
+    Message("Por favor, ingresa una consulta al prompt.")
+    Return
+  Else If Trim(txtAPIKEY.Text) = "" Then
+    Message("Por favor, ingresa tu API key.")
+    Return
+  Endif
+
+  ' Obtén el prompt del TextArea
+  Dim sPrompt As String = txtPROMPT.Text
+
+  ' Obtén la API key del TextBox
+  Dim sApiKey As String = txtAPIKEY.Text
+
+End
