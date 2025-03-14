@@ -31,7 +31,7 @@ Private horas As Integer
 Public idSeleccionado As Integer
 Private archivoFileClick As Boolean
 Private imgPreview As New Image
-Public sURL As String
+Public $URL As String
 
 ' Actualizar el Label cada segundo
 Public Sub TimerHOY_Timer()
@@ -3237,9 +3237,9 @@ End
 
 Public Sub menuIrURL_Click()
 
-  sURL = sTB_Text
+  $URL = sTB_Text
 
-  If sURL <> "" Then Shell "xdg-open " & sURL
+  If $URL <> "" Then Shell "xdg-open " & $URL
 
 End
 
@@ -4526,17 +4526,17 @@ End
 
 Public Sub btnBuscarORCID_Click()
 
-  sURL = txtORCID.Text
+  $URL = txtORCID.Text
 
-  If sURL <> "" Then Shell "xdg-open " & sURL
+  If $URL <> "" Then Shell "xdg-open " & $URL
 
 End
 
 Public Sub btnBuscarORCIDcolaborador_Click()
 
-  sURL = txtORCIDcolaborador.Text
+  $URL = txtORCIDcolaborador.Text
 
-  If sURL <> "" Then Shell "xdg-open " & sURL
+  If $URL <> "" Then Shell "xdg-open " & $URL
 
 End
 
