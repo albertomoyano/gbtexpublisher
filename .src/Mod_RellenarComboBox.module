@@ -206,6 +206,14 @@ Public Sub RellenarComboBoxBibTeX()
   FMain.cbLANGUAGEID.Add("latin")
   FMain.cbLANGUAGEID.Add("czech")
 
+  FMain.txtPAGINATION.Add("")' lo dejo para compatibilidad con referencias viejas
+  FMain.txtPAGINATION.Add("page")
+  FMain.txtPAGINATION.Add("column")
+  FMain.txtPAGINATION.Add("line")
+  FMain.txtPAGINATION.Add("verse")
+  FMain.txtPAGINATION.Add("section")
+  FMain.txtPAGINATION.Add("paragraph")
+
   FMain.txtORIGLANGUAGE.Add("")
   FMain.txtORIGLANGUAGE.Add("spanish")
   FMain.txtORIGLANGUAGE.Add("portuguese")

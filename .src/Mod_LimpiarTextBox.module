@@ -102,7 +102,7 @@ Public Sub LimpiarCamposBIB()
   FMain.txtINDEXTITLE.Clear
   FMain.txtISSUETITLE.Clear
   FMain.txtREPRINTTITLE.Clear
-  FMain.txtPAGINATION.Clear
+  FMain.txtPAGINATION.Text = ""
   FMain.txtVENUE.Clear
   FMain.txtBookPagination.Clear
   FMain.txtLANGIDOPTS.Clear
