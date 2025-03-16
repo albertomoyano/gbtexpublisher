@@ -8,6 +8,14 @@
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
+  { menuAI Menu
+    Text = ("AI")
+    Visible = False
+    { menudeepseek Menu
+      Text = ("DeepSeek")
+      Picture = Picture["iconos/DeepSeek.png"]
+    }
+  }
   { menuProcesarArchivos Menu
     #Translate = False
     Text = "Procesar archivos"
@@ -474,8 +482,13 @@
     Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
       MoveScaled(3,1,158,4)
+      { ComboBox2 ComboBox
+        MoveScaled(0,0,14,4)
+        ReadOnly = True
+        List = [("DeepSeek"), ("ChatGPT")]
+      }
       { MenuButton1 MenuButton
-        MoveScaled(8,0,23,4)
+        MoveScaled(16,0,20,4)
         #Translate = False
         Expand = True
         Text = "Guiones externos"
@@ -483,7 +496,7 @@
         MenuOnly = True
       }
       { Separator1 Separator
-        MoveScaled(32,0,2.3333,4)
+        MoveScaled(36,0,2.3333,4)
         #Translate = False
       }
       { btnLimpiar Button
@@ -552,8 +565,8 @@
         Count = 3
         Orientation = Align.Bottom
         Index = 0
-        Text = ("DeepSeek     ")
-        Picture = Picture["iconos/DeepSeek.png"]
+        Text = ("AI     ")
+        Picture = Picture["iconos/openAI.svg"]
         { Panel1 Panel
           MoveScaled(4,3,25,11)
           Expand = True
@@ -561,56 +574,6 @@
           Border = Border.Sunken
           { WebKit1 WebView
             MoveScaled(5,3,17,5)
-          }
-        }
-        { Splitter8 Splitter
-          MoveScaled(2,17,45,24)
-          Visible = False
-          Expand = True
-          Arrangement = Arrange.Vertical
-          Border = False
-          { HBox50 VBox
-            MoveScaled(1,1,41,5)
-            Expand = True
-            Spacing = True
-            Margin = True
-            Padding = 4
-          }
-          { HBox44 VBox
-            MoveScaled(1,7,41,16)
-            Expand = True
-            Spacing = True
-            Margin = True
-            Padding = 4
-            { txtPROMPT TextArea
-              MoveScaled(1,1,25,4)
-              #Translate = False
-              Expand = True
-              Wrap = True
-              ScrollBar = Scroll.Vertical
-            }
-            { HBox3 HBox
-              MoveScaled(1,9,38,4)
-              { Label119 Label
-                MoveScaled(0,0,12,3.5556)
-                Alignment = Align.Right
-                Text = ("API Key ")
-              }
-              { txtAPIKEY TextBox
-                MoveScaled(14,0,11,4)
-                Expand = True
-                Placeholder = ("Coloque su APIKey para acceder al servidor")
-              }
-              { Separator10 Separator
-                MoveScaled(26,0,2.3333,4)
-                #Translate = False
-              }
-              { btnSENDai Button
-                MoveScaled(30,0,16,4)
-                Background = &H8BE06F
-                Text = ("Enviar")
-              }
-            }
           }
         }
         Index = 1

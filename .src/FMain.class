@@ -110,7 +110,6 @@ Public Sub Form_Open()
 
   'configuración del ToDo
   Splitter2.Layout = [3, 1]
-  Splitter8.Layout = [3, 1]
   txtTAREAS.Visible = False
   Mostrar_Lista_Tareas
 
@@ -1909,7 +1908,6 @@ Public Sub eliminarBlancosBIB()
   EliminarEspaciosAlInicioYFinal(txtINDEXTITLE)
   EliminarEspaciosAlInicioYFinal(txtISSUETITLE)
   EliminarEspaciosAlInicioYFinal(txtREPRINTTITLE)
-  EliminarEspaciosAlInicioYFinal(txtPAGINATION)
   EliminarEspaciosAlInicioYFinal(txtVENUE)
   EliminarEspaciosAlInicioYFinal(txtBookPagination)
   EliminarEspaciosAlInicioYFinal(txtLANGIDOPTS)
@@ -2765,12 +2763,6 @@ End
 Public Sub Splitter2_Resize()
 
   Splitter2.Layout = [3, 1]
-
-End
-
-Public Sub Splitter8_Resize()
-
-  Splitter8.Layout = [3, 1]
 
 End
 
@@ -5988,27 +5980,5 @@ Public Sub gidGLOactual_Click()
 
   ' en el evento Click de la celda pasar como parámetro la fila
   Mod_Funciones.VerGloActual()
-
-End
-
-Public Sub btnSENDai_Click()' En el evento Click del botón "Enviar"
-
-  ' Verifica si el TextArea del prompt o el TextBox de la API key están vacíos
-  If Trim(txtPROMPT.Text) = "" And Trim(txtAPIKEY.Text) = "" Then
-    Message("Por favor, ingresa una consulta al prompt y tu API key.")
-    Return
-  Else If Trim(txtPROMPT.Text) = "" Then
-    Message("Por favor, ingresa una consulta al prompt.")
-    Return
-  Else If Trim(txtAPIKEY.Text) = "" Then
-    Message("Por favor, ingresa tu API key.")
-    Return
-  Endif
-
-  ' Obtén el prompt del TextArea
-  Dim sPrompt As String = txtPROMPT.Text
-
-  ' Obtén la API key del TextBox
-  Dim sApiKey As String = txtAPIKEY.Text
 
 End
