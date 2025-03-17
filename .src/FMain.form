@@ -482,11 +482,6 @@
     Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
       MoveScaled(3,1,158,4)
-      { ComboBox2 ComboBox
-        MoveScaled(0,0,14,4)
-        ReadOnly = True
-        List = [("DeepSeek"), ("ChatGPT")]
-      }
       { MenuButton1 MenuButton
         MoveScaled(16,0,20,4)
         #Translate = False
@@ -1735,8 +1730,7 @@
             Name = "txtVENUE"
             MoveScaled(84,0,10,4)
             Expand = True
-            PopupMenu = "menuTEXTBOX"
-            Placeholder = ("of event")
+            Placeholder = ("lugar o sede del evento")
           }
           { lblPUBSTATE Label
             MoveScaled(97,0,16,4)
