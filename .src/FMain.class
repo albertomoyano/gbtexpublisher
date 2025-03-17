@@ -4517,19 +4517,42 @@ Public Sub tblAutores_RowClick(Row As Integer)
 
 End
 
-Public Sub btnBuscarORCID_Click()
+Public Sub btnBuscarORCID_Click()' autores
 
-  $URL = txtORCID.Text
+  Dim sNombre As String
 
-  If $URL <> "" Then Shell "xdg-open " & $URL
+  ' Obtener el texto del TextBox
+  sNombre = txtAutor.Text
+
+  ' Verificar que no esté vacío
+  If Trim(sNombre) = "" Then
+    Message.Error("Por favor, introduce un nombre para buscar el ORCID")
+    Return
+  Endif
+
+  ' Construir la URL de búsqueda de ORCID
+  $URL = "https://orcid.org/orcid-search/search?searchQuery=" & URL.Encode(sNombre)
+
+  ' Abrir la URL en el navegador predeterminado
+  Desktop.Open($URL)
 
 End
 
-Public Sub btnBuscarORCIDcolaborador_Click()
+Public Sub btnBuscarORCIDcolaborador_Click()' colaboradores
 
-  $URL = txtORCIDcolaborador.Text
+  Dim sNombre As String
 
-  If $URL <> "" Then Shell "xdg-open " & $URL
+  ' Obtener el texto del TextBox
+  sNombre = txtORCIDcolaborador.Text
+
+  ' Verificar que no esté vacío
+  If Trim(sNombre) = "" Then
+    Message.Error("Por favor, introduce un nombre para buscar el ORCID")
+    Return
+  Endif
+
+  ' Construir la URL de búsqueda de ORCID
+  $URL = "https://orcid.org/orcid-search/search?searchQuery=" & URL.Encode(sNombre)
 
 End
 
@@ -5980,5 +6003,82 @@ Public Sub gidGLOactual_Click()
 
   ' en el evento Click de la celda pasar como parámetro la fila
   Mod_Funciones.VerGloActual()
+
+End
+
+' En el evento Click del botón
+Public Sub btnChequearISSN_Click()
+
+  Dim sISSN As String
+
+  ' Obtener el texto del TextBox
+  sISSN = txtISSN.Text
+
+  ' Verificar que no esté vacío
+  If Trim(sISSN) = "" Then
+    Message.Error("Por favor, introduce un ISSN para buscar")
+    Return
+  Endif
+
+  ' Validar formato ISSN y dígito de control
+  If Not IsValidISSN(sISSN) Then
+    Message.Error("El ISSN no es válido. Debe tener el formato XXXX-XXXX o XXXXXXXX y pasar la validación del dígito de control.")
+    Return
+  Endif
+
+  ' Construir la URL de búsqueda para el portal ISSN
+  ' $URL = "https://scholar.google.com/scholar?q=" & URL.Encode(sISSN)
+  $URL = "https://portal.issn.org/resource/ISSN/" & Replace(sISSN, "-", "")
+
+  ' Abrir la URL en el navegador predeterminado
+  Desktop.Open($URL)
+
+End
+
+' Función para validar formato ISSN y dígito de control
+Private Function IsValidISSN(sISSN As String) As Boolean
+  ' Eliminar guiones si existen
+
+  sISSN = Replace(sISSN, "-", "")
+
+  ' Verificar que tenga 8 caracteres
+  If Len(sISSN) <> 8 Then Return False
+
+  ' Verificar que los primeros 7 caracteres sean dígitos
+  Dim i As Integer
+  For i = 1 To 7
+    If Not IsDigit(Mid(sISSN, i, 1)) Then Return False
+  Next
+
+  ' Verificar que el último carácter sea un dígito o "X"
+  Dim sLastChar As String = Mid(sISSN, 8, 1)
+  If Not (IsDigit(sLastChar) Or sLastChar = "X") Then Return False
+
+  ' Calcular el dígito de control
+  Dim suma As Integer = 0
+  Dim peso As Integer = 8
+  For i = 1 To 7
+    suma += Val(Mid(sISSN, i, 1)) * peso
+    peso -= 1
+  Next
+
+  ' Calcular el dígito de control esperado
+  Dim digitoControl As Integer = 11 - (suma Mod 11)
+  Dim digitoEsperado As String
+
+  If digitoControl = 11 Then
+    digitoEsperado = "0"
+  Else If digitoControl = 10 Then
+    digitoEsperado = "X"
+  Else
+    digitoEsperado = Str(digitoControl)
+  Endif
+
+  ' Comparar el dígito de control calculado con el último carácter del ISSN
+  Return digitoEsperado = sLastChar
+
+End
+
+Public Sub menuHTML_Click()' pagina html del libro
 
 End

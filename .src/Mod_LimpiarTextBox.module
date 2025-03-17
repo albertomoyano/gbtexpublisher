@@ -124,7 +124,7 @@ Public Sub LimpiarCamposBIB()
   FMain.txtISRN.Clear
   FMain.txtISWC.Clear
   FMain.txtEID.Clear
-  FMain.txtEPRINTYPE.Clear
+  FMain.txtEPRINTYPE.Text = ""
   FMain.txtEPRINT.Clear
   FMain.txtENTRYSUBTYPE.Clear
   FMain.txtHOWPUBLISHED.Clear
