@@ -40,6 +40,8 @@ Public Sub LimpiarCamposBIB()
   FMain.cbOPTIONS.Text = ""
   FMain.txtLANGUAGE.Text = ""
   FMain.txtORIGLANGUAGE.Text = ""
+  FMain.txtPAGINATION.Text = ""
+  FMain.txtEPRINTYPE.Text = ""
   FMain.txtETIQ.Clear
   FMain.txtKEYWORDS.Clear
   FMain.txtCROSSREF.Clear
@@ -102,7 +104,6 @@ Public Sub LimpiarCamposBIB()
   FMain.txtINDEXTITLE.Clear
   FMain.txtISSUETITLE.Clear
   FMain.txtREPRINTTITLE.Clear
-  FMain.txtPAGINATION.Text = ""
   FMain.txtVENUE.Clear
   FMain.txtBookPagination.Clear
   FMain.txtLANGIDOPTS.Clear
@@ -124,7 +125,6 @@ Public Sub LimpiarCamposBIB()
   FMain.txtISRN.Clear
   FMain.txtISWC.Clear
   FMain.txtEID.Clear
-  FMain.txtEPRINTYPE.Text = ""
   FMain.txtEPRINT.Clear
   FMain.txtENTRYSUBTYPE.Clear
   FMain.txtHOWPUBLISHED.Clear
@@ -161,5 +161,129 @@ Public Function LimpiarCamposNotas()
   Form_Notas.txId.Clear
   Form_Notas.txAsunto.Clear
   Form_Notas.txContenido.Clear
+
+End
+
+Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
+
+  Dim texto As String
+
+  texto = textbox.Text
+  texto = Trim$(texto)
+  textbox.Text = texto
+
+End
+
+Public Sub eliminarBlancosBIB()
+
+  EliminarEspaciosAlInicioYFinal(FMain.txtETIQ)
+  EliminarEspaciosAlInicioYFinal(FMain.txtKEYWORDS)
+  EliminarEspaciosAlInicioYFinal(FMain.txtCROSSREF)
+  EliminarEspaciosAlInicioYFinal(FMain.txtCLAVEbib)
+  EliminarEspaciosAlInicioYFinal(FMain.txtTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtRELATED)
+  EliminarEspaciosAlInicioYFinal(FMain.txtYEAR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtDATEY)
+  EliminarEspaciosAlInicioYFinal(FMain.txtPUBLISHER)
+  EliminarEspaciosAlInicioYFinal(FMain.txtLOCATION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEDITOR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSERIES)
+  EliminarEspaciosAlInicioYFinal(FMain.txtRELATEDSTRING)
+  EliminarEspaciosAlInicioYFinal(FMain.txtMAINTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtLABEL)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSHORTTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEDITION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtBOOKAUTHOR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtBOOKTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtVOLUME)
+  EliminarEspaciosAlInicioYFinal(FMain.txtNUMBER)
+  EliminarEspaciosAlInicioYFinal(FMain.txtPAGES)
+  EliminarEspaciosAlInicioYFinal(FMain.txtJOURNALTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtURLDATE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtDOI)
+  EliminarEspaciosAlInicioYFinal(FMain.txtPART)
+  EliminarEspaciosAlInicioYFinal(FMain.txtBOLUMES)
+  EliminarEspaciosAlInicioYFinal(FMain.txtPAGETOTAL)
+  EliminarEspaciosAlInicioYFinal(FMain.txtISBN)
+  EliminarEspaciosAlInicioYFinal(FMain.txtISSN)
+  EliminarEspaciosAlInicioYFinal(FMain.txtORGANIZATION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtINSTITUTION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEVENTTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEVENTDATE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtINTRODUCTION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtTRANSLATOR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtAFTERWORD)
+  EliminarEspaciosAlInicioYFinal(FMain.txtFOREWORD)
+  EliminarEspaciosAlInicioYFinal(FMain.txtURL)
+  EliminarEspaciosAlInicioYFinal(FMain.txtCOMMENTATOR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtANNOTATOR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtNAMEADDON)
+  EliminarEspaciosAlInicioYFinal(FMain.txtAUTHOR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEDITORa)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEDITORb)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEDITORc)
+  EliminarEspaciosAlInicioYFinal(FMain.txtHOLDER)
+  EliminarEspaciosAlInicioYFinal(FMain.txtShortAuthor)
+  EliminarEspaciosAlInicioYFinal(FMain.txtBookTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(FMain.txtMainTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(FMain.txtJournalTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(FMain.txtIssueTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEventTitleAddOn)
+  EliminarEspaciosAlInicioYFinal(FMain.txtChapter)
+  EliminarEspaciosAlInicioYFinal(FMain.txtORIGDATE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtVERSION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtGENDER)
+  EliminarEspaciosAlInicioYFinal(FMain.txtINDEXTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtISSUETITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtREPRINTTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtVENUE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtBookPagination)
+  EliminarEspaciosAlInicioYFinal(FMain.txtLANGIDOPTS)
+  EliminarEspaciosAlInicioYFinal(FMain.txtISAN)
+  EliminarEspaciosAlInicioYFinal(FMain.txtXREF)
+  EliminarEspaciosAlInicioYFinal(FMain.txtXDATA)
+  EliminarEspaciosAlInicioYFinal(FMain.txtPRESORT)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSORTKEY)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSORTNAME)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSORTSHORTHAND)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSORTTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtINDEXSORTTITLE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSORTYEAR)
+  EliminarEspaciosAlInicioYFinal(FMain.txtFILE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtORIGLOCATION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtORIGPUBLISHER)
+  EliminarEspaciosAlInicioYFinal(FMain.txtISMN)
+  EliminarEspaciosAlInicioYFinal(FMain.txtISRN)
+  EliminarEspaciosAlInicioYFinal(FMain.txtISWC)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEID)
+  EliminarEspaciosAlInicioYFinal(FMain.txtEPRINT)
+  EliminarEspaciosAlInicioYFinal(FMain.txtENTRYSUBTYPE)
+  EliminarEspaciosAlInicioYFinal(FMain.txtHOWPUBLISHED)
+  EliminarEspaciosAlInicioYFinal(FMain.txtADDENDUM)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSHORTHAND)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSHORTHANDINTRO)
+  EliminarEspaciosAlInicioYFinal(FMain.txtIDS)
+  EliminarEspaciosAlInicioYFinal(FMain.txtENTRYSET)
+  EliminarEspaciosAlInicioYFinal(FMain.txtTitleAddOn)
+
+End
+
+Public Sub eliminarBlancosGLO()
+
+  EliminarEspaciosAlInicioYFinal(FMain.txtARCHIVO)
+  EliminarEspaciosAlInicioYFinal(FMain.txtNAME)
+  EliminarEspaciosAlInicioYFinal(FMain.txtDESCRIPTION)
+  EliminarEspaciosAlInicioYFinal(FMain.txtFIRST)
+  EliminarEspaciosAlInicioYFinal(FMain.txtTEXT)
+  EliminarEspaciosAlInicioYFinal(FMain.txtPLURAL)
+  EliminarEspaciosAlInicioYFinal(FMain.txtFPLURAL)
+  EliminarEspaciosAlInicioYFinal(FMain.txtSORT)
+
+End
+
+Public Sub eliminarBlancosMETA()
+
+  EliminarEspaciosAlInicioYFinal(FMain.txt05_pdfauthor)
+  EliminarEspaciosAlInicioYFinal(FMain.txt06_pdftitle)
 
 End

@@ -666,29 +666,6 @@ Public Sub txtARCHIVO_KeyRelease()'caracteres permitidos en los keywords
 
 End
 
-Public Sub EliminarEspaciosAlInicioYFinal(textbox As TextBox)
-
-  Dim texto As String
-
-  texto = textbox.Text
-  texto = Trim$(texto)
-  textbox.Text = texto
-
-End
-
-Public Sub eliminarBlancosGLO()
-
-  EliminarEspaciosAlInicioYFinal(txtARCHIVO)
-  EliminarEspaciosAlInicioYFinal(txtNAME)
-  EliminarEspaciosAlInicioYFinal(txtDESCRIPTION)
-  EliminarEspaciosAlInicioYFinal(txtFIRST)
-  EliminarEspaciosAlInicioYFinal(txtTEXT)
-  EliminarEspaciosAlInicioYFinal(txtPLURAL)
-  EliminarEspaciosAlInicioYFinal(txtFPLURAL)
-  EliminarEspaciosAlInicioYFinal(txtSORT)
-
-End
-
 Public Sub BtnBuscarGoogleGLO_Click()
 
   Dim Consulta As String = txtNAME.Text
@@ -868,7 +845,7 @@ Public Sub btnGuardarGlo_Click()
 
   tituloEscapado = Replace(txtTEXT.Text, "'", "''")
 
-  eliminarBlancosGLO
+  Mod_LimpiarTextBox.eliminarBlancosGLO
 
   Comando = "SELECT * FROM glosarios WHERE text = '" & tituloEscapado & "'"
   Busqueda = meConn.Exec(Comando)
@@ -908,7 +885,7 @@ Public Sub btnGuardarCambiosGlo_Click()
   btnAgregarGloKey.Visible = False
 
   'eliminamos blancos de inicio y final de cadena en los textbox
-  eliminarBlancosGLO
+  Mod_LimpiarTextBox.eliminarBlancosGLO
 
   Contenido = meConn.Edit("glosarios", "id=" & txtIDglosario.Text)
   guardarCamposGLO
@@ -1205,7 +1182,7 @@ End
 
 Public Sub btnGuardarMeta_Click()
 
-  eliminarBlancosMETA
+  Mod_LimpiarTextBox.eliminarBlancosMETA
 
   Contenido = meConn.Create("metadatos")
 
@@ -1305,17 +1282,10 @@ Public Sub guardarCamposMETA()
 
 End
 
-Public Sub eliminarBlancosMETA()
-
-  EliminarEspaciosAlInicioYFinal(txt05_pdfauthor)
-  EliminarEspaciosAlInicioYFinal(txt06_pdftitle)
-
-End
-
 Public Sub btnGuardarCambiosMeta_Click()
 
   ' Eliminamos blancos de inicio y final de cadena en los textbox
-  eliminarBlancosMETA
+  Mod_LimpiarTextBox.eliminarBlancosMETA
 
   ' Cargar el registro a modificar
   Contenido = meConn.Edit("metadatos", "id=" & txtIDmetadatos.Text)
@@ -1452,7 +1422,7 @@ Public Sub btnGuardar_Click()
 
   tituloEscapado = Replace(txtTITLE.Text, "'", "''")
 
-  eliminarBlancosBIB()
+  Mod_LimpiarTextBox.eliminarBlancosBIB
 
   ' Variables para almacenar los datos de los TextBox
   Dim booktitulo As String
@@ -1846,101 +1816,6 @@ Public Sub txtEDITOR_Change()
 
 End
 
-Public Sub eliminarBlancosBIB()
-
-  EliminarEspaciosAlInicioYFinal(txtETIQ)
-  EliminarEspaciosAlInicioYFinal(txtKEYWORDS)
-  EliminarEspaciosAlInicioYFinal(txtCROSSREF)
-  EliminarEspaciosAlInicioYFinal(txtCLAVEbib)
-  EliminarEspaciosAlInicioYFinal(txtTITLE)
-  EliminarEspaciosAlInicioYFinal(txtRELATED)
-  EliminarEspaciosAlInicioYFinal(txtYEAR)
-  EliminarEspaciosAlInicioYFinal(txtDATEY)
-  EliminarEspaciosAlInicioYFinal(txtPUBLISHER)
-  EliminarEspaciosAlInicioYFinal(txtLOCATION)
-  EliminarEspaciosAlInicioYFinal(txtEDITOR)
-  EliminarEspaciosAlInicioYFinal(txtSERIES)
-  EliminarEspaciosAlInicioYFinal(txtRELATEDSTRING)
-  EliminarEspaciosAlInicioYFinal(txtMAINTITLE)
-  EliminarEspaciosAlInicioYFinal(txtLABEL)
-  EliminarEspaciosAlInicioYFinal(txtSHORTTITLE)
-  EliminarEspaciosAlInicioYFinal(txtEDITION)
-  EliminarEspaciosAlInicioYFinal(txtBOOKAUTHOR)
-  EliminarEspaciosAlInicioYFinal(txtBOOKTITLE)
-  EliminarEspaciosAlInicioYFinal(txtVOLUME)
-  EliminarEspaciosAlInicioYFinal(txtNUMBER)
-  EliminarEspaciosAlInicioYFinal(txtPAGES)
-  EliminarEspaciosAlInicioYFinal(txtJOURNALTITLE)
-  EliminarEspaciosAlInicioYFinal(txtURLDATE)
-  EliminarEspaciosAlInicioYFinal(txtDOI)
-  EliminarEspaciosAlInicioYFinal(txtPART)
-  EliminarEspaciosAlInicioYFinal(txtBOLUMES)
-  EliminarEspaciosAlInicioYFinal(txtPAGETOTAL)
-  EliminarEspaciosAlInicioYFinal(txtISBN)
-  EliminarEspaciosAlInicioYFinal(txtISSN)
-  EliminarEspaciosAlInicioYFinal(txtORGANIZATION)
-  EliminarEspaciosAlInicioYFinal(txtINSTITUTION)
-  EliminarEspaciosAlInicioYFinal(txtEVENTTITLE)
-  EliminarEspaciosAlInicioYFinal(txtEVENTDATE)
-  EliminarEspaciosAlInicioYFinal(txtINTRODUCTION)
-  EliminarEspaciosAlInicioYFinal(txtTRANSLATOR)
-  EliminarEspaciosAlInicioYFinal(txtAFTERWORD)
-  EliminarEspaciosAlInicioYFinal(txtFOREWORD)
-  EliminarEspaciosAlInicioYFinal(txtURL)
-  EliminarEspaciosAlInicioYFinal(txtCOMMENTATOR)
-  EliminarEspaciosAlInicioYFinal(txtANNOTATOR)
-  EliminarEspaciosAlInicioYFinal(txtNAMEADDON)
-  EliminarEspaciosAlInicioYFinal(txtAUTHOR)
-  EliminarEspaciosAlInicioYFinal(txtEDITORa)
-  EliminarEspaciosAlInicioYFinal(txtEDITORb)
-  EliminarEspaciosAlInicioYFinal(txtEDITORc)
-  EliminarEspaciosAlInicioYFinal(txtHOLDER)
-  EliminarEspaciosAlInicioYFinal(txtShortAuthor)
-  EliminarEspaciosAlInicioYFinal(txtBookTitleAddOn)
-  EliminarEspaciosAlInicioYFinal(txtMainTitleAddOn)
-  EliminarEspaciosAlInicioYFinal(txtJournalTitleAddOn)
-  EliminarEspaciosAlInicioYFinal(txtIssueTitleAddOn)
-  EliminarEspaciosAlInicioYFinal(txtEventTitleAddOn)
-  EliminarEspaciosAlInicioYFinal(txtChapter)
-  EliminarEspaciosAlInicioYFinal(txtORIGDATE)
-  EliminarEspaciosAlInicioYFinal(txtVERSION)
-  EliminarEspaciosAlInicioYFinal(txtGENDER)
-  EliminarEspaciosAlInicioYFinal(txtINDEXTITLE)
-  EliminarEspaciosAlInicioYFinal(txtISSUETITLE)
-  EliminarEspaciosAlInicioYFinal(txtREPRINTTITLE)
-  EliminarEspaciosAlInicioYFinal(txtVENUE)
-  EliminarEspaciosAlInicioYFinal(txtBookPagination)
-  EliminarEspaciosAlInicioYFinal(txtLANGIDOPTS)
-  EliminarEspaciosAlInicioYFinal(txtISAN)
-  EliminarEspaciosAlInicioYFinal(txtXREF)
-  EliminarEspaciosAlInicioYFinal(txtXDATA)
-  EliminarEspaciosAlInicioYFinal(txtPRESORT)
-  EliminarEspaciosAlInicioYFinal(txtSORTKEY)
-  EliminarEspaciosAlInicioYFinal(txtSORTNAME)
-  EliminarEspaciosAlInicioYFinal(txtSORTSHORTHAND)
-  EliminarEspaciosAlInicioYFinal(txtSORTTITLE)
-  EliminarEspaciosAlInicioYFinal(txtINDEXSORTTITLE)
-  EliminarEspaciosAlInicioYFinal(txtSORTYEAR)
-  EliminarEspaciosAlInicioYFinal(txtFILE)
-  EliminarEspaciosAlInicioYFinal(txtORIGLOCATION)
-  EliminarEspaciosAlInicioYFinal(txtORIGPUBLISHER)
-  EliminarEspaciosAlInicioYFinal(txtISMN)
-  EliminarEspaciosAlInicioYFinal(txtISRN)
-  EliminarEspaciosAlInicioYFinal(txtISWC)
-  EliminarEspaciosAlInicioYFinal(txtEID)
-  EliminarEspaciosAlInicioYFinal(txtEPRINTYPE)
-  EliminarEspaciosAlInicioYFinal(txtEPRINT)
-  EliminarEspaciosAlInicioYFinal(txtENTRYSUBTYPE)
-  EliminarEspaciosAlInicioYFinal(txtHOWPUBLISHED)
-  EliminarEspaciosAlInicioYFinal(txtADDENDUM)
-  EliminarEspaciosAlInicioYFinal(txtSHORTHAND)
-  EliminarEspaciosAlInicioYFinal(txtSHORTHANDINTRO)
-  EliminarEspaciosAlInicioYFinal(txtIDS)
-  EliminarEspaciosAlInicioYFinal(txtENTRYSET)
-  EliminarEspaciosAlInicioYFinal(txtTitleAddOn)
-
-End
-
 Public Sub btnChequearISBN_Click()
 
   Dim ISBN As String = txtISBN.Text
@@ -1969,7 +1844,7 @@ Public Sub btnAgregarCitationKey_Click()
 
   tituloEscapado = Replace(txtTITLE.Text, "'", "''")
 
-  eliminarBlancosBIB()
+  Mod_LimpiarTextBox.eliminarBlancosBIB
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & tituloEscapado & "%'"
   Busqueda = meConn.Exec(Comando)
@@ -2293,7 +2168,7 @@ Public Sub btnGuardarIGUAL_Click()
 
   tituloEscapado = Replace(txtTITLE.Text, "'", "''")
 
-  eliminarBlancosBIB()
+  Mod_LimpiarTextBox.eliminarBlancosBIB
 
   ' Verificar si el campo txtAUTHOR contiene un punto y coma (;)
   If InStr(txtAUTHOR.Text, ";") > 0 Then
@@ -5137,7 +5012,7 @@ Public Sub btnAgregarKeyBIBtwo3_Click()
 
   tituloEscapado = Replace(txtTITLE.Text, "'", "''")
 
-  eliminarBlancosBIB()
+  Mod_LimpiarTextBox.eliminarBlancosBIB
 
   Comando = "SELECT * FROM bibtex WHERE title LIKE '%" & txtTitleNueva.Text & "%'"
   Busqueda = meConn.Exec(Comando)
