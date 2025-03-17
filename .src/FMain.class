@@ -5421,6 +5421,7 @@ Public Sub VListaBIB_Data(Row As Integer, Column As Integer)
     If Row >= 0 Then
       ContenidoBibTotal.moveTo(Row)
       Try VListaBIB.Data.Text = Str(ContenidoBibTotal[Column])
+      ' VListaBIB.Data.WordWrap = True' con esto habilitamos mostrar todo el contenido de las celdas
     Endif
   Endif
 
