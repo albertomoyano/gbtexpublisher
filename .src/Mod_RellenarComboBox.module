@@ -214,6 +214,14 @@ Public Sub RellenarComboBoxBibTeX()
   FMain.txtPAGINATION.Add("section")
   FMain.txtPAGINATION.Add("paragraph")
 
+  FMain.txtBookPagination.Add("")' lo dejo para compatibilidad con referencias viejas
+  FMain.txtBookPagination.Add("page")
+  FMain.txtBookPagination.Add("column")
+  FMain.txtBookPagination.Add("line")
+  FMain.txtBookPagination.Add("verse")
+  FMain.txtBookPagination.Add("section")
+  FMain.txtBookPagination.Add("paragraph")
+
   FMain.txtORIGLANGUAGE.Add("")
   FMain.txtORIGLANGUAGE.Add("spanish")
   FMain.txtORIGLANGUAGE.Add("portuguese")

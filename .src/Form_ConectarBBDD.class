@@ -4,7 +4,7 @@ Public meConn As New Connection
 
 Public Sub Form_Open()
 
-  Form_ConectarBBDD.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+  Form_ConectarBBDD.Title = Application.Title & " v. " & Application.Version & " - programación orientada al usuario"
 
   ' por el momento esta funcion se deshabilita
   Dim name As String

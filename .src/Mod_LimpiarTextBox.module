@@ -42,6 +42,7 @@ Public Sub LimpiarCamposBIB()
   FMain.txtORIGLANGUAGE.Text = ""
   FMain.txtPAGINATION.Text = ""
   FMain.txtEPRINTYPE.Text = ""
+  FMain.txtBookPagination.Text = ""
   FMain.txtETIQ.Clear
   FMain.txtKEYWORDS.Clear
   FMain.txtCROSSREF.Clear
@@ -105,7 +106,6 @@ Public Sub LimpiarCamposBIB()
   FMain.txtISSUETITLE.Clear
   FMain.txtREPRINTTITLE.Clear
   FMain.txtVENUE.Clear
-  FMain.txtBookPagination.Clear
   FMain.txtLANGIDOPTS.Clear
   FMain.txtISAN.Clear
   FMain.txtXREF.Clear
@@ -237,7 +237,6 @@ Public Sub eliminarBlancosBIB()
   EliminarEspaciosAlInicioYFinal(FMain.txtISSUETITLE)
   EliminarEspaciosAlInicioYFinal(FMain.txtREPRINTTITLE)
   EliminarEspaciosAlInicioYFinal(FMain.txtVENUE)
-  EliminarEspaciosAlInicioYFinal(FMain.txtBookPagination)
   EliminarEspaciosAlInicioYFinal(FMain.txtLANGIDOPTS)
   EliminarEspaciosAlInicioYFinal(FMain.txtISAN)
   EliminarEspaciosAlInicioYFinal(FMain.txtXREF)

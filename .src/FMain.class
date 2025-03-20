@@ -100,7 +100,7 @@ Public Sub Form_Open()
   Timer1.Delay = 1000
   Timer1.Stop  ' No iniciamos el Timer de inmediato
 
-  Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ")"
+  Fmain.Title = Application.Title & " v. " & Application.Version & " - programación orientada al usuario"
   TimerHOY.Enabled = True
 
   ' Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ") - (acá quiero poner el dia y la hora)"
