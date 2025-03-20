@@ -34,7 +34,7 @@ Public Sub salidaPDFmonografia()
   Wait 0.2
 
   FMain.TabPanel1.Index = 0
-  FMain.TabPanel6.Index = 2
+  FMain.TabPanel6.Index = 0
 
   ' obtenemos la exportación de los archivos bib, glo y metadatos
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
@@ -94,7 +94,7 @@ Public Sub salidaODTmonografia()
   Wait 0.2
 
   FMain.TabPanel1.Index = 0
-  FMain.TabPanel6.Index = 2
+  FMain.TabPanel6.Index = 0
 
   FMain.TerminalView1.Input("cat " & rutaBase & "/monografia-odt.tex " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2

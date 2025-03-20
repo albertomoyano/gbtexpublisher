@@ -42,9 +42,6 @@ End
 
 Public Sub Form_Open()
 
-  ' Cargar la URL después de configurar
-  WebKit1.URL = "https://chat.deepseek.com/"
-
   ' Usa la ruta seleccionada en el formulario de inicio
   meConn.Type = "sqlite3"
   meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
@@ -244,7 +241,7 @@ Public Sub Button4_Click() 'local git
   Dim rutaGit As String
 
   TabPanel1.Index = 0
-  TabPanel6.Index = 2
+  TabPanel6.Index = 0
 
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
   rutaGit = File.Dir(TextBox1.Text) &/ ".git"
@@ -543,7 +540,7 @@ End
 Public Sub menuCatalogo_Click()
 
   TabPanel1.Index = 0
-  TabPanel6.Index = 2
+  TabPanel6.Index = 0
 
   Mod_Exportar.ExportToCatalogo(TextBox1.Text)
   Wait 0.2
@@ -3300,7 +3297,7 @@ Public Sub menuDisclaimer_Click()
 
   If Resultado.Available Then
     TabPanel1.Index = 0
-    TabPanel6.Index = 2
+    TabPanel6.Index = 0
 
     Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
     Wait 0.2
@@ -3715,14 +3712,14 @@ End
 
 Public Sub menuPDFweb_Click()
 
-  TabPanel6.Index = 2
+  TabPanel6.Index = 0
   Form_CombinarPDF.ShowModal()
 
 End
 
 Public Sub menuOT_Click()
 
-  TabPanel6.Index = 2
+  TabPanel6.Index = 0
   Form_OTimprenta.ShowModal()
 
 End
@@ -4716,7 +4713,7 @@ Public Sub btnMenuGIT_Click()
 
   ' Ejecutar los comandos principales
   TabPanel1.Index = 0
-  TabPanel6.Index = 2
+  TabPanel6.Index = 0
   TerminalView1.Input("git add ." & "\n")
   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
@@ -5510,7 +5507,7 @@ Public Sub btnMenuGitLab_Click()
   Mod_Funciones.Borrar_Aux()
   IdGitLab = "git@gitlab.com:" & usuario & "/" & File.BaseName(TextBox1.Text) & ".git"
   TabPanel1.Index = 0
-  TabPanel6.Index = 2
+  TabPanel6.Index = 0
   TerminalView1.Input("git remote remove origin" & "\n")
   TerminalView1.Input("git remote add origin " & IdGitLab & "\n")
   TerminalView1.Input("git add ." & "\n")
@@ -5536,7 +5533,7 @@ Public Sub menuPDFcolor_Click()' pdf web
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    TabPanel6.Index = 2
+    TabPanel6.Index = 0
     Mod_GenerarPDF.salidaPDFweb
   Endif
 
@@ -5547,7 +5544,7 @@ Public Sub menuPDFgray_Click()' pdf imprenta
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    TabPanel6.Index = 2
+    TabPanel6.Index = 0
     Mod_GenerarPDF.salidaPDFimprenta
   Endif
 
@@ -5558,7 +5555,7 @@ Public Sub menuPARTE1_Click()' epub via png
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    TabPanel6.Index = 2
+    TabPanel6.Index = 0
     Mod_GenerarEPUB.salidaEPUBpng
   Endif
 
@@ -5566,7 +5563,7 @@ End
 
 Public Sub menuPARTE2_Click()' epub via png
 
-  TabPanel6.Index = 2
+  TabPanel6.Index = 0
   Mod_GenerarEPUB.creacionEpubPNG
 
 End
@@ -5576,7 +5573,7 @@ Public Sub menuEPUB2_Click()' epub via html
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    TabPanel6.Index = 2
+    TabPanel6.Index = 0
     Mod_GenerarEPUB.salidaEPUBhtml
   Endif
 
@@ -5688,7 +5685,7 @@ Public Sub FileView1_Click()
         txtEditorRapido.Enabled = False
         btnGuardarMod.Enabled = False
         btnFontEditor.Enabled = False
-        TabPanel6.Index = 2' saltar al paner de consola
+        TabPanel6.Index = 0' saltar al paner de consola
       Endif
     Else
       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
@@ -5806,7 +5803,7 @@ Public Sub menuPDFespecial_Click()
   If TextBox1.Text = "" Then
     Message.Warning("Debe tener un archivo LaTeX asociado.")
   Else
-    TabPanel6.Index = 2
+    TabPanel6.Index = 0
     Mod_GenerarPDF.salidaPDFespecial
   Endif
 
@@ -5956,5 +5953,9 @@ Private Function IsValidISSN(sISSN As String) As Boolean
 End
 
 Public Sub menuHTML_Click()' pagina html del libro
+
+End
+
+Public Sub menuPDFrevistaWEB_Click()
 
 End

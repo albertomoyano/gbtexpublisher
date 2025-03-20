@@ -59,7 +59,6 @@
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
-    Visible = False
     { menuPDFcolor Menu
       Text = ("PDF web")
     }
@@ -554,19 +553,21 @@
         MoveScaled(2,7,48,49)
         Arrangement = Arrange.Vertical
         Border = False
-        Count = 3
+        Count = 2
         Orientation = Align.Bottom
         Index = 0
-        Text = ("AI     ")
-        Picture = Picture["iconos/openAI.svg"]
-        { Panel1 Panel
-          MoveScaled(4,3,25,11)
+        Text = ("Terminal     ")
+        Picture = Picture["iconos/terminal.svg"]
+        { !TerminalView1 TerminalView
+          MoveScaled(3,3,27,6)
+          #Public = True
           Expand = True
-          Arrangement = Arrange.Fill
-          Border = Border.Sunken
-          { WebKit1 WebView
-            MoveScaled(5,3,17,5)
-          }
+          AutoResize = False
+          Blink = True
+          CursorStyle = TerminalView.Underline
+          ShowScrollBar = True
+          ShowLink = True
+          WindowCommands = True
         }
         Index = 1
         Text = ("Edición rápida     ")
@@ -611,20 +612,6 @@
             Wrap = True
             ScrollBar = Scroll.Vertical
           }
-        }
-        Index = 2
-        Text = ("Terminal     ")
-        Picture = Picture["iconos/terminal.svg"]
-        { !TerminalView1 TerminalView
-          MoveScaled(3,3,27,6)
-          #Public = True
-          Expand = True
-          AutoResize = False
-          Blink = True
-          CursorStyle = TerminalView.Underline
-          ShowScrollBar = True
-          ShowLink = True
-          WindowCommands = True
         }
         Index = 0
       }

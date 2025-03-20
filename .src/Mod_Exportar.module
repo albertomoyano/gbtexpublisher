@@ -761,9 +761,6 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
   Dim outputFile As String
   ' Dim id As Integer
 
-  ' me conceto a la base de datos
-  ' Conn = Mod_Conn.conectar()
-
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   Contenido = FMain.meConn.Exec(buscar)

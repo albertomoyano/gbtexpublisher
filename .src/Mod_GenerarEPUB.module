@@ -7,7 +7,7 @@ Public Sub salidaEPUBpng()' parte 1
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
-  FMain.TabPanel6.Index = 2
+  FMain.TabPanel6.Index = 0
   Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
@@ -204,7 +204,7 @@ Public Sub salidaEPUBhtml()
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
-  FMain.TabPanel6.Index = 2
+  FMain.TabPanel6.Index = 0
   Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
