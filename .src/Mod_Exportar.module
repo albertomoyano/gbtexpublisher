@@ -332,15 +332,15 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   Dim s As String
   Dim sb As String
   Dim f As ResultField
-  Dim fb As ResultField
+  ' Dim fb As ResultField
   Dim aFields As New String[]
-  Dim bFields As New String[]
+  ' Dim bFields As New String[]
   Dim w As Integer
   Dim wb As Integer
   Dim buscar As String
-  Dim buscarAutor As String
+  ' Dim buscarAutor As String
   Dim outputFile As String
-  Dim id As Integer
+  ' Dim id As Integer
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
