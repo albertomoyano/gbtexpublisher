@@ -81,7 +81,7 @@
     }
     { menuEPUB2 Menu
       #Translate = False
-      Text = "epub + azw3 (basado en lienzos)"
+      Text = "epub (basado en lienzos)"
     }
     { menuHTML Menu
       Text = ("HTML5")
