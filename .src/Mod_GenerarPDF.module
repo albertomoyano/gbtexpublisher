@@ -80,6 +80,9 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
   Dim newFile As String
   Dim newLog As String
 
+  Mod_Funciones.Borrar_Aux
+  Wait 0.2
+
   ' Llamamos a la función del módulo para verificar los metadatos obligatorios
   If Not Mod_Funciones.registrosObligatorios(FMain.TextBox1.Text) Then
     ' Si la función retorna False, cancelamos la operación
@@ -88,9 +91,6 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
 
   newFile = "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".tex"
   newLog = "gbTeX-" & File.BaseName(FMain.TextBox1.Text) & ".log"
-
-  Mod_Funciones.Borrar_Aux
-  Wait 0.2
 
   FMain.TabPanel1.Index = 0
   FMain.TabPanel6.Index = 0

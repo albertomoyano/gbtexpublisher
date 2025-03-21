@@ -114,6 +114,10 @@ BoldItalicFont = IBMPlexMono-BoldItalic.otf]{IBMPlexMono.otf}
 	\kern 6pt%
 	}
 
+% aseguramos igualdad al valor de la raya del medio
+\newcommand{\rdm}[1]{--#1--}
+\newcommand{\rdmq}[2]{--#1--\penalty10000 #2}
+
 %% rediseño del epígrafe
 %% la columna superior es tratada como párrafo y
 %% la inferior marginada a la derecha
@@ -346,10 +350,12 @@ placement=ht,
   {\endlist}
 
 % elegimos el estandar para las referencias
-\def\estandar{veronaAY}
+%\def\estandar{veronaC}
+\def\estandar{veronaM}
 %\def\estandar{VerboseIbid}
 %\def\estandar{APA}
 %\def\estandar{ISO690}
+%\def\estandar{numeric}
 %\def\estandar{custom}
 \input{./files/biblatex-\estandar-config.tex}
 

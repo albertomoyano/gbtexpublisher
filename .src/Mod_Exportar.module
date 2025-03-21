@@ -922,9 +922,9 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
       s &= "pdfmetalang={" & Contenido[aFields[40]] & "},\n"
     Endif
 
-    If Not IsNull(Contenido[aFields[41]]) And Len(Contenido[aFields[41]]) > 0 Then
-      s &= "pdfbaseurl={" & Contenido[aFields[41]] & "},\n"
-    Endif
+    ' If Not IsNull(Contenido[aFields[41]]) And Len(Contenido[aFields[41]]) > 0 Then
+    '   s &= "pdfbaseurl={" & Contenido[aFields[41]] & "},\n"
+    ' Endif
 
     If Not IsNull(Contenido[aFields[42]]) And Len(Contenido[aFields[42]]) > 0 Then
       s &= "pdfurl={" & Contenido[aFields[42]] & "},\n"
@@ -942,9 +942,9 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
       s &= "pdfidentifier={" & Contenido[aFields[45]] & "},\n"
     Endif
 
-    If Not IsNull(Contenido[aFields[46]]) And Len(Contenido[aFields[46]]) > 0 Then
-      s &= "pdfx={" & Contenido[aFields[46]] & "},\n"
-    Endif
+    ' If Not IsNull(Contenido[aFields[46]]) And Len(Contenido[aFields[46]]) > 0 Then
+    '   s &= "pdfx={" & Contenido[aFields[46]] & "},\n"
+    ' Endif
 
     If Not IsNull(Contenido[aFields[47]]) And Len(Contenido[aFields[47]]) > 0 Then
       s &= "pdfversionid={" & Contenido[aFields[47]] & "},\n"
@@ -958,9 +958,9 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
       s &= "pdfkeywords={" & Contenido[aFields[57]] & "},\n"
     Endif
 
-    If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
-      s &= "pdfformato={" & Contenido[aFields[61]] & "},\n"
-    Endif
+    ' If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
+    '   s &= "pdfformato={" & Contenido[aFields[61]] & "},\n"
+    ' Endif
 
     ' 'el titulo del libro es campo obligatorio
     s &= "pdftitle={" & Contenido[aFields[84]] & "},\n"
