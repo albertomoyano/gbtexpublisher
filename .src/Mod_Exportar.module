@@ -336,7 +336,7 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   Dim aFields As New String[]
   ' Dim bFields As New String[]
   Dim w As Integer
-  Dim wb As Integer
+  ' Dim wb As Integer
   Dim buscar As String
   ' Dim buscarAutor As String
   Dim outputFile As String
