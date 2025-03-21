@@ -330,7 +330,7 @@ End
 Public Sub Export2MetaEPUB(rutaTexto As String)
 
   Dim s As String
-  Dim sb As String
+  ' Dim sb As String
   Dim f As ResultField
   ' Dim fb As ResultField
   Dim aFields As New String[]
@@ -390,7 +390,7 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
     ' s &= "\\CoverMetadata{./media/" & Contenido[aFields[49]] & "}\n" 'tapa
     s &= "\n"
     s &= "\\begin{document}" & "\n"
-    s &= "\\def\\Author{" & sb & "}\n" '
+    ' s &= "\\def\\Author{" & sb & "}\n" '
     s &= "\\def\\Title{" & Contenido[aFields[6]] & ": " & Contenido[aFields[9]] & "}\n"
     s &= "\\Configure{OpfMetadata}" & "\n"
     s &= "{\\HCode{<dc:subject>" & Contenido[aFields[57]] & "</dc:subject>}}\n" 'palabras clave
