@@ -208,10 +208,10 @@ Public Sub salidaEPUBhtml()
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
   FMain.TabPanel6.Index = 0
-  Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
+  ' Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
-  Mod_Exportar.Exportar2MetadatosPDF(FMain.TextBox1.Text)
+  Mod_Exportar.Export2MetaEPUB(FMain.TextBox1.Text)
   Wait 0.2
 
   ' Lista de directorios que deseas crear dentro de "ebook"
@@ -232,7 +232,7 @@ Public Sub salidaEPUBhtml()
   Dim condicional As String = "\\\\HTMLEPUBtrue"
   FMain.TerminalView1.Input("echo " & condicional & " >> " & rutaFILES & "/book-epub2.tex" & "\n")
 
-  Dim newFile As String = "epub2-" & BaseName & ".tex"
+  Dim newFile As String = BaseName & ".tex"
   FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub2.tex " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2
 
@@ -243,12 +243,8 @@ Public Sub salidaEPUBhtml()
   FMain.TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg" & " " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/config.cfg" & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/config.cfg -a debug " & "epub-" & File.Name(FMain.TextBox1.Text) & "\n" & "rm -rf " & newFile & "\n")
+  FMain.TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/config.cfg -a debug " & File.Name(FMain.TextBox1.Text) & "\n")' & "rm -rf " & newFile & "\n")
   Wait 0.2
-
-  ' ' si la validación dio bien generamos un azw3 usando calibre
-  ' FMain.TerminalView1.Input("ebook-convert" & " " & File.Dir(FMain.TextBox1.Text) & "/ebook/epub2/epub2-pdf-" & BaseName & ".epub" & " " & File.Dir(FMain.TextBox1.Text) & "/ebook/kindle/kindle-pdf-" & BaseName & ".azw3" & "\n")
-  ' Wait 0.2
 
   ' FMain.TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
   ' Wait 0.2

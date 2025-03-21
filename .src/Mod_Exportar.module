@@ -354,31 +354,31 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
     Endif
   Next
 
-  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
+  ' Dim ids As String[] = Split(Contenido[aFields[5]], " ")
 
-  ' Inicializa la cadena vacía
-  sb = ""
-
-  ' Iterar sobre los IDs y obtener la información correspondiente
-  For Each id In ids
-    ' Establecer el valor de 'id' antes de ejecutar la consulta
-    buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
-
-    bFields.Clear
-    For Each fb In ContenidoAutor.Fields
-      bFields.Add(fb.Name)
-      If Len(fb.Name) > wb Then
-        wb = Len(fb.Name)
-      Endif
-    Next
-
-    ' Agregar la información al resultado
-    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
-  Next
-
-  ' Eliminar la coma adicional al final y cerrar la cadena
-  sb = Left(sb, Len(sb) - 2)
+  ' ' Inicializa la cadena vacía
+  ' sb = ""
+  '
+  ' ' Iterar sobre los IDs y obtener la información correspondiente
+  ' For Each id In ids
+  '   ' Establecer el valor de 'id' antes de ejecutar la consulta
+  '   buscarAutor = "SELECT * FROM autores WHERE id = " & id
+  '   ContenidoAutor = FMain.meConn.Exec(buscarAutor)
+  '
+  '   bFields.Clear
+  '   For Each fb In ContenidoAutor.Fields
+  '     bFields.Add(fb.Name)
+  '     If Len(fb.Name) > wb Then
+  '       wb = Len(fb.Name)
+  '     Endif
+  '   Next
+  '
+  '   ' Agregar la información al resultado
+  '   sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  ' Next
+  '
+  ' ' Eliminar la coma adicional al final y cerrar la cadena
+  ' sb = Left(sb, Len(sb) - 2)
 
   s = "" ' Inicializa la cadena definitiva
 
