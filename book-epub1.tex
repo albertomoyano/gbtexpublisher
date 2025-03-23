@@ -429,16 +429,23 @@ placement=ht,
 	detect-all,
 	per-mode=fraction}
 
-% Comando para insertar una página en blanco
+% comando para insertar una página en blanco
 \newcommand{\PaginaEnBlanco}{
     \newpage
     \thispagestyle{empty}
     {\textcolor{white}{.}} % Punto invisible para forzar la página
 }
 
-% declaramos los condicionales
+% función para generar una raya de unión de palabras que habilita el corte de palabra
+\makeatletter
+\def\thinskip{\hskip 0.01em\relax}
+\def\rdc{\thinskip--\thinskip}
+\makeatother
+
+% condicionales para los formatos de salida
 \newif\ifPDF
 \newif\ifBNPDF
 \newif\ifPNGEPUB
 \newif\ifHTMLEPUB
 \newif\ifHTML
+\newif\ifXML

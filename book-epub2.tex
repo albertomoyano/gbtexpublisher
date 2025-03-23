@@ -75,13 +75,18 @@
 \newcommand{\rdm}[1]{--#1--}
 \newcommand{\rdmq}[2]{--#1--\penalty10000 #2}
 
+% función para generar una raya de unión de palabras
+\makeatletter
+\def\thinskip{\hskip 0.01em\relax}
+\def\rdc{\thinskip--\thinskip}
+\makeatother
+
 \usepackage[allcolors=blue,colorlinks,hyperindex=true]{hyperref}
 
-% declaramos los condicionales
+% condicionales para los formatos de salida
 \newif\ifPDF
 \newif\ifBNPDF
 \newif\ifPNGEPUB
 \newif\ifHTMLEPUB
 \newif\ifHTML
-
-% fin del preambulo
+\newif\ifXML
