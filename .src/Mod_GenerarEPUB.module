@@ -207,42 +207,54 @@ Public Sub salidaEPUBhtml()
   FMain.TabPanel6.Index = 0
 
   ' copiamos las tipografias para el epub
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.ttf") Then
-    Copy "./IBMPlexSans-Regular.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.ttf"
-  End If
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.ttf") Then
-    Copy "./IBMPlexSans-Italic.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.ttf"
-  End If
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.ttf") Then
-    Copy "./IBMPlexSans-SemiBold.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.ttf"
-  End If
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.ttf") Then
-    Copy "./IBMPlexSans-SemiBoldItalic.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.ttf"
-  End If
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff") Then
-    Copy "./IBMPlexSans-Regular.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff"
-  End If
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff") Then
-    Copy "./IBMPlexSans-Italic.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff"
-  End If
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff") Then
-    Copy "./IBMPlexSans-SemiBold.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff"
-  End If
-  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff") Then
-    Copy "./IBMPlexSans-SemiBoldItalic.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff"
-  End If
   If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff2") Then
     Copy "./IBMPlexSans-Regular.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff2"
   End If
+  Wait 0.1
   If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff2") Then
     Copy "./IBMPlexSans-Italic.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff2"
   End If
+  Wait 0.1
   If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff2") Then
     Copy "./IBMPlexSans-SemiBold.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff2"
   End If
+  Wait 0.1
   If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff2") Then
     Copy "./IBMPlexSans-SemiBoldItalic.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff2"
   End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff") Then
+    Copy "./IBMPlexSans-Regular.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff"
+  End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff") Then
+    Copy "./IBMPlexSans-Italic.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff"
+  End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff") Then
+    Copy "./IBMPlexSans-SemiBold.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff"
+  End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff") Then
+    Copy "./IBMPlexSans-SemiBoldItalic.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff"
+  End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.ttf") Then
+    Copy "./IBMPlexSans-Regular.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.ttf"
+  End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.ttf") Then
+    Copy "./IBMPlexSans-Italic.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.ttf"
+  End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.ttf") Then
+    Copy "./IBMPlexSans-SemiBold.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.ttf"
+  End If
+  Wait 0.1
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.ttf") Then
+    Copy "./IBMPlexSans-SemiBoldItalic.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.ttf"
+  End If
+  Wait 0.1
 
   Mod_Funciones.Borrar_Aux
   Wait 0.2
@@ -282,8 +294,8 @@ Public Sub salidaEPUBhtml()
   FMain.TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg" & " " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/config.cfg" & "\n")
   Wait 0.2
 
-  ' FMain.TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/config.cfg -a debug " & File.Name(FMain.TextBox1.Text) & "\n")' & "rm -rf " & newFile & "\n")
-  ' Wait 0.2
+  FMain.TerminalView1.Input("tex4ebook -l -f epub -c " & rutaFILES & "/config.cfg -e " & rutaFILES & "/build.lua -a debug " & newFile & " " & "\"tidy,shell-escape\"" & "\n")' & " rm - rf " & newFile & " \ n ")"
+  Wait 0.2
 
   ' FMain.TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
   ' Wait 0.2
@@ -297,9 +309,10 @@ Public Sub salidaEPUBhtml()
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/config.cfg" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) &/ "*.ttf *.woff *.woff2 " & "\n")
   Wait 0.2
 
-  ' ' borramos los archivos auxiliares
-  ' Mod_Funciones.Borrar_Aux
+  ' borramos los archivos auxiliares y  tipografias
+  Mod_Funciones.Borrar_Aux
 
 End
