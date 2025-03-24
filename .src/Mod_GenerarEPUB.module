@@ -202,12 +202,39 @@ End
 
 Public Sub salidaEPUBhtml()
 
-  Mod_Funciones.Borrar_Aux
-  Wait 0.2
-
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
   FMain.TabPanel6.Index = 0
+
+  ' copiamos las tipografias para el epub
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.ttf") Then
+    Copy "./IBMPlexSans-Regular.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.ttf"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.ttf") Then
+    Copy "./IBMPlexSans-Italic.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.ttf"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.ttf") Then
+    Copy "./IBMPlexSans-SemiBold.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.ttf"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.ttf") Then
+    Copy "./IBMPlexSans-SemiBoldItalic.ttf" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.ttf"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff") Then
+    Copy "./IBMPlexSans-Regular.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff") Then
+    Copy "./IBMPlexSans-Italic.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff") Then
+    Copy "./IBMPlexSans-SemiBold.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff") Then
+    Copy "./IBMPlexSans-SemiBoldItalic.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff"
+  End If
+
+  Mod_Funciones.Borrar_Aux
+  Wait 0.2
+
   ' Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
@@ -215,7 +242,7 @@ Public Sub salidaEPUBhtml()
   Wait 0.2
 
   ' Lista de directorios que deseas crear dentro de "ebook"
-  Dim directorios As String[] = ["kindle", "epub2"]
+  Dim directorios As String[] = ["epub2"]
 
   ' Asegurarse de que el directorio "ebook" existe
   If Not Exist(File.Dir(FMain.TextBox1.Text) & "/ebook") Then
@@ -232,7 +259,7 @@ Public Sub salidaEPUBhtml()
   Dim condicional As String = "\\\\HTMLEPUBtrue"
   FMain.TerminalView1.Input("echo " & condicional & " >> " & rutaFILES & "/book-epub2.tex" & "\n")
 
-  Dim newFile As String = BaseName & ".tex"
+  Dim newFile As String = "epub2-" & BaseName & ".tex"
   FMain.TerminalView1.Input("cat " & rutaFILES & "/book-epub2.tex " & File.Name(FMain.TextBox1.Text) & " > " & newFile & "\n")
   Wait 0.2
 
@@ -243,8 +270,8 @@ Public Sub salidaEPUBhtml()
   FMain.TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg" & " " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/config.cfg" & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/config.cfg -a debug " & File.Name(FMain.TextBox1.Text) & "\n")' & "rm -rf " & newFile & "\n")
-  Wait 0.2
+  ' FMain.TerminalView1.Input("tex4ebook -l -f epub -e " & rutaFILES & "/build.lua -c " & rutaFILES & "/config.cfg -a debug " & File.Name(FMain.TextBox1.Text) & "\n")' & "rm -rf " & newFile & "\n")
+  ' Wait 0.2
 
   ' FMain.TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
   ' Wait 0.2
@@ -260,7 +287,7 @@ Public Sub salidaEPUBhtml()
   FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/config.cfg" & "\n")
   Wait 0.2
 
-  ' borramos los archivos auxiliares
-  Mod_Funciones.Borrar_Aux
+  ' ' borramos los archivos auxiliares
+  ' Mod_Funciones.Borrar_Aux
 
 End

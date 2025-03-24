@@ -59,7 +59,6 @@
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
-    Visible = False
     { menuPDFcolor Menu
       Text = ("PDF web")
     }

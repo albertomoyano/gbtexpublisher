@@ -17,41 +17,6 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
     End If
   Next
 
-  'copiamos los archivos de preámbulo de libro y revista
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/make4ht-indexing.lua") Then
-    Copy "./make4ht-indexing.lua" To File.Dir(rutaTexto) & "/files/make4ht-indexing.lua"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
-    Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub1.tex") Then
-    Copy "./book-epub1.tex" To File.Dir(rutaTexto) & "/files/book-epub1.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-epub2.tex") Then
-    Copy "./book-epub2.tex" To File.Dir(rutaTexto) & "/files/book-epub2.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaC-config.tex") Then
-    Copy "./biblatex-veronaC-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaC-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaM-config.tex") Then
-    Copy "./biblatex-veronaM-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaM-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-VerboseIbid-config.tex") Then
-    Copy "./biblatex-VerboseIbid-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-VerboseIbid-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-APA-config.tex") Then
-    Copy "./biblatex-APA-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-APA-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex") Then
-    Copy "./biblatex-ISO690-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-numeric-config.tex") Then
-    Copy "./biblatex-numeric-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-numeric-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex") Then
-    Copy "./biblatex-custom-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex"
-  End If
-
   'copiamos los archivos de configuracion general
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/imago1.css") Then
     Copy "./imago1.css" To File.Dir(rutaTexto) & "/files/imago1.css"
