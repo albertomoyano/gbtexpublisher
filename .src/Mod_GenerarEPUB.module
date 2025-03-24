@@ -231,6 +231,18 @@ Public Sub salidaEPUBhtml()
   If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff") Then
     Copy "./IBMPlexSans-SemiBoldItalic.woff" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff"
   End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff2") Then
+    Copy "./IBMPlexSans-Regular.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Regular.woff2"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff2") Then
+    Copy "./IBMPlexSans-Italic.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-Italic.woff2"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff2") Then
+    Copy "./IBMPlexSans-SemiBold.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBold.woff2"
+  End If
+  If Not File.RealPath(File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff2") Then
+    Copy "./IBMPlexSans-SemiBoldItalic.woff2" To File.Dir(FMain.TextBox1.Text) & "/IBMPlexSans-SemiBoldItalic.woff2"
+  End If
 
   Mod_Funciones.Borrar_Aux
   Wait 0.2
