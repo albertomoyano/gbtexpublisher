@@ -21,7 +21,7 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
     Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
   End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then' esta copia es diferente
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
     Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/make4ht-indexing.lua") Then
@@ -68,6 +68,9 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/configEPUB.cfg") Then
     Copy "./configEPUB.cfg" To File.Dir(rutaTexto) & "/files/configEPUB.cfg"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/revista-pdf.tex") Then
+    Copy "./revista-pdf.tex" To File.Dir(rutaTexto) & "/files/revista-pdf.tex"
   End If
 
   If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
