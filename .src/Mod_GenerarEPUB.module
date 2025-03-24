@@ -259,26 +259,15 @@ Public Sub salidaEPUBhtml()
   Mod_Funciones.Borrar_Aux
   Wait 0.2
 
-  ' Mod_Exportar.ExportToSeparata(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2BibTeX(FMain.TextBox1.Text)
   Mod_Exportar.Exportar2Glosario(FMain.TextBox1.Text)
   Mod_Exportar.Export2MetaEPUB(FMain.TextBox1.Text)
   Wait 0.2
 
-  ' Lista de directorios que deseas crear dentro de "ebook"
-  Dim directorios As String[] = ["epub2"]
-
   ' Asegurarse de que el directorio "ebook" existe
   If Not Exist(File.Dir(FMain.TextBox1.Text) & "/ebook") Then
     Mkdir File.Dir(FMain.TextBox1.Text) & "/ebook"
   End If
-
-  ' Crear los subdirectorios dentro de "ebook" si no existen
-  For Each directorio As String In directorios
-    If Not Exist(File.Dir(FMain.TextBox1.Text) & "/ebook/" & directorio) Then
-      Mkdir File.Dir(FMain.TextBox1.Text) & "/ebook/" & directorio
-    End If
-  Next
 
   Dim condicional As String = "\\\\HTMLEPUBtrue"
   FMain.TerminalView1.Input("echo " & condicional & " >> " & rutaFILES & "/book-epub2.tex" & "\n")
@@ -294,25 +283,20 @@ Public Sub salidaEPUBhtml()
   FMain.TerminalView1.Input("cat " & rutaFILES & "/configEPUB.cfg" & " " & rutaFILES & "/gbTeXmeta-" & BaseName & ".tex" & " > " & rutaFILES & "/config.cfg" & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("tex4ebook -l -f epub -c " & rutaFILES & "/config.cfg -e " & rutaFILES & "/build.lua -a debug " & newFile & " " & "\"tidy,shell-escape\"" & "\n")' & " rm - rf " & newFile & " \ n ")"
+  FMain.TerminalView1.Input("tex4ebook -l -f epub -c " & rutaFILES & "/config.cfg -e " & rutaFILES & "/build.lua -a debug " & newFile & " " & "\"tidy,shell-escape\"" & "\n" & "rm -rf " & newFile & "\n")
   Wait 0.2
 
-  ' FMain.TerminalView1.Input("mv epub-" & folder & " epub" & "\n" & "clear" & "\n")
-  ' Wait 0.2
-
-  ' FMain.TerminalView1.Input("rm -rf " & rutaFILES & "/gbTeXmeta-" & BaseName & ".cfg" & "\n")
-  ' Wait 0.2
-
-  ' eliminamos los archivos auxiliares
-  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXglo-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
-  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/config.cfg" & "\n")
-  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) &/ "*.ttf *.woff *.woff2 " & "\n")
+  FMain.TerminalView1.Input("mv epub2-" & BaseName & "-epub/" & " " & "./ebook/epub2" & "\n")
   Wait 0.2
 
   ' borramos los archivos auxiliares y  tipografias
   Mod_Funciones.Borrar_Aux
+  ' FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXglo-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  ' FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXbib-" & File.BaseName(FMain.TextBox1.Text) & ".bib" & "\n")
+  ' FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXmeta-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/gbTeXseparata-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/files/config.cfg" & "\n")
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) &/ "*.ttf *.woff *.woff2 " & "\n")
+  Wait 0.2
 
 End
