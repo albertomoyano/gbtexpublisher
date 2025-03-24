@@ -1,8 +1,9 @@
 ' Gambas module file
 
-Public rutaApp As String = User.Home &/ ".gbtexpublisher"
-Public rutaAppR As String = User.Home &/ ".respaldogbTeX"
-Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+' Public rutaApp As String = User.Home &/ ".gbtexpublisher"
+' Public rutaAppR As String = User.Home &/ ".respaldogbTeX"
+' Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+Public rutaFontEpub As String = User.Home &/ ".gbtexpublisher/fonts/"
 
 Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
 
@@ -17,7 +18,6 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   Next
 
   'copiamos los archivos de preámbulo de libro y revista
-  '
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/make4ht-indexing.lua") Then
     Copy "./make4ht-indexing.lua" To File.Dir(rutaTexto) & "/files/make4ht-indexing.lua"
   End If
@@ -51,10 +51,7 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex") Then
     Copy "./biblatex-custom-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex"
   End If
-  ' esta copia es diferente
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
-    Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
-  End If
+
   'copiamos los archivos de configuracion general
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/imago1.css") Then
     Copy "./imago1.css" To File.Dir(rutaTexto) & "/files/imago1.css"
@@ -92,13 +89,42 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
     Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
   End If
-  '
+  ' esta copia es diferente
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
+    Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
+  End If
   'User.Home &/ ".gbtexpublisher"
   If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
     Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/media/desconocido.png") Then
     Copy "./desconocido.png" To File.Dir(rutaTexto) & "/media/desconocido.png"
+  End If
+
+  ' copiamos las tipografias para el epub
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-Regular.ttf") Then
+    Copy "./IBMPlexSans-Regular.ttf" To rutaFontEpub & "IBMPlexSans-Regular.ttf"
+  End If
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-Italic.ttf") Then
+    Copy "./IBMPlexSans-Italic.ttf" To rutaFontEpub & "IBMPlexSans-Italic.ttf"
+  End If
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-SemiBold.ttf") Then
+    Copy "./IBMPlexSans-SemiBold.ttf" To rutaFontEpub & "IBMPlexSans-SemiBold.ttf"
+  End If
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-SemiBoldItalic.ttf") Then
+    Copy "./IBMPlexSans-SemiBoldItalic.ttf" To rutaFontEpub & "IBMPlexSans-SemiBoldItalic.ttf"
+  End If
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-Regular.woff") Then
+    Copy "./IBMPlexSans-Regular.woff" To rutaFontEpub & "IBMPlexSans-Regular.woff"
+  End If
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-Italic.woff") Then
+    Copy "./IBMPlexSans-Italic.woff" To rutaFontEpub & "IBMPlexSans-Italic.woff"
+  End If
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-SemiBold.woff") Then
+    Copy "./IBMPlexSans-SemiBold.woff" To rutaFontEpub & "IBMPlexSans-SemiBold.woff"
+  End If
+  If Not File.RealPath(rutaFontEpub & "IBMPlexSans-SemiBoldItalic.woff") Then
+    Copy "./IBMPlexSans-SemiBoldItalic.woff" To rutaFontEpub & "IBMPlexSans-SemiBoldItalic.woff"
   End If
 
   ' copiamos archivos para página html

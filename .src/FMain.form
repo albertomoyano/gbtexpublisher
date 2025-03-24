@@ -1425,22 +1425,8 @@
         Border = False
         ScrollBar = Scroll.Vertical
         Shadow = True
-        { HBox49 HBox
-          MoveScaled(0,0,100,4)
-          { Label23 Label
-            MoveScaled(31,0,16,3.5556)
-            Alignment = Align.Right
-            Text = ("Chapter ")
-          }
-          { txtChapter TextBox AllTextBoxes
-            Name = "txtChapter"
-            MoveScaled(51,0,21,3.5556)
-            Expand = True
-            PopupMenu = "menuTEXTBOX"
-          }
-        }
         { HBox36 HBox
-          MoveScaled(0,4,100,4)
+          MoveScaled(1,0,100,4)
           { Label19 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1465,8 +1451,31 @@
             Placeholder = ("number of volumes for multi-volume work")
           }
         }
+        { HBox49 HBox
+          MoveScaled(1,4,100,4)
+          { Label119 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("JournalYear ")
+          }
+          { txtJournalYear TextBox
+            MoveScaled(17,0,16,4)
+            Expand = True
+          }
+          { Label23 Label
+            MoveScaled(31,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Chapter ")
+          }
+          { txtChapter TextBox AllTextBoxes
+            Name = "txtChapter"
+            MoveScaled(51,0,21,3.5556)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+          }
+        }
         { HBox41 HBox
-          MoveScaled(0,8,100,4)
+          MoveScaled(1,8,100,4)
           { Label20 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1491,7 +1500,7 @@
           }
         }
         { HBox43 HBox
-          MoveScaled(0,12,100,4)
+          MoveScaled(1,12,100,4)
           { Label14 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
@@ -1517,7 +1526,7 @@
           }
         }
         { HBox46 HBox
-          MoveScaled(0,16,100,4)
+          MoveScaled(1,16,100,4)
           { Label17 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right
@@ -1544,7 +1553,7 @@
           }
         }
         { HBox42 HBox
-          MoveScaled(0,20,100,4)
+          MoveScaled(1,20,100,4)
           { lblDate Label
             MoveScaled(1,0,16,3.5556)
             Alignment = Align.Right
@@ -1571,7 +1580,7 @@
           }
         }
         { HBox45 HBox
-          MoveScaled(0,24,100,4)
+          MoveScaled(1,24,100,4)
           { Label22 Label
             MoveScaled(0,0,16,3.5556)
             Alignment = Align.Right

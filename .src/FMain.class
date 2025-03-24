@@ -17,6 +17,7 @@ Public rutaCATALOGO As String
 Public rutaARTCAP As String
 Public rutaApp As String = User.Home &/ ".gbtexpublisher"
 Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+Public rutaFonts As String = User.Home &/ ".gbtexpublisher/fonts"
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
 Public fFile As File
@@ -53,6 +54,10 @@ Public Sub Form_Open()
   ' controlamos que existan los directorios principales o los creamos
   If Not Exist(rutaApp) Then
     Mkdir rutaApp
+  End If
+
+  If Not Exist(rutaFonts) Then
+    Mkdir rutaFonts
   End If
 
   If Not Exist(rutaScriptsExternos) Then
