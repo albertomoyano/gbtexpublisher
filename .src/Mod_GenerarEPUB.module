@@ -6,6 +6,11 @@ Public rutaFILES As String = File.Dir(FMain.TextBox1.Text) & "/files"
 
 Public Sub salidaEPUBpng()' parte 1
 
+  FMain.DirViewRuta.Refresh
+  FMain.DirViewRuta.Reload
+  FMain.FileView1.Refresh
+  FMain.FileView1.Reload
+
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
   FMain.TabPanel6.Index = 0
@@ -64,7 +69,9 @@ Public Sub salidaEPUBpng()' parte 1
   Mod_Funciones.Borrar_Aux
   Wait 0.2
   FMain.DirViewRuta.Refresh
+  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
+  FMain.FileView1.Reload
 
 End
 
@@ -78,6 +85,11 @@ Public Sub creacionEpubPNG()' parte 2
   Dim rutaCoverDestino As String = rutaEPUB1 & "cover.png"
   Dim rutaIndex As String = rutaEPUB1 & "index.html"
   Dim rutaOPF As String = rutaEPUB1 & "content.opf"
+
+  FMain.DirViewRuta.Refresh
+  FMain.DirViewRuta.Reload
+  FMain.FileView1.Refresh
+  FMain.FileView1.Reload
 
   ' Verificar si la imagen de tapa ya está en el directorio EPUB1
   If Not File.RealPath(rutaCoverDestino) Then
@@ -178,11 +190,18 @@ Public Sub creacionEpubPNG()' parte 2
   FMain.TerminalView1.Input("rm -rf " & rutaEPUB1 & "*.png" & "\n")
   Wait 0.2
   FMain.DirViewRuta.Refresh
+  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
+  FMain.FileView1.Reload
 
 End
 
 Public Sub salidaEPUBhtml()
+
+  FMain.DirViewRuta.Refresh
+  FMain.DirViewRuta.Reload
+  FMain.FileView1.Refresh
+  FMain.FileView1.Reload
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
@@ -262,15 +281,14 @@ Public Sub salidaEPUBhtml()
   Wait 0.2
 
   FMain.TerminalView1.Input("tex4ebook -l -f epub -c " & rutaFILES & "/config.cfg -e " & rutaFILES & "/build.lua -a debug " & newFile & " " & "\"tidy,shell-escape\"" & "\n")
-  Wait 0.5
-
-  FMain.TerminalView1.Input("rm -rf " & BaseRuta & "/epub2-" & BaseName & ".tex" & "\n")
   Wait 0.2
+
   FMain.TerminalView1.Input("mv epub2-" & BaseName & "-epub" & " " & "epub2" & "\n")
   Wait 0.2
   Mod_Funciones.Borrar_Aux
-  Wait 0.2
   FMain.DirViewRuta.Refresh
+  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
+  FMain.FileView1.Reload
 
 End
