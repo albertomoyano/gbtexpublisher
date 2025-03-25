@@ -478,76 +478,53 @@
     Text = ("Salidas y configuraciones     ")
     Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
-      MoveScaled(3,1,158,4)
-      { MenuButton1 MenuButton
-        MoveScaled(16,0,20,4)
-        #Translate = False
+      MoveScaled(1,1,126,4)
+      { Panel8 Panel
+        MoveScaled(0,0,83,4)
         Expand = True
-        Text = "Guiones externos"
-        Picture = Picture["iconos/conversor.svg"]
-        MenuOnly = True
+        Arrangement = Arrange.Horizontal
+        { MenuButton1 MenuButton
+          MoveScaled(0,0,23,4)
+          #Translate = False
+          Text = "Guiones externos"
+          Picture = Picture["iconos/conversor.svg"]
+          MenuOnly = True
+        }
+        { Separator1 Separator
+          MoveScaled(24,0,2.3333,4)
+          #Translate = False
+        }
+        { btnLimpiar Button
+          MoveScaled(27,0,4,4)
+          #Translate = False
+          NoTabFocus = True
+          ToolTip = "Borrar entrada"
+          Picture = Picture["iconos/borrar.svg"]
+        }
+        { TextBox2 TextBox
+          MoveScaled(32,0,23,4)
+          #Translate = False
+          Expand = True
+        }
+        { BtnBuscarEnArchivos Button
+          MoveScaled(56,0,4,4)
+          #Translate = False
+          NoTabFocus = True
+          Picture = Picture["iconos/search.svg"]
+        }
+        { Label125 Label
+          MoveScaled(61,0,17,4)
+          #Translate = False
+          AutoResize = True
+          Text = "  Buscar palabras en todo el proyecto"
+        }
       }
-      { Separator1 Separator
-        MoveScaled(36,0,2.3333,4)
-        #Translate = False
-      }
-      { btnLimpiar Button
-        MoveScaled(38,0,4,4)
-        #Translate = False
-        NoTabFocus = True
-        ToolTip = "Borrar entrada"
-        Picture = Picture["iconos/borrar.svg"]
-      }
-      { TextBox2 TextBox
-        MoveScaled(43,0,23,4)
-        #Translate = False
-      }
-      { BtnBuscarEnArchivos Button
-        MoveScaled(67,0,4,4)
-        #Translate = False
-        NoTabFocus = True
-        Picture = Picture["iconos/search.svg"]
-      }
-      { Label125 Label
-        MoveScaled(73,0,14,4)
-        #Translate = False
-        AutoResize = True
-        Text = "  Buscar palabras en todo el proyecto"
-      }
-      { Separator9 Separator
-        MoveScaled(90,0,2.3333,4)
-        #Translate = False
-      }
-      { MenuApp MenuButton
-        MoveScaled(92.3333,0,17,4)
-        #Translate = False
-        Expand = True
-        Text = "Ver salidas"
-        Picture = Picture["iconos/document.svg"]
-        Menu = "AbrirApp"
-        MenuOnly = True
-      }
-      { MenuButton3 MenuButton
-        MoveScaled(109.3333,0,19,4)
-        #Translate = False
-        Expand = True
-        Text = "Complementos para PDF y ePub"
-        Picture = Picture["iconos/conversor.svg"]
-        Menu = "menuLTX"
-        MenuOnly = True
-      }
-      { MenuButton2 MenuButton
-        MoveScaled(128.3333,0,17,4)
-        #Translate = False
-        Expand = True
-        Text = "Procesar archivos por lotes"
-        Picture = Picture["iconos/conversor.svg"]
-        Menu = "menuProcesarArchivos"
-        MenuOnly = True
+      { Spring1 Spring
+        MoveScaled(119,0,5,4)
       }
     }
     { Splitter1 Splitter
-      MoveScaled(1,6,126,65)
+      MoveScaled(1,11,126,65)
       Expand = True
       Border = False
       { TabPanel6 TabPanel
@@ -555,7 +532,6 @@
         Arrangement = Arrange.Vertical
         Border = False
         Count = 2
-        Orientation = Align.Bottom
         Index = 0
         Text = ("Terminal     ")
         Picture = Picture["iconos/terminal.svg"]
@@ -620,28 +596,71 @@
         MoveScaled(51,2,74,61)
         Arrangement = Arrange.Vertical
         Border = False
-        { Splitter6 Splitter
-          MoveScaled(1,7,68,30)
+        { Panel1 Panel
+          MoveScaled(1,7,71,37)
           Expand = True
-          Border = False
-          { Splitter7 Splitter
-            MoveScaled(6,5,30,25)
-            Arrangement = Arrange.Vertical
-            Border = False
-            { DirViewRuta DirView
-              MoveScaled(4,4,25,9)
+          Arrangement = Arrange.Vertical
+          { HBox44 HBox
+            MoveScaled(0,0,65,4)
+            { btnRefrescarGrid Button
+              MoveScaled(0,0,4,4)
+              #Translate = False
+              NoTabFocus = True
+              Picture = Picture["iconos/integridad.svg"]
             }
-            { !FileView1 FileView
-              MoveScaled(2,14,27,9)
-              #Public = True
-              View = FileView.Detailed
-              Mode = Select.Multiple
+            { Separator9 Separator
+              MoveScaled(4,0,2.3333,4)
+              #Translate = False
+            }
+            { MenuApp MenuButton
+              MoveScaled(7,0,17,4)
+              #Translate = False
+              Expand = True
+              Text = "Ver salidas"
+              Picture = Picture["iconos/document.svg"]
+              Menu = "AbrirApp"
+              MenuOnly = True
+            }
+            { MenuButton3 MenuButton
+              MoveScaled(25,0,19,4)
+              #Translate = False
+              Expand = True
+              Text = "Complementos para PDF y ePub"
+              Picture = Picture["iconos/conversor.svg"]
+              Menu = "menuLTX"
+              MenuOnly = True
+            }
+            { MenuButton2 MenuButton
+              MoveScaled(44,0,17,4)
+              #Translate = False
+              Expand = True
+              Text = "Procesar archivos por lotes"
+              Picture = Picture["iconos/conversor.svg"]
+              Menu = "menuProcesarArchivos"
+              MenuOnly = True
             }
           }
-          { !ImageView1 ImageView
-            MoveScaled(39,11,18,12)
-            #Public = True
-            #Translate = False
+          { Splitter6 Splitter
+            MoveScaled(0,5,59,30)
+            Expand = True
+            Border = False
+            { Splitter7 Splitter
+              MoveScaled(6,5,30,25)
+              Arrangement = Arrange.Vertical
+              Border = False
+              { DirViewRuta DirView
+                MoveScaled(4,4,25,9)
+              }
+              { FileView1 FileView
+                MoveScaled(2,14,27,9)
+                View = FileView.Detailed
+              }
+            }
+            { !ImageView1 ImageView
+              MoveScaled(39,11,18,12)
+              #Public = True
+              #Translate = False
+            }
           }
         }
         { Splitter3 Splitter

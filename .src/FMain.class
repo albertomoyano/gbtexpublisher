@@ -5957,10 +5957,11 @@ Private Function IsValidISSN(sISSN As String) As Boolean
 
 End
 
-Public Sub menuHTML_Click()' pagina html del libro
+Public Sub btnRefrescarGrid_Click()
 
-End
-
-Public Sub menuPDFrevistaWEB_Click()
+  DirViewRuta.Refresh
+  DirViewRuta.Reload
+  FileView1.Refresh
+  FileView1.Reload
 
 End
