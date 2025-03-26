@@ -43,8 +43,8 @@ Public Sub LimpiarCamposBIB()
   FMain.txtPAGINATION.Text = ""
   FMain.txtEPRINTYPE.Text = ""
   FMain.txtBookPagination.Text = ""
+  FMain.txtKEYWORDS.Text = ""
   FMain.txtETIQ.Clear
-  FMain.txtKEYWORDS.Clear
   FMain.txtCROSSREF.Clear
   FMain.txtCLAVEbib.Clear
   FMain.txtTITLE.Clear

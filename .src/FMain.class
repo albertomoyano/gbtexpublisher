@@ -351,6 +351,8 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    DirViewRuta.Refresh
+    FileView1.Refresh
     TabPanel6.Index = 0
     ' borramos las carpetas que se crean en el cache
     Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
@@ -432,7 +434,8 @@ End
 Public Sub Watcher_Change()
 
   DirViewRuta.Root = File.Dir(TextBox1.Text)' reforzamos la indicación de la ruta
-  DirViewRuta.Refresh' Actualiza el DirChooser
+  DirViewRuta.Refresh
+  FileView1.Refresh
 
 End
 
@@ -2240,276 +2243,6 @@ Public Sub AsignarValores(Grid As GridView, Row As Integer, Mapeo As Collection,
   Next
 
 End
-
-' Public Sub VListaBIB_RowClick(Row As Integer)
-'
-'   ' configurar como se muestran los botones
-'   btnGuardarCambios.Visible = True
-'   BtnEliminarBib.Visible = True
-'   btnAgregarCitationKey.Visible = True
-'   btnGuardar.Visible = False
-'   btnAgregarKeyBIB.Visible = True
-'   BtnRefrescarBib.Visible = True
-'
-'   ' Asegura de que hay una fila seleccionada y datos válidos
-'   If Row < 0 Or Row >= ContenidoBibTotal.Count Then
-'     Return
-'   Endif
-'
-'   ' ' Mover el cursor al registro seleccionado
-'   ' ContenidoBibTotal.MoveTo(Row)
-'
-'   ' ' Mover el cursor al registro seleccionado
-'   ' VListaBIB.MoveTo(Row)
-'
-'   If Row = VListaBIB.SelectedRow Then
-'
-'     ' Rellenar los campos de texto con los valores de la fila seleccionada
-'     txtIDbibtex.Text = VListaBIB[Row, 0].Text
-'     ComboBox1.Text = VListaBIB[Row, 1].Text
-'     txtCLAVEbib.Text = VListaBIB[Row, 2].Text
-'     txtKEYWORDS.Text = VListaBIB[Row, 3].Text
-'     txtAUTHOR.Text = VListaBIB[Row, 4].Text
-'   Endif
-
-' txtIDbibtex.Text = VListaBIB[Row, 0].Text
-' ComboBox1.Text = VListaBIB[Row, 1].Text
-' txtCLAVEbib.Text = VListaBIB[Row, 2].Text
-' txtKEYWORDS.Text = VListaBIB[Row, 3].Text
-' txtAUTHOR.Text = VListaBIB[Row, 4].Text
-' txtBOOKAUTHOR.Text = VListaBIB[Row, 5].Text
-' txtEDITOR.Text = VListaBIB[Row, 6].Text
-' txtEDITORa.Text = VListaBIB[Row, 7].Text
-' txtEDITORb.Text = VListaBIB[Row, 8].Text
-' txtEDITORc.Text = VListaBIB[Row, 9].Text
-' txtAFTERWORD.Text = VListaBIB[Row, 10].Text
-' txtCOMMENTATOR.Text = VListaBIB[Row, 11].Text
-' txtTRANSLATOR.Text = VListaBIB[Row, 12].Text
-' txtHOLDER.Text = VListaBIB[Row, 13].Text
-' txtShortAuthor.Text = VListaBIB[Row, 14].Text
-' cbEDITORTYPE.Text = VListaBIB[Row, 15].Text
-' cbEDITORTYPEa.Text = VListaBIB[Row, 16].Text
-' cbEDITORTYPEb.Text = VListaBIB[Row, 17].Text
-' cbEDITORTYPEc.Text = VListaBIB[Row, 18].Text
-' txtFOREWORD.Text = VListaBIB[Row, 19].Text
-' txtINTRODUCTION.Text = VListaBIB[Row, 20].Text
-' txtANNOTATOR.Text = VListaBIB[Row, 21].Text
-' txtGENDER.Text = VListaBIB[Row, 22].Text
-' txtNAMEADDON.Text = VListaBIB[Row, 23].Text
-' txtTITLE.Text = VListaBIB[Row, 24].Text
-' txtSHORTTITLE.Text = VListaBIB[Row, 25].Text
-' txtINDEXTITLE.Text = VListaBIB[Row, 26].Text
-' txtBOOKTITLE.Text = VListaBIB[Row, 27].Text
-' txtMAINTITLE.Text = VListaBIB[Row, 28].Text
-' txtJOURNALTITLE.Text = VListaBIB[Row, 29].Text
-' txtISSUETITLE.Text = VListaBIB[Row, 30].Text
-' txtEVENTTITLE.Text = VListaBIB[Row, 31].Text
-' txtREPRINTTITLE.Text = VListaBIB[Row, 32].Text
-' txtSERIES.Text = VListaBIB[Row, 33].Text
-' txtBookTitleAddOn.Text = VListaBIB[Row, 34].Text
-' txtMainTitleAddOn.Text = VListaBIB[Row, 35].Text
-' txtJournalTitleAddOn.Text = VListaBIB[Row, 36].Text
-' txtIssueTitleAddOn.Text = VListaBIB[Row, 37].Text
-' txtEventTitleAddOn.Text = VListaBIB[Row, 38].Text
-' txtChapter.Text = VListaBIB[Row, 39].Text
-' txtVOLUME.Text = VListaBIB[Row, 40].Text
-' txtEDITION.Text = VListaBIB[Row, 41].Text
-' cbPUBSTATE.Text = VListaBIB[Row, 42].Text
-' txtYEAR.Text = VListaBIB[Row, 43].Text
-' txtDATEY.Text = VListaBIB[Row, 44].Text
-' txtURLDATE.Text = VListaBIB[Row, 45].Text
-' txtBOLUMES.Text = VListaBIB[Row, 46].Text
-' txtPART.Text = VListaBIB[Row, 47].Text
-' txtISSUE.Text = VListaBIB[Row, 48].Text
-' txtEVENTDATE.Text = VListaBIB[Row, 49].Text
-' txtORIGDATE.Text = VListaBIB[Row, 50].Text
-' txtVERSION.Text = VListaBIB[Row, 51].Text
-' txtLOCATION.Text = VListaBIB[Row, 52].Text
-' txtPUBLISHER.Text = VListaBIB[Row, 53].Text
-' txtINSTITUTION.Text = VListaBIB[Row, 54].Text
-' txtORGANIZATION.Text = VListaBIB[Row, 55].Text
-' txtPAGES.Text = VListaBIB[Row, 56].Text
-' txtPAGINATION.Text = VListaBIB[Row, 57].Text
-' cbLANGUAGE.Text = VListaBIB[Row, 58].Text
-' cbLANGUAGEID.Text = VListaBIB[Row, 59].Text
-' txtLANGUAGE.Text = VListaBIB[Row, 60].Text
-' txtORIGLOCATION.Text = VListaBIB[Row, 61].Text
-' txtORIGPUBLISHER.Text = VListaBIB[Row, 62].Text
-' txtPAGETOTAL.Text = VListaBIB[Row, 63].Text
-' txtVENUE.Text = VListaBIB[Row, 64].Text
-' txtBookPagination.Text = VListaBIB[Row, 65].Text
-' txtLANGIDOPTS.Text = VListaBIB[Row, 66].Text
-' txtORIGLANGUAGE.Text = VListaBIB[Row, 67].Text
-' txtISAN.Text = VListaBIB[Row, 68].Text
-' txtISBN.Text = VListaBIB[Row, 69].Text
-' txtISMN.Text = VListaBIB[Row, 70].Text
-' txtISRN.Text = VListaBIB[Row, 71].Text
-' txtISSN.Text = VListaBIB[Row, 72].Text
-' txtISWC.Text = VListaBIB[Row, 73].Text
-' txtURL.Text = VListaBIB[Row, 74].Text
-' txtDOI.Text = VListaBIB[Row, 75].Text
-' txtEID.Text = VListaBIB[Row, 76].Text
-' txtEPRINTYPE.Text = VListaBIB[Row, 77].Text
-' txtEPRINT.Text = VListaBIB[Row, 78].Text
-' txtENTRYSUBTYPE.Text = VListaBIB[Row, 79].Text
-' txtLABEL.Text = VListaBIB[Row, 80].Text
-' txtHOWPUBLISHED.Text = VListaBIB[Row, 81].Text
-' txtADDENDUM.Text = VListaBIB[Row, 82].Text
-' txtSHORTHAND.Text = VListaBIB[Row, 83].Text
-' txtSHORTHANDINTRO.Text = VListaBIB[Row, 84].Text
-' txtETIQ.Text = VListaBIB[Row, 85].Text
-' cbOPTIONS.Text = VListaBIB[Row, 86].Text
-' txtIDS.Text = VListaBIB[Row, 87].Text 'Ids
-' txtRELATED.Text = VListaBIB[Row, 88].Text
-' CmbRelatedType.Text = VListaBIB[Row, 89].Text
-' txtRELATEDSTRING.Text = VListaBIB[Row, 90].Text
-' txtENTRYSET.Text = VListaBIB[Row, 91].Text
-' txtCROSSREF.Text = VListaBIB[Row, 92].Text
-' txtXREF.Text = VListaBIB[Row, 93].Text
-' txtXDATA.Text = VListaBIB[Row, 94].Text
-' txtPRESORT.Text = VListaBIB[Row, 95].Text
-' txtSORTKEY.Text = VListaBIB[Row, 96].Text
-' txtSORTNAME.Text = VListaBIB[Row, 97].Text
-' txtSORTSHORTHAND.Text = VListaBIB[Row, 98].Text
-' txtSORTTITLE.Text = VListaBIB[Row, 99].Text
-' txtINDEXSORTTITLE.Text = VListaBIB[Row, 100].Text
-' txtSORTYEAR.Text = VListaBIB[Row, 101].Text
-' txtFILE.Text = VListaBIB[Row, 102].Text
-' txtABSTRACT.Text = VListaBIB[Row, 103].Text
-' txtLIBRARY.Text = VListaBIB[Row, 104].Text
-' txtNOTE.Text = VListaBIB[Row, 105].Text
-' txtANNOTATION.Text = VListaBIB[Row, 106].Text
-' txtNUMBER.Text = VListaBIB[Row, 107].Text
-' ' txtCreationDay108.Text = VListaBIB[Row, 108].Text' este registro quedo disponible
-' cbType.Text = VListaBIB[Row, 109].Text
-' txtTitleAddOn.Text = VListaBIB[Row, 110].Text
-' txtSubTitle.Text = VListaBIB[Row, 111].Text
-
-' End
-
-' Public Sub VListaBIB_RowClick(Row As Integer)
-'
-'   btnGuardarCambios.Visible = True
-'   BtnEliminarBib.Visible = True
-'   btnAgregarCitationKey.Visible = True
-'   btnGuardar.Visible = False
-'   btnAgregarKeyBIB.Visible = True
-'   BtnRefrescarBib.Visible = True
-'
-'   txtIDbibtex.Text = VListaBIB[Row, 0].Text
-'   ComboBox1.Text = VListaBIB[Row, 1].Text
-'   txtCLAVEbib.Text = VListaBIB[Row, 2].Text
-'   txtKEYWORDS.Text = VListaBIB[Row, 3].Text
-'   txtAUTHOR.Text = VListaBIB[Row, 4].Text
-'   txtBOOKAUTHOR.Text = VListaBIB[Row, 5].Text
-'   txtEDITOR.Text = VListaBIB[Row, 6].Text
-'   txtEDITORa.Text = VListaBIB[Row, 7].Text
-'   txtEDITORb.Text = VListaBIB[Row, 8].Text
-'   txtEDITORc.Text = VListaBIB[Row, 9].Text
-'   txtAFTERWORD.Text = VListaBIB[Row, 10].Text
-'   txtCOMMENTATOR.Text = VListaBIB[Row, 11].Text
-'   txtTRANSLATOR.Text = VListaBIB[Row, 12].Text
-'   txtHOLDER.Text = VListaBIB[Row, 13].Text
-'   txtShortAuthor.Text = VListaBIB[Row, 14].Text
-'   cbEDITORTYPE.Text = VListaBIB[Row, 15].Text
-'   cbEDITORTYPEa.Text = VListaBIB[Row, 16].Text
-'   cbEDITORTYPEb.Text = VListaBIB[Row, 17].Text
-'   cbEDITORTYPEc.Text = VListaBIB[Row, 18].Text
-'   txtFOREWORD.Text = VListaBIB[Row, 19].Text
-'   txtINTRODUCTION.Text = VListaBIB[Row, 20].Text
-'   txtANNOTATOR.Text = VListaBIB[Row, 21].Text
-'   txtGENDER.Text = VListaBIB[Row, 22].Text
-'   txtNAMEADDON.Text = VListaBIB[Row, 23].Text
-'   txtTITLE.Text = VListaBIB[Row, 24].Text
-'   txtSHORTTITLE.Text = VListaBIB[Row, 25].Text
-'   txtINDEXTITLE.Text = VListaBIB[Row, 26].Text
-'   txtBOOKTITLE.Text = VListaBIB[Row, 27].Text
-'   txtMAINTITLE.Text = VListaBIB[Row, 28].Text
-'   txtJOURNALTITLE.Text = VListaBIB[Row, 29].Text
-'   txtISSUETITLE.Text = VListaBIB[Row, 30].Text
-'   txtEVENTTITLE.Text = VListaBIB[Row, 31].Text
-'   txtREPRINTTITLE.Text = VListaBIB[Row, 32].Text
-'   txtSERIES.Text = VListaBIB[Row, 33].Text
-'   txtBookTitleAddOn.Text = VListaBIB[Row, 34].Text
-'   txtMainTitleAddOn.Text = VListaBIB[Row, 35].Text
-'   txtJournalTitleAddOn.Text = VListaBIB[Row, 36].Text
-'   txtIssueTitleAddOn.Text = VListaBIB[Row, 37].Text
-'   txtEventTitleAddOn.Text = VListaBIB[Row, 38].Text
-'   txtChapter.Text = VListaBIB[Row, 39].Text
-'   txtVOLUME.Text = VListaBIB[Row, 40].Text
-'   txtEDITION.Text = VListaBIB[Row, 41].Text
-'   cbPUBSTATE.Text = VListaBIB[Row, 42].Text
-'   txtYEAR.Text = VListaBIB[Row, 43].Text
-'   txtDATEY.Text = VListaBIB[Row, 44].Text
-'   txtURLDATE.Text = VListaBIB[Row, 45].Text
-'   txtBOLUMES.Text = VListaBIB[Row, 46].Text
-'   txtPART.Text = VListaBIB[Row, 47].Text
-'   txtISSUE.Text = VListaBIB[Row, 48].Text
-'   txtEVENTDATE.Text = VListaBIB[Row, 49].Text
-'   txtORIGDATE.Text = VListaBIB[Row, 50].Text
-'   txtVERSION.Text = VListaBIB[Row, 51].Text
-'   txtLOCATION.Text = VListaBIB[Row, 52].Text
-'   txtPUBLISHER.Text = VListaBIB[Row, 53].Text
-'   txtINSTITUTION.Text = VListaBIB[Row, 54].Text
-'   txtORGANIZATION.Text = VListaBIB[Row, 55].Text
-'   txtPAGES.Text = VListaBIB[Row, 56].Text
-'   txtPAGINATION.Text = VListaBIB[Row, 57].Text
-'   cbLANGUAGE.Text = VListaBIB[Row, 58].Text
-'   cbLANGUAGEID.Text = VListaBIB[Row, 59].Text
-'   txtLANGUAGE.Text = VListaBIB[Row, 60].Text
-'   txtORIGLOCATION.Text = VListaBIB[Row, 61].Text
-'   txtORIGPUBLISHER.Text = VListaBIB[Row, 62].Text
-'   txtPAGETOTAL.Text = VListaBIB[Row, 63].Text
-'   txtVENUE.Text = VListaBIB[Row, 64].Text
-'   txtBookPagination.Text = VListaBIB[Row, 65].Text
-'   txtLANGIDOPTS.Text = VListaBIB[Row, 66].Text
-'   txtORIGLANGUAGE.Text = VListaBIB[Row, 67].Text
-'   txtISAN.Text = VListaBIB[Row, 68].Text
-'   txtISBN.Text = VListaBIB[Row, 69].Text
-'   txtISMN.Text = VListaBIB[Row, 70].Text
-'   txtISRN.Text = VListaBIB[Row, 71].Text
-'   txtISSN.Text = VListaBIB[Row, 72].Text
-'   txtISWC.Text = VListaBIB[Row, 73].Text
-'   txtURL.Text = VListaBIB[Row, 74].Text
-'   txtDOI.Text = VListaBIB[Row, 75].Text
-'   txtEID.Text = VListaBIB[Row, 76].Text
-'   txtEPRINTYPE.Text = VListaBIB[Row, 77].Text
-'   txtEPRINT.Text = VListaBIB[Row, 78].Text
-'   txtENTRYSUBTYPE.Text = VListaBIB[Row, 79].Text
-'   txtLABEL.Text = VListaBIB[Row, 80].Text
-'   txtHOWPUBLISHED.Text = VListaBIB[Row, 81].Text
-'   txtADDENDUM.Text = VListaBIB[Row, 82].Text
-'   txtSHORTHAND.Text = VListaBIB[Row, 83].Text
-'   txtSHORTHANDINTRO.Text = VListaBIB[Row, 84].Text
-'   txtETIQ.Text = VListaBIB[Row, 85].Text
-'   cbOPTIONS.Text = VListaBIB[Row, 86].Text
-'   txtIDS.Text = VListaBIB[Row, 87].Text 'Ids
-'   txtRELATED.Text = VListaBIB[Row, 88].Text
-'   CmbRelatedType.Text = VListaBIB[Row, 89].Text
-'   txtRELATEDSTRING.Text = VListaBIB[Row, 90].Text
-'   txtENTRYSET.Text = VListaBIB[Row, 91].Text
-'   txtCROSSREF.Text = VListaBIB[Row, 92].Text
-'   txtXREF.Text = VListaBIB[Row, 93].Text
-'   txtXDATA.Text = VListaBIB[Row, 94].Text
-'   txtPRESORT.Text = VListaBIB[Row, 95].Text
-'   txtSORTKEY.Text = VListaBIB[Row, 96].Text
-'   txtSORTNAME.Text = VListaBIB[Row, 97].Text
-'   txtSORTSHORTHAND.Text = VListaBIB[Row, 98].Text
-'   txtSORTTITLE.Text = VListaBIB[Row, 99].Text
-'   txtINDEXSORTTITLE.Text = VListaBIB[Row, 100].Text
-'   txtSORTYEAR.Text = VListaBIB[Row, 101].Text
-'   txtFILE.Text = VListaBIB[Row, 102].Text
-'   txtABSTRACT.Text = VListaBIB[Row, 103].Text
-'   txtLIBRARY.Text = VListaBIB[Row, 104].Text
-'   txtNOTE.Text = VListaBIB[Row, 105].Text
-'   txtANNOTATION.Text = VListaBIB[Row, 106].Text
-'   txtNUMBER.Text = VListaBIB[Row, 107].Text
-'   txtCreationDay108.Text = VListaBIB[Row, 108].Text' este registro quedo disponible
-'   cbType.Text = VListaBIB[Row, 109].Text
-'   txtTitleAddOn.Text = VListaBIB[Row, 110].Text
-'   txtSubTitle.Text = VListaBIB[Row, 111].Text
-'
-' End
 
 Public Sub txtPUBLISHER_Change()
 
@@ -5959,9 +5692,7 @@ End
 
 Public Sub btnRefrescarGrid_Click()
 
-  DirViewRuta.Refresh
   DirViewRuta.Reload
-  FileView1.Refresh
   FileView1.Reload
 
 End

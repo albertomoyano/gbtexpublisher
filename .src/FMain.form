@@ -648,11 +648,13 @@
               MoveScaled(6,5,30,25)
               Arrangement = Arrange.Vertical
               Border = False
-              { DirViewRuta DirView
+              { !DirViewRuta DirView
                 MoveScaled(4,4,25,9)
+                #Public = True
               }
-              { FileView1 FileView
+              { !FileView1 FileView
                 MoveScaled(2,14,27,9)
+                #Public = True
                 View = FileView.Detailed
               }
             }
@@ -837,7 +839,7 @@
         Placeholder = ("Clave filtro para printbibliography")
       }
       { lblAlta4 Label
-        MoveScaled(67,0,14,4)
+        MoveScaled(76,0,14,4)
         AutoResize = True
         Alignment = Align.Right
         Text = ("    Será exportado como  ")
