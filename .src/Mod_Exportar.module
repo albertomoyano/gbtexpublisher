@@ -806,8 +806,20 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
       s &= "pdfcopyright={" & Contenido[aFields[15]] & "},\n"
     Endif
 
+    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
+      s &= "pdfcopyrightstatus={" & Contenido[aFields[15]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
+      s &= "pdfcopyrightstatustype={Text},\n"
+    Endif
+
     If Not IsNull(Contenido[aFields[16]]) And Len(Contenido[aFields[16]]) > 0 Then
-      s &= "pdflicenseurl={" & Contenido[aFields[16]] & "},\n"
+      s &= "pdfrightsinformationurl={" & Contenido[aFields[16]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[16]]) And Len(Contenido[aFields[16]]) > 0 Then
+      s &= "pdflicenseurl={" & Contenido[aFields[16]] & "},\n"'
     Endif
 
     If Not IsNull(Contenido[aFields[17]]) And Len(Contenido[aFields[17]]) > 0 Then
