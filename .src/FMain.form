@@ -4308,7 +4308,7 @@
         Text = ("Opcionales a la salida  de tipo libro     ")
         Picture = Picture["iconos/meta2.svg"]
         { ScrollView1 ScrollView
-          MoveScaled(1,1,84,104)
+          MoveScaled(1,-13,84,104)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True
@@ -4395,18 +4395,21 @@
           { HBox106 HBox
             MoveScaled(1,21,78,4)
             { Label120 Label
-              MoveScaled(-3,0,23,4)
+              MoveScaled(-7,0,23,4)
               Alignment = Align.Right
               Text = ("Licencia status  ")
             }
-            { !txt15_pdfcopyrightStatus ComboBox
-              MoveScaled(25,0,19,4)
+            { !cmb_pdfLicenciaStatus ComboBox
+              MoveScaled(18,0,19,4)
               #Public = True
               ReadOnly = True
             }
+            { Separator10 Separator
+              MoveScaled(37,0,2.3333,4)
+            }
             { Label38 Label
-              MoveScaled(37,0,23,4)
-              Alignment = Align.Right
+              MoveScaled(39,0,14,4)
+              AutoResize = True
               Text = ("Tipo de licencia  ")
             }
             { !txt15_pdfcopyright ComboBox
@@ -4452,7 +4455,7 @@
               Alignment = Align.Right
               Text = ("Editorial país  ")
             }
-            { !txtPublisher2 TextBox
+            { !txtEditorialPais TextBox
               MoveScaled(27,0,16,4)
               #Public = True
               Expand = True
@@ -4465,7 +4468,7 @@
               Alignment = Align.Right
               Text = ("Editorial ciudad  ")
             }
-            { !txtPublisher3 TextBox
+            { !txtEditorialCiudad TextBox
               MoveScaled(27,0,16,4)
               #Public = True
               Expand = True

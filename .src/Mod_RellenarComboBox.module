@@ -112,6 +112,10 @@ Public Sub RellenarCmbMetadatos()
   FMain.txt89_binding.Add("Cosido a hilo")
   FMain.txt89_binding.Add("Anillado")
   FMain.txt89_binding.Add("Abrochado")
+  FMain.cmb_pdfLicenciaStatus.Add("")
+  FMain.cmb_pdfLicenciaStatus.Add("Unknown")
+  FMain.cmb_pdfLicenciaStatus.Add("Copyrighted")
+  FMain.cmb_pdfLicenciaStatus.Add("Public Domain")
 
 End
 

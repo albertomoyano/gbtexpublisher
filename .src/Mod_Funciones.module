@@ -683,6 +683,9 @@ Public Sub CargarMetadatosArchivoActual()
     FMain.txt88_audiencia.Text = Contenido!audience_88
     FMain.txt89_binding.Text = Contenido!binding_89
     FMain.txt90_eisbn.Text = Contenido!eISBN_90
+    FMain.cmb_pdfLicenciaStatus.Text = Contenido!pdflicenciastatus_97
+    FMain.txtEditorialPais.Text = Contenido!pdfeditorialpais_98
+    FMain.txtEditorialCiudad.Text = Contenido!pdfeditorialciudad_99
 
   Else
     'falta limpiar el contenido de los textbox

@@ -802,17 +802,13 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
       s &= "pdfmetadate={" & Contenido[aFields[14]] & "},\n"
     Endif
 
-    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
-      s &= "pdfcopyright={" & Contenido[aFields[15]] & "},\n"
+    If Not IsNull(Contenido[aFields[97]]) And Len(Contenido[aFields[97]]) > 0 Then
+      s &= "pdfcopyrightstatus={" & Contenido[aFields[97]] & "},\n"
     Endif
 
-    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
-      s &= "pdfcopyrightstatus={" & Contenido[aFields[15]] & "},\n"
-    Endif
-
-    If Not IsNull(Contenido[aFields[15]]) And Len(Contenido[aFields[15]]) > 0 Then
-      s &= "pdfcopyrightstatustype={Text},\n"
-    Endif
+    ' If Not IsNull(Contenido[aFields[97]]) And Len(Contenido[aFields[97]]) > 0 Then
+    '   s &= "pdfcopyrightstatuslanguage={" & Contenido[aFields[97]] & "},\n"
+    ' Endif
 
     If Not IsNull(Contenido[aFields[16]]) And Len(Contenido[aFields[16]]) > 0 Then
       s &= "pdfrightsinformationurl={" & Contenido[aFields[16]] & "},\n"
@@ -954,11 +950,20 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
       s &= "pdfkeywords={" & Contenido[aFields[57]] & "},\n"
     Endif
 
+    If Not IsNull(Contenido[aFields[98]]) And Len(Contenido[aFields[98]]) > 0 Then
+      s &= "pdfcountry={" & Contenido[aFields[98]] & "},\n"
+    Endif
+
+    If Not IsNull(Contenido[aFields[99]]) And Len(Contenido[aFields[99]]) > 0 Then
+      s &= "pdfcity={" & Contenido[aFields[99]] & "},\n"
+    Endif
+
     ' If Not IsNull(Contenido[aFields[61]]) And Len(Contenido[aFields[61]]) > 0 Then
     '   s &= "pdfformato={" & Contenido[aFields[61]] & "},\n"
     ' Endif
 
     ' 'el titulo del libro es campo obligatorio
+    s &= "pdfcopyrightstatustype={Text},\n"
     s &= "pdftitle={" & Contenido[aFields[84]] & "},\n"
     s &= "pdfcreator={gbTeXpublisher}" & ",\n"
     s &= "pdfproducer={Ecosistema de LaTeX}" & ",\n"
