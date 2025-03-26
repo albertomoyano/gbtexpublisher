@@ -5,9 +5,7 @@ Public rutaFILES As String = File.Dir(FMain.TextBox1.Text) & "/files"
 Public Sub salidaPDFweb() 'generamos el PDF web del libro
 
   FMain.DirViewRuta.Refresh
-  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
-  FMain.FileView1.Reload
 
   Dim newFile As String
   Dim newLog As String
@@ -70,9 +68,7 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   'eliminamos los archivos bib y glo
   Mod_Funciones.Borrar_Aux
   Wait 0.2
-  FMain.DirViewRuta.Refresh
   FMain.DirViewRuta.Reload
-  FMain.FileView1.Refresh
   FMain.FileView1.Reload
 
 End
@@ -80,9 +76,7 @@ End
 Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
 
   FMain.DirViewRuta.Refresh
-  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
-  FMain.FileView1.Reload
 
   Dim newFile As String
   Dim newLog As String
@@ -142,9 +136,7 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
 
   Mod_Funciones.Borrar_Aux
   Wait 0.2
-  FMain.DirViewRuta.Refresh
   FMain.DirViewRuta.Reload
-  FMain.FileView1.Refresh
   FMain.FileView1.Reload
 
 End
@@ -152,9 +144,7 @@ End
 Public Sub salidaPDFespecial() 'generamos el PDF customizado
 
   FMain.DirViewRuta.Refresh
-  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
-  FMain.FileView1.Reload
 
   Dim newFile As String
   Dim newLog As String
@@ -217,9 +207,7 @@ Public Sub salidaPDFespecial() 'generamos el PDF customizado
 
   Mod_Funciones.Borrar_Aux
   Wait 0.2
-  FMain.DirViewRuta.Refresh
   FMain.DirViewRuta.Reload
-  FMain.FileView1.Refresh
   FMain.FileView1.Reload
 
 End

@@ -4308,7 +4308,7 @@
         Text = ("Opcionales a la salida  de tipo libro     ")
         Picture = Picture["iconos/meta2.svg"]
         { ScrollView1 ScrollView
-          MoveScaled(2,2,84,54)
+          MoveScaled(1,1,84,104)
           Expand = True
           Arrangement = Arrange.Vertical
           Spacing = True

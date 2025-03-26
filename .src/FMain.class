@@ -4456,7 +4456,6 @@ Public Sub btnMenuGIT_Click()
   TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
   TerminalView1.Input("git push --set-upstream origin main" & "\n")
   TerminalView1.SetFocus()
-  TerminalView1.Refresh()
 
 End
 

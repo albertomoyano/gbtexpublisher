@@ -330,21 +330,27 @@ End
 Public Sub Export2MetaEPUB(rutaTexto As String)
 
   Dim s As String
-  ' Dim sb As String
   Dim f As ResultField
-  ' Dim fb As ResultField
   Dim aFields As New String[]
-  ' Dim bFields As New String[]
   Dim w As Integer
-  ' Dim wb As Integer
   Dim buscar As String
-  ' Dim buscarAutor As String
+
+  Dim fx As ResultField
+  Dim xFields As New String[]
+  Dim wx As Integer
+  Dim buscarAutores As String
   Dim outputFile As String
-  ' Dim id As Integer
+
+  Dim fechauuid As String
+
+  fechauuid = Format(Now(), "gbTeXp\\ubli\\s\\her-ddmmmmyyyy-hh:nn:ss")
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
   Contenido = FMain.meConn.Exec(buscar)
+  ' Exportamos los registros seleccionados
+  buscarAutores = "select * from autoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoAutores = FMain.meConn.Exec(buscarAutores)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -354,44 +360,24 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
     Endif
   Next
 
-  ' Dim ids As String[] = Split(Contenido[aFields[5]], " ")
-
-  ' ' Inicializa la cadena vacía
-  ' sb = ""
-  '
-  ' ' Iterar sobre los IDs y obtener la información correspondiente
-  ' For Each id In ids
-  '   ' Establecer el valor de 'id' antes de ejecutar la consulta
-  '   buscarAutor = "SELECT * FROM autores WHERE id = " & id
-  '   ContenidoAutor = FMain.meConn.Exec(buscarAutor)
-  '
-  '   bFields.Clear
-  '   For Each fb In ContenidoAutor.Fields
-  '     bFields.Add(fb.Name)
-  '     If Len(fb.Name) > wb Then
-  '       wb = Len(fb.Name)
-  '     Endif
-  '   Next
-  '
-  '   ' Agregar la información al resultado
-  '   sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
-  ' Next
-  '
-  ' ' Eliminar la coma adicional al final y cerrar la cadena
-  ' sb = Left(sb, Len(sb) - 2)
-
-  s = "" ' Inicializa la cadena definitiva
+  xFields.Clear
+  For Each fx In ContenidoAutores.Fields
+    xFields.Add(fx.Name)
+    If Len(fx.Name) > wx Then
+      wx = Len(fx.Name)
+    Endif
+  Next
 
   While Contenido.Available
     s &= "\n"
     s &= "% contenido agregado de manera dinámica, no edite este archivo" & "\n"
-    ' s &= "\n"
-    ' s &= "\\Configure{CoverMimeType}{image/jpeg}" & "\n"
-    ' s &= "\\CoverMetadata{./media/" & Contenido[aFields[49]] & "}\n" 'tapa
     s &= "\n"
+    ' s &= "\\Configure{CoverMimeType}{image/jpeg}" & "\n"
+    ' s &= "\\CoverMetadata{" & Contenido[aFields[49]] & "}\n" 'tapa
+    ' s &= "\n"
     s &= "\\begin{document}" & "\n"
-    ' s &= "\\def\\Author{" & sb & "}\n" '
-    s &= "\\def\\Title{" & Contenido[aFields[6]] & ": " & Contenido[aFields[9]] & "}\n"
+    s &= "\\def\\Author{" & ContenidoAutores[xFields[2]] & "}\n"
+    s &= "\\def\\Title{" & Contenido[aFields[84]] & ": " & Contenido[aFields[9]] & "}\n"
     s &= "\\Configure{OpfMetadata}" & "\n"
     s &= "{\\HCode{<dc:subject>" & Contenido[aFields[57]] & "</dc:subject>}}\n" 'palabras clave
     s &= "\\Configure{OpfMetadata}" & "\n"
@@ -403,16 +389,14 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
     s &= "\\Configure{OpfMetadata}" & "\n"
     s &= "{\\HCode{<dc:rights>" & Contenido[aFields[15]] & "</dc:rights>}}\n" 'licencia
     s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:identifier id=\"uuid\" opf:scheme=\"UUID\">" & Contenido[aFields[26]] & "</dc:identifier>}}\n" 'identificador
-    s &= "\\Configure{OpfMetadata}" & "\n"
     s &= "{\\HCode{<dc:publisher>" & Contenido[aFields[28]] & "</dc:publisher>}}\n" 'editorial
     s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:identifier id=\"bookid\">" & Contenido[aFields[35]] & "</dc:identifier>}}\n" 'isbn
+    s &= "{\\HCode{<dc:identifier id=\"isbn\" opf:scheme=\"ISBN\">ISBN:" & Contenido[aFields[35]] & "</dc:identifier>}}\n" 'isbn
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:identifier id=\"url\" opf:scheme=\"URL\">" & Contenido[aFields[41]] & "</dc:identifier>}}\n" 'url
+    s &= "\\Configure{OpfMetadata}" & "\n"
+    s &= "{\\HCode{<dc:identifier id=\"uuid\" opf:scheme=\"uuid\">urn:uuid:" & fechauuid & "</dc:identifier>}}\n" 'UUID único
     s &= "\\Configure{DocumentLanguage}{" & Contenido[aFields[39]] & "}\n"
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:identifier id=\"bookid\" opf:scheme=\"URI\">" & Contenido[aFields[42]] & "</dc:identifier>}}\n" 'identificador uuid 42
-    s &= "\\Configure{OpfMetadata}" & "\n"
-    s &= "{\\HCode{<dc:description>" & Contenido[aFields[56]] & "</dc:description>}}\n" 'resumen
 
     If Not IsNull(Contenido[aFields[51]]) And Len(Contenido[aFields[51]]) > 0 Then
       s &= "\\Configure{OpfMetadata}" & "\n"
@@ -1607,7 +1591,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   xFields.Clear
   For Each fx In ContenidoSeparatas.Fields' tabla separatas
     xFields.Add(fx.Name)
-    If Len(fx.Name) > wb Then
+    If Len(fx.Name) > wx Then
       wx = Len(fx.Name)
     Endif
   Next

@@ -7,9 +7,7 @@ Public rutaFILES As String = File.Dir(FMain.TextBox1.Text) & "/files"
 Public Sub salidaEPUBpng()' parte 1
 
   FMain.DirViewRuta.Refresh
-  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
-  FMain.FileView1.Reload
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
@@ -68,9 +66,7 @@ Public Sub salidaEPUBpng()' parte 1
   ' borramos los archivos auxiliares
   Mod_Funciones.Borrar_Aux
   Wait 0.2
-  FMain.DirViewRuta.Refresh
   FMain.DirViewRuta.Reload
-  FMain.FileView1.Refresh
   FMain.FileView1.Reload
 
 End
@@ -87,9 +83,7 @@ Public Sub creacionEpubPNG()' parte 2
   Dim rutaOPF As String = rutaEPUB1 & "content.opf"
 
   FMain.DirViewRuta.Refresh
-  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
-  FMain.FileView1.Reload
 
   ' Verificar si la imagen de tapa ya está en el directorio EPUB1
   If Not File.RealPath(rutaCoverDestino) Then
@@ -152,21 +146,20 @@ Public Sub creacionEpubPNG()' parte 2
   Print #archivoOPF, "<?xml version='1.0' encoding='UTF-8'?>"
   Print #archivoOPF, "<package xmlns='http://www.idpf.org/2007/opf' unique-identifier='bookid' version='3.0'>"
   Print #archivoOPF, "<metadata xmlns:dc='http://purl.org/dc/elements/1.1/'>"
-  Print #archivoOPF, "<dc:title>" & BaseName & "</dc:title>"
-  Print #archivoOPF, "<dc:creator>Autor Desconocido</dc:creator>"
-  Print #archivoOPF, "<dc:language>es</dc:language>"
-  Print #archivoOPF, "<dc:identifier id='bookid'>urn:uuid:12345678-1234-5678-1234-567812345678</dc:identifier>"
+  ' Print #archivoOPF, "<dc:title>" & Contenido[aFields[84]] & ": " & Contenido[aFields[9]] & "</dc:title>"
+  ' Print #archivoOPF, "<dc:creator>" & ContenidoAutores[xFields[2]] & "</dc:creator>"
+  ' Print #archivoOPF, "<dc:language>" & Contenido[aFields[54]] & "</dc:language>"
+  ' Print #archivoOPF, "<<dc:identifier id=\"uuid\" opf:scheme=\"uuid\">urn:uuid:" & fechauuid & "</dc:identifier>"
+  ' Print #archivoOPF, "<dc:identifier id=\"isbn\" opf:scheme=\"ISBN\">ISBN:" & Contenido[aFields[35]] & "</dc:identifier>"
+  ' Print #archivoOPF, "<dc:identifier id=\"url\" opf:scheme=\"URL\">" & Contenido[aFields[41]] & "</dc:identifier>"
+
   Print #archivoOPF, "<dc:publisher>Mi Editorial</dc:publisher>"
   Print #archivoOPF, "<dc:description>Descripción del libro</dc:description>"
   Print #archivoOPF, "<dc:date>2023-10-01</dc:date>"
   Print #archivoOPF, "<dc:rights>Copyright © 2023 Mi Editorial. Todos los derechos reservados.</dc:rights>"
   Print #archivoOPF, "<dc:type>Text</dc:type>"
   Print #archivoOPF, "<dc:format>application/epub+zip</dc:format>"
-  Print #archivoOPF, "<dc:source>ISBN: 123-4567890123</dc:source>"
-  Print #archivoOPF, "<dc:subject>Ficción</dc:subject>"
-  Print #archivoOPF, "<dc:subject>Aventura</dc:subject>"
-  Print #archivoOPF, "<dc:contributor>Editor: Juan Pérez</dc:contributor>"
-  Print #archivoOPF, "<dc:contributor> Ilustrador: Ana G ómez</dc:contributor>"
+
   Print #archivoOPF, "<meta name='cover' content='cover-image'/>"
   Print #archivoOPF, "</metadata>"
   Print #archivoOPF, "<manifest>"
@@ -189,9 +182,7 @@ Public Sub creacionEpubPNG()' parte 2
   FMain.TerminalView1.Input("rm -rf " & rutaEPUB1 & "content.opf" & "\n")
   FMain.TerminalView1.Input("rm -rf " & rutaEPUB1 & "*.png" & "\n")
   Wait 0.2
-  FMain.DirViewRuta.Refresh
   FMain.DirViewRuta.Reload
-  FMain.FileView1.Refresh
   FMain.FileView1.Reload
 
 End
@@ -199,9 +190,7 @@ End
 Public Sub salidaEPUBhtml()
 
   FMain.DirViewRuta.Refresh
-  FMain.DirViewRuta.Reload
   FMain.FileView1.Refresh
-  FMain.FileView1.Reload
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata
   FMain.TabPanel1.Index = 0
@@ -286,9 +275,7 @@ Public Sub salidaEPUBhtml()
   FMain.TerminalView1.Input("mv epub2-" & BaseName & "-epub" & " " & "epub2" & "\n")
   Wait 0.2
   Mod_Funciones.Borrar_Aux
-  FMain.DirViewRuta.Refresh
   FMain.DirViewRuta.Reload
-  FMain.FileView1.Refresh
   FMain.FileView1.Reload
 
 End
