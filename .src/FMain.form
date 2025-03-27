@@ -19,6 +19,7 @@
   { menuProcesarArchivos Menu
     #Translate = False
     Text = "Procesar archivos"
+    Visible = False
     { Menu4 Menu
       Text = ("Ejecutar separatas")
       Picture = Picture["iconos/terminal.svg"]
@@ -34,22 +35,6 @@
     { menuBORRARaux Menu
       Text = ("Borrar archivos auxiliares")
       Picture = Picture["iconos/borrar.svg"]
-    }
-    { menuExportarMetadatos Menu
-      Text = ("Exportar metadatos")
-      Picture = Picture["iconos/logfile.svg"]
-      { Menu6 Menu
-        Text = ("PDF web")
-        Picture = Picture["iconos/acroread.svg"]
-      }
-      { Menu7 Menu
-        Text = ("ePub2")
-        Picture = Picture["iconos/epub.svg"]
-      }
-      { Menu10 Menu
-        Text = ("HTML")
-        Picture = Picture["iconos/web.svg"]
-      }
     }
   }
   { menuPDFrevista Menu
@@ -247,6 +232,24 @@
       #Translate = False
       Text = "Gacetilla para prensa"
       Picture = Picture["iconos/acroread.svg"]
+    }
+    { Menu11 Menu
+    }
+    { menuExportarMetadatos Menu
+      Text = ("Exportar metadatos")
+      Picture = Picture["iconos/logfile.svg"]
+      { Menu6 Menu
+        Text = ("PDF web")
+        Picture = Picture["iconos/acroread.svg"]
+      }
+      { Menu7 Menu
+        Text = ("ePub2")
+        Picture = Picture["iconos/epub.svg"]
+      }
+      { Menu10 Menu
+        Text = ("HTML")
+        Picture = Picture["iconos/web.svg"]
+      }
     }
   }
   { AbrirApp Menu
