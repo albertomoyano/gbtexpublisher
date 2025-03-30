@@ -274,25 +274,25 @@
     }
     { menuwebPDFcompleto Menu
       #Translate = False
-      Text = "Ver archivo PDF completo para web"
+      Text = "Archivo PDF completo para web"
     }
     { menuVerOt Menu
       #Translate = False
-      Text = "Ver Orden de Trabajo para imprenta"
+      Text = "Orden de Trabajo para imprenta"
     }
     { menuComentarios Menu
       #Translate = False
-      Text = "Ver página de comentarios para corrección"
+      Text = "Página de comentarios para corrección"
     }
     { Menu74 Menu
       #Translate = False
-      Text = "Ver página de Gacetilla para prensa"
+      Text = "Página de Gacetilla para prensa"
     }
     { Menu3 Menu
     }
     { menuHTMLghp Menu
       #Translate = False
-      Text = "Ver página HTML estática /docs"
+      Text = "Página HTML estática /docs"
     }
   }
   { Menu57 Menu
@@ -586,7 +586,7 @@
             MoveScaled(9,0,2.3333,4)
           }
           { TextLabel7 TextLabel
-            MoveScaled(16,0,18,4)
+            MoveScaled(18,0,26,4)
             Expand = True
             AutoResize = True
             Text = ("La edición rápida de este editor no tiene autoguardar.")
@@ -631,16 +631,15 @@
               #Translate = False
             }
             { MenuApp MenuButton
-              MoveScaled(7,0,17,4)
+              MoveScaled(7,0,19,4)
               #Translate = False
-              Expand = True
               Text = "Ver salidas"
               Picture = Picture["iconos/document.svg"]
               Menu = "AbrirApp"
               MenuOnly = True
             }
             { MenuButton3 MenuButton
-              MoveScaled(25,0,19,4)
+              MoveScaled(27,0,19,4)
               #Translate = False
               Expand = True
               Text = "Complementos para PDF y ePub"
@@ -649,7 +648,7 @@
               MenuOnly = True
             }
             { MenuButton2 MenuButton
-              MoveScaled(44,0,17,4)
+              MoveScaled(47,0,17,4)
               #Translate = False
               Expand = True
               Text = "Procesar archivos por lotes"

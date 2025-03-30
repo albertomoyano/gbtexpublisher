@@ -3059,7 +3059,7 @@ Public Sub menuDisclaimer_Click()
       Message.Warning("Se a generado el archivo de comentarios, pero <strong>pdf-" & BaseName & ".pdf</strong> no existe. No es posible completar la operación.")
     Else
       ' Si el archivo existe, ejecutar la función
-      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/_pdf-" & BaseName & ".pdf" & "\n")
+      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/@pdf-" & BaseName & ".pdf" & "\n")
       Wait 0.1
     End If
 
@@ -3070,7 +3070,7 @@ Public Sub menuDisclaimer_Click()
 
   Else
     Message.Info("No se encontró registro de comentarios en la base de datos para el archivo especificado. Será dirigido a la pestaña de comentarios para dar el alta el registro.")
-    TabPanel1.Index = 4
+    TabPanel1.Index = 5
   Endif
 
 End
@@ -5695,6 +5695,7 @@ End
 
 Public Sub btnRefrescarGrid_Click()
 
+  DirViewRuta.Root = File.Dir(TextBox1.Text)' reforzamos la indicación de la ruta
   DirViewRuta.Reload
   FileView1.Reload
 
