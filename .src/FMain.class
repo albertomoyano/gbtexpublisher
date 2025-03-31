@@ -3489,8 +3489,8 @@ End
 
 Public Sub btnAbrirRevista_Click()
 
-  ' Message.Info("Se deshabilita este módulo para este seminario")
-  menuAbrirRevista_Click()' abrir revista
+  Message.Info("Este módulo se encuentra deshabilitado, mientras está en desarrollo.")
+  ' menuAbrirRevista_Click()' abrir revista
 
 End
 
@@ -5703,14 +5703,14 @@ End
 
 Public Sub Menu6_Click()' sacar metadatos del pdf
 
-  Shell "exiftool " & File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf > " & File.Dir(TextBox1.Text) & "/pdf/metadatos-" & BaseName & ".txt" Wait
+  Shell "exiftool " & File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf > " & File.Dir(TextBox1.Text) & "/pdf/metadatospdf-" & BaseName & ".txt" Wait
 
-  Shell "sed -i '/Font Face/,$d' " & File.Dir(TextBox1.Text) & "/pdf/metadatos-" & BaseName & ".txt" Wait
+  Shell "sed -i '/Font Face/,$d' " & File.Dir(TextBox1.Text) & "/pdf/metadatospdf-" & BaseName & ".txt" Wait
 
 End
 
 Public Sub Menu7_Click()' sacar metadatos del epub
 
-  Shell "exiftool " & File.Dir(TextBox1.Text) & "/epub2/epub2-" & BaseName & ".epub > " & File.Dir(TextBox1.Text) & "/epub2/metadatos-" & BaseName & ".txt" Wait
+  Shell "exiftool " & File.Dir(TextBox1.Text) & "/epub2/epub2-" & BaseName & ".epub > " & File.Dir(TextBox1.Text) & "/epub2/metadatosepub2-" & BaseName & ".txt" Wait
 
 End

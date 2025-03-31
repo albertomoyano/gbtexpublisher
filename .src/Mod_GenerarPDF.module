@@ -48,6 +48,7 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   Dim compilar As String
   compilar = "latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n"
   ' Envía el comando al terminal
+  FMain.TerminalView1.Input("rm -rf " & File.Dir(FMain.TextBox1.Text) & "/pdf/metadatospdf-" & File.BaseName(FMain.TextBox1.Text) & ".txt" & "\n")
   FMain.TerminalView1.Input(compilar)
   Wait 0.2
 
