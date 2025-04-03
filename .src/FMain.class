@@ -37,7 +37,10 @@ Public $URL As String
 ' Actualizar el Label cada segundo
 Public Sub TimerHOY_Timer()
 
-  txtHOY.Text = Format(Now, "dd/mm/yyyy hh:nn:ss")
+  Dim diadehoy As String
+
+  diadehoy = Format(Now, "(dd \\de mmmm \\de yyyy hh:nn:ss)")
+  Fmain.Title = Application.Title & " v. " & Application.Version & " " & diadehoy & " - programación orientada al usuario"
 
 End
 
@@ -102,7 +105,7 @@ Public Sub Form_Open()
   Timer1.Delay = 1000
   Timer1.Stop  ' No iniciamos el Timer de inmediato
 
-  Fmain.Title = Application.Title & " v. " & Application.Version & " - programación orientada al usuario"
+  ' Fmain.Title = Application.Title & " v. " & Application.Version & " - programación orientada al usuario"
   TimerHOY.Enabled = True
 
   ' Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ") - (acá quiero poner el dia y la hora)"
