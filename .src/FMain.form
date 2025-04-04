@@ -32,6 +32,10 @@
       Text = ("Comprimir proyecto (.tar.gz)")
       Picture = Picture["iconos/archive-insert.svg"]
     }
+    { menuComprimirZip Menu
+      Text = ("Comprimir proyecto (.zip)")
+      Picture = Picture["iconos/archive-zip.svg"]
+    }
     { menuBORRARaux Menu
       Text = ("Borrar archivos auxiliares")
       Picture = Picture["iconos/borrar.svg"]

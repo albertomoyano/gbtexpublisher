@@ -325,17 +325,19 @@ End
 
 Public Sub menuGray_Click()
 
+  TabPanel6.Index = 0
   Form_ConvertirPNG.ShowModal()
 
 End
 
-Public Sub Menu4_Click()
+Public Sub Menu4_Click()' ejecutar separatas
 
   Dim sFilePath As String = File.Dir(TextBox1.Text) &/ "separatas.sh"
 
   ' Comprobamos si el archivo existe
   If File.RealPath(sFilePath) Then
     ' Si existe, ejecutamos el script
+    TabPanel6.Index = 0
     TerminalView1.Input("sh " & sFilePath & "\n" & "clear" & "\n")
     Wait 0.2
   Else
@@ -544,6 +546,7 @@ End
 
 Public Sub menuBORRARaux_Click()
 
+  TabPanel6.Index = 0
   Mod_Funciones.Borrar_Aux
 
 End
@@ -3190,6 +3193,22 @@ Public Sub menuComprimir_Click()
 
   comando = "tar cvzf " & fecha & "-" & BaseName & ".tar.gz *" & "\n"
 
+  TabPanel6.Index = 0
+  TerminalView1.Input(comando)
+
+End
+
+Public Sub menuComprimirZip_Click()
+
+  Dim fecha As String
+
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+
+  Dim comando As String
+  ' Crear archivo ZIP con el mismo nombre pero en formato .zip
+  comando = "zip -9 -r " & fecha & "-" & BaseName & ".zip *" & "\n"
+
+  TabPanel6.Index = 0
   TerminalView1.Input(comando)
 
 End
