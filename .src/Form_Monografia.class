@@ -17,7 +17,7 @@ Public Sub Form_Open()
   Dim comando As String
   ' buscamos la entrada que coincida con el archivo
   comando = "select * from monografias where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = FMain.meConn.Exec(comando)
+  Contenido = Form_ConectarBBDD.meConn.Exec(comando)
 
   If Contenido.Count > 0 Then
     'van funciones
@@ -52,7 +52,7 @@ Public Sub BtnNuevoMonografia_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM monografias LIMIT 1")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM monografias LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -67,7 +67,7 @@ End
 
 Public Sub btnGuardarMonografia_Click()
 
-  Contenido = FMain.meConn.Create("monografias")
+  Contenido = Form_ConectarBBDD.meConn.Create("monografias")
 
   guardarCampos
 
@@ -100,7 +100,7 @@ Public Sub btnGuardarCambiosMonografia_Click()
   btnGuardarMonografia.Visible = False
   btnGuardarCambiosMonografia.Visible = True
 
-  Contenido = FMain.meConn.Edit("monografias", "id=" & txtID.Text)
+  Contenido = Form_ConectarBBDD.meConn.Edit("monografias", "id=" & txtID.Text)
 
   If Contenido.Available Then
     guardarCampos()

@@ -28,7 +28,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridPublisher.Clear()
 
-  Contenido = FMain.meConn.Exec("SELECT * FROM publisher ORDER BY publisher ASC, location ASC")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT * FROM publisher ORDER BY publisher ASC, location ASC")
 
   'diseñamos el tableview
   GridPublisher.Columns.Count = 4
@@ -54,7 +54,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM publisher")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT COUNT(*) FROM publisher")
 
   Record = Contenido[0]
   Count = Record
@@ -72,7 +72,7 @@ Public Sub BtnNuevoPublisher_Click()
   Mod_LimpiarTextBox.LimpiarCamposPublisher()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM publisher LIMIT 1")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM publisher LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -89,7 +89,7 @@ End
 Public Sub btnGuardarPublisher_Click()
 
   ' no revisamos que existan coincidencias, ya que una editorial y puede tener diferentes domicilios
-  Contenido = FMain.meConn.Create("publisher")
+  Contenido = Form_ConectarBBDD.meConn.Create("publisher")
 
   guardarCampos
 
@@ -157,7 +157,7 @@ Public Sub btnGuardarCambiosPublisher_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = FMain.meConn.Edit("publisher", "id=" & txtID.Text)
+  Contenido = Form_ConectarBBDD.meConn.Edit("publisher", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -211,7 +211,7 @@ Public Sub btnBuscarPublisher_Click()
     Return
   Endif
 
-  Busqueda = FMain.meConn.Exec(Comando)
+  Busqueda = Form_ConectarBBDD.meConn.Exec(Comando)
 
   ' Limpia el GridView antes de mostrar los resultados de la búsqueda
   GridPublisher.Clear()

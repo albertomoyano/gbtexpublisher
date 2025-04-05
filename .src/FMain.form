@@ -383,11 +383,11 @@
       Menu = "Menu57"
       MenuOnly = True
     }
-    { Spring3 Spring
-      MoveScaled(95,0,4,4)
+    { Spring1 Spring
+      MoveScaled(99,1,12,2)
     }
     { btnKitty Button
-      MoveScaled(132,0,4,4)
+      MoveScaled(137,0,4,4)
       Enabled = False
       Picture = Picture["iconos/kitty.svg"]
     }

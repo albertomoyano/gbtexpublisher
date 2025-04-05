@@ -1,6 +1,6 @@
 ' Gambas class file
 
-' Public meConn As New Connection
+Public meConn As New Connection
 Public sArchivo As String
 
 Public Sub Form_Open()
@@ -49,7 +49,7 @@ Public Sub btnCerrar_Click()
 
 End
 
-Public Sub btnConectar_Click()
+Public Sub btnConectar_Click()' boton de conectar a la red
 
   ' condicional que revisa que exista la ruta y verifica si el TextBox está vacío o es Null
   If IsNull(txtBBDDorigen.Text) Or txtBBDDorigen.Text = "" Then
@@ -57,7 +57,15 @@ Public Sub btnConectar_Click()
     Return ' Detiene la ejecución
   End If
 
+  ' Usa la ruta seleccionada en el formulario de inicio
+  meConn.Type = "sqlite3"
+  meConn.Host = File.Dir(txtBBDDorigen.Text)
+  meConn.Name = File.Dir(txtBBDDorigen.Text) & "/gbtexpublisher.sqlite"
+  meConn.Open()
+  ' Configurar el modo de journal a DELETE
+  meConn.Exec("PRAGMA journal_mode=DELETE;")
+
   Me.Visible = False' .Hide
-  FMain.ShowModal
+  FMain.Show
 
 End

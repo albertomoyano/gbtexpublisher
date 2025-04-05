@@ -33,7 +33,7 @@
     Index = 0
     Text = ("SQLite")
     { HBox1 HBox
-      Move(0,36,450,36)
+      Move(0,36,720,36)
       { btnSelecionarBBDD Button
         Move(0,0,189,36)
         NoTabFocus = True
