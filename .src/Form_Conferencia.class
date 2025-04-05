@@ -27,7 +27,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridConferencia.Clear()
 
-  Contenido = Form_ConectarBBDD.meConn.Exec("select * from conferencias ORDER BY id DESC")
+  Contenido = FMain.meConn.Exec("select * from conferencias ORDER BY id DESC")
 
   'diseñamos el tableview
   GridConferencia.Columns.Count = 9
@@ -67,7 +67,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT COUNT(*) FROM conferencias")
+  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM conferencias")
 
   Record = Contenido[0]
   Count = Record
@@ -85,7 +85,7 @@ Public Sub BtnNuevoColeccion_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   'Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM conferencias LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM conferencias LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -126,7 +126,7 @@ Public Sub btnGuardarColeccion_Click()
   eliminarBlancos
 
   Comando = "SELECT * FROM conferencias WHERE Titulo01 = '" & tituloEscapado & "'"
-  Busqueda = Form_ConectarBBDD.meConn.Exec(Comando)
+  Busqueda = FMain.meConn.Exec(Comando)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -134,7 +134,7 @@ Public Sub btnGuardarColeccion_Click()
     Return ' Salir de la función si el título ya existe
   Endif
 
-  Contenido = Form_ConectarBBDD.meConn.Create("conferencias")
+  Contenido = FMain.meConn.Create("conferencias")
 
   guardarCampos
 
@@ -212,7 +212,7 @@ Public Sub btnGuardarCambiosColeccion_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = Form_ConectarBBDD.meConn.Edit("conferencias", "id=" & txtID.Text)
+  Contenido = FMain.meConn.Edit("conferencias", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")

@@ -384,10 +384,10 @@
       MenuOnly = True
     }
     { Spring3 Spring
-      MoveScaled(130,0,4,4)
+      MoveScaled(95,0,4,4)
     }
     { btnKitty Button
-      MoveScaled(137,0,4,4)
+      MoveScaled(132,0,4,4)
       Enabled = False
       Picture = Picture["iconos/kitty.svg"]
     }
@@ -472,7 +472,7 @@
     Text = ("Salidas y configuraciones     ")
     Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
-      MoveScaled(1,1,128,4)
+      MoveScaled(1,6,128,4)
       { Panel9 Panel
         MoveScaled(0,0,36,4)
         Expand = True

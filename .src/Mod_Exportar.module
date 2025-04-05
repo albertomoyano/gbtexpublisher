@@ -129,7 +129,7 @@ Public Sub Export2MetaDOCX(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -148,7 +148,7 @@ Public Sub Export2MetaDOCX(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Form_ConectarBBDD.meConn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -240,7 +240,7 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -259,7 +259,7 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Form_ConectarBBDD.meConn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -347,10 +347,10 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
   ' Exportamos los registros seleccionados
   buscarAutores = "select * from autoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoAutores = Form_ConectarBBDD.meConn.Exec(buscarAutores)
+  ContenidoAutores = FMain.meConn.Exec(buscarAutores)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -457,7 +457,7 @@ Public Sub ExportToCatalogo(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -476,7 +476,7 @@ Public Sub ExportToCatalogo(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Form_ConectarBBDD.meConn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -621,7 +621,7 @@ Public Sub Exportar2Glosario(rutaTexto As String)
   ' Conn = Mod_Conn.conectar()
 
   buscar = "select * from glosarios where archivo like ',%" & File.BaseName(rutaTexto) & ",%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -687,7 +687,7 @@ Public Sub Exportar2BibTeX(rutaTexto As String)
 
   'me aseguro de que la búsqueda se encuentre entre comas
   buscar = "select * from bibtex where keywords like ',%" & File.BaseName(rutaTexto) & ",%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -747,7 +747,7 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -1002,7 +1002,7 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -1021,7 +1021,7 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
   For Each id In ids
     ' Establecer el valor de 'id' antes de ejecutar la consulta
     buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Form_ConectarBBDD.meConn.Exec(buscarAutor)
+    ContenidoAutor = FMain.meConn.Exec(buscarAutor)
 
     bFields.Clear
     For Each fb In ContenidoAutor.Fields
@@ -1317,9 +1317,9 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+  Contenido = FMain.meConn.Exec(buscar)
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoMeta = Form_ConectarBBDD.meConn.Exec(buscarMeta)
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
 
   aFields.Clear
   For Each f In Contenido.Fields
@@ -1479,7 +1479,7 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoMeta = Form_ConectarBBDD.meConn.Exec(buscarMeta)
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
 
   bFields.Clear
   For Each fb In ContenidoMeta.Fields
@@ -1573,21 +1573,21 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
 
   ' Exportamos los registros seleccionados
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoMeta = Form_ConectarBBDD.meConn.Exec(buscarMeta)
+  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
   ' Exportamos los registros seleccionados
   buscarGHP = "select * from githubpages where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoGHP = Form_ConectarBBDD.meConn.Exec(buscarGHP)
+  ContenidoGHP = FMain.meConn.Exec(buscarGHP)
   ' Exportamos los registros seleccionados
   buscarSeparatas = "select * from separatas where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoSeparatas = Form_ConectarBBDD.meConn.Exec(buscarSeparatas)
+  ContenidoSeparatas = FMain.meConn.Exec(buscarSeparatas)
   ' Exportamos los registros seleccionados
   buscarAutores = "select * from autoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoAutores = Form_ConectarBBDD.meConn.Exec(buscarAutores)
-  ContenidoAutoresA = Form_ConectarBBDD.meConn.Exec(buscarAutores)
-  ContenidoAutores3 = Form_ConectarBBDD.meConn.Exec(buscarAutores)
+  ContenidoAutores = FMain.meConn.Exec(buscarAutores)
+  ContenidoAutoresA = FMain.meConn.Exec(buscarAutores)
+  ContenidoAutores3 = FMain.meConn.Exec(buscarAutores)
   ' Exportamos los registros seleccionados
   buscarColaboradores = "select * from colaboradoresGHP where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  ContenidoColaboradores = Form_ConectarBBDD.meConn.Exec(buscarColaboradores)
+  ContenidoColaboradores = FMain.meConn.Exec(buscarColaboradores)
 
   bFields.Clear
   For Each fb In ContenidoMeta.Fields' tabla metadatos

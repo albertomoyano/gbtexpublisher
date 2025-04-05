@@ -1,0 +1,18 @@
+' Gambas module file
+
+' Mod_Conexion.module
+
+Public meConn As New Connection
+
+Public Sub ConectarBaseDeDatos(RutaBD As String) As Boolean
+
+  Try meConn.Close
+  Try meConn.Type = "sqlite"
+  Try meConn.Name = RutaBD
+  Try meConn.Open()
+  Return True
+Catch
+  Message.Error("Error al conectar: " & Error.Text)
+  Return False
+
+End

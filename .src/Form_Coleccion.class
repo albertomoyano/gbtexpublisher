@@ -27,7 +27,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridColeccion.Clear()
 
-  Contenido = Form_ConectarBBDD.meConn.Exec("select * from coleccion ORDER BY id DESC")
+  Contenido = FMain.meConn.Exec("select * from coleccion ORDER BY id DESC")
 
   'diseñamos el tableview
   GridColeccion.Columns.Count = 4
@@ -53,7 +53,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT COUNT(*) FROM coleccion")
+  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM coleccion")
 
   Record = Contenido[0]
   Count = Record
@@ -71,7 +71,7 @@ Public Sub BtnNuevoColeccion_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM coleccion LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM coleccion LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -107,7 +107,7 @@ Public Sub btnGuardarColeccion_Click()
   eliminarBlancos
 
   Comando = "SELECT * FROM coleccion WHERE coleccion = '" & tituloEscapado & "'"
-  Busqueda = Form_ConectarBBDD.meConn.Exec(Comando)
+  Busqueda = FMain.meConn.Exec(Comando)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -115,7 +115,7 @@ Public Sub btnGuardarColeccion_Click()
     Return ' Salir de la función si el título ya existe
   Endif
 
-  Contenido = Form_ConectarBBDD.meConn.Create("coleccion")
+  Contenido = FMain.meConn.Create("coleccion")
 
   guardarCampos
 
@@ -184,7 +184,7 @@ Public Sub btnGuardarCambiosColeccion_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = Form_ConectarBBDD.meConn.Edit("coleccion", "id=" & txtID.Text)
+  Contenido = FMain.meConn.Edit("coleccion", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")

@@ -30,7 +30,7 @@ Public Sub btnExportarBIB_Click()
     buscar = "select * from bibtex where keywords like ',%" & txtFiltro.Text & ",%'"
 
     ' Exportar el registro seleccionado
-    Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
+    Contenido = FMain.meConn.Exec(buscar)
 
     aFields.Clear
     For Each f In Contenido.Fields

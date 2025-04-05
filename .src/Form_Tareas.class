@@ -43,7 +43,7 @@ Public Sub btnAgregar_Click()
   Endif
 
   'Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM tareas LIMIT 1")
+  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM tareas LIMIT 1")
 
   Dim Idn As Integer
   If Contenido["MAX(id)"] = Null Then
@@ -52,7 +52,7 @@ Public Sub btnAgregar_Click()
     Idn = CInt(Contenido["MAX(id)"]) + 1
   Endif
 
-  Contenido = Form_ConectarBBDD.meConn.Create("tareas")
+  Contenido = FMain.meConn.Create("tareas")
   Contenido!id = Idn
   Contenido!titulo = txtAgregarLista.Text
 
