@@ -41,8 +41,9 @@
         Text = ("Base de datos")
         Picture = Picture["iconos/basededatos.svg"]
       }
-      { txtBBDDorigen TextBox
+      { !txtBBDDorigen TextBox
         Move(252,0,144,36)
+        #Public = True
         Background = Color.Background
         Foreground = Color.Blue
         NoTabFocus = True

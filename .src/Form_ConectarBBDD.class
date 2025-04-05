@@ -58,7 +58,7 @@ Public Sub btnConectar_Click()
     Return ' Detiene la ejecución
   End If
 
-  Me.Hide
-  FMain.Show
+  Me.Visible = False' .Hide
+  FMain.ShowModal
 
 End
