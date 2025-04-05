@@ -1,6 +1,6 @@
 ' Gambas class file
 
-Public meConn As New Connection
+' Public meConn As New Connection
 Public sArchivo As String
 
 Public Sub Form_Open()

@@ -46,7 +46,7 @@ End
 
 Public Sub Form_Open()
 
-  Dim server As String = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+  Dim server As String = File.Dir(Form_ConectarBBDD.sArchivo)
 
   ' Usa la ruta seleccionada en el formulario de inicio
   Fmain.meConn.Type = "sqlite3"
