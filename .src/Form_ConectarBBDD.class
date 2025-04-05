@@ -25,12 +25,12 @@ Public Sub btnSelecionarBBDD_Click()
   ' Abrir un cuadro de diálogo para seleccionar un archivo
   Dialog.Title = "Seleccionar base de datos SQLite"
   Dialog.Filter = ["gbtexpublisher.sqlite", ""]' gbtexpublisher.sqlite
-  Dialog.Path = txtBBDDorigen.Text
+  Dialog.Path = txtRutaBBDD.Text
   If Dialog.OpenFile() Then Return
 
   ' Mostrar la ruta seleccionada en el TextBox
   sArchivo = Dialog.Path
-  txtBBDDorigen.Text = sArchivo
+  txtRutaBBDD.Text = sArchivo
 
   Dim respaldoBBDD As String = User.Home &/ ".respaldogbTeX"
   If Not Exist(respaldoBBDD) Then
@@ -52,15 +52,15 @@ End
 Public Sub btnConectar_Click()' boton de conectar a la red
 
   ' condicional que revisa que exista la ruta y verifica si el TextBox está vacío o es Null
-  If IsNull(txtBBDDorigen.Text) Or txtBBDDorigen.Text = "" Then
+  If IsNull(txtRutaBBDD.Text) Or txtRutaBBDD.Text = "" Then
     Message.Error("Debe indicar una ruta válida donde encontrar la base de datos <strong>gbtexpublisher.sqlite</strong>.")
     Return ' Detiene la ejecución
   End If
 
   ' Usa la ruta seleccionada en el formulario de inicio
   meConn.Type = "sqlite3"
-  meConn.Host = File.Dir(txtBBDDorigen.Text)
-  meConn.Name = File.Dir(txtBBDDorigen.Text) & "/gbtexpublisher.sqlite"
+  meConn.Host = File.Dir(txtRutaBBDD.Text)
+  meConn.Name = File.Dir(txtRutaBBDD.Text) & "/gbtexpublisher.sqlite"
   meConn.Open()
   ' Configurar el modo de journal a DELETE
   meConn.Exec("PRAGMA journal_mode=DELETE;")
