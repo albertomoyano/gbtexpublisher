@@ -5,34 +5,34 @@ Public sArchivo As String
 
 Public Sub Form_Open()
 
-  Dim versionRemota As String
-  Dim versionLocal As String = Application.Version
-
-  versionRemota = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/main/.project")
-
-  If versionRemota <> "" Then
-    Select Case CompararVersiones(versionLocal, versionRemota)
-      Case -1
-        Message.Info("Hay una nueva versión disponible: " & versionRemota)
-      Case 0
-        Print "Estás usando la última versión."
-      Case 1
-        Print "Tu versión local (" & versionLocal & ") es más reciente que la del repositorio."
-    End Select
-  Else
-    Message.Warning("No se pudo obtener la versión remota.")
-  Endif
-
   ' Dim versionRemota As String
-  ' Dim versionLocal As String = Application.Version' Versión actual de la app
-  '
-  ' versionRemota = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/refs/heads/main/.project")
-  '
-  ' If versionRemota <> "" And versionRemota <> versionLocal Then
-  '   Message.Info("¡Tu versión instalada difiere de la versión disponible en el repositorio: " & versionRemota)
+  ' Dim versionLocal As String = Application.Version
+  ' 
+  ' versionRemota = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/main/.project")
+  ' 
+  ' If versionRemota <> "" Then
+  '   Select Case CompararVersiones(versionLocal, versionRemota)
+  '     Case -1
+  '       Message.Info("Hay una nueva versión disponible: " & versionRemota)
+  '     Case 0
+  '       Print "Estás usando la última versión."
+  '     Case 1
+  '       Print "Tu versión local (" & versionLocal & ") es más reciente que la del repositorio."
+  '   End Select
   ' Else
-  '   Print "Estás usando la última versión."
+  '   Message.Warning("No se pudo obtener la versión remota.")
   ' Endif
+
+  Dim versionRemota As String
+  Dim versionLocal As String = Application.Version' Versión actual de la app
+  
+  versionRemota = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/refs/heads/main/.project")
+  
+  If versionRemota <> "" And versionRemota <> versionLocal Then
+    Message.Info("¡Tu versión instalada difiere de la versión disponible en el repositorio: " & versionRemota)
+  Else
+    Print "Estás usando la última versión."
+  Endif
 
   Dim name As String
   ' Usamos pgrep para buscar procesos por el nombre exacto de la aplicación
@@ -48,21 +48,21 @@ Public Sub Form_Open()
 
 End
 
-Public Function CompararVersiones(local As String, remota As String) As Integer
-
-  Dim vl As String[] = Split(local, ".")
-  Dim vr As String[] = Split(remota, ".")
-  Dim i As Integer
-  Dim l As Integer = Max(vl.Max, vr.Max)
-
-  For i = 0 To l
-    If Val(vl[i]) < Val(vr[i]) Then Return -1
-    If Val(vl[i]) > Val(vr[i]) Then Return 1
-  Next
-
-  Return 0 ' Son iguales
-
-End
+' Public Function CompararVersiones(local As String, remota As String) As Integer
+'
+'   Dim vl As String[] = Split(local, ".")
+'   Dim vr As String[] = Split(remota, ".")
+'   Dim i As Integer
+'   Dim l As Integer = Max(vl.Max, vr.Max)
+'
+'   For i = 0 To l
+'     If Val(vl[i]) < Val(vr[i]) Then Return -1
+'     If Val(vl[i]) > Val(vr[i]) Then Return 1
+'   Next
+'
+'   Return 0 ' Son iguales
+'
+' End
 
 Public Sub btnSelecionarBBDD_Click()
 
