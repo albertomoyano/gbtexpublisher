@@ -1,8 +1,6 @@
 ' Gambas class file
 
 Public meConn As New Connection
-Public server As String = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
-Public nombre As String = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
 Public Contenido As Result
 Public ContenidoBibTotal As Result' resultado completo de bibtex
 Public ContenidoBibActual As Result' resultado actual de bibtex
@@ -48,10 +46,12 @@ End
 
 Public Sub Form_Open()
 
+  Dim server As String = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+
   ' Usa la ruta seleccionada en el formulario de inicio
   Fmain.meConn.Type = "sqlite3"
   Fmain.meConn.Host = server
-  Fmain.meConn.Name = nombre
+  Fmain.meConn.Name = "gbtexpublisher.sqlite"
   Fmain.meConn.Open()
   ' Configurar el modo de journal a DELETE
   Fmain.meConn.Exec("PRAGMA journal_mode=DELETE;")

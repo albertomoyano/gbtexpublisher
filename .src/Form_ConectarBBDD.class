@@ -1,6 +1,7 @@
 ' Gambas class file
 
 Public meConn As New Connection
+Public sArchivo As String
 
 Public Sub Form_Open()
 
@@ -20,8 +21,6 @@ Public Sub Form_Open()
 End
 
 Public Sub btnSelecionarBBDD_Click()
-
-  Dim sArchivo As String
 
   ' Abrir un cuadro de diálogo para seleccionar un archivo
   Dialog.Title = "Seleccionar base de datos SQLite"
