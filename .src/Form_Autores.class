@@ -28,7 +28,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridAutores.Clear()
 
-  Contenido = FMain.meConn.Exec("select * from autores ORDER BY apellido DESC")
+  Contenido = Form_ConectarBBDD.meConn.Exec("select * from autores ORDER BY apellido DESC")
 
   'diseñamos el tableview
   GridAutores.Columns.Count = 14
@@ -83,7 +83,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = FMain.meConn.Exec("SELECT COUNT(*) FROM autores")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT COUNT(*) FROM autores")
 
   Record = Contenido[0]
   Count = Record
@@ -101,7 +101,7 @@ Public Sub BtnNuevoAutores_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM autores LIMIT 1")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM autores LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -139,7 +139,7 @@ Public Sub btnGuardarAutores_Click()
 
   ' no revisamos que existan coincidencias, ya que una editorial
   ' puede tener diferentes docmicilios
-  Contenido = FMain.meConn.Create("autores")
+  Contenido = Form_ConectarBBDD.meConn.Create("autores")
 
   guardarCampos
 
@@ -239,7 +239,7 @@ Public Sub btnGuardarCambiosAutores_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = FMain.meConn.Edit("autores", "id=" & txtID.Text)
+  Contenido = Form_ConectarBBDD.meConn.Edit("autores", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -273,7 +273,7 @@ Public Sub btnBuscarApellido_Click()
     Return
   Endif
 
-  Busqueda = FMain.meConn.Exec(Comando)
+  Busqueda = Form_ConectarBBDD.meConn.Exec(Comando)
 
   ' Limpia el GridView antes de mostrar los resultados de la búsqueda
   GridAutores.Clear()

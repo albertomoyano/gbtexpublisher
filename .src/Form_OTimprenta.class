@@ -49,7 +49,7 @@ Public Sub verTipoDocumento()
 
   ' Realizar la consulta
   comando = "SELECT * FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivoTEX & "'"
-  Contenido = FMain.meConn.Exec(comando)
+  Contenido = Form_ConectarBBDD.meConn.Exec(comando)
 
   ' Verificar si la consulta devolvió resultados
   If Contenido.Available Then
@@ -98,7 +98,7 @@ Public Sub btnNuevaOT_Click()
   Dim Idn As Integer
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM ot LIMIT 1")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM ot LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -117,7 +117,7 @@ End
 
 Public Sub btnGuardarOT_Click()
 
-  Contenido = FMain.meConn.Create("ot")
+  Contenido = Form_ConectarBBDD.meConn.Create("ot")
 
   guardarCamposOT()
   Contenido.Update
@@ -132,7 +132,7 @@ End
 
 Public Sub btnGuardarCambiosOT_Click()
 
-  Contenido = FMain.meConn.Edit("ot", "id=" & txtIDot.Text)
+  Contenido = Form_ConectarBBDD.meConn.Edit("ot", "id=" & txtIDot.Text)
 
   If Contenido.Available Then
     guardarCamposOT()
@@ -150,7 +150,7 @@ Public Sub levantarOT()
   Dim comandoOT As String
 
   comandoOT = "select * from ot where nombreArchivo = '" & nombreArchivoTEX & "'"
-  Contenido = FMain.meConn.Exec(comandoOT)
+  Contenido = Form_ConectarBBDD.meConn.Exec(comandoOT)
   If Contenido.Count > 0 Then
     btnNuevaOT.Visible = False
     btnGuardarOT.Visible = False
@@ -196,7 +196,7 @@ Public Sub levantarOTmetadatos()
   Dim Himagen As String
 
   comandoOTmetadatos = "select * from metadatos where nombreArchivo = '" & nombreArchivoTEX & "'"
-  Contenido = FMain.meConn.Exec(comandoOTmetadatos)
+  Contenido = Form_ConectarBBDD.meConn.Exec(comandoOTmetadatos)
   If Contenido.Count > 0 Then
     txtAutorOT.Text = Contenido!pdfauthor_05
     txtTituloOT.Text = Contenido!bookTitle_84
@@ -265,11 +265,11 @@ Public Sub ExportToOrdenTaller()
   Dim ContenidoComenta As Result
 
   buscarOT = "select * from ot where nombreArchivo like '%" & NombreArchivoTEX & "%'"
-  Contenido = FMain.meConn.Exec(buscarOT)
+  Contenido = Form_ConectarBBDD.meConn.Exec(buscarOT)
   buscarMeta = "select * from metadatos where nombreArchivo like '%" & NombreArchivoTEX & "%'"
-  ContenidoMeta = FMain.meConn.Exec(buscarMeta)
+  ContenidoMeta = Form_ConectarBBDD.meConn.Exec(buscarMeta)
   buscarComenta = "select * from comentarios where nombreArchivo like '%" & NombreArchivoTEX & "%'"
-  ContenidoComenta = FMain.meConn.Exec(buscarComenta)
+  ContenidoComenta = Form_ConectarBBDD.meConn.Exec(buscarComenta)
 
   aFields.Clear
   For Each f In Contenido.Fields

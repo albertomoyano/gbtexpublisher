@@ -1,19 +1,19 @@
 ' Gambas class file
 
-Private meConn As New Connection
+' Private meConn As New Connection
 Private Contenido As Result
 Private Busqueda As Result
 Private FilaSeleccionada As Integer
 
 Public Sub Form_Open()
 
-  ' Usa la ruta seleccionada en el formulario de inicio
-  meConn.Type = "sqlite3"
-  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Open()
-  ' Configurar el modo de journal a DELETE
-  meConn.Exec("PRAGMA journal_mode=DELETE;")
+  ' ' Usa la ruta seleccionada en el formulario de inicio
+  ' meConn.Type = "sqlite3"
+  ' meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+  ' meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
+  ' meConn.Open()
+  ' ' Configurar el modo de journal a DELETE
+  ' meConn.Exec("PRAGMA journal_mode=DELETE;")
 
   Mostrar_Lista()
 
@@ -27,7 +27,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
 
   GridConferencia.Clear()
 
-  Contenido = meConn.Exec("select * from conferencias ORDER BY id DESC")
+  Contenido = Form_ConectarBBDD.meConn.Exec("select * from conferencias ORDER BY id DESC")
 
   'diseñamos el tableview
   GridConferencia.Columns.Count = 9
@@ -67,7 +67,7 @@ Public Sub Mostrar_Lista() 'Función que rellena el GridView
     Contenido.MoveNext
   Next
 
-  Contenido = meConn.Exec("SELECT COUNT(*) FROM conferencias")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT COUNT(*) FROM conferencias")
 
   Record = Contenido[0]
   Count = Record
@@ -85,7 +85,7 @@ Public Sub BtnNuevoColeccion_Click()
   LimpiarCampos  'Limpiamos todos los campos
 
   'Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = meConn.Exec("SELECT MAX(id) FROM conferencias LIMIT 1")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM conferencias LIMIT 1")
 
   ' Si no hay ninguna entrada entonces arrancamos desde 0
   If Contenido["MAX(id)"] = Null Then
@@ -126,7 +126,7 @@ Public Sub btnGuardarColeccion_Click()
   eliminarBlancos
 
   Comando = "SELECT * FROM conferencias WHERE Titulo01 = '" & tituloEscapado & "'"
-  Busqueda = meConn.Exec(Comando)
+  Busqueda = Form_ConectarBBDD.meConn.Exec(Comando)
 
   ' Verificar si se encontraron resultados en la consulta
   If Busqueda.Count > 0 Then
@@ -134,7 +134,7 @@ Public Sub btnGuardarColeccion_Click()
     Return ' Salir de la función si el título ya existe
   Endif
 
-  Contenido = meConn.Create("conferencias")
+  Contenido = Form_ConectarBBDD.meConn.Create("conferencias")
 
   guardarCampos
 
@@ -212,7 +212,7 @@ Public Sub btnGuardarCambiosColeccion_Click()
   'eliminamos blancos de inicio y final de cadena en los textbox
   eliminarBlancos
 
-  Contenido = meConn.Edit("conferencias", "id=" & txtID.Text)
+  Contenido = Form_ConectarBBDD.meConn.Edit("conferencias", "id=" & txtID.Text)
   guardarCampos
   Contenido.Update
   Message.Info("Los cambios se guardaron con éxito.")
@@ -232,11 +232,11 @@ Public Sub btnSeleccion_Click()
     ' Accede al formulario original y establece los valores en los TextBox.
     FMain.txt82_conference.Text = tituloSeleccionada
     FMain.txt82_conferenceVisual.Text = tituloVisualSeleccionada
-    ' Cierra la conexión y el formulario actual
-    If meConn Then
-      meConn.Close()
-      meConn = Null
-    Endif
+    ' ' Cierra la conexión y el formulario actual
+    ' If meConn Then
+    '   meConn.Close()
+    '   meConn = Null
+    ' Endif
     Me.Close
   Else
     Message.Warning("Debe seleccionar una conferencia.")
@@ -259,20 +259,20 @@ End
 
 Public Sub Form_Close()
 
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
+  ' If meConn Then
+  '   meConn.Close()
+  '   meConn = Null
+  ' Endif
   Me.Close
 
 End
 
 Public Sub btnCerrarColeccion_Click()
 
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
+  ' If meConn Then
+  '   meConn.Close()
+  '   meConn = Null
+  ' Endif
   Me.Close
 
 End

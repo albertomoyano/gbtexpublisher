@@ -4,14 +4,14 @@ Private Contenido As Result
 
 Public Sub Form_Activate()
 
-  Contenido = FMain.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
   gridNotas.Rows.Count = Contenido.Count
 
 End
 
 Public Sub Form_Open()
 
-  Contenido = FMain.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
   gridNotas.Rows.Count = Contenido.Count
 
   With gridNotas
@@ -44,7 +44,7 @@ End
 
 Public Sub btnGuardarMod_Click()
 
-  Contenido = FMain.meConn.Edit("notas", "id=" & txId.Text)
+  Contenido = Form_ConectarBBDD.meConn.Edit("notas", "id=" & txId.Text)
   guardarCampos()
   Contenido.Update
   gridNotas.Refresh
@@ -77,7 +77,7 @@ Public Sub tbNuevo_Click()
   Mod_LimpiarTextBox.LimpiarCamposNotas()
 
   ' Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = FMain.meConn.Exec("SELECT MAX(id) FROM notas LIMIT 1")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM notas LIMIT 1")
 
   Dim Idn As Integer
   ' Si no hay ninguna entrada entonces arrancamos desde 0
@@ -94,7 +94,7 @@ End
 
 Public Sub btnGuardar_Click()
 
-  Contenido = FMain.meConn.Create("notas")
+  Contenido = Form_ConectarBBDD.meConn.Create("notas")
 
   guardarCampos()
   Contenido.Update
@@ -121,7 +121,7 @@ Public Sub tbBorrar_Click()
   Endif
 
   If Message.Question("¿Desea borrar la entrada?", "Si", "No") = 1 Then
-    Contenido = FMain.meConn.Exec("delete from notas where id=" & txId.Text)
+    Contenido = Form_ConectarBBDD.meConn.Exec("delete from notas where id=" & txId.Text)
   Endif
 
   Mod_LimpiarTextBox.LimpiarCamposNotas()
@@ -164,7 +164,7 @@ Public Sub BtnBuscar_Click()
   Consulta = "SELECT * FROM notas WHERE asunto LIKE '%" & txtBuscar.Text & "%' OR contenido LIKE '%" & txtBuscar.Text & "%'"
 
   ' Ejecutar la consulta y verificar si hay resultados
-  Contenido = FMain.meConn.Exec(Consulta)
+  Contenido = Form_ConectarBBDD.meConn.Exec(Consulta)
 
   If Contenido.Count = 0 Then
     ' No hay resultados
@@ -219,7 +219,7 @@ Public Sub CargarDatos(Consulta As String, Grid As GridView)
   Dim i As Integer
 
   ' Ejecutar la consulta
-  Contenido = FMain.meConn.Exec(Consulta)
+  Contenido = Form_ConectarBBDD.meConn.Exec(Consulta)
 
   ' Si no hay resultados
   If Contenido.Count = 0 Then

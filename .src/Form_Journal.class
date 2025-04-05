@@ -7,11 +7,11 @@ Private FilaSeleccionada As Integer
 
 Public Sub btnCerrarColeccion_Click()
 
-  ' Desconectar la base de datos
-  If conector Then
-    conector.Close()
-    conector = Null
-  Endif
+  ' ' Desconectar la base de datos
+  ' If conector Then
+  '   conector.Close()
+  '   conector = Null
+  ' Endif
   Me.Close()
 
 End

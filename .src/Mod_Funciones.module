@@ -597,7 +597,7 @@ Public Sub CargarMetadatosArchivoActual()
   Dim BaseName As String = File.RealPath(File.BaseName(FMain.TextBox1.Text))
 
   consulta = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  Contenido = FMain.meConn.Exec(consulta)
+  Contenido = Form_ConectarBBDD.meConn.Exec(consulta)
 
   If Contenido.Count > 0 Then
     FMain.BtnNuevoMeta.Visible = False
@@ -698,9 +698,9 @@ End
 
 Public Sub CerrarTodo()
 
-  If FMain.meConn Then
-    FMain.meConn.Close()
-    FMain.meConn = Null
+  If Form_ConectarBBDD.meConn Then
+    Form_ConectarBBDD.meConn.Close()
+    Form_ConectarBBDD.meConn = Null
     FMain.Contenido = Null
     FMain.ContenidoBibTotal = Null
     FMain.ContenidoBibActual = Null

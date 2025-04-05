@@ -1,39 +1,39 @@
 ' Gambas class file
 
-Private meConn As New Connection
+' Private meConn As New Connection
 Private Contenido As Result
 
-Public Sub Form_Open()
+' Public Sub Form_Open()
 
-  ' Usa la ruta seleccionada en el formulario de inicio
-  meConn.Type = "sqlite3"
-  meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
-  meConn.Open()
-  ' Configurar el modo de journal a DELETE
-  meConn.Exec("PRAGMA journal_mode=DELETE;")
+' ' Usa la ruta seleccionada en el formulario de inicio
+' meConn.Type = "sqlite3"
+' meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
+' meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
+' meConn.Open()
+' ' Configurar el modo de journal a DELETE
+' meConn.Exec("PRAGMA journal_mode=DELETE;")
+'
+' End
 
-End
+' Public Sub Form_Close()
+'
+'   If meConn Then
+'     meConn.Close()
+'     meConn = Null
+'   Endif
+'   Me.Close
+'
+' End
 
-Public Sub Form_Close()
-
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
-  Me.Close
-
-End
-
-Public Sub btnCancelar_Click()
-
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
-  Me.Close
-
-End
+' Public Sub btnCancelar_Click()
+'
+'   If meConn Then
+'     meConn.Close()
+'     meConn = Null
+'   Endif
+'   Me.Close
+'
+' End
 
 Public Sub btnAgregar_Click()
 
@@ -43,7 +43,7 @@ Public Sub btnAgregar_Click()
   Endif
 
   'Obtenemos el último ID y sumamos +1 para el nuevo registro
-  Contenido = meConn.Exec("SELECT MAX(id) FROM tareas LIMIT 1")
+  Contenido = Form_ConectarBBDD.meConn.Exec("SELECT MAX(id) FROM tareas LIMIT 1")
 
   Dim Idn As Integer
   If Contenido["MAX(id)"] = Null Then
@@ -52,7 +52,7 @@ Public Sub btnAgregar_Click()
     Idn = CInt(Contenido["MAX(id)"]) + 1
   Endif
 
-  Contenido = meConn.Create("tareas")
+  Contenido = Form_ConectarBBDD.meConn.Create("tareas")
   Contenido!id = Idn
   Contenido!titulo = txtAgregarLista.Text
 
@@ -64,10 +64,10 @@ Public Sub btnAgregar_Click()
   Contenido.Update
   FMain.Mostrar_Lista_Tareas
 
-  If meConn Then
-    meConn.Close()
-    meConn = Null
-  Endif
+  ' If meConn Then
+  '   meConn.Close()
+  '   meConn = Null
+  ' Endif
   Me.Close
 
 End
