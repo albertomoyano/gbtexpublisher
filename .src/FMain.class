@@ -1,8 +1,5 @@
 ' Gambas class file
 
-' Public meConn As New Connection
-' Public server As String = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
-' Public nombre As String = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text) &/ "gbtexpublisher.sqlite"
 Public Contenido As Result
 Public ContenidoBibTotal As Result' resultado completo de bibtex
 Public ContenidoBibActual As Result' resultado actual de bibtex
