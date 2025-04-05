@@ -5,6 +5,17 @@ Public sArchivo As String
 
 Public Sub Form_Open()
 
+  Dim versionRemota As String
+  Dim versionLocal As String = Application.Version' Versión actual de la app
+
+  versionRemota = Mod_Funciones.GitVersion("https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/refs/heads/main/.project")
+
+  If versionRemota <> "" And versionRemota <> versionLocal Then
+    Message.Info("¡Tu versión instalada difiere de la versión disponible en el repositorio: " & versionRemota)
+  Else
+    Print "Estás usando la última versión."
+  Endif
+
   Form_ConectarBBDD.Title = Application.Title & " v. " & Application.Version & " - programación orientada al usuario"
 
   ' por el momento esta funcion se deshabilita
@@ -65,7 +76,9 @@ Public Sub btnConectar_Click()' boton de conectar a la red
   ' Configurar el modo de journal a DELETE
   meConn.Exec("PRAGMA journal_mode=DELETE;")
 
-  Me.Visible = False' .Hide
+  Form_ConectarBBDD.Center
+  Form_ConectarBBDD.Visible = False
+  ' Me.Hide
   FMain.Show
 
 End

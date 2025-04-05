@@ -148,16 +148,11 @@ Public Sub GitVersion(raw As String) As String 'Función para chequear si hay ve
   Dim s As String
   Dim stx As String[]
   Dim r As String
-  Dim v As String
+  Dim v As String = ""
 
-  v = ""
-  If File.RealPath("/tmp/project.txt") Then
-    Shell "rm /tmp/project.txt" Wait
-  Endif
+  Shell "wget -qO- '" & raw & "'" To s
 
-  Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
-  If File.RealPath("/tmp/project.txt") Then
-    s = File.Load("/tmp/project.txt")
+  If s <> "" Then
     stx = Split(s, "\n")
     For Each r In stx
       If InStr(r, "Version=") Then
@@ -168,7 +163,33 @@ Public Sub GitVersion(raw As String) As String 'Función para chequear si hay ve
       Endif
     Next
   Endif
+
   Return v
+
+  ' Dim s As String
+  ' Dim stx As String[]
+  ' Dim r As String
+  ' Dim v As String
+  '
+  ' v = ""
+  ' If File.RealPath("/tmp/project.txt") Then
+  '   Shell "rm /tmp/project.txt" Wait
+  ' Endif
+  '
+  ' Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
+  ' If File.RealPath("/tmp/project.txt") Then
+  '   s = File.Load("/tmp/project.txt")
+  '   stx = Split(s, "\n")
+  '   For Each r In stx
+  '     If InStr(r, "Version=") Then
+  '       If Split(r, "=")[0] = "Version" Then
+  '         v = Split(r, "=")[1]
+  '         Break
+  '       Endif
+  '     Endif
+  '   Next
+  ' Endif
+  ' Return v
 
 End
 
