@@ -698,35 +698,37 @@ End
 
 Public Sub CerrarTodo()
 
-  If Form_ConectarBBDD.meConn Then
-    Form_ConectarBBDD.meConn.Close()
-    Form_ConectarBBDD.meConn = Null
-    FMain.Contenido = Null
-    FMain.ContenidoBibTotal = Null
-    FMain.ContenidoBibActual = Null
-    ' Cerrar la aplicación
-    Form_ConectarBBDD.Close
-  Endif
-
   ' borramos las carpetas que se crean en el cache
-  Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
-  Wait 0.1
+  FMain.TerminalView1.Input("rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n")
+  ' Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
+  Wait 0.2
 
   ' Intenta detener el proceso de Bash
   Try FMain.$Bash.Kill
   ' Espera un breve período para permitir que el proceso termine
-  Wait 0.1
+  Wait 0.2
   ' Verifica si el proceso aún está activo
   If FMain.$Bash.State = Process.Running Then
     ' Si el proceso sigue en ejecución, fuerza su terminación
     Try FMain.$Bash.Terminate
-    Wait 0.1
+    Wait 0.2
   Endif
   ' Si el proceso aún no ha terminado, muestra un mensaje de advertencia
   If FMain.$Bash.State = Process.Running Then
     Message.Warning("El proceso no pudo ser detenido.")
   Endif
 
+  FMain.Close
+
+  If Form_ConectarBBDD.meConn Then
+    Form_ConectarBBDD.meConn.Close()
+    Form_ConectarBBDD.meConn = Null
+    Form_ConectarBBDD.Close
+    ' FMain.Contenido = Null
+    ' FMain.ContenidoBibTotal = Null
+    ' FMain.ContenidoBibActual = Null
+
+  Endif
   Quit
 
 End
