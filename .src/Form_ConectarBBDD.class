@@ -43,7 +43,7 @@ Public Sub btnSelecionarBBDD_Click()
 
 End
 
-Public Sub btnCerrar_Click()
+Public Sub btnCerrar_Click()' boton de cerrar la conexion
 
   Quit
 
