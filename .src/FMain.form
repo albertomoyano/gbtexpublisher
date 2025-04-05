@@ -496,8 +496,9 @@
         MoveScaled(42,0,83,4)
         Expand = True
         Arrangement = Arrange.Horizontal
-        { MenuButton1 MenuButton
+        { !MenuButton1 MenuButton
           MoveScaled(-2,0,25.3333,4)
+          #Public = True
           #Translate = False
           Text = "Guiones externos"
           Picture = Picture["iconos/conversor.svg"]
@@ -620,8 +621,9 @@
               MoveScaled(4,0,2.3333,4)
               #Translate = False
             }
-            { MenuApp MenuButton
+            { !MenuApp MenuButton
               MoveScaled(7,0,19,4)
+              #Public = True
               #Translate = False
               Text = "Ver salidas"
               Picture = Picture["iconos/document.svg"]
@@ -632,8 +634,9 @@
               MoveScaled(26,0,2.3333,4)
               #Translate = False
             }
-            { MenuButton3 MenuButton
+            { !MenuButton3 MenuButton
               MoveScaled(31,0,19,4)
+              #Public = True
               #Translate = False
               Expand = True
               Text = "Complementos para PDF y ePub"
@@ -641,8 +644,9 @@
               Menu = "menuLTX"
               MenuOnly = True
             }
-            { MenuButton2 MenuButton
+            { !MenuButton2 MenuButton
               MoveScaled(50,0,17,4)
+              #Public = True
               #Translate = False
               Expand = True
               Text = "Procesar archivos por lotes"
@@ -883,8 +887,9 @@
         Alignment = Align.Right
         Text = ("Tipo de entrada ")
       }
-      { ComboBox1 ComboBox
+      { !ComboBox1 ComboBox
         MoveScaled(28,0,24,4)
+        #Public = True
         ReadOnly = True
       }
       { Spring7 Spring
@@ -1680,8 +1685,9 @@
             Alignment = Align.Right
             Text = ("BookPagination ")
           }
-          { txtBookPagination ComboBox
+          { !txtBookPagination ComboBox
             MoveScaled(72,0,16,4)
+            #Public = True
             NoTabFocus = True
             ReadOnly = True
           }
@@ -1690,8 +1696,9 @@
             Alignment = Align.Right
             Text = ("Pagination ")
           }
-          { txtPAGINATION ComboBox
+          { !txtPAGINATION ComboBox
             MoveScaled(106,0,16,4)
+            #Public = True
             NoTabFocus = True
             ReadOnly = True
           }
@@ -1764,8 +1771,9 @@
             Alignment = Align.Right
             Text = ("PubState ")
           }
-          { cbPUBSTATE ComboBox
+          { !cbPUBSTATE ComboBox
             MoveScaled(113,0,16,4)
+            #Public = True
             NoTabFocus = True
             ReadOnly = True
           }
@@ -1845,8 +1853,9 @@
             Alignment = Align.Right
             Text = "LangId "
           }
-          { cbLANGUAGEID ComboBox
+          { !cbLANGUAGEID ComboBox
             MoveScaled(108,0,13,4)
+            #Public = True
             NoTabFocus = True
             Expand = True
             ReadOnly = True
@@ -2000,8 +2009,9 @@
             Alignment = Align.Right
             Text = ("EprintType ")
           }
-          { txtEPRINTYPE ComboBox
+          { !txtEPRINTYPE ComboBox
             MoveScaled(72,0,20,4)
+            #Public = True
             ReadOnly = True
           }
         }
@@ -2056,8 +2066,9 @@
             Alignment = Align.Right
             Text = ("Type ")
           }
-          { cbType ComboBox
+          { !cbType ComboBox
             MoveScaled(17,0,26,4)
+            #Public = True
             ReadOnly = True
           }
           { lblLocation4 Label
@@ -3092,8 +3103,9 @@
         Alignment = Align.Right
         Text = ("Tipo de entrada  ")
       }
-      { cbTYPEentradaGlo ComboBox
+      { !cbTYPEentradaGlo ComboBox
         MoveScaled(17,0,24,4)
+        #Public = True
         NoTabFocus = True
         ReadOnly = True
       }
@@ -5211,8 +5223,9 @@
                 Alignment = Align.Right
                 Text = ("Rol  ")
               }
-              { cmbRolAutores ComboBox
+              { !cmbRolAutores ComboBox
                 MoveScaled(12,0,20,4)
+                #Public = True
                 ReadOnly = True
               }
               { Separator22 Separator
@@ -5325,8 +5338,9 @@
                 Alignment = Align.Right
                 Text = ("Rol  ")
               }
-              { cmbRolColaborador ComboBox
+              { !cmbRolColaborador ComboBox
                 MoveScaled(15,0,20,4)
+                #Public = True
                 ReadOnly = True
               }
               { Separator23 Separator
