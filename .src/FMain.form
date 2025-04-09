@@ -1983,14 +1983,26 @@
           }
           { HBox57 HBox
             MoveScaled(0,12,80,4)
+            { lblDOI2 Label
+              MoveScaled(0,0,16,3.5556)
+              Alignment = Align.Right
+              Text = ("DOI ")
+            }
+            { txtDOI TextBox AllTextBoxes
+              Name = "txtDOI"
+              MoveScaled(17,0,12,4)
+              Expand = True
+              PopupMenu = "menuTEXTBOX"
+              Placeholder = ("Digital Object Identifier")
+            }
             { lblISBN6 Label
-              MoveScaled(1,0,16,4)
+              MoveScaled(49,0,16,4)
               Alignment = Align.Right
               Text = ("Eid ")
             }
             { txtEID TextBox AllTextBoxes
               Name = "txtEID"
-              MoveScaled(22,0,10,4)
+              MoveScaled(66,0,10,4)
               Expand = True
               Placeholder = ("Identificador único utilizado principalmente por la plataforma Scopus ")
             }
@@ -2036,27 +2048,12 @@
               MoveScaled(37,0,12,4)
               Expand = True
               PopupMenu = "menuTEXTBOX"
-              Placeholder = ("URL")
+              Placeholder = ("URL (completa)")
             }
             { btnResetWebView Button
               MoveScaled(68,0,4,4)
               ToolTip = ("Resetear el browser")
               Picture = Picture["iconos/google.svg"]
-            }
-          }
-          { HBox56 HBox
-            MoveScaled(0,24,80,4)
-            { lblDOI2 Label
-              MoveScaled(0,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("DOI ")
-            }
-            { txtDOI TextBox AllTextBoxes
-              Name = "txtDOI"
-              MoveScaled(17,0,24,3.5556)
-              Expand = True
-              PopupMenu = "menuTEXTBOX"
-              Placeholder = ("Digital Object Identifier")
             }
           }
         }
