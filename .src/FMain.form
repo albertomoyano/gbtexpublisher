@@ -2033,6 +2033,10 @@
               PopupMenu = "menuTEXTBOX"
               Placeholder = ("URL")
             }
+            { btnChequearISSN2 Button
+              MoveScaled(39,0,4,4)
+              Picture = Picture["iconos/ActionGo.svg"]
+            }
           }
           { HBox56 HBox
             MoveScaled(0,24,80,4)
