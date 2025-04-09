@@ -201,6 +201,17 @@ Public Sub Form_Open()
 
 End
 
+' Evento cuando la página se carga correctamente
+Public Sub WebView1_LoadFinished(Success As Boolean)
+
+  If Not Success Then
+    Message("La página no se cargó correctamente", "Error")
+  Else
+    Print "Página cargada con éxito: " & WebView1.Url
+  End If
+
+End
+
 ' Función para actualizar el display del tiempo
 Public Sub ActualizarDisplay()
 
@@ -5781,12 +5792,23 @@ Public Sub Menu7_Click()' sacar metadatos del epub
 
 End
 
-Public Sub btnChequearURL_Click()
-
-End
-
 Public Sub btnResetWebView_Click()
 
   WebView1.Url = "https://www.google.com"
+
+End
+
+Public Sub btnChequearURL_Click()
+
+  Dim sUrl As String = Trim(txtURL.Text)
+
+  ' Validación básica de URL
+  If sUrl = "" Then
+    Message("Por favor, ingresar una dirección válida", "Error")
+    Return
+  End If
+
+  ' Cargar la URL en el WebView tal como está
+  WebView1.Url = sUrl
 
 End

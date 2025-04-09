@@ -2026,20 +2026,22 @@
               Alignment = Align.Right
               Text = ("URL ")
             }
+            { btnChequearURL Button
+              MoveScaled(22,0,4,4)
+              ToolTip = ("Buscar la URL en google")
+              Picture = Picture["iconos/ActionGo.svg"]
+            }
             { txtURL TextBox AllTextBoxes
               Name = "txtURL"
-              MoveScaled(23,0,12,4)
+              MoveScaled(37,0,12,4)
               Expand = True
               PopupMenu = "menuTEXTBOX"
               Placeholder = ("URL")
             }
             { btnResetWebView Button
               MoveScaled(68,0,4,4)
+              ToolTip = ("Resetear el browser")
               Picture = Picture["iconos/google.svg"]
-            }
-            { btnChequearURL Button
-              MoveScaled(73,0,4,4)
-              Picture = Picture["iconos/ActionGo.svg"]
             }
           }
           { HBox56 HBox
