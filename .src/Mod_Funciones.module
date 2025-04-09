@@ -234,6 +234,7 @@ End
 
 Public Sub Borrar_Tipografias()
 
+  FMain.TabPanel6.Index = 0
   FMain.TerminalView1.Input("cd " & File.Dir(FMain.TextBox1.Text) & "\n" & "rm *.ttf *.woff *.woff2" & "\n") 'desde la raiz al directorio padre"
   Wait 0.2
 
@@ -719,10 +720,13 @@ End
 
 Public Sub CerrarTodo()
 
+  FMain.TabPanel1.Index = 0
+  FMain.TabPanel6.Index = 0
   ' Borramos carpetas del caché
   Borrar_Aux
   Wait 0.2
   FMain.TerminalView1.Input("rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n")
+  FMain.TerminalView1.Input("clear" & "\n")
   Wait 0.2
 
   ' Intenta detener el proceso Bash
