@@ -433,6 +433,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
     'posicionamos la consola con el path del archivo de trabajo
     TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
+    WebView1.Url = "https://www.google.com"
   Endif
 
 End
