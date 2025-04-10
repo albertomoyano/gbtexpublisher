@@ -35,14 +35,14 @@
     { HBox1 HBox
       Move(0,36,720,36)
       { btnSelecionarBBDD Button
-        Move(0,0,189,36)
+        Move(0,0,144,36)
         NoTabFocus = True
         ToolTip = ("Seleccionar la base de datos")
-        Text = ("Base de datos")
+        Text = ("BBDD")
         Picture = Picture["iconos/basededatos.svg"]
       }
       { !txtRutaBBDD TextBox
-        Move(252,0,144,36)
+        Move(315,0,144,36)
         #Public = True
         Background = Color.Background
         Foreground = Color.Blue
@@ -124,11 +124,11 @@
         NoTabFocus = True
       }
       { btnConectarMARIA Button
-        Move(504,0,160,36)
-        Background = &H8BE06F
+        Move(504,0,144,36)
         Foreground = Color.Black
         NoTabFocus = True
         Text = ("Conectar")
+        Picture = Picture["iconos/comp.svg"]
       }
     }
     Index = 0
