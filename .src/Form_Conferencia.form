@@ -190,11 +190,11 @@
       Move(81,0,126,36)
     }
     { btnSeleccion Button
-      Move(261,0,144,36)
+      Move(261,0,288,36)
       Visible = False
-      Background = &H8BE06F
       NoTabFocus = True
       Text = ("Seleccionar")
+      Picture = Picture["iconos/comp.svg"]
     }
   }
 }

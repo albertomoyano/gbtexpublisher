@@ -42,9 +42,9 @@
       Alignment = Align.Normal
     }
     { btnGenerarPDF Button
-      Move(513,0,160,36)
-      Background = &H8BE06F
+      Move(513,0,288,36)
       Text = ("Generar PDF")
+      Picture = Picture["iconos/comp.svg"]
     }
     { Separator11 Separator
       Move(693,0,8,36)
@@ -52,7 +52,7 @@
       NoTabFocus = True
     }
     { btnSalirOT Button
-      Move(720,0,160,36)
+      Move(756,0,160,36)
       NoTabFocus = True
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]

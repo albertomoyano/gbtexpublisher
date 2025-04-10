@@ -23,7 +23,7 @@
     { btnBuscar Button
       Move(297,0,36,36)
       NoTabFocus = True
-      Picture = Picture["iconos/search.svg"]
+      Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { txtORIGEN TextBox
       Move(369,0,216,36)
@@ -57,7 +57,7 @@
       Placeholder = ("caracteres permitidos: ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     }
     { btnCONVERTIR Button
-      Move(621,0,160,40)
+      Move(621,0,144,40)
       Enabled = False
       NoTabFocus = True
       Text = ("Convertir")
@@ -70,18 +70,18 @@
       Move(135,0,117,36)
     }
     { btnListo Button
-      Move(351,0,160,36)
+      Move(351,0,286,36)
       Visible = False
-      Background = &H8BE06F
       NoTabFocus = True
       Text = ("Listo")
+      Picture = Picture["iconos/comp.svg"]
     }
     { Separator1 Separator
       Move(594,0,9,36)
       Foreground = Color.Transparent
     }
     { btnSalir Button
-      Move(639,0,160,36)
+      Move(774,0,144,36)
       NoTabFocus = True
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]

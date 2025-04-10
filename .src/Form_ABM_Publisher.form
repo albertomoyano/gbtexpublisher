@@ -197,16 +197,16 @@
     Index = 0
   }
   { HBox1 HBox
-    Move(9,594,630,36)
+    Move(9,594,882,36)
     { Spring2 Spring
       Move(270,0,126,36)
     }
     { btnSeleccion Button
-      Move(414,0,144,36)
+      Move(414,0,288,36)
       Visible = False
-      Background = &H8BE06F
       NoTabFocus = True
       Text = ("Aplicar selección")
+      Picture = Picture["iconos/comp.svg"]
     }
   }
 }

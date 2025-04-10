@@ -37,7 +37,7 @@
       Move(490,0,50,40)
     }
     { btnCerrar Button
-      Move(800,0,160,36)
+      Move(747,0,144,36)
       NoTabFocus = True
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]

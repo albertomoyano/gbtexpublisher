@@ -58,11 +58,11 @@
         NoTabFocus = True
       }
       { btnConectar Button
-        Move(288,0,160,36)
-        Background = &H8BE06F
+        Move(288,0,144,36)
         Foreground = Color.Black
         NoTabFocus = True
         Text = ("Conectar")
+        Picture = Picture["iconos/comp.svg"]
       }
     }
     Index = 1
@@ -140,7 +140,7 @@
       NoTabFocus = True
     }
     { btnCerrar Button
-      Move(468,0,164,36)
+      Move(468,0,144,36)
       NoTabFocus = True
       ToolTip = ("Cerrar la ventana")
       Text = ("Cerrar")

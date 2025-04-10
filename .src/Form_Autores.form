@@ -258,11 +258,11 @@
       Move(27,0,126,36)
     }
     { btnSeleccion Button
-      Move(459,0,180,36)
+      Move(459,0,288,36)
       Enabled = False
-      Background = &H8BE06F
       NoTabFocus = True
       Text = ("Seleccionar autor")
+      Picture = Picture["iconos/comp.svg"]
     }
     { Separator1 Separator
       Move(684,0,9,36)

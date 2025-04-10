@@ -37,7 +37,7 @@
       Foreground = Color.Transparent
     }
     { btnConvertirCOVER Button
-      Move(756,0,160,36)
+      Move(756,0,144,36)
       Text = ("cover.png")
       Picture = Picture["iconos/image.svg"]
     }
@@ -93,17 +93,17 @@
       Move(81,0,162,36)
     }
     { btnEnsamblar Button
-      Move(351,0,160,36)
-      Background = &H8BE06F
+      Move(351,0,288,36)
       NoTabFocus = True
       Text = ("Compaginar")
+      Picture = Picture["iconos/comp.svg"]
     }
     { Separator1 Separator
       Move(531,0,9,36)
       Foreground = Color.Transparent
     }
     { btnSalir Button
-      Move(594,0,160,36)
+      Move(756,0,144,36)
       NoTabFocus = True
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]
