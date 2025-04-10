@@ -44,10 +44,9 @@
     }
     { btnCerrarColeccion Button
       Move(513,0,144,36)
-      Background = &HE00000
-      Foreground = Color.White
       NoTabFocus = True
       Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
     }
   }
   { HBox6 Panel

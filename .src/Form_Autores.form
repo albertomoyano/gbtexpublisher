@@ -270,11 +270,10 @@
     }
     { btnCerrarColeccion Button
       Move(756,0,144,36)
-      Background = &HE00000
-      Foreground = Color.White
       NoTabFocus = True
       ToolTip = ("Cerrar la aplicación")
       Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
     }
   }
 }

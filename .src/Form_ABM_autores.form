@@ -39,10 +39,9 @@
     }
     { btnCLOSEauthor Button
       Move(760,0,160,36)
-      Background = &HE00000
-      Foreground = Color.White
       NoTabFocus = True
       Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
     }
   }
   { HBox6 Panel

@@ -48,14 +48,12 @@
     { Spring1 Spring
       Move(640,0,36,40)
     }
-    { btnCerrar ToolButton
+    { btnCerrar Button
       Move(702,0,160,36)
-      Background = &HE00000
-      Foreground = Color.White
       NoTabFocus = True
       ToolTip = ("Cerrar la ventana")
       Text = ("Cerrar")
-      Border = True
+      Picture = Picture["iconos/salir.svg"]
     }
   }
   { HBox8 HBox
