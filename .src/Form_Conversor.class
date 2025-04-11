@@ -55,6 +55,7 @@ Public Sub btnCONVERTIR_Click()
   ' Escapa las rutas de origen y destino
   Dim escapedPath As String = EscapePath(Dialog.Path)
   Dim escapedOriginalesPath As String = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
+  Dim archivoHTML As File
 
   txtORIGEN.Text = Dialog.Path
 
@@ -75,18 +76,37 @@ Public Sub btnCONVERTIR_Click()
       ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
       Shell "pandoc -f docx -t latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media/" & " " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) Wait
 
-      Dim textoInicio As String = "\n\\begin{document}\n\\frontmatter\n\n"
-      Dim textoFinal As String = "\n\n\\end{document}\n"
-      Dim contenido As String
-      '
-      ' Leer el contenido del archivo convertido
-      contenido = File.Load(archivoFinal)
+      ' Paso 1: Leer el archivo generado por Pandoc
+      Dim contenido As String = File.Load(archivoFinal)
 
-      ' Concatenar el texto al inicio y al final
-      contenido = textoInicio & contenido & textoFinal
+      ' Paso 2: Abrir el archivo original para SOBREESCRIBIRLO con el contenido modificado
+      Dim hFile As File
+      hFile = Open archivoFinal For Write
 
-      ' Guardar el archivo modificado
-      File.Save(archivoFinal, contenido)
+      ' Paso 3: Escribir cabecera
+      Print #hFile, "%  archivo cabecera para libros"
+      Print #hFile, "%  compilar con LuaLaTeX"
+      Print #hFile, "\\documentclass{book}"
+      Print #hFile, "\\usepackage[spanish]{babel}"
+      Print #hFile, "\\usepackage{fontspec}"
+      Print #hFile, "\\setmainfont{Libertinus Serif}"
+      Print #hFile, "\\usepackage{graphicx}"
+      Print #hFile, "\\usepackage{xcolor}"
+      Print #hFile, "\\usepackage{hyperref}"
+      Print #hFile, ""
+      Print #hFile, "\\begin{document}"
+      Print #hFile, "\\frontmatter"
+      Print #hFile, ""
+
+      ' Paso 4: Escribir contenido original
+      Print #hFile, contenido
+
+      ' Paso 5: Escribir pie
+      Print #hFile, ""
+      Print #hFile, "\\end{document}"
+
+      ' Paso 6: Cerrar el archivo
+      Close #hFile
 
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
       Shell "mv " & escapedPath & " " & escapedOriginalesPath
@@ -95,6 +115,47 @@ Public Sub btnCONVERTIR_Click()
       btnListo.Default = True
     Endif
   Endif
+
+  ' ' conversion desde un archivo docx
+  ' Dim archivoFinal As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+  ' If RadioButton1.Value = True And RadioButton2.Value = False And RadioButton3.Value = False Then
+  '   If Trim(txtDESTINO.Text) = "" Then
+  '     Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+  '   Else
+  '     ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
+  '     Shell "pandoc -f docx -t latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media/" & " " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) Wait
+  '
+  '     ' Paso 1: Leer el archivo generado por Pandoc
+  '     Dim contenido As String = File.Load(archivoFinal)
+  '
+  '     ' Paso 2: Abrir el archivo original para SOBREESCRIBIRLO con el contenido modificado
+  '     Dim hFile As Integer
+  '     Open archivoFinal For Output As #hFile
+  '
+  '     ' Paso 3: Escribir cabecera
+  '     Print #hFile, "\\documentclass{article}"
+  '     Print #hFile, "\\usepackage[utf8]{inputenc}"
+  '     Print #hFile, "\\begin{document}"
+  '     Print #hFile, "\\frontmatter"
+  '     Print #hFile, ""
+  '
+  '     ' Paso 4: Escribir contenido original
+  '     Print #hFile, contenido
+  '
+  '     ' Paso 5: Escribir pie
+  '     Print #hFile, ""
+  '     Print #hFile, "\\end{document}"
+  '
+  '     ' Paso 6: Cerrar el archivo
+  '     Close #hFile
+  '
+  '     ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+  '     Shell "mv " & escapedPath & " " & escapedOriginalesPath
+  '     Wait 0.2
+  '     btnListo.Visible = True
+  '     btnListo.Default = True
+  '   Endif
+  ' Endif
 
   ' conversion usando doc2tex
   Dim hprocess As Process
