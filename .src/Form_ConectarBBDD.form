@@ -112,12 +112,12 @@
     }
     { HBox4 HBox
       Move(27,117,702,36)
-      { btnCerrar2 ToolButton
+      { btnCerrar2 Button
         Move(0,0,144,36)
         NoTabFocus = True
         ToolTip = ("Sincronizar con otros servidores")
         Text = ("Sincronizar")
-        Border = True
+        Picture = Picture["iconos/sincronizar.svg"]
       }
       { Spring3 Spring
         Move(405,0,81,36)
