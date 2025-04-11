@@ -87,6 +87,9 @@ Public Sub Form_Open()
   If Not File.RealPath(User.Home &/ ".gbtexpublisher/book-pdf-especial.tex") Then
     Copy "./book-pdf-especial.tex" To User.Home &/ ".gbtexpublisher/book-pdf-especial.tex"
   End If
+  If Not File.RealPath(User.Home &/ ".gbtexpublisher/filtro.lua") Then
+    Copy "./filtro.lua" To User.Home &/ ".gbtexpublisher/filtro.lua"
+  End If
 
   ' Inicializamos los contadores de minutos y segundos
   horas = 0

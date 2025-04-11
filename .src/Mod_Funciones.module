@@ -18,11 +18,11 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   Next
 
   'copiamos los archivos de configuracion general
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
-    Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
-  End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
     Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
+    Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/make4ht-indexing.lua") Then
     Copy "./make4ht-indexing.lua" To File.Dir(rutaTexto) & "/files/make4ht-indexing.lua"

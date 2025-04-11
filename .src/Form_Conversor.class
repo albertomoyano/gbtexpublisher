@@ -52,6 +52,8 @@ Public Sub btnCONVERTIR_Click()
   Dim destinoRTF As String = File.Dir(Dialog.Path) &/ txtDESTINO.Text & "@.rtf"
   Dim rutaORIGINALES As String = File.Dir(Dialog.Path) &/ "originales"
   Dim rutaMEDIA As String = File.Dir(Dialog.Path) &/ "media"
+  Dim rutaFILTROLUA As String = User.Home &/ ".gbtexpublisher/filtro.lua"
+
   ' Escapa las rutas de origen y destino
   Dim escapedPath As String = EscapePath(Dialog.Path)
   Dim escapedOriginalesPath As String = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
@@ -73,7 +75,7 @@ Public Sub btnCONVERTIR_Click()
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
       ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
-      Shell "pandoc -f docx -t latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media/" & " " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) Wait
+      Shell "pandoc --lua-filter=" & rutaFILTROLUA & " -f docx -t latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media/" & " " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) Wait
 
       ' Paso 1: Leer el archivo generado por Pandoc
       Dim contenido As String = File.Load(archivoFinal)
@@ -112,6 +114,7 @@ Public Sub btnCONVERTIR_Click()
       Wait 0.2
       btnListo.Visible = True
       btnListo.Default = True
+      btnSalir.Visible = False
     Endif
   Endif
 
@@ -143,6 +146,7 @@ Public Sub btnCONVERTIR_Click()
     If hprocess.State = Process.Stopped Then
       btnCONVERTIR.Enabled = False
       btnListo.Visible = True
+      btnSalir.Visible = False
     Endif
   Endif
 
@@ -169,6 +173,7 @@ Public Sub btnCONVERTIR_Click()
         btnCONVERTIR.Enabled = False
         btnListo.Visible = True
         btnListo.Default = True
+        btnSalir.Visible = False
       Endif
     End If
   End If
