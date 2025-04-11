@@ -67,12 +67,13 @@ Public Sub btnCONVERTIR_Click()
   End If
 
   ' conversion desde un archivo docx
+  Dim archivoFinal As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
   If RadioButton1.Value = True And RadioButton2.Value = False And RadioButton3.Value = False Then
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
-      Shell "pandoc -f docx -t latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media/ " & File.RealPath(Dialog.Path) & " -o " & File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
-      Wait 0.3
+      ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
+      Shell "pandoc -f docx -t latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media/" & " " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) Wait
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
       Shell "mv " & escapedPath & " " & escapedOriginalesPath
       Wait 0.2
@@ -89,12 +90,8 @@ Public Sub btnCONVERTIR_Click()
     Else
       hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text
       Do While hprocess.state = Process.Running
-        Wait 0.1
+        Wait 0.2
       Loop
-      If hprocess.State = Process.Stopped Then
-        btnCONVERTIR.Enabled = False
-        btnListo.Visible = True
-      Endif
       Shell "mv " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp/word/media" & " " & File.Dir(Dialog.Path)
       Wait 0.2
       Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".xml"
@@ -109,6 +106,10 @@ Public Sub btnCONVERTIR_Click()
       Wait 0.1
       Shell "mv " & File.Dir(Dialog.Path) &/ File.Name(Dialog.Path) & " " & rutaORIGINALES
       Wait 0.2
+    Endif
+    If hprocess.State = Process.Stopped Then
+      btnCONVERTIR.Enabled = False
+      btnListo.Visible = True
     Endif
   Endif
 
