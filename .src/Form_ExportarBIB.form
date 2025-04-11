@@ -22,7 +22,7 @@
     }
     { btnDestino Button
       Move(225,0,36,36)
-      Picture = Picture["iconos/abrirBuscar.svg"]
+      Picture = Picture["iconos/document.svg"]
     }
     { !txtdestino TextBox
       Move(279,0,144,36)
