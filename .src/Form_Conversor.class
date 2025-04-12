@@ -171,12 +171,6 @@ Public Sub btnCONVERTIR_Click()
 
 End
 
-Private Function EscapePath(path As String) As String
-
-  Return "'" & Replace(path, "'", "'\\''") & "'"
-
-End
-
 Public Sub txtDESTINO_KeyRelease()
   ' Obtener el texto actual del TextBox
 
