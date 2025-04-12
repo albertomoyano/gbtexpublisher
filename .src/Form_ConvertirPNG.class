@@ -19,7 +19,7 @@ Public Sub Convertir_Click()
 
   ' Construir el comando de conversión
   Dim sCommand As String
-  sCommand = "convert " & txtArchivoOrigen.Text & " -colorspace Gray -density 300 -strip " & Quote(sOutputFile)
+  sCommand = "convert " & txtArchivoOrigen.Text & " -colorspace Gray -density 300 -strip " & Quote$(sOutputFile)
 
   FMain.TerminalView1.Input(sCommand & "\n" & "clear" & "\n")
 

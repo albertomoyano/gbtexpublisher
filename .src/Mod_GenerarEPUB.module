@@ -174,7 +174,7 @@ Public Sub creacionEpubPNG()' parte 2
   Close archivoOPF
 
   ' Generar el EPUB con metadatos
-  FMain.TerminalView1.Input("ebook-convert " & rutaEPUB1 & "content.opf " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & " --title " & Quote(BaseName) & " --language es --cover " & rutaEPUB1 & "cover.png --toc-threshold=1" & "\n")
+  FMain.TerminalView1.Input("ebook-convert " & rutaEPUB1 & "content.opf " & rutaEPUB1 & "epub1-" & BaseName & ".epub" & " --title " & Quote$(BaseName) & " --language es --cover " & rutaEPUB1 & "cover.png --toc-threshold=1" & "\n")
   Wait 0.2
 
   ' Limpieza de archivos temporales

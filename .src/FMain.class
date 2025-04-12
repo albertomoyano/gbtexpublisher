@@ -16,6 +16,7 @@ Public rutaCATALOGO As String
 Public rutaARTCAP As String
 Public rutaApp As String = User.Home &/ ".gbtexpublisher"
 Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
+Public rutaScriptsBash As String = User.Home &/ ".gbtexpublisher/ScriptsBash"
 Public rutaFonts As String = User.Home &/ ".gbtexpublisher/fonts"
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
@@ -56,6 +57,10 @@ Public Sub Form_Open()
 
   If Not Exist(rutaScriptsExternos) Then
     Mkdir rutaScriptsExternos
+  End If
+
+  If Not Exist(rutaScriptsBash) Then
+    Mkdir rutaScriptsBash
   End If
 
   Dim archivos As String[] = [
@@ -141,6 +146,14 @@ Public Sub Form_Open()
   For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
     mtmp = New Menu(menuScriptsExternos) As "obs"
     mtmp.caption = fileA
+  Next
+
+  Dim mtmpB As Menu
+  Dim fileB As String
+
+  For Each fileB In Dir(rutaScriptsBash, "*.sh").Sort()'
+    mtmpB = New Menu(menuScriptsBash) As "obsB"
+    mtmpB.caption = fileB
   Next
 
   ' botonera glosario de inicio
@@ -231,8 +244,24 @@ End
 'ejecutamos el evento click del observador
 Public Sub obs_click()
 
+  Dim archivoProyecto As String
+
+  archivoProyecto = File.Name(TextBox1.Text)
+
   TerminalView1.Input("clear" & "\n")
-  TerminalView1.Input("python3 " & rutaScriptsExternos &/ Last.caption & " " & File.Name(TextBox1.Text) & "\n")
+  TerminalView1.Input("python3 " & rutaScriptsExternos &/ Last.caption & " " & Quote$(archivoProyecto) & "\n")
+
+End
+
+'ejecutamos el evento click del observador
+Public Sub obsB_click()
+
+  Dim archivoTrabajo As String
+
+  archivoTrabajo = File.Name(TextBox1.Text)
+
+  TerminalView1.Input("clear" & "\n")
+  TerminalView1.Input("bash " & rutaScriptsBash &/ Last.caption & " " & Quote$(archivoTrabajo) & "\n")
 
 End
 
@@ -280,7 +309,7 @@ Public Sub Menu17_Click()'abrir pdf
   filePath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>pdf-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -310,7 +339,10 @@ End
 
 Public Sub Menu24_Click()
 
-  Shell "xdg-open https://www.linkedin.com/in/edicion-cientifica/" Wait
+  Dim alberto As String
+
+  alberto = "https://www.linkedin.com/in/edicion-cientifica/"
+  Shell "xdg-open " & Quote$(alberto) Wait
 
 End
 
@@ -321,7 +353,7 @@ Public Sub MenuHTMLview_Click()' abrir html
   filePath = File.Dir(TextBox1.Text) & "/html5/index.html"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>index.html</b> no existe.")
   Endif
@@ -400,6 +432,8 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     menuDisclaimer.Enabled = True
     menuScriptsExternos.Enabled = True
     MenuButton1.Menu = "menuScriptsExternos"
+    menuScriptsBash.Enabled = True
+    MenuButton4.Menu = "menuScriptsBash"
     HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
     ImageView1.Image = Null
@@ -461,7 +495,7 @@ Public Sub Menu74_Click()'ver pdf página del catálogo
   filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>gbTeXcatalogo-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -475,7 +509,7 @@ Public Sub menuComentarios_Click()'ver pdf página de comentarios
   filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>gbTeXdisclaimer-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -489,7 +523,7 @@ Public Sub menuVerOt_Click()'ver pdf página de comentarios
   filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXOT-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>gbTeXOT-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -503,7 +537,7 @@ Public Sub menuHTMLghp_Click()'ver pagina index.html
   filePath = File.Dir(TextBox1.Text) & "/docs/index.html"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>index.html</b> no existe.")
   Endif
@@ -517,7 +551,7 @@ Public Sub menuwebPDFcompleto_Click()'ver pdf página para web
   filePath = File.Dir(TextBox1.Text) & "/docs/web-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>web-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -538,13 +572,20 @@ End
 
 Public Sub Menu66_Click()
 
-  Shell "xdg-open https://gambas.sourceforge.net/en/main.html" Wait
+  Dim gambas As String
+
+  gambas = "https://gambas.sourceforge.net/en/main.html"
+
+  Shell "xdg-open " & Quote$(gambas) Wait
 
 End
 
 Public Sub Menu68_Click()
 
-  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher" Wait
+  Dim gitalberto As String
+
+  gitalberto = "https://github.com/albertomoyano/gbtexpublisher"
+  Shell "xdg-open " & Quote$(gitalberto) Wait
 
 End
 
@@ -689,7 +730,7 @@ Public Sub BtnBuscarGoogleGLO_Click()
   Consulta = Replace(Consulta, " ", "+")
 
   If Consulta <> "" Then
-    Shell "xdg-open https://www.google.com/search?q=" & Consulta Wait
+    Shell "xdg-open https://www.google.com/search?q=" & Quote$(Consulta) Wait
   End If
 
 End
@@ -2882,7 +2923,7 @@ Public Sub menuIrURL_Click()
 
   $URL = sTB_Text
 
-  If $URL <> "" Then Shell "xdg-open " & $URL
+  If $URL <> "" Then Shell "xdg-open " & Quote$($URL)
 
 End
 
@@ -3612,7 +3653,7 @@ Public Sub btnKanban_Click()
 
   ruta = "https://gitlab.com/" & txtGitLab.Text & "/" & File.BaseName(TextBox1.Text) & "/-/boards"
 
-  Shell "xdg-open " & ruta Wait
+  Shell "xdg-open " & Quote$(ruta) Wait
 
 End
 
@@ -5663,7 +5704,7 @@ Public Sub Menu8_Click()' abrir pdf parte 1 de epub
   filePath = File.Dir(TextBox1.Text) & "/ebook/epub1-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath Wait
+    Shell "xdg-open " & Quote$(filePath) Wait
   Else
     Message.Error("El archivo <b>epub1-" & BaseName & ".pdf</b> no existe.")
   Endif

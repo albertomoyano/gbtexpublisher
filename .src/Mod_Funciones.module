@@ -1,10 +1,5 @@
 ' Gambas module file
 
-' Public rutaApp As String = User.Home &/ ".gbtexpublisher"
-' Public rutaAppR As String = User.Home &/ ".respaldogbTeX"
-' Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
-' Public rutaFontEpub As String = User.Home &/ ".gbtexpublisher/fonts/"
-
 Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
 
   ' Lista de directorios que deseas crear

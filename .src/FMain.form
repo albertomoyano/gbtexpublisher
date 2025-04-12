@@ -13,7 +13,6 @@
     Visible = False
     { menudeepseek Menu
       Text = ("DeepSeek")
-      Picture = Picture["iconos/DeepSeek.png"]
     }
   }
   { menuProcesarArchivos Menu
@@ -203,12 +202,15 @@
     { Menu78 Menu
       #Translate = False
       Text = "Exportar referencias en archivo .bib"
-      Picture = Picture["iconos/exportar.svg"]
     }
     { menuScriptsExternos Menu
       #Translate = False
       Text = "Script externos"
-      Picture = Picture["iconos/edit-select.svg"]
+      Enabled = False
+      Visible = False
+    }
+    { menuScriptsBash Menu
+      Text = ("Script Bash")
       Enabled = False
       Visible = False
     }
@@ -610,7 +612,7 @@
           Expand = True
           Arrangement = Arrange.Vertical
           { HBox44 HBox
-            MoveScaled(0,0,65,4)
+            MoveScaled(-8,0,77,4)
             { btnRefrescarGrid Button
               MoveScaled(0,0,4,4)
               #Translate = False
@@ -635,23 +637,32 @@
               #Translate = False
             }
             { !MenuButton3 MenuButton
-              MoveScaled(31,0,19,4)
+              MoveScaled(28,0,19,4)
               #Public = True
               #Translate = False
               Expand = True
-              Text = "Complementos para PDF y ePub"
+              Text = "Complementos"
               Picture = Picture["iconos/conversor.svg"]
               Menu = "menuLTX"
               MenuOnly = True
             }
             { !MenuButton2 MenuButton
-              MoveScaled(50,0,17,4)
+              MoveScaled(47,0,17,4)
               #Public = True
               #Translate = False
               Expand = True
-              Text = "Procesar archivos por lotes"
+              Text = "Lotes"
               Picture = Picture["iconos/conversor.svg"]
               Menu = "menuProcesarArchivos"
+              MenuOnly = True
+            }
+            { !MenuButton4 MenuButton
+              MoveScaled(64,0,17,4)
+              #Public = True
+              #Translate = False
+              Expand = True
+              Text = "Purgatorio"
+              Picture = Picture["iconos/conversor.svg"]
               MenuOnly = True
             }
           }
@@ -2843,7 +2854,6 @@
               MoveScaled(0,0,4,4)
               Visible = False
               ToolTip = ("Guardar")
-              Picture = Picture["iconos/exportar.svg"]
             }
             { btnGuardarDuplicado Button
               MoveScaled(5,0,4,4)
