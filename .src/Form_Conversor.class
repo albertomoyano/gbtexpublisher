@@ -1,8 +1,6 @@
 ' Gambas class file
 
 ' Private destino As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
-Private rutaORIGINALES As String = File.Dir(Dialog.Path) &/ "originales"
-Private rutaMEDIA As String = File.Dir(Dialog.Path) &/ "media"
 Private contenido As String
 
 Public Sub Form_Open()
@@ -18,16 +16,30 @@ End
 Public Sub btnBuscar_Click()
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.docx", ("Archivos word"), "*.rtf", ("Archivos rtf"), "*", ("Todos los archivos")]
+
+  ' Ajustar el filtro según el RadioButton seleccionado
+  If RadioButton1.Value Then  ' Si está seleccionado el RadioButton para DOCX
+    Dialog.Filter = ["*.docx", ("Archivos word"), "*", ("Todos los archivos")]
+  Else If RadioButton3.Value Then  ' Si está seleccionado el RadioButton para RTF
+    Dialog.Filter = ["*.rtf", ("Archivos rtf"), "*", ("Todos los archivos")]
+  Else  ' Por defecto, mostrar ambos tipos
+    Dialog.Filter = ["*.docx", ("Archivos word"), "*.rtf", ("Archivos rtf"), "*", ("Todos los archivos")]
+  Endif
+
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
     Return
   Else
+    If Not Exist(File.Dir(Dialog.Path) & "/originales") Then
+      Mkdir File.Dir(Dialog.Path) & "/originales"
+    End If
+    If Not Exist(File.Dir(Dialog.Path) & "/media") Then
+      Mkdir File.Dir(Dialog.Path) & "/media"
+    End If
     txtORIGEN.Text = Dialog.Path
     btnCONVERTIR.Enabled = True
   Endif
-
 Catch
   Message.Error("No se pudo abrir el archivo")
 
@@ -53,29 +65,17 @@ End
 
 Public Sub btnCONVERTIR_Click()
 
-  ' Escapa las rutas de origen y destino
-  Dim escapedPath As String = EscapePath(Dialog.Path)
-  Dim escapedOriginalesPath As String = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
-
   txtORIGEN.Text = Dialog.Path
 
-  If Not Exist(rutaORIGINALES) Then
-    Mkdir rutaORIGINALES
-  End If
-
-  If Not Exist(rutaMEDIA) Then
-    Mkdir rutaMEDIA
-  End If
-
-  ' conversion desde un archivo docx
-  Dim archivoFinal As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
-  If RadioButton1.Value = True And RadioButton2.Value = False And RadioButton3.Value = False Then
+  ' convertir .docx
+  If RadioButton1.Value = True And RadioButton3.Value = False Then
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
       Dim rutaFILTROLUA As String = User.Home &/ ".gbtexpublisher/filtro.lua"
+      Dim archivoFinal As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
       ' ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
-      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & rutaMEDIA Wait
+      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media" Wait
 
       ' Paso 1: Leer el archivo generado por Pandoc
       contenido = File.Load(archivoFinal)
@@ -112,22 +112,26 @@ Public Sub btnCONVERTIR_Click()
       Close #hFile
 
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
-      Shell "mv " & escapedPath & " " & escapedOriginalesPath Wait
+      Shell "mv " & Quote$(Dialog.Path) & " " & Quote$(File.Dir(Dialog.Path) &/ "originales" &/ File.Name(Dialog.Path)) Wait
       btnListo.Visible = True
       btnListo.Default = True
       btnSalir.Visible = False
     Endif
   Endif
 
+  '
+  '
+  '
+  '
   ' conversión desde un archivo rtf
   Dim archivoFinalRTF As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
-  If RadioButton3.Value And Not RadioButton1.Value And Not RadioButton2.Value Then
+  If RadioButton3.Value And Not RadioButton1.Value Then
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
 
       ' Ejecutar pandoc con manejo de errores
-      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinalRTF) & " --from=rtf --to=latex --wrap=none --extract-media=" & rutaMEDIA Wait
+      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinalRTF) & " --from=rtf --to=latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media" Wait
 
       ' Leer el contenido generado
       contenido = File.Load(archivoFinalRTF)
@@ -157,37 +161,12 @@ Public Sub btnCONVERTIR_Click()
 
       Close #hFileRTF
 
-      Shell "mv " & escapedPath & " " & escapedOriginalesPath Wait
-
+      ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+      Shell "mv " & Quote$(Dialog.Path) & " " & Quote$(File.Dir(Dialog.Path) &/ "originales" &/ File.Name(Dialog.Path)) Wait
       btnListo.Visible = True
       btnListo.Default = True
       btnSalir.Visible = False
     End If
-  Endif
-
-  ' conversion usando doc2tex
-  Dim hprocess As Process
-  If RadioButton2.Value = True And RadioButton1.Value = False And RadioButton3.Value = False Then
-    If Trim(txtDESTINO.Text) = "" Then
-      Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
-    Else
-      hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text Wait
-      Do While hprocess.state = Process.Running
-        Wait 0.2
-      Loop
-      Shell "mv " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp/word/media" & " " & File.Dir(Dialog.Path) Wait
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".xml" Wait
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".csv" Wait
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".d2t.log" Wait
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".debug" Wait
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp" Wait
-      Shell "mv " & File.Dir(Dialog.Path) &/ File.Name(Dialog.Path) & " " & rutaORIGINALES Wait
-    Endif
-    If hprocess.State = Process.Stopped Then
-      btnCONVERTIR.Enabled = False
-      btnListo.Visible = True
-      btnSalir.Visible = False
-    Endif
   Endif
 
 End

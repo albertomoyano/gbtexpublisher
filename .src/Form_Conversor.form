@@ -4,7 +4,7 @@
   Move(0,0,960,207)
   #Scaled = False
   #Translate = False
-  Text = "Conversión de archivo a formato LaTeX"
+  Text = "Conversión de archivos a formato LaTeX utilizando Pandoc"
   Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True
@@ -22,18 +22,13 @@
     { RadioButton1 RadioButton
       Move(234,0,198,36)
       AutoResize = True
-      Text = ("Archivo DOCX (Pandoc) ")
+      Text = ("Archivo con formato .docx          ")
       Value = True
-    }
-    { RadioButton2 RadioButton
-      Move(432,0,234,36)
-      AutoResize = True
-      Text = ("Archivo DOCX (docx2tex) ")
     }
     { RadioButton3 RadioButton
       Move(666,0,243,36)
       AutoResize = True
-      Text = ("Archivo RTF (Pandoc) ")
+      Text = ("Archivo con formato .rtf ")
     }
   }
   { HBox2 HBox
@@ -90,22 +85,18 @@
     }
   }
   { HBox7 HBox
-    Move(0,120,952,36)
+    Move(0,135,952,36)
     { Spring1 Spring
-      Move(135,0,117,36)
+      Move(171,0,117,36)
     }
     { btnSalir Button
-      Move(423,0,144,36)
+      Move(396,0,144,36)
       NoTabFocus = True
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]
     }
-    { Separator1 Separator
-      Move(594,0,9,36)
-      Foreground = Color.Transparent
-    }
     { btnListo Button
-      Move(594,0,288,36)
+      Move(639,0,288,36)
       Visible = False
       NoTabFocus = True
       Text = ("Listo")
