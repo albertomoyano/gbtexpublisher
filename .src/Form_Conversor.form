@@ -48,7 +48,7 @@
     { btnBuscar Button
       Move(297,0,36,36)
       NoTabFocus = True
-      Picture = Picture["iconos/search.svg"]
+      Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { txtORIGEN TextBox
       Move(369,0,216,36)
@@ -94,22 +94,22 @@
     { Spring1 Spring
       Move(135,0,117,36)
     }
-    { btnListo Button
-      Move(351,0,288,36)
-      Visible = False
+    { btnSalir Button
+      Move(423,0,144,36)
       NoTabFocus = True
-      Text = ("Listo")
-      Picture = Picture["iconos/comp.svg"]
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
     }
     { Separator1 Separator
       Move(594,0,9,36)
       Foreground = Color.Transparent
     }
-    { btnSalir Button
-      Move(729,0,144,36)
+    { btnListo Button
+      Move(594,0,288,36)
+      Visible = False
       NoTabFocus = True
-      Text = ("Cerrar")
-      Picture = Picture["iconos/salir.svg"]
+      Text = ("Listo")
+      Picture = Picture["iconos/comp.svg"]
     }
   }
 }

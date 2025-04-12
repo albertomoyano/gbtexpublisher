@@ -1,5 +1,10 @@
 ' Gambas class file
 
+' Private destino As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+Private rutaORIGINALES As String = File.Dir(Dialog.Path) &/ "originales"
+Private rutaMEDIA As String = File.Dir(Dialog.Path) &/ "media"
+Private contenido As String
+
 Public Sub Form_Open()
 
   Dim fecha As String
@@ -48,12 +53,6 @@ End
 
 Public Sub btnCONVERTIR_Click()
 
-  Dim destino As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
-  Dim destinoRTF As String = File.Dir(Dialog.Path) &/ txtDESTINO.Text & "@.rtf"
-  Dim rutaORIGINALES As String = File.Dir(Dialog.Path) &/ "originales"
-  Dim rutaMEDIA As String = File.Dir(Dialog.Path) &/ "media"
-  Dim rutaFILTROLUA As String = User.Home &/ ".gbtexpublisher/filtro.lua"
-
   ' Escapa las rutas de origen y destino
   Dim escapedPath As String = EscapePath(Dialog.Path)
   Dim escapedOriginalesPath As String = EscapePath(rutaORIGINALES &/ File.Name(Dialog.Path))
@@ -74,25 +73,28 @@ Public Sub btnCONVERTIR_Click()
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
-      ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
-      Shell "pandoc --lua-filter=" & rutaFILTROLUA & " -f docx -t latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media/" & " " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) Wait
+      Dim rutaFILTROLUA As String = User.Home &/ ".gbtexpublisher/filtro.lua"
+      ' ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
+      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & rutaMEDIA Wait
 
       ' Paso 1: Leer el archivo generado por Pandoc
-      Dim contenido As String = File.Load(archivoFinal)
+      contenido = File.Load(archivoFinal)
 
       ' Paso 2: Abrir el archivo original para SOBREESCRIBIRLO con el contenido modificado
       Dim hFile As File
       hFile = Open archivoFinal For Write
 
       ' Paso 3: Escribir cabecera
-      Print #hFile, "%  archivo cabecera para libros"
-      Print #hFile, "%  compilar con LuaLaTeX"
+      Print #hFile, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
+      Print #hFile, ""
       Print #hFile, "\\documentclass{book}"
       Print #hFile, "\\usepackage[spanish]{babel}"
       Print #hFile, "\\usepackage{fontspec}"
       Print #hFile, "\\setmainfont{Libertinus Serif}"
       Print #hFile, "\\usepackage{graphicx}"
       Print #hFile, "\\usepackage{xcolor}"
+      Print #hFile, "\\usepackage{longtable}"
+      Print #hFile, "\\usepackage{caption}"
       Print #hFile, "\\usepackage{hyperref}"
       Print #hFile, ""
       Print #hFile, "\\begin{document}"
@@ -110,12 +112,57 @@ Public Sub btnCONVERTIR_Click()
       Close #hFile
 
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
-      Shell "mv " & escapedPath & " " & escapedOriginalesPath
-      Wait 0.2
+      Shell "mv " & escapedPath & " " & escapedOriginalesPath Wait
       btnListo.Visible = True
       btnListo.Default = True
       btnSalir.Visible = False
     Endif
+  Endif
+
+  ' conversión desde un archivo rtf
+  Dim archivoFinalRTF As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+  If RadioButton3.Value And Not RadioButton1.Value And Not RadioButton2.Value Then
+    If Trim(txtDESTINO.Text) = "" Then
+      Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+    Else
+
+      ' Ejecutar pandoc con manejo de errores
+      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinalRTF) & " --from=rtf --to=latex --wrap=none --extract-media=" & rutaMEDIA Wait
+
+      ' Leer el contenido generado
+      contenido = File.Load(archivoFinalRTF)
+
+      ' Escribir el nuevo contenido con cabecera y pie
+      Dim hFileRTF As File
+      hFileRTF = Open archivoFinalRTF For Write
+
+      Print #hFileRTF, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
+      Print #hFileRTF, ""
+      Print #hFileRTF, "\\documentclass{book}"
+      Print #hFileRTF, "\\usepackage[spanish]{babel}"
+      Print #hFileRTF, "\\usepackage{fontspec}"
+      Print #hFileRTF, "\\setmainfont{Libertinus Serif}"
+      Print #hFileRTF, "\\usepackage{graphicx}"
+      Print #hFileRTF, "\\usepackage{xcolor}"
+      Print #hFileRTF, "\\usepackage{longtable}"
+      Print #hFileRTF, "\\usepackage{caption}"
+      Print #hFileRTF, "\\usepackage{hyperref}"
+      Print #hFileRTF, ""
+      Print #hFileRTF, "\\begin{document}"
+      Print #hFileRTF, "\\frontmatter"
+      Print #hFileRTF, ""
+      Print #hFileRTF, contenido
+      Print #hFileRTF, ""
+      Print #hFileRTF, "\\end{document}"
+
+      Close #hFileRTF
+
+      Shell "mv " & escapedPath & " " & escapedOriginalesPath Wait
+
+      btnListo.Visible = True
+      btnListo.Default = True
+      btnSalir.Visible = False
+    End If
   Endif
 
   ' conversion usando doc2tex
@@ -124,24 +171,17 @@ Public Sub btnCONVERTIR_Click()
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
-      hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text
+      hprocess = Shell User.Home &/ "docx2tex/d2t " & txtORIGEN.Text Wait
       Do While hprocess.state = Process.Running
         Wait 0.2
       Loop
-      Shell "mv " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp/word/media" & " " & File.Dir(Dialog.Path)
-      Wait 0.2
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".xml"
-      Wait 0.1
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".csv"
-      Wait 0.1
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".d2t.log"
-      Wait 0.1
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".debug"
-      Wait 0.1
-      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp"
-      Wait 0.1
-      Shell "mv " & File.Dir(Dialog.Path) &/ File.Name(Dialog.Path) & " " & rutaORIGINALES
-      Wait 0.2
+      Shell "mv " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp/word/media" & " " & File.Dir(Dialog.Path) Wait
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".xml" Wait
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".csv" Wait
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".d2t.log" Wait
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".debug" Wait
+      Shell "rm -r " & File.Dir(Dialog.Path) &/ File.BaseName(Dialog.Path) & ".docx.tmp" Wait
+      Shell "mv " & File.Dir(Dialog.Path) &/ File.Name(Dialog.Path) & " " & rutaORIGINALES Wait
     Endif
     If hprocess.State = Process.Stopped Then
       btnCONVERTIR.Enabled = False
@@ -149,34 +189,6 @@ Public Sub btnCONVERTIR_Click()
       btnSalir.Visible = False
     Endif
   Endif
-
-  ' conversion usando pandoc con rtf
-  Dim zprocess As Process
-  If RadioButton3.Value = True And RadioButton1.Value = False And RadioButton2.Value = False Then
-    If Trim(txtDESTINO.Text) = "" Then
-      Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
-    Else
-      zprocess = Shell "iconv -f ISO-8859-1 -t UTF-8 " & escapedPath & " > " & destinoRTF
-      Wait 0.5
-      zprocess = Shell "pandoc -s " & destinoRTF & " -o " & destino & " --from=rtf --to=latex --wrap=none --extract-media=" & rutaMEDIA
-      Wait 0.5
-      ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
-      zprocess = Shell "rm " & destinoRTF
-      Wait 0.5
-      zprocess = Shell "mv " & escapedPath & " " & escapedOriginalesPath
-      Wait 0.5
-
-      Do While zprocess.state = Process.Running
-        Wait 0.1
-      Loop
-      If zprocess.State = Process.Stopped Then
-        btnCONVERTIR.Enabled = False
-        btnListo.Visible = True
-        btnListo.Default = True
-        btnSalir.Visible = False
-      Endif
-    End If
-  End If
 
 End
 

@@ -280,7 +280,7 @@ Public Sub Menu17_Click()'abrir pdf
   filePath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>pdf-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -310,7 +310,7 @@ End
 
 Public Sub Menu24_Click()
 
-  Shell "xdg-open https://www.linkedin.com/in/edicion-cientifica/"
+  Shell "xdg-open https://www.linkedin.com/in/edicion-cientifica/" Wait
 
 End
 
@@ -321,7 +321,7 @@ Public Sub MenuHTMLview_Click()' abrir html
   filePath = File.Dir(TextBox1.Text) & "/html5/index.html"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>index.html</b> no existe.")
   Endif
@@ -365,13 +365,11 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     FileView1.Refresh
     TabPanel6.Index = 0
     ' borramos las carpetas que se crean en el cache
-    Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n"
-    Wait 0.1
+    Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n" Wait
     TextBox1.Text = Dialog.Path
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     Mod_Funciones.Borrar_Aux
-    Shell "rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log" & "\n"
-    Wait 0.1
+    Shell "rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log" & "\n" Wait
     BaseName = File.BaseName(TextBox1.Text)
     rutaFILES = File.Dir(TextBox1.Text) & "/files"
     PanelLaTeX.Visible = True
@@ -463,7 +461,7 @@ Public Sub Menu74_Click()'ver pdf página del catálogo
   filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>gbTeXcatalogo-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -477,7 +475,7 @@ Public Sub menuComentarios_Click()'ver pdf página de comentarios
   filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>gbTeXdisclaimer-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -491,7 +489,7 @@ Public Sub menuVerOt_Click()'ver pdf página de comentarios
   filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXOT-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>gbTeXOT-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -505,7 +503,7 @@ Public Sub menuHTMLghp_Click()'ver pagina index.html
   filePath = File.Dir(TextBox1.Text) & "/docs/index.html"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>index.html</b> no existe.")
   Endif
@@ -519,7 +517,7 @@ Public Sub menuwebPDFcompleto_Click()'ver pdf página para web
   filePath = File.Dir(TextBox1.Text) & "/docs/web-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>web-" & BaseName & ".pdf</b> no existe.")
   Endif
@@ -540,13 +538,13 @@ End
 
 Public Sub Menu66_Click()
 
-  Shell "xdg-open https://gambas.sourceforge.net/en/main.html"
+  Shell "xdg-open https://gambas.sourceforge.net/en/main.html" Wait
 
 End
 
 Public Sub Menu68_Click()
 
-  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher"
+  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher" Wait
 
 End
 
@@ -691,7 +689,7 @@ Public Sub BtnBuscarGoogleGLO_Click()
   Consulta = Replace(Consulta, " ", "+")
 
   If Consulta <> "" Then
-    Shell "xdg-open https://www.google.com/search?q=" & Consulta
+    Shell "xdg-open https://www.google.com/search?q=" & Consulta Wait
   End If
 
 End
@@ -2307,12 +2305,6 @@ Public Sub txtABSTRACT_DblClick()
 
 End
 
-Public Sub menuAPA_Click()
-
-  Shell "xdg-open https://ctan.dcc.uchile.cl/macros/latex/contrib/biblatex-contrib/biblatex-apa/biblatex-apa.pdf"
-
-End
-
 Public Sub menuESTADISTICAS_Click()
 
   Message.Info("Función en desarrollo.", "Aceptar")
@@ -2650,9 +2642,42 @@ Public Sub menuCONVERSORpandoc_Click()
   ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
   Shell "pandoc -f docx -t latex --wrap=none " & Quote$(Dialog.Path) & " -o " & Quote$(outputPath) Wait
 
-  ' Verifica si el archivo tmp.tex fue creado exitosamente
+  ' Paso 1: Leer el archivo generado por Pandoc
+  Dim contenidoTMP As String = File.Load(outputPath)
+
+  ' Paso 2: Abrir el archivo original para SOBREESCRIBIRLO con el contenido modificado
+  Dim hFileTMP As File
+  hFileTMP = Open outputPath For Write
+
+  ' Paso 3: Escribir cabecera
+  Print #hFileTMP, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
+  Print #hFileTMP, ""
+  Print #hFileTMP, "\\documentclass{book}"
+  Print #hFileTMP, "\\usepackage[spanish]{babel}"
+  Print #hFileTMP, "\\usepackage{fontspec}"
+  Print #hFileTMP, "\\setmainfont{Libertinus Serif}"
+  Print #hFileTMP, "\\usepackage{graphicx}"
+  Print #hFileTMP, "\\usepackage{xcolor}"
+  Print #hFileTMP, "\\usepackage{longtable}"
+  Print #hFileTMP, "\\usepackage{caption}"
+  Print #hFileTMP, "\\usepackage{hyperref}"
+  Print #hFileTMP, ""
+  Print #hFileTMP, "\\begin{document}"
+  Print #hFileTMP, "\\frontmatter"
+  Print #hFileTMP, ""
+
+  ' Paso 4: Escribir contenido original
+  Print #hFileTMP, contenidoTMP
+
+  ' Paso 5: Escribir pie
+  Print #hFileTMP, ""
+  Print #hFileTMP, "\\end{document}"
+
+  ' Paso 6: Cerrar el archivo
+  Close #hFileTMP
+
   If Exist(outputPath) Then
-    Message.Info("La conversión a sido exitosa, el archivo: " & outputPath & " ha sido creado.")
+    Message.Info("La conversión a sido exitosa, el archivo<strong>: " & outputPath & "</strong> ha sido creado.")
   Else
     Message.Error("Error: No se pudo convertir el archivo.")
   Endif
@@ -3587,7 +3612,7 @@ Public Sub btnKanban_Click()
 
   ruta = "https://gitlab.com/" & txtGitLab.Text & "/" & File.BaseName(TextBox1.Text) & "/-/boards"
 
-  Shell "xdg-open " & ruta
+  Shell "xdg-open " & ruta Wait
 
 End
 
@@ -5303,7 +5328,7 @@ End
 
 Public Sub Menu5_Click()' área de debate de gbTeXpublisher
 
-  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher/discussions"
+  Shell "xdg-open https://github.com/albertomoyano/gbtexpublisher/discussions" Wait
 
 End
 
@@ -5455,7 +5480,7 @@ End
 
 Public Sub btnKitty_Click()
 
-  Shell "kitty --directory " & File.Dir(TextBox1.Text)
+  Shell "kitty --directory " & File.Dir(TextBox1.Text) Wait
 
 End
 
@@ -5638,7 +5663,7 @@ Public Sub Menu8_Click()' abrir pdf parte 1 de epub
   filePath = File.Dir(TextBox1.Text) & "/ebook/epub1-" & BaseName & ".pdf"
 
   If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & filePath
+    Shell "xdg-open " & filePath Wait
   Else
     Message.Error("El archivo <b>epub1-" & BaseName & ".pdf</b> no existe.")
   Endif
