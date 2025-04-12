@@ -95,7 +95,15 @@ Public Sub Form_Open()
   If Not File.RealPath(User.Home &/ ".gbtexpublisher/filtro.lua") Then
     Copy "./filtro.lua" To User.Home &/ ".gbtexpublisher/filtro.lua"
   End If
-
+  '
+  ' aseguramos la copia de los scripts en bash
+  If Not File.RealPath(User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HLyUL.sh") Then
+    Copy "./quitar_HLyUL.sh" To User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HLyUL.sh"
+  End If
+  If Not File.RealPath(User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh") Then
+    Copy "./quitar_HYPERTARGET.sh" To User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh"
+  End If
+  '
   ' Inicializamos los contadores de minutos y segundos
   horas = 0
   minutos = 0
