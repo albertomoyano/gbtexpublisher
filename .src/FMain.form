@@ -764,7 +764,7 @@
       }
     }
     { HBox14 HBox
-      MoveScaled(1,30,113,4)
+      MoveScaled(1,30,157,4)
       { BtnNuevoBib Button
         MoveScaled(0,0,4,4)
         NoTabFocus = True
@@ -794,28 +794,27 @@
         Picture = Picture["iconos/borrar.svg"]
       }
       { PanelAI Panel
-        MoveScaled(35,0,34,4)
-        Expand = True
+        MoveScaled(35,0,58,4)
         Arrangement = Arrange.Horizontal
+        AutoResize = True
         { btnAsistenteAI Button
           MoveScaled(0,0,16,4)
           Text = ("Asistente AI")
           Picture = Picture["iconos/AI.svg"]
         }
         { txtAsistenteAI TextBox
-          MoveScaled(18,0,11,4)
-          Expand = True
-          Placeholder = ("Coloca tu clave de ChatGPT")
+          MoveScaled(18,0,33,4)
+          Placeholder = ("Coloque su API key")
         }
       }
       { Label129 Label
-        MoveScaled(73,0,5,4)
+        MoveScaled(113,0,5,4)
         Visible = False
         AutoResize = True
         Text = ("ID  ")
       }
       { !txtIDbibtex TextBox
-        MoveScaled(78,0,10,4)
+        MoveScaled(120,0,10,4)
         #Public = True
         Visible = False
         Background = Color.Background
@@ -824,7 +823,7 @@
         ReadOnly = True
       }
       { txtTOTALbib TextLabel
-        MoveScaled(88,0,24.2222,4)
+        MoveScaled(130,0,24.2222,4)
         Expand = True
         Alignment = Align.Center
         Wrap = False

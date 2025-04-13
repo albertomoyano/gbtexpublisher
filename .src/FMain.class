@@ -178,6 +178,7 @@ Public Sub Form_Open()
   btnGuardarCambios.Visible = False
   btnGuardarIGUAL.Visible = False
   btnAgregarCitationKey.Visible = False
+  PanelAI.Visible = False
 
   ' botonera de githubpages de inicio
   BtnNuevoGHP.Visible = True
@@ -1415,6 +1416,7 @@ Public Sub BtnEliminarBib_Click()
   btnGuardarCambios.Visible = False
   btnAgregarCitationKey.Visible = False
   btnGuardarIGUAL.Visible = False
+  PanelAI.Visible = False
 
 End
 
@@ -1427,6 +1429,7 @@ Public Sub BtnNuevoBib_Click()
   btnAgregarCitationKey.Visible = True
   btnAgregarKeyBIB.Visible = True
   txtTMPbiblio.Enabled = True
+  PanelAI.Visible = False
   txtTMPbiblio.Background = Color.White
   txtTMPbiblio.Clear 'limpiamos el campo temporal
   txtTMPbiblio.SetFocus()
@@ -1480,6 +1483,7 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   btnAgregarCitationKey.Visible = False
   btnAgregarKeyBIB.Visible = False
   txtTMPbiblio.Enabled = False
+  PanelAI.Visible = False
 
 End Sub
 
@@ -1547,6 +1551,7 @@ Public Sub btnGuardar_Click()
     btnAgregarCitationKey.Visible = False
     btnGuardarIGUAL.Visible = False
     btnAgregarKeyBIB.Visible = False
+    PanelAI.Visible = False
     txtTMPbiblio.Enabled = False
     txtTMPbiblio.Background = Color.LightGray
     Mod_LimpiarTextBox.LimpiarCamposBIB()
@@ -2276,6 +2281,7 @@ Public Sub btnGuardarIGUAL_Click()
       BtnEliminarBib.Visible = False
       btnAgregarCitationKey.Visible = False
       btnGuardarIGUAL.Visible = False
+      PanelAI.Visible = False
     End If
   Endif
 
@@ -5267,6 +5273,9 @@ Public Sub VListaBIB_Click()' grid en el formulario principal
   btnAgregarCitationKey.Visible = True
   btnGuardar.Visible = False
   btnAgregarKeyBIB.Visible = True
+  PanelAI.Visible = True
+  txtTMPbiblio.Enabled = True
+  txtTMPbiblio.Background = Color.White
 
   TabPanel2.Index = 0
   Mod_Funciones.VerBibTeXenVListaBIB(VListaBIB.row)' en el evento Click de la celda pasar como parámetro la fila
@@ -5306,6 +5315,9 @@ Public Sub gridListaBIBactual_Click()' referencias del archivo en curso
   btnAgregarCitationKey.Visible = True
   btnGuardar.Visible = False
   btnAgregarKeyBIB.Visible = True
+  PanelAI.Visible = True
+  txtTMPbiblio.Enabled = True
+  txtTMPbiblio.Background = Color.White
 
   TabPanel2.Index = 1
   Mod_Funciones.VerBibTeXengridListaBIBactual()
@@ -5952,3 +5964,72 @@ Public Sub btnVerificarDOI_Click()
   End Select
 
 End
+
+Public Sub btnAsistenteAI_Click()
+
+  Message.Info("Este desarrollo se está ajustando.")
+  ' Dim bibtex As String
+  ' Dim apiKey As String = Trim(txtAsistenteAI.Text)
+  '
+  ' ' Verificar que la API Key esté presente y tenga el formato adecuado
+  ' If apiKey = "" Or Left(apiKey, 3) <> "sk-" Then
+  '   Message.Warning("Por favor, ingresa una clave API válida.")
+  '   Return
+  ' Endif
+  '
+  ' ' Obtener la referencia BibTeX seleccionada (ya controlada por el GridView)
+  ' bibtex = ObtenerReferenciaSeleccionada()  ' Esta función ya debe estar implementada
+  '
+  ' ' Llamar al asistente con la clave
+  ' LlamarAIA(bibtex, apiKey)
+
+End Sub
+
+' Public Sub LlamarAIA(bibtex As String, apiKey As String)
+'
+'   Dim prompt As String
+'   Dim jsonRequest As String
+'   Dim response As String
+'   Dim resultado As String
+'
+'   ' Construir el prompt para el modelo
+'   prompt = "Analiza la siguiente entrada BibTeX y haz lo siguiente:" & gb.NewLine &
+'     "1. Indica si hay campos importantes faltantes (como editor, ciudad, ISBN, traductor, idioma original o DOI)." & gb.NewLine &
+'     "2. Sugiere si hay versiones traducidas, ediciones más recientes o mejoras posibles." & gb.NewLine &
+'     "3. Propón una versión mejorada del registro BibTeX con los datos que puedas completar o mejorar." & gb.NewLine &
+'     "4. No inventes datos si no estás seguro. Solo sugiere si es razonable o común." & gb.NewLine & gb.NewLine &
+'     "Entrada BibTeX:" & gb.NewLine & bibtex
+'
+'   ' Preparar el cuerpo JSON
+'   jsonRequest = "{" "model" ":" "gpt-3.5-turbo" "," "messages" ":[{" "role" ":" "user" "," "content" ":" "" & Replace(prompt, "" "", "\\\"") & "" "}]}"
+'
+'   ' Llamada a la API usando curl
+'   Shell "curl -s https://api.openai.com/v1/chat/completions " &
+'     "-H 'Content-Type: application/json' " &
+'     "-H 'Authorization: Bearer " & apiKey & "' " &
+'     "-d '" & jsonRequest & "'" To response
+'
+'   ' Procesar la respuesta JSON
+'   resultado = ParsearRespuesta(response)
+'
+'   ' Mostrar la respuesta como cuadro informativo
+'   Message.Info("Análisis IA", resultado)
+'
+' End Sub
+
+' Public Function ParsearRespuesta(json As String) As String
+'
+'   Dim respuesta As JsonObject
+'
+'   Try respuesta = Json.Decode(json)
+'
+'   If respuesta["choices"] And respuesta["choices"][0]["message"]["content"] Then
+'     Return respuesta["choices"][0]["message"]["content"]
+'   Else
+'     Return "No se pudo obtener una respuesta válida de la IA."
+'   Endif
+'
+' Catch
+'   Return "Error al procesar la respuesta JSON: " & Error.Text
+'
+' End Function
