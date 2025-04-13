@@ -5921,3 +5921,34 @@ Public Sub btnVerificar_Click()
   End Select
 
 End
+
+Public Sub btnVerificarDOI_Click()
+
+  Dim sURL As String
+  Dim sResult As String
+  Dim iExitCode As Integer
+
+  sURL = Trim(txtDOI.Text)
+
+  If sURL = "" Then
+    Message.Error("Por favor, ingresa un DOI.")
+    Return
+  Endif
+
+  ' Comando curl para hacer una petición HEAD (-I) y seguir redirecciones (-L)
+  Shell "curl -s -o /dev/null -w '%{http_code}' -L " & Quote(sURL) To sResult
+  iExitCode = Process.LastValue
+
+  ' Evaluar código de estado HTTP
+  Select Case sResult
+    Case "200"
+      Message.Info("El DOI existe y respondió con <strong>código 200 OK</strong>.")
+    Case "301", "302"
+      Message.Info("El DOI fue redireccionada <strong>(código " & sResult & ")</strong>.")
+    Case "404"
+      Message.Error("El DOI no existe <strong>(404 Not Found)</strong>.")
+    Case Else
+      Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
+  End Select
+
+End
