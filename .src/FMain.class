@@ -5890,3 +5890,35 @@ Public Sub btnChequearURL_Click()
   WebView1.Url = sUrl
 
 End
+
+Public Sub btnVerificar_Click()
+
+  Dim sURL As String
+  Dim sResult As String
+  Dim iExitCode As Integer
+
+  sURL = Trim(txtURL.Text)
+
+  If sURL = "" Then
+    Message.Error("Por favor, ingresa una URL.")
+    Return
+  Endif
+
+  ' Comando curl para hacer una petición HEAD (-I) y seguir redirecciones (-L)
+  Shell "curl -s -o /dev/null -w '%{http_code}' -L " & Quote(sURL) To sResult
+  iExitCode = Process.LastValue
+
+  ' Evaluar código de estado HTTP
+  Select Case sResult
+    Case "200"
+      Message.Info("La URL existe y respondió con código 200 OK.")
+    Case "301", "302"
+      Message.Info("La URL fue redireccionada (código " & sResult & ").")
+    Case "404"
+      Message.Error("La URL no existe (404 Not Found).")
+    Case Else
+      Message.Error("Código de respuesta desconocido: " & sResult)
+  End Select
+
+End
+

@@ -2049,10 +2049,10 @@
               Alignment = Align.Right
               Text = ("URL ")
             }
-            { btnChequearURL Button
+            { btnVerificar Button
               MoveScaled(22,0,4,4)
-              ToolTip = ("Buscar la URL en google")
-              Picture = Picture["iconos/ActionGo.svg"]
+              ToolTip = ("Consultar si la URL existe")
+              Picture = Picture["iconos/sincronizar.svg"]
             }
             { txtURL TextBox AllTextBoxes
               Name = "txtURL"
@@ -2060,6 +2060,11 @@
               Expand = True
               PopupMenu = "menuTEXTBOX"
               Placeholder = ("URL (completa)")
+            }
+            { btnChequearURL Button
+              MoveScaled(63,0,4,4)
+              ToolTip = ("Visitar la URL en el navegador")
+              Picture = Picture["iconos/ActionGo.svg"]
             }
             { btnResetWebView Button
               MoveScaled(68,0,4,4)
@@ -2072,10 +2077,8 @@
           MoveScaled(101,5,21,18)
           Arrangement = Arrange.Fill
           Border = Border.Sunken
-          { !WebView1 WebView
-            MoveScaled(2,2,17,8)
-            #Public = True
-            Url = "https://www.google.com"
+          { WebView1 WebView
+            MoveScaled(3,1,16,16)
           }
         }
       }
