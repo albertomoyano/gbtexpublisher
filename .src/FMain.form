@@ -894,7 +894,7 @@
       { Label2 Label
         MoveScaled(0,0,16.8889,4)
         Font = Font["Bold"]
-        Foreground = &HFF0000
+        Foreground = &HE00000
         Alignment = Align.Right
         Text = ("Tipo de entrada ")
       }
@@ -1817,7 +1817,7 @@
             MoveScaled(0,0,16,3.5556)
             #Translate = False
             Font = Font["Bold"]
-            Foreground = &HFF0000
+            Foreground = &HE00000
             Alignment = Align.Right
             Text = "Hyphenation "
           }
