@@ -5911,14 +5911,13 @@ Public Sub btnVerificar_Click()
   ' Evaluar código de estado HTTP
   Select Case sResult
     Case "200"
-      Message.Info("La URL existe y respondió con código 200 OK.")
+      Message.Info("La URL existe y respondió con <strong>código 200 OK</strong>.")
     Case "301", "302"
-      Message.Info("La URL fue redireccionada (código " & sResult & ").")
+      Message.Info("La URL fue redireccionada <strong>(código " & sResult & ")</strong>.")
     Case "404"
-      Message.Error("La URL no existe (404 Not Found).")
+      Message.Error("La URL no existe <strong>(404 Not Found)</strong>.")
     Case Else
-      Message.Error("Código de respuesta desconocido: " & sResult)
+      Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
   End Select
 
 End
-
