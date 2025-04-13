@@ -782,7 +782,7 @@
         Picture = Picture["iconos/guardarComo.svg"]
       }
       { btnGuardarIGUAL Button
-        MoveScaled(12,0,14.4444,4)
+        MoveScaled(12,0,16,4)
         ToolTip = ("Forzar guardar")
         Text = ("Forzar")
         Picture = Picture["iconos/forzar.svg"]
@@ -793,14 +793,29 @@
         ToolTip = ("Borrar entrada")
         Picture = Picture["iconos/borrar.svg"]
       }
+      { PanelAI Panel
+        MoveScaled(35,0,34,4)
+        Expand = True
+        Arrangement = Arrange.Horizontal
+        { btnAsistenteAI Button
+          MoveScaled(0,0,16,4)
+          Text = ("Asistente AI")
+          Picture = Picture["iconos/AI.svg"]
+        }
+        { txtAsistenteAI TextBox
+          MoveScaled(18,0,11,4)
+          Expand = True
+          Placeholder = ("Coloca tu clave de ChatGPT")
+        }
+      }
       { Label129 Label
-        MoveScaled(61.3333,0,5,4)
+        MoveScaled(73,0,5,4)
         Visible = False
         AutoResize = True
         Text = ("ID  ")
       }
       { !txtIDbibtex TextBox
-        MoveScaled(69,0,10,4)
+        MoveScaled(78,0,10,4)
         #Public = True
         Visible = False
         Background = Color.Background
@@ -809,7 +824,7 @@
         ReadOnly = True
       }
       { txtTOTALbib TextLabel
-        MoveScaled(80,0,24.2222,4)
+        MoveScaled(88,0,24.2222,4)
         Expand = True
         Alignment = Align.Center
         Wrap = False
