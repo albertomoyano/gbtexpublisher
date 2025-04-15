@@ -1,13 +1,13 @@
-# Desarrollador
+# Editor
 
-![Tu Foto](img/placeholder-profile.png)
+# ![Tu Foto](img/placeholder-profile.png)
 
-## Tu Nombre
+## Alberto Moyano
 **Desarrollador de Software**
 
 Email: tu.email@ejemplo.com  
-GitHub: [github.com/tu-usuario](https://github.com/tu-usuario)  
-LinkedIn: [linkedin.com/in/tu-perfil](https://linkedin.com/in/tu-perfil)
+GitHub: [github.com](https://github.com/albertomoyano)  
+LinkedIn: [linkedin.com](https://www.linkedin.com/in/edicion-cientifica/)
 
 ## Resumen Profesional
 
@@ -15,13 +15,12 @@ Desarrollador de software con [X años] de experiencia en desarrollo de aplicaci
 
 ## Habilidades Técnicas
 
+- LaTeX
 - Gambas
-- C/C++
 - Python
 - SQL
 - Git
 - Shell Scripting
-- GTK+
 - Qt
 
 ## Experiencia Profesional
@@ -56,4 +55,4 @@ Aplicación de escritorio desarrollada en Gambas para [descripción breve de su 
 
 **Navegación**: [Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
-&copy; 2025 Mi Aplicación Gambas. Desarrollada con ❤️ usando Gambas.
+&copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.
