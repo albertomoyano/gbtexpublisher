@@ -31,7 +31,7 @@ Opté por Gambas como lenguaje de desarrollo por su equilibrio único entre:
 Actualmente, el software reduce un 70% el tiempo dedicado a tareas repetitivas en mis proyectos, garantizando salidas idénticas en todos los formatos. Está diseñado para editores científicos que valoran la precisión y la escalabilidad.
 
 
-{: .important }
+> [!TIP]
 > **gbTeXpublisher** es el eslabón perdido entre LaTeX puro y la edición profesional.
 
 ---
