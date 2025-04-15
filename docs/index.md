@@ -31,4 +31,4 @@ Lanzamiento inicial con todas las funcionalidades principales.
 
 **Navegación**: [Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
-&copy; 2025 Mi Aplicación Gambas. Desarrollada con ❤️ usando Gambas.
+&copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.
