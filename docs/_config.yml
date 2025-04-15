@@ -20,7 +20,6 @@ relative_links:
 
 # Incluir estos archivos en el sitio
 include:
-  - README.md
   - index.md
   - about.md
   - cv.md
