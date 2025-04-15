@@ -2,7 +2,10 @@
 
 ## Instrucciones de Instalación
 
-### Ubuntu
+
+
+
+## Ubuntu
 
 Para instalar en Ubuntu y derivados:
 
@@ -11,7 +14,7 @@ sudo dpkg -i mi-aplicacion_1.0.0_amd64.deb
 sudo apt-get install -f # Para resolver dependencias si es necesario
 ```
 
-### openSUSE
+## openSUSE
 
 Para instalar en openSUSE:
 
@@ -19,13 +22,12 @@ Para instalar en openSUSE:
 sudo zypper install mi-aplicacion-1.0.0.x86_64.rpm
 ```
 
-## Versión 0.1.659 (15 de Abril, 2025) - Última versión
+## Descargas:
 
-### Descargas:
+### Versión 0.1.659 (15 de Abril, 2025) - Última versión
 
 - [Ubuntu (.deb, 64-bit)](https://github.com/albertomoyano/gbtexpublisher/tree/main/ubuntu)
 - [openSUSE (.rpm, 64-bit)](https://github.com/albertomoyano/gbtexpublisher/tree/main/suse)
-
 
 ---
 

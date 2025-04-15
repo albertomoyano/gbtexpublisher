@@ -32,7 +32,8 @@ Actualmente, el software reduce un 70% el tiempo dedicado a tareas repetitivas e
 
 ---
 
-> **gbTeXpublisher** es el eslabón perdido entre LaTeX puro y la edición profesional.
+> #### Tip
+> **gbTeXpublisher** es el eslabón perdido entre LaTeX y la edición científica profesional.
 
 ---
 
