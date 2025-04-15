@@ -55,6 +55,6 @@ Soy editor especializado en textos académicos y científicos, con más de 700 t
 
 ---
 
-[Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
+[Inicio](index.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
 &copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.

@@ -34,6 +34,6 @@ Actualmente, el software reduce un 70% el tiempo dedicado a tareas repetitivas e
 
 ---
 
-[Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
+[Inicio](index.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
 &copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.
