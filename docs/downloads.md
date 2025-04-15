@@ -21,13 +21,6 @@ sudo zypper install mi-aplicacion-1.0.0.x86_64.rpm
 
 ## Versión 0.1.659 (15 de Abril, 2025) - Última versión
 
-### Novedades en esta versión:
-
-- Lanzamiento inicial de la aplicación
-- Implementación de todas las funcionalidades base
-- Soporte completo para Ubuntu y openSUSE
-- Interfaz optimizada para distintos tamaños de pantalla
-
 ### Descargas:
 
 - [Ubuntu (.deb, 64-bit)](https://github.com/tu-usuario/tu-repositorio/releases/download/v1.0.0/mi-aplicacion_1.0.0_amd64.deb)
