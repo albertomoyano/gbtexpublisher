@@ -1,0 +1,57 @@
+# Configuración básica para GitHub Pages con tema Jekyll
+
+# Nombre y descripción del sitio
+title: gbTeXpublisher
+description: Una solución potente y elegante desarrollada con Gambas para asistir al flujo de producción editorial
+
+# Configuración del tema
+theme: jekyll-theme-cayman
+
+# Configuración de plugins
+plugins:
+  - jekyll-relative-links
+  - jekyll-seo-tag
+
+# Permitir enlaces relativos en Markdown
+relative_links:
+  enabled: true
+  collections: true
+
+# Incluir estos archivos en el sitio
+include:
+  - README.md
+  - index.md
+  - about.md
+  - cv.md
+  - downloads.md
+
+# Configuración de SEO
+author: Alberto Moyano
+twitter:
+  username: albertomoyano
+  card: summary
+social:
+  name: Alberto Moyano
+  links:
+    - https://github.com/albertomoyano
+    - https://www.linkedin.com/in/edicion-cientifica/
+
+# Configuración de navegación
+header_pages:
+  - index.md
+  - about.md
+  - cv.md
+  - downloads.md
+
+# Configuración de Google Analytics (opcional)
+# google_analytics: UA-XXXXXXXX-X
+
+# Carpetas a ignorar
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
