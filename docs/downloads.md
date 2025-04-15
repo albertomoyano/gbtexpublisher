@@ -23,8 +23,8 @@ sudo zypper install mi-aplicacion-1.0.0.x86_64.rpm
 
 ### Descargas:
 
-- [Ubuntu (.deb, 64-bit)](https://github.com/tu-usuario/tu-repositorio/releases/download/v1.0.0/mi-aplicacion_1.0.0_amd64.deb)
-- [openSUSE (.rpm, 64-bit)](https://github.com/tu-usuario/tu-repositorio/releases/download/v1.0.0/mi-aplicacion-1.0.0.x86_64.rpm)
+- [Ubuntu (.deb, 64-bit)](https://github.com/albertomoyano/gbtexpublisher/blob/main/ubuntu/gbtexpublisher0_0.1.659.orig.tar.gz)
+- [openSUSE (.rpm, 64-bit)](https://github.com/albertomoyano/gbtexpublisher/blob/main/suse/gbtexpublisher0-0.1.659-1.tar)
 
 
 ---
