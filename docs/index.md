@@ -11,7 +11,7 @@ Tras evaluar las herramientas existentes, identifiqué que ninguna ofrecía:
 - Garantías de consistencia en proyectos con alta demanda técnica y colaborativa.
 
 
-### Por qué Gambas como lenguaje para el desarrollo
+## Por qué Gambas como lenguaje para el desarrollo
 
 Opté por Gambas como lenguaje de desarrollo por su equilibrio único entre:
 
@@ -19,14 +19,14 @@ Opté por Gambas como lenguaje de desarrollo por su equilibrio único entre:
 - Productividad acelerada gracias a su IDE intuitivo y vinculación sencilla con herramientas CLI de LaTeX.
 - Capacidad modular para integrar scripts personalizados y bibliotecas externas.
 
-### Qué ofrece mi solución
+## Qué ofrece mi solución
 
 - Edición ramificada: Gestión de versiones orientada a derivados (ej.: una base LaTeX genera salidas para imprenta, web y dispositivos).
 - Validaciones automáticas: Detección de inconsistencias en sintaxis, referencias cruzadas y metadatos.
 - Pipeline configurable: Flujos adaptables a estándares editoriales específicos (APA, IEEE, etc.).
 - Libertad de stack: Interoperabilidad con git, Makefiles y herramientas tradicionales de LaTeX.
 
-### Impacto
+## Impacto
 
 Actualmente, el software reduce un 70% el tiempo dedicado a tareas repetitivas en mis proyectos, garantizando salidas idénticas en todos los formatos. Está diseñado para editores científicos que valoran la precisión y la escalabilidad.
 
