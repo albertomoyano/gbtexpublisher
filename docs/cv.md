@@ -32,31 +32,21 @@ Soy editor especializado en textos académicos y científicos, con más de 700 t
 
 ## Experiencia profesional
 
-### [Nombre de la Empresa]
-**[Cargo]** | [Fecha inicio - Fecha fin]
+### [Ediciones Imago Mundi](https://www.edicionesimagomundi.com/)
+- editorial con un fecundo trabajo en el ámbito de las ciencias sociales y humanas argentinas, siempre vinculada a los campos académico e intelectual, a la producción de investigadores de universidades nacionales y al desarrollo del pensamiento crítico en otras geografías.
 
-- [Logro o responsabilidad relevante]
+### Guttenpress
+Imprenta con una fuerte orientación hacia la producción de libros, revistas y catálogos.
 
-### Experiencia docente y de laboratorio
+### Saveas...
+- El taller de preprensa y la imprenta tenían una fuerte orientación hacia la producción de folletos y catálogos, además ejercí la dirección de la revista CMyK (la misma funcionaba como herramienta de difusión del taller), se editaron 24 números, se distribuía de manera gratuita en el ambiente publicitario y del diseño gráfico.
+
+
+## Experiencia docente y de laboratorio
 - 1992-1992 Dictado de curso de Aldus PageMaker en la Subsecretaría de Publicaciones de la Facultad de Filosofía y Letras (UBA) a cargo de Mauro Dobruskin.
 - 1995 Beta tester de Adobe Latinoamérica para su producto Adobe PageMaker.
 - 2009-2010 Dictado del Seminario Edición de textos académicos y científicos utilizando LaTeX en el Programa de Extensión Universitaria de la Facultad de Filosofía y Letras de la UBA.
 
-### [Nombre de la Empresa]
-**[Cargo]** | [Fecha inicio - Fecha fin]
-
-- [Logro o responsabilidad relevante]
-- [Logro o responsabilidad relevante]
-
-## Formación Académica
-
-### [Título obtenido]
-[Universidad o Institución], [Año de graduación]
-
-## Proyectos Destacados
-
-### Mi Aplicación Gambas
-Aplicación de escritorio desarrollada en Gambas para [descripción breve de su propósito].
 
 ## Membresías
 - [CervanTeX](http://www.cervantex.es/)
