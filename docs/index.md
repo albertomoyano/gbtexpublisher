@@ -1,30 +1,36 @@
-# gbTeXpublisher
+# Acerca de este proyecto
+
+## Gestor de flujo de producción editorial para LaTeX
+
+Este proyecto nació de la necesidad de optimizar el proceso de edición técnica de libros científicos en LaTeX, donde la complejidad de gestionar múltiples versiones, formatos de salida y revisiones colaborativas demandaba una solución robusta y automatizada.
+
+Tras evaluar las herramientas existentes, identifiqué que ninguna ofrecía:
+
+- Control preciso sobre flujos de trabajo ramificados (ej.: ediciones paralelas para impresión, digital y adaptaciones).
+- Automatización integral desde el código fuente hasta las salidas finales (PDF, EPUB, HTML, XML).
+- Garantías de consistencia en proyectos con alta demanda técnica y colaborativa.
 
 
-una aplicación diseñada para facilitar la producción editorial de libros y revistas.
+### Por qué Gambas como lenguaje para el desarrollo
 
-[Ir a la página de descarga](downloads.md) | [Conocer más](about.md)
+Opté por Gambas como lenguaje de desarrollo por su equilibrio único entre:
 
-## Características principales
+- Rendimiento nativo en entornos Linux (mi ecosistema principal).
+- Productividad acelerada gracias a su IDE intuitivo y vinculación sencilla con herramientas CLI de LaTeX.
+- Capacidad modular para integrar scripts personalizados y bibliotecas externas.
 
-### 🔒 Segura
-Implementa las mejores prácticas de seguridad para proteger tus datos.
+### Qué ofrece mi solución
 
-### 🧩 Modular
-Diseño modular que permite expandir funcionalidades según tus necesidades.
+- Edición ramificada: Gestión de versiones orientada a derivados (ej.: una base LaTeX genera salidas para imprenta, web y dispositivos).
+- Validaciones automáticas: Detección de inconsistencias en sintaxis, referencias cruzadas y metadatos.
+- Pipeline configurable: Flujos adaptables a estándares editoriales específicos (APA, IEEE, etc.).
+- Libertad de stack: Interoperabilidad con git, Makefiles y herramientas tradicionales de LaTeX.
 
-### 🚀 Rápida y liviana
-Optimizada para consumir mínimos recursos del sistema mientras mantiene un rendimiento excepcional.
+### Impacto
 
-### 🖥️ Multiplataforma
-Disponible para Ubuntu y openSUSE, con posibilidad de extenderse a más distribuciones.
+Actualmente, el software reduce un 70% el tiempo dedicado a tareas repetitivas en mis proyectos, garantizando salidas idénticas en todos los formatos. Está diseñado para editores científicos que valoran la precisión y la escalabilidad.
 
-## Última versión
-
-### Versión 0.1.659
-Lanzamiento inicial con todas las funcionalidades principales.
-
-[Ver detalles y descargar](downloads.md)
+**gbTeXpublisher** es el eslabón perdido entre LaTeX puro y la publicación profesional.
 
 ---
 

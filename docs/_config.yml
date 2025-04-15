@@ -21,15 +21,11 @@ relative_links:
 # Incluir estos archivos en el sitio
 include:
   - index.md
-  - about.md
   - cv.md
   - downloads.md
 
 # Configuración de SEO
 author: Alberto Moyano
-# twitter:
-#   username: albertomoyano
-#   card: summary
 social:
   name: Alberto Moyano
   links:
@@ -39,7 +35,6 @@ social:
 # Configuración de navegación
 header_pages:
   - index.md
-  - about.md
   - cv.md
   - downloads.md
 
