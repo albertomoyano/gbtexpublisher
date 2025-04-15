@@ -28,9 +28,9 @@ include:
 
 # Configuración de SEO
 author: Alberto Moyano
-twitter:
-  username: albertomoyano
-  card: summary
+# twitter:
+#   username: albertomoyano
+#   card: summary
 social:
   name: Alberto Moyano
   links:
