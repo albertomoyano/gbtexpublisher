@@ -1,6 +1,6 @@
 # Mi Aplicación Gambas
 
-## Bienvenido a Mi Aplicación
+## Bienvenido a mi desarrollo
 
 Una solución potente y elegante desarrollada con Gambas
 
