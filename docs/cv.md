@@ -1,6 +1,6 @@
 # Alberto Moyano
 
-![Flora](img/82118498.jpeg)
+![Flora](img/flora.png)
 
 Email: alberto.alejandro.moyano@gmail.com  
 GitHub: [github.com](https://github.com/albertomoyano)  
