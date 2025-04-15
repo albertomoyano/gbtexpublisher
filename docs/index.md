@@ -1,4 +1,4 @@
-# Acerca de gbTeXpublisher
+# gbTeXpublisher
 
 
 una aplicación diseñada para facilitar la producción editorial de libros y revistas.
