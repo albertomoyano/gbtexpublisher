@@ -22,13 +22,13 @@ Disponible para Ubuntu y openSUSE, con posibilidad de extenderse a más distribu
 
 ## Última versión
 
-### Versión 1.0.0
+### Versión 0.1.659
 Lanzamiento inicial con todas las funcionalidades principales.
 
 [Ver detalles y descargar](downloads.md)
 
 ---
 
-**Navegación**: [Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
+[Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
 &copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.

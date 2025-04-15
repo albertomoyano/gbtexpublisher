@@ -58,13 +58,13 @@ Soy editor especializado en textos académicos y científicos, con más de 700 t
 ### Mi Aplicación Gambas
 Aplicación de escritorio desarrollada en Gambas para [descripción breve de su propósito].
 
-### [Membresías]
+## Membresías
 - [CervanTeX](http://www.cervantex.es/)
 - [gambas-es.org](https://gambas-es.org)
 - [tex.stackexchange](https://tex.stackexchange.com/)
 
 ---
 
-**Navegación**: [Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
+[Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
 &copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.

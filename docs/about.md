@@ -34,6 +34,6 @@ El desarrollo futuro de esta aplicación se centrará en:
 
 ---
 
-**Navegación**: [Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
+[Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
 &copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.

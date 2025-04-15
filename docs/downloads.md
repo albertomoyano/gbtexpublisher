@@ -50,6 +50,6 @@ sudo zypper install mi-aplicacion-1.0.0.x86_64.rpm
 
 ---
 
-**Navegación**: [Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
+[Inicio](index.md) | [Acerca de](about.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
 &copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.
