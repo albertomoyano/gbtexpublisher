@@ -111,117 +111,6 @@ Public Sub EsISBNValido(ISBN As String) As Boolean
 
 End
 
-'exportamos el archivo metadatos
-Public Sub Export2MetaDOCX(rutaTexto As String)
-
-  Dim s As String
-  Dim sb As String
-  Dim f As ResultField
-  Dim fb As ResultField
-  Dim aFields As New String[]
-  Dim bFields As New String[]
-  Dim w As Integer
-  Dim wb As Integer
-  Dim buscar As String
-  Dim buscarAutor As String
-  Dim outputFile As String
-  Dim id As Integer
-
-  ' Exportamos los registros seleccionados
-  buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
-  Contenido = Form_ConectarBBDD.meConn.Exec(buscar)
-
-  aFields.Clear
-  For Each f In Contenido.Fields
-    aFields.Add(f.Name)
-    If Len(f.Name) > w Then
-      w = Len(f.Name)
-    Endif
-  Next
-
-  Dim ids As String[] = Split(Contenido[aFields[5]], " ")
-
-  ' Inicializa la cadena vacía
-  sb = ""
-
-  ' Iterar sobre los IDs y obtener la información correspondiente
-  For Each id In ids
-    ' Establecer el valor de 'id' antes de ejecutar la consulta
-    buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Form_ConectarBBDD.meConn.Exec(buscarAutor)
-
-    bFields.Clear
-    For Each fb In ContenidoAutor.Fields
-      bFields.Add(fb.Name)
-      If Len(fb.Name) > wb Then
-        wb = Len(fb.Name)
-      Endif
-    Next
-
-    ' Agregar la información al resultado
-    sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
-  Next
-
-  ' Eliminar la coma adicional al final y cerrar la cadena
-  sb = Left(sb, Len(sb) - 2)
-
-  s = "" ' Inicializa la cadena definitiva
-
-  While Contenido.Available
-    s &= "\n"
-    s &= "\\Configure{META}{" & "\n"
-    s &= "<dc:title>" & Contenido[aFields[6]] & "</dc:title>\\Hnewline\n" 'titulo del libro
-    s &= "<dc:alternative>" & Contenido[aFields[58]] & "</dc:alternative>\\Hnewline\n" 'titulo en segundo idioma
-    s &= "<dc:subject>" & Contenido[aFields[7]] & "</dc:subject>\\Hnewline\n" 'subjet
-    s &= "<dc:keyword>" & Contenido[aFields[57]] & "</dc:keyword>\\Hnewline\n" 'palabras claves
-    s &= "<dc:created>" & Contenido[aFields[12]] & "</dc:created>\\Hnewline\n" 'fecha de creación
-    s &= "<dc:modified>" & Contenido[aFields[13]] & "</dc:modified>\\Hnewline\n" 'fecha de modificación
-    s &= "<dc:creator>" & sb & "</dc:creator>\\Hnewline\n" 'author
-
-    If Not IsNull(Contenido[aFields[52]]) And Len(Contenido[aFields[52]]) > 0 Then
-      s &= "<dc:contributor>Director de Colección: " & Contenido[aFields[52]] & "</dc:contributor>\\Hnewline\n"
-    Endif
-    If Not IsNull(Contenido[aFields[53]]) And Len(Contenido[aFields[53]]) > 0 Then
-      s &= "<dc:contributor>Traductor: " & Contenido[aFields[53]] & "</dc:contributor>\\Hnewline\n"
-    Endif
-    If Not IsNull(Contenido[aFields[55]]) And Len(Contenido[aFields[55]]) > 0 Then
-      s &= "<dc:contributor>Ilustrador: " & Contenido[aFields[55]] & "</dc:contributor>\\Hnewline\n"
-    Endif
-    If Not IsNull(Contenido[aFields[56]]) And Len(Contenido[aFields[56]]) > 0 Then
-      s &= "<dc:description>" & Contenido[aFields[56]] & "</dc:description>\\Hnewline\n" 'description
-    Endif
-    If Not IsNull(Contenido[aFields[35]]) And Len(Contenido[aFields[35]]) > 0 Then
-      s &= "<dc:identifier>ISBN: " & Contenido[aFields[35]] & "</dc:identifier>\\Hnewline\n" 'isbn
-    Endif
-    If Not IsNull(Contenido[aFields[49]]) And Len(Contenido[aFields[49]]) > 0 Then
-      s &= "<dc:coverage>" & Contenido[aFields[49]] & "</dc:coverage>\\Hnewline\n" 'coverage
-    Endif
-    If Not IsNull(Contenido[aFields[69]]) And Len(Contenido[aFields[69]]) > 0 Then
-      s &= "<dc:source>" & Contenido[aFields[69]] & "</dc:source>\\Hnewline\n" 'coverage
-    Endif
-
-    s &= "<dc:type>" & Contenido[aFields[30]] & "</dc:type>\\Hnewline\n" 'tipo de formato
-    s &= "<dc:language>" & Contenido[aFields[39]] & "</dc:language>\\Hnewline\n" 'idioma principal
-    s &= "<dc:publisher>" & Contenido[aFields[28]] & "</dc:publisher>\\Hnewline\n" 'publihser
-    s &= "<dc:license>" & Contenido[aFields[15]] & "</dc:license>\\Hnewline\n" 'licencia
-    s &= "<dc:rights>" & Contenido[aFields[16]] & "</dc:rights>\\Hnewline\n" 'url de la licencia
-    s &= "}\n"
-    s &= "\\makeatother" & "\n"
-    s &= "\\begin{document}\n"
-    s &= "\\EndPreamble" & "\n"
-    s &= "\n"
-
-    Contenido.MoveNext
-  Wend
-
-  ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
-
-  ' Guarda el contenido acumulado en un solo archivo
-  File.Save(outputFile, s)
-
-End
-
 'exportamos el archivo metadatos para articulo para hacer el maketitle
 Public Sub ExportToMetaTMP(rutaTexto As String)
 
@@ -443,7 +332,7 @@ End
 Public Sub ExportToCatalogo(rutaTexto As String)
 
   Dim s As String
-  Dim sb As String
+  ' Dim sb As String
   Dim f As ResultField
   Dim fb As ResultField
   Dim aFields As New String[]
@@ -451,9 +340,10 @@ Public Sub ExportToCatalogo(rutaTexto As String)
   Dim w As Integer
   Dim wb As Integer
   Dim buscar As String
-  Dim buscarAutor As String
+  Dim buscarFecha As String
   Dim outputFile As String
-  Dim id As Integer
+  ' Dim id As Integer
+  Dim ContenidoFecha As Result
 
   ' Exportamos los registros seleccionados
   buscar = "select * from metadatos where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
@@ -467,31 +357,17 @@ Public Sub ExportToCatalogo(rutaTexto As String)
     Endif
   Next
 
-  Dim ids As String[] = Split(Contenido[aFields[0]], " ")
+  ' Establecer el valor de 'id' antes de ejecutar la consulta
+  buscarFecha = "select * from githubpages where nombreArchivo like '%" & File.BaseName(rutaTexto) & "%'"
+  ContenidoFecha = Form_ConectarBBDD.meConn.Exec(buscarFecha)
 
-  ' Inicializa la cadena vacía
-  sb = ""
-
-  ' Iterar sobre los IDs y obtener la información correspondiente
-  For Each id In ids
-    ' Establecer el valor de 'id' antes de ejecutar la consulta
-    buscarAutor = "SELECT * FROM autores WHERE id = " & id
-    ContenidoAutor = Form_ConectarBBDD.meConn.Exec(buscarAutor)
-
-    bFields.Clear
-    For Each fb In ContenidoAutor.Fields
-      bFields.Add(fb.Name)
-      If Len(fb.Name) > wb Then
-        wb = Len(fb.Name)
-      Endif
-    Next
-
-    ' ' Agregar la información al resultado
-    ' sb &= ContenidoAutor[bFields[2]] & " " & ContenidoAutor[bFields[1]] & ", "
+  bFields.Clear
+  For Each fb In ContenidoFecha.Fields
+    bFields.Add(fb.Name)
+    If Len(fb.Name) > wb Then
+      wb = Len(fb.Name)
+    Endif
   Next
-
-  ' ' Eliminar la coma adicional al final y cerrar la cadena
-  ' sb = Left(sb, Len(sb) - 2)
 
   s = "" ' Inicializa la cadena definitiva
 
@@ -544,7 +420,7 @@ Public Sub ExportToCatalogo(rutaTexto As String)
     s &= "\\noindent\\legales{Formato: \\textbf{" & Contenido[aFields[61]] & "}}\\\\" & "\n"
     s &= "\\noindent\\legales{Páginas: \\textbf{" & Contenido[aFields[50]] & "}}\\\\" & "\n"
     s &= "\\noindent\\legales{Idioma: \\textbf{" & Contenido[aFields[39]] & "}}\\\\" & "\n"
-    s &= "\\noindent\\legales{Fecha: \\textbf{" & Contenido[aFields[11]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\legales{Fecha: \\textbf{" & ContenidoFecha[bFields[9]] & "}}\\\\" & "\n"
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
 
@@ -570,7 +446,7 @@ Public Sub ExportToCatalogo(rutaTexto As String)
 
     s &= "\\begin{textblock*}{11cm}(75mm,77mm)" & "\n"
     s &= "\\begin{minipage}{11cm}" & "\n"
-    s &= "\\noindent \\autoria{" & sb & "}" & "\n"
+    s &= "\\noindent \\autoria{" & Contenido[aFields[5]] & "}" & "\n"
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
 
@@ -582,12 +458,12 @@ Public Sub ExportToCatalogo(rutaTexto As String)
     ' s &= "\\end{minipage}}" & "\n"
     ' s &= "\\end{textblock*}" & "\n"
 
-    s &= "\\begin{textblock*}{18cm}(15mm,277mm)" & "\n"
-    s &= "\\begin{minipage}{18cm}" & "\n"
-    s &= "\\centering" & "\n"
-    s &= "\\url{" & Contenido[aFields[42]] & "}" & "\n"
-    s &= "\\end{minipage}" & "\n"
-    s &= "\\end{textblock*}" & "\n"
+    ' s &= "\\begin{textblock*}{18cm}(15mm,277mm)" & "\n"
+    ' s &= "\\begin{minipage}{18cm}" & "\n"
+    ' s &= "\\centering" & "\n"
+    ' s &= "\\url{" & Contenido[aFields[42]] & "}" & "\n"
+    ' s &= "\\end{minipage}" & "\n"
+    ' s &= "\\end{textblock*}" & "\n"
 
     s &= "\\end{document}" & "\n"
     s &= "\n"

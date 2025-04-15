@@ -717,22 +717,24 @@ Public Sub CerrarTodo()
 
   FMain.TabPanel1.Index = 0
   FMain.TabPanel6.Index = 0
-  ' Borramos carpetas del caché
   Borrar_Aux
   Wait 0.2
+  ' Borramos carpetas del caché
   FMain.TerminalView1.Input("rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n")
   FMain.TerminalView1.Input("clear" & "\n")
   Wait 0.2
 
-  ' Intenta detener el proceso Bash
-  Try FMain.$Bash.Kill
-  Wait 0.2
-  If FMain.$Bash.State = Process.Running Then
-    Try FMain.$Bash.Terminate
+  ' detiene el proceso Bash
+  If FMain.$Bash And If FMain.$Bash.State = Process.Running Then
+    FMain.$Bash.Kill
     Wait 0.2
-  Endif
-  If FMain.$Bash.State = Process.Running Then
-    Message.Warning("El proceso no pudo ser detenido.")
+    If FMain.$Bash.State = Process.Running Then
+      FMain.$Bash.Terminate
+      Wait 0.2
+      If FMain.$Bash.State = Process.Running Then
+        Message.Warning("El proceso no pudo ser detenido.")
+      Endif
+    Endif
   Endif
 
   ' Cierra la conexión a la BBDD si existe

@@ -8,13 +8,6 @@
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
-  { menuAI Menu
-    Text = ("AI")
-    Visible = False
-    { menudeepseek Menu
-      Text = ("DeepSeek")
-    }
-  }
   { menuProcesarArchivos Menu
     #Translate = False
     Text = "Procesar archivos"
@@ -803,8 +796,8 @@
           Picture = Picture["iconos/AI.svg"]
         }
         { txtAsistenteAI TextBox
-          MoveScaled(18,0,33,4)
-          Placeholder = ("Coloque su API key")
+          MoveScaled(18,0,40,4)
+          Placeholder = ("Coloque su API key con el formato adecuado")
         }
       }
       { Label129 Label
@@ -3378,7 +3371,7 @@
         Text = ("Opcionales para la salida de tipo revista     ")
         Picture = Picture["iconos/revista.svg"]
         { ScrollView14 ScrollView
-          MoveScaled(2,2,90,53)
+          MoveScaled(3,5,90,53)
           Visible = False
           Expand = True
           Arrangement = Arrange.Vertical
@@ -3967,24 +3960,6 @@
               Placeholder = ("Se refiere al ISSN de la versión electrónica del documento")
             }
           }
-          { HBox145 HBox
-            MoveScaled(0,-1,78,4)
-            { btnVerResumen Button
-              MoveScaled(1,0,4,4)
-              Text = ("") & "..."
-            }
-            { Label93 Label
-              MoveScaled(7,0,19,4)
-              Alignment = Align.Right
-              Text = ("Resumen  ")
-            }
-            { !txt56_resumen TextBox
-              MoveScaled(27,0,16,4)
-              #Public = True
-              Expand = True
-              Placeholder = ("Resumen en idioma principal")
-            }
-          }
           { HBox137 HBox
             MoveScaled(0,3,78,4)
             { Label85 Label
@@ -4161,7 +4136,7 @@
           Border = False
           ScrollBar = Scroll.Vertical
           { HBox94 HBox
-            MoveScaled(0,0,78,4)
+            MoveScaled(0,1,78,4)
             { Label76 Label
               MoveScaled(3,0,23,4)
               Alignment = Align.Right
@@ -4175,7 +4150,7 @@
             }
           }
           { HBox98 HBox
-            MoveScaled(0,4,78,4)
+            MoveScaled(0,5,78,4)
             { Label33 Label
               MoveScaled(1,0,23,4)
               Alignment = Align.Right
@@ -4189,7 +4164,7 @@
             }
           }
           { HBox99 HBox
-            MoveScaled(0,8,78,4)
+            MoveScaled(0,9,78,4)
             { Label34 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4202,8 +4177,26 @@
               Placeholder = ("Cargo o título académico del autor principal (solo uno)")
             }
           }
+          { HBox145 HBox
+            MoveScaled(0,13,78,4)
+            { Label93 Label
+              MoveScaled(7,0,23,4)
+              Alignment = Align.Right
+              Text = ("Catálogo resumen  ")
+            }
+            { btnVerResumen Button
+              MoveScaled(32,0,4,4)
+              Picture = Picture["iconos/schedule.svg"]
+            }
+            { !txt56_resumen TextBox
+              MoveScaled(40,0,16,4)
+              #Public = True
+              Expand = True
+              Placeholder = ("Resumen en idioma principal")
+            }
+          }
           { HBox102 HBox
-            MoveScaled(0,12,95,4)
+            MoveScaled(0,18,95,4)
             { Label35 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4226,7 +4219,7 @@
             }
           }
           { HBox108 HBox
-            MoveScaled(0,16,94,4)
+            MoveScaled(0,22,94,4)
             { Label45 Label
               MoveScaled(0,0,23,4)
               Alignment = Align.Right
@@ -4274,7 +4267,7 @@
             }
           }
           { HBox109 HBox
-            MoveScaled(0,20,89,4)
+            MoveScaled(0,26,89,4)
             { Label57 Label
               MoveScaled(-7,0,23,4)
               Alignment = Align.Right
@@ -4322,7 +4315,7 @@
             }
           }
           { HBox146 HBox
-            MoveScaled(0,24,99,4)
+            MoveScaled(0,30,99,4)
             { Label94 Label
               MoveScaled(1,0,23,4)
               Alignment = Align.Right

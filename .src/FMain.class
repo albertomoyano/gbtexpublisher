@@ -3577,12 +3577,15 @@ End
 Public Sub btnBuscarFiltro_Click()
 
   Dim Consulta As String
+  Dim clave As String
 
-  If txtKEYWORDS.Text = "" Then
-    Message.Warning("Debe introducir contenido a buscar.")
+  clave = txtKEYWORDS.Text
+
+  If clave = "" Then
+    Message.Warning("Debe introducir una clave (filtro) a buscar.")
     Return
   Else
-    Consulta = "SELECT * FROM bibtex WHERE keywords LIKE '%" & txtKEYWORDS.Text & "%' ORDER BY id DESC;"
+    Consulta = "SELECT * FROM bibtex WHERE keywords LIKE '%" & Quote$(clave) & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
     TabPanel5.Index = 2
   Endif
@@ -5967,7 +5970,8 @@ End
 
 Public Sub btnAsistenteAI_Click()
 
-  Message.Info("Este desarrollo se está ajustando.")
+  Message.Info("Este desarrollo trabaja solo en el modelo cliente/servidor.")
+
   ' Dim bibtex As String
   ' Dim apiKey As String = Trim(txtAsistenteAI.Text)
   '
