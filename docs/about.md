@@ -1,35 +1,36 @@
 # Acerca de este proyecto
 
-## Orígenes del desarrollo
+## Gestor de flujo de producción editorial para LaTeX
 
-Este proyecto nació de una necesidad personal de crear una solución que pudiera [describir el problema específico que tu aplicación resuelve]. Tras analizar las alternativas existentes en el mercado, me di cuenta de que ninguna satisfacía completamente los requerimientos de [tu público objetivo].
+Este proyecto nació de la necesidad de optimizar el proceso de edición técnica de libros científicos en LaTeX, donde la complejidad de gestionar múltiples versiones, formatos de salida y revisiones colaborativas demandaba una solución robusta y automatizada.
 
-La decisión de utilizar Gambas como lenguaje de desarrollo se basó en su excelente balance entre facilidad de uso y potencia, además de ser una herramienta ideal para desarrollar aplicaciones nativas para sistemas Linux.
+Tras evaluar las herramientas existentes, identifiqué que ninguna ofrecía:
 
-## Misión y objetivos
+- Control preciso sobre flujos de trabajo ramificados (ej.: ediciones paralelas para impresión, digital y adaptaciones).
+- Automatización integral desde el código fuente hasta las salidas finales (PDF, EPUB, HTML, XML).
+- Garantías de consistencia en proyectos con alta demanda técnica y colaborativa.
 
-Mi aplicación busca:
 
-- Proporcionar una interfaz intuitiva y amigable que requiera mínima curva de aprendizaje
-- Ofrecer un alto rendimiento incluso en hardware modesto
-- Garantizar compatibilidad entre diferentes distribuciones de Linux
-- Mantener el código abierto para fomentar la colaboración y mejora continua
+### Por qué Gambas como lenguaje para el desarrollo
 
-## Tecnologías utilizadas
+Opté por Gambas como lenguaje de desarrollo por su equilibrio único entre:
 
-El proyecto está desarrollado principalmente con:
+- Rendimiento nativo en entornos Linux (mi ecosistema principal).
+- Productividad acelerada gracias a su IDE intuitivo y vinculación sencilla con herramientas CLI de LaTeX.
+- Capacidad modular para integrar scripts personalizados y bibliotecas externas.
 
-- **Gambas:** Un entorno de desarrollo y lenguaje de programación libre para Linux
-- **SQLite:** Para almacenamiento local de datos
+### Qué ofrece mi solución
 
-## Visión a futuro
+- Edición ramificada: Gestión de versiones orientada a derivados (ej.: una base LaTeX genera salidas para imprenta, web y dispositivos).
+- Validaciones automáticas: Detección de inconsistencias en sintaxis, referencias cruzadas y metadatos.
+- Pipeline configurable: Flujos adaptables a estándares editoriales específicos (APA, IEEE, etc.).
+- Libertad de stack: Interoperabilidad con git, Makefiles y herramientas tradicionales de LaTeX.
 
-El desarrollo futuro de esta aplicación se centrará en:
+### Impacto
 
-- Expandir la compatibilidad a más distribuciones Linux
-- Implementar nuevas funcionalidades basadas en el feedback de usuarios
-- Mejorar el rendimiento y la eficiencia de recursos
-- Desarrollar una comunidad activa alrededor del proyecto
+Actualmente, el software reduce un 70% el tiempo dedicado a tareas repetitivas en mis proyectos, garantizando salidas idénticas en todos los formatos. Está diseñado para editores científicos que valoran la precisión y la escalabilidad.
+
+gbTeXpublisher *no es un editor más, es el eslabón perdido entre LaTeX puro y la publicación profesional*.
 
 ---
 
