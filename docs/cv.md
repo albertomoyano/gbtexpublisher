@@ -1,9 +1,6 @@
 # Alberto Moyano
 
-# ![Flora](img/82118498.jpeg)
-
-## Alberto Moyano
-**Desarrollador de Software**
+![Flora](img/82118498.jpeg)
 
 Email: alberto.alejandro.moyano@gmail.com  
 GitHub: [github.com](https://github.com/albertomoyano)  
@@ -13,24 +10,37 @@ LinkedIn: [linkedin.com](https://www.linkedin.com/in/edicion-cientifica/)
 
 Soy editor especializado en textos académicos y científicos, con más de 700 títulos editados en una carrera que combina experiencia gráfica editorial con herramientas digitales avanzadas. Actualmente, me encuentro dirigiendo la producción de Ediciones Imago Mundi, trabajo y coedito con editoriales colegas y he dirigido talleres de impresión especializados en libros y revistas, adquiriendo una sólida base en el sector.
 
-## Habilidades Técnicas
+## Conocimientos
 
-- LaTeX
-- Gambas
+### Nivel profesional
+- lenguaje LaTeX
+- entorno BibTeX y bibLaTeX
+- lenguaje Markdown
+- lenguaje Asciidoc
+
+### Nivel avanzado
+- aplicación InDesign
+- aplicación JabRef
+- lenguaje Gambas
+
+### Nivel general
 - Python
-- SQL
-- Git
-- Shell Scripting
-- Qt
+- lenguaje HTML
+- lenguaje CSS
+- lenguaje SQL
+- lenguaje XML
 
-## Experiencia Profesional
+## Experiencia profesional
 
 ### [Nombre de la Empresa]
 **[Cargo]** | [Fecha inicio - Fecha fin]
 
 - [Logro o responsabilidad relevante]
-- [Logro o responsabilidad relevante]
-- [Logro o responsabilidad relevante]
+
+### Experiencia docente y de laboratorio
+- 1992-1992 Dictado de curso de Aldus PageMaker en la Subsecretaría de Publicaciones de la Facultad de Filosofía y Letras (UBA) a cargo de Mauro Dobruskin.
+- 1995 Beta tester de Adobe Latinoamérica para su producto Adobe PageMaker.
+- 2009-2010 Dictado del Seminario Edición de textos académicos y científicos utilizando LaTeX en el Programa de Extensión Universitaria de la Facultad de Filosofía y Letras de la UBA.
 
 ### [Nombre de la Empresa]
 **[Cargo]** | [Fecha inicio - Fecha fin]
@@ -48,8 +58,10 @@ Soy editor especializado en textos académicos y científicos, con más de 700 t
 ### Mi Aplicación Gambas
 Aplicación de escritorio desarrollada en Gambas para [descripción breve de su propósito].
 
-### [Otro Proyecto]
-[Descripción breve]
+### [Membresías]
+- [CervanTeX](http://www.cervantex.es/)
+- [gambas-es.org](https://gambas-es.org)
+- [tex.stackexchange](https://tex.stackexchange.com/)
 
 ---
 
