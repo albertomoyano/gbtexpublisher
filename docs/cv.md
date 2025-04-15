@@ -33,13 +33,13 @@ Soy editor especializado en textos académicos y científicos, con más de 700 t
 ## Experiencia profesional
 
 ### [Ediciones Imago Mundi](https://www.edicionesimagomundi.com/)
-- editorial con un fecundo trabajo en el ámbito de las ciencias sociales y humanas argentinas, siempre vinculada a los campos académico e intelectual, a la producción de investigadores de universidades nacionales y al desarrollo del pensamiento crítico en otras geografías.
+- Editorial con un fecundo trabajo en el ámbito de las ciencias sociales y humanas argentinas, siempre vinculada a los campos académico e intelectual, a la producción de investigadores de universidades nacionales y al desarrollo del pensamiento crítico en otras geografías.
 
 ### Guttenpress
-Imprenta con una fuerte orientación hacia la producción de libros, revistas y catálogos.
+- Imprenta con una fuerte orientación hacia la producción de libros, revistas y catálogos.
 
 ### Saveas...
-- El taller de preprensa y la imprenta tenían una fuerte orientación hacia la producción de folletos y catálogos, además ejercí la dirección de la revista CMyK (la misma funcionaba como herramienta de difusión del taller), se editaron 24 números, se distribuía de manera gratuita en el ambiente publicitario y del diseño gráfico.
+- Taller de preprensa e imprenta con una fuerte orientación hacia la producción de folletos y catálogos, además ejercí la dirección de la revista CMyK (la misma funcionaba como herramienta de difusión del taller), se editaron 24 números, se distribuía de manera gratuita en el ambiente publicitario y del diseño gráfico.
 
 
 ## Experiencia docente y de laboratorio

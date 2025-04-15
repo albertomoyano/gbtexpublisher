@@ -1,4 +1,4 @@
-# Mi Aplicación Gambas - Sitio Web
+# Acerca de gbTeXpublisher
 
 Este repositorio contiene el sitio web oficial de Mi Aplicación Gambas, desarrollada en Gambas para sistemas Linux.
 
