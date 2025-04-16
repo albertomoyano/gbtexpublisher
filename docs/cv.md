@@ -24,7 +24,7 @@ Soy editor especializado en textos académicos y científicos, con más de 700 t
 - lenguaje Gambas
 
 ### Nivel general
-- Python
+- lenguaje Python
 - lenguaje HTML
 - lenguaje CSS
 - lenguaje SQL

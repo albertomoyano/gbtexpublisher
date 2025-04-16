@@ -7,22 +7,22 @@
 
 ## Ubuntu
 
-Para instalar en Ubuntu y derivados:
+Para instalar en Ubuntu y derivados
 
 ```bash
-sudo dpkg -i mi-aplicacion_1.0.0_amd64.deb
+sudo dpkg -i nombre_aplicacion.deb
 sudo apt-get install -f # Para resolver dependencias si es necesario
 ```
 
 ## openSUSE
 
-Para instalar en openSUSE:
+Para instalar en openSUSE
 
 ```bash
-sudo zypper install mi-aplicacion-1.0.0.x86_64.rpm
+sudo zypper install nombre_aplicacion.rpm
 ```
 
-## Descargas:
+## Descargas
 
 ### Versión 0.1.659 (15 de Abril, 2025) - Última versión
 
