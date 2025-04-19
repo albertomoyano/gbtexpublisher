@@ -1,87 +1,49 @@
-name: Deploy DEB Package Release
+name: DEB Package Deployment
 
 on:
   push:
     paths:
       - 'ubuntu/paquetes/*.deb'
-    branches:
-      - main  # Ajusta a tu rama principal
-
-# Configuración para que aparezca en Deployments
-permissions:
-  contents: write
-  deployments: write
 
 jobs:
-  build-and-release:
+  release-deb:
     runs-on: ubuntu-latest
-    environment: 
-      name: deb-releases
-      url: https://github.com/${{ github.repository }}/releases
-    
+    permissions:
+      contents: write
+      deployments: write
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # Necesario para tags
 
-    - name: Setup deployment status
-      uses: actions/github-script@v6
-      id: deployment
-      with:
-        script: |
-          const deployment = await github.rest.repos.createDeployment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: context.ref,
-            auto_merge: false,
-            required_contexts: [],
-            environment: 'deb-releases',
-            transient_environment: true,
-            production_environment: false
-          })
-          return deployment.data.id
-
-    - name: Find DEB package
-      id: package
+    - name: Get DEB info
+      id: deb-info
       run: |
         DEB_FILE=$(ls ubuntu/paquetes/*.deb | head -n 1)
-        DEB_NAME=$(basename "$DEB_FILE")
-        VERSION=$(echo "$DEB_NAME" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || date +"%Y.%m.%d")
-        
-        echo "file_path=$DEB_FILE" >> $GITHUB_OUTPUT
-        echo "file_name=$DEB_NAME" >> $GITHUB_OUTPUT
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "DEB_FILE=$DEB_FILE" >> $GITHUB_ENV
+        echo "name=$(basename "$DEB_FILE")" >> $GITHUB_OUTPUT
+        echo "path=$DEB_FILE" >> $GITHUB_OUTPUT
+        echo "version=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.descargarDEB }}  # Asegúrate que este es el nombre de tu secret
+        GITHUB_TOKEN: ${{ secrets.descargarDEB }}
       with:
-        tag_name: "deb-${{ steps.package.outputs.version }}"
-        name: "DEB Package v${{ steps.package.outputs.version }}"
-        body: |
-          📦 Paquete .deb para Ubuntu
-          
-          **Instalación:**
-          ```bash
-          sudo dpkg -i ${{ steps.package.outputs.file_name }}
-          sudo apt install -f
-          ```
-        files: ${{ steps.package.outputs.file_path }}
-        draft: false
-        prerelease: false
+        files: ${{ steps.deb-info.outputs.path }}
+        tag_name: "deb-${{ steps.deb-info.outputs.version }}"
+        name: "DEB Package ${{ steps.deb-info.outputs.version }}"
+        body: "Package deployed automatically"
 
-    - name: Update deployment status
+    - name: Create Deployment Record
       uses: actions/github-script@v6
-      if: always()
       with:
         script: |
-          await github.rest.repos.createDeploymentStatus({
+          await github.rest.repos.createDeployment({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            deployment_id: ${{ steps.deployment.outputs.result }},
-            state: ${{ job.status == 'success' ? 'success' : 'failure' }},
-            environment_url: 'https://github.com/${{ github.repository }}/releases/tag/deb-${{ steps.package.outputs.version }}'
+            ref: context.ref,
+            description: 'DEB Package Release',
+            environment: 'deb-packages',
+            auto_merge: false,
+            required_contexts: []
           })
