@@ -38,6 +38,10 @@ header_pages:
   - cv.md
   - downloads.md
 
+# Incluye tu CSS
+head_scripts:
+  - /assets/css/custom.scss
+
 # Configuración de Google Analytics (opcional)
 # google_analytics: UA-XXXXXXXX-X
 
