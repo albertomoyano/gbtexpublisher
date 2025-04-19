@@ -4,7 +4,7 @@ Architecture: all
 Maintainer: Alberto Moyano <alberto.alejandro.moyano@gmail.com>
 Installed-Size: 90618
 Depends: gambas3-runtime (>= 3.19), gambas3-runtime (<< 3.99.0), gambas3-gb-image (>= 3.19), gambas3-gb-image (<< 3.99.0), gambas3-gb-qt5 (>= 3.19), gambas3-gb-qt5 (<< 3.99.0), gambas3-gb-form (>= 3.19), gambas3-gb-form (<< 3.99.0), gambas3-gb-db (>= 3.19), gambas3-gb-db (<< 3.99.0), gambas3-gb-db-sqlite3 (>= 3.19), gambas3-gb-db-sqlite3 (<< 3.99.0), gambas3-gb-dbus (>= 3.19), gambas3-gb-dbus (<< 3.99.0), gambas3-gb-desktop (>= 3.19), gambas3-gb-desktop (<< 3.99.0), gambas3-gb-form-dialog (>= 3.19), gambas3-gb-form-dialog (<< 3.99.0), gambas3-gb-util (>= 3.19), gambas3-gb-util (<< 3.99.0), gambas3-gb-settings (>= 3.19), gambas3-gb-settings (<< 3.99.0), gambas3-gb-term (>= 3.19), gambas3-gb-term (<< 3.99.0), gambas3-gb-form-terminal (>= 3.19), gambas3-gb-form-terminal (<< 3.99.0), gambas3-gb-inotify (>= 3.19), gambas3-gb-inotify (<< 3.99.0), gambas3-gb-net (>= 3.19), gambas3-gb-net (<< 3.99.0), gambas3-gb-net-curl (>= 3.19), gambas3-gb-net-curl (<< 3.99.0), gambas3-gb-qt5-ext (>= 3.19), gambas3-gb-qt5-ext (<< 3.99.0), gambas3-gb-qt5-webview (>= 3.19), gambas3-gb-qt5-webview (<< 3.99.0), gambas3-gb-util-web (>= 3.19), gambas3-gb-util-web (<< 3.99.0), mc, exiftool, kitty, pandoc, git
-Filename: gbtexpublisher0_0.1.661-0ubuntu1_all.deb
+Filename: ./gbtexpublisher0_0.1.661-0ubuntu1_all.deb
 Size: 79051302
 MD5sum: 338d9fa66e2647cf6cbd4f77dc62c9e2
 SHA1: 61ac18077a0a678c917df1d3be15f1dac5a5e9f1
