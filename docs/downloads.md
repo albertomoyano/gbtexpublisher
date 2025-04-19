@@ -1,36 +1,57 @@
 # Descargas
 
-## Instrucciones de Instalación
+## 📦 Instalación en Ubuntu/Debian
 
-
-
-
-## Ubuntu
-
-Para instalar en Ubuntu y derivados
+### Método recomendado (última versión estable):
 
 ```bash
-sudo dpkg -i nombre_aplicacion.deb
-sudo apt-get install -f # Para resolver dependencias si es necesario
+# Descargar el paquete .deb más reciente
+wget https://github.com/albertomoyano/gbtexpublisher/releases/latest/download/gbtexpublisher.deb
+
+# Instalar con dependencias
+sudo apt install ./gbtexpublisher.deb
 ```
 
-## openSUSE
+### Alternativa manual:
+1. Descargar el .deb desde [Releases](https://github.com/albertomoyano/gbtexpublisher/releases)
+2. Instalar:
+   ```bash
+   sudo dpkg -i gbtexpublisher.deb
+   sudo apt install -f  # Resuelve dependencias si es necesario
+   ```
 
-Para instalar en openSUSE
-
+## 🔄 Actualización
 ```bash
-sudo zypper install nombre_aplicacion.rpm
+# Primero desinstalar la versión anterior
+sudo apt remove gbtexpublisher
+
+# Luego instalar la nueva versión como arriba
 ```
 
-## Descargas
+## 📥 Descargas por versión
 
-### Versión 0.1.659 (15 de Abril, 2025) - Última versión
+### Versión Actual (v0.1.662)
+- **Fecha**: 19 de Abril 2025
+- **Descargas**:
+  - [gbtexpublisher_0.1.659.deb](https://github.com/albertomoyano/gbtexpublisher/releases/download/v0.1.659/gbtexpublisher_0.1.659.deb) (64-bit)
+  - [Ver todas las versiones](https://github.com/albertomoyano/gbtexpublisher/releases)
 
-- [Ubuntu (.deb, 64-bit)](https://github.com/albertomoyano/gbtexpublisher/tree/main/ubuntu)
-- [openSUSE (.rpm, 64-bit)](https://github.com/albertomoyano/gbtexpublisher/tree/main/suse)
+## ❓ Soporte Técnico
+Si encuentras problemas:
+1. Verifica dependencias:
+   ```bash
+   sudo apt install gambas3-runtime gambas3-gb-qt5
+   ```
+2. Reporta issues en [GitHub Issues](https://github.com/albertomoyano/gbtexpublisher/issues)
+
+## 📜 Historial de Cambios
+- **v0.1.662** (19/04/2025):
+  - Mejoras en estabilidad
+  - Corrección de errores menores
 
 ---
 
-[Inicio](index.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
+[🏠 Inicio](index.md) | [👨‍💻 Desarrollador](cv.md) | [📦 Descargas](downloads.md)
 
-&copy; 2025 gbTeXpublisher. Desarrollada con ❤️ usando Gambas.
+© 2025 gbTeXpublisher | [Licencia GPLv3](LICENSE) | Desarrollado con ❤️ en Gambas
+
