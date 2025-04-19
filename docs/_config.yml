@@ -4,20 +4,13 @@
 title: gbTeXpublisher
 description: Una solución potente y elegante desarrollada con Gambas para asistir al flujo de producción editorial
 
-# Configuración del tema
 # theme: jekyll-theme-cayman
 remote_theme: pmarsceill/just-the-docs
 
-# Incluye tu CSS
-head_scripts:
-  - /assets/css/custom.scss
-  - /assets/css/override.scss
-  
 # Configuración de plugins
 plugins:
   - jekyll-relative-links
   - jekyll-seo-tag
-  - jekyll-sass-converter
 
 sass:
   style: compressed
