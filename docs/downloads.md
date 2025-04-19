@@ -33,7 +33,7 @@ sudo apt remove gbtexpublisher
 ### Versi贸n Actual (v0.1.662)
 - **Fecha**: 19 de Abril 2025
 - **Descargas**:
-  - [gbtexpublisher_0.1.659.deb](https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb) (64-bit)
+  - [gbtexpublisher_0.1.662.deb](https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb) (64-bit)
   - [Ver todas las versiones](https://github.com/albertomoyano/gbtexpublisher/releases)
 
 ## 鉂� Soporte T茅cnico
