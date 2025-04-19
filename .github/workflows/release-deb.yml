@@ -1,39 +1,70 @@
-name: Publish .deb Release
+name: Publish .deb Packages
 
 on:
   push:
     paths:
-      - 'ubuntu/paquetes/*.deb'  # Solo se activa con cambios en .deb
+      - 'ubuntu/paquetes/*.deb'
     branches:
       - main  # Ajusta según tu rama principal
 
 jobs:
-  publish-deb-release:
+  publish-deb:
     runs-on: ubuntu-latest
-    
-    # Esto evita que se ejecute simultáneamente con tu workflow de Pages si fuera necesario
     concurrency:
       group: deb-release-${{ github.ref }}
       cancel-in-progress: false
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Necesario para tags
     
-    - name: Get .deb file
-      id: debfile
+    - name: Find .deb package
+      id: package
       run: |
-        DEB_FILE=$(ls ubuntu/paquetes/*.deb | head -n 1)
-        echo "DEB_FILE=${DEB_FILE}" >> $GITHUB_OUTPUT
-        echo "DEB_NAME=$(basename "$DEB_FILE")" >> $GITHUB_OUTPUT
+        # Busca el primer archivo .deb en el directorio
+        DEB_PATH=$(ls ubuntu/paquetes/*.deb | head -n 1)
+        DEB_NAME=$(basename "$DEB_PATH")
         
-    - name: Create Release
+        # Extrae versión del nombre del archivo (formato: nombre_version_arch.deb)
+        VERSION=$(echo "$DEB_NAME" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || date +"%Y.%m.%d")
+        
+        echo "DEB_PATH=$DEB_PATH" >> $GITHUB_OUTPUT
+        echo "DEB_NAME=$DEB_NAME" >> $GITHUB_OUTPUT
+        echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+        
+        # Opcional: Verifica que el archivo existe
+        if [ ! -f "$DEB_PATH" ]; then
+          echo "Error: No se encontró el archivo .deb"
+          exit 1
+        fi
+
+    - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: deb-v${{ github.run_number }}  # Usamos el número de ejecución como versión
-        name: "Package Release (${{ github.run_number }})"
-        body: "Automated .deb package release"
-        files: ${{ steps.debfile.outputs.DEB_FILE }}
+        tag_name: "deb-${{ steps.package.outputs.VERSION }}"
+        name: "Package v${{ steps.package.outputs.VERSION }}"
+        body: |
+          Paquete .deb para Ubuntu
+          
+          **Instalación:**
+          ```bash
+          sudo dpkg -i ${{ steps.package.outputs.DEB_NAME }}
+          sudo apt install -f  # Para resolver dependencias
+          ```
+          
+          **SHA256:**
+          `$(sha256sum ${{ steps.package.outputs.DEB_PATH }} | cut -d' ' -f1)`
+        files: ${{ steps.package.outputs.DEB_PATH }}
         draft: false
         prerelease: false
+        generate_release_notes: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.descargarDEB }}
+
+    - name: Verify release
+      run: |
+        echo "Release creado exitosamente:"
+        echo "Versión: ${{ steps.package.outputs.VERSION }}"
+        echo "Archivo: ${{ steps.package.outputs.DEB_NAME }}"
