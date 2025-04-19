@@ -8,6 +8,10 @@ description: Una solución potente y elegante desarrollada con Gambas para asist
 # theme: jekyll-theme-cayman
 remote_theme: pmarsceill/just-the-docs
 
+# Incluye tu CSS
+head_scripts:
+  - /assets/css/custom.scss
+
 # Configuración de plugins
 plugins:
   - jekyll-relative-links
@@ -37,10 +41,6 @@ header_pages:
   - index.md
   - cv.md
   - downloads.md
-
-# Incluye tu CSS
-head_scripts:
-  - /assets/css/custom.scss
 
 # Configuración de Google Analytics (opcional)
 # google_analytics: UA-XXXXXXXX-X
