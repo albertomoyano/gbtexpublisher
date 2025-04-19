@@ -1,0 +1,39 @@
+name: Publish .deb Release
+
+on:
+  push:
+    paths:
+      - 'ubuntu/paquetes/*.deb'  # Solo se activa con cambios en .deb
+    branches:
+      - main  # Ajusta según tu rama principal
+
+jobs:
+  publish-deb-release:
+    runs-on: ubuntu-latest
+    
+    # Esto evita que se ejecute simultáneamente con tu workflow de Pages si fuera necesario
+    concurrency:
+      group: deb-release-${{ github.ref }}
+      cancel-in-progress: false
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Get .deb file
+      id: debfile
+      run: |
+        DEB_FILE=$(ls ubuntu/paquetes/*.deb | head -n 1)
+        echo "DEB_FILE=${DEB_FILE}" >> $GITHUB_OUTPUT
+        echo "DEB_NAME=$(basename "$DEB_FILE")" >> $GITHUB_OUTPUT
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: deb-v${{ github.run_number }}  # Usamos el número de ejecución como versión
+        name: "Package Release (${{ github.run_number }})"
+        body: "Automated .deb package release"
+        files: ${{ steps.debfile.outputs.DEB_FILE }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
