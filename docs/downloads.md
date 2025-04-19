@@ -1,15 +1,15 @@
 # Descargas
 
-## 📦 Instalación en Ubuntu/Debian
+## 馃摝 Instalaci贸n en Ubuntu/Debian
 
-### Método recomendado (última versión estable):
+### M茅todo recomendado (煤ltima versi贸n estable):
 
 ```bash
-# Descargar el paquete .deb más reciente
-wget https://github.com/albertomoyano/gbtexpublisher/releases/latest/download/gbtexpublisher.deb
+# Descargar el paquete .deb m谩s reciente
+wget https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb
 
 # Instalar con dependencias
-sudo apt install ./gbtexpublisher.deb
+sudo apt install ./gbtexpublisher0_0.1.662-0ubuntu1_all.deb
 ```
 
 ### Alternativa manual:
@@ -20,23 +20,23 @@ sudo apt install ./gbtexpublisher.deb
    sudo apt install -f  # Resuelve dependencias si es necesario
    ```
 
-## 🔄 Actualización
+## 馃攧 Actualizaci贸n
 ```bash
-# Primero desinstalar la versión anterior
+# Primero desinstalar la versi贸n anterior
 sudo apt remove gbtexpublisher
 
-# Luego instalar la nueva versión como arriba
+# Luego instalar la nueva versi贸n como arriba
 ```
 
-## 📥 Descargas por versión
+## 馃摜 Descargas por versi贸n
 
-### Versión Actual (v0.1.662)
+### Versi贸n Actual (v0.1.662)
 - **Fecha**: 19 de Abril 2025
 - **Descargas**:
-  - [gbtexpublisher_0.1.659.deb](https://github.com/albertomoyano/gbtexpublisher/releases/download/v0.1.659/gbtexpublisher_0.1.659.deb) (64-bit)
+  - [gbtexpublisher_0.1.659.deb](https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb) (64-bit)
   - [Ver todas las versiones](https://github.com/albertomoyano/gbtexpublisher/releases)
 
-## ❓ Soporte Técnico
+## 鉂� Soporte T茅cnico
 Si encuentras problemas:
 1. Verifica dependencias:
    ```bash
@@ -44,14 +44,14 @@ Si encuentras problemas:
    ```
 2. Reporta issues en [GitHub Issues](https://github.com/albertomoyano/gbtexpublisher/issues)
 
-## 📜 Historial de Cambios
+## 馃摐 Historial de Cambios
 - **v0.1.662** (19/04/2025):
   - Mejoras en estabilidad
-  - Corrección de errores menores
+  - Correcci贸n de errores menores
 
 ---
 
-[🏠 Inicio](index.md) | [👨‍💻 Desarrollador](cv.md) | [📦 Descargas](downloads.md)
+[馃彔 Inicio](index.md) | [馃懆鈥嶐煉� Desarrollador](cv.md) | [馃摝 Descargas](downloads.md)
 
-© 2025 gbTeXpublisher | [Licencia GPLv3](LICENSE) | Desarrollado con ❤️ en Gambas
+漏 2025 gbTeXpublisher | [Licencia GPLv3](LICENSE) | Desarrollado con 鉂わ笍 en Gambas
 
