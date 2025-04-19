@@ -11,12 +11,17 @@ remote_theme: pmarsceill/just-the-docs
 # Incluye tu CSS
 head_scripts:
   - /assets/css/custom.scss
-
+  - /assets/css/override.scss
+  
 # Configuración de plugins
 plugins:
   - jekyll-relative-links
   - jekyll-seo-tag
+  - jekyll-sass-converter
 
+sass:
+  style: compressed
+  
 # Permitir enlaces relativos en Markdown
 relative_links:
   enabled: true
