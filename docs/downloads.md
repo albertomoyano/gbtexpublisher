@@ -47,11 +47,11 @@ Si encuentras problemas:
 ## Historial de Cambios
 - **v0.1.662** (19/04/2025):
   - Mejoras en estabilidad
-  - Correcci贸n de errores menores
+  - Corrección de errores menores
 
 ---
 
 [Inicio](index.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
-© 2025 gbTeXpublisher | [Licencia GPLv3](LICENSE) | Desarrollado con ❤️ en Gambas
+2025 gbTeXpublisher | [Licencia GPLv3](LICENSE) | Desarrollado con ❤️ en Gambas
 
