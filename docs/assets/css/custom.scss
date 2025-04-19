@@ -1,0 +1,16 @@
+// docs/assets/css/custom.scss
+
+// Ajusta el tamaño de fuente en bloques de código
+.highlight {
+    font-size: 12px !important;  // Tamaño base (ajusta según necesites)
+    
+    pre {
+        font-size: inherit !important;
+    }
+}
+
+// Opcional: Ajustar tipografía en línea (`code`)
+code {
+    font-size: 12px !important;
+    padding: 0.1em 0.4em !important;
+}
