@@ -1,8 +1,6 @@
 # Descargas
 
-
-wget https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/main/scripts/instalar-gbtexpublisher.sh
-sudo bash instalar-gbtexpublisher.sh
+wget https://github.com/albertomoyano/gbtexpublisher/blob/main/instalar-gbtexpublisher.sh | sudo bash instalar-gbtexpublisher.sh
 
 ## Instalación en Ubuntu/Debian/Linux Mint
 
