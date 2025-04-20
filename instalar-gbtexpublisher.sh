@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Verificar si se está ejecutando como root
+if [ "$EUID" -ne 0 ]; then
+    echo "Este script debe ejecutarse con privilegios de administrador (sudo)."
+    echo "Por favor, ejecuta: sudo $0"
+    exit 1
+fi
+
 # Lista de componentes que necesita tu programa
 COMPONENTES=(
     gambas3-runtime
@@ -40,7 +47,10 @@ instalar_si_faltan() {
     for comp in "${COMPONENTES[@]}"; do
         if ! eval "$comando_check $comp" &>/dev/null; then
             echo "Instalando $comp..."
-            eval "$comando_instalar $comp"
+            if ! eval "$comando_instalar $comp"; then
+                echo "Error al instalar $comp"
+                exit 1
+            fi
         else
             echo "$comp ya está instalado. Omitiendo."
         fi
