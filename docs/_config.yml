@@ -6,7 +6,9 @@ description: Una solución potente y elegante desarrollada con Gambas para asist
 
 # theme: jekyll-theme-cayman
 # remote_theme: pmarsceill/just-the-docs
-remote_theme: rundocs/jekyll-rtd-theme
+# O usa uno de estos temas oficiales:
+# remote_theme: pages-themes/minimal
+remote_theme: pages-themes/midnight
 
 # Configuración de plugins
 plugins:
