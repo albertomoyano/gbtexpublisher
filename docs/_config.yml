@@ -4,11 +4,11 @@
 title: gbTeXpublisher
 description: Una solución potente y elegante desarrollada con Gambas para asistir al flujo de producción editorial
 
+# temas oficiales:
 # theme: jekyll-theme-cayman
 # remote_theme: pmarsceill/just-the-docs
-# O usa uno de estos temas oficiales:
-# remote_theme: pages-themes/minimal
-remote_theme: pages-themes/midnight
+remote_theme: pages-themes/minimal
+# remote_theme: pages-themes/midnight
 
 # Configuración de plugins
 plugins:
