@@ -1,57 +1,49 @@
 # Descargas
 
-## Instalación en Ubuntu/Debian
+## Instalación en Ubuntu/Debian/Linux Mint
 
-### Método recomendado (última versión estable):
+### Método recomendado (instalador automático)
+Ejecuta este comando en tu terminal para instalar automáticamente todas las dependencias y la última versión:
 
 ```bash
-# Descargar el paquete .deb más reciente
-wget https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb
-
-# Instalar con dependencias
-sudo apt install ./gbtexpublisher0_0.1.662-0ubuntu1_all.deb
+wget -qO- https://github.com/albertomoyano/gbtexpublisher/tree/main/instalar-gbtexpublisher.sh | sudo bash
 ```
 
-### Alternativa manual:
-1. Descargar el .deb desde [Releases](https://github.com/albertomoyano/gbtexpublisher/releases)
-2. Instalar:
-   ```bash
-   sudo dpkg -i gbtexpublisher.deb
-   sudo apt install -f  # Resuelve dependencias si es necesario
-   ```
-
-## Actualización
+### Instalación manual
+1. Descarga el paquete más reciente:
 ```bash
-# Primero desinstalar la versi贸n anterior
-sudo apt remove gbtexpublisher
+wget https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb
+```
 
-# Luego instalar la nueva versión como arriba
+2. Instala con gestión de dependencias:
+```bash
+sudo apt install ./gbtexpublisher0_0.1.662-0ubuntu1_all.deb
 ```
 
 ## Descargas por versión
 
 ### Versión Actual (v0.1.662)
-- **Fecha**: 19 de Abril 2025
-- **Descargas**:
-  - [gbtexpublisher_0.1.662.deb](https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb) (64-bit)
-  - [Ver todas las versiones](https://github.com/albertomoyano/gbtexpublisher/releases)
-
-## Soporte Técnico
-Si encuentras problemas:
-1. Verifica dependencias:
-   ```bash
-   sudo apt install gambas3-runtime gambas3-gb-qt5
-   ```
-2. Reporta issues en [GitHub Issues](https://github.com/albertomoyano/gbtexpublisher/issues)
-
-## Historial de Cambios
-- **v0.1.662** (19/04/2025):
+- **Fecha**: 19 de Abril 2025  
+- **Novedades**:
   - Mejoras en estabilidad
   - Corrección de errores menores
+- **Descarga directa**:
+  - [Paquete .deb (64-bit)](https://github.com/albertomoyano/gbtexpublisher/releases/download/deb-2025.04.19/gbtexpublisher0_0.1.662-0ubuntu1_all.deb)
+
+[Ver todas las versiones →](https://github.com/albertomoyano/gbtexpublisher/releases)
+
+
+3. Para reportar bugs:
+[Crear un issue en GitHub](https://github.com/albertomoyano/gbtexpublisher/issues)
+
+## Historial de Cambios
+
+| Versión   | Fecha       | Cambios Importantes               |
+|-----------|------------|-----------------------------------|
+| v0.1.662  | 2025-04-19 | Mejoras de estabilidad general    |
 
 ---
 
 [Inicio](index.md) | [Desarrollador](cv.md) | [Descargas](downloads.md)
 
 2025 gbTeXpublisher | [Licencia GPLv3](https://www-gnu-org.translate.goog/licenses/gpl-3.0.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc) | Desarrollado con ❤️ en Gambas
-
