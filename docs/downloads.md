@@ -1,12 +1,18 @@
 # Descargas
 
+
+wget https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/main/scripts/instalar-gbtexpublisher.sh
+sudo bash instalar-gbtexpublisher.sh
+
 ## Instalación en Ubuntu/Debian/Linux Mint
 
 ### Método recomendado (instalador automático)
 Ejecuta este comando en tu terminal para instalar automáticamente todas las dependencias y la última versión:
 
 ```bash
-wget -qO- https://github.com/albertomoyano/gbtexpublisher/tree/main/instalar-gbtexpublisher.sh | sudo bash
+wget -qO- https://github.com/albertomoyano/gbtexpublisher/tree/main/instalar-gbtexpublisher.sh
+
+sudo bash instalar-gbtexpublisher.sh
 ```
 
 ### Instalación manual
