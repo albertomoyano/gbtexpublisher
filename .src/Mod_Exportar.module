@@ -413,58 +413,41 @@ Public Sub ExportToCatalogo(rutaTexto As String)
       s &= "\\includegraphics[width=45mm]{" & User.Home & "/.gbtexpublisher/falta-tapa.png}" & "\n"
     Endif
     s &= "\\end{textblock*}" & "\n"
-
     s &= "\\begin{textblock*}{45mm}(15mm,100mm)" & "\n"
     s &= "\\begin{minipage}{45mm}" & "\n"
     s &= "\\noindent\\legales{ISBN: \\textbf{" & Contenido[aFields[35]] & "}}\\\\" & "\n"
     s &= "\\noindent\\legales{Formato: \\textbf{" & Contenido[aFields[61]] & "}}\\\\" & "\n"
     s &= "\\noindent\\legales{Páginas: \\textbf{" & Contenido[aFields[50]] & "}}\\\\" & "\n"
     s &= "\\noindent\\legales{Idioma: \\textbf{" & Contenido[aFields[39]] & "}}\\\\" & "\n"
-    s &= "\\noindent\\legales{Fecha: \\textbf{" & ContenidoFecha[bFields[9]] & "}}\\\\" & "\n"
+    If Not IsNull(ContenidoFecha[bFields[9]]) And ContenidoFecha[bFields[9]] <> "" Then
+      s &= "\\noindent\\legales{Fecha: \\textbf{" & ContenidoFecha[bFields[9]] & "}}\\\\" & "\n"
+    Else
+      s &= "\\noindent\\legales{Fecha: \\textbf{FALTA FECHA}}" & "\n"
+    Endif
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
-
     s &= "\\begin{textblock*}{11cm}(75mm,20mm)" & "\n"
     s &= "\\begin{minipage}{11cm}" & "\n"
-    s &= "\\noindent \\cabecera{Colección {\\color{color2}\\textbf{" & Contenido[aFields[51]] & "}}}\\\\" & "\n"
-    s &= "\\noindent \\cabecera{Dirigida por \\textbf{" & Contenido[aFields[52]] & "}}\\\\" & "\n"
+    s &= "\\noindent\\cabecera{Colección {\\color{color2}\\textbf{" & Contenido[aFields[51]] & "}}}\\\\" & "\n"
+    s &= "\\noindent\\cabecera{Dirigida por \\textbf{" & Contenido[aFields[52]] & "}}\\\\" & "\n"
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
-
     s &= "\\begin{textblock*}{11cm}(75mm,45mm)" & "\n"
     s &= "\\begin{minipage}{11cm}" & "\n"
     s &= "\\raggedright \\titulo{" & Contenido[aFields[84]] & "}\\\\" & "\n"
     s &= "\\raggedright \\subtitulo{" & Contenido[aFields[9]] & "}" & "\n"
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
-
     s &= "\\begin{textblock*}{11cm}(75mm,100mm)" & "\n"
     s &= "\\begin{minipage}{11cm}" & "\n"
-    s &= "\\noindent \\texto{" & Contenido[aFields[56]] & "}" & "\n"
+    s &= "\\noindent\\texto{" & Contenido[aFields[56]] & "}" & "\n"
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
-
     s &= "\\begin{textblock*}{11cm}(75mm,77mm)" & "\n"
     s &= "\\begin{minipage}{11cm}" & "\n"
-    s &= "\\noindent \\autoria{" & Contenido[aFields[5]] & "}" & "\n"
+    s &= "\\noindent\\autoria{" & Contenido[aFields[5]] & "}" & "\n"
     s &= "\\end{minipage}" & "\n"
     s &= "\\end{textblock*}" & "\n"
-
-    ' s &= "\\begin{textblock*}{164mm}(15mm,220mm)" & "\n"
-    ' s &= "\\fboxsep2mm" & "\n"
-    ' s &= "\\colorbox{black!5}{" & "\n"
-    ' s &= "\\begin{minipage}{164mm}" & "\n"
-    ' s &= "\\noindent \\biografia{" & txtCV.Text & "}" & "\n"
-    ' s &= "\\end{minipage}}" & "\n"
-    ' s &= "\\end{textblock*}" & "\n"
-
-    ' s &= "\\begin{textblock*}{18cm}(15mm,277mm)" & "\n"
-    ' s &= "\\begin{minipage}{18cm}" & "\n"
-    ' s &= "\\centering" & "\n"
-    ' s &= "\\url{" & Contenido[aFields[42]] & "}" & "\n"
-    ' s &= "\\end{minipage}" & "\n"
-    ' s &= "\\end{textblock*}" & "\n"
-
     s &= "\\end{document}" & "\n"
     s &= "\n"
 
