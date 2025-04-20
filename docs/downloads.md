@@ -6,8 +6,7 @@
 Ejecuta este comando en tu terminal para instalar automáticamente todas las dependencias y la última versión:
 
 ```bash
-wget https://github.com/albertomoyano/gbtexpublisher/blob/main/instalar-gbtexpublisher.sh | sudo bash ./instalar-gbtexpublisher.sh
-
+wget -qO- https://raw.githubusercontent.com/albertomoyano/gbtexpublisher/main/instalar-gbtexpublisher.sh | sudo bash
 ```
 
 ### Instalación manual
