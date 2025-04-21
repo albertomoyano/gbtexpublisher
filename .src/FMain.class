@@ -178,7 +178,6 @@ Public Sub Form_Open()
   btnGuardarCambios.Visible = False
   btnGuardarIGUAL.Visible = False
   btnAgregarCitationKey.Visible = False
-  PanelAI.Visible = False
 
   ' botonera de githubpages de inicio
   BtnNuevoGHP.Visible = True
@@ -1416,7 +1415,6 @@ Public Sub BtnEliminarBib_Click()
   btnGuardarCambios.Visible = False
   btnAgregarCitationKey.Visible = False
   btnGuardarIGUAL.Visible = False
-  PanelAI.Visible = False
 
 End
 
@@ -1429,7 +1427,6 @@ Public Sub BtnNuevoBib_Click()
   btnAgregarCitationKey.Visible = True
   btnAgregarKeyBIB.Visible = True
   txtTMPbiblio.Enabled = True
-  PanelAI.Visible = False
   txtTMPbiblio.Background = Color.White
   txtTMPbiblio.Clear 'limpiamos el campo temporal
   txtTMPbiblio.SetFocus()
@@ -1483,7 +1480,6 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   btnAgregarCitationKey.Visible = False
   btnAgregarKeyBIB.Visible = False
   txtTMPbiblio.Enabled = False
-  PanelAI.Visible = False
 
 End Sub
 
@@ -1551,7 +1547,6 @@ Public Sub btnGuardar_Click()
     btnAgregarCitationKey.Visible = False
     btnGuardarIGUAL.Visible = False
     btnAgregarKeyBIB.Visible = False
-    PanelAI.Visible = False
     txtTMPbiblio.Enabled = False
     txtTMPbiblio.Background = Color.LightGray
     Mod_LimpiarTextBox.LimpiarCamposBIB()
@@ -2281,7 +2276,6 @@ Public Sub btnGuardarIGUAL_Click()
       BtnEliminarBib.Visible = False
       btnAgregarCitationKey.Visible = False
       btnGuardarIGUAL.Visible = False
-      PanelAI.Visible = False
     End If
   Endif
 
@@ -5276,7 +5270,6 @@ Public Sub VListaBIB_Click()' grid en el formulario principal
   btnAgregarCitationKey.Visible = True
   btnGuardar.Visible = False
   btnAgregarKeyBIB.Visible = True
-  PanelAI.Visible = True
   txtTMPbiblio.Enabled = True
   txtTMPbiblio.Background = Color.White
 
@@ -5318,7 +5311,6 @@ Public Sub gridListaBIBactual_Click()' referencias del archivo en curso
   btnAgregarCitationKey.Visible = True
   btnGuardar.Visible = False
   btnAgregarKeyBIB.Visible = True
-  PanelAI.Visible = True
   txtTMPbiblio.Enabled = True
   txtTMPbiblio.Background = Color.White
 

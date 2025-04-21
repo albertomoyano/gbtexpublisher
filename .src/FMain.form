@@ -799,20 +799,6 @@
         ToolTip = ("Borrar entrada")
         Picture = Picture["iconos/borrar.svg"]
       }
-      { PanelAI Panel
-        MoveScaled(35,0,58,4)
-        Arrangement = Arrange.Horizontal
-        AutoResize = True
-        { btnAsistenteAI Button
-          MoveScaled(0,0,16,4)
-          Text = ("Asistente AI")
-          Picture = Picture["iconos/AI.svg"]
-        }
-        { txtAsistenteAI TextBox
-          MoveScaled(18,0,40,4)
-          Placeholder = ("Coloque su API key con el formato adecuado")
-        }
-      }
       { Label129 Label
         MoveScaled(113,0,5,4)
         Visible = False
@@ -933,7 +919,7 @@
       Arrangement = Arrange.Vertical
       Margin = True
       Padding = 4
-      Count = 9
+      Count = 10
       Index = 0
       Text = ("Autoría     ")
       Picture = Picture["iconos/candado-abierto.svg"]
@@ -2974,6 +2960,62 @@
               Expand = True
             }
           }
+        }
+      }
+      Index = 9
+      Text = ("Asistente AI     ")
+      Picture = Picture["iconos/AI.svg"]
+      { Splitter9 Splitter
+        MoveScaled(7,8,114,28)
+        Expand = True
+        Border = False
+        { Panel11 Panel
+          MoveScaled(2,1,78,26)
+          Arrangement = Arrange.Vertical
+          Spacing = True
+          Padding = 4
+          { PanelAI Panel
+            MoveScaled(1,1,72,4)
+            Arrangement = Arrange.Horizontal
+            AutoResize = True
+            { Label168 Label
+              MoveScaled(0,0,16,3.5556)
+              Alignment = Align.Right
+              Text = ("API Gemini ")
+            }
+            { txtAsistenteAI TextBox
+              MoveScaled(18,0,19,4)
+              Expand = True
+              Placeholder = ("Coloque su API key con el formato adecuado")
+            }
+            { btnAsistenteAI Button
+              MoveScaled(54,0,16,4)
+              Text = ("Consultar")
+              Picture = Picture["iconos/clave.svg"]
+            }
+          }
+          { PanelAI2 Panel
+            MoveScaled(1,5,72,4)
+            Arrangement = Arrange.Horizontal
+            AutoResize = True
+            { Label171 Label
+              MoveScaled(0,0,16,3.5556)
+              Alignment = Align.BottomNormal
+              Text = ("Prompt")
+            }
+          }
+          { txtAreaPrompt TextArea
+            MoveScaled(1,9,30,14)
+            Wrap = True
+            ScrollBar = Scroll.Vertical
+          }
+        }
+        { txtResultado TextArea
+          MoveScaled(90,9,21,17)
+          Background = Color.Background
+          ReadOnly = True
+          Wrap = True
+          ScrollBar = Scroll.Vertical
         }
       }
       Index = 0
