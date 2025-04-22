@@ -36,9 +36,8 @@
       Move(0,0,720,36)
       { TextLabel1 TextLabel
         Move(126,0,531,36)
-        Font = Font["Bold"]
         Expand = True
-        Text = ("Seleccione una base de datos para conectarse y empezar a trabajar")
+        Text = ("Seleccione su base de datos <strong>gbtexpublisher.sqlite</strong>")
         Alignment = Align.Center
       }
     }
@@ -47,9 +46,8 @@
       { btnSelecionarBBDD Button
         Move(0,0,144,36)
         NoTabFocus = True
-        ToolTip = ("Seleccionar la base de datos")
         Text = ("Buscar")
-        Picture = Picture["iconos/basededatos.svg"]
+        Picture = Picture["iconos/search.svg"]
       }
       { !txtRutaBBDD TextBox
         Move(315,0,144,36)
@@ -59,6 +57,7 @@
         NoTabFocus = True
         Expand = True
         ReadOnly = True
+        Placeholder = ("Ruta válida de la base de datos gbtexpublisher.sqlite")
       }
     }
     { HBox2 HBox
@@ -72,7 +71,7 @@
         Foreground = Color.Black
         NoTabFocus = True
         Text = ("Conectar")
-        Picture = Picture["iconos/comp.svg"]
+        Picture = Picture["iconos/basededatos.svg"]
       }
     }
     Index = 1
