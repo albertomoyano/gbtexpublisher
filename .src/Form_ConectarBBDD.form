@@ -32,13 +32,23 @@
     Highlight = True
     Index = 0
     Text = ("SQLite")
+    { HBox9 HBox
+      Move(0,0,720,36)
+      { TextLabel1 TextLabel
+        Move(126,0,531,36)
+        Font = Font["Bold"]
+        Expand = True
+        Text = ("Seleccione una base de datos para conectarse y empezar a trabajar")
+        Alignment = Align.Center
+      }
+    }
     { HBox1 HBox
       Move(0,36,720,36)
       { btnSelecionarBBDD Button
         Move(0,0,144,36)
         NoTabFocus = True
         ToolTip = ("Seleccionar la base de datos")
-        Text = ("BBDD")
+        Text = ("Buscar")
         Picture = Picture["iconos/basededatos.svg"]
       }
       { !txtRutaBBDD TextBox
