@@ -161,31 +161,6 @@ Public Sub GitVersion(raw As String) As String 'Función para chequear si hay ve
 
   Return v
 
-  ' Dim s As String
-  ' Dim stx As String[]
-  ' Dim r As String
-  ' Dim v As String
-  '
-  ' v = ""
-  ' If File.RealPath("/tmp/project.txt") Then
-  '   Shell "rm /tmp/project.txt" Wait
-  ' Endif
-  '
-  ' Shell "wget -O '/tmp/project.txt' '" & raw & "'" Wait
-  ' If File.RealPath("/tmp/project.txt") Then
-  '   s = File.Load("/tmp/project.txt")
-  '   stx = Split(s, "\n")
-  '   For Each r In stx
-  '     If InStr(r, "Version=") Then
-  '       If Split(r, "=")[0] = "Version" Then
-  '         v = Split(r, "=")[1]
-  '         Break
-  '       Endif
-  '     Endif
-  '   Next
-  ' Endif
-  ' Return v
-
 End
 
 'funcion para asegurar metadatos basicos a los archivos
@@ -936,5 +911,41 @@ Public Sub CopiarArchivosRevista(rutaTexto As String)'libros y revistas
   If Not File.RealPath(File.Dir(rutaTexto) & "/.gitignore") Then
     Copy "./gitignore" To File.Dir(rutaTexto) & "/.gitignore"
   End If
+
+End
+
+' Módulo para configurar los GridView
+Public Sub ConfigurarGridAI(grid As GridView)
+
+  With grid
+    .Header = True
+    .Grid = True
+    .Columns.Count = 13
+
+    '
+    ' Configuración de columnas
+    For i As Integer = 0 To 5
+      Select Case i
+        Case 0
+          .Columns[i].Title = "Id"
+          .Columns[i].Width = 0
+        Case 1
+          .Columns[i].Title = "Fecha"
+          .Columns[i].Width = 120
+        Case 2
+          .Columns[i].Title = "Tarea"
+          .Columns[i].Width = 250
+        Case 3
+          .Columns[i].Title = "Prompt"
+          .Columns[i].Width = 300
+        Case 4
+          .Columns[i].Title = "Respuesta"
+          .Columns[i].Width = 400
+        Case Else
+          .Columns[i].Title = ""
+          .Columns[i].Width = 0
+      End Select
+    Next
+  End With
 
 End

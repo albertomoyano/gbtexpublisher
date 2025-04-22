@@ -462,7 +462,7 @@
     Margin = True
     Padding = 4
     Border = False
-    Count = 6
+    Count = 7
     Index = 0
     Text = ("Salidas y configuraciones     ")
     Picture = Picture["iconos/logfile.svg"]
@@ -919,7 +919,7 @@
       Arrangement = Arrange.Vertical
       Margin = True
       Padding = 4
-      Count = 10
+      Count = 9
       Index = 0
       Text = ("Autoría     ")
       Picture = Picture["iconos/candado-abierto.svg"]
@@ -2960,62 +2960,6 @@
               Expand = True
             }
           }
-        }
-      }
-      Index = 9
-      Text = ("Asistente AI     ")
-      Picture = Picture["iconos/AI.svg"]
-      { Splitter9 Splitter
-        MoveScaled(7,8,114,28)
-        Expand = True
-        Border = False
-        { Panel11 Panel
-          MoveScaled(2,1,78,26)
-          Arrangement = Arrange.Vertical
-          Spacing = True
-          Padding = 4
-          { PanelAI Panel
-            MoveScaled(1,1,72,4)
-            Arrangement = Arrange.Horizontal
-            AutoResize = True
-            { Label168 Label
-              MoveScaled(0,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("API Gemini ")
-            }
-            { txtAsistenteAI TextBox
-              MoveScaled(18,0,19,4)
-              Expand = True
-              Placeholder = ("Coloque su API key con el formato adecuado")
-            }
-            { btnAsistenteAI Button
-              MoveScaled(54,0,16,4)
-              Text = ("Consultar")
-              Picture = Picture["iconos/clave.svg"]
-            }
-          }
-          { PanelAI2 Panel
-            MoveScaled(1,5,72,4)
-            Arrangement = Arrange.Horizontal
-            AutoResize = True
-            { Label171 Label
-              MoveScaled(0,0,16,3.5556)
-              Alignment = Align.BottomNormal
-              Text = ("Prompt")
-            }
-          }
-          { txtAreaPrompt TextArea
-            MoveScaled(1,9,30,14)
-            Wrap = True
-            ScrollBar = Scroll.Vertical
-          }
-        }
-        { txtResultado TextArea
-          MoveScaled(90,9,21,17)
-          Background = Color.Background
-          ReadOnly = True
-          Wrap = True
-          ScrollBar = Scroll.Vertical
         }
       }
       Index = 0
@@ -5708,6 +5652,101 @@
       { txtDisclaimer TextArea
         MoveScaled(3,3,16,16)
         Expand = True
+        Wrap = True
+        ScrollBar = Scroll.Vertical
+      }
+    }
+    Index = 6
+    Text = ("Asistente AI     ")
+    Picture = Picture["iconos/AI.svg"]
+    { Splitter9 Splitter
+      MoveScaled(1,1,114,70)
+      Expand = True
+      Border = False
+      { Panel11 Panel
+        MoveScaled(2,6,78,58)
+        Arrangement = Arrange.Vertical
+        Spacing = True
+        Padding = 4
+        { PanelAI Panel
+          MoveScaled(1,1,72,4)
+          Arrangement = Arrange.Horizontal
+          AutoResize = True
+          { Label168 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("API Gemini ")
+          }
+          { PictureBox2 PictureBox
+            MoveScaled(18,0,4,4)
+            Picture = Picture.Load("iconos/gemini.png")
+            Alignment = Align.Center
+          }
+          { txtAsistenteAI TextBox
+            MoveScaled(25,0,19,4)
+            Expand = True
+            Placeholder = ("Coloque su API key con el formato adecuado")
+          }
+          { btnAsistenteAI Button
+            MoveScaled(49,0,16,4)
+            Text = ("Consultar")
+            Picture = Picture["iconos/clave.svg"]
+          }
+          { btnGuardarAI Button
+            MoveScaled(67,0,4,4)
+            ToolTip = ("Guardar")
+            Picture = Picture["iconos/guardar.svg"]
+          }
+        }
+        { PanelAI2 Panel
+          MoveScaled(1,5,72,4)
+          Arrangement = Arrange.Horizontal
+          AutoResize = True
+          { Label172 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Tarea ")
+          }
+          { txtTareaAI TextBox
+            MoveScaled(17,0,24,4)
+          }
+          { Label171 Label
+            MoveScaled(41,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Prompt ")
+          }
+          { cmbPrompt ComboBox
+            MoveScaled(57,0,22,4)
+            Expand = True
+            ReadOnly = True
+          }
+        }
+        { Splitter10 Splitter
+          MoveScaled(1,10,57,23)
+          Expand = True
+          Arrangement = Arrange.Vertical
+          Border = False
+          { txtAreaPrompt1 TextArea
+            MoveScaled(0,0,41,9)
+            Wrap = True
+            ScrollBar = Scroll.Vertical
+          }
+          { txtAreaPrompt2 TextArea
+            MoveScaled(0,9,41,10)
+            Wrap = True
+            ScrollBar = Scroll.Vertical
+          }
+        }
+        { gridAI GridView
+          MoveScaled(1,33,47,25)
+          ShowCursor = True
+          ScrollBar = Scroll.Vertical
+        }
+      }
+      { txtResultado TextArea
+        MoveScaled(90,9,21,17)
+        Background = Color.Background
+        ReadOnly = True
         Wrap = True
         ScrollBar = Scroll.Vertical
       }

@@ -147,6 +147,7 @@ Public Sub Form_Open()
   Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
   Mod_RellenarComboBox.RellenarCmbMetadatos()
   Mod_RellenarComboBox.RellenarCmbGitHubPages()
+  Mod_RellenarComboBox.RellenarCmbPrompt()
 
   Dim mtmp As Menu
   Dim fileA As String
@@ -208,6 +209,7 @@ Public Sub Form_Open()
   Mod_Funciones.ConfigurarGridView(gridListaBIBactual)
   Mod_Funciones.ConfigurarGridGLO(VGridGLO)
   Mod_Funciones.ConfigurarGridGLO(gidGLOactual)
+  Mod_Funciones.ConfigurarGridAI(gridAI)
   '
   ' Ejecutar las consultas SQL
   ContenidoBibTotal = Form_ConectarBBDD.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
@@ -222,6 +224,20 @@ Public Sub Form_Open()
   ' Mostrar_ListaGLO()
 
   Splitter6.Layout = [1, 1]
+  Splitter10.Layout = [1, 3]
+  Splitter9.Layout = [1, 1]
+
+End
+
+Public Sub Splitter10_Resize()
+
+  Splitter10.Layout = [1, 3]
+
+End
+
+Public Sub Splitter9_Resize()
+
+  Splitter9.Layout = [1, 1]
 
 End
 
@@ -622,63 +638,6 @@ Public Sub menuCatalogo_Click()
   Mod_Funciones.Borrar_Aux
 
 End
-
-' Public Sub Mostrar_ListaGLO() 'Función que rellena el GridView
-'
-'   Dim i As Integer
-'   Dim Comando As String
-'
-'   VGridGLO.Clear()
-'
-'   Comando = "select * from glosarios ORDER BY name ASC"
-'   Contenido = Form_ConectarBBDD.meConn.Exec(Comando)
-'
-'   'diseñamos el tableview
-'   VGridGLO.Columns.Count = 11
-'   VGridGLO.Header = True
-'   VGridGLO.Columns[0].Title = "ID"
-'   VGridGLO.Columns[0].Width = 0
-'   VGridGLO.Columns[1].Title = "Clave"
-'   VGridGLO.Columns[1].Width = 200
-'   VGridGLO.Columns[2].Title = "Tipo"
-'   VGridGLO.Columns[2].Width = 100
-'   VGridGLO.Columns[3].Title = ""
-'   VGridGLO.Columns[3].Width = 0
-'   VGridGLO.Columns[4].Title = "Nombre"
-'   VGridGLO.Columns[4].Width = 200
-'   VGridGLO.Columns[5].Title = ""
-'   VGridGLO.Columns[5].Width = 0
-'   VGridGLO.Columns[6].Title = "Primera vez"
-'   VGridGLO.Columns[6].Width = 800
-'   VGridGLO.Columns[7].Title = ""
-'   VGridGLO.Columns[7].Width = 0
-'   VGridGLO.Columns[8].Title = ""
-'   VGridGLO.Columns[8].Width = 0
-'   VGridGLO.Columns[9].Title = ""
-'   VGridGLO.Columns[9].Width = 0
-'   VGridGLO.Columns[10].Title = ""
-'   VGridGLO.Columns[10].Width = 0
-'
-'   'ASIGNO LA CANTIDAD DE FILAS SEGUN LA CANTIDAD DE DATOS QUE EXISTEN
-'   VGridGLO.Rows.Count = Contenido.Count
-'
-'   'recorremos el resutado de la consulta para mostrarlo
-'   For i = 0 To Contenido.Count - 1
-'     VGridGLO[i, 0].Text = Contenido!id
-'     VGridGLO[i, 1].Text = Contenido!key
-'     VGridGLO[i, 2].Text = Contenido!type
-'     VGridGLO[i, 3].Text = Contenido!archivo
-'     VGridGLO[i, 4].Text = Contenido!name
-'     VGridGLO[i, 5].Text = Contenido!description
-'     VGridGLO[i, 6].Text = Contenido!first
-'     VGridGLO[i, 7].Text = Contenido!text
-'     VGridGLO[i, 8].Text = Contenido!plural
-'     VGridGLO[i, 9].Text = Contenido!firstplural
-'     VGridGLO[i, 10].Text = Contenido!sort
-'     Contenido.MoveNext
-'   Next
-'
-' End
 
 Public Sub txtCLAVEglo_KeyRelease()' Convertir el texto ingresado a minusculas
 
@@ -5889,7 +5848,7 @@ Public Sub btnChequearURL_Click()
 
   ' Validación básica de URL
   If sUrl = "" Then
-    Message("Por favor, ingresar una dirección válida", "Error")
+    Message.Error("Por favor, ingresar una dirección válida.")
     Return
   End If
 
@@ -5907,7 +5866,7 @@ Public Sub btnVerificar_Click()
   sURL = Trim(txtURL.Text)
 
   If sURL = "" Then
-    Message.Error("Por favor, ingresa una URL.")
+    Message.Error("Por favor, ingresar una dirección válida.")
     Return
   Endif
 
@@ -5938,7 +5897,7 @@ Public Sub btnVerificarDOI_Click()
   sURL = Trim(txtDOI.Text)
 
   If sURL = "" Then
-    Message.Error("Por favor, ingresa un DOI.")
+    Message.Error("Por favor, ingresar una dirección válida.")
     Return
   Endif
 
