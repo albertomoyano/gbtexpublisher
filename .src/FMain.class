@@ -148,6 +148,7 @@ Public Sub Form_Open()
   Mod_RellenarComboBox.RellenarCmbMetadatos()
   Mod_RellenarComboBox.RellenarCmbGitHubPages()
   Mod_RellenarComboBox.RellenarCmbPrompt()
+  Mod_RellenarComboBox.RellenarCmbIdiomaSalida()
 
   Dim mtmp As Menu
   Dim fileA As String
@@ -5919,72 +5920,53 @@ Public Sub btnVerificarDOI_Click()
 
 End
 
-Public Sub btnAsistenteAI_Click()
+Public Sub btnGuardarAI_Click()
 
   Message.Info("Este desarrollo trabaja solo en el modelo cliente/servidor.")
 
-  ' Dim bibtex As String
-  ' Dim apiKey As String = Trim(txtAsistenteAI.Text)
-  '
-  ' ' Verificar que la API Key esté presente y tenga el formato adecuado
-  ' If apiKey = "" Or Left(apiKey, 3) <> "sk-" Then
-  '   Message.Warning("Por favor, ingresa una clave API válida.")
-  '   Return
-  ' Endif
-  '
-  ' ' Obtener la referencia BibTeX seleccionada (ya controlada por el GridView)
-  ' bibtex = ObtenerReferenciaSeleccionada()  ' Esta función ya debe estar implementada
-  '
-  ' ' Llamar al asistente con la clave
-  ' LlamarAIA(bibtex, apiKey)
+End
 
-End Sub
+Public Sub btnAsistenteAI_Click()
 
-' Public Sub LlamarAIA(bibtex As String, apiKey As String)
-'
-'   Dim prompt As String
-'   Dim jsonRequest As String
-'   Dim response As String
-'   Dim resultado As String
-'
-'   ' Construir el prompt para el modelo
-'   prompt = "Analiza la siguiente entrada BibTeX y haz lo siguiente:" & gb.NewLine &
-'     "1. Indica si hay campos importantes faltantes (como editor, ciudad, ISBN, traductor, idioma original o DOI)." & gb.NewLine &
-'     "2. Sugiere si hay versiones traducidas, ediciones más recientes o mejoras posibles." & gb.NewLine &
-'     "3. Propón una versión mejorada del registro BibTeX con los datos que puedas completar o mejorar." & gb.NewLine &
-'     "4. No inventes datos si no estás seguro. Solo sugiere si es razonable o común." & gb.NewLine & gb.NewLine &
-'     "Entrada BibTeX:" & gb.NewLine & bibtex
-'
-'   ' Preparar el cuerpo JSON
-'   jsonRequest = "{" "model" ":" "gpt-3.5-turbo" "," "messages" ":[{" "role" ":" "user" "," "content" ":" "" & Replace(prompt, "" "", "\\\"") & "" "}]}"
-'
-'   ' Llamada a la API usando curl
-'   Shell "curl -s https://api.openai.com/v1/chat/completions " &
-'     "-H 'Content-Type: application/json' " &
-'     "-H 'Authorization: Bearer " & apiKey & "' " &
-'     "-d '" & jsonRequest & "'" To response
-'
-'   ' Procesar la respuesta JSON
-'   resultado = ParsearRespuesta(response)
-'
-'   ' Mostrar la respuesta como cuadro informativo
-'   Message.Info("Análisis IA", resultado)
-'
-' End Sub
+  ' Validar campos vacíos
+  If Trim(txtAreaPrompt1.Text) = "" Then
+    Message.Error("¡El texto del prompt no puede estar vacío!")
+    Return
+  End If
 
-' Public Function ParsearRespuesta(json As String) As String
-'
-'   Dim respuesta As JsonObject
-'
-'   Try respuesta = Json.Decode(json)
-'
-'   If respuesta["choices"] And respuesta["choices"][0]["message"]["content"] Then
-'     Return respuesta["choices"][0]["message"]["content"]
-'   Else
-'     Return "No se pudo obtener una respuesta válida de la IA."
-'   Endif
-'
-' Catch
-'   Return "Error al procesar la respuesta JSON: " & Error.Text
-'
-' End Function
+  If Trim(txtAreaPrompt2.Text) = "" Then
+    Message.Error("¡El texto a procesar no puede estar vacío!")
+    Return
+  End If
+
+  ' Validar API key
+  If Trim(txtAsistenteAI.Text) = "" Then
+    Message.Error("¡La API key es obligatoria!")
+    Return
+  End If
+
+  ' Construir prompt final (combina textarea1 + textarea2)
+  Dim promptFinal As String
+  promptFinal = txtAreaPrompt1.Text & "\n" & txtAreaPrompt2.Text
+
+  ' ' Llamar a la función que envía a la API (ejemplo simplificado)
+  ' LlamarAPI(promptFinal, textboxAPIKey.Text, valueboxTemperatura.Value)
+
+End
+
+Public Sub cmbIdiomaSalida_Change()
+
+  Dim idioma As String
+
+  Select Case cmbIdiomaSalida.Index
+    Case 0
+      idioma = "La respuesta debe ser generada en idioma español"
+    Case 1
+      idioma = "desarrollo.txt"
+    Case 2
+      idioma = "conclusion.txt"
+    Case Else
+      Return
+  End Select
+
+End

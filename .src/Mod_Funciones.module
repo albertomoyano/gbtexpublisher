@@ -924,7 +924,7 @@ Public Sub ConfigurarGridAI(grid As GridView)
 
     '
     ' Configuración de columnas
-    For i As Integer = 0 To 5
+    For i As Integer = 0 To 4
       Select Case i
         Case 0
           .Columns[i].Title = "Id"
@@ -933,14 +933,11 @@ Public Sub ConfigurarGridAI(grid As GridView)
           .Columns[i].Title = "Fecha"
           .Columns[i].Width = 120
         Case 2
-          .Columns[i].Title = "Tarea"
-          .Columns[i].Width = 250
-        Case 3
           .Columns[i].Title = "Prompt"
-          .Columns[i].Width = 300
-        Case 4
+          .Columns[i].Width = 420
+        Case 3
           .Columns[i].Title = "Respuesta"
-          .Columns[i].Width = 400
+          .Columns[i].Width = 420
         Case Else
           .Columns[i].Title = ""
           .Columns[i].Width = 0
