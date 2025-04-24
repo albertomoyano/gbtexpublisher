@@ -418,6 +418,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    hboxHerramientas.Enabled = True
     DirViewRuta.Refresh
     FileView1.Refresh
     TabPanel6.Index = 0
@@ -2911,6 +2912,7 @@ Public Sub menuAbrirRevista_Click()
   If Dialog.OpenFile() Then
     Return
   Else
+    hboxHerramientas.Enabled = True
     TabPanel6.Index = 0
     PanelLaTeX.Visible = False
     PanelLaTeX.Enabled = False
