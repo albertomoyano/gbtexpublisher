@@ -227,7 +227,7 @@
     }
     { menuCatalogo Menu
       #Translate = False
-      Text = "Gacetilla para prensa"
+      Text = "Catálogo y gacetilla para prensa"
       Picture = Picture["iconos/acroread.svg"]
     }
     { Menu11 Menu
@@ -289,7 +289,7 @@
     }
     { menuHTMLghp Menu
       #Translate = False
-      Text = "Página HTML estática /docs"
+      Text = "Página HTML estática para GitHub Pages"
     }
   }
   { Menu57 Menu
@@ -404,7 +404,7 @@
       Picture = Picture["iconos/kitty.svg"]
     }
     { btnCerrarPrograma Button
-      MoveScaled(142,0,14,4)
+      MoveScaled(142,0,16,4)
       Text = ("Salir")
       Picture = Picture["iconos/salir.svg"]
     }
@@ -413,7 +413,7 @@
     MoveScaled(1,5,155,4)
     Enabled = False
     { !MenuApp MenuButton
-      MoveScaled(0,0,19,4)
+      MoveScaled(-9,0,28,4)
       #Public = True
       #Translate = False
       Text = "Ver salidas"
@@ -455,16 +455,12 @@
       Expand = True
       Placeholder = ("coloque aquí su usuario GitLab")
     }
-    { Separator11 Separator
-      MoveScaled(103,0,2.3333,4)
-      #Translate = False
-    }
     { HBox4 HBox
-      MoveScaled(106,0,18,4)
+      MoveScaled(106,0,20,4)
       { PictureBox37 PictureBox
         MoveScaled(0,0,4,4)
         Picture = Picture.Load("iconos/reloj.svg")
-        Alignment = Align.Center
+        Alignment = Align.Right
       }
       { txtTiempo TextLabel
         MoveScaled(4,0,11,4)
@@ -628,7 +624,7 @@
               #Public = True
               #Translate = False
               Expand = True
-              Text = "Complementos"
+              Text = "PDFs adicionales"
               Picture = Picture["iconos/conversor.svg"]
               Menu = "menuLTX"
               MenuOnly = True
@@ -702,7 +698,7 @@
             }
           }
           Index = 1
-          Text = ("Chat     ")
+          Text = ("Post-It     ")
           Picture = Picture["iconos/chat.svg"]
           Index = 0
         }
