@@ -332,7 +332,7 @@
     MoveScaled(1,0,158,4)
     { btnAbrirLibro Button
       MoveScaled(0,0,14,4)
-      Text = ("Libro")
+      Text = ("LaTeX")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdf MenuButton
@@ -349,7 +349,7 @@
     }
     { btnAbrirRevista Button
       MoveScaled(31,0,14,4)
-      Text = ("Revista")
+      Text = ("AsciiDoc")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista MenuButton

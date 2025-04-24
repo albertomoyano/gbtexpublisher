@@ -2904,7 +2904,7 @@ End
 
 Public Sub menuAbrirRevista_Click()
 
-  Dialog.Title = "Seleccionar archivo"
+  Dialog.Title = "Seleccione un archivo AsciiDoc para trabajar"
   Dialog.Filter = ["*.adoc", "Archivo de AsciiDoc"]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
@@ -2918,7 +2918,6 @@ Public Sub menuAbrirRevista_Click()
     PanelQuarto.Enabled = True
     habilitamosRevista()
     TextBox1.Text = Dialog.Path
-    ' sCurrentFilePath = TextBox1.Text
     DirViewRuta.Root = File.Dir(TextBox1.Text)
     guardarTipoDocumentoRevista()
     Mod_LimpiarTextBox.LimpiarCamposBIB()
