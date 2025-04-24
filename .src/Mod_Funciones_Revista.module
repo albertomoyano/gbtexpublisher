@@ -5,12 +5,6 @@ Public Sub CopiarArchivosRevista(rutaTexto As String)
   If Not Exist(File.Dir(rutaTexto) & "/media") Then
     Mkdir File.Dir(rutaTexto) & "/media"
   End If
-  If Not Exist(File.Dir(rutaTexto) & "/config") Then
-    Mkdir File.Dir(rutaTexto) & "/config"
-  End If
-  If Not Exist(File.Dir(rutaTexto) & "/art01") Then
-    Mkdir File.Dir(rutaTexto) & "/art01"
-  End If
   If Not Exist(File.Dir(rutaTexto) & "/tapa") Then
     Mkdir File.Dir(rutaTexto) & "/tapa"
   End If

@@ -64,9 +64,6 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/configEPUB.cfg") Then
     Copy "./configEPUB.cfg" To File.Dir(rutaTexto) & "/files/configEPUB.cfg"
   End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/revista-pdf.tex") Then
-    Copy "./revista-pdf.tex" To File.Dir(rutaTexto) & "/files/revista-pdf.tex"
-  End If
 
   If Not File.RealPath(File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex") Then
     Copy "./inicio-frontmatter.tex" To File.Dir(rutaTexto) & "/artcap/inicio-frontmatter.tex"
@@ -853,47 +850,39 @@ Public Sub CopiarArchivosRevista(rutaTexto As String)'libros y revistas
     End If
   Next
 
-  'copiamos los archivos de preámbulo de libro y revista
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaAY-config.tex") Then
-    Copy "./biblatex-veronaAY-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaAY-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-VerboseIbid-config.tex") Then
-    Copy "./biblatex-VerboseIbid-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-VerboseIbid-config.tex"
-  End If
+  'copiamos los archivos CSL para bibliografia
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-APA-config.tex") Then
     Copy "./biblatex-APA-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-APA-config.tex"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex") Then
-    Copy "./biblatex-ISO690-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex") Then
     Copy "./biblatex-custom-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-custom-config.tex"
   End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/revista-pdf.tex") Then
-    Copy "./revista-pdf.tex" To File.Dir(rutaTexto) & "/files/revista-pdf.tex"
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex") Then
+    Copy "./biblatex-ISO690-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-ISO690-config.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-numeric-config.tex") Then
+    Copy "./biblatex-numeric-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-numeric-config.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-VerboseIbid-config.tex") Then
+    Copy "./biblatex-VerboseIbid-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-VerboseIbid-config.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaC-config.tex") Then
+    Copy "./biblatex-veronaC-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaC-config.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/biblatex-veronaM-config.tex") Then
+    Copy "./biblatex-veronaM-config.tex" To File.Dir(rutaTexto) & "/files/biblatex-veronaM-config.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/files/matriz-revista-pdf.tex") Then
+    Copy "./matriz-revista-pdf.tex" To File.Dir(rutaTexto) & "/files/matriz-revista-pdf.tex"
   End If
 
-  'copiamos los archivos de configuracion general
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/imagoCustom.css") Then
-    Copy "./imagoCustom.css" To File.Dir(rutaTexto) & "/files/imagoCustom.css"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/configHTML.cfg") Then
-    Copy "./configHTML.cfg" To File.Dir(rutaTexto) & "/files/configHTML.cfg"
-  End If
-  If Not File.RealPath(File.Dir(rutaTexto) & "/files/configEPUB.cfg") Then
-    Copy "./configEPUB.cfg" To File.Dir(rutaTexto) & "/files/configEPUB.cfg"
-  End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/readme.md") Then
     Copy "./readme.md" To File.Dir(rutaTexto) & "/readme.md"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/LICENSE") Then
     Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
   End If
-
   ' copiamos archivos para página html
-  If Not File.RealPath(File.Dir(rutaTexto) & "/docs/logo-imago.png") Then
-    Copy "./logo-imago.png" To File.Dir(rutaTexto) & "/docs/logo-imago.png"
-  End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/docs/descarga.png") Then
     Copy "./descarga.png" To File.Dir(rutaTexto) & "/docs/descarga.png"
   End If
@@ -906,7 +895,6 @@ Public Sub CopiarArchivosRevista(rutaTexto As String)'libros y revistas
   If Not File.RealPath(File.Dir(rutaTexto) & "/docs/favicon.jpg") Then
     Copy "./favicon.jpg" To File.Dir(rutaTexto) & "/docs/favicon.jpg"
   End If
-
   ' aseguramos que los epub y kindle no vayan al repositorio
   If Not File.RealPath(File.Dir(rutaTexto) & "/.gitignore") Then
     Copy "./gitignore" To File.Dir(rutaTexto) & "/.gitignore"
