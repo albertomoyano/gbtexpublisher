@@ -2905,7 +2905,7 @@ End
 Public Sub menuAbrirRevista_Click()
 
   Dialog.Title = "Seleccionar archivo"
-  Dialog.Filter = ["*.tex", "Archivo de LaTeX"]
+  Dialog.Filter = ["*.adoc", "Archivo de AsciiDoc"]
   Dialog.AutoExt = True
   Dialog.Path = User.Home
   If Dialog.OpenFile() Then
@@ -3554,8 +3554,7 @@ End
 
 Public Sub btnAbrirRevista_Click()
 
-  Message.Info("Este módulo se encuentra deshabilitado, mientras está en desarrollo.")
-  ' menuAbrirRevista_Click()' abrir revista
+  menuAbrirRevista_Click()' abrir revista
 
 End
 
