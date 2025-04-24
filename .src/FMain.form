@@ -36,20 +36,19 @@
   { menuPDFrevista Menu
     Text = ("menuPDFrevista")
     Visible = False
-    { menuPDFrevistaWEB Menu
-      Text = ("PDF web")
-    }
-    { menuPDFrevistaIMPRENTA Menu
-      Text = ("PDF imprenta")
-    }
-    { menuPDFespecialRevista Menu
-      Text = ("PDF especial")
-    }
     { menuHTMLrevista Menu
       Text = ("HTML5")
     }
     { menuXMLrevista Menu
       Text = ("XML-JATS")
+    }
+    { Menu12 Menu
+    }
+    { menuPDFrevistaWEB Menu
+      Text = ("PDF web")
+    }
+    { menuPDFrevistaIMPRENTA Menu
+      Text = ("PDF imprenta")
     }
   }
   { menuPDF Menu
@@ -65,6 +64,8 @@
     { menuPDFespecialLibro Menu
       Text = ("PDF especial")
     }
+    { Menu13 Menu
+    }
     { menuEPUB1 Menu
       #Translate = False
       Text = "epub + azw3 (basado en páginas)"
@@ -78,9 +79,6 @@
     { menuEPUB2 Menu
       #Translate = False
       Text = "epub (basado en lienzos)"
-    }
-    { menuHTML Menu
-      Text = ("HTML5")
     }
   }
   { menuTEXTBOX Menu
@@ -332,7 +330,7 @@
     MoveScaled(1,0,158,4)
     { btnAbrirLibro Button
       MoveScaled(0,0,14,4)
-      Text = ("LaTeX")
+      Text = ("Libro")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdf MenuButton
@@ -349,7 +347,7 @@
     }
     { btnAbrirRevista Button
       MoveScaled(31,0,14,4)
-      Text = ("AsciiDoc")
+      Text = ("Revista")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista MenuButton
