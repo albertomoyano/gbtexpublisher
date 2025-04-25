@@ -1,10 +1,11 @@
 # Gambas Form File 3.0
 
 { Form Form
-  Move(0,0,960,207)
+  Move(0,0,963,324)
   #Scaled = False
   #Translate = False
-  Text = "Conversión de archivos a formato LaTeX utilizando Pandoc"
+  Expand = True
+  Text = "Conversión de archivos a formato LaTeX y AsciiDoc utilizando Pandoc"
   Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True
@@ -12,7 +13,7 @@
   Margin = True
   Padding = 4
   { HBox1 HBox
-    Move(0,0,942,36)
+    Move(9,18,747,36)
     { Label3 Label
       Move(0,0,162,36)
       NoTabFocus = True
@@ -21,24 +22,26 @@
     }
     { RadioButton1 RadioButton
       Move(234,0,198,36)
+      Expand = True
       AutoResize = True
       Text = ("Archivo con formato .docx          ")
       Value = True
     }
     { RadioButton3 RadioButton
-      Move(666,0,243,36)
+      Move(459,0,243,36)
+      Expand = True
       AutoResize = True
       Text = ("Archivo con formato .rtf ")
     }
   }
   { HBox2 HBox
-    Move(9,36,800,36)
+    Move(9,54,800,36)
     NoTabFocus = True
     { Label1 Label
       Move(9,0,162,36)
       NoTabFocus = True
       Alignment = Align.Right
-      Text = ("Seleccionar origen  ")
+      Text = ("Archivo de origen  ")
     }
     { btnBuscar Button
       Move(297,0,36,36)
@@ -55,8 +58,33 @@
       Placeholder = "Seleccione un archivo word con extensión docx"
     }
   }
+  { HBox5 HBox
+    Move(0,90,747,36)
+  }
+  { HBox4 HBox
+    Move(9,144,747,36)
+    { Label4 Label
+      Move(0,0,162,36)
+      NoTabFocus = True
+      Alignment = Align.Right
+      Text = ("Formato de salida  ")
+    }
+    { RadioButton2 RadioButton
+      Move(234,0,198,36)
+      Expand = True
+      AutoResize = True
+      Text = ("Archivo con formato .tex         ")
+      Value = True
+    }
+    { RadioButton4 RadioButton
+      Move(459,0,243,36)
+      Expand = True
+      AutoResize = True
+      Text = ("Archivo con formato .adoc")
+    }
+  }
   { HBox3 HBox
-    Move(0,80,800,36)
+    Move(9,180,800,36)
     NoTabFocus = True
     { Label2 Label
       Move(0,0,162,36)
@@ -85,18 +113,18 @@
     }
   }
   { HBox7 HBox
-    Move(0,135,952,36)
+    Move(9,216,900,36)
     { Spring1 Spring
-      Move(171,0,117,36)
+      Move(81,0,117,36)
     }
     { btnSalir Button
-      Move(396,0,144,36)
+      Move(234,0,144,36)
       NoTabFocus = True
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]
     }
     { btnListo Button
-      Move(639,0,288,36)
+      Move(414,0,288,36)
       Visible = False
       NoTabFocus = True
       Text = ("Listo")

@@ -2,6 +2,7 @@
 
 ' Private destino As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
 Private contenido As String
+Private contenidoRTF As String
 
 Public Sub Form_Open()
 
@@ -63,26 +64,149 @@ Public Sub btnListo_Click()
 
 End
 
+' Public Sub btnCONVERTIR_Click()
+'
+'   txtORIGEN.Text = Dialog.Path
+'
+'   Dim rutaOrigen As String = txtORIGEN.Text
+'
+'   ' convertir .docx
+'   If RadioButton1.Value = True And RadioButton3.Value = False Then
+'     If Trim(txtDESTINO.Text) = "" Then
+'       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+'     Else
+'       Dim rutaFILTROLUA As String = User.Home &/ ".gbtexpublisher/filtro.lua"
+'       Dim archivoFinal As String = File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+'       ' ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
+'       Shell "pandoc " & Quote$(rutaOrigen) & " -o " & Quote$(archivoFinal) & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & File.Dir(rutaOrigen) & "/media" Wait
+'
+'       If Not File.RealPath(archivoFinal) Then
+'         Message.Error("El archivo no se a podido generar")
+'       Else
+'         ' Paso 1: Leer el archivo generado por Pandoc
+'         contenido = File.Load(archivoFinal)
+'       End If
+'
+'       ' Paso 2: Abrir el archivo original para SOBREESCRIBIRLO con el contenido modificado
+'       Dim hFile As File
+'       hFile = Open archivoFinal For Write
+'
+'       ' Paso 3: Escribir cabecera
+'       Print #hFile, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
+'       Print #hFile, ""
+'       Print #hFile, "\\documentclass{book}"
+'       Print #hFile, "\\usepackage[spanish]{babel}"
+'       Print #hFile, "\\usepackage{fontspec}"
+'       Print #hFile, "\\setmainfont{Libertinus Serif}"
+'       Print #hFile, "\\usepackage{graphicx}"
+'       Print #hFile, "\\usepackage{xcolor}"
+'       Print #hFile, "\\usepackage{longtable}"
+'       Print #hFile, "\\usepackage{caption}"
+'       Print #hFile, "\\usepackage{hyperref}"
+'       Print #hFile, ""
+'       Print #hFile, "\\begin{document}"
+'       Print #hFile, "\\frontmatter"
+'       Print #hFile, ""
+'
+'       ' Paso 4: Escribir contenido original
+'       Print #hFile, contenido
+'
+'       ' Paso 5: Escribir pie
+'       Print #hFile, ""
+'       Print #hFile, "\\end{document}"
+'
+'       ' Paso 6: Cerrar el archivo
+'       Close #hFile
+'
+'       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+'       Shell "mv " & Quote$(rutaOrigen) & " " & Quote$(File.Dir(rutaOrigen) &/ "originales" &/ File.Name(rutaOrigen)) Wait
+'       btnListo.Visible = True
+'       btnListo.Default = True
+'       btnSalir.Visible = False
+'     Endif
+'   Endif
+'
+'   '
+'   '
+'   '
+'   '
+'   ' conversión desde un archivo rtf
+'   Dim archivoFinalRTF As String = File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+'   If RadioButton3.Value And Not RadioButton1.Value Then
+'     If Trim(txtDESTINO.Text) = "" Then
+'       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+'     Else
+'
+'       ' Ejecutar pandoc con manejo de errores
+'       Shell "pandoc " & Quote$(rutaOrigen) & " -o " & Quote$(archivoFinalRTF) & " --from=rtf --to=latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media" Wait
+'
+'       ' Leer el contenido generado
+'       contenidoRTF = File.Load(archivoFinalRTF)
+'
+'       ' Escribir el nuevo contenido con cabecera y pie
+'       Dim hFileRTF As File
+'       hFileRTF = Open archivoFinalRTF For Write
+'
+'       Print #hFileRTF, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
+'       Print #hFileRTF, ""
+'       Print #hFileRTF, "\\documentclass{book}"
+'       Print #hFileRTF, "\\usepackage[spanish]{babel}"
+'       Print #hFileRTF, "\\usepackage{fontspec}"
+'       Print #hFileRTF, "\\setmainfont{Libertinus Serif}"
+'       Print #hFileRTF, "\\usepackage{graphicx}"
+'       Print #hFileRTF, "\\usepackage{xcolor}"
+'       Print #hFileRTF, "\\usepackage{longtable}"
+'       Print #hFileRTF, "\\usepackage{caption}"
+'       Print #hFileRTF, "\\usepackage{hyperref}"
+'       Print #hFileRTF, ""
+'       Print #hFileRTF, "\\begin{document}"
+'       Print #hFileRTF, "\\frontmatter"
+'       Print #hFileRTF, ""
+'       Print #hFileRTF, contenidoRTF
+'       Print #hFileRTF, ""
+'       Print #hFileRTF, "\\end{document}"
+'
+'       Close #hFileRTF
+'
+'       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+'       Shell "mv " & Quote$(rutaOrigen) & " " & Quote$(File.Dir(rutaOrigen) &/ "originales" &/ File.Name(rutaOrigen)) Wait
+'       btnListo.Visible = True
+'       btnListo.Default = True
+'       btnSalir.Visible = False
+'     End If
+'   Endif
+'
+' End
+
 Public Sub btnCONVERTIR_Click()
 
   txtORIGEN.Text = Dialog.Path
+
+  Dim rutaOrigen As String = txtORIGEN.Text
 
   ' convertir .docx
   If RadioButton1.Value = True And RadioButton3.Value = False Then
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
-      Dim rutaFILTROLUA As String = User.Home &/ ".gbtexpublisher/filtro.lua"
-      Dim archivoFinal As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+      Dim rutaFILTROLUA As String = Quote$(User.Home &/ ".gbtexpublisher/filtro.lua")
+      Dim mediaDir As String = Quote$(File.Dir(rutaOrigen) &/ "media")
+      Dim archivoFinal As String = Quote$(File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex")
       ' ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
-      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinal) & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media" Wait
+      Shell "pandoc " & Quote$(rutaOrigen) & " -o " & archivoFinal & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & mediaDir Wait
 
-      ' Paso 1: Leer el archivo generado por Pandoc
-      contenido = File.Load(archivoFinal)
+      Dim rutaBase As String = File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+
+      ' Verifica y carga el archivo (usa rutaBase SIN comillas)
+      If Not File.RealPath(rutaBase) Then
+        Message.Error("El archivo no se pudo generar")
+      Else
+        contenido = File.Load(rutaBase)  ' ¡Sin Quote$() aquí!
+      End If
 
       ' Paso 2: Abrir el archivo original para SOBREESCRIBIRLO con el contenido modificado
       Dim hFile As File
-      hFile = Open archivoFinal For Write
+      hFile = Open rutaBase For Write
 
       ' Paso 3: Escribir cabecera
       Print #hFile, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
@@ -112,7 +236,8 @@ Public Sub btnCONVERTIR_Click()
       Close #hFile
 
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
-      Shell "mv " & Quote$(Dialog.Path) & " " & Quote$(File.Dir(Dialog.Path) &/ "originales" &/ File.Name(Dialog.Path)) Wait
+      Dim destinoOriginal As String = Quote$(File.Dir(rutaOrigen) &/ "originales" &/ File.Name(rutaOrigen))
+      Shell "mv " & Quote$(rutaOrigen) & " " & destinoOriginal Wait
       btnListo.Visible = True
       btnListo.Default = True
       btnSalir.Visible = False
@@ -123,51 +248,53 @@ Public Sub btnCONVERTIR_Click()
   '
   '
   '
-  ' conversión desde un archivo rtf
-  Dim archivoFinalRTF As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
-  If RadioButton3.Value And Not RadioButton1.Value Then
-    If Trim(txtDESTINO.Text) = "" Then
-      Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
-    Else
-
-      ' Ejecutar pandoc con manejo de errores
-      Shell "pandoc " & Quote$(Dialog.Path) & " -o " & Quote$(archivoFinalRTF) & " --from=rtf --to=latex --wrap=none --extract-media=" & File.Dir(Dialog.Path) & "/media" Wait
-
-      ' Leer el contenido generado
-      contenido = File.Load(archivoFinalRTF)
-
-      ' Escribir el nuevo contenido con cabecera y pie
-      Dim hFileRTF As File
-      hFileRTF = Open archivoFinalRTF For Write
-
-      Print #hFileRTF, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
-      Print #hFileRTF, ""
-      Print #hFileRTF, "\\documentclass{book}"
-      Print #hFileRTF, "\\usepackage[spanish]{babel}"
-      Print #hFileRTF, "\\usepackage{fontspec}"
-      Print #hFileRTF, "\\setmainfont{Libertinus Serif}"
-      Print #hFileRTF, "\\usepackage{graphicx}"
-      Print #hFileRTF, "\\usepackage{xcolor}"
-      Print #hFileRTF, "\\usepackage{longtable}"
-      Print #hFileRTF, "\\usepackage{caption}"
-      Print #hFileRTF, "\\usepackage{hyperref}"
-      Print #hFileRTF, ""
-      Print #hFileRTF, "\\begin{document}"
-      Print #hFileRTF, "\\frontmatter"
-      Print #hFileRTF, ""
-      Print #hFileRTF, contenido
-      Print #hFileRTF, ""
-      Print #hFileRTF, "\\end{document}"
-
-      Close #hFileRTF
-
-      ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
-      Shell "mv " & Quote$(Dialog.Path) & " " & Quote$(File.Dir(Dialog.Path) &/ "originales" &/ File.Name(Dialog.Path)) Wait
-      btnListo.Visible = True
-      btnListo.Default = True
-      btnSalir.Visible = False
-    End If
-  Endif
+  ' ' conversión desde un archivo rtf
+  ' Dim archivoFinalRTF As String = Quote$(File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex")
+  ' If RadioButton3.Value And Not RadioButton1.Value Then
+  '   If Trim(txtDESTINO.Text) = "" Then
+  '     Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
+  '   Else
+  '     Dim mediaDirRTF As String = Quote$(File.Dir(Dialog.Path) & "/media")
+  '
+  '     ' Ejecutar pandoc con manejo de errores
+  '     Shell "pandoc " & Quote$(rutaOrigen) & " -o " & archivoFinalRTF & " --from=rtf --to=latex --wrap=none --extract-media=" & mediaDirRTF Wait
+  '
+  '     ' Leer el contenido generado
+  '     contenidoRTF = File.Load(archivoFinalRTF)
+  '
+  '     ' Escribir el nuevo contenido con cabecera y pie
+  '     Dim hFileRTF As File
+  '     hFileRTF = Open archivoFinalRTF For Write
+  '
+  '     Print #hFileRTF, "%  archivo con cabecera para libros, compilar con LuaLaTeX"
+  '     Print #hFileRTF, ""
+  '     Print #hFileRTF, "\\documentclass{book}"
+  '     Print #hFileRTF, "\\usepackage[spanish]{babel}"
+  '     Print #hFileRTF, "\\usepackage{fontspec}"
+  '     Print #hFileRTF, "\\setmainfont{Libertinus Serif}"
+  '     Print #hFileRTF, "\\usepackage{graphicx}"
+  '     Print #hFileRTF, "\\usepackage{xcolor}"
+  '     Print #hFileRTF, "\\usepackage{longtable}"
+  '     Print #hFileRTF, "\\usepackage{caption}"
+  '     Print #hFileRTF, "\\usepackage{hyperref}"
+  '     Print #hFileRTF, ""
+  '     Print #hFileRTF, "\\begin{document}"
+  '     Print #hFileRTF, "\\frontmatter"
+  '     Print #hFileRTF, ""
+  '     Print #hFileRTF, contenidoRTF
+  '     Print #hFileRTF, ""
+  '     Print #hFileRTF, "\\end{document}"
+  '
+  '     Close #hFileRTF
+  '
+  '     ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
+  '     Dim destinoOriginalRTF As String = Quote$(File.Dir(rutaOrigen) &/ "originales" &/ File.Name(rutaOrigen))
+  '     Shell "mv " & Quote$(rutaOrigen) & " " & destinoOriginalRTF Wait
+  '     btnListo.Visible = True
+  '     btnListo.Default = True
+  '     btnSalir.Visible = False
+  '   End If
+  ' Endif
 
 End
 
