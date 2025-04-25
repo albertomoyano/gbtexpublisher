@@ -17,7 +17,7 @@
     { Label5 TextLabel
       Move(54,0,621,36)
       Expand = True
-      Text = ("Dispone de un filtro Lua para editar en <strong>user.home/.gbtexpuglisher/filtro.lua</strong>")
+      Text = ("Se dispone de un filtro Lua para editar en <strong>user.home/.gbtexpuglisher/filtro.lua</strong>")
       Alignment = Align.Center
     }
   }
