@@ -5,7 +5,7 @@
   #Scaled = False
   #Translate = False
   Expand = True
-  Text = "Conversión de archivos a formato LaTeX y AsciiDoc utilizando Pandoc"
+  Text = "Conversión de archivos Word (.docx) a formato LaTeX y AsciiDoc utilizando Pandoc"
   Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True
