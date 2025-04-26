@@ -1,12 +1,13 @@
 ' Gambas class file
 
-Private $de As String
-
-Public Sub _new(de As String)
-
-  ' $de = de
-
-End
+'
+' Private $de As String
+'
+' Public Sub _new(de As String)
+'
+'   ' $de = de
+'
+' End
 
 ' Public Sub Form_Open()
 '
