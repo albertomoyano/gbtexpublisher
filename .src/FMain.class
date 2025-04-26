@@ -5972,3 +5972,7 @@ Public Sub cmbIdiomaSalida_Change()
   End Select
 
 End
+
+Public Sub Label178_MouseDown()
+
+End

@@ -1,33 +1,107 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<svg version="1.1" width="64" height="64" color-interpolation="linearRGB"
-     xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
- <g>
-  <path style="fill:#010101; fill-opacity:0.5019"
-        d="M36 61H41L64 30L58 27L59 31L36 61z"
-  />
-  <path style="fill:none; stroke:#010000; stroke-width:4"
-        d="M2 28V41L36 59L58 30V17L25 5L2 28z"
-  />
-  <linearGradient id="gradient0" gradientUnits="userSpaceOnUse" x1="13.84" y1="-38.14" x2="58.34" y2="-27.7">
-   <stop offset="0" stop-color="#ffffff"/>
-   <stop offset="1" stop-color="#ffefa5"/>
-  </linearGradient>
-  <path style="fill:url(#gradient0)"
-        d="M2 28L36 43L58 17L25 5L2 28z"
-  />
-  <linearGradient id="gradient1" gradientUnits="userSpaceOnUse" x1="51.59" y1="-14.77" x2="92.98" y2="3.63">
-   <stop offset="0" stop-color="#f1b704"/>
-   <stop offset="1" stop-color="#fcffac"/>
-  </linearGradient>
-  <path style="fill:url(#gradient1)"
-        d="M36 43V59L58 30V17L36 43z"
-  />
-  <linearGradient id="gradient2" gradientUnits="userSpaceOnUse" x1="22.97" y1="92.59" x2="-14.6" y2="67.29">
-   <stop offset="0.0076" stop-color="#f2ee90"/>
-   <stop offset="1" stop-color="#fffeac"/>
-  </linearGradient>
-  <path style="fill:url(#gradient2)"
-        d="M2 28V41L36 59V43L2 28z"
-  />
- </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="28"
+   height="28"
+   color-interpolation="linearRGB"
+   id="svg29"
+   sodipodi:docname="notitas.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs33" />
+  <sodipodi:namedview
+     id="namedview31"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="13.5625"
+     inkscape:cx="26.764977"
+     inkscape:cy="20.202765"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg29" />
+  <g
+     id="g27"
+     transform="matrix(0.43406312,0,0,0.43406312,0.22119816,0.19242308)">
+    <path
+       style="fill:#010101;fill-opacity:0.5019"
+       d="m 36,61 h 5 l 23,-31 -6,-3 1,4 z"
+       id="path2" />
+    <path
+       style="fill:none;stroke:#010000;stroke-width:4"
+       d="M 2,28 V 41 L 36,59 58,30 V 17 L 25,5 Z"
+       id="path4" />
+    <linearGradient
+       id="gradient0"
+       gradientUnits="userSpaceOnUse"
+       x1="13.84"
+       y1="-38.139999"
+       x2="58.34"
+       y2="-27.700001">
+      <stop
+         offset="0"
+         stop-color="#ffffff"
+         id="stop6" />
+      <stop
+         offset="1"
+         stop-color="#ffefa5"
+         id="stop8" />
+    </linearGradient>
+    <path
+       style="fill:url(#gradient0)"
+       d="M 2,28 36,43 58,17 25,5 Z"
+       id="path11" />
+    <linearGradient
+       id="gradient1"
+       gradientUnits="userSpaceOnUse"
+       x1="51.59"
+       y1="-14.77"
+       x2="92.980003"
+       y2="3.6300001">
+      <stop
+         offset="0"
+         stop-color="#f1b704"
+         id="stop13" />
+      <stop
+         offset="1"
+         stop-color="#fcffac"
+         id="stop15" />
+    </linearGradient>
+    <path
+       style="fill:url(#gradient1)"
+       d="M 36,43 V 59 L 58,30 V 17 Z"
+       id="path18" />
+    <linearGradient
+       id="gradient2"
+       gradientUnits="userSpaceOnUse"
+       x1="22.969999"
+       y1="92.589996"
+       x2="-14.6"
+       y2="67.290001">
+      <stop
+         offset="0.0076"
+         stop-color="#f2ee90"
+         id="stop20" />
+      <stop
+         offset="1"
+         stop-color="#fffeac"
+         id="stop22" />
+    </linearGradient>
+    <path
+       style="fill:url(#gradient2)"
+       d="M 2,28 V 41 L 36,59 V 43 Z"
+       id="path25" />
+  </g>
 </svg>

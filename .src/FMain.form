@@ -549,7 +549,7 @@
       }
     }
     { Splitter1 Splitter
-      MoveScaled(1,11,126,65)
+      MoveScaled(1,11,126,76)
       Expand = True
       Border = False
       { TabPanel6 TabPanel
@@ -616,7 +616,7 @@
         Index = 0
       }
       { Splitter2 Splitter
-        MoveScaled(52,1,74,64)
+        MoveScaled(52,1,74,73)
         Arrangement = Arrange.Vertical
         Border = False
         { Panel1 Panel
@@ -691,8 +691,11 @@
           }
         }
         { TabPanel7 TabPanel
-          MoveScaled(2,45,70,18)
+          MoveScaled(2,45,70,23)
           Arrangement = Arrange.Fill
+          Spacing = True
+          Margin = True
+          Padding = 4
           Border = False
           Count = 2
           Index = 0
@@ -716,6 +719,47 @@
           Index = 1
           Text = ("Post-It     ")
           Picture = Picture["iconos/chat.svg"]
+          { Panel17 Panel
+            MoveScaled(1,1,61,17)
+            Arrangement = Arrange.Vertical
+            { Panel14 HBox
+              MoveScaled(0,0,56,4)
+              { Label177 Label
+                MoveScaled(0,0,20,4)
+                AutoResize = True
+                Text = ("Comprobar notas cada  ")
+              }
+              { Label178 Label
+                MoveScaled(38,0,13,4)
+                AutoResize = True
+                Text = ("  segundos")
+              }
+            }
+            { Panel15 HBox
+              MoveScaled(0,4,56,4)
+              { chkSonido CheckBox
+                MoveScaled(1,0,16,4)
+                Text = ("Incluir sonido")
+                Value = CheckBox.True
+              }
+            }
+            { Panel16 HBox
+              MoveScaled(0,8,56,4)
+              { Spring1 Spring
+                MoveScaled(0,0,15,4)
+              }
+              { Button2 Button
+                MoveScaled(20,0,16,4)
+                Text = ("Nota nueva")
+                Picture = Picture["iconos/notitas.svg"]
+              }
+              { Button3 Button
+                MoveScaled(37,0,16,4)
+                Text = ("Ver ocultos")
+                Picture = Picture["iconos/search.svg"]
+              }
+            }
+          }
           Index = 0
         }
       }
@@ -916,7 +960,7 @@
         ReadOnly = True
       }
       { Spring7 Spring
-        MoveScaled(62,0,27,3)
+        MoveScaled(62,0,15,4)
       }
     }
     { TabPanel2 TabPanel
