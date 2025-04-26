@@ -1,115 +1,116 @@
 ' Gambas class file
 
-Private $Note As Collection
-
-Public Sub _New(cNote As Collection)
-
-  ' $Note = cNote
-  ' If $note["x"] = "0" Then $Note["x"] = Desktop.width - (300 + (Windows.count * 38))
-  ' If $note["y"] = "0" Then $Note["y"] = Windows.Count * 38
-  ' If $note["color"] = 0 Then $Note["color"] = Color.Lighter(Color.Lighter(Color.Yellow))
-  ' If $note["desde"] = "" Then $Note["desde"] = Now()
-
-End
-
-Public Sub Form_Open()
-
-  '   Me.x = $Note["x"]
-  '   Me.y = $Note["y"]
-  '   pbMove.Picture = Picture.Load("chincheta.png")
-  '   pbHide.Picture = Picture.Load("hide.png")
-  '   panel2.Background = $Note["color"]
-  '   texto.Background = $Note["color"]
-  '   tlfecha.Text = Format($Note["desde"], "dd/mm/yyyy hh:nn:ss")
-  '   texto.Text &= $Note["texto"]
-  '   tlfecha.text &= ("<br>Enviada por:<br> <b>") & $Note["de"] & "</b>"
-  '   texto.Raise
-  '   PictureBox1.Lower
-  '   If $note["de"] = $note["para"] Then
-  '     texto.readonly = False
-  '     pbGuardar.Visible = True
-  '     pbGuardar.Enabled = False
-  '
-  '   Else
-  '     texto.readonly = True
-  '     pbGuardar.Visible = False
-  '   Endif
-  '
-  ' Catch
-  '
-  '   Debug Error.Text;; Error.Where
-
-End
-
-Public Sub pbDelete_Click()
-
-  ' Me.Hide()
-  ' Wait 0.01
-  ' Try Connections[Application.Name].Exec("delete from postits where id=&1", $Note["id"])
-  ' If Error Then
-  '   Message.Error(Error.Text & " - " & Error.Where)
-  '   Return
-  ' Endif
-  ' Try fMain.visibles.Extract(fMain.visibles.Find($Note["id"]))
-  ' Me.Close()
-
-End
-
-Public Sub movedores_MouseDrag()
-
-  ' Me.Mouse = Mouse.Pointing
-  ' Me.Move(Mouse.ScreenX - Mouse.Startx - Last.x - 11, Mouse.ScreenY - Mouse.StartY - Last.y - 11) '11 porque el tamaño del cursor del ratón es 22 y si no hacemos esto, se toma como referencia el centro del cursor y no la punta
-
-End
-
-Public Sub movedores_MouseUp()
-
-  ' Me.Mouse = Mouse.Arrow
-  ' If (Me.x <> $Note["x"] Or Me.Y <> $Note["y"]) Then
-  '   $Note["x"] = Me.X
-  '   $Note["y"] = Me.Y
-  '   actualizar()
-  ' Endif
-
-End
-
-Private Sub actualizar()
-
-  ' Try Connections[Application.Name].Exec("update postits set de=&2, para=&3, fecha=&4, texto=&5, desde=&6, oculto=&7, x=&8, y=&9, color=&{10},leido=&{11} where id=&1", $Note["id"], $Note["de"], $Note["para"], $Note["fecha"], $Note["texto"], $Note["desde"], $Note["oculto"], $Note["x"], $Note["y"], $Note["color"], $note["leido"])
-  ' If Error Then message.Error(Error.Text & " " & Error.Where)
-
-End
-
-Public Sub Texto_Change()
-
-  ' pbGuardar.enabled = True
-
-End
-
-Public Sub pbResponder_Click()
-
-  ' Dim f As Form
-  '
-  ' f = New Notanueva($Note["de"])
-  ' f.Visible = True
-
-End
-
-Public Sub pbGuardar_Click()
-
-  ' If $Note["texto"] <> texto.Text Then
-  '   $Note["texto"] = texto.Text
-  '   actualizar()
-  '   pbGuardar.enabled = False
-  ' Endif
-
-End
-
-Public Sub pbHide_Click()
-
-  ' $Note["oculto"] = 1
-  ' fMain.visibles.Extract(fMain.visibles.Find($Note["id"]))
-  ' actualizar()
-  ' Me.close()
-
-End
+'
+' Private $Note As Collection
+'
+' Public Sub _New(cNote As Collection)
+'
+'   ' $Note = cNote
+'   ' If $note["x"] = "0" Then $Note["x"] = Desktop.width - (300 + (Windows.count * 38))
+'   ' If $note["y"] = "0" Then $Note["y"] = Windows.Count * 38
+'   ' If $note["color"] = 0 Then $Note["color"] = Color.Lighter(Color.Lighter(Color.Yellow))
+'   ' If $note["desde"] = "" Then $Note["desde"] = Now()
+'
+' End
+'
+' Public Sub Form_Open()
+'
+'   '   Me.x = $Note["x"]
+'   '   Me.y = $Note["y"]
+'   '   pbMove.Picture = Picture.Load("chincheta.png")
+'   '   pbHide.Picture = Picture.Load("hide.png")
+'   '   panel2.Background = $Note["color"]
+'   '   texto.Background = $Note["color"]
+'   '   tlfecha.Text = Format($Note["desde"], "dd/mm/yyyy hh:nn:ss")
+'   '   texto.Text &= $Note["texto"]
+'   '   tlfecha.text &= ("<br>Enviada por:<br> <b>") & $Note["de"] & "</b>"
+'   '   texto.Raise
+'   '   PictureBox1.Lower
+'   '   If $note["de"] = $note["para"] Then
+'   '     texto.readonly = False
+'   '     pbGuardar.Visible = True
+'   '     pbGuardar.Enabled = False
+'   '
+'   '   Else
+'   '     texto.readonly = True
+'   '     pbGuardar.Visible = False
+'   '   Endif
+'   '
+'   ' Catch
+'   '
+'   '   Debug Error.Text;; Error.Where
+'
+' End
+'
+' Public Sub pbDelete_Click()
+'
+'   ' Me.Hide()
+'   ' Wait 0.01
+'   ' Try Connections[Application.Name].Exec("delete from postits where id=&1", $Note["id"])
+'   ' If Error Then
+'   '   Message.Error(Error.Text & " - " & Error.Where)
+'   '   Return
+'   ' Endif
+'   ' Try fMain.visibles.Extract(fMain.visibles.Find($Note["id"]))
+'   ' Me.Close()
+'
+' End
+'
+' Public Sub movedores_MouseDrag()
+'
+'   ' Me.Mouse = Mouse.Pointing
+'   ' Me.Move(Mouse.ScreenX - Mouse.Startx - Last.x - 11, Mouse.ScreenY - Mouse.StartY - Last.y - 11) '11 porque el tamaño del cursor del ratón es 22 y si no hacemos esto, se toma como referencia el centro del cursor y no la punta
+'
+' End
+'
+' Public Sub movedores_MouseUp()
+'
+'   ' Me.Mouse = Mouse.Arrow
+'   ' If (Me.x <> $Note["x"] Or Me.Y <> $Note["y"]) Then
+'   '   $Note["x"] = Me.X
+'   '   $Note["y"] = Me.Y
+'   '   actualizar()
+'   ' Endif
+'
+' End
+'
+' Private Sub actualizar()
+'
+'   ' Try Connections[Application.Name].Exec("update postits set de=&2, para=&3, fecha=&4, texto=&5, desde=&6, oculto=&7, x=&8, y=&9, color=&{10},leido=&{11} where id=&1", $Note["id"], $Note["de"], $Note["para"], $Note["fecha"], $Note["texto"], $Note["desde"], $Note["oculto"], $Note["x"], $Note["y"], $Note["color"], $note["leido"])
+'   ' If Error Then message.Error(Error.Text & " " & Error.Where)
+'
+' End
+'
+' Public Sub Texto_Change()
+'
+'   ' pbGuardar.enabled = True
+'
+' End
+'
+' Public Sub pbResponder_Click()
+'
+'   ' Dim f As Form
+'   '
+'   ' f = New Notanueva($Note["de"])
+'   ' f.Visible = True
+'
+' End
+'
+' Public Sub pbGuardar_Click()
+'
+'   ' If $Note["texto"] <> texto.Text Then
+'   '   $Note["texto"] = texto.Text
+'   '   actualizar()
+'   '   pbGuardar.enabled = False
+'   ' Endif
+'
+' End
+'
+' Public Sub pbHide_Click()
+'
+'   ' $Note["oculto"] = 1
+'   ' fMain.visibles.Extract(fMain.visibles.Find($Note["id"]))
+'   ' actualizar()
+'   ' Me.close()
+'
+' End

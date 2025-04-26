@@ -29,14 +29,14 @@
       Alignment = Align.Right
       Text = ("Seleccionar método  ")
     }
-    { RadioButton1 RadioButton
+    { rbFormatoDOCX RadioButton
       Move(234,0,198,36)
       Expand = True
       AutoResize = True
       Text = ("Archivo con formato .docx          ")
       Value = True
     }
-    { RadioButton3 RadioButton
+    { rbFormatoRTF RadioButton
       Move(459,0,243,36)
       Expand = True
       AutoResize = True
@@ -78,14 +78,14 @@
       Alignment = Align.Right
       Text = ("Formato de salida  ")
     }
-    { RadioButton2 RadioButton
+    { rbTEX RadioButton
       Move(234,0,198,36)
       Expand = True
       AutoResize = True
       Text = ("Archivo con formato .tex         ")
       Value = True
     }
-    { RadioButton4 RadioButton
+    { rbADOC RadioButton
       Move(459,0,243,36)
       Expand = True
       AutoResize = True
