@@ -5973,6 +5973,6 @@ Public Sub cmbIdiomaSalida_Change()
 
 End
 
-Public Sub Label178_MouseDown()
+Public Sub btnNotaNueva_Click()
 
 End

@@ -722,6 +722,9 @@
           { Panel17 Panel
             MoveScaled(1,1,61,17)
             Arrangement = Arrange.Vertical
+            Spacing = True
+            Margin = True
+            Padding = 4
             { Panel14 HBox
               MoveScaled(0,0,56,4)
               { Label177 Label
@@ -738,27 +741,31 @@
                 Value = 1
               }
               { Label178 Label
-                MoveScaled(38,0,13,4)
+                MoveScaled(27,0,11,4)
                 AutoResize = True
                 Text = ("  segundos")
               }
-            }
-            { Panel15 HBox
-              MoveScaled(0,4,56,4)
+              { Separator11 Separator
+                MoveScaled(38,0,2.3333,4)
+                #Translate = False
+              }
               { chkSonido CheckBox
-                MoveScaled(1,0,16,4)
+                MoveScaled(41,0,16,4)
                 Text = ("Incluir sonido")
                 Value = CheckBox.True
               }
             }
+            { Panel15 HBox
+              MoveScaled(0,4,56,2)
+            }
             { Panel16 HBox
-              MoveScaled(0,8,56,4)
-              { Button2 Button
+              MoveScaled(0,7,56,4)
+              { btnNotaNueva Button
                 MoveScaled(1,0,16,4)
                 Text = ("Nota nueva")
                 Picture = Picture["iconos/notitas.svg"]
               }
-              { Button3 Button
+              { btnVerOcultos Button
                 MoveScaled(17,0,16,4)
                 Text = ("Ver ocultos")
                 Picture = Picture["iconos/search.svg"]

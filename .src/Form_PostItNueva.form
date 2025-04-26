@@ -14,7 +14,7 @@
       MoveScaled(0,0,13,4)
       AutoResize = True
       Alignment = Align.Right
-      Text = ("Mostrar desde")
+      Text = ("Mostrar desde ")
     }
     { dSince DateBox
       MoveScaled(14,0,22,4)
@@ -22,15 +22,15 @@
     }
   }
   { HBox3 HBox
-    MoveScaled(1,40,37,4)
+    MoveScaled(1,41,37,4)
     Invert = True
-    { bSend ToolButton
-      MoveScaled(15,0,12,4)
+    { bSend Button
+      MoveScaled(20,0,16,4)
       Text = ("Enviar")
       Picture = Picture["iconos/agregar.svg"]
     }
-    { bCancel ToolButton
-      MoveScaled(0,0,13,4)
+    { bCancel MenuButton
+      MoveScaled(0,0,16,4)
       Text = ("Cancelar")
       Picture = Picture["iconos/salir.svg"]
     }
@@ -47,10 +47,11 @@
     { Label1 Label
       MoveScaled(1,0,8,4)
       Alignment = Align.Right
-      Text = ("Para:")
+      Text = ("Para ")
     }
     { para ComboBox
       MoveScaled(11,0,25,4)
+      Expand = True
     }
   }
 }
