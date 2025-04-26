@@ -729,6 +729,14 @@
                 AutoResize = True
                 Text = ("Comprobar notas cada  ")
               }
+              { intervaloNotas SpinBox
+                MoveScaled(20,0,9,4)
+                ToolTip = ("Intervalo entre comprobaciones de Correo y de Notas de Escritorio")
+                MinValue = 1
+                MaxValue = 120
+                Step = 5
+                Value = 1
+              }
               { Label178 Label
                 MoveScaled(38,0,13,4)
                 AutoResize = True
