@@ -730,7 +730,7 @@
                 Text = ("Comprobar notas cada  ")
               }
               { intervaloNotas SpinBox
-                MoveScaled(20,0,9,4)
+                MoveScaled(20,0,6,4)
                 ToolTip = ("Intervalo entre comprobaciones de Correo y de Notas de Escritorio")
                 MinValue = 1
                 MaxValue = 120
@@ -753,18 +753,18 @@
             }
             { Panel16 HBox
               MoveScaled(0,8,56,4)
-              { Spring1 Spring
-                MoveScaled(0,0,15,4)
-              }
               { Button2 Button
-                MoveScaled(20,0,16,4)
+                MoveScaled(1,0,16,4)
                 Text = ("Nota nueva")
                 Picture = Picture["iconos/notitas.svg"]
               }
               { Button3 Button
-                MoveScaled(37,0,16,4)
+                MoveScaled(17,0,16,4)
                 Text = ("Ver ocultos")
                 Picture = Picture["iconos/search.svg"]
+              }
+              { Spring1 Spring
+                MoveScaled(38,0,5,4)
               }
             }
           }
