@@ -418,17 +418,19 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    TextBox1.Text = Dialog.Path
+    Dim rutaOrigen As String = TextBox1.Text
+    TerminalView1.Input("cd " & rutaOrigen & "\n")' movemos la consola a la ruta del archivo
+    BaseName = File.BaseName(rutaOrigen)
+    DirViewRuta.Root = File.Dir(rutaOrigen)
     hboxHerramientas.Enabled = True
     DirViewRuta.Refresh
     FileView1.Refresh
     TabPanel6.Index = 0
     ' borramos las carpetas que se crean en el cache
-    Shell "rm -rf " & User.Home & "/.local/share/org.gambas.*" & "\n" Wait
-    TextBox1.Text = Dialog.Path
-    DirViewRuta.Root = File.Dir(TextBox1.Text)
+    Shell Quote$("rm -rf " & User.Home & "/.local/share/org.gambas.*") & "\n" Wait
     Mod_Funciones.Borrar_Aux
-    Shell "rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log" & "\n" Wait
-    BaseName = File.BaseName(TextBox1.Text)
+    Shell Quote$("rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log") & "\n" Wait
     rutaFILES = File.Dir(TextBox1.Text) & "/files"
     PanelLaTeX.Visible = True
     PanelLaTeX.Enabled = True
@@ -492,9 +494,8 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
     txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
     txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-    'posicionamos la consola con el path del archivo de trabajo
-    TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
     WebView1.Url = "https://www.google.com"
+    TerminalView1.Input("clear" & "\n")' limpiamos la consola
   Endif
 
 End
@@ -2912,6 +2913,11 @@ Public Sub menuAbrirRevista_Click()
   If Dialog.OpenFile() Then
     Return
   Else
+    TextBox1.Text = Dialog.Path
+    Dim rutaOrigen As String = TextBox1.Text
+    TerminalView1.Input("cd " & rutaOrigen & "\n")' movemos la consola a la ruta del archivo
+    BaseName = File.BaseName(rutaOrigen)
+    DirViewRuta.Root = File.Dir(rutaOrigen)
     hboxHerramientas.Enabled = True
     TabPanel6.Index = 0
     PanelLaTeX.Visible = False
@@ -2919,8 +2925,6 @@ Public Sub menuAbrirRevista_Click()
     PanelQuarto.Visible = True
     PanelQuarto.Enabled = True
     habilitamosRevista()
-    TextBox1.Text = Dialog.Path
-    DirViewRuta.Root = File.Dir(TextBox1.Text)
     guardarTipoDocumentoRevista()
     Mod_LimpiarTextBox.LimpiarCamposBIB()
     HBoxPanelRevista.Visible = True
@@ -2973,9 +2977,7 @@ Public Sub menuAbrirRevista_Click()
     txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
     txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
     txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-    'posicionamos la consola con el path del archivo de trabajo
-    TerminalView1.Input("cd " & File.Dir(TextBox1.Text) & "\n" & "clear" & "\n")
-    TerminalView1.SetFocus()
+    TerminalView1.Input("clear" & "\n")' limpiamos la consola
   Endif
 
   ' 'comienza metadatos
@@ -4539,7 +4541,7 @@ Public Sub btnMenuGIT_Click()
   IdGitHub = "git@github.com:" & usuario & "/" & BaseName & ".git"
 
   ' Verificar si el directorio actual es un repositorio Git
-  resultado = Shell$("git rev-parse --is-inside-work-tree 2>/dev/null")
+  resultado = Shell$(BaseName &/ "git rev-parse --is-inside-work-tree 2>/dev/null")
   If Trim(resultado) = "true" Then
     repoLocal = True
   Endif

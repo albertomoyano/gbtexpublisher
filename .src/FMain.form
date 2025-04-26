@@ -487,8 +487,15 @@
     Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
       MoveScaled(1,6,128,4)
-      { Spring1 Spring
-        MoveScaled(10,0,29,4)
+      { PictureBox2 PictureBox
+        MoveScaled(0,0,4,4)
+        Picture = Picture.Load("iconos/duplicados.svg")
+        Alignment = Align.Right
+      }
+      { Label176 Label
+        MoveScaled(9,-1,31,5)
+        Expand = True
+        Text = ("gbTeXpublisher no admite rutas de directorios que contengan espacios")
       }
       { Panel8 Panel
         MoveScaled(44,0,83,4)
