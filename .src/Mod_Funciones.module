@@ -902,35 +902,30 @@ Public Sub CopiarArchivosRevista(rutaTexto As String)'libros y revistas
 
 End
 
-' Módulo para configurar los GridView
-Public Sub ConfigurarGridAI(grid As GridView)
+Public Sub ConfigurarGridAI()
+
+  ' Contenido = Form_ConectarBBDD.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
+  ' gridNotas.Rows.Count = Contenido.Count
+
+  Dim grid As GridView = FMain.gridAI
+
+  grid.Clear() ' Limpiar configuración previa
 
   With grid
     .Header = True
     .Grid = True
-    .Columns.Count = 13
-
-    '
-    ' Configuración de columnas
-    For i As Integer = 0 To 4
-      Select Case i
-        Case 0
-          .Columns[i].Title = "Id"
-          .Columns[i].Width = 0
-        Case 1
-          .Columns[i].Title = "Fecha"
-          .Columns[i].Width = 120
-        Case 2
-          .Columns[i].Title = "Prompt"
-          .Columns[i].Width = 420
-        Case 3
-          .Columns[i].Title = "Respuesta"
-          .Columns[i].Width = 420
-        Case Else
-          .Columns[i].Title = ""
-          .Columns[i].Width = 0
-      End Select
-    Next
+    .Columns.Count = 3
+    .Columns[0].Title = "id"
+    .Columns[0].Width = 0
+    .Columns[1].Title = "Fecha"
+    .Columns[1].Width = 120
+    .Columns[2].Title = "Prompt"
+    .Columns[2].Width = 840
   End With
+
+  FMain.btnPromptNuevo.Visible = True
+  FMain.btnPromptBorrar.Visible = False
+  FMain.btnPromptGuardar.Visible = False
+  FMain.btnPromptGuardarMod.Visible = False
 
 End

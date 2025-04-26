@@ -147,7 +147,6 @@ Public Sub Form_Open()
   Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
   Mod_RellenarComboBox.RellenarCmbMetadatos()
   Mod_RellenarComboBox.RellenarCmbGitHubPages()
-  Mod_RellenarComboBox.RellenarCmbPrompt()
   Mod_RellenarComboBox.RellenarCmbIdiomaSalida()
 
   Dim mtmp As Menu
@@ -210,7 +209,7 @@ Public Sub Form_Open()
   Mod_Funciones.ConfigurarGridView(gridListaBIBactual)
   Mod_Funciones.ConfigurarGridGLO(VGridGLO)
   Mod_Funciones.ConfigurarGridGLO(gidGLOactual)
-  Mod_Funciones.ConfigurarGridAI(gridAI)
+  Mod_Funciones.ConfigurarGridAI()
   '
   ' Ejecutar las consultas SQL
   ContenidoBibTotal = Form_ConectarBBDD.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")
@@ -5970,9 +5969,5 @@ Public Sub cmbIdiomaSalida_Change()
     Case Else
       Return
   End Select
-
-End
-
-Public Sub btnNotaNueva_Click()
 
 End

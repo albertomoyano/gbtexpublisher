@@ -11,16 +11,6 @@ Public Sub RellenarCmbIdiomaSalida()
 
 End
 
-Public Sub RellenarCmbPrompt()
-
-  FMain.cmbPrompt.Add("")'
-  FMain.cmbPrompt.Add("Traducir al español")
-  FMain.cmbPrompt.Add("Traducir al inglés y al portugues")
-  FMain.cmbPrompt.Add("Completar referencia")
-  FMain.cmbPrompt.Add("Completar glosario")
-
-End
-
 Public Sub RellenarCmbGitHubPages()
 
   FMain.cmbRolAutores.Add("")': Seleccionar un rol

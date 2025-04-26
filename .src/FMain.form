@@ -616,7 +616,7 @@
         Index = 0
       }
       { Splitter2 Splitter
-        MoveScaled(52,1,74,73)
+        MoveScaled(54,1,74,73)
         Arrangement = Arrange.Vertical
         Border = False
         { Panel1 Panel
@@ -5786,18 +5786,37 @@
           MoveScaled(1,8,85,4)
           Arrangement = Arrange.Horizontal
           AutoResize = True
-          { Label171 Label
-            MoveScaled(1,0,16,3.5556)
-            Alignment = Align.Right
-            Text = ("Prompt ")
+          { btnPromptNuevo Button
+            MoveScaled(0,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Agregar entrada")
+            Picture = Picture["iconos/+nuevo.svg"]
           }
-          { cmbPrompt ComboBox
-            MoveScaled(23,0,22,4)
-            Expand = True
-            ReadOnly = True
+          { btnPromptBorrar Button
+            MoveScaled(4,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Eliminar entrada")
+            Picture = Picture["iconos/borrar.svg"]
+          }
+          { btnPromptGuardar Button
+            MoveScaled(8,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Guardar entrada")
+            Picture = Picture["iconos/guardar.svg"]
+          }
+          { btnPromptGuardarMod Button
+            MoveScaled(12,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Guardar cambios")
+            Picture = Picture["iconos/guardarComo.svg"]
+          }
+          { txtIdPrompt TextBox
+            MoveScaled(17,0,13,4)
+            Visible = False
           }
           { Label173 Label
-            MoveScaled(47,0,16,4)
+            MoveScaled(48,0,16,4)
+            Expand = True
             Alignment = Align.Right
             Text = ("Respuesta en ")
           }
@@ -5806,37 +5825,28 @@
             ReadOnly = True
           }
         }
+        { gridAI GridView
+          MoveScaled(1,12,47,15)
+          ShowCursor = True
+          ScrollBar = Scroll.Vertical
+        }
         { Splitter10 Splitter
-          MoveScaled(1,13,57,23)
+          MoveScaled(1,34,57,23)
           Expand = True
           Arrangement = Arrange.Vertical
           Border = False
-          { txtAreaPrompt1 TextArea
+          { !txtAreaPrompt1 TextArea
             MoveScaled(0,0,41,9)
+            #Public = True
             Wrap = True
             ScrollBar = Scroll.Vertical
           }
-          { txtAreaPrompt2 TextArea
+          { !txtAreaPrompt2 TextArea
             MoveScaled(0,9,41,10)
+            #Public = True
             Wrap = True
             ScrollBar = Scroll.Vertical
           }
-        }
-        { PanelAI4 Panel
-          MoveScaled(1,36,85,4)
-          Arrangement = Arrange.Horizontal
-          AutoResize = True
-          { Label175 Label
-            MoveScaled(0,0,16,3.5556)
-            Expand = True
-            Alignment = Align.BottomNormal
-            Text = ("Historial de consultas")
-          }
-        }
-        { gridAI GridView
-          MoveScaled(1,40,47,25)
-          ShowCursor = True
-          ScrollBar = Scroll.Vertical
         }
       }
       { Panel12 Panel
