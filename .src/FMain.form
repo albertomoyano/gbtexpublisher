@@ -486,19 +486,28 @@
     Text = ("Salidas y configuraciones     ")
     Picture = Picture["iconos/logfile.svg"]
     { HBox93 HBox
-      MoveScaled(1,6,128,4)
-      { PictureBox2 PictureBox
-        MoveScaled(0,0,4,4)
-        Picture = Picture.Load("iconos/duplicados.svg")
-        Alignment = Align.Right
-      }
-      { Label176 Label
-        MoveScaled(9,-1,31,5)
+      MoveScaled(1,6,159,4)
+      { Panel13 Panel
+        MoveScaled(1,0,60,4)
         Expand = True
-        Text = ("gbTeXpublisher no admite rutas de directorios que contengan espacios")
+        { PictureBox2 PictureBox
+          MoveScaled(0,0,4,4)
+          Picture = Picture.Load("iconos/duplicados.svg")
+          Alignment = Align.Right
+        }
+        { Label176 Label
+          MoveScaled(5,0,52,4)
+          Expand = True
+          AutoResize = True
+          Text = ("gbTeXpublisher no admite rutas de directorios que contengan espacios")
+        }
+      }
+      { Separator8 Separator
+        MoveScaled(64,0,2.3333,4)
+        #Translate = False
       }
       { Panel8 Panel
-        MoveScaled(44,0,83,4)
+        MoveScaled(75,0,83,4)
         Expand = True
         Arrangement = Arrange.Horizontal
         { !MenuButton1 MenuButton
