@@ -147,7 +147,6 @@ Public Sub Form_Open()
   Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
   Mod_RellenarComboBox.RellenarCmbMetadatos()
   Mod_RellenarComboBox.RellenarCmbGitHubPages()
-  Mod_RellenarComboBox.RellenarCmbIdiomaSalida()
 
   Dim mtmp As Menu
   Dim fileA As String
@@ -197,6 +196,12 @@ Public Sub Form_Open()
   btnGuardarCapitulo.Visible = False
   btnGuardarCambiosCapitulo.Visible = False
   btnBorrarCapitulo.Visible = False
+
+  ' botonera de asistente de AI
+  btnPromptNuevo.Visible = True
+  btnPromptBorrar.Visible = False
+  btnPromptGuardar.Visible = False
+  btnPromptGuardarMod.Visible = False
 
   ' asignamos tipografia monoespaciada al textarea de biblio
   txtTMPbiblio.Font = Font["Monospace"]
@@ -337,18 +342,6 @@ Public Sub Menu17_Click()'abrir pdf
   Else
     Message.Error("El archivo <b>pdf-" & BaseName & ".pdf</b> no existe.")
   Endif
-
-End
-
-Public Sub Menu11_Click()'cerrar el programa
-
-  Mod_Funciones.CerrarTodo()
-
-End
-
-Public Sub btnCerrarPrograma_Click()
-
-  Mod_Funciones.CerrarTodo()
 
 End
 
@@ -5921,12 +5914,6 @@ Public Sub btnVerificarDOI_Click()
 
 End
 
-Public Sub btnGuardarAI_Click()
-
-  Message.Info("Este desarrollo trabaja solo en el modelo cliente/servidor.")
-
-End
-
 Public Sub btnAsistenteAI_Click()
 
   ' Validar campos vacíos
@@ -5955,19 +5942,8 @@ Public Sub btnAsistenteAI_Click()
 
 End
 
-Public Sub cmbIdiomaSalida_Change()
+Public Sub Menu14_Click()
 
-  Dim idioma As String
-
-  Select Case cmbIdiomaSalida.Index
-    Case 0
-      idioma = "La respuesta debe ser generada en idioma español"
-    Case 1
-      idioma = "desarrollo.txt"
-    Case 2
-      idioma = "conclusion.txt"
-    Case Else
-      Return
-  End Select
+  Mod_Funciones.CerrarTodo()
 
 End

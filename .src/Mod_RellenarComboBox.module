@@ -1,16 +1,5 @@
 ' Gambas module file
 
-Public Sub RellenarCmbIdiomaSalida()
-
-  FMain.cmbIdiomaSalida.Add("español")
-  FMain.cmbIdiomaSalida.Add("portugues")
-  FMain.cmbIdiomaSalida.Add("inglés")
-  FMain.cmbIdiomaSalida.Add("italiano")
-  FMain.cmbIdiomaSalida.Add("alemán")
-  FMain.cmbIdiomaSalida.Add("francés")
-
-End
-
 Public Sub RellenarCmbGitHubPages()
 
   FMain.cmbRolAutores.Add("")': Seleccionar un rol
