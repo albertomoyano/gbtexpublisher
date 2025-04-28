@@ -69,7 +69,7 @@ Public Sub btnExportarBIB_Click()
     s &= "\n\n@Comment{gbTeXpublisher: databaseType:biblatex; fecha de creación: " & fecha & ";}"
 
     ' Establece la ruta y el nombre del archivo de salida
-    outputFile = txtdestino.Text &/ txtNombre.Text & ".bib"
+    outputFile = txtdestino.Text & "/" & txtNombre.Text & ".bib"
     File.Save(outputFile, s)
 
     ' Mostrar mensaje de exportación terminada en el label

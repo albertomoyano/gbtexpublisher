@@ -1,6 +1,5 @@
 ' Gambas class file
 
-' Private destino As String = File.Dir(Dialog.Path) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
 Private contenido As String
 Private contenidoRTF As String
 
@@ -75,15 +74,15 @@ Public Sub btnCONVERTIR_Click()
     If Trim(txtDESTINO.Text) = "" Then
       Message.Error("El campo de Destino no puede estar vacío", "Cancelar")
     Else
-      Dim rutaFILTROLUA As String = Quote$(User.Home &/ ".gbtexpublisher/filtro.lua")
-      Dim mediaDir As String = Quote$(File.Dir(rutaOrigen) &/ "media")
+      Dim rutaFILTROLUA As String = Quote$(User.Home & "/.gbtexpublisher/filtro.lua")
+      Dim mediaDir As String = Quote$(File.Dir(rutaOrigen) & "/media")
       Dim archivoFinal As String
 
       ' Determinar la extensión del archivo final según el formato seleccionado
       If rbTEX.Value Then
-        archivoFinal = Quote$(File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex")
+        archivoFinal = Quote$(File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".tex")
       Else If rbADOC.Value Then
-        archivoFinal = Quote$(File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".adoc")
+        archivoFinal = Quote$(File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".adoc")
       Endif
 
       ' Ejecutar Pandoc según el formato seleccionado
@@ -95,7 +94,7 @@ Public Sub btnCONVERTIR_Click()
 
       ' Solo aplicar el formato LaTeX si se seleccionó TEX
       If rbTEX.Value Then
-        Dim rutaBase As String = File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex"
+        Dim rutaBase As String = File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".tex"
 
         ' Verifica y carga el archivo (usa rutaBase SIN comillas)
         If Not File.RealPath(rutaBase) Then
@@ -137,7 +136,7 @@ Public Sub btnCONVERTIR_Click()
       Endif
 
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
-      Dim destinoOriginal As String = Quote$(File.Dir(rutaOrigen) &/ "originales" &/ File.Name(rutaOrigen))
+      Dim destinoOriginal As String = Quote$(File.Dir(rutaOrigen) & "/originales/" & File.Name(rutaOrigen))
       Shell "mv " & Quote$(rutaOrigen) & " " & destinoOriginal Wait
       btnListo.Visible = True
       btnListo.Default = True
@@ -154,9 +153,9 @@ Public Sub btnCONVERTIR_Click()
     Else
       ' Determinar la extensión del archivo final según el formato seleccionado
       If rbTEX.Value Then
-        archivoFinalRTF = Quote$(File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".tex")
+        archivoFinalRTF = Quote$(File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".tex")
       Else If rbADOC.Value Then
-        archivoFinalRTF = Quote$(File.Dir(rutaOrigen) &/ txtFecha.Text & txtDESTINO.Text & ".adoc")
+        archivoFinalRTF = Quote$(File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".adoc")
       Endif
 
       Dim mediaDirRTF As String = Quote$(File.Dir(Dialog.Path) & "/media")
@@ -200,7 +199,7 @@ Public Sub btnCONVERTIR_Click()
       Endif
 
       ' Mueve el archivo de origen a la carpeta "originales" usando el comando mv
-      Dim destinoOriginalRTF As String = Quote$(File.Dir(rutaOrigen) &/ "originales" &/ File.Name(rutaOrigen))
+      Dim destinoOriginalRTF As String = Quote$(File.Dir(rutaOrigen) & "/originales/" & File.Name(rutaOrigen))
       Shell "mv " & Quote$(rutaOrigen) & " " & destinoOriginalRTF Wait
       btnListo.Visible = True
       btnListo.Default = True

@@ -14,7 +14,7 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
 
   'copiamos los archivos de configuracion general
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
-    Copy User.Home &/ ".gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
+    Copy User.Home & "/.gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
     Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"
@@ -88,7 +88,6 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
     Copy "./LICENSE2" To File.Dir(rutaTexto) & "/LICENSE"
   End If
 
-  'User.Home &/ ".gbtexpublisher"
   If Not File.RealPath(File.Dir(rutaTexto) & "/media/logo-imago-ByW.png") Then
     Copy "./logo-imago-ByW.png" To File.Dir(rutaTexto) & "/media/logo-imago-ByW.png"
   End If

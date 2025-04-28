@@ -208,7 +208,7 @@ Public Sub ExportToMetaTMP(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida para usar en al archivo fuente de tex
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmetaTMP-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXmetaTMP-" & File.BaseName(rutaTexto) & ".tex"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -321,7 +321,7 @@ Public Sub Export2MetaEPUB(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -455,7 +455,7 @@ Public Sub ExportToCatalogo(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXcatalogo-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXcatalogo-" & File.BaseName(rutaTexto) & ".tex"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -524,7 +524,7 @@ Public Sub Exportar2Glosario(rutaTexto As String)
 
   ' Establece la ruta y el nombre del archivo de salida
   ' Guarda el contenido acumulado en un solo archivo
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXglo-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXglo-" & File.BaseName(rutaTexto) & ".tex"
 
   File.Save(outputFile, s)
 
@@ -584,7 +584,7 @@ Public Sub Exportar2BibTeX(rutaTexto As String)
   ' Establece la ruta y el nombre del archivo de salida
   ' Guarda el contenido acumulado en un solo archivo
   s &= "\n\n@Comment{generado con gbTeXpublisher; databaseType:biblatex; fecha de creación: " & fecha & ";}"
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXbib-" & File.BaseName(rutaTexto) & ".bib"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXbib-" & File.BaseName(rutaTexto) & ".bib"
   File.Save(outputFile, s)
 
 End
@@ -836,7 +836,7 @@ Public Sub Exportar2MetadatosPDF(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -1153,7 +1153,7 @@ Public Sub Exportar2MetadatosHTMLbook(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXmeta-" & File.BaseName(rutaTexto) & ".tex"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -1284,7 +1284,7 @@ Public Sub ExportToDisclaimer(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXdisclaimer-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXdisclaimer-" & File.BaseName(rutaTexto) & ".tex"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -1316,7 +1316,7 @@ Public Sub ExportToSeparata(rutaTexto As String)
   ' %acá termina el script
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXseparata-" & File.BaseName(rutaTexto) & ".tex"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXseparata-" & File.BaseName(rutaTexto) & ".tex"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -1386,7 +1386,7 @@ Public Sub ExportToMetadatosPDFTK(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "files" &/ "gbTeXpdfTKmeta-" & File.BaseName(rutaTexto) & ".txt"
+  outputFile = File.Dir(rutaTexto) & "/files/" & "gbTeXpdfTKmeta-" & File.BaseName(rutaTexto) & ".txt"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)
@@ -1759,7 +1759,7 @@ Public Sub ExportToIndexHTML(rutaTexto As String)
   Wend
 
   ' Establece la ruta y el nombre del archivo de salida
-  outputFile = File.Dir(rutaTexto) &/ "docs" &/ "index.html"
+  outputFile = File.Dir(rutaTexto) & "/docs/" & "index.html"
 
   ' Guarda el contenido acumulado en un solo archivo
   File.Save(outputFile, s)

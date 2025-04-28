@@ -39,13 +39,13 @@ Public Sub btnSelecionarBBDD_Click()
   sArchivo = Dialog.Path
   txtRutaBBDD.Text = sArchivo
 
-  Dim respaldoBBDD As String = User.Home &/ ".respaldogbTeX"
+  Dim respaldoBBDD As String = User.Home & "/.respaldogbTeX"
   If Not Exist(respaldoBBDD) Then
     Mkdir respaldoBBDD
   Else
     Dim fecha As String
     fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-    Shell "cp " & sArchivo & " " & respaldoBBDD &/ fecha & "-" & "gbtexpublisher.sqlite"
+    Shell "cp " & sArchivo & " " & respaldoBBDD & "/" & fecha & "-" & "gbtexpublisher.sqlite"
   End If
 
 End

@@ -3,63 +3,6 @@
 Private BaseName As String = File.BaseName(FMain.TextBox1.Text)
 Private rutaFILES As String = File.Dir(FMain.TextBox1.Text) & "/files"
 
-Public Sub salidaHTML5gitbook()
-
-  ' ' Llamamos a la función del módulo para verificar los metadatos
-  ' If Not Mod_Funciones.registrosObligatorios(TextBox1.Text) Then
-  '   ' Si la función retorna False, cancelamos la operación
-  '   Return
-  ' End If
-  '
-  ' TabPanel1.Index = 0
-  ' TabPanel6.Index = 0
-  '
-  ' Mod_Funciones.Borrar_Aux
-  ' Wait 0.2
-  '
-  ' ' exportamos los archivos bib y glo
-  ' Mod_Exportar.Exportar2BibTeX(TextBox1.Text)
-  ' Mod_Exportar.Exportar2Glosario(TextBox1.Text)
-  ' Mod_Exportar.Exportar2MetadatosHTMLbook(TextBox1.Text)
-  ' Wait 0.2
-  '
-  ' Shell "cp " & File.Dir(TextBox1.Text) &/ "files/imago_custom.css" & " " & File.Dir(TextBox1.Text)
-  ' Wait 0.2
-  '
-  ' Dim newFile As String
-  ' newFile = "html5-" & File.Name(TextBox1.Text)
-  ' TerminalView1.Input("cat " & rutaFILES & "/general-html.tex" & " " & File.Name(TextBox1.Text) & " > " & newFile & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.Input("rm -rf html5" & "\n")
-  ' Wait 0.2
-  ' Mkdir File.Dir(TextBox1.Text) & "/html5"
-  ' Wait 0.1
-  '
-  ' TerminalView1.Input("latexmk -l -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & newFile & "\n")
-  ' Wait 0.2
-  ' TerminalView1.Input("lwarpmk html" & "\n")
-  ' Wait 0.2
-  '
-  ' Dim folderHTML5 As String
-  ' folderHTML5 = File.Dir(TextBox1.Text) &/ "html5"
-  ' 'hacemos una copia de los archivos
-  ' TerminalView1.Input("cp -r " & File.Dir(TextBox1.Text) & "/media" & " " & folderHTML5 & "\n")
-  ' Wait 0.2
-  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.html" & " " & folderHTML5 & "\n")
-  ' Wait 0.2
-  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.png" & " " & folderHTML5 & "\n")
-  ' Wait 0.2
-  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.css" & " " & folderHTML5 & "\n")
-  ' Wait 0.2
-  ' TerminalView1.Input("cp " & File.Dir(TextBox1.Text) &/ "*.js" & " " & folderHTML5 & "\n")
-  ' Wait 0.2
-  '
-  ' TerminalView1.SetFocus()
-  ' Mod_Funciones.Borrar_Aux
-
-End
-
 Public Sub salidaHTML5()
 
   ' obtenemos la exportación de los archivos bib, glo, metadatos y separata

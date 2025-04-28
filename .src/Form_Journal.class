@@ -31,7 +31,7 @@ Public Sub Form_Open()
 
   If Error Then
     conector = Null
-    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>gbtexpublisher.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home &/ ".gbtexpublisher")
+    Message.Error("Error al intentar conectarse con la base de datos. Asegúrese de que el archivo de la base de datos <strong>gbtexpublisher.sqlite</strong> se encuentra disponible. El mismo debe encontrarse en " & User.Home & "/.gbtexpublisher")
   Else
 
     btnGuardarColeccion.Visible = False

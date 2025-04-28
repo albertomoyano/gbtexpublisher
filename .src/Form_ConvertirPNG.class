@@ -15,7 +15,7 @@ Public Sub Convertir_Click()
   Endif
 
   ' Crear la ruta completa del archivo de salida
-  Dim sOutputFile As String = File.Dir(FMain.TextBox1.Text) &/ "media/" & txtNombre.Text & ".png"
+  Dim sOutputFile As String = File.Dir(FMain.TextBox1.Text) & "/media/" & txtNombre.Text & ".png"
 
   ' Construir el comando de conversión
   Dim sCommand As String
@@ -29,7 +29,7 @@ Public Sub btnOrigen_Click()
 
   Dialog.Title = "Seleccionar el archivo a convertir"
   Dialog.Filter = ["*.jpg;*.jpeg", "Archivos JPG y JPEG", "*.png", "Archivos PNG"]
-  Dialog.Path = File.Dir(FMain.TextBox1.Text) &/ "media/"
+  Dialog.Path = File.Dir(FMain.TextBox1.Text) & "/media/"
   If Dialog.OpenFile() Then
     Return
   Else

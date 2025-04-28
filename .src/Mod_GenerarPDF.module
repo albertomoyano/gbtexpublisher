@@ -55,7 +55,7 @@ Public Sub salidaPDFweb() 'generamos el PDF web del libro
   FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
+  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) & "/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) & "/pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
 
   'copiamos /files el archivo .log
@@ -124,7 +124,7 @@ Public Sub salidaPDFimprenta() 'generamos el PDF imprenta del libro
   FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
+  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) & "/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) & "/pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
 
   'copiamos /files el archivo .log
@@ -195,7 +195,7 @@ Public Sub salidaPDFespecial() 'generamos el PDF customizado
   FMain.TerminalView1.Input("rm -rf " & newFile & "\n")
   Wait 0.2
 
-  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) &/ "pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) &/ "pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
+  FMain.TerminalView1.Input("mv " & File.Dir(FMain.TextBox1.Text) & "/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & " " & File.Dir(FMain.TextBox1.Text) & "/pdf/pdf-" & File.BaseName(FMain.TextBox1.Text) & ".pdf" & "\n")
   Wait 0.2
 
   'copiamos /files el archivo .log

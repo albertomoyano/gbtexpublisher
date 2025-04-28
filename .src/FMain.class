@@ -14,10 +14,10 @@ Public rutaMEDIA As String
 Public rutaCONTADOR As String
 Public rutaCATALOGO As String
 Public rutaARTCAP As String
-Public rutaApp As String = User.Home &/ ".gbtexpublisher"
-Public rutaScriptsExternos As String = User.Home &/ ".gbtexpublisher/ScriptsExternos"
-Public rutaScriptsBash As String = User.Home &/ ".gbtexpublisher/ScriptsBash"
-Public rutaFonts As String = User.Home &/ ".gbtexpublisher/fonts"
+Public rutaApp As String = User.Home & "/.gbtexpublisher"
+Public rutaScriptsExternos As String = User.Home & "/.gbtexpublisher/ScriptsExternos"
+Public rutaScriptsBash As String = User.Home & "/.gbtexpublisher/ScriptsBash"
+Public rutaFonts As String = User.Home & "/.gbtexpublisher/fonts"
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
 Public fFile As File
@@ -69,8 +69,8 @@ Public Sub Form_Open()
   ]
 
   For Each archivo As String In archivos
-    If Not File.RealPath(rutaApp &/ archivo) Then
-      Copy "./" & archivo To rutaApp &/ archivo
+    If Not File.RealPath(rutaApp & "/" & archivo) Then
+      Copy "./" & archivo To rutaApp & "/" & archivo
     Endif
   Next
 
@@ -84,24 +84,24 @@ Public Sub Form_Open()
   ]
 
   For Each archivopy As String In archivosP
-    If Not File.RealPath(rutaScriptsExternos &/ archivopy) Then
-      Copy "./" & archivopy To rutaScriptsExternos &/ archivopy
+    If Not File.RealPath(rutaScriptsExternos & "/" & archivopy) Then
+      Copy "./" & archivopy To rutaScriptsExternos & "/" & archivopy
     Endif
   Next
 
-  If Not File.RealPath(User.Home &/ ".gbtexpublisher/book-pdf-especial.tex") Then
-    Copy "./book-pdf-especial.tex" To User.Home &/ ".gbtexpublisher/book-pdf-especial.tex"
+  If Not File.RealPath(User.Home & "/.gbtexpublisher/book-pdf-especial.tex") Then
+    Copy "./book-pdf-especial.tex" To User.Home & "/.gbtexpublisher/book-pdf-especial.tex"
   End If
-  If Not File.RealPath(User.Home &/ ".gbtexpublisher/filtro.lua") Then
-    Copy "./filtro.lua" To User.Home &/ ".gbtexpublisher/filtro.lua"
+  If Not File.RealPath(User.Home & "/.gbtexpublisher/filtro.lua") Then
+    Copy "./filtro.lua" To User.Home & "/.gbtexpublisher/filtro.lua"
   End If
   '
   ' aseguramos la copia de los scripts en bash
-  If Not File.RealPath(User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HLyUL.sh") Then
-    Copy "./quitar_HLyUL.sh" To User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HLyUL.sh"
+  If Not File.RealPath(User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HLyUL.sh") Then
+    Copy "./quitar_HLyUL.sh" To User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HLyUL.sh"
   End If
-  If Not File.RealPath(User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh") Then
-    Copy "./quitar_HYPERTARGET.sh" To User.Home &/ ".gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh"
+  If Not File.RealPath(User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh") Then
+    Copy "./quitar_HYPERTARGET.sh" To User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh"
   End If
   '
   ' Inicializamos los contadores de minutos y segundos
@@ -134,13 +134,13 @@ Public Sub Form_Open()
   End If
 
   'declaramos las rutas a utilizar
-  rutaFILES = File.Dir(TextBox1.Text) &/ "files"
-  rutaCORRECCIONES = File.Dir(TextBox1.Text) &/ "correcciones"
-  rutaMEDIA = File.Dir(TextBox1.Text) &/ "media"
-  rutaORIGINALES = File.Dir(TextBox1.Text) &/ "originales"
-  rutaTAPA = File.Dir(TextBox1.Text) &/ "tapa"
-  rutaCATALOGO = File.Dir(TextBox1.Text) &/ "catalogo"
-  rutaARTCAP = File.Dir(TextBox1.Text) &/ "artcap"
+  rutaFILES = File.Dir(TextBox1.Text) & "/files"
+  rutaCORRECCIONES = File.Dir(TextBox1.Text) & "/correcciones"
+  rutaMEDIA = File.Dir(TextBox1.Text) & "/media"
+  rutaORIGINALES = File.Dir(TextBox1.Text) & "/originales"
+  rutaTAPA = File.Dir(TextBox1.Text) & "/tapa"
+  rutaCATALOGO = File.Dir(TextBox1.Text) & "/catalogo"
+  rutaARTCAP = File.Dir(TextBox1.Text) & "/artcap"
   BaseName = File.BaseName(TextBox1.Text)
 
   Mod_RellenarComboBox.RellenarComboBoxBibTeX()
@@ -278,7 +278,7 @@ Public Sub obs_click()
   archivoProyecto = File.Name(TextBox1.Text)
 
   TerminalView1.Input("clear" & "\n")
-  TerminalView1.Input("python3 " & rutaScriptsExternos &/ Last.caption & " " & Quote$(archivoProyecto) & "\n")
+  TerminalView1.Input("python3 " & rutaScriptsExternos & "/" & Last.caption & " " & Quote$(archivoProyecto) & "\n")
 
 End
 
@@ -290,7 +290,7 @@ Public Sub obsB_click()
   archivoTrabajo = File.Name(TextBox1.Text)
 
   TerminalView1.Input("clear" & "\n")
-  TerminalView1.Input("bash " & rutaScriptsBash &/ Last.caption & " " & Quote$(archivoTrabajo) & "\n")
+  TerminalView1.Input("bash " & rutaScriptsBash & "/" & Last.caption & " " & Quote$(archivoTrabajo) & "\n")
 
 End
 
@@ -315,7 +315,7 @@ Public Sub Button4_Click() 'local git
   TabPanel6.Index = 0
 
   fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-  rutaGit = File.Dir(TextBox1.Text) &/ ".git"
+  rutaGit = File.Dir(TextBox1.Text) & "/.git"
 
   ' Verificar si el directorio existe
   If Not Exist(rutaGit) Then
@@ -386,7 +386,7 @@ End
 
 Public Sub Menu4_Click()' ejecutar separatas
 
-  Dim sFilePath As String = File.Dir(TextBox1.Text) &/ "separatas.sh"
+  Dim sFilePath As String = File.Dir(TextBox1.Text) & "/separatas.sh"
 
   ' Comprobamos si el archivo existe
   If File.RealPath(sFilePath) Then
@@ -622,10 +622,10 @@ Public Sub menuCatalogo_Click()
   Mod_Exportar.ExportToCatalogo(TextBox1.Text)
   Wait 0.2
 
-  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXcatalogo-" & BaseName & ".tex" & "\n")
+  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES & "/gbTeXcatalogo-" & BaseName & ".tex" & "\n")
   Wait 0.2
 
-  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
+  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
   Wait 0.2
 
   TerminalView1.SetFocus()
@@ -1160,7 +1160,7 @@ Public Sub btnAbrirPNG_Click()
   If Dialog.OpenFile() Then
     Return
   Else
-    Dim rutaCover As String = File.Dir(Dialog.Path) &/ File.Name(Dialog.Path)
+    Dim rutaCover As String = File.Dir(Dialog.Path) & "/" & File.Name(Dialog.Path)
     txt49_imagentapa.Text = rutaCover
   Endif
 
@@ -2639,7 +2639,7 @@ Public Sub menuCONVERSORpandoc_Click()
 
   ' Construye la ruta completa para el archivo de salida
   Dim outputPath As String
-  outputPath = directoryPath &/ "tmp.tex"
+  outputPath = directoryPath & "/tmp.tex"
 
   ' Ejecuta el comando Pandoc para convertir el archivo DOCX a LaTeX
   Shell "pandoc -f docx -t latex --wrap=none " & Quote$(Dialog.Path) & " -o " & Quote$(outputPath) Wait
@@ -3084,10 +3084,10 @@ Public Sub menuDisclaimer_Click()
     Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
     Wait 0.2
 
-    TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES &/ "gbTeXdisclaimer-" & BaseName & ".tex" & "\n")
+    TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES & "/gbTeXdisclaimer-" & BaseName & ".tex" & "\n")
     Wait 0.1
 
-    TerminalView1.Input("mv gbTeXdisclaimer-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) &/ "pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & "\n")
+    TerminalView1.Input("mv gbTeXdisclaimer-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & "\n")
     Wait 0.1
 
     Dim pdfPath As String
@@ -4532,7 +4532,7 @@ Public Sub btnMenuGIT_Click()
   IdGitHub = "git@github.com:" & usuario & "/" & BaseName & ".git"
 
   ' Verificar si el directorio actual es un repositorio Git
-  resultado = Shell$(BaseName &/ "git rev-parse --is-inside-work-tree 2>/dev/null")
+  resultado = Shell$(BaseName & "/git rev-parse --is-inside-work-tree 2>/dev/null")
   If Trim(resultado) = "true" Then
     repoLocal = True
   Endif
@@ -5515,7 +5515,7 @@ Public Sub FileView1_Click()
   Application.Busy = 1
 
   ' Construir la ruta completa del archivo
-  sRutaArchivo = FileView1.Dir &/ FileView1.Current
+  sRutaArchivo = FileView1.Dir & "/" & FileView1.Current
 
   ' Verificar si el archivo seleccionado es una imagen
   If Lower(FileView1.Current) Like "*.{jpg,png,jpeg}" Then
@@ -5593,7 +5593,7 @@ End
 
 Public Sub btnGuardarMod_Click()
 
-  Dim sRutaArchivo As String = FileView1.Dir &/ FileView1.Current
+  Dim sRutaArchivo As String = FileView1.Dir & "/" & FileView1.Current
 
   If File.Save(sRutaArchivo, txtEditorRapido.Text) <> Null Then
     Message.Info("Los cambios se guardaron con éxito.")
