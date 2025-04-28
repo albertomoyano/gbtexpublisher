@@ -434,11 +434,6 @@
       Text = ("GitLab")
       Picture = Picture["iconos/gitlab.svg"]
     }
-    { btnKanban Button
-      MoveScaled(102,0,4,4)
-      ToolTip = ("Acceder al kanban del proyecto alojado en GitLab")
-      Picture = Picture["iconos/kanban.svg"]
-    }
     { txtGitLab TextBox
       MoveScaled(107,0,10,4)
       Expand = True

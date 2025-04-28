@@ -3605,22 +3605,6 @@ Public Sub btnAbrirPublisher_Click()
 
 End
 
-Public Sub btnKanban_Click()
-
-  Dim ruta As String
-  Dim usuario As String = Trim(txtGitLab.Text)
-
-  If usuario = "" Then
-    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
-    Return
-  End If
-
-  ruta = "https://gitlab.com/" & txtGitLab.Text & "/" & File.BaseName(TextBox1.Text) & "/-/boards"
-
-  Shell "xdg-open " & Quote$(ruta) Wait
-
-End
-
 Public Sub btnGenerarIndex_Click()
 
   Mod_Exportar.ExportToIndexHTML(TextBox1.Text)
