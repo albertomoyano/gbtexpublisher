@@ -602,7 +602,7 @@ Public Sub Menu68_Click()
 
   Dim gitalberto As String
 
-  gitalberto = "https://github.com/albertomoyano/gbtexpublisher"
+  gitalberto = "https://albertomoyano.github.io/gbtexpublisher/"
   Shell "xdg-open " & Quote$(gitalberto) Wait
 
 End
