@@ -442,7 +442,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     btnMenuGitLab.Enabled = True
-    btnKanban.Enabled = True
     menuGray.Enabled = True
     menuCatalogo.Enabled = True
     Menu4.Enabled = True
@@ -2933,7 +2932,6 @@ Public Sub menuAbrirRevista_Click()
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     btnMenuGitLab.Enabled = True
-    btnKanban.Enabled = True
     menuGray.Enabled = True
     menuCatalogo.Enabled = True
     Menu4.Enabled = True

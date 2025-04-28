@@ -411,13 +411,17 @@
       MenuOnly = True
     }
     { Separator20 Separator
-      MoveScaled(34,0,2.3333,4)
+      MoveScaled(30,0,2.3333,4)
       #Translate = False
     }
     { Button4 Button
-      MoveScaled(37,0,17.7778,4)
+      MoveScaled(33,0,17.7778,4)
       Text = ("Git Local")
       Picture = Picture["iconos/git-local.svg"]
+    }
+    { Separator24 Separator
+      MoveScaled(52,0,2.3333,4)
+      #Translate = False
     }
     { btnMenuGIT Button
       MoveScaled(56,0,17.7778,4)
@@ -429,13 +433,17 @@
       Expand = True
       Placeholder = ("coloque aquí su usuario GitHub")
     }
+    { Separator27 Separator
+      MoveScaled(84,0,2.3333,4)
+      #Translate = False
+    }
     { btnMenuGitLab Button
-      MoveScaled(84,0,17.7778,4)
+      MoveScaled(91,0,17.7778,4)
       Text = ("GitLab")
       Picture = Picture["iconos/gitlab.svg"]
     }
     { txtGitLab TextBox
-      MoveScaled(107,0,10,4)
+      MoveScaled(109,0,10,4)
       Expand = True
       Placeholder = ("coloque aquí su usuario GitLab")
     }
@@ -489,7 +497,7 @@
         }
       }
       { Separator8 Separator
-        MoveScaled(69,0,2.3333,4)
+        MoveScaled(58,0,2.3333,4)
         #Translate = False
       }
       { Panel8 Panel
