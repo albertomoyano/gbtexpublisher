@@ -192,6 +192,7 @@
     { Menu78 Menu
       #Translate = False
       Text = "Exportar referencias en archivo .bib"
+      Picture = Picture["iconos/exportar2.svg"]
     }
     { menuScriptsExternos Menu
       #Translate = False
@@ -610,7 +611,7 @@
         Index = 0
       }
       { Splitter2 Splitter
-        MoveScaled(54,1,74,73)
+        MoveScaled(52,1,74,73)
         Arrangement = Arrange.Vertical
         Border = False
         { Panel1 Panel
