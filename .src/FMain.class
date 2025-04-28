@@ -439,7 +439,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     menuBORRARaux.Enabled = True
     menuComprimir.Enabled = True
     menuTOOLS.Enabled = True
-    btnKitty.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     btnMenuGitLab.Enabled = True
@@ -5485,12 +5484,6 @@ Public Sub cmbRolColaborador_Click()
     Case "bnd"
       txtDescripcionColaboradores.Text = "Binder - Persona encargada de encuadernar el libro"
   End Select
-
-End
-
-Public Sub btnKitty_Click()
-
-  Shell "kitty --directory " & File.Dir(TextBox1.Text) Wait
 
 End
 

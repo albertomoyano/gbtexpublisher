@@ -300,7 +300,7 @@
   }
   { Menu57 Menu
     #Translate = False
-    Text = "Ayuda"
+    Text = "Acerca de..."
     { Menu9 Menu
       Text = ("Verificar la integridad de gbTeXpublisher")
       Picture = Picture["iconos/integridad.svg"]
@@ -401,16 +401,11 @@
     MoveScaled(1,5,120,4)
     Enabled = False
     AutoResize = True
-    { btnKitty Button
-      MoveScaled(0,0,4,4)
-      Enabled = False
-      Picture = Picture["iconos/kitty.svg"]
-    }
     { !MenuApp MenuButton
-      MoveScaled(5,0,24,4)
+      MoveScaled(1,0,28,4)
       #Public = True
       #Translate = False
-      Text = "Ver salidas"
+      Text = "Ver salidas generadas"
       Picture = Picture["iconos/document.svg"]
       Menu = "AbrirApp"
       MenuOnly = True
