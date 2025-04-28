@@ -56,13 +56,13 @@
     Text = "menuPDF"
     Visible = False
     { menuPDFcolor Menu
-      Text = ("PDF web")
+      Text = ("PDF para web")
     }
     { menuPDFgray Menu
-      Text = ("PDF imprenta")
+      Text = ("PDF para imprenta")
     }
     { menuPDFespecialLibro Menu
-      Text = ("PDF especial")
+      Text = ("PDF con matriz especial")
     }
     { Menu13 Menu
     }
