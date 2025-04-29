@@ -589,9 +589,7 @@ End
 
 Public Sub Menu66_Click()
 
-  Dim gambas As String
-
-  gambas = "https://gambas.sourceforge.net/en/main.html"
+  Dim gambas As String = "https://gambaswiki.org/website/en/main.html"
 
   Shell "xdg-open " & Quote$(gambas) Wait
 
@@ -599,9 +597,8 @@ End
 
 Public Sub Menu68_Click()
 
-  Dim gitalberto As String
+  Dim gitalberto As String = "https://albertomoyano.github.io/gbtexpublisher/"
 
-  gitalberto = "https://albertomoyano.github.io/gbtexpublisher/"
   Shell "xdg-open " & Quote$(gitalberto) Wait
 
 End
