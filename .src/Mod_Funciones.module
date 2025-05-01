@@ -307,7 +307,7 @@ Public Sub VerificarPorcentajeEnTexto(TextoOriginal As String) As String
 End
 
 Public Sub VerBibTeXenVListaBIB(iRow As Integer)
-  ' Recoger la fila como parámetro en la función del módulo, se ahorra recuperar 112 veces su valor desde el Gridview
+  ' Recoger la fila como parámetro en la función del módulo, se ahorra recuperar 113 veces su valor desde el Gridview
 
   With FMain
     .txtIDbibtex.Text = .VListaBIB[iRow, 0].Text
@@ -422,6 +422,7 @@ Public Sub VerBibTeXenVListaBIB(iRow As Integer)
     .cbType.Text = .VListaBIB[iRow, 109].Text
     .txtTitleAddOn.Text = .VListaBIB[iRow, 110].Text
     .txtSubTitle.Text = .VListaBIB[iRow, 111].Text
+    .txtJournalYear.Text = .VListaBIB[iRow, 112].Text
   End With
 
 End
@@ -575,6 +576,7 @@ Public Sub VerBibTeXengridListaBIBactual()
   FMain.cbType.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 109].Text
   FMain.txtTitleAddOn.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 110].Text
   FMain.txtSubTitle.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 111].Text
+  FMain.txtJournalYear.Text = FMain.gridListaBIBactual[FMain.gridListaBIBactual.row, 112].Text
 
 End
 
@@ -764,10 +766,10 @@ Public Sub ConfigurarGridView(grid As GridView)
   With grid
     .Header = True
     .Grid = True
-    .Columns.Count = 112
+    .Columns.Count = 113
 
     ' Configuración de columnas
-    For i As Integer = 0 To 111
+    For i As Integer = 0 To 112
       Select Case i
         Case 0
           .Columns[i].Title = "Id"

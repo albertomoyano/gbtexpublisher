@@ -44,6 +44,7 @@ Public Sub LimpiarCamposBIB()
   FMain.txtEPRINTYPE.Text = ""
   FMain.txtBookPagination.Text = ""
   FMain.txtKEYWORDS.Text = ""
+  FMain.txtJournalYear.Text = ""
   FMain.txtETIQ.Clear
   FMain.txtCROSSREF.Clear
   FMain.txtCLAVEbib.Clear
@@ -136,7 +137,6 @@ Public Sub LimpiarCamposBIB()
   FMain.txtNOTE.Clear
   FMain.txtTitleAddOn.Clear
   FMain.txtSubTitle.Clear
-  FMain.txtJournalYear.Clear
 
 End
 

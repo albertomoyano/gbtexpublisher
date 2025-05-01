@@ -1619,10 +1619,10 @@ Public Sub guardarCampos()
   Contenido!id = txtIDbibtex.Text
   Contenido!tipoEntrada = ComboBox1.Text
   Contenido!hyphenation = cbLANGUAGE.Text
-  Contenido!relatedType = CmbRelatedType.Text
-  Contenido!pubState = cbPUBSTATE.Text
+  Contenido!relatedtype = CmbRelatedType.Text
+  Contenido!pubstate = cbPUBSTATE.Text
   Contenido!type = cbType.Text
-  Contenido!editorType = cbEDITORTYPE.Text
+  Contenido!editortype = cbEDITORTYPE.Text
   Contenido!etiquetas = txtETIQ.Text
   Contenido!keywords = txtKEYWORDS.Text
   Contenido!crossref = txtCROSSREF.Text
@@ -1635,18 +1635,18 @@ Public Sub guardarCampos()
   Contenido!location = txtLOCATION.Text
   Contenido!editor = txtEDITOR.Text
   Contenido!series = txtSERIES.Text
-  Contenido!relatedString = txtRELATEDSTRING.Text
-  Contenido!mainTitle = txtMAINTITLE.Text
+  Contenido!relatedstring = txtRELATEDSTRING.Text
+  Contenido!maintitle = txtMAINTITLE.Text
   Contenido!label = txtLABEL.Text
-  Contenido!shortTitle = txtSHORTTITLE.Text
+  Contenido!shorttitle = txtSHORTTITLE.Text
   Contenido!edition = txtEDITION.Text
-  Contenido!bookAuthor = txtBOOKAUTHOR.Text
-  Contenido!bookTitle = txtBOOKTITLE.Text
+  Contenido!bookauthor = txtBOOKAUTHOR.Text
+  Contenido!booktitle = txtBOOKTITLE.Text
   Contenido!volume = txtVOLUME.Text
   Contenido!number = txtNUMBER.Text
   Contenido!pages = txtPAGES.Text
-  Contenido!journalTitle = txtJOURNALTITLE.Text
-  Contenido!urlDate = txtURLDATE.Text
+  Contenido!journaltitle = txtJOURNALTITLE.Text
+  Contenido!urldate = txtURLDATE.Text
   Contenido!doi = txtDOI.Text
   Contenido!part = txtPART.Text
   Contenido!volumes = txtBOLUMES.Text
@@ -1655,8 +1655,8 @@ Public Sub guardarCampos()
   Contenido!issn = txtISSN.Text
   Contenido!organization = txtORGANIZATION.Text
   Contenido!institution = txtINSTITUTION.Text
-  Contenido!eventTitle = txtEVENTTITLE.Text
-  Contenido!eventDate = txtEVENTDATE.Text
+  Contenido!eventtitle = txtEVENTTITLE.Text
+  Contenido!eventdate = txtEVENTDATE.Text
   Contenido!introduction = txtINTRODUCTION.Text
   Contenido!translator = txtTRANSLATOR.Text
   Contenido!afterword = txtAFTERWORD.Text
@@ -1672,7 +1672,7 @@ Public Sub guardarCampos()
   Contenido!editorB = txtEDITORb.Text
   Contenido!editorC = txtEDITORc.Text
   Contenido!holder = txtHOLDER.Text
-  Contenido!shortAuthor = txtShortAuthor.Text
+  Contenido!shortauthor = txtShortAuthor.Text
   Contenido!editorAtype = cbEDITORTYPEa.Text
   Contenido!editorBtype = cbEDITORTYPEb.Text
   Contenido!editorCtype = cbEDITORTYPEc.Text
@@ -1682,18 +1682,18 @@ Public Sub guardarCampos()
   Contenido!issueTitleAddOn = txtIssueTitleAddOn.Text
   Contenido!eventTitleAddOn = txtEventTitleAddOn.Text
   Contenido!chapter = txtChapter.Text
-  Contenido!origDate = txtORIGDATE.Text
+  Contenido!origdate = txtORIGDATE.Text
   Contenido!version = txtVERSION.Text
   Contenido!gender = txtGENDER.Text
-  Contenido!indexTitle = txtINDEXTITLE.Text
-  Contenido!issueTitle = txtISSUETITLE.Text
-  Contenido!reprintTitle = txtREPRINTTITLE.Text
+  Contenido!indextitle = txtINDEXTITLE.Text
+  Contenido!issuetitle = txtISSUETITLE.Text
+  Contenido!reprinttitle = txtREPRINTTITLE.Text
   Contenido!pagination = txtPAGINATION.Text
   Contenido!langId = cbLANGUAGEID.Text
   Contenido!venue = txtVENUE.Text
-  Contenido!bookPagination = txtBookPagination.Text
+  Contenido!bookpagination = txtBookPagination.Text
   Contenido!langIdOpts = txtLANGIDOPTS.Text
-  Contenido!origLanguage = txtORIGLANGUAGE.Text
+  Contenido!origlanguage = txtORIGLANGUAGE.Text
   Contenido!isan = txtISAN.Text
   Contenido!xref = txtXREF.Text
   Contenido!xdata = txtXDATA.Text
@@ -1727,6 +1727,7 @@ Public Sub guardarCampos()
   Contenido!issue = txtISSUE.Text
   Contenido!titleaddon = txtTitleAddOn.Text
   Contenido!subtitle = txtSubTitle.Text
+  Contenido!journalyear = txtJournalYear.Text
 
 End
 
@@ -2289,7 +2290,7 @@ Public Sub BtnBuscarBookTitle_Click()
     Message.Warning("Debe introducir contenido a buscar.")
     Return
   Else
-    Consulta = "SELECT * FROM bibtex WHERE bookTitle LIKE '%" & txtBOOKTITLE.Text & "%' ORDER BY id DESC;"
+    Consulta = "SELECT * FROM bibtex WHERE booktitle LIKE '%" & txtBOOKTITLE.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
     TabPanel5.Index = 2
   Endif
@@ -2317,7 +2318,7 @@ Public Sub BtnBuscarJournal_Click()
     Message.Warning("Debe introducir contenido a buscar.")
     Return
   Else
-    Consulta = "SELECT * FROM bibtex WHERE journalTitle LIKE '%" & txtJOURNALTITLE.Text & "%' ORDER BY id DESC;"
+    Consulta = "SELECT * FROM bibtex WHERE journaltitle LIKE '%" & txtJOURNALTITLE.Text & "%' ORDER BY id DESC;"
     CargarDatos(Consulta, VListaBIB)
     TabPanel5.Index = 2
   Endif
@@ -4701,7 +4702,7 @@ Public Sub btnGuardarRelacion_Click()
 
   ' Construir la consulta UPDATE
   Dim Consulta As String
-  Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', crossref= '" & valor2 & "', related= '" & valor3 & "', relatedString= '" & valor4 & "', relatedType= '" & valor5 & "' WHERE id= " & idReferencia
+  Consulta = "UPDATE bibtex SET keywords= '" & valor1 & "', crossref= '" & valor2 & "', related= '" & valor3 & "', relatedstring= '" & valor4 & "', relatedtype= '" & valor5 & "' WHERE id= " & idReferencia
 
   Form_ConectarBBDD.meConn.Exec(Consulta)
   Form_ConectarBBDD.meConn.Commit
@@ -4726,32 +4727,32 @@ Public Sub btnDuplicar_Click()
   ' Construir la consulta INSERT ... SELECT
   Dim Consulta As String
   Consulta = "INSERT INTO bibtex (" &
-    "tipoEntrada, citationKey, keywords, author, bookAuthor, editor, editorA, editorB, editorC, " &
-    "afterword, commentator, translator, holder, shortAuthor, editorType, editorAtype, editorBtype, " &
-    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shortTitle, indexTitle, " &
-    "bookTitle, mainTitle, journalTitle, issueTitle, eventTitle, reprintTitle, series, bookTitleAddOn, " &
+    "tipoEntrada, citationKey, keywords, author, bookauthor, editor, editorA, editorB, editorC, " &
+    "afterword, commentator, translator, holder, shortauthor, editortype, editorAtype, editorBtype, " &
+    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shorttitle, indextitle, " &
+    "booktitle, maintitle, journaltitle, issuetitle, eventtitle, reprinttitle, series, bookTitleAddOn, " &
     "mainTitleAddOn, journalTitleAddOn, issueTitleAddOn, eventTitleAddOn, chapter, volume, edition, " &
-    "pubState, yearY, dateD, urlDate, volumes, part, issue, eventDate, origDate, version, location, " &
+    "pubstate, yearY, dateD, urldate, volumes, part, issue, eventdate, origdate, version, location, " &
     "publisher, institution, organization, pages, pagination, hyphenation, langId, language, " &
-    "origLocation, origPublisher, pageTotal, venue, bookPagination, langIdOpts, origLanguage, isan, " &
+    "origLocation, origPublisher, pageTotal, venue, bookpagination, langIdOpts, origlanguage, isan, " &
     "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
-    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedType, " &
-    "relatedString, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
-    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, " &
+    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedtype, " &
+    "relatedstring, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, journalyear, " &
     "creationdate, type" &
     ") SELECT " &
-    "tipoEntrada, citationKey, keywords, author, bookAuthor, editor, editorA, editorB, editorC, " &
-    "afterword, commentator, translator, holder, shortAuthor, editorType, editorAtype, editorBtype, " &
-    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shortTitle, indexTitle, " &
-    "bookTitle, mainTitle, journalTitle, issueTitle, eventTitle, reprintTitle, series, bookTitleAddOn, " &
+    "tipoEntrada, citationKey, keywords, author, bookauthor, editor, editorA, editorB, editorC, " &
+    "afterword, commentator, translator, holder, shortauthor, editortype, editorAtype, editorBtype, " &
+    "editorCtype, foreword, introduction, annotator, gender, nameAddOn, title, shorttitle, indextitle, " &
+    "booktitle, maintitle, journaltitle, issuetitle, eventtitle, reprinttitle, series, bookTitleAddOn, " &
     "mainTitleAddOn, journalTitleAddOn, issueTitleAddOn, eventTitleAddOn, chapter, volume, edition, " &
-    "pubState, yearY, dateD, urlDate, volumes, part, issue, eventDate, origDate, version, location, " &
+    "pubstate, yearY, dateD, urldate, volumes, part, issue, eventdate, origdate, version, location, " &
     "publisher, institution, organization, pages, pagination, hyphenation, langId, language, " &
-    "origLocation, origPublisher, pageTotal, venue, bookPagination, langIdOpts, origLanguage, isan, " &
+    "origLocation, origPublisher, pageTotal, venue, bookpagination, langIdOpts, origlanguage, isan, " &
     "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
-    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedType, " &
-    "relatedString, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
-    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, " &
+    "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedtype, " &
+    "relatedstring, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, journalyear, " &
     "creationdate, type " &
     "FROM bibtex WHERE id = " & idSeleccionado
 
