@@ -3,7 +3,7 @@
 Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
 
   ' Lista de directorios que deseas crear
-  Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "pdf", "artcap", "docs"]
+  Dim directorios As String[] = ["files", "correcciones", "media", "originales", "tapa", "pdf", "artcap", "docs", ".github", ".github/workflows"]
 
   ' Crear los directorios si no existen
   For Each directorio As String In directorios
@@ -15,6 +15,9 @@ Public Sub CopiarArchivos(rutaTexto As String)'libros y revistas
   'copiamos los archivos de configuracion general
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf-especial.tex") Then
     Copy User.Home & "/.gbtexpublisher/book-pdf-especial.tex" To File.Dir(rutaTexto) & "/files/book-pdf-especial.tex"
+  End If
+  If Not File.RealPath(File.Dir(rutaTexto) & "/.github/workflows/release-pdf.yml") Then
+    Copy "./release-pdf.yml" To File.Dir(rutaTexto) & "/.github/workflows/release-pdf.yml"
   End If
   If Not File.RealPath(File.Dir(rutaTexto) & "/files/book-pdf.tex") Then
     Copy "./book-pdf.tex" To File.Dir(rutaTexto) & "/files/book-pdf.tex"

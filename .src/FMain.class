@@ -470,6 +470,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
       Form_Notas.Close
     End If
     Mod_LimpiarTextBox.LimpiarCamposBIB()
+    ' Nos asegura de que exista el directorio de workflows
     Mod_Funciones.CopiarArchivos(TextBox1.Text)
     levantarComenta()' levantamos los datos de comentario
     levantarGitHubPages()' levantamos los datos de githubpages
