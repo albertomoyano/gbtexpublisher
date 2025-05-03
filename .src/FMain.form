@@ -974,7 +974,7 @@
       }
     }
     { TabPanel2 TabPanel
-      MoveScaled(1,45,155,66)
+      MoveScaled(1,44,155,66)
       Expand = True
       Arrangement = Arrange.Vertical
       Margin = True
@@ -1531,7 +1531,7 @@
       Text = ("Vol./Núm./Fe.     ")
       Picture = Picture["iconos/fechas.svg"]
       { ScrollView4 ScrollView
-        MoveScaled(2,2,102,37)
+        MoveScaled(2,2,135,37)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -1589,25 +1589,41 @@
           }
         }
         { HBox41 HBox
-          MoveScaled(1,8,100,4)
+          MoveScaled(1,8,130,4)
           { Label20 Label
             MoveScaled(0,0,16,4)
             Alignment = Align.Right
             Text = ("Number ")
           }
-          { txtNUMBER TextBox AllTextBoxes
-            Name = "txtNUMBER"
-            MoveScaled(17,0,16,4)
+          { HBox1 HBox
+            MoveScaled(17,0,42,4)
             Expand = True
+            { txtNUMBER TextBox AllTextBoxes
+              Name = "txtNUMBER"
+              MoveScaled(1,0,11,4)
+              Expand = True
+            }
+            { lblISBN6 Label
+              MoveScaled(13,0,16,4)
+              Alignment = Align.Right
+              Text = ("Eid ")
+            }
+            { txtEID TextBox AllTextBoxes
+              Name = "txtEID"
+              MoveScaled(31,0,10,4)
+              ToolTip = ("Identificador electrónico para artículos de publicación contínua")
+              Expand = True
+              Placeholder = ("Identificador electrónico")
+            }
           }
           { lblPART Label
-            MoveScaled(33,0,16,3.5556)
+            MoveScaled(62,0,16,3.5556)
             Alignment = Align.Right
             Text = ("Part ")
           }
           { txtPART TextBox AllTextBoxes
             Name = "txtPART"
-            MoveScaled(50,0,11,4)
+            MoveScaled(80,0,11,4)
             Expand = True
             PopupMenu = "menuTEXTBOX"
           }
@@ -1632,8 +1648,9 @@
           { txtISSUE TextBox AllTextBoxes
             Name = "txtISSUE"
             MoveScaled(60,0,11,4)
+            ToolTip = ("Se usa para designar suplementos, números especiales u otras ediciones no numeradas formalmente")
             Expand = True
-            Placeholder = ("non-number issue of journal")
+            Placeholder = ("Se usa para designar suplementos")
           }
         }
         { HBox46 HBox
@@ -2061,20 +2078,6 @@
               Expand = True
               PopupMenu = "menuTEXTBOX"
               Placeholder = ("Digital Object Identifier")
-            }
-          }
-          { HBox1 HBox
-            MoveScaled(0,16,80,4)
-            { lblISBN6 Label
-              MoveScaled(0,0,16,4)
-              Alignment = Align.Right
-              Text = ("Eid ")
-            }
-            { txtEID TextBox AllTextBoxes
-              Name = "txtEID"
-              MoveScaled(21,0,10,4)
-              Expand = True
-              Placeholder = ("Identificador único utilizado principalmente por la plataforma Scopus ")
             }
           }
           { HBox3 HBox

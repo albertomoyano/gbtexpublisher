@@ -45,6 +45,7 @@ Public Sub LimpiarCamposBIB()
   FMain.txtBookPagination.Text = ""
   FMain.txtKEYWORDS.Text = ""
   FMain.txtJournalYear.Text = ""
+  FMain.txtISSUE.Clear
   FMain.txtETIQ.Clear
   FMain.txtCROSSREF.Clear
   FMain.txtCLAVEbib.Clear

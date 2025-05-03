@@ -1728,7 +1728,7 @@ Public Sub guardarCampos()
   Contenido!issue = txtISSUE.Text
   Contenido!titleaddon = txtTitleAddOn.Text
   Contenido!subtitle = txtSubTitle.Text
-  Contenido!journalyear = txtJournalYear.Text
+  Contenido!yearoflife = txtJournalYear.Text
 
 End
 
@@ -3096,7 +3096,7 @@ Public Sub menuDisclaimer_Click()
       Message.Warning("Se a generado el archivo de comentarios, pero <strong>pdf-" & BaseName & ".pdf</strong> no existe. No es posible completar la operación.")
     Else
       ' Si el archivo existe, ejecutar la función
-      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/@-" & BaseName & ".pdf" & "\n")
+      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/draft-" & BaseName & ".pdf" & "\n")
       Wait 0.1
     End If
 
@@ -4739,7 +4739,7 @@ Public Sub btnDuplicar_Click()
     "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
     "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedtype, " &
     "relatedstring, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
-    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, journalyear, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, yearoflife, " &
     "creationdate, type" &
     ") SELECT " &
     "tipoEntrada, citationKey, keywords, author, bookauthor, editor, editorA, editorB, editorC, " &
@@ -4753,7 +4753,7 @@ Public Sub btnDuplicar_Click()
     "isbn, ismn, isrn, issn, iswc, url, doi, eid, eprinttype, eprint, entrysubtype, label, " &
     "howpublisher, addendum, shorthand, shorthandintro, etiquetas, options, ids, related, relatedtype, " &
     "relatedstring, entryset, crossref, xref, xdata, presort, sortkey, sortname, sortshorthand, " &
-    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, journalyear, " &
+    "sorttitle, indexsorttitle, sortyear, file, abstract, library, note, annotation, number, yearoflife, " &
     "creationdate, type " &
     "FROM bibtex WHERE id = " & idSeleccionado
 
@@ -5826,68 +5826,6 @@ Public Sub btnChequearURL_Click()
 
 End
 
-Public Sub btnVerificar_Click()
-
-  Dim sURL As String
-  Dim sResult As String
-  Dim iExitCode As Integer
-
-  sURL = Trim(txtURL.Text)
-
-  If sURL = "" Then
-    Message.Error("Por favor, ingresar una dirección válida.")
-    Return
-  Endif
-
-  ' Comando curl para hacer una petición HEAD (-I) y seguir redirecciones (-L)
-  Shell "curl -s -o /dev/null -w '%{http_code}' -L " & Quote(sURL) To sResult
-  iExitCode = Process.LastValue
-
-  ' Evaluar código de estado HTTP
-  Select Case sResult
-    Case "200"
-      Message.Info("La URL existe y respondió con <strong>código 200 OK</strong>.")
-    Case "301", "302"
-      Message.Info("La URL fue redireccionada <strong>(código " & sResult & ")</strong>.")
-    Case "404"
-      Message.Error("La URL no existe <strong>(404 Not Found)</strong>.")
-    Case Else
-      Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
-  End Select
-
-End
-
-Public Sub btnVerificarDOI_Click()
-
-  Dim sURL As String
-  Dim sResult As String
-  Dim iExitCode As Integer
-
-  sURL = Trim(txtDOI.Text)
-
-  If sURL = "" Then
-    Message.Error("Por favor, ingresar una dirección válida.")
-    Return
-  Endif
-
-  ' Comando curl para hacer una petición HEAD (-I) y seguir redirecciones (-L)
-  Shell "curl -s -o /dev/null -w '%{http_code}' -L " & Quote(sURL) To sResult
-  iExitCode = Process.LastValue
-
-  ' Evaluar código de estado HTTP
-  Select Case sResult
-    Case "200"
-      Message.Info("El DOI existe y respondió con <strong>código 200 OK</strong>.")
-    Case "301", "302"
-      Message.Info("El DOI fue redireccionada <strong>(código " & sResult & ")</strong>.")
-    Case "404"
-      Message.Error("El DOI no existe <strong>(404 Not Found)</strong>.")
-    Case Else
-      Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
-  End Select
-
-End
-
 Public Sub btnAsistenteAI_Click()
 
   ' Validar campos vacíos
@@ -5919,5 +5857,93 @@ End
 Public Sub Menu14_Click()
 
   Mod_Funciones.CerrarTodo()
+
+End
+
+Public Sub btnVerificarDOI_Click()
+
+  Dim sURL As String
+  Dim sResult As String
+  Dim iExitCode As Integer
+
+  ' Mostrar indicador de carga
+  FMain.Mouse = Mouse.Wait
+
+  sURL = Trim(txtDOI.Text)
+  If sURL = "" Then
+    Message.Error("Por favor, ingresar un DOI válido.")
+    FMain.Mouse = Mouse.Default
+    Return
+  Endif
+
+  ' Validar si el formato es de un DOI
+  If Not (Left(sURL, 4) = "http") Then
+    ' Agregar el prefijo para DOI
+    sURL = "https://doi.org/" & sURL
+  Endif
+
+  ' Comando curl con límite de tiempo y otras mejoras
+  ' --connect-timeout: límite de tiempo para la conexión (5 segundos)
+  ' --max-time: límite de tiempo total para la operación (10 segundos)
+  Shell "curl -s -o /dev/null -w '%{http_code}' -L --connect-timeout 5 --max-time 10 " & Quote(sURL) To sResult
+  iExitCode = Process.LastValue
+
+  ' Restaurar el cursor
+  FMain.Mouse = Mouse.Default
+
+  ' Evaluar código de estado HTTP
+  Select Case sResult
+    Case "200"
+      Message.Info("El <strong>DOI es válido</strong> y respondió con código 200.")
+    Case "301", "302"
+      Message.Info("El <strong>DOI fue redireccionado</strong> y respondió con código " & sResult & ".")
+    Case "404"
+      Message.Error("El <strong>DOI no existe</strong> y respondió con código 404 Not Found.")
+    Case "000"
+      Message.Error("Tiempo de espera agotado o no se pudo conectar al servidor.")
+    Case ""
+      Message.Error("Error en la ejecución del comando. Verifica la conexión a Internet.")
+    Case Else
+      Message.Error("Código de respuesta: <strong>" & sResult & "</strong>.")
+  End Select
+
+End
+
+Public Sub btnVerificar_Click()' verificar url
+
+  Dim sURL As String
+  Dim sResult As String
+  Dim iExitCode As Integer
+
+  ' Mostrar indicador de carga
+  FMain.Mouse = Mouse.Wait
+
+  sURL = Trim(txtURL.Text)
+  If sURL = "" Then
+    Message.Error("Por favor, ingresar una URL válido.")
+    FMain.Mouse = Mouse.Default
+    Return
+  Endif
+
+  ' Comando curl con límite de tiempo y otras mejoras
+  ' --connect-timeout: límite de tiempo para la conexión (5 segundos)
+  ' --max-time: límite de tiempo total para la operación (10 segundos)
+  Shell "curl -s -o /dev/null -w '%{http_code}' -L --connect-timeout 5 --max-time 10 " & Quote(sURL) To sResult
+  iExitCode = Process.LastValue
+
+  ' Restaurar el cursor
+  FMain.Mouse = Mouse.Default
+
+  ' Evaluar código de estado HTTP
+  Select Case sResult
+    Case "200"
+      Message.Info("La <strong>URL existe</strong> y respondió con código 200.")
+    Case "301", "302"
+      Message.Info("La <strong>URL fue redireccionada</strong> (código " & sResult & ").")
+    Case "404"
+      Message.Error("La <strong>URL no existe</strong> (404 Not Found).")
+    Case Else
+      Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
+  End Select
 
 End
