@@ -3096,7 +3096,7 @@ Public Sub menuDisclaimer_Click()
       Message.Warning("Se a generado el archivo de comentarios, pero <strong>pdf-" & BaseName & ".pdf</strong> no existe. No es posible completar la operación.")
     Else
       ' Si el archivo existe, ejecutar la función
-      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/@pdf-" & BaseName & ".pdf" & "\n")
+      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/@-" & BaseName & ".pdf" & "\n")
       Wait 0.1
     End If
 
