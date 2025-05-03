@@ -2,7 +2,7 @@ name: PDF Release
 on:
   push:
     paths:
-      - 'pdf/*.pdf'
+      - 'pdf/pdf-*.pdf'
   workflow_dispatch:
 jobs:
   release-pdf:
