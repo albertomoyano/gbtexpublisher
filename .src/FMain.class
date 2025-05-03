@@ -5920,7 +5920,7 @@ Public Sub btnVerificar_Click()' verificar url
 
   sURL = Trim(txtURL.Text)
   If sURL = "" Then
-    Message.Error("Por favor, ingresar una URL válido.")
+    Message.Error("Por favor, ingresar una URL válida.")
     FMain.Mouse = Mouse.Default
     Return
   Endif
@@ -5939,9 +5939,9 @@ Public Sub btnVerificar_Click()' verificar url
     Case "200"
       Message.Info("La <strong>URL existe</strong> y respondió con código 200.")
     Case "301", "302"
-      Message.Info("La <strong>URL fue redireccionada</strong> (código " & sResult & ").")
+      Message.Info("La <strong>URL fue redireccionada</strong> y respondió con código " & sResult & ".")
     Case "404"
-      Message.Error("La <strong>URL no existe</strong> (404 Not Found).")
+      Message.Error("La <strong>URL no existe</strong> y respondió con 404 Not Found.")
     Case Else
       Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
   End Select
