@@ -5885,7 +5885,7 @@ Public Sub btnVerificarDOI_Click()
   ' Comando curl con límite de tiempo y otras mejoras
   ' --connect-timeout: límite de tiempo para la conexión (5 segundos)
   ' --max-time: límite de tiempo total para la operación (10 segundos)
-  Shell "curl -s -o /dev/null -w '%{http_code}' -L --connect-timeout 5 --max-time 10 " & Quote(sURL) To sResult
+  Shell "curl -s -o /dev/null -w '%{http_code}' -L --connect-timeout 5 --max-time 10 -A 'Mozilla/5.0'" & " " & Quote(sURL) To sResult
   iExitCode = Process.LastValue
 
   ' Restaurar el cursor
@@ -5899,6 +5899,8 @@ Public Sub btnVerificarDOI_Click()
       Message.Info("El <strong>DOI fue redireccionado</strong> y respondió con código " & sResult & ".")
     Case "404"
       Message.Error("El <strong>DOI no existe</strong> y respondió con código 404 Not Found.")
+    Case "500", "503"
+      Message.Error("<strong>Error del servidor</strong> (" & sResult & "). Intenta nuevamente más tarde.")
     Case "000"
       Message.Error("Tiempo de espera agotado o no se pudo conectar al servidor.")
     Case ""
@@ -5928,7 +5930,7 @@ Public Sub btnVerificar_Click()' verificar url
   ' Comando curl con límite de tiempo y otras mejoras
   ' --connect-timeout: límite de tiempo para la conexión (5 segundos)
   ' --max-time: límite de tiempo total para la operación (10 segundos)
-  Shell "curl -s -o /dev/null -w '%{http_code}' -L --connect-timeout 5 --max-time 10 " & Quote(sURL) To sResult
+  Shell "curl -s -o /dev/null -w '%{http_code}' -L --connect-timeout 5 --max-time 10 -A 'Mozilla/5.0'" & " " & Quote(sURL) To sResult
   iExitCode = Process.LastValue
 
   ' Restaurar el cursor
@@ -5942,6 +5944,10 @@ Public Sub btnVerificar_Click()' verificar url
       Message.Info("La <strong>URL fue redireccionada</strong> y respondió con código " & sResult & ".")
     Case "404"
       Message.Error("La <strong>URL no existe</strong> y respondió con 404 Not Found.")
+    Case "500", "503"
+      Message.Error("<strong>Error del servidor</strong> (" & sResult & "). Intenta nuevamente más tarde.")
+    Case "000"
+      Message.Error("Tiempo de espera agotado o no se pudo conectar al servidor.")
     Case Else
       Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
   End Select
