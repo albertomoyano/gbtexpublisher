@@ -13,6 +13,7 @@
     Visible = False
     { MenuWikcionario Menu
       Text = ("wikicionario (el diccionario libre)")
+      Picture = Picture["iconos/wiktionary.svg"]
     }
     { MenuRAE Menu
       Text = ("RAE (diccionario de la lengua española)")
@@ -5875,8 +5876,8 @@
       }
     }
     Index = 7
-    Text = ("Wikcionario")
-    Picture = Picture["iconos/wiktionary.svg"]
+    Text = ("Diccionarios     ")
+    Picture = Picture["iconos/publisher2.svg"]
     { PanelAI4 Panel
       MoveScaled(7,6,106,4)
       Arrangement = Arrange.Horizontal
