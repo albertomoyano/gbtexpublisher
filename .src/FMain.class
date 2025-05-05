@@ -33,6 +33,7 @@ Public idSeleccionado As Integer
 Private archivoFileClick As Boolean
 Private imgPreview As New Image
 Public $URL As String
+Public sDiccionarioSeleccionado As String
 
 ' Actualizar el Label cada segundo
 Public Sub TimerHOY_Timer()
@@ -5951,5 +5952,43 @@ Public Sub btnVerificar_Click()' verificar url
     Case Else
       Message.Error("Código de respuesta desconocido: <strong>" & sResult & "<strong>.")
   End Select
+
+End
+
+Public Sub MenuWikcionario_Click()
+
+  sDiccionarioSeleccionado = "wikcionario"
+  MenuButtonIdiomas.Text = "Wikcionario"
+
+End
+
+Public Sub MenuRAE_Click()
+
+  sDiccionarioSeleccionado = "rae"
+  MenuButtonIdiomas.Text = "RAE"
+
+End
+
+Public Sub ButtonConsultar_Click()
+
+  Dim palabra As String = Trim(TextBoxPalabra.Text)
+  Dim diccionarioUrl As String
+
+  If palabra = "" Then
+    Message.Error("Debes ingresar una palabra.")
+    Return
+  Endif
+
+  Select Case sDiccionarioSeleccionado
+    Case "wikcionario"
+      diccionarioUrl = "https://es.wiktionary.org/wiki/" & URLEncode(palabra)
+    Case "rae"
+      diccionarioUrl = "https://dle.rae.es/" & URLEncode(palabra)
+    Case Else
+      Message.Error("Debes seleccionar un diccionario.")
+      Return
+  End Select
+
+  WebViewDefinicion.Url = diccionarioUrl
 
 End

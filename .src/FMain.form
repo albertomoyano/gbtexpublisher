@@ -8,6 +8,16 @@
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
+  { MenuIdiomas Menu
+    Text = ("MenuIdiomas")
+    Visible = False
+    { MenuWikcionario Menu
+      Text = ("wikicionario (el diccionario libre)")
+    }
+    { MenuRAE Menu
+      Text = ("RAE (diccionario de la lengua española)")
+    }
+  }
   { menuProcesarArchivos Menu
     #Translate = False
     Text = "Procesar archivos"
@@ -5795,7 +5805,7 @@
           { HBox9 HBox
             MoveScaled(54,0,16,4)
             { btnPromptNuevo Button
-              MoveScaled(-1,0,4,4)
+              MoveScaled(0,0,4,4)
               NoTabFocus = True
               ToolTip = ("Agregar entrada")
               Picture = Picture["iconos/+nuevo.svg"]
@@ -5867,17 +5877,38 @@
     Index = 7
     Text = ("Wikcionario")
     Picture = Picture["iconos/wiktionary.svg"]
+    { PanelAI4 Panel
+      MoveScaled(7,6,106,4)
+      Arrangement = Arrange.Horizontal
+      AutoResize = True
+      { MenuButtonIdiomas MenuButton
+        MoveScaled(28,0,20,4)
+        Menu = "menuIdiomas"
+        MenuOnly = True
+      }
+      { Separator28 Separator
+        MoveScaled(74,0,2.3333,4)
+        #Translate = False
+      }
+      { ButtonConsultar Button
+        MoveScaled(77,0,4,4)
+        Picture = Picture["iconos/search.svg"]
+      }
+      { TextBoxPalabra TextBox
+        MoveScaled(82,0,13,4)
+        Expand = True
+      }
+    }
     { Panel13 Panel
-      MoveScaled(6,2,87,58)
+      MoveScaled(6,11,57,34)
       Expand = True
       Arrangement = Arrange.Vertical
       Spacing = True
       Padding = 4
       Border = Border.Sunken
       { WebViewDefinicion WebView
-        MoveScaled(2,3,16,16)
+        MoveScaled(2,3,36,14)
         Expand = True
-        Url = "https://es.wiktionary.org/"
       }
     }
     Index = 0
