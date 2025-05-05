@@ -5992,3 +5992,10 @@ Public Sub ButtonConsultar_Click()
   WebViewDefinicion.Url = diccionarioUrl
 
 End
+
+Public Sub btnReset_Click()
+
+  WebViewDefinicion.Clear
+  TextBoxPalabra.Clear
+
+End

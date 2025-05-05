@@ -17,6 +17,7 @@
     }
     { MenuRAE Menu
       Text = ("RAE (diccionario de la lengua española)")
+      Picture = Picture["iconos/Nn.svg"]
     }
   }
   { menuProcesarArchivos Menu
@@ -5882,6 +5883,15 @@
       MoveScaled(7,6,106,4)
       Arrangement = Arrange.Horizontal
       AutoResize = True
+      { btnReset Button
+        MoveScaled(3,0,4,4)
+        Picture = Picture["iconos/hide.png"]
+      }
+      { lblBOOKAUTHOR1 Label
+        MoveScaled(11,0,12,4)
+        Alignment = Align.Right
+        Text = ("Buscar con ")
+      }
       { MenuButtonIdiomas MenuButton
         MoveScaled(28,0,20,4)
         Menu = "menuIdiomas"
