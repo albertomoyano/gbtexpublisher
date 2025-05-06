@@ -52,15 +52,26 @@
       Text = ("HTML5")
     }
     { menuXMLrevista Menu
-      Text = ("XML-JATS")
+      Text = ("XML-JATS SciELO")
+    }
+    { Menu16 Menu
+      Text = ("XML-JATS PMD")
+    }
+    { Menu20 Menu
+      Text = ("DocBook")
     }
     { Menu12 Menu
     }
-    { menuPDFrevistaWEB Menu
-      Text = ("PDF web")
+    { Menu18 Menu
+      Text = ("epub (basado en lienzos)")
     }
-    { menuPDFrevistaIMPRENTA Menu
-      Text = ("PDF imprenta")
+    { Menu21 Menu
+    }
+    { Menu19 Menu
+      Text = ("Generar PDF revista")
+    }
+    { menuPDFrevistaWEB Menu
+      Text = ("Generar PDF libro")
     }
   }
   { menuPDF Menu
@@ -366,7 +377,7 @@
     }
     { btnAbrirRevista Button
       MoveScaled(31,0,14,4)
-      Text = ("Revista")
+      Text = ("AsciiDoc")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista MenuButton
