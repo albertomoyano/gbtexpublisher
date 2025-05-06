@@ -420,6 +420,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     DirViewRuta.Refresh
     FileView1.Refresh
     TabPanel6.Index = 0
+    TabPanel6[2].Visible = False
     ' borramos las carpetas que se crean en el cache
     Shell Quote$("rm -rf " & User.Home & "/.local/share/org.gambas.*") & "\n" Wait
     Mod_Funciones.Borrar_Aux
@@ -2910,6 +2911,7 @@ Public Sub menuAbrirRevista_Click()
     DirViewRuta.Root = File.Dir(rutaOrigen)
     hboxHerramientas.Enabled = True
     TabPanel6.Index = 0
+    TabPanel6[2].Visible = True
     PanelLaTeX.Visible = False
     PanelLaTeX.Enabled = False
     PanelQuarto.Visible = True

@@ -563,7 +563,7 @@
         MoveScaled(1,8,48,49)
         Arrangement = Arrange.Vertical
         Border = False
-        Count = 2
+        Count = 3
         Index = 0
         Text = ("Terminal     ")
         Picture = Picture["iconos/terminal.svg"]
@@ -618,6 +618,34 @@
             Background = &HFFF7DF
             Wrap = True
             ScrollBar = Scroll.Vertical
+          }
+        }
+        Index = 2
+        Text = ("AsciiDoc     ")
+        Picture = Picture["iconos/asciidoctor.svg"]
+        { HBox15 HBox
+          MoveScaled(0,0,45,4)
+          { btnGuardarMod2 Button
+            MoveScaled(1,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Guardar cambios")
+            Picture = Picture["iconos/guardarComo.svg"]
+          }
+        }
+        { Panel18 Panel
+          MoveScaled(1,21,37,20)
+          Expand = True
+          Arrangement = Arrange.Fill
+          Border = Border.Sunken
+          { editorADOC TextEditor
+            MoveScaled(6,4,24,11)
+            ScrollBar = Scroll.Vertical
+            Highlight = "HTML"
+            Mode = "Sh"
+            Wrap = True
+            ShowPosition = True
+            ShowLineNumber = True
+            ShowSpaces = True
           }
         }
         Index = 0
