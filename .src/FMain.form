@@ -5922,30 +5922,38 @@
       MoveScaled(7,6,106,4)
       Arrangement = Arrange.Horizontal
       AutoResize = True
-      { btnReset Button
-        MoveScaled(3,0,4,4)
-        Picture = Picture["iconos/hide.png"]
+      { btnIRalRepositorio Button
+        MoveScaled(0,0,4,4)
+        Picture = Picture["iconos/github-mark.svg"]
+      }
+      { Separator29 Separator
+        MoveScaled(4,0,2.3333,4)
+        #Translate = False
       }
       { lblBOOKAUTHOR1 Label
-        MoveScaled(11,0,12,4)
+        MoveScaled(8,0,12,4)
         Alignment = Align.Right
         Text = ("Buscar con ")
       }
       { MenuButtonIdiomas MenuButton
-        MoveScaled(28,0,20,4)
+        MoveScaled(22,0,20,4)
         Menu = "menuIdiomas"
         MenuOnly = True
       }
+      { btnReset Button
+        MoveScaled(43,0,4,4)
+        Picture = Picture["iconos/hide.png"]
+      }
       { Separator28 Separator
-        MoveScaled(74,0,2.3333,4)
+        MoveScaled(48,0,2.3333,4)
         #Translate = False
       }
       { ButtonConsultar Button
-        MoveScaled(77,0,4,4)
+        MoveScaled(52,0,4,4)
         Picture = Picture["iconos/search.svg"]
       }
       { TextBoxPalabra TextBox
-        MoveScaled(82,0,13,4)
+        MoveScaled(57,0,13,4)
         Expand = True
       }
     }
