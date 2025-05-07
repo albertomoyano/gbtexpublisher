@@ -112,8 +112,15 @@ uniquelist=minyear]{biblatex}
 \NewBibliographyString{photocopy}
 \NewBibliographyString{digitalprinting}
 \NewBibliographyString{edauthor}
+\NewBibliographyString{sq}
+\NewBibliographyString{sqq}
+
+\newcommand*{\sq}{\bibstring{sq}}
+\newcommand*{\sqq}{\bibstring{sqq}}
 
 \DefineBibliographyStrings{spanish}{%
+  sq               = {y~sig\adddot},
+  sqq              = {y~ss\adddot},
 	inpreparation    = {en preparación},
 	submitted        = {enviado},
 	forthcoming      = {de próxima aparición},
@@ -231,7 +238,6 @@ uniquelist=minyear]{biblatex}
 			{\bibstring{translationas}}}\nopunct}%
 	{\printtext{\bibstring{reprint}}}\nopunct}
 \makeatother
-
 
 % instrucción que me permite crear titulo y año como cita
 \DeclareCiteCommand{\titleyear}
