@@ -422,6 +422,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
   If Dialog.OpenFile() Then
     Return
   Else
+    FMain.btnResetEditor_Click()
     TextBox1.Text = Dialog.Path
     Dim rutaOrigen As String = TextBox1.Text
     TerminalView1.Input("cd " & rutaOrigen & "\n")' movemos la consola a la ruta del archivo
