@@ -473,7 +473,7 @@
     }
   }
   { TabPanel1 TabPanel
-    MoveScaled(1,11,161,93)
+    MoveScaled(1,11,163,93)
     Visible = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -590,6 +590,35 @@
           WindowCommands = True
         }
         Index = 1
+        Text = ("Edición     ")
+        Picture = Picture["iconos/asciidoctor.svg"]
+        { HBox15 HBox
+          MoveScaled(-1,0,48,4)
+          { btnGuardarEditor Button
+            MoveScaled(1,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Guardar cambios")
+            Picture = Picture["iconos/guardarComo.svg"]
+          }
+          { Spring3 Spring
+            MoveScaled(6,0,5,4)
+          }
+          { btnResetEditor Button
+            MoveScaled(13,0,4,4)
+            NoTabFocus = True
+            Picture = Picture["iconos/hide.png"]
+          }
+        }
+        { Panel18 Panel
+          MoveScaled(1,21,37,20)
+          Expand = True
+          Arrangement = Arrange.Fill
+          Border = Border.Sunken
+          { WebViewEditor WebView
+            MoveScaled(6,4,25,10)
+          }
+        }
+        Index = 2
         Text = ("Edición rápida     ")
         Picture = Picture["iconos/textnormal.svg"]
         { HBox6 HBox
@@ -629,34 +658,6 @@
             Background = &HFFF7DF
             Wrap = True
             ScrollBar = Scroll.Vertical
-          }
-        }
-        Index = 2
-        Text = ("AsciiDoc     ")
-        Picture = Picture["iconos/asciidoctor.svg"]
-        { HBox15 HBox
-          MoveScaled(0,0,45,4)
-          { btnGuardarMod2 Button
-            MoveScaled(1,0,4,4)
-            NoTabFocus = True
-            ToolTip = ("Guardar cambios")
-            Picture = Picture["iconos/guardarComo.svg"]
-          }
-        }
-        { Panel18 Panel
-          MoveScaled(1,21,37,20)
-          Expand = True
-          Arrangement = Arrange.Fill
-          Border = Border.Sunken
-          { editorADOC TextEditor
-            MoveScaled(6,4,24,11)
-            ScrollBar = Scroll.Vertical
-            Highlight = "HTML"
-            Mode = "Sh"
-            Wrap = True
-            ShowPosition = True
-            ShowLineNumber = True
-            ShowSpaces = True
           }
         }
         Index = 0
@@ -5965,7 +5966,7 @@
       Padding = 4
       Border = Border.Sunken
       { WebViewDefinicion WebView
-        MoveScaled(2,3,36,14)
+        MoveScaled(12,8,16,16)
         Expand = True
       }
     }
