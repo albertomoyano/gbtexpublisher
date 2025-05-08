@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor ACE</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        //    overflow: hidden;
+        }
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-size: 16px;
+			line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div id="editor"></div>
+
+    <!-- Cargar el editor ACE desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+
+    <script>
+        // Inicializar el editor
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/katzenmilch");
+        editor.session.setMode("ace/mode/text");
+        editor.setShowPrintMargin(false);
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true,
+            fontSize: "16px",
+			showPrintMargin: false,
+			wrap: true
+        });
+        
+		// Función para verificar si el contenido ha sido modificado
+		function estaModificado() {
+			return modificado ? "true" : "false"; // ← Más explícito que toString()
+		}
+
+        // Variable para controlar si el contenido ha sido modificado
+        var modificado = false;
+        
+        // Detectar cambios en el editor
+        editor.on("change", function() {
+            modificado = true;
+            console.log("Contenido modificado");
+        });
+        
+        // Función para obtener el texto del editor
+        function obtenerTexto() {
+            return editor.getValue();
+        }
+        
+		function setearTexto(texto) {
+			editor.off("change"); // Desactivar temporalmente el evento change
+			editor.setValue(texto, -1);
+			modificado = false;
+			editor.on("change", onEditorChange); // Reactivar el evento
+		}
+
+		function onEditorChange() {
+			modificado = true;
+			console.log("Contenido modificado");
+		}
+
+		// Inicialización:
+		editor.on("change", onEditorChange);
+        
+        // Función para cambiar el lenguaje del editor
+        function cambiarLenguaje(lenguaje) {
+            console.log("Cambiando lenguaje a: " + lenguaje);
+            editor.session.setMode("ace/mode/" + lenguaje);
+        }
+               
+        // Función para marcar el contenido como guardado
+        function marcarComoGuardado() {
+            console.log("Marcando contenido como guardado");
+            modificado = false;
+        }
+        
+        // Función para resetear el editor
+        function resetEditor() {
+            console.log("Reseteando editor");
+            editor.setValue("", -1);
+            modificado = false;
+        }
+
+        // Informar que el editor está listo
+        console.log("Editor ACE inicializado y listo para usar");
+		
+		// Función para establecer el texto del editor
+		function setearTexto(texto) {
+			console.log("Estableciendo texto en el editor, longitud: " + texto.length);
+			editor.setValue(texto, -1); // -1 mueve el cursor al inicio
+			modificado = false;
+		}
+
+		// Función para decodificar texto en base64
+		function decodeBase64Text(base64) {
+			try {
+			return decodeURIComponent(escape(atob(base64)));
+		} catch(e) {
+			console.error('Error decodificando Base64:', e);
+			return 'Error decodificando contenido';
+		}
+		}
+    </script>
+</body>
+</html>
