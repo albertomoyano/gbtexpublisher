@@ -584,21 +584,8 @@
             ToolTip = ("Guardar cambios")
             Picture = Picture["iconos/guardarComo.svg"]
           }
-          { Separator20 Separator
-            MoveScaled(5,0,2.3333,4)
-            #Translate = False
-          }
-          { PictureBox4 PictureBox
-            MoveScaled(7.3333,0,4,4)
-            Picture = Picture.Load("iconos/duplicados.svg")
-            Alignment = Align.Right
-          }
-          { TextLabel7 TextLabel
-            MoveScaled(15,0,26,4)
-            Expand = True
-            AutoResize = True
-            Text = ("La edición rápida en este editor no tiene autoguardar.")
-            Alignment = Align.Normal
+          { Spring3 Spring
+            MoveScaled(14,0,17,4)
           }
           { btnResetEditor Button
             MoveScaled(42,0,4,4)

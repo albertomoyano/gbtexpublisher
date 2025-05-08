@@ -31,12 +31,12 @@ Private minutos As Integer
 Private horas As Integer
 Public idSeleccionado As Integer
 Private archivoFileClick As Boolean
-Private imgPreview As New Image
 Public $URL As String
 Public sDiccionarioSeleccionado As String
 Public RutaArchivoActual As String
-
+Public imgPreview As Image
 ' Actualizar el Label cada segundo
+
 Public Sub TimerHOY_Timer()
 
   Dim diadehoy As String
@@ -48,12 +48,15 @@ End
 
 Public Sub Form_Open()
 
+  ' Usar la ruta existente para el editor ACE
   Dim ruta As String
   Dim rutaAce As String = User.Home & "/.gbtexpublisher/www/editor.html"
 
   ruta = "file://" & rutaAce
-
   WebViewEditor.url = ruta
+
+  ' Inicializar variables necesarias
+  RutaArchivoActual = ""
 
   ' controlamos que existan los directorios principales o los creamos
   If Not Exist(rutaApp) Then
@@ -5881,6 +5884,8 @@ Public Sub btnGuardarEditor_Click()
     Message.Error("Error al guardar el archivo:\n\n" & Error.Text)
   Else
     Message.Info("Archivo guardado correctamente")
+    ' Marcar como no modificado después de guardar
+    WebViewEditor.Eval("marcarComoGuardado();")
   Endif
 
 End
@@ -5888,57 +5893,101 @@ End
 Public Sub FileView1_Click()
 
   Dim sRutaArchivo As String
-  Dim ImagePreviewSelected As String
   Dim sContenido As String
+  Dim sExt As String
+  Dim iSize As Long
 
-  archivoFileClick = True
-  Application.Busy = 1
+  ' Detener si no hay archivo seleccionado
+  If FileView1.Current = "" Then Return
+
+  Application.Busy = True ' o Application.Busy = 1 según prefieras
 
   ' Construir la ruta completa del archivo
-  sRutaArchivo = FileView1.Dir & "/" & FileView1.Current
+  sRutaArchivo = FileView1.Dir &/ FileView1.Current
 
-  ' Verificar si el archivo seleccionado es una imagen
-  If Lower(FileView1.Current) Like "*.{jpg,png,jpeg}" Then
-    ' Verificar si el archivo existe
-    If Exist(sRutaArchivo) Then
-      ' Intentar cargar la imagen
-      imgPreview = Image.Load(sRutaArchivo)
-      ' Verificar si la imagen se cargó correctamente
+  ' Verificar que el archivo existe
+  If Not Exist(sRutaArchivo) Then
+    Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
+    Application.Busy = False ' o Application.Busy = 0
+    Return
+  Endif
+
+  ' Verificar si el archivo tiene un tamaño de 0 KB
+  iSize = Stat(sRutaArchivo).Size
+  If iSize = 0 Then
+    Message.Info("El archivo está vacío (0 KB)")
+    Application.Busy = False ' o Application.Busy = 0
+    Return
+  Endif
+
+  sExt = Lower(File.Ext(FileView1.Current))
+
+  ' --- Verificar si es imagen ---
+  If EsImagen(sExt) Then
+    Try imgPreview = Image.Load(sRutaArchivo)
+    If Error Then
+      Message.Error("Error al cargar la imagen:\n\n" & Error.Text)
+    Else
       If IsNull(imgPreview) Then
         Message.Error("No se pudo cargar la imagen:\n\n" & sRutaArchivo)
       Else
-        ' Limpiar el ImageView antes de asignar la nueva imagen
-        ImageView1.Image = Null
         ImageView1.Image = imgPreview
-        ImagePreviewSelected = sRutaArchivo
-        TabPanel6.Index = 0  ' Saltar al panel de consola
+        TabPanel6.Index = 0  ' Mostrar imagen
       Endif
-    Else
-      Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
     Endif
-  Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css,md,log,tex,html,adoc,ini}" Then
-    If Exist(sRutaArchivo) Then
-      Try sContenido = File.Load(sRutaArchivo)
-      If Error Then
-        Message.Error("No se pudo cargar el archivo de texto:\n\n" & sRutaArchivo & "\n\n" & Error.Text)
-      Else
-        TabPanel6.Index = 1
-        ' Cargar el contenido en el editor ACE usando la función definida en editor.html
-        CargarArchivoEnEditor(sContenido, sRutaArchivo)
-        RutaArchivoActual = sRutaArchivo
-        ImageView1.Image = Null
-      Endif
-    Else
-      Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
+
+    ' --- Verificar si es archivo de texto ---
+  Else If EsTexto(sExt) Then
+
+    ' Verificar si hay cambios sin guardar
+    If RutaArchivoActual <> "" And WebViewEditor.Eval("estaModificado();") = "true" Then
+      Select Message.Question("El archivo actual tiene cambios sin guardar. ¿Qué desea hacer?",
+            "Guardar los cambios", "Descartar", "Cancelar")
+        Case 1  ' Guardar
+          btnGuardarEditor_Click()
+        Case 2  ' Descartar cambios
+          ' Continuar con la carga del nuevo archivo
+        Case 3  ' Cancelar
+          Application.Busy = False ' o Application.Busy = 0
+          Return
+      End Select
     Endif
+
+    Try sContenido = File.Load(sRutaArchivo)
+    If Error Then
+      Message.Error("No se pudo cargar el archivo de texto:\n\n" & sRutaArchivo & "\n\n" & Error.Text)
+    Else
+      TabPanel6.Index = 1  ' Cambiar a la pestaña del editor
+
+      ' *** IMPORTANTE: Primero asignar la ruta y después cargar el contenido ***
+      RutaArchivoActual = sRutaArchivo
+      CargarArchivoEnEditor(sContenido, sRutaArchivo)
+    Endif
+
+    ' --- Otro tipo de archivo: mostrar mensaje ---
   Else
-    ' Si el archivo no es una imagen ni un archivo de texto, limpiar el ImageView y el TextArea
-    ImageView1.Image = Null
-    ImagePreviewSelected = ""
+    Message.Info("Tipo de archivo no soportado: " & sExt)
   Endif
 
-  ' Desactivar el estado ocupado
-  Application.Busy = 0
+  Application.Busy = False ' o Application.Busy = 0
+
+End
+
+' Función para verificar si una extensión es de imagen
+Private Function EsImagen(ext As String) As Boolean
+
+  Dim aImagenes As String[] = ["jpg", "jpeg", "png", "gif", "bmp", "svg"]
+
+  Return aImagenes.Exist(ext)
+
+End
+
+' Función para verificar si una extensión es de texto
+Private Function EsTexto(ext As String) As Boolean
+
+  Dim aTexto As String[] = ["txt", "sh", "cfg", "bib", "lua", "css", "md", "log", "tex", "html", "htm", "adoc", "ini", "js", "json", "xml", "py", "c", "cpp", "h", "gambas"]
+
+  Return aTexto.Exist(ext)
 
 End
 
@@ -5957,6 +6006,8 @@ Private Sub CargarArchivoEnEditor(sContenido As String, sRutaArchivo As String)
       sModo = "css"
     Case "js"
       sModo = "javascript"
+    Case "json"
+      sModo = "json"
     Case "sh"
       sModo = "sh"
     Case "lua"
@@ -5967,10 +6018,18 @@ Private Sub CargarArchivoEnEditor(sContenido As String, sRutaArchivo As String)
       sModo = "latex"
     Case "log"
       sModo = "text"
-    Case "cfg"
+    Case "cfg", "ini"
       sModo = "ini"
     Case "adoc"
       sModo = "asciidoc"
+    Case "xml"
+      sModo = "xml"
+    Case "py"
+      sModo = "python"
+    Case "c", "cpp", "h"
+      sModo = "c_cpp"
+    Case "gambas"
+      sModo = "vbscript"  ' Lo más cercano a gambas disponible en ACE
     Default
       sModo = "text"
   End Select
@@ -5978,11 +6037,15 @@ Private Sub CargarArchivoEnEditor(sContenido As String, sRutaArchivo As String)
   ' Convertir el contenido a Base64 para evitar problemas de escapado
   sBase64 = Base64$(sContenido)
 
-  ' Modificar el archivo editor.html para agregar una función que acepte Base64
-  ' Primero, verificamos si la función ya está definida (solo ejecutar una vez)
+  ' Inyectar funciones JavaScript en el WebView (solo si aún no existen)
   WebViewEditor.Eval("if (typeof decodeBase64Text === 'undefined') { " &
     "  window.decodeBase64Text = function(base64) { " &
-    "    return decodeURIComponent(escape(atob(base64))); " &
+    "    try {" &
+    "      return decodeURIComponent(escape(atob(base64))); " &
+    "    } catch(e) { " &
+    "      console.error('Error decodificando Base64:', e); " &
+    "      return 'Error decodificando contenido'; " &
+    "    }" &
     "  }; " &
     "}")
 
@@ -5991,6 +6054,32 @@ Private Sub CargarArchivoEnEditor(sContenido As String, sRutaArchivo As String)
 
   ' Cambiar el modo de edición según la extensión
   WebViewEditor.Eval("cambiarLenguaje('" & sModo & "');")
-  '
+
+  ' Marcar como no modificado al cargar un nuevo archivo
+  WebViewEditor.Eval("marcarComoGuardado();")
+
+  ' Imprimir información de depuración en consola
+  Print "Archivo cargado en editor: " & sRutaArchivo
+  Print "Tamaño del contenido: " & Len(sContenido) & " bytes"
+  Print "Modo de edición: " & sModo
+
+End
+
+Public Sub btnResetEditor_Click()
+  ' Verificamos si hay cambios no guardados
+
+  If WebViewEditor.Eval("estaModificado();") = "true" Then
+    ' Preguntamos al usuario
+    Select Case Message.Question("Hay cambios sin guardar. Se perderán los cambios al resetear el editor", "Continuar", "Cancelar")
+      Case 1  ' Continuar
+        ' Seguimos con el reseteo
+      Case 2  ' Cancelar
+        Return  ' Salimos sin hacer nada
+    End Select
+  Endif
+
+  ' Ejecutamos el reseteo
+  WebViewEditor.Eval("resetEditor();")
+  RutaArchivoActual = ""
 
 End
