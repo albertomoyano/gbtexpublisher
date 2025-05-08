@@ -464,7 +464,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
     ImageView1.Image = Null
-    txtEditorRapido.Text = ""
     ' Ejecutar la consulta SQL bibtex
     ContenidoBibActual = Form_ConectarBBDD.meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
     ' refrescamos los datos en los grid del archivo en curso
@@ -5494,28 +5493,6 @@ Public Sub DirViewRuta_Click()
 
 End
 
-Public Sub btnFontEditor_Click()
-
-  Dialog.Title = "Seleccione una tipografía"
-  Dialog.Font = txtEditorRapido.Font
-  Dialog.FixedOnly = False
-  If Dialog.SelectFont() Then Return
-  txtEditorRapido.Font = Dialog.Font
-
-End
-
-Public Sub btnGuardarMod_Click()
-
-  Dim sRutaArchivo As String = FileView1.Dir & "/" & FileView1.Current
-
-  If File.Save(sRutaArchivo, txtEditorRapido.Text) <> Null Then
-    Message.Info("Los cambios se guardaron con éxito.")
-  Else
-    Message.Error("No se pueden guardar los cambios.")
-  Endif
-
-End
-
 Public Sub Menu9_Click()' verificar integridad de gbTeXpublisher
 
   RevisarComponentes()
@@ -5886,51 +5863,6 @@ Public Sub btnVerificar_Click()' verificar url
 
 End
 
-Public Sub MenuWikcionario_Click()
-
-  sDiccionarioSeleccionado = "wikcionario"
-  MenuButtonIdiomas.Text = "Wikcionario"
-
-End
-
-Public Sub MenuRAE_Click()
-
-  sDiccionarioSeleccionado = "rae"
-  MenuButtonIdiomas.Text = "RAE"
-
-End
-
-Public Sub ButtonConsultar_Click()
-
-  Dim palabra As String = Trim(TextBoxPalabra.Text)
-  Dim diccionarioUrl As String
-
-  If palabra = "" Then
-    Message.Error("Debes ingresar una palabra.")
-    Return
-  Endif
-
-  Select Case sDiccionarioSeleccionado
-    Case "wikcionario"
-      diccionarioUrl = "https://es.wiktionary.org/wiki/" & URLEncode(palabra)
-    Case "rae"
-      diccionarioUrl = "https://dle.rae.es/" & URLEncode(palabra)
-    Case Else
-      Message.Error("Debes seleccionar un diccionario.")
-      Return
-  End Select
-
-  WebViewDefinicion.Url = diccionarioUrl
-
-End
-
-Public Sub btnReset_Click()
-
-  WebViewDefinicion.Clear
-  TextBoxPalabra.Clear
-
-End
-
 Public Sub btnGuardarEditor_Click()
 
   Dim sContenido As String
@@ -5979,10 +5911,6 @@ Public Sub FileView1_Click()
         ImageView1.Image = Null
         ImageView1.Image = imgPreview
         ImagePreviewSelected = sRutaArchivo
-        txtEditorRapido.Text = ""         ' Limpiar el TextArea
-        txtEditorRapido.Enabled = False
-        btnGuardarMod.Enabled = False
-        btnFontEditor.Enabled = False
         TabPanel6.Index = 0  ' Saltar al panel de consola
       Endif
     Else
@@ -5999,8 +5927,6 @@ Public Sub FileView1_Click()
         CargarArchivoEnEditor(sContenido, sRutaArchivo)
         RutaArchivoActual = sRutaArchivo
         ImageView1.Image = Null
-        btnGuardarMod.Enabled = True
-        btnFontEditor.Enabled = True
       Endif
     Else
       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
@@ -6008,10 +5934,6 @@ Public Sub FileView1_Click()
   Else
     ' Si el archivo no es una imagen ni un archivo de texto, limpiar el ImageView y el TextArea
     ImageView1.Image = Null
-    txtEditorRapido.Text = ""
-    txtEditorRapido.Enabled = False
-    btnGuardarMod.Enabled = False
-    btnFontEditor.Enabled = False
     ImagePreviewSelected = ""
   Endif
 
@@ -6069,109 +5991,6 @@ Private Sub CargarArchivoEnEditor(sContenido As String, sRutaArchivo As String)
 
   ' Cambiar el modo de edición según la extensión
   WebViewEditor.Eval("cambiarLenguaje('" & sModo & "');")
+  '
 
 End
-
-' ' Evento click en FileView1 para cargar la imagen en ImageView o el texto en TextArea
-' Public Sub FileView1_Click()
-'
-'   Dim sRutaArchivo As String
-'   Dim ImagePreviewSelected As String
-'   Dim sContenido As String
-'
-'   archivoFileClick = True
-'   Application.Busy = 1
-'
-'   ' Construir la ruta completa del archivo
-'   sRutaArchivo = FileView1.Dir & "/" & FileView1.Current
-'
-'   ' Verificar si el archivo seleccionado es una imagen
-'   If Lower(FileView1.Current) Like "*.{jpg,png,jpeg}" Then
-'     ' Verificar si el archivo existe
-'     If Exist(sRutaArchivo) Then
-'       ' Intentar cargar la imagen
-'       imgPreview = Image.Load(sRutaArchivo)
-'       ' Verificar si la imagen se cargó correctamente
-'       If IsNull(imgPreview) Then
-'         Message.Error("No se pudo cargar la imagen:\n\n" & sRutaArchivo)
-'       Else
-'         ' Limpiar el ImageView antes de asignar la nueva imagen
-'         ImageView1.Image = Null
-'         ImageView1.Image = imgPreview
-'         ImagePreviewSelected = sRutaArchivo
-'         txtEditorRapido.Text = ""         ' Limpiar el TextArea
-'         txtEditorRapido.Enabled = False
-'         btnGuardarMod.Enabled = False
-'         btnFontEditor.Enabled = False
-'         TabPanel6.Index = 0' saltar al paner de consola
-'       Endif
-'     Else
-'       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
-'     Endif
-'   Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css,md,log,tex,html,adoc}" Then
-'     If Exist(sRutaArchivo) Then
-'       sContenido = File.Load(sRutaArchivo)
-'       If IsNull(sContenido) Then
-'         Message.Error("No se pudo cargar el archivo de texto:\n\n" & sRutaArchivo)
-'       Else
-'         TabPanel6.Index = 1
-'         WebViewEditor.EvaluateJavaScript("editor.setValue('" & EscaparParaJS(sContenido) & "', -1);")
-'         ' (opcional) guardar ruta actual en variable global para el botón Guardar
-'         RutaArchivoActual = sRutaArchivo
-'         ImageView1.Image = Null
-'       Endif
-'     Else
-'       Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
-'     Endif
-'     '   ' Verificar si el archivo seleccionado es un archivo de texto
-'     ' Else If Lower(FileView1.Current) Like "*.{txt,sh,cfg,bib,lua,css,md,log,tex}" Then
-'     '   ' Verificar si el archivo existe
-'     '   If Exist(sRutaArchivo) Then
-'     '     ' Intentar cargar el contenido del archivo de texto
-'     '     sContenido = File.Load(sRutaArchivo)
-'     '     txtEditorRapido.Enabled = True
-'     '     btnGuardarMod.Enabled = True
-'     '     btnFontEditor.Enabled = True
-'     '     txtEditorRapido.SetFocus()
-'     '
-'     '     ' Verificar si el contenido se cargó correctamente
-'     '     If IsNull(sContenido) Then
-'     '       Message.Error("No se pudo cargar el archivo de texto:\n\n" & sRutaArchivo)
-'     '     Else
-'     '       ' Asignar el contenido al TextArea
-'     '       TabPanel6.Index = 1
-'     '       WebViewEditor.Run("editor.setValue(" & Encode$(sContenido, gb.UTF8) & ", -1);")
-'     '       ' txtEditorRapido.Text = sContenido
-'     '       ImageView1.Image = Null' limpia el imageview
-'     '     Endif
-'     '   Else
-'     '     Message.Warning("El archivo no existe:\n\n" & sRutaArchivo)
-'     '   Endif
-'     ' Limpiar el ImageView si no es una imagen
-'     ImageView1.Image = Null
-'     ImagePreviewSelected = ""
-'   Else
-'     ' Si el archivo no es una imagen ni un archivo de texto, limpiar el ImageView y el TextArea
-'     ImageView1.Image = Null
-'     txtEditorRapido.Text = ""
-'     txtEditorRapido.Enabled = False
-'     btnGuardarMod.Enabled = False
-'     btnFontEditor.Enabled = False
-'     ImagePreviewSelected = ""
-'   Endif
-'
-'   ' Desactivar el estado ocupado
-'   Application.Busy = 0
-'
-' End
-' Private Function EscaparParaJS(texto As String) As String
-'   ' Escapar caracteres especiales para insertar en un string de JavaScript
-'
-'   texto = Replace$(texto, "\\", "\\\\")
-'   texto = Replace$(texto, "'", "\'")
-'   texto = Replace$(texto, "" "", "\"")
-'   texto = Replace$(texto, gb.NewLine, "\n")
-'   texto = Replace$(texto, "\r", "") ' por si hay retornos de carro
-'   Return texto
-'
-' End Function

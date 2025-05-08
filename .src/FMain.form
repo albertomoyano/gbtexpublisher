@@ -8,18 +8,6 @@
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
-  { MenuIdiomas Menu
-    Text = ("MenuIdiomas")
-    Visible = False
-    { MenuWikcionario Menu
-      Text = ("wikicionario (el diccionario libre)")
-      Picture = Picture["iconos/wiktionary.svg"]
-    }
-    { MenuRAE Menu
-      Text = ("RAE (diccionario de la lengua española)")
-      Picture = Picture["iconos/Nn.svg"]
-    }
-  }
   { menuProcesarArchivos Menu
     #Translate = False
     Text = "Procesar archivos"
@@ -434,10 +422,6 @@
       Menu = "AbrirApp"
       MenuOnly = True
     }
-    { Separator20 Separator
-      MoveScaled(30,0,2.3333,4)
-      #Translate = False
-    }
     { Button4 Button
       MoveScaled(33,0,17.7778,4)
       Text = ("Git Local")
@@ -481,7 +465,7 @@
     Margin = True
     Padding = 4
     Border = False
-    Count = 8
+    Count = 7
     Index = 0
     Text = ("Salidas y configuraciones     ")
     Picture = Picture["iconos/logfile.svg"]
@@ -574,7 +558,7 @@
         MoveScaled(1,8,48,49)
         Arrangement = Arrange.Vertical
         Border = False
-        Count = 3
+        Count = 2
         Index = 0
         Text = ("Terminal     ")
         Picture = Picture["iconos/terminal.svg"]
@@ -600,11 +584,24 @@
             ToolTip = ("Guardar cambios")
             Picture = Picture["iconos/guardarComo.svg"]
           }
-          { Spring3 Spring
-            MoveScaled(6,0,5,4)
+          { Separator20 Separator
+            MoveScaled(5,0,2.3333,4)
+            #Translate = False
+          }
+          { PictureBox4 PictureBox
+            MoveScaled(7.3333,0,4,4)
+            Picture = Picture.Load("iconos/duplicados.svg")
+            Alignment = Align.Right
+          }
+          { TextLabel7 TextLabel
+            MoveScaled(15,0,26,4)
+            Expand = True
+            AutoResize = True
+            Text = ("La edición rápida en este editor no tiene autoguardar.")
+            Alignment = Align.Normal
           }
           { btnResetEditor Button
-            MoveScaled(13,0,4,4)
+            MoveScaled(42,0,4,4)
             NoTabFocus = True
             Picture = Picture["iconos/hide.png"]
           }
@@ -616,48 +613,6 @@
           Border = Border.Sunken
           { WebViewEditor WebView
             MoveScaled(6,4,25,10)
-          }
-        }
-        Index = 2
-        Text = ("Edición rápida     ")
-        Picture = Picture["iconos/textnormal.svg"]
-        { HBox6 HBox
-          MoveScaled(1,1,45,4)
-          { btnGuardarMod Button
-            MoveScaled(1,0,4,4)
-            Enabled = False
-            NoTabFocus = True
-            ToolTip = ("Guardar cambios")
-            Picture = Picture["iconos/guardarComo.svg"]
-          }
-          { btnFontEditor Button
-            MoveScaled(5,0,4,4)
-            Enabled = False
-            ToolTip = ("Guardar modificaciones")
-            Picture = Picture["iconos/fonts.svg"]
-          }
-          { Separator26 Separator
-            MoveScaled(9,0,2.3333,4)
-          }
-          { TextLabel7 TextLabel
-            MoveScaled(18,0,26,4)
-            Expand = True
-            AutoResize = True
-            Text = ("La edición rápida de este editor no tiene autoguardar.")
-            Alignment = Align.Normal
-          }
-        }
-        { Panel7 Panel
-          MoveScaled(2,22,37,20)
-          Expand = True
-          Arrangement = Arrange.Fill
-          Border = Border.Sunken
-          { txtEditorRapido TextEdit
-            MoveScaled(18,3,14,13)
-            Font = Font["Inconsolata LGC Nerd Font Mono"]
-            Background = &HFFF7DF
-            Wrap = True
-            ScrollBar = Scroll.Vertical
           }
         }
         Index = 0
@@ -5914,60 +5869,6 @@
           Wrap = True
           ScrollBar = Scroll.Vertical
         }
-      }
-    }
-    Index = 7
-    Text = ("Diccionarios     ")
-    Picture = Picture["iconos/publisher2.svg"]
-    { PanelAI4 Panel
-      MoveScaled(7,6,106,4)
-      Arrangement = Arrange.Horizontal
-      AutoResize = True
-      { btnIRalRepositorio Button
-        MoveScaled(0,0,4,4)
-        Picture = Picture["iconos/github-mark.svg"]
-      }
-      { Separator29 Separator
-        MoveScaled(4,0,2.3333,4)
-        #Translate = False
-      }
-      { lblBOOKAUTHOR1 Label
-        MoveScaled(8,0,12,4)
-        Alignment = Align.Right
-        Text = ("Buscar con ")
-      }
-      { MenuButtonIdiomas MenuButton
-        MoveScaled(22,0,20,4)
-        Menu = "menuIdiomas"
-        MenuOnly = True
-      }
-      { btnReset Button
-        MoveScaled(43,0,4,4)
-        Picture = Picture["iconos/hide.png"]
-      }
-      { Separator28 Separator
-        MoveScaled(48,0,2.3333,4)
-        #Translate = False
-      }
-      { ButtonConsultar Button
-        MoveScaled(52,0,4,4)
-        Picture = Picture["iconos/search.svg"]
-      }
-      { TextBoxPalabra TextBox
-        MoveScaled(57,0,13,4)
-        Expand = True
-      }
-    }
-    { Panel13 Panel
-      MoveScaled(6,11,57,34)
-      Expand = True
-      Arrangement = Arrange.Vertical
-      Spacing = True
-      Padding = 4
-      Border = Border.Sunken
-      { WebViewDefinicion WebView
-        MoveScaled(12,8,16,16)
-        Expand = True
       }
     }
     Index = 0
