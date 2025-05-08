@@ -17,9 +17,6 @@ Public rutaARTCAP As String
 Private rutaApp As String = User.Home & "/.gbtexpublisher"
 Private rutaScriptsExternos As String = User.Home & "/.gbtexpublisher/ScriptsExternos"
 Private rutaScriptsBash As String = User.Home & "/.gbtexpublisher/ScriptsBash"
-' Private rutaFonts As String = User.Home & "/.gbtexpublisher/fonts"
-' Private rutaWWW As String = User.Home & "/.gbtexpublisher/www"
-' Private rutaACE As String = User.Home & "/.gbtexpublisher/www/ace"
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
 Public fFile As File
