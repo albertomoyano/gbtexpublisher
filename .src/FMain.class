@@ -14,10 +14,12 @@ Public rutaMEDIA As String
 Public rutaCONTADOR As String
 Public rutaCATALOGO As String
 Public rutaARTCAP As String
-Public rutaApp As String = User.Home & "/.gbtexpublisher"
-Public rutaScriptsExternos As String = User.Home & "/.gbtexpublisher/ScriptsExternos"
-Public rutaScriptsBash As String = User.Home & "/.gbtexpublisher/ScriptsBash"
-Public rutaFonts As String = User.Home & "/.gbtexpublisher/fonts"
+Private rutaApp As String = User.Home & "/.gbtexpublisher"
+Private rutaScriptsExternos As String = User.Home & "/.gbtexpublisher/ScriptsExternos"
+Private rutaScriptsBash As String = User.Home & "/.gbtexpublisher/ScriptsBash"
+' Private rutaFonts As String = User.Home & "/.gbtexpublisher/fonts"
+' Private rutaWWW As String = User.Home & "/.gbtexpublisher/www"
+' Private rutaACE As String = User.Home & "/.gbtexpublisher/www/ace"
 Public rutaCORRECCIONES As String
 Public Item_Seleccionado As Integer
 Public fFile As File
@@ -30,7 +32,7 @@ Private segundos As Integer
 Private minutos As Integer
 Private horas As Integer
 Public idSeleccionado As Integer
-Private archivoFileClick As Boolean
+' Private archivoFileClick As Boolean
 Public $URL As String
 Public sDiccionarioSeleccionado As String
 Public RutaArchivoActual As String
@@ -48,6 +50,29 @@ End
 
 Public Sub Form_Open()
 
+  ' Lista de rutas que necesitas verificar/crear
+  Dim rutasNecesarias As String[] = [
+    User.Home & "/.gbtexpublisher",
+    User.Home & "/.gbtexpublisher/ScriptsExternos",
+    User.Home & "/.gbtexpublisher/ScriptsBash",
+    User.Home & "/.gbtexpublisher/fonts",
+    User.Home & "/.gbtexpublisher/www",
+    User.Home & "/.gbtexpublisher/www/ace"
+
+  ]
+
+  ' Verificar y crear rutas si no existen
+  For Each rutaDirSys As String In rutasNecesarias
+    If Not Exist(rutaDirSys) Then
+      Try Mkdir rutaDirSys  ' ← Intenta crear el directorio
+      If Error Then
+        Message.Error("Error al intentar crear los directorios del sistema.")' Print "Error al crear directorio: " & rutaDirSys & " (" & Error.Text & ")"
+      Else
+        Print "Directorio creado: " & rutaDirSys
+      Endif
+    End If
+  Next
+
   ' Usar la ruta existente para el editor ACE
   Dim ruta As String
   Dim rutaAce As String = User.Home & "/.gbtexpublisher/www/editor.html"
@@ -57,23 +82,6 @@ Public Sub Form_Open()
 
   ' Inicializar variables necesarias
   RutaArchivoActual = ""
-
-  ' controlamos que existan los directorios principales o los creamos
-  If Not Exist(rutaApp) Then
-    Mkdir rutaApp
-  End If
-
-  If Not Exist(rutaFonts) Then
-    Mkdir rutaFonts
-  End If
-
-  If Not Exist(rutaScriptsExternos) Then
-    Mkdir rutaScriptsExternos
-  End If
-
-  If Not Exist(rutaScriptsBash) Then
-    Mkdir rutaScriptsBash
-  End If
 
   Dim archivos As String[] = [
     "falta-tapa.png",
@@ -101,6 +109,9 @@ Public Sub Form_Open()
     Endif
   Next
 
+  If Not File.RealPath(User.Home & "/.gbtexpublisher/www/editor.html") Then
+    Copy "./editor.html" To User.Home & "/.gbtexpublisher/www/editor.html"
+  End If
   If Not File.RealPath(User.Home & "/.gbtexpublisher/book-pdf-especial.tex") Then
     Copy "./book-pdf-especial.tex" To User.Home & "/.gbtexpublisher/book-pdf-especial.tex"
   End If
@@ -124,10 +135,7 @@ Public Sub Form_Open()
   Timer1.Delay = 1000
   Timer1.Stop  ' No iniciamos el Timer de inmediato
 
-  ' Fmain.Title = Application.Title & " v. " & Application.Version & " - programación orientada al usuario"
   TimerHOY.Enabled = True
-
-  ' Fmain.Title = Application.Title & " (versión en desarrollo " & Application.Version & ") - (acá quiero poner el dia y la hora)"
 
   $Bash = TerminalView1.Shell("/usr/bin/bash")
   TerminalView1.SetFocus()

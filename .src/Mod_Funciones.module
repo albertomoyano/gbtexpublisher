@@ -720,6 +720,19 @@ Public Sub CerrarTodo()
     Form_ConectarBBDD.Close
   Endif
 
+  ' Cierra ambos WebView si existen
+  If FMain.WebViewEditor <> Null Or FMain.WebView1 <> Null Then
+    If FMain.WebViewEditor <> Null Then
+      FMain.WebViewEditor.Close
+      FMain.WebViewEditor = Null
+    End If
+
+    If FMain.WebView1 <> Null Then
+      FMain.WebView1.Close
+      FMain.WebView1 = Null
+    End If
+  End If
+
   ' Finalmente cerrar formulario principal y salir de la aplicación
   FMain.Close
   Quit
