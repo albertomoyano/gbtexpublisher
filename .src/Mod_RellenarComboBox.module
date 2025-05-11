@@ -286,6 +286,8 @@ Public Sub RellenarComboBoxBibTeX()
   FMain.cbType.Add("licenciaturathesis")
   FMain.cbType.Add("especialthesis")
   FMain.cbType.Add("posgradothesis")
+  FMain.cbType.Add("profesoradothesis")
+
   ' FMain.cbType.Add("@manual (seleccionar)")
   ' FMain.cbType.Add("guía de usuario")
   ' FMain.cbType.Add("manual técnico")

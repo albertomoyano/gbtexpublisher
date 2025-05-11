@@ -5216,6 +5216,7 @@ End
 Public Sub VListaBIB_Click()' grid en el formulario principal
 
   ' configurar como se muestran los botones
+  btnGuardarIGUAL.Visible = False
   btnGuardarCambios.Visible = True
   BtnEliminarBib.Visible = True
   btnAgregarCitationKey.Visible = True
