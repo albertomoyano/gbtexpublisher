@@ -360,17 +360,16 @@
       Menu = "menuPDF"
       MenuOnly = True
     }
-    { Separator2 Separator
-      MoveScaled(28,0,2.3333,4)
-    }
     { btnAbrirRevista Button
       MoveScaled(31,0,14,4)
+      Visible = False
       Text = ("AsciiDoc")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdfRevista MenuButton
       MoveScaled(45,0,14,4)
       #Translate = False
+      Visible = False
       Enabled = False
       Text = "Salidas"
       Picture = Picture["iconos/salidas.svg"]
@@ -551,7 +550,7 @@
       }
     }
     { Splitter1 Splitter
-      MoveScaled(1,7,126,76)
+      MoveScaled(2,7,126,76)
       Expand = True
       Border = False
       { TabPanel6 TabPanel
@@ -772,7 +771,7 @@
     Text = ("Referencias bibliográficas     ")
     Picture = Picture["iconos/imprenta.svg"]
     { Panel3 Panel
-      MoveScaled(1,1,123,28)
+      MoveScaled(2,1,123,28)
       Arrangement = Arrange.Horizontal
       AutoResize = True
       { TabPanel5 TabPanel
@@ -5721,7 +5720,7 @@
       Expand = True
       Border = False
       { Panel11 Panel
-        MoveScaled(2,6,87,58)
+        MoveScaled(2,7,87,58)
         Arrangement = Arrange.Vertical
         Spacing = True
         Padding = 4
@@ -5839,7 +5838,7 @@
         }
       }
       { Panel12 Panel
-        MoveScaled(93,8,28,56)
+        MoveScaled(93,8,28,31)
         Arrangement = Arrange.Vertical
         { TextLabel8 TextLabel
           MoveScaled(2,3,17,7)
@@ -5849,7 +5848,7 @@
           Alignment = Align.Normal
         }
         { txtResultado TextArea
-          MoveScaled(2,37,21,17)
+          MoveScaled(1,12,21,17)
           Background = Color.Background
           Expand = True
           ReadOnly = True

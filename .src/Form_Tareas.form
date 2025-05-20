@@ -49,19 +49,19 @@
     { Spring1 Spring
       MoveScaled(1,0,15,4)
     }
-    { btnAgregar Button
-      MoveScaled(18,0,32,4)
-      Text = ("Listo")
-      Picture = Picture["iconos/comp.svg"]
-    }
     { Separator1 Separator
       MoveScaled(37,0,1,4)
       Foreground = Color.Transparent
     }
     { btnCancelar Button
-      MoveScaled(61,0,16,4)
+      MoveScaled(38,0,16,4)
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]
+    }
+    { btnAgregar Button
+      MoveScaled(55,0,32,4)
+      Text = ("Listo")
+      Picture = Picture["iconos/comp.svg"]
     }
   }
 }
