@@ -30,9 +30,10 @@ footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
 % cambiamos el nombre de sigla
 \newcommand{\acronymsname}{Índice de siglas}
 
-\usepackage{fontspec}% Soporte para fuentes OpenType
-\usepackage[final]{microtype}% Mejoras tipográficas micro
-\microtypecontext{spacing=nonfrench}% Mejora espaciado sin modificar el interletrado
+% Mejoras tipográficas para fuentes OpenType
+\usepackage{fontspec}
+\usepackage[final,babel=true]{microtype}
+\microtypecontext{spacing=nonfrench}
 % solo trabajamos con protusion y sin expansion para Libertinus
 \SetProtrusion
 [ name=libertinus ]
@@ -43,7 +44,8 @@ footnotesep=14pt plus 0.1pt minus 0.1pt]{geometry}
 
 % Fuente principal Libertinus con características tipográficas
 \setmainfont{Libertinus Serif}
-[Numbers={OldStyle,Proportional},
+[Microtypography,
+Numbers={OldStyle,Proportional},
 Ligatures={TeX,Common,Discretionary},
 RawFeature={+cv01,+cv02}, % Variantes de caracteres opcionales
 Scale=1.18]
