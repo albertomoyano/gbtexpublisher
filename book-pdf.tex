@@ -338,8 +338,28 @@ placement=ht,
 \def\slash{/\penalty\z@\hskip\z@skip}
 \makeatother
 
-% CENTRADO DEL AUTOR DE LOS CAPITULOS
-\newcommand\nombreautor[1]{\textsc{\MakeLowercase{#1}}}
+% Centrado y versalita de autores de capítulos
+\makeatletter
+\newcommand\nombreautor[1]{%
+	\begin{center}%
+		\@nombreautor{#1}%
+	\end{center}%
+	\vspace{24pt}%
+}
+\def\@nombreautor#1{%
+	\@nombreautor@split#1 \@nil%
+}
+\def\@nombreautor@split#1 y #2\@nil{%
+	\ifx\relax#2\relax%
+	\textsc{\MakeLowercase{#1}}% Solo un autor
+	\else%
+	\@nombreautor@multiple{#1}{#2}% Múltiples autores
+	\fi%
+}
+\def\@nombreautor@multiple#1#2{%
+	\textsc{\MakeLowercase{#1}} y \textsc{\MakeLowercase{#2}}%
+}
+\makeatother
 
 % CITA CON CAMBIO DE TAMAÑO TIPOGRAFICO
 \renewenvironment{quote}
