@@ -403,7 +403,7 @@
       Alignment = Align.Right
     }
     { Label176 Label
-      MoveScaled(94,0,20,4)
+      MoveScaled(96,0,20,4)
       AutoResize = True
       Text = ("gbTeXpublisher no admite rutas de directorios que contengan espacios")
     }
