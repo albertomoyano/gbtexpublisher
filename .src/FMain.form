@@ -455,7 +455,7 @@
       Placeholder = ("coloque aquí su usuario GitLab")
     }
   }
-  { TabPanel1 TabPanel
+  { TabPanel1 TabStrip
     MoveScaled(1,11,163,93)
     Visible = False
     Expand = True
@@ -463,7 +463,6 @@
     Spacing = True
     Margin = True
     Padding = 4
-    Border = False
     Count = 7
     Index = 0
     Text = ("Salidas y configuraciones     ")
@@ -678,13 +677,12 @@
             }
           }
         }
-        { TabPanel7 TabPanel
+        { TabPanel7 TabStrip
           MoveScaled(2,45,70,23)
           Arrangement = Arrange.Fill
           Spacing = True
           Margin = True
           Padding = 4
-          Border = False
           Count = 2
           Index = 0
           Text = ("Check List     ")
@@ -774,7 +772,7 @@
       MoveScaled(2,1,123,28)
       Arrangement = Arrange.Horizontal
       AutoResize = True
-      { TabPanel5 TabPanel
+      { TabPanel5 TabStrip
         MoveScaled(2,1,117,26)
         Expand = True
         Arrangement = Arrange.Vertical
@@ -966,7 +964,7 @@
         MoveScaled(62,0,15,4)
       }
     }
-    { TabPanel2 TabPanel
+    { TabPanel2 TabStrip
       MoveScaled(1,44,155,66)
       Expand = True
       Arrangement = Arrange.Vertical
@@ -3027,7 +3025,7 @@
       MoveScaled(1,1,122,27)
       NoTabFocus = True
       Arrangement = Arrange.Horizontal
-      { TabPanel3 TabPanel
+      { TabPanel3 TabStrip
         MoveScaled(1,1,119,25)
         Expand = True
         Arrangement = Arrange.Vertical
@@ -4168,7 +4166,7 @@
           MoveScaled(49,0,5,4)
         }
       }
-      { !TabPanelLibro TabPanel
+      { !TabPanelLibro TabStrip
         MoveScaled(2,9,156,62)
         #Public = True
         Expand = True
@@ -4176,7 +4174,6 @@
         Spacing = True
         Margin = True
         Padding = 4
-        Border = False
         Count = 3
         Index = 0
         Text = ("Obligatorios a la salida de tipo libro     ")
@@ -5253,7 +5250,7 @@
           Expand = True
         }
       }
-      { TabPanel4 TabPanel
+      { TabPanel4 TabStrip
         MoveScaled(2,29,119,41)
         Expand = True
         Arrangement = Arrange.Fill
@@ -5261,11 +5258,10 @@
         Margin = True
         Padding = 4
         Count = 2
-        Highlight = True
         Index = 0
         Text = ("Autor(es) y colaboradores del libro     ")
         Picture = Picture["iconos/autores.svg"]
-        { TabStrip2 TabPanel
+        { TabStrip2 TabStrip
           MoveScaled(2,3,114,32)
           Expand = True
           Arrangement = Arrange.Fill
@@ -5273,7 +5269,6 @@
           Margin = True
           Padding = 4
           Count = 2
-          Highlight = True
           Index = 0
           Text = ("Autoría     ")
           Picture = Picture["iconos/candado-abierto.svg"]
