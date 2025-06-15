@@ -552,56 +552,6 @@
       MoveScaled(2,7,126,76)
       Expand = True
       Border = False
-      { TabPanel6 TabPanel
-        MoveScaled(1,8,48,49)
-        Arrangement = Arrange.Vertical
-        Border = False
-        Count = 2
-        Index = 0
-        Text = ("Terminal     ")
-        Picture = Picture["iconos/terminal.svg"]
-        { !TerminalView1 TerminalView
-          MoveScaled(3,3,27,6)
-          #Public = True
-          Expand = True
-          AutoResize = False
-          Blink = True
-          CursorStyle = TerminalView.Underline
-          ShowScrollBar = True
-          ShowLink = True
-          WindowCommands = True
-        }
-        Index = 1
-        Text = ("Edición     ")
-        Picture = Picture["iconos/asciidoctor.svg"]
-        { HBox15 HBox
-          MoveScaled(-1,0,48,4)
-          { btnGuardarEditor Button
-            MoveScaled(1,0,4,4)
-            NoTabFocus = True
-            ToolTip = ("Guardar cambios")
-            Picture = Picture["iconos/guardarComo.svg"]
-          }
-          { Spring3 Spring
-            MoveScaled(14,0,17,4)
-          }
-          { btnResetEditor Button
-            MoveScaled(42,0,4,4)
-            NoTabFocus = True
-            Picture = Picture["iconos/hide.png"]
-          }
-        }
-        { Panel18 Panel
-          MoveScaled(1,21,37,20)
-          Expand = True
-          Arrangement = Arrange.Fill
-          Border = Border.Sunken
-          { WebViewEditor WebView
-            MoveScaled(6,4,25,10)
-          }
-        }
-        Index = 0
-      }
       { Splitter2 Splitter
         MoveScaled(52,1,74,73)
         Arrangement = Arrange.Vertical
@@ -763,6 +713,55 @@
           }
           Index = 0
         }
+      }
+      { TabPanel6 TabStrip
+        MoveScaled(1,8,48,49)
+        Arrangement = Arrange.Vertical
+        Count = 2
+        Index = 0
+        Text = ("Terminal     ")
+        Picture = Picture["iconos/terminal.svg"]
+        { !TerminalView1 TerminalView
+          MoveScaled(3,3,27,6)
+          #Public = True
+          Expand = True
+          AutoResize = False
+          Blink = True
+          CursorStyle = TerminalView.Underline
+          ShowScrollBar = True
+          ShowLink = True
+          WindowCommands = True
+        }
+        Index = 1
+        Text = ("Edición     ")
+        Picture = Picture["iconos/asciidoctor.svg"]
+        { HBox15 HBox
+          MoveScaled(-1,0,48,4)
+          { btnGuardarEditor Button
+            MoveScaled(1,0,4,4)
+            NoTabFocus = True
+            ToolTip = ("Guardar cambios")
+            Picture = Picture["iconos/guardarComo.svg"]
+          }
+          { Spring3 Spring
+            MoveScaled(14,0,17,4)
+          }
+          { btnResetEditor Button
+            MoveScaled(42,0,4,4)
+            NoTabFocus = True
+            Picture = Picture["iconos/hide.png"]
+          }
+        }
+        { Panel18 Panel
+          MoveScaled(1,21,37,20)
+          Expand = True
+          Arrangement = Arrange.Fill
+          Border = Border.Sunken
+          { WebViewEditor WebView
+            MoveScaled(6,4,25,10)
+          }
+        }
+        Index = 0
       }
     }
     Index = 1
