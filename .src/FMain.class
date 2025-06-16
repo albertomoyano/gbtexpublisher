@@ -225,7 +225,6 @@ Public Sub Form_Open()
   Mod_Funciones.ConfigurarGridView(gridListaBIBactual)
   Mod_Funciones.ConfigurarGridGLO(VGridGLO)
   Mod_Funciones.ConfigurarGridGLO(gidGLOactual)
-  Mod_Funciones.ConfigurarGridAI()
   '
   ' Ejecutar las consultas SQL
   ContenidoBibTotal = Form_ConectarBBDD.meConn.Exec("SELECT * FROM bibtex ORDER BY id DESC")

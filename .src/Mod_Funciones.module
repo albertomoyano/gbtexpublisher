@@ -918,29 +918,3 @@ Public Sub CopiarArchivosRevista(rutaTexto As String)'libros y revistas
   End If
 
 End
-
-Public Sub ConfigurarGridAI()
-
-  ' Contenido = Form_ConectarBBDD.meConn.Exec("SELECT * FROM notas ORDER BY id DESC")
-  ' gridNotas.Rows.Count = Contenido.Count
-
-  Dim grid As GridView = FMain.gridAI
-
-  grid.Clear() ' Limpiar configuración previa
-
-  With grid
-    .Header = True
-    .Grid = True
-    .Columns.Count = 4
-    .Columns[0].Title = "id"
-    .Columns[0].Width = 0
-    .Columns[1].Title = "Fecha"
-    .Columns[1].Width = 120
-    .Columns[2].Title = "Base"
-    .Columns[2].Width = 300
-    .Columns[3].Title = "Prompt"
-    .Columns[3].Width = 540
-
-  End With
-
-End
