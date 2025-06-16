@@ -214,12 +214,6 @@ Public Sub Form_Open()
   btnGuardarCambiosCapitulo.Visible = False
   btnBorrarCapitulo.Visible = False
 
-  ' botonera de asistente de AI
-  btnPromptNuevo.Visible = True
-  btnPromptBorrar.Visible = False
-  btnPromptGuardar.Visible = False
-  btnPromptGuardarMod.Visible = False
-
   ' asignamos tipografia monoespaciada al textarea de biblio
   txtTMPbiblio.Font = Font["Monospace"]
 
@@ -246,20 +240,6 @@ Public Sub Form_Open()
   ' Mostrar_ListaGLO()
 
   Splitter6.Layout = [1, 1]
-  Splitter10.Layout = [1, 3]
-  Splitter9.Layout = [1, 1]
-
-End
-
-Public Sub Splitter10_Resize()
-
-  Splitter10.Layout = [1, 3]
-
-End
-
-Public Sub Splitter9_Resize()
-
-  Splitter9.Layout = [1, 1]
 
 End
 
@@ -271,13 +251,6 @@ Public Sub WebView1_LoadFinished(Success As Boolean)
   Else
     Print "Página cargada con éxito: " & WebView1.Url
   End If
-
-End
-
-' Función para actualizar el display del tiempo
-Public Sub ActualizarDisplay()
-
-  txtTiempo.Caption = Right$("0" & horas, 2) & ":" & Right$("0" & minutos, 2) & ":" & Right$("0" & segundos, 2)
 
 End
 
@@ -3584,9 +3557,6 @@ Public Sub Timer1_Timer()
     horas += 1
   Endif
 
-  ' Actualizamos el display del tiempo
-  ActualizarDisplay
-
 End
 
 ' Función para actualizar el display del botón
@@ -3600,9 +3570,6 @@ Public Sub reinicamosTiempo()
   ' Detenemos el Timer si está corriendo, luego lo reiniciamos
   Timer1.Stop
   Timer1.Start
-
-  ' Actualizamos el display para reflejar el reinicio
-  ActualizarDisplay
 
 End
 
@@ -5742,34 +5709,6 @@ Public Sub btnChequearURL_Click()
 
   ' Cargar la URL en el WebView tal como está
   WebView1.Url = sUrl
-
-End
-
-Public Sub btnAsistenteAI_Click()
-
-  ' Validar campos vacíos
-  If Trim(txtAreaPrompt1.Text) = "" Then
-    Message.Error("¡El texto del prompt no puede estar vacío!")
-    Return
-  End If
-
-  If Trim(txtAreaPrompt2.Text) = "" Then
-    Message.Error("¡El texto a procesar no puede estar vacío!")
-    Return
-  End If
-
-  ' Validar API key
-  If Trim(txtAsistenteAI.Text) = "" Then
-    Message.Error("¡La API key es obligatoria!")
-    Return
-  End If
-
-  ' Construir prompt final (combina textarea1 + textarea2)
-  Dim promptFinal As String
-  promptFinal = txtAreaPrompt1.Text & "\n" & txtAreaPrompt2.Text
-
-  ' ' Llamar a la función que envía a la API (ejemplo simplificado)
-  ' LlamarAPI(promptFinal, textboxAPIKey.Text, valueboxTemperatura.Value)
 
 End
 
