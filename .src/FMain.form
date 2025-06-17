@@ -567,7 +567,7 @@
           Arrangement = Arrange.Fill
           Border = Border.Sunken
           { WebViewEditor WebView
-            MoveScaled(6,4,25,10)
+            MoveScaled(7,4,23,12)
           }
         }
         Index = 0
@@ -945,7 +945,7 @@
       Text = ("Autoría     ")
       Picture = Picture["iconos/candado-abierto.svg"]
       { ScrollView2 ScrollView
-        MoveScaled(2,3,108,55)
+        MoveScaled(1,4,108,55)
         Expand = True
         Arrangement = Arrange.Vertical
         Spacing = True
@@ -2097,11 +2097,13 @@
           }
         }
         { Panel10 Panel
-          MoveScaled(101,5,21,18)
+          MoveScaled(96,5,21,18)
           Arrangement = Arrange.Fill
           Border = Border.Sunken
-          { WebView1 WebView
-            MoveScaled(3,1,16,16)
+          { !WebView1 WebView
+            MoveScaled(2,5,14,9)
+            #Public = True
+            Expand = True
           }
         }
       }

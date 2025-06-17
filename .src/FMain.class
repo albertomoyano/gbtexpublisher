@@ -6013,18 +6013,18 @@ End
 Public Sub btnResetEditor_Click()
   ' Verificamos si hay cambios no guardados
 
-  If WebViewEditor.Eval("estaModificado();") = "true" Then
-    ' Preguntamos al usuario
-    Select Case Message.Question("Hay cambios sin guardar. Se perderán los cambios al resetear el editor", "Continuar", "Cancelar")
-      Case 1  ' Continuar
-        ' Seguimos con el reseteo
-      Case 2  ' Cancelar
-        Return  ' Salimos sin hacer nada
-    End Select
-  Endif
-
-  ' Ejecutamos el reseteo
-  WebViewEditor.Eval("resetEditor();")
-  RutaArchivoActual = ""
+  ' If WebViewEditor.Eval("estaModificado();") = "true" Then
+  '   ' Preguntamos al usuario
+  '   Select Case Message.Question("Hay cambios sin guardar. Se perderán los cambios al resetear el editor", "Continuar", "Cancelar")
+  '     Case 1  ' Continuar
+  '       ' Seguimos con el reseteo
+  '     Case 2  ' Cancelar
+  '       Return  ' Salimos sin hacer nada
+  '   End Select
+  ' Endif
+  '
+  ' ' Ejecutamos el reseteo
+  ' WebViewEditor.Eval("resetEditor();")
+  ' RutaArchivoActual = ""
 
 End
