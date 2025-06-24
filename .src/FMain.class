@@ -5306,39 +5306,6 @@ Public Sub Menu5_Click()' área de debate de gbTeXpublisher
 
 End
 
-Public Sub btnMenuGitLab_Click()
-
-  Dim fecha As String
-  Dim usuario As String = Trim(txtGitLab.Text)
-  Dim IdGitLab As String
-
-  If Not File.RealPath(File.Dir(TextBox1.Text) & "/.gitlab-ci.yml") Then
-    Copy "./gitlab-ci.yml" To File.Dir(TextBox1.Text) & "/.gitlab-ci.yml"
-  End If
-
-  ' Obtener la fecha actual
-  fecha = Format(Date(), "dd-mm-yyyy")
-
-  ' Verificar si el nombre de usuario está vacío
-  If usuario = "" Then
-    Message.Error("Debe indicar su nombre de usuario en GitLab", "Ok")
-    Return
-  End If
-
-  Mod_Funciones.Borrar_Aux()
-  IdGitLab = "git@gitlab.com:" & usuario & "/" & File.BaseName(TextBox1.Text) & ".git"
-  TabPanel1.Index = 0
-  TabPanel6.Index = 0
-  TerminalView1.Input("git remote remove origin" & "\n")
-  TerminalView1.Input("git remote add origin " & IdGitLab & "\n")
-  TerminalView1.Input("git add ." & "\n")
-  TerminalView1.Input("git commit -m '" & fecha & "'" & "\n")
-  TerminalView1.Input("git push --set-upstream origin main" & "\n")
-  TerminalView1.SetFocus()
-  TerminalView1.Refresh()
-
-End
-
 Public Sub chkURLdescarga_Click()
 
   If chkURLdescarga.Value = True Then
