@@ -3516,12 +3516,6 @@ Public Sub btnBuscarFiltro_Click()
 
 End
 
-Public Sub btnAbrirLibro_Click()
-
-  menuAbrirLibro_Click()' abrir libro
-
-End
-
 ' Evento que se ejecuta cada segundo
 Public Sub Timer1_Timer()
 
@@ -5977,5 +5971,11 @@ Public Sub btnResetEditor_Click()
   ' ' Ejecutamos el reseteo
   ' WebViewEditor.Eval("resetEditor();")
   ' RutaArchivoActual = ""
+
+End
+
+Public Sub menuAbrirTeX_Click()
+
+  menuAbrirLibro_Click()' abrir libro
 
 End
