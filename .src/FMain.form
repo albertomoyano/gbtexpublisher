@@ -388,7 +388,6 @@
         { btnCOMPpdf MenuButton
           MoveScaled(22,0,21.1111,4)
           #Translate = False
-          Enabled = False
           Text = "Construir salidas"
           Picture = Picture["iconos/salidas.svg"]
           Menu = "menuPDF"
