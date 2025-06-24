@@ -33,35 +33,6 @@
       Picture = Picture["iconos/borrar.svg"]
     }
   }
-  { menuPDFrevista Menu
-    Text = ("menuPDFrevista")
-    Visible = False
-    { menuHTMLrevista Menu
-      Text = ("HTML5")
-    }
-    { menuXMLrevista Menu
-      Text = ("XML-JATS SciELO")
-    }
-    { Menu16 Menu
-      Text = ("XML-JATS PMD")
-    }
-    { Menu20 Menu
-      Text = ("DocBook")
-    }
-    { Menu12 Menu
-    }
-    { Menu18 Menu
-      Text = ("epub (basado en lienzos)")
-    }
-    { Menu21 Menu
-    }
-    { Menu19 Menu
-      Text = ("Generar PDF revista")
-    }
-    { menuPDFrevistaWEB Menu
-      Text = ("Generar PDF libro")
-    }
-  }
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
@@ -344,43 +315,39 @@
     }
   }
   { HBox171 HBox
-    MoveScaled(1,0,120,4)
+    MoveScaled(1,0,163,4)
     AutoResize = True
     { btnAbrirLibro Button
       MoveScaled(0,0,14,4)
-      Text = ("Libro")
+      Text = ("LaTeX")
       Picture = Picture["iconos/abrirBuscar.svg"]
     }
     { btnCOMPpdf MenuButton
-      MoveScaled(14,0,14,4)
+      MoveScaled(14,0,28,4)
       #Translate = False
       Enabled = False
-      Text = "Salidas"
+      Text = "Construir salidas"
       Picture = Picture["iconos/salidas.svg"]
       Menu = "menuPDF"
       MenuOnly = True
     }
-    { btnAbrirRevista Button
-      MoveScaled(31,0,14,4)
-      Visible = False
-      Text = ("AsciiDoc")
-      Picture = Picture["iconos/abrirBuscar.svg"]
+    { Separator2 Separator
+      MoveScaled(56,0,2.3333,4)
     }
-    { btnCOMPpdfRevista MenuButton
-      MoveScaled(45,0,14,4)
+    { !MenuApp MenuButton
+      MoveScaled(64,0,28,4)
+      #Public = True
       #Translate = False
-      Visible = False
-      Enabled = False
-      Text = "Salidas"
-      Picture = Picture["iconos/salidas.svg"]
-      Menu = "menuPDFrevista"
+      Text = "Ver salidas generadas"
+      Picture = Picture["iconos/document.svg"]
+      Menu = "AbrirApp"
       MenuOnly = True
     }
     { Separator12 Separator
-      MoveScaled(60,0,2.3333,4)
+      MoveScaled(102,0,2.3333,4)
     }
     { Panel9 HBox
-      MoveScaled(63,0,22,4)
+      MoveScaled(105,0,22,4)
       Expand = True
       { PictureBox1 PictureBox
         MoveScaled(0,0,4,4)
@@ -398,51 +365,18 @@
       }
     }
     { PictureBox2 PictureBox
-      MoveScaled(88,0,4,4)
+      MoveScaled(130,0,4,4)
       Picture = Picture.Load("iconos/duplicados.svg")
       Alignment = Align.Right
     }
     { Label176 Label
-      MoveScaled(96,0,20,4)
+      MoveScaled(135,0,20,4)
       AutoResize = True
       Text = ("gbTeXpublisher no admite rutas de directorios que contengan espacios")
     }
   }
-  { hboxHerramientas HBox
-    MoveScaled(1,5,120,4)
-    Enabled = False
-    AutoResize = True
-    { !MenuApp MenuButton
-      MoveScaled(1,0,28,4)
-      #Public = True
-      #Translate = False
-      Text = "Ver salidas generadas"
-      Picture = Picture["iconos/document.svg"]
-      Menu = "AbrirApp"
-      MenuOnly = True
-    }
-    { Button4 Button
-      MoveScaled(33,0,17.7778,4)
-      Text = ("Git Local")
-      Picture = Picture["iconos/git-local.svg"]
-    }
-    { Separator24 Separator
-      MoveScaled(52,0,2.3333,4)
-      #Translate = False
-    }
-    { btnMenuGIT Button
-      MoveScaled(56,0,17.7778,4)
-      Text = ("GitHub")
-      Picture = Picture["iconos/github.svg"]
-    }
-    { txtGIT TextBox
-      MoveScaled(75,0,8,4)
-      Expand = True
-      Placeholder = ("coloque aquí su usuario GitHub")
-    }
-  }
   { TabPanel1 TabStrip
-    MoveScaled(1,11,163,93)
+    MoveScaled(1,5,163,93)
     Visible = False
     Expand = True
     Arrangement = Arrange.Vertical
@@ -458,6 +392,23 @@
       { HBox4 HBox
         MoveScaled(2,0,56,4)
         Expand = True
+        { Button4 Button
+          MoveScaled(0,0,4,4)
+          Picture = Picture["iconos/git-local.svg"]
+        }
+        { Separator24 Separator
+          MoveScaled(5,0,2.3333,4)
+          #Translate = False
+        }
+        { btnMenuGIT Button
+          MoveScaled(8,0,4,4)
+          Picture = Picture["iconos/github.svg"]
+        }
+        { txtGIT TextBox
+          MoveScaled(16,0,8,4)
+          Expand = True
+          Placeholder = ("coloque aquí su usuario GitHub")
+        }
       }
       { Separator8 Separator
         MoveScaled(58,0,2.3333,4)
@@ -5609,9 +5560,9 @@
     Index = 0
   }
   { Timer1 #Timer
-    #MoveScaled(128,0)
+    #MoveScaled(135,8)
   }
   { TimerHOY #Timer
-    #MoveScaled(122,0)
+    #MoveScaled(128,8)
   }
 }

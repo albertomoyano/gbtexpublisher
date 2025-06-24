@@ -405,7 +405,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     TerminalView1.Input("cd " & rutaOrigen & "\n")' movemos la consola a la ruta del archivo
     BaseName = File.BaseName(rutaOrigen)
     DirViewRuta.Root = File.Dir(rutaOrigen)
-    hboxHerramientas.Enabled = True
     DirViewRuta.Refresh
     FileView1.Refresh
     TabPanel6.Index = 0
@@ -431,7 +430,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     menuTOOLS.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
-    btnMenuGitLab.Enabled = True
     menuGray.Enabled = True
     menuCatalogo.Enabled = True
     Menu4.Enabled = True
@@ -2896,7 +2894,6 @@ Public Sub menuAbrirRevista_Click()
     TerminalView1.Input("cd " & rutaOrigen & "\n")' movemos la consola a la ruta del archivo
     BaseName = File.BaseName(rutaOrigen)
     DirViewRuta.Root = File.Dir(rutaOrigen)
-    hboxHerramientas.Enabled = True
     TabPanel6.Index = 0
     PanelLaTeX.Visible = False
     PanelLaTeX.Enabled = False
@@ -2919,7 +2916,6 @@ Public Sub menuAbrirRevista_Click()
     menuScriptsExternos.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
-    btnMenuGitLab.Enabled = True
     menuGray.Enabled = True
     menuCatalogo.Enabled = True
     Menu4.Enabled = True
@@ -3356,8 +3352,6 @@ Public Sub habilitamosLibro()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = True
-  btnCOMPpdfRevista.Enabled = True
-  btnCOMPpdfRevista.Enabled = False
   HBoxPanelLibro.Visible = True
   HBox85.Visible = True
   TabPanelLibro.Visible = True
@@ -3372,8 +3366,6 @@ Public Sub habilitamosRevista()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = False
-  btnCOMPpdfRevista.Enabled = False
-  btnCOMPpdfRevista.Enabled = True
   HBoxPanelLibro.Visible = True
   HBox85.Visible = True
   TabPanelLibro.Visible = False
@@ -3388,8 +3380,6 @@ Public Sub habilitamosMonografia()
 
   'habilitamos o deshabilitamos libros, revistas y monografias
   btnCOMPpdf.Enabled = False
-  btnCOMPpdfRevista.Enabled = False
-  btnCOMPpdfRevista.Enabled = False
   menuPDFweb.Visible = False
   menuOT.Visible = False
   ' Inicia el Timer al hacer clic en el botón
@@ -3529,12 +3519,6 @@ End
 Public Sub btnAbrirLibro_Click()
 
   menuAbrirLibro_Click()' abrir libro
-
-End
-
-Public Sub btnAbrirRevista_Click()
-
-  menuAbrirRevista_Click()' abrir revista
 
 End
 
