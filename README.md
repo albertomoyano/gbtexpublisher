@@ -15,8 +15,8 @@ La aplicación está desarrollada como **software de escritorio en Linux**, espe
 
 - **Gambas** como entorno de desarrollo.
 - **MySQL** como base de datos.
-- **AsciiDoc y XML** como formatos de texto base.
-- Herramientas del sistema (Bash, Pandoc, LaTeX, etc.) para procesamiento.
+- **LaTeX** como formato de texto base.
+- Herramientas del sistema (Bash, Pandoc, LuaLaTeX, etc.) para procesamiento.
 
 ## Razones para no hacer una versión web
 
@@ -38,13 +38,13 @@ Al ser una app nativa, no depende de navegadores ni intérpretes web. Esto garan
 
 ### 5. Estándares abiertos y editables
 
-El uso de texto plano (AsciiDoc/XML) garantiza trazabilidad, edición con cualquier editor y control con herramientas estándar (grep, diff, git, etc.).
+El uso de texto plano (LaTeX) garantiza trazabilidad, edición con cualquier editor y control con herramientas estándar (grep, diff, git, etc.).
 
 ## Sobre la percepción de "obsolescencia"
 
 No todas las soluciones deben ser web. Las apps de escritorio siguen siendo el estándar en:
 
-- Edición profesional (DTP, LaTeX, InDesign, etc.)
+- Edición profesional (DTP, InDesign, etc.)
 - Programación (IDEs)
 - Producción científica
 - Sistemas cerrados o de misión crítica
