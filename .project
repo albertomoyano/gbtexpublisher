@@ -2,7 +2,7 @@
 Title=gbTeXpublisher
 Startup=Form_ConectarBBDD
 Icon=iconos/terminal.png
-Version=0.1.677
+Version=0.1.678
 Component=gb.image
 Component=gb.gui
 Component=gb.form
