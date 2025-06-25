@@ -378,7 +378,7 @@
         }
         { btnMenuGIT Button
           MoveScaled(8,0,4,4)
-          Picture = Picture["iconos/github.svg"]
+          Picture = Picture["iconos/github-mark.svg"]
         }
         { txtGIT TextBox
           MoveScaled(13,0,8,4)
