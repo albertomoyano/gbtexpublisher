@@ -155,14 +155,11 @@
   }
   { menuArchivo Menu
     Text = ("Archivo")
+    Enabled = False
+    Visible = False
     { menuAbrirTeX Menu
       Text = ("Abrir archivo .tex")
       Picture = Picture["iconos/abrirBuscar.svg"]
-    }
-    { Menu14 Menu
-      #Translate = False
-      Text = "Cerrar el programa"
-      Picture = Picture["iconos/salir.svg"]
     }
   }
   { menuTOOLS Menu
@@ -318,6 +315,13 @@
       Text = "Aviso Legal"
       Picture = Picture["iconos/clavebib.svg"]
     }
+    { Menu12 Menu
+    }
+    { Menu14 Menu
+      #Translate = False
+      Text = "Cerrar el programa"
+      Picture = Picture["iconos/salir.svg"]
+    }
   }
   { HBox171 HBox
     MoveScaled(1,1,99,4)
@@ -325,13 +329,12 @@
     { Panel9 HBox
       MoveScaled(1,0,22,4)
       Expand = True
-      { PictureBox1 PictureBox
-        MoveScaled(0,0,4,4)
-        Picture = Picture.Load("iconos/go-home.svg")
-        Alignment = Align.Center
+      { btnMenuAbrir Button
+        MoveScaled(4,0,4,4)
+        Picture = Picture["iconos/go-home.svg"]
       }
       { !TextBox1 TextBox
-        MoveScaled(8,0,11,4)
+        MoveScaled(10,0,11,4)
         #Public = True
         Background = Color.Background
         Foreground = Color.Blue

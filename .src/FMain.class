@@ -5979,3 +5979,9 @@ Public Sub menuAbrirTeX_Click()
   menuAbrirLibro_Click()' abrir libro
 
 End
+
+Public Sub btnMenuAbrir_Click()
+
+  menuAbrirLibro_Click()' abrir libro
+
+End
