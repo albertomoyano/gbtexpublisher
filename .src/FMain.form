@@ -315,19 +315,21 @@
       Text = "Aviso Legal"
       Picture = Picture["iconos/clavebib.svg"]
     }
-    { Menu12 Menu
-    }
-    { Menu14 Menu
-      #Translate = False
-      Text = "Cerrar el programa"
-      Picture = Picture["iconos/salir.svg"]
-    }
   }
   { HBox171 HBox
     MoveScaled(1,1,99,4)
     AutoResize = True
+    { btnSalir Button
+      MoveScaled(1,0,16,4)
+      Text = ("Salir")
+      Picture = Picture["iconos/salir.svg"]
+    }
+    { Separator11 Separator
+      MoveScaled(17,0,2.3333,4)
+      #Translate = False
+    }
     { Panel9 HBox
-      MoveScaled(1,0,22,4)
+      MoveScaled(24,0,22,4)
       Expand = True
       { btnMenuAbrir Button
         MoveScaled(4,0,4,4)
@@ -344,12 +346,12 @@
       }
     }
     { PictureBox2 PictureBox
-      MoveScaled(33,0,4,4)
+      MoveScaled(50,0,4,4)
       Picture = Picture.Load("iconos/duplicados.svg")
       Alignment = Align.Right
     }
     { Label176 Label
-      MoveScaled(40,0,20,4)
+      MoveScaled(55,0,20,4)
       AutoResize = True
       Text = ("gbTeXpublisher no admite rutas de directorios que contengan espacios")
     }

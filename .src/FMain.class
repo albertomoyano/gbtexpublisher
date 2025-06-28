@@ -5656,12 +5656,6 @@ Public Sub btnChequearURL_Click()
 
 End
 
-Public Sub Menu14_Click()
-
-  Mod_Funciones.CerrarTodo()
-
-End
-
 Public Sub btnVerificarDOI_Click()
 
   Dim sURL As String
@@ -5983,5 +5977,11 @@ End
 Public Sub btnMenuAbrir_Click()
 
   menuAbrirLibro_Click()' abrir libro
+
+End
+
+Public Sub btnSalir_Click()
+
+  Mod_Funciones.CerrarTodo()
 
 End
