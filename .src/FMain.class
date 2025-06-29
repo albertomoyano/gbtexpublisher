@@ -272,18 +272,6 @@ Public Sub obsB_click()
 
 End
 
-Public Sub menuAPUNTES_Click()
-
-  Form_Notas.Show()
-
-End
-
-Public Sub menuCONVERSOR_Click()
-
-  Form_Conversor.ShowModal()
-
-End
-
 Public Sub Button4_Click() 'local git
 
   Dim fecha As String
@@ -377,17 +365,13 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     PanelLaTeX.Enabled = True
     PanelQuarto.Visible = False
     PanelQuarto.Enabled = False
-    habilitamosLibro()
     guardarTipoDocumentoLibro()
-    HBoxPanelRevista.Visible = False
-    TabPanelRevista.Visible = False
     HBoxPanelLibro.Visible = True
     TabPanelLibro.Visible = True
     btnGuardarIGUAL.Visible = False
     TabPanel1.Visible = True
     menuBORRARaux.Enabled = True
     menuComprimir.Enabled = True
-    menuTOOLS.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     menuGray.Enabled = True
@@ -425,7 +409,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
     MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
     contarEntradasBIByGLO()' mostramos las cantidades en el boton
-    Mod_Funciones.limpiamosMetadatosLibrosRevistas()' limpiamos las entradas de los metadatos
     TotalEntradasBIByGLO()'actualizamos el contador de entradas
     MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
     Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
@@ -450,12 +433,6 @@ End
 Public Sub d2t_Click()
 
   Form_Conversor.ShowModal()
-
-End
-
-Public Sub Menu78_Click()'exportar referencias bibligráficas
-
-  Form_ExportarBIB.ShowModal()
 
 End
 
@@ -2489,7 +2466,7 @@ Public Sub menuMAYexcepciones_Click()
 
 End
 
-Public Sub menuCONVERSORpandoc_Click()
+Public Sub ConvertirDirectoPandoc()
   ' Configura el diálogo para seleccionar un archivo DOCX
 
   Dialog.Title = "Seleccionar archivo"
@@ -2764,175 +2741,6 @@ Public Sub menuMAYand_Click()'aplicar mayuscula para autores
 
 End
 
-Public Sub menuAbrirRevista_Click()
-
-  Dialog.Title = "Seleccione un archivo AsciiDoc para trabajar"
-  Dialog.Filter = ["*.adoc", "Archivo de AsciiDoc"]
-  Dialog.AutoExt = True
-  Dialog.Path = User.Home
-  If Dialog.OpenFile() Then
-    Return
-  Else
-    TextBox1.Text = Dialog.Path
-    Dim rutaOrigen As String = TextBox1.Text
-    TerminalView1.Input("cd " & rutaOrigen & "\n")' movemos la consola a la ruta del archivo
-    BaseName = File.BaseName(rutaOrigen)
-    DirViewRuta.Root = File.Dir(rutaOrigen)
-    TabPanel6.Index = 0
-    PanelLaTeX.Visible = False
-    PanelLaTeX.Enabled = False
-    PanelQuarto.Visible = True
-    PanelQuarto.Enabled = True
-    guardarTipoDocumentoRevista()
-    Mod_LimpiarTextBox.LimpiarCamposBIB()
-    HBoxPanelRevista.Visible = True
-    TabPanelRevista.Visible = True
-    HBoxPanelLibro.Visible = False
-    TabPanelLibro.Visible = False
-    BaseName = File.BaseName(TextBox1.Text)
-    rutaFILES = File.Dir(TextBox1.Text) & "/files"
-    btnGuardarIGUAL.Visible = False
-    TabPanel1.Visible = True
-    menuBORRARaux.Enabled = True
-    menuComprimir.Enabled = True
-    menuTOOLS.Enabled = True
-    ' menuScriptsExternos.Enabled = True
-    Button4.Enabled = True
-    btnMenuGIT.Enabled = True
-    menuGray.Enabled = True
-    menuCatalogo.Enabled = True
-    Menu4.Enabled = True
-    menuOT.Enabled = True
-    menuPDFweb.Enabled = True
-    menuDisclaimer.Enabled = True
-    ' menuScriptsExternos.Enabled = True
-    MenuButton1.Menu = "menuScriptsExternos"
-    HBox93.Visible = True
-    If Form_Notas.Visible Then
-      Form_Notas.Close ' Cierra la ventana
-    End If
-    Mod_Funciones.CopiarArchivosRevista(TextBox1.Text)
-    ' levantamos los datos de comentario
-    levantarComenta()
-    levantarGitHubPages()' levantamos los datos de githubpages
-    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-    MostrarListaAutoresNuevo()' Refrescamos la lista de entradas de github pages
-    MostrarListaColaboradoresNuevo()' Refrescamos la lista de entradas de github pages
-    contarEntradasBIByGLO()' mostramos las cantidades en el boton
-    ' limpiamos las entradas de los metadatos
-    Mod_Funciones.limpiamosMetadatosLibrosRevistas()
-    'cargamos datos en los gridview
-    TotalEntradasBIByGLO()'actualizamos el contador de entradas
-    MostrarListaCapNuevo()' Refrescamos la lista de entradas de github pages
-    ' Ejecutar la consulta SQL
-    ContenidoBibActual = Form_ConectarBBDD.meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
-    ' refrescamos los datos en los grid del archivo en curso
-    gridListaBIBactual.Rows.Count = ContenidoBibActual.Count
-    tbRefDup.Rows.Count = ContenidoBibActual.Count
-    Mod_Funciones.CargarMetadatosArchivoActual()' levantamos los datos de metadatos
-    txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
-    txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
-    txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-    TerminalView1.Input("clear" & "\n")' limpiamos la consola
-  Endif
-
-  ' 'comienza metadatos
-  ' Dim comando As String
-  ' ' buscamos la entrada que coincida con el archivo
-  ' comando = "select * from metadatos where nombreArchivo = " & "'" & BaseName & ".tex'"
-  ' Contenido = Form_ConectarBBDD.meConn.Exec(Comando)
-  ' If Contenido.Count > 0 Then
-  '   BtnNuevoMeta.Visible = False
-  '   btnGuardarMeta.Visible = False
-  '   btnGuardarCambiosMeta.Visible = True
-  '   txtIDglosario.Text = Contenido!id
-  '   txtnombreArchivo.Text = Contenido!nombreArchivo
-  '   txt02_pdfxmp1.Text = Contenido!pdfxmp1_02
-  '   txt03_pdfxmp2.Text = Contenido!pdfxmp2_03
-  '   txt04_pdfxmp3.Text = Contenido!pdfxmp3_04
-  '   txt05_pdfauthor.Text = Contenido!pdfauthor_05
-  '   txt06_pdftitle.Text = Contenido!pdftitle_06
-  '   txtSubjet.Text = Contenido!pdfsubject_07
-  '   txtpdfsubject_07b.Text = Contenido!pdfsubject_07b
-  '   txtpdfsubject_07c.Text = Contenido!pdfsubject_07c
-  '   txtKeywords.Text = Contenido!pdfkeywords_08
-  '   txt09_pdfsubtitle.Text = Contenido!pdfsubtitle_09
-  '   txt10_pdfauthortitle.Text = Contenido!pdfauthortitle_10
-  '   txtDate.Text = Contenido!pdfdate_11
-  '   txtCreationDate.Text = Contenido!pdfcreationdate_12
-  '   txtModDate.Text = Contenido!pdfmoddate_13
-  '   txtMetaDate.Text = Contenido!pdfmetadate_14
-  '   txt15_pdfcopyright.Text = Contenido!pdfcopyright_15
-  '   txt16_pdflicenseurl.Text = Contenido!pdflicenseurl_16
-  '   txtCaptionWriter.Text = Contenido!pdfcaptionwriter_17
-  '   txtContactAddress.Text = Contenido!pdfcontactaddress_18
-  '   txtContactCity.Text = Contenido!pdfcontactcity_19
-  '   txtContactPostCode.Text = Contenido!pdfcontactpostcode_20
-  '   txtContactCountry.Text = Contenido!pdfcontactcountry_21
-  '   txtContactRegion.Text = Contenido!pdfcontactregion_22
-  '   txtContactPhone.Text = Contenido!pdfcontactphone_23
-  '   txtContactEmail.Text = Contenido!pdfcontactemail_24
-  '   txtContactURL.Text = Contenido!pdfcontacturl_25
-  '   txtDocumentId.Text = Contenido!pdfdocumentid_26
-  '   txtPublication.Text = Contenido!pdfpublication_27
-  '   txtPublisher28.Text = Contenido!pdfpublisher_28
-  '   cmbType.Text = Contenido!pdftype_29
-  '   cbPubType.Text = Contenido!pdfpubtype_30
-  '   txtVolNum.Text = Contenido!pdfvolumenum_31
-  '   txtIssueNum.Text = Contenido!pdfissuenum_32
-  '   txt33_pdfpagerange.Text = Contenido!pdfpagerange_33
-  '   txt34_pdfbookedition.Text = Contenido!pdfbookedition_34
-  '   txt35_pdfisbn.Text = Contenido!pdfisbn_35
-  '   txt36_pdfissn.Text = Contenido!pdfissn_36
-  '   txt37_pdfeissn.Text = Contenido!pdfeissn_37
-  '   txt38_pdfpubstatus.Text = Contenido!pdfpubstatus_38
-  '   txtLang.Text = Contenido!pdflang_39
-  '   txt40_pdfmetalang.Text = Contenido!pdfmetalang_40
-  '   txtBaseURL.Text = Contenido!pdfbaseurl_41
-  '   txt42_pdfurl.Text = Contenido!pdfurl_42
-  '   txt43_pdfdoi.Text = Contenido!pdfdoi_43
-  '   cbPDFrendition.Text = Contenido!pdfrendition_44
-  '   txtDocumentId.Text = Contenido!pdfidentifier_45
-  '   cbPDFx.Text = Contenido!pdfx_46
-  '   txtVersionId.Text = Contenido!pdfversionid_47
-  '   txt48_abstract.Text = Contenido!abstract_48
-  '   txt48b_abstract.Text = Contenido!abstract_48b
-  '   txt48c_abstract.Text = Contenido!abstract_48c
-  '   txt49_imagentapa.Text = Contenido!imagentapa_49
-  '   txt50_pagetotal.Text = Contenido!pagetotal_50
-  '   txtCOLECCION.Text = Contenido!relation_51
-  '   txtDirection.Text = Contenido!direction_52
-  '   txt53_traductor.Text = Contenido!traductor_53
-  '   txt54_idiomaorig.Text = Contenido!idiomaorig_54
-  '   txt55_ilustrador.Text = Contenido!ilustrador_55
-  '   txt56_resumen.Text = Contenido!resumen_56
-  '   txt57_palabrasclave.Text = Contenido!palabrasclave_57
-  '   txt57b_palabrasclave.Text = Contenido!palabrasclave_57b
-  '   txt57c_palabrasclave.Text = Contenido!palabrasclave_57c
-  '   txt58_papertitletwo.Text = Contenido!papertitletwo_58
-  '   txt59_artrecibido.Text = Contenido!artrecibido_59
-  '   txt60_artaceptado.Text = Contenido!artaceptado_60
-  '   txtFORMATO.Text = Contenido!formato_61
-  '   txt59_opt_source.Text = Contenido!source_69
-  '   txt82_conferenceVisual.Text = Contenido!opt_72
-  '   txt78_genero.Text = Contenido!genero_78
-  '   txt82_conference.Text = Contenido!conference_82
-  '   txt84_bookTitle.Text = Contenido!bookTitle_84
-  '   txt85_doiRevista.Text = Contenido!doiRevista_85
-  '   txt86_annotation.Text = Contenido!notas_86
-  '   txt87_HTMLFirstPageBottom.Text = Contenido!piehtml_87
-  '   txt88_audiencia.Text = Contenido!audience_88
-  '   txt89_binding.Text = Contenido!binding_89
-  '   txt90_eisbn.Text = Contenido!eISBN_90
-  '
-  ' Else
-  '   BtnNuevoMeta.Visible = True
-  '   btnGuardarMeta.Visible = False
-  '   btnGuardarCambiosMeta.Visible = False
-  ' Endif
-
-End
-
 Public Sub menuDisclaimer_Click()
 
   Dim buscar As String
@@ -3149,95 +2957,95 @@ Public Sub guardarTipoDocumentoLibro()
 
 End
 
-Public Sub guardarTipoDocumentoRevista()
+' Public Sub guardarTipoDocumentoRevista()
+'
+'   Dim tdR As String = "tipoRevista"
+'   Dim nombreArchivo As String = File.Name(TextBox1.Text)
+'   Dim consulta As Result
+'   Dim existe As Boolean = False
+'
+'   ' Verificar si el archivo ya existe en la tabla
+'   consulta = Form_ConectarBBDD.meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+'
+'   ' Comprobar si la consulta devolvió algún resultado
+'   If consulta.Available Then
+'     existe = True
+'   End If
+'
+'   ' Solo si no existe, insertamos el nuevo registro
+'   If Not existe Then
+'     Contenido = Form_ConectarBBDD.meConn.Create("tipoDocumento")
+'     Contenido!nombreArchivo = nombreArchivo
+'     Contenido!tipoDocumento = tdR
+'     Contenido.Update
+'   End If
+'
+' End
 
-  Dim tdR As String = "tipoRevista"
-  Dim nombreArchivo As String = File.Name(TextBox1.Text)
-  Dim consulta As Result
-  Dim existe As Boolean = False
+' Public Sub guardarTipoDocumentoMonografia()
+'
+'   Dim tdM As String = "tipoMonografia"
+'   Dim nombreArchivo As String = File.Name(TextBox1.Text)
+'   Dim consulta As Result
+'   Dim existe As Boolean = False
+'
+'   ' Verificar si el archivo ya existe en la tabla
+'   consulta = Form_ConectarBBDD.meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+'
+'   ' Comprobar si la consulta devolvió algún resultado
+'   If consulta.Available Then
+'     existe = True
+'   End If
+'
+'   ' Solo si no existe, insertamos el nuevo registro
+'   If Not existe Then
+'     Contenido = Form_ConectarBBDD.meConn.Create("tipoDocumento")
+'     Contenido!nombreArchivo = nombreArchivo
+'     Contenido!tipoDocumento = tdM
+'     Contenido.Update
+'   End If
+'
+' End
 
-  ' Verificar si el archivo ya existe en la tabla
-  consulta = Form_ConectarBBDD.meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+' Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
+' 
+'   Dim consulta As Result
+'   Dim tipoDocumento As String
+' 
+'   ' Realizar la consulta
+'   Print "Buscando archivo: "; nombreArchivo
+'   consulta = Form_ConectarBBDD.meConn.Exec("SELECT tipoDocumento FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
+' 
+'   ' Verificar si la consulta devolvió resultados
+'   If consulta.Fields Then
+'     ' Obtener el valor de tipoDocumento
+'     tipoDocumento = consulta["tipoDocumento"]
+'     Print "Tipo de documento encontrado: "; tipoDocumento
+' 
+'     ' Condicional para elegir la función según el tipo de documento
+'     Select Case tipoDocumento
+'       Case "tipoLibro"
+'         habilitamosLibro
+'       Case Else
+'         Message.Error("Tipo de documento desconocido.")
+'     End Select
+'   Else
+'     Message.Error("El archivo no existe en la base de datos.")
+'   End If
+' 
+' End
 
-  ' Comprobar si la consulta devolvió algún resultado
-  If consulta.Available Then
-    existe = True
-  End If
-
-  ' Solo si no existe, insertamos el nuevo registro
-  If Not existe Then
-    Contenido = Form_ConectarBBDD.meConn.Create("tipoDocumento")
-    Contenido!nombreArchivo = nombreArchivo
-    Contenido!tipoDocumento = tdR
-    Contenido.Update
-  End If
-
-End
-
-Public Sub guardarTipoDocumentoMonografia()
-
-  Dim tdM As String = "tipoMonografia"
-  Dim nombreArchivo As String = File.Name(TextBox1.Text)
-  Dim consulta As Result
-  Dim existe As Boolean = False
-
-  ' Verificar si el archivo ya existe en la tabla
-  consulta = Form_ConectarBBDD.meConn.Exec("SELECT nombreArchivo FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
-
-  ' Comprobar si la consulta devolvió algún resultado
-  If consulta.Available Then
-    existe = True
-  End If
-
-  ' Solo si no existe, insertamos el nuevo registro
-  If Not existe Then
-    Contenido = Form_ConectarBBDD.meConn.Create("tipoDocumento")
-    Contenido!nombreArchivo = nombreArchivo
-    Contenido!tipoDocumento = tdM
-    Contenido.Update
-  End If
-
-End
-
-Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
-
-  Dim consulta As Result
-  Dim tipoDocumento As String
-
-  ' Realizar la consulta
-  Print "Buscando archivo: "; nombreArchivo
-  consulta = Form_ConectarBBDD.meConn.Exec("SELECT tipoDocumento FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
-
-  ' Verificar si la consulta devolvió resultados
-  If consulta.Fields Then
-    ' Obtener el valor de tipoDocumento
-    tipoDocumento = consulta["tipoDocumento"]
-    Print "Tipo de documento encontrado: "; tipoDocumento
-
-    ' Condicional para elegir la función según el tipo de documento
-    Select Case tipoDocumento
-      Case "tipoLibro"
-        habilitamosLibro
-      Case Else
-        Message.Error("Tipo de documento desconocido.")
-    End Select
-  Else
-    Message.Error("El archivo no existe en la base de datos.")
-  End If
-
-End
-
-Public Sub habilitamosLibro()
-
-  'habilitamos o deshabilitamos libros, revistas y monografias
-  btnCOMPpdf.Enabled = True
-  HBoxPanelLibro.Visible = True
-  HBox85.Visible = True
-  TabPanelLibro.Visible = True
-  menuPDFweb.Visible = True
-  menuOT.Visible = True
-
-End
+' Public Sub habilitamosLibro()
+'
+'   'habilitamos o deshabilitamos libros, revistas y monografias
+'   btnCOMPpdf.Enabled = True
+'   HBoxPanelLibro.Visible = True
+'   HBox85.Visible = True
+'   TabPanelLibro.Visible = True
+'   menuPDFweb.Visible = True
+'   menuOT.Visible = True
+'
+' End
 
 Public Sub TotalEntradasBIByGLO()'calculamos las entradas totales contarEntradasBIByGLO()
 
@@ -5833,5 +5641,29 @@ Public Sub btnVerIMAGEN_Click()
     ' Limpiar el ImageView en caso de error
     ImageViewProyecto.Picture = Null
   Endif
+
+End
+
+Public Sub btnBlocDeNotas_Click()
+
+  Form_Notas.ShowModal()
+
+End
+
+Public Sub btnConvertirWord_Click()
+
+  Form_Conversor.ShowModal()
+
+End
+
+Public Sub btnConvertirWordDirecto_Click()
+
+  ConvertirDirectoPandoc()
+
+End
+
+Public Sub btnExportarBibtex_Click()
+
+  Form_ExportarBIB.ShowModal()
 
 End

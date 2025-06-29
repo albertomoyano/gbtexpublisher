@@ -84,17 +84,17 @@
     { Spring1 Spring
       Move(63,0,90,36)
     }
-    { btnExportarBIB Button
-      Move(441,0,288,36)
-      Text = ("Exportar")
-      Picture = Picture["iconos/comp.svg"]
-    }
     { Separator1 Separator
       Move(639,0,9,36)
       Foreground = Color.Transparent
     }
+    { btnExportarBIB Button
+      Move(639,0,144,36)
+      Text = ("Exportar")
+      Picture = Picture["iconos/comp.svg"]
+    }
     { btnCancelar Button
-      Move(693,0,160,36)
+      Move(783,0,160,36)
       Text = ("Cerrar")
       Picture = Picture["iconos/salir.svg"]
     }

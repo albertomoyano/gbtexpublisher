@@ -154,30 +154,6 @@
       Picture = Picture["iconos/borrar.svg"]
     }
   }
-  { menuTOOLS Menu
-    #Translate = False
-    Text = "Herramientas"
-    { menuCONVERSOR Menu
-      #Translate = False
-      Text = ".docx a LaTeX (con carpetas del proyecto)"
-      Picture = Picture["iconos/conversor.svg"]
-    }
-    { menuCONVERSORpandoc Menu
-      #Translate = False
-      Text = ".docx a LaTeX (esquema simple)"
-      Picture = Picture["iconos/conversor.svg"]
-    }
-    { menuAPUNTES Menu
-      #Translate = False
-      Text = "Cuaderno de apuntes"
-      Picture = Picture["iconos/textnormal.svg"]
-    }
-    { Menu78 Menu
-      #Translate = False
-      Text = "Exportar referencias en archivo .bib"
-      Picture = Picture["iconos/exportar2.svg"]
-    }
-  }
   { menuLTX Menu
     #Translate = False
     Text = "Complementos para PDF y ePub"
@@ -334,7 +310,7 @@
         { btnCOMPpdf MenuButton
           MoveScaled(25,0,21.1111,4)
           #Translate = False
-          Text = "Construir salidas"
+          Text = "Salidas"
           Picture = Picture["iconos/salidas.svg"]
           Menu = "menuPDF"
           MenuOnly = True
@@ -343,7 +319,7 @@
           MoveScaled(47,0,21.1111,4)
           #Public = True
           #Translate = False
-          Text = "PDFs adicionales"
+          Text = "Otros PDF"
           Picture = Picture["iconos/conversor.svg"]
           Menu = "menuLTX"
           MenuOnly = True
@@ -354,10 +330,35 @@
         #Translate = False
       }
       { HBox15 HBox
-        MoveScaled(74,0,68,4)
+        MoveScaled(74,0,79,4)
         Expand = True
+        { btnBlocDeNotas Button
+          MoveScaled(0,0,4,4)
+          #Translate = False
+          NoTabFocus = True
+          ToolTip = "Bloc de notas"
+          Picture = Picture["iconos/textnormal.svg"]
+        }
+        { btnConvertirWord Button
+          MoveScaled(4,0,4,4)
+          #Translate = False
+          NoTabFocus = True
+          Picture = Picture["iconos/word-1.svg"]
+        }
+        { btnConvertirWordDirecto Button
+          MoveScaled(8,0,4,4)
+          #Translate = False
+          NoTabFocus = True
+          Picture = Picture["iconos/word-2.svg"]
+        }
+        { btnExportarBibtex Button
+          MoveScaled(12,0,4,4)
+          #Translate = False
+          NoTabFocus = True
+          Picture = Picture["iconos/exportar2.svg"]
+        }
         { !MenuButton2 MenuButton
-          MoveScaled(20,0,17,4)
+          MoveScaled(41,0,17,4)
           #Public = True
           #Translate = False
           Visible = False
@@ -368,7 +369,7 @@
           MenuOnly = True
         }
         { !MenuButton4 MenuButton
-          MoveScaled(38,0,17,4)
+          MoveScaled(60,0,17,4)
           #Public = True
           #Translate = False
           Visible = False
