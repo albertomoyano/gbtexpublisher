@@ -1141,12 +1141,6 @@ Public Sub btnLimpiarTapa_Click()
 
 End
 
-Public Sub btnMostrarColeccion_Click()
-
-  Form_Coleccion.ShowModal()
-
-End
-
 Public Sub BtnEliminarBib_Click()
 
   'Chequeamos primero que se haya elegido una entrada
@@ -3164,12 +3158,6 @@ Public Sub btnLimpiar_Click()
 
   TextBox2.Clear
   TerminalView1.Input("clear" & "\n")
-
-End
-
-Public Sub btnAbrirPublisher_Click()
-
-  Form_ABM_Publisher.ShowModal()
 
 End
 

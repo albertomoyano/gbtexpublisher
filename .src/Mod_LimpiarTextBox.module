@@ -1,14 +1,5 @@
 ' Gambas module file
 
-Public Function LimpiarCamposPublisher()
-
-  Form_ABM_Publisher.txtID.Clear
-  Form_ABM_Publisher.txtPublisher.Clear
-  Form_ABM_Publisher.txtJournal.Clear
-  Form_ABM_Publisher.txtLocation.Clear
-
-End
-
 Public Sub LimpiarCamposGLO()
 
   FMain.txtIDglosario.Clear
