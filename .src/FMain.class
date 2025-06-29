@@ -5600,6 +5600,7 @@ Public Sub btnSalir_Click()
 
 End
 
+' ALTERNATIVA 4: Usando Desktop.Open (método más elegante)
 Public Sub btnVerPDF_Click()
 
   Dim sArchivoSeleccionado As String
@@ -5633,8 +5634,8 @@ Public Sub btnVerPDF_Click()
     Return
   Endif
 
-  ' Abrir el PDF con el visor predeterminado usando Shell
-  Shell "xdg-open " & Quote(sRutaCompleta) Wait
+  ' Usar Desktop.Open - método más elegante y compatible
+  Try Desktop.Open(sRutaCompleta)
 
   ' Verificar si ocurrió un error
   If Error Then
@@ -5642,3 +5643,46 @@ Public Sub btnVerPDF_Click()
   Endif
 
 End
+
+' Public Sub btnVerPDF_Click()
+'
+'   Dim sArchivoSeleccionado As String
+'   Dim sRutaCompleta As String
+'   Dim sExtension As String
+'
+'   ' Verificar que hay un archivo seleccionado en el FileView
+'   If FileViewProyecto.Current = "" Then
+'     Message.Warning("Por favor seleccione un archivo de la lista")
+'     Return
+'   Endif
+'
+'   ' Obtener el archivo seleccionado
+'   sArchivoSeleccionado = FileViewProyecto.Current
+'
+'   ' Construir la ruta completa del archivo
+'   sRutaCompleta = FileViewProyecto.Dir &/ sArchivoSeleccionado
+'
+'   ' Verificar que el archivo existe
+'   If Not Exist(sRutaCompleta) Then
+'     Message.Error("El archivo seleccionado no existe")
+'     Return
+'   Endif
+'
+'   ' Obtener la extensión del archivo
+'   sExtension = LCase(File.Ext(sArchivoSeleccionado))
+'
+'   ' Verificar que es un archivo PDF
+'   If sExtension <> "pdf" Then
+'     Message.Warning("El archivo seleccionado no es un PDF.\nPor favor seleccione un archivo con extensión .pdf")
+'     Return
+'   Endif
+'
+'   ' Abrir el PDF con el visor predeterminado usando Shell
+'   Shell "xdg-open " & Quote(sRutaCompleta) Wait
+'
+'   ' Verificar si ocurrió un error
+'   If Error Then
+'     Message.Error("Error al abrir el archivo PDF:\n" & Error.Text)
+'   Endif
+'
+' End
