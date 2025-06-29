@@ -3008,20 +3008,20 @@ End
 ' End
 
 ' Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
-' 
+'
 '   Dim consulta As Result
 '   Dim tipoDocumento As String
-' 
+'
 '   ' Realizar la consulta
 '   Print "Buscando archivo: "; nombreArchivo
 '   consulta = Form_ConectarBBDD.meConn.Exec("SELECT tipoDocumento FROM tipoDocumento WHERE nombreArchivo = '" & nombreArchivo & "'")
-' 
+'
 '   ' Verificar si la consulta devolvió resultados
 '   If consulta.Fields Then
 '     ' Obtener el valor de tipoDocumento
 '     tipoDocumento = consulta["tipoDocumento"]
 '     Print "Tipo de documento encontrado: "; tipoDocumento
-' 
+'
 '     ' Condicional para elegir la función según el tipo de documento
 '     Select Case tipoDocumento
 '       Case "tipoLibro"
@@ -3032,7 +3032,7 @@ End
 '   Else
 '     Message.Error("El archivo no existe en la base de datos.")
 '   End If
-' 
+'
 ' End
 
 ' Public Sub habilitamosLibro()
@@ -5554,7 +5554,7 @@ Public Sub btnVerTEXTO_Click()
   Dim aExtensionesPermitidas As String[]
 
   ' Definir las extensiones de archivos de texto permitidas
-  aExtensionesPermitidas = ["txt", "tex", "sh", "css", "js", "json", "xml", "md", "log", "conf", "cfg", "ini"]
+  aExtensionesPermitidas = ["txt", "tex", "sh", "css", "js", "json", "xml", "md", "log", "conf", "cfg", "ini", "doc", "docx", "rtf"]
 
   ' Verificar que hay un archivo seleccionado en el FileView
   If FileViewProyecto.Current = "" Then
