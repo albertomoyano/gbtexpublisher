@@ -93,18 +93,18 @@
     { Spring1 Spring
       Move(81,0,117,36)
     }
-    { btnSalir Button
-      Move(234,0,144,36)
-      NoTabFocus = True
-      Text = ("Cerrar")
-      Picture = Picture["iconos/salir.svg"]
-    }
     { btnListo Button
       Move(414,0,144,36)
       Visible = False
       NoTabFocus = True
       Text = ("Listo")
       Picture = Picture["iconos/comp.svg"]
+    }
+    { btnSalir Button
+      Move(612,0,144,36)
+      NoTabFocus = True
+      Text = ("Cerrar")
+      Picture = Picture["iconos/salir.svg"]
     }
   }
 }
