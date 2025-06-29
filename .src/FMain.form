@@ -153,15 +153,6 @@
       Picture = Picture["iconos/borrar.svg"]
     }
   }
-  { menuArchivo Menu
-    Text = ("Archivo")
-    Enabled = False
-    Visible = False
-    { menuAbrirTeX Menu
-      Text = ("Abrir archivo .tex")
-      Picture = Picture["iconos/abrirBuscar.svg"]
-    }
-  }
   { menuTOOLS Menu
     #Translate = False
     Text = "Herramientas"
@@ -500,12 +491,15 @@
           }
         }
         { Panel18 Panel
-          MoveScaled(1,21,37,20)
+          MoveScaled(1,7,37,20)
           Expand = True
           Arrangement = Arrange.Fill
           Border = Border.Sunken
-          { WebViewEditor WebView
-            MoveScaled(7,4,23,12)
+          { TextAreaEdicion TextArea
+            MoveScaled(10,2,16,16)
+            Background = &HFFF7DF
+            Wrap = True
+            ScrollBar = Scroll.Vertical
           }
         }
         Index = 0
