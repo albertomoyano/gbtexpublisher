@@ -128,7 +128,6 @@ Public Sub Form_Open()
   TerminalView1.SetFocus()
 
   'configuración del ToDo
-  Splitter2.Layout = [3, 1]
   txtTAREAS.Visible = False
   Mostrar_Lista_Tareas
 
@@ -155,21 +154,21 @@ Public Sub Form_Open()
   Mod_RellenarComboBox.RellenarCmbMetadatos()
   Mod_RellenarComboBox.RellenarCmbGitHubPages()
 
-  Dim mtmp As Menu
-  Dim fileA As String
+  ' Dim mtmp As Menu
+  ' Dim fileA As String
+  '
+  ' For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
+  '   mtmp = New Menu(menuScriptsExternos) As "obs"
+  '   mtmp.caption = fileA
+  ' Next
 
-  For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
-    mtmp = New Menu(menuScriptsExternos) As "obs"
-    mtmp.caption = fileA
-  Next
-
-  Dim mtmpB As Menu
-  Dim fileB As String
-
-  For Each fileB In Dir(rutaScriptsBash, "*.sh").Sort()'
-    mtmpB = New Menu(menuScriptsBash) As "obsB"
-    mtmpB.caption = fileB
-  Next
+  ' Dim mtmpB As Menu
+  ' Dim fileB As String
+  '
+  ' For Each fileB In Dir(rutaScriptsBash, "*.sh").Sort()'
+  '   mtmpB = New Menu(menuScriptsBash) As "obsB"
+  '   mtmpB.caption = fileB
+  ' Next
 
   ' botonera glosario de inicio
   BtnNuevoGlo.Visible = True
@@ -310,20 +309,6 @@ Public Sub Button4_Click() 'local git
 
 End
 
-Public Sub Menu17_Click()'abrir pdf
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>pdf-" & BaseName & ".pdf</b> no existe.")
-  Endif
-
-End
-
 ' Evento Show del formulario
 Public Sub Form_Show()
   ' Configura las coordenadas del formulario para ubicarlo en el margen superior derecho
@@ -339,20 +324,6 @@ Public Sub Menu24_Click()
 
   alberto = "https://www.linkedin.com/in/edicion-cientifica/"
   Shell "xdg-open " & Quote$(alberto) Wait
-
-End
-
-Public Sub MenuHTMLview_Click()' abrir html
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/html5/index.html"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>index.html</b> no existe.")
-  Endif
 
 End
 
@@ -395,7 +366,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     BaseName = File.BaseName(rutaOrigen)
     DirViewRuta.Root = File.Dir(rutaOrigen)
     DirViewRuta.Refresh
-    FileView1.Refresh
+    FileViewProyecto.Refresh
     TabPanel6.Index = 0
     ' borramos las carpetas que se crean en el cache
     Shell Quote$("rm -rf " & User.Home & "/.local/share/org.gambas.*") & "\n" Wait
@@ -425,10 +396,10 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     menuOT.Enabled = True
     menuPDFweb.Enabled = True
     menuDisclaimer.Enabled = True
-    menuScriptsExternos.Enabled = True
-    MenuButton1.Menu = "menuScriptsExternos"
-    menuScriptsBash.Enabled = True
-    MenuButton4.Menu = "menuScriptsBash"
+    ' menuScriptsExternos.Enabled = True
+    ' MenuButton1.Menu = "menuScriptsExternos"
+    ' menuScriptsBash.Enabled = True
+    ' MenuButton4.Menu = "menuScriptsBash"
     HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
     ImageView1.Image = Null
@@ -472,83 +443,13 @@ Public Sub Watcher_Change()
 
   DirViewRuta.Root = File.Dir(TextBox1.Text)' reforzamos la indicación de la ruta
   DirViewRuta.Refresh
-  FileView1.Refresh
+  FileViewProyecto.Refresh
 
 End
 
 Public Sub d2t_Click()
 
   Form_Conversor.ShowModal()
-
-End
-
-Public Sub Menu74_Click()'ver pdf página del catálogo
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>gbTeXcatalogo-" & BaseName & ".pdf</b> no existe.")
-  Endif
-
-End
-
-Public Sub menuComentarios_Click()'ver pdf página de comentarios
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>gbTeXdisclaimer-" & BaseName & ".pdf</b> no existe.")
-  Endif
-
-End
-
-Public Sub menuVerOt_Click()'ver pdf página de comentarios
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/pdf/gbTeXOT-" & BaseName & ".pdf"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>gbTeXOT-" & BaseName & ".pdf</b> no existe.")
-  Endif
-
-End
-
-Public Sub menuHTMLghp_Click()'ver pagina index.html
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/docs/index.html"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>index.html</b> no existe.")
-  Endif
-
-End
-
-Public Sub menuwebPDFcompleto_Click()'ver pdf página para web
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/docs/web-" & BaseName & ".pdf"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>web-" & BaseName & ".pdf</b> no existe.")
-  Endif
 
 End
 
@@ -2354,12 +2255,6 @@ Public Sub btnBuscarFiltroGlosario_Click()
 
 End
 
-Public Sub Splitter2_Resize()
-
-  Splitter2.Layout = [3, 1]
-
-End
-
 Public Sub Mostrar_Lista_Tareas() ' Función para popular la lista de eventos
 
   Contenido = Form_ConectarBBDD.meConn.Exec("select id, completado, titulo from tareas")
@@ -2888,7 +2783,6 @@ Public Sub menuAbrirRevista_Click()
     PanelLaTeX.Enabled = False
     PanelQuarto.Visible = True
     PanelQuarto.Enabled = True
-    habilitamosRevista()
     guardarTipoDocumentoRevista()
     Mod_LimpiarTextBox.LimpiarCamposBIB()
     HBoxPanelRevista.Visible = True
@@ -2902,7 +2796,7 @@ Public Sub menuAbrirRevista_Click()
     menuBORRARaux.Enabled = True
     menuComprimir.Enabled = True
     menuTOOLS.Enabled = True
-    menuScriptsExternos.Enabled = True
+    ' menuScriptsExternos.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     menuGray.Enabled = True
@@ -2911,7 +2805,7 @@ Public Sub menuAbrirRevista_Click()
     menuOT.Enabled = True
     menuPDFweb.Enabled = True
     menuDisclaimer.Enabled = True
-    menuScriptsExternos.Enabled = True
+    ' menuScriptsExternos.Enabled = True
     MenuButton1.Menu = "menuScriptsExternos"
     HBox93.Visible = True
     If Form_Notas.Visible Then
@@ -3324,10 +3218,6 @@ Public Sub seleccionarFuncionPorTipo(nombreArchivo As String)
     Select Case tipoDocumento
       Case "tipoLibro"
         habilitamosLibro
-      Case "tipoRevista"
-        habilitamosRevista
-      Case "tipoMonografia"
-        habilitamosMonografia
       Case Else
         Message.Error("Tipo de documento desconocido.")
     End Select
@@ -3346,33 +3236,6 @@ Public Sub habilitamosLibro()
   TabPanelLibro.Visible = True
   menuPDFweb.Visible = True
   menuOT.Visible = True
-  ' Inicia el Timer al hacer clic en el botón
-  reinicamosTiempo
-
-End
-
-Public Sub habilitamosRevista()
-
-  'habilitamos o deshabilitamos libros, revistas y monografias
-  btnCOMPpdf.Enabled = False
-  HBoxPanelLibro.Visible = True
-  HBox85.Visible = True
-  TabPanelLibro.Visible = False
-  menuPDFweb.Visible = True
-  menuOT.Visible = True
-  ' Inicia el Timer al hacer clic en el botón
-  reinicamosTiempo
-
-End
-
-Public Sub habilitamosMonografia()
-
-  'habilitamos o deshabilitamos libros, revistas y monografias
-  btnCOMPpdf.Enabled = False
-  menuPDFweb.Visible = False
-  menuOT.Visible = False
-  ' Inicia el Timer al hacer clic en el botón
-  reinicamosTiempo
 
 End
 
@@ -5392,13 +5255,13 @@ Public Sub Splitter6_Resize()
 
 End
 
-' Evento click en DirView actualiza los archivos que se muestran en FileView1
+' Evento click en DirView actualiza los archivos que se muestran en FileViewProyecto
 Public Sub DirViewRuta_Click()
 
   Dim bloquear As Boolean = False
 
   If Not bloquear Then
-    FileView1.Dir = DirViewRuta.Current
+    FileViewProyecto.Dir = DirViewRuta.Current
   Endif
 
 End
@@ -5455,20 +5318,6 @@ Public Sub menuPDFespecial_Click()
   Else
     TabPanel6.Index = 0
     Mod_GenerarPDF.salidaPDFespecial
-  Endif
-
-End
-
-Public Sub Menu8_Click()' abrir pdf parte 1 de epub
-
-  Dim filePath As String
-
-  filePath = File.Dir(TextBox1.Text) & "/ebook/epub1-" & BaseName & ".pdf"
-
-  If File.RealPath(filePath) <> "" Then
-    Shell "xdg-open " & Quote$(filePath) Wait
-  Else
-    Message.Error("El archivo <b>epub1-" & BaseName & ".pdf</b> no existe.")
   Endif
 
 End
@@ -5606,7 +5455,7 @@ Public Sub btnRefrescarGrid_Click()
 
   DirViewRuta.Root = File.Dir(TextBox1.Text)' reforzamos la indicación de la ruta
   DirViewRuta.Reload
-  FileView1.Reload
+  FileViewProyecto.Reload
 
 End
 
@@ -5757,5 +5606,48 @@ End
 Public Sub btnSalir_Click()
 
   Mod_Funciones.CerrarTodo()
+
+End
+
+Public Sub btnVerPDF_Click()
+
+  Dim sArchivoSeleccionado As String
+  Dim sRutaCompleta As String
+  Dim sExtension As String
+
+  ' Verificar que hay un archivo seleccionado en el FileView
+  If FileViewProyecto.Current = "" Then
+    Message.Warning("Por favor seleccione un archivo de la lista")
+    Return
+  Endif
+
+  ' Obtener el archivo seleccionado
+  sArchivoSeleccionado = FileViewProyecto.Current
+
+  ' Construir la ruta completa del archivo
+  sRutaCompleta = FileViewProyecto.Dir &/ sArchivoSeleccionado
+
+  ' Verificar que el archivo existe
+  If Not Exist(sRutaCompleta) Then
+    Message.Error("El archivo seleccionado no existe")
+    Return
+  Endif
+
+  ' Obtener la extensión del archivo
+  sExtension = LCase(File.Ext(sArchivoSeleccionado))
+
+  ' Verificar que es un archivo PDF
+  If sExtension <> "pdf" Then
+    Message.Warning("El archivo seleccionado no es un PDF.\nPor favor seleccione un archivo con extensión .pdf")
+    Return
+  Endif
+
+  ' Abrir el PDF con el visor predeterminado usando Shell
+  Shell "xdg-open " & Quote(sRutaCompleta) Wait
+
+  ' Verificar si ocurrió un error
+  If Error Then
+    Message.Error("Error al abrir el archivo PDF:\n" & Error.Text)
+  Endif
 
 End
