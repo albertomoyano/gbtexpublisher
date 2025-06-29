@@ -5636,6 +5636,9 @@ Public Sub btnVerPDF_Click()
   ' Usar Desktop.Open - método más elegante y compatible
   Try Desktop.Open(sRutaCompleta)
 
+  ' Limpiar ImageView
+  ImageViewProyecto.Picture = Null
+
   ' Verificar si ocurrió un error
   If Error Then
     Message.Error("Error al abrir el archivo PDF:\n" & Error.Text)
@@ -5679,6 +5682,9 @@ Public Sub btnEPUB_Click()
   ' Usar Desktop.Open - método más elegante y compatible
   Try Desktop.Open(sRutaCompleta)
 
+  ' Limpiar ImageView
+  ImageViewProyecto.Picture = Null
+
   ' Verificar si ocurrió un error
   If Error Then
     Message.Error("Error al abrir el archivo ePub:\n" & Error.Text)
@@ -5721,6 +5727,9 @@ Public Sub btnVerHTML_Click()
 
   ' Usar Desktop.Open - método más elegante y compatible
   Try Desktop.Open(sRutaCompleta)
+
+  ' Limpiar ImageView
+  ImageViewProyecto.Picture = Null
 
   ' Verificar si ocurrió un error
   If Error Then
@@ -5769,6 +5778,9 @@ Public Sub btnVerTEXTO_Click()
   ' Abrir el archivo de texto
   Try Desktop.Open(sRutaCompleta)
 
+  ' Limpiar ImageView
+  ImageViewProyecto.Picture = Null
+
   ' Verificar si ocurrió un error
   If Error Then
     Message.Error("Error al abrir el archivo de texto:\n" & Error.Text)
@@ -5776,45 +5788,50 @@ Public Sub btnVerTEXTO_Click()
 
 End
 
-' Public Sub btnVerTEXTO_Click()
-'
-'   Dim sArchivoSeleccionado As String
-'   Dim sRutaCompleta As String
-'   Dim sExtension As String
-'
-'   ' Verificar que hay un archivo seleccionado en el FileView
-'   If FileViewProyecto.Current = "" Then
-'     Message.Warning("Por favor seleccione un archivo de la lista")
-'     Return
-'   Endif
-'
-'   ' Obtener el archivo seleccionado
-'   sArchivoSeleccionado = FileViewProyecto.Current
-'
-'   ' Construir la ruta completa del archivo
-'   sRutaCompleta = FileViewProyecto.Dir &/ sArchivoSeleccionado
-'
-'   ' Verificar que el archivo existe
-'   If Not Exist(sRutaCompleta) Then
-'     Message.Error("El archivo seleccionado no existe")
-'     Return
-'   Endif
-'
-'   ' Obtener la extensión del archivo
-'   sExtension = LCase(File.Ext(sArchivoSeleccionado))
-'
-'   ' Verificar que es un archivo PDF
-'   If sExtension <> "txt" Then
-'     Message.Warning("El archivo seleccionado no es un txt.\nPor favor seleccione un archivo con extensión .txt")
-'     Return
-'   Endif
-'
-'   ' Usar Desktop.Open - método más elegante y compatible
-'   Try Desktop.Open(sRutaCompleta)
-'
-'   ' Verificar si ocurrió un error
-'   If Error Then
-'     Message.Error("Error al abrir el archivo txt:\n" & Error.Text)
-'   Endif
-'
-' End
+Public Sub btnVerIMAGEN_Click()
+
+  Dim sArchivoSeleccionado As String
+  Dim sRutaCompleta As String
+  Dim sExtension As String
+  Dim aExtensionesImagen As String[]
+
+  ' Definir las extensiones de imagen permitidas
+  aExtensionesImagen = ["png", "jpg", "jpeg", "gif", "bmp", "tiff", "tif", "webp"]
+
+  ' Verificar que hay un archivo seleccionado en el FileView
+  If FileViewProyecto.Current = "" Then
+    Message.Warning("Por favor seleccione un archivo de la lista")
+    Return
+  Endif
+
+  ' Obtener el archivo seleccionado
+  sArchivoSeleccionado = FileViewProyecto.Current
+
+  ' Construir la ruta completa del archivo
+  sRutaCompleta = FileViewProyecto.Dir &/ sArchivoSeleccionado
+
+  ' Verificar que el archivo existe
+  If Not Exist(sRutaCompleta) Then
+    Message.Error("El archivo seleccionado no existe")
+    Return
+  Endif
+
+  ' Obtener la extensión del archivo
+  sExtension = LCase(File.Ext(sArchivoSeleccionado))
+
+  ' Verificar que es un archivo de imagen válido
+  If aExtensionesImagen.Find(sExtension) = -1 Then
+    Message.Warning("El archivo seleccionado no es una imagen válida.\nExtensiones permitidas: ." & aExtensionesImagen.Join(", ."))
+    Return
+  Endif
+
+  ' Cargar y mostrar la imagen en el ImageView
+  Try ImageViewProyecto.Picture = Picture.Load(sRutaCompleta)
+
+  If Error Then
+    Message.Error("Error al cargar la imagen:\n" & Error.Text)
+    ' Limpiar el ImageView en caso de error
+    ImageViewProyecto.Picture = Null
+  Endif
+
+End
