@@ -494,29 +494,35 @@
             #Translate = False
           }
           { btnVerPDF Button
-            MoveScaled(10,0,4,4)
+            MoveScaled(6,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/acroread.svg"]
           }
           { btnEPUB Button
-            MoveScaled(14,0,4,4)
+            MoveScaled(10,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/epub.svg"]
           }
           { btnVerHTML Button
-            MoveScaled(18,0,4,4)
+            MoveScaled(14,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/web.svg"]
           }
+          { btnVerIMAGEN Button
+            MoveScaled(18,0,4,4)
+            #Translate = False
+            NoTabFocus = True
+            Picture = Picture["iconos/image.svg"]
+          }
           { Separator1 Separator
-            MoveScaled(22,0,2.3333,4)
+            MoveScaled(29,0,2.3333,4)
             #Translate = False
           }
           { !MenuButton1 MenuButton
-            MoveScaled(25,0,25.3333,4)
+            MoveScaled(32,0,25.3333,4)
             #Public = True
             #Translate = False
             Text = "Guiones externos"
@@ -524,7 +530,7 @@
             MenuOnly = True
           }
           { Spring1 Spring
-            MoveScaled(52,0,8,4)
+            MoveScaled(59,0,8,4)
           }
         }
         { !FileViewProyecto FileView
