@@ -378,14 +378,3 @@ Public Sub RellenarComboBoxBibTeX()
   FMain.txtEPRINTYPE.Add("DOI")
 
 End
-
-Public Sub RellenarEstiloMonografia()
-
-  Form_Monografia.cmbEstiloReferencias.Add("")
-  Form_Monografia.cmbEstiloReferencias.Add("APA 7ma edición")
-  Form_Monografia.cmbEstiloReferencias.Add("Vancouver")
-  Form_Monografia.cmbEstiloReferencias.Add("IEEE")
-  Form_Monografia.cmbEstiloReferencias.Add("Oxford (autor/año)")
-  Form_Monografia.cmbEstiloReferencias.Add("Oxford (nota a pie)")
-
-End
