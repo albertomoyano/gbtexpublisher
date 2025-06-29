@@ -5600,7 +5600,6 @@ Public Sub btnSalir_Click()
 
 End
 
-' ALTERNATIVA 4: Usando Desktop.Open (método más elegante)
 Public Sub btnVerPDF_Click()
 
   Dim sArchivoSeleccionado As String
@@ -5644,7 +5643,140 @@ Public Sub btnVerPDF_Click()
 
 End
 
-' Public Sub btnVerPDF_Click()
+Public Sub btnEPUB_Click()
+
+  Dim sArchivoSeleccionado As String
+  Dim sRutaCompleta As String
+  Dim sExtension As String
+
+  ' Verificar que hay un archivo seleccionado en el FileView
+  If FileViewProyecto.Current = "" Then
+    Message.Warning("Por favor seleccione un archivo de la lista")
+    Return
+  Endif
+
+  ' Obtener el archivo seleccionado
+  sArchivoSeleccionado = FileViewProyecto.Current
+
+  ' Construir la ruta completa del archivo
+  sRutaCompleta = FileViewProyecto.Dir &/ sArchivoSeleccionado
+
+  ' Verificar que el archivo existe
+  If Not Exist(sRutaCompleta) Then
+    Message.Error("El archivo seleccionado no existe")
+    Return
+  Endif
+
+  ' Obtener la extensión del archivo
+  sExtension = LCase(File.Ext(sArchivoSeleccionado))
+
+  ' Verificar que es un archivo PDF
+  If sExtension <> "epub" Then
+    Message.Warning("El archivo seleccionado no es un ePub.\nPor favor seleccione un archivo con extensión .epub")
+    Return
+  Endif
+
+  ' Usar Desktop.Open - método más elegante y compatible
+  Try Desktop.Open(sRutaCompleta)
+
+  ' Verificar si ocurrió un error
+  If Error Then
+    Message.Error("Error al abrir el archivo ePub:\n" & Error.Text)
+  Endif
+
+End
+
+Public Sub btnVerHTML_Click()
+
+  Dim sArchivoSeleccionado As String
+  Dim sRutaCompleta As String
+  Dim sExtension As String
+
+  ' Verificar que hay un archivo seleccionado en el FileView
+  If FileViewProyecto.Current = "" Then
+    Message.Warning("Por favor seleccione un archivo de la lista")
+    Return
+  Endif
+
+  ' Obtener el archivo seleccionado
+  sArchivoSeleccionado = FileViewProyecto.Current
+
+  ' Construir la ruta completa del archivo
+  sRutaCompleta = FileViewProyecto.Dir &/ sArchivoSeleccionado
+
+  ' Verificar que el archivo existe
+  If Not Exist(sRutaCompleta) Then
+    Message.Error("El archivo seleccionado no existe")
+    Return
+  Endif
+
+  ' Obtener la extensión del archivo
+  sExtension = LCase(File.Ext(sArchivoSeleccionado))
+
+  ' Verificar que es un archivo PDF
+  If sExtension <> "html" Then
+    Message.Warning("El archivo seleccionado no es un html.\nPor favor seleccione un archivo con extensión .html")
+    Return
+  Endif
+
+  ' Usar Desktop.Open - método más elegante y compatible
+  Try Desktop.Open(sRutaCompleta)
+
+  ' Verificar si ocurrió un error
+  If Error Then
+    Message.Error("Error al abrir el archivo html:\n" & Error.Text)
+  Endif
+
+End
+
+Public Sub btnVerTEXTO_Click()
+
+  Dim sArchivoSeleccionado As String
+  Dim sRutaCompleta As String
+  Dim sExtension As String
+  Dim aExtensionesPermitidas As String[]
+
+  ' Definir las extensiones de archivos de texto permitidas
+  aExtensionesPermitidas = ["txt", "tex", "sh", "css", "js", "json", "xml", "md", "log", "conf", "cfg", "ini"]
+
+  ' Verificar que hay un archivo seleccionado en el FileView
+  If FileViewProyecto.Current = "" Then
+    Message.Warning("Por favor seleccione un archivo de la lista")
+    Return
+  Endif
+
+  ' Obtener el archivo seleccionado
+  sArchivoSeleccionado = FileViewProyecto.Current
+
+  ' Construir la ruta completa del archivo
+  sRutaCompleta = FileViewProyecto.Dir &/ sArchivoSeleccionado
+
+  ' Verificar que el archivo existe
+  If Not Exist(sRutaCompleta) Then
+    Message.Error("El archivo seleccionado no existe")
+    Return
+  Endif
+
+  ' Obtener la extensión del archivo
+  sExtension = LCase(File.Ext(sArchivoSeleccionado))
+
+  ' Verificar que es un archivo de texto válido
+  If aExtensionesPermitidas.Find(sExtension) = -1 Then
+    Message.Warning("El archivo seleccionado no es un archivo de texto válido.\nExtensiones permitidas: " & aExtensionesPermitidas.Join(", "))
+    Return
+  Endif
+
+  ' Abrir el archivo de texto
+  Try Desktop.Open(sRutaCompleta)
+
+  ' Verificar si ocurrió un error
+  If Error Then
+    Message.Error("Error al abrir el archivo de texto:\n" & Error.Text)
+  Endif
+
+End
+
+' Public Sub btnVerTEXTO_Click()
 '
 '   Dim sArchivoSeleccionado As String
 '   Dim sRutaCompleta As String
@@ -5672,17 +5804,17 @@ End
 '   sExtension = LCase(File.Ext(sArchivoSeleccionado))
 '
 '   ' Verificar que es un archivo PDF
-'   If sExtension <> "pdf" Then
-'     Message.Warning("El archivo seleccionado no es un PDF.\nPor favor seleccione un archivo con extensión .pdf")
+'   If sExtension <> "txt" Then
+'     Message.Warning("El archivo seleccionado no es un txt.\nPor favor seleccione un archivo con extensión .txt")
 '     Return
 '   Endif
 '
-'   ' Abrir el PDF con el visor predeterminado usando Shell
-'   Shell "xdg-open " & Quote(sRutaCompleta) Wait
+'   ' Usar Desktop.Open - método más elegante y compatible
+'   Try Desktop.Open(sRutaCompleta)
 '
 '   ' Verificar si ocurrió un error
 '   If Error Then
-'     Message.Error("Error al abrir el archivo PDF:\n" & Error.Text)
+'     Message.Error("Error al abrir el archivo txt:\n" & Error.Text)
 '   Endif
 '
 ' End

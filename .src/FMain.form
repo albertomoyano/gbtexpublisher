@@ -517,20 +517,30 @@
             NoTabFocus = True
             Picture = Picture["iconos/image.svg"]
           }
+          { btnVerTEXTO Button
+            MoveScaled(22,0,4,4)
+            #Translate = False
+            NoTabFocus = True
+            Picture = Picture["iconos/textnormal.svg"]
+          }
           { Separator1 Separator
-            MoveScaled(29,0,2.3333,4)
+            MoveScaled(26,0,2.3333,4)
             #Translate = False
           }
+          { !ComboBox2 ComboBox
+            MoveScaled(29,0,13,4)
+            #Public = True
+            Expand = True
+            ReadOnly = True
+          }
           { !MenuButton1 MenuButton
-            MoveScaled(32,0,25.3333,4)
+            MoveScaled(57,0,25.3333,4)
             #Public = True
             #Translate = False
+            Visible = False
             Text = "Guiones externos"
             Picture = Picture["iconos/conversor.svg"]
             MenuOnly = True
-          }
-          { Spring1 Spring
-            MoveScaled(59,0,8,4)
           }
         }
         { !FileViewProyecto FileView
