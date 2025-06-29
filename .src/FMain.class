@@ -5588,15 +5588,6 @@ Public Sub btnVerificar_Click()' verificar url
 
 End
 
-' Función para verificar si una extensión es de imagen
-Private Function EsImagen(ext As String) As Boolean
-
-  Dim aImagenes As String[] = ["jpg", "jpeg", "png", "gif", "bmp", "svg"]
-
-  Return aImagenes.Exist(ext)
-
-End
-
 Public Sub btnMenuAbrir_Click()
 
   menuAbrirLibro_Click()' abrir libro
