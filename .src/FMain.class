@@ -315,13 +315,6 @@ Public Sub Menu24_Click()
 
 End
 
-Public Sub menuGray_Click()
-
-  TabPanel6.Index = 0
-  Form_ConvertirPNG.ShowModal()
-
-End
-
 Public Sub Menu4_Click()' ejecutar separatas
 
   Dim sFilePath As String = File.Dir(TextBox1.Text) & "/separatas.sh"
@@ -363,8 +356,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     rutaFILES = File.Dir(TextBox1.Text) & "/files"
     PanelLaTeX.Visible = True
     PanelLaTeX.Enabled = True
-    PanelQuarto.Visible = False
-    PanelQuarto.Enabled = False
     guardarTipoDocumentoLibro()
     HBoxPanelLibro.Visible = True
     TabPanelLibro.Visible = True
@@ -972,35 +963,6 @@ Public Sub btnVerResumen_Click()
 
 End
 
-Public Sub btnLimpiarJournal_Click()
-
-  txtPublication.Clear
-  txt36_pdfissn.Clear
-  txt37_pdfeissn.Clear
-  txtBaseURL.Clear
-
-End
-
-Public Sub btnVerNota_Click()
-
-  Form_TXTextendido.OriginalTextBox = txt71_note
-  Form_TXTextendido.ShowModal()
-
-End
-
-Public Sub btnLimpiarRevisor_Click()
-
-  txt73_reviewer.Clear
-
-End
-
-Public Sub btnLimpiarConferencia_Click()
-
-  txt82_conference.Clear
-  txt82_conferenceVisual.Clear
-
-End
-
 Public Sub btnAbrirPNG_Click()
 
   Dialog.Title = "Seleccionar archivo de tapa"
@@ -1074,7 +1036,7 @@ Public Sub guardarCamposMETA()
   Contenido!pdfxmp2_03 = txt03_pdfxmp2.Text'3
   Contenido!pdfxmp3_04 = txt04_pdfxmp3.Text'4
   Contenido!pdfauthor_05 = txt05_pdfauthor.Text'
-  Contenido!pdftitle_06 = txt06_pdftitle.Text'6
+  ' Contenido!pdftitle_06 = txt06_pdftitle.Text'6
   Contenido!pdfsubject_07 = txtSubjet.Text'7
   Contenido!pdfsubject_07b = txtpdfsubject_07b.Text'8
   Contenido!pdfsubject_07c = txtpdfsubject_07c.Text'9
@@ -1082,9 +1044,9 @@ Public Sub guardarCamposMETA()
   Contenido!pdfsubtitle_09 = txt09_pdfsubtitle.Text'11
   Contenido!pdfauthortitle_10 = txt10_pdfauthortitle.Text'12
   Contenido!pdfdate_11 = txtDate.Text'13
-  Contenido!pdfcreationdate_12 = txtCreationDate.Text'14
-  Contenido!pdfmoddate_13 = txtModDate.Text'15
-  Contenido!pdfmetadate_14 = txtMetaDate.Text'16
+  ' Contenido!pdfcreationdate_12 = txtCreationDate.Text'14
+  ' Contenido!pdfmoddate_13 = txtModDate.Text'15
+  ' Contenido!pdfmetadate_14 = txtMetaDate.Text'16
   Contenido!pdfcopyright_15 = txt15_pdfcopyright.Text'17
   Contenido!pdflicenseurl_16 = txt16_pdflicenseurl.Text'18
   Contenido!pdfcaptionwriter_17 = txtCaptionWriter.Text'19
@@ -1096,28 +1058,28 @@ Public Sub guardarCamposMETA()
   Contenido!pdfcontactphone_23 = txtContactPhone.Text'25
   Contenido!pdfcontactemail_24 = txtContactEmail.Text'26
   Contenido!pdfcontacturl_25 = txtContactURL.Text'27
-  Contenido!pdfdocumentid_26 = txtDocumentId.Text'28
-  Contenido!pdfpublication_27 = txtPublication.Text'29
+  ' Contenido!pdfdocumentid_26 = txtDocumentId.Text'28
+  ' Contenido!pdfpublication_27 = txtPublication.Text'29
   Contenido!pdfpublisher_28 = txtPublisher28.Text'30
   Contenido!pdftype_29 = cmbType.Text'31
   Contenido!pdfpubtype_30 = cbPubType.Text'32
   Contenido!pdfvolumenum_31 = txtVolNum.Text'33
   Contenido!pdfissuenum_32 = txtIssueNum.Text'34
-  Contenido!pdfpagerange_33 = txt33_pdfpagerange.Text'35
+  ' Contenido!pdfpagerange_33 = txt33_pdfpagerange.Text'35
   Contenido!pdfbookedition_34 = txt34_pdfbookedition.Text'36
   Contenido!pdfisbn_35 = txt35_pdfisbn.Text'37
-  Contenido!pdfissn_36 = txt36_pdfissn.Text'38
-  Contenido!pdfeissn_37 = txt37_pdfeissn.Text'39
+  ' Contenido!pdfissn_36 = txt36_pdfissn.Text'38
+  ' Contenido!pdfeissn_37 = txt37_pdfeissn.Text'39
   Contenido!pdfpubstatus_38 = txt38_pdfpubstatus.Text'40
   Contenido!pdflang_39 = txtLang.Text'41
   Contenido!pdfmetalang_40 = txt40_pdfmetalang.Text'42
   Contenido!pdfbaseurl_41 = txtBaseURL.Text'43
-  Contenido!pdfurl_42 = txt42_pdfurl.Text'44
+  ' Contenido!pdfurl_42 = txt42_pdfurl.Text'44
   Contenido!pdfdoi_43 = txt43_pdfdoi.Text'45
   Contenido!pdfrendition_44 = cbPDFrendition.Text'46
-  Contenido!pdfidentifier_45 = txtDocumentId.Text'47
+  ' Contenido!pdfidentifier_45 = txtDocumentId.Text'47
   Contenido!pdfx_46 = cbPDFx.Text'48
-  Contenido!pdfversionid_47 = txtVersionId.Text'49
+  ' Contenido!pdfversionid_47 = txtVersionId.Text'49
   Contenido!abstract_48 = txt48_abstract.Text'50
   Contenido!abstract_48b = txt48b_abstract.Text'1
   Contenido!abstract_48c = txt48c_abstract.Text'52
@@ -1125,27 +1087,27 @@ Public Sub guardarCamposMETA()
   Contenido!pagetotal_50 = txt50_pagetotal.Text'54
   Contenido!relation_51 = txtCOLECCION.Text'55
   Contenido!direction_52 = txtDirection.Text'56
-  Contenido!traductor_53 = txt53_traductor.Text'57
-  Contenido!idiomaorig_54 = txt54_idiomaorig.Text'58
-  Contenido!ilustrador_55 = txt55_ilustrador.Text'59
+  ' Contenido!traductor_53 = txt53_traductor.Text'57
+  ' Contenido!idiomaorig_54 = txt54_idiomaorig.Text'58
+  ' Contenido!ilustrador_55 = txt55_ilustrador.Text'59
   Contenido!resumen_56 = txt56_resumen.Text'60
   Contenido!palabrasclave_57 = txt57_palabrasclave.Text'61
   Contenido!palabrasclave_57b = txt57b_palabrasclave.Text'62
   Contenido!palabrasclave_57c = txt57c_palabrasclave.Text'63
-  Contenido!papertitletwo_58 = txt58_papertitletwo.Text'64
-  Contenido!artrecibido_59 = txt59_artrecibido.Text'65
-  Contenido!artaceptado_60 = txt60_artaceptado.Text'66
+  ' Contenido!papertitletwo_58 = txt58_papertitletwo.Text'64
+  ' Contenido!artrecibido_59 = txt59_artrecibido.Text'65
+  ' Contenido!artaceptado_60 = txt60_artaceptado.Text'66
   Contenido!formato_61 = txtFORMATO.Text'67
-  Contenido!source_69 = txt59_opt_source.Text'68
-  Contenido!opt_72 = txt82_conferenceVisual.Text'69
-  Contenido!genero_78 = txt78_genero.Text'70
-  Contenido!conference_82 = txt82_conference.Text'71
+  ' Contenido!source_69 = txt59_opt_source.Text'68
+  ' Contenido!opt_72 = txt82_conferenceVisual.Text'69
+  ' Contenido!genero_78 = txt78_genero.Text'70
+  ' Contenido!conference_82 = txt82_conference.Text'71
   Contenido!bookTitle_84 = txt84_bookTitle.Text'72
-  Contenido!doiRevista_85 = txt85_doiRevista.Text'73
-  Contenido!notas_86 = txt86_annotation.Text'74
-  Contenido!piehtml_87 = txt87_HTMLFirstPageBottom.Text'75
-  Contenido!audience_88 = txt88_audiencia.Text'76
-  Contenido!binding_89 = txt89_binding.Text'77
+  ' Contenido!doiRevista_85 = txt85_doiRevista.Text'73
+  ' Contenido!notas_86 = txt86_annotation.Text'74
+  ' Contenido!piehtml_87 = txt87_HTMLFirstPageBottom.Text'75
+  ' Contenido!audience_88 = txt88_audiencia.Text'76
+  ' Contenido!binding_89 = txt89_binding.Text'77
   Contenido!eISBN_90 = txt90_eisbn.Text'78
 
   Contenido!pdflicenciastatus_97 = cmb_pdfLicenciaStatus.Text'97
@@ -1179,21 +1141,9 @@ Public Sub btnLimpiarTapa_Click()
 
 End
 
-Public Sub btnMostarJournal2_Click()
-
-  Form_Journal.ShowModal()
-
-End
-
 Public Sub btnMostrarColeccion_Click()
 
   Form_Coleccion.ShowModal()
-
-End
-
-Public Sub btnMostarConferencia_Click()
-
-  Form_Conferencia.ShowModal()
 
 End
 
