@@ -475,8 +475,8 @@
             MoveScaled(1,8,25,9)
             #Public = True
           }
-          { !ImageView1 ImageView
-            MoveScaled(29,8,18,12)
+          { !ImageViewProyecto ImageView
+            MoveScaled(29,8,23,12)
             #Public = True
             #Translate = False
           }

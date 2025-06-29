@@ -227,7 +227,7 @@ Public Sub Form_Open()
   ' glosarios debe pasar a evento data
   ' Mostrar_ListaGLO()
 
-  Splitter6.Layout = [1, 1]
+  Splitter6.Layout = [1, 2]
 
 End
 
@@ -402,7 +402,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     ' MenuButton4.Menu = "menuScriptsBash"
     HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
-    ImageView1.Image = Null
+    ImageViewProyecto.Image = Null
     ' Ejecutar la consulta SQL bibtex
     ContenidoBibActual = Form_ConectarBBDD.meConn.Exec("SELECT * FROM bibtex WHERE ',' || keywords || ',' LIKE '%," & BaseName & ",%' ORDER BY id DESC")
     ' refrescamos los datos en los grid del archivo en curso
@@ -5251,7 +5251,7 @@ End
 
 Public Sub Splitter6_Resize()
 
-  Splitter6.Layout = [1, 1]
+  Splitter6.Layout = [1, 2]
 
 End
 
