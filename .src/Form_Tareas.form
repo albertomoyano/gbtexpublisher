@@ -2,6 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,106.6667,29)
+  Icon = Picture["iconos/checklist.svg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True

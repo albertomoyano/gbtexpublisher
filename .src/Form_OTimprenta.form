@@ -4,6 +4,7 @@
   Move(0,0,960,748)
   #Scaled = False
   Text = ("OT para imprenta")
+  Icon = Picture["iconos/impresora.svg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True

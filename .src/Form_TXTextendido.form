@@ -4,6 +4,7 @@
   Move(0,0,960,396)
   #Scaled = False
   Text = ("Texto completo")
+  Icon = Picture["iconos/schedule.svg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
