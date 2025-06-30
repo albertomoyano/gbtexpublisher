@@ -3,38 +3,6 @@
 ' Private meConn As New Connection
 Private Contenido As Result
 
-' Public Sub Form_Open()
-
-' ' Usa la ruta seleccionada en el formulario de inicio
-' meConn.Type = "sqlite3"
-' meConn.Host = File.Dir(Form_ConectarBBDD.txtBBDDorigen.Text)
-' meConn.Name = File.RealPath(Form_ConectarBBDD.txtBBDDorigen.Text)
-' meConn.Open()
-' ' Configurar el modo de journal a DELETE
-' meConn.Exec("PRAGMA journal_mode=DELETE;")
-'
-' End
-
-' Public Sub Form_Close()
-'
-'   If meConn Then
-'     meConn.Close()
-'     meConn = Null
-'   Endif
-'   Me.Close
-'
-' End
-
-' Public Sub btnCancelar_Click()
-'
-'   If meConn Then
-'     meConn.Close()
-'     meConn = Null
-'   Endif
-'   Me.Close
-'
-' End
-
 Public Sub btnAgregar_Click()
 
   If txtAgregarLista.Text = "" Then
@@ -64,10 +32,6 @@ Public Sub btnAgregar_Click()
   Contenido.Update
   FMain.Mostrar_Lista_Tareas
 
-  ' If meConn Then
-  '   meConn.Close()
-  '   meConn = Null
-  ' Endif
   Me.Close
 
 End
@@ -85,5 +49,11 @@ Public Sub txtAgregarLista_KeyRelease()
   If Key.Code = 16777220 Or Key.code = 16777221 Then 'No me funciona de otra manera que no sea usando el código
     btnAgregar_Click
   Endif
+
+End
+
+Public Sub btnCancelar_Click()
+
+  Me.Close()
 
 End

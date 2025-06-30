@@ -361,11 +361,9 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     TabPanelLibro.Visible = True
     btnGuardarIGUAL.Visible = False
     TabPanel1.Visible = True
-    menuBORRARaux.Enabled = True
     menuComprimir.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
-    menuGray.Enabled = True
     Menu4.Enabled = True
     HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
