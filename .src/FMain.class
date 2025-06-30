@@ -29,23 +29,14 @@ Private segundos As Integer
 Private minutos As Integer
 Private horas As Integer
 Public idSeleccionado As Integer
-' Private archivoFileClick As Boolean
 Public $URL As String
 Public sDiccionarioSeleccionado As String
 Public RutaArchivoActual As String
 Public imgPreview As Image
-' Actualizar el Label cada segundo
-
-Public Sub TimerHOY_Timer()
-
-  Dim diadehoy As String
-
-  diadehoy = Format(Now, "(dd \\de mmmm \\de yyyy hh:nn:ss)")
-  Fmain.Title = Application.Title & " v. " & Application.Version & " " & diadehoy & " - programación orientada al usuario"
-
-End
 
 Public Sub Form_Open()
+
+  FMain.Title = Application.Title & " v. " & Application.Version
 
   ' Lista de rutas que necesitas verificar/crear
   Dim rutasNecesarias As String[] = [
@@ -113,16 +104,6 @@ Public Sub Form_Open()
   If Not File.RealPath(User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh") Then
     Copy "./quitar_HYPERTARGET.sh" To User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh"
   End If
-  '
-  ' Inicializamos los contadores de minutos y segundos
-  horas = 0
-  minutos = 0
-  segundos = 0
-  ' Configuramos el Timer para que se ejecute cada segundo (1000 milisegundos)
-  Timer1.Delay = 1000
-  Timer1.Stop  ' No iniciamos el Timer de inmediato
-
-  TimerHOY.Enabled = True
 
   $Bash = TerminalView1.Shell("/usr/bin/bash")
   TerminalView1.SetFocus()
@@ -153,22 +134,6 @@ Public Sub Form_Open()
   Mod_RellenarComboBox.RellenarCmbEntradaGlosario()
   Mod_RellenarComboBox.RellenarCmbMetadatos()
   Mod_RellenarComboBox.RellenarCmbGitHubPages()
-
-  ' Dim mtmp As Menu
-  ' Dim fileA As String
-  '
-  ' For Each fileA In Dir(rutaScriptsExternos, "*.py").Sort()'
-  '   mtmp = New Menu(menuScriptsExternos) As "obs"
-  '   mtmp.caption = fileA
-  ' Next
-
-  ' Dim mtmpB As Menu
-  ' Dim fileB As String
-  '
-  ' For Each fileB In Dir(rutaScriptsBash, "*.sh").Sort()'
-  '   mtmpB = New Menu(menuScriptsBash) As "obsB"
-  '   mtmpB.caption = fileB
-  ' Next
 
   ' botonera glosario de inicio
   BtnNuevoGlo.Visible = True
@@ -224,8 +189,6 @@ Public Sub Form_Open()
   '
   ContenidoGLOTotal = Form_ConectarBBDD.meConn.Exec("SELECT * FROM glosarios ORDER BY name ASC")'
   VGridGLO.Rows.Count = ContenidoGLOTotal.Count
-  ' glosarios debe pasar a evento data
-  ' Mostrar_ListaGLO()
 
   Splitter6.Layout = [1, 2]
 
@@ -344,10 +307,8 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     TabPanelLibro.Visible = True
     btnGuardarIGUAL.Visible = False
     TabPanel1.Visible = True
-    menuComprimir.Enabled = True
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
-    Menu4.Enabled = True
     HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
     ImageViewProyecto.Image = Null
@@ -2976,40 +2937,6 @@ Public Sub btnBuscarFiltro_Click()
 
 End
 
-' Evento que se ejecuta cada segundo
-Public Sub Timer1_Timer()
-
-  ' Incrementamos los segundos
-  segundos += 1
-
-  ' Si los segundos llegan a 60, incrementamos los minutos y reiniciamos los segundos
-  If segundos = 60 Then
-    segundos = 0
-    minutos += 1
-  Endif
-
-  ' Si los minutos llegan a 60, incrementamos las horas y reiniciamos los minutos
-  If minutos = 60 Then
-    minutos = 0
-    horas += 1
-  Endif
-
-End
-
-' Función para actualizar el display del botón
-Public Sub reinicamosTiempo()
-
-  ' Reiniciamos el conteo de horas, minutos y segundos
-  horas = 0
-  minutos = 0
-  segundos = 0
-
-  ' Detenemos el Timer si está corriendo, luego lo reiniciamos
-  Timer1.Stop
-  Timer1.Start
-
-End
-
 Public Sub btnLimpiar_Click()
 
   TextBox2.Clear
@@ -5536,7 +5463,6 @@ Public Sub btnSeparata_Click()
   ' Comprobamos si el archivo existe
   If File.RealPath(sFilePath) Then
     ' Si existe, ejecutamos el script
-    TabPanel6.Index = 0
     TerminalView1.Input("sh " & sFilePath & "\n" & "clear" & "\n")
     Wait 0.2
   Else
