@@ -5,7 +5,7 @@
   #Scaled = False
   #Translate = False
   Expand = True
-  Text = "Conversión de archivos Word (.docx) a formato LaTeX y AsciiDoc utilizando Pandoc"
+  Text = "Conversión de archivos Word (.docx) a formato LaTeX utilizando Pandoc"
   Resizable = False
   Arrangement = Arrange.Vertical
   AutoResize = True
@@ -56,7 +56,6 @@
       NoTabFocus = True
       Expand = True
       ReadOnly = True
-      Placeholder = "Seleccione un archivo word con extensión docx"
     }
   }
   { HBox3 HBox
@@ -69,7 +68,7 @@
       Text = ("Archivo de  destino  ")
     }
     { txtFecha TextBox
-      Move(234,0,144,36)
+      Move(270,0,108,36)
       Background = Color.Background
       Alignment = Align.Right
       ReadOnly = True
@@ -78,7 +77,7 @@
       Move(387,0,216,40)
       NoTabFocus = True
       Expand = True
-      Placeholder = ("caracteres permitidos: ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+      Placeholder = ("permitidos: ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     }
     { btnCONVERTIR Button
       Move(621,0,144,40)
