@@ -17,20 +17,13 @@
       Text = ("Ejecutar separatas")
       Picture = Picture["iconos/terminal.svg"]
     }
-    { menuGray Menu
-      Text = ("Convertir imágenes a .png en grayscale")
-      Picture = Picture["iconos/terminal.svg"]
-    }
     { menuComprimir Menu
       Text = ("Comprimir proyecto (.tar.gz)")
+      Picture = Picture["iconos/archive-zip.svg"]
     }
     { menuComprimirZip Menu
       Text = ("Comprimir proyecto (.zip)")
       Picture = Picture["iconos/archive-zip.svg"]
-    }
-    { menuBORRARaux Menu
-      Text = ("Borrar archivos auxiliares")
-      Picture = Picture["iconos/borrar.svg"]
     }
   }
   { menuPDF Menu
@@ -329,25 +322,16 @@
           Picture = Picture["iconos/impresora.svg"]
         }
         { !MenuButton2 MenuButton
-          MoveScaled(50,0,17,4)
+          MoveScaled(33,0,16,4)
           #Public = True
           #Translate = False
-          Visible = False
-          Expand = True
           Text = "Lotes"
           Picture = Picture["iconos/conversor.svg"]
           Menu = "menuProcesarArchivos"
           MenuOnly = True
         }
-        { !MenuButton4 MenuButton
-          MoveScaled(68,0,17,4)
-          #Public = True
-          #Translate = False
-          Visible = False
-          Expand = True
-          Text = "Purgatorio"
-          Picture = Picture["iconos/conversor.svg"]
-          MenuOnly = True
+        { Spring1 Spring
+          MoveScaled(59,0,10,4)
         }
       }
     }
@@ -463,52 +447,59 @@
             NoTabFocus = True
             Picture = Picture["iconos/integridad.svg"]
           }
+          { btnBorrarAuxiliares Button
+            MoveScaled(4,0,4,4)
+            #Translate = False
+            NoTabFocus = True
+            ToolTip = "Borrar archivos auxiliares"
+            Picture = Picture["iconos/borrar.svg"]
+          }
           { Separator12 Separator
-            MoveScaled(4,0,2.3333,4)
+            MoveScaled(9,0,2.3333,4)
             #Translate = False
           }
           { btnVerPDF Button
-            MoveScaled(6,0,4,4)
+            MoveScaled(11,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/acroread.svg"]
           }
           { btnEPUB Button
-            MoveScaled(10,0,4,4)
+            MoveScaled(15,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/epub.svg"]
           }
           { btnVerHTML Button
-            MoveScaled(14,0,4,4)
+            MoveScaled(19,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/web.svg"]
           }
           { btnVerIMAGEN Button
-            MoveScaled(18,0,4,4)
+            MoveScaled(23,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/image.svg"]
           }
           { btnVerTEXTO Button
-            MoveScaled(22,0,4,4)
+            MoveScaled(27,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/textnormal.svg"]
           }
           { Separator1 Separator
-            MoveScaled(26,0,2.3333,4)
+            MoveScaled(31,0,2.3333,4)
             #Translate = False
           }
           { !ComboBox2 ComboBox
-            MoveScaled(29,0,13,4)
+            MoveScaled(34,0,13,4)
             #Public = True
             Expand = True
             ReadOnly = True
           }
           { !MenuButton1 MenuButton
-            MoveScaled(57,0,25.3333,4)
+            MoveScaled(48,0,25.3333,4)
             #Public = True
             #Translate = False
             Visible = False

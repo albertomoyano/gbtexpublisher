@@ -441,13 +441,6 @@ Public Sub Menu68_Click()
 
 End
 
-Public Sub menuBORRARaux_Click()
-
-  TabPanel6.Index = 0
-  Mod_Funciones.Borrar_Aux
-
-End
-
 Public Sub txtCLAVEglo_KeyRelease()' Convertir el texto ingresado a minusculas
 
   ' Obtener el texto actual del TextBox
@@ -5576,5 +5569,11 @@ End
 Public Sub btnImprenta_Click()
 
   Form_OTimprenta.ShowModal()
+
+End
+
+Public Sub btnBorrarAuxiliares_Click()
+
+  Mod_Funciones.Borrar_Aux
 
 End
