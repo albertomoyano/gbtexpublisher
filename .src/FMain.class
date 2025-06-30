@@ -366,15 +366,7 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     Button4.Enabled = True
     btnMenuGIT.Enabled = True
     menuGray.Enabled = True
-    menuCatalogo.Enabled = True
     Menu4.Enabled = True
-    menuOT.Enabled = True
-    menuPDFweb.Enabled = True
-    menuDisclaimer.Enabled = True
-    ' menuScriptsExternos.Enabled = True
-    ' MenuButton1.Menu = "menuScriptsExternos"
-    ' menuScriptsBash.Enabled = True
-    ' MenuButton4.Menu = "menuScriptsBash"
     HBox93.Visible = True
     ' limpiamos el ImageView y el EditorRapido
     ImageViewProyecto.Image = Null
@@ -452,25 +444,6 @@ End
 Public Sub menuBORRARaux_Click()
 
   TabPanel6.Index = 0
-  Mod_Funciones.Borrar_Aux
-
-End
-
-Public Sub menuCatalogo_Click()
-
-  TabPanel1.Index = 0
-  TabPanel6.Index = 0
-
-  Mod_Exportar.ExportToCatalogo(TextBox1.Text)
-  Wait 0.2
-
-  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES & "/gbTeXcatalogo-" & BaseName & ".tex" & "\n")
-  Wait 0.2
-
-  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
-  Wait 0.2
-
-  TerminalView1.SetFocus()
   Mod_Funciones.Borrar_Aux
 
 End
@@ -2685,53 +2658,6 @@ Public Sub menuMAYand_Click()'aplicar mayuscula para autores
 
 End
 
-Public Sub menuDisclaimer_Click()
-
-  Dim buscar As String
-  Dim Resultado As Result
-  'condicional para revisar que exista la entrada de comentarios en la base de datos
-  ' Exportamos los registros seleccionados
-  buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(TextBox1.Text) & "%'"
-  Resultado = Form_ConectarBBDD.meConn.Exec(buscar)
-
-  If Resultado.Available Then
-    TabPanel1.Index = 0
-    TabPanel6.Index = 0
-
-    Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
-    Wait 0.2
-
-    TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES & "/gbTeXdisclaimer-" & BaseName & ".tex" & "\n")
-    Wait 0.1
-
-    TerminalView1.Input("mv gbTeXdisclaimer-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & "\n")
-    Wait 0.1
-
-    Dim pdfPath As String
-    pdfPath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
-
-    ' Verificar si el archivo existe
-    If Not File.RealPath(pdfPath) Then
-      ' Si el archivo no existe, no hacer nada o mostrar un mensaje
-      Message.Warning("Se a generado el archivo de comentarios, pero <strong>pdf-" & BaseName & ".pdf</strong> no existe. No es posible completar la operación.")
-    Else
-      ' Si el archivo existe, ejecutar la función
-      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/draft-" & BaseName & ".pdf" & "\n")
-      Wait 0.1
-    End If
-
-    Mod_Funciones.Borrar_Aux
-    TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXdisclaimer-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
-    Wait 0.2
-    TerminalView1.SetFocus()
-
-  Else
-    Message.Info("No se encontró registro de comentarios en la base de datos para el archivo especificado. Será dirigido a la pestaña de comentarios para dar el alta el registro.")
-    TabPanel1.Index = 5
-  Endif
-
-End
-
 Public Sub BtnNuevoComenta_Click()
 
   Dim Idn As Integer
@@ -3085,20 +3011,6 @@ Public Sub btnAgregarKeyBIBtwo_Click()
     ' Si no hay texto, simplemente establece el texto a agregar
     txtFILTROrelacion.Text = TextoAAgregar
   Endif
-
-End
-
-Public Sub menuPDFweb_Click()
-
-  TabPanel6.Index = 0
-  Form_CombinarPDF.ShowModal()
-
-End
-
-Public Sub menuOT_Click()
-
-  TabPanel6.Index = 0
-  Form_OTimprenta.ShowModal()
 
 End
 
@@ -5205,20 +5117,6 @@ Public Sub btnRefrescarGrid_Click()
 
 End
 
-Public Sub Menu6_Click()' sacar metadatos del pdf
-
-  Shell "exiftool " & File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf > " & File.Dir(TextBox1.Text) & "/pdf/metadatospdf-" & BaseName & ".txt" Wait
-
-  Shell "sed -i '/Font Face/,$d' " & File.Dir(TextBox1.Text) & "/pdf/metadatospdf-" & BaseName & ".txt" Wait
-
-End
-
-Public Sub Menu7_Click()' sacar metadatos del epub
-
-  Shell "exiftool " & File.Dir(TextBox1.Text) & "/epub2/epub2-" & BaseName & ".epub > " & File.Dir(TextBox1.Text) & "/epub2/metadatosepub2-" & BaseName & ".txt" Wait
-
-End
-
 Public Sub btnResetWebView_Click()
 
   WebView1.Url = "https://www.google.com"
@@ -5603,5 +5501,80 @@ End
 Public Sub btnExportarBibtex_Click()
 
   Form_ExportarBIB.ShowModal()
+
+End
+
+Public Sub btnCompaginarPDF_Click()
+
+  Form_CombinarPDF.ShowModal()
+
+End
+
+Public Sub btnComentariosCorreccion_Click()
+
+  Dim buscar As String
+  Dim Resultado As Result
+  'condicional para revisar que exista la entrada de comentarios en la base de datos
+  ' Exportamos los registros seleccionados
+  buscar = "select * from comentarios where nombreArchivo like '%" & File.BaseName(TextBox1.Text) & "%'"
+  Resultado = Form_ConectarBBDD.meConn.Exec(buscar)
+
+  If Resultado.Available Then
+    TabPanel1.Index = 0
+    TabPanel6.Index = 0
+
+    Mod_Exportar.ExportToDisclaimer(TextBox1.Text)
+    Wait 0.2
+
+    TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES & "/gbTeXdisclaimer-" & BaseName & ".tex" & "\n")
+    Wait 0.1
+
+    TerminalView1.Input("mv gbTeXdisclaimer-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & "\n")
+    Wait 0.1
+
+    Dim pdfPath As String
+    pdfPath = File.Dir(TextBox1.Text) & "/pdf/pdf-" & BaseName & ".pdf"
+
+    ' Verificar si el archivo existe
+    If Not File.RealPath(pdfPath) Then
+      ' Si el archivo no existe, no hacer nada o mostrar un mensaje
+      Message.Warning("Se a generado el archivo de comentarios, pero <strong>pdf-" & BaseName & ".pdf</strong> no existe. No es posible completar la operación.")
+    Else
+      ' Si el archivo existe, ejecutar la función
+      TerminalView1.Input("pdfunite " & File.Dir(TextBox1.Text) & "/pdf/gbTeXdisclaimer-" & BaseName & ".pdf" & " " & pdfPath & " " & File.Dir(TextBox1.Text) & "/pdf/draft-" & BaseName & ".pdf" & "\n")
+      Wait 0.1
+    End If
+
+    Mod_Funciones.Borrar_Aux
+    TerminalView1.Input("rm -rf " & File.Dir(TextBox1.Text) & "/files/gbTeXdisclaimer-" & File.BaseName(FMain.TextBox1.Text) & ".tex" & "\n")
+    Wait 0.2
+    TerminalView1.SetFocus()
+
+  Else
+    Message.Info("No se encontró registro de comentarios en la base de datos para el archivo especificado. Será dirigido a la pestaña de comentarios para dar el alta el registro.")
+    TabPanel1.Index = 5
+  Endif
+
+End
+
+Public Sub btnCatalogo_Click()
+
+  Mod_Exportar.ExportToCatalogo(TextBox1.Text)
+  Wait 0.2
+
+  TerminalView1.Input("latexmk -f --interaction=nonstopmode -pdflatex=lualatex -pdflua " & rutaFILES & "/gbTeXcatalogo-" & BaseName & ".tex" & "\n")
+  Wait 0.2
+
+  TerminalView1.Input("mv gbTeXcatalogo-" & BaseName & ".pdf" & " " & File.Dir(TextBox1.Text) & "/pdf/gbTeXcatalogo-" & BaseName & ".pdf" & "\n")
+  Wait 0.2
+
+  TerminalView1.SetFocus()
+  Mod_Funciones.Borrar_Aux
+
+End
+
+Public Sub btnImprenta_Click()
+
+  Form_OTimprenta.ShowModal()
 
 End
