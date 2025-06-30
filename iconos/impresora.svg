@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="28"
+   height="28"
+   color-interpolation="linearRGB"
+   id="svg78"
+   sodipodi:docname="impresora.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs82" />
+  <sodipodi:namedview
+     id="namedview80"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="13.5625"
+     inkscape:cx="26.986175"
+     inkscape:cy="14.304147"
+     inkscape:window-width="1920"
+     inkscape:window-height="1054"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg78" />
+  <g
+     id="g76"
+     transform="matrix(0.42717219,0,0,0.42717219,0.61151285,0.21370573)">
+    <path
+       style="fill:#010000;fill-opacity:0.4509"
+       d="m 26,63 c 0,0 12,-7 14,-3 4,2 10,-2 14,-6 L 64,44 56,40 H 26 Z"
+       id="path2" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4"
+       d="M 16,14 C 5,23 2,26 2,40 l 36,18 c 0,0 2,1 4,-1 L 56,43 V 33 c 0,0 0,-2 -1,-3 -1,-1 -3,-2 -3,-2 z M 2,49 26,62 c 0,0 2,-6 8,-10 V 50 L 11.24,38.61 C 5,42 2,49 2,49 Z M 52,10 28,2 21,17 v 1 l 23,9 v -1 z"
+       id="path4" />
+    <linearGradient
+       id="gradient0"
+       gradientUnits="userSpaceOnUse"
+       x1="-8.0900002"
+       y1="65.120003"
+       x2="-14.95"
+       y2="33.360001">
+      <stop
+         offset="0"
+         stop-color="#aeaeae"
+         id="stop6" />
+      <stop
+         offset="1"
+         stop-color="#e1e1e1"
+         id="stop8" />
+    </linearGradient>
+    <path
+       style="fill:url(#gradient0)"
+       d="M 48,26 46,28 18,17 20,15 16,14 C 5,23 2,26 2,40 L 38,58 C 38,44 42,38 52,28 Z"
+       id="path11" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2"
+       d="M 6,40 34,54 V 50 L 6,36 Z"
+       id="path13" />
+    <path
+       style="fill:#383838"
+       d="M 6,40 34,54 V 50 L 6,36 Z"
+       id="path15" />
+    <linearGradient
+       id="gradient1"
+       gradientUnits="userSpaceOnUse"
+       x1="13.56"
+       y1="56.529999"
+       x2="19.959999"
+       y2="43.73">
+      <stop
+         offset="0"
+         stop-color="#ffffff"
+         id="stop17" />
+      <stop
+         offset="0.749"
+         stop-color="#e5e5e5"
+         id="stop19" />
+      <stop
+         offset="1"
+         stop-color="#9b9b9b"
+         id="stop21" />
+    </linearGradient>
+    <path
+       style="fill:url(#gradient1)"
+       d="m 2,49 24,13 c 0,0 2,-6 8,-10 V 50 L 11.24,38.61 C 5,42 2,49 2,49 Z"
+       id="path24" />
+    <linearGradient
+       id="gradient2"
+       gradientUnits="userSpaceOnUse"
+       x1="28.549999"
+       y1="21.209999"
+       x2="34.099998"
+       y2="8.5799999">
+      <stop
+         offset="0"
+         stop-color="#535353"
+         id="stop26" />
+      <stop
+         offset="0.2745"
+         stop-color="#b5b5b5"
+         id="stop28" />
+      <stop
+         offset="1"
+         stop-color="#ffffff"
+         id="stop30" />
+    </linearGradient>
+    <path
+       style="fill:url(#gradient2)"
+       d="M 52,10 28,2 21,17 v 1 l 23,9 v -1 z"
+       id="path33" />
+    <linearGradient
+       id="gradient3"
+       gradientUnits="userSpaceOnUse"
+       x1="45.880001"
+       y1="35.610001"
+       x2="42.880001"
+       y2="54.610001">
+      <stop
+         offset="0.0039"
+         stop-color="#c0c0c0"
+         id="stop35" />
+      <stop
+         offset="1"
+         stop-color="#9a9a9a"
+         id="stop37" />
+    </linearGradient>
+    <path
+       style="fill:url(#gradient3)"
+       d="M 55,30 C 54,29 52,28 52,28 42,38 38,44 38,58 c 0,0 2,1 4,-1 L 56,43 V 33 c 0,0 0,-2 -1,-3 z"
+       id="path40" />
+    <radialGradient
+       id="gradient4"
+       gradientUnits="userSpaceOnUse"
+       cx="0"
+       cy="0"
+       r="64"
+       gradientTransform="matrix(0.165,0.118,-0.269,0.3761,44.6696,44.5417)">
+      <stop
+         offset="0.0039"
+         stop-color="#838383"
+         id="stop42" />
+      <stop
+         offset="1"
+         stop-color="#adadad"
+         id="stop44" />
+    </radialGradient>
+    <path
+       style="fill:url(#gradient4)"
+       d="M 42,57 56,43 V 33 L 54,31 C 46,39 42,47 42,57 Z"
+       id="path47" />
+    <radialGradient
+       id="gradient5"
+       gradientUnits="userSpaceOnUse"
+       cx="0"
+       cy="0"
+       r="64"
+       gradientTransform="matrix(0.0312,0,0,0.0468,33,43)">
+      <stop
+         offset="0"
+         stop-color="#ffe3e3"
+         id="stop49" />
+      <stop
+         offset="1"
+         stop-color="#dd0505"
+         id="stop51" />
+    </radialGradient>
+    <path
+       style="fill:url(#gradient5)"
+       d="m 32,42 c 2,-2 5,1 3,3 -2,2 -5,-1 -3,-3 z"
+       transform="translate(5,-4)"
+       id="path54" />
+    <radialGradient
+       id="gradient6"
+       gradientUnits="userSpaceOnUse"
+       cx="0"
+       cy="0"
+       r="64"
+       gradientTransform="matrix(0.0312,0,0,0.0468,33,43)">
+      <stop
+         offset="0"
+         stop-color="#35ff06"
+         id="stop56" />
+      <stop
+         offset="0.9843"
+         stop-color="#1e9303"
+         id="stop58" />
+    </radialGradient>
+    <path
+       style="fill:url(#gradient6)"
+       d="m 32,42 c 2,-2 5,1 3,3 -2,2 -5,-1 -3,-3 z"
+       transform="translate(2,1)"
+       id="path61" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1"
+       d="m 8,48 16,8"
+       transform="translate(4,-4)"
+       id="path63" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1"
+       d="m 8,48 16,8"
+       transform="translate(2,-2)"
+       id="path65" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1"
+       d="m 8,48 16,8"
+       id="path67" />
+    <radialGradient
+       id="gradient7"
+       gradientUnits="userSpaceOnUse"
+       cx="0"
+       cy="0"
+       r="64"
+       gradientTransform="matrix(0.5295,-0.3272,0.1957,0.3167,17.1527,18.9224)">
+      <stop
+         offset="0"
+         stop-color="#909090"
+         id="stop69" />
+      <stop
+         offset="1"
+         stop-color="#3c3c3c"
+         id="stop71" />
+    </radialGradient>
+    <path
+       style="fill:url(#gradient7)"
+       d="M 18,19 43,30 C 37,30 36,46 21,39 6,32 11,19 18,19 Z"
+       id="path74" />
+  </g>
+</svg>
