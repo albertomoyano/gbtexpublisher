@@ -9,23 +9,6 @@
   Spacing = True
   Margin = True
   Padding = 4
-  { menuProcesarArchivos Menu
-    #Translate = False
-    Text = "Procesar archivos"
-    Visible = False
-    { Menu4 Menu
-      Text = ("Ejecutar separatas")
-      Picture = Picture["iconos/terminal.svg"]
-    }
-    { menuComprimir Menu
-      Text = ("Comprimir proyecto (.tar.gz)")
-      Picture = Picture["iconos/archive-zip.svg"]
-    }
-    { menuComprimirZip Menu
-      Text = ("Comprimir proyecto (.zip)")
-      Picture = Picture["iconos/archive-zip.svg"]
-    }
-  }
   { menuPDF Menu
     #Translate = False
     Text = "menuPDF"
@@ -299,6 +282,7 @@
           MoveScaled(16,0,4,4)
           #Translate = False
           NoTabFocus = True
+          ToolTip = "Generar PDF completo para la web"
           Picture = Picture["iconos/adobe-acrobat-reader-svgrepo-com.svg"]
         }
         { btnComentariosCorreccion Button
@@ -319,19 +303,18 @@
           MoveScaled(28,0,4,4)
           #Translate = False
           NoTabFocus = True
+          ToolTip = "Orden de taller"
           Picture = Picture["iconos/impresora.svg"]
         }
-        { !MenuButton2 MenuButton
-          MoveScaled(33,0,16,4)
-          #Public = True
+        { btnTARGZ Button
+          MoveScaled(32,0,4,4)
           #Translate = False
-          Text = "Lotes"
-          Picture = Picture["iconos/conversor.svg"]
-          Menu = "menuProcesarArchivos"
-          MenuOnly = True
+          NoTabFocus = True
+          ToolTip = "Comprimir el proyecto en unn archivo tar.gz"
+          Picture = Picture["iconos/archive-zip.svg"]
         }
         { Spring1 Spring
-          MoveScaled(59,0,10,4)
+          MoveScaled(69,0,6,4)
         }
       }
     }
@@ -441,65 +424,71 @@
         }
         { HBox6 HBox
           MoveScaled(1,40,68,4)
-          { btnRefrescarGrid Button
+          { btnSeparata Button
             MoveScaled(0,0,4,4)
+            #Translate = False
+            NoTabFocus = True
+            Picture = Picture["iconos/terminal.svg"]
+          }
+          { btnRefrescarGrid Button
+            MoveScaled(4,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/integridad.svg"]
           }
           { btnBorrarAuxiliares Button
-            MoveScaled(4,0,4,4)
+            MoveScaled(8,0,4,4)
             #Translate = False
             NoTabFocus = True
             ToolTip = "Borrar archivos auxiliares"
             Picture = Picture["iconos/borrar.svg"]
           }
           { Separator12 Separator
-            MoveScaled(9,0,2.3333,4)
+            MoveScaled(13,0,2.3333,4)
             #Translate = False
           }
           { btnVerPDF Button
-            MoveScaled(11,0,4,4)
+            MoveScaled(15,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/acroread.svg"]
           }
           { btnEPUB Button
-            MoveScaled(15,0,4,4)
+            MoveScaled(19,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/epub.svg"]
           }
           { btnVerHTML Button
-            MoveScaled(19,0,4,4)
+            MoveScaled(23,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/web.svg"]
           }
           { btnVerIMAGEN Button
-            MoveScaled(23,0,4,4)
+            MoveScaled(27,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/image.svg"]
           }
           { btnVerTEXTO Button
-            MoveScaled(27,0,4,4)
+            MoveScaled(31,0,4,4)
             #Translate = False
             NoTabFocus = True
             Picture = Picture["iconos/textnormal.svg"]
           }
           { Separator1 Separator
-            MoveScaled(31,0,2.3333,4)
+            MoveScaled(35,0,2.3333,4)
             #Translate = False
           }
           { !ComboBox2 ComboBox
-            MoveScaled(34,0,13,4)
+            MoveScaled(38,0,13,4)
             #Public = True
             Expand = True
             ReadOnly = True
           }
           { !MenuButton1 MenuButton
-            MoveScaled(48,0,25.3333,4)
+            MoveScaled(54,0,25.3333,4)
             #Public = True
             #Translate = False
             Visible = False

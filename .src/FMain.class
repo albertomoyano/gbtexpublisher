@@ -315,23 +315,6 @@ Public Sub Menu24_Click()
 
 End
 
-Public Sub Menu4_Click()' ejecutar separatas
-
-  Dim sFilePath As String = File.Dir(TextBox1.Text) & "/separatas.sh"
-
-  ' Comprobamos si el archivo existe
-  If File.RealPath(sFilePath) Then
-    ' Si existe, ejecutamos el script
-    TabPanel6.Index = 0
-    TerminalView1.Input("sh " & sFilePath & "\n" & "clear" & "\n")
-    Wait 0.2
-  Else
-    ' Si no existe, mostramos un mensaje
-    Message.Info("El archivo <b>separatas.sh</b> no existe. Por favor, analice la configuración de su proyecto.")
-  Endif
-
-End
-
 Public Sub menuAbrirLibro_Click()'abrir un libro
 
   Dialog.Title = "Seleccionar archivo"
@@ -2748,36 +2731,6 @@ Public Sub btnFont_Click()
   Dialog.FixedOnly = False
   If Dialog.SelectFont() Then Return
   txtDisclaimer.Font = Dialog.Font
-
-End
-
-Public Sub menuComprimir_Click()
-
-  Dim fecha As String
-
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-
-  Dim comando As String
-
-  comando = "tar cvzf " & fecha & "-" & BaseName & ".tar.gz *" & "\n"
-
-  TabPanel6.Index = 0
-  TerminalView1.Input(comando)
-
-End
-
-Public Sub menuComprimirZip_Click()
-
-  Dim fecha As String
-
-  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
-
-  Dim comando As String
-  ' Crear archivo ZIP con el mismo nombre pero en formato .zip
-  comando = "zip -9 -r " & fecha & "-" & BaseName & ".zip *" & "\n"
-
-  TabPanel6.Index = 0
-  TerminalView1.Input(comando)
 
 End
 
@@ -5573,5 +5526,36 @@ End
 Public Sub btnBorrarAuxiliares_Click()
 
   Mod_Funciones.Borrar_Aux
+
+End
+
+Public Sub btnSeparata_Click()
+
+  Dim sFilePath As String = File.Dir(TextBox1.Text) & "/separatas.sh"
+
+  ' Comprobamos si el archivo existe
+  If File.RealPath(sFilePath) Then
+    ' Si existe, ejecutamos el script
+    TabPanel6.Index = 0
+    TerminalView1.Input("sh " & sFilePath & "\n" & "clear" & "\n")
+    Wait 0.2
+  Else
+    ' Si no existe, mostramos un mensaje
+    Message.Info("El archivo <b>separatas.sh</b> no existe. Por favor, analice la configuración de su proyecto.")
+  Endif
+
+End
+
+Public Sub btnTARGZ_Click()
+
+  Dim fecha As String
+
+  fecha = Format(Date(), "dd-mm-yyyy") ' Obtener la fecha actual
+
+  Dim comando As String
+
+  comando = "tar cvzf " & fecha & "-" & BaseName & ".tar.gz *" & "\n"
+
+  TerminalView1.Input(comando)
 
 End
