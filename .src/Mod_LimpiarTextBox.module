@@ -272,10 +272,3 @@ Public Sub eliminarBlancosGLO()
   EliminarEspaciosAlInicioYFinal(FMain.txtSORT)
 
 End
-
-Public Sub eliminarBlancosMETA()
-
-  EliminarEspaciosAlInicioYFinal(FMain.txt05_pdfauthor)
-  EliminarEspaciosAlInicioYFinal(FMain.txt06_pdftitle)
-
-End

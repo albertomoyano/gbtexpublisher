@@ -25,9 +25,6 @@ Public rutaTAPA As String
 Public BaseName As String
 Public sTB_Text As String
 Public LastTextBox As TextBox
-Private segundos As Integer
-Private minutos As Integer
-Private horas As Integer
 Public idSeleccionado As Integer
 Public $URL As String
 Public sDiccionarioSeleccionado As String
@@ -35,6 +32,14 @@ Public RutaArchivoActual As String
 Public imgPreview As Image
 
 Public Sub Form_Open()
+
+  ' Dim sDBPath As String
+  '
+  ' sDBPath = User.Home & "/.gbtexpublisher/gbtexpublisher.sqlite"
+  ' If Not Exist(sDBPath) Then
+  '   Message.Warning("No se encuentra la base de datos en: " & sDBPath & "\nEs imposible continuar con la ejecución")
+  '   Quit
+  ' End If
 
   FMain.Title = Application.Title & " v. " & Application.Version
 
@@ -97,14 +102,6 @@ Public Sub Form_Open()
     Copy "./filtro.lua" To User.Home & "/.gbtexpublisher/filtro.lua"
   End If
   '
-  ' aseguramos la copia de los scripts en bash
-  If Not File.RealPath(User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HLyUL.sh") Then
-    Copy "./quitar_HLyUL.sh" To User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HLyUL.sh"
-  End If
-  If Not File.RealPath(User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh") Then
-    Copy "./quitar_HYPERTARGET.sh" To User.Home & "/.gbtexpublisher/ScriptsBash/quitar_HYPERTARGET.sh"
-  End If
-
   $Bash = TerminalView1.Shell("/usr/bin/bash")
   TerminalView1.SetFocus()
 
@@ -278,7 +275,7 @@ Public Sub Menu24_Click()
 
 End
 
-Public Sub menuAbrirLibro_Click()'abrir un libro
+Public Sub menuAbrirLibro()'abrir un libro
 
   Dialog.Title = "Seleccionar archivo"
   Dialog.Filter = ["*.tex", "Archivos de LaTeX"]
@@ -300,8 +297,6 @@ Public Sub menuAbrirLibro_Click()'abrir un libro
     Mod_Funciones.Borrar_Aux
     Shell Quote$("rm -rf " & File.Dir(TextBox1.Text) & "/files/*.log") & "\n" Wait
     rutaFILES = File.Dir(TextBox1.Text) & "/files"
-    PanelLaTeX.Visible = True
-    PanelLaTeX.Enabled = True
     guardarTipoDocumentoLibro()
     HBoxPanelLibro.Visible = True
     TabPanelLibro.Visible = True
@@ -815,14 +810,6 @@ Public Sub btnVerAbstract_Click()
 
 End
 
-Public Sub btnLimpiarRelation_Click()
-
-  txtCOLECCION.Clear
-  txtDirection.Clear
-  txtFORMATO.Clear
-
-End
-
 Public Sub txt15_pdfcopyright_Click()
 
   If txt15_pdfcopyright.Index = 0 Then
@@ -1025,9 +1012,6 @@ Public Sub guardarCamposMETA()
 End
 
 Public Sub btnGuardarCambiosMeta_Click()
-
-  ' Eliminamos blancos de inicio y final de cadena en los textbox
-  Mod_LimpiarTextBox.eliminarBlancosMETA
 
   ' Cargar el registro a modificar
   Contenido = Form_ConectarBBDD.meConn.Edit("metadatos", "id=" & txtIDmetadatos.Text)
@@ -5105,7 +5089,7 @@ End
 
 Public Sub btnMenuAbrir_Click()
 
-  menuAbrirLibro_Click()' abrir libro
+  menuAbrirLibro()' abrir libro
 
 End
 
