@@ -528,6 +528,7 @@
         { txtTMPbiblio TextArea
           MoveScaled(2,2,36,13)
           Enabled = False
+          Font = Font["Monospace"]
           Background = Color.LightGray
           Expand = True
           Wrap = True
@@ -1696,186 +1697,171 @@
       Index = 4
       Text = ("IS**/Digital     ")
       Picture = Picture["iconos/web.svg"]
-      { Splitter8 Splitter
-        MoveScaled(3,2,123,36)
+      { ScrollView6 ScrollView
+        MoveScaled(2,2,82,34)
         Expand = True
+        Arrangement = Arrange.Vertical
+        Spacing = True
+        Margin = True
+        Padding = 4
         Border = False
-        { ScrollView6 ScrollView
-          MoveScaled(14,0,82,34)
-          Expand = True
-          Arrangement = Arrange.Vertical
-          Spacing = True
-          Margin = True
-          Padding = 4
-          Border = False
-          ScrollBar = Scroll.Vertical
-          Shadow = True
-          { HBox51 HBox
-            MoveScaled(0,0,80,4)
-            { btnChequearISBN Button
-              MoveScaled(0,0,4,4)
-              Picture = Picture["iconos/comp.svg"]
-            }
-            { lblISBN Label
-              MoveScaled(8,0,12,3.5556)
-              Alignment = Align.Right
-              Text = ("ISBN ")
-            }
-            { txtISBN TextBox AllTextBoxes
-              Name = "txtISBN"
-              MoveScaled(21,0,11,4)
-              Expand = True
-              Placeholder = ("International Standard Book Number")
-            }
-            { lblISBN3 Label
-              MoveScaled(35,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("ISMN ")
-            }
-            { txtISMN TextBox AllTextBoxes
-              Name = "txtISMN"
-              MoveScaled(52,0,11,4)
-              Expand = True
-              Placeholder = ("International Standard Music Number")
-            }
+        ScrollBar = Scroll.Vertical
+        Shadow = True
+        { HBox51 HBox
+          MoveScaled(0,0,80,4)
+          { btnChequearISBN Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/comp.svg"]
           }
-          { HBox52 HBox
-            MoveScaled(0,4,80,4)
-            { btnChequearISSN Button
-              MoveScaled(0,0,4,4)
-              Picture = Picture["iconos/comp.svg"]
-            }
-            { Label44 Label
-              MoveScaled(8,0,12,3.5556)
-              Alignment = Align.Right
-              Text = ("ISSN ")
-            }
-            { txtISSN TextBox AllTextBoxes
-              Name = "txtISSN"
-              MoveScaled(21,0,11,4)
-              Expand = True
-              Placeholder = ("International Standard Serial Number")
-            }
-            { lblISBN4 Label
-              MoveScaled(28,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("ISRN ")
-            }
-            { txtISRN TextBox AllTextBoxes
-              Name = "txtISRN"
-              MoveScaled(45,0,11,4)
-              Expand = True
-              Placeholder = (" International Standard Technical Report Number")
-            }
+          { lblISBN Label
+            MoveScaled(8,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("ISBN ")
           }
-          { HBox53 HBox
-            MoveScaled(0,8,80,4)
-            { lblISBN2 Label
-              MoveScaled(0,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("ISAN ")
-            }
-            { txtISAN TextBox AllTextBoxes
-              Name = "txtISAN"
-              MoveScaled(17,0,11,4)
-              Expand = True
-              Placeholder = ("International Standard Audiovisual Number")
-            }
-            { lblISBN5 Label
-              MoveScaled(28,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("ISWC ")
-            }
-            { txtISWC TextBox AllTextBoxes
-              Name = "txtISWC"
-              MoveScaled(45,0,10,4)
-              Expand = True
-              Placeholder = ("International Standard Work Code")
-            }
+          { txtISBN TextBox AllTextBoxes
+            Name = "txtISBN"
+            MoveScaled(21,0,11,4)
+            Expand = True
+            Placeholder = ("International Standard Book Number")
           }
-          { HBox57 HBox
-            MoveScaled(0,12,80,4)
-            { lblDOI2 Label
-              MoveScaled(0,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("DOI ")
-            }
-            { btnVerificarDOI Button
-              MoveScaled(18,0,4,4)
-              ToolTip = ("Consultar si la URL existe")
-              Picture = Picture["iconos/sincronizar.svg"]
-            }
-            { txtDOI TextBox AllTextBoxes
-              Name = "txtDOI"
-              MoveScaled(24,0,12,4)
-              Expand = True
-              PopupMenu = "menuTEXTBOX"
-              Placeholder = ("Digital Object Identifier")
-            }
+          { lblISBN3 Label
+            MoveScaled(35,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ISMN ")
           }
-          { HBox3 HBox
-            MoveScaled(0,20,80,4)
-            { lblISBN7 Label
-              MoveScaled(1,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("Eprint ")
-            }
-            { txtEPRINT TextBox AllTextBoxes
-              Name = "txtEPRINT"
-              MoveScaled(22,0,10,4)
-              Expand = True
-              Placeholder = ("Identificador utilizado en repositorios de acceso abierto como arXiv o PubMed")
-            }
-            { lblISBN8 Label
-              MoveScaled(33,0,16,4)
-              Alignment = Align.Right
-              Text = ("EprintType ")
-            }
-            { !txtEPRINTYPE ComboBox
-              MoveScaled(50,0,20,4)
-              #Public = True
-              ReadOnly = True
-            }
-          }
-          { HBox54 HBox
-            MoveScaled(0,24,80,4)
-            { Label21 Label
-              MoveScaled(3,0,16,3.5556)
-              Alignment = Align.Right
-              Text = ("URL ")
-            }
-            { btnVerificar Button
-              MoveScaled(22,0,4,4)
-              ToolTip = ("Consultar si la URL existe")
-              Picture = Picture["iconos/sincronizar.svg"]
-            }
-            { txtURL TextBox AllTextBoxes
-              Name = "txtURL"
-              MoveScaled(37,0,12,4)
-              Expand = True
-              PopupMenu = "menuTEXTBOX"
-              Placeholder = ("URL (completa)")
-            }
-            { btnChequearURL Button
-              MoveScaled(63,0,4,4)
-              ToolTip = ("Visitar la URL en el navegador")
-              Picture = Picture["iconos/ActionGo.svg"]
-            }
-            { btnResetWebView Button
-              MoveScaled(68,0,4,4)
-              ToolTip = ("Resetear el browser")
-              Picture = Picture["iconos/google.svg"]
-            }
+          { txtISMN TextBox AllTextBoxes
+            Name = "txtISMN"
+            MoveScaled(52,0,11,4)
+            Expand = True
+            Placeholder = ("International Standard Music Number")
           }
         }
-        { Panel10 Panel
-          MoveScaled(96,5,21,18)
-          Arrangement = Arrange.Fill
-          Border = Border.Sunken
-          { !WebView1 WebView
-            MoveScaled(2,5,14,9)
-            #Public = True
+        { HBox52 HBox
+          MoveScaled(0,4,80,4)
+          { btnChequearISSN Button
+            MoveScaled(0,0,4,4)
+            Picture = Picture["iconos/comp.svg"]
+          }
+          { Label44 Label
+            MoveScaled(8,0,12,3.5556)
+            Alignment = Align.Right
+            Text = ("ISSN ")
+          }
+          { txtISSN TextBox AllTextBoxes
+            Name = "txtISSN"
+            MoveScaled(21,0,11,4)
             Expand = True
+            Placeholder = ("International Standard Serial Number")
+          }
+          { lblISBN4 Label
+            MoveScaled(28,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ISRN ")
+          }
+          { txtISRN TextBox AllTextBoxes
+            Name = "txtISRN"
+            MoveScaled(45,0,11,4)
+            Expand = True
+            Placeholder = (" International Standard Technical Report Number")
+          }
+        }
+        { HBox53 HBox
+          MoveScaled(0,8,80,4)
+          { lblISBN2 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ISAN ")
+          }
+          { txtISAN TextBox AllTextBoxes
+            Name = "txtISAN"
+            MoveScaled(17,0,11,4)
+            Expand = True
+            Placeholder = ("International Standard Audiovisual Number")
+          }
+          { lblISBN5 Label
+            MoveScaled(28,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("ISWC ")
+          }
+          { txtISWC TextBox AllTextBoxes
+            Name = "txtISWC"
+            MoveScaled(45,0,10,4)
+            Expand = True
+            Placeholder = ("International Standard Work Code")
+          }
+        }
+        { HBox57 HBox
+          MoveScaled(0,12,80,4)
+          { lblDOI2 Label
+            MoveScaled(0,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("DOI ")
+          }
+          { btnVerificarDOI Button
+            MoveScaled(18,0,4,4)
+            ToolTip = ("Consultar si la URL existe")
+            Picture = Picture["iconos/sincronizar.svg"]
+          }
+          { txtDOI TextBox AllTextBoxes
+            Name = "txtDOI"
+            MoveScaled(24,0,12,4)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+            Placeholder = ("Digital Object Identifier")
+          }
+        }
+        { HBox3 HBox
+          MoveScaled(0,20,80,4)
+          { lblISBN7 Label
+            MoveScaled(1,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("Eprint ")
+          }
+          { txtEPRINT TextBox AllTextBoxes
+            Name = "txtEPRINT"
+            MoveScaled(22,0,10,4)
+            Expand = True
+            Placeholder = ("Identificador utilizado en repositorios de acceso abierto como arXiv o PubMed")
+          }
+          { lblISBN8 Label
+            MoveScaled(33,0,16,4)
+            Alignment = Align.Right
+            Text = ("EprintType ")
+          }
+          { !txtEPRINTYPE ComboBox
+            MoveScaled(50,0,20,4)
+            #Public = True
+            ReadOnly = True
+          }
+        }
+        { HBox54 HBox
+          MoveScaled(0,24,80,4)
+          { Label21 Label
+            MoveScaled(3,0,16,3.5556)
+            Alignment = Align.Right
+            Text = ("URL ")
+          }
+          { btnVerificar Button
+            MoveScaled(22,0,4,4)
+            ToolTip = ("Consultar si la URL existe")
+            Picture = Picture["iconos/sincronizar.svg"]
+          }
+          { txtURL TextBox AllTextBoxes
+            Name = "txtURL"
+            MoveScaled(37,0,12,4)
+            Expand = True
+            PopupMenu = "menuTEXTBOX"
+            Placeholder = ("URL (completa)")
+          }
+          { btnChequearURL Button
+            MoveScaled(63,0,4,4)
+            ToolTip = ("Visitar la URL en el navegador")
+            Picture = Picture["iconos/ActionGo.svg"]
+          }
+          { btnResetWebView Button
+            MoveScaled(68,0,4,4)
+            ToolTip = ("Resetear el browser")
+            Picture = Picture["iconos/google.svg"]
           }
         }
       }

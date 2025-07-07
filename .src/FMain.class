@@ -191,16 +191,16 @@ Public Sub Form_Open()
 
 End
 
-' Evento cuando la página se carga correctamente
-Public Sub WebView1_LoadFinished(Success As Boolean)
-
-  If Not Success Then
-    Message("La página no se cargó correctamente", "Error")
-  Else
-    Print "Página cargada con éxito: " & WebView1.Url
-  End If
-
-End
+' ' Evento cuando la página se carga correctamente
+' Public Sub WebView1_LoadFinished(Success As Boolean)
+'
+'   If Not Success Then
+'     Message("La página no se cargó correctamente", "Error")
+'   Else
+'     Print "Página cargada con éxito: " & WebView1.Url
+'   End If
+'
+' End
 
 Public Sub Form_Close()
 
@@ -335,7 +335,7 @@ Public Sub menuAbrirLibro()'abrir un libro
     txtEXPORTARmeta.text = "gbTeXmeta-" & BaseName & ".tex"
     txtEXPORTARbib.text = "gbTeXbib-" & BaseName & ".bib"
     txtEXPORTARglo.text = "gbTeXglo-" & BaseName & ".tex"
-    WebView1.Url = "https://www.google.com"
+    ' WebView1.Url = "https://www.google.com"
     TerminalView1.Input("clear" & "\n")' limpiamos la consola
   Endif
 
@@ -1105,7 +1105,7 @@ Public Sub btnGuardarCambios_Click()' guardar cambios en bibtex
   ' Guardardamos la actualización de los campos modificados
   guardarCampos()
   Contenido.Update
-  Form_ConectarBBDD.meConn.Commit()  ' confirmar cambios en la base de datos
+  Form_ConectarBBDD.meConn.Commit()' confirmar cambios en la base de datos
   Mod_LimpiarTextBox.LimpiarCamposBIB()
   RefrescarGrid()
 
@@ -4972,26 +4972,26 @@ Public Sub btnRefrescarGrid_Click()
 
 End
 
-Public Sub btnResetWebView_Click()
+' Public Sub btnResetWebView_Click()
+'
+'   WebView1.Url = "https://www.google.com"
+'
+' End
 
-  WebView1.Url = "https://www.google.com"
-
-End
-
-Public Sub btnChequearURL_Click()
-
-  Dim sUrl As String = Trim(txtURL.Text)
-
-  ' Validación básica de URL
-  If sUrl = "" Then
-    Message.Error("Por favor, ingresar una dirección válida.")
-    Return
-  End If
-
-  ' Cargar la URL en el WebView tal como está
-  WebView1.Url = sUrl
-
-End
+' Public Sub btnChequearURL_Click()
+'
+'   Dim sUrl As String = Trim(txtURL.Text)
+'
+'   ' Validación básica de URL
+'   If sUrl = "" Then
+'     Message.Error("Por favor, ingresar una dirección válida.")
+'     Return
+'   End If
+'
+'   ' Cargar la URL en el WebView tal como está
+'   WebView1.Url = sUrl
+'
+' End
 
 Public Sub btnVerificarDOI_Click()
 
