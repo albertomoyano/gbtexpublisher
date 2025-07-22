@@ -1,0 +1,37 @@
+' Gambas module file
+
+Public meConn As Connection
+
+Public Function OnRed() As Connection
+
+  meConn = New Connection
+  meConn.Type = "sqlite3"
+  meConn.Host = User.Home & "/.gbtexpublisher"
+  meConn.Name = "gbtexpublisher.sqlite"
+  meConn.Open()
+
+  ' PRAGMA después de abrir y ANTES del return
+  meConn.Exec("PRAGMA journal_mode=DELETE;")
+
+  ' Form_ConectarBBDD.Center
+  ' Form_ConectarBBDD.Visible = False
+
+  ' Return meConn
+
+Catch
+  Message.Error("Imposible abrir la base de datos")
+
+End
+
+Public Sub OffRed() As Connection
+
+  meConn.Close
+  meConn = Null
+
+End
+
+Public Sub CerrarTodo()
+
+  Mod_Funciones.CerrarTodo()
+
+End

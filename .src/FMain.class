@@ -191,17 +191,6 @@ Public Sub Form_Open()
 
 End
 
-' ' Evento cuando la página se carga correctamente
-' Public Sub WebView1_LoadFinished(Success As Boolean)
-'
-'   If Not Success Then
-'     Message("La página no se cargó correctamente", "Error")
-'   Else
-'     Print "Página cargada con éxito: " & WebView1.Url
-'   End If
-'
-' End
-
 Public Sub Form_Close()
 
   Mod_Funciones.CerrarTodo()
@@ -3537,23 +3526,6 @@ Public Sub btnBuscarORCID_Click()' autores
 
   Desktop.Open(sURL)
 
-  ' Dim sNombre As String
-
-  ' ' Obtener el texto del TextBox
-  ' sNombre = txtAutor.Text
-  '
-  ' ' Verificar que no esté vacío
-  ' If Trim(sNombre) = "" Then
-  '   Message.Error("Por favor, introduce un nombre para buscar el ORCID")
-  '   Return
-  ' Endif
-  '
-  ' ' Construir la URL de búsqueda de ORCID
-  ' $URL = "https://orcid.org/orcid-search/search?searchQuery=" & URL.Encode(sNombre)
-  '
-  ' ' Abrir la URL en el navegador predeterminado
-  ' Desktop.Open($URL)
-
 End
 
 Public Sub btnBuscarORCIDcolaborador_Click()' colaboradores
@@ -3571,20 +3543,6 @@ Public Sub btnBuscarORCIDcolaborador_Click()' colaboradores
   sURL = "https://orcid.org/orcid-search/search?searchQuery=" & URLEncode(sNombre)
 
   Desktop.Open(sURL)
-
-  ' Dim sNombre As String
-  '
-  ' ' Obtener el texto del TextBox
-  ' sNombre = txtORCIDcolaborador.Text
-  '
-  ' ' Verificar que no esté vacío
-  ' If Trim(sNombre) = "" Then
-  '   Message.Error("Por favor, introduce un nombre para buscar el ORCID")
-  '   Return
-  ' Endif
-  '
-  ' ' Construir la URL de búsqueda de ORCID
-  ' $URL = "https://orcid.org/orcid-search/search?searchQuery=" & URL.Encode(sNombre)
 
 End
 
