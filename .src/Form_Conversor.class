@@ -66,12 +66,12 @@ Public Sub btnCONVERTIR_Click()
   Endif
 
   ' Configuración de rutas
-  Dim rutaFILTROLUA As String = Quote$(User.Home & "/.gbtexpublisher/filtro.lua")
-  Dim mediaDir As String = Quote$(File.Dir(rutaOrigen))
-  Dim archivoFinal As String = Quote$(File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".tex")
+  Dim rutaFILTROLUA As String = User.Home & "/.gbtexpublisher/filtro.lua"
+  Dim mediaDir As String = File.Dir(rutaOrigen)
+  Dim archivoFinal As String = File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".tex"
 
   ' Ejecutar pandoc
-  Shell "pandoc " & Quote$(rutaOrigen) & " -o " & archivoFinal & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & mediaDir Wait
+  Shell "pandoc " & rutaOrigen & " -o " & archivoFinal & " --lua-filter=" & rutaFILTROLUA & " --from=docx --to=latex --wrap=none --extract-media=" & mediaDir Wait
 
   ' Ruta base sin comillas para operaciones de archivo
   Dim rutaBase As String = File.Dir(rutaOrigen) & "/" & txtFecha.Text & txtDESTINO.Text & ".tex"
